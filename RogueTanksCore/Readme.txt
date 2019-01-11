@@ -32,9 +32,12 @@ unit_hunter,
 
 Changelog:
 
-0.0.0
+4.1.9
 
-Removed some double bracket tagging on Pirate and Primitive vehicles
+Removed some double bracket tagging on Pirate and Primitive vehicles,
+Fixed Winston armor values,
+Added Winston Light AC5 version,
+minor fixes
 
 4.1.5
 
