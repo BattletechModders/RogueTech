@@ -1,0 +1,336 @@
+{
+
+	"Custom": {
+		"Weights": {
+			"ReservedSlots": 4,
+			"EngineFactor": 0.85
+		},
+		"WorkOrderCosts": {
+			"Install": {
+				"TechCost": "1.35 * [[Chassis.Tonnage]] / 2",
+				"CBillCost": "12000 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]] / 45"
+			}
+		},		
+		"Category" : { 
+			"CategoryID" : "EngineShield" 
+		},		
+		"Linked" : {
+			"Links" : [
+				{ "ComponentDefId" : "emod_engineslots_size2", "Location" : "LeftTorso" },
+				{ "ComponentDefId" : "emod_engineslots_size2", "Location" : "RightTorso" }
+			]
+		},
+		"Flags" : { "flags" : [ "engine_part" ] },
+		"CriticalHitStates": {
+			"MaxStates" : 2,
+			"DeathMethod" : "EngineDestroyed",			
+			"HitEffects" : [
+				{
+					"State" : 1,
+					"StatusEffect" : {
+						"durationData" : {
+						},
+						"targetingData" : {
+							"effectTargetsCreator" : true,
+							"effectTriggerType" : "Passive",
+							"effectTargetType" : "Creator"
+						},
+						"effectType" : "StatisticEffect",
+						"Description" : {
+							"Id" : "PEExchangerDestroyed",
+							"Name" : "Heat Controller Desroyed",
+							"Details" : "30% Heat Generated",
+							"Icon" : "uixSvgIcon_equipment_ThermalExchanger"
+						},
+						"nature" : "Debuff",
+						"statisticData" : {
+						"statName" : "HeatGenerated",
+						"operation" : "Float_Multiply",
+						"modValue" : "1.3",
+						"modType" : "System.Single",
+						"additionalRules" : "NotSet",
+						"targetCollection" : "Weapon",
+						"targetWeaponCategory" : "NotSet",
+						"targetWeaponType" : "NotSet",
+						"targetAmmoCategory" : "NotSet",
+						"targetWeaponSubType" : "NotSet"						
+						}
+					}					
+				},
+				{
+					"State" : 1,				
+					"StatusEffect" : {
+						"durationData" : {
+						},
+						"targetingData" : {
+							"effectTargetsCreator" : true,
+							"effectTriggerType" : "Passive",
+							"effectTargetType" : "Creator"
+						},
+						"effectType" : "StatisticEffect",
+						"Description" : {
+							"Id" : "PEBANKDestroyed",
+							"Name" : "Heat Controller Desroyed",
+							"Details" : "-40 Max Heat",
+							"Icon" : "uixSvgIcon_equipment_ThermalExchanger"
+						},
+						"nature" : "Debuff",
+						"statisticData" : {
+						"statName" : "MaxHeat",
+						"operation" : "Int_Subtract",
+						"modValue" : "40",
+						"modType" : "System.Int32",
+						"additionalRules" : "NotSet",
+						"targetCollection" : "Weapon",
+						"targetWeaponCategory" : "NotSet",
+						"targetWeaponType" : "NotSet",
+						"targetAmmoCategory" : "NotSet",
+						"targetWeaponSubType" : "NotSet"
+						}
+					}
+				},
+				{
+					"State" : 2,				
+					"StatusEffect" : {
+						"durationData" : {
+						},
+						"targetingData" : {
+							"effectTargetsCreator" : true,
+							"effectTriggerType" : "Passive",
+							"effectTargetType" : "Creator"
+						},
+						"effectType" : "StatisticEffect",
+						"Description" : {
+							"Id" : "PELifeSupportDestroyed",
+							"Name" : "Critical Overheat",
+							"Details" : "Take Damage on Overheat",
+							"Icon" : "uixSvgIcon_equipment_ThermalExchanger"
+						},
+						"nature" : "Debuff",
+						"statisticData" : {
+				"statName" : "ReceiveHeatDamageInjury",
+				"operation" : "Set",
+				"modValue" : "true",
+				"modType" : "System.Boolean"
+						}
+					}
+				}				
+			]
+		},
+        "BonusDescriptions": {
+            "Bonuses": [
+                "WalkSpeed: +10%",
+                "RunSpeed: +10%",
+				"JumpDistance: +15%",
+				"TEHeatgen: +10%",				
+                "EngineWeight: -15%",
+				"EngineReserved: 6"
+            ]
+        },		
+            "InventorySorter" : {
+                "SortKey" : "00013"
+            }		
+	},
+
+    "Description" : {
+        "Cost" : 1100000,
+        "Rarity" : 10,
+        "Purchasable" : false,
+        "Manufacturer" : "Pirate",
+        "Model" : "HOTROD",
+        "UIName" : "Engine (PRT)",
+        "Id" : "Gear_Engine_Pirate",
+        "Name" : "Pirate Engine",
+        "Details" : "So Some gouzaizi thought he cracked how to make a Star League Grade Engine Shielding, if this doesn't blow up your mech when it breaks, it surely will boost the engine. There is a note etched into the main board that says ''Suck It Yang''.",
+        "Icon" : "uixSvgIcon_equipment_Heatsink"
+    },
+    "BonusValueA" : "-15% Engine Weight",
+    "BonusValueB" : "MOAR POWAH!",
+    "ComponentType" : "HeatSink",
+    "ComponentSubType" : "Heatsink",
+    "PrefabIdentifier" : "",
+    "BattleValue" : 0,
+    "InventorySize" : 6,
+    "Tonnage" : 0,
+    "AllowedLocations" : "CenterTorso",
+    "DisallowedLocations" : "All",
+    "CriticalComponent" : true,
+    "statusEffects" : [
+        {
+            "durationData" : {
+                "duration" : -1,
+                "ticksOnActivations" : false,
+                "useActivationsOfTarget" : false,
+                "ticksOnEndOfRound" : false,
+                "ticksOnMovements" : false,
+                "stackLimit" : 1,
+                "clearedWhenAttacked" : false
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "triggerLimit" : 0,
+                "extendDurationOnTrigger" : 0,
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : false,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : true
+            },
+            "effectType" : "StatisticEffect",
+            "Description" : {
+                "Id" : "StatusEffect-PirateExchange",
+                "Name" : "Engine Boostah!",
+                "Details" : "Improved Engine output but runs hot.",
+                "Icon" : "uixSvgIcon_equipment_ThermalExchanger"
+            },
+            "nature" : "Buff",
+            "statisticData" : {
+                "appliesEachTick" : false,
+                "effectsPersistAfterDestruction" : false,
+                "statName" : "HeatGenerated",
+                "operation" : "Float_Multiply",
+                "modValue" : "1.1",
+                "modType" : "System.Single",
+                "additionalRules" : "NotSet",
+                "targetCollection" : "Weapon",
+                "targetWeaponCategory" : "NotSet",
+                "targetWeaponType" : "NotSet",
+                "targetAmmoCategory" : "NotSet",
+                "targetWeaponSubType" : "NotSet"
+            },
+            "tagData" : null,
+            "floatieData" : null,
+            "actorBurningData" : null,
+            "vfxData" : null,
+            "instantModData" : null,
+            "poorlyMaintainedEffectData" : null
+        },
+        {
+            "durationData" : {
+                "duration" : -1,
+                "ticksOnActivations" : false,
+                "useActivationsOfTarget" : false,
+                "ticksOnEndOfRound" : false,
+                "ticksOnMovements" : false,
+                "stackLimit" : 1,
+                "clearedWhenAttacked" : false
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "triggerLimit" : 0,
+                "extendDurationOnTrigger" : 0,
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : false,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" : {
+                "Id" : "StatusEffect-PirateJump",
+                "Name" : "MAX HEAT INCREASED",
+                "Details" : "Improves Heat 40Max/20Threshhold.",
+                "Icon" : "uixSvgIcon_equipment_HeatBank"
+            },
+            "nature" : "Buff",
+            "statisticData" : {
+                "appliesEachTick" : false,
+                "effectsPersistAfterDestruction" : false,
+                "statName" : "JumpDistanceMultiplier",
+                "operation" : "Float_Multiply",
+                "modValue" : "1.15",
+                "modType" : "System.Single",
+                "additionalRules" : "NotSet",
+                "targetCollection" : "NotSet",
+                "targetWeaponCategory" : "NotSet",
+                "targetWeaponType" : "NotSet",
+                "targetAmmoCategory" : "NotSet",
+                "targetWeaponSubType" : "NotSet"
+            },
+            "tagData" : null,
+            "floatieData" : null,
+            "actorBurningData" : null,
+            "vfxData" : null,
+            "instantModData" : null,
+            "poorlyMaintainedEffectData" : null
+        },
+	         {
+            "durationData" : {
+                "duration" : -1,
+                "ticksOnActivations" : false,
+                "useActivationsOfTarget" : false,
+                "ticksOnEndOfRound" : false,
+                "ticksOnMovements" : false,
+                "stackLimit" : 1,
+                "clearedWhenAttacked" : false
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "triggerLimit" : 0,
+                "extendDurationOnTrigger" : 0,
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : false,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+			"effectType" : "StatisticEffect",
+			"Description" :
+			{
+				"Id" : "PirateSuperchargerWalk",
+				"Name" : "Supercharged",
+				"Details" : "Supercharged Engines",
+				"Icon" : "uixSvgIcon_action_evasivemove"
+			},
+			"statisticData" : 
+			{
+				"statName" : "WalkSpeed",
+				"operation" : "Float_Multiply",
+				"modValue" : "1.1",
+				"modType" : "System.Single"
+			},
+			"nature" : "Buff"
+		},
+			{
+			"durationData" :
+			{
+				"duration" : -1,
+                "stackLimit" : 1				
+			},
+			"targetingData" : 
+			{
+				"effectTriggerType" : "Passive",
+				"effectTargetType" : "Creator",
+                "showInStatusPanel" : false				
+			},
+			"effectType" : "StatisticEffect",
+			"Description" :
+			{
+				"Id" : "PirateChargerSAS",
+				"Name" : "ChargerSprint",
+				"Details" : "MORE SPEED.",
+				"Icon" : "uixSvgIcon_run_n_gun"
+			},
+			"statisticData" : 
+			{
+				"statName" : "RunSpeed",
+				"operation" : "Float_Multiply",
+				"modValue" : "1.1",
+				"modType" : "System.Single"
+			},
+			"nature" : "Buff"
+		}			
+    ],
+    "ComponentTags" : {
+        "items" : [
+            "component_type_stock"
+        ],
+        "tagSetSourceFile" : ""
+    }
+}
