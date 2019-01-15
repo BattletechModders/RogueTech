@@ -1,7 +1,7 @@
 ; Inno Setup
 
 #define isfiles "isfiles-unicode"
-#define BTDirectory "D:\LadyAlekto\Mod\RogueTech"
+#define BTDirectory "D:\RogueTechStuff\RogueTech"
 
 #define AppVerJSON
 #define FileHandle
@@ -55,13 +55,13 @@ UsePreviousAppDir=no
 UsePreviousTasks=no
 DisableWelcomePage=no
 OutputDir={#SourcePath}
-OutputBaseFilename=RogueTechSetup-v{#RTVersion}
+OutputBaseFilename=RogueTechCore-v{#RTVersion}
 BackColor=clRed
 BackColor2=clBlack
 
 [Files]
 ;Source: "/RogueTech Core/RogueTech.txt"; DestDir: "{app}/Mods/RogueTech Core"; Flags: isreadme ignoreversion
-Source: "/*"; Excludes: ".modtek,.git,log.txt,Log_Turbine.txt,RTsetup.iss,*.log,Turbine,RandomCampaignStart,InnerSphereMap,RandomTravelContracts,PersistentMapClient,VanillaEnabler,ClanJadeFalcon,ElitePilots,Nagas,Totem Mechs,WoBLamMechs,CommanderPortraitLoader,PowerArmour,MWOHeroes,Superheavys,RogueFlashPointModule,ExperimentalWeapons,RaelM Emblem,UrbieNuke,AIM,AIMBrutal,RogueTechBrutal,RogueTechNormal,GlobalDifficultyByCompany,GlobalDifficultyByPlanets,Retrainer,Silence,FreeCam,ShopSeller,BindableEscapeKey,ArmorRepair,ArmorPoints,Pilot_Quirks,StabilePiloting,Pilot_Fatigue,MoreIsLess_dZ,RogueEmblems,All 3025 Mercs,Capellan Emblems,Replacement_MechPortraits,SkipIntro,OnePointArmorStep,CrystalClear" ; DestDir: "{app}/Mods"; Flags: recursesubdirs ignoreversion
+Source: "/*"; Excludes: ".git,.modtek,.git,log.txt,Log_Turbine.txt,RTsetup.iss,RTAssetsSetup.iss,*.log,NAOP_CustomMechsNParts,SortByTonnage,Turbine,SkipTravelCutscenes,RandomCampaignStart,InnerSphereMap,RandomTravelContracts,PersistentMapClient,VanillaEnabler,ClanJadeFalcon,ElitePilots,Nagas,Totem Mechs,WoBLamMechs,CommanderPortraitLoader,PowerArmour,MWOHeroes,Superheavys,RogueFlashPointModule,ExperimentalWeapons,RaelM Emblem,UrbieNuke,AIM,AIMBrutal,RogueTechBrutal,RogueTechNormal,GlobalDifficultyByCompany,GlobalDifficultyByPlanets,Retrainer,Silence,FreeCam,ShopSeller,BindableEscapeKey,ArmorRepair,ArmorPoints,Pilot_Quirks,StabilePiloting,Pilot_Fatigue,MoreIsLess_dZ,RogueEmblems,All 3025 Mercs,Capellan Emblems,Replacement_MechPortraits,SkipIntro,OnePointArmorStep,CrystalClear" ; DestDir: "{app}/Mods"; Flags: recursesubdirs ignoreversion
 Source: "{#SourcePath}Optionals\Battletech Sound Replacement Pack\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion uninsneveruninstall createallsubdirs; Components: gfx\soundmod
 Source: "{#SourcePath}Optionals\Enable Debug\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion uninsneveruninstall createallsubdirs; Components: debugjson
 Source: "{#SourcePath}Optionals\RogueGenerals\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion uninsneveruninstall createallsubdirs; Components: gametips
@@ -83,8 +83,10 @@ Source: "/OnePointArmorStep/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/OnePoi
 Source: "/BindableEscapeKey/*"; DestDir: "{app}/Mods/BindableEscapeKey"; Flags: ignoreversion; Components: qol\esckeybind;
 Source: "/ShopSeller/*"; DestDir: "{app}/Mods/ShopSeller"; Flags: ignoreversion; Components: qol\ShopSeller;
 Source: "/Retrainer/*"; DestDir: "{app}/Mods/Retrainer"; Flags: ignoreversion; Components: qol\Retrainer;
+Source: "/SortByTonnage/*"; DestDir: "{app}/Mods/SortByTonnage"; Flags: ignoreversion; Components: qol\SortByTonnage;
 Source: "/CommanderPortraitLoader/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/CommanderPortraitLoader"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: gfx\CommanderPortraitLoader;
 Source: "/CrystalClear/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/CrystalClear"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: gfx\crystal;
+Source: "/SkipTravelCutscenes/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/SkipTravelCutscenes"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: gfx\crystal;
 Source: "/Silence/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Silence"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: gfx\silence;
 Source: "/Replacement_MechPortraits/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Replacement_MechPortraits"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: gfx\mechportraits;
 Source: "/ArmorRepair/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/ArmorRepair"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: repair\on;
@@ -104,7 +106,8 @@ Source: "/PowerArmour/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/PowerArmour"
 Source: "/WoBLamMechs/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/WoBLamMechs"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\WoBLamMechs;
 Source: "/ClanJadeFalcon/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/ClanJadeFalcon"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\ClanJadeFalcon;
 Source: "/Nagas/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Nagas"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\Nagas;
-Source: "/Totem Mechs/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Totem Mechs"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\TotemMechs;
+Source: "/Totem Mechs/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Totem Mechs"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\NAOP_CustomMechsNParts;
+Source: "/NAOP_CustomMechsNParts/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/NAOP_CustomMechsNParts"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\TotemMechs;
 Source: "/RandomCampaignStart/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RandomCampaignStart"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\RandomCampaignStart;
 Source: "/RogueFlashPointModule/*"; DestDir: "{app}/Mods/RogueFlashPointModule"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: DLC\FLASHPOINT;
 Source: "{#SourcePath}Optionals\RTML\0Harmony.dll"; DestDir: "{app}\BattleTech_Data\Managed\"; Flags: ignoreversion; Tasks: BTML\BTMLinst
@@ -146,10 +149,11 @@ Name: "dz\moreisless"; Description: "Reduced Pilot XP gain by Rank"; Types: full
 Name: "qol"; Description: "Quality of Life Options"; Types: full compact custom;
 Name: "qol\onepointarmor"; Description: "Shift+Click to change armour by 1"; Types: full compact;
 Name: "qol\skipintro"; Description: "Skip Intro"; Types: full compact;
+Name: "qol\SortByTonnage"; Description: "Sort Mechs by Cost"; Types: full compact;
 Name: "qol\ShopSeller"; Description: "Shopseller - Use shift/ctrl+click to sell faster"; Types: custom;
 Name: "qol\Retrainer"; Description: "Retrainer - Spend 5k Cbills to retrain your pilots once"; Types: custom;
 Name: "qol\esckeybind"; Description: "Use Mouse4 as ESC key"; Types: custom;
-Name: "qol\Turbine"; Description: "Turbine - speeds up json manager, may cause issues"; Types: custom;
+Name: "qol\Turbine"; Description: "Turbine - speeds up json manager, may cause issues"; Types: full compact;
 Name: "RogueTechOptionals"; Description: "Optional Mods and Components"; Types: full custom compact;
 Name: "RogueTechOptionals\RandomCampaignStart"; Description: "Randomized Campaign start - disable for a quicker new game and predefined lance"; Types: full compact;
 Name: "RogueTechOptionals\PowerArmour"; Description: "A collection fo PowerArmours by LadyAlekto"; Types: full compact;
@@ -158,9 +162,10 @@ Name: "RogueTechOptionals\ElitePilots"; Description: "Elite Pilots - Lances and 
 Name: "RogueTechOptionals\MWOHeroes"; Description: "MWO Hero Mechs - MWO Custom Chassis by Spark, Katrina Kerensky & GroxGlitch"; Types: full compact;
 Name: "RogueTechOptionals\WoBLamMechs"; Description: "WOB LAM's - LAM's for Comstar by Akodoreign"; Types: full compact;
 Name: "RogueTechOptionals\TotemMechs"; Description: "Totem Mechs - Powerfull and Expensive Chassis by Akodoreign"; Types: full compact;
-Name: "RogueTechOptionals\Nagas"; Description: "Naga and O-Bakemono - Artillery Mechs by Akodoreign"; Types: custom;
+Name: "RogueTechOptionals\Nagas"; Description: "ArrowIV Capable Units - by Akodoreign,LadyAlekto&Cargo_Vroom"; Types: custom;
 Name: "RogueTechOptionals\ClanJadeFalcon"; Description: "Clan JadeFalcon Totem Mechs by Rhynim"; Types: custom;
 Name: "RogueTechOptionals\ExperimentalWeapons"; Description: "Experimental Weapons - by MXMach"; Types: custom;
+Name: "RogueTechOptionals\NAOP_CustomMechsNParts"; Description: "Custom Mechs 'n Parts - by NewAgeOfPower"; Types: custom;
 Name: "emblems"; Description: "Emblem Options"; Types: custom;
 Name: "emblems\rogueemblems"; Description: "RogueTech Emblems"; Types: custom;
 Name: "emblems\raelmemblems"; Description: "RaelM Emblems"; Types: custom;
@@ -168,7 +173,8 @@ Name: "emblems\mercemblems"; Description: "3025 Mercenary Emblems"; Types: custo
 Name: "emblems\capellaemblems"; Description: "Capellan Emblems"; Types: custom;
 Name: "gfx"; Description: "FX Options"; Types: custom;
 Name: "gfx\CommanderPortraitLoader"; Description: "Commander Portrait Loader"; Types: full;
-Name: "gfx\soundmod"; Description: "Battletech Sound Replacement Pack by Highwayleopard"; Types: full compact;
+Name: "gfx\soundmod"; Description: "Battletech Sound Replacement Pack by Zota6"; Types: full compact;
+Name: "gfx\SkipTravelCutscenes"; Description: "Skip Travel cutscenes"; Types: full compact;
 Name: "gfx\crystal"; Description: "Crystal Clear - Drastically reduce Postprocessing"; Types: custom;
 Name: "gfx\silence"; Description: "Silence - Disable most Ambient Chatter"; Types: custom;
 Name: "gfx\mechportraits"; Description: "Coloured Mech Portraits by Armakoir"; Types: custom;
