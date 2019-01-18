@@ -32,6 +32,17 @@ unit_hunter,
 
 Changelog:
 
+4.3.0
+
+Added Bolus Tanks by lady A,
+Added Enhanced and Extended LRM carriers,
+Added LBX Clan Tank Destroyer,
+Added LBX Po heavy tank,
+Added Po II heavy tank,
+Added Po II Gauss,
+Added Po II Stealth,
+minor fixes
+
 4.1.9
 
 Removed some double bracket tagging on Pirate and Primitive vehicles,
