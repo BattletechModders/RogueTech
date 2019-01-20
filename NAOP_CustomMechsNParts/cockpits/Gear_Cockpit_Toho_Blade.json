@@ -1,34 +1,26 @@
 {
 
 	"Custom": {
-	"ComponentExplosion": { "ExplosionDamage": 100, "StabilityDamage": 100 },
 		"Category" : { 
-			"CategoryID" : "Gyro" 
-		},	
-		"Flags" : { "flags" : [ "not_broken", "no_salvage", "autorepair" ] },
+			"CategoryID" : "Cockpit" 
+		},
 		"WorkOrderCosts": {
 			"Install": {
 				"TechCost": "[[Chassis.Tonnage]]/10",
-				"CBillCost": "[[Chassis.Tonnage]] * 1.2"
+				"CBillCost": "[[Chassis.Tonnage]] * 1.1"
 			}
 		},
         "BonusDescriptions": {
-            "Bonuses": [
-				"Defense: +1",
-				"EvaMax: +1"
-				"EvaPips: +1",
-				"DamageTaken: -10%",
-				"StabDamageTaken: -10%",
-                "GyroStab: 50",
-				"GyroWeight: -50%",
-				"WeaponBoom: 100"
+            "Bonuses": [		
+				"DFAAcc: +1",
+				"MeleeAcc: +2",
+				"Health: +2",
+				"Initiative: +3",
+				"IsCockpit"
             ]
         },
-		"Weights": {
-			"StructureFactor": 0.50
-		},			
             "InventorySorter" : {
-                "SortKey" : "00022"
+                "SortKey" : "00019"
             }		
 	},
 
@@ -36,58 +28,81 @@
     "RelativeModifier" : 0,
     "AbsoluteModifier" : 0,
     "Description" : {
-        "Cost" : 8100000,
-        "Rarity" : 99,
-        "Purchasable" : false,
-        "Manufacturer" : "Optimus",
-        "Model" : "Ultima",
-        "UIName" : "Gyro HE (UX)",
-        "Id" : "Gear_Gyro_Ultima",
-        "Name" : "HE Gyro",
-        "Details" : "This custom gyro was built by Optimus. Through the constructing the flywheel almost entirely out of of carbon nanomaterials and osmiridium alloy, the 'Ultima' design can be spun up to hypersonic velocities without shattering, permitting for it to be more compact and lighter than an Ultralight Gyro whilst remaining more stable than a Standard. Featuring prototype microactuators optimized using stolen data it allows the MechWarrior to dance across the battlefield in a languid manner. As can be imagined, a hypersonic disk in the middle of your mech can be catastrophic if structural failure occurs...",
-        "Icon" : "uixSvgIcon_equipment_Gyro"
+        "Cost" : 940000,
+        "Rarity" : 9,
+        "Purchasable" : true,
+        "Manufacturer" : "Toho Heavy Industries",
+        "Model" : "Blade",
+        "UIName" : "Melee Cockpit",
+        "Id" : "Gear_Cockpit_Toho_Blade",
+        "Name" : "Melee Cockpit",
+        "Details" : "Based on a fusion of Clan and New Dallas Memory Core technologies, this offering by Toho Heavy Industries is equipped with melee actuator optimizer software. It is intended for Close-Combat Mechs fitted with an assortment of hand-to-hand weapons, intended for MechWarriors who intend to get in close and smash their opponents.",
+        "Icon" : "uixSvgIcon_equipment_Comms"
     },
-    "BonusValueA" : "",
-    "BonusValueB" : "",
+    "BonusValueA" : "+2 Melee/+1 DFA Accuracy",
+    "BonusValueB" : "+3 Initiative | +2 Health",
     "ComponentType" : "Upgrade",
     "ComponentSubType" : "NotSet",
     "PrefabIdentifier" : "",
-    "BattleValue" : 500,
+    "BattleValue" : 0,
     "InventorySize" : 2,
-    "Tonnage" : 0,
-    "AllowedLocations" : "CenterTorso",
+    "Tonnage" : 3,
+    "AllowedLocations" : "Head",
     "DisallowedLocations" : "All",
     "CriticalComponent" : false,
     "statusEffects" : [
-		{
-			"durationData" :
-			{
+        {
+            "durationData" : {
                 "duration" : -1,
-                "stackLimit" : -1
-			},
-			"targetingData" : 
-			{
-				"effectTriggerType" : "Passive",
-				"effectTargetType" : "Creator"
-			},
-			"effectType" : "StatisticEffect",
-			"Description" :
-			{
-				"Id" : "MaxEvasion",
-				"Name" : "EVASIVE MOVE",
-				"Details" : "This unit generates an extra EVASIVE charge from movement actions (up to its maximum).",
-				"Icon" : "uixSvgIcon_action_evasivemove"
-			},
-			"statisticData" : 
-			{
-				"statName" : "MaxEvasivePips",
-				"operation" : "Int_Add",
-				"modValue" : "1",
-				"modType" : "System.Int32"
-			},
-			"nature" : "Buff"
-		},	
-		{
+                "ticksOnActivations" : false,
+                "useActivationsOfTarget" : false,
+                "ticksOnEndOfRound" : false,
+                "ticksOnMovements" : false,
+                "stackLimit" : -1,
+                "clearedWhenAttacked" : false
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "triggerLimit" : 0,
+                "extendDurationOnTrigger" : 0,
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : false,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" : {
+                "Id" : "CockpitInitativeEffect",
+                "Name" : "CockpitTechBonus",
+                "Details" : "Provides + 3 Initiative and several buffs.",
+                "Icon" : "uixSvgIcon_equipment_Cockpit"
+            },
+            "nature" : "Buff",
+            "statisticData" : {
+                "appliesEachTick" : false,
+                "effectsPersistAfterDestruction" : false,
+                "statName" : "BaseInitiative",
+                "operation" : "Int_Add",
+                "modValue" : "-3",
+                "modType" : "System.Int32",
+                "additionalRules" : "NotSet",
+                "targetCollection" : "NotSet",
+                "targetWeaponCategory" : "NotSet",
+                "targetWeaponType" : "NotSet",
+                "targetAmmoCategory" : "NotSet",
+                "targetWeaponSubType" : "NotSet"
+            },
+            "tagData" : null,
+            "floatieData" : null,
+            "actorBurningData" : null,
+            "vfxData" : null,
+            "instantModData" : null,
+            "poorlyMaintainedEffectData" : null
+        },	
+        {
             "durationData" : {
                 "duration" : -1,
                 "ticksOnActivations" : false,
@@ -111,25 +126,25 @@
             },
             "effectType" : "StatisticEffect",
             "Description" : {
-                "Id" : "ImmortalisDHit",
-                "Name" : "HARDER TO HIT",
-                "Details" : "Provides a penalty to all attacks against this unit.",
-                "Icon" : "uixSvgIcon_equipment_Gyro"
+                "Id" : "DNI-StatusEffect-Attack_ToHit",
+                "Name" : "Man Machine Interface",
+                "Details" : "Active DNI Grants Melee Accuracy.",
+                "Icon" : "uixSvgIcon_equipment_TTS"
             },
             "nature" : "Buff",
             "statisticData" : {
                 "appliesEachTick" : false,
                 "effectsPersistAfterDestruction" : false,
-                "statName" : "ToHitThisActor",
+                "statName" : "AccuracyModifier",
                 "operation" : "Float_Add",
-                "modValue" : "1.0",
+                "modValue" : "-2.0",
                 "modType" : "System.Single",
                 "additionalRules" : "NotSet",
-                "targetCollection" : "NotSet",
+                "targetCollection" : "Weapon",
                 "targetWeaponCategory" : "NotSet",
                 "targetWeaponType" : "NotSet",
                 "targetAmmoCategory" : "NotSet",
-                "targetWeaponSubType" : "NotSet"
+                "targetWeaponSubType" : "Melee"
             },
             "tagData" : null,
             "floatieData" : null,
@@ -137,44 +152,15 @@
             "vfxData" : null,
             "instantModData" : null,
             "poorlyMaintainedEffectData" : null
-        },
-		{
-			"durationData" :
-			{
-                "duration" : -1,
-                "stackLimit" : -1
-			},
-			"targetingData" : 
-			{
-				"effectTriggerType" : "Passive",
-				"effectTargetType" : "Creator",
-                "showInStatusPanel" : false
-			},
-			"effectType" : "StatisticEffect",
-			"Description" :
-			{
-				"Id" : "GainEvasion",
-				"Name" : "EVASIVE MOVE",
-				"Details" : "This unit generates an extra EVASIVE charge from movement actions (up to its maximum).",
-				"Icon" : "uixSvgIcon_action_evasivemove"
-			},
-			"statisticData" : 
-			{
-				"statName" : "EvasivePipsGainedAdditional",
-				"operation" : "Int_Add",
-				"modValue" : "1",
-				"modType" : "System.Int32"
-			},
-			"nature" : "Buff"
-		},
-		{
+        },		
+        {
             "durationData" : {
                 "duration" : -1,
                 "ticksOnActivations" : false,
                 "useActivationsOfTarget" : false,
                 "ticksOnEndOfRound" : false,
                 "ticksOnMovements" : false,
-                "stackLimit" : 1,
+                "stackLimit" : -1,
                 "clearedWhenAttacked" : false
             },
             "targetingData" : {
@@ -191,21 +177,21 @@
             },
             "effectType" : "StatisticEffect",
             "Description" : {
-                "Id" : "HEStab",
-                "Name" : "INCOMING STABILITY DAMAGE DECREASED",
-                "Details" : "Incoming stability damage reduced by [AMT].",
-                "Icon" : "uixSvgIcon_equipment_Gyro"
+                "Id" : "Pilot_HealthAdd-T2",
+                "Name" : "MAX INJURIES INCREASED",
+                "Details" : "Prevents [AMT] Injuries against a MechWarrior.",
+                "Icon" : "uixSvgIcon_equipment_Cockpit"
             },
             "nature" : "Buff",
             "statisticData" : {
                 "appliesEachTick" : false,
                 "effectsPersistAfterDestruction" : false,
-                "statName" : "ReceivedInstabilityMultiplier",
-                "operation" : "Float_Multiply",
-                "modValue" : "0.9",
-                "modType" : "System.Single",
+                "statName" : "BonusHealth",
+                "operation" : "Int_Add",
+                "modValue" : "2",
+                "modType" : "System.Int32",
                 "additionalRules" : "NotSet",
-                "targetCollection" : "NotSet",
+                "targetCollection" : "Pilot",
                 "targetWeaponCategory" : "NotSet",
                 "targetWeaponType" : "NotSet",
                 "targetAmmoCategory" : "NotSet",
@@ -225,11 +211,10 @@
                 "useActivationsOfTarget" : false,
                 "ticksOnEndOfRound" : false,
                 "ticksOnMovements" : false,
-                "stackLimit" : 10,
+                "stackLimit" : -1,
                 "clearedWhenAttacked" : false
             },
             "targetingData" : {
-			"effectTargetsCreator": true,
                 "effectTriggerType" : "Passive",
                 "triggerLimit" : 0,
                 "extendDurationOnTrigger" : 0,
@@ -243,19 +228,25 @@
             },
             "effectType" : "StatisticEffect",
             "Description" : {
-                "Id" : "ImmortalisDR",
-                "Name" : "Optimal Angling",
-                "Details" : "All incoming Melee damage reduced.",
-                "Icon" : "uixSvgIcon_mwFury"
+                "Id" : "StatusEffect-Attack_DFAACC_JJ",
+                "Name" : "DFA ACC",
+                "Details" : "DFA Accuracy Increased.",
+                "Icon" : "uixSvgIcon_equipment_ActuatorLeg"
             },
             "nature" : "Buff",
             "statisticData" : {
                 "appliesEachTick" : false,
                 "effectsPersistAfterDestruction" : false,
-                "statName" : "DamageReductionMultiplierAll",
+                "statName" : "AccuracyModifier",
                 "operation" : "Float_Add",
-                "modValue" : "-0.10",
-                "modType" : "System.Single"
+                "modValue" : "-1.0",
+                "modType" : "System.Single",
+                "additionalRules" : "NotSet",
+                "targetCollection" : "NotSet",
+                "targetWeaponCategory" : "NotSet",
+                "targetWeaponType" : "NotSet",
+                "targetAmmoCategory" : "NotSet",
+                "targetWeaponSubType" : "DFA"
             },
             "tagData" : null,
             "floatieData" : null,
@@ -263,41 +254,12 @@
             "vfxData" : null,
             "instantModData" : null,
             "poorlyMaintainedEffectData" : null
-        },
-		{
-			"durationData" :
-			{
-				"duration" : -1,
-                "stackLimit" : 1				
-			},
-			"targetingData" : 
-			{
-				"effectTriggerType" : "Passive",
-				"effectTargetType" : "Creator",
-                "showInTargetPreview" : false,
-                "showInStatusPanel" : false
-			},
-			"effectType" : "StatisticEffect",
-			"Description" :
-			{
-				"Id" : "HESsteady",
-				"Name" : "Steadier 'Mech",
-				"Details" : "UNSTEADY threshold increased to 70",
-				"Icon" : "uixSvgIcon_action_evasivemove"
-			},
-			"statisticData" : 
-			{
-                "statName" : "UnsteadyThreshold",
-                "operation" : "Float_Add",
-                "modValue" : "50.0",
-                "modType" : "System.Single"
-			},
-			"nature" : "Buff"
-		}
+        }
     ],
     "ComponentTags" : {
         "items" : [
-            "component_type_stock"
+            "component_type_stock",
+			"ClanCockpit"
         ],
         "tagSetSourceFile" : ""
     }
