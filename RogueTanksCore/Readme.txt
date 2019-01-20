@@ -18,6 +18,7 @@ unit_hover,
 unit_noconvoy,
 unit_primitive,
 unit_carrier,
+unit_stealth,
 
 unit_galleon,
 unit_behemoth,
@@ -31,6 +32,18 @@ unit_hunter,
 
 
 Changelog:
+
+4.4.1
+
+Added Light MRM Carrier,
+Added Zhukov_Liao,
+Added J Edgar_Kurita,
+Added Pegasus_C3,
+Added Scimitar_C3,
+Added Challenger_XI Command Tank,
+Fixed Enhanced and Extended LRM being undertonned by giving them C3 slaves,
+Gave C3 to tanks that canonically have it,
+Minor fixes
 
 4.3.0
 
