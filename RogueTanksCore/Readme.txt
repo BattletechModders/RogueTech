@@ -33,6 +33,15 @@ unit_hunter,
 
 Changelog:
 
+4.4.7
+
+Switched Technicals to swiftwind model,
+Adjusted CLANK naming for LowVis,
+Adjusted Pirate naming for LowVis,
+Adjusted Primitive naming for LowVis,
+minor tagging fixes,
+Linted stuff
+
 4.4.1
 
 Added Light MRM Carrier,
