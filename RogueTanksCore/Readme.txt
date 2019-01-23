@@ -33,13 +33,13 @@ unit_hunter,
 
 Changelog:
 
-0.0.0
+4.5.7
 
 Fixed Winston_LAC's ammo,
 Updated Swiftwind to be a scout with bap and c3 slave,
-Updated Core/APC vehicle names for LowVis,
-Updated Core/Assault vehicle names for LowVis,
+Updated all vehicles for LowVis naming,
 Fuel Cell engines for Sleipnir APC,
+minor fixes
 
 4.4.7
 
