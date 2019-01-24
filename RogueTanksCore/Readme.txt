@@ -33,7 +33,7 @@ unit_hunter,
 
 Changelog:
 
-0.0.0
+4.6.2
 
 Added Ajax Command Vehicle and Ajax Streak Boat,
 Gave scout/spotter vehicles the "unit_predator" tag,
