@@ -33,6 +33,10 @@ unit_hunter,
 
 Changelog:
 
+0.0.0
+
+Added Ajax Command Vehicle and Ajax Streak Boat,
+
 4.5.7
 
 Fixed Winston_LAC's ammo,
