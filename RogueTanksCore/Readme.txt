@@ -36,6 +36,7 @@ Changelog:
 0.0.0
 
 Added Ajax Command Vehicle and Ajax Streak Boat,
+Gave scout/spotter vehicles the "unit_predator" tag,
 
 4.5.7
 
