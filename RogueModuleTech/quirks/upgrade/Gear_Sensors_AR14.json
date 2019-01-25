@@ -1,52 +1,93 @@
 {
     "Custom": {
-        "Category": {
-            "CategoryID": "Cockpit"
-        },
+        "Category": [
+           { "CategoryID": "CockpitSensors"},
+		   { "CategoryID": "AdvECM" },
+		   { "CategoryID": "C3" }
+        ],
         "WorkOrderCosts": {
             "Install": {
-                "TechCost": "1",
-                "CBillCost": "[[Chassis.Tonnage]]"
+                "TechCost": "[[Chassis.Tonnage]]/10",
+                "CBillCost": "[[Chassis.Tonnage]] * 1.1"
             }
+        },
+        "Flags": {
+            "flags": [
+                "not_broken",
+                "no_salvage",
+                "autorepair"
+            ]
         },
         "BonusDescriptions": {
             "Bonuses": [
-                "Resolve: +2",
+                "EvaPips: +1",
+                "Sensors: +20%",
+                "Sight: +20%",
                 "Initiative: +1",
-                "IsCockpit"
+                "CalledShot: 25%",
+                "IsECM: 7",
+                "ECMBubble: 210",
+                "IsProbe: 6",
+                "Sharer",
+                "CockpitEWS"
             ]
         },
         "InventorySorter": {
-            "SortKey": "00202"
+            "SortKey": "00019"
         }
     },
     "StatName": null,
     "RelativeModifier": 0,
     "AbsoluteModifier": 0,
     "Description": {
-        "Cost": 320000,
-        "Rarity": 3,
+        "Cost": 1370000,
+        "Rarity": 99,
         "Purchasable": true,
-        "Manufacturer": "StarCorps",
-        "Model": "Enhanced",
-        "UIName": "Comms Suite +",
-        "Id": "Gear_Cockpit_StarCorps_Enhanced",
-        "Name": "StarCorps Enhanced Comms System",
-        "Details": "All 'Mechs come equipped with a stock cockpit configuration, which can be upgraded for improved performance. Comms System upgrades allow for better lance cohesion during combat, increasing the Morale generated.",
+        "Manufacturer": "Kallon",
+        "Model": "LosTech",
+        "UIName": "AR14 Sheathed Beacon",
+        "Id": "Gear_Sensors_AR14",
+        "Name": "SLDF Black Ops Cockpit  ",
+        "Details": "The AR-14 Sheathed Directional Beacon with Angel ECM Suit is a Star League Cockpit and Sensor system specifically designed for the Chameleon Polarization Shield, combining the benefits of an Active probe with a ECM system.",
         "Icon": "uixSvgIcon_equipment_Comms"
     },
-    "BonusValueA": "+ 2 Morale Gain",
-    "BonusValueB": "",
+    "BonusValueA": "+1 Health/Resolve.",
+    "BonusValueB": "+20% Sensors/Sight",
     "ComponentType": "Upgrade",
     "ComponentSubType": "NotSet",
     "PrefabIdentifier": "",
     "BattleValue": 0,
-    "InventorySize": 1,
-    "Tonnage": 1,
+    "InventorySize": 2,
+    "Tonnage": 2,
     "AllowedLocations": "Head",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
-    "statusEffects": [	
+    "statusEffects": [
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "GainEvasion",
+                "Name": "EVASIVE MOVE",
+                "Details": "This unit generates an extra EVASIVE charge from movement actions (up to its maximum).",
+                "Icon": "uixSvgIcon_action_evasivemove"
+            },
+            "statisticData": {
+                "statName": "EvasivePipsGainedAdditional",
+                "operation": "Int_Add",
+                "modValue": "1",
+                "modType": "System.Int32"
+            },
+            "nature": "Buff"
+        },
         {
             "durationData": {
                 "duration": -1,
@@ -97,62 +138,15 @@
             "vfxData": null,
             "instantModData": null,
             "poorlyMaintainedEffectData": null
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
-                "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": true
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "StatusEffect-Morale_Gain-T2",
-                "Name": "MORALE GENERATION INCREASED",
-                "Details": "Provides a +2 bonus to actions that generate Resolve.",
-                "Icon": "uixSvgIcon_equipment_Cockpit"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
-                "statName": "MoraleBonusGain",
-                "operation": "Int_Add",
-                "modValue": "2",
-                "modType": "System.Int32",
-                "additionalRules": "NotSet",
-                "targetCollection": "NotSet",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
         }
     ],
     "ComponentTags": {
         "items": [
-            "component_type_stock"
+		"BLACKLISTED",
+            "component_type_stock",
+            "lv-shares-sensors",
+            "lv-jammer_m7_r7",
+            "lv-probe_m6"
         ],
         "tagSetSourceFile": ""
     }

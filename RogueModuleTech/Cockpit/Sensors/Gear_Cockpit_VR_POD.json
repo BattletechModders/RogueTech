@@ -1,67 +1,43 @@
 {
     "Custom": {
         "Category": [
-           { "CategoryID": "Cockpit"},
-		   { "CategoryID": "AdvECM" }
+            {"CategoryID": "VirtualRealityPilotingPod"},
+			{"CategoryID": "CockpitSensors"}
         ],
-        "WorkOrderCosts": {
-            "Install": {
-                "TechCost": "[[Chassis.Tonnage]]/10",
-                "CBillCost": "[[Chassis.Tonnage]] * 1.1"
-            }
-        },
-        "Flags": {
-            "flags": [
-                "not_broken",
-                "no_salvage",
-                "autorepair"
-            ]
-        },
         "BonusDescriptions": {
             "Bonuses": [
-                "EvaPips: +1",
-				"AdvZoom: 3",
-				"AdvZoomRange: 210",
-				"ThermalVision: 1",
-				"ThermalVisionHeat: 30",
-                "Sensors: +20%",
-                "Sight: +20%",
-                "Initiative: +2",
-                "CalledShot: 25%",
-                "IsECM: 7",
-                "ECMBubble: 210",
-                "IsProbe: 6",
-                "Sharer",
-                "IsCockpit"
+                "Initiative: +1",
+                "EvaMax: +2",
+                "EvaPips: +2",
+				"CockpitSensors: 2",
+				"PilotShutDown"
+                "IsVRPP"
             ]
         },
         "InventorySorter": {
             "SortKey": "00019"
         }
     },
-    "StatName": null,
-    "RelativeModifier": 0,
-    "AbsoluteModifier": 0,
     "Description": {
-        "Cost": 1370000,
-        "Rarity": 99,
+        "Cost": 1040000,
+        "Rarity": 0,
         "Purchasable": true,
-        "Manufacturer": "Kallon",
-        "Model": "LosTech",
-        "UIName": "AR14 Sheathed Beacon",
-        "Id": "Gear_Cockpit_AR14",
-        "Name": "SLDF Black Ops Cockpit  ",
-        "Details": "The AR-14 Sheathed Directional Beacon with Angel ECM Suit is a Star League Cockpit and Sensor system specifically designed for the Chameleon Polarization Shield, combining the benefits of an Active probe with a ECM system.",
-        "Icon": "uixSvgIcon_equipment_Comms"
+        "Manufacturer": "Prototype",
+        "Model": "Deadly Sins",
+        "UIName": "Virtual Reality Piloting Pod",
+        "Id": "Gear_Cockpit_VR_POD",
+        "Name": "VRP-POD",
+        "Details": "Initially an offshoot of the scrapped DNI project, this addition fully immerses a pilot in their connection to the 'Mech, further improving all its aspects at the risk of a deadly feedback loop <b><color=#F79232>Requires DNI or EI Cockpit to be installed</color></b>",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
     },
-    "BonusValueA": "+1 Health/Resolve.",
-    "BonusValueB": "+20% Sensors/Sight",
+    "BonusValueA": "Shutdown",
+    "BonusValueB": "Injury",
     "ComponentType": "Upgrade",
     "ComponentSubType": "NotSet",
     "PrefabIdentifier": "",
     "BattleValue": 0,
-    "InventorySize": 2,
-    "Tonnage": 3,
+    "InventorySize": 1,
+    "Tonnage": 1,
     "AllowedLocations": "Head",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
@@ -72,25 +48,25 @@
                 "stackLimit": -1
             },
             "targetingData": {
+                "effectTargetsCreator": true,
                 "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInStatusPanel": false
+                "effectTargetType": "Creator"
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "GainEvasion",
-                "Name": "EVASIVE MOVE",
-                "Details": "This unit generates an extra EVASIVE charge from movement actions (up to its maximum).",
-                "Icon": "uixSvgIcon_action_evasivemove"
+                "Id": "DNI-Penalty",
+                "Name": "OverheatPilotDamage",
+                "Details": "Take Damage on Overheat",
+                "Icon": "uixSvgIcon_equipment_Cockpit"
             },
+            "nature": "Debuff",
             "statisticData": {
-                "statName": "EvasivePipsGainedAdditional",
-                "operation": "Int_Add",
-                "modValue": "1",
-                "modType": "System.Int32"
-            },
-            "nature": "Buff"
-        },
+                "statName": "ReceiveShutdownInjury",
+                "operation": "Set",
+                "modValue": "true",
+                "modType": "System.Boolean"
+            }
+        },	
         {
             "durationData": {
                 "duration": -1,
@@ -115,7 +91,7 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "CockpitInitativeEffect",
+                "Id": "CockpitInitativeEffectPlus",
                 "Name": "CockpitTechBonus",
                 "Details": "Provides + 1 Initiative and several buffs.",
                 "Icon": "uixSvgIcon_equipment_Cockpit"
@@ -144,7 +120,33 @@
         },
         {
             "durationData": {
-                "duration": -1
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "GainEvasion",
+                "Name": "EVASIVE MOVE",
+                "Details": "This unit generates an extra EVASIVE charge from movement actions (up to its maximum).",
+                "Icon": "uixSvgIcon_action_evasivemove"
+            },
+            "statisticData": {
+                "statName": "EvasivePipsGainedAdditional",
+                "operation": "Int_Add",
+                "modValue": "2",
+                "modType": "System.Int32"
+            },
+            "nature": "Buff"
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
@@ -152,28 +154,24 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "TCCALLSHOT",
-                "Name": "Improved Called Shot",
-                "Details": "Called Shots twice as reliable",
-                "Icon": "uixSvgIcon_ability_mastertactician"
+                "Id": "MaxEvasion",
+                "Name": "EVASIVE MOVE",
+                "Details": "This unit generates an extra EVASIVE charge from movement actions (up to its maximum).",
+                "Icon": "uixSvgIcon_action_evasivemove"
             },
             "statisticData": {
-                "statName": "CalledShotBonusMultiplier",
-                "operation": "Float_Multiply",
-                "modValue": "1.25",
-                "modType": "System.Single"
-            }
+                "statName": "MaxEvasivePips",
+                "operation": "Int_Add",
+                "modValue": "2",
+                "modType": "System.Int32"
+            },
+            "nature": "Buff"
         }
     ],
     "ComponentTags": {
         "items": [
-		"BLACKLISTED",
             "component_type_stock",
-            "lv-shares-sensors",
-			"lv-vismode-zoom_m3_s7",
-			"lv-vismode-heat_m1_d35",
-            "lv-jammer_m7_r7",
-            "lv-probe_m6"
+			"lv-probe-boost_m2"
         ],
         "tagSetSourceFile": ""
     }
