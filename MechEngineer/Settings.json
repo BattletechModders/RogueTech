@@ -83,6 +83,12 @@
 		"Full": "Identify Friend/Foe Jammer- A low tier ECM that adds {0} to sensor checks but does not enable Stealth Systems."
 	},
 	{
+		"Bonus": "PirateJammer",
+		"Short": "PirateJammer",
+		"Long": "Pirate Jammer",
+		"Full": "A low tier ECM that adds {0} to sensor checks that can enable Stealth Systems but Lacks the ECM Bubble."
+	},	
+	{
 		"Bonus": "BlueShield",
 		"Short": "BlueShield",
 		"Long": "BlueShield",
@@ -138,9 +144,27 @@
 	},	
 	{
 		"Bonus": "SensorBoost",
-		"Short": "Sensors",
-		"Long": "S{0} Sensors",
+		"Short": "SensorBooster",
+		"Long": "S{0} Sensors Boost",
 		"Full": "A low level Sensor Suite provides a stacking bonus of {0} sensor checks made by this unit"
+	},
+	{
+		"Bonus": "CockpitSensors",
+		"Short": "Sensors",
+		"Long": "Sensors",
+		"Full": "Cockpit Sensors Suite providing a stacking bonus of {0} sensor checks made by this unit."
+	},
+	{
+		"Bonus": "CockpitEWS",
+		"Short": "Cockpit EWS",
+		"Long": "Cockpit EWS",
+		"Full": "A advanced compact Electronic Warfare suite replacing the Cockpits Sensor Systems."
+	},	
+	{
+		"Bonus": "FCS",
+		"Short": "FCS",
+		"Long": "FireControlSystems",
+		"Full": "Cockpit Fire Control Systems providing Targeting and Weapons Control Systems."
 	},	
 	{
 		"Bonus": "IsProbe",
@@ -385,7 +409,13 @@
 			"Short": "OH Injury",
 			"Long": "Overheat Injury",
 			"Full": "Take pilot damage on overheat"
-		},		
+		},	
+		{
+			"Bonus": "PilotShutDown",
+			"Short": "SD Injury",
+			"Long": "Shutdown Injury",
+			"Full": "Take pilot damage on shutdown"
+		},			
 		{
 			"Bonus": "ArtemisIV",
 			"Short": "ArtemisIV",
@@ -484,8 +514,8 @@
 		}, {
 			"Bonus": "IsCockpit",
 			"Short": "Cockpit",
-			"Long": "Cockpit Upgrade",
-			"Full": "Cockpit Upgrade provides various Effects"
+			"Long": "Cockpit Systems",
+			"Full": "Cockpit Life Support and Piloting Systems"
 		},{
 			"Bonus": "IsVRPP",
 			"Short": "VRPP",
@@ -1513,7 +1543,32 @@
 		"Gear_Cockpit_Tacticon_B2000_Battle_Computer",
 		"Gear_Actuator_CoolingJacket",
 		"Gear_Cockpit_VR_POD",
-		"Gear_Gyro_HE_Optima"
+		"Gear_Gyro_HE_Optima",
+		"Gear_FCS_Generic_Standard",
+		"Gear_FCS_Improved",
+		"Gear_FCS_Energy",
+		"Gear_FCS_AdvancedTC",
+		"Gear_Sensors_Generic_Standard",
+		"Gear_AdvZoom",
+		"Gear_ThermalVision",
+		"Gear_IFFJammer",
+		"Gear_Sensors_HighPowered",
+		"Gear_FCS_Defiance",
+		"Gear_Sensors_AR12",
+		"Gear_Cockpit_Ceres_Metals_Braced",
+		"Gear_Cockpit_Ceres_Metals_Hardened",
+		"Gear_Cockpit_Ceres_Metals_Reinforced",
+		"Gear_Cockpit_Majesty_M_M_60KL",
+		"Gear_Cockpit_Generic_Standard",
+		"Gear_Cockpit_Majesty_M_M_120KL",
+		"Gear_Cockpit_Majesty_M_M_180KL",
+		"Gear_Cockpit_SLDF_Custom",
+		"Gear_Cockpit_StarCorps_Advanced",
+		"Gear_Cockpit_StarCorps_Enhanced",
+		"Gear_Cockpit_StarCorps_Improved",
+		"Gear_Cockpit_CLAN_EI",
+		"Gear_Cockpit_CLAN_Standard",
+		"Gear_Cockpit_DNI"
 	],
 	
 
@@ -1639,7 +1694,7 @@
 			"MinEquiped": 1,
 			"DefaultCustoms": {
 				"Sorter": {
-					"Order": 0
+					"Order": 1
 				},
 				"Replace": {
 					"ComponentDefId": "Gear_Cockpit_Generic_Standard",
@@ -1727,6 +1782,78 @@
 					"Flags": [
 						"not_broken"
 					]
+				}
+			},
+			"AddAlreadyEquiped": "{0} already installed on mech",
+			"AddAlreadyEquipedLocation": "{0} already installed on {1}",
+			"AddMaximumReached": "Mech already have {1} of {0} installed",
+			"AddMaximumLocationReached": "Mech already have {1} of {0} installed at {2}",
+			"AddMixed": "Mech can have only one type of {0}",
+			"ValidateRequred": "MISSING {0}: This mech must mount a {1}",
+			"ValidateMinimum": "MISSING {0}: This mech must mount at least {2} of {1}",
+			"ValidateMixed": "WRONG {0}: Mech can have only one type of {1}",
+			"ValidateUnique": "EXCESS {0}: This mech can't mount more then one {1}",
+			"ValidateMaximum": "EXCESS {0}: This mech can't mount more then {2} of {1}",
+			"ValidateUniqueLocation": "EXCESS {0}: This mech can't mount more then one {1} at any location",
+			"ValidateMaximumLocation": "EXCESS {0}: This mech can't mount more then {2} of {1} any location",
+			"ValidateForbidden": "Cannot use {0} and {1} together"
+		},
+		{
+			"Name": "CockpitFCS",
+			"DisplayName": "FCS",
+			"Unique": false,
+			"UniqueForLocation": true,
+			"Required": true,
+			"displayName": "FCS",
+			"AllowMixTags": true,
+			"AutoReplace": true,
+			"ReplaceAnyLocation": false,
+			"MaxEquiped": -1,
+			"MaxEquipedPerLocation": 1,
+			"MinEquiped": 1,
+			"DefaultCustoms": {
+				"Sorter": {
+					"Order": 0
+				},
+				"Replace": {
+					"ComponentDefId": "Gear_FCS_Generic_Standard",
+					"Location": "Head"
+				}
+			},
+			"AddAlreadyEquiped": "{0} already installed on mech",
+			"AddAlreadyEquipedLocation": "{0} already installed on {1}",
+			"AddMaximumReached": "Mech already have {1} of {0} installed",
+			"AddMaximumLocationReached": "Mech already have {1} of {0} installed at {2}",
+			"AddMixed": "Mech can have only one type of {0}",
+			"ValidateRequred": "MISSING {0}: This mech must mount a {1}",
+			"ValidateMinimum": "MISSING {0}: This mech must mount at least {2} of {1}",
+			"ValidateMixed": "WRONG {0}: Mech can have only one type of {1}",
+			"ValidateUnique": "EXCESS {0}: This mech can't mount more then one {1}",
+			"ValidateMaximum": "EXCESS {0}: This mech can't mount more then {2} of {1}",
+			"ValidateUniqueLocation": "EXCESS {0}: This mech can't mount more then one {1} at any location",
+			"ValidateMaximumLocation": "EXCESS {0}: This mech can't mount more then {2} of {1} any location",
+			"ValidateForbidden": "Cannot use {0} and {1} together"
+		},
+		{
+			"Name": "CockpitSensors",
+			"DisplayName": "Sensors",
+			"Unique": false,
+			"UniqueForLocation": true,
+			"Required": true,
+			"displayName": "Sensors",
+			"AllowMixTags": true,
+			"AutoReplace": true,
+			"ReplaceAnyLocation": false,
+			"MaxEquiped": -1,
+			"MaxEquipedPerLocation": 1,
+			"MinEquiped": 1,
+			"DefaultCustoms": {
+				"Sorter": {
+					"Order": 2
+				},
+				"Replace": {
+					"ComponentDefId": "Gear_Sensors_Generic_Standard",
+					"Location": "Head"
 				}
 			},
 			"AddAlreadyEquiped": "{0} already installed on mech",
