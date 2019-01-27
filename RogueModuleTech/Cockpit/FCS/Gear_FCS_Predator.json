@@ -1,48 +1,53 @@
 {
     "Custom": {
         "Category": {
-            "CategoryID": "Cockpit"
+            "CategoryID": "CockpitFCS"
         },
         "WorkOrderCosts": {
             "Install": {
-                "TechCost": "1",
-                "CBillCost": "[[Chassis.Tonnage]]"
+                "TechCost": "[[Chassis.Tonnage]]/10",
+                "CBillCost": "[[Chassis.Tonnage]] * 1.15"
             }
         },
         "BonusDescriptions": {
             "Bonuses": [
-                "Health: 1",
-                "Melee: +10%",
-                "IsCockpit"
+                "Accuracy: +1",
+                "CalledShot: 10%",
+				"Sight: +5%",
+				"AdvZoom: 3",
+				"AdvZoomRange: 150",
+				"ThermalVision: 1",
+				"ThermalVisionHeat: 50"
+                "FCS"
             ]
         },
         "InventorySorter": {
-            "SortKey": "00202"
+            "SortKey": "00201"
         }
     },
     "StatName": null,
     "RelativeModifier": 0,
     "AbsoluteModifier": 0,
     "Description": {
-        "Cost": 300000,
-        "Rarity": 3,
+        "Cost": 450000,
+        "Rarity": 8,
         "Purchasable": true,
-        "Manufacturer": "Pirates",
-        "Model": "Spiked",
-        "UIName": "Spiked Helmet (PRT)",
-        "Id": "Gear_Cockpit_Spiked_Helmet",
-        "Name": "Pirates Spiked Helmet",
-        "Details": "This looks like it once was a Ceres Metals Compact Cockpit but someone made it look like a helm and added spikes to it!.",
+        "Manufacturer": "Deadly Sins",
+        "Model": "Predator",
+        "UIName": "FCS Predator",
+        "Id": "Gear_FCS_Predator",
+        "Name": "Weapons Computer",
+        "Details": "The Predator FCS is a State of the Art Fire Control System, offering top notch Zoom and Thermal Vision with superior Target Acquisition Heuristics.",
         "Icon": "uixSvgIcon_equipment_Cockpit"
     },
-    "BonusValueA": "+ 1 Injury Resist",
-    "BonusValueB": "+5% Melee Damage.",
+    "BonusValueA": "Breaching Shot",
+    "BonusValueB": "",
     "ComponentType": "Upgrade",
     "ComponentSubType": "NotSet",
     "PrefabIdentifier": "",
     "BattleValue": 0,
     "InventorySize": 1,
-    "Tonnage": 0,
+    "Tonnage": 1,
     "AllowedLocations": "Head",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
@@ -67,25 +72,76 @@
                 "forcePathRebuild": false,
                 "forceVisRebuild": false,
                 "showInTargetPreview": false,
-                "showInStatusPanel": true
+                "showInStatusPanel": false
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StatusEffect-Spikedhelmet",
-                "Name": "Spiked Helmet",
-                "Details": "Prevents 1 Injuries and increases melee damage by 5%.",
+                "Id": "HP-CockpitSensors-Spot",
+                "Name": "SPOTTING DISTANCE INCREASED",
+                "Details": "Increases spotting distance by 50m.",
                 "Icon": "uixSvgIcon_equipment_Cockpit"
             },
             "nature": "Buff",
             "statisticData": {
                 "appliesEachTick": false,
                 "effectsPersistAfterDestruction": false,
-                "statName": "BonusHealth",
-                "operation": "Int_Add",
-                "modValue": "1",
-                "modType": "System.Int32",
+                "statName": "SpotterDistanceAbsolute",
+                "operation": "Float_Multiply",
+                "modValue": "1.05",
+                "modType": "System.Single",
                 "additionalRules": "NotSet",
-                "targetCollection": "Pilot",
+                "targetCollection": "NotSet",
+                "targetWeaponCategory": "NotSet",
+                "targetWeaponType": "NotSet",
+                "targetAmmoCategory": "NotSet",
+                "targetWeaponSubType": "NotSet"
+            },
+            "tagData": null,
+            "floatieData": null,
+            "actorBurningData": null,
+            "vfxData": null,
+            "instantModData": null,
+            "poorlyMaintainedEffectData": null
+        },	
+        {
+            "durationData": {
+                "duration": -1,
+                "ticksOnActivations": false,
+                "useActivationsOfTarget": false,
+                "ticksOnEndOfRound": false,
+                "ticksOnMovements": false,
+                "stackLimit": -1,
+                "clearedWhenAttacked": false
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": true
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "TC-TO-HIT",
+                "Name": "Targeting Computer",
+                "Details": "Breaching Shot, Improved Accuracy/Recoil.",
+                "Icon": "uixSvgIcon_ability_precisionstrike"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "appliesEachTick": false,
+                "effectsPersistAfterDestruction": false,
+                "statName": "AccuracyModifier",
+                "operation": "Float_Add",
+                "modValue": "-1.0",
+                "modType": "System.Single",
+                "additionalRules": "NotSet",
+                "targetCollection": "Weapon",
                 "targetWeaponCategory": "NotSet",
                 "targetWeaponType": "NotSet",
                 "targetAmmoCategory": "NotSet",
@@ -100,53 +156,32 @@
         },
         {
             "durationData": {
-                "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": 6,
-                "clearedWhenAttacked": false
+                "duration": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
-                "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
+                "effectTargetType": "Creator"
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "SpikedHelmMelee",
-                "Name": "MELEE DAMAGE INCREASED",
-                "Details": "Melee attacks deal 5% more damage.",
-                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+                "Id": "TCCALLSHOT",
+                "Name": "Improved Called Shot",
+                "Details": "Called Shots twice as reliable",
+                "Icon": "uixSvgIcon_ability_mastertactician"
             },
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
-                "statName": "DamagePerShot",
+                "statName": "CalledShotBonusMultiplier",
                 "operation": "Float_Multiply",
                 "modValue": "1.1",
-                "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "Weapon",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "Melee"
-            },
-            "nature": "Buff"
+                "modType": "System.Single"
+            }
         }
     ],
     "ComponentTags": {
         "items": [
-            "component_type_stock"
+            "component_type_stock",
+			"lv-vismode-zoom_m1_s5",
+			"lv-vismode-heat_m1_d100",
         ],
         "tagSetSourceFile": ""
     }
