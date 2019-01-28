@@ -7,10 +7,10 @@ Some units by LadyAlecto and Justin Kase
 
 RogueTanks Modules:
 
-RogueTanksCore - The Majority of RT's vehicles, things available widely in the IS and Periphery.
-PrimitiveTanks - Units mostly armed with Rifles, RL, MG, and basic 3025 weapons.
-PirateTanks - Units mostly armed with the odd pirate weapons.
+RogueTanks - The Majority of RT's vehicles, things available widely in the IS and Periphery.
+PrimitiveTanks - Units mostly armed with Rifles, RL, MG, and basic 3025 weapons, only the most ragtag of insterstelar powers use these, they're often found in the hands of local militia and cash strapped mercs.
 CLANK - Clan tanks with clan gear.
+PLANK - Units mostly armed with the odd pirate weapons cobbled together by people who probably shout "Witness Me!"
 
 Custom Tags List:
 
