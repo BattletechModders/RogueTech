@@ -33,6 +33,10 @@ unit_hunter,
 
 Changelog:
 
+4.6.3
+
+Moved Clan, Pirate and Primitive tank modules into main folder to reduce RT root folder clutter.
+
 4.6.2
 
 Added Ajax Command Vehicle and Ajax Streak Boat,
