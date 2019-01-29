@@ -33,6 +33,10 @@ unit_hunter,
 
 Changelog:
 
+4.6.4
+
+Minor fixes
+
 4.6.3
 
 Moved Clan, Pirate and Primitive tank modules into main folder to reduce RT root folder clutter.
