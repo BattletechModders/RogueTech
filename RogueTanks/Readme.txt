@@ -33,6 +33,11 @@ unit_hunter,
 
 Changelog:
 
+4.6.7
+
+Added Scorpion Light Tanks with MRM and Light AC/2,
+Minor updates and fixes for existing Scorpions,
+
 4.6.4
 
 Minor fixes
