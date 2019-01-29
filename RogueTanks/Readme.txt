@@ -33,10 +33,11 @@ unit_hunter,
 
 Changelog:
 
-4.6.7
+4.6.8
 
 Added Scorpion Light Tanks with MRM and Light AC/2,
 Minor updates and fixes for existing Scorpions,
+Added Pirate Demon
 
 4.6.4
 
