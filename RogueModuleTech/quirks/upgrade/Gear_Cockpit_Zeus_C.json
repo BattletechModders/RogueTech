@@ -2,9 +2,7 @@
     "Custom": {
         "Category": [
            { "CategoryID": "Cockpit"},
-		   { "CategoryID": "CockpitFCS"},
-		   { "CategoryID": "CockpitSensors"},
-		   { "CategoryID": "AdvECM" }
+		   { "CategoryID": "C3" }
         ],
         "WorkOrderCosts": {
             "Install": {
@@ -14,6 +12,7 @@
         },
         "Flags": {
             "flags": [
+				"default",
                 "not_broken",
                 "no_salvage",
                 "autorepair"
@@ -21,18 +20,14 @@
         },
         "BonusDescriptions": {
             "Bonuses": [
-                "Breaching",
-                "Accuracy: +2",
-                "WeaponDamage: +10%",
-                "Resolve: 2",
-                "Initiative: 3",
+                "LanceResolve: 2",
+                "Initiative: 1",
+				"Tacticon: +2",
+				"LanceAcc: +2",
+				"LanceSight2: 100",
+				"Health: 3",
                 "Sharer",
-                "IsECM: 2",
-                "ECMBubble: 210",
-                "IsProbe: 3",
-				"CockpitEWS",
 				"IsCockpit"
-				"FCS"
             ]
         },
         "InventorySorter": {
@@ -48,10 +43,10 @@
         "Purchasable": false,
         "Manufacturer": "Society",
         "Model": "ADV TC",
-        "UIName": "Prototype Command Computer (C)",
-        "Id": "Gear_TTS_Zeus_C",
+        "UIName": "Command Cockpit (C)",
+        "Id": "Gear_Cockpit_Zeus_C",
         "Name": "Max Tech Weapons Computer",
-        "Details": "Targeting Computers are sophisticated pieces of electronics that, unlike normal targeting systems, physically help MechWarriors target their opponents. Recoil compensators and gyroscopic stabilizers are used to prevent normal weapon drift from factors such as recoil and movement while the computer accounts for atmospheric and other conditions to present an accurate ''lead'' on the target. This allows for more surgical precision of weapons fire, especially with naturally accurate systems. ",
+        "Details": "All 'Mechs come equipped with a stock cockpit configuration, which can be upgraded for improved performance. Command Consoles are components that can only be mounted on Heavy or Assault Class 'Mechs. The Console adds a complete set of controls for a second MechWarrior with added command and control facilities, allowing for better Lance coordination by upgrading initiative.\n\nStar League-vintage Command Consoles are very rare by 3025 because 'Mechs equipped in this way were favoured targets in battle. Most still existing have been relegated to training duties.",
         "Icon": "uixSvgIcon_equipment_Cockpit"
     },
     "BonusValueA": "Breaching Shot",
@@ -61,11 +56,62 @@
     "PrefabIdentifier": "",
     "BattleValue": 0,
     "InventorySize": 2,
-    "Tonnage": 3,
+    "Tonnage": 2,
     "AllowedLocations": "Head",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
-    "statusEffects": [
+    "statusEffects": [	
+        {
+            "durationData" : {
+                "duration" : -1,
+                "ticksOnActivations" : false,
+                "useActivationsOfTarget" : false,
+                "ticksOnEndOfRound" : false,
+                "ticksOnMovements" : false,
+                "stackLimit" : -1,
+                "clearedWhenAttacked" : false
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "triggerLimit" : 0,
+                "extendDurationOnTrigger" : 0,
+                "specialRules" : "NotSet",
+                "effectTargetType" : "AllLanceMates",
+                "range" : 0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : false,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" : {
+                "Id" : "StatusEffect-Initiative_Lance",
+                "Name" : "Command Consoles",
+                "Details" : "Provides + 1 Initiative and several buffs.",
+                "Icon" : "uixSvgIcon_equipment_Cockpit"
+            },
+            "nature" : "Buff",
+            "statisticData" : {
+                "appliesEachTick" : false,
+                "effectsPersistAfterDestruction" : false,
+                "statName" : "BaseInitiative",
+                "operation" : "Int_Add",
+                "modValue" : "-2",
+                "modType" : "System.Int32",
+                "additionalRules" : "NotSet",
+                "targetCollection" : "NotSet",
+                "targetWeaponCategory" : "NotSet",
+                "targetWeaponType" : "NotSet",
+                "targetAmmoCategory" : "NotSet",
+                "targetWeaponSubType" : "NotSet"
+            },
+            "tagData" : null,
+            "floatieData" : null,
+            "actorBurningData" : null,
+            "vfxData" : null,
+            "instantModData" : null,
+            "poorlyMaintainedEffectData" : null
+        },	
         {
             "durationData": {
                 "duration": -1,
@@ -101,7 +147,7 @@
                 "effectsPersistAfterDestruction": false,
                 "statName": "BaseInitiative",
                 "operation": "Int_Add",
-                "modValue": "-3",
+                "modValue": "-1",
                 "modType": "System.Int32",
                 "additionalRules": "NotSet",
                 "targetCollection": "NotSet",
@@ -116,81 +162,58 @@
             "vfxData": null,
             "instantModData": null,
             "poorlyMaintainedEffectData": null
-        },	
-        {
-            "durationData": {
-                "duration": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator"
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "TC-Breaching",
-                "Name": "BREACHING SHOT",
-                "Details": "PASSIVE: Attacking with a single weapon ignores COVER and GUARDED on the target.",
-                "Icon": "uixSvgIcon_ability_precisionstrike"
-            },
-            "statisticData": {
-                "statName": "PrecisionStrike",
-                "operation": "Set",
-                "modValue": "true",
-                "modType": "System.Boolean"
-            },
-            "nature": "Buff"
         },
         {
-            "durationData": {
-                "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
+            "durationData" : {
+                "duration" : -1,
+                "ticksOnActivations" : false,
+                "useActivationsOfTarget" : false,
+                "ticksOnEndOfRound" : false,
+                "ticksOnMovements" : false,
+                "stackLimit" : -1,
+                "clearedWhenAttacked" : false
             },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
-                "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": true
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "triggerLimit" : 0,
+                "extendDurationOnTrigger" : 0,
+                "specialRules" : "NotSet",
+                "effectTargetType" : "AllLanceMates",
+                "range" : 0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : false,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
             },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "TC-TO-HIT",
-                "Name": "Targeting Computer",
-                "Details": "Breaching Shot, Improved Accuracy/Recoil.",
-                "Icon": "uixSvgIcon_ability_precisionstrike"
+            "effectType" : "StatisticEffect",
+            "Description" : {
+                "Id" : "StatusEffect-Spotting_Gain-T1",
+                "Name" : "SPOTTING DISTANCE INCREASED",
+                "Details" : "Increases spotting distance by 25m.",
+                "Icon" : "uixSvgIcon_equipment_Cockpit"
             },
-            "nature": "Buff",
-            "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
-                "statName": "AccuracyModifier",
-                "operation": "Float_Add",
-                "modValue": "-2.0",
-                "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "Weapon",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
+            "nature" : "Buff",
+            "statisticData" : {
+                "appliesEachTick" : false,
+                "effectsPersistAfterDestruction" : false,
+                "statName" : "SpotterDistanceAbsolute",
+                "operation" : "Float_Add",
+                "modValue" : "100.0",
+                "modType" : "System.Single",
+                "additionalRules" : "NotSet",
+                "targetCollection" : "NotSet",
+                "targetWeaponCategory" : "NotSet",
+                "targetWeaponType" : "NotSet",
+                "targetAmmoCategory" : "NotSet",
+                "targetWeaponSubType" : "NotSet"
             },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
-        },
+            "tagData" : null,
+            "floatieData" : null,
+            "actorBurningData" : null,
+            "vfxData" : null,
+            "instantModData" : null,
+            "poorlyMaintainedEffectData" : null
+        },		
         {
             "durationData": {
                 "duration": -1,
@@ -226,7 +249,7 @@
                 "effectsPersistAfterDestruction": false,
                 "statName": "BonusHealth",
                 "operation": "Int_Add",
-                "modValue": "2",
+                "modValue": "3",
                 "modType": "System.Int32",
                 "additionalRules": "NotSet",
                 "targetCollection": "Pilot",
@@ -257,7 +280,7 @@
                 "triggerLimit": 0,
                 "extendDurationOnTrigger": 0,
                 "specialRules": "NotSet",
-                "effectTargetType": "Creator",
+                "effectTargetType": "AllLanceMates",
                 "range": 0,
                 "forcePathRebuild": false,
                 "forceVisRebuild": false,
@@ -290,10 +313,7 @@
         "items": [
 		"BLACKLISTED",
             "component_type_stock",
-            "lv-shares-sensors",
-            "ClanCockpit",
-			"lv-jammer_m2_r7",
-            "lv-probe_m3"
+            "lv-shares-sensors"
         ],
         "tagSetSourceFile": ""
     }
