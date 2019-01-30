@@ -33,6 +33,11 @@ unit_hunter,
 
 Changelog:
 
+4.7.0
+
+Added Red October, an stealth Arrow IV tank, to the Nagas folder,
+Fixed superheavy and arty tank names for LowVisibility
+
 4.6.8
 
 Added Scorpion Light Tanks with MRM and Light AC/2,
