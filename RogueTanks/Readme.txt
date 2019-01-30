@@ -33,6 +33,21 @@ unit_hunter,
 
 Changelog:
 
+4.7.0
+
+Added Red October, an stealth Arrow IV tank, to the Nagas folder,
+Fixed superheavy and arty tank names for LowVisibility
+
+4.6.8
+
+Added Scorpion Light Tanks with MRM and Light AC/2,
+Minor updates and fixes for existing Scorpions,
+Added Pirate Demon
+
+4.6.4
+
+Minor fixes
+
 4.6.3
 
 Moved Clan, Pirate and Primitive tank modules into main folder to reduce RT root folder clutter.
