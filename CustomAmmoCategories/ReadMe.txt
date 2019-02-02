@@ -12,14 +12,14 @@ CustomAmmoCategoriesSettings.json
 CustomAmmoCategories.json
 [
 {
-	"Id":"LGAUSS", - имя новой категории, может быть любым 
-	"BaseCategory":"GAUSS" - имя базовой категории, должно быть из перечня (AC2/AC5/AC10/AC20/GAUSS/Flamer/AMS/MG/SRM/LRM), 
-	                         необходимо для обеспечения обратной совместимости. 
-	                         Все остальные механизмы игры, за исключением подсчетам оставшихся патронов в бою и соотвествия оружия и амуниции в мехлабе.
+	"Id":"LGAUSS", - new ammo category name, precessed for WeaponDef.AmmoCategory and AmmunitionDef.Category fields, using it in other AmmoCategory field will lead load error
+	"BaseCategory":"GAUSS" - base category name. Must bt in (AC2/AC5/AC10/AC20/GAUSS/Flamer/AMS/MG/SRM/LRM), 
+	                         needed for backward compatibility. 
+							 All other game mechanic (for example status effect targeting), except ammo count in battle and mech validator in mech lab will use this value.
 },
 ]
 
-Weapon definition
+Ammo definition
 {
    "Description" : {
       "Id" : "Ammunition_LBX10ECM",
@@ -33,19 +33,32 @@ Weapon definition
    },
    "Type" : "Normal",
    "Category" : "LBX10", 
-   "AccuracyModifier" : -10.0, будет сложено с соотвествующи модификатором оружия
-   "CriticalChanceMultiplier" : 0.0, будет сложено с соотвествующи модификатором оружия
-   "DamagePerShot": -50.0, будет сложено с соотвествующи модификатором оружия
-   "AIBattleValue":90, используется ИИ для выбора оружия. ИИ использует для выстрела из данного оружия боеприпас с большим значением из доступных
-   "ShotsWhenFired" : 0, будет сложено с соотвествующи модификатором оружия
-   "ProjectilesPerShot" : 0, будет сложено с соотвествующи модификатором оружия
-   "HeatDamagePerShot": 0.0, будет сложено с соотвествующи модификатором оружия
-   "HeatGenerated" : 0,
+   
+   "AccuracyModifier" : -10.0, Effective AccuracyModifier will be Weapon.AccuracyModifier + Ammo.AccuracyModifier (current weapon status effects will be used too)
+   "CriticalChanceMultiplier" : 0.0, Effective AccuracyModifier will be Weapon.CriticalChanceMultiplier + Ammo.CriticalChanceMultiplier (current weapon status effects will be used too)
+   "DamagePerShot": -50.0, Effective DamagePerShot will be Weapon.DamagePerShot + Ammo.DamagePerShot (current weapon status effects will be used too)
+   "AIBattleValue":90, used for AI. It will use ammo with highest AIBattleValue on depletion switch to next 
+   "ShotsWhenFired" : 0, Effective ShotsWhenFired will be Weapon.ShotsWhenFired + Ammo.ShotsWhenFired (current weapon status effects will be used too)
+   "ProjectilesPerShot" : 0, Effective ProjectilesPerShot will be Weapon.ProjectilesPerShot + Ammo.ProjectilesPerShot (current weapon status effects will be used too)
+   "HeatDamagePerShot": 0.0, Effective HeatDamagePerShot will be Weapon.HeatDamagePerShot + Ammo.HeatDamagePerShot (current weapon status effects will be used too)
+       
+   "MinRange": 0.0, Effective MinRange will be Weapon.MinRange + Ammo.MinRange (current weapon status effects will be used too)
+   "MaxRange": 0.0, Effective MinRange will be Weapon.MaxRange + Ammo.MaxRange (current weapon status effects will be used too)
+   "ShortRange": 0.0, Effective ShortRange will be Weapon.ShortRange + Ammo.ShortRange (current weapon status effects will be used too)
+   "MiddleRange": 0.0, Effective MiddleRange will be Weapon.MiddleRange + Ammo.MiddleRange (current weapon status effects will be used too)
+   "LongRange": 0.0, Effective LongRange will be Weapon.LongRange + Ammo.LongRange (current weapon status effects will be used too)
+         NOTE: Range modifications not always displays correctly while viewing shooting arc, but hit chance and possibility calculated normally. 
+		 
+   "HeatGenerated" : 0, Effective HeatGenerated will be Weapon.HeatGenerated + Ammo.HeatGenerated (current weapon status effects will be used too)
+   "RefireModifier" : 0, Effective RefireModifier will be Weapon.RefireModifier + Ammo.RefireModifier (current weapon status effects will be used too)
+   "Instability" : 0, Effective Instability will be Weapon.Instability + Ammo.Instability (current weapon status effects will be used too)
+   "AttackRecoil" : 0, Effective AttackRecoil will be Weapon.AttackRecoil + Ammo.AttackRecoil (current weapon status effects will be used too)
+   
    "HeatGeneratedModifier" : 1,
    "ArmorDamageModifier" : 1,
    "ISDamageModifier" : 1,
    "CriticalDamageModifier" : 1,
-   "statusEffects" : [   - будет применено при попадании
+   "statusEffects" : [   - will be applied on weapon hit (only "OnHit" effectTriggerType)
         {
             "durationData" : {
                 "duration" : 5,
