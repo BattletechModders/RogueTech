@@ -33,6 +33,12 @@ unit_hunter,
 
 Changelog:
 
+0.0.0
+
+Adding Alacorn Mk.VII
+Many minor fixes,
+Updates for new ammo system,
+
 4.7.7
 
 Adding prefab for Mars Assault Vehicle,
