@@ -38,6 +38,7 @@ Changelog:
 Adding Alacorn Mk.VII
 Many minor fixes,
 Updates for new ammo system,
+Gave RL carriers a few chaff and inferno pods.
 
 4.7.7
 
