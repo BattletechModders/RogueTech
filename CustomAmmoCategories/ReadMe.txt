@@ -34,6 +34,15 @@ Ammo definition
    "Type" : "Normal",
    "Category" : "LBX10", 
    
+   "AIBattleValue": 90,
+   "DamagePerShot": -50.0,
+   "HeatDamagePerShot": 0.0,
+   
+   "CriticalChanceMultiplier" : 1.0,
+   
+   "WeaponEffectID" : "WeaponEffect-Weapon_PPC", Played fire effect can be set in ammo definition, for example this LBX AC10 will fire as PPC if ECM ammo is choosed
+   "EvasivePipsIgnored" : 0, Effective EvasivePipsIgnored will be Weapon.EvasivePipsIgnored + Ammo.EvasivePipsIgnored (current weapon status effects will be used too)
+   
    "AccuracyModifier" : -10.0, Effective AccuracyModifier will be Weapon.AccuracyModifier + Ammo.AccuracyModifier (current weapon status effects will be used too)
    "CriticalChanceMultiplier" : 0.0, Effective AccuracyModifier will be Weapon.CriticalChanceMultiplier + Ammo.CriticalChanceMultiplier (current weapon status effects will be used too)
    "DamagePerShot": -50.0, Effective DamagePerShot will be Weapon.DamagePerShot + Ammo.DamagePerShot (current weapon status effects will be used too)

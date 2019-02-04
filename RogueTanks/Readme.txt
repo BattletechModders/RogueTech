@@ -33,6 +33,21 @@ unit_hunter,
 
 Changelog:
 
+0.0.0
+
+Gave SRM Carrier_RT it's missing C3 unit.
+Added SRM Carrier_3054
+
+4.8.7
+
+Adding Alacorn Mk.VII
+Many minor fixes,
+Updates for new ammo system,
+Gave RL carriers a few chaff and inferno pods.
+Added LRM techies,
+updated gun techies,
+added an Arrow IV armed Demolisher II by Raza5
+
 4.7.7
 
 Adding prefab for Mars Assault Vehicle,
