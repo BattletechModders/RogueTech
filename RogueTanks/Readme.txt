@@ -33,10 +33,12 @@ unit_hunter,
 
 Changelog:
 
-0.0.0
+4.9.9
 
 Gave SRM Carrier_RT it's missing C3 unit.
 Added SRM Carrier_3054
+Update pass on all tanks for CustomAmmo
+misc minor fixes in the proccess
 
 4.8.7
 
