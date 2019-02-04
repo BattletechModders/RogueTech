@@ -33,6 +33,11 @@ unit_hunter,
 
 Changelog:
 
+0.0.0
+
+Gave SRM Carrier_RT it's missing C3 unit.
+Added SRM Carrier_3054
+
 4.8.7
 
 Adding Alacorn Mk.VII
