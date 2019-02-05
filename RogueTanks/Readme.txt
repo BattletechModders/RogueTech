@@ -33,6 +33,10 @@ unit_hunter,
 
 Changelog:
 
+0.0.0
+
+Updated faction tags on Assault tanks.
+
 4.9.9
 
 Gave SRM Carrier_RT it's missing C3 unit.
