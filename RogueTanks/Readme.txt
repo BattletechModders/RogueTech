@@ -40,6 +40,7 @@ Set Techies to use MLRS4 prefab (smallest looking truck)
 Set Red October to use MLRS
 Set 60 and 80 ton Thunderbolt carriers to use MLRS2
 Set Light Carriers to use MLRS3
+Added Light Thunderbolt 10 Carrier
 
 5.0.5
 
