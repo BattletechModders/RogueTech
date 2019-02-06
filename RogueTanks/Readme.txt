@@ -33,6 +33,12 @@ unit_hunter,
 
 Changelog:
 
+5.0.5
+
+Updated faction tags on Assault, Heavy, Medium and Light tanks.
+Added Von Luckner K75N
+Renamed two previous Von Luckners with model numbers for clarity.
+
 4.9.9
 
 Gave SRM Carrier_RT it's missing C3 unit.
