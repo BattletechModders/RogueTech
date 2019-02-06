@@ -35,7 +35,7 @@ Changelog:
 
 0.0.0
 
-Updated faction tags on Assault tanks.
+Updated faction tags on Assault, Heavy, Medium and Light tanks.
 
 4.9.9
 
