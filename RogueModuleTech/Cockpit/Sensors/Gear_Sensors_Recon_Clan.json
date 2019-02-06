@@ -1,38 +1,41 @@
 {
     "Custom": {
-        "Category": [
-            { "CategoryID": "MissTTSART"},
-			{ "CategoryID": "CockpitFCS"}
-        ],
+        "Category": {
+            "CategoryID": "CockpitSensors"
+        },
         "BonusDescriptions": {
             "Bonuses": [
-                "MissileAcc: +2",
-				"IndirectAcc: +1",
-                "ArtemisIV",
-				"FCS"
+				"Sensors: +6%",
+                "Sight: +7%",
+				"AdvZoom: 2",
+				"AdvZoomRange: 180",
+				"ThermalVision: 2",
+				"ThermalVisionHeat: 60",
+				"CockpitSensors: 1",
+                "IFFJammer: 1"
             ]
         },
         "InventorySorter": {
-            "SortKey": "00201"
+            "SortKey": "00203"
         }
     },
     "StatName": null,
     "RelativeModifier": 0,
     "AbsoluteModifier": 0,
     "Description": {
-        "Cost": 1000000,
-        "Rarity": 7,
+        "Cost": 770000,
+        "Rarity": 3,
         "Purchasable": true,
-        "Manufacturer": "Clan Widowmaker",
-        "Model": "Series XXXII Multitrack With Artemis IV",
-        "UIName": "FCS Artemis IV (C)",
-        "Id": "Gear_FCS_Clan_ARTEMISIV",
-        "Name": "Clan Artemis IV FCS",
-        "Details": "The XXXII Fire Control System is just one of many in a long line of Fire Control Systems developed by the Clans during their Exodus from the Inner Sphere. The XXXII was the first true home grown Clan Fire Control System that was fielded in high number on Long Range Missle equiped BattleMechs. <b><color=#F79232>Cannot be used with other Missile TTS and enables using Artemis IV Ammo.</color></b>",
+        "Manufacturer": "CLAN",
+        "Model": "Recon battleComp",
+        "UIName": "Sensor Recon (C)",
+        "Id": "Gear_Sensors_Recon_Clan",
+        "Name": "Recon Battle Computer",
+        "Details": "A Clan upgraded sensor package combining advanced Rangefinders, Seismic Sensors and Scanning Algorithms with a IFF Jammer, also carrying a set of thermal and zoom systems.",
         "Icon": "uixSvgIcon_equipment_TTS"
     },
-    "BonusValueA": "+ 2 Direct-Fire Missile Acc|",
-    "BonusValueB": "+ 1 Indirect Missile Acc.",
+    "BonusValueA": "+1 Defense.",
+    "BonusValueB": "+1 Missile Defense.",
     "ComponentType": "Upgrade",
     "ComponentSubType": "NotSet",
     "PrefabIdentifier": "",
@@ -42,15 +45,14 @@
     "AllowedLocations": "Head",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
-    "statusEffects": [
-        {
+    "statusEffects": [        {
             "durationData": {
                 "duration": -1,
                 "ticksOnActivations": false,
                 "useActivationsOfTarget": false,
                 "ticksOnEndOfRound": false,
                 "ticksOnMovements": false,
-                "stackLimit": 1,
+                "stackLimit": -1,
                 "clearedWhenAttacked": false
             },
             "targetingData": {
@@ -63,21 +65,29 @@
                 "forcePathRebuild": false,
                 "forceVisRebuild": false,
                 "showInTargetPreview": false,
-                "showInStatusPanel": true
+                "showInStatusPanel": false
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StatusEffect-I3F100",
-                "Name": "Indirect Fire Improved",
-                "Details": "Indirect Missiles Attacks gain +1 accuracy.",
-                "Icon": "uixSvgIcon_equipment_TTS"
+                "Id": "BAProbe",
+                "Name": "HP-CockpitSensors-Sensor",
+                "Details": "Increased Sight/Sensors",
+                "Icon": "uixSvgIcon_equipment_Cockpit"
             },
             "nature": "Buff",
             "statisticData": {
-                "statName": "ToHitIndirectModifier",
-                "operation": "Float_Add",
-                "modValue": "-1.0",
-                "modType": "System.Single"
+                "appliesEachTick": false,
+                "effectsPersistAfterDestruction": false,
+                "statName": "SensorDistanceAbsolute",
+                "operation": "Float_Multiply",
+                "modValue": "1.06",
+                "modType": "System.Single",
+                "additionalRules": "NotSet",
+                "targetCollection": "NotSet",
+                "targetWeaponCategory": "NotSet",
+                "targetWeaponType": "NotSet",
+                "targetAmmoCategory": "NotSet",
+                "targetWeaponSubType": "NotSet"
             },
             "tagData": null,
             "floatieData": null,
@@ -85,7 +95,7 @@
             "vfxData": null,
             "instantModData": null,
             "poorlyMaintainedEffectData": null
-        },	
+        },
         {
             "durationData": {
                 "duration": -1,
@@ -106,26 +116,26 @@
                 "forcePathRebuild": false,
                 "forceVisRebuild": false,
                 "showInTargetPreview": false,
-                "showInStatusPanel": true
+                "showInStatusPanel": false
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StatusEffect-ARTEMIS-BONUS",
-                "Name": "Artemis IV System",
-                "Details": "Missile weapon attacks have their hit improved by +2.",
-                "Icon": "uixSvgIcon_equipment_TTS"
+                "Id": "HP-CockpitSensors-Spot",
+                "Name": "SPOTTING DISTANCE INCREASED",
+                "Details": "Increases spotting distance by 50m.",
+                "Icon": "uixSvgIcon_equipment_Cockpit"
             },
             "nature": "Buff",
             "statisticData": {
                 "appliesEachTick": false,
                 "effectsPersistAfterDestruction": false,
-                "statName": "AccuracyModifier",
-                "operation": "Float_Add",
-                "modValue": "-2.0",
+                "statName": "SpotterDistanceAbsolute",
+                "operation": "Float_Multiply",
+                "modValue": "1.07",
                 "modType": "System.Single",
                 "additionalRules": "NotSet",
-                "targetCollection": "Weapon",
-                "targetWeaponCategory": "Missile",
+                "targetCollection": "NotSet",
+                "targetWeaponCategory": "NotSet",
                 "targetWeaponType": "NotSet",
                 "targetAmmoCategory": "NotSet",
                 "targetWeaponSubType": "NotSet"
@@ -136,12 +146,14 @@
             "vfxData": null,
             "instantModData": null,
             "poorlyMaintainedEffectData": null
-        }
-    ],
+        }],
     "ComponentTags": {
         "items": [
             "component_type_stock",
-            "ArtemisTTS"
+            "lv-scrambler_m1",
+			"lv-probe-boost_m1",
+			"lv-vismode-zoom_m0_c-2_s6",
+			"lv-vismode-heat_m2_d60"
         ],
         "tagSetSourceFile": ""
     }
