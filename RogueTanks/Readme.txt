@@ -33,9 +33,11 @@ unit_hunter,
 
 Changelog:
 
-0.0.0
+5.0.5
 
 Updated faction tags on Assault, Heavy, Medium and Light tanks.
+Added Von Luckner K75N
+Renamed two previous Von Luckners with model numbers for clarity.
 
 4.9.9
 
