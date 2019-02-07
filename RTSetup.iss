@@ -61,7 +61,7 @@ BackColor2=clBlack
 
 [Files]
 ;Source: "/RogueTech Core/RogueTech.txt"; DestDir: "{app}/Mods/RogueTech Core"; Flags: isreadme ignoreversion
-Source: "/*"; Excludes: ".git,.modtek,.git,log.txt,Log_Turbine.txt,RTsetup.iss,RTAssetsSetup.iss,*.log,NAOP_CustomMechsNParts,SortByTonnage,Turbine,SkipTravelCutscenes,RandomCampaignStart,InnerSphereMap,RandomTravelContracts,PersistentMapClient,VanillaEnabler,ClanJadeFalcon,ElitePilots,Nagas,Totem Mechs,WoBLamMechs,CommanderPortraitLoader,PowerArmour,MWOHeroes,Superheavys,RogueFlashPointModule,ExperimentalWeapons,RaelM Emblem,UrbieNuke,AIM,AIMBrutal,RogueTechBrutal,RogueTechNormal,GlobalDifficultyByCompany,GlobalDifficultyByPlanets,Retrainer,Silence,FreeCam,ShopSeller,BindableEscapeKey,ArmorRepair,ArmorPoints,Pilot_Quirks,StabilePiloting,Pilot_Fatigue,MoreIsLess_dZ,RogueEmblems,All 3025 Mercs,Capellan Emblems,Replacement_MechPortraits,SkipIntro,OnePointArmorStep,CrystalClear" ; DestDir: "{app}/Mods"; Flags: recursesubdirs ignoreversion
+Source: "/*"; Excludes: ".git,.modtek,.git,log.txt,Log_Turbine.txt,RTsetup.iss,RTAssetsSetup.iss,*.log,Kas_events,NAOP_CustomMechsNParts,SortByTonnage,SkipTravelCutscenes,RandomCampaignStart,InnerSphereMap,RandomTravelContracts,PersistentMapClient,VanillaEnabler,ClanJadeFalcon,ElitePilots,Nagas,Totem Mechs,WoBLamMechs,CommanderPortraitLoader,PowerArmour,MWOHeroes,Superheavys,RogueFlashPointModule,ExperimentalWeapons,RaelM Emblem,UrbieNuke,AIM,AIMBrutal,RogueTechBrutal,RogueTechNormal,GlobalDifficultyByCompany,GlobalDifficultyByPlanets,Retrainer,Silence,FreeCam,ShopSeller,BindableEscapeKey,ArmorRepair,ArmorPoints,Pilot_Quirks,StabilePiloting,Pilot_Fatigue,MoreIsLess_dZ,RogueEmblems,All 3025 Mercs,Capellan Emblems,Replacement_MechPortraits,SkipIntro,OnePointArmorStep,CrystalClear" ; DestDir: "{app}/Mods"; Flags: recursesubdirs ignoreversion
 Source: "{#SourcePath}Optionals\Battletech Sound Replacement Pack\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion uninsneveruninstall createallsubdirs; Components: gfx\soundmod
 Source: "{#SourcePath}Optionals\Enable Debug\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion uninsneveruninstall createallsubdirs; Components: debugjson
 Source: "{#SourcePath}Optionals\RogueGenerals\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion uninsneveruninstall createallsubdirs; Components: gametips
@@ -70,6 +70,7 @@ Source: "/PersistentMapClient/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Pers
 Source: "/InnerSphereMap/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/InnerSphereMap"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechMode\Online;
 Source: "/RandomTravelContracts/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RandomTravelContracts"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechMode\Online;
 Source: "/Pilot_Quirks/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Pilot_Quirks"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: dz\quirks;
+Source: "/Kas_events/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Kas_events"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: dz\quirks;
 Source: "/StabilePiloting/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/StabilePiloting"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: dz\quirks;
 Source: "/Pilot_Fatigue/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Pilot_Fatigue"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: dz\fatigue;
 Source: "/MoreIsLess_dZ/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/MoreIsLess_dZ"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: dz\moreisless;
@@ -78,7 +79,6 @@ Source: "/RaelM Emblem/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RaelM Emble
 Source: "/All 3025 Mercs/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/All 3025 Mercs"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: emblems\mercemblems;
 Source: "/Capellan Emblems/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Capellan Emblems"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: emblems\capellaemblems;
 Source: "/SkipIntro/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/SkipIntro"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: qol\skipintro;
-Source: "/Turbine/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Turbine"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: qol\Turbine;
 Source: "/OnePointArmorStep/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/OnePointArmorStep"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: qol\onepointarmor;
 Source: "/BindableEscapeKey/*"; DestDir: "{app}/Mods/BindableEscapeKey"; Flags: ignoreversion; Components: qol\esckeybind;
 Source: "/ShopSeller/*"; DestDir: "{app}/Mods/ShopSeller"; Flags: ignoreversion; Components: qol\ShopSeller;
@@ -86,7 +86,7 @@ Source: "/Retrainer/*"; DestDir: "{app}/Mods/Retrainer"; Flags: ignoreversion; C
 Source: "/SortByTonnage/*"; DestDir: "{app}/Mods/SortByTonnage"; Flags: ignoreversion; Components: qol\SortByTonnage;
 Source: "/CommanderPortraitLoader/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/CommanderPortraitLoader"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: gfx\CommanderPortraitLoader;
 Source: "/CrystalClear/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/CrystalClear"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: gfx\crystal;
-Source: "/SkipTravelCutscenes/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/SkipTravelCutscenes"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: gfx\crystal;
+Source: "/SkipTravelCutscenes/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/SkipTravelCutscenes"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: gfx\SkipTravelCutscenes;
 Source: "/Silence/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Silence"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: gfx\silence;
 Source: "/Replacement_MechPortraits/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Replacement_MechPortraits"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: gfx\mechportraits;
 Source: "/ArmorRepair/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/ArmorRepair"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: repair\on;
@@ -95,7 +95,7 @@ Source: "/GlobalDifficultyByCompany/*"; Excludes: "log.txt"; DestDir: "{app}/Mod
 Source: "/GlobalDifficultyByPlanets/*"; DestDir: "{app}/Mods/GlobalDifficultyByPlanets"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: difficulty\off;
 Source: "/RogueTechNormal/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RogueTechNormal"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechDiff\Normal;
 Source: "/AIM/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/AIM"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechDiff\Normal;
-Source: "/RogueTechBrutal/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RogueTechNormal"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechDiff\Brutal;
+Source: "/RogueTechBrutal/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RogueTechBrutal"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechDiff\Brutal;
 Source: "/AIMBrutal/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/AIMBrutal"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechDiff\Brutal;
 Source: "/UrbieNuke/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/UrbieNuke"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechDiff\Brutal;
 Source: "/ExperimentalWeapons/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/ExperimentalWeapons"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\ExperimentalWeapons;
@@ -106,20 +106,34 @@ Source: "/PowerArmour/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/PowerArmour"
 Source: "/WoBLamMechs/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/WoBLamMechs"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\WoBLamMechs;
 Source: "/ClanJadeFalcon/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/ClanJadeFalcon"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\ClanJadeFalcon;
 Source: "/Nagas/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Nagas"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\Nagas;
-Source: "/Totem Mechs/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Totem Mechs"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\NAOP_CustomMechsNParts;
-Source: "/NAOP_CustomMechsNParts/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/NAOP_CustomMechsNParts"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\TotemMechs;
+Source: "/Totem Mechs/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Totem Mechs"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\TotemMechs;
+Source: "/NAOP_CustomMechsNParts/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/NAOP_CustomMechsNParts"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\NAOP_CustomMechsNParts; 
 Source: "/RandomCampaignStart/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RandomCampaignStart"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\RandomCampaignStart;
 Source: "/RogueFlashPointModule/*"; DestDir: "{app}/Mods/RogueFlashPointModule"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: DLC\FLASHPOINT;
-Source: "{#SourcePath}Optionals\RTML\0Harmony.dll"; DestDir: "{app}\BattleTech_Data\Managed\"; Flags: ignoreversion; Tasks: BTML\BTMLinst
-Source: "{#SourcePath}Optionals\RTML\Mono.Cecil.dll"; DestDir: "{app}\BattleTech_Data\Managed\"; Flags: ignoreversion; Tasks: BTML\BTMLinst
-Source: "{#SourcePath}Optionals\RTML\BattleTechModLoader.dll"; DestDir: "{app}\BattleTech_Data\Managed\"; Flags: ignoreversion; Tasks: BTML\BTMLinst
-Source: "{#SourcePath}Optionals\RTML\BattleTechModLoaderInjector.exe"; DestDir: "{app}\BattleTech_Data\Managed\"; Flags: ignoreversion; Tasks: BTML\BTMLinst
-Source: "{#SourcePath}Optionals\RTML\rt-factions.zip"; DestDir: "{app}\BattleTech_Data\Managed\"; Flags: ignoreversion; Tasks: BTML\BTMLinst
-Source: "{#SourcePath}Optionals\RTML\0Harmony.dll"; DestDir: "{app}\BattleTech_Data\Managed\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2
-Source: "{#SourcePath}Optionals\RTML\Mono.Cecil.dll"; DestDir: "{app}\BattleTech_Data\Managed\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2
-Source: "{#SourcePath}Optionals\RTML\BattleTechModLoader.dll"; DestDir: "{app}\BattleTech_Data\Managed\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2
-Source: "{#SourcePath}Optionals\RTML\BattleTechModLoaderInjector.exe"; DestDir: "{app}\BattleTech_Data\Managed\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2
-Source: "{#SourcePath}Optionals\RTML\rt-factions.zip"; DestDir: "{app}\BattleTech_Data\Managed\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2
+Source: "{#SourcePath}Optionals\ModTek\0Harmony.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
+Source: "{#SourcePath}Optionals\ModTek\ModTekInjector.exe"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
+Source: "{#SourcePath}Optionals\ModTek\factions.zip"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
+Source: "{#SourcePath}Optionals\ModTek\ModTek.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
+Source: "{#SourcePath}Optionals\ModTek\modtekassetbundle"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
+Source: "{#SourcePath}Optionals\ModTek\Ionic.Zip.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
+Source: "{#SourcePath}Optionals\ModTek\Mono.Cecil.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
+Source: "{#SourcePath}Optionals\ModTek\Mono.Cecil.Mdb.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
+Source: "{#SourcePath}Optionals\ModTek\Mono.Cecil.Pdb.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
+Source: "{#SourcePath}Optionals\ModTek\Mono.Cecil.Rocks.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
+Source: "{#SourcePath}Optionals\ModTek\Newtonsoft.Json.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
+Source: "{#SourcePath}Optionals\ModTek\System.Runtime.Serialization.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
+Source: "{#SourcePath}Optionals\ModTek\0Harmony.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
+Source: "{#SourcePath}Optionals\ModTek\ModTekInjector.exe"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
+Source: "{#SourcePath}Optionals\ModTek\factions.zip"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
+Source: "{#SourcePath}Optionals\ModTek\ModTek.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
+Source: "{#SourcePath}Optionals\ModTek\modtekassetbundle"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
+Source: "{#SourcePath}Optionals\ModTek\Ionic.Zip.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
+Source: "{#SourcePath}Optionals\ModTek\Mono.Cecil.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
+Source: "{#SourcePath}Optionals\ModTek\Mono.Cecil.Mdb.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
+Source: "{#SourcePath}Optionals\ModTek\Mono.Cecil.Pdb.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
+Source: "{#SourcePath}Optionals\ModTek\Mono.Cecil.Rocks.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
+Source: "{#SourcePath}Optionals\ModTek\Newtonsoft.Json.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
+Source: "{#SourcePath}Optionals\ModTek\System.Runtime.Serialization.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
 
 [Messages]
 SetupAppRunningError=Setup has detected that another RT setup or BATTLETECH game is currently running.%n%nPlease close all instances of it now, then click OK to continue, or Cancel to exit.
@@ -153,15 +167,14 @@ Name: "qol\SortByTonnage"; Description: "Sort Mechs by Cost"; Types: full compac
 Name: "qol\ShopSeller"; Description: "Shopseller - Use shift/ctrl+click to sell faster"; Types: custom;
 Name: "qol\Retrainer"; Description: "Retrainer - Spend 5k Cbills to retrain your pilots once"; Types: custom;
 Name: "qol\esckeybind"; Description: "Use Mouse4 as ESC key"; Types: custom;
-Name: "qol\Turbine"; Description: "Turbine - speeds up json manager, may cause issues"; Types: full compact;
 Name: "RogueTechOptionals"; Description: "Optional Mods and Components"; Types: full custom compact;
 Name: "RogueTechOptionals\RandomCampaignStart"; Description: "Randomized Campaign start - disable for a quicker new game and predefined lance"; Types: full compact;
-Name: "RogueTechOptionals\PowerArmour"; Description: "A collection fo PowerArmours by LadyAlekto"; Types: full compact;
-Name: "RogueTechOptionals\Superheavys"; Description: "Superheavys - Oversized Mechs&Tanks and their Missions by LadyAlekto&CargoVroom"; Types: full compact;
-Name: "RogueTechOptionals\ElitePilots"; Description: "Elite Pilots - Lances and Contracts to face Skilled Pilots by LadyAlekto"; Types: full compact;
+Name: "RogueTechOptionals\PowerArmour"; Description: "A collection of PowerArmours by LadyAlekto"; Types: full compact;
 Name: "RogueTechOptionals\MWOHeroes"; Description: "MWO Hero Mechs - MWO Custom Chassis by Spark, Katrina Kerensky & GroxGlitch"; Types: full compact;
 Name: "RogueTechOptionals\WoBLamMechs"; Description: "WOB LAM's - LAM's for Comstar by Akodoreign"; Types: full compact;
 Name: "RogueTechOptionals\TotemMechs"; Description: "Totem Mechs - Powerfull and Expensive Chassis by Akodoreign"; Types: full compact;
+Name: "RogueTechOptionals\Superheavys"; Description: "Superheavys - Oversized Mechs&Tanks and their Missions by LadyAlekto&CargoVroom"; Types: custom;
+Name: "RogueTechOptionals\ElitePilots"; Description: "Elite Pilots - Lances and Contracts to face Superior Skilled Pilots by LadyAlekto"; Types: custom;
 Name: "RogueTechOptionals\Nagas"; Description: "ArrowIV Capable Units - by Akodoreign,LadyAlekto&Cargo_Vroom"; Types: custom;
 Name: "RogueTechOptionals\ClanJadeFalcon"; Description: "Clan JadeFalcon Totem Mechs by Rhynim"; Types: custom;
 Name: "RogueTechOptionals\ExperimentalWeapons"; Description: "Experimental Weapons - by MXMach"; Types: custom;
@@ -206,9 +219,9 @@ Filename: "https://old.reddit.com/r/roguetech/"; Description: "The RogueTech sub
 Filename: "https://discordapp.com/invite/PWbaqq9"; Description: "The BattleTech Discord with RT Support"; Flags: postinstall nowait shellexec skipifsilent
 ;Filename: "{app}/BattleTech.exe"; Description: "Launch BATTLETECH"; Flags: postinstall skipifsilent unchecked
 ;Filename: "{app}/Mods/RogueTech Core/RogueTech.txt"; Description: "View the Changelog file"; Flags: postinstall nowait shellexec skipifsilent unchecked
-Filename: "{app}\BattleTech_Data\Managed\BattleTechModLoaderInjector.exe"; Parameters: /nokeypress ; Tasks: BTML\BTMLinst
-Filename: "{app}\BattleTech_Data\Managed\BattleTechModLoaderInjector.exe"; Parameters: /restore /nokeypress; Tasks: BTML\BTMLinst2
-Filename: "{app}\BattleTech_Data\Managed\BattleTechModLoaderInjector.exe"; Parameters: /nokeypress ; Tasks: BTML\BTMLinst2
+Filename: "{app}\Mods\ModTek\ModTekInjector.exe"; Parameters: -f factions.zip /nokeypress ; Tasks: BTML\BTMLinst
+Filename: "{app}\Mods\ModTek\ModTekInjector.exe"; Parameters: /restore /nokeypress; Tasks: BTML\BTMLinst2
+Filename: "{app}\Mods\ModTek\ModTekInjector.exe"; Parameters: -f factions.zip /nokeypress ; Tasks: BTML\BTMLinst2
 
 [UninstallRun]
 Filename: "{app}\BattleTech_Data\Managed\BattleTechModLoaderInjector.exe"; Parameters: /restore /nokeypress
