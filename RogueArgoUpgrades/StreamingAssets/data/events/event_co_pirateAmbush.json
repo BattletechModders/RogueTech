@@ -1,0 +1,628 @@
+{
+    "Description" : {
+        "Id" : "event_co_pirateAmbush",
+        "Name" : "Pirates Ambush the <i>Argo</i>",
+        "Details" : "Blaring klaxons interrupt an otherwise quiet morning routine as several fast-moving ships appear, pacing the <i>Argo</i>. Darius broadcasts their hail to the bridge.\r\n\r\n\"You're flying through our space, strangers. It's awfully dangerous out here. Just awful, especially for a ragged-looking ship like\u2026 the <i>Argo</i>, is it? Tell you what, we'll provide you with a safe passage. For a price, of course.\"\r\n\r\nWhile you consider your options, Sumire pipes up. \"Commander, if you can buy me some time, I could do a rapid fire-up of the Leopard. That'll teach them not to mess with us.\"",
+        "Icon" : "uixTxrSpot_UnidentifiedObject.png"
+    },
+    "Scope" : "Company",
+    "Weight" : 10,
+    "Requirements" : {
+        "Scope" : "Company",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "",
+            "items" : null
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "Tags/CompanyTags",
+            "items" : [
+                "MODIFIED_STAT_MechTechSkill"
+            ]
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "MechTechSkill",
+                "op" : "GreaterThanOrEqual",
+                "val" : 2,
+                "valueConstant" : "2"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "StarSystem",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "Tags/PlanetTags",
+                "items" : null
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/PlanetTags",
+                "items" : null
+            },
+            "RequirementComparisons" : []
+        }
+    ],
+    "AdditionalObjects" : [
+        {
+            "Scope" : "SecondaryMechWarrior",
+            "Requirements" : {
+                "Scope" : "SecondaryMechWarrior",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "Tags/PilotTags",
+                    "items" : [
+                        "pilot_lucky"
+                    ]
+                },
+                "RequirementComparisons" : [
+                    {
+                        "obj" : "Injuries",
+                        "op" : "Equal",
+                        "val" : 0,
+                        "valueConstant" : "0"
+                    }
+                ]
+            }
+        }
+    ],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Pay them off.",
+                "Details" : "[\u00A250,000]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : null
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "Tags/CompanyTags",
+                        "items" : null
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Funds",
+                            "op" : "GreaterThan",
+                            "val" : 50000,
+                            "valueConstant" : "50000"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Lose C-Bills & Morale",
+                        "Details" : "Swallowing your pride, you approve the payment. The look of disappointment on Sumire's face echoes that of the rest of the bridge crew.\r\n\r\nAdding insult to injury, the voice over the bridge's speaker drips with satisfaction. \"A wise decision, Commander. You're welcome in our space any time.\"\r\n\r\nAs the pirate ships disappear into the starry distance, it's not the first time you find yourself wishing that the <i>Argo</i> was a battleship\u2026",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-50000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Stall until the Leopard is ready.",
+                "Details" : "Risky option",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "The pirates flee",
+                        "Details" : "The frustrated pirate tries to walk you through the money transfer one more time. \"No, the last account number is a ZERO, not the letter O. It's never the letter O!\"\r\n\r\nJust then, the Leopard leaps free from its docking collar on the side of the <i>Argo</i> and fires a barrage of LRMs at the pirate ships.\r\n\r\nWith a growl of displeasure, the enemy captain's flagship peels off. \"Another time, Commander. Mark my words.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+							"ExclusionTags" : {
+							"tagSetSourceFile" : "Tags/CompanyTags",
+							"items" : "argo_power3"
+							},							
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "comp_pirateProtection"
+                                ]
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "The pirates flee but a MechWarrior is injured",
+                        "Details" : "The frustrated pirate tries to walk you through the money transfer one more time. \"No, the last account number is a ZERO, not the letter O. It's never the letter O!\"\r\n\r\nJust then, the Leopard leaps free from its docking collar on the side of the <i>Argo</i> and fires a barrage of LRMs at the pirate ships.\r\n\r\nThe pirates retaliate with laser blasts and the whole ship groans as emergency systems activate.\r\n\r\nAfter another flash of light from the Leopard, the enemy captain gives the order to retreat. Unfortunately, it's too late for [[SCN_MW,{SCN_MW.Callsign}]], who was caught on the wrong side of a blast door and ends up in the MedBay.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+							"ExclusionTags" : {
+							"tagSetSourceFile" : "Tags/CompanyTags",
+							"items" : "argo_power3"
+							},								
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Injuries",
+                                    "value" : "2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "comp_pirateProtection"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_2",
+                        "Name" : "The pirates flee but a Mech Bay takes damage",
+                        "Details" : "The frustrated pirate tries to walk you through the money transfer one more time. \"No, the last account number is a ZERO, not the letter O. It's never the letter O!\"\r\n\r\nJust then, the Leopard leaps free from its docking collar on the side of the <i>Argo</i> and fires a barrage of LRMs at the pirate ships.\r\n\r\nThey quickly recover, launching salvos of torpedoes back at the <i>Argo</i>. The impact feels tremendous, but Dr. Murad waves it off. \"Those decks were damaged anyhow, Commander.\" \r\n\r\nBefore long, the pirates lose their resolve and fall back, at which point Yang checks in. \"The <i>Argo</i> may not be in any worse shape, but we felt the impacts down here in the Mech Bay and there's been some damage.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+							"ExclusionTags" : {
+							"tagSetSourceFile" : "Tags/CompanyTags",
+							"items" : "argo_power3"
+							},								
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "comp_pirateProtection"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "-1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_3",
+                        "Name" : "The pirates flee in terror as your pleasure liner opens fire",
+                        "Details" : "The unsuspecting pirate tries to walk you through the money transfer one more time. ''No, the last account number is a ZERO, not the letter O. It's never the letter O!''. Just then, the <i>Argo</i>'s hidden weapons come fully online, and unleash a barrage of LRMs and laser fire at the pirate ships.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : {
+							"tagSetSourceFile" : "Tags/CompanyTags",
+							"items" : "argo_power3"
+							},
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+							"ExclusionTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+							},								
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "comp_pirateProtection"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        }
+                    ]
+                }				
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Broadcast for help from the system authorities.",
+                "Details" : "[Liked by {TGT_SYSTEM.OwnerDef.ShortName}]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : null
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : null
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Reputation.Owner",
+                            "op" : "GreaterThanOrEqual",
+                            "val" : 20,
+                            "valueConstant" : "[rep_liked_min]"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "The pirates flee",
+                        "Details" : "Darius sends an SOS, and you set about buying time until help arrives.\r\n\r\nJust as the pirates begin to lose patience, several interceptors arrive on the scene, bearing the colors of the local authorities. With a growl of displeasure, the enemy captain commands her flagship to turn tail. \"Another time, Commander. Mark my words.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 75,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "comp_pirateProtection"
+                                ]
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_1",
+                        "Name" : "The pirates flee but a MechWarrior is injured",
+                        "Details" : "Darius sends an SOS, and you set about buying time until help arrives. Before long, the pirate captain informs you she's having a bad day and fires a few glancing laser blasts off the side of the <i>Argo</i> to express her displeasure. The whole ship groans as emergency systems activate.\r\n\r\nJust then, several interceptors arrive on the scene, bearing the colors of the local authorities. With a curse, the enemy captain gives the order to retreat. Unfortunately, it's too late for [[SCN_MW,{SCN_MW.Callsign}]], who was caught on the wrong side of a blast door and ends up in the MedBay.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Injuries",
+                                    "value" : "2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : {
+                                "Scope" : "Company",
+                                "RequirementTags" : {
+                                    "tagSetSourceFile" : "",
+                                    "items" : null
+                                },
+                                "ExclusionTags" : {
+                                    "tagSetSourceFile" : "",
+                                    "items" : null
+                                },
+                                "RequirementComparisons" : []
+                            },
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "comp_pirateProtection"
+                                ]
+                            },
+                            "Stats" : [],
+                            "Actions" : [],
+                            "ForceEvents" : [],
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_3",
+                "Name" : "Persuade the pirates that you're criminals just like them.",
+                "Details" : "[Underworld Friends]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Commander",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "Tags/CommanderTags",
+                        "items" : [
+                            "commander_underworldFriends"
+                        ]
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : null
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_3_0",
+                        "Name" : "Small morale boost",
+                        "Details" : "You say, \"We've been straight with these criminals in the past. I'll see if we can get a deal.\"\r\n\r\nAfter you drop the names of black market contacts that the company has dealt with in the past, the pirate reluctantly accepts your story.\r\n\r\n\"Well, I can see you've been around, and you've caught me in a good mood. Plus, my people are tired, and our holds are full. Next time I find you in my space, though, you'll pay up. With interest.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}
