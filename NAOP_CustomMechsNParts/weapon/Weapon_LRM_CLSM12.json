@@ -1,66 +1,84 @@
 {
 
-	"Custom": {
-		"Category" : [ 
-			{ "CategoryID": "Cockpit" },
-			{ "CategoryID": "CockpitFCS" }
-		],
-		"WorkOrderCosts": {
-			"Install": {
-				"TechCost": "[[Chassis.Tonnage]]/10",
-				"CBillCost": "[[Chassis.Tonnage]] * 1.1"
-			}
-		},
-        "BonusDescriptions": {
-            "Bonuses": [		
-				"DFAAcc: +2",
-				"MeleeAcc: +2",
-				"Health: +2",
-				"Initiative: +3",
-				"SensorBoost: 1",
-				"IsCockpit"
+	"Custom": { "Category" : { "CategoryID" : "CGLauncher"},
+			"BonusDescriptions": {
+            "Bonuses": [
+				"TAG: 2",
+				"PipsIgnored: 2",
+				"WpnAccuracy: +2",
+				"HeatPerTurn: +12",
+				"WpnRecoil: 1",
+				"IsSmartMissile",
+				"IsCoilLauncher",
+				"Painter"
             ]
         },
             "InventorySorter" : {
-                "SortKey" : "00019"
-            }		
-	},
-
-    "StatName" : null,
-    "RelativeModifier" : 0,
-    "AbsoluteModifier" : 0,
+                "SortKey" : "03014"
+            }
+		},
+		
+    "Category" : "Missile",
+    "Type" : "LRM",
+    "WeaponSubType" : "LRM10",
+    "MinRange" : 360,
+    "MaxRange" : 1640,
+    "RangeSplit" : [
+		560,
+        920,
+        1280
+    ],
+    "AmmoCategory" : "SmartMissile",
+    "StartingAmmoCapacity" : 0,
+    "HeatGenerated" : 9,
+    "Damage" : 9,
+    "OverheatedDamageMultiplier" : 0,
+    "EvasiveDamageMultiplier" : 0,
+    "EvasivePipsIgnored" : 2,
+    "DamageVariance" : 0,
+    "HeatDamage" : 0,
+    "AccuracyModifier" : -2,
+    "CriticalChanceMultiplier" : 1,
+    "AOECapable" : false,
+    "IndirectFireCapable" : true,
+    "RefireModifier" : 1,
+    "ShotsWhenFired" : 12,
+    "ProjectilesPerShot" : 1,
+    "AttackRecoil" : 1,
+    "Instability" : 1,
+    "WeaponEffectID" : "WeaponEffect-Weapon_LRM20",
     "Description" : {
-        "Cost" : 940000,
-        "Rarity" : 9,
+        "Cost" : 2507000,
+        "Rarity" : 10,
         "Purchasable" : true,
         "Manufacturer" : "Toho Heavy Industries",
-        "Model" : "Blade",
-        "UIName" : "Melee Cockpit",
-        "Id" : "Gear_Cockpit_Toho_Blade",
-        "Name" : "Melee Cockpit",
-        "Details" : "Based on a fusion of Clan and New Dallas Memory Core technologies, this offering by Toho Heavy Industries is equipped with melee actuator optimizer software. It is intended for Close-Combat Mechs fitted with an assortment of hand-to-hand weapons, intended for MechWarriors who intend to get in close and smash their opponents in melee.",
-        "Icon" : "uixSvgIcon_equipment_Comms"
+        "Model" : "Coil-Launched Smart Missiles",
+        "UIName" : "CL SM12",
+        "Id" : "Weapon_LRM_CLSM12",
+        "Name" : "Coilgun Smart Missile Launcher [12]",
+        "Details" : "This design by Optimus uses shortened, Superconductive Gauss Coils to boost <b><color=#ffcc00>Smart Missiles</color></b> out of the 'Mech before they arm and ignite their rocket motors, resulting in slightly increased damage, accuracy, and a tremendous increase in range, but comes at the cost of increased launcher mass and bulk, not to mention a tremendous minimum range, as missiles cannot be safely armed while inside the launcher! Firing heat is decreased as the missile engines do not ignite until they have cleared the 'Mech, but the need cryocool the non-LosTech superconductive Coils also results in significant passive heat generation.",
+        "Icon" : "uixSvgIcon_weapon_Missile"
     },
-    "BonusValueA" : "+2 Melee/+1 DFA Accuracy",
-    "BonusValueB" : "+3 Initiative | +2 Health",
-    "ComponentType" : "Upgrade",
-    "ComponentSubType" : "NotSet",
-    "PrefabIdentifier" : "",
+    "BonusValueA" : "",
+    "BonusValueB" : "",
+    "ComponentType" : "Weapon",
+    "ComponentSubType" : "Weapon",
+    "PrefabIdentifier" : "lrm15",
     "BattleValue" : 0,
-    "InventorySize" : 1,
-    "Tonnage" : 1.5,
-    "AllowedLocations" : "Head",
+    "InventorySize" : 4,
+    "Tonnage" : 8,
+    "AllowedLocations" : "All",
     "DisallowedLocations" : "All",
     "CriticalComponent" : false,
     "statusEffects" : [
-        {
+		{
             "durationData" : {
                 "duration" : -1,
                 "ticksOnActivations" : false,
                 "useActivationsOfTarget" : false,
                 "ticksOnEndOfRound" : false,
                 "ticksOnMovements" : false,
-                "stackLimit" : -1,
+                "stackLimit" : 1,
                 "clearedWhenAttacked" : false
             },
             "targetingData" : {
@@ -77,18 +95,18 @@
             },
             "effectType" : "StatisticEffect",
             "Description" : {
-                "Id" : "CockpitInitativeEffect",
-                "Name" : "CockpitTechBonus",
-                "Details" : "Provides + 3 Initiative and several buffs.",
-                "Icon" : "uixSvgIcon_equipment_Cockpit"
+                "Id" : "StatusEffect-Heat_CLLRM12",
+                "Name" : "Increased Heat",
+                "Details" : "Maintains a constant heat generation of [AMT].",
+                "Icon" : "uixSvgIcon_equipment_ThermalExchanger"
             },
-            "nature" : "Buff",
+            "nature" : "Debuff",
             "statisticData" : {
                 "appliesEachTick" : false,
                 "effectsPersistAfterDestruction" : false,
-                "statName" : "BaseInitiative",
+                "statName" : "EndMoveHeat",
                 "operation" : "Int_Add",
-                "modValue" : "-3",
+                "modValue" : "12",
                 "modType" : "System.Int32",
                 "additionalRules" : "NotSet",
                 "targetCollection" : "NotSet",
@@ -103,19 +121,72 @@
             "vfxData" : null,
             "instantModData" : null,
             "poorlyMaintainedEffectData" : null
-        },	
-        {
+        },
+	        {
             "durationData" : {
-                "duration" : -1,
+                "duration" : 2,
+                "ticksOnActivations" : true,
+                "useActivationsOfTarget" : true,
+                "ticksOnEndOfRound" : false,
+                "ticksOnMovements" : false,
+                "stackLimit" : 10,
+                "clearedWhenAttacked" : false
+            },
+            "targetingData" : {
+                "effectTriggerType" : "OnHit",
+                "triggerLimit" : 0,
+                "extendDurationOnTrigger" : 0,
+                "specialRules" : "NotSet",
+                "effectTargetType" : "NotSet",
+                "range" : 0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : false,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : true
+            },
+            "effectType" : "StatisticEffect",
+            "Description" : {
+                "Id" : "CL-LRM",
+                "Name" : "Zeroing In!",
+                "Details" : "Further attacks against this target have their accuracy increased by [AMT]",
+                "Icon" : "uixSvgIcon_genericDiamond"
+            },
+            "nature" : "Debuff",
+            "statisticData" :            {
+                "statName": "ToHitThisActor",
+                "operation": "Float_Add",
+                "modValue": "-1.0",
+                "modType": "System.Single",
+                "additionalRules" : "NotSet",
+                "targetCollection" : "NotSet",
+                "targetWeaponCategory" : "NotSet",
+                "targetWeaponType" : "NotSet",
+                "targetAmmoCategory" : "NotSet",
+                "targetWeaponSubType" : "NotSet"				
+            },
+            "tagData": {
+                "tagList": [
+                    "lv-tag-effect"
+                ]
+            },
+            "floatieData" : null,
+            "actorBurningData" : null,
+            "vfxData" : null,
+            "instantModData" : null,
+            "poorlyMaintainedEffectData" : null
+        },
+		{
+            "durationData" : {
+                "duration" : 1,
                 "ticksOnActivations" : false,
                 "useActivationsOfTarget" : false,
                 "ticksOnEndOfRound" : false,
                 "ticksOnMovements" : false,
-                "stackLimit" : -1,
+                "stackLimit" : 1,
                 "clearedWhenAttacked" : false
             },
             "targetingData" : {
-                "effectTriggerType" : "Passive",
+                "effectTriggerType" : "OnWeaponFire",
                 "triggerLimit" : 0,
                 "extendDurationOnTrigger" : 0,
                 "specialRules" : "NotSet",
@@ -128,72 +199,21 @@
             },
             "effectType" : "StatisticEffect",
             "Description" : {
-                "Id" : "DNI-StatusEffect-Attack_ToHit",
-                "Name" : "Man Machine Interface",
-                "Details" : "Active DNI Grants Melee Accuracy.",
-                "Icon" : "uixSvgIcon_equipment_TTS"
-            },
-            "nature" : "Buff",
-            "statisticData" : {
-                "appliesEachTick" : false,
-                "effectsPersistAfterDestruction" : false,
-                "statName" : "AccuracyModifier",
-                "operation" : "Float_Add",
-                "modValue" : "-1.0",
-                "modType" : "System.Single",
-                "additionalRules" : "NotSet",
-                "targetCollection" : "Weapon",
-                "targetWeaponCategory" : "NotSet",
-                "targetWeaponType" : "NotSet",
-                "targetAmmoCategory" : "NotSet",
-                "targetWeaponSubType" : "Melee"
-            },
-            "tagData" : null,
-            "floatieData" : null,
-            "actorBurningData" : null,
-            "vfxData" : null,
-            "instantModData" : null,
-            "poorlyMaintainedEffectData" : null
-        },		
-        {
-            "durationData" : {
-                "duration" : -1,
-                "ticksOnActivations" : false,
-                "useActivationsOfTarget" : false,
-                "ticksOnEndOfRound" : false,
-                "ticksOnMovements" : false,
-                "stackLimit" : -1,
-                "clearedWhenAttacked" : false
-            },
-            "targetingData" : {
-                "effectTriggerType" : "Passive",
-                "triggerLimit" : 0,
-                "extendDurationOnTrigger" : 0,
-                "specialRules" : "NotSet",
-                "effectTargetType" : "Creator",
-                "range" : 0,
-                "forcePathRebuild" : false,
-                "forceVisRebuild" : false,
-                "showInTargetPreview" : false,
-                "showInStatusPanel" : false
-            },
-            "effectType" : "StatisticEffect",
-            "Description" : {
-                "Id" : "Pilot_HealthAdd-T2",
-                "Name" : "MAX INJURIES INCREASED",
-                "Details" : "Prevents [AMT] Injuries against a MechWarrior.",
+                "Id" : "StatusEffect-Spotting_Gain-T2",
+                "Name" : "SPOTTING DISTANCE INCREASED",
+                "Details" : "Increases spotting distance by [AMT]m.",
                 "Icon" : "uixSvgIcon_equipment_Cockpit"
             },
             "nature" : "Buff",
             "statisticData" : {
                 "appliesEachTick" : false,
                 "effectsPersistAfterDestruction" : false,
-                "statName" : "BonusHealth",
-                "operation" : "Int_Add",
-                "modValue" : "2",
-                "modType" : "System.Int32",
+                "statName" : "SpotterDistanceAbsolute",
+                "operation" : "Float_Add",
+                "modValue" : "50.0",
+                "modType" : "System.Single",
                 "additionalRules" : "NotSet",
-                "targetCollection" : "Pilot",
+                "targetCollection" : "NotSet",
                 "targetWeaponCategory" : "NotSet",
                 "targetWeaponType" : "NotSet",
                 "targetAmmoCategory" : "NotSet",
@@ -208,16 +228,16 @@
         },
 		{
             "durationData" : {
-                "duration" : -1,
+                "duration" : 1,
                 "ticksOnActivations" : false,
                 "useActivationsOfTarget" : false,
                 "ticksOnEndOfRound" : false,
                 "ticksOnMovements" : false,
-                "stackLimit" : -1,
+                "stackLimit" : 1,
                 "clearedWhenAttacked" : false
             },
             "targetingData" : {
-                "effectTriggerType" : "Passive",
+                "effectTriggerType" : "OnWeaponFire",
                 "triggerLimit" : 0,
                 "extendDurationOnTrigger" : 0,
                 "specialRules" : "NotSet",
@@ -226,29 +246,29 @@
                 "forcePathRebuild" : false,
                 "forceVisRebuild" : false,
                 "showInTargetPreview" : false,
-                "showInStatusPanel" : false
+                "showInStatusPanel" : true
             },
             "effectType" : "StatisticEffect",
             "Description" : {
-                "Id" : "StatusEffect-Attack_DFAACC_JJ",
-                "Name" : "DFA ACC",
-                "Details" : "DFA Accuracy Increased.",
-                "Icon" : "uixSvgIcon_equipment_ActuatorLeg"
+                "Id" : "StatusEffect-Sensor_Gain-T3",
+                "Name" : "SPOTTING DISTANCE INCREASED",
+                "Details" : "Increases spotting distance by [AMT]m.",
+                "Icon" : "uixSvgIcon_equipment_Cockpit"
             },
             "nature" : "Buff",
             "statisticData" : {
                 "appliesEachTick" : false,
                 "effectsPersistAfterDestruction" : false,
-                "statName" : "AccuracyModifier",
+                "statName" : "SensorDistanceAbsolute",
                 "operation" : "Float_Add",
-                "modValue" : "-1.0",
+                "modValue" : "100.0",
                 "modType" : "System.Single",
                 "additionalRules" : "NotSet",
                 "targetCollection" : "NotSet",
                 "targetWeaponCategory" : "NotSet",
                 "targetWeaponType" : "NotSet",
                 "targetAmmoCategory" : "NotSet",
-                "targetWeaponSubType" : "DFA"
+                "targetWeaponSubType" : "NotSet"
             },
             "tagData" : null,
             "floatieData" : null,
@@ -257,13 +277,12 @@
             "instantModData" : null,
             "poorlyMaintainedEffectData" : null
         }
-    ],
+	],
     "ComponentTags" : {
         "items" : [
             "component_type_stock",
-			"lv-probe-boost_m1",
-			"ClanCockpit",
-			"ClanFCS"
+			"component_type_lostech",
+            "range_extreme"
         ],
         "tagSetSourceFile" : ""
     }
