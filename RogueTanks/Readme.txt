@@ -33,7 +33,7 @@ unit_hunter,
 
 Changelog:
 
-0.0.0
+5.2.3
 
 Set Bolas to use MLRS prefab (modern armor with rockets on top)
 Set Techies to use MLRS4 prefab (smallest looking truck)
@@ -41,6 +41,9 @@ Set Red October to use MLRS
 Set 60 and 80 ton Thunderbolt carriers to use MLRS2
 Set Light Carriers to use MLRS3
 Added Light Thunderbolt 10 Carrier
+Added new Von Luckner,
+Many ammo fixes,
+Many minor other fixes
 
 5.0.5
 
