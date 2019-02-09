@@ -33,10 +33,30 @@ unit_hunter,
 
 Changelog:
 
-0.0.0
+5.2.3
+
+Set Bolas to use MLRS prefab (modern armor with rockets on top)
+Set Techies to use MLRS4 prefab (smallest looking truck)
+Set Red October to use MLRS
+Set 60 and 80 ton Thunderbolt carriers to use MLRS2
+Set Light Carriers to use MLRS3
+Added Light Thunderbolt 10 Carrier
+Added new Von Luckner,
+Many ammo fixes,
+Many minor other fixes
+
+5.0.5
+
+Updated faction tags on Assault, Heavy, Medium and Light tanks.
+Added Von Luckner K75N
+Renamed two previous Von Luckners with model numbers for clarity.
+
+4.9.9
 
 Gave SRM Carrier_RT it's missing C3 unit.
 Added SRM Carrier_3054
+Update pass on all tanks for CustomAmmo
+misc minor fixes in the proccess
 
 4.8.7
 

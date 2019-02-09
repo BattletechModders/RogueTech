@@ -9,10 +9,35 @@
 	"DLLEntryPoint": "CustomComponents.Control.Init",
 	"Settings" : {
 				"LogLevel": "Debug",
+		"DebugInfo" : [
+        "SalvageProccess"
+			],
 		"ColorTags" : [ ],
 		
-		"FixDeletedComponents": false,
+		"FixDeletedComponents": true,
         "FixSaveGameMech":  false,
+		
+		"RunAutofixer" : true,
+		 
+   "OverrideSalvageGeneration" : true,
+   
+    "NoLootCTDestroyed" : false,
+
+    "OverrideRecoveryChance" : true,
+    "SalvageUnrecoveredMech" : true,
+   
+    "BaseRecoveryChance" : 0.5,
+   "LimbRecoveryPenalty" : 0.05,
+    "TorsoRecoveryPenalty" : 0.1,
+    "HeadRecoveryPenaly" : 0,
+    "EjectRecoveryBonus" : 0.25,
+
+    "OverrideMechPartCalculation" : true,
+    "CenterTorsoDestroyedParts" : 1,
+    "SalvageArmWeight" : 0.75,
+    "SalvageLegWeight" : 0.75,
+    "SalvageTorsoWeight" : 1,
+    "SalvageHeadWeight" : 0.5,
 		
 		"TagRestrictionDropValidateRequiredTags":  true,
 		"TagRestrictionDropValidateIncompatibleTags":  true,
@@ -50,7 +75,7 @@
 			{ "Tag" : "SLDFMech", "CategoryID" : "Cockpit", "Type" : "Upgrade", "DefID" : "Gear_Cockpit_SLDF_Standard", "Location" : "Head" },
 			{ "Tag" : "SLDFMech", "CategoryID" : "CockpitSensors", "Type" : "Upgrade", "DefID" : "Gear_Sensors_SLDF", "Location" : "Head" },
 			{ "Tag" : "SLDFMech", "CategoryID" : "Cooling", "Type" : "HeatSink", "DefID" : "emod_kit_dhs_royal", "Location" : "CenterTorso", "AddIfNotPresent" : true },
-			{ "Tag" : "Primitive", "CategoryID" : "Armor", "Type" : "Upgrade", "DefID" : "Gear_armorslots_Primitive", "Location" : "Head", "AddIfNotPresent" : true },
+			{ "Tag" : "Primitive", "CategoryID" : "Armor", "Type" : "Upgrade", "DefID" : "Gear_armorslots_Primitive", "Location" : "CenterTorso", "AddIfNotPresent" : true },
 			{ "Tag" : "Primitive", "CategoryID" : "CockpitFCS", "Type" : "Upgrade", "DefID" : "Gear_FCS_Primitive_Standard", "Location" : "Head" },
 			{ "Tag" : "Primitive", "CategoryID" : "Cockpit", "Type" : "Upgrade", "DefID" : "Gear_Cockpit_Primitive", "Location" : "Head", "AddIfNotPresent" : true },
 			{ "Tag" : "Primitive", "CategoryID" : "CockpitSensors", "Type" : "Upgrade", "DefID" : "Gear_Sensors_Primitve_Standard", "Location" : "Head" },
@@ -115,7 +140,7 @@
 		{  "Name": "RAC20",  "displayName": "Rotary Autocannon/20"},
 		{  "Name": "BattleComputer",  "displayName": "Battle Computer",  "MaxEquiped":  "1", "AutoReplace": "true"},	
 		{  "Name": "MissTTSART",  "displayName": "Artemis IV System",  "MaxEquiped":  "1", "AutoReplace": "true"},
-		{  "Name": "LRMARTIVAmmo",  "displayName": "Artemis IV LRM",  "MaxEquiped":  "1", "AutoReplace": "true"},
+		{  "Name": "LRMARTIVAmmo",  "displayName": "Artemis IV LRM", "AutoReplace": "true"},
 		{  "Name": "SRMARTIVAmmo",  "displayName": "Artemis IV SRM",  "AutoReplace": "true"},
 		{  "Name": "CLANTTS",  "displayName": "CLAN TTS",  "MaxEquiped":  "1", "AutoReplace": "true"},
 		{  "Name": "TTSComp",  "displayName": "TTS Battle Computer",  "MaxEquiped":  "1", "AutoReplace": "true"},
@@ -135,6 +160,10 @@
 		{  "Name": "HeatBank",  "displayName": "Heatbank",  "MaxEquiped":  "1", "AutoReplace": "true"},
 		{  "Name": "Exchanger",  "displayName": "Thermal Exchanger", "MaxEquiped":  "1", "AutoReplace": "true"},
 		{  "Name": "VirtualRealityPilotingPod",  "displayName": "Virtual Reality Piloting Pod", "MaxEquiped":  "1", "AutoReplace": "true"},
+		{  "Name": "Railgun",  "displayName": "Railgun"},
+		{  "Name": "ParticleWeapon",  "displayName": "Particle Weapon"},
+		{  "Name": "SmartMissile",  "displayName": "Smart Missile"},
+		{  "Name": "CGLauncher",  "displayName": "Coilgun Launcher"},
 		{  "Name": "ChassisSupport",  "displayName": "Integral Chassis Systems", "MaxEquiped":  "1", "AutoReplace": "true"},
 		{  "Name": "SensorsRefit",  "displayName": "Sensor Refit", "MaxEquiped":  "1", "AutoReplace": "true"}
 		],
@@ -337,25 +366,6 @@
 				"TTSComp"
             ],
 			"RequiredTags" : [ "ClanFCS" ]
-        },		
-        {
-            "Tag" : "ECM",
-            "IncompatibleTags" : [
-				"AdvECM"
-            ]
-        },
-        {
-            "Tag" : "Probe",
-            "IncompatibleTags" : [
-				"AdvECM"
-            ]
-        },	
-        {
-            "Tag" : "AdvECM",
-            "IncompatibleTags" : [
-				"Probe",
-				"ECM"
-            ]
         },		
         {
             "Tag" : "Shock",
