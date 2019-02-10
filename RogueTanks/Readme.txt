@@ -33,6 +33,12 @@ unit_hunter,
 
 Changelog:
 
+0.0.0
+
+Added Ku IFV as a clan APC,
+Removed clans from normal APC faction lists,
+Added Battle Computers to Mobile HQs and Gulltoprs.
+
 5.2.3
 
 Set Bolas to use MLRS prefab (modern armor with rockets on top)
