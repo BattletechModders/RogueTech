@@ -33,11 +33,13 @@ unit_hunter,
 
 Changelog:
 
-0.0.0
+5.2.9
 
 Added Ku IFV as a clan APC,
+Added two Indra APC for clans,
 Removed clans from normal APC faction lists,
 Added Battle Computers to Mobile HQs and Gulltoprs.
+Minor fixes
 
 5.2.3
 
