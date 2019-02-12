@@ -33,6 +33,11 @@ unit_hunter,
 
 Changelog:
 
+0.0.0
+
+Adapted RL carriers to the new AI only multi shot RL that keeps them from dumping every rocket at once,
+Added Inferno focused Light RL carrier
+
 5.2.9
 
 Added Ku IFV as a clan APC,
