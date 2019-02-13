@@ -16,6 +16,7 @@ CustomAmmoCategories.json
 	"BaseCategory":"GAUSS" - base category name. Must bt in (AC2/AC5/AC10/AC20/GAUSS/Flamer/AMS/MG/SRM/LRM), 
 	                         needed for backward compatibility. 
 							 All other game mechanic (for example status effect targeting), except ammo count in battle and mech validator in mech lab will use this value.
+							 !Flamer - is base category for energy ammo (plasma, chemical lasers etc)
 },
 ]
 
@@ -69,7 +70,9 @@ new fields
 		"FlatJammingChance": 1.0, - Chance of jamming weapon after fire. 1.0 is jamm always. Unjamming logic implemented as in WeaponRealizer
 		"DamageVariance": 20, - Simple damage variance as implemented in WeaponRealizer
 		"DistantVariance": 0.3, - Distance damage variance as implemented in WeaponRealizer
-		"DistantVarianceReversed": false - Set is distance damage variance is reversed
+		"DistantVarianceReversed": false, - Set is distance damage variance is reversed
+		"Cooldown": 2, - number of rounds weapon will be unacceptable after fire this mode
+		"AIHitChanceCap": 0.3 - AI will choose mode with minimal delta |current toHit with this mode - AIHitChanceCap|
 	}]
   
   
