@@ -16,9 +16,9 @@
 		},
         "BonusDescriptions": {
             "Bonuses": [
-				"Defense: +2",
-				"EvaMax: +1",
-                "EvaPips: +1",
+				"Accuracy: +2",
+				"MeleeAcc: +2",
+                "Initiative: +2",
 				"WeaponBoom: 25"
             ]
         },
@@ -39,7 +39,7 @@
         "UIName" : "Support Systems (MH)",
         "Id" : "Gear_Support_FullHaul",
         "Name" : "Support Systems (MH)",
-        "Details" : "<b><color=#009933>Armsmaster:</color></b> This chassis comes equipped with an exceptionally fine-tuned actuator orientation optimizer, which increases the MechWarrior's ability to connect with the opponent whether in melee or in a artillery duel.",
+        "Details" : "<b><color=#009933>Armsmaster:</color></b> This chassis comes equipped with an exceptionally fine-tuned actuator orientation optimizer, which increases the MechWarrior's ability to connect with the opponent whether in melee or in a artillery duel, and decreases effective reaction time.",
         "Icon" : "uixSvgIcon_equipment_Cockpit"
     },
     "BonusValueA" : "",
@@ -57,51 +57,53 @@
        {
             "durationData": {
                 "duration": -1,
-                "stackLimit": -1
+                "ticksOnActivations": false,
+                "useActivationsOfTarget": false,
+                "ticksOnEndOfRound": false,
+                "ticksOnMovements": false,
+                "stackLimit": -1,
+                "clearedWhenAttacked": false
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "effectTargetType": "Creator"
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "PhantomCockpitEvaMax",
-                "Name": "EVASIVE MOVE",
-                "Details": "This unit generates an extra EVASIVE charge from movement actions (up to its maximum).",
-                "Icon": "uixSvgIcon_action_evasivemove"
-            },
-            "statisticData": {
-                "statName": "MaxEvasivePips",
-                "operation": "Int_Add",
-                "modValue": "1",
-                "modType": "System.Int32"
-            },
-            "nature": "Buff"
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
                 "effectTargetType": "Creator",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
                 "showInStatusPanel": false
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "PhantomCockpitEvaEff",
-                "Name": "EVASIVE MOVE",
-                "Details": "This unit generates an extra EVASIVE charge from movement actions (up to its maximum).",
-                "Icon": "uixSvgIcon_action_evasivemove"
+                "Id": "FullHaulInit",
+                "Name": "Armsmaster",
+                "Details": "Provides + 2 Initiative and several buffs.",
+                "Icon": "uixSvgIcon_equipment_Cockpit"
             },
+            "nature": "Buff",
             "statisticData": {
-                "statName": "EvasivePipsGainedAdditional",
+                "appliesEachTick": false,
+                "effectsPersistAfterDestruction": false,
+                "statName": "BaseInitiative",
                 "operation": "Int_Add",
-                "modValue": "1",
-                "modType": "System.Int32"
+                "modValue": "-2",
+                "modType": "System.Int32",
+                "additionalRules": "NotSet",
+                "targetCollection": "NotSet",
+                "targetWeaponCategory": "NotSet",
+                "targetWeaponType": "NotSet",
+                "targetAmmoCategory": "NotSet",
+                "targetWeaponSubType": "NotSet"
             },
-            "nature": "Buff"
+            "tagData": null,
+            "floatieData": null,
+            "actorBurningData": null,
+            "vfxData": null,
+            "instantModData": null,
+            "poorlyMaintainedEffectData": null
         },
         {
             "durationData": {
@@ -127,21 +129,72 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "PhatomCockpit-Defense_ToHit",
-                "Name": "HARDER TO HIT",
-                "Details": "Provides a penalty to all attacks against this unit.",
-                "Icon": "uixSvgIcon_equipment_Gyro"
+                "Id": "FullHaulMelee",
+                "Name": "Armsmaster Melee",
+                "Details": "Increased Melee Accuracy.",
+                "Icon": "uixSvgIcon_equipment_TTS"
             },
             "nature": "Buff",
             "statisticData": {
                 "appliesEachTick": false,
                 "effectsPersistAfterDestruction": false,
-                "statName": "ToHitThisActor",
+                "statName": "AccuracyModifier",
                 "operation": "Float_Add",
-                "modValue": "2.0",
+                "modValue": "-2.0",
                 "modType": "System.Single",
                 "additionalRules": "NotSet",
-                "targetCollection": "NotSet",
+                "targetCollection": "Weapon",
+                "targetWeaponCategory": "NotSet",
+                "targetWeaponType": "NotSet",
+                "targetAmmoCategory": "NotSet",
+                "targetWeaponSubType": "Melee"
+            },
+            "tagData": null,
+            "floatieData": null,
+            "actorBurningData": null,
+            "vfxData": null,
+            "instantModData": null,
+            "poorlyMaintainedEffectData": null
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "ticksOnActivations": false,
+                "useActivationsOfTarget": false,
+                "ticksOnEndOfRound": false,
+                "ticksOnMovements": false,
+                "stackLimit": -1,
+                "clearedWhenAttacked": false
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": true
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "FullHaulRanged",
+                "Name": "Armsmaster Ranged",
+                "Details": "Increased Ranged Accuracy.",
+                "Icon": "uixSvgIcon_ability_precisionstrike"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "appliesEachTick": false,
+                "effectsPersistAfterDestruction": false,
+                "statName": "AccuracyModifier",
+                "operation": "Float_Add",
+                "modValue": "-2.0",
+                "modType": "System.Single",
+                "additionalRules": "NotSet",
+                "targetCollection": "Weapon",
                 "targetWeaponCategory": "NotSet",
                 "targetWeaponType": "NotSet",
                 "targetAmmoCategory": "NotSet",
