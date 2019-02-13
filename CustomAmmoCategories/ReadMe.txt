@@ -16,9 +16,66 @@ CustomAmmoCategories.json
 	"BaseCategory":"GAUSS" - base category name. Must bt in (AC2/AC5/AC10/AC20/GAUSS/Flamer/AMS/MG/SRM/LRM), 
 	                         needed for backward compatibility. 
 							 All other game mechanic (for example status effect targeting), except ammo count in battle and mech validator in mech lab will use this value.
+							 !Flamer - is base category for energy ammo (plasma, chemical lasers etc)
 },
 ]
 
+Weapon definition
+new fields
+  "Streak": true/false - if true only success hits will be shown, ammo decremental and heat generation will be based on success hits. 
+							with "HitGenerator" : "Streak" - will be true streak effect all-hit-or-no-fire
+  "HitGenerator" : "Streak", Set to hit generator. Supported values ("Individual"/"Cluster"/"Streak"). 
+                                  Streak hit generator is sort of cluster, 
+								  if first projectile hit, rest hit too (location distribution as cluster hit generator),
+								  if first projectile misses, rest misses too
+								  if not set weapon hit generator will be used.
+								  if not set hit generator will be choosed by weapon type.
+								  if weapon define has tag "wr-clustered_shots", "Cluster" hit generator will be forced. 
+  "DirectFireModifier" : -10.0, Accuracy modifier if weapon can strike directly
+	"Modes": array of modes for weapon
+	[{
+		"Id": "x4",  - Must be unique per weapon
+		"UIName": "x4", - This string will be displayed near weapon name
+		"isBaseMode":true, - Weapon must have one base mode. Mode with this setting will used by default
+		"WeaponEffectID" : "WeaponEffect-Weapon_PPC", Played fire effect can be set in mode definition
+		"EvasivePipsIgnored" : 0, This value will be added to EvasivePipsIgnored (current weapon status effects will be used too)
+
+		"AccuracyModifier" : -10.0, This value will be added to AccuracyModifier (current weapon status effects will be used too)
+		"CriticalChanceMultiplier" : 0.0, This value will be added to CriticalChanceMultiplier (current weapon status effects will be used too)
+		"DamagePerShot": -50.0, This value will be added to DamagePerShot (current weapon status effects will be used too)
+		"ShotsWhenFired" : 0, This value will be added to ShotsWhenFired (current weapon status effects will be used too)
+		"ProjectilesPerShot" : 0, This value will be added to ProjectilesPerShot (current weapon status effects will be used too)
+		"HeatDamagePerShot": 0.0, This value will be added to HeatDamagePerShot (current weapon status effects will be used too)
+		   
+		"MinRange": 0.0, This value will be added to MinRange (current weapon status effects will be used too)
+		"MaxRange": 0.0, This value will be added to MaxRange (current weapon status effects will be used too)
+		"ShortRange": 0.0, This value will be added to ShortRange (current weapon status effects will be used too)
+		"MiddleRange": 0.0, This value will be added to MiddleRange (current weapon status effects will be used too)
+		"LongRange": 0.0, This value will be added to LongRange (current weapon status effects will be used too)
+			 NOTE: Range modifications not always displays correctly while viewing shooting arc, but hit chance and possibility calculated normally. 
+			 
+		"HeatGenerated" : 0, This value will be added to HeatGenerated (current weapon status effects will be used too)
+		"RefireModifier" : 0, This value will be added to RefireModifier (current weapon status effects will be used too)
+		"Instability" : 0, This value will be added to Instability (current weapon status effects will be used too)
+		"AttackRecoil" : 0, This value will be added to AttackRecoil
+		"IndirectFireCapable" : false, Effective IndirectFireCapable will be taken from ammo. If not set in ammo define, weapon value will be used
+		"EvasivePipsIgnored" : 0, This value will be added to EvasivePipsIgnored (current weapon status effects will be used too)
+		"HitGenerator" : "Individual", Set to hit generator. Supported values ("Individual"/"Cluster"/"Streak"). 
+									  Streak hit generator is sort of cluster, 
+									  if first projectile hit, rest hit too (location distribution as cluster hit generator),
+									  if first projectile misses, rest misses too
+									  if not set weapon hit generator will be used.
+									  if weapon define has tag "wr-clustered_shots", "Cluster" hit generator will be forced. 
+		"DirectFireModifier" : -10.0, Accuracy modifier if weapon can strike directly
+		"FlatJammingChance": 1.0, - Chance of jamming weapon after fire. 1.0 is jamm always. Unjamming logic implemented as in WeaponRealizer
+		"DamageVariance": 20, - Simple damage variance as implemented in WeaponRealizer
+		"DistantVariance": 0.3, - Distance damage variance as implemented in WeaponRealizer
+		"DistantVarianceReversed": false, - Set is distance damage variance is reversed
+		"Cooldown": 2, - number of rounds weapon will be unacceptable after fire this mode
+		"AIHitChanceCap": 0.3 - AI will choose mode with minimal delta |current toHit with this mode - AIHitChanceCap|
+	}]
+  
+  
 Ammo definition
 {
    "Description" : {
@@ -33,35 +90,43 @@ Ammo definition
    },
    "Type" : "Normal",
    "Category" : "LBX10", 
-   
-   "AIBattleValue": 90,
-   "DamagePerShot": -50.0,
-   "HeatDamagePerShot": 0.0,
-   
-   "CriticalChanceMultiplier" : 1.0,
+      
    
    "WeaponEffectID" : "WeaponEffect-Weapon_PPC", Played fire effect can be set in ammo definition, for example this LBX AC10 will fire as PPC if ECM ammo is choosed
-   "EvasivePipsIgnored" : 0, Effective EvasivePipsIgnored will be Weapon.EvasivePipsIgnored + Ammo.EvasivePipsIgnored (current weapon status effects will be used too)
+   "EvasivePipsIgnored" : 0, This value will be added to EvasivePipsIgnored (current weapon status effects will be used too)
    
-   "AccuracyModifier" : -10.0, Effective AccuracyModifier will be Weapon.AccuracyModifier + Ammo.AccuracyModifier (current weapon status effects will be used too)
-   "CriticalChanceMultiplier" : 0.0, Effective AccuracyModifier will be Weapon.CriticalChanceMultiplier + Ammo.CriticalChanceMultiplier (current weapon status effects will be used too)
-   "DamagePerShot": -50.0, Effective DamagePerShot will be Weapon.DamagePerShot + Ammo.DamagePerShot (current weapon status effects will be used too)
-   "AIBattleValue":90, used for AI. It will use ammo with highest AIBattleValue on depletion switch to next 
-   "ShotsWhenFired" : 0, Effective ShotsWhenFired will be Weapon.ShotsWhenFired + Ammo.ShotsWhenFired (current weapon status effects will be used too)
-   "ProjectilesPerShot" : 0, Effective ProjectilesPerShot will be Weapon.ProjectilesPerShot + Ammo.ProjectilesPerShot (current weapon status effects will be used too)
-   "HeatDamagePerShot": 0.0, Effective HeatDamagePerShot will be Weapon.HeatDamagePerShot + Ammo.HeatDamagePerShot (current weapon status effects will be used too)
+   "AccuracyModifier" : -10.0, This value will be added to AccuracyModifier (current weapon status effects will be used too)
+   "CriticalChanceMultiplier" : 0.0, This value will be added to CriticalChanceMultiplier (current weapon status effects will be used too)
+   "DamagePerShot": -50.0, This value will be added to DamagePerShot (current weapon status effects will be used too)
+   "AIBattleValue":90, Not used any more
+   "ShotsWhenFired" : 0, This value will be added to ShotsWhenFired (current weapon status effects will be used too)
+   "ProjectilesPerShot" : 0, This value will be added to ProjectilesPerShot (current weapon status effects will be used too)
+   "HeatDamagePerShot": 0.0, This value will be added to HeatDamagePerShot (current weapon status effects will be used too)
        
-   "MinRange": 0.0, Effective MinRange will be Weapon.MinRange + Ammo.MinRange (current weapon status effects will be used too)
-   "MaxRange": 0.0, Effective MinRange will be Weapon.MaxRange + Ammo.MaxRange (current weapon status effects will be used too)
-   "ShortRange": 0.0, Effective ShortRange will be Weapon.ShortRange + Ammo.ShortRange (current weapon status effects will be used too)
-   "MiddleRange": 0.0, Effective MiddleRange will be Weapon.MiddleRange + Ammo.MiddleRange (current weapon status effects will be used too)
-   "LongRange": 0.0, Effective LongRange will be Weapon.LongRange + Ammo.LongRange (current weapon status effects will be used too)
+   "MinRange": 0.0, This value will be added to MinRange (current weapon status effects will be used too)
+   "MaxRange": 0.0, This value will be added to MaxRange (current weapon status effects will be used too)
+   "ShortRange": 0.0, This value will be added to ShortRange (current weapon status effects will be used too)
+   "MiddleRange": 0.0, This value will be added to MiddleRange (current weapon status effects will be used too)
+   "LongRange": 0.0, This value will be added to LongRange (current weapon status effects will be used too)
          NOTE: Range modifications not always displays correctly while viewing shooting arc, but hit chance and possibility calculated normally. 
 		 
-   "HeatGenerated" : 0, Effective HeatGenerated will be Weapon.HeatGenerated + Ammo.HeatGenerated (current weapon status effects will be used too)
-   "RefireModifier" : 0, Effective RefireModifier will be Weapon.RefireModifier + Ammo.RefireModifier (current weapon status effects will be used too)
-   "Instability" : 0, Effective Instability will be Weapon.Instability + Ammo.Instability (current weapon status effects will be used too)
-   "AttackRecoil" : 0, Effective AttackRecoil will be Weapon.AttackRecoil + Ammo.AttackRecoil (current weapon status effects will be used too)
+   "HeatGenerated" : 0, This value will be added to HeatGenerated (current weapon status effects will be used too)
+   "RefireModifier" : 0, This value will be added to RefireModifier (current weapon status effects will be used too)
+   "Instability" : 0, This value will be added to Instability (current weapon status effects will be used too)
+   "AttackRecoil" : 0, This value will be added to AttackRecoil
+   "IndirectFireCapable" : false, Effective IndirectFireCapable will be taken from ammo. If not set in ammo define, weapon value will be used
+   "EvasivePipsIgnored" : 0, This value will be added to EvasivePipsIgnored (current weapon status effects will be used too)
+   "HitGenerator" : "Individual", Set to hit generator. Supported values ("Individual"/"Cluster"/"Streak"). 
+                                  Streak hit generator is sort of cluster, 
+								  if first projectile hit, rest hit too (location distribution as cluster hit generator),
+								  if first projectile misses, rest misses too
+								  if not set weapon hit generator will be used.
+								  if weapon define has tag "wr-clustered_shots", "Cluster" hit generator will be forced. 
+   "DirectFireModifier" : -10.0, Accuracy modifier if weapon can strike directly
+   "FlatJammingChance": 1.0, - Chance of jamming weapon after fire. 1.0 is jamm always. Unjamming logic implemented as in WeaponRealizer
+   "DamageVariance": 20, - Simple damage variance as implemented in WeaponRealizer
+   "DistantVariance": 0.3, - Distance damage variance as implemented in WeaponRealizer
+   "DistantVarianceReversed": false - Set is distance damage variance is reversed
    
    "HeatGeneratedModifier" : 1,
    "ArmorDamageModifier" : 1,
@@ -121,3 +186,266 @@ Ammo definition
         }
     ]
 }
+
+
+overriden methods
+
+!!!BattleTech.AttackDirector.AttackSequence.GenerateHitInfo
+	Prefix
+Implement HitGenerator choosing. Original method completely rewritten and never invoking. 
+
+!!!BattleTech.AttackDirector.AttackSequence.OnAttackSequenceResolveDamage:
+	Prefix
+add per ammo modification to applying status effects. Original method completely rewritten and never invoking
+
+!!!BattleTech.Weapon.DecrementAmmo:
+	Prefix
+method completely rewritten to make weapon use only selected ammo and implement streak ammo decremental (decrement only success hits)
+	
+!!!BattleTech.AbstractActor.CalcAndSetAlphaStrikesRemaining:
+	Prefix:
+Method completely rewritten to make AI calc remaining alpha strikes correctly base on real weapon ammo category. Original method never invoking
+	
+!!!BattleTech.Weapon.SetAmmoBoxes
+	Prefix
+Method completely rewritten to make weapon use right ammo. Original method never invoking.
+
+!!!BattleTech.Weapon.CurrentAmmo
+	Prefix
+Method completely rewritten to make weapon use right ammo. Original method never invoking.
+
+!!!BattleTech.MechValidationRules.ValidateMechHasAppropriateAmmo:
+	Prefix
+Method completely rewritten to make mechlab validator functioning correctly.
+
+!!!BattleTech.WeaponRepresentation.PlayWeaponEffect:
+	Prefix
+Method completely rewritten to play correct effect for each ammo. Original method never invoking.
+	
+!!!WeaponEffect.PlayProjectile:
+	Prefix
+Method completely rewritten to make correct AttackRecoil. Original method never invoking.
+
+!BattleTech.ToHit.GetEvasivePipsModifier
+	Prefix
+add per ammo modification. If modification is done original method not invoked.
+
+!BattleTech.WeaponDef.FromJSON
+	Prefix
+method make some modification on json. Original method always invoking.
+
+!BattleTech.AmmunitionDef.FromJSON
+	Prefix
+method make some modification on json. Original method always invoking.
+
+!BattleTech.UI.CombatHUDWeaponSlot.OnPointerDown
+	Prefix
+add trigger to ammo cycling. If click detected on right side of weapon slot original method not invoking.
+
+!BattleTech.UI.CombatHUDWeaponSlot.OnPointerUp
+	Prefix
+add trigger to ammo cycling. If click detected on right side of weapon slot original method not invoking.
+
+!BattleTech.UI.CombatHUDWeaponSlot.RefreshHighlighted
+	Prefix
+add check on DisplayWeapon == null if so original method not invoking.
+
+!BattleTech.Weapon.DamagePerShot getter
+	Prefix
+add per ammo modification. If modification is done original method not invoked.
+
+!BattleTech.Weapon.HeatDamagePerShot getter
+	Prefix
+add per ammo modification. If modification is done original method not invoked.
+
+!BattleTech.Weapon.get_ShotsWhenFired
+	Prefix
+add per ammo modification. If modification is done original method not invoked.
+
+!BattleTech.Weapon.get_ProjectilesPerShot:
+	Prefix
+add per ammo modification. If modification is done original method not invoked.
+
+!BattleTech.Weapon.get_CriticalChanceMultiplier:
+	Prefix
+add per ammo modification. If modification is done original method not invoked.
+
+!BattleTech.Weapon.get_AccuracyModifier:
+	Prefix
+add per ammo modification. If modification is done original method not invoked.
+
+!BattleTech.Weapon.get_MinRange:
+	Prefix
+add per ammo modification. If modification is done original method not invoked.
+
+!BattleTech.Weapon.get_MaxRange:
+	Prefix
+add per ammo modification. If modification is done original method not invoked.
+
+!BattleTech.Weapon.get_ShortRange:
+	Prefix
+add per ammo modification. If modification is done original method not invoked.
+
+!BattleTech.Weapon.get_MediumRange:
+	Prefix
+add per ammo modification. If modification is done original method not invoked.
+
+!BattleTech.Weapon.get_LongRange:
+	Prefix
+add per ammo modification. If modification is done original method not invoked.
+
+!BattleTech.Weapon.get_HeatGenerated:
+	Prefix
+add per ammo modification. If modification is done original method not invoked.
+
+!BattleTech.Weapon.get_IndirectFireCapable:
+	Prefix
+add per ammo modification. If modification is done original method not invoked.
+
+!BattleTech.Weapon.get_AOECapable:
+	Prefix
+add per ammo modification. If modification is done original method not invoked.
+
+!BattleTech.Weapon.Instability:
+	Prefix
+add per ammo modification. If modification is done original method not invoked.
+
+!BattleTech.Weapon.get_WillFire:
+	Prefix
+add per ammo modification. If modification is done original method not invoked.
+
+!BattleTech.Weapon.RefireModifier getter
+	Prefix
+add per ammo modification. If modification is done original method not invoked.
+	
+!BattleTech.MechComponent.UIName getter:
+	Prefix:
+add per ammo modification. If modification is done original method not invoked.
+
+BattleTech.WeaponRepresentation.Init:
+	Postfix
+Registering additional weapon visual effects.
+
+BattleTech.WeaponRepresentation.ResetWeaponEffect:
+	Postfix
+resetting additional per ammo visual effects
+
+BattleTech.CombatGameState.ShutdownCombatState:
+	Postfix
+make some cleaning
+
+BattleTech.AttackDirector.AttackSequence.Cleanup:
+	Postfix
+helps AI to cycle ammo on depletion 
+
+BattleTech.UI.CombatHUDWeaponSlot.RefreshDisplayedWeapon:
+	Transpiler
+needed show real projectiles count when ProjectilesPerShot > 1
+
+BattleTech.CombatGameState.RebuildAllLists
+	Postfix
+registering all weapon and ammo on battlefield.
+
+BattleTech.CombatGameState.OnCombatGameDestroyed:
+	Postfix
+make some cleaning
+
+BattleTech.UI.CombatHUD.Init:
+	Prefix
+registering all weapon and ammo on battlefield. Original method always invoking
+
+AttackEvaluator.MakeAttackOrderForTarget
+	Prefix
+AI make decision what ammo he must use to hit target. Original method invoking always
+	
+AttackEvaluator.MakeAttackOrder
+	Postfix
+AI make decision what ammo he must use to hit target.
+
+AIUtil.UnitHasLOFToTargetFromPosition:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+
+AIUtil.UnitHasLOFToUnit:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+
+BattleTech.AIRoleAssignment.EvaluateSniper:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+
+BattleTech.AbstractActor.GetLongestRangeWeapon:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+
+BattleTech.AbstractActor.HasIndirectLOFToTargetUnit:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+
+BattleTech.AbstractActor.HasLOFToTargetUnit:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+
+BattleTech.HostileDamageFactor.expectedDamageForShooting:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+
+BattleTech.MultiAttack.FindWeaponToHitTarget:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+
+BattleTech.MultiAttack.GetExpectedDamageForMultiTargetWeapon:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+
+BattleTech.MultiAttack.PartitionWeaponListToKillTarget:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+
+BattleTech.MultiAttack.ValidateMultiAttackOrder:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+
+BattleTech.PreferExposedAlonePositionalFactor.InitEvaluationForPhaseForUnit:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+
+BattleTech.PreferFiringSolutionWhenExposedAllyPositionalFactor.EvaluateInfluenceMapFactorAtPosition:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+
+BattleTech.PreferLethalDamageToRearArcFromHostileFactor.expectedDamageForShooting:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+
+BattleTech.PreferNotLethalPositionFactor.expectedDamageForShooting:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+
+BattleTech.ToHit.GetAllModifiers:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+	Postfix
+add per ammo or weapon modificator if direct fire detected.
+
+BattleTech.ToHit.GetAllModifiersDescription:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+	Postfix
+add per ammo or weapon modificator if direct fire detected.
+
+BattleTech.UI.CombatHUDWeaponSlot.UpdateToolTipsFiring:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+
+BattleTech.UI.CombatHUDWeaponTickMarks.GetValidSlots:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+
+BattleTech.Weapon.WillFireAtTargetFromPosition:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+
+LOFCache.UnitHasLOFToTarget:
+	Transpiler
+add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
