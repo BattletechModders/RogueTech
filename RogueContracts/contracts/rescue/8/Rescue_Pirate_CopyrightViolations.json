@@ -1,15 +1,15 @@
 {
-    "ID": "Rescue_IntelligenceAgent",
-    "contractName": "Intelligence Agent",
+    "ID": "Rescue_Pirate_CopyrightViolations",
+    "contractName": "Copyright Violations",
     "contractDisplayStyle": "BaseCampaignNormal",
-    "difficulty": 5,
+    "difficulty": 8,
     "difficultyUIModifier": 0,
     "weight": 1,
     "scope": "STANDARD",
     "finalDifficulty": 0,
-    "shortDescription": "One of our covert operatives was captured by a {TEAM_TAR.FactionDef.Demonym} patrol during a routine data drop, and is being held at a secure facility on {TGT_SYSTEM.name}. We need a rapid response team to raid the facility and get our operative out safely. We will pay a bonus if you're able to secure the data she was trying to deliver, as well. It's being held at a separate facility.",
-    "longDescription": "There shouldn't be any surprises here, Commander. The target is expecting a pickup so she'll be aboard in a matter of moments. The data might be tougher but it's your call if you want to go after it.",
-    "salvagePotential": 16,
+    "shortDescription": "We have an opportunity to get our hands on the next season of a popular holovid series before it's sent out for general distribution. Fans will pay through the nose to get a copy even a few weeks early. All you have to do is go to the secure {TEAM_TAR.FactionDef.Demonym} facility where the data is being stored, and our agent will transmit the data directly to your 'Mech. Oh, if you have a chance, pick the agent up, too? He's holed up in a secondary facility.",
+    "longDescription": "If this is the next season of <i>Rough Riders</i>, we need to <i>not</i> let Yang know. He'll trade our whole payment for early access.",
+    "salvagePotential": 20,
     "requirementList": [
         {
             "Scope": "StarSystem",
@@ -18,12 +18,16 @@
                 "tagSetSourceFile": ""
             },
             "ExclusionTags": {
-                "items": [
-                    "planet_other_empty"
-                ],
+                "items": [],
                 "tagSetSourceFile": ""
             },
             "RequirementComparisons": [
+                {
+                    "obj": "Employer.AuriganPirates",
+                    "op": "Equal",
+                    "val": 1,
+                    "valueConstant": null
+                },
                 {
                     "obj": "Target.IsOwner",
                     "op": "Equal",
@@ -59,8 +63,8 @@
             "contractObjective": {
                 "EncounterObjectGuid": "dee3ebc7-d9df-4e5f-bfbb-0fb7dff587f8"
             },
-            "title": "Retrieve the Agent and Escape",
-            "description": "",
+            "title": "Retrieve the Data and Extract Safely",
+            "description": "Retrieve the VIP and Extract Safely",
             "isPrimary": true,
             "forPlayer": "Player1",
             "objectiveGuids": [
@@ -75,8 +79,8 @@
             "objective": {
                 "EncounterObjectGuid": "3a4192be-2a53-4383-94ac-19c08883ea5f"
             },
-            "title": "Recover the Agent by Securing the Facility",
-            "description": "",
+            "title": "Recover the Holovid Data by Securing the Designated Area.",
+            "description": "The objective for the player to retrieve the primary rescue target.",
             "isPrimary": true,
             "OnSuccessResults": [],
             "OnFailureResults": []
@@ -87,56 +91,6 @@
             },
             "title": "Hidden KILL OBJECTIVE for OpFor1",
             "description": "UNUSED KILL OBJECTIVE for AutoComplete",
-            "isPrimary": false,
-            "OnSuccessResults": [],
-            "OnFailureResults": []
-        },
-        {
-            "objective": {
-                "EncounterObjectGuid": "6f4ceb92-9eef-4765-b345-42ed8fe8e1b3"
-            },
-            "title": "Get to the Evac Zone",
-            "description": "",
-            "isPrimary": true,
-            "OnSuccessResults": [],
-            "OnFailureResults": []
-        },
-        {
-            "objective": {
-                "EncounterObjectGuid": "ff3cb25c-4bd9-4343-be9a-be14fa22718c"
-            },
-            "title": "The 'Mech Carrying the Operative Must Survive",
-            "description": "",
-            "isPrimary": true,
-            "OnSuccessResults": [],
-            "OnFailureResults": []
-        },
-        {
-            "objective": {
-                "EncounterObjectGuid": "b8e94728-f1b4-4c2b-a4b3-6716dd48e721"
-            },
-            "title": "Recover the Data by Securing the Secondary Facility",
-            "description": "",
-            "isPrimary": false,
-            "OnSuccessResults": [],
-            "OnFailureResults": []
-        },
-        {
-            "objective": {
-                "EncounterObjectGuid": "5a848ea1-535c-42e2-b125-bb8d2a9d633d"
-            },
-            "title": "Hidden KILL OBJECTIVE for OpFor2",
-            "description": "Hidden KILL OBJECTIVE for autocomplete of mission",
-            "isPrimary": false,
-            "OnSuccessResults": [],
-            "OnFailureResults": []
-        },
-        {
-            "objective": {
-                "EncounterObjectGuid": "a9f1746b-e990-4c8f-90be-3c4f229da58f"
-            },
-            "title": "The 'Mech carrying the data must survive",
-            "description": "",
             "isPrimary": false,
             "OnSuccessResults": [
                 {
@@ -154,7 +108,135 @@
                         {
                             "typeString": "System.Single",
                             "name": "ContractBonusRewardPct",
-                            "value": "0.3",
+                            "value": "0.25",
+                            "set": false,
+                            "valueConstant": null
+                        }
+                    ],
+                    "Actions": [],
+                    "ForceEvents": [],
+                    "TemporaryResult": false,
+                    "ResultDuration": 0
+                }
+            ],
+            "OnFailureResults": []
+        },
+        {
+            "objective": {
+                "EncounterObjectGuid": "6f4ceb92-9eef-4765-b345-42ed8fe8e1b3"
+            },
+            "title": "Get to the evac zone",
+            "description": "The objective to escape with all player units.",
+            "isPrimary": true,
+            "OnSuccessResults": [],
+            "OnFailureResults": []
+        },
+        {
+            "objective": {
+                "EncounterObjectGuid": "ff3cb25c-4bd9-4343-be9a-be14fa22718c"
+            },
+            "title": "Ensure Primary Asset Recovery unit survives",
+            "description": "The objective to keep the unit which is carrying the primary target alive. Player will fail if it is destroyed.",
+            "isPrimary": true,
+            "OnSuccessResults": [],
+            "OnFailureResults": []
+        },
+        {
+            "objective": {
+                "EncounterObjectGuid": "b8e94728-f1b4-4c2b-a4b3-6716dd48e721"
+            },
+            "title": "Recover the pirate agent by securing the Secondary Designated Area.",
+            "description": "The secondary and optional objective to secure the second rescue target.",
+            "isPrimary": false,
+            "OnSuccessResults": [
+                {
+                    "Scope": "Company",
+                    "Requirements": null,
+                    "AddedTags": {
+                        "items": [],
+                        "tagSetSourceFile": ""
+                    },
+                    "RemovedTags": {
+                        "items": [],
+                        "tagSetSourceFile": ""
+                    },
+                    "Stats": [
+                        {
+                            "typeString": "System.Single",
+                            "name": "ContractBonusRewardPct",
+                            "value": "0.1",
+                            "set": false,
+                            "valueConstant": null
+                        }
+                    ],
+                    "Actions": [],
+                    "ForceEvents": [],
+                    "TemporaryResult": false,
+                    "ResultDuration": 0
+                }
+            ],
+            "OnFailureResults": []
+        },
+        {
+            "objective": {
+                "EncounterObjectGuid": "5a848ea1-535c-42e2-b125-bb8d2a9d633d"
+            },
+            "title": "Hidden KILL OBJECTIVE for OpFor2",
+            "description": "Hidden KILL OBJECTIVE for autocomplete of mission",
+            "isPrimary": false,
+            "OnSuccessResults": [
+                {
+                    "Scope": "Company",
+                    "Requirements": null,
+                    "AddedTags": {
+                        "items": [],
+                        "tagSetSourceFile": ""
+                    },
+                    "RemovedTags": {
+                        "items": [],
+                        "tagSetSourceFile": ""
+                    },
+                    "Stats": [
+                        {
+                            "typeString": "System.Single",
+                            "name": "ContractBonusRewardPct",
+                            "value": "0.1",
+                            "set": false,
+                            "valueConstant": null
+                        }
+                    ],
+                    "Actions": [],
+                    "ForceEvents": [],
+                    "TemporaryResult": false,
+                    "ResultDuration": 0
+                }
+            ],
+            "OnFailureResults": []
+        },
+        {
+            "objective": {
+                "EncounterObjectGuid": "a9f1746b-e990-4c8f-90be-3c4f229da58f"
+            },
+            "title": "Ensure Secondary Asset Recovery unit survives",
+            "description": "The objective to keep the unit which is carrying the secondary target alive. The player can fail this objective.",
+            "isPrimary": false,
+            "OnSuccessResults": [
+                {
+                    "Scope": "Company",
+                    "Requirements": null,
+                    "AddedTags": {
+                        "items": [],
+                        "tagSetSourceFile": ""
+                    },
+                    "RemovedTags": {
+                        "items": [],
+                        "tagSetSourceFile": ""
+                    },
+                    "Stats": [
+                        {
+                            "typeString": "System.Single",
+                            "name": "ContractBonusRewardPct",
+                            "value": "0.1",
                             "set": false,
                             "valueConstant": null
                         }
@@ -235,7 +317,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "We're coming up on the target facility, Commander.",
+                    "words": "The facility is located in this region, Commander. Move into the area and the data will begin transmitting automatically.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -245,13 +327,13 @@
                     "selectedCastDefId": "castDef_DariusDefault",
                     "emote": "Default",
                     "audioName": "NONE",
-                    "cameraFocusGuid": "",
+                    "cameraFocusGuid": "a85da736-7a2e-4cc6-aff3-feb9d73fc7e1",
                     "cameraDistance": "Far",
                     "cameraHeight": "Default",
                     "revealRadius": -1
                 },
                 {
-                    "words": "There it is. Move up, secure the location, and pick up the agent.",
+                    "words": "The pirate agent is in hiding in a different facility, here. We don't have to recover him if it looks too dangerous.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -261,13 +343,13 @@
                     "selectedCastDefId": "castDef_DariusDefault",
                     "emote": "Default",
                     "audioName": "NONE",
-                    "cameraFocusGuid": "",
+                    "cameraFocusGuid": "ef65cf21-ed27-4d27-89eb-14aa4da61e93",
                     "cameraDistance": "Far",
                     "cameraHeight": "Default",
                     "revealRadius": -1
                 },
                 {
-                    "words": "Get her to the evac zone, and get the hell out of there.",
+                    "words": "Once you've got the data, head to the extraction point for pickup.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -283,7 +365,7 @@
                     "revealRadius": -1
                 },
                 {
-                    "words": "Good luck, Commander. Oliveira out.",
+                    "words": "Good hunting, Commander.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -308,7 +390,23 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "The agent is away. Good work, Commander. Let's go get paid.",
+                    "words": "Commander, you've <i>got</i> to take a peek and see what show it is. If it's <i>Rough Riders</i>...",
+                    "wordsColor": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                    },
+                    "selectedCastDefId": "castDef_YangDefault",
+                    "emote": "Default",
+                    "audioName": "NONE",
+                    "cameraFocusGuid": "",
+                    "cameraDistance": "Far",
+                    "cameraHeight": "Default",
+                    "revealRadius": -1
+                },
+                {
+                    "words": "Never mind, Yang.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -333,7 +431,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "I'm pulling the plug, Commander. No way to salvage this mess.",
+                    "words": "We have to pull out, Commander. There's no way to salvage this situation.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -358,7 +456,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "The agent is on her way out. Hold position until she's safely aboard, and then get out of there.",
+                    "words": "That's the spot. Hold position, Commander.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -483,7 +581,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "We've lost the data, Commander. We'll send in a recovery team later; for now, focus on getting that agent to safety.",
+                    "words": "Dammit. Secondary target is down. Focus on the primary target.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -548,7 +646,7 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "ec9d2280-ca9a-4d90-8a20-963d8a4c0a39"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "UNDEFINED",
                         "unitDefId": "",
@@ -581,7 +679,7 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "ebc06b6a-c5a8-4165-95ce-480bcf335570"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "UNDEFINED",
                         "unitDefId": "",
@@ -614,7 +712,7 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "d50f1e9d-0a0b-4dc8-9a06-a33233aaa8a1"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "UNDEFINED",
                         "unitDefId": "",
@@ -647,7 +745,7 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "461141c2-f956-49a5-b2c6-6f951b957a94"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "UNDEFINED",
                         "unitDefId": "",
@@ -718,7 +816,7 @@
                 "lanceTagSet": {
                     "items": [
                         "lance_type_battle",
-                        "lance_type_notallvehicles"
+                        "lance_type_mech"
                     ],
                     "tagSetSourceFile": "tags/LanceTags"
                 },
@@ -738,7 +836,7 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "250eaaa4-6cbf-4ae2-bf23-dd8ab2fa0883"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "mechDef_InheritLance",
@@ -771,7 +869,7 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "3033608e-9551-4c83-96d5-74946b8e4ea8"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "mechDef_InheritLance",
@@ -804,7 +902,7 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "420c7662-0f08-4687-ad60-9134038f9ca6"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "mechDef_InheritLance",
@@ -837,7 +935,7 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "6e366cb6-fb37-44d5-94f1-8ca595d1e8aa"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "mechDef_InheritLance",
@@ -877,7 +975,7 @@
                 "lanceTagSet": {
                     "items": [
                         "lance_type_support",
-                        "lance_type_notallvehicles"
+                        "lance_type_mech"
                     ],
                     "tagSetSourceFile": "tags/LanceTags"
                 },
@@ -897,7 +995,7 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "34c6b3c4-c466-47d4-af9c-2804a6e57fb5"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "mechDef_InheritLance",
@@ -930,7 +1028,7 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "d086cbbd-6a84-4452-9ac1-fc8536531959"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "mechDef_InheritLance",
@@ -963,7 +1061,7 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "ce16d609-ecb3-448a-a887-cc1b1544cc2b"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "mechDef_InheritLance",
@@ -996,7 +1094,7 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "0e94c058-66e2-461b-aaf2-d23345bc2a7f"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "mechDef_InheritLance",
