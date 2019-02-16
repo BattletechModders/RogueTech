@@ -32,6 +32,9 @@ new fields
 								  if not set hit generator will be choosed by weapon type.
 								  if weapon define has tag "wr-clustered_shots", "Cluster" hit generator will be forced. 
   "DirectFireModifier" : -10.0, Accuracy modifier if weapon can strike directly
+  "DamageOnJamming": true/false, - if true on jamm weapon will be damaged
+  "FlatJammingChance": 1.0, - Chance of jamming weapon after fire. 1.0 is jamm always. Unjamming logic implemented as in WeaponRealizer
+  "DisableClustering": true/false - if true ProjectilesPerShot > 1 will affect only visual nor damage. If omitted consider as true.
 	"Modes": array of modes for weapon
 	[{
 		"Id": "x4",  - Must be unique per weapon
@@ -72,7 +75,11 @@ new fields
 		"DistantVariance": 0.3, - Distance damage variance as implemented in WeaponRealizer
 		"DistantVarianceReversed": false, - Set is distance damage variance is reversed
 		"Cooldown": 2, - number of rounds weapon will be unacceptable after fire this mode
-		"AIHitChanceCap": 0.3 - AI will choose mode with minimal delta |current toHit with this mode - AIHitChanceCap|
+		"AIHitChanceCap": 0.3, - AI will choose mode with minimal delta |current toHit with this mode - AIHitChanceCap|
+		"DamageOnJamming": true/false, - if true on jamm weapon will be damaged
+		"DamageMultiplier":2.0, - damage multiplier for this mode effective value will be Weapon.DamagePerShot*Ammo.DamageMultiplier*Mode.DamageMultiplier rounded
+									to nearest integer. If omitted assumed to be 1.0
+		"AlwaysIndirectVisuals": false, if true missiles will always plays indirect visuals, even if direct line of sight exists
 	}]
   
   
@@ -127,7 +134,12 @@ Ammo definition
    "DamageVariance": 20, - Simple damage variance as implemented in WeaponRealizer
    "DistantVariance": 0.3, - Distance damage variance as implemented in WeaponRealizer
    "DistantVarianceReversed": false - Set is distance damage variance is reversed
-   
+   "DamageMultiplier":0.1667, - damage multiplier for this mode effective value will be Weapon.DamagePerShot*Ammo.DamageMultiplier*Mode.DamageMultiplier rounded
+								to nearest integer. If omitted assumed to be 1.0.
+								I can't use existing "ArmorDamageModifier" and "ISDamageModifier" cause 
+								  1) it is unknown what damage must be displayed in HUD
+								  2) it is difficult separate damage at place of impact 
+   "AlwaysIndirectVisuals": false, if true missiles will always plays indirect visuals, even if direct line of sight exists
    "HeatGeneratedModifier" : 1,
    "ArmorDamageModifier" : 1,
    "ISDamageModifier" : 1,
@@ -250,77 +262,77 @@ add trigger to ammo cycling. If click detected on right side of weapon slot orig
 	Prefix
 add check on DisplayWeapon == null if so original method not invoking.
 
-!BattleTech.Weapon.DamagePerShot getter
-	Prefix
-add per ammo modification. If modification is done original method not invoked.
+BattleTech.Weapon.DamagePerShot getter
+	Postfix
+add per ammo/mode modification
 
-!BattleTech.Weapon.HeatDamagePerShot getter
-	Prefix
-add per ammo modification. If modification is done original method not invoked.
+BattleTech.Weapon.HeatDamagePerShot getter
+	Postfix
+add per ammo/mode modification
 
-!BattleTech.Weapon.get_ShotsWhenFired
-	Prefix
-add per ammo modification. If modification is done original method not invoked.
+BattleTech.Weapon.get_ShotsWhenFired
+	Postfix
+add per ammo/mode modification
 
-!BattleTech.Weapon.get_ProjectilesPerShot:
-	Prefix
-add per ammo modification. If modification is done original method not invoked.
+BattleTech.Weapon.get_ProjectilesPerShot:
+	Postfix
+add per ammo/mode modification
 
-!BattleTech.Weapon.get_CriticalChanceMultiplier:
-	Prefix
-add per ammo modification. If modification is done original method not invoked.
+BattleTech.Weapon.get_CriticalChanceMultiplier:
+	Postfix
+add per ammo/mode modification
 
-!BattleTech.Weapon.get_AccuracyModifier:
-	Prefix
-add per ammo modification. If modification is done original method not invoked.
+BattleTech.Weapon.get_AccuracyModifier:
+	Postfix
+add per ammo/mode modification
 
-!BattleTech.Weapon.get_MinRange:
-	Prefix
-add per ammo modification. If modification is done original method not invoked.
+BattleTech.Weapon.get_MinRange:
+	Postfix
+add per ammo/mode modification
 
-!BattleTech.Weapon.get_MaxRange:
-	Prefix
-add per ammo modification. If modification is done original method not invoked.
+BattleTech.Weapon.get_MaxRange:
+	Postfix
+add per ammo/mode modification
 
-!BattleTech.Weapon.get_ShortRange:
-	Prefix
-add per ammo modification. If modification is done original method not invoked.
+BattleTech.Weapon.get_ShortRange:
+	Postfix
+add per ammo/mode modification
 
-!BattleTech.Weapon.get_MediumRange:
-	Prefix
-add per ammo modification. If modification is done original method not invoked.
+BattleTech.Weapon.get_MediumRange:
+	Postfix
+add per ammo/mode modification
 
-!BattleTech.Weapon.get_LongRange:
-	Prefix
-add per ammo modification. If modification is done original method not invoked.
+BattleTech.Weapon.get_LongRange:
+	Postfix
+add per ammo/mode modification
 
-!BattleTech.Weapon.get_HeatGenerated:
-	Prefix
-add per ammo modification. If modification is done original method not invoked.
+BattleTech.Weapon.get_HeatGenerated:
+	Postfix
+add per ammo/mode modification
 
-!BattleTech.Weapon.get_IndirectFireCapable:
-	Prefix
-add per ammo modification. If modification is done original method not invoked.
+BattleTech.Weapon.get_IndirectFireCapable:
+	Postfix
+add per ammo/mode modification
 
-!BattleTech.Weapon.get_AOECapable:
-	Prefix
-add per ammo modification. If modification is done original method not invoked.
+BattleTech.Weapon.get_AOECapable:
+	Postfix
+add per ammo/mode modification
 
-!BattleTech.Weapon.Instability:
-	Prefix
-add per ammo modification. If modification is done original method not invoked.
+BattleTech.Weapon.Instability:
+	Postfix
+add per ammo/mode modification
 
-!BattleTech.Weapon.get_WillFire:
-	Prefix
-add per ammo modification. If modification is done original method not invoked.
+BattleTech.Weapon.get_WillFire:
+	Postfix
+add per ammo/mode modification
 
-!BattleTech.Weapon.RefireModifier getter
-	Prefix
-add per ammo modification. If modification is done original method not invoked.
+BattleTech.Weapon.RefireModifier getter
+	Postfix
+add per ammo/mode modification
 	
-!BattleTech.MechComponent.UIName getter:
-	Prefix:
-add per ammo modification. If modification is done original method not invoked.
+BattleTech.MechComponent.UIName getter:
+	Postfix
+add per ammo/mode modification
 
 BattleTech.WeaponRepresentation.Init:
 	Postfix
