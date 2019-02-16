@@ -1,15 +1,16 @@
 {
-    "ID": "DestroyBase_CeaseAndDesist",
-    "contractName": "Cease and Desist",
+    "ID": "DestroyBase_Pirate_HideTheEvidence_Hard",
+    "contractName": "Leave No Trace",
     "contractDisplayStyle": "BaseCampaignNormal",
-    "difficulty": 2,
+    "difficulty": 8,
     "difficultyUIModifier": 0,
     "weight": 1,
     "scope": "STANDARD",
     "finalDifficulty": 0,
-    "shortDescription": "We have reliable information that a remote {TEAM_TAR.FactionDef.Demonym} laboratory is attempting to reverse-engineer sensitive {TEAM_EMP.FactionDef.Demonym} technology in violation of the usage license. They have failed to respond to our communications that they cease and desist these unlawful operations. Therefore, we authorize you to execute the license termination clause upon that facility.",
-    "longDescription": "The contract does not specify any retrieval, Commander. We are to bring the base down and destroy the tech with it.",
-    "salvagePotential": 12,
+    "representativeCastDefIDOverride": null,
+    "shortDescription": "One of our sources inside a {TEAM_TAR.FactionDef.Demonym} law enforcement facility just reported some alarming news. Somehow, the authorities have gotten their filthy hands on one of our accountants, and they're interrogating him for all our business secrets right now. That's not something we're willing to tolerate. We can't take any chances on this one, Commander. We need you to flatten that facility.",
+    "longDescription": "It never occurred to me that 'accountant to pirates' would be a particularly risky position. Makes sense, I suppose.",
+    "salvagePotential": 28,
     "requirementList": [
         {
             "Scope": "StarSystem",
@@ -23,21 +24,15 @@
             },
             "RequirementComparisons": [
                 {
-                    "obj": "Employer.IsOwner",
-                    "op": "Equal",
-                    "val": 0,
-                    "valueConstant": null
-                },
-                {
-                    "obj": "Target.AuriganPirates",
-                    "op": "Equal",
-                    "val": 0,
-                    "valueConstant": null
-                },
-                {
                     "obj": "Employer.AuriganPirates",
                     "op": "Equal",
-                    "val": 0,
+                    "val": 1,
+                    "valueConstant": null
+                },
+                {
+                    "obj": "Target.IsOwner",
+                    "op": "Equal",
+                    "val": 1,
                     "valueConstant": null
                 }
             ]
@@ -69,8 +64,8 @@
             "contractObjective": {
                 "EncounterObjectGuid": "6f5f8d17-70ed-44a8-acc0-ccf9258925aa"
             },
-            "title": "Destroy Enemy Structures and Escape",
-            "description": "Destroy Enemy Structures",
+            "title": "Destroy Enemy Structures and Extract Safely",
+            "description": "Destroy Enemy Structures and Extract Safely",
             "isPrimary": true,
             "forPlayer": "Player1",
             "objectiveGuids": [
@@ -87,7 +82,7 @@
                 "EncounterObjectGuid": "3ac1476d-5ab0-436b-aa68-e1a5436e796f"
             },
             "title": "Destroy the Facility",
-            "description": "",
+            "description": "The objective to destroy the targeted buildings.",
             "isPrimary": true,
             "OnSuccessResults": [],
             "OnFailureResults": []
@@ -97,7 +92,7 @@
                 "EncounterObjectGuid": "979864d1-7d84-4797-b032-696a157deed8"
             },
             "title": "Destroy Base Garrison",
-            "description": "",
+            "description": "The primary objective to destroy the garrison / defenders of the base.",
             "isPrimary": false,
             "OnSuccessResults": [
                 {
@@ -115,7 +110,7 @@
                         {
                             "typeString": "System.Single",
                             "name": "ContractBonusRewardPct",
-                            "value": "0.25",
+                            "value": "0.1",
                             "set": false,
                             "valueConstant": null
                         }
@@ -169,7 +164,7 @@
                 "EncounterObjectGuid": "ea4504c3-8dcc-4049-bff2-784c423f0aa8"
             },
             "title": "Destroy Enemy Reinforcements",
-            "description": "",
+            "description": "The objective to eliminate enemy reinforcements who attack.",
             "isPrimary": false,
             "OnSuccessResults": [
                 {
@@ -205,7 +200,7 @@
                 "EncounterObjectGuid": "3a753f8c-2d38-4ea6-9812-c9c169cd3545"
             },
             "title": "Get to the evac zone",
-            "description": "",
+            "description": "The objective for the player to extract their units.",
             "isPrimary": true,
             "OnSuccessResults": [],
             "OnFailureResults": []
@@ -219,7 +214,7 @@
             "encounterChunk": {
                 "EncounterObjectGuid": "a5257151-5269-4222-9a0d-31001a70fe22"
             },
-            "enableChunkFromContract": false,
+            "enableChunkFromContract": true,
             "requirementList": []
         }
     ],
@@ -270,14 +265,14 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "Commander, we're here to shut down a research base.",
+                    "words": "THIS IS AN AUTOMATED WARNING. THIS IS A SECURE FACILITY. WITHDRAW OR YOU WILL BE FIRED ON.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
                         "b": 1,
                         "a": 1
                     },
-                    "selectedCastDefId": "castDef_DariusDefault",
+                    "selectedCastDefId": "castDef_Computer",
                     "emote": "Default",
                     "audioName": "NONE",
                     "cameraFocusGuid": "",
@@ -286,23 +281,23 @@
                     "revealRadius": -1
                 },
                 {
-                    "words": "Approach the base and destroy the designated buildings.",
+                    "words": "THE SYSTEM AUTHORITIES HAVE BEEN NOTIFIED OF YOUR INTRUSION.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
                         "b": 1,
                         "a": 1
                     },
-                    "selectedCastDefId": "castDef_DariusDefault",
+                    "selectedCastDefId": "castDef_Computer",
                     "emote": "Default",
                     "audioName": "NONE",
-                    "cameraFocusGuid": "40decd4d-427d-4f2e-8fc7-fc379ae4bbc2",
+                    "cameraFocusGuid": "",
                     "cameraDistance": "Far",
                     "cameraHeight": "Default",
                     "revealRadius": -1
                 },
                 {
-                    "words": "Be wary of the base defenders, and watch for any additional patrols in the area. Good hunting, Commander.",
+                    "words": "That could mean reinforcements, Commander. Keep your eyes peeled.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -327,14 +322,14 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "All contract targets eliminated. This was a good day's work, Commander.",
+                    "words": "That was a hell of a show down there, Commander. I especially liked the part where the buildings went 'boom'.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
                         "b": 1,
                         "a": 1
                     },
-                    "selectedCastDefId": "castDef_DariusDefault",
+                    "selectedCastDefId": "castDef_SumireDefault",
                     "emote": "Default",
                     "audioName": "NONE",
                     "cameraFocusGuid": "",
@@ -352,7 +347,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "We'll have to report this as a mission failure, Commander.",
+                    "words": "Commander, I don't know what happened down there, but we need to extract, <i>now</i>.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -377,14 +372,14 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "They've got multiple units protecting this facility. Be careful not to get caught in an ambush.",
+                    "words": "Yeah, I'm seeing some movement out there, Commander. Guessing that's the reinforcements they mentioned.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
                         "b": 1,
                         "a": 1
                     },
-                    "selectedCastDefId": "castDef_DariusDefault",
+                    "selectedCastDefId": "castDef_SumireDefault",
                     "emote": "Default",
                     "audioName": "NONE",
                     "cameraFocusGuid": "",
@@ -507,6 +502,7 @@
     "expirationTimeOverride": -1,
     "negotiatedSalary": 1,
     "negotiatedSalvage": 0,
+    "excludedFromProceduralGeneration": false,
     "player1Team": {
         "encounterLayerData": {
             "EncounterObjectGuid": "ca92ce11-36c5-40d1-ac17-2559e1d3bcc9"
@@ -711,8 +707,8 @@
                 "lanceDefId": "Tagged",
                 "lanceTagSet": {
                     "items": [
-                        "lance_type_cavalry",
-                        "lance_type_notallvehicles"
+                        "lance_type_battle",
+                        "lance_type_mech"
                     ],
                     "tagSetSourceFile": "tags/LanceTags"
                 },
@@ -721,9 +717,7 @@
                     "tagSetSourceFile": "tags/LanceTags"
                 },
                 "spawnEffectTags": {
-                    "items": [
-                        "spawn_poorly_maintained_50"
-                    ],
+                    "items": [],
                     "tagSetSourceFile": "tags/SpawnEffectTags"
                 },
                 "lanceDifficultyAdjustment": 0,
@@ -881,9 +875,7 @@
                     "tagSetSourceFile": "tags/LanceTags"
                 },
                 "spawnEffectTags": {
-                    "items": [
-                        "spawn_poorly_maintained_50"
-                    ],
+                    "items": [],
                     "tagSetSourceFile": "tags/SpawnEffectTags"
                 },
                 "lanceDifficultyAdjustment": 0,
@@ -897,7 +889,7 @@
                         "customUnitName": "",
                         "customHeraldryDefId": "",
                         "unitType": "Turret",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "turretDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -930,7 +922,7 @@
                         "customUnitName": "",
                         "customHeraldryDefId": "",
                         "unitType": "Turret",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "turretDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -963,7 +955,7 @@
                         "customUnitName": "",
                         "customHeraldryDefId": "",
                         "unitType": "Turret",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "turretDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -996,7 +988,7 @@
                         "customUnitName": "",
                         "customHeraldryDefId": "",
                         "unitType": "Turret",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "turretDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -1032,7 +1024,8 @@
                 "lanceDefId": "Tagged",
                 "lanceTagSet": {
                     "items": [
-                        "lance_type_fire"
+                        "lance_type_cavalry",
+                        "lance_type_mech"
                     ],
                     "tagSetSourceFile": "tags/LanceTags"
                 },
