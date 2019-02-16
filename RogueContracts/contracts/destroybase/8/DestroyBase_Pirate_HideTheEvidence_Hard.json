@@ -1,16 +1,43 @@
 {
-    "ID": "DestroyBase_Pirate_HideTheEvidence",
-    "contractName": "Hide the Evidence",
+    "ID": "DestroyBase_Pirate_HideTheEvidence_Hard",
+    "contractName": "Leave No Trace",
     "contractDisplayStyle": "BaseCampaignNormal",
     "difficulty": 8,
     "difficultyUIModifier": 0,
     "weight": 1,
     "scope": "STANDARD",
     "finalDifficulty": 0,
-    "shortDescription": "We had a few associates go missing recently, and where should they happen to turn up but a {TEAM_TAR.FactionDef.Demonym} black site? We have to assume they're being interrogated right now. Normally, we'd be extremely concerned for their welfare and we'd try to rescue them, but in this case it seems likely they're beyond rescue. We need you to level that black site, to ensure any secrets they've spilled are erased.",
-    "longDescription": "No honor among thieves, I suppose.",
-    "salvagePotential": 20,
-    "requirementList": [],
+    "representativeCastDefIDOverride": null,
+    "shortDescription": "One of our sources inside a {TEAM_TAR.FactionDef.Demonym} law enforcement facility just reported some alarming news. Somehow, the authorities have gotten their filthy hands on one of our accountants, and they're interrogating him for all our business secrets right now. That's not something we're willing to tolerate. We can't take any chances on this one, Commander. We need you to flatten that facility.",
+    "longDescription": "It never occurred to me that 'accountant to pirates' would be a particularly risky position. Makes sense, I suppose.",
+    "salvagePotential": 28,
+    "requirementList": [
+        {
+            "Scope": "StarSystem",
+            "RequirementTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+            },
+            "ExclusionTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+            },
+            "RequirementComparisons": [
+                {
+                    "obj": "Employer.AuriganPirates",
+                    "op": "Equal",
+                    "val": 1,
+                    "valueConstant": null
+                },
+                {
+                    "obj": "Target.IsOwner",
+                    "op": "Equal",
+                    "val": 1,
+                    "valueConstant": null
+                }
+            ]
+        }
+    ],
     "OnContractSuccessResults": [],
     "OnContractFailureResults": [],
     "contractType": "DestroyBase",
@@ -187,7 +214,7 @@
             "encounterChunk": {
                 "EncounterObjectGuid": "a5257151-5269-4222-9a0d-31001a70fe22"
             },
-            "enableChunkFromContract": false,
+            "enableChunkFromContract": true,
             "requirementList": []
         }
     ],
@@ -238,7 +265,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "THIS IS AN AUTOMATED WARNING. YOU ARE ENTERING A RESTRICTED AREA. WITHDRAW OR YOU WILL BE FIRED ON.",
+                    "words": "THIS IS AN AUTOMATED WARNING. THIS IS A SECURE FACILITY. WITHDRAW OR YOU WILL BE FIRED ON.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -254,14 +281,14 @@
                     "revealRadius": -1
                 },
                 {
-                    "words": "I don't know, Commander. They seem really serious. Maybe we should--",
+                    "words": "THE SYSTEM AUTHORITIES HAVE BEEN NOTIFIED OF YOUR INTRUSION.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
                         "b": 1,
                         "a": 1
                     },
-                    "selectedCastDefId": "castDef_SumireDefault",
+                    "selectedCastDefId": "castDef_Computer",
                     "emote": "Default",
                     "audioName": "NONE",
                     "cameraFocusGuid": "",
@@ -270,14 +297,14 @@
                     "revealRadius": -1
                 },
                 {
-                    "words": "I'm kidding! I'm kidding. Let's wreck some stuff.",
+                    "words": "That could mean reinforcements, Commander. Keep your eyes peeled.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
                         "b": 1,
                         "a": 1
                     },
-                    "selectedCastDefId": "castDef_SumireDefault",
+                    "selectedCastDefId": "castDef_DariusDefault",
                     "emote": "Default",
                     "audioName": "NONE",
                     "cameraFocusGuid": "dafd0d98-c88a-4f90-b137-4fe5ed94ebbb",
@@ -295,14 +322,14 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "Anybody still inside that facility is not going to be doing much talking anytime soon, Commander.",
+                    "words": "That was a hell of a show down there, Commander. I especially liked the part where the buildings went 'boom'.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
                         "b": 1,
                         "a": 1
                     },
-                    "selectedCastDefId": "castDef_DariusDefault",
+                    "selectedCastDefId": "castDef_SumireDefault",
                     "emote": "Default",
                     "audioName": "NONE",
                     "cameraFocusGuid": "",
@@ -345,14 +372,14 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "They've got multiple units protecting this facility, careful not to get caught in an ambush.",
+                    "words": "Yeah, I'm seeing some movement out there, Commander. Guessing that's the reinforcements they mentioned.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
                         "b": 1,
                         "a": 1
                     },
-                    "selectedCastDefId": "castDef_DariusDefault",
+                    "selectedCastDefId": "castDef_SumireDefault",
                     "emote": "Default",
                     "audioName": "NONE",
                     "cameraFocusGuid": "",
@@ -475,6 +502,7 @@
     "expirationTimeOverride": -1,
     "negotiatedSalary": 1,
     "negotiatedSalvage": 0,
+    "excludedFromProceduralGeneration": false,
     "player1Team": {
         "encounterLayerData": {
             "EncounterObjectGuid": "ca92ce11-36c5-40d1-ac17-2559e1d3bcc9"
@@ -680,7 +708,7 @@
                 "lanceTagSet": {
                     "items": [
                         "lance_type_battle",
-                        "lance_type_notallvehicles"
+                        "lance_type_mech"
                     ],
                     "tagSetSourceFile": "tags/LanceTags"
                 },
@@ -996,7 +1024,8 @@
                 "lanceDefId": "Tagged",
                 "lanceTagSet": {
                     "items": [
-                        "lance_type_fire"
+                        "lance_type_cavalry",
+                        "lance_type_mech"
                     ],
                     "tagSetSourceFile": "tags/LanceTags"
                 },
