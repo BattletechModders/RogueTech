@@ -1,15 +1,15 @@
 {
-    "ID": "Assassinate_InsurrectionInterception",
-    "contractName": "Insurrection Interception",
+    "ID": "Assassinate_Pirate_CodeOfSilence_Hard",
+    "contractName": "Vendetta",
     "contractDisplayStyle": "BaseCampaignNormal",
-    "difficulty": 2,
+    "difficulty": 8,
     "difficultyUIModifier": 0,
     "weight": 1,
     "scope": "STANDARD",
     "finalDifficulty": 0,
-    "shortDescription": "For months, we've had trouble with people here in {TGT_SYSTEM.name} being riled up by talk of insurrection, rebellion, independence. Based on top {TEAM_EMP.FactionDef.Demonym} analysts' reports, we believe there's a {TEAM_TAR.FactionDef.Demonym} propagandist in the area, stirring up discontent. We've set up a security net to capture her. But we can't cover every possible exit from our net and could use an extra Lance of 'Mechs. If she tries to slip through your assigned territory, turn her vehicle to slag.",
-    "longDescription": "I've negotiated a major bump if we DO end up finding the propagandist and eliminating her, as well as a danger-pay bonus if she has any escorts and we eliminate them as well.",
-    "salvagePotential": 8,
+    "shortDescription": "There's a {TEAM_TAR.FactionDef.Demonym} MechWarrior here on {TGT_SYSTEM.name}, involved in keeping the peace. He helped out with some of our operations, and in turn we kept him supplied with things he couldn't get on the open market, if you know what I mean. But he's started talking to the authorities, and making threats about exposing our business. We want you to put a stop to that. He's probably gonna try to make a break for it. Don't let him escape.",
+    "longDescription": "I suppose the target probably should have known what he was getting into. Lay down with dogs...",
+    "salvagePotential": 20,
     "requirementList": [
         {
             "Scope": "StarSystem",
@@ -18,22 +18,20 @@
                 "tagSetSourceFile": ""
             },
             "ExclusionTags": {
-                "items": [
-                    "planet_other_empty"
-                ],
+                "items": [],
                 "tagSetSourceFile": ""
             },
             "RequirementComparisons": [
                 {
-                    "obj": "Employer.IsOwner",
+                    "obj": "Employer.AuriganPirates",
                     "op": "Equal",
                     "val": 1,
                     "valueConstant": null
                 },
                 {
-                    "obj": "Employer.AuriganPirates",
+                    "obj": "Target.IsOwner",
                     "op": "Equal",
-                    "val": 0,
+                    "val": 1,
                     "valueConstant": null
                 }
             ]
@@ -65,8 +63,8 @@
             "contractObjective": {
                 "EncounterObjectGuid": "edafecaf-4d24-4304-98b1-9e645898c6ee"
             },
-            "title": "Destroy the Propagandist and Escape",
-            "description": "",
+            "title": "Destroy the Target and Escape",
+            "description": "Destroy the Target, clear area of additional forces Enemies, and Escape",
             "isPrimary": true,
             "forPlayer": "Player1",
             "objectiveGuids": [
@@ -84,7 +82,7 @@
                 "EncounterObjectGuid": "650245ff-89b6-4c0f-9b72-31db69cf109c"
             },
             "title": "Destroy Supporting Enemy Forces",
-            "description": "",
+            "description": "The secondary objective to destroy an additional lance supporting the assassination target.",
             "isPrimary": false,
             "OnSuccessResults": [
                 {
@@ -102,7 +100,7 @@
                         {
                             "typeString": "System.Single",
                             "name": "ContractBonusRewardPct",
-                            "value": "0.25",
+                            "value": "0.1",
                             "set": false,
                             "valueConstant": null
                         }
@@ -120,7 +118,7 @@
                 "EncounterObjectGuid": "ef887928-31f2-4001-a1d8-44f8dc5f5bf8"
             },
             "title": "Eliminate Ambushers",
-            "description": "",
+            "description": "Destroy enemy Ambushers before extraction",
             "isPrimary": false,
             "OnSuccessResults": [
                 {
@@ -155,9 +153,19 @@
             "objective": {
                 "EncounterObjectGuid": "504a1169-8858-4f3d-be89-48eb39f54e4d"
             },
-            "title": "Destroy {TEAM_TAR.FactionDef.Demonym} Propagandist",
-            "description": "",
+            "title": "Destroy {TEAM_TAR.FactionDef.Demonym} MechWarrior",
+            "description": "The objective to destroy the Assassination Target.",
             "isPrimary": true,
+            "OnSuccessResults": [],
+            "OnFailureResults": []
+        },
+        {
+            "objective": {
+                "EncounterObjectGuid": "c12ee829-2a99-4ed4-be8a-5f16407a2361"
+            },
+            "title": "Destroy Assassination Lance Hidden Objective",
+            "description": "Hidden Objective for AutoComplete, Destroy Assassination Lance",
+            "isPrimary": false,
             "OnSuccessResults": [
                 {
                     "Scope": "Company",
@@ -174,7 +182,7 @@
                         {
                             "typeString": "System.Single",
                             "name": "ContractBonusRewardPct",
-                            "value": "0.2",
+                            "value": "0.1",
                             "set": false,
                             "valueConstant": null
                         }
@@ -189,20 +197,10 @@
         },
         {
             "objective": {
-                "EncounterObjectGuid": "c12ee829-2a99-4ed4-be8a-5f16407a2361"
-            },
-            "title": "Destroy Assassination Lance Hidden Objective",
-            "description": "Hidden Objective for AutoComplete, Destroy Assassination Lance",
-            "isPrimary": false,
-            "OnSuccessResults": [],
-            "OnFailureResults": []
-        },
-        {
-            "objective": {
                 "EncounterObjectGuid": "cc0880d2-2c42-40ef-98ed-33fe754c96e6"
             },
-            "title": "Get to the Evac Zone",
-            "description": "",
+            "title": "Get to the evac zone",
+            "description": "The objective for the player to escape and complete the mission.",
             "isPrimary": true,
             "OnSuccessResults": [],
             "OnFailureResults": []
@@ -211,8 +209,8 @@
             "objective": {
                 "EncounterObjectGuid": "3a4192be-2a53-4383-94ac-19c08883ea5f"
             },
-            "title": "Stop the Target from Escaping",
-            "description": "",
+            "title": "Prevent the Target from Escaping",
+            "description": "The objective to stop the assassination target for escaping, the player will fail if the target escapes.",
             "isPrimary": true,
             "OnSuccessResults": [],
             "OnFailureResults": []
@@ -224,7 +222,33 @@
             "title": "Armor Breached",
             "description": "Armor of the Target is breached.",
             "isPrimary": false,
-            "OnSuccessResults": [],
+            "OnSuccessResults": [
+                {
+                    "Scope": "Company",
+                    "Requirements": null,
+                    "AddedTags": {
+                        "items": [],
+                        "tagSetSourceFile": ""
+                    },
+                    "RemovedTags": {
+                        "items": [],
+                        "tagSetSourceFile": ""
+                    },
+                    "Stats": [
+                        {
+                            "typeString": "System.Single",
+                            "name": "ContractBonusRewardPct",
+                            "value": "0.1",
+                            "set": false,
+                            "valueConstant": null
+                        }
+                    ],
+                    "Actions": [],
+                    "ForceEvents": [],
+                    "TemporaryResult": false,
+                    "ResultDuration": 0
+                }
+            ],
             "OnFailureResults": []
         }
     ],
@@ -236,7 +260,7 @@
             "encounterChunk": {
                 "EncounterObjectGuid": "19e8fa2a-f850-42f0-a067-15fcafcc8123"
             },
-            "enableChunkFromContract": false,
+            "enableChunkFromContract": true,
             "requirementList": []
         },
         {
@@ -295,7 +319,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "Commander, this is the region we've been asked to patrol as part of the net.",
+                    "words": "This is where the target should be patrolling, Commander.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -311,7 +335,7 @@
                     "revealRadius": 0
                 },
                 {
-                    "words": "Our employers need us to keep an eye out for the propaganda agent, as this is one possible escape route she might take.",
+                    "words": "From here, you should be able to get eyes on him.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -327,7 +351,7 @@
                     "revealRadius": 0
                 },
                 {
-                    "words": "If she's in this region, we need to find her and take her out. Then we can evac.",
+                    "words": "Once he's down, head to the evac point for your pickup.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -352,7 +376,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "Mission accomplished. The {TEAM_TAR.FactionDef.Demonym} propagandist is dead.",
+                    "words": "Well done, Commander. Let's go get paid.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -377,7 +401,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "That's a failure. I'll notify {TEAM_EMP.FactionDef.ShortName} to shift their net and try to catch her elsewhere.",
+                    "words": "This is a disaster. Commander, I'm pulling the plug on this operation.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -402,7 +426,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "Target eliminated. We can clean up any remaining hostiles, or head for the evac zone.",
+                    "words": "He's down, Commander. I think that sent the proper message. Finish cleaning up, or head for the evac LZ.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -747,9 +771,7 @@
                     "tagSetSourceFile": "tags/LanceTags"
                 },
                 "spawnEffectTags": {
-                    "items": [
-                        "spawn_poorly_maintained_25"
-                    ],
+                    "items": [],
                     "tagSetSourceFile": "tags/SpawnEffectTags"
                 },
                 "lanceDifficultyAdjustment": 0,
@@ -907,9 +929,7 @@
                     "tagSetSourceFile": "tags/LanceTags"
                 },
                 "spawnEffectTags": {
-                    "items": [
-                        "spawn_poorly_maintained_25"
-                    ],
+                    "items": [],
                     "tagSetSourceFile": "tags/SpawnEffectTags"
                 },
                 "lanceDifficultyAdjustment": 0,
@@ -1067,9 +1087,7 @@
                     "tagSetSourceFile": "tags/LanceTags"
                 },
                 "spawnEffectTags": {
-                    "items": [
-                        "spawn_poorly_maintained_50"
-                    ],
+                    "items": [],
                     "tagSetSourceFile": "tags/SpawnEffectTags"
                 },
                 "lanceDifficultyAdjustment": 0,
@@ -1080,7 +1098,7 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "6cd3107e-0f9d-4809-ab8c-fb30faf4cd80"
                         },
-                        "customUnitName": "Propagandist",
+                        "customUnitName": "Target MechWarrior",
                         "customHeraldryDefId": "",
                         "unitType": "Mech",
                         "unitDefId": "mechDef_InheritLance",
