@@ -1,15 +1,15 @@
 {
-    "ID": "CaptureEscort_SaveThePrototype_Hard",
-    "contractName": "Scientific Emergency",
+    "ID": "CaptureEscort_Pirate_UnexpectedGuests",
+    "contractName": "Unexpected Guests",
     "contractDisplayStyle": "BaseCampaignNormal",
-    "difficulty": 8,
-    "difficultyUIModifier": 2,
+    "difficulty": 5,
+    "difficultyUIModifier": 0,
     "weight": 1,
     "scope": "STANDARD",
     "finalDifficulty": 0,
-    "shortDescription": "A surprise attack by {TEAM_TAR.FactionDef.ShortName} resulted in the capture of our research facility here in the {TGT_SYSTEM.name} system. At the last moment, when all was lost, a convoy managed to escape with an extremely valuable prototype. With the facility in enemy hands, we need this prototype to reconstruct the work of our scientists. Intercept the convoy before the enemy does, and escort our researchers to safety.",
-    "longDescription": "Commander, this is definitely a contract where speed is of the essence. I expect that if {TEAM_TAR.FactionDef.Demonym} forces locate the asset, they'll rally reinforcements from the captured research facility.",
-    "salvagePotential": 20,
+    "shortDescription": "I can't imagine why our {TEAM_TAR.FactionDef.Demonym} friends didn't let us know they'd invited a bunch of wealthy merchants to visit. We'd have prepared a welcoming party for them at the spaceport. Instead, it looks like we're going to have to meet up with them out in the field. Luckily, we know where they are; the drivers of their little convoy were pretty happy with the payoff we gave them. We want you to go down there and escort our new friends to safety.",
+    "longDescription": "There's got to be more to this story than just a simple kidnapping, Commander.",
+    "salvagePotential": 24,
     "requirementList": [
         {
             "Scope": "StarSystem",
@@ -18,22 +18,20 @@
                 "tagSetSourceFile": ""
             },
             "ExclusionTags": {
-                "items": [
-                    "planet_other_empty"
-                ],
+                "items": [],
                 "tagSetSourceFile": ""
             },
             "RequirementComparisons": [
                 {
-                    "obj": "Employer.IsOwner",
+                    "obj": "Employer.AuriganPirates",
                     "op": "Equal",
                     "val": 1,
                     "valueConstant": null
                 },
                 {
-                    "obj": "Employer.AuriganPirates",
+                    "obj": "Target.IsOwner",
                     "op": "Equal",
-                    "val": 0,
+                    "val": 1,
                     "valueConstant": null
                 }
             ]
@@ -65,8 +63,8 @@
             "contractObjective": {
                 "EncounterObjectGuid": "7db60871-d4ae-423d-9c82-fb40ca083372"
             },
-            "title": "Escort Convoy to Safety and Escape",
-            "description": "",
+            "title": "Capture Convoy Rally Point, Escort Convoy to Safety, and Extract Safely",
+            "description": "Capture Convoy Rally Point, Escort Convoy to Safety, and Extract Safely",
             "isPrimary": true,
             "forPlayer": "Player1",
             "objectiveGuids": [
@@ -86,7 +84,7 @@
                 "EncounterObjectGuid": "acf88d1b-d09f-4db7-b7ea-9f48a426075c"
             },
             "title": "Destroy Enemy Blocking Force",
-            "description": "",
+            "description": "The objective to destroy the force of enemies which will try adn stop the player from reaching the rally point.",
             "isPrimary": false,
             "OnSuccessResults": [
                 {
@@ -122,7 +120,7 @@
                 "EncounterObjectGuid": "5f01500a-5087-4a6f-86d8-9e0450bc93eb"
             },
             "title": "Secure the Convoy Rally Point",
-            "description": "",
+            "description": "Secure the Convoy Rally Point",
             "isPrimary": true,
             "OnSuccessResults": [],
             "OnFailureResults": []
@@ -132,7 +130,7 @@
                 "EncounterObjectGuid": "371c6027-0869-4e03-8d70-192a8f441d70"
             },
             "title": "Destroy Enemy Reinforcements",
-            "description": "",
+            "description": "The objective to destroy enemy units which will attempt to block the convoy from reaching its destination.",
             "isPrimary": false,
             "OnSuccessResults": [
                 {
@@ -168,7 +166,7 @@
                 "EncounterObjectGuid": "d4d20990-fbeb-4f6e-81b7-7e94bba6a2c5"
             },
             "title": "Escort Friendly units to their Destination",
-            "description": "",
+            "description": "Escort Friendly units to their Destination",
             "isPrimary": true,
             "OnSuccessResults": [],
             "OnFailureResults": []
@@ -178,7 +176,7 @@
                 "EncounterObjectGuid": "7da17c55-5d39-4a36-836c-69219a8ddeab"
             },
             "title": "Ensure All Convoy units survive during Extraction",
-            "description": "",
+            "description": "Protect the all units in Convoy during Extraction, suffering no losses.",
             "isPrimary": false,
             "OnSuccessResults": [
                 {
@@ -216,7 +214,33 @@
             "title": "Hidden Objective: Destroy hunter lance for mission complete.",
             "description": "Hidden Objective: Destroy hunter lance for mission complete.",
             "isPrimary": false,
-            "OnSuccessResults": [],
+            "OnSuccessResults": [
+                {
+                    "Scope": "Company",
+                    "Requirements": null,
+                    "AddedTags": {
+                        "items": [],
+                        "tagSetSourceFile": ""
+                    },
+                    "RemovedTags": {
+                        "items": [],
+                        "tagSetSourceFile": ""
+                    },
+                    "Stats": [
+                        {
+                            "typeString": "System.Single",
+                            "name": "ContractBonusRewardPct",
+                            "value": "0.1",
+                            "set": false,
+                            "valueConstant": null
+                        }
+                    ],
+                    "Actions": [],
+                    "ForceEvents": [],
+                    "TemporaryResult": false,
+                    "ResultDuration": 0
+                }
+            ],
             "OnFailureResults": []
         },
         {
@@ -224,7 +248,7 @@
                 "EncounterObjectGuid": "3a4192be-2a53-4383-94ac-19c08883ea5f"
             },
             "title": "Get to the Evac Zone",
-            "description": "",
+            "description": "The objective to escape with all the player units.",
             "isPrimary": true,
             "OnSuccessResults": [],
             "OnFailureResults": []
@@ -234,7 +258,7 @@
                 "EncounterObjectGuid": "9820d0c3-79e7-4456-b55c-ca820e82fae2"
             },
             "title": "Protect Convoy while Dropship Arrives",
-            "description": "",
+            "description": "USELESS OBJECTIVE",
             "isPrimary": true,
             "OnSuccessResults": [],
             "OnFailureResults": []
@@ -244,7 +268,7 @@
                 "EncounterObjectGuid": "fa7458f8-c940-480c-91ce-4605fa8965d4"
             },
             "title": "Protect Convoy as they Embark on the Dropship",
-            "description": "",
+            "description": "USELESS OBJECTIVE",
             "isPrimary": true,
             "OnSuccessResults": [],
             "OnFailureResults": []
@@ -258,7 +282,7 @@
             "encounterChunk": {
                 "EncounterObjectGuid": "68ac8364-8ea0-408a-949e-3e395ed8655b"
             },
-            "enableChunkFromContract": true,
+            "enableChunkFromContract": false,
             "requirementList": []
         },
         {
@@ -347,23 +371,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "We have friendly units about to come under fire.",
-                    "wordsColor": {
-                        "r": 1,
-                        "g": 1,
-                        "b": 1,
-                        "a": 1
-                    },
-                    "selectedCastDefId": "castDef_DariusDefault",
-                    "emote": "Default",
-                    "audioName": "NONE",
-                    "cameraFocusGuid": "",
-                    "cameraDistance": "Far",
-                    "cameraHeight": "Default",
-                    "revealRadius": -1
-                },
-                {
-                    "words": "Move to their position and provide support.",
+                    "words": "The convoy has stopped at a nearby facility, Commander.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -379,7 +387,7 @@
                     "revealRadius": -1
                 },
                 {
-                    "words": "Get them to safety, keep them intact, and get out there when it's done.",
+                    "words": "Let's move up and get them underway to their extract point.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -404,7 +412,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "Excellent work, Commander. The convoy carrying the prototype safely reached extraction. We're on our way in for a pick up.",
+                    "words": "Whoever they were, they're in the hands of our friends, now.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -429,7 +437,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "Pack it in, Commander. Nothing left to do here.",
+                    "words": "Dammit. We're going to have to report this one as a loss, Commander.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -479,7 +487,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "More contacts on the sensors, Commander. Looks like they're sending in additional units to destroy the convoy.",
+                    "words": "More contacts, Commander. These folks are shooting to kill. Who the hell is on these transports, anyway?",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -489,7 +497,7 @@
                     "selectedCastDefId": "castDef_DariusDefault",
                     "emote": "Default",
                     "audioName": "NONE",
-                    "cameraFocusGuid": "8a365fc5-d25b-4d64-afbb-4ebf423721a9",
+                    "cameraFocusGuid": "",
                     "cameraDistance": "Far",
                     "cameraHeight": "Default",
                     "revealRadius": -1
@@ -529,23 +537,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "Good, it looks you've secured the area around the convoy's position. They are ready to make their way towards the extraction point now. Keep them alive!",
-                    "wordsColor": {
-                        "r": 1,
-                        "g": 1,
-                        "b": 1,
-                        "a": 1
-                    },
-                    "selectedCastDefId": "castDef_DariusDefault",
-                    "emote": "Default",
-                    "audioName": "NONE",
-                    "cameraFocusGuid": "d3d75b1e-ace5-43e8-b037-79a2dd2b3d4e",
-                    "cameraDistance": "Far",
-                    "cameraHeight": "Default",
-                    "revealRadius": -1
-                },
-                {
-                    "words": "Keep in mind that the convoy will try to stay near you for protection. Continue advancing to get them to the extract point!",
+                    "words": "Just got word from the driver of the lead vehicle. They're ready to move out.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -635,7 +627,7 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "0b3955ca-f9bb-4248-b042-344210df6d67"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "mechDef_None",
@@ -668,7 +660,7 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "29ac85b0-2d90-4b75-8842-6dc335ad4097"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "mechDef_None",
@@ -701,7 +693,7 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "b5a4f55e-c235-4ac0-a13c-e5f067910690"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "mechDef_None",
@@ -734,7 +726,7 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "b7c6ecec-c420-4b9d-ada4-4a63140429e9"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "mechDef_None",
@@ -814,15 +806,12 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "d7109e5f-7e09-4a9d-98a7-a0bf651532e6"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
-                        "unitType": "Vehicle",
-                        "unitDefId": "UseLance",
+                        "unitType": "Mech",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
-                            "items": [
-                                "unit_noncombatant",
-                                "unit_vehicle"
-                            ],
+                            "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
@@ -850,15 +839,12 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "bdb37cd1-dff5-4740-b361-d5d1aebfd452"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
-                        "unitType": "Vehicle",
-                        "unitDefId": "UseLance",
+                        "unitType": "Mech",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
-                            "items": [
-                                "unit_noncombatant",
-                                "unit_vehicle"
-                            ],
+                            "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
@@ -886,15 +872,12 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "5a7f08f5-3ceb-467e-b857-b3fc1874d016"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
-                        "unitType": "Vehicle",
-                        "unitDefId": "UseLance",
+                        "unitType": "Mech",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
-                            "items": [
-                                "unit_vehicle",
-                                "unit_weaponless"
-                            ],
+                            "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
@@ -922,15 +905,12 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "938ab06b-304b-4f45-ba86-abcaa0fe01c5"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
-                        "unitType": "Vehicle",
-                        "unitDefId": "UseLance",
+                        "unitType": "Mech",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
-                            "items": [
-                                "unit_noncombatant",
-                                "unit_vehicle"
-                            ],
+                            "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
@@ -975,8 +955,7 @@
                 "lanceDefId": "Tagged",
                 "lanceTagSet": {
                     "items": [
-                        "lance_type_recon",
-                        "lance_type_notallvehicles"
+                        "lance_type_recon"
                     ],
                     "tagSetSourceFile": "tags/LanceTags"
                 },
@@ -996,10 +975,10 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "fd5f61a5-e486-4fc3-9ee2-a67dc92fd4cc"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -1029,10 +1008,10 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "d06e441e-ff0e-4501-91e5-d1ec62626de4"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -1062,10 +1041,10 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "0ebae4a1-02d0-4b1d-b38b-1f4b10ad9d9d"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -1095,10 +1074,10 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "8420632e-4e7a-48f8-a03f-3495e5df31da"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -1134,8 +1113,7 @@
                 "lanceDefId": "Tagged",
                 "lanceTagSet": {
                     "items": [
-                        "lance_type_battle",
-                        "lance_type_notallvehicles"
+                        "lance_type_battle"
                     ],
                     "tagSetSourceFile": "tags/LanceTags"
                 },
@@ -1155,10 +1133,10 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "c70a6142-0f12-43d4-944f-8c28d28bcfa0"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -1188,10 +1166,10 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "08e55906-bfe4-4f55-b52c-95203e7ce021"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -1221,10 +1199,10 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "0a013d23-76f2-41cd-b705-797c69be9190"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -1254,10 +1232,10 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "a2300a0e-7465-4c75-9a78-e8b0a8d33417"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -1293,8 +1271,7 @@
                 "lanceDefId": "Tagged",
                 "lanceTagSet": {
                     "items": [
-                        "lance_type_fire",
-                        "lance_type_notallvehicles"
+                        "lance_type_fire"
                     ],
                     "tagSetSourceFile": "tags/LanceTags"
                 },
@@ -1314,10 +1291,10 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "3f8a51bd-2db0-4473-86bc-435ea1125391"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -1347,10 +1324,10 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "d1a04f94-29bc-4221-a4bf-793443c06165"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -1380,10 +1357,10 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "de2c80f9-e0dc-4592-85de-b75d5c0cff28"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -1413,10 +1390,10 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "82af386a-9635-4d01-a120-4a7b9bee8f3f"
                         },
-                        "customUnitName": null,
+                        "customUnitName": "",
                         "customHeraldryDefId": null,
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
