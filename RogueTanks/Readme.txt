@@ -33,10 +33,16 @@ unit_hunter,
 
 Changelog:
 
+ToDo check RL carrier legality. Especially Space use.
+
 0.0.0
 
 Adapted RL carriers to the new AI only multi shot RL that keeps them from dumping every rocket at once,
 Added Inferno focused Light RL carrier
+Rifle Carrier Update:
+    Added Mixed Rifle Carrier,
+    Adjusted Medium Rifle Carrier
+minor fixes and tweaks
 
 5.2.9
 
