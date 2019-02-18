@@ -33,6 +33,25 @@ unit_hunter,
 
 Changelog:
 
+ToDo check RL carrier legality. Especially Space use.
+
+0.0.0
+
+Adapted RL carriers to the new AI only multi shot RL that keeps them from dumping every rocket at once,
+Added Inferno focused Light RL carrier
+Rifle Carrier Update:
+    Added Mixed Rifle Carrier,
+    Adjusted Medium Rifle Carrier
+minor fixes and tweaks
+
+5.2.9
+
+Added Ku IFV as a clan APC,
+Added two Indra APC for clans,
+Removed clans from normal APC faction lists,
+Added Battle Computers to Mobile HQs and Gulltoprs.
+Minor fixes
+
 5.2.3
 
 Set Bolas to use MLRS prefab (modern armor with rockets on top)
