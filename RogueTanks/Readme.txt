@@ -34,6 +34,18 @@ unit_hunter,
 
 Changelog:
 
+5.5.4
+
+Added:
+    Clan Ares (Plasma),
+    Clan Epona B,
+    Clan Epona C,
+    Clan Zorya (Ammo)
+    Clan Oro,
+    Clan Oro (HAG)
+
+Minor updates for Ares, Epona and Bellona, Turhan, Balrog
+
 5.4.3
 
 Added Bardiche Heavy Strike Tank,
