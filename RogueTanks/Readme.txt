@@ -34,6 +34,12 @@ unit_hunter,
 
 Changelog:
 
+0.0.0
+
+Misc ammo updates,
+Misc minor fixes,
+Added Candiru - a light primitive tank smaller than the Izula.
+
 5.5.4
 
 Added:
