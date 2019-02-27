@@ -34,6 +34,12 @@ unit_hunter,
 
 Changelog:
 
+0.0.0
+
+Mars Update,
+Added new Streak LRM version,
+Fixed updated others.
+
 5.6.0
 
 Misc ammo updates,
