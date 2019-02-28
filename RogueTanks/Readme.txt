@@ -34,11 +34,17 @@ unit_hunter,
 
 Changelog:
 
-0.0.0
+5.7.1 - 2/27/2019
 
-Mars Update,
-Added new Streak LRM version,
-Fixed updated others.
+Added a Clan Demolisher variant
+
+5.7.0
+
+Mars Update
+    Added new Streak LRM version,
+    Fixed updated others.
+
+Moooaar ammo tweaks; lower tech ammo on some early units, fancier ammo on higher tier things, a double bin or two for things with more than two tons of standard.
 
 5.6.0
 
