@@ -6,7 +6,17 @@ CustomAmmoCategoriesSettings.json
 {
 "debugLog":true, - enable debug log 
 "modHTTPServer":false, - enable debug http server
-"modHTTPListen":"http://localhost:65080" - debug http server url, if enabled
+"modHTTPListen":"http://localhost:65080/" - debug http server url, if enabled
+"forbiddenRangeEnable:true, - enable or disable forbidden range mechanic, if false ForbiddenRange always counts as 0 
+"ClusterAIMult":0.2, - AI use this value to calculate cluster weapon mode/ammo (more projectiles, less damage per projectile) prefer coefficient 
+                            in case of low target armor and/or exposed locations
+"PenetrateAIMult":0.4 - AI use this value to calculate penetrate weapon mode/ammo (less projectiles, more damage per projectile) prefer coefficient 
+                            in case of full target armor and no exposed locations
+"JamAIAvoid":1.0, - if higher than 1.0, AI will more avoid jamming modes/ammo. 0.0 will result division by zero exception. 
+                      0 < X < 1.0f AI will prefer jamming modes/ammo (i don't know why it needs, but you can)
+"DamageJamAIAvoid":2.0, - if higher than 1.0, AI will more avoid modes/ammo that damage weapon on jamming. 0.0 will result division by zero exception. 
+                      0 < X < 1.0f AI will prefer damage jamming modes/ammo (i don't know why it needs, but you can)
+					  NOTE: if AI has exposed locations, it will lose all fear and will not avoid dangerous modes and ammo.
 }
 
 CustomAmmoCategories.json
@@ -34,7 +44,32 @@ new fields
   "DirectFireModifier" : -10.0, Accuracy modifier if weapon can strike directly
   "DamageOnJamming": true/false, - if true on jamm weapon will be damaged
   "FlatJammingChance": 1.0, - Chance of jamming weapon after fire. 1.0 is jamm always. Unjamming logic implemented as in WeaponRealizer
+  "GunneryJammingBase": 5, - 
+  "GunneryJammingMult": 0.05, - this values uses to alter flat jamming chance by pilot skills 
+                                  formula effective jamming chance = FlatJammingChance + (GunneryJammingBase - Pilot Gunnery)* GunneryJammingMult
+								  if FlatJammingChance = 1.0, GunneryJammingBase = 6, GunneryJammingMult = 0.1, GunnerySkill = 10
+								  result = 1.0 + (6-10)*0.1 = 0.6
+								  GunneryJammingBase if ommited in weapon def., ammo def. and mode def. assumed as 5. 
   "DisableClustering": true/false - if true ProjectilesPerShot > 1 will affect only visual nor damage. If omitted consider as true.
+  "NotUseInMelee": true, - if true even AntiPersonel weapon type will not fire on melee attack, AI aware. 
+  "AlternateDamageCalc": false, - if true alternate damage calc formula will be implemented 
+                              DamagePerShot = (damage from weaponDef + (damage from ammo) + (damage from mode)*(damage multiplayer from ammo)*(damage multiplayer from mode)*(damage with effects)/(damage from weaponDef)
+  "AlternateHeatDamageCalc": false, - same as  AlternateDamageCalc but for heat 
+  "AMSHitChance": 0.0, - if this weapon is AMS, this value is AMS efficiency, 
+                         if this weapon is missile launcher this value shows how difficult to intercept missile with AMS. Negative value - is harder, 
+						 positive is easer.
+  "IsAMS": false, - if true this weapon acts as AMS. It will not fire during normal attack. But tries to intercept incomming missiles.
+                    rude model: every 10 meters of missile fly path there is check, if it in range of any AMS. 
+					If so, AMS have AMS.AMSHitChance + missile.AMSHitChance chance to shoot missile down. Avaible shoots count of AMS is decrementing.
+					If AMS have no shoots avaible it will not shoot. At end of turn AMS shoots count set to AMS.ShootsWhenFired.
+					If missile intercepted, no further checks will be made. 
+					Commentary: as you can see, if missile fly path is short chance to be shooted down is less. 
+					If missiles is few, and fly path is long chance to be shooted down grows rapidly. 
+					AMS visual effect commentary: only two visual effects avaible for AMS: ballistic(autocannons) and laser(lasers). 
+					I had experimented with "WeaponEffect-Weapon_Laser_Small" and "WeaponEffect-Weapon_AC2" for LAMS ans AMS accordingly.
+					AMS can become jammed, have damage-on-jam option and so on. AMSHitChance and ShootsWhenFired can be updated in AMS ammo or mode.
+					AMS uses ammunition and heated while firing. Damage and on hit status effects will on be applied. 
+  "IsAAMS": false - if true, weapon acts as advanced AMS, it will fire all missiles from enemies in range, not only attacking.
 	"Modes": array of modes for weapon
 	[{
 		"Id": "x4",  - Must be unique per weapon
@@ -56,7 +91,7 @@ new fields
 		"MiddleRange": 0.0, This value will be added to MiddleRange (current weapon status effects will be used too)
 		"LongRange": 0.0, This value will be added to LongRange (current weapon status effects will be used too)
 			 NOTE: Range modifications not always displays correctly while viewing shooting arc, but hit chance and possibility calculated normally. 
-			 
+		"ForbiddenRange": 90, - weapon can't fire at all if range to target is less than this value
 		"HeatGenerated" : 0, This value will be added to HeatGenerated (current weapon status effects will be used too)
 		"RefireModifier" : 0, This value will be added to RefireModifier (current weapon status effects will be used too)
 		"Instability" : 0, This value will be added to Instability (current weapon status effects will be used too)
@@ -71,15 +106,27 @@ new fields
 									  if weapon define has tag "wr-clustered_shots", "Cluster" hit generator will be forced. 
 		"DirectFireModifier" : -10.0, Accuracy modifier if weapon can strike directly
 		"FlatJammingChance": 1.0, - Chance of jamming weapon after fire. 1.0 is jamm always. Unjamming logic implemented as in WeaponRealizer
+	    "GunneryJammingBase": 5, - 
+	    "GunneryJammingMult": 0.05, - this values uses to alter flat jamming chance by pilot skills 
+									  formula effective jamming chance = FlatJammingChance + (GunneryJammingBase - Pilot Gunnery)* GunneryJammingMult
+									  if FlatJammingChance = 1.0, GunneryJammingBase = 6, GunneryJammingMult = 0.1, GunnerySkill = 10
+									  result = 1.0 + (6-10)*0.1 = 0.6
+								      GunneryJammingBase if omitted in weapon def., ammo def. and mode def. assumed as 5. 
 		"DamageVariance": 20, - Simple damage variance as implemented in WeaponRealizer
 		"DistantVariance": 0.3, - Distance damage variance as implemented in WeaponRealizer
 		"DistantVarianceReversed": false, - Set is distance damage variance is reversed
 		"Cooldown": 2, - number of rounds weapon will be unacceptable after fire this mode
-		"AIHitChanceCap": 0.3, - AI will choose mode with minimal delta |current toHit with this mode - AIHitChanceCap|
-		"DamageOnJamming": true/false, - if true on jamm weapon will be damaged
+		"AIHitChanceCap": 0.3, - not used any more
+		"DamageOnJamming": true/false, - if true on jamming weapon will be damaged
 		"DamageMultiplier":2.0, - damage multiplier for this mode effective value will be Weapon.DamagePerShot*Ammo.DamageMultiplier*Mode.DamageMultiplier rounded
-									to nearest integer. If omitted assumed to be 1.0
+									to nearest integer. If omitted assumed to be 1.0. HeatDamagePerShot affected too. 
 		"AlwaysIndirectVisuals": false, if true missiles will always plays indirect visuals, even if direct line of sight exists
+		"AmmoCategory": "LRM", AmmoCategory can now be overridden by weapon mode. If setted as "NotSet" weapon wouldn't use any ammo. 
+		                       If weapon has mode with "NotSet" ammo category you will not see warnings in mechlab for this weapon, 
+							   even if you are not supply this weapon with ammo.
+		  "AMSHitChance": 0.0, - if this weapon is AMS, this value is AMS efficiency, 
+								 if this weapon is missile launcher this value shows how difficult to intercept missile with AMS. Negative value - is harder, 
+								 positive is easer.
 	}]
   
   
@@ -139,6 +186,9 @@ Ammo definition
 								I can't use existing "ArmorDamageModifier" and "ISDamageModifier" cause 
 								  1) it is unknown what damage must be displayed in HUD
 								  2) it is difficult separate damage at place of impact 
+   "AMSHitChance": 0.0, - if this weapon is AMS, this value is AMS efficiency, 
+                         if this weapon is missile launcher this value shows how difficult to intercept missile with AMS. Negative value - is harder, 
+						 positive is easer.
    "AlwaysIndirectVisuals": false, if true missiles will always plays indirect visuals, even if direct line of sight exists
    "HeatGeneratedModifier" : 1,
    "ArmorDamageModifier" : 1,
@@ -461,3 +511,4 @@ add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable cha
 LOFCache.UnitHasLOFToTarget:
 	Transpiler
 add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
+
