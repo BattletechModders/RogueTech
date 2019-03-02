@@ -8,7 +8,7 @@ Some units by LadyAlecto and Justin Kase
 RogueTanks Modules:
 
 RogueTanks - The Majority of RT's vehicles, things available widely in the IS and Periphery.
-PrimitiveTanks - Units mostly armed with Rifles, RL, MG, and basic 3025 weapons, only the most ragtag of insterstelar powers use these, they're often found in the hands of local militia and cash strapped mercs.
+PrimitiveTanks - Units mostly armed with Rifles, RL, MG, and basic 3025 weapons, only the most ragtag of interstellar powers use these, they're often found in the hands of local militia and cash strapped mercs.
 CLANK - Clan tanks with clan gear.
 PLANK - Units mostly armed with the odd pirate weapons cobbled together by people who probably shout "Witness Me!"
 
@@ -19,6 +19,7 @@ unit_noconvoy,
 unit_primitive,
 unit_carrier,
 unit_stealth,
+unit_predator
 
 unit_galleon,
 unit_behemoth,
@@ -33,16 +34,53 @@ unit_hunter,
 
 Changelog:
 
-ToDo check RL carrier legality. Especially Space use.
+5.7.1 - 2/27/2019
 
-0.0.0
+Added a Clan Demolisher variant
 
-Adapted RL carriers to the new AI only multi shot RL that keeps them from dumping every rocket at once,
-Added Inferno focused Light RL carrier
+5.7.0
+
+Mars Update
+    Added new Streak LRM version,
+    Fixed updated others.
+
+Moooaar ammo tweaks; lower tech ammo on some early units, fancier ammo on higher tier things, a double bin or two for things with more than two tons of standard.
+
+5.6.0
+
+Misc ammo updates,
+Many minor fixes,
+Added Candiru - a light primitive tank smaller than the Izula.
+Added Joust variants
+
+5.5.4
+
+Added:
+    Clan Ares (Plasma),
+    Clan Epona B,
+    Clan Epona C,
+    Clan Zorya (Ammo)
+    Clan Oro,
+    Clan Oro (HAG)
+
+Minor updates for Ares, Epona and Bellona, Turhan, Balrog
+
+5.4.3
+
+Added Bardiche Heavy Strike Tank,
+Special fluid guns for Ivan since it's become a meme,
+
+Rocket Carrier Update:
+    Rebuilt carriers to comply with overlooked space restrictions.
+    Adapted RL carriers to the new AI only multi shot RL that keeps them from dumping every rocket at once,
+    Added Inferno focused Light RL carrier
+    Added Heavy RL Carrier
+
 Rifle Carrier Update:
     Added Mixed Rifle Carrier,
     Adjusted Medium Rifle Carrier
-minor fixes and tweaks
+
+Many minor fixes and tweaks
 
 5.2.9
 
@@ -201,7 +239,7 @@ Adjustment pass on unit role tagging, mostly to mitigate some fallback spawning.
 
 4.0.1
 
-Fixed tags idenfitying carrier type vehicles and updated their threat level ratings.
+Fixed tags identifying carrier type vehicles and updated their threat level ratings.
 
 4.0.0 test
 
@@ -239,7 +277,7 @@ Added Myrmidon_INF
 
 Added Demolisher_Gauss,
 Added Demolisher_Primitive,
-Changed "MercenaryReviewBoard" faction tag to "mercenaryreviewboard" in all occurences so it will work right.
+Changed "MercenaryReviewBoard" faction tag to "mercenaryreviewboard" in all occurrences so it will work right.
 Removed illegal ATM3s and accidental IS Small Pulse Laser from PUMA_CLAN, replaced with SRM4_CLAN's
 
 3.5.8
