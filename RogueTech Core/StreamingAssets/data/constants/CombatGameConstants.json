@@ -34,7 +34,7 @@
 		"WalkHeat": 3,
 		"SprintHeat": 8,
 		"JumpHeatUnitSize": 6.5,
-		"JumpHeatPerUnit": 1.15,
+		"JumpHeatPerUnit": 0.9,
 		"JumpHeatMin": 3,
 		"EngineDamageHeat": 5,
 		"InternalHeatSinkCount": 0,
@@ -50,14 +50,14 @@
 		"ShowPeakHeat": false
 	},
 	"Visibility": {
-		"BaseSpotterDistance": 350.0,
+		"BaseSpotterDistance": 1.0,
 		"SpotterTacticsMultiplier": 0.0,
 		"RatioFullVis": 0.79,
 		"RatioObstructedVis": 0.41,
 		"MinRatioFromActors": 0.2,
 		"ShutDownVisibilityModifier": 0.0,
 		"ShutDownSignatureModifier": -0.5,
-		"BaseSensorDistance": 500.0,
+		"BaseSensorDistance": 1.0,
 		"UseAsymmetricalSensors": true,
 		"ShowExtendedBlipsBeforeContact": false,
 		"ExtendedSensorDistanceMultiplier": 1.0,
@@ -68,7 +68,7 @@
 		"NumSensorLockSteps": 1,
 		"SensorLockSingleStepEffect": {
 			"durationData": {
-				"duration": 2,
+				"duration": 3,
 				"ticksOnEndOfRound": true,
 				"stackLimit": 1
 			},
@@ -84,9 +84,9 @@
 				"Icon": "uixSvgIcon_action_sensorlock"
 			},
 			"statisticData": {
-				"statName": "ToHitThisActor",
-				"operation": "Float_Add",
-				"modValue": "-1.0",
+				"statName": "SensorSignatureModifier",
+				"operation": "Float_Multiply",
+				"modValue": "2.0",
 				"modType": "System.Single"
 			},
 			"nature": "Debuff"
@@ -94,14 +94,16 @@
 		"NumSensorLockImpairedEffects": 2,
 		"SensorsImpairedEffect": {
 			"durationData": {
-				"duration": 2,
+				"duration": 3,
 				"ticksOnActivations": true,
-				"useActivationsOfTarget": true
+				"useActivationsOfTarget": true,
+				"stackLimit": 1
 			},
 			"targetingData": {
 				"effectTargetType": "SingleTarget",
-				"showInTargetPreview": true,
-				"showInStatusPanel": true
+				"showInTargetPreview": false,
+				"showInStatusPanel": false,
+				"forceVisRebuild": true
 			},
 			"effectType": "StatisticEffect",
 			"Description": {
@@ -112,9 +114,9 @@
 			},
 			"nature": "Debuff",
 			"statisticData": {
-				"statName": "CriticalHitChanceReceivedMultiplier",
+				"statName": "SpottingVisibilityMultiplier",
 				"operation": "Float_Multiply",
-				"modValue": "1.5",
+				"modValue": "2.0",
 				"modType": "System.Single"
 			}
 		},
@@ -138,7 +140,7 @@
 			"statisticData": {
 				"statName": "SensorSignatureModifier",
 				"operation": "Float_Add",
-				"modValue": "0.75",
+				"modValue": "1.5",
 				"modType": "System.Single"
 			},
 			"nature": "Debuff"
@@ -204,10 +206,10 @@
 		"ToHitSelfStoodUp": 5,
 		"ToHitSelfArmMountedWeapon": -1,
 		"SensorLockStripsEvasivePips": true,
-		"SensorLockPipsStripped": 1,
+		"SensorLockPipsStripped": 2,
 		"ToHitMovingTargetDistances": [
-			10,
-			70,
+			30,
+			80,
 			140,
 			210,
 			280,
@@ -240,38 +242,38 @@
 			15
 		],
 		"ToHitMovingPipUMs": [
-			1,
 			2,
-			3,
-			5,
-			7,
-			9,
-			11,
-			13,
-			15,
+			4,
+			6,
+			8,
+			10,
+			12,
+			14,
+			16,
 			18,
-			21,
+			20,
+			22,
 			24,
-			27,
-			30,
-			35
+			26,
+			28,
+			30
 		],
 		"ToHitMovingTargetStrings": [
-			"1 EVASIVE charge: +1 Difficulty to hit this unit.",
-			"2 EVASIVE charges: +2 Difficulty to hit this unit.",
-			"3 EVASIVE charges: +3 Difficulty to hit this unit.",
-			"4 EVASIVE charges: +5 Difficulty to hit this unit.",
-			"5 EVASIVE charges: +7 Difficulty to hit this unit.",
-			"6 EVASIVE charges: +9 Difficulty to hit this unit.",
-			"7 EVASIVE charges: +11 Difficulty to hit this unit.",
-			"8 EVASIVE charges: +13 Difficulty to hit this unit.",
-			"9 EVASIVE charges: +15 Difficulty to hit this unit.",
-			"10 EVASIVE charges: +18 Difficulty to hit this unit.",
-			"11 EVASIVE charges: +21 Difficulty to hit this unit.",
+			"1 EVASIVE charge: +2 Difficulty to hit this unit.",
+			"2 EVASIVE charges: +4 Difficulty to hit this unit.",
+			"3 EVASIVE charges: +6 Difficulty to hit this unit.",
+			"4 EVASIVE charges: +8 Difficulty to hit this unit.",
+			"5 EVASIVE charges: +10 Difficulty to hit this unit.",
+			"6 EVASIVE charges: +12 Difficulty to hit this unit.",
+			"7 EVASIVE charges: +14 Difficulty to hit this unit.",
+			"8 EVASIVE charges: +16 Difficulty to hit this unit.",
+			"9 EVASIVE charges: +18 Difficulty to hit this unit.",
+			"10 EVASIVE charges: +20 Difficulty to hit this unit.",
+			"11 EVASIVE charges: +22 Difficulty to hit this unit.",
 			"12 EVASIVE charges: +24 Difficulty to hit this unit.",
-			"13 EVASIVE charges: +27 Difficulty to hit this unit.",
-			"14 EVASIVE charges: +30 Difficulty to hit this unit.",
-			"15 EVASIVE charges: +35 Difficulty to hit this unit."
+			"13 EVASIVE charges: +26 Difficulty to hit this unit.",
+			"14 EVASIVE charges: +28 Difficulty to hit this unit.",
+			"15 EVASIVE charges: +30 Difficulty to hit this unit."
 		],
 		"ToHitSelfWeaponDamaged": 2,
 		"ToHitSelfWeaponLocationDamagedMinor": 1,
