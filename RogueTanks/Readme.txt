@@ -34,6 +34,13 @@ unit_hunter,
 
 Changelog:
 
+5.7.5 - 3/1/2019
+
+Added Saracen and Saracen MRM,
+Adjusted ScimitarB's ammo to make it less redundant with Saracen
+Removed Rarity values that were randomly on some vehicles. I'm 90% sure they do nothing, but if they do it wasn't organized.
+Gave some vehicles proper movedefs that had vanilla ones.
+
 5.7.1 - 2/27/2019
 
 Added a Clan Demolisher variant
