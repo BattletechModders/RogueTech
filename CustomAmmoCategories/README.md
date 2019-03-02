@@ -71,6 +71,7 @@ new fields
 					AMS can become jammed, have damage-on-jam option and so on. AMSHitChance and ShootsWhenFired can be updated in AMS ammo or mode.
 					AMS uses ammunition and heated while firing. Damage and on hit status effects will on be applied. 
   "IsAAMS": false - if true, weapon acts as advanced AMS, it will fire all missiles from enemies in range, not only attacking.
+  "AMSImmune": false - if true, weapon missiles is immune to AMS and none AMS will try to intercept them.
 	"Modes": array of modes for weapon
 	[{
 		"Id": "x4",  - Must be unique per weapon
