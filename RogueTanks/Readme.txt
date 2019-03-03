@@ -42,6 +42,7 @@ Pegasus Update
     Renamed PEGASUSB to PEGASUS_SRM
     Minor Fixes,
     Minor tweaks
+Fixed scaling of Izula tank family    
 
 5.7.9 - 3/2/2019
 
