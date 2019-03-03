@@ -34,6 +34,19 @@ unit_hunter,
 
 Changelog:
 
+5.8.5
+
+Pegasus Update
+    Added Sealed and Sensor variants
+    Renamed PEGASUS_RT to PEGASUS_3058
+    Renamed PEGASUSB to PEGASUS_SRM
+    Minor Fixes,
+    Minor tweaks
+
+5.7.9 - 3/2/2019
+
+Added M.A.S.H trucks, original jsons by JK, using model in the CAB by various.
+
 5.7.5 - 3/1/2019
 
 Added Saracen and Saracen MRM,
