@@ -196,6 +196,21 @@ Ammo definition
    "ArmorDamageModifier" : 1,
    "ISDamageModifier" : 1,
    "CriticalDamageModifier" : 1,
+   "AOECapable" : false, - if true weapon will included in AOE damage calculations 
+   "AOERange": 100, - Area of effect range
+                   Notes: AOECapable will force AlwaysIndirectVisuals to true. 
+				             So it is good idea to use only missile weapon effects unless i've implement indirect visuals for ballistic effect.
+				          AOE projectiles always miss no matter toHit values, this is cause AOE dealt only AOE damage.
+						     So it is good idea to set -10 for AccuracyModifier to help AI understand fact that AoE weapon always inflicts damage.
+						  AOE heat dealt implementations is wrong and should not be used.
+						  Projectiles intercepted by AMS will not cause AOE damage.
+						  AOE to hit effect will be implemented to all targets in AoE range. 
+						  On fire weapon effects will be implemented to real target only
+						  Base point of AoE range calculations will be point where first projectile,
+						            (if weapon have ShotsWhenFired > 1) not intercepted by AMS, hits ground.
+						  It is recommended to use LRM5, LRM10, LRM15 or LRM20 as weapon subtype cause other subtypes have too huge spread when misses
+						  It is good idea to set ForbiddenRage for AoE weapon and set NotUseInMelee to true
+						  AOE weapon can't hit mech head, cause every headshot inflicts pilot injury. With fact AoE always dealt damage it will be imbalance. 
    "statusEffects" : [   - will be applied on weapon hit (only "OnHit" effectTriggerType)
         {
             "durationData" : {
