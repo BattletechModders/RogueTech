@@ -34,6 +34,14 @@ unit_hunter,
 
 Changelog:
 
+5.8.9
+
+Vedette Update
+    Renamed VedetteB to Vedette_AC2
+    Added Vedette_LIAO
+    Added Vedette_NETC
+    Minor faction and tagging tweaks
+
 5.8.5
 
 Pegasus Update
