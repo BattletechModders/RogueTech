@@ -34,6 +34,39 @@ unit_hunter,
 
 Changelog:
 
+5.9.3 HF - 3/4/2019
+
+Fixed typo in LBX Marsden II and changed filenames for additional clarity.
+
+5.9.3
+
+Renamed Zephyr to Zephyr_SRM2
+Renamed ZephyrB_RT to Zephyr
+Added Zephyr_C3I for Comstar/Blake
+Minor fixes and tweaks
+
+5.8.9
+
+Vedette Update
+    Renamed VedetteB to Vedette_AC2
+    Added Vedette_LIAO
+    Added Vedette_NETC
+    Minor faction and tagging tweaks
+
+5.8.5
+
+Pegasus Update
+    Added Sealed and Sensor variants
+    Renamed PEGASUS_RT to PEGASUS_3058
+    Renamed PEGASUSB to PEGASUS_SRM
+    Minor Fixes,
+    Minor tweaks
+Fixed scaling of Izula tank family    
+
+5.7.9 - 3/2/2019
+
+Added M.A.S.H trucks, original jsons by JK, using model in the CAB by various.
+
 5.7.5 - 3/1/2019
 
 Added Saracen and Saracen MRM,
