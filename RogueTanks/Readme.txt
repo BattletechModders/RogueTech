@@ -34,6 +34,10 @@ unit_hunter,
 
 Changelog:
 
+5.9.3 HF - 3/4/2019
+
+Fixed typo in LBX Marsden II and changed filenames for additional clarity.
+
 5.9.3
 
 Renamed Zephyr to Zephyr_SRM2
