@@ -54,6 +54,8 @@ Changed Ranger VV1 to Colo's BTR model
 Changed Marsden II to Colo's M1 Abrams model
 Gave Izula series Colo's Crusader model
 
+Added Savanha Master with model
+
 5.9.3 HF - 3/4/2019
 
 Fixed typo in LBX Marsden II and changed filenames for additional clarity.
