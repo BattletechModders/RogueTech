@@ -34,6 +34,10 @@ unit_hunter,
 
 Changelog:
 
+6.1.6
+
+Added Condor, Condor Flamer, Condor Liao, Condor Davion, Condor Laser, based on defs contributed by JK.
+
 6.1.1 3/5/2019
 
 Alacorn Model,
