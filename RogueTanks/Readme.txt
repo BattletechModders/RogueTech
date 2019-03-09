@@ -34,6 +34,52 @@ unit_hunter,
 
 Changelog:
 
+6.1.6
+
+Added Condor, Condor Flamer, Condor Liao, Condor Davion, Condor Laser, based on defs contributed by JK.
+
+6.1.1 3/5/2019
+
+Alacorn Model,
+Ares Model,
+Challenger Model - Also given to Ajax, and Brutus
+Devastator Model - Also given to Demolisher II's,
+Goblin Model,
+Heavy Carrier Model,
+Hetzer Model,
+J. Edgar model,
+Vedette Model,
+Zhukov Model,
+
+Changed Brutus to Bulldog Model
+
+Changed Ignis to Colo's Bradley model,
+Changed Ranger VV1 to Colo's BTR model
+Changed Marsden II to Colo's M1 Abrams model
+Gave Izula series Colo's Crusader model
+
+Added Savanha Master with model
+
+5.9.3 HF - 3/4/2019
+
+Fixed typo in LBX Marsden II and changed filenames for additional clarity.
+Fixed typo in Red October
+
+5.9.3
+
+Renamed Zephyr to Zephyr_SRM2
+Renamed ZephyrB_RT to Zephyr
+Added Zephyr_C3I for Comstar/Blake
+Minor fixes and tweaks
+
+5.8.9
+
+Vedette Update
+    Renamed VedetteB to Vedette_AC2
+    Added Vedette_LIAO
+    Added Vedette_NETC
+    Minor faction and tagging tweaks
+
 5.8.5
 
 Pegasus Update

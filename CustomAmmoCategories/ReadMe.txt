@@ -3,6 +3,12 @@ Unpack to Mods folder
 Settings 
 CustomAmmoCategoriesSettings.json
 
+click on right side of HUD weapon slot to switch mode (near hit chance)
+click on center of HUD weapon slot to switch ammo (near ammo count)
+ctrl+left click on weapon slot will eject current ammo 
+   NOTE: ammo can't be ejected if mech moved this round
+         after ejection mech can't jump and sprint until end of round
+
 {
 "debugLog":true, - enable debug log 
 "modHTTPServer":false, - enable debug http server
@@ -70,7 +76,23 @@ new fields
 					AMS can become jammed, have damage-on-jam option and so on. AMSHitChance and ShootsWhenFired can be updated in AMS ammo or mode.
 					AMS uses ammunition and heated while firing. Damage and on hit status effects will on be applied. 
   "IsAAMS": false - if true, weapon acts as advanced AMS, it will fire all missiles from enemies in range, not only attacking.
+  "AMSShootsEveryAttack": false, - if true AMS will not share AMS.ShootsWhenFired between all missile attacks this round. 
+                                       Every missile attack will cause AMS.ShootsWhenFired shoots. 
+								   if false AMS will shoot AMS.ShootsWhenFired per round
   "AMSImmune": false - if true, weapon missiles is immune to AMS and none AMS will try to intercept them.
+  "AOECapable" : false, - if true weapon will included in AOE damage calculations. If true set in weapon definition 
+                            all shoots will have AoE effect (even for energy weapon). If true, it can't be overridden by ammo.
+  "AOERange": 100, - Area of effect range. If AOECapable in weapon is set to true this value will be used. If AOECapable is true, it can't be overridden by ammo.
+  "AOEDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
+                            one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
+  "AOEHeatDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
+                            one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
+  "SpreadRange": 0, - Area of projectiles spread effect. If > 0 projectiles will include in spread calculations. Per weapon, ammo, mode values are additive.
+                         if used for missiles, and target have AMS it will fire no matter if it is not advanced and target is not primary.
+  "IFFDef" : "IFFComponentDefId", if not empty and target have component with such defId it will exclude form AoE and spread targets list. 
+                                   if not empty weapon owner will be excluded form AoE and spread targets list anyway even it has no suitable IFF component.
+								   supposed weapon have IFF transponder for own projectiles. If not empty ammo transponder has priority, than mode, and than weapon
+								   There is special transponder name "_IFFOffile" - if transponder defId set as IFFOffline it counts as have no transponder at all.
 	"Modes": array of modes for weapon
 	[{
 		"Id": "x4",  - Must be unique per weapon
@@ -128,6 +150,12 @@ new fields
 		  "AMSHitChance": 0.0, - if this weapon is AMS, this value is AMS efficiency, 
 								 if this weapon is missile launcher this value shows how difficult to intercept missile with AMS. Negative value - is harder, 
 								 positive is easer.
+	  "SpreadRange": 0, - Area of projectiles spread effect. If > 0 projectiles will include in spread calculations. Per weapon, ammo, mode values are additive.
+							 if used for missiles, and target have AMS it will fire no matter if it is not advanced and target is not primary.
+	  "IFFDef" : "IFFComponentDefId", if not empty and target have component with such defId it will exclude form AoE and spread targets list. 
+									   if not empty weapon owner will be excluded form AoE and spread targets list anyway even it has no suitable IFF component.
+									   supposed weapon have IFF transponder for own projectiles. If not empty ammo transponder has priority, than mode, and than weapon
+									   There is special transponder name "_IFFOffile" - if transponder defId set as IFFOffline it counts as have no transponder at all.
 	}]
   
   
@@ -195,6 +223,32 @@ Ammo definition
    "ArmorDamageModifier" : 1,
    "ISDamageModifier" : 1,
    "CriticalDamageModifier" : 1,
+   "AOECapable" : false, - if true shoots will be included in AOE damage calculations 
+   "AOERange": 100, - Area of effect range
+                   Notes: AOECapable will force AlwaysIndirectVisuals to true. 
+				             So it is good idea to use only missile weapon effects unless i've implement indirect visuals for ballistic effect.
+				          AOE projectiles always miss no matter toHit values, this is cause AOE dealt only AOE damage.
+						     So it is good idea to set -10 for AccuracyModifier to help AI understand fact that AoE weapon always inflicts damage.
+						  AOE shots can inflict heat damage. It value based on weapon heat damage per shot and decreasing linear by distance between target and impact base point.
+						  Projectiles intercepted by AMS will not cause AOE damage.
+						  AOE to hit effect will be implemented to all targets in AoE range. 
+						  On fire weapon effects will be implemented to real target only
+						  Base point of AoE range calculations will be point where first projectile,
+						            (if weapon have ShotsWhenFired > 1) not intercepted by AMS, hits ground.
+						  It is recommended to use LRM5, LRM10, LRM15 or LRM20 as weapon subtype cause other subtypes have too huge spread when misses
+						  It is good idea to set ForbiddenRage for AoE weapon and set NotUseInMelee to true
+						  AOE weapon can't hit mech head, cause every headshot inflicts pilot injury. With fact AoE always dealt damage it will be imbalance. 
+						  Damage variations for AoE weapon should not be used cause it will lead completely wrong result 
+  "AOEDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
+                            one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
+  "AOEHeatDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
+                            one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
+  "SpreadRange": 0, - Area of projectiles spread effect. If > 0 projectiles will include in spread calculations. Per weapon, ammo, mode values are additive.
+                         if used for missiles, and target have AMS it will fire no matter if it is not advanced and target is not primary.
+  "IFFDef" : "IFFComponentDefId", if not empty and target have component with such defId it will exclude form AoE and spread targets list. 
+                                   if not empty weapon owner will be excluded form AoE and spread targets list anyway even it has no suitable IFF component.
+								   supposed weapon have IFF transponder for own projectiles. If not empty ammo transponder has priority, than mode, and than weapon
+								   There is special transponder name "_IFFOffile" - if transponder defId set as "_IFFOffline" it counts as have no transponder at all.
    "statusEffects" : [   - will be applied on weapon hit (only "OnHit" effectTriggerType)
         {
             "durationData" : {
