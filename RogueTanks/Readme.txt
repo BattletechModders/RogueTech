@@ -42,7 +42,7 @@ Added Condor, Condor Flamer, Condor Liao, Condor Davion, Condor Laser, based on 
 
 Alacorn Model,
 Ares Model,
-Challenger Model - Also given to Ajax, and Brutus
+Challenger Model - Also given to Ajax
 Devastator Model - Also given to Demolisher II's,
 Goblin Model,
 Heavy Carrier Model,
