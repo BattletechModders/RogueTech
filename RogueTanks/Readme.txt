@@ -34,10 +34,12 @@ unit_hunter,
 
 Changelog:
 
-6.2.3
+6.2.4 - 3/11/2019
 
 Hetzer Update
     Added AC10, LRM, SRM, Laser, Scout, AP, UAC
+
+Added TBM20/LRM20 carrier.
 
 6.1.6
 
