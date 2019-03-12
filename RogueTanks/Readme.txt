@@ -34,6 +34,11 @@ unit_hunter,
 
 Changelog:
 
+6.2.3
+
+Hetzer Update
+    Added AC10, LRM, SRM, Laser, Scout, AP, UAC
+
 6.1.6
 
 Added Condor, Condor Flamer, Condor Liao, Condor Davion, Condor Laser, based on defs contributed by JK.
@@ -42,7 +47,7 @@ Added Condor, Condor Flamer, Condor Liao, Condor Davion, Condor Laser, based on 
 
 Alacorn Model,
 Ares Model,
-Challenger Model - Also given to Ajax, and Brutus
+Challenger Model - Also given to Ajax
 Devastator Model - Also given to Demolisher II's,
 Goblin Model,
 Heavy Carrier Model,
