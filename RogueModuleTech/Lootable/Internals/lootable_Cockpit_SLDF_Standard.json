@@ -5,54 +5,51 @@
                 "CategoryID": "Cockpit"
             }
         ],
-        "ArmorRepair": {
-            "ArmorTPCost": 0.9,
-            "ArmorCBCost": 0.8
+        "WorkOrderCosts": {
+            "Install": {
+                "TechCost": "[[Chassis.Tonnage]]/10",
+                "CBillCost": "[[Chassis.Tonnage]] * 1.1"
+            }
         },
         "BonusDescriptions": {
             "Bonuses": [
-                "Initiative: -1",
-                "NoEject",
-                "ArmorTPCost: -10%",
-                "ArmorCBCost: -20%",
+                "Health: +1",
+                "Initiative: +1",
                 "IsCockpit"
             ]
         },
         "InventorySorter": {
-            "SortKey": "00019"
+            "SortKey": "00202"
         },
         "Flags": {
             "flags": [
-                "default",
-                "not_broken",
-                "no_salvage",
-                "autorepair"
+                "not_broken"
             ]
-        },
-		"Lootable": {
-			"ItemID": "lootable_Cockpit_Primitive"
-		}
+        }
     },
+    "StatName": null,
+    "RelativeModifier": 0,
+    "AbsoluteModifier": 0,
     "Description": {
-        "Cost": 0,
-        "Rarity": 99,
-        "Purchasable": false,
-        "Manufacturer": "Generic",
-        "Model": "Primitive",
-        "UIName": "Primitive Cockpit",
-        "Id": "Gear_Cockpit_Primitive",
-        "Name": "Primitive Cockpit",
-        "Details": "The Primitive Cockpit is functionally similar to the modern BattleMech cockpit, but due to the bulkier components, it weighs five tons instead of three.  It lacks an ejection seat and the sensors are even worse than that of a standard IndustrialMech's",
-        "Icon": "uixSvgIcon_equipment_Cockpit"
+        "Cost": 170000,
+        "Rarity": 8,
+        "Purchasable": true,
+        "Manufacturer": "SLDF",
+        "Model": "Standard",
+        "UIName": "Cockpit SLDF",
+        "Id": "lootable_Cockpit_SLDF_Standard",
+        "Name": "SLDF Standard Cockpit  ",
+        "Details": "A StarLeague Defense Forces Standard Spec cockpit, complete with ballistic cooling suit.",
+        "Icon": "uixSvgIcon_equipment_Comms"
     },
-    "BonusValueA": "Bad Sensors|",
-    "BonusValueB": "Cannot Eject.",
+    "BonusValueA": "+1 Health/Resolve.",
+    "BonusValueB": "+20% Sensors/Sight",
     "ComponentType": "Upgrade",
     "ComponentSubType": "NotSet",
     "PrefabIdentifier": "",
     "BattleValue": 0,
     "InventorySize": 1,
-    "Tonnage": 2,
+    "Tonnage": 1,
     "AllowedLocations": "Head",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
@@ -92,7 +89,7 @@
                 "effectsPersistAfterDestruction": false,
                 "statName": "BaseInitiative",
                 "operation": "Int_Add",
-                "modValue": "1",
+                "modValue": "-1",
                 "modType": "System.Int32",
                 "additionalRules": "NotSet",
                 "targetCollection": "NotSet",
@@ -110,31 +107,60 @@
         },
         {
             "durationData": {
-                "duration": -1
+                "duration": -1,
+                "ticksOnActivations": false,
+                "useActivationsOfTarget": false,
+                "ticksOnEndOfRound": false,
+                "ticksOnMovements": false,
+                "stackLimit": -1,
+                "clearedWhenAttacked": false
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "effectTargetType": "Creator"
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "PrimitiveCockpitEject",
-                "Name": "No Ejection",
-                "Details": "PASSIVE: Attacking with a single weapon ignores COVER and GUARDED on the target.",
-                "Icon": "uixSvgIcon_ability_precisionstrike"
+                "Id": "SLIC-Pilot_HealthAdd-T1",
+                "Name": "MAX INJURIES INCREASED",
+                "Details": "Prevents 1 Injuries against a MechWarrior.",
+                "Icon": "uixSvgIcon_equipment_Cockpit"
             },
+            "nature": "Buff",
             "statisticData": {
-                "statName": "CanEject",
-                "operation": "Set",
-                "modValue": "false",
-                "modType": "System.Boolean"
+                "appliesEachTick": false,
+                "effectsPersistAfterDestruction": false,
+                "statName": "BonusHealth",
+                "operation": "Int_Add",
+                "modValue": "1",
+                "modType": "System.Int32",
+                "additionalRules": "NotSet",
+                "targetCollection": "Pilot",
+                "targetWeaponCategory": "NotSet",
+                "targetWeaponType": "NotSet",
+                "targetAmmoCategory": "NotSet",
+                "targetWeaponSubType": "NotSet"
             },
-            "nature": "Buff"
+            "tagData": null,
+            "floatieData": null,
+            "actorBurningData": null,
+            "vfxData": null,
+            "instantModData": null,
+            "poorlyMaintainedEffectData": null
         }
     ],
     "ComponentTags": {
         "items": [
-            "component_type_stock"
+            "component_type_stock",
+            "BLACKLISTED"
         ],
         "tagSetSourceFile": ""
     }
