@@ -34,6 +34,11 @@ unit_hunter,
 
 Changelog:
 
+6.2.3
+
+Hetzer Update
+    Added AC10, LRM, SRM, Laser, Scout, AP, UAC
+
 6.1.6
 
 Added Condor, Condor Flamer, Condor Liao, Condor Davion, Condor Laser, based on defs contributed by JK.
