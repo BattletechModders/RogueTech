@@ -34,6 +34,10 @@ unit_hunter,
 
 Changelog:
 
+6.2.6
+
+Added Longtom and Thumper units in new Artillery folder.
+
 6.2.4 - 3/11/2019
 
 Hetzer Update
