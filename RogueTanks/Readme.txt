@@ -34,6 +34,10 @@ unit_hunter,
 
 Changelog:
 
+6.2.9 - 3/13/2019
+
+Added Morrigu, three variants, using Colo's model.
+
 6.2.6
 
 Added Longtom and Thumper units in new Artillery folder.
