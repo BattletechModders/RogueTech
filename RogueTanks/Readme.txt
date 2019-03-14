@@ -34,6 +34,12 @@ unit_hunter,
 
 Changelog:
 
+0.0.0
+
+Adjusted light vehicles, carriers, pirate and primitive to conform to current naming conventions.
+Fixed dupe IDs in SchreckAC and Primitive Schreck
+Minor fixes.
+
 6.2.9 - 3/13/2019
 
 Added Morrigu, three variants, using Colo's model.
