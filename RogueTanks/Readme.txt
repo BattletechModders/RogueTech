@@ -36,7 +36,9 @@ Changelog:
 
 0.0.0
 
-Scimitars fixed to conform to current naming conventions.
+Adjusted light vehicles and carriers to conform to current naming conventions.
+Minor fixes.
+
 6.2.9 - 3/13/2019
 
 Added Morrigu, three variants, using Colo's model.
