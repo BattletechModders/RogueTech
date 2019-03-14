@@ -34,6 +34,10 @@ unit_hunter,
 
 Changelog:
 
+0.0.0
+
+Scimitars fixed to conform to current naming conventions.
+
 6.2.6
 
 Added Longtom and Thumper units in new Artillery folder.
