@@ -37,6 +37,9 @@ Changelog:
 0.0.0
 
 Scimitars fixed to conform to current naming conventions.
+6.2.9 - 3/13/2019
+
+Added Morrigu, three variants, using Colo's model.
 
 6.2.6
 
