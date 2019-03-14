@@ -36,7 +36,7 @@ Changelog:
 
 0.0.0
 
-Adjusted light vehicles and carriers to conform to current naming conventions.
+Adjusted light vehicles, carriers, pirate and primitive to conform to current naming conventions.
 Fixed dupe IDs in SchreckAC and Primitive Schreck
 Minor fixes.
 
