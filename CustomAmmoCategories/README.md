@@ -4,6 +4,12 @@ Unpack to Mods folder
 Settings 
 CustomAmmoCategoriesSettings.json
 
+click on right side of HUD weapon slot to switch mode (near hit chance)
+click on center of HUD weapon slot to switch ammo (near ammo count)
+ctrl+left click on weapon slot will eject current ammo 
+   NOTE: ammo can't be ejected if mech moved this round
+         after ejection mech can't jump and sprint until end of round
+
 {
 "debugLog":true, - enable debug log 
 "modHTTPServer":false, - enable debug http server
@@ -18,6 +24,7 @@ CustomAmmoCategoriesSettings.json
 "DamageJamAIAvoid":2.0, - if higher than 1.0, AI will more avoid modes/ammo that damage weapon on jamming. 0.0 will result division by zero exception. 
                       0 < X < 1.0f AI will prefer damage jamming modes/ammo (i don't know why it needs, but you can)
 					  NOTE: if AI has exposed locations, it will lose all fear and will not avoid dangerous modes and ammo.
+"AmmoCanBeExhausted":true - enables or disables ammo exhaustion mechanic. See CanBeExhaustedAt parameter is ammo definition.
 }
 
 CustomAmmoCategories.json
@@ -71,7 +78,33 @@ new fields
 					AMS can become jammed, have damage-on-jam option and so on. AMSHitChance and ShootsWhenFired can be updated in AMS ammo or mode.
 					AMS uses ammunition and heated while firing. Damage and on hit status effects will on be applied. 
   "IsAAMS": false - if true, weapon acts as advanced AMS, it will fire all missiles from enemies in range, not only attacking.
+  "AMSShootsEveryAttack": false, - if true AMS will not share AMS.ShootsWhenFired between all missile attacks this round. 
+                                       Every missile attack will cause AMS.ShootsWhenFired shoots. 
+								   if false AMS will shoot AMS.ShootsWhenFired per round
   "AMSImmune": false - if true, weapon missiles is immune to AMS and none AMS will try to intercept them.
+  "AOECapable" : false, - if true weapon will included in AOE damage calculations. If true set in weapon definition 
+                            all shoots will have AoE effect (even for energy weapon). If true, it can't be overridden by ammo.
+  "AOERange": 100, - Area of effect range. If AOECapable in weapon is set to true this value will be used. If AOECapable is true, it can't be overridden by ammo.
+  "AOEDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
+                            one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
+  "AOEHeatDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
+                            one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
+  "SpreadRange": 0, - Area of projectiles spread effect. If > 0 projectiles will include in spread calculations. Per weapon, ammo, mode values are additive.
+                         if used for missiles, and target have AMS it will fire no matter if it is not advanced and target is not primary.
+  "IFFDef" : "IFFComponentDefId", if not empty and target have component with such defId it will exclude form AoE and spread targets list. 
+                                   if not empty weapon owner will be excluded form AoE and spread targets list anyway even it has no suitable IFF component.
+								   supposed weapon have IFF transponder for own projectiles. If not empty ammo transponder has priority, than mode, and than weapon
+								   There is special transponder name "_IFFOffile" - if transponder defId set as IFFOffline it counts as have no transponder at all.
+  "HasShells": true/false, if defined determinate has shots shrapnel effect or not. If defined can't be overriden by ammo or mode. 
+                            Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
+                            Damage per shell - full damage per projectile / ProjectilesPerShot
+                            Only for missiles effect now. Should not be used with AoE.
+  "ShellsRadius": 90, determines if shells will have spreading. Works same way as SpreadRange. Per weapon value will be used if HasShells is true for this weapon.
+  "MinShellsDistance": 30, Minimum distance missile have to fly before explode. Min value 30.
+  "MaxShellsDistance": 100, Distance from end of trajectory where missile should separate. Min value 20
+                             Note: example - trajectory length 200, min 80, max 100 - missile will separate 100m from end.
+							       example 2 trajectory length 100, min 80, max 100 - missile will separate 20m from end cause it have to fly 80m until separation. 
+								   example 3 trajectory length 100 min 120, max 200 - missile will not separate at all. 
 	"Modes": array of modes for weapon
 	[{
 		"Id": "x4",  - Must be unique per weapon
@@ -129,6 +162,22 @@ new fields
 		  "AMSHitChance": 0.0, - if this weapon is AMS, this value is AMS efficiency, 
 								 if this weapon is missile launcher this value shows how difficult to intercept missile with AMS. Negative value - is harder, 
 								 positive is easer.
+	  "SpreadRange": 0, - Area of projectiles spread effect. If > 0 projectiles will include in spread calculations. Per weapon, ammo, mode values are additive.
+							 if used for missiles, and target have AMS it will fire no matter if it is not advanced and target is not primary.
+	  "IFFDef" : "IFFComponentDefId", if not empty and target have component with such defId it will exclude form AoE and spread targets list. 
+									   if not empty weapon owner will be excluded form AoE and spread targets list anyway even it has no suitable IFF component.
+									   supposed weapon have IFF transponder for own projectiles. If not empty ammo transponder has priority, than mode, and than weapon
+									   There is special transponder name "_IFFOffile" - if transponder defId set as IFFOffline it counts as have no transponder at all.
+      "HasShells": true/false, if defined determinate has shots shrapnel effect for this mode or not. If defined can't be overriden by ammo. 
+                            Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
+                            Damage per shell - full damage per projectile / ProjectilesPerShot
+                            Only for missiles effect now. Should not be used with AoE.
+	  "ShellsRadius": 90, determines if shells will have spreading. Works same way as SpreadRange. Per mode value will be used if HasShells is true for this mode.
+	  "MinShellsDistance": 30, Minimum distance missile have to fly before explode. Min value 30.
+	  "MaxShellsDistance": 100, Distance from end of trajectory where missile should separate. Min value 20
+								 Note: example - trajectory length 200, min 80, max 100 - missile will separate 100m from end.
+									   example 2 trajectory length 100, min 80, max 100 - missile will separate 20m from end cause it have to fly 80m until separation. 
+									   example 3 trajectory length 100 min 120, max 200 - missile will not separate at all. 
 	}]
   
   
@@ -196,13 +245,13 @@ Ammo definition
    "ArmorDamageModifier" : 1,
    "ISDamageModifier" : 1,
    "CriticalDamageModifier" : 1,
-   "AOECapable" : false, - if true weapon will included in AOE damage calculations 
+   "AOECapable" : false, - if true shoots will be included in AOE damage calculations 
    "AOERange": 100, - Area of effect range
                    Notes: AOECapable will force AlwaysIndirectVisuals to true. 
 				             So it is good idea to use only missile weapon effects unless i've implement indirect visuals for ballistic effect.
 				          AOE projectiles always miss no matter toHit values, this is cause AOE dealt only AOE damage.
 						     So it is good idea to set -10 for AccuracyModifier to help AI understand fact that AoE weapon always inflicts damage.
-						  AOE heat dealt implementations is wrong and should not be used.
+						  AOE shots can inflict heat damage. It value based on weapon heat damage per shot and decreasing linear by distance between target and impact base point.
 						  Projectiles intercepted by AMS will not cause AOE damage.
 						  AOE to hit effect will be implemented to all targets in AoE range. 
 						  On fire weapon effects will be implemented to real target only
@@ -211,6 +260,40 @@ Ammo definition
 						  It is recommended to use LRM5, LRM10, LRM15 or LRM20 as weapon subtype cause other subtypes have too huge spread when misses
 						  It is good idea to set ForbiddenRage for AoE weapon and set NotUseInMelee to true
 						  AOE weapon can't hit mech head, cause every headshot inflicts pilot injury. With fact AoE always dealt damage it will be imbalance. 
+						  Damage variations for AoE weapon should not be used cause it will lead completely wrong result 
+  "AOEDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
+                            one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
+  "AOEHeatDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
+                            one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
+  "SpreadRange": 0, - Area of projectiles spread effect. If > 0 projectiles will include in spread calculations. Per weapon, ammo, mode values are additive.
+                         if used for missiles, and target have AMS it will fire no matter if it is not advanced and target is not primary.
+  "IFFDef" : "IFFComponentDefId", if not empty and target have component with such defId it will exclude form AoE and spread targets list. 
+                                   if not empty weapon owner will be excluded form AoE and spread targets list anyway even it has no suitable IFF component.
+								   supposed weapon have IFF transponder for own projectiles. If not empty ammo transponder has priority, than mode, and than weapon
+								   There is special transponder name "_IFFOffile" - if transponder defId set as "_IFFOffline" it counts as have no transponder at all.
+  "HasShells": true/false, if defined determinate has shots shrapnel effect for this ammo or not. 
+						Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
+						Damage per shell - full damage per projectile / ProjectilesPerShot
+						Only for missiles effect now. Should not be used with AoE.
+  "ShellsRadius": 90, determines if shells will have spreading. Works same way as SpreadRange. Per mode value will be used if HasShells is true for this mode.
+  "MinShellsDistance": 30, Minimum distance missile have to fly before explode. Min value 30.
+  "MaxShellsDistance": 100, Distance from end of trajectory where missile should separate. Min value 20
+							 Note: example - trajectory length 200, min 80, max 100 - missile will separate 100m from end.
+								   example 2 trajectory length 100, min 80, max 100 - missile will separate 20m from end cause it have to fly 80m until separation. 
+								   example 3 trajectory length 100 min 120, max 200 - missile will not separate at all. 
+  "UnseparatedDamageMult": 0.8, Damage multiplier applying to shell missile which hadn't separated due to short trajectory length
+  "ArmorDamageModifier" : 1, Armor damage modifier 
+  "ISDamageModifier" : 1, Inner structure damage modifier
+                        Note: if armor can be breached with this shot more complicated formula will be used - 
+						part of damage will remove rest armor, rest part of damage will be multiply to ISDamageModifier. 
+						example target have 10 armor, ArmorDamageModifier - 2, ISDamageModifier - 0.2, damage 10.
+						5 points of raw damage will remove 10 armor. Rest 5 points of raw damage will inflict 1 = (5*0.2) damage to IS
+						consolidated damage will be 5+1 = 6. 
+	"CanBeExhaustedAt": 0.5 - if greater than 0 enables per ammo exhaustion mechanic. At end of attack sequence each uses in this attack ammo box is checked.
+	                           if it has (ammo level) = (current ammo/ammo capacity) LESS than CanBeExhaustedAt for this ammo it has 
+								(CanBeExhaustedAt - (ammo level)) / (ammo level) chance to be exhausted. Which means component become destroyed without explosion.	
+								Example: ammo box has capacity 10, ammo has CanBeExhaustedAt - 0.5, current ammo upon check - 4. Exhaustion chance = (0.5 - 0.4)/0.5 = 0.2
+								Note: if current ammo is 0, Exhaustion chance become 1. One ammo box checked once per attack. Ammo ejections initiates exhaustion check too. 
    "statusEffects" : [   - will be applied on weapon hit (only "OnHit" effectTriggerType)
         {
             "durationData" : {

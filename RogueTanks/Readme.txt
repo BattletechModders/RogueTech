@@ -34,11 +34,36 @@ unit_hunter,
 
 Changelog:
 
+0.0.0
+
+Adjusted light vehicles, carriers, pirate and primitive to conform to current naming conventions.
+Fixed dupe IDs in SchreckAC and Primitive Schreck
+Minor fixes.
+
+6.2.9 - 3/13/2019
+
+Added Morrigu, three variants, using Colo's model.
+
+6.2.6
+
+Added Longtom and Thumper units in new Artillery folder.
+
+6.2.4 - 3/11/2019
+
+Hetzer Update
+    Added AC10, LRM, SRM, Laser, Scout, AP, UAC
+
+Added TBM20/LRM20 carrier.
+
+6.1.6
+
+Added Condor, Condor Flamer, Condor Liao, Condor Davion, Condor Laser, based on defs contributed by JK.
+
 6.1.1 3/5/2019
 
 Alacorn Model,
 Ares Model,
-Challenger Model - Also given to Ajax, and Brutus
+Challenger Model - Also given to Ajax
 Devastator Model - Also given to Demolisher II's,
 Goblin Model,
 Heavy Carrier Model,
