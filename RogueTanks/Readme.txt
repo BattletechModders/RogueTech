@@ -34,11 +34,13 @@ unit_hunter,
 
 Changelog:
 
-0.0.0
+6.4.5 - 3/16/2019
 
-Adjusted light vehicles, carriers, pirate and primitive to conform to current naming conventions.
-Fixed dupe IDs in SchreckAC and Primitive Schreck
-Minor fixes.
+Adjusted all vehicle filenames/ids to conform to current naming conventions,
+Fixed dupe IDs in SchreckAC and Primitive Schreck,
+Added Pegasus_MG,
+Added Drillson ICE, ERLL, SRM,
+Minor fixes
 
 6.2.9 - 3/13/2019
 
