@@ -34,6 +34,22 @@ unit_hunter,
 
 Changelog:
 
+6.4.5 - 3/16/2019
+
+Adjusted all vehicle filenames/ids to conform to current naming conventions,
+Fixed dupe IDs in SchreckAC and Primitive Schreck,
+Added Pegasus_MG,
+Added Drillson ICE, ERLL, SRM,
+Minor fixes
+
+6.2.9 - 3/13/2019
+
+Added Morrigu, three variants, using Colo's model.
+
+6.2.6
+
+Added Longtom and Thumper units in new Artillery folder.
+
 6.2.4 - 3/11/2019
 
 Hetzer Update

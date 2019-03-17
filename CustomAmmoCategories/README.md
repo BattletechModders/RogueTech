@@ -24,6 +24,7 @@ ctrl+left click on weapon slot will eject current ammo
 "DamageJamAIAvoid":2.0, - if higher than 1.0, AI will more avoid modes/ammo that damage weapon on jamming. 0.0 will result division by zero exception. 
                       0 < X < 1.0f AI will prefer damage jamming modes/ammo (i don't know why it needs, but you can)
 					  NOTE: if AI has exposed locations, it will lose all fear and will not avoid dangerous modes and ammo.
+"AmmoCanBeExhausted":true - enables or disables ammo exhaustion mechanic. See CanBeExhaustedAt parameter is ammo definition.
 }
 
 CustomAmmoCategories.json
@@ -94,6 +95,16 @@ new fields
                                    if not empty weapon owner will be excluded form AoE and spread targets list anyway even it has no suitable IFF component.
 								   supposed weapon have IFF transponder for own projectiles. If not empty ammo transponder has priority, than mode, and than weapon
 								   There is special transponder name "_IFFOffile" - if transponder defId set as IFFOffline it counts as have no transponder at all.
+  "HasShells": true/false, if defined determinate has shots shrapnel effect or not. If defined can't be overriden by ammo or mode. 
+                            Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
+                            Damage per shell - full damage per projectile / ProjectilesPerShot
+                            Only for missiles effect now. Should not be used with AoE.
+  "ShellsRadius": 90, determines if shells will have spreading. Works same way as SpreadRange. Per weapon value will be used if HasShells is true for this weapon.
+  "MinShellsDistance": 30, Minimum distance missile have to fly before explode. Min value 30.
+  "MaxShellsDistance": 100, Distance from end of trajectory where missile should separate. Min value 20
+                             Note: example - trajectory length 200, min 80, max 100 - missile will separate 100m from end.
+							       example 2 trajectory length 100, min 80, max 100 - missile will separate 20m from end cause it have to fly 80m until separation. 
+								   example 3 trajectory length 100 min 120, max 200 - missile will not separate at all. 
 	"Modes": array of modes for weapon
 	[{
 		"Id": "x4",  - Must be unique per weapon
@@ -157,6 +168,16 @@ new fields
 									   if not empty weapon owner will be excluded form AoE and spread targets list anyway even it has no suitable IFF component.
 									   supposed weapon have IFF transponder for own projectiles. If not empty ammo transponder has priority, than mode, and than weapon
 									   There is special transponder name "_IFFOffile" - if transponder defId set as IFFOffline it counts as have no transponder at all.
+      "HasShells": true/false, if defined determinate has shots shrapnel effect for this mode or not. If defined can't be overriden by ammo. 
+                            Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
+                            Damage per shell - full damage per projectile / ProjectilesPerShot
+                            Only for missiles effect now. Should not be used with AoE.
+	  "ShellsRadius": 90, determines if shells will have spreading. Works same way as SpreadRange. Per mode value will be used if HasShells is true for this mode.
+	  "MinShellsDistance": 30, Minimum distance missile have to fly before explode. Min value 30.
+	  "MaxShellsDistance": 100, Distance from end of trajectory where missile should separate. Min value 20
+								 Note: example - trajectory length 200, min 80, max 100 - missile will separate 100m from end.
+									   example 2 trajectory length 100, min 80, max 100 - missile will separate 20m from end cause it have to fly 80m until separation. 
+									   example 3 trajectory length 100 min 120, max 200 - missile will not separate at all. 
 	}]
   
   
@@ -250,6 +271,29 @@ Ammo definition
                                    if not empty weapon owner will be excluded form AoE and spread targets list anyway even it has no suitable IFF component.
 								   supposed weapon have IFF transponder for own projectiles. If not empty ammo transponder has priority, than mode, and than weapon
 								   There is special transponder name "_IFFOffile" - if transponder defId set as "_IFFOffline" it counts as have no transponder at all.
+  "HasShells": true/false, if defined determinate has shots shrapnel effect for this ammo or not. 
+						Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
+						Damage per shell - full damage per projectile / ProjectilesPerShot
+						Only for missiles effect now. Should not be used with AoE.
+  "ShellsRadius": 90, determines if shells will have spreading. Works same way as SpreadRange. Per mode value will be used if HasShells is true for this mode.
+  "MinShellsDistance": 30, Minimum distance missile have to fly before explode. Min value 30.
+  "MaxShellsDistance": 100, Distance from end of trajectory where missile should separate. Min value 20
+							 Note: example - trajectory length 200, min 80, max 100 - missile will separate 100m from end.
+								   example 2 trajectory length 100, min 80, max 100 - missile will separate 20m from end cause it have to fly 80m until separation. 
+								   example 3 trajectory length 100 min 120, max 200 - missile will not separate at all. 
+  "UnseparatedDamageMult": 0.8, Damage multiplier applying to shell missile which hadn't separated due to short trajectory length
+  "ArmorDamageModifier" : 1, Armor damage modifier 
+  "ISDamageModifier" : 1, Inner structure damage modifier
+                        Note: if armor can be breached with this shot more complicated formula will be used - 
+						part of damage will remove rest armor, rest part of damage will be multiply to ISDamageModifier. 
+						example target have 10 armor, ArmorDamageModifier - 2, ISDamageModifier - 0.2, damage 10.
+						5 points of raw damage will remove 10 armor. Rest 5 points of raw damage will inflict 1 = (5*0.2) damage to IS
+						consolidated damage will be 5+1 = 6. 
+	"CanBeExhaustedAt": 0.5 - if greater than 0 enables per ammo exhaustion mechanic. At end of attack sequence each uses in this attack ammo box is checked.
+	                           if it has (ammo level) = (current ammo/ammo capacity) LESS than CanBeExhaustedAt for this ammo it has 
+								(CanBeExhaustedAt - (ammo level)) / (ammo level) chance to be exhausted. Which means component become destroyed without explosion.	
+								Example: ammo box has capacity 10, ammo has CanBeExhaustedAt - 0.5, current ammo upon check - 4. Exhaustion chance = (0.5 - 0.4)/0.5 = 0.2
+								Note: if current ammo is 0, Exhaustion chance become 1. One ammo box checked once per attack. Ammo ejections initiates exhaustion check too. 
    "statusEffects" : [   - will be applied on weapon hit (only "OnHit" effectTriggerType)
         {
             "durationData" : {
