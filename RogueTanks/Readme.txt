@@ -34,6 +34,14 @@ unit_hunter,
 
 Changelog:
 
+6.5.0
+
+Goblin Update
+    Added LRM and SRM variants,
+    Fixed Goblin scaling,
+    Fixed weight class
+Minor fixes
+
 6.4.5 - 3/16/2019
 
 Adjusted all vehicle filenames/ids to conform to current naming conventions,
