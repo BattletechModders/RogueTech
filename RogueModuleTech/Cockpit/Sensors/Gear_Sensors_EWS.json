@@ -1,63 +1,58 @@
 {
     "Custom": {
-        "Weights": {
-            "EngineFactor": 0.5
-        },
+        "Category": [
+           { "CategoryID": "CockpitSensors"},
+           { "CategoryID": "ECM"},
+		   { "CategoryID": "Probe"},
+		   { "CategoryID": "AdvECM" }
+        ],
         "WorkOrderCosts": {
             "Install": {
-                "TechCost": "1.2 * [[Chassis.Tonnage]] / 2",
-                "CBillCost": "12000 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]] / 35"
+                "TechCost": "[[Chassis.Tonnage]]/10",
+                "CBillCost": "[[Chassis.Tonnage]] * 1.1"
             }
-        },
-        "Category": [{
-            "CategoryID": "EngineShield"
-        }],
-        "Flags": {
-            "flags": [
-                "engine_part",
-                "not_broken",
-                "no_salvage",
-                "autorepair"
-            ]
         },
         "BonusDescriptions": {
             "Bonuses": [
-                "EngineWeight: -50%",
-                "HeatGenerated: +20%",
-                "HeatPerTurn: +10",
-                "EngineReserved: 4"
+                "Sensors: +5%",
+                "Sight: +10%",
+                "IsECM: 2",
+                "ECMBubble: 90",
+                "IsProbe: 2",
+                "Sharer",
+                "CockpitEWS"
             ]
         },
         "InventorySorter": {
-            "SortKey": "00013"
-        },
-		"Lootable": {
-            "ItemID": "emod_engineslots_xl_center"
+            "SortKey": "00203"
         }
     },
+    "StatName": null,
+    "RelativeModifier": 0,
+    "AbsoluteModifier": 0,
     "Description": {
-        "Cost": 5500000,
-        "Rarity": 99,
+        "Cost": 870000,
+        "Rarity": 8,
         "Purchasable": true,
-        "Manufacturer": "Lostech",
-        "Model": "Extra-light",
-        "UIName": "Prototype XL",
-        "Id": "emod_engineslots_xl_proto",
-        "Name": "XL Engine",
-        "Details": "A StarLeague Era Prototype XL Engine that does not protrude into the side torsos but suffers increased heat generation.",
-        "Icon": "uixSvgIcon_equipment_Heatsink"
+        "Manufacturer": "Kallon",
+        "Model": "NewTech",
+        "UIName": "AR-24 Sheathed Beacon",
+        "Id": "Gear_Sensors_EWS",
+        "Name": "Black Ops Cockpit",
+        "Details": "The AR-24 Sheathed Directional Beacon with ECM Suit is based on a a Star League Sensor system, combining the benefits of an Active probe with a ECM system, sadly it cannot provide the same benefits as most of its Technology is lost.",
+        "Icon": "uixSvgIcon_equipment_Comms"
     },
-    "BonusValueA": "- 50% Engine Weight",
-    "BonusValueB": "+ 6 Slots Required",
-    "ComponentType": "HeatSink",
-    "ComponentSubType": "Heatsink",
+    "BonusValueA": "Probe",
+    "BonusValueB": "ECM",
+    "ComponentType": "Upgrade",
+    "ComponentSubType": "NotSet",
     "PrefabIdentifier": "",
     "BattleValue": 0,
-    "InventorySize": 5,
-    "Tonnage": 0,
-    "AllowedLocations": "CenterTorso",
+    "InventorySize": 1,
+    "Tonnage": 1,
+    "AllowedLocations": "Head",
     "DisallowedLocations": "All",
-    "CriticalComponent": true,
+    "CriticalComponent": false,
     "statusEffects": [
         {
             "durationData": {
@@ -66,7 +61,7 @@
                 "useActivationsOfTarget": false,
                 "ticksOnEndOfRound": false,
                 "ticksOnMovements": false,
-                "stackLimit": 1,
+                "stackLimit": -1,
                 "clearedWhenAttacked": false
             },
             "targetingData": {
@@ -79,25 +74,25 @@
                 "forcePathRebuild": false,
                 "forceVisRebuild": false,
                 "showInTargetPreview": false,
-                "showInStatusPanel": false
+                "showInStatusPanel": true
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StatusEffect-Heat_ICE",
-                "Name": "Increased Heat",
-                "Details": "Heat generation increased by 15%.",
-                "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+                "Id": "SLIC-BLACKOPS",
+                "Name": "SLIC Black Ops",
+                "Details": "Increased Sight/Sensors/Health.",
+                "Icon": "uixSvgIcon_equipment_Cockpit"
             },
             "nature": "Buff",
             "statisticData": {
                 "appliesEachTick": false,
                 "effectsPersistAfterDestruction": false,
-                "statName": "HeatGenerated",
+                "statName": "SensorDistanceAbsolute",
                 "operation": "Float_Multiply",
-                "modValue": "1.2",
+                "modValue": "1.05",
                 "modType": "System.Single",
                 "additionalRules": "NotSet",
-                "targetCollection": "Weapon",
+                "targetCollection": "NotSet",
                 "targetWeaponCategory": "NotSet",
                 "targetWeaponType": "NotSet",
                 "targetAmmoCategory": "NotSet",
@@ -117,7 +112,7 @@
                 "useActivationsOfTarget": false,
                 "ticksOnEndOfRound": false,
                 "ticksOnMovements": false,
-                "stackLimit": 1,
+                "stackLimit": -1,
                 "clearedWhenAttacked": false
             },
             "targetingData": {
@@ -134,19 +129,19 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StatusEffect-Heat_LaserAMS",
-                "Name": "Increased Heat",
-                "Details": "Maintains a constant heat generation of 10.",
-                "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+                "Id": "SLIC-Spotting_Gain-T1",
+                "Name": "SPOTTING DISTANCE INCREASED",
+                "Details": "Increases spotting distance by 50m.",
+                "Icon": "uixSvgIcon_equipment_Cockpit"
             },
-            "nature": "Debuff",
+            "nature": "Buff",
             "statisticData": {
                 "appliesEachTick": false,
                 "effectsPersistAfterDestruction": false,
-                "statName": "HeatSinkCapacity",
-                "operation": "Int_Add",
-                "modValue": "-10",
-                "modType": "System.Int32",
+                "statName": "SpotterDistanceAbsolute",
+                "operation": "Float_Multiply",
+                "modValue": "1.1",
+                "modType": "System.Single",
                 "additionalRules": "NotSet",
                 "targetCollection": "NotSet",
                 "targetWeaponCategory": "NotSet",
@@ -164,8 +159,12 @@
     ],
     "ComponentTags": {
         "items": [
-		"BLACKLISTED",
-            "component_type_stock"
+			"BLACKLISTED",
+            "component_type_stock",
+            "lv-shares-sensors",
+            "ElectronicCounterMeasures",
+            "lv-jammer_m2_r3",
+            "lv-probe_m2"
         ],
         "tagSetSourceFile": ""
     }
