@@ -34,6 +34,12 @@ unit_hunter,
 
 Changelog:
 
+6.5.5
+
+Added Mortar Techies,
+Added Mortar Carrier (60 ton),
+Minor fixes
+
 6.5.0
 
 Goblin Update
