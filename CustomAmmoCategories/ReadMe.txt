@@ -98,6 +98,11 @@ new fields
                             Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
                             Damage per shell - full damage per projectile / ProjectilesPerShot
                             Only for missiles and ballistic effects. Should not be used with AoE.
+							Please note, if you are using HasShells with wr-clustered_shots tag behavior may be undesired 
+							cause in that case WeaponRealizer's code controlling impact damage calculations.
+							"DisableClustering":false also should not be used either set it to true or delete at all. 
+							"WeaponEffect-Weapon_AC2" should not be used as "WeaponEffectID" you can replace it with "WeaponEffect-Weapon_AC5" 
+							nor internally nor visual it wouldn't have any difference
   "ShellsRadius": 90, determines if shells will have spreading. Works same way as SpreadRange. Per weapon value will be used if HasShells is true for this weapon.
   "MinShellsDistance": 30, Minimum distance missile have to fly before explode. Min value 30.
   "MaxShellsDistance": 100, Distance from end of trajectory where missile should separate. Min value 20
@@ -177,6 +182,11 @@ new fields
                             Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
                             Damage per shell - full damage per projectile / ProjectilesPerShot
                             Only for missiles and ballistic effects. Should not be used with AoE.
+							Please note, if you are using HasShells with wr-clustered_shots tag behavior may be undesired 
+							cause in that case WeaponRealizer's code controlling impact damage calculations 
+							"DisableClustering":false also should not be used either set it to true or delete at all. 
+							"WeaponEffect-Weapon_AC2" should not be used as "WeaponEffectID" you can replace it with "WeaponEffect-Weapon_AC5" 
+							nor internally nor visual it wouldn't have any difference
 	  "ShellsRadius": 90, determines if shells will have spreading. Works same way as SpreadRange. Per mode value will be used if HasShells is true for this mode.
 	  "MinShellsDistance": 30, Minimum distance missile have to fly before explode. Min value 30.
 	  "MaxShellsDistance": 100, Distance from end of trajectory where missile should separate. Min value 20
@@ -286,6 +296,11 @@ Ammo definition
 						Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
 						Damage per shell - full damage per projectile / ProjectilesPerShot
 						Only for missiles and ballistic effects. Should not be used with AoE.
+						Please note, if you are using HasShells with wr-clustered_shots tag behavior may be undesired 
+						cause in that case WeaponRealizer's code controlling impact damage calculations 
+						"DisableClustering":false also should not be used either set it to true or delete at all. 
+						"WeaponEffect-Weapon_AC2" should not be used as "WeaponEffectID" you can replace it with "WeaponEffect-Weapon_AC5" 
+						nor internally nor visual it wouldn't have any difference
   "ShellsRadius": 90, determines if shells will have spreading. Works same way as SpreadRange. Per mode value will be used if HasShells is true for this mode.
   "MinShellsDistance": 30, Minimum distance missile have to fly before explode. Min value 30.
   "MaxShellsDistance": 100, Distance from end of trajectory where missile should separate. Min value 20
