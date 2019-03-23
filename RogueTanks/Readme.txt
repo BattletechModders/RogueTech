@@ -34,9 +34,10 @@ unit_hunter,
 
 Changelog:
 
-6.5.6
+6.5.9
 
 Scale update. Fixed/Updated all vehicle scaling.
+Added Vehicle Born IED trucks, 15 tons for HE and Fire, and a Nuke one in the Urbienuke
 
 6.5.5
 
