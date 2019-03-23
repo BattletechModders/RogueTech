@@ -34,6 +34,10 @@ unit_hunter,
 
 Changelog:
 
+6.5.6
+
+Scale update. Fixed/Updated all vehicle scaling.
+
 6.5.5
 
 Added Mortar Techies,
