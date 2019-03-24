@@ -80,7 +80,7 @@ new fields
   "AMSShootsEveryAttack": false, - if true AMS will not share AMS.ShootsWhenFired between all missile attacks this round. 
                                        Every missile attack will cause AMS.ShootsWhenFired shoots. 
 								   if false AMS will shoot AMS.ShootsWhenFired per round
-  "AMSImmune": false, - if true, weapon missiles is immune to AMS and none AMS will try to intercept them.
+  "AMSImmune": false - if true, weapon missiles is immune to AMS and none AMS will try to intercept them.
   "AOECapable" : false, - if true weapon will included in AOE damage calculations. If true set in weapon definition 
                             all shoots will have AoE effect (even for energy weapon). If true, it can't be overridden by ammo.
   "AOERange": 100, - Area of effect range. If AOECapable in weapon is set to true this value will be used. If AOECapable is true, it can't be overridden by ammo.
@@ -97,13 +97,24 @@ new fields
   "HasShells": true/false, if defined determinate has shots shrapnel effect or not. If defined can't be overriden by ammo or mode. 
                             Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
                             Damage per shell - full damage per projectile / ProjectilesPerShot
-                            Only for missiles effect now. Should not be used with AoE.
+                            Only for missiles and ballistic effects. Should not be used with AoE.
+							Please note, if you are using HasShells with wr-clustered_shots tag behavior may be undesired 
+							cause in that case WeaponRealizer's code controlling impact damage calculations.
+							"DisableClustering":false also should not be used either set it to true or delete at all. 
+							"WeaponEffect-Weapon_AC2" should not be used as "WeaponEffectID" you can replace it with "WeaponEffect-Weapon_AC5" 
+							nor internally nor visual it wouldn't have any difference
   "ShellsRadius": 90, determines if shells will have spreading. Works same way as SpreadRange. Per weapon value will be used if HasShells is true for this weapon.
   "MinShellsDistance": 30, Minimum distance missile have to fly before explode. Min value 30.
   "MaxShellsDistance": 100, Distance from end of trajectory where missile should separate. Min value 20
                              Note: example - trajectory length 200, min 80, max 100 - missile will separate 100m from end.
 							       example 2 trajectory length 100, min 80, max 100 - missile will separate 20m from end cause it have to fly 80m until separation. 
 								   example 3 trajectory length 100 min 120, max 200 - missile will not separate at all. 
+  "Unguided": false, for missiles effect only. If true missile trajectory will be strait line instead of curvy. Like it is unguided as old WW2 rockets. 
+					True value tied IndirectCapablea and AlwaysIndirectVisuals to false. 
+					logic: if ammo unguided is true - launch will be unguided no matter mode and weapon settings, 
+					if ammo unguided is false or not set i'm looking at mode. if mode unguided is true launch will be unguided, 
+					if mode unguided is false or not set i'm looking at weapon. 
+					if weapon unguided is true launch will be unguided if not set or false launch will be guided
 	"Modes": array of modes for weapon
 	[{
 		"Id": "x4",  - Must be unique per weapon
@@ -170,13 +181,24 @@ new fields
       "HasShells": true/false, if defined determinate has shots shrapnel effect for this mode or not. If defined can't be overriden by ammo. 
                             Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
                             Damage per shell - full damage per projectile / ProjectilesPerShot
-                            Only for missiles effect now. Should not be used with AoE.
+                            Only for missiles and ballistic effects. Should not be used with AoE.
+							Please note, if you are using HasShells with wr-clustered_shots tag behavior may be undesired 
+							cause in that case WeaponRealizer's code controlling impact damage calculations 
+							"DisableClustering":false also should not be used either set it to true or delete at all. 
+							"WeaponEffect-Weapon_AC2" should not be used as "WeaponEffectID" you can replace it with "WeaponEffect-Weapon_AC5" 
+							nor internally nor visual it wouldn't have any difference
 	  "ShellsRadius": 90, determines if shells will have spreading. Works same way as SpreadRange. Per mode value will be used if HasShells is true for this mode.
 	  "MinShellsDistance": 30, Minimum distance missile have to fly before explode. Min value 30.
 	  "MaxShellsDistance": 100, Distance from end of trajectory where missile should separate. Min value 20
 								 Note: example - trajectory length 200, min 80, max 100 - missile will separate 100m from end.
 									   example 2 trajectory length 100, min 80, max 100 - missile will separate 20m from end cause it have to fly 80m until separation. 
 									   example 3 trajectory length 100 min 120, max 200 - missile will not separate at all. 
+	  "Unguided": false, for missiles effect only. If true missile trajectory will be strait line instead of curvy. Like it is unguided as old WW2 rockets. 
+						True value tied IndirectCapablea and AlwaysIndirectVisuals to false
+					logic: if ammo unguided is true - launch will be unguided no matter mode and weapon settings, 
+					if ammo unguided is false or not set i'm looking at mode. if mode unguided is true launch will be unguided, 
+					if mode unguided is false or not set i'm looking at weapon. 
+					if weapon unguided is true launch will be unguided if not set or false launch will be guided
 	}]
   
   
@@ -273,7 +295,12 @@ Ammo definition
   "HasShells": true/false, if defined determinate has shots shrapnel effect for this ammo or not. 
 						Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
 						Damage per shell - full damage per projectile / ProjectilesPerShot
-						Only for missiles effect now. Should not be used with AoE.
+						Only for missiles and ballistic effects. Should not be used with AoE.
+						Please note, if you are using HasShells with wr-clustered_shots tag behavior may be undesired 
+						cause in that case WeaponRealizer's code controlling impact damage calculations 
+						"DisableClustering":false also should not be used either set it to true or delete at all. 
+						"WeaponEffect-Weapon_AC2" should not be used as "WeaponEffectID" you can replace it with "WeaponEffect-Weapon_AC5" 
+						nor internally nor visual it wouldn't have any difference
   "ShellsRadius": 90, determines if shells will have spreading. Works same way as SpreadRange. Per mode value will be used if HasShells is true for this mode.
   "MinShellsDistance": 30, Minimum distance missile have to fly before explode. Min value 30.
   "MaxShellsDistance": 100, Distance from end of trajectory where missile should separate. Min value 20
@@ -293,6 +320,12 @@ Ammo definition
 								(CanBeExhaustedAt - (ammo level)) / (ammo level) chance to be exhausted. Which means component become destroyed without explosion.	
 								Example: ammo box has capacity 10, ammo has CanBeExhaustedAt - 0.5, current ammo upon check - 4. Exhaustion chance = (0.5 - 0.4)/0.5 = 0.2
 								Note: if current ammo is 0, Exhaustion chance become 1. One ammo box checked once per attack. Ammo ejections initiates exhaustion check too. 
+    "Unguided": false, for missiles effect only. If true missile trajectory will be strait line instead of curvy. Like it is unguided as old WW2 rockets. 
+	               True value tied IndirectCapablea and AlwaysIndirectVisuals to false
+					logic: if ammo unguided is true - launch will be unguided no matter mode and weapon settings, 
+					if ammo unguided is false or not set i'm looking at mode. if mode unguided is true launch will be unguided, 
+					if mode unguided is false or not set i'm looking at weapon. 
+					if weapon unguided is true launch will be unguided if not set or false launch will be guided
    "statusEffects" : [   - will be applied on weapon hit (only "OnHit" effectTriggerType)
         {
             "durationData" : {

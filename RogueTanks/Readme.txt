@@ -34,11 +34,33 @@ unit_hunter,
 
 Changelog:
 
-0.0.0
+6.6.0 - 3/23/2019
 
-Adjusted light vehicles, carriers, pirate and primitive to conform to current naming conventions.
-Fixed dupe IDs in SchreckAC and Primitive Schreck
-Minor fixes.
+Scale update. Fixed/Updated all vehicle scaling.
+Added Vehicle Born IED trucks, 15 tons for HE and Fire, and a Nuke one in the Urbienuke
+Added VBIED FIretruck
+
+6.5.5
+
+Added Mortar Techies,
+Added Mortar Carrier (60 ton),
+Minor fixes
+
+6.5.0
+
+Goblin Update
+    Added LRM and SRM variants,
+    Fixed Goblin scaling,
+    Fixed weight class
+Minor fixes
+
+6.4.5 - 3/16/2019
+
+Adjusted all vehicle filenames/ids to conform to current naming conventions,
+Fixed dupe IDs in SchreckAC and Primitive Schreck,
+Added Pegasus_MG,
+Added Drillson ICE, ERLL, SRM,
+Minor fixes
 
 6.2.9 - 3/13/2019
 
