@@ -41,6 +41,14 @@ to invoke heat sinks manipulation dialog ctrl+click on brace (shield) button in 
 												state of active component activatable by heat level is still shown in activation menu but there is no button to activate them
 												fail check is not performed on activation of component activated by heat, 
 												but fail check after each move is still performed if crit chance is grater than zero
+			"AutoActivateOnOverheatLevel": 0.8, same as AutoActivateOnHeat but instead of Heat level used persentage of Overheat
+			"AutoDeactivateOnOverheatLevel": 0.8, same as AutoDeactivateOnHeat but instead of Heat level used persentage of Overheat
+			"ActivationMessage": "ON", - string showing in activation floatie message along with component UI name
+			"DeactivationMessage": "OFF", - string showing in deactivation floatie message along with component UI name
+			"ActivationIsBuff": "true", - if true component activation floatie message will have buff icon, deactivation - debuff,
+			"NoUniqueCheck": false, - if true disables unique component check in lechlab, so you can install nore than one component of the same type to one mech
+			"ChargesCount": 0, - if > 0 charges logic will be used. On activation component will decrement charges couner instead of activation and than apply statusEffects
+			                   NOTE: cause component not activating actualy FailChance will not increase from round to round.
 			"statusEffects": [  - status effect applied on activation. Same rules as for other component's passive effects. 
 				{
 					"durationData" : {
