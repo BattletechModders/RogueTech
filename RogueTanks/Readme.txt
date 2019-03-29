@@ -34,6 +34,11 @@ unit_hunter,
 
 Changelog:
 
+6.6.2 - 3/29/2019
+
+Added crappy Hetzer with Quickcell AC10,
+misc minor vehicle fixes.
+
 6.6.0 - 3/23/2019
 
 Scale update. Fixed/Updated all vehicle scaling.
