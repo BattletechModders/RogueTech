@@ -4,47 +4,31 @@
             "CategoryID": "PPCCAP"
         }],
         "ComponentExplosion": {
-            "ExplosionDamage": 25
+            "ExplosionDamage": 50
         },
         "BonusDescriptions": {
             "Bonuses": [
-                "PPCCAPDMG: +15%",
-                "PPCCAPHEAT: +20%",
-                "WeaponBoom: 25"
+                "ActivePPCCAPDMG: +20%",
+                "ActivePPCCAPHEAT: +10%",
+				"ActiveHeatPerTurn: +9",
+				"FailChance: 10%",
+				"FailChanceTurn: 15%",
+                "WeaponBoom: 50"
             ]
         },
         "InventorySorter": {
             "SortKey": "00027"
-        }
-    },
-    "StatName": null,
-    "RelativeModifier": 0,
-    "AbsoluteModifier": 0,
-    "Description": {
-        "Cost": 840000,
-        "Rarity": 4,
-        "Purchasable": true,
-        "Manufacturer": "Gibson",
-        "Model": "PPC CAP",
-        "UIName": "PPC Capacitator",
-        "Id": "Gear_PPC_Capacitator",
-        "Name": "PPC CAP",
-        "Details": "The PPC Capacitor is an extra component that can be added to any type of Projector Cannon. It enhances a PPC’s damage capabilities at the cost of higher heat generation. When Destroyed Explodes.",
-        "Icon": "uixSvgIcon_equipment_TTS"
-    },
-    "BonusValueA": "+ 15% PPC Damage",
-    "BonusValueB": "+ 20% PPC Heat",
-    "ComponentType": "Upgrade",
-    "ComponentSubType": "NotSet",
-    "PrefabIdentifier": "",
-    "BattleValue": 0,
-    "InventorySize": 2,
-    "Tonnage": 1,
-    "AllowedLocations": "All",
-    "DisallowedLocations": "All",
-    "CriticalComponent": false,
-    "statusEffects": [
-        {
+        },
+		"ActivatableComponent":{
+			"ButtonName":"Capacitator",
+			"FailFlatChance": 0.1,
+			"FailRoundsStart": 2,
+			"FailChancePerTurn": 0.15,
+			"SelfCrit":true,
+			"FailPilotingBase": 5,
+			"FailPilotingMult": 0.1,
+			"statusEffects": [
+				{
             "durationData": {
                 "duration": -1,
                 "ticksOnActivations": false,
@@ -79,7 +63,7 @@
                 "effectsPersistAfterDestruction": false,
                 "statName": "DamagePerShot",
                 "operation": "Float_Multiply",
-                "modValue": "1.15",
+                "modValue": "1.2",
                 "modType": "System.Single",
                 "additionalRules": "NotSet",
                 "targetCollection": "Weapon",
@@ -130,7 +114,7 @@
                 "effectsPersistAfterDestruction": false,
                 "statName": "HeatGenerated",
                 "operation": "Float_Multiply",
-                "modValue": "1.2",
+                "modValue": "1.1",
                 "modType": "System.Single",
                 "additionalRules": "NotSet",
                 "targetCollection": "Weapon",
@@ -145,7 +129,89 @@
             "vfxData": null,
             "instantModData": null,
             "poorlyMaintainedEffectData": null
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "ticksOnActivations": false,
+                "useActivationsOfTarget": false,
+                "ticksOnEndOfRound": false,
+                "ticksOnMovements": false,
+                "stackLimit": 1,
+                "clearedWhenAttacked": false
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect-Heat2_PPCCAP",
+                "Name": "Increased Heat",
+                "Details": "Maintains a constant heat generation of 10.",
+                "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+            },
+            "nature": "Debuff",
+            "statisticData": {
+                "appliesEachTick": false,
+                "effectsPersistAfterDestruction": false,
+                "statName": "HeatSinkCapacity",
+                "operation": "Int_Add",
+                "modValue": "-9",
+                "modType": "System.Int32",
+                "additionalRules": "NotSet",
+                "targetCollection": "NotSet",
+                "targetWeaponCategory": "NotSet",
+                "targetWeaponType": "NotSet",
+                "targetAmmoCategory": "NotSet",
+                "targetWeaponSubType": "NotSet"
+            },
+            "tagData": null,
+            "floatieData": null,
+            "actorBurningData": null,
+            "vfxData": null,
+            "instantModData": null,
+            "poorlyMaintainedEffectData": null
         }
+			]
+		}
+    },
+    "StatName": null,
+    "RelativeModifier": 0,
+    "AbsoluteModifier": 0,
+    "Description": {
+        "Cost": 840000,
+        "Rarity": 4,
+        "Purchasable": true,
+        "Manufacturer": "Gibson",
+        "Model": "PPC CAP",
+        "UIName": "PPC Capacitator",
+        "Id": "Gear_PPC_Capacitator",
+        "Name": "PPC CAP",
+        "Details": "The PPC Capacitor is an extra component that can be added to any type of Projector Cannon. It enhances a PPC’s damage capabilities at the cost of higher heat generation. When Destroyed Explodes.",
+        "Icon": "uixSvgIcon_equipment_TTS"
+    },
+    "BonusValueA": "+ 15% PPC Damage",
+    "BonusValueB": "+ 20% PPC Heat",
+    "ComponentType": "Upgrade",
+    "ComponentSubType": "NotSet",
+    "PrefabIdentifier": "",
+    "BattleValue": 0,
+    "InventorySize": 2,
+    "Tonnage": 1,
+    "AllowedLocations": "All",
+    "DisallowedLocations": "All",
+    "CriticalComponent": false,
+    "statusEffects": [
+        
     ],
     "ComponentTags": {
         "items": [
