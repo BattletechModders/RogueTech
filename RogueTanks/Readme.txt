@@ -34,6 +34,10 @@ unit_hunter,
 
 Changelog:
 
+6.6.8
+
+Added Alacorn IIC and Alacorn IIC-A
+
 6.6.6 - 4/3/2019
 
 Added Light Mortar Carrier,
