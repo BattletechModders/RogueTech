@@ -1,5 +1,8 @@
 Unpack to Mods folder
 
+
+ArmorDamageModifier and ISDamageModifier are now avaible for weapon and mode
+
 Settings 
 CustomAmmoCategoriesSettings.json
 
@@ -24,6 +27,9 @@ ctrl+left click on weapon slot will eject current ammo
                       0 < X < 1.0f AI will prefer damage jamming modes/ammo (i don't know why it needs, but you can)
 					  NOTE: if AI has exposed locations, it will lose all fear and will not avoid dangerous modes and ammo.
 "AmmoCanBeExhausted":true - enables or disables ammo exhaustion mechanic. See CanBeExhaustedAt parameter is ammo definition.
+"DynamicDesignMasksDefs": - preload design masks array for dynamic design mask apply
+["DesignMaskCrystals","DesignMaskForest","DesignMaskGeothermal","DesignMaskGeothermalLava","DesignMaskIce","DesignMaskRadiation","DesignMaskSpores","DesignMaskBurningForest"]
+
 }
 
 CustomAmmoCategories.json
@@ -326,6 +332,30 @@ Ammo definition
 					if ammo unguided is false or not set i'm looking at mode. if mode unguided is true launch will be unguided, 
 					if mode unguided is false or not set i'm looking at weapon. 
 					if weapon unguided is true launch will be unguided if not set or false launch will be guided
+   "MineFieldRadius": 3, - Radius of minefield in in-game cells (one cell have 4x4 size)
+   "MineFieldCount": 1, - Count of mines in one cell
+   "MineFieldHeat": 4, - Heat damage from one mine explosion
+   "MineFieldHitChance": 0.12, - Chance of mine explosion when actor steps to cell
+   "MineFieldDamage": 4, - normal damage from one mine explosion
+                      Notes: each projectile hited ground creates mine field. Projectile hits target inflicts normal damage and not creating minefield.
+					         On ground impact for each projectile affected cell is calculated base on MineFieldRadius.
+							 For radius 3 it will looks approximately like this(X it is cell where projectile hits ground)
+                               #####
+                              #######
+                             #########
+                             ####X####
+                             #########
+                              #######
+                               #####
+						     For each affected cell added record for mine field. This record contains info: MineFieldCount, MineFieldHitChance, MineFieldDamage, MineFieldHeat.
+							 Cell can have unlimited mine fields records count (as long as there is enough memory, but cause each record uses very little amount of memory maximum count is about billions and literally unreachable).
+							 On end on each move(or sprint) sequence list of cells actor visited is gathered.  
+							 For each cell actor visited for each mine field record in these cells check is performed.
+							 If count of mines in record grater than zero performed roll on MineFieldHitChance. If roll success mine counter in this record decremented, 
+							 heat and damage incremented by MineFieldHeat and MineFieldDamage accordingly.
+							 after all mine fields in path itterated damage and heat implemented to actor. If damage is lethal score added to owner of last minefield inflicted damage.
+							 For meches damage splited between two legs and heat implemented as heat. Heat applied at end of activation. 
+							 For vehicle damage splited between four locations (front,back,left,right) heat impemented as normal damage
    "statusEffects" : [   - will be applied on weapon hit (only "OnHit" effectTriggerType)
         {
             "durationData" : {
