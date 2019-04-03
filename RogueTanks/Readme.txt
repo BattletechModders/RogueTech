@@ -34,6 +34,12 @@ unit_hunter,
 
 Changelog:
 
+6.6.6 - 4/3/2019
+
+Added Light Mortar Carrier,
+Ammo tweaks, (RIP Raza)
+Minor Fixes
+
 6.6.4 - 3/30/2019
 
 Added Thumper_Angel arty vehicle,
