@@ -34,6 +34,10 @@ unit_hunter,
 
 Changelog:
 
+6.6.9
+
+
+
 6.6.8
 
 Added Alacorn IIC and Alacorn IIC-A
