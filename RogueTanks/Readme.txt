@@ -36,7 +36,7 @@ Changelog:
 
 6.6.9
 
-
+Added VBIED APC
 
 6.6.8
 
