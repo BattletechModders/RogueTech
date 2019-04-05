@@ -34,6 +34,11 @@ unit_hunter,
 
 Changelog:
 
+6.7.1 - 4/5/2019
+
+Added JES 1 (medium srm hovertank)
+Fixed a bunch of hovertank pathingdefs
+
 6.6.9
 
 Added VBIED APC
