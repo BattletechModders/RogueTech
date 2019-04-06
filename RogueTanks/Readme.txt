@@ -34,6 +34,11 @@ unit_hunter,
 
 Changelog:
 
+6.7.3
+
+Added JES-II (95 ton Jihad era lrm carrier),
+Added Pirate Harasser (Which...suspiciously...is missing an SRM rack)
+
 6.7.1 - 4/5/2019
 
 Added JES 1 (medium srm hovertank)
