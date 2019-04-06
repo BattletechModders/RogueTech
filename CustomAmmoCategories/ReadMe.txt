@@ -153,7 +153,14 @@ new fields
 						   If mech or vehicle ending move in burning cell they suffer heat damage. For mech it is heat damage, for vehicle it is normal damage splitted by all locations except turret.
 						   Damage inflicted to vehicle that way are not cause critical damage to internal components only armor and structure.
 						   Fired cell not saved on battle save/reload.
-	"Modes": array of modes for weapon
+   "FireTerrainCellRadius":6, - radius in in-game cells to fire check roll. On impact each hex cell containing at least one map cell with in radius will have chance to be burned
+                                additive for weapon mode and ammo.
+   "AdditionalImpactVFX":"WFX_Nuke", - additional VFX played on impact. Mode have priority, than ammo, than weapon. Long played effects not supposed. 
+                                       Effect game object will be cleaned and returned to pool on next fire sequence of this weapon. 
+   "AdditionalImpactVFXScaleX":10, - scale of additional VFX, used only when AdditionalImpactVFX is not empty. Note, not all VFXs supports scaling.
+   "AdditionalImpactVFXScaleY":10,
+   "AdditionalImpactVFXScaleZ":10,
+   "Modes": array of modes for weapon
 	[{
 		"Id": "x4",  - Must be unique per weapon
 		"UIName": "x4", - This string will be displayed near weapon name
@@ -251,6 +258,13 @@ new fields
 						   If mech or vehicle ending move in burning cell they suffer heat damage. For mech it is heat damage, for vehicle it is normal damage splitted by all locations except turret.
 						   Damage inflicted to vehicle that way are not cause critical damage to internal components only armor and structure.
 						   Fired cell not saved on battle save/reload.
+   "FireTerrainCellRadius":6, - radius in in-game cells to fire check roll. On impact each hex cell containing at least one map cell with in radius will have chance to be burned
+                                additive for weapon mode and ammo.
+   "AdditionalImpactVFX":"WFX_Nuke", - additional VFX played on impact. Mode have priority, than ammo, than weapon. Long played effects not supposed. 
+                                       Effect game object will be cleaned and returned to pool on next fire sequence of this weapon. 
+   "AdditionalImpactVFXScaleX":10, - scale of additional VFX, used only when AdditionalImpactVFX is not empty. Note, not all VFXs supports scaling.
+   "AdditionalImpactVFXScaleY":10,
+   "AdditionalImpactVFXScaleZ":10,
 	}]
   
   
@@ -418,6 +432,13 @@ Ammo definition
 						   If mech or vehicle ending move in burning cell they suffer heat damage. For mech it is heat damage, for vehicle it is normal damage splitted by all locations except turret.
 						   Damage inflicted to vehicle that way are not cause critical damage to internal components only armor and structure.
 						   Fired cell not saved on battle save/reload.
+   "FireTerrainCellRadius":6, - radius in in-game cells to fire check roll. On impact each hex cell containing at least one map cell with in radius will have chance to be burned
+                                additive for weapon mode and ammo.
+   "AdditionalImpactVFX":"WFX_Nuke", - additional VFX played on impact. Mode have priority, than ammo, than weapon. Long played effects not supposed. 
+                                       Effect game object will be cleaned and returned to pool on next fire sequence of this weapon. 
+   "AdditionalImpactVFXScaleX":10, - scale of additional VFX, used only when AdditionalImpactVFX is not empty. Note, not all VFXs supports scaling.
+   "AdditionalImpactVFXScaleY":10,
+   "AdditionalImpactVFXScaleZ":10,
    "statusEffects" : [   - will be applied on weapon hit (only "OnHit" effectTriggerType)
         {
             "durationData" : {
