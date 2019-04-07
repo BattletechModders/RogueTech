@@ -34,6 +34,12 @@ unit_hunter,
 
 Changelog:
 
+6.7.6 - 4/7/2019
+
+Gave missing TTS to some carriers. Removed some from the Light carriers that were not supposed to have them.
+Distributed more APFSDS ammo to primitive tanks.
+Gave FASCAM ARROW IV ammo to a couple Naga folder tanks.
+
 6.7.3
 
 Added JES-II (95 ton Jihad era lrm carrier),
