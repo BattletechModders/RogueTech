@@ -1,8 +1,5 @@
 Unpack to Mods folder
 
-
-ArmorDamageModifier and ISDamageModifier are now avaible for weapon and mode
-
 Settings 
 CustomAmmoCategoriesSettings.json
 
@@ -27,9 +24,30 @@ ctrl+left click on weapon slot will eject current ammo
                       0 < X < 1.0f AI will prefer damage jamming modes/ammo (i don't know why it needs, but you can)
 					  NOTE: if AI has exposed locations, it will lose all fear and will not avoid dangerous modes and ammo.
 "AmmoCanBeExhausted":true - enables or disables ammo exhaustion mechanic. See CanBeExhaustedAt parameter is ammo definition.
-"DynamicDesignMasksDefs": - preload design masks array for dynamic design mask apply
-["DesignMaskCrystals","DesignMaskForest","DesignMaskGeothermal","DesignMaskGeothermalLava","DesignMaskIce","DesignMaskRadiation","DesignMaskSpores","DesignMaskBurningForest"]
-
+"BurningForestDesignMask":"DesignMaskBurningForest", - design mask for burning forest
+"BurnedForestDesignMask":"DesignMaskBurnedForest",  - design mask for burned forest
+"BurningTerrainDesignMask":"DesignMaskBurningTerrain" - design mask for burning terrain
+"BurningForestCellRadius":3, - size of hex cell in grid used for terrain effects supported values 3,4 (you should not change this until you know what doing)
+"BurningForestTurns":3, - rounds forest on fire
+"AdditinalAssets": ["nuked"], - additional assets for VFX to load on init
+"BurningForestStrength":30, - heat damage for burning forest
+"BurningForestBaseExpandChance":0.5, - chance to expand for burning cell (fire can be expanded only to hex cell with forest)
+"DynamicDesignMasksDefs":["DesignMaskCrystals","DesignMaskForest","DesignMaskGeothermal","DesignMaskGeothermalLava","DesignMaskIce","DesignMaskRadiation","DesignMaskSpores","DesignMaskBurningForest","DesignMaskBurnedForest","DesignMaskBurningTerrain"],
+ list of design mask to load. <BurningForestDesignMask> and <BurnedForestDesignMask> should always included to this list. 
+"BurningFX":"vfxPrfPrtl_fireTerrain_lrgLoop", - VFX prefab spawned in hex cell on fire
+"BurnedFX":"vfxPrfPrtl_miningSmokePlume_lrg_loop", - VFX prefab spawned in hex cell on fire exhaust 
+"BurningScaleX":1, - scale for burning VFX (note not all VFXes supports scaling vfxPrfPrtl_fireTerrain_lrgLoop does not)
+"BurningScaleY":1,
+"BurningScaleZ":1,
+"BurnedScaleX":1,  - scale for burned VFX (note not all VFXes supports scaling vfxPrfPrtl_miningSmokePlume_lrg_loop does not)
+"BurnedScaleY":1,
+"BurnedScaleZ":1,
+"BurnedOffsetX":0, - offset for burning VFX
+"BurnedOffsetY":0,
+"BurnedOffsetZ":0,
+"BurningOffsetX":0, - offset for burned VFX
+"BurningOffsetY":0,
+"BurningOffsetZ":0
 }
 
 CustomAmmoCategories.json
@@ -121,7 +139,28 @@ new fields
 					if ammo unguided is false or not set i'm looking at mode. if mode unguided is true launch will be unguided, 
 					if mode unguided is false or not set i'm looking at weapon. 
 					if weapon unguided is true launch will be unguided if not set or false launch will be guided
-	"Modes": array of modes for weapon
+  "FireTerrainChance":1, - chance to fireup hex cell. Additive for weapon, ammo and mode
+  "FireDurationWithoutForest":1, - duration of fire if hex cell has no forest, if > 0 even hex cell with no forest will burn. 
+                                  If cell have forest burn period is max from FireDurationWithoutForest and BurningForestTurns
+								  additive for weapon mode and ammo.
+  "FireTerrainStrength":0, - strength of fire. If 0 and hex cell have no forest cell will not fire. If > 0 and hex cell have forest strength is max from FireTerrainStrength and BurningForestStrength
+                                  additive for weapon mode and ammo.
+  "FireOnSuccessHit" : true, - if true roll to fire hex cell will be permitted even on success hit. In that case fire hex cell will be detected as current target position. 
+                               if false only projectiles that hits ground have chance to fire terrain. If ommited in weapon ammo and mode supposed as false.
+							   mode value have priority, than ammo and than weapon.
+					NOTES: expanding logic each turn each burning cell (no matter having forest or not) have BurningForestBaseExpandChance to expand no neighbour cell with forest 
+					       burning cell not counted as forest.
+						   If mech or vehicle ending move in burning cell they suffer heat damage. For mech it is heat damage, for vehicle it is normal damage splitted by all locations except turret.
+						   Damage inflicted to vehicle that way are not cause critical damage to internal components only armor and structure.
+						   Fired cell not saved on battle save/reload.
+   "FireTerrainCellRadius":6, - radius in in-game cells to fire check roll. On impact each hex cell containing at least one map cell with in radius will have chance to be burned
+                                additive for weapon mode and ammo.
+   "AdditionalImpactVFX":"WFX_Nuke", - additional VFX played on impact. Mode have priority, than ammo, than weapon. Long played effects not supposed. 
+                                       Effect game object will be cleaned and returned to pool on next fire sequence of this weapon. 
+   "AdditionalImpactVFXScaleX":10, - scale of additional VFX, used only when AdditionalImpactVFX is not empty. Note, not all VFXs supports scaling.
+   "AdditionalImpactVFXScaleY":10,
+   "AdditionalImpactVFXScaleZ":10,
+   "Modes": array of modes for weapon
 	[{
 		"Id": "x4",  - Must be unique per weapon
 		"UIName": "x4", - This string will be displayed near weapon name
@@ -205,6 +244,27 @@ new fields
 					if ammo unguided is false or not set i'm looking at mode. if mode unguided is true launch will be unguided, 
 					if mode unguided is false or not set i'm looking at weapon. 
 					if weapon unguided is true launch will be unguided if not set or false launch will be guided
+  "FireTerrainChance":1, - chance to fireup hex cell. Additive for weapon, ammo and mode
+  "FireDurationWithoutForest":1, - duration of fire if hex cell has no forest, if > 0 even hex cell with no forest will burn. 
+                                  If cell have forest burn period is max from FireDurationWithoutForest and BurningForestTurns
+								  additive for weapon mode and ammo.
+  "FireTerrainStrength":0, - strength of fire. If 0 and hex cell have no forest cell will not fire. If > 0 and hex cell have forest strength is max from FireTerrainStrength and BurningForestStrength
+                                  additive for weapon mode and ammo.
+  "FireOnSuccessHit" : true, - if true roll to fire hex cell will be permitted even on success hit. In that case fire hex cell will be detected as current target position. 
+                               if false only projectiles that hits ground have chance to fire terrain. If ommited in weapon ammo and mode supposed as false.
+							   mode value have priority, than ammo and than weapon.
+					NOTES: expanding logic each turn each burning cell (no matter having forest or not) have BurningForestBaseExpandChance to expand no neighbour cell with forest 
+					       burning cell not counted as forest.
+						   If mech or vehicle ending move in burning cell they suffer heat damage. For mech it is heat damage, for vehicle it is normal damage splitted by all locations except turret.
+						   Damage inflicted to vehicle that way are not cause critical damage to internal components only armor and structure.
+						   Fired cell not saved on battle save/reload.
+   "FireTerrainCellRadius":6, - radius in in-game cells to fire check roll. On impact each hex cell containing at least one map cell with in radius will have chance to be burned
+                                additive for weapon mode and ammo.
+   "AdditionalImpactVFX":"WFX_Nuke", - additional VFX played on impact. Mode have priority, than ammo, than weapon. Long played effects not supposed. 
+                                       Effect game object will be cleaned and returned to pool on next fire sequence of this weapon. 
+   "AdditionalImpactVFXScaleX":10, - scale of additional VFX, used only when AdditionalImpactVFX is not empty. Note, not all VFXs supports scaling.
+   "AdditionalImpactVFXScaleY":10,
+   "AdditionalImpactVFXScaleZ":10,
 	}]
   
   
@@ -356,6 +416,29 @@ Ammo definition
 							 after all mine fields in path itterated damage and heat implemented to actor. If damage is lethal score added to owner of last minefield inflicted damage.
 							 For meches damage splited between two legs and heat implemented as heat. Heat applied at end of activation. 
 							 For vehicle damage splited between four locations (front,back,left,right) heat impemented as normal damage
+   						     Damage inflicted that way are not cause critical damage to internal components only armor and structure.
+	  					     Minefields not saved on battle save/reload.
+  "FireTerrainChance":1, - chance to fireup hex cell. Additive for weapon, ammo and mode
+  "FireDurationWithoutForest":1, - duration of fire if hex cell has no forest, if > 0 even hex cell with no forest will burn. 
+                                  If cell have forest burn period is max from FireDurationWithoutForest and BurningForestTurns
+								  additive for weapon mode and ammo.
+  "FireTerrainStrength":0, - strength of fire. If 0 and hex cell have no forest cell will not fire. If > 0 and hex cell have forest strength is max from FireTerrainStrength and BurningForestStrength
+                                  additive for weapon mode and ammo.
+  "FireOnSuccessHit" : true, - if true roll to fire hex cell will be permitted even on success hit. In that case fire hex cell will be detected as current target position. 
+                               if false only projectiles that hits ground have chance to fire terrain. If ommited in weapon ammo and mode supposed as false.
+							   mode value have priority, than ammo and than weapon.
+					NOTES: expanding logic each turn each burning cell (no matter having forest or not) have BurningForestBaseExpandChance to expand no neighbour cell with forest 
+					       burning cell not counted as forest.
+						   If mech or vehicle ending move in burning cell they suffer heat damage. For mech it is heat damage, for vehicle it is normal damage splitted by all locations except turret.
+						   Damage inflicted to vehicle that way are not cause critical damage to internal components only armor and structure.
+						   Fired cell not saved on battle save/reload.
+   "FireTerrainCellRadius":6, - radius in in-game cells to fire check roll. On impact each hex cell containing at least one map cell with in radius will have chance to be burned
+                                additive for weapon mode and ammo.
+   "AdditionalImpactVFX":"WFX_Nuke", - additional VFX played on impact. Mode have priority, than ammo, than weapon. Long played effects not supposed. 
+                                       Effect game object will be cleaned and returned to pool on next fire sequence of this weapon. 
+   "AdditionalImpactVFXScaleX":10, - scale of additional VFX, used only when AdditionalImpactVFX is not empty. Note, not all VFXs supports scaling.
+   "AdditionalImpactVFXScaleY":10,
+   "AdditionalImpactVFXScaleZ":10,
    "statusEffects" : [   - will be applied on weapon hit (only "OnHit" effectTriggerType)
         {
             "durationData" : {
