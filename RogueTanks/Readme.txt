@@ -34,6 +34,17 @@ unit_hunter,
 
 Changelog:
 
+6.8.0 - 4/8/2019
+
+Changed models used for 
+    JES II,
+    Gorgon,
+    Thumpers,
+    Ballista,
+    Po heavy tanks,
+    Ontos,
+    Behemoths
+
 6.7.9 - 4/7/2019
 
 Added Arrow IV Assault Vehicle to naga folder
