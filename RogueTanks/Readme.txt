@@ -34,6 +34,12 @@ unit_hunter,
 
 Changelog:
 
+6.7.9 - 4/7/2019
+
+Added Arrow IV Assault Vehicle to naga folder
+Added Ballista (Sniper Arty Tank)
+Added Pirate Thumper
+
 6.7.6 - 4/7/2019
 
 Gave missing TTS to some carriers. Removed some from the Light carriers that were not supposed to have them.
