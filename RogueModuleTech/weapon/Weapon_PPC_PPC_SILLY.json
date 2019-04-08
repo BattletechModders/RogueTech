@@ -1,10 +1,15 @@
 {
     "Custom": {
+        "ComponentExplosion": {
+            "ExplosionDamage": 50,
+            "StabilityDamage": 25
+        },
         "BonusDescriptions": {
             "Bonuses": [
                 "PPCDEBUFF: 2",
                 "RangedDmg: +400%",
-                "WpnRecoil: 3"
+                "WpnRecoil: 3",
+                "WeaponBoom: 50"
             ]
         },
         "InventorySorter": {
@@ -15,11 +20,11 @@
     "Type": "PPC",
     "WeaponSubType": "PPC",
     "MinRange": 240,
-    "MaxRange": 1000,
+    "MaxRange": 1080,
     "RangeSplit": [
-        400,
-        600,
-        800
+        330,
+        480,
+        720
     ],
     "AmmoCategory": "NotSet",
     "StartingAmmoCapacity": 0,
@@ -47,12 +52,12 @@
         "Cost": 2000000,
         "Rarity": 10,
         "Purchasable": true,
-        "Manufacturer": "Fusigon",
-        "Model": "Heavy Particle Projector Cannon",
-        "UIName": "Heavy PPC",
+        "Manufacturer": "Parti-Kill",
+        "Model": "M1",
+        "UIName": "Ultra-Light Naval PPC",
         "Id": "Weapon_PPC_PPC_SILLY",
         "Name": "NPPC",
-        "Details": "Researched by the Draconis Combine, the Heavy PPC is a larger, more potent version of the Particle Projector Cannon, capable of delivering a devastating blow to both the enemy and their sensors. \n\n <b><color=#00ffff>Left Click on Chance to Hit during battle to toggle Field Inhibitor, disabling min range at chance of Misfire</color> </b>",
+        "Details": "It's a gigantic PPC. The EMP Field is generates is massive affecting units near the target, disrupting myomer and sensor systems. Damage increases over distance, it's hard to focus it on nearby targets. \n\n <b><color=#00ffff>Left Click on Chance to Hit during battle to toggle Field Inhibitor, disabling min range at chance of Misfire</color> </b>",
         "Icon": "uixSvgIcon_weapon_Energy"
     },
     "BonusValueA": "",
@@ -82,7 +87,20 @@
 			"MinRange": -240.0,
 			"AccuracyModifier" : 1.0,
 			"AIHitChanceCap": 0.99
-		}		
+        },
+        {
+			"Id":"NPPC_BURST",
+			"UIName":"Burst",
+			"isBaseMode":false,
+			"DamageOnJamming": false,
+			"FlatJammingChance": 0.25,
+            "ShotsWhenFired" : 2,
+            "DamageMultiplier": 0.3,
+            "EvasivePipsIgnored" : 2,
+            "AccuracyModifier" : 2.0,
+            "DamageVariance": 1,
+			"AIHitChanceCap": 0.99
+		}	
 	],
     "statusEffects": [
         {
@@ -121,6 +139,151 @@
                 "statName": "AccuracyModifier",
                 "operation": "Float_Add",
                 "modValue": "2.0",
+                "modType": "System.Single",
+                "additionalRules": "NotSet",
+                "targetCollection": "NotSet",
+                "targetWeaponCategory": "NotSet",
+                "targetWeaponType": "NotSet",
+                "targetAmmoCategory": "NotSet",
+                "targetWeaponSubType": "NotSet"
+            },
+            "tagData": null,
+            "floatieData": null,
+            "actorBurningData": null,
+            "vfxData": null,
+            "instantModData": null,
+            "poorlyMaintainedEffectData": null
+        },
+        {
+            "durationData": {
+                "duration": 2,
+                "ticksOnActivations": true,
+                "useActivationsOfTarget": true,
+                "ticksOnEndOfRound": false,
+                "ticksOnMovements": false,
+                "stackLimit": -1,
+                "clearedWhenAttacked": false
+            },
+            "targetingData": {
+                "effectTriggerType": "OnHit",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
+                "effectTargetType": "NotSet",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": true
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "Chaff-Effect3",
+                "Name": "SENSOR SCRAMBLE",
+                "Details": "Mech's sensors are clouded.",
+                "Icon": "uixSvgIcon_shipUpgrade_power2"
+            },
+            "nature": "Debuff",
+            "statisticData": {
+                "statName": "SensorDistanceAbsolute",
+                "operation": "Float_Multiply",
+                "modValue": "0.8",
+                "modType": "System.Single"
+            },
+            "tagData": null,
+            "floatieData": null,
+            "actorBurningData": null,
+            "vfxData": null,
+            "instantModData": null,
+            "poorlyMaintainedEffectData": null
+        },
+        {
+            "durationData": {
+                "duration": 2,
+                "ticksOnActivations": true,
+                "useActivationsOfTarget": true,
+                "ticksOnEndOfRound": false,
+                "ticksOnMovements": false,
+                "stackLimit": 6,
+                "clearedWhenAttacked": false
+            },
+            "targetingData": {
+                "effectTriggerType": "OnHit",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
+                "effectTargetType": "NotSet",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "HAYWIRE-Effect1",
+                "Name": "HAYWIRED",
+                "Details": "The Mech's Movement is reduced.",
+                "Icon": "uixSvgIcon_status_sensorsImpaired"
+            },
+            "nature": "Debuff",
+            "statisticData": {
+                "appliesEachTick": false,
+                "effectsPersistAfterDestruction": false,
+                "statName": "WalkSpeed",
+                "operation": "Float_Multiply",
+                "modValue": "0.90",
+                "modType": "System.Single",
+                "additionalRules": "NotSet",
+                "targetCollection": "NotSet",
+                "targetWeaponCategory": "NotSet",
+                "targetWeaponType": "NotSet",
+                "targetAmmoCategory": "NotSet",
+                "targetWeaponSubType": "NotSet"
+            },
+            "tagData": null,
+            "floatieData": null,
+            "actorBurningData": null,
+            "vfxData": null,
+            "instantModData": null,
+            "poorlyMaintainedEffectData": null
+        },
+        {
+            "durationData": {
+                "duration": 2,
+                "ticksOnActivations": true,
+                "useActivationsOfTarget": true,
+                "ticksOnEndOfRound": false,
+                "ticksOnMovements": false,
+                "stackLimit": 6,
+                "clearedWhenAttacked": false
+            },
+            "targetingData": {
+                "effectTriggerType": "OnHit",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
+                "effectTargetType": "NotSet",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "HAYWIRE-Effect2",
+                "Name": "HAYWIRED",
+                "Details": "The Mech's Movement is reduced.",
+                "Icon": "uixSvgIcon_status_sensorsImpaired"
+            },
+            "nature": "Debuff",
+            "statisticData": {
+                "appliesEachTick": false,
+                "effectsPersistAfterDestruction": false,
+                "statName": "RunSpeed",
+                "operation": "Float_Multiply",
+                "modValue": "0.90",
                 "modType": "System.Single",
                 "additionalRules": "NotSet",
                 "targetCollection": "NotSet",
