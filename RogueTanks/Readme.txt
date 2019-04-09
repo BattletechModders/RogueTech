@@ -34,6 +34,11 @@ unit_hunter,
 
 Changelog:
 
+6.8.1
+
+Removed Noncombat tag from APCs that have had a bunch of cargo space replaced with serious weapon systems.
+    This will make them sometimes appear in combat lances.
+
 6.8.0 - 4/8/2019
 
 Changed models used for 
