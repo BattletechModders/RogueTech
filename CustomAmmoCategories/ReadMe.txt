@@ -1,5 +1,7 @@
 Unpack to Mods folder
 
+WARNING! If you use AIM mod you need to have special patched version or set ShowMissMargin to false in AIM settings. 
+
 Settings 
 CustomAmmoCategoriesSettings.json
 
@@ -47,9 +49,16 @@ ctrl+left click on weapon slot will eject current ammo
 "BurnedOffsetZ":0,
 "BurningOffsetX":0, - offset for burned VFX
 "BurningOffsetY":0,
-"BurningOffsetZ":0
+"BurningOffsetZ":0,
+"DontShowNotDangerouceJammMessages": true, - if true cooldown and jamming weapon without damage not cause floatie message
+"MineFieldPathingMods":{ - landmines hit roll modificator by pathing. Effective value multiplicative. If not found in this table consider as 1.0.
+    "pathingdef_light":0,
+	"pathingdef_medium":0.5
+  },
+"JumpLandingMineAttractRadius": 2 - radius of terrain cells affected on landing after jump
 }
 
+now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
 CustomAmmoCategories.json
 [
 {
@@ -160,6 +169,8 @@ new fields
    "AdditionalImpactVFXScaleX":10, - scale of additional VFX, used only when AdditionalImpactVFX is not empty. Note, not all VFXs supports scaling.
    "AdditionalImpactVFXScaleY":10,
    "AdditionalImpactVFXScaleZ":10,
+   "ClearMineFieldRadius": 4, - radius in in-game terrain cells. Minefields in all cells within radius will be cleared in terrain impact.
+                                Clearing on success hit controled by FireOnSuccessHit flag.
    "Modes": array of modes for weapon
 	[{
 		"Id": "x4",  - Must be unique per weapon
@@ -265,6 +276,8 @@ new fields
    "AdditionalImpactVFXScaleX":10, - scale of additional VFX, used only when AdditionalImpactVFX is not empty. Note, not all VFXs supports scaling.
    "AdditionalImpactVFXScaleY":10,
    "AdditionalImpactVFXScaleZ":10,
+   "ClearMineFieldRadius": 4, - radius in in-game terrain cells. Minefields in all cells within radius will be cleared in terrain impact.
+                                Clearing on success hit controled by FireOnSuccessHit flag.
 	}]
   
   
@@ -439,6 +452,19 @@ Ammo definition
    "AdditionalImpactVFXScaleX":10, - scale of additional VFX, used only when AdditionalImpactVFX is not empty. Note, not all VFXs supports scaling.
    "AdditionalImpactVFXScaleY":10,
    "AdditionalImpactVFXScaleZ":10,
+   "LongVFXOnImpact": "vfxPrfPrtl_artillerySmokeSignal_loop", - terrain impact vfx supposed to be played few turns 
+   "LongVFXOnImpactScaleX":3, - scale for persistent terrain vfx 
+   "LongVFXOnImpactScaleY":20,
+   "LongVFXOnImpactScaleZ":3,
+   "tempDesignMaskCellRadius":6, - radius in in-game cells to fire check roll. On impact each hex cell containing at least one map cell with in radius will be affected by change
+   "tempDesignMaskOnImpactTurns":3, - count of turns persistent terrain effect played
+   "tempDesignMaskOnImpact":"DesignMaskSmoke", - design mask applied on impact
+                                 NOTE: tempDesignMaskOnImpact design mask are not superseding original mask (if avaible) instead new design mask creating at runtime. 
+								 This new mask is result of addition current terrain mask and tempDesignMaskOnImpact. All integer or float values is addiditve. 
+								 Name will be result of concatenation as well as description. Sticky effects concatenating too. 
+								 Appliance of mask and visuals on success hit is controled by FireOnSuccessHit flag. 
+   "ClearMineFieldRadius": 4, - radius in in-game terrain cells. Minefields in all cells within radius will be cleared in terrain impact.
+                                Clearing on success hit controled by FireOnSuccessHit flag.
    "statusEffects" : [   - will be applied on weapon hit (only "OnHit" effectTriggerType)
         {
             "durationData" : {
