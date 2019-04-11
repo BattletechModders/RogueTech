@@ -61,7 +61,7 @@ BackColor2=clBlack
 
 [Files]
 ;Source: "/RogueTech Core/RogueTech.txt"; DestDir: "{app}/Mods/RogueTech Core"; Flags: isreadme ignoreversion
-Source: "/*"; Excludes: ".git,.modtek,.git,log.txt,Log_Turbine.txt,RTAssetsSetup.iss,*.log,LootedClanMechs,The Drones Of Syberia,ClanEmblems,BlackDisabler,Raza5_s Mech Emporium,Replacement_MechPortraits_Haree,Replacement_MechPortraits_JK,LootMagnet,SpeedMod,Flashpoint-The-Raid,EternusMechs,NAOP_CustomMechsNParts,Kas_events,SortByTonnage,SkipTravelCutscenes,RandomCampaignStart,InnerSphereMap,RandomTravelContracts,PersistentMapClient,VanillaEnabler,ClanJadeFalcon,RogueModuleElites,Nagas,Totem Mechs,WoBLamMechs,CommanderPortraitLoader,PowerArmour,MWOHeroes,Superheavys,RogueFlashPointModule,ExperimentalWeapons,RaelM Emblem,UrbieNuke,AIM,AIMBrutal,RogueTechBrutal,RogueTechNormal,GlobalDifficultyByCompany,GlobalDifficultyByPlanets,Retrainer,Silence,FreeCam,BindableEscapeKey,ArmorRepair,ArmorPoints,Pilot_Quirks,StabilePiloting,Pilot_Fatigue,MoreIsLess_dZ,RogueEmblems,All 3025 Mercs,Capellan Emblems,Replacement_MechPortraits,SkipIntro,OnePointArmorStep,CrystalClear" ; DestDir: "{app}/Mods"; Flags: recursesubdirs ignoreversion
+Source: "/*"; Excludes: ".git,.modtek,.git,log.txt,Log_Turbine.txt,RTAssetsSetup.iss,*.log,Urbocalypse,ArtilleryUnits,LootedClanMechs,The Drones Of Syberia,ClanEmblems,BlackDisabler,Raza5_s Mech Emporium,Replacement_MechPortraits_Haree,Replacement_MechPortraits_JK,LootMagnet,SpeedMod,Flashpoint-The-Raid,EternusMechs,NAOP_CustomMechsNParts,Kas_events,SortByTonnage,SkipTravelCutscenes,RandomCampaignStart,InnerSphereMap,RandomTravelContracts,PersistentMapClient,VanillaEnabler,ClanJadeFalcon,RogueModuleElites,Totem Mechs,WoBLamMechs,CommanderPortraitLoader,PowerArmour,MWOHeroes,Superheavys,RogueFlashPointModule,ExperimentalWeapons,RaelM Emblem,UrbieNuke,AIM,AIMBrutal,RogueTechBrutal,RogueTechNormal,GlobalDifficultyByCompany,GlobalDifficultyByPlanets,Retrainer,Silence,FreeCam,BindableEscapeKey,ArmorRepair,ArmorPoints,Pilot_Quirks,StabilePiloting,Pilot_Fatigue,MoreIsLess_dZ,RogueEmblems,All 3025 Mercs,Capellan Emblems,Replacement_MechPortraits,SkipIntro,OnePointArmorStep,CrystalClear" ; DestDir: "{app}/Mods"; Flags: recursesubdirs ignoreversion
 Source: "{#SourcePath}Optionals\Battletech Sound Replacement Pack\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion uninsneveruninstall createallsubdirs; Components: gfx\soundmod
 Source: "{#SourcePath}Optionals\Enable Debug\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion uninsneveruninstall createallsubdirs; Components: debugjson
 Source: "{#SourcePath}Optionals\RogueGenerals\*"; DestDir: "{app}"; Flags: recursesubdirs ignoreversion uninsneveruninstall createallsubdirs; Components: gametips
@@ -111,12 +111,13 @@ Source: "/WoBLamMechs/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/WoBLamMechs"
 Source: "/ClanJadeFalcon/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/ClanJadeFalcon"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\ClanJadeFalcon;
 Source: "/EternusMechs/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/EternusMechs"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\EternusMechs;
 Source: "/Raza5_s Mech Emporium/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Raza5_s Mech Emporium"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\Emporium;
-Source: "/Nagas/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Nagas"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\Nagas;
+Source: "/ArtilleryUnits/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/ArtilleryUnits"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\ArtilleryUnits;
 Source: "/Totem Mechs/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Totem Mechs"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\TotemMechs;
 Source: "/NAOP_CustomMechsNParts/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/NAOP_CustomMechsNParts"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\NAOPCustoms;
 Source: "/The Drones Of Syberia/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/The Drones Of Syberia"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\Drones;
 Source: "/RandomCampaignStart/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RandomCampaignStart"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\RandomCampaignStart;
 Source: "/LootedClanMechs/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/LootedClanMechs"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\LootedClanMechs;
+Source: "/Urbocalypse/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Urbocalypse"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\Urbocalypse;
 Source: "/LootMagnet/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/LootMagnet"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\LootMagnet;
 Source: "/RogueFlashPointModule/*"; DestDir: "{app}/Mods/RogueFlashPointModule"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: DLC\FLASHPOINT;
 Source: "/Flashpoint-The-Raid/*"; DestDir: "{app}/Mods/Flashpoint-The-Raid"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: DLC\FLASHPOINT;
@@ -183,12 +184,13 @@ Name: "RogueTechOptionals\LootMagnet"; Description: "LootMagnet - Lore-friendly 
 Name: "RogueTechOptionals\RandomCampaignStart"; Description: "Randomized Campaign start - disable for a quicker new game and predefined lance"; Types: full compact;
 Name: "RogueTechOptionals\PowerArmour"; Description: "A collection of PowerArmours - by LadyAlekto"; Types: full compact;
 Name: "RogueTechOptionals\LootedClanMechs"; Description: "Looted Clan Mechs - by LadyAlekto"; Types: full compact;
+Name: "RogueTechOptionals\Urbocalypse"; Description: "Urbocalypse - UrbanMechs - by LadyAlekto&Raza"; Types: full compact;
 Name: "RogueTechOptionals\MWOHeroes"; Description: "MWO Hero Mechs - MWO Custom Chassis by Spark, Katrina Kerensky & GroxGlitch"; Types: full compact;
 Name: "RogueTechOptionals\WoBLamMechs"; Description: "WOB LAM's - LAM's for Comstar by Akodoreign"; Types: full compact;
 Name: "RogueTechOptionals\TotemMechs"; Description: "Totem Mechs - Powerfull and Expensive Chassis by Akodoreign"; Types: full compact;
 Name: "RogueTechOptionals\Superheavys"; Description: "Superheavys - Oversized Mechs&Tanks and their Missions by LadyAlekto&CargoVroom"; Types: custom;
 Name: "RogueTechOptionals\RogueModuleElites"; Description: "Elite Pilots and Mechs - Lances and Contracts to face Superior Skilled Forces by LadyAlekto"; Types: custom;
-Name: "RogueTechOptionals\Nagas"; Description: "ArrowIV Capable Units - by Akodoreign,LadyAlekto&Cargo_Vroom"; Types: custom;
+Name: "RogueTechOptionals\ArtilleryUnits"; Description: "Heavy Artillery Units - by Akodoreign,LadyAlekto&Cargo_Vroom&Raza"; Types: custom;
 Name: "RogueTechOptionals\ClanJadeFalcon"; Description: "Clan JadeFalcon Totem Mechs by Rhynim"; Types: custom;
 Name: "RogueTechOptionals\ExperimentalWeapons"; Description: "Experimental Weapons - by MXMach"; Types: custom;
 Name: "RogueTechOptionals\NAOPCustoms"; Description: "OP Custom Mechs and Tech- by NewAgeOfPower"; Types: custom;
