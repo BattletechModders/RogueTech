@@ -38,6 +38,7 @@ Changelog:
 
 Removed Noncombat tag from APCs that have had a bunch of cargo space replaced with serious weapon systems.
     This will make them sometimes appear in combat lances.
+Added HPPC Demolisher
 
 6.8.0 - 4/8/2019
 
