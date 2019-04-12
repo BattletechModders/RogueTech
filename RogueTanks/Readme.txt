@@ -34,6 +34,12 @@ unit_hunter,
 
 Changelog:
 
+6.8.4
+
+Lady added new pathingdefs for minefield interactions
+Implemented new hover pathing defs on all hover units,
+Corrected some tracked/wheeled defs that were wrong type or weight.
+
 6.8.1
 
 Removed Noncombat tag from APCs that have had a bunch of cargo space replaced with serious weapon systems.
