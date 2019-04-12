@@ -34,6 +34,35 @@ unit_hunter,
 
 Changelog:
 
+6.8.4
+
+Lady added new pathingdefs for minefield interactions
+Implemented new hover pathing defs on all hover units,
+Corrected some tracked/wheeled defs that were wrong type or weight.
+
+6.8.1
+
+Removed Noncombat tag from APCs that have had a bunch of cargo space replaced with serious weapon systems.
+    This will make them sometimes appear in combat lances.
+Added HPPC Demolisher
+
+6.8.0 - 4/8/2019
+
+Changed models used for 
+    JES II,
+    Gorgon,
+    Thumpers,
+    Ballista,
+    Po heavy tanks,
+    Ontos,
+    Behemoths
+
+6.7.9 - 4/7/2019
+
+Added Arrow IV Assault Vehicle to naga folder
+Added Ballista (Sniper Arty Tank)
+Added Pirate Thumper
+
 6.7.6 - 4/7/2019
 
 Gave missing TTS to some carriers. Removed some from the Light carriers that were not supposed to have them.
