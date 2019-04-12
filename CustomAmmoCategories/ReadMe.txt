@@ -431,6 +431,9 @@ Ammo definition
 							 For vehicle damage splited between four locations (front,back,left,right) heat impemented as normal damage
    						     Damage inflicted that way are not cause critical damage to internal components only armor and structure.
 	  					     Minefields not saved on battle save/reload.
+							 Note on melee through mine field: if mech while moving to melee targets suffer normal damage attack will be interrupted. 
+							 Mech get close to target but nor attack animation played nor melee damage inflicted.
+							 Note on DFA attack on target standing on mine field: damage will be inflicted normaly AFTER DFA attack completes 
   "FireTerrainChance":1, - chance to fireup hex cell. Additive for weapon, ammo and mode
   "FireDurationWithoutForest":1, - duration of fire if hex cell has no forest, if > 0 even hex cell with no forest will burn. 
                                   If cell have forest burn period is max from FireDurationWithoutForest and BurningForestTurns
