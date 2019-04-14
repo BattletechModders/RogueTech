@@ -1,12 +1,20 @@
 {
 	"Custom": {
+		"Category": [
+			{
+				"CategoryID": "BoosterPack"
+			}
+		],
 		"BonusDescriptions": {
 			"Bonuses": [
-				"DFA: +10%",
-				"DFASelfDamage: -10%",
-				"DFAAcc: +1",
-				"JumpDistance: -5%"
+				"RunSpeed: +10%",
+				"WalkSpeed: +20%",
+				"JumpDistance: +100%",
+				"HeatGenerated: +20%"
 			]
+		},
+		"InventorySorter": {
+			"SortKey": "00028"
 		},
 		"Flags": {
 			"flags": [
@@ -14,24 +22,21 @@
 				"no_salvage",
 				"autorepair"
 			]
-		},
-		"InventorySorter": {
-			"SortKey": "00028"
 		}
 	},
-	"JumpCapacity": 1,
-	"MinTonnage": 60,
-	"MaxTonnage": 85,
+	"JumpCapacity": 2,
+	"MinTonnage": 101,
+	"MaxTonnage": 200,
 	"Description": {
-		"Cost": 120000,
-		"Rarity": 1,
+		"Cost": 174000,
+		"Rarity": 99,
 		"Purchasable": true,
-		"Manufacturer": "MAD-Choppers",
-		"Model": "MAD-DER",
-		"UIName": " Directional Thruster (MAD-DER)",
-		"Id": "Gear_JumpJet_Directional_MAD-DER",
-		"Name": "Directional Thruster (MAD-DER)",
-		"Details": "This specially modified directional thruster modified for the special MAD-DER Marauder variant works in conjunction with the LAM system strapped into the mech's chassis, while it wasn't possible to remove all the weight cost from the thruster, its lighter then its normal counterparts. And since its linked directly into the engine core, its not possible to remove it, but its destruction won't affect the engine core itself.",
+		"Manufacturer": "Generic",
+		"Model": "Assault",
+		"UIName": "Booster Jet (SH-Clan)",
+		"Id": "Gear_JumpJet_Booster_clan",
+		"Name": "Booster Jet (SH-Clan)",
+		"Details": "This is less like a jump Jet and more of a straight up Rocket Booster strapped to its own Fusion Core, it surely will lift anything its attached to. It can be mounted in a way to propel a mech forward as easily as upward.",
 		"Icon": "uixSvgIcon_action_jump"
 	},
 	"BonusValueA": null,
@@ -40,35 +45,48 @@
 	"ComponentSubType": "Functionality",
 	"PrefabIdentifier": "JumpJet",
 	"BattleValue": 0,
-	"InventorySize": 1,
-	"Tonnage": 0,
-	"AllowedLocations": "Torso, Legs",
+	"InventorySize": 4,
+	"Tonnage": 8,
+	"AllowedLocations": "Torso",
 	"DisallowedLocations": "Head, Arms",
 	"CriticalComponent": false,
 	"statusEffects": [
 		{
 			"durationData": {
-				"duration": -1
+				"duration": -1,
+				"ticksOnActivations": false,
+				"useActivationsOfTarget": false,
+				"ticksOnEndOfRound": false,
+				"ticksOnMovements": false,
+				"stackLimit": -1,
+				"clearedWhenAttacked": false
 			},
 			"targetingData": {
 				"effectTriggerType": "Passive",
+				"triggerLimit": 0,
+				"extendDurationOnTrigger": 0,
+				"specialRules": "NotSet",
 				"effectTargetType": "Creator",
+				"range": 0,
+				"forcePathRebuild": false,
+				"forceVisRebuild": false,
 				"showInTargetPreview": false,
-				"showInStatusPanel": true
+				"showInStatusPanel": false
 			},
 			"effectType": "StatisticEffect",
 			"Description": {
-				"Id": "Directional Jump Jets",
-				"Name": "Accurate Jumping",
-				"Details": "Improved DFA",
-				"Icon": "uixSvgIcon_ability_mastertactician"
+				"Id": "StatusEffect-Jump_Distance-T3",
+				"Name": "JUMP DISTANCE INCREASED",
+				"Details": "The Partial Wing System increases Jump Jet jump distance by 30%",
+				"Icon": "uixSvgIcon_equipment_Gyro"
 			},
+			"nature": "Buff",
 			"statisticData": {
 				"appliesEachTick": false,
 				"effectsPersistAfterDestruction": false,
 				"statName": "JumpDistanceMultiplier",
 				"operation": "Float_Multiply",
-				"modValue": "0.95",
+				"modValue": "2",
 				"modType": "System.Single",
 				"additionalRules": "NotSet",
 				"targetCollection": "NotSet",
@@ -76,6 +94,73 @@
 				"targetWeaponType": "NotSet",
 				"targetAmmoCategory": "NotSet",
 				"targetWeaponSubType": "NotSet"
+			},
+			"tagData": null,
+			"floatieData": null,
+			"actorBurningData": null,
+			"vfxData": null,
+			"instantModData": null,
+			"poorlyMaintainedEffectData": null
+		},
+		{
+			"durationData": {
+				"duration": -1,
+				"ticksOnActivations": false,
+				"useActivationsOfTarget": false,
+				"ticksOnEndOfRound": false,
+				"ticksOnMovements": false,
+				"stackLimit": -1,
+				"clearedWhenAttacked": false
+			},
+			"targetingData": {
+				"effectTriggerType": "Passive",
+				"triggerLimit": 0,
+				"extendDurationOnTrigger": 0,
+				"specialRules": "NotSet",
+				"effectTargetType": "Creator",
+				"range": 0,
+				"forcePathRebuild": false,
+				"forceVisRebuild": false,
+				"showInTargetPreview": false,
+				"showInStatusPanel": false
+			},
+			"effectType": "StatisticEffect",
+			"Description": {
+				"Id": "SuperchargerWalk",
+				"Name": "Supercharged",
+				"Details": "Supercharged Engines",
+				"Icon": "uixSvgIcon_action_evasivemove"
+			},
+			"statisticData": {
+				"statName": "WalkSpeed",
+				"operation": "Float_Multiply",
+				"modValue": "1.2",
+				"modType": "System.Single"
+			},
+			"nature": "Buff"
+		},
+		{
+			"durationData": {
+				"duration": -1,
+				"stackLimit": -1
+			},
+			"targetingData": {
+				"effectTriggerType": "Passive",
+				"effectTargetType": "Creator",
+				"showInStatusPanel": false
+			},
+			"effectType": "StatisticEffect",
+			"Description": {
+				"Id": "ChargerSAS",
+				"Name": "ChargerSprint",
+				"Details": "MORE SPEED.",
+				"Icon": "uixSvgIcon_run_n_gun"
+			},
+			"statisticData": {
+				"statName": "RunSpeed",
+				"operation": "Float_Multiply",
+				"modValue": "1.1",
+				"modType": "System.Single"
 			},
 			"nature": "Buff"
 		},
@@ -103,127 +188,25 @@
 			},
 			"effectType": "StatisticEffect",
 			"Description": {
-				"Id": "StatusEffect-Attack_DamageDFA-JJ",
-				"Name": "DFA DAMAGE INCREASED",
-				"Details": "DFA attacks deal 10% more damage.",
-				"Icon": "uixSvgIcon_equipment_ActuatorLeg"
+				"Id": "StatusEffect-Heat_Supercharger",
+				"Name": "Increased Heat",
+				"Details": "Heat generation increased by 20%.",
+				"Icon": "uixSvgIcon_equipment_ThermalExchanger"
 			},
 			"nature": "Buff",
 			"statisticData": {
 				"appliesEachTick": false,
 				"effectsPersistAfterDestruction": false,
-				"statName": "DamagePerShot",
+				"statName": "HeatGenerated",
 				"operation": "Float_Multiply",
-				"modValue": "1.1",
+				"modValue": "1.2",
 				"modType": "System.Single",
 				"additionalRules": "NotSet",
 				"targetCollection": "Weapon",
 				"targetWeaponCategory": "NotSet",
 				"targetWeaponType": "NotSet",
 				"targetAmmoCategory": "NotSet",
-				"targetWeaponSubType": "DFA"
-			},
-			"tagData": null,
-			"floatieData": null,
-			"actorBurningData": null,
-			"vfxData": null,
-			"instantModData": null,
-			"poorlyMaintainedEffectData": null
-		},
-		{
-			"durationData": {
-				"duration": -1,
-				"ticksOnActivations": false,
-				"useActivationsOfTarget": false,
-				"ticksOnEndOfRound": false,
-				"ticksOnMovements": false,
-				"stackLimit": -1,
-				"clearedWhenAttacked": false
-			},
-			"targetingData": {
-				"effectTriggerType": "Passive",
-				"triggerLimit": 0,
-				"extendDurationOnTrigger": 0,
-				"specialRules": "NotSet",
-				"effectTargetType": "Creator",
-				"range": 0,
-				"forcePathRebuild": false,
-				"forceVisRebuild": false,
-				"showInTargetPreview": false,
-				"showInStatusPanel": false
-			},
-			"effectType": "StatisticEffect",
-			"Description": {
-				"Id": "StatusEffect-Attack_SelfDamageDFA-JJ",
-				"Name": "DFA SELF-INFLICTED DAMAGE DECREASED",
-				"Details": "DFA attacks deal 10% less damage to the attacker.",
-				"Icon": "uixSvgIcon_equipment_ActuatorLeg"
-			},
-			"nature": "Buff",
-			"statisticData": {
-				"appliesEachTick": false,
-				"effectsPersistAfterDestruction": false,
-				"statName": "DFASelfDamage",
-				"operation": "Float_Multiply",
-				"modValue": "0.90",
-				"modType": "System.Single",
-				"additionalRules": "NotSet",
-				"targetCollection": "NotSet",
-				"targetWeaponCategory": "NotSet",
-				"targetWeaponType": "NotSet",
-				"targetAmmoCategory": "NotSet",
-				"targetWeaponSubType": "DFA"
-			},
-			"tagData": null,
-			"floatieData": null,
-			"actorBurningData": null,
-			"vfxData": null,
-			"instantModData": null,
-			"poorlyMaintainedEffectData": null
-		},
-		{
-			"durationData": {
-				"duration": -1,
-				"ticksOnActivations": false,
-				"useActivationsOfTarget": false,
-				"ticksOnEndOfRound": false,
-				"ticksOnMovements": false,
-				"stackLimit": -1,
-				"clearedWhenAttacked": false
-			},
-			"targetingData": {
-				"effectTriggerType": "Passive",
-				"triggerLimit": 0,
-				"extendDurationOnTrigger": 0,
-				"specialRules": "NotSet",
-				"effectTargetType": "Creator",
-				"range": 0,
-				"forcePathRebuild": false,
-				"forceVisRebuild": false,
-				"showInTargetPreview": false,
-				"showInStatusPanel": false
-			},
-			"effectType": "StatisticEffect",
-			"Description": {
-				"Id": "StatusEffect-Attack_DFAACC_JJ",
-				"Name": "DFA Accuracy Boost",
-				"Details": "DFA attacks deal +1 Acc.",
-				"Icon": "uixSvgIcon_equipment_ActuatorLeg"
-			},
-			"nature": "Buff",
-			"statisticData": {
-				"appliesEachTick": false,
-				"effectsPersistAfterDestruction": false,
-				"statName": "AccuracyModifier",
-				"operation": "Float_Add",
-				"modValue": "-1.0",
-				"modType": "System.Single",
-				"additionalRules": "NotSet",
-				"targetCollection": "NotSet",
-				"targetWeaponCategory": "NotSet",
-				"targetWeaponType": "NotSet",
-				"targetAmmoCategory": "NotSet",
-				"targetWeaponSubType": "DFA"
+				"targetWeaponSubType": "NotSet"
 			},
 			"tagData": null,
 			"floatieData": null,
