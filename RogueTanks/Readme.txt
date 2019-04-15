@@ -34,6 +34,11 @@ unit_hunter,
 
 Changelog:
 
+0.0.0
+
+Oro to Colo's Oro model,
+Shamash to Savannah Master model,
+
 6.8.4
 
 Lady added new pathingdefs for minefield interactions
