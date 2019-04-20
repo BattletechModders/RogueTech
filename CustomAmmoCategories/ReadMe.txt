@@ -55,7 +55,7 @@ ctrl+left click on weapon slot will eject current ammo
     "pathingdef_light":0,
 	"pathingdef_medium":0.5
   },
-"JumpLandingMineAttractRadius": 2 - radius of terrain cells affected on landing after jump
+"JumpLandingMineAttractRadius": 2, - radius of terrain cells affected on landing after jump
 "BurnedTrees":{  - better not to change anything unless you know what you are doing 
   "Mesh":"envMdlTree_deadWood_polar_frozen_shapeA_LOD0", - prefab containing burned tree mesh (must be loaded as part of additional assets)
   "BumpMap":"envTxrTree_treesVaried_polar_frozen_nrm", - burned trees textures (must be loaded as part of additional assets)
@@ -64,9 +64,11 @@ ctrl+left click on weapon slot will eject current ammo
   "Transmission":"envTxrTree_treesVaried_polar_frozen_trs",
   "MetallicGlossMap":"envTxrTree_treesVaried_polar_frozen_mtl",
   "BurnedTreeScale":2,  - scale of burned trees 
-  "DecalScale",40f, - size of burned terrain decale
+  "DecalScale":40, - size of burned terrain decale
   "DecalTexture":"envTxrDecl_terrainDmgSmallBlack_alb" - burned terrain decale texture (must be loaded as part of additional assets)
-}
+},
+"DontShowBurnedTrees":false, - if true burned trees will be hidden instead of drawing burned variant
+"DontShowScorchTerrain":false - if true burned terrain decal will not be applied 
 }
 
 now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
