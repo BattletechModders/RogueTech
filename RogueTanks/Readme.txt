@@ -35,9 +35,9 @@ unit_hunter,
 
 Changelog:
 
-6.9.4 - 4/20/2019
+6.9.5 - 4/20/2019
 
-Added four Partisan variants using Colo's model
+Added five Partisan variants using Colo's model
 
 6.9.0 - 4/15 -> 4/17/2019
 
