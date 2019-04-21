@@ -37,7 +37,7 @@ ctrl+left click on weapon slot will eject current ammo
 "DynamicDesignMasksDefs":["DesignMaskCrystals","DesignMaskForest","DesignMaskGeothermal","DesignMaskGeothermalLava","DesignMaskIce","DesignMaskRadiation","DesignMaskSpores","DesignMaskBurningForest","DesignMaskBurnedForest","DesignMaskBurningTerrain"],
  list of design mask to load. <BurningForestDesignMask> and <BurnedForestDesignMask> should always included to this list. 
 "BurningFX":"vfxPrfPrtl_fireTerrain_lrgLoop", - VFX prefab spawned in hex cell on fire
-"BurnedFX":"vfxPrfPrtl_miningSmokePlume_lrg_loop", - VFX prefab spawned in hex cell on fire exhaust 
+"BurnedFX":"vfxPrfPrtl_miningSmokePlume_lrg_loop", - not used any more
 "BurningScaleX":1, - scale for burning VFX (note not all VFXes supports scaling vfxPrfPrtl_fireTerrain_lrgLoop does not)
 "BurningScaleY":1,
 "BurningScaleZ":1,
@@ -55,7 +55,20 @@ ctrl+left click on weapon slot will eject current ammo
     "pathingdef_light":0,
 	"pathingdef_medium":0.5
   },
-"JumpLandingMineAttractRadius": 2 - radius of terrain cells affected on landing after jump
+"JumpLandingMineAttractRadius": 2, - radius of terrain cells affected on landing after jump
+"BurnedTrees":{  - better not to change anything unless you know what you are doing 
+  "Mesh":"envMdlTree_deadWood_polar_frozen_shapeA_LOD0", - prefab containing burned tree mesh (must be loaded as part of additional assets)
+  "BumpMap":"envTxrTree_treesVaried_polar_frozen_nrm", - burned trees textures (must be loaded as part of additional assets)
+  "MainTex":"envTxrTree_treesVaried_polar_frozen_alb",
+  "OcculusionMap":"envTxrTree_treesVaried_polar_frozen_amb",
+  "Transmission":"envTxrTree_treesVaried_polar_frozen_trs",
+  "MetallicGlossMap":"envTxrTree_treesVaried_polar_frozen_mtl",
+  "BurnedTreeScale":2,  - scale of burned trees 
+  "DecalScale":40, - size of burned terrain decale
+  "DecalTexture":"envTxrDecl_terrainDmgSmallBlack_alb" - burned terrain decale texture (must be loaded as part of additional assets)
+},
+"DontShowBurnedTrees":false, - if true burned trees will be hidden instead of drawing burned variant
+"DontShowScorchTerrain":false - if true burned terrain decal will not be applied 
 }
 
 now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
@@ -466,6 +479,60 @@ Ammo definition
 								 This new mask is result of addition current terrain mask and tempDesignMaskOnImpact. All integer or float values is addiditve. 
 								 Name will be result of concatenation as well as description. Sticky effects concatenating too. 
 								 Appliance of mask and visuals on success hit is controled by FireOnSuccessHit flag. 
+								 NOTE on design mask concatenation: if no other mask on terrain, temp mask will be implemented as defined. If there is other mask
+	result - effective resulting mask.
+    parentMask - undelying mask
+	newMask - applying mask
+	
+      result.Description.Name = parentMask.Description.Name + " " + newMask.Description.Name;
+      result.Description.Details = parentMask.Description.Details + "\n" + newMask.Description.Details;
+      result.Description.Icon = newMask.Description.Icon;
+      result.hideInUI = newMask.hideInUI;
+      result.moveCostMechLight = parentMask.moveCostMechLight + newMask.moveCostMechLight - 1f;
+      result.moveCostMechMedium = parentMask.moveCostMechMedium + newMask.moveCostMechMedium - 1f; 
+      result.moveCostMechHeavy = parentMask.moveCostMechHeavy + newMask.moveCostMechHeavy - 1f; 
+      result.moveCostMechAssault = parentMask.moveCostMechAssault + newMask.moveCostMechAssault - 1f; 
+      result.moveCostTrackedLight = parentMask.moveCostTrackedLight + newMask.moveCostTrackedLight - 1f; 
+      result.moveCostTrackedMedium = parentMask.moveCostTrackedMedium + newMask.moveCostTrackedMedium - 1f; 
+      result.moveCostTrackedHeavy = parentMask.moveCostTrackedHeavy + newMask.moveCostTrackedHeavy - 1f; 
+      result.moveCostTrackedAssault = parentMask.moveCostTrackedAssault + newMask.moveCostTrackedAssault - 1f; 
+      result.moveCostWheeledLight = parentMask.moveCostWheeledLight + newMask.moveCostWheeledLight - 1f; 
+      result.moveCostWheeledMedium = parentMask.moveCostWheeledMedium + newMask.moveCostWheeledMedium - 1f; 
+      result.moveCostWheeledHeavy = parentMask.moveCostWheeledHeavy + newMask.moveCostWheeledHeavy - 1f; 
+      result.moveCostWheeledAssault = parentMask.moveCostWheeledAssault + newMask.moveCostWheeledAssault - 1f;
+      result.moveCostSprintMultiplier = parentMask.moveCostSprintMultiplier + newMask.moveCostSprintMultiplier - 1f;
+      result.stabilityDamageMultiplier = parentMask.stabilityDamageMultiplier + newMask.stabilityDamageMultiplier - 1f;
+      result.visibilityMultiplier = parentMask.visibilityMultiplier + newMask.visibilityMultiplier - 1f;
+      result.visibilityHeight = parentMask.visibilityHeight + newMask.visibilityHeight;
+      result.signatureMultiplier = parentMask.signatureMultiplier + newMask.signatureMultiplier - 1f;
+      result.sensorRangeMultiplier = parentMask.sensorRangeMultiplier + newMask.sensorRangeMultiplier - 1f;
+      result.targetabilityModifier = parentMask.targetabilityModifier + newMask.targetabilityModifier;
+      result.meleeTargetabilityModifier = parentMask.meleeTargetabilityModifier + newMask.meleeTargetabilityModifier - 1f;
+      result.grantsGuarded = newMask.grantsGuarded;
+      result.grantsEvasive = newMask.grantsEvasive;
+      result.toHitFromModifier = parentMask.toHitFromModifier + newMask.toHitFromModifier;
+      result.heatSinkMultiplier = parentMask.heatSinkMultiplier + newMask.heatSinkMultiplier - 1f;
+      result.heatPerTurn = parentMask.heatPerTurn + newMask.heatPerTurn;
+      result.legStructureDamageMin = parentMask.legStructureDamageMin + newMask.legStructureDamageMin;
+      result.legStructureDamageMax = parentMask.legStructureDamageMax + newMask.legStructureDamageMax;
+      result.canBurn = newMask.canBurn;
+      result.canExplode = newMask.canExplode;
+      result.allDamageDealtMultiplier = parentMask.allDamageDealtMultiplier + newMask.allDamageDealtMultiplier - 1f;
+      result.allDamageTakenMultiplier = parentMask.allDamageTakenMultiplier + newMask.allDamageTakenMultiplier - 1f;
+      result.antipersonnelDamageDealtMultiplier = parentMask.antipersonnelDamageDealtMultiplier + newMask.antipersonnelDamageDealtMultiplier - 1f;
+      result.antipersonnelDamageTakenMultiplier = parentMask.antipersonnelDamageTakenMultiplier + newMask.antipersonnelDamageTakenMultiplier - 1f;
+      result.energyDamageDealtMultiplier = parentMask.energyDamageDealtMultiplier + newMask.energyDamageDealtMultiplier - 1f;
+      result.energyDamageTakenMultiplier = parentMask.energyDamageTakenMultiplier + newMask.energyDamageTakenMultiplier - 1f;
+      result.ballisticDamageDealtMultiplier = parentMask.ballisticDamageDealtMultiplier + newMask.ballisticDamageDealtMultiplier - 1f;
+      result.ballisticDamageTakenMultiplier = parentMask.ballisticDamageTakenMultiplier + newMask.ballisticDamageTakenMultiplier - 1f;
+      result.missileDamageDealtMultiplier = parentMask.missileDamageDealtMultiplier + newMask.missileDamageDealtMultiplier - 1f;
+      result.missileDamageTakenMultiplier = parentMask.missileDamageTakenMultiplier + newMask.missileDamageTakenMultiplier - 1f;
+      result.audioSwitchSurfaceType = parentMask.audioSwitchSurfaceType;
+      result.audioSwitchRainingSurfaceType = parentMask.audioSwitchRainingSurfaceType;
+      result.customBiomeAudioSurfaceType = parentMask.customBiomeAudioSurfaceType;
+								 
+	!!!!!Not all of this parameters actually used by engine. You can make some experiments to know which of them used actually. 
+	
    "ClearMineFieldRadius": 4, - radius in in-game terrain cells. Minefields in all cells within radius will be cleared in terrain impact.
                                 Clearing on success hit controled by FireOnSuccessHit flag.
    "statusEffects" : [   - will be applied on weapon hit (only "OnHit" effectTriggerType)
