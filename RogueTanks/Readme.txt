@@ -15,11 +15,12 @@ PLANK - Units mostly armed with the odd pirate weapons cobbled together by peopl
 Custom Tags List:
 
 unit_hover,
-unit_noconvoy,
+unit_noconvoy, Things that are too fast, or too slow, to be appropriate and fun in convoys
 unit_primitive,
 unit_carrier,
 unit_stealth,
-unit_predator
+unit_predator, Things with boosted sensor or tagging gear
+unit_vbied, Things with suicide bombs
 
 unit_galleon,
 unit_behemoth,
@@ -34,10 +35,26 @@ unit_hunter,
 
 Changelog:
 
-0.0.0
+7.0.0 - 4/21/2019
+
+Added Clan Streak LRM Carrier,
+Added Clan Mixed Missile Carrier
+Added Hybrid Light Missile carrier,
+Designed and added Ferret medium hunter/killer tank,
+Tagging tweaks for APCs
+
+6.9.5 - 4/20/2019
+
+Added five Partisan variants using Colo's model
+
+6.9.0 - 4/15 -> 4/17/2019
 
 Oro to Colo's Oro model,
 Shamash to Savannah Master model,
+Marked VBIED vehicles as legendary to keep their numbers down,
+Clearer name for pirate Harrasser VBIED,
+Added unit_vbied tag,
+Recalced vehicle movedefs based on effective average hex size according to Cpt Moore.
 
 6.8.4
 
