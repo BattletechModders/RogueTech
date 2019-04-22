@@ -35,10 +35,11 @@ unit_hunter,
 
 Changelog:
 
-6.9.9 - 4/21/2019
+7.0.0 - 4/21/2019
 
 Added Clan Streak LRM Carrier,
 Added Clan Mixed Missile Carrier
+Added Hybrid Light Missile carrier,
 Designed and added Ferret medium hunter/killer tank,
 Tagging tweaks for APCs
 
