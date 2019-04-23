@@ -1,11 +1,10 @@
 {
     "Custom": {
         "Category": [{
-            "CategoryID": "ArmActuator"
+            "CategoryID": "ArmLowerActuator"
         }],
         "ArmActuator": {
-            "AccuracyBonus": -3,
-            "Type": "Lower"
+            "Type": "PartLower"
         },
         "BonusDescriptions": {
             "Bonuses": [
@@ -21,37 +20,6 @@
         },
         "InventorySorter": {
             "SortKey": "00020"
-        },
-        "CriticalHitStates": {
-            "MaxStates": 1,
-            "HitEffects": [
-                {
-                    "State": 1,
-                    "StatusEffect": {
-                        "durationData": {},
-                        "targetingData": {
-                            "effectTargetsCreator": true,
-                            "effectTriggerType": "Passive",
-                            "effectTargetType": "Creator"
-                        },
-                        "effectType": "StatisticEffect",
-                        "Description": {
-                            "Id": "HandCrit1",
-                            "Name": "Mount Critical",
-                            "Details": "Reduced Accuracy",
-                            "Icon": "uixSvgIcon_equipment_ActuatorArm"
-                        },
-                        "nature": "Debuff",
-                        "statisticData": {
-                            "statName": "AccuracyModifier",
-                            "operation": "Float_Add",
-                            "modValue": "1.0",
-                            "modType": "System.Single",
-                            "targetCollection": "Weapon"
-                        }
-                    }
-                }
-            ]
         }
     },
     "StatName": null,
@@ -81,6 +49,32 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id" : "Status-LowerAccuracy-{location}",
+                "Name": "Lower Arm Accuracy",
+                "Details": "+1 Arm mounted accuracy.",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName" : "{location}.Accuracy",
+                "operation" : "Float_Add",
+                "modValue" : "-3",
+                "modType" : "System.Single"
+            }
+        },	
         {
             "durationData": {
                 "duration": -1,

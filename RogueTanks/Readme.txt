@@ -15,11 +15,12 @@ PLANK - Units mostly armed with the odd pirate weapons cobbled together by peopl
 Custom Tags List:
 
 unit_hover,
-unit_noconvoy,
+unit_noconvoy, Things that are too fast, or too slow, to be appropriate and fun in convoys
 unit_primitive,
 unit_carrier,
 unit_stealth,
-unit_predator
+unit_predator, Things with boosted sensor or tagging gear
+unit_vbied, Things with suicide bombs
 
 unit_galleon,
 unit_behemoth,
@@ -36,9 +37,129 @@ Changelog:
 
 0.0.0
 
-Adjusted light vehicles, carriers, pirate and primitive to conform to current naming conventions.
-Fixed dupe IDs in SchreckAC and Primitive Schreck
-Minor fixes.
+Tweaked vehicle stealth to follow the current style of mech stealth,
+Removed LRM and SRM Artemis standin files that have long been unused.
+Tweaked the Bardiche,
+Found a couple tanks to give the double mg bin which otherwise was not used on *any* units,
+Fixed wrong ammo on Myrmimdon_INF
+
+7.0.0 - 4/21/2019
+
+Added Clan Streak LRM Carrier,
+Added Clan Mixed Missile Carrier
+Added Hybrid Light Missile carrier,
+Designed and added Ferret medium hunter/killer tank,
+Tagging tweaks for APCs
+
+6.9.5 - 4/20/2019
+
+Added five Partisan variants using Colo's model
+
+6.9.0 - 4/15 -> 4/17/2019
+
+Oro to Colo's Oro model,
+Shamash to Savannah Master model,
+Marked VBIED vehicles as legendary to keep their numbers down,
+Clearer name for pirate Harrasser VBIED,
+Added unit_vbied tag,
+Recalced vehicle movedefs based on effective average hex size according to Cpt Moore.
+
+6.8.4
+
+Lady added new pathingdefs for minefield interactions
+Implemented new hover pathing defs on all hover units,
+Corrected some tracked/wheeled defs that were wrong type or weight.
+
+6.8.1
+
+Removed Noncombat tag from APCs that have had a bunch of cargo space replaced with serious weapon systems.
+    This will make them sometimes appear in combat lances.
+Added HPPC Demolisher
+
+6.8.0 - 4/8/2019
+
+Changed models used for 
+    JES II,
+    Gorgon,
+    Thumpers,
+    Ballista,
+    Po heavy tanks,
+    Ontos,
+    Behemoths
+
+6.7.9 - 4/7/2019
+
+Added Arrow IV Assault Vehicle to naga folder
+Added Ballista (Sniper Arty Tank)
+Added Pirate Thumper
+
+6.7.6 - 4/7/2019
+
+Gave missing TTS to some carriers. Removed some from the Light carriers that were not supposed to have them.
+Distributed more APFSDS ammo to primitive tanks.
+Gave FASCAM ARROW IV ammo to a couple Naga folder tanks.
+
+6.7.3
+
+Added JES-II (95 ton Jihad era lrm carrier),
+Added Pirate Harasser (Which...suspiciously...is missing an SRM rack)
+
+6.7.1 - 4/5/2019
+
+Added JES 1 (medium srm hovertank)
+Fixed a bunch of hovertank pathingdefs
+
+6.6.9
+
+Added VBIED APC
+
+6.6.8
+
+Added Alacorn IIC and Alacorn IIC-A
+
+6.6.6 - 4/3/2019
+
+Added Light Mortar Carrier,
+Ammo tweaks, (RIP Raza)
+Minor Fixes
+
+6.6.4 - 3/30/2019
+
+Added Thumper_Angel arty vehicle,
+Minor fixes
+
+6.6.2 - 3/29/2019
+
+Added crappy Hetzer with Quickcell AC10,
+misc minor vehicle fixes.
+
+6.6.0 - 3/23/2019
+
+Scale update. Fixed/Updated all vehicle scaling.
+Added Vehicle Born IED trucks, 15 tons for HE and Fire, and a Nuke one in the Urbienuke
+Added VBIED FIretruck
+
+6.5.5
+
+Added Mortar Techies,
+Added Mortar Carrier (60 ton),
+Minor fixes
+
+6.5.0
+
+Goblin Update
+    Added LRM and SRM variants,
+    Fixed Goblin scaling,
+    Fixed weight class
+Minor fixes
+
+6.4.5 - 3/16/2019
+
+Adjusted all vehicle filenames/ids to conform to current naming conventions,
+Fixed dupe IDs in SchreckAC and Primitive Schreck,
+Added Pegasus_MG,
+Added Drillson ICE, ERLL, SRM,
+Minor fixes
 
 6.2.9 - 3/13/2019
 

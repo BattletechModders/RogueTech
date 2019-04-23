@@ -1,5 +1,7 @@
 Unpack to Mods folder
 
+WARNING! If you use AIM mod you need to have special patched version or set ShowMissMargin to false in AIM settings. 
+
 Settings 
 CustomAmmoCategoriesSettings.json
 
@@ -24,8 +26,52 @@ ctrl+left click on weapon slot will eject current ammo
                       0 < X < 1.0f AI will prefer damage jamming modes/ammo (i don't know why it needs, but you can)
 					  NOTE: if AI has exposed locations, it will lose all fear and will not avoid dangerous modes and ammo.
 "AmmoCanBeExhausted":true - enables or disables ammo exhaustion mechanic. See CanBeExhaustedAt parameter is ammo definition.
+"BurningForestDesignMask":"DesignMaskBurningForest", - design mask for burning forest
+"BurnedForestDesignMask":"DesignMaskBurnedForest",  - design mask for burned forest
+"BurningTerrainDesignMask":"DesignMaskBurningTerrain" - design mask for burning terrain
+"BurningForestCellRadius":3, - size of hex cell in grid used for terrain effects supported values 3,4 (you should not change this until you know what doing)
+"BurningForestTurns":3, - rounds forest on fire
+"AdditinalAssets": ["nuked"], - additional assets for VFX to load on init
+"BurningForestStrength":30, - heat damage for burning forest
+"BurningForestBaseExpandChance":0.5, - chance to expand for burning cell (fire can be expanded only to hex cell with forest)
+"DynamicDesignMasksDefs":["DesignMaskCrystals","DesignMaskForest","DesignMaskGeothermal","DesignMaskGeothermalLava","DesignMaskIce","DesignMaskRadiation","DesignMaskSpores","DesignMaskBurningForest","DesignMaskBurnedForest","DesignMaskBurningTerrain"],
+ list of design mask to load. <BurningForestDesignMask> and <BurnedForestDesignMask> should always included to this list. 
+"BurningFX":"vfxPrfPrtl_fireTerrain_lrgLoop", - VFX prefab spawned in hex cell on fire
+"BurnedFX":"vfxPrfPrtl_miningSmokePlume_lrg_loop", - not used any more
+"BurningScaleX":1, - scale for burning VFX (note not all VFXes supports scaling vfxPrfPrtl_fireTerrain_lrgLoop does not)
+"BurningScaleY":1,
+"BurningScaleZ":1,
+"BurnedScaleX":1,  - scale for burned VFX (note not all VFXes supports scaling vfxPrfPrtl_miningSmokePlume_lrg_loop does not)
+"BurnedScaleY":1,
+"BurnedScaleZ":1,
+"BurnedOffsetX":0, - offset for burning VFX
+"BurnedOffsetY":0,
+"BurnedOffsetZ":0,
+"BurningOffsetX":0, - offset for burned VFX
+"BurningOffsetY":0,
+"BurningOffsetZ":0,
+"DontShowNotDangerouceJammMessages": true, - if true cooldown and jamming weapon without damage not cause floatie message
+"MineFieldPathingMods":{ - landmines hit roll modificator by pathing. Effective value multiplicative. If not found in this table consider as 1.0.
+    "pathingdef_light":0,
+	"pathingdef_medium":0.5
+  },
+"JumpLandingMineAttractRadius": 2, - radius of terrain cells affected on landing after jump
+"BurnedTrees":{  - better not to change anything unless you know what you are doing 
+  "Mesh":"envMdlTree_deadWood_polar_frozen_shapeA_LOD0", - prefab containing burned tree mesh (must be loaded as part of additional assets)
+  "BumpMap":"envTxrTree_treesVaried_polar_frozen_nrm", - burned trees textures (must be loaded as part of additional assets)
+  "MainTex":"envTxrTree_treesVaried_polar_frozen_alb",
+  "OcculusionMap":"envTxrTree_treesVaried_polar_frozen_amb",
+  "Transmission":"envTxrTree_treesVaried_polar_frozen_trs",
+  "MetallicGlossMap":"envTxrTree_treesVaried_polar_frozen_mtl",
+  "BurnedTreeScale":2,  - scale of burned trees 
+  "DecalScale":40, - size of burned terrain decale
+  "DecalTexture":"envTxrDecl_terrainDmgSmallBlack_alb" - burned terrain decale texture (must be loaded as part of additional assets)
+},
+"DontShowBurnedTrees":false, - if true burned trees will be hidden instead of drawing burned variant
+"DontShowScorchTerrain":false - if true burned terrain decal will not be applied 
 }
 
+now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
 CustomAmmoCategories.json
 [
 {
@@ -80,7 +126,7 @@ new fields
   "AMSShootsEveryAttack": false, - if true AMS will not share AMS.ShootsWhenFired between all missile attacks this round. 
                                        Every missile attack will cause AMS.ShootsWhenFired shoots. 
 								   if false AMS will shoot AMS.ShootsWhenFired per round
-  "AMSImmune": false, - if true, weapon missiles is immune to AMS and none AMS will try to intercept them.
+  "AMSImmune": false - if true, weapon missiles is immune to AMS and none AMS will try to intercept them.
   "AOECapable" : false, - if true weapon will included in AOE damage calculations. If true set in weapon definition 
                             all shoots will have AoE effect (even for energy weapon). If true, it can't be overridden by ammo.
   "AOERange": 100, - Area of effect range. If AOECapable in weapon is set to true this value will be used. If AOECapable is true, it can't be overridden by ammo.
@@ -97,14 +143,48 @@ new fields
   "HasShells": true/false, if defined determinate has shots shrapnel effect or not. If defined can't be overriden by ammo or mode. 
                             Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
                             Damage per shell - full damage per projectile / ProjectilesPerShot
-                            Only for missiles effect now. Should not be used with AoE.
+                            Only for missiles and ballistic effects. Should not be used with AoE.
+							Please note, if you are using HasShells with wr-clustered_shots tag behavior may be undesired 
+							cause in that case WeaponRealizer's code controlling impact damage calculations.
+							"DisableClustering":false also should not be used either set it to true or delete at all. 
+							"WeaponEffect-Weapon_AC2" should not be used as "WeaponEffectID" you can replace it with "WeaponEffect-Weapon_AC5" 
+							nor internally nor visual it wouldn't have any difference
   "ShellsRadius": 90, determines if shells will have spreading. Works same way as SpreadRange. Per weapon value will be used if HasShells is true for this weapon.
   "MinShellsDistance": 30, Minimum distance missile have to fly before explode. Min value 30.
   "MaxShellsDistance": 100, Distance from end of trajectory where missile should separate. Min value 20
                              Note: example - trajectory length 200, min 80, max 100 - missile will separate 100m from end.
 							       example 2 trajectory length 100, min 80, max 100 - missile will separate 20m from end cause it have to fly 80m until separation. 
 								   example 3 trajectory length 100 min 120, max 200 - missile will not separate at all. 
-	"Modes": array of modes for weapon
+  "Unguided": false, for missiles effect only. If true missile trajectory will be strait line instead of curvy. Like it is unguided as old WW2 rockets. 
+					True value tied IndirectCapablea and AlwaysIndirectVisuals to false. 
+					logic: if ammo unguided is true - launch will be unguided no matter mode and weapon settings, 
+					if ammo unguided is false or not set i'm looking at mode. if mode unguided is true launch will be unguided, 
+					if mode unguided is false or not set i'm looking at weapon. 
+					if weapon unguided is true launch will be unguided if not set or false launch will be guided
+  "FireTerrainChance":1, - chance to fireup hex cell. Additive for weapon, ammo and mode
+  "FireDurationWithoutForest":1, - duration of fire if hex cell has no forest, if > 0 even hex cell with no forest will burn. 
+                                  If cell have forest burn period is max from FireDurationWithoutForest and BurningForestTurns
+								  additive for weapon mode and ammo.
+  "FireTerrainStrength":0, - strength of fire. If 0 and hex cell have no forest cell will not fire. If > 0 and hex cell have forest strength is max from FireTerrainStrength and BurningForestStrength
+                                  additive for weapon mode and ammo.
+  "FireOnSuccessHit" : true, - if true roll to fire hex cell will be permitted even on success hit. In that case fire hex cell will be detected as current target position. 
+                               if false only projectiles that hits ground have chance to fire terrain. If ommited in weapon ammo and mode supposed as false.
+							   mode value have priority, than ammo and than weapon.
+					NOTES: expanding logic each turn each burning cell (no matter having forest or not) have BurningForestBaseExpandChance to expand no neighbour cell with forest 
+					       burning cell not counted as forest.
+						   If mech or vehicle ending move in burning cell they suffer heat damage. For mech it is heat damage, for vehicle it is normal damage splitted by all locations except turret.
+						   Damage inflicted to vehicle that way are not cause critical damage to internal components only armor and structure.
+						   Fired cell not saved on battle save/reload.
+   "FireTerrainCellRadius":6, - radius in in-game cells to fire check roll. On impact each hex cell containing at least one map cell with in radius will have chance to be burned
+                                additive for weapon mode and ammo.
+   "AdditionalImpactVFX":"WFX_Nuke", - additional VFX played on impact. Mode have priority, than ammo, than weapon. Long played effects not supposed. 
+                                       Effect game object will be cleaned and returned to pool on next fire sequence of this weapon. 
+   "AdditionalImpactVFXScaleX":10, - scale of additional VFX, used only when AdditionalImpactVFX is not empty. Note, not all VFXs supports scaling.
+   "AdditionalImpactVFXScaleY":10,
+   "AdditionalImpactVFXScaleZ":10,
+   "ClearMineFieldRadius": 4, - radius in in-game terrain cells. Minefields in all cells within radius will be cleared in terrain impact.
+                                Clearing on success hit controled by FireOnSuccessHit flag.
+   "Modes": array of modes for weapon
 	[{
 		"Id": "x4",  - Must be unique per weapon
 		"UIName": "x4", - This string will be displayed near weapon name
@@ -170,13 +250,47 @@ new fields
       "HasShells": true/false, if defined determinate has shots shrapnel effect for this mode or not. If defined can't be overriden by ammo. 
                             Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
                             Damage per shell - full damage per projectile / ProjectilesPerShot
-                            Only for missiles effect now. Should not be used with AoE.
+                            Only for missiles and ballistic effects. Should not be used with AoE.
+							Please note, if you are using HasShells with wr-clustered_shots tag behavior may be undesired 
+							cause in that case WeaponRealizer's code controlling impact damage calculations 
+							"DisableClustering":false also should not be used either set it to true or delete at all. 
+							"WeaponEffect-Weapon_AC2" should not be used as "WeaponEffectID" you can replace it with "WeaponEffect-Weapon_AC5" 
+							nor internally nor visual it wouldn't have any difference
 	  "ShellsRadius": 90, determines if shells will have spreading. Works same way as SpreadRange. Per mode value will be used if HasShells is true for this mode.
 	  "MinShellsDistance": 30, Minimum distance missile have to fly before explode. Min value 30.
 	  "MaxShellsDistance": 100, Distance from end of trajectory where missile should separate. Min value 20
 								 Note: example - trajectory length 200, min 80, max 100 - missile will separate 100m from end.
 									   example 2 trajectory length 100, min 80, max 100 - missile will separate 20m from end cause it have to fly 80m until separation. 
 									   example 3 trajectory length 100 min 120, max 200 - missile will not separate at all. 
+	  "Unguided": false, for missiles effect only. If true missile trajectory will be strait line instead of curvy. Like it is unguided as old WW2 rockets. 
+						True value tied IndirectCapablea and AlwaysIndirectVisuals to false
+					logic: if ammo unguided is true - launch will be unguided no matter mode and weapon settings, 
+					if ammo unguided is false or not set i'm looking at mode. if mode unguided is true launch will be unguided, 
+					if mode unguided is false or not set i'm looking at weapon. 
+					if weapon unguided is true launch will be unguided if not set or false launch will be guided
+  "FireTerrainChance":1, - chance to fireup hex cell. Additive for weapon, ammo and mode
+  "FireDurationWithoutForest":1, - duration of fire if hex cell has no forest, if > 0 even hex cell with no forest will burn. 
+                                  If cell have forest burn period is max from FireDurationWithoutForest and BurningForestTurns
+								  additive for weapon mode and ammo.
+  "FireTerrainStrength":0, - strength of fire. If 0 and hex cell have no forest cell will not fire. If > 0 and hex cell have forest strength is max from FireTerrainStrength and BurningForestStrength
+                                  additive for weapon mode and ammo.
+  "FireOnSuccessHit" : true, - if true roll to fire hex cell will be permitted even on success hit. In that case fire hex cell will be detected as current target position. 
+                               if false only projectiles that hits ground have chance to fire terrain. If ommited in weapon ammo and mode supposed as false.
+							   mode value have priority, than ammo and than weapon.
+					NOTES: expanding logic each turn each burning cell (no matter having forest or not) have BurningForestBaseExpandChance to expand no neighbour cell with forest 
+					       burning cell not counted as forest.
+						   If mech or vehicle ending move in burning cell they suffer heat damage. For mech it is heat damage, for vehicle it is normal damage splitted by all locations except turret.
+						   Damage inflicted to vehicle that way are not cause critical damage to internal components only armor and structure.
+						   Fired cell not saved on battle save/reload.
+   "FireTerrainCellRadius":6, - radius in in-game cells to fire check roll. On impact each hex cell containing at least one map cell with in radius will have chance to be burned
+                                additive for weapon mode and ammo.
+   "AdditionalImpactVFX":"WFX_Nuke", - additional VFX played on impact. Mode have priority, than ammo, than weapon. Long played effects not supposed. 
+                                       Effect game object will be cleaned and returned to pool on next fire sequence of this weapon. 
+   "AdditionalImpactVFXScaleX":10, - scale of additional VFX, used only when AdditionalImpactVFX is not empty. Note, not all VFXs supports scaling.
+   "AdditionalImpactVFXScaleY":10,
+   "AdditionalImpactVFXScaleZ":10,
+   "ClearMineFieldRadius": 4, - radius in in-game terrain cells. Minefields in all cells within radius will be cleared in terrain impact.
+                                Clearing on success hit controled by FireOnSuccessHit flag.
 	}]
   
   
@@ -273,7 +387,12 @@ Ammo definition
   "HasShells": true/false, if defined determinate has shots shrapnel effect for this ammo or not. 
 						Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
 						Damage per shell - full damage per projectile / ProjectilesPerShot
-						Only for missiles effect now. Should not be used with AoE.
+						Only for missiles and ballistic effects. Should not be used with AoE.
+						Please note, if you are using HasShells with wr-clustered_shots tag behavior may be undesired 
+						cause in that case WeaponRealizer's code controlling impact damage calculations 
+						"DisableClustering":false also should not be used either set it to true or delete at all. 
+						"WeaponEffect-Weapon_AC2" should not be used as "WeaponEffectID" you can replace it with "WeaponEffect-Weapon_AC5" 
+						nor internally nor visual it wouldn't have any difference
   "ShellsRadius": 90, determines if shells will have spreading. Works same way as SpreadRange. Per mode value will be used if HasShells is true for this mode.
   "MinShellsDistance": 30, Minimum distance missile have to fly before explode. Min value 30.
   "MaxShellsDistance": 100, Distance from end of trajectory where missile should separate. Min value 20
@@ -293,6 +412,129 @@ Ammo definition
 								(CanBeExhaustedAt - (ammo level)) / (ammo level) chance to be exhausted. Which means component become destroyed without explosion.	
 								Example: ammo box has capacity 10, ammo has CanBeExhaustedAt - 0.5, current ammo upon check - 4. Exhaustion chance = (0.5 - 0.4)/0.5 = 0.2
 								Note: if current ammo is 0, Exhaustion chance become 1. One ammo box checked once per attack. Ammo ejections initiates exhaustion check too. 
+    "Unguided": false, for missiles effect only. If true missile trajectory will be strait line instead of curvy. Like it is unguided as old WW2 rockets. 
+	               True value tied IndirectCapablea and AlwaysIndirectVisuals to false
+					logic: if ammo unguided is true - launch will be unguided no matter mode and weapon settings, 
+					if ammo unguided is false or not set i'm looking at mode. if mode unguided is true launch will be unguided, 
+					if mode unguided is false or not set i'm looking at weapon. 
+					if weapon unguided is true launch will be unguided if not set or false launch will be guided
+   "MineFieldRadius": 3, - Radius of minefield in in-game cells (one cell have 4x4 size)
+   "MineFieldCount": 1, - Count of mines in one cell
+   "MineFieldHeat": 4, - Heat damage from one mine explosion
+   "MineFieldHitChance": 0.12, - Chance of mine explosion when actor steps to cell
+   "MineFieldDamage": 4, - normal damage from one mine explosion
+                      Notes: each projectile hited ground creates mine field. Projectile hits target inflicts normal damage and not creating minefield.
+					         On ground impact for each projectile affected cell is calculated base on MineFieldRadius.
+							 For radius 3 it will looks approximately like this(X it is cell where projectile hits ground)
+                               #####
+                              #######
+                             #########
+                             ####X####
+                             #########
+                              #######
+                               #####
+						     For each affected cell added record for mine field. This record contains info: MineFieldCount, MineFieldHitChance, MineFieldDamage, MineFieldHeat.
+							 Cell can have unlimited mine fields records count (as long as there is enough memory, but cause each record uses very little amount of memory maximum count is about billions and literally unreachable).
+							 On end on each move(or sprint) sequence list of cells actor visited is gathered.  
+							 For each cell actor visited for each mine field record in these cells check is performed.
+							 If count of mines in record grater than zero performed roll on MineFieldHitChance. If roll success mine counter in this record decremented, 
+							 heat and damage incremented by MineFieldHeat and MineFieldDamage accordingly.
+							 after all mine fields in path itterated damage and heat implemented to actor. If damage is lethal score added to owner of last minefield inflicted damage.
+							 For meches damage splited between two legs and heat implemented as heat. Heat applied at end of activation. 
+							 For vehicle damage splited between four locations (front,back,left,right) heat impemented as normal damage
+   						     Damage inflicted that way are not cause critical damage to internal components only armor and structure.
+	  					     Minefields not saved on battle save/reload.
+							 Note on melee through mine field: if mech while moving to melee targets suffer normal damage attack will be interrupted. 
+							 Mech get close to target but nor attack animation played nor melee damage inflicted.
+							 Note on DFA attack on target standing on mine field: damage will be inflicted normaly AFTER DFA attack completes 
+  "FireTerrainChance":1, - chance to fireup hex cell. Additive for weapon, ammo and mode
+  "FireDurationWithoutForest":1, - duration of fire if hex cell has no forest, if > 0 even hex cell with no forest will burn. 
+                                  If cell have forest burn period is max from FireDurationWithoutForest and BurningForestTurns
+								  additive for weapon mode and ammo.
+  "FireTerrainStrength":0, - strength of fire. If 0 and hex cell have no forest cell will not fire. If > 0 and hex cell have forest strength is max from FireTerrainStrength and BurningForestStrength
+                                  additive for weapon mode and ammo.
+  "FireOnSuccessHit" : true, - if true roll to fire hex cell will be permitted even on success hit. In that case fire hex cell will be detected as current target position. 
+                               if false only projectiles that hits ground have chance to fire terrain. If ommited in weapon ammo and mode supposed as false.
+							   mode value have priority, than ammo and than weapon.
+					NOTES: expanding logic each turn each burning cell (no matter having forest or not) have BurningForestBaseExpandChance to expand no neighbour cell with forest 
+					       burning cell not counted as forest.
+						   If mech or vehicle ending move in burning cell they suffer heat damage. For mech it is heat damage, for vehicle it is normal damage splitted by all locations except turret.
+						   Damage inflicted to vehicle that way are not cause critical damage to internal components only armor and structure.
+						   Fired cell not saved on battle save/reload.
+   "FireTerrainCellRadius":6, - radius in in-game cells to fire check roll. On impact each hex cell containing at least one map cell with in radius will have chance to be burned
+                                additive for weapon mode and ammo.
+   "AdditionalImpactVFX":"WFX_Nuke", - additional VFX played on impact. Mode have priority, than ammo, than weapon. Long played effects not supposed. 
+                                       Effect game object will be cleaned and returned to pool on next fire sequence of this weapon. 
+   "AdditionalImpactVFXScaleX":10, - scale of additional VFX, used only when AdditionalImpactVFX is not empty. Note, not all VFXs supports scaling.
+   "AdditionalImpactVFXScaleY":10,
+   "AdditionalImpactVFXScaleZ":10,
+   "LongVFXOnImpact": "vfxPrfPrtl_artillerySmokeSignal_loop", - terrain impact vfx supposed to be played few turns 
+   "LongVFXOnImpactScaleX":3, - scale for persistent terrain vfx 
+   "LongVFXOnImpactScaleY":20,
+   "LongVFXOnImpactScaleZ":3,
+   "tempDesignMaskCellRadius":6, - radius in in-game cells to fire check roll. On impact each hex cell containing at least one map cell with in radius will be affected by change
+   "tempDesignMaskOnImpactTurns":3, - count of turns persistent terrain effect played
+   "tempDesignMaskOnImpact":"DesignMaskSmoke", - design mask applied on impact
+                                 NOTE: tempDesignMaskOnImpact design mask are not superseding original mask (if avaible) instead new design mask creating at runtime. 
+								 This new mask is result of addition current terrain mask and tempDesignMaskOnImpact. All integer or float values is addiditve. 
+								 Name will be result of concatenation as well as description. Sticky effects concatenating too. 
+								 Appliance of mask and visuals on success hit is controled by FireOnSuccessHit flag. 
+								 NOTE on design mask concatenation: if no other mask on terrain, temp mask will be implemented as defined. If there is other mask
+	result - effective resulting mask.
+    parentMask - undelying mask
+	newMask - applying mask
+	
+      result.Description.Name = parentMask.Description.Name + " " + newMask.Description.Name;
+      result.Description.Details = parentMask.Description.Details + "\n" + newMask.Description.Details;
+      result.Description.Icon = newMask.Description.Icon;
+      result.hideInUI = newMask.hideInUI;
+      result.moveCostMechLight = parentMask.moveCostMechLight + newMask.moveCostMechLight - 1f;
+      result.moveCostMechMedium = parentMask.moveCostMechMedium + newMask.moveCostMechMedium - 1f; 
+      result.moveCostMechHeavy = parentMask.moveCostMechHeavy + newMask.moveCostMechHeavy - 1f; 
+      result.moveCostMechAssault = parentMask.moveCostMechAssault + newMask.moveCostMechAssault - 1f; 
+      result.moveCostTrackedLight = parentMask.moveCostTrackedLight + newMask.moveCostTrackedLight - 1f; 
+      result.moveCostTrackedMedium = parentMask.moveCostTrackedMedium + newMask.moveCostTrackedMedium - 1f; 
+      result.moveCostTrackedHeavy = parentMask.moveCostTrackedHeavy + newMask.moveCostTrackedHeavy - 1f; 
+      result.moveCostTrackedAssault = parentMask.moveCostTrackedAssault + newMask.moveCostTrackedAssault - 1f; 
+      result.moveCostWheeledLight = parentMask.moveCostWheeledLight + newMask.moveCostWheeledLight - 1f; 
+      result.moveCostWheeledMedium = parentMask.moveCostWheeledMedium + newMask.moveCostWheeledMedium - 1f; 
+      result.moveCostWheeledHeavy = parentMask.moveCostWheeledHeavy + newMask.moveCostWheeledHeavy - 1f; 
+      result.moveCostWheeledAssault = parentMask.moveCostWheeledAssault + newMask.moveCostWheeledAssault - 1f;
+      result.moveCostSprintMultiplier = parentMask.moveCostSprintMultiplier + newMask.moveCostSprintMultiplier - 1f;
+      result.stabilityDamageMultiplier = parentMask.stabilityDamageMultiplier + newMask.stabilityDamageMultiplier - 1f;
+      result.visibilityMultiplier = parentMask.visibilityMultiplier + newMask.visibilityMultiplier - 1f;
+      result.visibilityHeight = parentMask.visibilityHeight + newMask.visibilityHeight;
+      result.signatureMultiplier = parentMask.signatureMultiplier + newMask.signatureMultiplier - 1f;
+      result.sensorRangeMultiplier = parentMask.sensorRangeMultiplier + newMask.sensorRangeMultiplier - 1f;
+      result.targetabilityModifier = parentMask.targetabilityModifier + newMask.targetabilityModifier;
+      result.meleeTargetabilityModifier = parentMask.meleeTargetabilityModifier + newMask.meleeTargetabilityModifier - 1f;
+      result.grantsGuarded = newMask.grantsGuarded;
+      result.grantsEvasive = newMask.grantsEvasive;
+      result.toHitFromModifier = parentMask.toHitFromModifier + newMask.toHitFromModifier;
+      result.heatSinkMultiplier = parentMask.heatSinkMultiplier + newMask.heatSinkMultiplier - 1f;
+      result.heatPerTurn = parentMask.heatPerTurn + newMask.heatPerTurn;
+      result.legStructureDamageMin = parentMask.legStructureDamageMin + newMask.legStructureDamageMin;
+      result.legStructureDamageMax = parentMask.legStructureDamageMax + newMask.legStructureDamageMax;
+      result.canBurn = newMask.canBurn;
+      result.canExplode = newMask.canExplode;
+      result.allDamageDealtMultiplier = parentMask.allDamageDealtMultiplier + newMask.allDamageDealtMultiplier - 1f;
+      result.allDamageTakenMultiplier = parentMask.allDamageTakenMultiplier + newMask.allDamageTakenMultiplier - 1f;
+      result.antipersonnelDamageDealtMultiplier = parentMask.antipersonnelDamageDealtMultiplier + newMask.antipersonnelDamageDealtMultiplier - 1f;
+      result.antipersonnelDamageTakenMultiplier = parentMask.antipersonnelDamageTakenMultiplier + newMask.antipersonnelDamageTakenMultiplier - 1f;
+      result.energyDamageDealtMultiplier = parentMask.energyDamageDealtMultiplier + newMask.energyDamageDealtMultiplier - 1f;
+      result.energyDamageTakenMultiplier = parentMask.energyDamageTakenMultiplier + newMask.energyDamageTakenMultiplier - 1f;
+      result.ballisticDamageDealtMultiplier = parentMask.ballisticDamageDealtMultiplier + newMask.ballisticDamageDealtMultiplier - 1f;
+      result.ballisticDamageTakenMultiplier = parentMask.ballisticDamageTakenMultiplier + newMask.ballisticDamageTakenMultiplier - 1f;
+      result.missileDamageDealtMultiplier = parentMask.missileDamageDealtMultiplier + newMask.missileDamageDealtMultiplier - 1f;
+      result.missileDamageTakenMultiplier = parentMask.missileDamageTakenMultiplier + newMask.missileDamageTakenMultiplier - 1f;
+      result.audioSwitchSurfaceType = parentMask.audioSwitchSurfaceType;
+      result.audioSwitchRainingSurfaceType = parentMask.audioSwitchRainingSurfaceType;
+      result.customBiomeAudioSurfaceType = parentMask.customBiomeAudioSurfaceType;
+								 
+	!!!!!Not all of this parameters actually used by engine. You can make some experiments to know which of them used actually. 
+	
+   "ClearMineFieldRadius": 4, - radius in in-game terrain cells. Minefields in all cells within radius will be cleared in terrain impact.
+                                Clearing on success hit controled by FireOnSuccessHit flag.
    "statusEffects" : [   - will be applied on weapon hit (only "OnHit" effectTriggerType)
         {
             "durationData" : {
