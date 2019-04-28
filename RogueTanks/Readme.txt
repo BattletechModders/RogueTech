@@ -35,13 +35,17 @@ unit_hunter,
 
 Changelog:
 
-0.0.0
+7.0.9 - 4/27/2019
 
 Tweaked vehicle stealth to follow the current style of mech stealth,
 Removed LRM and SRM Artemis standin files that have long been unused.
 Tweaked the Bardiche,
 Found a couple tanks to give the double mg bin which otherwise was not used on *any* units,
 Fixed wrong ammo on Myrmimdon_INF
+Added Pirate Shepard
+Added Clan Oro (UAC5)
+Added Clan Oro (Gauss)
+minor fixes
 
 7.0.0 - 4/21/2019
 
