@@ -35,6 +35,13 @@ unit_hunter,
 
 Changelog:
 
+7.1.0 - 4/30/2019
+
+Added Marksman Artilery Vehicle,
+Minor fixes for other arty vehicles
+
+Note that adding crit-able default internals, including motive systems, has been done to all vehicles on or about this date.
+
 7.0.9 - 4/27/2019
 
 Tweaked vehicle stealth to follow the current style of mech stealth,
