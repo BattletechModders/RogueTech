@@ -35,6 +35,10 @@ unit_hunter,
 
 Changelog:
 
+7.1.1
+
+Added MRM Demolisher
+
 7.1.0 - 4/30/2019
 
 Added Marksman Artilery Vehicle,
