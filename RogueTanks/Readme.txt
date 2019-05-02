@@ -31,9 +31,17 @@ unit_brutus,
 unit_pegasus,
 unit_zephyr,
 unit_hunter,
+unit_demolisher <- Literally every faction has these
 
 
 Changelog:
+
+7.1.5
+
+Added Clan ATM Carrier,
+Added missing CASE to Clan vehicles,
+Made "unit_demolisher" tag to enable special lances with them,
+minor fixes
 
 7.1.1
 
