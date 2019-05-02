@@ -31,7 +31,7 @@ unit_brutus,
 unit_pegasus,
 unit_zephyr,
 unit_hunter,
-unit_demolisher
+unit_demolisher <- Literally every faction has these
 
 
 Changelog:
