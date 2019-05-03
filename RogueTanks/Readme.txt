@@ -36,9 +36,10 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+7.1.7 - 5/3/2019
+
 Added Clan Gauss Demolisher,
 Fixed laser Morrigu haveing 4 engine cores LOL,
-
 
 7.1.5
 
