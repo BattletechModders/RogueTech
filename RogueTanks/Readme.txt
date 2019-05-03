@@ -31,17 +31,40 @@ unit_brutus,
 unit_pegasus,
 unit_zephyr,
 unit_hunter,
+unit_demolisher <- Literally every faction has these
 
 
 Changelog:
 
-0.0.0
+7.1.5
+
+Added Clan ATM Carrier,
+Added missing CASE to Clan vehicles,
+Made "unit_demolisher" tag to enable special lances with them,
+minor fixes
+
+7.1.1
+
+Added MRM Demolisher
+
+7.1.0 - 4/30/2019
+
+Added Marksman Artilery Vehicle,
+Minor fixes for other arty vehicles
+
+Note that adding crit-able default internals, including motive systems, has been done to all vehicles on or about this date.
+
+7.0.9 - 4/27/2019
 
 Tweaked vehicle stealth to follow the current style of mech stealth,
 Removed LRM and SRM Artemis standin files that have long been unused.
 Tweaked the Bardiche,
 Found a couple tanks to give the double mg bin which otherwise was not used on *any* units,
 Fixed wrong ammo on Myrmimdon_INF
+Added Pirate Shepard
+Added Clan Oro (UAC5)
+Added Clan Oro (Gauss)
+minor fixes
 
 7.0.0 - 4/21/2019
 
