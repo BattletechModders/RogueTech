@@ -36,6 +36,10 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+Added Clan Gauss Demolisher,
+Fixed laser Morrigu haveing 4 engine cores LOL,
+
+
 7.1.5
 
 Added Clan ATM Carrier,
