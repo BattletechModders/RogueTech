@@ -4,109 +4,125 @@
             "UIColor": "Gold"
         },
         "DynamicSlots": {
-            "ReservedSlots": 14,
+            "ReservedSlots": 6,
             "BackgroundColor": "GoldHalf",
             "ShowIcon": false,
-            "NameText": "Ferro-Carbide Lamellor (C)",
+            "NameText": "Reactive Plating",
             "BonusAText": "Dynamic Slot",
             "BonusBText": " "
         },
         "WorkOrderCosts": {
             "Install": {
-                "TechCost": "1.8 * [[Chassis.Tonnage]] / 15",
-                "CBillCost": "20000 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]] / 5"
+                "TechCost": "1.15 * [[Chassis.Tonnage]] / 15",
+                "CBillCost": "1000 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]] / 40"
             }
         },
-        "CASE": {
-            "AllLocations": true,
-            "MaximumDamage": 3
+        "Category": [{
+            "CategoryID": "Armor"
+        }],
+		"CASE": {
+            "AllLocations": true
         },
-        "Category": [
-            {
-                "CategoryID": "Armor"
-            }
-        ],
         "ArmorRepair": {
-            "ArmorTPCost": 2.8,
-            "ArmorCBCost": 2000.0
-        },
-        "ArmorStructureChanges": {
-            "ArmorFactor": 1.2,
-            "StructureFactor": 1.2
-        },
-        "Flags": {
-            "flags": [
-                "ignore_damage",
-                "autorepair",
-                "not_broken"
-            ]
+            "ArmorTPCost": 1.15,
+            "ArmorCBCost": 1.2
         },
         "BonusDescriptions": {
             "Bonuses": [
-                "CritRes: 10%",
-                "MeleeDamageTaken: -25%",
-                "DamageTaken: -20%",
-                "StructureProtection: +20%",
-                "ArmorProtection: x1.2",
-                "Reserved: 14",
-                "ArmorTPCost: 180%",
-                "ArmorCBCost: 20000%",
-                "CASEII"
+				"CASE",
+                "KineticProtection: 30%",
+                "EnergyProtection: -10%",
+                "Reserved: 6",
+                "ArmorTPCost: 15%",
+                "ArmorCBCost: 20%"
             ]
         },
         "InventorySorter": {
             "SortKey": "00009"
-        }
+        },
+		"Flags": {
+            "flags": [
+				"default",
+                "not_broken",
+                "no_salvage",
+                "autorepair"
+            ]
+        },
+		"Lootable": {
+            "ItemID": "Gear_Reactive_Plating"
+        },
     },
+    "StatName": null,
+    "RelativeModifier": 0,
+    "AbsoluteModifier": 0,
     "Description": {
-        "Cost": 4000000,
-        "Rarity": 10,
+        "Cost": 0,
+        "Rarity": 0,
         "Purchasable": true,
-        "Manufacturer": "Clan Diamond Shark",
-        "Model": "Armor Critical Slot",
-        "UIName": "Ferro-Carbide Lamellor (C)",
-        "Id": "emod_armorslots_clanferrocarbidelamellor",
-        "Name": "Ferro-Carbide Lamellor Armor (C)",
-        "Details": "One of Clan Diamond Shark's latest projects, this mech armour variant of the Ferro-Carbide Lamellor is capable of protecting a mech's internal with the best technology possible available until now on WarShips. <b><color=#00ff00>CASE II Enabled</color></b>",
-        "Icon": "uixSvgIcon_action_end"
+        "Manufacturer": "L.A.W.",
+        "Model": "Reactive Plating",
+        "UIName": "Cased Reactive Plating",
+        "Id": "ZeusX_Reactive_Plating",
+        "Name": "Reactive Plating",
+        "Details": "Reactive Armor Plating (sometimes called Blazer Armor) is a type of specialized armor that uses a series of microscopic explosions to reduce the effects of explosive weapons fire like missiles, artillery, and mortars. Reserves 10 slots.",
+        "Icon": "uixSvgIcon_mwFury"
     },
-    "BonusValueA": "-20%Dmg.Taken|+20%Structure|",
-    "BonusValueB": "+20%Armor",
+    "BonusValueA": "+20% Kinetic Protection|",
+    "BonusValueB": "-10% Energy Protection.",
     "ComponentType": "Upgrade",
     "ComponentSubType": "NotSet",
     "PrefabIdentifier": "",
     "BattleValue": 0,
     "InventorySize": 1,
     "Tonnage": 0,
-    "AllowedLocations": "All",
+    "AllowedLocations": "CenterTorso",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
         {
             "durationData": {
                 "duration": -1,
-                "stackLimit": -1
+                "ticksOnActivations": false,
+                "useActivationsOfTarget": false,
+                "ticksOnEndOfRound": false,
+                "ticksOnMovements": false,
+                "stackLimit": 10,
+                "clearedWhenAttacked": false
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
                 "effectTargetType": "Creator",
-                "showInTargetPreview": true,
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
                 "showInStatusPanel": true
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "Spall_Liner_Effect",
-                "Name": "Spall Liner",
-                "Details": "This unit resists critical hits.",
-                "Icon": "uixSvgIcon_ability_mastertactician"
+                "Id": "StatusEffect-ReactivePenalty",
+                "Name": "Reactive Plating",
+                "Details": "Takes less Kinetic Damage.",
+                "Icon": "uixSvgIcon_mwFury"
             },
+            "nature": "Buff",
             "statisticData": {
-                "statName": "CriticalHitChanceReceivedMultiplier",
+                "appliesEachTick": false,
+                "effectsPersistAfterDestruction": false,
+                "statName": "DamageReductionMultiplierEnergy",
                 "operation": "Float_Multiply",
-                "modValue": "0.9",
+                "modValue": "1.1",
                 "modType": "System.Single"
             },
-            "nature": "Buff"
+            "tagData": null,
+            "floatieData": null,
+            "actorBurningData": null,
+            "vfxData": null,
+            "instantModData": null,
+            "poorlyMaintainedEffectData": null
         },
         {
             "durationData": {
@@ -132,18 +148,18 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StatusEffect-FCLamellorDefMelee",
-                "Name": "Ferro-Carbide Lamellor Armour",
-                "Details": "All incoming Melee damage reduced.",
+                "Id": "StatusEffect-ReactiveBonus1",
+                "Name": "Reflective Coating",
+                "Details": "Takes less Energy Damage.",
                 "Icon": "uixSvgIcon_mwFury"
             },
             "nature": "Buff",
             "statisticData": {
                 "appliesEachTick": false,
                 "effectsPersistAfterDestruction": false,
-                "statName": "DamageReductionMultiplierMelee",
-                "operation": "Float_Add",
-                "modValue": "-0.25",
+                "statName": "DamageReductionMultiplierBallistic",
+                "operation": "Float_Multiply",
+                "modValue": "0.7",
                 "modType": "System.Single"
             },
             "tagData": null,
@@ -160,11 +176,10 @@
                 "useActivationsOfTarget": false,
                 "ticksOnEndOfRound": false,
                 "ticksOnMovements": false,
-                "stackLimit": 1,
+                "stackLimit": 10,
                 "clearedWhenAttacked": false
             },
             "targetingData": {
-                "effectTargetsCreator": true,
                 "effectTriggerType": "Passive",
                 "triggerLimit": 0,
                 "extendDurationOnTrigger": 0,
@@ -174,22 +189,22 @@
                 "forcePathRebuild": false,
                 "forceVisRebuild": false,
                 "showInTargetPreview": false,
-                "showInStatusPanel": true
+                "showInStatusPanel": false
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StatusEffect-CFL",
-                "Name": "REDUCED DAMAGE TAKEN",
-                "Details": "All incoming damage reduced by 20%.",
-                "Icon": "uixSvgIcon_action_end"
+                "Id": "StatusEffect-ReactiveBonus2",
+                "Name": "Reflective Coating",
+                "Details": "Takes less Energy Damage.",
+                "Icon": "uixSvgIcon_mwFury"
             },
             "nature": "Buff",
             "statisticData": {
                 "appliesEachTick": false,
                 "effectsPersistAfterDestruction": false,
-                "statName": "DamageReductionMultiplierAll",
+                "statName": "DamageReductionMultiplierMissile",
                 "operation": "Float_Multiply",
-                "modValue": "0.8",
+                "modValue": "0.7",
                 "modType": "System.Single"
             },
             "tagData": null,
@@ -202,8 +217,7 @@
     ],
     "ComponentTags": {
         "items": [
-            "component_type_stock",
-            "ClanArmor"
+            "component_type_stock"
         ],
         "tagSetSourceFile": ""
     }
