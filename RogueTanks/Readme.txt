@@ -36,10 +36,14 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+0.0.0
+
+Enabled blacklisted VBIEDs now that they have a dead trigger
+
 7.1.7 - 5/3/2019
 
 Added Clan Gauss Demolisher,
-Fixed laser Morrigu haveing 4 engine cores LOL,
+Fixed laser Morrigu having 4 engine cores LOL,
 
 7.1.5
 
