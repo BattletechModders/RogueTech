@@ -36,9 +36,10 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-0.0.0
+7.1.9
 
-Enabled blacklisted VBIEDs now that they have a dead trigger
+Enabled blacklisted VBIEDs now that they have a self kill trigger,
+Added a new Pirate Marsden II
 
 7.1.7 - 5/3/2019
 
