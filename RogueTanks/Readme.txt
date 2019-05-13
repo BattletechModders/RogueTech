@@ -36,7 +36,7 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-7.2.7
+7.2.7 - 5/13/2019
 
 Added Brutus (LRM), 
 Added Brutus (HPPC),
