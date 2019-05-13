@@ -36,10 +36,26 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+7.2.7
+
+Added Brutus (LRM), 
+Added Brutus (HPPC),
+Adjusted other Brutus ammo, tagging and + weapons,
+Fixed a misnamed manticore chassisdef,
+Added Manticore (LBX),
+Added Manticore (Command),
+Added Manticore (C3),
+Adjusted Manticore ammo, and tagging
+
+7.1.9
+
+Enabled blacklisted VBIEDs now that they have a self kill trigger,
+Added a new Pirate Marsden II
+
 7.1.7 - 5/3/2019
 
 Added Clan Gauss Demolisher,
-Fixed laser Morrigu haveing 4 engine cores LOL,
+Fixed laser Morrigu having 4 engine cores LOL,
 
 7.1.5
 
