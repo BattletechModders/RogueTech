@@ -36,6 +36,10 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+0.0.0
+
+Added Pirate Axel "Rose"
+
 7.3.3 - 5/14/2019
 
 Hunter Update
