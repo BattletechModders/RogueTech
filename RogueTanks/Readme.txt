@@ -38,7 +38,8 @@ Changelog:
 
 0.0.0
 
-Added Pirate Axel "Rose"
+Added Pirate Axel "Rose",
+Added Light Mortar Carrier with FASCAM,
 
 7.3.3 - 5/14/2019
 
