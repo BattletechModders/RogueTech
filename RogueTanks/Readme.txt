@@ -40,6 +40,9 @@ Changelog:
 
 Added Pirate Axel "Rose",
 Added Light Mortar Carrier with FASCAM,
+Added a second Clan LRM carrier with a different payload,
+Reworked Enhanced LRM Carrier,
+Reworked Extended LRM Carrier
 
 7.3.3 - 5/14/2019 <---- Corresponds to P10 HF2
 
