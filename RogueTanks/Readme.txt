@@ -36,7 +36,17 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-7.2.7
+7.3.3 - 5/14/2019
+
+Hunter Update
+    Added Hunter LPL,
+    Added Hunter ERL,
+    Added Hunter (Ammo),
+    Took overweight heavy flamers away from a couple Hunters,
+    Tweaked Hunter_LA because i goofed and it wasn't quite valid,
+    Adjusted some ammo
+
+7.2.7 - 5/13/2019
 
 Added Brutus (LRM), 
 Added Brutus (HPPC),
