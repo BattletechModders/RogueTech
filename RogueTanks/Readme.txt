@@ -41,7 +41,7 @@ Changelog:
 Added Pirate Axel "Rose",
 Added Light Mortar Carrier with FASCAM,
 
-7.3.3 - 5/14/2019
+7.3.3 - 5/14/2019 <---- Corresponds to P10 HF2
 
 Hunter Update
     Added Hunter LPL,
