@@ -36,6 +36,27 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+7.3.3 - 5/14/2019
+
+Hunter Update
+    Added Hunter LPL,
+    Added Hunter ERL,
+    Added Hunter (Ammo),
+    Took overweight heavy flamers away from a couple Hunters,
+    Tweaked Hunter_LA because i goofed and it wasn't quite valid,
+    Adjusted some ammo
+
+7.2.7 - 5/13/2019
+
+Added Brutus (LRM), 
+Added Brutus (HPPC),
+Adjusted other Brutus ammo, tagging and + weapons,
+Fixed a misnamed manticore chassisdef,
+Added Manticore (LBX),
+Added Manticore (Command),
+Added Manticore (C3),
+Adjusted Manticore ammo, and tagging
+
 7.1.9
 
 Enabled blacklisted VBIEDs now that they have a self kill trigger,
