@@ -36,10 +36,50 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+7.4.3 - 5/15/2019
+
+Added Pirate Axel "Rose",
+Added Light Mortar Carrier with FASCAM,
+Added a second Clan LRM carrier with a different payload,
+Reworked Enhanced LRM Carrier,
+Reworked Extended LRM Carrier,
+Striker Light Tank Update:
+    Minor tweaks/fixes,
+    Added Striker (3061),
+    Added Striker (Ammo),
+    Added Striker (Narc),
+    Added Striker (Laser)
+
+7.3.3 - 5/14/2019 <---- Corresponds to P10 HF2
+
+Hunter Update
+    Added Hunter LPL,
+    Added Hunter ERL,
+    Added Hunter (Ammo),
+    Took overweight heavy flamers away from a couple Hunters,
+    Tweaked Hunter_LA because i goofed and it wasn't quite valid,
+    Adjusted some ammo
+
+7.2.7 - 5/13/2019
+
+Added Brutus (LRM), 
+Added Brutus (HPPC),
+Adjusted other Brutus ammo, tagging and + weapons,
+Fixed a misnamed manticore chassisdef,
+Added Manticore (LBX),
+Added Manticore (Command),
+Added Manticore (C3),
+Adjusted Manticore ammo, and tagging
+
+7.1.9
+
+Enabled blacklisted VBIEDs now that they have a self kill trigger,
+Added a new Pirate Marsden II
+
 7.1.7 - 5/3/2019
 
 Added Clan Gauss Demolisher,
-Fixed laser Morrigu haveing 4 engine cores LOL,
+Fixed laser Morrigu having 4 engine cores LOL,
 
 7.1.5
 
