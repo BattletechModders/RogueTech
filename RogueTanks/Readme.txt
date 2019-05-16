@@ -36,8 +36,7 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-0.0.0
-
+7.4.3 - 5/15/2019
 
 Added Pirate Axel "Rose",
 Added Light Mortar Carrier with FASCAM,
