@@ -36,7 +36,21 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-7.3.3 - 5/14/2019
+7.4.3 - 5/15/2019
+
+Added Pirate Axel "Rose",
+Added Light Mortar Carrier with FASCAM,
+Added a second Clan LRM carrier with a different payload,
+Reworked Enhanced LRM Carrier,
+Reworked Extended LRM Carrier,
+Striker Light Tank Update:
+    Minor tweaks/fixes,
+    Added Striker (3061),
+    Added Striker (Ammo),
+    Added Striker (Narc),
+    Added Striker (Laser)
+
+7.3.3 - 5/14/2019 <---- Corresponds to P10 HF2
 
 Hunter Update
     Added Hunter LPL,
