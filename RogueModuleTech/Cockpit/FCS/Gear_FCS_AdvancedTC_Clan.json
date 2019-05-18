@@ -3,13 +3,16 @@
         "Category": [{
             "CategoryID": "CockpitFCS"
         }],
+		"WorkOrderCosts": {
+            "Install": {
+                "TechCost": "[[Chassis.Tonnage]]/8",
+                "CBillCost": "[[Chassis.Tonnage]] * 1.2"
+            }
+        },
         "BonusDescriptions": {
             "Bonuses": [
                 "Breaching",
-				"AdvZoom: 3",
-				"AdvZoomRange: 270",
-				"ThermalVision: 1",
-				"ThermalVisionHeat: 30",
+				"OffensivePushAcc: +2",
                 "Recoil: -1",
                 "CalledShot: 30%",
 				"Range: +10%",
@@ -48,6 +51,29 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
+		{
+            "durationData": {
+                "duration": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator"
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "TC-CalledShotAcc",
+                "Name": "BREACHING SHOT",
+                "Details": "PASSIVE: Attacking with a single weapon ignores COVER and GUARDED on the target.",
+                "Icon": "uixSvgIcon_ability_precisionstrike"
+            },
+            "statisticData": {
+                "statName": "IRTCalledShotMod",
+                "operation": "Int_Add",
+                "modValue": "-2",
+                "modType": "System.Int32",
+            },
+            "nature": "Buff"
+        },
         {
             "durationData": {
                 "duration": -1
@@ -245,9 +271,7 @@
     "ComponentTags": {
         "items": [
             "component_type_stock",
-			"ClanFCS",
-			"lv-vismode-zoom_m0_c-3_s9",
-			"lv-vismode-heat_m1_d30"
+			"ClanFCS"
         ],
         "tagSetSourceFile": ""
     }
