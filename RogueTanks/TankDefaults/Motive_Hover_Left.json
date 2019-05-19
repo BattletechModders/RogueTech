@@ -1,22 +1,25 @@
 {
     "Custom": {
-        "Category": [{
-            "CategoryID": "MotiveSystemLeft"
-        }],
-		"Flags": {
+        "Category": [
+            {
+                "CategoryID": "MotiveSystemLeft"
+            }
+        ],
+        "Flags": {
             "flags": [
                 "not_broken",
                 "no_salvage",
                 "autorepair"
             ]
         },
-		"VehicleCriticalEffects" : {
-                    "LinkedStatisticName" : "VehicleMotiveHoverCrits",
-                    "PenalizedEffectIDs" : [
-                        ["CriticalEffect-VehicleMotiveCruiseHoverCrit1, CriticalEffect-VehicleMotiveFlankHoverCrit1"]
-                    ],
-                    "DeathMethod" : "EngineDestroyed"
-                }
+        "VehicleCriticalEffects": {
+            "LinkedStatisticName": "VehicleMotiveHoverCrits",
+            "OnDestroyedEffectIDs": [
+                "CriticalEffect-VehicleMotiveCruiseHoverCrit1",
+                "CriticalEffect-VehicleMotiveFlankHoverCrit1",
+				"CriticalEffect-MotiveTankCritPenalty3"
+            ]
+        }
     },
     "Description": {
         "Cost": 0,
@@ -30,8 +33,8 @@
         "Details": "Hover Propulsion",
         "Icon": "uixSvgIcon_equipment_HeatBank"
     },
-    "BonusValueA": "+40%Walk|+10%Sprint|",
-    "BonusValueB": "+15% Heat Generated",
+    "BonusValueA": "",
+    "BonusValueB": "",
     "ComponentType": "Upgrade",
     "ComponentSubType": "NotSet",
     "PrefabIdentifier": "",
@@ -42,10 +45,35 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
-    ],
+	{
+			"durationData": {
+				"duration": -1,
+				"stackLimit": -1
+			},
+			"targetingData": {
+				"effectTriggerType": "Passive",
+				"effectTargetType": "Creator",
+				"showInStatusPanel": false
+			},
+			"effectType": "StatisticEffect",
+			"Description": {
+				"Id": "TankCritPenalizedMotiveL",
+				"Name": "ChargerSprint",
+				"Details": "MORE SPEED.",
+				"Icon": "uixSvgIcon_run_n_gun"
+			},
+			"statisticData": {
+				"statName": "CriticalHitChanceReceivedMultiplier",
+				"operation": "Float_Multiply",
+				"modValue": "1.1",
+				"modType": "System.Single"
+			},
+			"nature": "Buff"
+		}
+	],
     "ComponentTags": {
         "items": [
-			"BLACKLISTED",
+            "BLACKLISTED",
             "component_type_stock"
         ],
         "tagSetSourceFile": ""

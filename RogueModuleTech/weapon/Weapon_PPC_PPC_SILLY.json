@@ -6,15 +6,19 @@
             ]
         },
         "ComponentExplosion": {
-            "ExplosionDamage": 50,
-            "StabilityDamage": 25
+            "ExplosionDamage": 100,
+            "StabilityDamage": 50
         },
         "BonusDescriptions": {
             "Bonuses": [
+                "MinRangeDamage: 20",
                 "PPCDEBUFF: 2",
-                "RangedDmg: +400%",
-                "WpnRecoil: 3",
-                "WeaponBoom: 50"
+                "WpnRecoil: 4",
+                "VariableDmg: 20",
+                "WeaponBoom: 100",
+                "AreaOfEffect: 120",
+                "AreaOfEffectDmg: 5",
+                "AreaOfEffectHeatDmg: 5"
             ]
         },
         "InventorySorter": {
@@ -25,20 +29,22 @@
     "Type": "PPC",
     "WeaponSubType": "PPC",
     "MinRange": 240,
-    "MaxRange": 1080,
+    "MaxRange": 1110,
     "RangeSplit": [
-        330,
-        480,
-        720
+        360,
+        510,
+        750
     ],
     "AmmoCategory": "NotSet",
     "StartingAmmoCapacity": 0,
     "HeatGenerated": 100,
-    "Damage": 50,
+    "Damage": 200,
     "OverheatedDamageMultiplier": 0,
     "EvasiveDamageMultiplier": 0,
-    "EvasivePipsIgnored": 0,
+    "EvasivePipsIgnored": 1,
     "DamageVariance": 20,
+    "DistantVariance": 0.2,
+    "DistantVarianceReversed": true,
     "HeatDamage": 5,
     "AccuracyModifier": 0,
     "CriticalChanceMultiplier": 1,
@@ -47,11 +53,12 @@
     "AOEDamage": 5,
     "AOEHeatDamage": 5,
     "IndirectFireCapable": false,
-    "RefireModifier": 5,
+    "DamageOnJamming": true,
+    "RefireModifier": 4,
     "ShotsWhenFired": 1,
     "ProjectilesPerShot": 1,
     "AttackRecoil": 4,
-    "Instability": 30,
+    "Instability": 10,
     "WeaponEffectID": "WeaponEffect-Weapon_PPC",
     "Description": {
         "Cost": 2000000,
@@ -61,8 +68,8 @@
         "Model": "M1",
         "UIName": "Ultra-Light Naval PPC",
         "Id": "Weapon_PPC_PPC_SILLY",
-        "Name": "NPPC",
-        "Details": "It's a gigantic PPC. The EMP Field is generates is massive affecting units near the target, disrupting myomer and sensor systems. Damage increases over distance, it's hard to focus it on nearby targets. \n\n <b><color=#00ffff>Left Click on Chance to Hit during battle to toggle the Field Inhibitor.  (FIOFF) Has no minimum range penalty but can Misfire.</color> </b>",
+        "Name": "ULN PPC",
+        "Details": "It's a gigantic PPC. The EMP Field is generates is massive affecting units near the target, disrupting myomer and sensor systems. Damage increases over distance, it's hard to focus it on nearby targets. \n\n <b><color=#00ffff>Left Click on Chance to Hit during battle to toggle the Field Inhibitor.  (FIOFF) Has no minimum range penalty but is very likely to Misfire.</color> </b>",
         "Icon": "uixSvgIcon_weapon_Energy"
     },
     "BonusValueA": "",
@@ -76,24 +83,34 @@
     "AllowedLocations": "All",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
-	"Modes":[
-		{
-			"Id":"FION",
-			"UIName":"FION",
-			"isBaseMode":true,
-			"AIHitChanceCap": 0.99
-		},
-		{
-			"Id":"FIOFF",
-			"UIName":"FIOFF",
-			"isBaseMode":false,
-			"DamageOnJamming": true,
-			"FlatJammingChance": 0.5,
-			"MinRange": -240.0,
-			"AccuracyModifier" : 1.0,
-			"AIHitChanceCap": 0.99
-        }	
-	],
+    "Modes": [
+        {
+            "Id": "FION",
+            "UIName": "FION",
+            "isBaseMode": true
+        },
+        {
+            "Id": "FIOFF",
+            "UIName": "FIOFF",
+            "isBaseMode": false,
+            "DamageOnJamming": true,
+            "FlatJammingChance": 0.75,
+            "MinRange": -240.0,
+            "AccuracyModifier": 1.0
+        },
+        {
+            "Id": "Range",
+            "UIName": "Range",
+            "isBaseMode": false,
+            "DamagePerShot": 50,
+            "DamageOnJamming": true,
+            "MinRange": 120.0,
+            "ShortRange": 180,
+            "LongRange": 240.0,
+            "MaxRange": 300.0,
+            "RefireModifier" : 2
+        }
+    ],
     "statusEffects": [
         {
             "durationData": {
@@ -179,7 +196,7 @@
             "statisticData": {
                 "statName": "SensorDistanceAbsolute",
                 "operation": "Float_Multiply",
-                "modValue": "0.8",
+                "modValue": "0.75",
                 "modType": "System.Single"
             },
             "tagData": null,
@@ -224,7 +241,7 @@
                 "effectsPersistAfterDestruction": false,
                 "statName": "WalkSpeed",
                 "operation": "Float_Multiply",
-                "modValue": "0.90",
+                "modValue": "0.85",
                 "modType": "System.Single",
                 "additionalRules": "NotSet",
                 "targetCollection": "NotSet",
@@ -275,7 +292,7 @@
                 "effectsPersistAfterDestruction": false,
                 "statName": "RunSpeed",
                 "operation": "Float_Multiply",
-                "modValue": "0.90",
+                "modValue": "0.85",
                 "modType": "System.Single",
                 "additionalRules": "NotSet",
                 "targetCollection": "NotSet",
@@ -294,9 +311,8 @@
     ],
     "ComponentTags": {
         "items": [
- "OmniRestriction.{location}",
+            "OmniRestriction.{location}",
             "component_type_stock",
-            "wr-reverse_variance_by_distance-500",
             "range_extreme"
         ],
         "tagSetSourceFile": ""

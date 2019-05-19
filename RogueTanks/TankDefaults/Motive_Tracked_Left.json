@@ -1,24 +1,37 @@
 {
     "Custom": {
-        "Category": [{
-            "CategoryID": "MotiveSystemLeft"
-        }],
-		"Flags": {
+        "Category": [
+            {
+                "CategoryID": "MotiveSystemLeft"
+            }
+        ],
+        "Flags": {
             "flags": [
                 "not_broken",
                 "no_salvage",
                 "autorepair"
             ]
         },
-		"VehicleCriticalEffects" : {
-                    "LinkedStatisticName" : "VehicleMotiveTrackedCrits",
-                    "PenalizedEffectIDs" : [
-                        ["CriticalEffect-VehicleMotiveCruiseTrackCrit1, CriticalEffect-VehicleMotiveFlankTrackCrit1"],
-						["CriticalEffect-VehicleMotiveCruiseTrackCrit2, CriticalEffect-VehicleMotiveFlankTrackCrit2"],
-						["CriticalEffect-VehicleMotiveCruiseTrackCrit3, CriticalEffect-VehicleMotiveFlankTrackCrit3"]
-                    ],
-                    "DeathMethod" : "EngineDestroyed"
-                }
+        "VehicleCriticalEffects": {
+            "LinkedStatisticName": "VehicleMotiveTrackedCrits",
+            "PenalizedEffectIDs": [
+                [
+                    "CriticalEffect-VehicleMotiveCruiseTrackCrit1",
+                    "CriticalEffect-VehicleMotiveFlankTrackCrit1",
+					"CriticalEffect-MotiveTankCritPenalty1"
+                ],
+                [
+                    "CriticalEffect-VehicleMotiveCruiseTrackCrit2",
+                    "CriticalEffect-VehicleMotiveFlankTrackCrit2",
+					"CriticalEffect-MotiveTankCritPenalty2"
+                ]
+            ],
+            "OnDestroyedEffectIDs": [
+                "CriticalEffect-VehicleMotiveCruiseTrackCrit3",
+                "CriticalEffect-VehicleMotiveFlankTrackCrit3",
+				"CriticalEffect-MotiveTankCritPenalty3"
+            ]
+        }
     },
     "Description": {
         "Cost": 0,
@@ -32,8 +45,8 @@
         "Details": "Tracked Propulsion",
         "Icon": "uixSvgIcon_equipment_HeatBank"
     },
-    "BonusValueA": "+40%Walk|+10%Sprint|",
-    "BonusValueB": "+15% Heat Generated",
+    "BonusValueA": "",
+    "BonusValueB": "",
     "ComponentType": "Upgrade",
     "ComponentSubType": "NotSet",
     "PrefabIdentifier": "",
@@ -44,10 +57,35 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
-    ],
+	{
+			"durationData": {
+				"duration": -1,
+				"stackLimit": -1
+			},
+			"targetingData": {
+				"effectTriggerType": "Passive",
+				"effectTargetType": "Creator",
+				"showInStatusPanel": false
+			},
+			"effectType": "StatisticEffect",
+			"Description": {
+				"Id": "TankCritPenalizedMotiveL",
+				"Name": "ChargerSprint",
+				"Details": "MORE SPEED.",
+				"Icon": "uixSvgIcon_run_n_gun"
+			},
+			"statisticData": {
+				"statName": "CriticalHitChanceReceivedMultiplier",
+				"operation": "Float_Multiply",
+				"modValue": "1.1",
+				"modType": "System.Single"
+			},
+			"nature": "Buff"
+		}
+	],
     "ComponentTags": {
         "items": [
-			"BLACKLISTED",
+            "BLACKLISTED",
             "component_type_stock"
         ],
         "tagSetSourceFile": ""
