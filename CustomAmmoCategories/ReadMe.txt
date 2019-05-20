@@ -69,6 +69,7 @@ ctrl+left click on weapon slot will eject current ammo
 },
 "DontShowBurnedTrees":false, - if true burned trees will be hidden instead of drawing burned variant
 "DontShowScorchTerrain":false - if true burned terrain decal will not be applied 
+"AAMSAICoeff":0.2 - factor that determines how much AI will prefer the strategic mode of missile defense in the presence of friendly units in the area of the anti-missile system 
 }
 
 now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
@@ -118,11 +119,14 @@ new fields
 					If missile intercepted, no further checks will be made. 
 					Commentary: as you can see, if missile fly path is short chance to be shooted down is less. 
 					If missiles is few, and fly path is long chance to be shooted down grows rapidly. 
-					AMS visual effect commentary: only two visual effects avaible for AMS: ballistic(autocannons) and laser(lasers). 
-					I had experimented with "WeaponEffect-Weapon_Laser_Small" and "WeaponEffect-Weapon_AC2" for LAMS ans AMS accordingly.
 					AMS can become jammed, have damage-on-jam option and so on. AMSHitChance and ShootsWhenFired can be updated in AMS ammo or mode.
 					AMS uses ammunition and heated while firing. Damage and on hit status effects will on be applied. 
   "IsAAMS": false - if true, weapon acts as advanced AMS, it will fire all missiles from enemies in range, not only attacking.
+						NOTE! AMS can be setted by mode, ammo and weapon. Mode have priority, than ammo, and then weapon. 
+						NOTE! If you weapon shoots as AMS in current round you can't use it in offensive mode (if any) until next round.
+							  On other hand if you fired weapon this round you will not be able to use this weapon as AMS until next activation completes 
+						NOTE! Every weapon effect can be used as visuals for AMS fire (missile, machine gun, ballistic, laser, gauss) you can experiment,
+						      but some effects is more suitable.
   "AMSShootsEveryAttack": false, - if true AMS will not share AMS.ShootsWhenFired between all missile attacks this round. 
                                        Every missile attack will cause AMS.ShootsWhenFired shoots. 
 								   if false AMS will shoot AMS.ShootsWhenFired per round
@@ -143,12 +147,8 @@ new fields
   "HasShells": true/false, if defined determinate has shots shrapnel effect or not. If defined can't be overriden by ammo or mode. 
                             Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
                             Damage per shell - full damage per projectile / ProjectilesPerShot
-                            Only for missiles and ballistic effects. Should not be used with AoE.
-							Please note, if you are using HasShells with wr-clustered_shots tag behavior may be undesired 
-							cause in that case WeaponRealizer's code controlling impact damage calculations.
-							"DisableClustering":false also should not be used either set it to true or delete at all. 
-							"WeaponEffect-Weapon_AC2" should not be used as "WeaponEffectID" you can replace it with "WeaponEffect-Weapon_AC5" 
-							nor internally nor visual it wouldn't have any difference
+                            Only for missiles, ballistic and gauss effects. Should not be used with AoE.
+							NOTE! If ImprovedBallistic is false HasShells considered as false too no matter real value. 
   "ShellsRadius": 90, determines if shells will have spreading. Works same way as SpreadRange. Per weapon value will be used if HasShells is true for this weapon.
   "MinShellsDistance": 30, Minimum distance missile have to fly before explode. Min value 30.
   "MaxShellsDistance": 100, Distance from end of trajectory where missile should separate. Min value 20
@@ -184,6 +184,15 @@ new fields
    "AdditionalImpactVFXScaleZ":10,
    "ClearMineFieldRadius": 4, - radius in in-game terrain cells. Minefields in all cells within radius will be cleared in terrain impact.
                                 Clearing on success hit controled by FireOnSuccessHit flag.
+   "Cooldown": 2, - number of rounds weapon will be unacceptable after fire this mode
+   "ImprovedBallistic": true, - whether use or not own ballistic weapon effect engine. 
+								Difference between "improved" and vanilla engine:
+								1. Improved mode uses ShotsWhenFire properly (vanilla had not used them at all)
+								2. Improved mode can use curvy trajectory for indirect fire (indirect gauss bullet can be used too, but looks very funny)
+								3. Improved mode fire ShotsWhenFire volleys with ProjectilesPerShot bullets in each. 
+								   Bullets in one volley fired simultaneously instead of one by one (as in WeaponRealizer)
+								   But damage still dealt once per volley, not per bullet, to keep compatibility with vanilla.
+								NOTE! If ImprovedBallistic is set DisableClustering is forced to true and "wr-clustered_shots" tag removed from definition. 
    "Modes": array of modes for weapon
 	[{
 		"Id": "x4",  - Must be unique per weapon
@@ -247,15 +256,11 @@ new fields
 									   if not empty weapon owner will be excluded form AoE and spread targets list anyway even it has no suitable IFF component.
 									   supposed weapon have IFF transponder for own projectiles. If not empty ammo transponder has priority, than mode, and than weapon
 									   There is special transponder name "_IFFOffile" - if transponder defId set as IFFOffline it counts as have no transponder at all.
-      "HasShells": true/false, if defined determinate has shots shrapnel effect for this mode or not. If defined can't be overriden by ammo. 
-                            Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
-                            Damage per shell - full damage per projectile / ProjectilesPerShot
-                            Only for missiles and ballistic effects. Should not be used with AoE.
-							Please note, if you are using HasShells with wr-clustered_shots tag behavior may be undesired 
-							cause in that case WeaponRealizer's code controlling impact damage calculations 
-							"DisableClustering":false also should not be used either set it to true or delete at all. 
-							"WeaponEffect-Weapon_AC2" should not be used as "WeaponEffectID" you can replace it with "WeaponEffect-Weapon_AC5" 
-							nor internally nor visual it wouldn't have any difference
+	  "HasShells": true/false, if defined determinate has shots shrapnel effect or not. If defined can't be overriden by ammo or mode. 
+								Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
+								Damage per shell - full damage per projectile / ProjectilesPerShot
+								Only for missiles, ballistic and gauss effects. Should not be used with AoE.
+								NOTE! If ImprovedBallistic is false HasShells considered as false too no matter real value. 
 	  "ShellsRadius": 90, determines if shells will have spreading. Works same way as SpreadRange. Per mode value will be used if HasShells is true for this mode.
 	  "MinShellsDistance": 30, Minimum distance missile have to fly before explode. Min value 30.
 	  "MaxShellsDistance": 100, Distance from end of trajectory where missile should separate. Min value 20
@@ -291,6 +296,21 @@ new fields
    "AdditionalImpactVFXScaleZ":10,
    "ClearMineFieldRadius": 4, - radius in in-game terrain cells. Minefields in all cells within radius will be cleared in terrain impact.
                                 Clearing on success hit controled by FireOnSuccessHit flag.
+	  "IsAMS": false, - if true this weapon acts as AMS. It will not fire during normal attack. But tries to intercept incomming missiles.
+						rude model: every 10 meters of missile fly path there is check, if it in range of any AMS. 
+						If so, AMS have AMS.AMSHitChance + missile.AMSHitChance chance to shoot missile down. Avaible shoots count of AMS is decrementing.
+						If AMS have no shoots avaible it will not shoot. At end of turn AMS shoots count set to AMS.ShootsWhenFired.
+						If missile intercepted, no further checks will be made. 
+						Commentary: as you can see, if missile fly path is short chance to be shooted down is less. 
+						If missiles is few, and fly path is long chance to be shooted down grows rapidly. 
+						AMS can become jammed, have damage-on-jam option and so on. AMSHitChance and ShootsWhenFired can be updated in AMS ammo or mode.
+						AMS uses ammunition and heated while firing. Damage and on hit status effects will on be applied. 
+	  "IsAAMS": false - if true, weapon acts as advanced AMS, it will fire all missiles from enemies in range, not only attacking.
+						NOTE! AMS can be setted by mode, ammo and weapon. Mode have priority, than ammo, and then weapon. 
+						NOTE! If you weapon shoots as AMS in current round you can't use it in offensive mode (if any) until next round.
+							  On other hand if you fired weapon this round you will not be able to use this weapon as AMS until next activation completes 
+						NOTE! Every weapon effect can be used as visuals for AMS fire (missile, machine gun, ballistic, laser, gauss) you can experiment,
+						      but some effects is more suitable.
 	}]
   
   
@@ -384,15 +404,26 @@ Ammo definition
                                    if not empty weapon owner will be excluded form AoE and spread targets list anyway even it has no suitable IFF component.
 								   supposed weapon have IFF transponder for own projectiles. If not empty ammo transponder has priority, than mode, and than weapon
 								   There is special transponder name "_IFFOffile" - if transponder defId set as "_IFFOffline" it counts as have no transponder at all.
-  "HasShells": true/false, if defined determinate has shots shrapnel effect for this ammo or not. 
-						Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
-						Damage per shell - full damage per projectile / ProjectilesPerShot
-						Only for missiles and ballistic effects. Should not be used with AoE.
-						Please note, if you are using HasShells with wr-clustered_shots tag behavior may be undesired 
-						cause in that case WeaponRealizer's code controlling impact damage calculations 
-						"DisableClustering":false also should not be used either set it to true or delete at all. 
-						"WeaponEffect-Weapon_AC2" should not be used as "WeaponEffectID" you can replace it with "WeaponEffect-Weapon_AC5" 
-						nor internally nor visual it wouldn't have any difference
+  "HasShells": true/false, if defined determinate has shots shrapnel effect or not. If defined can't be overriden by ammo or mode. 
+                            Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
+                            Damage per shell - full damage per projectile / ProjectilesPerShot
+                            Only for missiles, ballistic and gauss effects. Should not be used with AoE.
+							NOTE! If ImprovedBallistic is false HasShells considered as false too no matter real value. 
+  "IsAMS": false, - if true this weapon acts as AMS. It will not fire during normal attack. But tries to intercept incomming missiles.
+					rude model: every 10 meters of missile fly path there is check, if it in range of any AMS. 
+					If so, AMS have AMS.AMSHitChance + missile.AMSHitChance chance to shoot missile down. Avaible shoots count of AMS is decrementing.
+					If AMS have no shoots avaible it will not shoot. At end of turn AMS shoots count set to AMS.ShootsWhenFired.
+					If missile intercepted, no further checks will be made. 
+					Commentary: as you can see, if missile fly path is short chance to be shooted down is less. 
+					If missiles is few, and fly path is long chance to be shooted down grows rapidly. 
+					AMS can become jammed, have damage-on-jam option and so on. AMSHitChance and ShootsWhenFired can be updated in AMS ammo or mode.
+					AMS uses ammunition and heated while firing. Damage and on hit status effects will on be applied. 
+  "IsAAMS": false - if true, weapon acts as advanced AMS, it will fire all missiles from enemies in range, not only attacking.
+					NOTE! AMS can be setted by mode, ammo and weapon. Mode have priority, than ammo, and then weapon. 
+					NOTE! If you weapon shoots as AMS in current round you can't use it in offensive mode (if any) until next round.
+						  On other hand if you fired weapon this round you will not be able to use this weapon as AMS until next activation completes 
+					NOTE! Every weapon effect can be used as visuals for AMS fire (missile, machine gun, ballistic, laser, gauss) you can experiment,
+						  but some effects is more suitable.
   "ShellsRadius": 90, determines if shells will have spreading. Works same way as SpreadRange. Per mode value will be used if HasShells is true for this mode.
   "MinShellsDistance": 30, Minimum distance missile have to fly before explode. Min value 30.
   "MaxShellsDistance": 100, Distance from end of trajectory where missile should separate. Min value 20
