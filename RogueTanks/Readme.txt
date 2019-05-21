@@ -36,6 +36,10 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+0.0.0
+
+Fixed TBM20 carrier being undertonned,
+
 7.4.5 - 5/19/2019
 
 Added Demolisher (Arrow IV) to arty folder,
