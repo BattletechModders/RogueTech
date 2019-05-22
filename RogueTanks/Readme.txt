@@ -38,7 +38,8 @@ Changelog:
 
 0.0.0
 
-Fixed TBM20 carrier being undertonned
+Fixed TBM20 carrier being undertonned,
+Tweaked a few techies to carry Generic_AP
 
 7.4.5 - 5/19/2019 <---- Corresponds to P11 A5
 
