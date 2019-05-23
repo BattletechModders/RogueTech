@@ -36,6 +36,16 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+0.0.0
+
+Fixed TBM20 carrier being undertonned,
+Tweaked a few techies to carry Generic_AP
+
+7.4.5 - 5/19/2019 <---- Corresponds to P11 A5
+
+Added Demolisher (Arrow IV) to arty folder,
+minor fixes
+
 7.4.3 - 5/15/2019
 
 Added Pirate Axel "Rose",
