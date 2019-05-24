@@ -69,7 +69,78 @@ ctrl+left click on weapon slot will eject current ammo
 },
 "DontShowBurnedTrees":false, - if true burned trees will be hidden instead of drawing burned variant
 "DontShowScorchTerrain":false - if true burned terrain decal will not be applied 
-"AAMSAICoeff":0.2 - factor that determines how much AI will prefer the strategic mode of missile defense in the presence of friendly units in the area of the anti-missile system 
+"AAMSAICoeff":0.2 - factor that determines how much AI will prefer the strategic mode of missile defence in the presence of friendly units in the area of the anti-missile system 
+"ForestBurningDurationBiomeMult":{  -        per biome forest fire duration multiplayer, applied to BurningForestTurns value (rounded to nearest integer)
+	"DesignMaskBiomeBadlandsParched":0.7,
+	"DesignMaskBiomeDesertParched":0.7,
+	"DesignMaskBiomeHighlandsFall":1,
+	"DesignMaskBiomeHighlandsSpring":1,
+	"DesignMaskBiomeJungleTropical":1.5,
+	"DesignMaskBiomeLowlandsCoastal":1,
+	"DesignMaskBiomeLowlandsFall":1,
+	"DesignMaskBiomeLowlandsSpring":1,
+	"DesignMaskBiomeLunarVacuum":0.0,
+	"DesignMaskBiomeMartianVacuum":0.0,
+	"DesignMaskBiomePolarFrozen":0.7,
+	"DesignMaskBiomeTundraFrozen":0.7
+},
+"WeaponBurningDurationBiomeMult":{  -        per biome fire duration multiplayer, applied to effective Weapon.FireDurationWithoutForest value (rounded to nearest integer)
+	"DesignMaskBiomeBadlandsParched":1,
+	"DesignMaskBiomeDesertParched":1,
+	"DesignMaskBiomeHighlandsFall":1,
+	"DesignMaskBiomeHighlandsSpring":1,
+	"DesignMaskBiomeJungleTropical":0.7,
+	"DesignMaskBiomeLowlandsCoastal":1,
+	"DesignMaskBiomeLowlandsFall":1,
+	"DesignMaskBiomeLowlandsSpring":1,
+	"DesignMaskBiomeLunarVacuum":0.2,
+	"DesignMaskBiomeMartianVacuum":0.3,
+	"DesignMaskBiomePolarFrozen":0.7,
+	"DesignMaskBiomeTundraFrozen":0.7
+},
+"ForestBurningStrengthBiomeMult":{  -        per biome forest fire strength multiplayer, applied to BurningForestStrength value (rounded to nearest integer)
+	"DesignMaskBiomeBadlandsParched":1.5,
+	"DesignMaskBiomeDesertParched":1.5,
+	"DesignMaskBiomeHighlandsFall":1,
+	"DesignMaskBiomeHighlandsSpring":1,
+	"DesignMaskBiomeJungleTropical":0.5,
+	"DesignMaskBiomeLowlandsCoastal":1,
+	"DesignMaskBiomeLowlandsFall":1,
+	"DesignMaskBiomeLowlandsSpring":1,
+	"DesignMaskBiomeLunarVacuum":0,
+	"DesignMaskBiomeMartianVacuum":0,
+	"DesignMaskBiomePolarFrozen":0.3,
+	"DesignMaskBiomeTundraFrozen":0.3
+},
+"WeaponBurningStrengthBiomeMult":{   -        per biome fire strength multiplayer, applied to effective Weapon.FireTerrainStrength value (rounded to nearest integer)
+	"DesignMaskBiomeBadlandsParched":1,
+	"DesignMaskBiomeDesertParched":1,
+	"DesignMaskBiomeHighlandsFall":1,
+	"DesignMaskBiomeHighlandsSpring":1,
+	"DesignMaskBiomeJungleTropical":0.7,
+	"DesignMaskBiomeLowlandsCoastal":1,
+	"DesignMaskBiomeLowlandsFall":1,
+	"DesignMaskBiomeLowlandsSpring":1,
+	"DesignMaskBiomeLunarVacuum":1,
+	"DesignMaskBiomeMartianVacuum":1,
+	"DesignMaskBiomePolarFrozen":0.5,
+	"DesignMaskBiomeTundraFrozen":0.5
+},
+"LitFireChanceBiomeMult":{   -        per biome fire chance multiplayer, applied to effective Weapon.FireTerrainChance and BurningForestBaseExpandChance values
+	"DesignMaskBiomeBadlandsParched":2.0,
+	"DesignMaskBiomeDesertParched":2.0,
+	"DesignMaskBiomeHighlandsFall":1,
+	"DesignMaskBiomeHighlandsSpring":1,
+	"DesignMaskBiomeJungleTropical":0.7,
+	"DesignMaskBiomeLowlandsCoastal":1,
+	"DesignMaskBiomeLowlandsFall":1,
+	"DesignMaskBiomeLowlandsSpring":1,
+	"DesignMaskBiomeLunarVacuum":1,
+	"DesignMaskBiomeMartianVacuum":1,
+	"DesignMaskBiomePolarFrozen":0.5,
+	"DesignMaskBiomeTundraFrozen":0.5
+}
+								NOTE: Current values is my own vision of flame mechanics process, adjust them for you own will
 }
 
 now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
