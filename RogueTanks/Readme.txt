@@ -36,7 +36,16 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-0.0.0
+7.5.1
+
+Rhino Fire Support Tank update
+    Added Rhino MG,
+    Added Rhino SL,
+    Added Base Rhino,
+    Tweaked Rhino Royal and Rhino Flamer
+
+
+7.4.7 <---- Corresponds to P11 release
 
 Fixed TBM20 carrier being undertonned,
 Tweaked a few techies to carry Generic_AP
