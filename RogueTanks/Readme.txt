@@ -36,9 +36,10 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-0.0.0
+7.6.2
 
 Added Demon (PPC),
+Added Bandit medium hovers ( <3 Justin ),
 Minor tweaks
 
 7.5.1
