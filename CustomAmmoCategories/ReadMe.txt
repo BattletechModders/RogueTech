@@ -209,6 +209,7 @@ new fields
                             one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
   "AOEHeatDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
                             one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
+  "AOEInstability": 0 - instability AoE damage 
   "SpreadRange": 0, - Area of projectiles spread effect. If > 0 projectiles will include in spread calculations. Per weapon, ammo, mode values are additive.
                          if used for missiles, and target have AMS it will fire no matter if it is not advanced and target is not primary.
   "IFFDef" : "IFFComponentDefId", if not empty and target have component with such defId it will exclude form AoE and spread targets list. 
@@ -264,6 +265,8 @@ new fields
 								   Bullets in one volley fired simultaneously instead of one by one (as in WeaponRealizer)
 								   But damage still dealt once per volley, not per bullet, to keep compatibility with vanilla.
 								NOTE! If ImprovedBallistic is set DisableClustering is forced to true and "wr-clustered_shots" tag removed from definition. 
+  "BallisticDamagePerPallet": true - if true damage inflicted per pallet instead of per shot. Only working with ImprovedBallistic true, ballistic weapon effect and HasShels false
+                                     Damage will be divided by ProjectilesPerShot value, heat damage and stable damage too. 
    "Modes": array of modes for weapon
 	[{
 		"Id": "x4",  - Must be unique per weapon
@@ -382,6 +385,8 @@ new fields
 							  On other hand if you fired weapon this round you will not be able to use this weapon as AMS until next activation completes 
 						NOTE! Every weapon effect can be used as visuals for AMS fire (missile, machine gun, ballistic, laser, gauss) you can experiment,
 						      but some effects is more suitable.
+  "BallisticDamagePerPallet": true - if true damage inflicted per pallet instead of per shot. Only working with ImprovedBallistic true, ballistic weapon effect and HasShels false
+                                     Damage will be divided by ProjectilesPerShot value, heat damage and stable damage too. 
 	}]
   
   
@@ -469,6 +474,7 @@ Ammo definition
                             one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
   "AOEHeatDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
                             one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
+  "AOEInstability": 0 - instability AoE damage 
   "SpreadRange": 0, - Area of projectiles spread effect. If > 0 projectiles will include in spread calculations. Per weapon, ammo, mode values are additive.
                          if used for missiles, and target have AMS it will fire no matter if it is not advanced and target is not primary.
   "IFFDef" : "IFFComponentDefId", if not empty and target have component with such defId it will exclude form AoE and spread targets list. 
@@ -637,6 +643,8 @@ Ammo definition
 	
    "ClearMineFieldRadius": 4, - radius in in-game terrain cells. Minefields in all cells within radius will be cleared in terrain impact.
                                 Clearing on success hit controled by FireOnSuccessHit flag.
+  "BallisticDamagePerPallet": true - if true damage inflicted per pallet instead of per shot. Only working with ImprovedBallistic true, ballistic weapon effect and HasShels false
+                                     Damage will be divided by ProjectilesPerShot value, heat damage and stable damage too. 
    "statusEffects" : [   - will be applied on weapon hit (only "OnHit" effectTriggerType)
         {
             "durationData" : {
