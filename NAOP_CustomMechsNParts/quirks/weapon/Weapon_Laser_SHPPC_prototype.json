@@ -4,8 +4,10 @@
         "BonusDescriptions": {
             "Bonuses": [
 				"PPCDEBUFF: 8",
-				"BadShielding: 3",
 				"WpnRecoil: 8",
+				"CoolDown: 2",
+				"HeatPerTurn: +30",
+				"Signature: +100%",
 				"WeaponBoom: 200"
             ]
         },	
@@ -29,7 +31,7 @@
     ],
     "AmmoCategory" : "NotSet",
     "StartingAmmoCapacity" : 0,
-    "HeatGenerated" : 150,
+    "HeatGenerated" : 100,
     "Damage" : 300,
     "OverheatedDamageMultiplier" : 0,
     "EvasiveDamageMultiplier" : 0,
@@ -45,6 +47,8 @@
     "ProjectilesPerShot" : 1,
     "AttackRecoil" : 10,
     "Instability" : 20,
+    "FireTerrainChance": 0.75,
+    "FireOnSuccessHit" : true,
     "WeaponEffectID" : "WeaponEffect-Weapon_PPC",
     "Description" : {
         "Cost" : 9920000,
@@ -55,7 +59,7 @@
         "UIName" : "Phased Cannon Array",
         "Id" : "Weapon_Laser_SHPPC_prototype",
         "Name" : "PCA Prototype",
-        "Details" : "It was thought that particle weapons could not be scaled up further from Medium mounts without prohibitively bulky shielding, as the energized discharge would affect the firing 'Mech. However, in this custom design, Optimus accepted a limited amount of self-harm and employed active-field stabilization rather than passive shielding, resulting in possibly the most powerful mech-scale energy weapon ever built. <b><color=#ff0000>Firing this weapon will debuff your own mech for 3 accuracy!</color></b> The direct fusion core siphon and support machinery requires it to be mounted in the torso.<b><color=#ffcc00> This Super-Heavy mount causes 75 residual heat and increases Signature by 100%.</color></b>",
+        "Details" : "It was thought that particle weapons could not be scaled up further from Medium mounts without prohibitively bulky shielding, as the energized discharge would affect the firing 'Mech. However, in this custom design, Optimus accepted a limited amount of self-harm and employed active-field stabilization rather than passive shielding, resulting in possibly the most powerful mech-scale energy weapon ever built. The direct fusion core siphon and support machinery requires it to be mounted in the torso.<b><color=#ffcc00> This weapon has to cooldown for 2 turns to fire safely. Safety can be disengaged but this results in increased heat generation and a significant risc of failure</color></b>",
         "Icon" : "uixSvgIcon_weapon_Energy"
     },
     "BonusValueA" : "",
@@ -69,6 +73,31 @@
     "AllowedLocations" : "Torso",
     "DisallowedLocations" : "All",
     "CriticalComponent" : false,
+                        "Modes":[
+                {
+                        "Id":"Std",
+                        "UIName":"STD",
+                        "isBaseMode":true,
+			"Cooldown": 2
+                },
+                {
+                        "Id":"Safety Off",
+                        "UIName":"UnSafe",
+                        "isBaseMode":false,
+			"Cooldown": 1,
+			"HeatGenerated" : 25,
+                        "DamageOnJamming": true,
+                        "FlatJammingChance": 0.3
+                },
+                {
+                        "Id":"YOLO",
+                        "UIName":"YOLO",
+                        "isBaseMode":false,
+			"HeatGenerated" : 75,
+                        "DamageOnJamming": true,
+                        "FlatJammingChance": 0.6
+                }
+        ],
     "statusEffects" : [
         {
             "durationData" : {
@@ -77,7 +106,7 @@
                 "useActivationsOfTarget" : true,
                 "ticksOnEndOfRound" : false,
                 "ticksOnMovements" : false,
-                "stackLimit" : 10,
+                "stackLimit" : 1,
                 "clearedWhenAttacked" : false
             },
             "targetingData" : {
@@ -109,57 +138,6 @@
                 "modType" : "System.Single",
                 "additionalRules" : "NotSet",
                 "targetCollection" : "NotSet",
-                "targetWeaponCategory" : "NotSet",
-                "targetWeaponType" : "NotSet",
-                "targetAmmoCategory" : "NotSet",
-                "targetWeaponSubType" : "NotSet"
-            },
-            "tagData" : null,
-            "floatieData" : null,
-            "actorBurningData" : null,
-            "vfxData" : null,
-            "instantModData" : null,
-            "poorlyMaintainedEffectData" : null
-        },
-		{
-            "durationData" : {
-                "duration" : 2,
-                "ticksOnActivations" : true,
-                "useActivationsOfTarget" : true,
-                "ticksOnEndOfRound" : false,
-                "ticksOnMovements" : false,
-                "stackLimit" : 10,
-                "clearedWhenAttacked" : false
-            },
-            "targetingData" : {
-                "effectTriggerType" : "OnWeaponFire",
-                "triggerLimit" : 0,
-                "extendDurationOnTrigger" : 2,
-                "specialRules" : "NotSet",
-                "effectTargetType" : "Creator",
-                "range" : 0,
-                "forcePathRebuild" : false,
-                "forceVisRebuild" : false,
-                "showInTargetPreview" : true,
-                "showInStatusPanel" : true
-            },
-            "effectType" : "StatisticEffect",
-            "Description" : {
-                "Id" : "AbilityDefPPC",
-                "Name" : "SENSORS IMPAIRED",
-                "Details" : "[AMT] Difficulty to all of this unit's attacks.",
-                "Icon" : "uixSvgIcon_status_sensorsImpaired"
-            },
-            "nature" : "Debuff",
-            "statisticData" : {
-                "appliesEachTick" : false,
-                "effectsPersistAfterDestruction" : false,
-                "statName" : "AccuracyModifier",
-                "operation" : "Float_Add",
-                "modValue" : "3.0",
-                "modType" : "System.Single",
-                "additionalRules" : "NotSet",
-                "targetCollection" : "Weapon",
                 "targetWeaponCategory" : "NotSet",
                 "targetWeaponType" : "NotSet",
                 "targetAmmoCategory" : "NotSet",
@@ -223,49 +201,49 @@
             "instantModData" : null,
             "poorlyMaintainedEffectData" : null
         },
-		{
+              {
             "durationData" : {
-                "duration" : 2,
-                "ticksOnActivations" : true,
-                "useActivationsOfTarget" : true,
+                "duration" : -1,
+                "ticksOnActivations" : false,
+                "useActivationsOfTarget" : false,
                 "ticksOnEndOfRound" : false,
                 "ticksOnMovements" : false,
-                "stackLimit" : 10,
+                "stackLimit" : 1,
                 "clearedWhenAttacked" : false
             },
             "targetingData" : {
-                "effectTriggerType" : "OnWeaponFire",
+                "effectTriggerType" : "Passive",
                 "triggerLimit" : 0,
-                "extendDurationOnTrigger" : 2,
+                "extendDurationOnTrigger" : 0,
                 "specialRules" : "NotSet",
                 "effectTargetType" : "Creator",
                 "range" : 0,
                 "forcePathRebuild" : false,
                 "forceVisRebuild" : false,
-                "showInTargetPreview" : true,
-                "showInStatusPanel" : true
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
             },
             "effectType" : "StatisticEffect",
             "Description" : {
-                "Id" : "ParticleHeatSHPPC",
-                "Name" : "Residual Heating",
-                "Details" : "Particle Weapon Aftereffect",
-                "Icon" : "uixSvgIcon_shipUpgrade_power2"
+                "Id" : "StatusEffect-Heat_CLLRM12",
+                "Name" : "Increased Heat",
+                "Details" : "Maintains a constant heat generation of [AMT].",
+                "Icon" : "uixSvgIcon_equipment_ThermalExchanger"
             },
             "nature" : "Debuff",
             "statisticData" : {
-				"appliesEachTick" : false,
-				"effectsPersistAfterDestruction" : false,
-				"statName": "HeatSinkCapacity",
-				"operation": "Int_Add",
-				"modValue": "-75",
-				"modType": "System.Int32",
-				"additionalRules" : "NotSet",
-				"targetCollection" : "NotSet",
-				"targetWeaponCategory" : "NotSet",
-				"targetWeaponType" : "NotSet",
-				"targetAmmoCategory" : "NotSet",
-				"targetWeaponSubType" : "NotSet"
+                "appliesEachTick" : false,
+                "effectsPersistAfterDestruction" : false,
+                "statName" : "HeatSinkCapacity",
+                "operation" : "Int_Add",
+                "modValue" : "-30",
+                "modType" : "System.Int32",
+                "additionalRules" : "NotSet",
+                "targetCollection" : "NotSet",
+                "targetWeaponCategory" : "NotSet",
+                "targetWeaponType" : "NotSet",
+                "targetAmmoCategory" : "NotSet",
+                "targetWeaponSubType" : "NotSet"
             },
             "tagData" : null,
             "floatieData" : null,

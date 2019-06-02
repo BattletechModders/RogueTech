@@ -9,7 +9,10 @@
 				"ImpMove: 10%",
                 "ImpAccuracy: -2",
                 "ImpHeatSink: -10%",
-				"WpnRecoil: 1",
+				"CoolDown: 1",
+				"HeatPerTurn: +10",
+				"WpnRecoil: 2",
+				"Signature: +10%",
 				"MultiLaser"
             ]
         },	
@@ -30,7 +33,7 @@
     ],
     "AmmoCategory" : "NotSet",
     "StartingAmmoCapacity" : 0,
-    "HeatGenerated" : 12,
+    "HeatGenerated" : 20,
     "Damage" : 33,
     "OverheatedDamageMultiplier" : 0,
     "EvasiveDamageMultiplier" : 0,
@@ -41,11 +44,12 @@
     "CriticalChanceMultiplier" : 1,
     "AOECapable" : false,
     "IndirectFireCapable" : false,
-    "RefireModifier" : 1,
+    "RefireModifier" : 2,
     "ShotsWhenFired" : 2,
     "ProjectilesPerShot" : 1,
-    "AttackRecoil" : 1,
+    "AttackRecoil" : 2,
     "Instability" : 6,
+    "FireTerrainChance": 0.0825,
     "WeaponEffectID" : "WeaponEffect-Weapon_LaserER_Small",
     "Description" : {
         "Cost" : 2480000,
@@ -56,7 +60,7 @@
         "UIName" : "M. Phased Lance",
         "Id" : "Weapon_Laser_MPPL",
         "Name" : "M Phased Lance",
-        "Details" : "Particle weapons have longer ranges in atmosphere than lasers, are significantly more efficient at transferring energy to the target, are nearly as accurate, and can have ionizing effects, disrupting the opponent's electronics and sensors. However, they can cause residual heat buildup, forcing the operator to let their weapon fully vent before firing again. Furthermore, particle generators have unmistakable emissions, which are impractical to conceal on 'Mech sized vehicles, increasing the sensors signature of the 'Mech carrying them. <b><color=#ffcc00>This Medium mount causes 8 residual heat and increases Signature by 10%. It has a Phase Modulator, dramatically increasing range and accuracy.</color></b>",
+        "Details" : "Particle weapons have longer ranges in atmosphere than lasers, are significantly more efficient at transferring energy to the target, are nearly as accurate, and can have ionizing effects, disrupting the opponent's electronics and sensors. However, they require constant cooling even when not firing and equire to cooldown to fire safely. Furthermore, particle generators have unmistakable emissions, which are impractical to conceal on 'Mech sized vehicles, increasing the sensors signature of the 'Mech carrying them. <b><color=#ffcc00>This weapon generates almost no heat and has a cooldown of 1 turn in normal mode. In can be overcharged to fire every turn with 40% jamming chance. </color></b>",
         "Icon" : "uixSvgIcon_weapon_Energy"
     },
     "BonusValueA" : "",
@@ -70,6 +74,21 @@
     "AllowedLocations" : "All",
     "DisallowedLocations" : "All",
     "CriticalComponent" : false,
+                        "Modes":[
+                {
+                        "Id":"Std",
+                        "UIName":"STD",
+                        "isBaseMode":true,
+                        "HeatGenerated" : -15,
+                        "Cooldown": 1
+                },
+                {
+                        "Id":"Overcharge",
+                        "UIName":"Overcharge",
+                        "isBaseMode":false,
+                        "FlatJammingChance": 0.4
+                }
+    ],
     "statusEffects" : [
         {
             "durationData" : {
@@ -78,7 +97,7 @@
                 "useActivationsOfTarget" : true,
                 "ticksOnEndOfRound" : false,
                 "ticksOnMovements" : false,
-                "stackLimit" : 10,
+                "stackLimit" : 6,
                 "clearedWhenAttacked" : false
             },
             "targetingData" : {
@@ -326,49 +345,49 @@
             "instantModData" : null,
             "poorlyMaintainedEffectData" : null
         },
-		{
+               {
             "durationData" : {
-                "duration" : 2,
-                "ticksOnActivations" : true,
-                "useActivationsOfTarget" : true,
+                "duration" : -1,
+                "ticksOnActivations" : false,
+                "useActivationsOfTarget" : false,
                 "ticksOnEndOfRound" : false,
                 "ticksOnMovements" : false,
-                "stackLimit" : 10,
+                "stackLimit" : -1,
                 "clearedWhenAttacked" : false
             },
             "targetingData" : {
-                "effectTriggerType" : "OnWeaponFire",
+                "effectTriggerType" : "Passive",
                 "triggerLimit" : 0,
-                "extendDurationOnTrigger" : 2,
+                "extendDurationOnTrigger" : 0,
                 "specialRules" : "NotSet",
                 "effectTargetType" : "Creator",
                 "range" : 0,
                 "forcePathRebuild" : false,
                 "forceVisRebuild" : false,
-                "showInTargetPreview" : true,
-                "showInStatusPanel" : true
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
             },
             "effectType" : "StatisticEffect",
             "Description" : {
-                "Id" : "ParticleHeatMPPL",
-                "Name" : "Residual Heating",
-                "Details" : "Particle Weapon Aftereffect",
-                "Icon" : "uixSvgIcon_shipUpgrade_power2"
+                "Id" : "StatusEffect-Heat_MPPL",
+                "Name" : "Increased Heat",
+                "Details" : "Maintains a constant heat generation of [AMT].",
+                "Icon" : "uixSvgIcon_equipment_ThermalExchanger"
             },
             "nature" : "Debuff",
             "statisticData" : {
-				"appliesEachTick" : false,
-				"effectsPersistAfterDestruction" : false,
-				"statName": "HeatSinkCapacity",
-				"operation": "Int_Add",
-				"modValue": "-8",
-				"modType": "System.Int32",
-				"additionalRules" : "NotSet",
-				"targetCollection" : "NotSet",
-				"targetWeaponCategory" : "NotSet",
-				"targetWeaponType" : "NotSet",
-				"targetAmmoCategory" : "NotSet",
-				"targetWeaponSubType" : "NotSet"
+                "appliesEachTick" : false,
+                "effectsPersistAfterDestruction" : false,
+                "statName" : "HeatSinkCapacity",
+                "operation" : "Int_Add",
+                "modValue" : "-10",
+                "modType" : "System.Int32",
+                "additionalRules" : "NotSet",
+                "targetCollection" : "NotSet",
+                "targetWeaponCategory" : "NotSet",
+                "targetWeaponType" : "NotSet",
+                "targetAmmoCategory" : "NotSet",
+                "targetWeaponSubType" : "NotSet"
             },
             "tagData" : null,
             "floatieData" : null,

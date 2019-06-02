@@ -22,9 +22,10 @@
                 "CBillCost": "10 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]] / 10"
             }
         },
-        "Category": [{
-            "CategoryID": "Cooling"
-        }],
+        "Category" : [
+          {"CategoryID": "Cooling"},
+          {"CategoryID": "EnginePart"}
+        ],
         "InventorySorter": {
             "SortKey": "00016"
         },
@@ -35,6 +36,9 @@
                 "no_salvage",
                 "autorepair"
             ]
+        },
+		"Lootable": {
+            "ItemID": "lootable_kit_dhs_royal"
         }
     },
     "DissipationCapacity": 6,
@@ -61,7 +65,87 @@
     "AllowedLocations": "CenterTorso",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
-    "statusEffects": null,
+    "statusEffects": [
+	{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect-Heat_Max-Royal",
+                "Name": "Prototype DHS system",
+                "Details": "Improves cooling and Heat Threshholds.",
+                "Icon": "uixSvgIcon_equipment_HeatBank"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "MaxHeat",
+                "operation": "Int_Add",
+                "modValue": "10",
+                "modType": "System.Int32"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect-Overheat_Threshold-Royal",
+                "Name": "Increased Overheat Level",
+                "Details": "Overheat threshold increased by 5",
+                "Icon": "uixSvgIcon_equipment_HeatBank"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "OverheatLevel",
+                "operation": "Int_Add",
+                "modValue": "10",
+                "modType": "System.Int32"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect-Heat_GenReduction-Royal",
+                "Name": "HEAT GENERATION DECREASED",
+                "Details": "Heat generation reduced by 10%.",
+                "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "HeatGenerated",
+                "operation": "Float_Multiply",
+                "modValue": "0.95",
+                "modType": "System.Single",
+                "targetCollection": "Weapon"
+            }
+        }
+	],
     "ComponentTags": {
         "items": [
 		"BLACKLISTED",

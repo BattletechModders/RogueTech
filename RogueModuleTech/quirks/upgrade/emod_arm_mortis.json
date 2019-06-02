@@ -1,15 +1,23 @@
 {
     "Custom": {
         "Category": [{
-            "CategoryID": "ArmActuator"
+            "CategoryID": "ArmShoulder"
+        },{
+            "CategoryID": "ArmUpperActuator"
+        },{
+            "CategoryID": "ArmLowerActuator"
+        },
+		{
+            "CategoryID": "ArmHandActuator"
         }],
         "ArmActuator": {
-            "AccuracyBonus": "-3",
-            "Type": "Hand"
+            "Type": "PartShoulder, PartUpper, PartLower, PartHand"
         },
         "BonusDescriptions": {
             "Bonuses": [
-				"ShotsFiredAC20: +1",
+				"RecoilAC20: -2",
+				"RangeAC20: +15%",
+				"AC20Damage: +25%",
                 "ArmAccuracy: +3",
                 "MeleeAcc: +1",
                 "Melee: +30%",
@@ -19,119 +27,6 @@
         "InventorySorter": {
             "SortKey": "00020"
         },
-        "CriticalHitStates": {
-            "MaxStates": 2,
-            "HitEffects": [
-                {
-                    "State": 1,
-                    "StatusEffect": {
-                        "durationData": {},
-                        "targetingData": {
-                            "effectTargetsCreator": true,
-                            "effectTriggerType": "Passive",
-                            "effectTargetType": "Creator"
-                        },
-                        "effectType": "StatisticEffect",
-                        "Description": {
-                            "Id": "HandCrit1",
-                            "Name": "Hand Critical",
-                            "Details": "Reduced Melee Accuracy",
-                            "Icon": "uixSvgIcon_equipment_ActuatorArm"
-                        },
-                        "nature": "Debuff",
-                        "statisticData": {
-                            "statName": "AccuracyModifier",
-                            "operation": "Float_Add",
-                            "modValue": "1.0",
-                            "modType": "System.Single",
-                            "targetCollection": "Weapon",
-                            "targetWeaponSubType": "Melee"
-                        }
-                    }
-                },
-                {
-                    "State": 1,
-                    "StatusEffect": {
-                        "durationData": {},
-                        "targetingData": {
-                            "effectTargetsCreator": true,
-                            "effectTriggerType": "Passive",
-                            "effectTargetType": "Creator"
-                        },
-                        "effectType": "StatisticEffect",
-                        "Description": {
-                            "Id": "HandCrit12",
-                            "Name": "Hand Critical",
-                            "Details": "Reduced Melee Accuracy and Damage",
-                            "Icon": "uixSvgIcon_equipment_ActuatorArm"
-                        },
-                        "nature": "Debuff",
-                        "statisticData": {
-                            "statName": "DamagePerShot",
-                            "operation": "Float_Multiply",
-                            "modValue": "0.8",
-                            "modType": "System.Single",
-                            "targetCollection": "Weapon",
-                            "targetWeaponSubType": "Melee"
-                        }
-                    }
-                },
-                {
-                    "State": 2,
-                    "StatusEffect": {
-                        "durationData": {},
-                        "targetingData": {
-                            "effectTargetsCreator": true,
-                            "effectTriggerType": "Passive",
-                            "effectTargetType": "Creator"
-                        },
-                        "effectType": "StatisticEffect",
-                        "Description": {
-                            "Id": "HandCrit2",
-                            "Name": "Hand Critical",
-                            "Details": "Reduced Melee Accuracy",
-                            "Icon": "uixSvgIcon_equipment_ActuatorArm"
-                        },
-                        "nature": "Debuff",
-                        "statisticData": {
-                            "statName": "AccuracyModifier",
-                            "operation": "Float_Add",
-                            "modValue": "2.0",
-                            "modType": "System.Single",
-                            "targetCollection": "Weapon",
-                            "targetWeaponSubType": "Melee"
-                        }
-                    }
-                },
-                {
-                    "State": 2,
-                    "StatusEffect": {
-                        "durationData": {},
-                        "targetingData": {
-                            "effectTargetsCreator": true,
-                            "effectTriggerType": "Passive",
-                            "effectTargetType": "Creator"
-                        },
-                        "effectType": "StatisticEffect",
-                        "Description": {
-                            "Id": "HandCrit22",
-                            "Name": "Hand Critical",
-                            "Details": "Reduced Melee Damage",
-                            "Icon": "uixSvgIcon_equipment_ActuatorArm"
-                        },
-                        "nature": "Debuff",
-                        "statisticData": {
-                            "statName": "DamagePerShot",
-                            "operation": "Float_Multiply",
-                            "modValue": "0.6",
-                            "modType": "System.Single",
-                            "targetCollection": "Weapon",
-                            "targetWeaponSubType": "Melee"
-                        }
-                    }
-                }
-            ]
-        },
         "Flags": {
             "flags": [
 				"default",
@@ -139,6 +34,9 @@
                 "autorepair",
                 "not_broken"
             ]
+        },
+		"Lootable": {
+            "ItemID": "Lootable_arm_mortis"
         }
     },
     "Description": {
@@ -147,7 +45,7 @@
         "Purchasable": false,
         "Manufacturer": "S-Mart",
         "Model": "Evil Dead",
-        "UIName": "Hand",
+        "UIName": "Double Barrel!",
         "Id": "emod_arm_mortis",
         "Name": "Arm Hand Actuator",
         "Details": "All right, you primitive screw-heads, listen up! See this? This... is my boomstick! - It's a LB-X TWENTY!, double-barreled Defiance Disintegrator. S-Mart's top of the line. You can find this in the sporting goods department. That's right, this sweet baby was made in Grand Rapids, Michigan. Retails for about $109.95. It's got a walnut stock, cobalt-blue steel, and a hair trigger. That's right... shop smart: shop S-Mart... Ya got that?!",
@@ -159,12 +57,38 @@
     "ComponentSubType": "NotSet",
     "PrefabIdentifier": "",
     "BattleValue": 0,
-    "InventorySize": 3,
+    "InventorySize": 4,
     "Tonnage": 0,
     "AllowedLocations": "Arms",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id" : "Status-MortisAccuracy-{location}",
+                "Name": "Mount Arm Accuracy",
+                "Details": "+1 Arm mounted accuracy.",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName" : "{location}.Accuracy",
+                "operation" : "Float_Add",
+                "modValue" : "-3",
+                "modType" : "System.Single"
+            }
+        },	
         {
             "durationData": {},
             "targetingData": {
@@ -245,6 +169,36 @@
                 "targetWeaponSubType": "Melee"
             }
         },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect_ExMortis_Damage",
+                "Name": "Hand Melee Damage",
+                "Details": "Melee attacks deal 20% Extra stab damage.",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+            },
+            "nature": "Buff",
+            "statisticData": {
+            "statName": "DamagePerShot",
+                "operation": "Float_Multiply",
+                "modValue": "1.2",
+                "modType": "System.Single",
+			"targetCollection" : "Weapon",
+                "targetWeaponCategory" : "NotSet",
+                "targetWeaponType" : "Autocannon",
+                "targetWeaponSubType" : "AC20"	
+            }
+        },
         {
             "durationData": {
                 "duration": -1,
@@ -258,21 +212,141 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StatusEffect-ExMortis",
+                "Id": "StatusEffect_ExMortis_Recoil",
                 "Name": "Hand Melee Damage",
                 "Details": "Melee attacks deal 20% Extra stab damage.",
                 "Icon": "uixSvgIcon_equipment_ActuatorArm"
             },
             "nature": "Buff",
             "statisticData": {
-            "statName": "ShotsWhenFired",
+            "statName": "RefireModifier",
             "operation": "Int_Add",
-            "modValue": "1",
+            "modValue": "-2",
             "modType": "System.Int32",
 			"targetCollection" : "Weapon",
                 "targetWeaponCategory" : "NotSet",
                 "targetWeaponType" : "Autocannon",
                 "targetWeaponSubType" : "AC20"	
+            }
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect_ExMortis_RangeShort",
+                "Name": "C3M Probe",
+                "Details": "Increased Sight/Sensors",
+                "Icon": "uixSvgIcon_equipment_Cockpit"
+            },
+            "nature": "Buff",
+            "statisticData": {
+            "statName": "ShortRange",
+            "operation": "Float_Multiply",
+            "modValue": "1.15",
+            "modType": "System.Single",
+			"targetCollection" : "Weapon",
+                "targetWeaponCategory" : "NotSet",
+                "targetWeaponType" : "Autocannon",
+                "targetWeaponSubType" : "AC20"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect_ExMortis_RangeMedium",
+                "Name": "C3M Probe",
+                "Details": "Increased Sight/Sensors",
+                "Icon": "uixSvgIcon_equipment_Cockpit"
+            },
+            "nature": "Buff",
+            "statisticData": {
+            "statName": "MediumRange",
+            "operation": "Float_Multiply",
+            "modValue": "1.15",
+            "modType": "System.Single",
+			"targetCollection" : "Weapon",
+                "targetWeaponCategory" : "NotSet",
+                "targetWeaponType" : "Autocannon",
+                "targetWeaponSubType" : "AC20"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect_ExMortis_RangeLong",
+                "Name": "C3M Probe",
+                "Details": "Increased Sight/Sensors",
+                "Icon": "uixSvgIcon_equipment_Cockpit"
+            },
+            "nature": "Buff",
+            "statisticData": {
+            "statName": "LongRange",
+            "operation": "Float_Multiply",
+            "modValue": "1.15",
+            "modType": "System.Single",
+			"targetCollection" : "Weapon",
+                "targetWeaponCategory" : "NotSet",
+                "targetWeaponType" : "Autocannon",
+                "targetWeaponSubType" : "AC20"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect_ExMortis_RangeMax",
+                "Name": "C3M Probe",
+                "Details": "Increased Sight/Sensors",
+                "Icon": "uixSvgIcon_equipment_Cockpit"
+            },
+            "nature": "Buff",
+            "statisticData": {
+            "statName": "MaxRange",
+            "operation": "Float_Multiply",
+            "modValue": "1.2",
+            "modType": "System.Single",
+			"targetCollection" : "Weapon",
+                "targetWeaponCategory" : "NotSet",
+                "targetWeaponType" : "Autocannon",
+                "targetWeaponSubType" : "AC20"
             }
         }		
     ],

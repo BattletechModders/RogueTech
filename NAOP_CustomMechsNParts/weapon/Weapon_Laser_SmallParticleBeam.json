@@ -6,9 +6,14 @@
 				"IsParticleWeapon",
 				"WpnAccuracy: +1",
 				"PipsIgnored: 1",
+
 				"ImpMove: 5%",
                 "ImpAccuracy: -1",
                 "ImpHeatSink: -5%",
+				"CoolDown: 1",
+				"HeatPerTurn: +5",
+				"WpnRecoil: 2",
+				"Signature: +5%",
 				"MultiLaser"
             ]
         },	
@@ -29,7 +34,7 @@
     ],
     "AmmoCategory" : "NotSet",
     "StartingAmmoCapacity" : 0,
-    "HeatGenerated" : 8,
+    "HeatGenerated" : 15,
     "Damage" : 15,
     "OverheatedDamageMultiplier" : 0,
     "EvasiveDamageMultiplier" : 0,
@@ -40,11 +45,12 @@
     "CriticalChanceMultiplier" : 1,
     "AOECapable" : false,
     "IndirectFireCapable" : false,
-    "RefireModifier" : 0,
+    "RefireModifier" : 1,
     "ShotsWhenFired" : 3,
     "ProjectilesPerShot" : 1,
-    "AttackRecoil" : 0,
+    "AttackRecoil" : 1,
     "Instability" : 3,
+    "FireTerrainChance": 0.0375,
     "WeaponEffectID" : "WeaponEffect-Weapon_LaserPulse_Small",
     "Description" : {
         "Cost" : 1240000,
@@ -55,7 +61,7 @@
         "UIName" : "S. Particle Beam",
         "Id" : "Weapon_Laser_SmallParticleBeam",
         "Name" : "S Particle Beam",
-        "Details" : "Particle weapons have longer ranges in atmosphere than lasers, are significantly more efficient at transferring energy to the target, are nearly as accurate, and can have ionizing effects, disrupting the opponent's electronics and sensors. However, they can cause residual heat buildup, forcing the operator to let their weapon fully vent before firing again. Furthermore, particle generators have unmistakable emissions, which are impractical to conceal on 'Mech sized vehicles, increasing the sensors signature of the 'Mech carrying them. <b><color=#ffcc00>This Small mount causes 4 residual heat and increases Signature by 5%. Particle beams ignore 1 pip of evasion and have 1 innate accuracy.</color></b>",
+        "Details" : "Particle weapons have longer ranges in atmosphere than lasers, are significantly more efficient at transferring energy to the target, are nearly as accurate, and can have ionizing effects, disrupting the opponent's electronics and sensors. However, they require constant cooling even when not firing and equire to cooldown to fire safely. Furthermore, particle generators have unmistakable emissions, which are impractical to conceal on 'Mech sized vehicles, increasing the sensors signature of the 'Mech carrying them. <b><color=#ffcc00>This weapon generates almost no heat and has a cooldown of 1 turn in normal mode. In can be overcharged to fire every turn with 30% jamming chance. </color></b>",
         "Icon" : "uixSvgIcon_weapon_Energy"
     },
     "BonusValueA" : "",
@@ -69,6 +75,21 @@
     "AllowedLocations" : "All",
     "DisallowedLocations" : "All",
     "CriticalComponent" : false,
+    "Modes":[
+                {
+                        "Id":"Std",
+                        "UIName":"STD",
+                        "isBaseMode":true,
+                        "HeatGenerated" : -10,
+                        "Cooldown": 1
+                },
+                {
+                        "Id":"Overcharge",
+                        "UIName":"Overcharge",
+                        "isBaseMode":false,
+                        "FlatJammingChance": 0.3
+                }
+    ],
     "statusEffects" : [
         {
             "durationData" : {
@@ -274,49 +295,49 @@
             "instantModData": null,
             "poorlyMaintainedEffectData": null
         },
-		{
+               {
             "durationData" : {
-                "duration" : 2,
-                "ticksOnActivations" : true,
-                "useActivationsOfTarget" : true,
+                "duration" : -1,
+                "ticksOnActivations" : false,
+                "useActivationsOfTarget" : false,
                 "ticksOnEndOfRound" : false,
                 "ticksOnMovements" : false,
-                "stackLimit" : 10,
+                "stackLimit" : -1,
                 "clearedWhenAttacked" : false
             },
             "targetingData" : {
-                "effectTriggerType" : "OnWeaponFire",
+                "effectTriggerType" : "Passive",
                 "triggerLimit" : 0,
-                "extendDurationOnTrigger" : 2,
+                "extendDurationOnTrigger" : 0,
                 "specialRules" : "NotSet",
                 "effectTargetType" : "Creator",
                 "range" : 0,
                 "forcePathRebuild" : false,
                 "forceVisRebuild" : false,
-                "showInTargetPreview" : true,
-                "showInStatusPanel" : true
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
             },
             "effectType" : "StatisticEffect",
             "Description" : {
-                "Id" : "ParticleHeatSPB",
-                "Name" : "Residual Heating",
-                "Details" : "Particle Weapon Aftereffect",
-                "Icon" : "uixSvgIcon_shipUpgrade_power2"
+                "Id" : "StatusEffect-Heat_SPB",
+                "Name" : "Increased Heat",
+                "Details" : "Maintains a constant heat generation of [AMT].",
+                "Icon" : "uixSvgIcon_equipment_ThermalExchanger"
             },
             "nature" : "Debuff",
             "statisticData" : {
-				"appliesEachTick" : false,
-				"effectsPersistAfterDestruction" : false,
-				"statName": "HeatSinkCapacity",
-				"operation": "Int_Add",
-				"modValue": "-4",
-				"modType": "System.Int32",
-				"additionalRules" : "NotSet",
-				"targetCollection" : "NotSet",
-				"targetWeaponCategory" : "NotSet",
-				"targetWeaponType" : "NotSet",
-				"targetAmmoCategory" : "NotSet",
-				"targetWeaponSubType" : "NotSet"
+                "appliesEachTick" : false,
+                "effectsPersistAfterDestruction" : false,
+                "statName" : "HeatSinkCapacity",
+                "operation" : "Int_Add",
+                "modValue" : "-5",
+                "modType" : "System.Int32",
+                "additionalRules" : "NotSet",
+                "targetCollection" : "NotSet",
+                "targetWeaponCategory" : "NotSet",
+                "targetWeaponType" : "NotSet",
+                "targetAmmoCategory" : "NotSet",
+                "targetWeaponSubType" : "NotSet"
             },
             "tagData" : null,
             "floatieData" : null,

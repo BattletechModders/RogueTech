@@ -1,20 +1,119 @@
 {
     "Custom": {
-        "Category": [{
-            "CategoryID": "PPCCAP"
-        }],
+        "Category": [
+            {
+                "CategoryID": "PPCCAP"
+            }
+        ],
         "ComponentExplosion": {
-            "ExplosionDamage": 25
+            "ExplosionDamage": 50
         },
         "BonusDescriptions": {
             "Bonuses": [
-                "PPCCAPDMG: +15%",
-                "PPCCAPHEAT: +20%",
-                "WeaponBoom: 25"
+                "ActivePPCCAPDMG: +20%",
+                "ActivePPCCAPHEAT: +10%",
+                "ActiveHeatPerTurn: +9",
+                "FailChance: 10%",
+                "FailChanceTurn: 15%",
+                "FailCritSelf",
+                "WeaponBoom: 50"
             ]
         },
         "InventorySorter": {
             "SortKey": "00027"
+        },
+        "ActivatableComponent": {
+            "ButtonName": "Capacitator",
+            "FailFlatChance": 0.1,
+            "FailRoundsStart": 2,
+            "FailChancePerTurn": 0.15,
+            "SelfCrit": true,
+            "FailPilotingBase": 5,
+            "FailPilotingMult": 0.1,
+            "statusEffects": [
+                {
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "effectTargetType": "Creator",
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": true
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "StatusEffect-Attack_PPCCAP",
+                        "Name": "PPC Capacitator",
+                        "Details": "Increased PPC Damage.",
+                        "Icon": "uixSvgIcon_equipment_TTS"
+                    },
+                    "nature": "Buff",
+                    "statisticData": {
+                        "statName": "DamagePerShot",
+                        "operation": "Float_Multiply",
+                        "modValue": "1.2",
+                        "modType": "System.Single",
+                        "targetCollection": "Weapon",
+                        "targetWeaponSubType": "PPC"
+                    }
+                },
+                {
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "effectTargetType": "Creator",
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "StatusEffect-Heat_PPCCAP",
+                        "Name": "Increased Heat",
+                        "Details": "Heat generation increased by 20%.",
+                        "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+                    },
+                    "nature": "Buff",
+                    "statisticData": {
+                        "statName": "HeatGenerated",
+                        "operation": "Float_Multiply",
+                        "modValue": "1.1",
+                        "modType": "System.Single",
+                        "targetCollection": "Weapon",
+                        "targetWeaponSubType": "PPC"
+                    }
+                },
+                {
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "effectTargetType": "Creator",
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "StatusEffect-Heat2_PPCCAP",
+                        "Name": "Increased Heat",
+                        "Details": "Maintains a constant heat generation of 10.",
+                        "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+                    },
+                    "nature": "Debuff",
+                    "statisticData": {
+                        "statName": "HeatSinkCapacity",
+                        "operation": "Int_Add",
+                        "modValue": "-9",
+                        "modType": "System.Int32"
+                    }
+                }
+            ]
         }
     },
     "StatName": null,
@@ -43,110 +142,7 @@
     "AllowedLocations": "All",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
-    "statusEffects": [
-        {
-            "durationData": {
-                "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": 1,
-                "clearedWhenAttacked": false
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
-                "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": true
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "StatusEffect-Attack_PPCCAP",
-                "Name": "PPC Capacitator",
-                "Details": "Increased PPC Damage.",
-                "Icon": "uixSvgIcon_equipment_TTS"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
-                "statName": "DamagePerShot",
-                "operation": "Float_Multiply",
-                "modValue": "1.15",
-                "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "Weapon",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "PPC"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": 1,
-                "clearedWhenAttacked": false
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
-                "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "StatusEffect-Heat_PPCCAP",
-                "Name": "Increased Heat",
-                "Details": "Heat generation increased by 20%.",
-                "Icon": "uixSvgIcon_equipment_ThermalExchanger"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
-                "statName": "HeatGenerated",
-                "operation": "Float_Multiply",
-                "modValue": "1.2",
-                "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "Weapon",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "PPC"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
-        }
-    ],
+    "statusEffects": [],
     "ComponentTags": {
         "items": [
             "component_type_variant",

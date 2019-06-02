@@ -15,11 +15,12 @@ PLANK - Units mostly armed with the odd pirate weapons cobbled together by peopl
 Custom Tags List:
 
 unit_hover,
-unit_noconvoy,
+unit_noconvoy, Things that are too fast, or too slow, to be appropriate and fun in convoys
 unit_primitive,
 unit_carrier,
 unit_stealth,
-unit_predator
+unit_predator, Things with boosted sensor or tagging gear
+unit_vbied, Things with suicide bombs
 
 unit_galleon,
 unit_behemoth,
@@ -30,15 +31,252 @@ unit_brutus,
 unit_pegasus,
 unit_zephyr,
 unit_hunter,
+unit_demolisher <- Literally every faction has these
 
 
 Changelog:
+
+7.6.2
+
+Added Demon (PPC),
+Added Bandit medium hovers ( <3 Justin ),
+Minor tweaks
+
+7.5.1
+
+Rhino Fire Support Tank update
+    Added Rhino MG,
+    Added Rhino SL,
+    Added Base Rhino,
+    Tweaked Rhino Royal and Rhino Flamer
+
+7.4.7 <---- Corresponds to P11 release
+
+Fixed TBM20 carrier being undertonned,
+Tweaked a few techies to carry Generic_AP
+
+7.4.5 - 5/19/2019 <---- Corresponds to P11 A5
+
+Added Demolisher (Arrow IV) to arty folder,
+minor fixes
+
+7.4.3 - 5/15/2019
+
+Added Pirate Axel "Rose",
+Added Light Mortar Carrier with FASCAM,
+Added a second Clan LRM carrier with a different payload,
+Reworked Enhanced LRM Carrier,
+Reworked Extended LRM Carrier,
+Striker Light Tank Update:
+    Minor tweaks/fixes,
+    Added Striker (3061),
+    Added Striker (Ammo),
+    Added Striker (Narc),
+    Added Striker (Laser)
+
+7.3.3 - 5/14/2019 <---- Corresponds to P10 HF2
+
+Hunter Update
+    Added Hunter LPL,
+    Added Hunter ERL,
+    Added Hunter (Ammo),
+    Took overweight heavy flamers away from a couple Hunters,
+    Tweaked Hunter_LA because i goofed and it wasn't quite valid,
+    Adjusted some ammo
+
+7.2.7 - 5/13/2019
+
+Added Brutus (LRM), 
+Added Brutus (HPPC),
+Adjusted other Brutus ammo, tagging and + weapons,
+Fixed a misnamed manticore chassisdef,
+Added Manticore (LBX),
+Added Manticore (Command),
+Added Manticore (C3),
+Adjusted Manticore ammo, and tagging
+
+7.1.9
+
+Enabled blacklisted VBIEDs now that they have a self kill trigger,
+Added a new Pirate Marsden II
+
+7.1.7 - 5/3/2019
+
+Added Clan Gauss Demolisher,
+Fixed laser Morrigu having 4 engine cores LOL,
+
+7.1.5
+
+Added Clan ATM Carrier,
+Added missing CASE to Clan vehicles,
+Made "unit_demolisher" tag to enable special lances with them,
+minor fixes
+
+7.1.1
+
+Added MRM Demolisher
+
+7.1.0 - 4/30/2019
+
+Added Marksman Artilery Vehicle,
+Minor fixes for other arty vehicles
+
+Note that adding crit-able default internals, including motive systems, has been done to all vehicles on or about this date.
+
+7.0.9 - 4/27/2019
+
+Tweaked vehicle stealth to follow the current style of mech stealth,
+Removed LRM and SRM Artemis standin files that have long been unused.
+Tweaked the Bardiche,
+Found a couple tanks to give the double mg bin which otherwise was not used on *any* units,
+Fixed wrong ammo on Myrmimdon_INF
+Added Pirate Shepard
+Added Clan Oro (UAC5)
+Added Clan Oro (Gauss)
+minor fixes
+
+7.0.0 - 4/21/2019
+
+Added Clan Streak LRM Carrier,
+Added Clan Mixed Missile Carrier
+Added Hybrid Light Missile carrier,
+Designed and added Ferret medium hunter/killer tank,
+Tagging tweaks for APCs
+
+6.9.5 - 4/20/2019
+
+Added five Partisan variants using Colo's model
+
+6.9.0 - 4/15 -> 4/17/2019
+
+Oro to Colo's Oro model,
+Shamash to Savannah Master model,
+Marked VBIED vehicles as legendary to keep their numbers down,
+Clearer name for pirate Harrasser VBIED,
+Added unit_vbied tag,
+Recalced vehicle movedefs based on effective average hex size according to Cpt Moore.
+
+6.8.4
+
+Lady added new pathingdefs for minefield interactions
+Implemented new hover pathing defs on all hover units,
+Corrected some tracked/wheeled defs that were wrong type or weight.
+
+6.8.1
+
+Removed Noncombat tag from APCs that have had a bunch of cargo space replaced with serious weapon systems.
+    This will make them sometimes appear in combat lances.
+Added HPPC Demolisher
+
+6.8.0 - 4/8/2019
+
+Changed models used for 
+    JES II,
+    Gorgon,
+    Thumpers,
+    Ballista,
+    Po heavy tanks,
+    Ontos,
+    Behemoths
+
+6.7.9 - 4/7/2019
+
+Added Arrow IV Assault Vehicle to naga folder
+Added Ballista (Sniper Arty Tank)
+Added Pirate Thumper
+
+6.7.6 - 4/7/2019
+
+Gave missing TTS to some carriers. Removed some from the Light carriers that were not supposed to have them.
+Distributed more APFSDS ammo to primitive tanks.
+Gave FASCAM ARROW IV ammo to a couple Naga folder tanks.
+
+6.7.3
+
+Added JES-II (95 ton Jihad era lrm carrier),
+Added Pirate Harasser (Which...suspiciously...is missing an SRM rack)
+
+6.7.1 - 4/5/2019
+
+Added JES 1 (medium srm hovertank)
+Fixed a bunch of hovertank pathingdefs
+
+6.6.9
+
+Added VBIED APC
+
+6.6.8
+
+Added Alacorn IIC and Alacorn IIC-A
+
+6.6.6 - 4/3/2019
+
+Added Light Mortar Carrier,
+Ammo tweaks, (RIP Raza)
+Minor Fixes
+
+6.6.4 - 3/30/2019
+
+Added Thumper_Angel arty vehicle,
+Minor fixes
+
+6.6.2 - 3/29/2019
+
+Added crappy Hetzer with Quickcell AC10,
+misc minor vehicle fixes.
+
+6.6.0 - 3/23/2019
+
+Scale update. Fixed/Updated all vehicle scaling.
+Added Vehicle Born IED trucks, 15 tons for HE and Fire, and a Nuke one in the Urbienuke
+Added VBIED FIretruck
+
+6.5.5
+
+Added Mortar Techies,
+Added Mortar Carrier (60 ton),
+Minor fixes
+
+6.5.0
+
+Goblin Update
+    Added LRM and SRM variants,
+    Fixed Goblin scaling,
+    Fixed weight class
+Minor fixes
+
+6.4.5 - 3/16/2019
+
+Adjusted all vehicle filenames/ids to conform to current naming conventions,
+Fixed dupe IDs in SchreckAC and Primitive Schreck,
+Added Pegasus_MG,
+Added Drillson ICE, ERLL, SRM,
+Minor fixes
+
+6.2.9 - 3/13/2019
+
+Added Morrigu, three variants, using Colo's model.
+
+6.2.6
+
+Added Longtom and Thumper units in new Artillery folder.
+
+6.2.4 - 3/11/2019
+
+Hetzer Update
+    Added AC10, LRM, SRM, Laser, Scout, AP, UAC
+
+Added TBM20/LRM20 carrier.
+
+6.1.6
+
+Added Condor, Condor Flamer, Condor Liao, Condor Davion, Condor Laser, based on defs contributed by JK.
 
 6.1.1 3/5/2019
 
 Alacorn Model,
 Ares Model,
-Challenger Model - Also given to Ajax, and Brutus
+Challenger Model - Also given to Ajax
 Devastator Model - Also given to Demolisher II's,
 Goblin Model,
 Heavy Carrier Model,
