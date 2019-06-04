@@ -36,6 +36,18 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+0.0.0
+
+The Big Move. Separating by Eras.
+Moved items in old Dark Age folder to proper locations.
+
+7.6.6 - 6/3/2019
+
+Added Heavy Mortar Carrier,
+Added Pirate Pike,
+Gave a couple things single shot TBM,
+minor fixes
+
 7.6.2
 
 Added Demon (PPC),
