@@ -1,9 +1,12 @@
 Unpack to Mods folder
-
-WARNING! If you use AIM mod you need to have special patched version or set ShowMissMargin to false in AIM settings. 
-
-Settings 
+CustomAmmoCategories settings 
 CustomAmmoCategoriesSettings.json
+WeaponRealizer settings
+WeaponRealizerSettings.json (for description look at the WR-README)
+AttackImprovementMod settings
+AIM_settings.json (for description look at the AIM-README)
+
+WARNING! Shipped versions of AIM and WR can't be loaded by ModTek and can't be used standalone.
 
 click on right side of HUD weapon slot to switch mode (near hit chance)
 click on center of HUD weapon slot to switch ammo (near ammo count)
