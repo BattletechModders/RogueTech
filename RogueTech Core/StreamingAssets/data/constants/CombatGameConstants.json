@@ -50,14 +50,14 @@
 		"ShowPeakHeat": false
 	},
 	"Visibility": {
-		"BaseSpotterDistance": 1.0,
+		"BaseSpotterDistance": 250.0,
 		"SpotterTacticsMultiplier": 0.0,
 		"RatioFullVis": 0.79,
 		"RatioObstructedVis": 0.41,
 		"MinRatioFromActors": 0.2,
 		"ShutDownVisibilityModifier": 0.0,
 		"ShutDownSignatureModifier": -0.5,
-		"BaseSensorDistance": 1.0,
+		"BaseSensorDistance": 450.0,
 		"UseAsymmetricalSensors": true,
 		"ShowExtendedBlipsBeforeContact": false,
 		"ExtendedSensorDistanceMultiplier": 1.0,
@@ -120,34 +120,91 @@
 				"modType": "System.Single"
 			}
 		},
-		"FiredWeaponsEffect": {
-			"durationData": {
-				"duration": 2,
-				"ticksOnActivations": true,
-				"useActivationsOfTarget": true
-			},
-			"targetingData": {
-				"effectTriggerType": "OnActivation",
-				"effectTargetType": "SingleTarget"
-			},
-			"effectType": "StatisticEffect",
-			"Description": {
-				"Id": "FiredWeaponsSignatureEffect",
-				"Name": "FIRED WEAPONS",
-				"Details": "+100% SIGNATURE",
-				"Icon": "uixSvgIcon_genericDiamond"
-			},
-			"statisticData": {
-				"statName": "SensorSignatureModifier",
-				"operation": "Float_Add",
-				"modValue": "5",
-				"modType": "System.Single"
-			},
-			"nature": "Debuff"
-		},
-		"MaxShadowingDistance": 70.0,
-		"NumShadowingSteps": -3
-	},
+		"SensorLockAntiStealthEffect": {
+      "durationData": {
+        "duration": 1,
+        "ticksOnEndOfRound": true,
+        "stackLimit": 1
+      },
+      "targetingData": {
+        "effectTargetType": "SingleTarget",
+		"forceVisRebuild" : true,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "SensorLockAntiStealthEffect",
+        "Name": "SENSOR LOCK: STEALTH SUPPRESSED",
+        "Details": "Sensor Lock suppresses Stealth on this unit for 1 Round.",
+        "Icon": "uixSvgIcon_status_sensorsImpaired"
+      },
+      "nature": "Debuff",
+      "statisticData": {
+        "statName": "GhostEffectStacks",
+        "operation": "Int_Add",
+        "modValue": "-999",
+        "modType": "System.Int32"
+      }
+    },
+	 "FiredWeaponsEffect": {
+      "durationData": {
+        "duration": 1,
+        "ticksOnEndOfRound": true,
+        "stackLimit": 1
+      },
+      "targetingData": {
+        "effectTriggerType": "OnActivation",
+        "effectTargetType": "SingleTarget"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "FiredWeaponsSignatureEffect",
+        "Name": "FIRED WEAPONS",
+        "Details": "+100% SIGNATURE",
+        "Icon": "uixSvgIcon_genericDiamond"
+      },
+      "statisticData": {
+        "statName": "SensorSignatureModifier",
+        "operation": "Float_Add",
+        "modValue": "0.0",
+        "modType": "System.Single"
+      },
+      "nature": "Debuff"
+    },
+	"FiredWeaponsAntiStealthEffect": {
+      "durationData": {
+        "duration": 1,
+        "ticksOnEndOfRound": true,
+        "stackLimit": 1
+      },
+      "targetingData": {
+        "effectTriggerType": "OnActivation",
+        "effectTargetType": "SingleTarget",
+		"forceVisRebuild" : true,
+        "showInTargetPreview" : false,
+        "showInStatusPanel" : false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "FiredWeaponsAntiStealthEffect",
+        "Name": "FIRED WEAPONS: STEALTH SUPPRESSED",
+        "Details": "Firing weapons suppresses Stealth on this unit for 1 Round.",
+        "Icon": "uixSvgIcon_status_sensorsImpaired"
+      },
+      "statisticData": {
+        "statName": "GhostEffectStacks",
+        "operation": "Int_Add",
+        "modValue": "-1",
+        "modType": "System.Int32"
+      },
+      "nature": "Debuff"
+    },
+	"MaxShadowingDistance": 80.0,
+    "NumShadowingSteps": -1,
+	"GhostStatePipThreshold" : 2,
+	"GhostStateHidesBlips": true
+  },
 	"ToHit": {
 		"FiringArcDegrees": 60.0,
 		"ToHitBaseFloor": 0.7,
@@ -1001,6 +1058,14 @@
 		"showFLoatiesForMisses": false,
 		"showFloatiesForDodges": true,
 		"showStateRemovals": false,
+		"ScreenShakeBuildingDestruction": [
+      600,
+      250,
+      500,
+      750,
+      1000
+    ],
+	"ScreenShakeBuildingDestructionLength": 8,
 		"ScreenShakeRangedDamageRelativeMod": 2.0,
 		"ScreenShakeRangedDamageAbsoluteMod": 0.0,
 		"ScreenShakeMeleeDamageRelativeMod": 2.0,
@@ -1296,275 +1361,428 @@
 		"CamMultiplierSlowMove": 5.0 /* this multiplier controls "slow start" camera zooms: mission begin, mission end, and non-cinematic player attack zooms */
 	},
 	"VFXNames": {
-		"pilotEject": {
-			"name": "vfxPrfPrtl_mechWarriorEject",
-			"cacheCount": 1
-		},
-		"footfallBase": {
-			"name": "vfxPrfPrtl_mechFootfall_",
-			"cacheCount": 1
-		},
-		"groundImpactBase": {
-			"name": "vfxPrfPrtl_mechFall_",
-			"cacheCount": 1
-		},
-		"jumpjetLandBase": {
-			"name": "vfxPrfPrtl_jumpJetLanding_",
-			"cacheCount": 1
-		},
-		"mechDeath_centerTorso_A": {
-			"name": "vfxPrfPrtl_mechDeathTotal_A",
-			"cacheCount": 1
-		},
-		"mechDeath_centerTorso_B": {
-			"name": "vfxPrfPrtl_mechDeathTotal_B",
-			"cacheCount": 1
-		},
-		"mechDeath_centerTorso_C": {
-			"name": "vfxPrfPrtl_mechDeathTotal_C",
-			"cacheCount": 1
-		},
-		"mechDeath_cockpit": {
-			"name": "vfxPrfPrtl_mechDeathCockpit",
-			"cacheCount": 1
-		},
-		"mechDeath_gyro": {
-			"name": "vfxPrfPrtl_mechDeathElectricalShutdown",
-			"cacheCount": 1
-		},
-		"mechDeath_engine": {
-			"name": "vfxPrfPrtl_mechDeathHeatShutdown",
-			"cacheCount": 1
-		},
-		"mechDeath_legs": {
-			"name": "vfxPrfPrtl_mechDeathLegs",
-			"cacheCount": 1
-		},
-		"mechDeath_ammoExplosion_A": {
-			"name": "vfxPrfPrtl_mechDeathTotal_A",
-			"cacheCount": 1
-		},
-		"mechDeath_ammoExplosion_B": {
-			"name": "vfxPrfPrtl_mechDeathTotal_B",
-			"cacheCount": 1
-		},
-		"mechDeath_ammoExplosion_C": {
-			"name": "vfxPrfPrtl_mechDeathTotal_C",
-			"cacheCount": 1
-		},
-		"mechDeath_vitalComponent": {
-			"name": "vfxPrfPrtl_mechDeathElectricalShutdown",
-			"cacheCount": 1
-		},
-		"mechDeath_pilotKilled": {
-			"name": "vfxPrfPrtl_mechDeathCockpit",
-			"cacheCount": 1
-		},
-		"vehicleDeath_A": {
-			"name": "vfxPrfPrtl_vehicleDeath_A",
-			"cacheCount": 1
-		},
-		"vehicleDeath_B": {
-			"name": "vfxPrfPrtl_vehicleDeath_B",
-			"cacheCount": 1
-		},
-		"persistentDamage": [
-			{
-				"name": "vfxPrfPrtl_mechDmgSmokeLrg_loop",
-				"cacheCount": 8
-			},
-			{
-				"name": "vfxPrfPrtl_mechDmgSmokeSm_loop",
-				"cacheCount": 8
-			},
-			{
-				"name": "vfxPrfPrtl_mechDmgElectricalSm_loop",
-				"cacheCount": 8
-			},
-			{
-				"name": "vfxPrfPrtl_mechDmgElectricalLrg_loop",
-				"cacheCount": 4
-			},
-			{
-				"name": "vfxPrfPrtl_mechDmgSparks",
-				"cacheCount": 8
-			},
-			{
-				"name": "vfxPrfPrtl_mechDmgElectricalFailure_loop",
-				"cacheCount": 2
-			}
-		],
-		"persistentCrit": [
-			{
-				"name": "vfxPrfPrtl_mechDmgFireLrg_loop",
-				"cacheCount": 2
-			},
-			{
-				"name": "vfxPrfPrtl_mechDmgFireSm_loop",
-				"cacheCount": 2
-			},
-			{
-				"name": "vfxPrfPrtl_mechDmgSmokeSpark_loop",
-				"cacheCount": 2
-			}
-		],
-		"componentDestruction_A": {
-			"name": "vfxPrfPrtl_mechDmgParkBreak_A",
-			"cacheCount": 3
-		},
-		"componentDestruction_B": {
-			"name": "vfxPrfPrtl_mechDmgParkBreak_B",
-			"cacheCount": 3
-		},
-		"componentDestruction_C": {
-			"name": "vfxPrfPrtl_mechDmgParkBreak_C",
-			"cacheCount": 3
-		},
-		"componentDestruction_D": {
-			"name": "vfxPrfPrtl_mechDmgParkBreak_shrapnel",
-			"cacheCount": 3
-		},
-		"componentDestruction_AmmoExplosion": {
-			"name": "vfxPrfPrtl_mechDmgCritAmmo",
-			"cacheCount": 2
-		},
-		"deadMechLoop": {
-			"name": "vfxPrfPrtl_mechDmgDead_loop",
-			"cacheCount": 6
-		},
-		"deadMechLoop_A": {
-			"name": "vfxPrfPrtl_mechDmgDead_A_loop",
-			"cacheCount": 6
-		},
-		"deadMechLoop_B": {
-			"name": "vfxPrfPrtl_mechDmgDead_B_loop",
-			"cacheCount": 6
-		},
-		"deadMechLoop_C": {
-			"name": "vfxPrfPrtl_mechDmgDead_C_loop",
-			"cacheCount": 6
-		},
-		"deadMechLoop_D": {
-			"name": "vfxPrfPrtl_mechDmgDead_loop",
-			"cacheCount": 6
-		},
-		"heat_midHeat_persistent": {
-			"name": "vfxPrfPrtl_heatVentSm_loop",
-			"cacheCount": 3
-		},
-		"heat_highHeat_persistent": {
-			"name": "vfxPrfPrtl_heatVentLrg_loop",
-			"cacheCount": 3
-		},
-		"heat_heatVent_small": {
-			"name": "vfxPrfPrtl_heatDumpSm_burst",
-			"cacheCount": 1
-		},
-		"heat_heatVent_large": {
-			"name": "vfxPrfPrtl_heatDumpLrg_burst",
-			"cacheCount": 1
-		},
-		"heat_heatVent_shutdown": {
-			"name": "vfxPrfPrtl_heatDumpLrg_burst",
-			"cacheCount": 1
-		},
-		"heat_heatShutdown": {
-			"name": "vfxPrfPrtl_overheatStatusLrg_loop",
-			"cacheCount": 2
-		},
-		"heat_coolantVent": {
-			"name": "vfxPrfPrtl_coolantVent",
-			"cacheCount": 1
-		},
-		"flames_loop_small": {
-			"name": "vfxPrfPrtl_fireTerrain_smLoop",
-			"cacheCount": 1
-		},
-		"flames_loop_medium": {
-			"name": "vfxPrfPrtl_fireTerrain_medLoop",
-			"cacheCount": 1
-		},
-		"flames_loop_large": {
-			"name": "vfxPrfPrtl_fireTerrain_lrgLoop",
-			"cacheCount": 1
-		},
-		"flames_single_small": {
-			"name": "vfxPrfPrtl_fireTerrain_smOneShot",
-			"cacheCount": 1
-		},
-		"flames_single_large": {
-			"name": "vfxPrfPrtl_fireTerrain_lrgOneShot",
-			"cacheCount": 1
-		},
-		"flames_trees_small": {
-			"name": "vfxPrfPrtl_fireTree_sm",
-			"cacheCount": 1
-		},
-		"flames_trees_large": {
-			"name": "vfxPrfPrtl_fireTree_lrg",
-			"cacheCount": 1
-		},
-		"flamer_impact": {
-			"name": "vfxPrfPrtl_weaponFlamerImpact",
-			"cacheCount": 4
-		},
-		"flamer_persistent": {
-			"name": "vfxPrfPrtl_weaponFlamerBurningLrg",
-			"cacheCount": 4
-		},
-		"directionalExplosion_small": {
-			"name": "vfxPrfPrtl_explosionDirectedSm_debris",
-			"cacheCount": 1
-		},
-		"directionalExplosion_medium": {
-			"name": "vfxPrfPrtl_explosionDirectedMed_debris",
-			"cacheCount": 1
-		},
-		"directionalExplosion_large": {
-			"name": "vfxPrfPrtl_explosionDirectedLrg_debris",
-			"cacheCount": 1
-		},
-		"directionalExplosion_electrical": {
-			"name": "vfxPrfPrtl_explosionDirectedLrg_electric",
-			"cacheCount": 1
-		},
-		"directionalExplosion_energy": {
-			"name": "vfxPrfPrtl_explosionDirectedLrg_scifi",
-			"cacheCount": 1
-		},
-		"jumpjet_launch": {
-			"name": "vfxPrfSys_jumpJetLaunch",
-			"cacheCount": 5
-		},
-		"artillery_incoming": {
-			"name": "vfxPrfPrtl_artilleryProjectiles",
-			"cacheCount": 1
-		},
-		"artillery_explosion": {
-			"name": "vfxPrfPrtl_propaneTankExplosion",
-			"cacheCount": 1
-		},
-		"artillery_projectile_single": {
-			"name": "vfxPrfPrtl_artilleryProjectile_single",
-			"cacheCount": 1
-		},
-		"artillery_impact_single": {
-			"name": "vfxPrfPrtl_artilleryImpact_single",
-			"cacheCount": 1
-		},
-		"artillery_projectile_barrage": {
-			"name": "vfxPrfPrtl_artilleryProjectile_barrage",
-			"cacheCount": 1
-		},
-		"artillery_impact_barrage": {
-			"name": "vfxPrfPrtl_artilleryImpact_barrage",
-			"cacheCount": 1
-		},
-		"artillery_orbital_ppc": {
-			"name": "vfxPrfPrtl_orbitalPPC_oneshot",
-			"cacheCount": 1
-		}
-	},
+    "pilotEject": {
+      "name": "vfxPrfPrtl_mechWarriorEject",
+      "cacheCount": 1
+    },
+    "footfallBase": {
+      "name": "vfxPrfPrtl_mechFootfall_",
+      "cacheCount": 1
+    },
+    "groundImpactBase": {
+      "name": "vfxPrfPrtl_mechFall_",
+      "cacheCount": 1
+    },
+    "jumpjetLandBase": {
+      "name": "vfxPrfPrtl_jumpJetLanding_",
+      "cacheCount": 1
+    },
+    "mechDeath_centerTorso_A": {
+      "name": "vfxPrfPrtl_mechDeathTotal_A",
+      "cacheCount": 1
+    },
+    "mechDeath_centerTorso_B": {
+      "name": "vfxPrfPrtl_mechDeathTotal_B",
+      "cacheCount": 1
+    },
+    "mechDeath_centerTorso_C": {
+      "name": "vfxPrfPrtl_mechDeathTotal_C",
+      "cacheCount": 1
+    },
+    "mechDeath_cockpit": {
+      "name": "vfxPrfPrtl_mechDeathCockpit",
+      "cacheCount": 1
+    },
+    "mechDeath_gyro": {
+      "name": "vfxPrfPrtl_mechDeathElectricalShutdown",
+      "cacheCount": 1
+    },
+    "mechDeath_engine": {
+      "name": "vfxPrfPrtl_mechDeathHeatShutdown",
+      "cacheCount": 1
+    },
+    "mechDeath_legs": {
+      "name": "vfxPrfPrtl_mechDeathLegs",
+      "cacheCount": 1
+    },
+    "mechDeath_ammoExplosion_A": {
+      "name": "vfxPrfPrtl_mechDeathTotal_A",
+      "cacheCount": 1
+    },
+    "mechDeath_ammoExplosion_B": {
+      "name": "vfxPrfPrtl_mechDeathTotal_B",
+      "cacheCount": 1
+    },
+    "mechDeath_ammoExplosion_C": {
+      "name": "vfxPrfPrtl_mechDeathTotal_C",
+      "cacheCount": 1
+    },
+    "mechDeath_vitalComponent": {
+      "name": "vfxPrfPrtl_mechDeathElectricalShutdown",
+      "cacheCount": 1
+    },
+    "mechDeath_pilotKilled": {
+      "name": "vfxPrfPrtl_mechDeathCockpit",
+      "cacheCount": 1
+    },
+    "vehicleDeath_A": {
+      "name": "vfxPrfPrtl_vehicleDeath_A",
+      "cacheCount": 1
+    },
+    "vehicleDeath_B": {
+      "name": "vfxPrfPrtl_vehicleDeath_B",
+      "cacheCount": 1
+    },
+    "persistentDamage": [
+      {
+        "name": "vfxPrfPrtl_mechDmgSmokeLrg_loop",
+        "cacheCount": 8
+      },
+      {
+        "name": "vfxPrfPrtl_mechDmgSmokeSm_loop",
+        "cacheCount": 8
+      },
+      {
+        "name": "vfxPrfPrtl_mechDmgElectricalSm_loop",
+        "cacheCount": 8
+      },
+      {
+        "name": "vfxPrfPrtl_mechDmgElectricalLrg_loop",
+        "cacheCount": 4
+      },
+      {
+        "name": "vfxPrfPrtl_mechDmgSparks",
+        "cacheCount": 8
+      },
+      {
+        "name": "vfxPrfPrtl_mechDmgElectricalFailure_loop",
+        "cacheCount": 2
+      }
+    ],
+    "persistentCrit": [
+      {
+        "name": "vfxPrfPrtl_mechDmgFireLrg_loop",
+        "cacheCount": 2
+      },
+      {
+        "name": "vfxPrfPrtl_mechDmgFireSm_loop",
+        "cacheCount": 2
+      },
+      {
+        "name": "vfxPrfPrtl_mechDmgSmokeSpark_loop",
+        "cacheCount": 2
+      }
+    ],
+    "componentDestruction_A": {
+      "name": "vfxPrfPrtl_mechDmgParkBreak_A",
+      "cacheCount": 3
+    },
+    "componentDestruction_B": {
+      "name": "vfxPrfPrtl_mechDmgParkBreak_B",
+      "cacheCount": 3
+    },
+    "componentDestruction_C": {
+      "name": "vfxPrfPrtl_mechDmgParkBreak_C",
+      "cacheCount": 3
+    },
+    "componentDestruction_D": {
+      "name": "vfxPrfPrtl_mechDmgParkBreak_shrapnel",
+      "cacheCount": 3
+    },
+    "componentDestruction_AmmoExplosion": {
+      "name": "vfxPrfPrtl_mechDmgCritAmmo",
+      "cacheCount": 2
+    },
+    "deadMechLoop": {
+      "name": "vfxPrfPrtl_mechDmgDead_loop",
+      "cacheCount": 6
+    },
+    "deadMechLoop_A": {
+      "name": "vfxPrfPrtl_mechDmgDead_A_loop",
+      "cacheCount": 6
+    },
+    "deadMechLoop_B": {
+      "name": "vfxPrfPrtl_mechDmgDead_B_loop",
+      "cacheCount": 6
+    },
+    "deadMechLoop_C": {
+      "name": "vfxPrfPrtl_mechDmgDead_C_loop",
+      "cacheCount": 6
+    },
+    "deadMechLoop_D": {
+      "name": "vfxPrfPrtl_mechDmgDead_loop",
+      "cacheCount": 6
+    },
+    "heat_midHeat_persistent": {
+      "name": "vfxPrfPrtl_heatVentSm_loop",
+      "cacheCount": 3
+    },
+    "heat_highHeat_persistent": {
+      "name": "vfxPrfPrtl_heatVentLrg_loop",
+      "cacheCount": 3
+    },
+    "heat_heatVent_small": {
+      "name": "vfxPrfPrtl_heatDumpSm_burst",
+      "cacheCount": 1
+    },
+    "heat_heatVent_large": {
+      "name": "vfxPrfPrtl_heatDumpLrg_burst",
+      "cacheCount": 1
+    },
+    "heat_heatVent_shutdown": {
+      "name": "vfxPrfPrtl_heatDumpLrg_burst",
+      "cacheCount": 1
+    },
+    "heat_heatShutdown": {
+      "name": "vfxPrfPrtl_overheatStatusLrg_loop",
+      "cacheCount": 2
+    },
+    "heat_coolantVent": {
+      "name": "vfxPrfPrtl_coolantVent",
+      "cacheCount": 1
+    },
+    "flames_loop_small": {
+      "name": "vfxPrfPrtl_fireTerrain_smLoop",
+      "cacheCount": 1
+    },
+    "flames_loop_medium": {
+      "name": "vfxPrfPrtl_fireTerrain_medLoop",
+      "cacheCount": 1
+    },
+    "flames_loop_large": {
+      "name": "vfxPrfPrtl_fireTerrain_lrgLoop",
+      "cacheCount": 1
+    },
+    "flames_single_small": {
+      "name": "vfxPrfPrtl_fireTerrain_smOneShot",
+      "cacheCount": 1
+    },
+    "flames_single_large": {
+      "name": "vfxPrfPrtl_fireTerrain_lrgOneShot",
+      "cacheCount": 1
+    },
+    "flames_trees_small": {
+      "name": "vfxPrfPrtl_fireTree_sm",
+      "cacheCount": 1
+    },
+    "flames_trees_large": {
+      "name": "vfxPrfPrtl_fireTree_lrg",
+      "cacheCount": 1
+    },
+    "flamer_impact": {
+      "name": "vfxPrfPrtl_weaponFlamerImpact",
+      "cacheCount": 4
+    },
+    "flamer_persistent": {
+      "name": "vfxPrfPrtl_weaponFlamerBurningLrg",
+      "cacheCount": 4
+    },
+    "directionalExplosion_small": {
+      "name": "vfxPrfPrtl_explosionDirectedSm_debris",
+      "cacheCount": 1
+    },
+    "directionalExplosion_medium": {
+      "name": "vfxPrfPrtl_explosionDirectedMed_debris",
+      "cacheCount": 1
+    },
+    "directionalExplosion_large": {
+      "name": "vfxPrfPrtl_explosionDirectedLrg_debris",
+      "cacheCount": 1
+    },
+    "directionalExplosion_electrical": {
+      "name": "vfxPrfPrtl_explosionDirectedLrg_electric",
+      "cacheCount": 1
+    },
+    "directionalExplosion_energy": {
+      "name": "vfxPrfPrtl_explosionDirectedLrg_scifi",
+      "cacheCount": 1
+    },
+    "jumpjet_launch": {
+      "name": "vfxPrfSys_jumpJetLaunch",
+      "cacheCount": 5
+    },
+    "artillery_incoming": {
+      "name": "vfxPrfPrtl_artilleryProjectiles",
+      "cacheCount": 1
+    },
+    "artillery_explosion": {
+      "name": "vfxPrfPrtl_propaneTankExplosion",
+      "cacheCount": 1
+    },
+    "artillery_projectile_single": {
+      "name": "vfxPrfPrtl_artilleryProjectile_single",
+      "cacheCount": 1
+    },
+    "artillery_impact_single": {
+      "name": "vfxPrfPrtl_artilleryImpact_single",
+      "cacheCount": 1
+    },
+    "artillery_projectile_barrage": {
+      "name": "vfxPrfPrtl_artilleryProjectile_barrage",
+      "cacheCount": 1
+    },
+    "artillery_impact_barrage": {
+      "name": "vfxPrfPrtl_artilleryImpact_barrage",
+      "cacheCount": 1
+    },
+    "artillery_orbital_ppc": {
+      "name": "vfxPrfPrtl_orbitalPPC_oneshot",
+      "cacheCount": 1
+    },
+    "artillery_electric_transformer_explosion": {
+      "name": "vfxPrfPrtl_electricTransformerExplosion",
+      "cacheCount": 1
+    },
+    "artillery_coolant_explosion": {
+      "name": "vfxPrfPrtl_coolantExplosion",
+      "cacheCount": 1
+    },
+	"active_probe_Effect": {
+      "name": "vfxPrfPrtl_activeProbe_loop",
+      "cacheCount": 1
+    },
+	"urbanRubbleCivilianNames" : [
+		"UrbPrfBldn_Rubble_01_conc",
+		"UrbPrfBldn_Rubble_02_conc",
+		"UrbPrfBldn_Rubble_03_conc",
+		"UrbPrfBldn_Rubble_04_conc",
+		"UrbPrfBldn_Rubble_05_conc",
+		"UrbPrfBldn_Rubble_06_conc",
+		"UrbPrfBldn_Rubble_07_conc",
+		"UrbPrfBldn_Rubble_08_conc",
+		"UrbPrfBldn_Rubble_09_conc",
+		"UrbPrfBldn_Rubble_10_conc",
+		"UrbPrfBldn_Rubble_11_conc",
+		"UrbPrfBldn_Rubble_12_conc",
+		"UrbPrfBldn_Rubble_13_conc",
+		"UrbPrfBldn_Rubble_14_conc",
+		"UrbPrfBldn_Rubble_15_conc",
+		"UrbPrfBldn_Rubble_16_conc",
+		"UrbPrfBldn_Rubble_A_01",
+		"UrbPrfBldn_Rubble_A_02",
+		"UrbPrfBldn_Rubble_B_01",
+		"UrbPrfBldn_Rubble_B_02",
+		"UrbPrfBldn_Rubble_C_01",
+		"UrbPrfBldn_Rubble_C_02",
+		"UrbPrfBldn_Rubble_D_01",
+		"UrbPrfBldn_Rubble_D_02",
+		"UrbPrfBldn_Rubble_E_01",
+		"UrbPrfBldn_Rubble_E_02",
+		"UrbPrfBldn_Rubble_F_01",
+		"UrbPrfBldn_Rubble_F_02",
+		"UrbPrfBldn_Rubble_G_01",
+		"UrbPrfBldn_Rubble_Corp_01"
+	],
+	"urbanRubbleCorporateNames" : [
+		"UrbPrfBldn_Rubble_01_conc",
+		"UrbPrfBldn_Rubble_02_conc",
+		"UrbPrfBldn_Rubble_03_conc",
+		"UrbPrfBldn_Rubble_04_conc",
+		"UrbPrfBldn_Rubble_05_conc",
+		"UrbPrfBldn_Rubble_06_conc",
+		"UrbPrfBldn_Rubble_07_conc",
+		"UrbPrfBldn_Rubble_08_conc",
+		"UrbPrfBldn_Rubble_09_conc",
+		"UrbPrfBldn_Rubble_10_conc",
+		"UrbPrfBldn_Rubble_11_conc",
+		"UrbPrfBldn_Rubble_12_conc",
+		"UrbPrfBldn_Rubble_13_conc",
+		"UrbPrfBldn_Rubble_14_conc",
+		"UrbPrfBldn_Rubble_15_conc",
+		"UrbPrfBldn_Rubble_16_conc",
+		"UrbPrfBldn_Rubble_A_01",
+		"UrbPrfBldn_Rubble_A_02",
+		"UrbPrfBldn_Rubble_B_01",
+		"UrbPrfBldn_Rubble_B_02",
+		"UrbPrfBldn_Rubble_C_01",
+		"UrbPrfBldn_Rubble_C_02",
+		"UrbPrfBldn_Rubble_D_01",
+		"UrbPrfBldn_Rubble_D_02",
+		"UrbPrfBldn_Rubble_E_01",
+		"UrbPrfBldn_Rubble_E_02",
+		"UrbPrfBldn_Rubble_F_01",
+		"UrbPrfBldn_Rubble_F_02",
+		"UrbPrfBldn_Rubble_G_01",
+		"UrbPrfBldn_Rubble_Corp_01"
+	],
+	"urbanRubbleConstructionNames" : [
+		"UrbPrfBldn_Rubble_01_conc",
+		"UrbPrfBldn_Rubble_02_conc",
+		"UrbPrfBldn_Rubble_03_conc",
+		"UrbPrfBldn_Rubble_04_conc",
+		"UrbPrfBldn_Rubble_05_conc",
+		"UrbPrfBldn_Rubble_06_conc",
+		"UrbPrfBldn_Rubble_07_conc",
+		"UrbPrfBldn_Rubble_08_conc",
+		"UrbPrfBldn_Rubble_09_conc",
+		"UrbPrfBldn_Rubble_10_conc",
+		"UrbPrfBldn_Rubble_11_conc",
+		"UrbPrfBldn_Rubble_12_conc",
+		"UrbPrfBldn_Rubble_13_conc",
+		"UrbPrfBldn_Rubble_14_conc",
+		"UrbPrfBldn_Rubble_15_conc",
+		"UrbPrfBldn_Rubble_16_conc",
+		"UrbPrfBldn_Rubble_A_01",
+		"UrbPrfBldn_Rubble_A_02",
+		"UrbPrfBldn_Rubble_B_01",
+		"UrbPrfBldn_Rubble_B_02",
+		"UrbPrfBldn_Rubble_C_01",
+		"UrbPrfBldn_Rubble_C_02",
+		"UrbPrfBldn_Rubble_D_01",
+		"UrbPrfBldn_Rubble_D_02",
+		"UrbPrfBldn_Rubble_E_01",
+		"UrbPrfBldn_Rubble_E_02",
+		"UrbPrfBldn_Rubble_F_01",
+		"UrbPrfBldn_Rubble_F_02",
+		"UrbPrfBldn_Rubble_G_01",
+		"UrbPrfBldn_Rubble_Corp_01"
+	],
+	"urbanRubbleMilitaryNames" : [
+		"UrbPrfBldn_Rubble_01_conc",
+		"UrbPrfBldn_Rubble_02_conc",
+		"UrbPrfBldn_Rubble_03_conc",
+		"UrbPrfBldn_Rubble_04_conc",
+		"UrbPrfBldn_Rubble_05_conc",
+		"UrbPrfBldn_Rubble_06_conc",
+		"UrbPrfBldn_Rubble_07_conc",
+		"UrbPrfBldn_Rubble_08_conc",
+		"UrbPrfBldn_Rubble_09_conc",
+		"UrbPrfBldn_Rubble_10_conc",
+		"UrbPrfBldn_Rubble_11_conc",
+		"UrbPrfBldn_Rubble_12_conc",
+		"UrbPrfBldn_Rubble_13_conc",
+		"UrbPrfBldn_Rubble_14_conc",
+		"UrbPrfBldn_Rubble_15_conc",
+		"UrbPrfBldn_Rubble_16_conc",
+		"UrbPrfBldn_Rubble_A_01",
+		"UrbPrfBldn_Rubble_A_02",
+		"UrbPrfBldn_Rubble_B_01",
+		"UrbPrfBldn_Rubble_B_02",
+		"UrbPrfBldn_Rubble_C_01",
+		"UrbPrfBldn_Rubble_C_02",
+		"UrbPrfBldn_Rubble_D_01",
+		"UrbPrfBldn_Rubble_D_02",
+		"UrbPrfBldn_Rubble_E_01",
+		"UrbPrfBldn_Rubble_E_02",
+		"UrbPrfBldn_Rubble_F_01",
+		"UrbPrfBldn_Rubble_F_02",
+		"UrbPrfBldn_Rubble_G_01",
+		"UrbPrfBldn_Rubble_Corp_01"
+	],
+	"urbanRubbleGenericByBuildingSize" : [
+		"urbMdlBldn_Rubble_Medium",
+		"urbMdlBldn_Rubble_Small",
+		"urbMdlBldn_Rubble_Medium",
+		"urbMdlBldn_Rubble_Large",
+		"urbMdlBldn_Rubble_Mega",
+	]
+	"UrbanBuildingPropDestructionShockwaveSpeed": 50,
+	"UrbanBuildingPropDestructionRadiusScale": 1.5,
+	"UrbanUtilityPropDestructionStartingRadius": 10,
+	"UrbanUtilityPropDestructionTotalRadius": 60 ,
+	"UrbanBuildingPropDestructionDelay": 0.1 ,
+	"UrbanDestructionVFXPrecacheAmount": 10,
+  },
 	"MoveConstants": {
 		"MoveTable": [
 			30,
@@ -1622,5 +1840,18 @@
 		"sniperMinAbs": 0,
 		"sniperMaxFrac": 0.5,
 		"sniperTagMultiplier": 2.0
-	}
+	},
+	"ScaledBuildingStructurePointsList" : [
+    {"Difficulty":  1, "SmallStructurePoints": 50, "MediumStructurePoints": 100, "LargeStructurePoints": 150},
+    {"Difficulty":  2, "SmallStructurePoints": 50, "MediumStructurePoints": 100, "LargeStructurePoints": 150},
+    {"Difficulty":  3, "SmallStructurePoints": 50, "MediumStructurePoints": 100, "LargeStructurePoints": 150},
+    {"Difficulty":  4, "SmallStructurePoints": 100, "MediumStructurePoints": 150, "LargeStructurePoints": 200},
+    {"Difficulty":  5, "SmallStructurePoints": 100, "MediumStructurePoints": 150, "LargeStructurePoints": 200},
+    {"Difficulty":  6, "SmallStructurePoints": 100, "MediumStructurePoints": 150, "LargeStructurePoints": 200},
+    {"Difficulty":  7, "SmallStructurePoints": 100, "MediumStructurePoints": 150, "LargeStructurePoints": 200},
+    {"Difficulty":  8, "SmallStructurePoints": 150, "MediumStructurePoints": 200, "LargeStructurePoints": 250},
+    {"Difficulty":  9, "SmallStructurePoints": 150, "MediumStructurePoints": 200, "LargeStructurePoints": 250},
+    {"Difficulty": 10, "SmallStructurePoints": 150, "MediumStructurePoints": 200, "LargeStructurePoints": 250}
+  ],  
+  "RavenTutorialDialogID": "32cf9b93-a87d-4244-a9fe-ddaa9198f3d7",
 }
