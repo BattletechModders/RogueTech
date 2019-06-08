@@ -36,10 +36,24 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-0.0.0
+7.8.2 - 6/8/2019
+
+Added Gallant_Fusion,
+minor fixes
+
+7.8.1
+
+Added lore large laser Rotunda,
+Added lore packrats, ICE, SRM2, ML, base,
+minor fixes
+
+7.7.4
 
 The Big Move. Separating by Eras.
 Moved items in old Dark Age folder to proper locations.
+Added Packrat, Gallant and Rotunda,
+    Addapted same for RT
+Added Gallant_3050
 
 7.6.6 - 6/3/2019
 
