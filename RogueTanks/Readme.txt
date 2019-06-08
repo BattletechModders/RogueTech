@@ -36,6 +36,11 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+7.8.2 - 6/8/2019
+
+Added Gallant_Fusion,
+minor fixes
+
 7.8.1
 
 Added lore large laser Rotunda,
