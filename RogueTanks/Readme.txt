@@ -36,6 +36,11 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+0.0.0
+
+Moving more things to eras,
+Added Nuke Long Tom,
+
 7.8.2 - 6/8/2019
 
 Added Gallant_Fusion,
