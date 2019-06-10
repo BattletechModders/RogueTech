@@ -1,6 +1,24 @@
 to invoke activation dialog ctrl+click on move button in mech HUD. 
 to invoke heat sinks manipulation dialog ctrl+click on brace (shield) button in mech HUD. 
    heat sinks manipulation limitations: you can switch on and off only dedicated heat sinks not engine internal ones
+   
+AI can activate component if it have correct tags
+AI related tags:
+	cae_ai_offence - component provides damage and/or accuracy boost
+    cae_ai_defence - component provides defence boost
+    cae_ai_explode - component can explode and damage other components in location and/or inner structure
+    cae_ai_heat - component have negative impact on heat dissipation
+    cae_ai_cool - component have positive impact on heat dissipation
+    cae_ai_speed - component increase speed
+    cae_ai_sensors - component increase sensors range
+AI related mod settings
+	"AIComponentUsefullModifyer":0.2 - if value if greater AI will less fair to activate potentially useful components which can make significant damage to himself on fail
+	"AIComponentExtreamlyUsefulModifyer":0.4, - if value if greater AI will less fair to activate potentially very useful components which can make significant damage to himself on fail
+	"AIOffenceUsefullCoeff":0.1, - if value if lesser AI will count cae_ai_offence more useful
+	"AIDefenceUsefullCoeff":0.2, - if value if lesser AI will count cae_ai_defence more useful
+	"AIHeatCoeffCoeff":0.9, - if value if greater AI will count cae_ai_cool less useful and cae_ai_heat less dangerous
+	"AIOverheatCoeffCoeff":0.8 - if value if greater AI will count cae_ai_cool less useful and cae_ai_heat less dangerous
+	
     "Custom":{
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
 		"ActivatableComponent":{
@@ -36,7 +54,7 @@ to invoke heat sinks manipulation dialog ctrl+click on brace (shield) button in 
 							   EffectiveFailChance = 0.8 + (5-8)*0.1 = 0.5
 			"AutoActivateOnHeat": 40, - upon mech reaching this heat level unactive activatable component will be activated automaticly.
 			"AutoDeactivateOnHeat": 30,  - upon mech reaching this heat level active activatable component will be deactivated automaticly.
-			                             NOTES: component with AutoActivateOnHeat > 0 can't be activated or deactivated maually
+			                             NOTES: 
 										        activation/deactivation heat check performed after every heat sinks activation (usually after each fire and brace activity)
 												state of active component activatable by heat level is still shown in activation menu but there is no button to activate them
 												fail check is not performed on activation of component activated by heat, 
@@ -49,6 +67,50 @@ to invoke heat sinks manipulation dialog ctrl+click on brace (shield) button in 
 			"NoUniqueCheck": false, - if true disables unique component check in lechlab, so you can install nore than one component of the same type to one mech
 			"ChargesCount": 0, - if > 0 charges logic will be used. On activation component will decrement charges couner instead of activation and than apply statusEffects
 			                   NOTE: cause component not activating actualy FailChance will not increase from round to round.
+			"FailStabDamage": 0, - damage to stability on fail
+			"FailChancePerActivation": 0 - fail chance change per activation
+			"AlwaysFail": false - each activation counts as fail no matter fail roll or fail chance
+			"CanNotBectivatedManualy": false - flag component can't be activated manually. WARNING! No backward compatibility - components with AutoActivateOnHeat > 0 can now be activated manually
+												if CanNotBectivatedManualy is set to false. This works so cause i want to provide possibility of both activation vectors auto-by-heat and manual
+												if manual activation is unwanted CanNotBectivatedManualy have to be true
+			"activateVFX":{  - VFX applied on activation (removed on component destruction)
+				"VFXPrefab":"vfxPrfPrtl_miningSmokePlume_lrg_loop" - VFX prefab name, same rules as for VFX names in CustomAmmoCategories. For external VFXes CAE relay on CAC
+			    "VFXScaleX":1, - scale for VFX if supported
+				"VFXScaleY":1,
+				"VFXScaleZ":1,
+				"VFXOffsetX":0, - offset for VFX
+				"VFXOffsetY":0,
+				"VFXOffsetZ":0,
+			}, 
+			"presistantVFX":{  - VFX applied on combat initialisation (removed on component destruction)
+				"VFXPrefab":"vfxPrfPrtl_miningSmokePlume_lrg_loop" - VFX prefab name, same rules as for VFX names in CustomAmmoCategories. For external VFXes CAE relay on CAC
+			    "VFXScaleX":1, - scale for VFX if supported
+				"VFXScaleY":1,
+				"VFXScaleZ":1,
+				"VFXOffsetX":0, - offset for VFX
+				"VFXOffsetY":0,
+				"VFXOffsetZ":0,
+			}, 
+			"destroyedVFX":{  - VFX applied on component destruction and played until end of combat
+				"VFXPrefab":"vfxPrfPrtl_miningSmokePlume_lrg_loop" - VFX prefab name, same rules as for VFX names in CustomAmmoCategories. For external VFXes CAE relay on CAC
+			    "VFXScaleX":1, - scale for VFX if supported
+				"VFXScaleY":1,
+				"VFXScaleZ":1,
+				"VFXOffsetX":0, - offset for VFX
+				"VFXOffsetY":0,
+				"VFXOffsetZ":0,
+			}, 
+							NOTE: if parent component is weapon with correct representation this representation object will be uses as parent object. If no unit itself will be used
+			"Explosion":{ - component AoE explosion capabilities
+			  "Range":90, - range. All combatants within range will be affected
+			  "Damage":3000, - AoE damage linear decrease by distance between source and target
+			  "Heat":100, - Heat damage. If target is not mech this value will be added to Damage in calcualtion
+			  "Stability":100 - Stability damage. If target is not mech this value is ommited
+			}, 			
+							NOTE: parent unit owner of component is not affected. Only other combatants. So component owner is not have to be destroyed or damaged at all. On other modders concern.
+							      Damage value calculation have same rules as CAC AoE damage.
+			"ExplodeOnFail": false, - if true Explode will be activated on component activation fail
+			"ExplodeOnDamage": false - if true Explode will be activated on component destruction
 			"statusEffects": [  - status effect applied on activation. Same rules as for other component's passive effects. 
 				{
 					"durationData" : {
