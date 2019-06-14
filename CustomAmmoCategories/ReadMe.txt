@@ -144,6 +144,17 @@ ctrl+left click on weapon slot will eject current ammo
 	"DesignMaskBiomeTundraFrozen":0.5
 }
 								NOTE: Current values is my own vision of flame mechanics process, adjust them for you own will
+								
+"AmmoCookoff":{ - AmmoCookoffSettings
+					Ammo explosions roll a chance to explode every time your mech overheats, and they roll a more severe chance if you overheat enough to force a shut down.
+					By default, these values are 10% per box, and 20% per box respectively.
+					there are some settings on how the chances work, and they should be self-explanatory.
+  "Enabled":false, - enable or disable AmmoCookoff mechanic overall 
+  "OverheatChance":10,
+  "ShutdownHeatChance":25,
+  "UseHBSMercySetting":true
+},
+
 }
 
 now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
