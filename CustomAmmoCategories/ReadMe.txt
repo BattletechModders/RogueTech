@@ -281,6 +281,7 @@ new fields
 								NOTE! If ImprovedBallistic is set DisableClustering is forced to true and "wr-clustered_shots" tag removed from definition. 
   "BallisticDamagePerPallet": true - if true damage inflicted per pallet instead of per shot. Only working with ImprovedBallistic true, ballistic weapon effect and HasShels false
                                      Damage will be divided by ProjectilesPerShot value, heat damage and stable damage too. 
+	"StatusEffectsPerHit":false - if true OnHit status effects applying on each hit instead on once. 
    "Modes": array of modes for weapon
 	[{
 		"Id": "x4",  - Must be unique per weapon
