@@ -72,40 +72,55 @@ Fire Cell Radius x1.3 = Designmask
 For Engine Types
 
 Primitive all explosion strengths by 2
-ICE/FuelCell No explosion
+ICE/FuelCell Only Fire and Heat, explosive damage set to 10%
 Pirate Engine Explosion stuff x1.5 when active
 
 Chance is set by engine type
 
-Standard Engine 0.01 (1%)
+Standard Engine 0.03 (1%)
 Xl Engine 0.02
-XXL Engine 0.03
+XXL Engine 0.01
+Light Engine 0.02
+Compact Engine 0.04
 Pirate Engine 0.1 -> 0.66 when active
-Primitive Engine 0.5
-ICE 0.0
+Primitive Engine 0.2
+ICE/FuelCell 0.01 BUT barely any damage and only heat, fire and smoke
 
-Designmask and explosion type set by engine type
+Designmask and explosion VFX set by engine type
+Designmask AOE set by core
+
+"TempDesignMask":"DesignMaskRadiation", for standard cores
+"TempDesignMask":"DesignMaskSmoke", for ice/fuel cell
 
 For the Core
 
 "ActivatableComponent":{
 			"ExplodeOnDamage":true,
-			"CanNotBectivatedManualy": false,
+			"CanNotBectivatedManualy": true,
 			"Explosion":{
-			  "Range": 5,
 			  "Damage": 10,
 			  "Heat": 2,
-			  "Stability": 1.7,
-			   "FireTerrainChance": 1,
+			  "Stability": 1.7,			  
+			  "Range": 5,			  
 			  "FireTerrainStrength": 1,
-			  "FireDurationWithoutForest":1,
 			  "FireTerrainCellRadius": 1,
+			  "TempDesignMaskCellRadius":12,
+			  "FireDurationWithoutForest":1,
+			  "FireTerrainChance": 1,
+			  "TempDesignMaskTurns": 2,
 			   "VFXActorStat":"EngineExplodeVFX",
 			  "RangeActorStat":"EngineExplodeRange",
 			  "DamageActorStat":"EngineExplodeDamage",
 			  "HeatActorStat":"EngineExplodeHeat",
 			  "StabilityActorStat":"EngineExplodeStability",
-			  "ChanceActorStat":"EngineExplodeChance"
+			  "ChanceActorStat":"EngineExplodeChance",
+			  "FireTerrainChanceActorStat":"EngineExplodeFireChance",
+				"FireTerrainStrengthActorStat":"EngineExplodeFireStrength",
+				"FireDurationWithoutForestActorStat":"EngineExplodeTerrainDuration",
+				"FireTerrainCellRadiusActorStat":"EngineExplodeFireRadius",
+				"TempDesignMaskActorStat":"EngineExplodeDesignMask",
+				"TempDesignMaskTurnsActorStat":"EngineExplodeDesignMaskDuration",
+				"TempDesignMaskCellRadiusActorStat":"EngineExplodeDesignMaskRadius"
 			},
 			"statusEffects": []
 		}		
@@ -114,72 +129,26 @@ On the Engine Type
 
 "ActivatableComponent":{
 			"ExplodeOnDamage":true,
-			"CanNotBectivatedManualy": false,
+			"CanNotBectivatedManualy": true,
 			"Explosion":{
-			"Chance": 0.1,
+			"Chance": 0.01,
 			  "VFX":"WFX_Nuke",
-			  "TempDesignMaskCellRadius":12,
-			  "TempDesignMaskTurns": 2,
 			  "TempDesignMask":"DesignMaskRadiation",
 			  "VFXActorStat":"EngineExplodeVFX",
 			  "RangeActorStat":"EngineExplodeRange",
 			  "DamageActorStat":"EngineExplodeDamage",
 			  "HeatActorStat":"EngineExplodeHeat",
 			  "StabilityActorStat":"EngineExplodeStability",
-			  "ChanceActorStat":"EngineExplodeChance"
+			  "ChanceActorStat":"EngineExplodeChance",
+			  "FireTerrainChanceActorStat":"EngineExplodeFireChance",
+				"FireTerrainStrengthActorStat":"EngineExplodeFireStrength",
+				"FireDurationWithoutForestActorStat":"EngineExplodeTerrainDuration",
+				"FireTerrainCellRadiusActorStat":"EngineExplodeFireRadius",
+				"TempDesignMaskActorStat":"EngineExplodeDesignMask",
+				"TempDesignMaskTurnsActorStat":"EngineExplodeDesignMaskDuration",
+				"TempDesignMaskCellRadiusActorStat":"EngineExplodeDesignMaskRadius"
 			},
 			"statusEffects": [
-				{
-					"durationData" : {
-						"duration" : -1,
-						"ticksOnActivations" : false,
-						"useActivationsOfTarget" : false,
-						"ticksOnEndOfRound" : false,
-						"ticksOnMovements" : false,
-						"stackLimit" : -1,
-						"clearedWhenAttacked" : false
-					},
-					"targetingData" : {
-						"effectTriggerType" : "Passive",
-						"triggerLimit" : 0,
-						"extendDurationOnTrigger" : 0,
-						"specialRules" : "NotSet",
-						"effectTargetType" : "Creator",
-						"range" : 0,
-						"forcePathRebuild" : false,
-						"forceVisRebuild" : false,
-						"showInTargetPreview" : false,
-						"showInStatusPanel" : true
-					},
-					"effectType" : "StatisticEffect",
-					"Description" : {
-						"Id" : "StatusEffect-CoreProtect",
-						"Name" : "ENGINE CORE PROTECTED",
-						"Details" : "Protect engine core",
-						"Icon" : "uixSvgIcon_equipment_Cockpit"
-					},
-					"nature" : "Buff",
-					"statisticData" : {
-						"appliesEachTick" : false,
-						"effectsPersistAfterDestruction" : false,
-						"statName" : "EngineExplodeDamage",
-						"operation" : "Float_Multiply",
-						"modValue" : "0.05",
-						"modType" : "System.Single",
-						"additionalRules" : "NotSet",
-						"targetCollection" : "NotSet",
-						"targetWeaponCategory" : "NotSet",
-						"targetWeaponType" : "NotSet",
-						"targetAmmoCategory" : "NotSet",
-						"targetWeaponSubType" : "NotSet"
-					},
-					"tagData" : null,
-					"floatieData" : null,
-					"actorBurningData" : null,
-					"vfxData" : null,
-					"instantModData" : null,
-					"poorlyMaintainedEffectData" : null
-				} 			
 			]
 		}		
 		
@@ -216,7 +185,8 @@ For ICE and Fuel Cell "no explosion effect"
 						"modType" : "System.String"
 					},
 				},
-				{"durationData" : {
+				{
+				"durationData" : {
 						"duration" : -1,
 						"stackLimit" : -1
 					},
