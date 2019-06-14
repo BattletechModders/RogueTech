@@ -71,8 +71,9 @@ AI related mod settings
 			"FailChancePerActivation": 0 - fail chance change per activation
 			"AlwaysFail": false - each activation counts as fail no matter fail roll or fail chance
 			"CanNotBeActivatedManualy": false - flag component can't be activated manually. WARNING! No backward compatibility - components with AutoActivateOnHeat > 0 can now be activated manually
-												if CanNotBectivatedManualy is set to false. This works so cause i want to provide possibility of both activation vectors auto-by-heat and manual
-												if manual activation is unwanted CanNotBectivatedManualy have to be true
+												if CanNotBeActivatedManualy is set to false. This works so cause i want to provide possibility of both activation vectors auto-by-heat and manual
+												if manual activation is unwanted CanNotBeActivatedManualy have to be true
+												NOTE! if omitted consider as true. You have to set it as false if you want component to have ability to able to activate manualy.
 			"activateVFX":{  - VFX applied on activation (removed on component destruction)
 				"VFXPrefab":"vfxPrfPrtl_miningSmokePlume_lrg_loop" - VFX prefab name, same rules as for VFX names in CustomAmmoCategories. For external VFXes CAE relay on CAC
 			    "VFXScaleX":1, - scale for VFX if supported
@@ -220,6 +221,14 @@ AI related mod settings
 							      Damage value calculation have same rules as CAC AoE damage.
 			"ExplodeOnFail": false, - if true Explode will be activated on component activation fail
 			"ExplodeOnDamage": false - if true Explode will be activated on component destruction
+			"ActiveByDefault": false - if true component will be activated on combat start with no fail roll
+			"ExplodeOnSuccess": false - if true component will explode on success activation
+			"EjectOnFail": false - if true pilot will eject BEFORE damage applience on fail activation roll
+			"EjectOnSuccess": false - if true pilot will eject BEFORE effects applience on success activation roll
+			"EjectOnActivationTry": false - if true pilot will be ejected before roll check
+								NOTE: Please keep in mind that all status efeects will be canseled on unit destruction. Ejection counts as destruction too.
+								If you want to keep unit statistic after component/mech destruction you have to set "effectsPersistAfterDestruction" : true
+								It is really neaded by components altering explosion stats cause do mech destruction they returned to default state which is usualy unwanted
 			"statusEffects": [  - status effect applied on activation. Same rules as for other component's passive effects. 
 				{
 					"durationData" : {
