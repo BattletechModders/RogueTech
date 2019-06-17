@@ -36,6 +36,11 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+7.8.10
+
+Added Clan Maxim hover transport,
+Added Clan Asshur scout tanks
+
 7.8.8 - 6/12/2019
 
 Moving more things to eras,
