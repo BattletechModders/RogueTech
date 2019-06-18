@@ -36,10 +36,20 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-0.0.0
+7.8.10
+
+Added Clan Maxim hover transport,
+Added Clan Asshur scout tanks
+
+7.8.8 - 6/12/2019
 
 Moving more things to eras,
 Added Nuke Long Tom,
+Added VBIED Primitive J. Edgar,
+Added VBIED Quickcell Hetzer,
+blacklisted a few well known VBIED temporarily,
+Added SRM Carrier Elite,
+minor fixes
 
 7.8.2 - 6/8/2019
 
