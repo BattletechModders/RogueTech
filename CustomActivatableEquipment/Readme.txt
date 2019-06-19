@@ -70,9 +70,10 @@ AI related mod settings
 			"FailStabDamage": 0, - damage to stability on fail
 			"FailChancePerActivation": 0 - fail chance change per activation
 			"AlwaysFail": false - each activation counts as fail no matter fail roll or fail chance
-			"CanNotBectivatedManualy": false - flag component can't be activated manually. WARNING! No backward compatibility - components with AutoActivateOnHeat > 0 can now be activated manually
-												if CanNotBectivatedManualy is set to false. This works so cause i want to provide possibility of both activation vectors auto-by-heat and manual
-												if manual activation is unwanted CanNotBectivatedManualy have to be true
+			"CanNotBeActivatedManualy": false - flag component can't be activated manually. WARNING! No backward compatibility - components with AutoActivateOnHeat > 0 can now be activated manually
+												if CanNotBeActivatedManualy is set to false. This works so cause i want to provide possibility of both activation vectors auto-by-heat and manual
+												if manual activation is unwanted CanNotBeActivatedManualy have to be true
+												NOTE! if omitted consider as true. You have to set it as false if you want component to have ability to able to activate manualy.
 			"activateVFX":{  - VFX applied on activation (removed on component destruction)
 				"VFXPrefab":"vfxPrfPrtl_miningSmokePlume_lrg_loop" - VFX prefab name, same rules as for VFX names in CustomAmmoCategories. For external VFXes CAE relay on CAC
 			    "VFXScaleX":1, - scale for VFX if supported
@@ -105,12 +106,129 @@ AI related mod settings
 			  "Range":90, - range. All combatants within range will be affected
 			  "Damage":3000, - AoE damage linear decrease by distance between source and target
 			  "Heat":100, - Heat damage. If target is not mech this value will be added to Damage in calcualtion
-			  "Stability":100 - Stability damage. If target is not mech this value is ommited
+			  "Stability":100, - Stability damage. If target is not mech this value is ommited
+			  "Chance":0.6, - Chance of explosion if commited
+			  "VFX":"WFX_Nuke" - additional VFX on explosion 
+				"VFXScaleX":1, - VFX scale
+				"VFXScaleY":1,
+				"VFXScaleZ":1,
+				"VFXOffsetX":0, - VFX offset
+				"VFXOffsetY":0,
+				"VFXOffsetZ":0,
+							same as in CAC weapon incineration settings. Search for deteils in CAC readme. CAC biome settings applying too
+				"FireTerrainChance": 0.3,
+				"FireTerrainStrength": 40,
+				"FireDurationWithoutForest": 0,
+				"FireTerrainCellRadius":7,
+							same rules as CAC terrain design mask applying on weapon impact. Search for deteils in CAC readme.
+				"TempDesignMask":"DesignMaskRadiation",
+				"TempDesignMaskTurns": 999,
+				"TempDesignMaskCellRadius":12,
+				"LongVFX":"",
+				"LongVFXScaleX":1,
+				"LongVFXScaleY":1,
+				"LongVFXScaleZ":1,
+				"LongVFXOffsetX":0,
+				"LongVFXOffsetY":0,
+				"LongVFXOffsetZ":0,
+				"VFXActorStat":0,
+							next some tricky part. You can change explosion parameters via unit "StatisticEffect"  statusEffects. If component allow this. 
+							In component explosion settings you can set "<param>ActorStat" setting. Than in another component you can define status effect changing this setting. 
+							Example: Component1 have 
+							.............................
+							"Exposion" : {
+								"Chance":1,
+								"Range":90,
+								"Damage":100
+								"RangeActorStat":"Component1RangeStat",
+								"DamageActorStat":"Component1DamageStat"
+							}
+							.........................
+							Component2 
+							.......................
+							"statusEffects": [
+							..........................
+							{
+							............................
+								"statisticData" : {
+									....................................
+									"statName" : "Component1RangeStat",
+									"operation" : "Float_Multiply",
+									"modValue" : "2.0",
+									"modType" : "System.Single",
+									.....................................
+								},
+							...........................
+							},
+							..........................
+							{
+							............................
+								"statisticData" : {
+									....................................
+									"statName" : "Component1DamageStat",
+									"operation" : "Float_Multiply",
+									"modValue" : "3.0",
+									"modType" : "System.Single",
+									.....................................
+								},
+							...........................
+							},
+							..........................
+							]
+							Component3
+							"Exposion" : {
+								"Chance":1,
+								"RangeActorStat":"Component1RangeStat",
+								"DamageActorStat":"Component1DamageStat"
+							}
+							if unit have Component1 and Component3 - they(components) will explode with 90m ramge and 100 damage
+							if unit have Component1, Component3 and Component2, than Component1 and Component3 explosion will be 180m ramge and 300 damage
+							if unit have Component3 it will not explode case Range and Damage is not set (assumed 0)
+				"VFXScaleXActorStat":"",
+				"VFXScaleYActorStat":"",
+				"VFXScaleZActorStat":"",
+				"VFXOffsetXActorStat":"",
+				"VFXOffsetYActorStat":"",
+				"VFXOffsetZActorStat":"",
+				"RangeActorStat":"",
+				"DamageActorStat":"",
+				"HeatActorStat":"",
+				"StabilityActorStat":"",
+				"ChanceActorStat":"",
+				"FireTerrainChanceActorStat":"",
+				"FireTerrainStrengthActorStat":"",
+				"FireDurationWithoutForestActorStat":"",
+				"FireTerrainCellRadiusActorStat":"",
+				"TempDesignMaskActorStat":"",
+				"TempDesignMaskTurnsActorStat":"",
+				"TempDesignMaskCellRadiusActorStat":"",
+				"LongVFXActorStat":"",
+				"LongVFXScaleXActorStat":"",
+				"LongVFXScaleYActorStat":"",
+				"LongVFXScaleZActorStat":"",
+				"LongVFXOffsetXActorStat":"",
+				"LongVFXOffsetYActorStat":"",
+				"LongVFXOffsetZActorStat":"",
+				"AmmoCountScale": false - affects only if component is ammo box. If so explosion damage/heat/instability will be scaled by CurrentAmmo/AmmoCapasity. 
+											If component is not functional scale factor will be zero.
+				"AddSelfDamageTag":"", - if not empty explosion damage/heat/instability will be adjusted. 
+				                         Effective values of damage/heat/instability of all other components which have AddOtherDamageTag value same as AddSelfDamageTag 
+										 of current component will be added to explosion values.
+										 Need to add ammo boxes explosion strength to engine core explosion strength. 
+				"AddOtherDamageTag":""
 			}, 			
 							NOTE: parent unit owner of component is not affected. Only other combatants. So component owner is not have to be destroyed or damaged at all. On other modders concern.
 							      Damage value calculation have same rules as CAC AoE damage.
 			"ExplodeOnFail": false, - if true Explode will be activated on component activation fail
 			"ExplodeOnDamage": false - if true Explode will be activated on component destruction
+			"ActiveByDefault": false - if true component will be activated on combat start with no fail roll
+			"ExplodeOnSuccess": false - if true component will explode on success activation
+			"EjectOnFail": false - if true pilot will eject BEFORE damage applience on fail activation roll
+			"EjectOnSuccess": false - if true pilot will eject BEFORE effects applience on success activation roll
+			"EjectOnActivationTry": false - if true pilot will be ejected before roll check
+								NOTE: Please keep in mind that all status efeects will be canseled on unit destruction. Ejection counts as destruction too.
+								If you want to keep unit statistic after component/mech destruction you have to set "effectsPersistAfterDestruction" : true
+								It is really neaded by components altering explosion stats cause do mech destruction they returned to default state which is usualy unwanted
 			"statusEffects": [  - status effect applied on activation. Same rules as for other component's passive effects. 
 				{
 					"durationData" : {
