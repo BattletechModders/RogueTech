@@ -282,6 +282,12 @@ new fields
   "BallisticDamagePerPallet": true - if true damage inflicted per pallet instead of per shot. Only working with ImprovedBallistic true, ballistic weapon effect and HasShels false
                                      Damage will be divided by ProjectilesPerShot value, heat damage and stable damage too. 
 	"StatusEffectsPerHit":false - if true OnHit status effects applying on each hit instead on once. 
+	"AdditionalAudioEffect": "enum:AudioEventList_explosion.explosion_propane_tank", - additional sound effect on projectile impact. Value format "<type>:<name>".
+							 type values: "enum" - building in-game enum value
+							              "id" - unsigned integer (if you know value)
+								   		  "name" - audio event name 
+										  "none" - none additional sound for this type name doesn't matter
+							 may be set per ammo, mode and weapon. Mode have priority than ammo than weapon
    "Modes": array of modes for weapon
 	[{
 		"Id": "x4",  - Must be unique per weapon
@@ -402,6 +408,12 @@ new fields
 						      but some effects is more suitable.
   "BallisticDamagePerPallet": true - if true damage inflicted per pallet instead of per shot. Only working with ImprovedBallistic true, ballistic weapon effect and HasShels false
                                      Damage will be divided by ProjectilesPerShot value, heat damage and stable damage too. 
+	"AdditionalAudioEffect": "enum:AudioEventList_explosion.explosion_propane_tank", - additional sound effect on projectile impact. Value format "<type>:<name>".
+							 type values: "enum" - building in-game enum value
+							              "id" - unsigned integer (if you know value)
+								   		  "name" - audio event name 
+										  "none" - none additional sound for this type name doesn't matter
+							 may be set per ammo, mode and weapon. Mode have priority than ammo than weapon
 	}]
   
   
@@ -660,6 +672,12 @@ Ammo definition
                                 Clearing on success hit controled by FireOnSuccessHit flag.
   "BallisticDamagePerPallet": true - if true damage inflicted per pallet instead of per shot. Only working with ImprovedBallistic true, ballistic weapon effect and HasShels false
                                      Damage will be divided by ProjectilesPerShot value, heat damage and stable damage too. 
+	"AdditionalAudioEffect": "enum:AudioEventList_explosion.explosion_propane_tank", - additional sound effect on projectile impact. Value format "<type>:<name>".
+							 type values: "enum" - building in-game enum value
+							              "id" - unsigned integer (if you know value)
+								   		  "name" - audio event name 
+										  "none" - none additional sound for this type name doesn't matter
+							 may be set per ammo, mode and weapon. Mode have priority than ammo than weapon
    "statusEffects" : [   - will be applied on weapon hit (only "OnHit" effectTriggerType)
         {
             "durationData" : {
