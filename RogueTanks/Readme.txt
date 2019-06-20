@@ -36,6 +36,11 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+0.0.0
+
+Added Zhukov WOB and WOB LBX,
+minor fixes
+
 7.8.10
 
 Added Clan Maxim hover transport,
