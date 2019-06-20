@@ -38,7 +38,10 @@ Changelog:
 
 0.0.0
 
-Added Zhukov WOB and WOB LBX,
+Added Zhukov WOB,
+Added Zhukov WOB LBX,
+Added SRM Carrier WOB,
+Added LRM Carrier WOB
 minor fixes
 
 7.8.10
