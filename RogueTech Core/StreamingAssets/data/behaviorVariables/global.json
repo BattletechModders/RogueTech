@@ -1632,13 +1632,79 @@
 		}
 	},
 	{
-	    /* Float to track what "significant" damage is (0: no damge, 1: destroyed). Used to gague whether we should fire our weapon
+	    /*  Description: Float to track confidence in causing structural damage. Used to gague whether we should fire our weapon
 		from a ghosted state */
-		"k" : "Float_SignificantDamageWhileGhostedLevel",
+		"k" : "Float_ConfidenceInSignificantDamageWhileGhostedLevel",
 		"v" : 
 		{
 			"type" : "Float",
-			"IntVal" : 0.7
+			"floatVal" : 0.8
+		}
+	},
+	{
+	    /* When calculatiing expected damage, how much to lerp between the damage divided by number of weapons and the damage if every hit
+		was in the same location. 0 is damage divided and 1 is damage concentrated. 
+		Increases with Float_GhostStateHysteresisMultiplierTurnIncrease */
+		"k" : "Float_WeaponDamageSpreadLerpValue",
+		"v" : 
+		{
+			"type" : "Float",
+			"floatVal" : 0.5
+		}
+	},
+	{
+	    /*  When getting the chance in causing significant damage, how much weight to give the amount of structural damage caused. */
+		"k" : "Float_StructuralDamagePercentageMultiplier",
+		"v" : 
+		{
+			"type" : "Float",
+			"floatVal" : 1.5
+		}
+	},
+	{
+	    /* When shooting in ghost state, lerp value to go from expected damage and max possible damage.
+		Increases with Float_GhostStateHysteresisMultiplierTurnIncrease */
+		"k" : "Float_ExpectedAndMaxDamageShootingInGhostStateLerp",
+		"v" : 
+		{
+			"type" : "Float",
+			"floatVal" : 0.6
+		}
+	},
+	{	
+	    /* For every round the ai does not shoot in ghost state, it adds to a mutiplier that increases the confidence in causing higher damage */
+		"k" : "Float_GhostStateHysteresisMultiplierTurnIncrease",
+		"v" : 
+		{
+			"type" : "Float",
+			"floatVal" : 0.4
+	}
+	},
+	{	
+	    /* Enables more precise predictions about expected damage by counting weapons in range and damage reductions of the unit*/
+		"k" : "Bool_ExpectedDamageAccuracyIncrease",
+		"v" : 
+		{
+			"type" : "Bool",
+			"boolVal" : true
+		}
+	},
+	{
+	    /*Enables the long-range pathfinding to be aware of actors blocking movement in nodes globally */
+		"k" : "Bool_EnableLongRangePathfindingBeActorAware",
+		"v" : 
+		{
+			"type" : "Bool",
+			"boolVal" : true
+		}
+	},
+	{
+	    /* How close to the target region do we switch to short-range pathfinding */
+		"k" : "Float_LongRangeToShortRangeDistanceThreshold",
+		"v" : 
+		{
+			"type" : "Float",
+			"floatVal" : 10
 		}
 	}
 	]
