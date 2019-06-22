@@ -44,6 +44,9 @@ Added SRM Carrier WOB,
 Added LRM Carrier WOB,
 Added Puma 007,
 Added Puma 008,
+
+Pike from Schrek to Alacorn model,
+Light Flamer carrier to Striker model,
 minor fixes
 
 7.8.10
