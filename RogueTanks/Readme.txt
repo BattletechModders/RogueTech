@@ -41,7 +41,9 @@ Changelog:
 Added Zhukov WOB,
 Added Zhukov WOB LBX,
 Added SRM Carrier WOB,
-Added LRM Carrier WOB
+Added LRM Carrier WOB,
+Added Puma 007,
+Added Puma 008,
 minor fixes
 
 7.8.10
