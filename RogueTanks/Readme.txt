@@ -48,6 +48,7 @@ Added Puma 008,
 Pike from Schrek to Alacorn model,
 Light Flamer carrier to Striker model,
 Harasser from striker to bandit model,
+Demon to BTR model,
 minor fixes
 
 7.8.10
