@@ -102,6 +102,22 @@ AI related mod settings
 				"VFXOffsetZ":0,
 			}, 
 							NOTE: if parent component is weapon with correct representation this representation object will be uses as parent object. If no unit itself will be used
+			"activateSound":"enum:AudioEventList_ui.ui_ecm_start", - additional sound effect on component activation impact. Value format "<type>:<name>".
+							 type values: "enum" - building in-game enum value
+							              "id" - unsigned integer (if you know value)
+								   		  "name" - audio event name 
+										  "none" - none additional sound for this type name doesn't matter							
+			"deactivateSound":"" - additional sound effect on component activation impact. Value format "<type>:<name>".
+							 type values: "enum" - building in-game enum value
+							              "id" - unsigned integer (if you know value)
+								   		  "name" - audio event name 
+										  "none" - none additional sound for this type name doesn't matter
+			"destroySound":"" - additional sound effect on component activation impact. Value format "<type>:<name>".
+							 type values: "enum" - building in-game enum value
+							              "id" - unsigned integer (if you know value)
+								   		  "name" - audio event name 
+										  "none" - none additional sound for this type name doesn't matter
+							NOTE! activateSound played only on success activation. If activation fail deactivateSound played (if any). 
 			"Explosion":{ - component AoE explosion capabilities
 			  "Range":90, - range. All combatants within range will be affected
 			  "Damage":3000, - AoE damage linear decrease by distance between source and target
@@ -215,7 +231,13 @@ AI related mod settings
 				                         Effective values of damage/heat/instability of all other components which have AddOtherDamageTag value same as AddSelfDamageTag 
 										 of current component will be added to explosion values.
 										 Need to add ammo boxes explosion strength to engine core explosion strength. 
-				"AddOtherDamageTag":""
+				"AddOtherDamageTag":"",
+				"ExplodeSound":"" - additional sound effect on component explosion. Value format "<type>:<name>".
+							 type values: "enum" - building in-game enum value
+							              "id" - unsigned integer (if you know value)
+								   		  "name" - audio event name 
+										  "none" - none additional sound for this type name doesn't matter			
+				"ExplodeSoundActorStat":"" - actor stat name for statisticEffect explode sound override
 			}, 			
 							NOTE: parent unit owner of component is not affected. Only other combatants. So component owner is not have to be destroyed or damaged at all. On other modders concern.
 							      Damage value calculation have same rules as CAC AoE damage.
