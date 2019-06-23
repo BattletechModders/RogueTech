@@ -1,0 +1,417 @@
+{
+    "Description" : {
+        "Id" : "event_mw_disciplinaryMeasures",
+        "Name" : "Disciplinary Measures",
+        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] enters your quarters and snaps to attention, glancing between you and Darius. Darius stares the MechWarrior down. \"We've had a complaint about you, soldier. Causing trouble in the Mech Bay?\"\r\n\r\n\"That MechTech's got a grudge against me, sir. My 'Mech's been opened up for way longer than anybody else's, and for <i>no good reason</i>. I was just trying to get things moving.\"\r\n\r\nDarius glances at you. \"Are you buying this, Commander?\"",
+        "Icon" : "uixTxrSpot_Discipline.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 10,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "",
+            "items" : null
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "Tags/PilotTags",
+            "items" : [
+                "pilot_dependable",
+                "pilot_rebellious"
+            ]
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : null
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "",
+                "items" : null
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/CompanyTags",
+                "items" : [
+                    "MODIFIED_STAT_MechTechSkill"
+                ]
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "TaskDuration",
+                    "op" : "GreaterThanOrEqual",
+                    "val" : 1,
+                    "valueConstant" : "1"
+                },
+                {
+                    "obj" : "MechTechSkill",
+                    "op" : "GreaterThanOrEqual",
+                    "val" : 3,
+                    "valueConstant" : "3"
+                }
+            ]
+        }
+    ],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Instruct Yang to discipline the MechTech.",
+                "Details" : "MechTech penalty",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Productivity drops",
+                        "Details" : "Later that day, Yang departs your quarters, heading back to the Mech Bay to have a stern discussion with his technician. Productivity may take a hit for a couple weeks, but it should put an end to any needless delays.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "-1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 7
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Order {TGT_MW.Callsign} to stay out of the Mech Bay until work is completed.",
+                "Details" : "Risky option",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "MechWarrior lets it go",
+                        "Details" : "The MechWarrior nods, salutes and leaves without a word.\r\n\r\nLater that week, Darius reports in. \"Whatever you told [[TGT_MW,{TGT_MW.Callsign}]] seems to have worked. The Mech Bay is quiet and productive again. Well\u2026 as quiet as the Mech Bay can be, anyway.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_dependable"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "MechWarrior doesn't let it go",
+                        "Details" : "Later that week, Darius reports in. \"Well, {COMMANDER.FirstName}\u2026 [[TGT_MW,{TGT_MW.Callsign}]] <i>did</i> stay out of the Mech Bay. That didn't stop the technician from 'accidentally' taking a spectacular fall in the hallway. He's pretty beat up, but he should be able to return to duty in a week or so.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_rebellious"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : null
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 7
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Put the warrior to work in the Mech Bay for one week.",
+                "Details" : "[{TGT_MW.Callsign}: Technician]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "MechWarrior",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "Tags/PilotTags",
+                        "items" : [
+                            "pilot_tech"
+                        ]
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : null
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "Bonus to productivity",
+                        "Details" : "The next day, Darius reports in. \"As per your orders, Yang has been putting [[TGT_MW,{TGT_MW.Callsign}]]'s tech background to use in the Mech Bay. It looks like this may even boost productivity for a while. {TGT_MW.Callsign} isn't fighting with the technician anymore, either, but that's probably because Yang's keeping {TGT_MW.OBJ} too busy.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 75,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "3",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 7
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "7",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_1",
+                        "Name" : "Penalty to productivity",
+                        "Details" : "The next day, Darius reports in. \"As per your orders, Yang has been trying to put [[TGT_MW,{TGT_MW.Callsign}]]'s tech background to use in the Mech Bay. It isn't what I'd call an unqualified success, but {TGT_MW.Callsign} isn't fighting with the technician anymore, either. I'd guess that's because they've decided that Yang is their common enemy.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "-1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 7
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "7",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}

@@ -1,0 +1,523 @@
+{
+    "Description" : {
+        "Id" : "event_mw_bookishTriviaNight",
+        "Name" : "Trivia Night",
+        "Details" : "It's Trivia Night, and one of the largest casinos in {TGT_SYSTEM.Name} is packed. [[TGT_MW,{TGT_MW.Callsign}]] entered and has been on a hot streak.\r\n\r\n\"Come on, Commander!\" Darius leans closer, but still has to shout to be heard. \"{TGT_MW.Callsign} just got the last six answers right. Even at a minimum bet, we would have made \u00A25,000. Let's see if we can make some money tonight!\"\r\n\r\nJust then, [[SCN_MW,{SCN_MW.Callsign}]] totters past, drink in hand. Darius grabs {SCN_MW.OBJ}. \"Better yet, {SCN_MW.Callsign} here gives us four for a high-stakes competition team.\"",
+        "Icon" : "uixTxrSpot_HiringHall.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 40,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "items" : [
+                "pilot_bookish"
+            ],
+            "tagSetSourceFile" : "Tags/PilotTags"
+        },
+        "ExclusionTags" : {
+            "items" : [
+                "pilot_morale_high",
+                "pilot_morale_low"
+            ],
+            "tagSetSourceFile" : "Tags/PilotTags"
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : "0"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "items" : null,
+                "tagSetSourceFile" : ""
+            },
+            "ExclusionTags" : {
+                "items" : null,
+                "tagSetSourceFile" : ""
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "Travel",
+                    "op" : "Equal",
+                    "val" : 0,
+                    "valueConstant" : "0"
+                }
+            ]
+        },
+        {
+            "Scope" : "StarSystem",
+            "RequirementTags" : {
+                "items" : [
+                    "planet_industry_recreation"
+                ],
+                "tagSetSourceFile" : "Tags/PlanetTags"
+            },
+            "ExclusionTags" : {
+                "items" : null,
+                "tagSetSourceFile" : ""
+            },
+            "RequirementComparisons" : []
+        }
+    ],
+    "AdditionalObjects" : [
+        {
+            "Scope" : "SecondaryMechWarrior",
+            "Requirements" : {
+                "Scope" : "SecondaryMechWarrior",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : [
+                        "pilot_bookish",
+                        "pilot_morale_high",
+                        "pilot_morale_low"
+                    ],
+                    "tagSetSourceFile" : "Tags/PilotTags"
+                },
+                "RequirementComparisons" : [
+                    {
+                        "obj" : "Injuries",
+                        "op" : "Equal",
+                        "val" : 0,
+                        "valueConstant" : "0"
+                    }
+                ]
+            }
+        }
+    ],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Just play for fun.",
+                "Details" : "Non-participation option",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Nothing happens",
+                        "Details" : "Both Darius and [[TGT_MW,{TGT_MW.Callsign}]] are disappointed, but they enter themselves as a two person 'casual' team, pooling their own personal money for the entry fee. [[SCN_MW,{SCN_MW.Callsign}]] waves goodbye and heads toward the slot machines.\r\n\r\nLater in the evening, Darius drops down into the seat next to you. \"Ten in a row to close out the night. {TGT_MW.Callsign} is a bit of a genius. So, yeah\u2026\" He clinks glasses with you. \"We would've made a tidy sum. Not that I'm bitter, of course.\"\r\n\r\nYou grin right back at him. \"Of course you're not.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : []
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Place a small bet.",
+                "Details" : "[\u00A21,000]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "items" : null,
+                        "tagSetSourceFile" : ""
+                    },
+                    "ExclusionTags" : {
+                        "items" : null,
+                        "tagSetSourceFile" : ""
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Funds",
+                            "op" : "GreaterThan",
+                            "val" : 1000,
+                            "valueConstant" : "1000"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Small winner",
+                        "Details" : "\"Ten in a row to close out the night!\" You haven't seen Darius this happy since he got the best of a three-way trade with a Davion noble and a Taurian merchant.\r\n\r\n\"[[TGT_MW,{TGT_MW.Callsign}]] is a genius!\" He slaps {TGT_MW.OBJ} generously on the back. \"I'm buying you a helmet. We need to keep that brain of yours safe!\"\r\n\r\nAs the team arrives at the shuttle, [[SCN_MW,{SCN_MW.Callsign}]] runs over to tell the rest of the shore leave crew about Trivia Night. {TGT_MW.Callsign} sheepishly soaks up their praise.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 75,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "5000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "Breaking even",
+                        "Details" : "Thanks to [[TGT_MW,{TGT_MW.Callsign}]], your team held its own\u2026 but some of the other teams were simply better at playing the game. They buzzed in more quickly, or questioned the wording of possibly-correct answers to get them dismissed.\r\n\r\nDarius, of course, protested everything. \"Did you see that Magistracy team start working the judge after we got on a roll?\"\r\n\r\nSeeing {TGT_MW.Callsign} staring morosely into {TGT_MW.Det} drink, Darius shakes {TGT_MW.Obj} encouragingly by the shoulders. \"Don't worry about it! At least we broke even, Besides, I hate to toss C-Bills away on a rigged game. Unless I'm the one cheating, of course.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Compete in the high-stakes room.",
+                "Details" : "[\u00A210,000]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "items" : null,
+                        "tagSetSourceFile" : ""
+                    },
+                    "ExclusionTags" : {
+                        "items" : null,
+                        "tagSetSourceFile" : ""
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Funds",
+                            "op" : "GreaterThan",
+                            "val" : 10000,
+                            "valueConstant" : "10000"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "Big winner",
+                        "Details" : "\"<i>WE WON! WE WON IT ALL!!!</i>\" Darius roars at the top of his lungs.\r\n\r\nEven the audience is chanting [[TGT_MW,{TGT_MW.Callsign}]]'s callsign, making {TGT_MW.OBJ} stand on the table and take bow after bow. \r\n\r\nDoubling every round was an insane move on Darius's part, and your heart is still racing from the moment when he let everything ride on an obscure question about the [[DM.BaseDescriptionDefs[LoreFivePillars],Five Pillars]].\r\n\r\nLooking around the room, you discover that Sumire and the rest of the vacationing crew have been watching your performace. She gives a sincere slow-clap for the team's efforts.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "50000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_1",
+                        "Name" : "Second place",
+                        "Details" : "\"I\u2026 don't know this one.\" The color drains from [[TGT_MW,{TGT_MW.Callsign}]]'s face as the rest of the team stares at {TGT_MW.OBJ} expectantly.\r\n\r\n\"Hey, don't worry,\" Darius says as he does some quick math in his head. \"Even if we lose this round, we come in second place and take home some good money. Seriously good money. You've been incredible.\"\r\n\r\n[[SCN_MW,{SCN_MW.Callsign}]] chimes in. \"Yeah, don't sweat it. Who the hell ever heard of the [[DM.BaseDescriptionDefs[LoreSchwartzSystem],Schwartz]] system, anyway?\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "25000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_2",
+                        "Name" : "Team loses",
+                        "Details" : "\"How bad is it,\" you ask as you keep an eye on a crestfallen [[TGT_MW,{TGT_MW.Callsign}]].\r\n\r\nDarius shrugs. \"Bad, but not horrible. I was trying to save some money from each round, but I lost track during that losing streak. We took a loss, but it wasn't everything\u2026 I mean, we still have the <i>Argo</i>.\"\r\n\r\n{TGT_MW.Callsign} blanches. \"I'm so sorry, Commander\u2026\" \r\n\r\n\"We're <i>fine</i>,\" you say firmly. \"Don't worry about it. We went in together, we went down together.\" But your words of comfort don't do much.\r\n\r\nLooking at the other losing teams provides a grim reminder that it's called 'gambling' for a reason.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-5000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}

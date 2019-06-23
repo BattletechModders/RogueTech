@@ -1,0 +1,788 @@
+{
+    "Description" : {
+        "Id" : "event_mw_plague_Rescue",
+        "Name" : "Quarantine",
+        "Details" : "Darius has called a rare emergency meeting. \"Recently, we rescued a ship that was damaged as it departed a planet under quarantine. We hoped we'd avoided infection. We did not. Now [[TGT_MW,{TGT_MW.Callsign}]] has developed a highly contagious, potentially fatal disease.\"\r\n\r\nGrimly, he lays out the path ahead. \"We need to isolate an entire MedBay until {TGT_MW.Subj} {TGT_MW.Gender?NonBinary:recover|Default:recovers}. I've also contacted the local authorities, and they've offered to sell us medication for \u00A2120,000. An extortionate price, but without it, we may find ourselves in the same position as the ship we rescued.\"\r\n\r\nSumire adds, \"I spoke to a friend at a pharmaceutical research lab, but this bug is beyond the scope of any of his experimental antivirals.\"",
+        "Icon" : "uixTxrSpot_MedBay.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 10,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "Tags/PilotTags",
+            "items" : null
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "Tags/PilotTags",
+            "items" : [
+                "pilot_lucky"
+            ]
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : "0"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "Tags/CompanyTags",
+                "items" : [
+                    "argo_medBay2",
+                    "chain_plague_Rescue1"
+                ]
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/CompanyTags",
+                "items" : [
+                    "chain_plague_Vaccine",
+                    "MODIFIED_STAT_MedTechSkill"
+                ]
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "MedTechSkill",
+                    "op" : "GreaterThanOrEqual",
+                    "val" : 4,
+                    "valueConstant" : "4"
+                }
+            ]
+        },
+        {
+            "Scope" : "StarSystem",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "Tags/PlanetTags",
+                "items" : null
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/PlanetTags",
+                "items" : [
+                    "planet_civ_primitive",
+                    "planet_pop_none"
+                ]
+            },
+            "RequirementComparisons" : []
+        }
+    ],
+    "AdditionalObjects" : [
+        {
+            "Scope" : "SecondaryMechWarrior",
+            "Requirements" : {
+                "Scope" : "SecondaryMechWarrior",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "Tags/PilotTags",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "Tags/PilotTags",
+                    "items" : [
+                        "pilot_lucky"
+                    ]
+                },
+                "RequirementComparisons" : [
+                    {
+                        "obj" : "Injuries",
+                        "op" : "Equal",
+                        "val" : 0,
+                        "valueConstant" : "0"
+                    }
+                ]
+            }
+        },
+        {
+            "Scope" : "TertiaryMechWarrior",
+            "Requirements" : {
+                "Scope" : "TertiaryMechWarrior",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "Tags/PilotTags",
+                    "items" : [
+                        "pilot_lucky"
+                    ]
+                },
+                "RequirementComparisons" : [
+                    {
+                        "obj" : "Injuries",
+                        "op" : "Equal",
+                        "val" : 0,
+                        "valueConstant" : "0"
+                    }
+                ]
+            }
+        }
+    ],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Refuse the expensive medicine.",
+                "Details" : "cheap, risky option",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "longest time out",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] is quarantined in one of the MedBays and provided local symptomatic treatment. {TGT_MW.Subj_C} {TGT_MW.Gender?NonBinary:are|Default:is} soon joined by [[SCN_MW,{SCN_MW.Callsign}]], and not long after that, [[TRT_MW,{TRT_MW.Callsign}]] falls ill as well.\r\n\r\nRumors and fear spread faster than the virus, with stories of paralyzed limbs, agonizing cramps, and hallucinations. Everyone finds themselves praying to whatever gods they worship.\r\n\r\nEventually, it is clear the quarantine has successfully limited the spread of the disease. For these three MechWarriors, however, it's going to be a long and extremely unpleasant road to recovery.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 75,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "chain_shoreLeave",
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "90",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "chain_shoreLeave",
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "60",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-3",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 90
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-4",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "TertiaryMechWarrior",
+                            "Requirements" : {
+                                "Scope" : "TertiaryMechWarrior",
+                                "RequirementTags" : {
+                                    "tagSetSourceFile" : "",
+                                    "items" : null
+                                },
+                                "ExclusionTags" : {
+                                    "tagSetSourceFile" : "Tags/PilotTags",
+                                    "items" : [
+                                        "pilot_lucky"
+                                    ]
+                                },
+                                "RequirementComparisons" : []
+                            },
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "chain_shoreLeave",
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "30",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_1",
+                        "Name" : "long time out",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] is quarantined in one of the MedBays and provided local symptomatic treatment. {TGT_MW.Subj_C} {TGT_MW.Gender?NonBinary:are|Default:is} soon joined by [[SCN_MW,{SCN_MW.Callsign}]], and not long after that, [[TRT_MW,{TRT_MW.Callsign}]] falls ill as well.\r\n\r\nRumors and fear spread faster than the virus, with stories of paralyzed limbs, agonizing cramps, and hallucinations. Everyone finds themselves praying to whatever gods they worship.\r\n\r\nEventually, it is clear the quarantine has successfully limited the spread of the disease. For these three MechWarriors, however, it's going to be a slow road to recovery.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "chain_shoreLeave",
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "60",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "chain_shoreLeave",
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "45",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-3",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-4",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "TertiaryMechWarrior",
+                            "Requirements" : {
+                                "Scope" : "TertiaryMechWarrior",
+                                "RequirementTags" : {
+                                    "tagSetSourceFile" : "",
+                                    "items" : null
+                                },
+                                "ExclusionTags" : {
+                                    "tagSetSourceFile" : "Tags/PilotTags",
+                                    "items" : [
+                                        "pilot_lucky"
+                                    ]
+                                },
+                                "RequirementComparisons" : []
+                            },
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "chain_shoreLeave",
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "21",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Pay for the medicine.",
+                "Details" : "[\u00A2120,000]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : null
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : null
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Funds",
+                            "op" : "GreaterThan",
+                            "val" : 120000,
+                            "valueConstant" : "120000"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "long time out",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] is quarantined in one of the MedBays and medication administered. {TGT_MW.Subj_C} {TGT_MW.Gender?NonBinary:are|Default:is} soon joined by [[SCN_MW,{SCN_MW.Callsign}]], and not long after that, [[TRT_MW,{TRT_MW.Callsign}]] falls ill as well.\r\n\r\nRumors and fear spread faster than the virus, with stories of paralyzed limbs, agonizing cramps, and hallucinations. Everyone finds themselves praying to whatever gods they worship.\r\n\r\nThankfully, the drugs provided by the planet at such great cost do their job, stopping the contagion in its tracks. Nobody else gets sick, but the three MechWarriors who contracted the disease have a long, slow road to recovery ahead.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "chain_shoreLeave",
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "45",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "chain_shoreLeave",
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "21",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-3",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 45
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-120000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "TertiaryMechWarrior",
+                            "Requirements" : {
+                                "Scope" : "TertiaryMechWarrior",
+                                "RequirementTags" : {
+                                    "tagSetSourceFile" : "",
+                                    "items" : null
+                                },
+                                "ExclusionTags" : {
+                                    "tagSetSourceFile" : "Tags/PilotTags",
+                                    "items" : [
+                                        "pilot_lucky"
+                                    ]
+                                },
+                                "RequirementComparisons" : []
+                            },
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "chain_shoreLeave",
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "7",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "medium time out",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] is quarantined in one of the MedBays and medication administered. {TGT_MW.Subj_C} {TGT_MW.Gender?NonBinary:are|Default:is} soon joined by [[SCN_MW,{SCN_MW.Callsign}]].\r\n\r\nRumors and fear spread faster than the virus, with stories of paralyzed limbs, agonizing cramps, and hallucinations. Everyone finds themselves praying to whatever gods they worship.\r\n\r\nThankfully, the drugs provided by the planet at such great cost do their job, stopping the contagion in its tracks. Nobody else gets sick, but the two MechWarriors who contracted the disease have a long, slow road to recovery ahead.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "chain_shoreLeave",
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "30",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "chain_shoreLeave",
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "14",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-3",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-120000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "UNSELECTABLE"
+}

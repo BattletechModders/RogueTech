@@ -1,0 +1,341 @@
+{
+    "Description" : {
+        "Id" : "event_mw_honestLetters",
+        "Name" : "Letters from Home",
+        "Details" : "Thanks to the modern-day miracle of the Hyperpulse Generator, it's mail day aboard the <i>Argo</i>. Crew members filter into and out of the communications room to receive messages from home.\r\n\r\nLater that evening, there's a knock at the door of your personal quarters. Upon opening the door, [[TGT_MW,{TGT_MW.Callsign}]] slips inside and hands you a datapad.  \"Commander, I'd already read half of this message before I realized it wasn't mine. It's addressed to [[SCN_MW,{SCN_MW.Callsign}]], from a long-distance lover back home. It's a breakup letter.\"\r\n\r\nA torn expression creases {TGT_MW.Callsign}'s face. \"I just don't know what to do. {SCN_MW.Subj_C} would be devastated\u2026 do I pass the letter on to {SCN_MW.OBJ}, or do I keep it to myself?\"",
+        "Icon" : "uixTxrSpot_MechWarriorsTalking.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 10,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "items" : [
+                "pilot_honest"
+            ],
+            "tagSetSourceFile" : "Tags/PilotTags"
+        },
+        "ExclusionTags" : {
+            "items" : [
+                "pilot_morale_high",
+                "pilot_morale_low"
+            ],
+            "tagSetSourceFile" : "Tags/PilotTags"
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : "0"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "items" : null,
+                "tagSetSourceFile" : ""
+            },
+            "ExclusionTags" : {
+                "items" : null,
+                "tagSetSourceFile" : ""
+            },
+            "RequirementComparisons" : []
+        }
+    ],
+    "AdditionalObjects" : [
+        {
+            "Scope" : "SecondaryMechWarrior",
+            "Requirements" : {
+                "Scope" : "SecondaryMechWarrior",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : [
+                        "pilot_morale_high",
+                        "pilot_morale_low"
+                    ],
+                    "tagSetSourceFile" : "Tags/PilotTags"
+                },
+                "RequirementComparisons" : [
+                    {
+                        "obj" : "Injuries",
+                        "op" : "Equal",
+                        "val" : 0,
+                        "valueConstant" : "0"
+                    }
+                ]
+            }
+        }
+    ],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Advise {TGT_MW.Callsign} to pass the mail to its recipient.",
+                "Details" : "honest option",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "MW 1 follows your advice: tells MW 2",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] considers for a moment, then nods and leaves your quarters.\r\n\r\nLater that week, you run into [[SCN_MW,{SCN_MW.Callsign}]] in the mess. {SCN_MW.SUBJ_C} {SCN_MW.Gender?NonBinary:seem|Default:seems} distracted, with dark circles under {SCN_MW.Det} eyes. It may take a while before {SCN_MW.Callsign} shakes this off.\r\n\r\nAt a table nearby, {TGT_MW.Callsign} catches your eye and nods. While it was a tough call, {TGT_MW.Callsign} is clearly at peace with {TGT_MW.Det} decision to not delay the inevitable.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 75,
+                    "Results" : [
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_1",
+                        "Name" : "MW 1 sadly doesn't follow your advice: doesn't tell MW 2",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] considers for a moment, then reluctantly nods and leaves your quarters.\r\n\r\nLater that week, you run into [[SCN_MW,{SCN_MW.Callsign}]] in the mess. {SCN_MW.SUBJ_C} {SCN_MW.Gender?NonBinary:seem|Default:seems} far too relaxed to be struggling with a broken heart.\r\n\r\nAt a table nearby, {TGT_MW.Callsign} catches your eye and shakes {TGT_MW.Det} head. By the circles under {TGT_MW.Det} eyes, you gather that {TGT_MW.Subj} decided to withhold {SCN_MW.Callsign}'s letter, and that the guilt is cutting into {TGT_MW.Det} sleep.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_cautious"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : [
+                                    "pilot_brave"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Praise {TGT_MW.OBJ} for considering {SCN_MW.Callsign}'s morale.",
+                "Details" : "dishonest option",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "MW 1 doesn't follow your advice: tells MW 2",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] considers for a moment, then reluctantly nods and leaves your quarters.\r\n\r\nLater that week, you run into [[SCN_MW,{SCN_MW.Callsign}]] in the mess. {SCN_MW.Subj_C} {SCN_MW.Gender?NonBinary:seem|Default:seems} distracted, with dark circles under {SCN_MW.Det} eyes. {TGT_MW.Callsign} clearly decided truth was more important than morale. It may take a while before {SCN_MW.Callsign} shakes this off.\r\n\r\nAt a table nearby, {TGT_MW.Callsign} catches your eye. While it was a tough call, {TGT_MW.Callsign} is clearly at peace with {TGT_MW.Det} decision to not delay the inevitable.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "MW 1 sadly follows your advice: doesn't tell MW 2",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] considers for a moment, then reluctantly nods and leaves your quarters.\r\n\r\nLater that week, you run into [[SCN_MW,{SCN_MW.Callsign}]] in the mess. {SCN_MW.SUBJ_C} {SCN_MW.Gender?NonBinary:seem|Default:seems} far too relaxed to be struggling with a broken heart.\r\n\r\nAt a table nearby, {TGT_MW.Callsign} catches your eye. By the circles under {TGT_MW.Det} eyes, it looks like {TGT_MW.Subj} followed your advice to withhold {SCN_MW.Callsign}'s letter and it's cutting into {TGT_MW.Det} sleep.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_2",
+                        "Name" : "MW 2 finds out anyway",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] considers for a moment, then reluctantly nods and leaves your quarters.\r\n\r\nLater that week, you find [[SCN_MW,{SCN_MW.Callsign}]] arguing with {TGT_MW.OBJ} in the mess over the misdirected letter and {TGT_MW.Callsign}'s apparent dishonesty. They're both upset about what happened, and everyone else in the mess is carefully looking at their own plates.\r\n\r\nAt the sight of you, {SCN_MW.Callsign} says, \"Forget it,\" and stomps off.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}

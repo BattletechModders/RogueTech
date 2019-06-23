@@ -1,0 +1,238 @@
+{
+    "Description" : {
+        "Id" : "event_mw_couplingunit",
+        "Name" : "Coupling Unit",
+        "Details" : "You receive a call from Dr. Murad. \"Commander, the <i>Argo</i> is testing me. I have a negative reading from one of our rotational assembly's coupling joints.  If it's not repaired quickly, it'll shut down our grav modules.\r\n\r\n\"Our problem joint is near the reactor shielding, in a very hard to reach place. I can try to patch around it, but I'm not sure that will work.\r\n\r\n\"What I'd prefer to do is have someone go EVA to perform the repair. [[TGT_MW,{TGT_MW.Callsign}]] has plenty of experience with external ship work, and is ready to attempt the fix. Now, it's a bit risky, and I know how you value your MechWarriors. I'd like your call before I authorize the repair.\"",
+        "Icon" : "uixTxrSpot_FarahWorking.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 10,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "Tags/PilotTags",
+            "items" : [
+                "pilot_spacer"
+            ]
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "Tags/PilotTags",
+            "items" : null
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : "0"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "",
+                "items" : null
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/CompanyTags",
+                "items" : [
+                    "MODIFIED_STAT_MechTechSkill",
+                    "MODIFIED_STAT_MedTechSkill"
+                ]
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "Travel",
+                    "op" : "Equal",
+                    "val" : 0,
+                    "valueConstant" : "0"
+                },
+                {
+                    "obj" : "MedTechSkill",
+                    "op" : "GreaterThanOrEqual",
+                    "val" : 2,
+                    "valueConstant" : "2"
+                },
+                {
+                    "obj" : "MechTechSkill",
+                    "op" : "GreaterThanOrEqual",
+                    "val" : 2,
+                    "valueConstant" : "2"
+                }
+            ]
+        }
+    ],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Allow Dr. Murad to borrow your MechWarrior.",
+                "Details" : "Safe",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Congrats all around",
+                        "Details" : "Later that week, Dr. Murad's voice calmly flows through the speaker on your desk, \"[[TGT_MW,{TGT_MW.Callsign}]] did it, Commander. And {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:are|Default:is} back safe and sound. The <i>Argo</i> did not defeat me\u2026 yet.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 75,
+                    "Results" : []
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_1",
+                        "Name" : "Accidents happen",
+                        "Details" : "Later that week, Dr. Murad pulls you aside. \"Good news and bad news Commander. [[TGT_MW,{TGT_MW.Callsign}]] fixed it but was injured doing so. I sent {TGT_MW.OBJ} to the Medbay.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Injuries",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Patch around the problem.",
+                "Details" : "risky",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Fixed for now.",
+                        "Details" : "Later that week, Dr. Murad pulls you aside. \"Well, that patch worked. The <i>Argo</i> is running smoothly\u2026 for now, Commander. But [[TGT_MW,{TGT_MW.Callsign}]] is still very willing to go out there and do some hands-on work if\u2014when\u2014this happens again.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_dependable"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "That didn't work at all",
+                        "Details" : "Later that week, Dr. Murad enters your office. \"Bad news, Commander. The patch only partially worked. To maintain minimal gravity support, I'm going to insist we shut down the rotation for several hours each day until we can get a permanent fix. I let the staff know about the situation, and they seemed annoyed for some reason. But on the bright side, no MechWarriors were incapacitated by this!\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "-1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}

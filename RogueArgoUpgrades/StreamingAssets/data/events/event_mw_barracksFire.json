@@ -1,0 +1,507 @@
+{
+    "Description" : {
+        "Id" : "event_mw_barracksFire",
+        "Name" : "A Fire in the Barracks",
+        "Details" : "In the Command Center, the comm system squawks.\"Command? Anybody?\" It's [[TGT_MW,{TGT_MW.Callsign}]], with a nervy edge in {TGT_MW.Det} voice. \"There's a big fire in the Barracks! Everybody's out, but\u2026 not our stuff. Is there anything else I can do?\"\r\n\r\nDr. Murad calls out a reply. \"How did\u2026\" Her voice is sharp with alarm. Moments later, she continues: \"\u2026Commander, I've turned off power and ventilation, but the fire won't go out while there's oxygen to burn. I'm going to have to remotely vent the pod.\"\r\n\r\n\"Commander, [[SCN_MW,{SCN_MW.Callsign}]] just found some dusty fire extinguishers behind a panel!\" says {TGT_MW.Callsign}.",
+        "Icon" : "uixTxrSpot_Accident.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 10,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "items" : null,
+            "tagSetSourceFile" : "Tags/PilotTags"
+        },
+        "ExclusionTags" : {
+            "items" : null,
+            "tagSetSourceFile" : "Tags/PilotTags"
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : "0"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "items" : null,
+                "tagSetSourceFile" : ""
+            },
+            "ExclusionTags" : {
+                "items" : [
+                    "argo_power2"
+                ],
+                "tagSetSourceFile" : "Tags/CompanyTags"
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "Funds",
+                    "op" : "GreaterThan",
+                    "val" : 15000,
+                    "valueConstant" : "15000"
+                }
+            ]
+        }
+    ],
+    "AdditionalObjects" : [
+        {
+            "Scope" : "SecondaryMechWarrior",
+            "Requirements" : {
+                "Scope" : "SecondaryMechWarrior",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : [
+                        "pilot_brave"
+                    ],
+                    "tagSetSourceFile" : "Tags/PilotTags"
+                },
+                "RequirementComparisons" : [
+                    {
+                        "obj" : "Injuries",
+                        "op" : "Equal",
+                        "val" : 0,
+                        "valueConstant" : "0"
+                    }
+                ]
+            }
+        }
+    ],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Vent the pod to space.",
+                "Details" : "Safest",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "The fire is contained but the pod is damaged.",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]]'s protestations are abruptly cut off by Dr. Murad's brisk response. \"Venting now, Commander.\"\r\n\r\nThe entire <i>Argo</i> wobbles as flame follows air out of the decompressed hab pod, and then winks out.\r\n\r\nAt the next morning briefing, Dr. Murad gives an update. \"We extinguished the fire, but both problem and solution wreaked havoc on the interior spaces. That will be expensive. Now, this fire was caused by a fault in the power system itself, which not-incidentally also disabled the <i>Argo</i>'s automated fire suppression systems. I strongly advise upgrading the ship's power conduits as soon as possible.\"\r\n\r\nMeanwhile, the MechWarriors pick through their ruined belongings, salvaging some, but throwing out most of the rest.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-15000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Send in {TGT_MW.Callsign} and {SCN_MW.Callsign} to put out the fire.",
+                "Details" : "safer",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "MechWarriors get Injured",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] responds, \"Right away, Commander! We'll save what we can.\"\r\n\r\nAt the next morning briefing, Dr. Murad gives an update. \"The MechWarriors were able to extinguish the fire, but they inhaled too much smoke and ended up in the MedBay for treatment.\"\r\n\r\nShe continues, \"Now, this fire was caused by a fault in the power system itself, which not-incidentally also disabled the <i>Argo</i>'s automated fire suppression systems. I strongly advise upgrading the ship's power conduits as soon as possible.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_brave"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : [
+                                    "pilot_cautious"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Injuries",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_brave"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : [
+                                    "pilot_cautious"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Injuries",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-5000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "The fire is contained with no significant damage",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] responds, \"Right away, Commander. We'll save what we can.\"\r\n\r\nAt the next morning briefing, Dr. Murad gives an update. \"The MechWarriors were able to extinguish the fire with minimal damage to the hab and no injuries. It really was a heroic effort on their part.\"\r\n\r\nShe continues, \"Now, this fire was caused by a fault in the power system itself, which not-incidentally also disabled the <i>Argo</i>'s automated fire suppression systems. I strongly advise upgrading the ship's power conduits as soon as possible.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-2000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_brave"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : [
+                                    "pilot_cautious"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_brave"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : [
+                                    "pilot_cautious"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Allow {TGT_MW.Callsign} to try to put out the fire {TGT_MW.REFL}.",
+                "Details" : "[{TGT_MW.Callsign}: Brave]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "MechWarrior",
+                    "RequirementTags" : {
+                        "items" : [
+                            "pilot_brave"
+                        ],
+                        "tagSetSourceFile" : "Tags/PilotTags"
+                    },
+                    "ExclusionTags" : {
+                        "items" : null,
+                        "tagSetSourceFile" : ""
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "MechWarrior gets injured",
+                        "Details" : "Speaking into the comm, you address your MechWarrior. \"You want to try putting it out yourself, [[TGT_MW,{TGT_MW.Callsign}]]?\"\r\n\r\n{TGT_MW.Callsign} shouts out a hasty reply: \"Happy to do so if it saves our stuff!\" In the background, you hear [[SCN_MW,{SCN_MW.Callsign}]]'s protestations.\r\n\r\nAt the next morning briefing, Dr. Murad gives an update. \"{TGT_MW.Callsign} was able to extinguish the fire, but not before significant damage to the hab. Additionally, {TGT_MW.Subj} inhaled too much smoke and ended up in the MedBay for treatment. Now, this fire was caused by a fault in the power system itself, which not-incidentally also disabled the <i>Argo</i>'s automated fire suppression systems. I strongly advise upgrading the ship's power conduits as soon as possible.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Injuries",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-5000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_1",
+                        "Name" : "The fire is contained with no significant damage",
+                        "Details" : "Speaking into the comm, you address your MechWarrior. \"You want to try putting it out yourself, [[TGT_MW,{TGT_MW.Callsign}]]?\"\r\n\r\n{TGT_MW.Callsign} shouts out a hasty reply: \"Happy to do so if it saves our stuff!\" In the background, you hear [[SCN_MW,{SCN_MW.Callsign}]]'s protestations.\r\n\r\nAt the next morning briefing, Dr. Murad gives an update. \"{TGT_MW.Callsign} was able to single-handedly extinguish the fire, preventing damage to the hab and avoiding getting injured {TGT_MW.Refl}.\"\r\n\r\nShe continues, \"Now, this fire was caused by a fault in the power system itself, which not-incidentally also disabled the <i>Argo</i>'s automated fire suppression systems. I strongly advise upgrading the ship's power conduits as soon as possible.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 75,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-2000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}

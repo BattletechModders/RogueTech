@@ -1,0 +1,478 @@
+{
+    "Description" : {
+        "Id" : "event_co_blackMarket_CookieJar",
+        "Name" : "Hands in the Cookie Jar",
+        "Details" : "As you arrive at the [[DM.BaseDescriptionDefs[LoreBlackMarket],Black Market]] rendezvous, you realize, too late, that something isn't right. There's a burst of lights and sirens as the local authorities surround your group.\r\n\r\nA senior officer steps forward. \"This can be easy or hard, Commander {COMMANDER.LastName}. Turn over the access codes, secret handshakes, and whatever other tradecraft you use to gain access to the Market, and you'll walk away scot-free, with \u00A2100,000 C-Bills in your pocket.\"\r\n\r\nShe crosses her arms in smug determination. \"Or you can pretend you don't know anything and pay a frankly staggering fine for wasting our time.\"",
+        "Icon" : "uixTxrSpot_IllicitDealings.png"
+    },
+    "Scope" : "Company",
+    "Weight" : 40,
+    "Requirements" : {
+        "Scope" : "Company",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "Tags/CompanyTags",
+            "items" : [
+                "company_blackMarket_ON"
+            ]
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "",
+            "items" : []
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Travel",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : "0"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Commander",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "",
+                "items" : []
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "",
+                "items" : []
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "Injuries",
+                    "op" : "Equal",
+                    "val" : 0,
+                    "valueConstant" : "0"
+                }
+            ]
+        },
+        {
+            "Scope" : "StarSystem",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "Tags/PlanetTags",
+                "items" : [
+                    "planet_other_blackmarket"
+                ]
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "",
+                "items" : []
+            },
+            "RequirementComparisons" : []
+        }
+    ],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Tell them nothing and pay the fine.",
+                "Details" : "[\u00A2500,000]",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Funds",
+                            "op" : "GreaterThan",
+                            "val" : 500000,
+                            "valueConstant" : "500000"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "pay the fine",
+                        "Details" : "As the empty shuttle breaks atmosphere on the way back to the Argo, Darius finally speaks.\r\n\r\n\"Commander, it was the right call to pay the fine, even if it's killing my budget. The Black Market cabal would probably have discovered our betrayal. As it stands, the pirates will appreciate our willingness to stay quiet.\"\r\n\r\nSumire calls back from the cockpit. \"At least we can still go shopping, right? I give the Black Market 24 hours before a new pop-up shop is ready for business.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-500000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Reputation.AuriganPirates",
+                                    "value" : "2",
+                                    "set" : false,
+                                    "valueConstant" : "[rep_gain_medium]"
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Sell the information for \u00A2100,000.",
+                "Details" : "the money option",
+                "Icon" : null
+            },
+            "RequirementList" : null,
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "the most money, not caught",
+                        "Details" : "Safely back on the Argo, Sumire watches the {TGT_SYSTEM.Name} news feeds. \"Looks like this particular pop-up shop is shut down. It's on all the networks. I give the cabal 24 hours before a new one opens, though.\"\r\n\r\nDarius is reading updates from less public information sources. \"The pirate forums don't have much more information. Fortunately, no one is linking the raid back to us.\"\r\n\r\nYang crosses his arms over his chest. \"Okay, okay, but <i>Iron Beard</i> doesn't feel good about playing both sides like this. It reflects poorly on his criminal character.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "100000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "the most money, got caught",
+                        "Details" : "Safely back on the Argo, Sumire watches the {TGT_SYSTEM.Name} news feeds. \"Looks like this particular pop-up shop is shut down. It's on all the networks. I give the cabal 24 hours before a new one opens, though.\"\r\n\r\nDarius is reading updates from less public information sources. \"Bad news, team. From the rumblings on the pirate forums, they're linking the raid back to us.\"\r\n\r\nYang crosses his arms over his chest. \"Dammit people! <i>Iron Beard</i> will have to retire. This reflects poorly on his criminal character.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : [
+                                    "company_blackMarket_BANNED"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : [
+                                    "company_blackMarket_ON"
+                                ]
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "100000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Reputation.AuriganPirates",
+                                    "value" : "-3",
+                                    "set" : false,
+                                    "valueConstant" : "[rep_loss_large]"
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "BlackMarketAccess_Display",
+                                    "value" : "-1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : [
+                                    "company_blackMarket_OFF"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 365
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Sell the information but try to warn the Black Market.",
+                "Details" : "the risky option",
+                "Icon" : null
+            },
+            "RequirementList" : null,
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "some money, rep up with pirates",
+                        "Details" : "The officer is suspicious of your quick cooperation and only pays you a portion of the reward before releasing you.\r\n\r\nSafely back on the Argo, Sumire watches the {TGT_SYSTEM.Name} news feeds. \"No big announcements of a successful police action.\"\r\n\r\nDarius reads from less public information sources. \"Some news on the pirate forums. Sounds like they got our warning in time and the authorities showed up an hour too late.\"\r\n\r\nYang puffs up his chest. \"As long as <i>Iron Beard</i> gets the credit for outsmarting the government. Gotta work on his reputation.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "50000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Reputation.AuriganPirates",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : "[rep_gain_small]"
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_1",
+                        "Name" : "some money, rep down with pirates",
+                        "Details" : "The officer is suspicious of your quick cooperation and only pays you a portion of the reward before releasing you.\r\n\r\nSafely back on the Argo, Sumire watches the {TGT_SYSTEM.Name} news feeds. \"No big announcements of a successful police action.\"\r\n\r\nDarius reads from less public information sources. \"On the pirate forums, it sounds like they got our warning, but not in time to move all of the goods. Some grumblings that we're not to be trusted.\"\r\n\r\nYang crosses his arms over his chest. \"<i>Iron Beard</i> does not like how this reflects on his criminal reputation.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 75,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "50000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Reputation.AuriganPirates",
+                                    "value" : "-1",
+                                    "set" : false,
+                                    "valueConstant" : "[rep_loss_small]"
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_3",
+                "Name" : "Work your connections higher up the food chain.",
+                "Details" : "[Friendly with {TGT_SYSTEM.OwnerDef.ShortName}]",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Reputation.Owner",
+                            "op" : "GreaterThanOrEqual",
+                            "val" : 40,
+                            "valueConstant" : "[rep_friendly_min]"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_3_0",
+                        "Name" : "Nothing happens, morale boost",
+                        "Details" : "As the officer finishes her comm call, storm clouds gather in her face. It's the same look you see on a MechWarrior after you've delivered a solid dressing-down.\r\n\r\n\"Commander,\" she says without the smug tone she exhibited earlier. \"I've been directed by my superiors to let you go. Please accept my...\" You can almost taste the sour lemon in her mouth, \"My apologies for inconveniencing you.\"\r\n\r\nAs you board the transports and continue your journey to the secret location of the Black Market, Darius finally breaks out into a satisfied smile. \"Well played, Commander. This will make a good story for the crew.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}

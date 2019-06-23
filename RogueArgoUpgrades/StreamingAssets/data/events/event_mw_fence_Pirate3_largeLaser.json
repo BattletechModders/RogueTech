@@ -1,0 +1,653 @@
+{
+    "Description" : {
+        "Id" : "event_mw_fence_Pirate3_largeLaser",
+        "Name" : "Black Market fence selling a Large Laser",
+        "Details" : "Darius calls up from a planetside supply run. \"Commander, [[TGT_MW,{TGT_MW.Callsign}]] tagged along to help me wrangle supplies. {TGT_MW.Gender?Male:He's|Female:She's|NonBinary:They've} managed to get involved with a broker in the local black market.\"\r\n\r\n\"Now this broker is offering to sell us a [[DM.WeaponDefs[Weapon_Laser_LargeLaser_2-Magna],{DM.WeaponDefs[Weapon_Laser_LargeLaser_2-Magna].Description.Name}]]. This is a serious deal with a pretty significant individual. What do you want to do?\"",
+        "Icon" : "uixTxrSpot_IllicitDealings.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 40,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "Tags/PilotTags",
+            "items" : []
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "",
+            "items" : []
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : null
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "Tags/CompanyTags",
+                "items" : null
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/CompanyTags",
+                "items" : [
+                    "company_blackMarket_ON"
+                ]
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "Travel",
+                    "op" : "Equal",
+                    "val" : 0,
+                    "valueConstant" : "0"
+                },
+                {
+                    "obj" : "Reputation.AuriganPirates",
+                    "op" : "GreaterThanOrEqual",
+                    "val" : 20,
+                    "valueConstant" : "[rep_liked_min]"
+                }
+            ]
+        },
+        {
+            "Scope" : "StarSystem",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "Tags/PlanetTags",
+                "items" : [
+                    "planet_other_blackmarket"
+                ]
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/PlanetTags",
+                "items" : null
+            },
+            "RequirementComparisons" : []
+        }
+    ],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Refuse the offer.",
+                "Details" : "Non-participation option",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "No effect",
+                        "Details" : "Darius nods. \"Possibly the safest option. We'll just finish our legitimate business and get out of here.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : []
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Accept the offer.",
+                "Details" : "[\u00A2160,000]",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Funds",
+                            "op" : "GreaterThan",
+                            "val" : 160000,
+                            "valueConstant" : "160000"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Gain the weapon",
+                        "Details" : "Darius arranges for the sale, and the broker gets the weapon safely loaded onto the shuttle. [[TGT_MW,{TGT_MW.Callsign}]] and the broker then celebrate at a series of bars that evening. Darius hauls {TGT_MW.Callsign} back to the <i>Argo</i> early the next morning.\r\n\r\n{TGT_MW.Callsign} drunkenly waves at you as you arrive to inspect the cargo. \"Everything is great, Commander! So, <i>so</i> great. We gotta come back and do this again later.",
+                        "Icon" : null
+                    },
+                    "Weight" : 75,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Item.WeaponDef.Weapon_Laser_LargeLaser_2-Magna",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-160000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Reputation.AuriganPirates",
+                                    "value" : "2",
+                                    "set" : false,
+                                    "valueConstant" : "[rep_gain_medium]"
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "chain_shoreLeave"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "Lose money",
+                        "Details" : "Before [[TGT_MW,{TGT_MW.Callsign}]] can finish the deal, security forces swarm the exchange point. Apparently {TGT_MW.Callsign}'s' broker got advance warning of the raid and didn't pass it on.\r\n\r\nThe planetary authorities demand that a huge fine be paid before eventually letting {TGT_MW.Callsign} return to the shuttle, completely exhausted from the interrogation.",
+                        "Icon" : null
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-40000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "chain_shoreLeave"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Just steal the laser.",
+                "Details" : "[{TGT_MW.Callsign}: Dishonest]",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "MechWarrior",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "Tags/PilotTags",
+                        "items" : [
+                            "pilot_dishonest"
+                        ]
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "Tags/PilotTags",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "Gain the weapon",
+                        "Details" : "You send [[TGT_MW,{TGT_MW.Callsign}]] and Darius to the exchange along with a couple of big, tough crew members. {TGT_MW.Callsign} was smooth enough at managing the relationship that the broker is taken entirely by surprise, despite the value of the deal.\r\n\r\nLater, Darius quietly reports on just how furious {TGT_MW.Callsign}'s 'friend' was about the double-cross. \"I think it wasn't even the loss of the money that made the broker so upset, Commander. It was the betrayal itself.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Item.WeaponDef.Weapon_Laser_LargeLaser_2-Magna",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Reputation.AuriganPirates",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : "[rep_loss_medium]"
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "chain_shoreLeave"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_1",
+                        "Name" : "Injured MechWarrior",
+                        "Details" : "You send [[TGT_MW,{TGT_MW.Callsign}]] and Darius to the exchange with a couple of big, tough crew members. Unfortunately, the broker had also planned a double-cross.\r\n\r\n{TGT_MW.Callsign} is critically injured in the ensuing crossfire. You don't get the weapon, either.",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Injuries",
+                                    "value" : "3",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "chain_shoreLeave"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Reputation.AuriganPirates",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : "[rep_loss_medium]"
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_2",
+                        "Name" : "Dead MechWarrior",
+                        "Details" : "You send [[TGT_MW,{TGT_MW.Callsign}]] and Darius to the exchange with a couple of big, tough crew members. Unfortunately, the double-cross goes very badly. Darius and the crew members escape, but {TGT_MW.Callsign} is captured by the broker, who apparently takes the betrayal extremely personally.\r\n\r\n{TGT_MW.Callsign}'s body is found by the local police the next morning.",
+                        "Icon" : null
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_Kill",
+                                    "value" : "1",
+                                    "valueConstant" : null,
+                                    "additionalValues" : [
+                                        "caught double-crossing the wrong people."
+                                    ]
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Reputation.AuriganPirates",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : "[rep_loss_medium]"
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_3",
+                "Name" : "Let {TGT_MW.Callsign}, the expert, handle it.",
+                "Details" : "[\u00A2120,000, {TGT_MW.Callsign}: Criminal]",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "Tags/CompanyTags",
+                        "items" : []
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Funds",
+                            "op" : "GreaterThan",
+                            "val" : 120000,
+                            "valueConstant" : "120000"
+                        }
+                    ]
+                },
+                {
+                    "Scope" : "MechWarrior",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "Tags/PilotTags",
+                        "items" : [
+                            "pilot_criminal"
+                        ]
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_3_0",
+                        "Name" : "Gain the weapon",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] meets up with the broker in a bar with a budget and a plan. After a few drinks, {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:start|Default:starts} dropping the names of past black market contacts the company has dealt with, along with some personal exploits. More booze flows, and more stories are shared.\r\n\r\nThe next morning, Darius returns to the <i>Argo</i> with the weapon and a still-drunk {TGT_MW.Callsign}. The MechWarrior waggles {TGT_MW.DET} fingers at you when you come to inspect the merchandise. \"Come with us next time, Commander. It'll be fun. You've got <i>fans</i> now.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Item.WeaponDef.Weapon_Laser_LargeLaser_2-Magna",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-120000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Reputation.AuriganPirates",
+                                    "value" : "3",
+                                    "set" : false,
+                                    "valueConstant" : "[rep_gain_large]"
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "chain_shoreLeave"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}

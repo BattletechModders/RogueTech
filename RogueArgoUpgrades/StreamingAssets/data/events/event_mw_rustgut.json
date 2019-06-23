@@ -1,0 +1,410 @@
+{
+    "Description" : {
+        "Id" : "event_mw_rustgut",
+        "Name" : "Rustgut",
+        "Details" : "Dr. Murad's voice calls out to you from across the hall. \"Over here, Commander. Near the lockers.\" When you round the corner, you find her, [[TGT_MW,{TGT_MW.Callsign}]], and something that looks suspiciously like a moonshine still.\r\n\r\nDr. Murad looks up at you, a slight frown on her face. \"This MechWarrior was just explaining to me how {TGT_MW.SUBJ} came to build a device to make\u2014what was the term?\u2014<i>Engine Room Rustgut</i>.\"\r\n\r\n{TGT_MW.Callsign} looks chagrined, but defends {TGT_MW.REFL} with, \"I was just trying to make some money, and maybe have a bit of fun. We're all going a little stir crazy.\"",
+        "Icon" : "uixTxrSpot_MechWarriorsTalking.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 10,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "",
+            "items" : null
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "Tags/PilotTags",
+            "items" : null
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : null
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "",
+                "items" : []
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/CompanyTags",
+                "items" : [
+                    "argo_rec_lounge1",
+                    "MODIFIED_STAT_MechTechSkill",
+                    "MODIFIED_STAT_MedTechSkill"
+                ]
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "MedTechSkill",
+                    "op" : "GreaterThanOrEqual",
+                    "val" : 2,
+                    "valueConstant" : "2"
+                },
+                {
+                    "obj" : "MechTechSkill",
+                    "op" : "GreaterThanOrEqual",
+                    "val" : 2,
+                    "valueConstant" : "2"
+                }
+            ]
+        }
+    ],
+    "AdditionalObjects" : [
+        {
+            "Scope" : "SecondaryMechWarrior",
+            "Requirements" : {
+                "Scope" : "SecondaryMechWarrior",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "Tags/PilotTags",
+                    "items" : [
+                        "pilot_honest"
+                    ]
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Dismantle the still.",
+                "Details" : "Discipline {TGT_MW.Callsign} and dismantle the still",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "No more moonshine",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] accepts {TGT_MW.DET} punishment with some grumbling, and sets about tearing down the still. The MechWarriors will have to make do without their Engine Room Rustgut.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_low"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Move the still to the kitchen.",
+                "Details" : "risky",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "The moonshine is disgusting",
+                        "Details" : "You task [[TGT_MW,{TGT_MW.Callsign}]] with moving the still to the kitchen, and {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:do|Default:does} so with enthusiasm.\r\n\r\nFor a few days, {TGT_MW.Det} Engine Room Rustgut is available on the mess deck in moderate amounts. Sadly, the consensus opinion is that it is completely undrinkable. \r\n\r\nNevertheless, {TGT_MW.Callsign} finishes off the final batch by {TGT_MW.REFL} before the kitchen staff takes the still apart.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_drunk"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_low"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "Now the entire crew is drunk",
+                        "Details" : "You task [[TGT_MW,{TGT_MW.Callsign}]] with moving the still to the kitchen, and {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:do|Default:does} so with enthusiasm.\r\n\r\nFor a week, the mess is crowded with so many crewmembers and MechWarriors that you cannot find a place to sit without pulling rank, and the stink of Rustgut is everywhere.\r\n\r\nWhen the crew start showing up to shifts hung over, one day the kitchen staff arrive and the still has been mysteriously dismantled. In the daily briefing, Darius and Yang share a knowing look at the news.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "-1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 7
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Drag the full story out of {TGT_MW.Callsign}.",
+                "Details" : "[{TGT_MW.Callsign}: Naive]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "MechWarrior",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "Tags/PilotTags",
+                        "items" : [
+                            "pilot_naive"
+                        ]
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "Tags/PilotTags",
+                        "items" : null
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "{TGT_MW.Callsign} explains it all",
+                        "Details" : "\"I know this wasn't your idea, [[TGT_MW,{TGT_MW.Callsign}]],\" you say. \"So whose was it?\"\r\n\r\n{TGT_MW.Callsign} explains, \"It all started when [[SCN_MW,{SCN_MW.Callsign}]] got a letter from {SCN_MW.DET} sister\u2026\"\r\n\r\n\"{SCN_MW.Callsign} doesn't <i>have</i> a sister, {TGT_MW.Callsign}.\"\r\n\r\n\"Wait, then whose lifesaving medical operation are we trying to raise money for?\"\r\n\r\n\"Take the still apart and try to stay out of trouble for a change. Now, if you'll excuse me, I'm going to have a chat with {SCN_MW.Callsign}.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_low"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}

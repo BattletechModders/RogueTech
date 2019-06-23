@@ -1,0 +1,444 @@
+{
+    "Description" : {
+        "Id" : "event_mw_doctorsOrders_Commander",
+        "Name" : "Doctor's Orders",
+        "Details" : "As you're on your way to the MedBay for an evaluation, you hear [[TGT_MW,{TGT_MW.Callsign}]] and [[SCN_MW,{SCN_MW.Callsign}]] shouting, and then a loud metallic crash.\r\n\r\n\"Commander!\" {TGT_MW.Callsign} calls as you enter. \"How nice of you to join us!\" {TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:rise|Default:rises} halfway out of bed, trailing a tangled rope of tubes and wires.\r\n\r\nThe senior doctor turns on you, flushed and angry. \"Commander, your MechWarriors refuse to follow their recovery regimen.\"\r\n\r\n{SCN_MW.Callsign} lounges in a nearby chair. \"How come you're running around the ship? You're hurt too!\"",
+        "Icon" : "uixTxrSpot_MedBayDoc.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 40,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "Tags/PilotTags",
+            "items" : null
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "",
+            "items" : null
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "GreaterThanOrEqual",
+                "val" : 1,
+                "valueConstant" : "1"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "",
+                "items" : null
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/CompanyTags",
+                "items" : [
+                    "event_mw_doctorsOrders",
+                    "MODIFIED_STAT_MedTechSkill"
+                ]
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "MedTechSkill",
+                    "op" : "GreaterThanOrEqual",
+                    "val" : 2,
+                    "valueConstant" : "2"
+                }
+            ]
+        },
+        {
+            "Scope" : "Commander",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "",
+                "items" : null
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "",
+                "items" : null
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "Injuries",
+                    "op" : "GreaterThanOrEqual",
+                    "val" : 1,
+                    "valueConstant" : "1"
+                }
+            ]
+        }
+    ],
+    "AdditionalObjects" : [
+        {
+            "Scope" : "SecondaryMechWarrior",
+            "Requirements" : {
+                "Scope" : "SecondaryMechWarrior",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Instruct the doctors to relax their rules.",
+                "Details" : "penalty to Med",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Short Med penalty",
+                        "Details" : "\"[[SCN_MW,{SCN_MW.Callsign}]], I'm up and about because I have a mercenary company to run. Unlike you, my job doesn't stop when I'm not in a 'Mech.\"\r\n\r\nYou turning to the doctor. \"I respect the challenges you face here, but perhaps allow for a bit more activity and less bed-rest? Clearly, [[TGT_MW,{TGT_MW.Callsign}]] is going a little stir-crazy.\"\r\n\r\nThe senior doctor's tightened lips communicate displeasure, but she keeps those words to herself. \"Very well, Commander. We will incorporate physical therapy earlier into the treatment. If {TGT_MW.Subj} {TGT_MW.Gender?NonBinary:push|Default:pushes} too hard too soon, however, recovery may take even longer .\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 7
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_low"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_low"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : [
+                                    "event_mw_doctorsOrders"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Discipline the pilots and confine them to MedBay.",
+                "Details" : "boost to Med",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Short Med boost",
+                        "Details" : "\"[[SCN_MW,{SCN_MW.Callsign}]], I'm up and about because I have a mercenary company to run. Unlike you, my job doesn't stop when I'm not in a 'Mech.\"\r\n\r\nYou turn to the doctor. \"You have permission to restrain pilots in their beds the next time that someone causes you trouble.\"\r\n\r\n[[TGT_MW,{TGT_MW.Callsign}]]'s protestations die in {TGT_MW.Det} throat as you turn on {TGT_MW.Obj}. \"I know you feel like a god when you're in your 'Mech, but when you're here in the MedBay, your god is right over there!\" You point at the doctor.\r\n\r\n\"I expect you to do everything that she and her staff ask you to do. And if I hear otherwise, you may never get back into a 'Mech again.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 7
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : [
+                                    "event_mw_doctorsOrders"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Order {TGT_MW.Callsign} to practice while {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:recover|Default:recovers}.",
+                "Details" : "[Argo: Training Module]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "Tags/CompanyTags",
+                        "items" : [
+                            "argo_trainingModule1"
+                        ]
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : null
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "XP Boost",
+                        "Details" : "\"[[SCN_MW,{SCN_MW.Callsign}]], I'm up and about because I have a mercenary company to run. Unlike you, my job doesn't stop when I'm not in a 'Mech.\"\r\n\r\nYou turn to the doctor. \"I respect the challenges you face here, but clearly, [[TGT_MW,{TGT_MW.Callsign}]] is going a little stir-crazy. Perhaps {TGT_MW.SUBJ} could spend some time each day in the Training Modules?\"\r\n\r\nThe doctor's tightened lips communicate displeasure, but she keeps those words to herself. \"Very well, Commander. We'll need {TGT_MW.OBJ} on {TGT_MW.DET} feet soon enough. Walking to the Training Room and back won't be any different than doing laps in the hallway.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "ExperienceUnspent",
+                                    "value" : "50",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "ExperienceUnspent",
+                                    "value" : "50",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : [
+                                    "event_mw_doctorsOrders"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}

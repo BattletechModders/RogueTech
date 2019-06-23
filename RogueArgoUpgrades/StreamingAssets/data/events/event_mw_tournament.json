@@ -1,0 +1,536 @@
+{
+    "Description" : {
+        "Id" : "event_mw_tournament",
+        "Name" : "Tournament Madness",
+        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] arrives at your quarters, looking for some advice.\r\n\r\nWhat had started as a competitive training exercise in the Training Module has since evolved into a shipwide tournament, with mixed Lances of MechWarriors and other crew. {TGT_MW.Callsign} and [[SCN_MW,{SCN_MW.Callsign}]] have been competing together.\r\n\r\n\"But Commander, {SCN_MW.Callsign} hasn't been pulling {SCN_MW.Det} weight, and my other two teammates are looking to me, as Lance captain, to do something about it. I'm feeling a bit stuck here. What should I do?\"",
+        "Icon" : "uixTxrSpot_TrainingModules.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 10,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "items" : null,
+            "tagSetSourceFile" : ""
+        },
+        "ExclusionTags" : {
+            "items" : [
+                "pilot_morale_high",
+                "pilot_morale_low"
+            ],
+            "tagSetSourceFile" : "Tags/PilotTags"
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : "0"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "items" : [
+                    "argo_trainingModule1"
+                ],
+                "tagSetSourceFile" : "Tags/CompanyTags"
+            },
+            "ExclusionTags" : {
+                "items" : null,
+                "tagSetSourceFile" : ""
+            },
+            "RequirementComparisons" : []
+        }
+    ],
+    "AdditionalObjects" : [
+        {
+            "Scope" : "SecondaryMechWarrior",
+            "Requirements" : {
+                "Scope" : "SecondaryMechWarrior",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : [
+                        "pilot_morale_high",
+                        "pilot_morale_low"
+                    ],
+                    "tagSetSourceFile" : "Tags/PilotTags"
+                },
+                "RequirementComparisons" : [
+                    {
+                        "obj" : "Injuries",
+                        "op" : "Equal",
+                        "val" : 0,
+                        "valueConstant" : "0"
+                    }
+                ]
+            }
+        }
+    ],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Advise {TGT_MW.Obj} to replace {SCN_MW.Callsign}.",
+                "Details" : "safe option?",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "The replacement is worse",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] nods. \"You're right, I just couldn't bring myself to do it. I suppose leadership requires tough decisions like this.\"\r\n\r\nLater that week, you visit the Training room and check the leaderboards. {TGT_MW.Callsign}'s Lance has fallen in the standings.\r\n\r\n{TGT_MW.Subj_C} {TGT_MW.Gender?NonBinary:walk|Default:walks} up behind you. \"I may have to do that again. Next time, remind me to get a replacement who's actually an improvement.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_1",
+                        "Name" : "You find a better replacement",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] nods. \"You're right, I just couldn't bring myself to do it. I suppose that leadership requires tough decisions like this.\"\r\n\r\nLater that week, you visit the Training room and check the leaderboards. {TGT_MW.Callsign}'s Lance has risen in the standings.\r\n\r\n{TGT_MW.Subj_C} {TGT_MW.Gender?NonBinary:walk|Default:walks} up behind you. \"Thanks for the advice\u2026 I just wish I'd done it sooner. We might've made it into the finals. Maybe next season, though.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_2",
+                        "Name" : "The mood of the entire tournament sours",
+                        "Details" : "Later that week, you visit the Training room and check the leaderboards. [[TGT_MW,{TGT_MW.Callsign}]]'s Lance has fallen to the bottom of the standings.\r\n\r\nThe current match finishes and {TGT_MW.Callsign} emerges from one set of pods and immediately charges over to confront [[SCN_MW,{SCN_MW.Callsign}]] who has emerged from the other team's pods. Taunting, recriminations and accusations ripple through the entire room.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Suggest {TGT_MW.Callsign} hold extra practice.",
+                "Details" : "Risky option?",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "{SCN_MW.Callsign} still disappoints",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] nods. \"You're right. Now's the time for everyone to step up.\"\r\n\r\nLater that week, you visit the Training room and check the leaderboards. {TGT_MW.Callsign}'s Lance has fallen in the standings.\r\n\r\n[[SCN_MW,{SCN_MW.Callsign}]] walks up behind you. \"Commander, I know you encouraged {TGT_MW.Callsign} to keep me around. I feel bad that I let {TGT_MW.Obj} down, but I think that I need the life-or-death adrenaline from a <i>real</i> battlefield. Anyway, please know that I won't let <i>you</i> down\u2026 not when it counts, anyway.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "{SCN_MW.Callsign} rallies to the challenge",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] nods. \"You're right. Now's the time for everyone to step up.\"\r\n\r\nLater that week, you visit the Training room and check the leaderboards. {TGT_MW.Callsign}'s Lance has risen in the standings.\r\n\r\n{TGT_MW.Subj_C} {TGT_MW.Gender?NonBinary:walk|Default:walks} up behind you. \"Thanks for the advice. I just wish I'd challenged the team even sooner\u2026 we may have made it into the finals. But next season we've got this, for sure.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_2",
+                        "Name" : "The entire Lance gets better",
+                        "Details" : "Later that week, you visit the Training room and check the leaderboards. [[TGT_MW,{TGT_MW.Callsign}]]'s Lance has risen to the top of the standings.\r\n\r\nThe current match finishes and a grinning {TGT_MW.Callsign} exits from one pod and pounds on the adjacent pod. [[SCN_MW,{SCN_MW.Callsign}]] emerges, laughing. Cheers and congratulations ripple through the entire room.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Remind {TGT_MW.Callsign} of {TGT_MW.Det} training.",
+                "Details" : "[{TGT_MW.Callsign}: Officer]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "MechWarrior",
+                    "RequirementTags" : {
+                        "items" : [
+                            "pilot_officer"
+                        ],
+                        "tagSetSourceFile" : "Tags/PilotTags"
+                    },
+                    "ExclusionTags" : {
+                        "items" : null,
+                        "tagSetSourceFile" : ""
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "The team improves",
+                        "Details" : "You study the MechWarrior. \"I'll bet that you already know what to do.\"\r\n\r\n[[TGT_MW,{TGT_MW.Callsign}]] hesitates. \"Well, I have some ideas, but\u2026 I suppose I should step up as captain. All right. I'll bring this team together!\"\r\n\r\nLater that week, you visit the Training room and check the leaderboards. {TGT_MW.Callsign}'s Lance has risen in the standings.\r\n\r\n{TGT_MW.Subj_C} {TGT_MW.Gender?NonBinary:walk|Default:walks} up behind you. \"Thanks for the advice. I wish I'd stepped up to my responsibilities earlier, we may have made it to the finals. Maybe next season.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_1",
+                        "Name" : "The whole team improves",
+                        "Details" : "Later that week, you visit the Training room and check the leaderboards. [[TGT_MW,{TGT_MW.Callsign}]]'s Lance has risen to the top of the standings.\r\n\r\nThe current match ends. A grinning {TGT_MW.Callsign} exits from one pod and pounds another, from which [[SCN_MW,{SCN_MW.Callsign}]] emerges in triumph. Cheers and congratulations ripple through the entire room.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 75,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}

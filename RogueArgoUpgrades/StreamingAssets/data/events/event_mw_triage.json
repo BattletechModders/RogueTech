@@ -1,0 +1,604 @@
+{
+    "Description" : {
+        "Id" : "event_mw_triage",
+        "Name" : "Triage",
+        "Details" : "Darius shows up at your door in the middle of the night. He looks worn to the bone. \"Commander, [[TGT_MW,{TGT_MW.Callsign}]] has slipped into a coma. The MedTechs don't expect {TGT_MW.Obj} to survive the night.\"",
+        "Icon" : "uixTxrSpot_MedBay.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 10,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "",
+            "items" : null
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "",
+            "items" : null
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "GreaterThanOrEqual",
+                "val" : 3,
+                "valueConstant" : "3"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "",
+                "items" : null
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/CompanyTags",
+                "items" : [
+                    "MODIFIED_STAT_MedTechSkill"
+                ]
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "MedTechSkill",
+                    "op" : "GreaterThanOrEqual",
+                    "val" : 7,
+                    "valueConstant" : "7"
+                }
+            ]
+        }
+    ],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Prepare a eulogy.",
+                "Details" : "do nothing",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "MW dies",
+                        "Details" : "You sit down heavily in your chair. \"All right. Thank you, Darius. I'll put together what I need to record a message for {TGT_MW.Det} next of kin. Perhaps something to say to the crew.\"\r\n\r\nLate the next afternoon, Darius arrives at your quarters with the bad news. \"[[TGT_MW,{TGT_MW.Callsign}]] has died. I'm sorry, Commander.\"\r\n\r\nLooking down at the words you've written, they seem wholly inadequate. But you know that the MechWarriors will appreciate hearing something from their Commander. A reminder that the passing of a life will not go unnoticed.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 75,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_Kill",
+                                    "value" : "1",
+                                    "valueConstant" : null,
+                                    "additionalValues" : [
+										"declared dead on the operating table.",
+									]
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_1",
+                        "Name" : "MW lives",
+                        "Details" : "You sit down heavily in your chair. \"All right. Thank you, Darius. I'll put together what I need to record a message for {TGT_MW.Det} next of kin. Perhaps something to say to the crew.\"\r\n\r\nAfter a few hours, Darius returns, a weak smile peeking through his tired face. \"[[TGT_MW,{TGT_MW.Callsign}]]'s vital signs have started to improve, Commander. {TGT_MW.Gender?Male:He's|Female:She's|NonBinary:They've} made it through this crisis. With luck there won't be another one.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Keep vigil in the MedBay.",
+                "Details" : "Keep vigil in the MedBay",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "MW lives",
+                        "Details" : "You clench a fist. \"Thank you, Darius. I want to see {TGT_MW.Obj}, to say goodbye. {TGT_MW.Subj_C} {TGT_MW.Gender?NonBinary:deserve|Default:deserves} that.\"\r\n\r\nDarius accompanies you to the MedBay, where you take a seat beside the MechWarrior's bed and wait. After a few hours, other MechWarriors look in, sigh, and move on. An hour after that, [[TGT_MW,{TGT_MW.Callsign}]]'s shallow breathing deepens and {TGT_MW.Det} vital signs start to improve. Darius returns, summoned by a MedTech.\r\n\r\n\"You might as well rest now, Commander. {TGT_MW.Gender?Male:He's|Female:She's|NonBinary:They've} made it through this crisis. With luck there won't be another one.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "MW dies",
+                        "Details" : "You clench a fist. \"Thank you, Darius. I want to see {TGT_MW.Obj}, to say goodbye. {TGT_MW.Subj_C} {TGT_MW.Gender?NonBinary:deserve|Default:deserves} that.\"\r\n\r\nDarius accompanies you to the MedBay, where you take a seat beside the MechWarrior's bed and wait. After a few hours, other MechWarriors look in, sigh, and move on. An hour after that, [[TGT_MW,{TGT_MW.Callsign}]]'s shallow breathing stops. Darius returns, summoned by a MedTech.\r\n\r\n\"You might as well rest now, Commander. You did what you could. When you wake, you can record the message for {TGT_MW.Det} next of kin.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_Kill",
+                                    "value" : "1",
+                                    "valueConstant" : null,
+                                    "additionalValues" : [
+										"declared dead on the operating table.",
+									]
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Deplete MedBay resources to try to save {TGT_MW.OBJ}.",
+                "Details" : "[\u00A250,000]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : null
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : null
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Funds",
+                            "op" : "GreaterThan",
+                            "val" : 50000,
+                            "valueConstant" : "50000"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "MW lives",
+                        "Details" : "\"That's bullshit,\" you snap at Darius. \"I'm going over there. [[TGT_MW,{TGT_MW.Callsign}]] is too important to just write off like that.\"\r\n\r\n\"Commander\u2026\" begins Darius, before stopping himself. He follows you as you stalk over to the MedBay, where you yell at the MedTechs, yell at {TGT_MW.Callsign}, and generally clarify that death is not an option. The stressed MedTechs scurry around trying every risky solution they can think of.\r\n\r\nA few hours after you arrive, {TGT_MW.Det} vital signs improve markedly. Just as exhausted as the MedBay staff, you allow Darius to shoo you off to rest. Another battle won.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 90,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-6",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 7
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-50000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_1",
+                        "Name" : "MW dies",
+                        "Details" : "\"That's bullshit,\" you snap at Darius. \"I'm going over there. [[TGT_MW,{TGT_MW.Callsign}]] is too important to just write off like that.\"\r\n\r\n\"Commander\u2026\" begins Darius, before stopping himself. He follows you as you stalk over to the MedBay, where you yell at the MedTechs, yell at {TGT_MW.Callsign}, and generally clarify that death is not an option. The stressed MedTechs scurry around trying every risky solution they can think of.\r\n\r\nA few hours later, however, {TGT_MW.Det} vital signs continue to decline, and finally {TGT_MW.Det} shallow breathing stops.\r\n\r\nDarius puts a hand on your shoulder. \"You did what you could, Commander. Everyone did. You should get some rest now.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 10,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-6",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 7
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-50000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_Kill",
+                                    "value" : "1",
+                                    "valueConstant" : null,
+                                    "additionalValues" : [
+										"declared dead on the operating table.",
+									]
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_3",
+                "Name" : "Dedicate the entire hospital bay.",
+                "Details" : "[Argo: Hospital Bays]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "Tags/CompanyTags",
+                        "items" : [
+                            "argo_medbay_hospital"
+                        ]
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : null
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_3_0",
+                        "Name" : "MW lives",
+                        "Details" : "\"That's bullshit,\" you snap at Darius. \"We have every damn fancy machine in the Periphery in that Hospital Bay of ours. I refuse to accept that [[TGT_MW,{TGT_MW.Callsign}]] will die.\"\r\n\r\n\"Commander\u2026\" begins Darius, before stopping himself. He follows you as you stalk over to the Hospital Bay, where you yell at the MedTechs, yell at {TGT_MW.Callsign}, and generally clarify that death is not an option. The stressed MedTechs scurry around trying every risky solution they can think of.\r\n\r\nA few hours after you arrive, {TGT_MW.Det} vital signs improve markedly. Just as exhausted as the MedBay staff, you allow Darius to shoo you off to rest. Another battle won.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-3",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}

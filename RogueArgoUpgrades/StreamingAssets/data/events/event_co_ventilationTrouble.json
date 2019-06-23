@@ -1,0 +1,320 @@
+{
+    "Description" : {
+        "Id" : "event_co_ventilationTrouble",
+        "Name" : "Ventilation Trouble",
+        "Details" : "In the daily briefing, Darius brings up the Barracks climate control system. \"Apparently it's started cycling randomly between 'tolerable' and 'the inside of a 'Mech cockpit in a desert.'\"\r\n\r\nDr. Murad just shrugs. \"I can replace the fan controllers again, but it may not be money well spent. Something else is going on in the unimproved power conduits, but as the <i>Argo</i> is very old, and very complicated, tracking it down has been difficult.\"",
+        "Icon" : "uixTxrSpot_Barracks.png"
+    },
+    "Scope" : "Company",
+    "Weight" : 10,
+    "Requirements" : {
+        "Scope" : "Company",
+        "RequirementTags" : {
+            "items" : null,
+            "tagSetSourceFile" : ""
+        },
+        "ExclusionTags" : {
+            "items" : [
+                "argo_power2",
+                "company_fixedVentilation"
+            ],
+            "tagSetSourceFile" : "Tags/CompanyTags"
+        },
+        "RequirementComparisons" : []
+    },
+    "AdditionalRequirements" : [],
+    "AdditionalObjects" : [
+        {
+            "Scope" : "SecondaryMechWarrior",
+            "Requirements" : {
+                "Scope" : "SecondaryMechWarrior",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : [
+                        "pilot_morale_high",
+                        "pilot_morale_low"
+                    ],
+                    "tagSetSourceFile" : "Tags/PilotTags"
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Replace the fan controllers.",
+                "Details" : "[\u00A210,000]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "items" : null,
+                        "tagSetSourceFile" : ""
+                    },
+                    "ExclusionTags" : {
+                        "items" : null,
+                        "tagSetSourceFile" : ""
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Funds",
+                            "op" : "GreaterThan",
+                            "val" : 10000,
+                            "valueConstant" : "10000"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Farah fixes the problem, for now",
+                        "Details" : "Dr. Murad nods. \"Of course. One less thing to worry about right now.\"\r\n\r\nReplacing the fan controllers resolves the temperature issue, at least in the short term. Dr. Murad deprioritizes tracking down the problem's root cause; whatever is happening in the power system, it isn't currently causing issues, and there are other problems to solve.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-10000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "company_fixedVentilation"
+                                ],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Distribute portable fans to those affected.",
+                "Details" : "risky",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "The portable fans mostly work",
+                        "Details" : "Darius sees to it that MechWarriors and crew members with irregular climate control get portable fans to alleviate the problem.\r\n\r\nUnfortunately, the portable fans don't make enough of a difference for everyone. [[SCN_MW,{SCN_MW.Callsign}]], in particular, becomes increasingly irritable, as {SCN_MW.SUBJ} {SCN_MW.Gender?NonBinary:find|Default:finds} it hard to sleep.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 75,
+                    "Results" : [
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "The portable fans work",
+                        "Details" : "Darius sees to it that MechWarriors and crew members with irregular climate control get portable fans to alleviate the problem.\r\n\r\nNobody is happy with this state of affairs, but the portable fans seem to work well enough.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : []
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Completely rebuild the system.",
+                "Details" : "[\u00A2100,000, Manufacturing World]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "items" : null,
+                        "tagSetSourceFile" : ""
+                    },
+                    "ExclusionTags" : {
+                        "items" : null,
+                        "tagSetSourceFile" : ""
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Funds",
+                            "op" : "GreaterThan",
+                            "val" : 100000,
+                            "valueConstant" : "100000"
+                        },
+                        {
+                            "obj" : "Travel",
+                            "op" : "Equal",
+                            "val" : 0,
+                            "valueConstant" : "0"
+                        }
+                    ]
+                },
+                {
+                    "Scope" : "StarSystem",
+                    "RequirementTags" : {
+                        "items" : [
+                            "planet_industry_manufacturing"
+                        ],
+                        "tagSetSourceFile" : "Tags/PlanetTags"
+                    },
+                    "ExclusionTags" : {
+                        "items" : null,
+                        "tagSetSourceFile" : ""
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "Fix it once and for all",
+                        "Details" : "\"How exciting!\" says Dr. Murad. She promptly begins organizing what becomes a massive technical effort to replace the entire climate system.\r\n\r\nFarah shows no hesitation in purchasing new and well-understood parts directly from the factories on {TGT_SYSTEM.Name}. The cost is significant, but in the end, the <i>Argo</i> is much more habitable.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "company_fixedVentilation"
+                                ],
+                                "tagSetSourceFile" : "Tags/CompanyTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-100000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}

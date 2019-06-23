@@ -1,0 +1,448 @@
+{
+    "Description" : {
+        "Id" : "event_mw_memorialWall",
+        "Name" : "The Memorial Wall",
+        "Details" : "Late in the evening, [[TGT_MW,{TGT_MW.Callsign}]] ducks into your quarters. Dark circles rim {TGT_MW.DET} bloodshot eyes. \"Hey, Commander\u2026 I, uh, know you're busy, but I don't know where to turn.\"\r\n\r\n\"What's wrong, MechWarrior?\"\r\n\r\n{TGT_MW.Callsign}'s voice trembles. \"I haven't slept for days. I keep thinking why <i>me</i>? Why am I alive? I've seen ejections fail, ammo explosions, and impossible headshots. Rookies, veterans, it doesn't matter. How long until my picture is added to the Memorial Wall?\"",
+        "Icon" : "event_mechwarriors_TEMP.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 1000,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "Tags/PilotTags",
+            "items" : [
+                "pilot_honest"
+            ]
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "Tags/PilotTags",
+            "items" : [
+                "pilot_dependable",
+                "pilot_dishonest",
+                "pilot_rebellious"
+            ]
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : "0"
+            },
+            {
+                "obj" : "ExperienceSpent",
+                "op" : "GreaterThan",
+                "val" : 10000,
+                "valueConstant" : "10000"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "Tags/CompanyTags",
+                "items" : []
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/CompanyTags",
+                "items" : [
+                    "event_mw_survivorsGuilt",
+                    "MODIFIED_STAT_MedTechSkill"
+                ]
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "MedTechSkill",
+                    "op" : "GreaterThan",
+                    "val" : 2,
+                    "valueConstant" : "2"
+                }
+            ]
+        }
+    ],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Reassure {TGT_MW.Callsign}.",
+                "Details" : "reassure",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "High Spirits + dependable",
+                        "Details" : "\"We'll all end up on that wall one day, but it takes more than luck to make it as far as you have, MechWarrior.\" You rest a reassuring hand on [[TGT_MW,{TGT_MW.Callsign}]]'s shoulder. \"You're here because of your talent. Frankly, you've taken some hits that would have put me in early retirement.\"\r\n\r\n{TGT_MW.Callsign} stares at {TGT_MW.DET} boots. \"But what if I slip?\"\r\n\r\n\"Then we'll catch you. Every single member of this outfit has your back, on or off the battlefield. If you need to talk for an hour, or a night, or every night, I'm here for you.\"\r\n\r\n\"Thanks, Commander.\" A faint smile cracks {TGT_MW.Callsign}'s face. \"I won't abuse this privilege. You have my word.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 75,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_dependable"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_morale_low"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_1",
+                        "Name" : "Low morale",
+                        "Details" : "\"In the end, we'll all end up on that wall, but you've got plenty of time. You're the best of the best, [[TGT_MW,{TGT_MW.Callsign}]].\" You look {TGT_MW.SUBJ} straight in the eyes. \"Plain and simple.\"\r\n\r\n{TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:sigh and shake|Default:sighs and shakes} {TGT_MW.DET} head. \"I've cleaned better MechWarriors than me out of cockpits, Commander. Meat is cheap.\"\r\n\r\n\"Keep thinking like that and you'll end up just like them.\"\r\n\r\n\"Some pep talk, Commander.\" {TGT_MW.Callsign} slumps, resting {TGT_MW.DET} head back against the bulkhead and closing {TGT_MW.DET} eyes. \"I guess I'll give sleep another shot.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_morale_low"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Help {TGT_MW.Callsign} forget {TGT_MW.DET} troubles.",
+                "Details" : "offer a drink",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Dependable + High Morale",
+                        "Details" : "\"It all comes down to luck in the end. I've lost friends to freak accidents and seen enemies walk away from hits that should've ground them into pulp.\" You pour two glasses of whiskey and slide one over to [[TGT_MW,{TGT_MW.Callsign}]].\r\n\r\n{TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:sip|Default:sips} {TGT_MW.DET} drink, but {TGT_MW.DET} focus is on you. \"It doesn't seem fair.\" \r\n\r\n\"It's not, but I promise I'll do everything in my power to make sure you and every member of this outfit gets off the battlefield in one piece.\"\r\n\r\n\"This crew is all I've got.\" {TGT_MW.Callsign} raises {TGT_MW.DET} drink. \"If it weren't for all of you, I think I would have called it quits by now. Thanks for taking the time to talk, Commander.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_dependable"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_morale_low"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "Drunk + High Morale",
+                        "Details" : "\"We'll all end up on that wall in the end, so here's a little advice. Loosen up a little. Enjoy the ride while you can.\" You pour two tall glasses of whiskey and slide one over to [[TGT_MW,{TGT_MW.Callsign}]]. \r\n\r\nAs you savor the fire in your throat and the lingering taste of smoke, {TGT_MW.Callsign} gulps {TGT_MW.DET} liquor down. {TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:push|Default:pushes} {TGT_MW.DET} glass toward you. \"In that case, how about another?\"\r\n\r\nYou oblige {TGT_MW.OBJ} and {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:drain|Default:drains} another glass. After a couple more rounds, you dismiss {TGT_MW.Callsign} for the night and {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:stumble|Default:stumbles} back to the barracks.\r\n\r\nLater in the week, Darius reports that {TGT_MW.Callsign} is in better spirits, but {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:are|Default:is} drinking heavily each day.",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_drunk"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_morale_low"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Refer {TGT_MW.Callsign} to the Med Techs.",
+                "Details" : "med risk",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "MW Dependable + MedTech - 2",
+                        "Details" : "\"There's no predicting when you'll end up on the Memorial Wall. Don't let it get to you.\" You pause, reflecting for a moment. \"I've seen MechWarriors throw their lives away over these kind of doubts.\"\r\n\r\n[[TGT_MW,{TGT_MW.Callsign}]] lowers {TGT_MW.DET} head. \"I don't want to end up like that.\"\r\n\r\n\"You've still got time. Feel free to stop by my quarters any time, but you should really check in with the MedTechs. They can work wonders, whether you need counselling or a prescription or anything else.\"\r\n\r\n{TGT_MW.Callsign} looks into the distance thoughtfully and then nods {TGT_MW.DET} head. \"I've trusted you with my life every time I've been on the battlefield. No reason to stop now. I'll see the MedTechs tomorrow, Commander.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_dependable"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_1",
+                        "Name" : "Rebellious",
+                        "Details" : "\"No one knows, MechWarrior. But there are resources for dealing with this anxiety. I've scheduled you for an appointment with the chief MedTech first thing tomorrow.\" You give an encouraging smile, but [[TGT_MW,{TGT_MW.Callsign}]] is unmoved. \"There's no shame in asking for a little help.\"\r\n\r\n\"I know, Commander, but I'm asking <i>you</i> for help. Not the MedTechs.\"\r\n\r\n\"I <i>am</i> helping you by getting you proper treatment. This isn't a suggestion, MechWarrior. It's an order.\" {TGT_MW.Callsign} utters a grunt in acknowledgment, but the conversation dwindles and ends shortly. \r\n\r\nThe next day, Darius reports in: \"{TGT_MW.Callsign} never showed up for {TGT_MW.DET} appointment. I hunted {TGT_MW.OBJ} down and {TGT_MW.SUBJ} got in my face. I disciplined {TGT_MW.OBJ}, but I'll be watching {TGT_MW.OBJ} from now on.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_rebellious"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_morale_low"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}

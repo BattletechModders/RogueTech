@@ -1,0 +1,524 @@
+{
+    "Description" : {
+        "Id" : "event_mw_demoralized",
+        "Name" : "Demoralized",
+        "Details" : "[[SCN_MW,{SCN_MW.Callsign}]] approaches you on the mess deck. \"Commander, you know how [[TGT_MW,{TGT_MW.Callsign}]] is sidelined in MedBay? I've been visiting {TGT_MW.OBJ}, trying to keep {TGT_MW.DET} morale up and, well, {TGT_MW.SUBJ}{TGT_MW.Gender?NonBinary:'re|Default:'s} really messed up. {TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:think|Default:thinks} the injury was {TGT_MW.DET} own fault. Maybe you could do something?\"\r\n\r\nResting a hand on {SCN_MW.Callsign} shoulder, you say, \"Thanks for letting me know, {SCN_MW.Callsign}. I'll see what I can do.\"",
+        "Icon" : "uixTxrSpot_MedBayPatient.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 40,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "items" : null,
+            "tagSetSourceFile" : ""
+        },
+        "ExclusionTags" : {
+            "items" : [
+                "pilot_morale_high"
+            ],
+            "tagSetSourceFile" : "Tags/PilotTags"
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "GreaterThanOrEqual",
+                "val" : 3,
+                "valueConstant" : "3"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [],
+    "AdditionalObjects" : [
+        {
+            "Scope" : "SecondaryMechWarrior",
+            "Requirements" : {
+                "Scope" : "SecondaryMechWarrior",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : [
+                    {
+                        "obj" : "Injuries",
+                        "op" : "Equal",
+                        "val" : 0,
+                        "valueConstant" : null
+                    }
+                ]
+            }
+        }
+    ],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Visit {TGT_MW.Callsign} in MedBay.",
+                "Details" : "safe option",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Gain high morale",
+                        "Details" : "Later in the day, you arrive in the MedBay and find [[TGT_MW,{TGT_MW.Callsign}]] in bed, just starting at the ceiling. \"Hey, Commander. I didn't expect you to come by.\"\r\n\r\n\"I need you back on your feet, {TGT_MW.Callsign},\" you say. \"This\u2014\" You make a vague gesture at the MedBay and {TGT_MW.Callsign}'s condition. \"This happens to MechWarriors, but it's just bad luck. It doesn't mean anything.\"\r\n\r\n\"Yeah, I guess so.\"\r\n\r\n\"Good! Recover fast, because you've got work to do.\"\r\n\r\n{TGT_MW.Callsign} cracks a smile. \"Will do, Commander.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 75,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_1",
+                        "Name" : "Low morale",
+                        "Details" : "Later in the day, you arrive in the MedBay and find [[TGT_MW,{TGT_MW.Callsign}]] in bed, just starting at the ceiling. \"Hey, Commander. I didn't expect you to come by.\"\r\n\r\n\"You'll be back on your feet in no time, {TGT_MW.Callsign}.\"\r\n\r\n{TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:shrug|Default:shrugs}, then {TGT_MW.Gender?NonBinary:wince|Default:winces} in pain. \"Maybe. I don't know. I feel like this happened <i>for a reason</i>.\"\r\n\r\nAfter fifteen minutes, you're unable to lift the cloud over {TGT_MW.Callsign}'s mood, so you bid {TGT_MW.OBJ} a speedy recovery and retreat.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Relay good wishes through Darius.",
+                "Details" : "risky option",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Gain unstable",
+                        "Details" : "Later in the day, you delegate the task to Darius. \"Please drop by MedBay and check in on [[TGT_MW,{TGT_MW.Callsign}]]. Remind {TGT_MW.OBJ} that these things happen, and that {TGT_MW.Gender?NonBinary:they're|Male:he's|Female:she's} still an important member of the crew.\"\r\n\r\nThe next day, Darius shares an update. \"I tried to cheer up {TGT_MW.Callsign}, but {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:are|Default:is} taking this injury badly. This may be a psychological problem.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_unstable"
+                                ],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "Gain Low Morale",
+                        "Details" : "Later in the day, you delegate the task to Darius. \"Please drop by MedBay and check in on [[TGT_MW,{TGT_MW.Callsign}]]. Remind {TGT_MW.OBJ} that these things happen, and that {TGT_MW.Gender?NonBinary:they're|Male:he's|Female:she's} still an important member of the crew.\"\r\n\r\nThe next day, Darius shares an update. \"I tried to cheer {TGT_MW.Callsign} up, but {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:are|Default:is} taking this injury badly. That said, I think {TGT_MW.SUBJ} will shake it off when not in the MedBay.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_2",
+                        "Name" : "Gain High Morale",
+                        "Details" : "Later in the day, you delegate the task to Darius. \"Please drop by MedBay and check in on [[TGT_MW,{TGT_MW.Callsign}]]. Remind {TGT_MW.OBJ} that these things happen, and that {TGT_MW.Gender?NonBinary:they're|Male:he's|Female:she's} still an important member of the crew.\"\r\n\r\nThe next day, Darius shares an update. \"I managed to cheer up {TGT_MW.Callsign}. I think {TGT_MW.SUBJ} just needed to hear some encouragement from someone other than a MechWarrior or a doctor.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Deliver some entertainment.",
+                "Details" : "[Argo: Library]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "items" : [
+                            "argo_rec_library1"
+                        ],
+                        "tagSetSourceFile" : ""
+                    },
+                    "ExclusionTags" : {
+                        "items" : null,
+                        "tagSetSourceFile" : ""
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "Holovids delivered, add High Morale",
+                        "Details" : "You pick up a datapad with some huge stack of book chips on your way over to MedBay. [[TGT_MW,{TGT_MW.Callsign}]] opens {TGT_MW.DET} eyes as you enter. \"Commander? I wasn't expecting visitors today.\"\r\n\r\n\"I just thought you might appreciate something to take your mind off things,\" you say, setting the datapad and the chips on the table beside {TGT_MW.OBJ}. \"I didn't mean to interrupt your rest.\"\r\n\r\nAfter a few minutes of conversation, you take you leave so {TGT_MW.Callsign} can go back to sleep.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_1",
+                        "Name" : "Books delivered, gain Bookish",
+                        "Details" : "You pick up a datapad with a huge stack of holovid chips on your way over to MedBay. [[TGT_MW,{TGT_MW.Callsign}]] opens {TGT_MW.DET} eyes as you enter. \"Commander? I wasn't expecting visitors today.\"\r\n\r\n\"I just thought you might appreciate something to take your mind off things,\" you say, setting the datapad and the chips on the table beside {TGT_MW.OBJ}. \"I didn't mean to interrupt your rest.\"\r\n\r\nAfter a few minutes of conversation, you take you leave so {TGT_MW.Callsign} can go back to sleep.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_bookish"
+                                ],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_2",
+                        "Name" : "Everyone chips in, Morale",
+                        "Details" : "You pick up a datapad with some book and holovid chips on your way over to MedBay. [[TGT_MW,{TGT_MW.Callsign}]] is already reading from a datapad as you enter. {TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:look|Default:looks} up. \"Oh, Commander. Were you bringing that stuff for me? Just put it over there.\"\r\n\r\nEvery flat surface near {TGT_MW.DET} bed is covered with books, datapads, and snacks from the mess-hall. Is that a stuffed animal?\r\n\r\nIt would appear that [[SCN_MW,{SCN_MW.Callsign}]] has rallied more than just you to help {TGT_MW.DET} friend recover.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}
