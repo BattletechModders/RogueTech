@@ -10,12 +10,15 @@
       "Bonuses": [
         "Sensors: +10%",
         "Sight: +10%",
+		"Resolve: +1",
         "FriendlyAura: 180",
         "LanceAcc: +1",
         "UnFriendlyAura: 300",
         "AccuracyDebuff: -1",
-        "Resolve: +1",
-        "GhostSpotter: 240",
+        "IsECM: 1",
+                "ECMBubble: 190",
+				"Jammer: 2"
+				"JamBubble: 300"
         "NovaCEWS"
       ]
     },
@@ -233,38 +236,70 @@
       }
     },
     {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": 1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "specialRules": "Aura",
-        "effectTargetType": "EnemiesWithinRange",
-        "range": 240.0,
-        "forcePathRebuild": false,
-        "forceVisRebuild": true,
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description":
-      {
-        "Id": "ECMCounter_GhostSpotterEffect",
-        "Name": "STEALTH SPOTTER",
-        "Details":
-          "This unit is spotting against an enemy ECM field, reducing Stealth Charges by 1 each round for all visible enemies within the field.",
-        "Icon": "uixSvgIcon_action_sensorlock"
-      },
-      "statisticData":
-      {
-        "statName": "HasGhostSpotter",
-        "operation": "Set",
-        "modValue": "true",
-        "modType": "System.Boolean"
-      },
-      "nature": "Debuff"
-    }
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "Aura",
+                "effectTargetType" : "AlliesWithinRange",
+                "range" : 200.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : false,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "LV_ECM_SHIELD",
+				"Name" : "Makes it easier for enemies to know where you are, but harder to attack",
+				"Details" : "IPSUM SUCKUM",
+				"Icon" : "uixSvgIcon_status_ECM-missileDef"
+            },
+            "statisticData" : 
+            {
+				"statName" : "LV_ECM_Shield",
+				"operation": "Int_Add",
+				"modValue": "1",
+				"modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        },
+        {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1,
+				"uniqueEffectIdStackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "Aura",
+                "effectTargetType" : "EnemiesWithinRange",
+                "range" : 300.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "LV_ECM_JAM",
+				"Name" : "ECM Jammer",
+				"Details" : "Jamming ECM, reduces sensor checks for enemies in field",
+				"Icon" : "uixSvgIcon_action_sensorlock"
+            },
+            "statisticData" : 
+            {
+				"statName" : "LV_ECM_Jammed",
+				"operation": "Int_Add",
+				"modValue": "1",
+				"modType": "System.Int32"
+            },
+            "nature" : "Debuff"
+        } 
   ],
   "ComponentTags": {
     "items": [
