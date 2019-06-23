@@ -1,0 +1,512 @@
+{
+    "Description" : {
+        "Id" : "event_mw_readingCorridor",
+        "Name" : "Reading in the Corridor",
+        "Details" : "Rounding a corner in an unused corridor, you nearly trip over [[TGT_MW,{TGT_MW.Callsign}]]. The MechWarrior sits in a heap on the floor, nose-deep in a dog-eared, honest-to-goodness, paper book.\r\n\r\n{TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:look|Default:looks} up. \"Oh, Commander, am I in your way? I needed to get out of the barracks. There's just no good place for me to read.\"\r\n\r\nYou gesture at the book and {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:hand|Default:hands} it over. While you idly flip its pages, {TGT_MW.Callsign} asks, \"I heard that there's a disrepaired library here in the <i>Argo</i>. Think we could get that online?\"",
+        "Icon" : "uixTxrSpot_EngineeringInnards.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 10,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "Tags/PilotTags",
+            "items" : []
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "Tags/PilotTags",
+            "items" : []
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : null
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "",
+                "items" : [
+                    "event_HIDDEN"
+                ]
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/CompanyTags",
+                "items" : [
+                    "argo_rec_library1",
+                    "MODIFIED_STAT_MechTechSkill"
+                ]
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "MechTechSkill",
+                    "op" : "GreaterThanOrEqual",
+                    "val" : 2,
+                    "valueConstant" : "2"
+                }
+            ]
+        }
+    ],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Order {TGT_MW.Callsign} to find another place to read.",
+                "Details" : "non-question route",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "{TGT_MW.Callsign} moves to the mess deck",
+                        "Details" : "\"You can't sit in the corridors, [[TGT_MW,{TGT_MW.Callsign}]]. It blocks traffic.\"\r\n\r\n{TGT_MW.Callsign} looks up and down the empty corridor, but stops short of actually saying 'what traffic?' {TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:get|Default:gets} to {TGT_MW.DET} feet before you can offer a suggestion of where to go.\r\n\r\nLater in the week, Darius takes you aside. \"{TGT_MW.Callsign} has been in the mess hall at all hours, reading and eating. Pretty soon {TGT_MW.Subj} won't be fit enough for duty.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_low"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_1",
+                        "Name" : "{TGT_MW.Callsign} heads back to the barracks",
+                        "Details" : "\"You can't sit in the corridors, [[TGT_MW,{TGT_MW.Callsign}]]. It blocks traffic.\"\r\n\r\n{TGT_MW.Callsign} looks up and down the empty corridor, but stops short of actually saying 'what traffic?' {TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:get|Default:gets} to {TGT_MW.DET} feet before you can offer a suggestion of where to go.\r\n\r\n\"I'll just head back to the barracks, Commander.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_low"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_2",
+                        "Name" : "{TGT_MW.Callsign} moves to the Mech Bay",
+                        "Details" : "\"You can't sit in the corridors, [[TGT_MW,{TGT_MW.Callsign}]]. It blocks traffic.\"\r\n\r\n{TGT_MW.Callsign} looks up and down the empty corridor, but stops short of actually saying 'what traffic?' {TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:get|Default:gets} to {TGT_MW.DET} feet before you can offer a suggestion of where to go.\r\n\r\nLater in the week, Yang requests, again, that the pilots stay out of the Mech Bay. \"We can't repair a cockpit when there's someone <i>sitting in it reading a book!</i>\" The Chief is not amused.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "-1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 7
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Ask about the history book {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:are|Default:is} reading.",
+                "Details" : "[{TGT_MW.Callsign}: Military]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "MechWarrior",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "Tags/PilotTags",
+                        "items" : [
+                            "pilot_military"
+                        ]
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "A real meatgrinder",
+                        "Details" : "\"Learn anything useful in here?\" you ask.\r\n\r\n\"I've been studying [[DM.BaseDescriptionDefs[LoreKerensky],Kerensky]]'s strategies during the [[DM.BaseDescriptionDefs[LoreOperationLiberation],Liberation of Terra]],\" [[TGT_MW,{TGT_MW.Callsign}]] says.\r\n\r\nYou nod. \"That was a real meat grinder. But recall the guidelines about keeping the supply lines open. Best move along, MechWarrior.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "ExperienceUnspent",
+                                    "value" : "50",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "Ancient history",
+                        "Details" : "\"Learn anything useful in here?\" you ask.\r\n\r\n\"I've been reading about [[DM.BaseDescriptionDefs[LoreGeorgeSPatton],Patton]] back in the 20th century,\" [[TGT_MW,{TGT_MW.Callsign}]] says.\r\n\r\nYou nod. \"Tank warfare. That's good stuff, {TGT_MW.Callsign}, but it highlights the importance of clear travel routes. Best move along.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "ExperienceUnspent",
+                                    "value" : "50",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_2",
+                        "Name" : "Clausewitz",
+                        "Details" : "Spying a familiar chapter heading, you recite a line from [[DM.BaseDescriptionDefs[LoreClausewitz],Carl von Clausewitz]]. \"Only a fraction of booklearning will seep into practical life anyhow, and the more foolish the theory, the less of it.\"\r\n\r\n[[TGT_MW,{TGT_MW.Callsign}]] laughs and takes back the book. \"That's awesome, Commander! I was reading Clausewitz just now.\"\r\n\r\nYou nod. \"I see you're paying attention. He also spoke of the 'fog of war', and right now you're blocking the line of sight in this corridor. Best move along, MechWarrior.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "ExperienceUnspent",
+                                    "value" : "50",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Ask about the science book {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:are|Default:is} reading.",
+                "Details" : "[{TGT_MW.Callsign}: Technician]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "MechWarrior",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "Tags/PilotTags",
+                        "items" : [
+                            "pilot_tech"
+                        ]
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "Help in the Mech Bay",
+                        "Details" : "\"Learn anything useful in here?\" you ask.\r\n\r\n[[TGT_MW,{TGT_MW.Callsign}]] eagerly and gingerly takes back the book. \"I've been curious about LosTech all my life. Ever since I got aboard the <i>Argo</i>, I just can't get enough of reading these old books. I discovered this last month, on shore leave. Can't understand half of it, though, and I actually have some formal training to fall back on.\"\r\n\r\nYou interrupt the rambling, \"So the answer is\u2026 no.\"\r\n\r\n{TGT_MW.Callsign} laughs. \"Not <i>no</i>, just <i>not yet</i>. But I do have some theories to share with the Chief when he has a few minutes.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_3",
+                "Name" : "Ask about the economics book {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:are|Default:is} reading.",
+                "Details" : "[{TGT_MW.Callsign}: Merchant]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "MechWarrior",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "Tags/PilotTags",
+                        "items" : [
+                            "pilot_merchant"
+                        ]
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_3_0",
+                        "Name" : "Help with contracts",
+                        "Details" : "\"Learn anything useful in here?\" you ask.\r\n\r\n[[TGT_MW,{TGT_MW.Callsign}]] looks around the battered <i>Argo</i>, choosing {TGT_MW.DET} next words carefully. \"Commander, this amazing ship has so much potential, but the fixed maintenance costs must be killing us.\"\r\n\r\n{TGT_MW.Subj_C} {TGT_MW.Gender?NonBinary:launch|Default:launches} into a lengthy digression about saving expenses by putting 'Mechs into storage that are not regularly used for contracts.\r\n\r\nFinally you interrupt {TGT_MW.OBJ}. \"Okay, I get it. Next time, though, maybe you could talk Darius' ear off.\"\r\n\r\n{TGT_MW.Callsign} laughs. \"Maybe I will.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "10000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}
