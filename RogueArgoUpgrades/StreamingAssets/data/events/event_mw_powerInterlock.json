@@ -1,0 +1,241 @@
+{
+    "Description" : {
+        "Id" : "event_mw_powerInterlock",
+        "Name" : "Power Interlock",
+        "Details" : "\"If we don't bypass the faulty interlock, we're looking at a 17% drop across the board!\" [[TGT_MW,{TGT_MW.Callsign}]] is animated, practically shouting, and you try to remember how you got drawn into this argument.\r\n\r\nApparently, with {TGT_MW.DET} technical background, {TGT_MW.Callsign} thinks {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:have|Default:has} identified a serious flaw in the <i>Argo</i>'s secondary power interlock.\r\n\r\nFor her part, Dr. Murad insists the interlock is working correctly. \"We're lucky it's only 17%! That isn't the interlock. These systems have just missed several centuries' worth of annual maintenance. Your plan would potentially expose the entire central core to an overload.\"\r\n\r\n\"Only if it doesn't work,\" {TGT_MW.Callsign} fires back.",
+        "Icon" : "uixTxrSpot_Farah.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 10,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "items" : [
+                "pilot_tech"
+            ],
+            "tagSetSourceFile" : "Tags/PilotTags"
+        },
+        "ExclusionTags" : {
+            "items" : [
+                "event_mw_respectMurad"
+            ],
+            "tagSetSourceFile" : "Tags/PilotTags"
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : "0"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "items" : null,
+                "tagSetSourceFile" : ""
+            },
+            "ExclusionTags" : {
+                "items" : null,
+                "tagSetSourceFile" : ""
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "Funds",
+                    "op" : "GreaterThan",
+                    "val" : 20000,
+                    "valueConstant" : "20000"
+                }
+            ]
+        }
+    ],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Leave the power system alone.",
+                "Details" : "safe",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "good",
+                        "Details" : "\"I have to side with Dr. Murad on this, [[TGT_MW,{TGT_MW.Callsign}]],\" you say. \"Don't take risks with the power system.\"\r\n\r\nIn victory, Dr. Murad is gracious. \"We'll leave the interlock in place, but you can help me trace this power route. There's a snarl further up the line where I think we can make some efficiency gains.\" {TGT_MW.Callsign} nods, and the two of them continue their conversation as they head down the corridor.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : []
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Ask Dr. Murad to test {TGT_MW.Callsign}'s idea.",
+                "Details" : "risky",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "good?",
+                        "Details" : "You say, \"Dr. Murad, can you run a small-scale test to find out what would happen?\"\r\n\r\nShe frowns at you, then says, \"I suppose it's worth examining.\" She turns to [[TGT_MW,{TGT_MW.Callsign}]] to develop a testing plan.\r\n\r\nLater in the day, Dr. Murad tells you {TGT_MW.Callsign} was both right <i>and</i> wrong. \"The interlock really is causing a power drop, but there's no safe way to route around it. Add it to the growing pile of <i>Argo</i> issues we have no way to fix!\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "event_mw_respectMurad"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "bad",
+                        "Details" : "You say, \"Dr. Murad, can you run a small-scale test to find out what would happen?\"\r\n\r\nShe frowns at you, then says, \"I suppose it's worth examining.\" She turns to [[TGT_MW,{TGT_MW.Callsign}]] to develop a testing plan.\r\n\r\nA few hours later, the power goes out in the command center. When you find Dr. Murad, she's elbow-deep in a power conduit. \"I can fix the damage {TGT_MW.Callsign}'s bright idea caused, but we're going to have to replace some parts. I will thank you to keep that MechWarrior away from critical systems in the future, Commander.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-20000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}
