@@ -36,7 +36,14 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-7.9.2
+0.0.0
+
+Added Vehicle only simplified TComp with roughly TT functionality. (Currently unused),
+Added Demon (HGR WOB),
+Added Partisan AA (XL WOB),
+minor fixes
+
+7.9.2 - 6/25/2019
 
 Added Zhukov WOB,
 Added Zhukov WOB LBX,
