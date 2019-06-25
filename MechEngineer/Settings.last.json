@@ -1,2642 +1,470 @@
 {
-    "HeatDamageInjuryEnabled" : true,
-    "ShutdownInjuryEnabled" : true,
-    "MinimumHeatSinksOnMech" : 10,
-    "EnforceRulesForAdditionalInternalHeatSinks" : true,
-    "AllowMixingHeatSinkTypes" : false,
-    "FractionalAccountingPrecision" : 0.5,
-    "ArmorStructureRatioEnforcement" : false,
-    "ArmorStructureRatioEnforcementSkipMechDefs" : [
-        
-    ],
-    "SaveMechDefOnMechLabConfirm" : false,
-    "DefaultEngineHeatSinkId" : "Gear_HeatSink_Generic_Standard",
-    "EngineMissingFallbackHeatSinkCapacity" : 30,
-    "DynamicSlotsValidateDropEnabled" : true,
-    "TagRestrictions" : [
-        {
-            "Tag" : "emod_case",
-            "IncompatibleTags" : [
-                "emod_case2"
-            ]
-        }
-    ],
-    "BonusDescriptionsBonusTemplate" : " <indent=10%><line-indent=-5%><line-height=65%>{{bonus}}</line-height></line-indent></indent>\r\n",
-    "BonusDescriptionsDescriptionTemplate" : "Traits:<b><color=#F79B26FF>\r\n{{bonuses}}</color></b>\r\n{{originalDescription}}",
-    "BonusDescriptions" : [
-        {
-            "Bonus" : "Stealth",
-            "Short" : "Stealthed",
-            "Long" : "S{0} Stealth Systems",
-            "Full" : "Stealth Systems prevents Detection on Enemy sensors - imposes a penalty of {0} to any Sensor Checks against this unit"
-        },
-        {
-            "Bonus" : "StealthTier",
-            "Short" : "S{0} Stealth",
-            "Long" : "Strength {0} Stealth Systems",
-            "Full" : "Strength {0} Stealth Systems"
-        },
-        {
-            "Bonus" : "StealthShort",
-            "Short" : "{0} SR. Slth. Def.",
-            "Long" : "{0} SR Stealth. Def.",
-            "Full" : "{0} To hit against stealthed Unit at Short Ranges"
-        },
-        {
-            "Bonus" : "StealthMid",
-            "Short" : "{0} MR. Slth. Def.",
-            "Long" : "{0} MR Stealth. Def.",
-            "Full" : "{0} To hit against stealthed Unit at Medium Ranges"
-        },
-        {
-            "Bonus" : "StealthLong",
-            "Short" : "{0} LR. Slth. Def.",
-            "Long" : "{0} LR Stealth. Def.",
-            "Full" : "{0} To hit against stealthed Unit at Long Ranges"
-        },
-        {
-            "Bonus" : "StealthExt",
-            "Short" : "{0} ER. Slth. Def.",
-            "Long" : "{0} ER Stealth. Def.",
-            "Full" : "{0} To hit against stealthed Unit at Extreme Ranges"
-        },
-        {
-            "Bonus" : "StealthMove",
-            "Short" : "{0} Slth.Def.",
-            "Long" : "{0} Slth Defense",
-            "Full" : "{0} to Defense before Movement decay"
-        },
-        {
-            "Bonus" : "StealthDistance",
-            "Short" : "{0} Move.Decay.",
-            "Long" : "{0} Hex Move.Decay.",
-            "Full" : "{0} hexes before stealthed Defense decays"
-        },
-        {
-            "Bonus" : "IsECM",
-            "Short" : "S{0} ECM",
-            "Long" : "Strength {0} Electronic Countermeasures Suite",
-            "Full" : "Electronic Countermeasures Suite - imposes a penalty of {0} to any Sensor Checks by jammed units"
-        },
-        {
-            "Bonus" : "IFFJammer",
-            "Short" : "IffJammer",
-            "Long" : "I.F.F. Jammer",
-            "Full" : "Identify Friend/Foe Jammer- A low tier ECM that adds {0} to sensor checks but does not enable Stealth Systems."
-        },
-        {
-            "Bonus" : "Jammer",
-            "Short" : "Jammer",
-            "Long" : "Jammer",
-            "Full" : "A low tier ECM that adds {0} to sensor checks that can enable Stealth Systems but Lacks the ECM Bubble."
-        },
-        {
-            "Bonus" : "PirateJammer",
-            "Short" : "PirateJammer",
-            "Long" : "Pirate Jammer",
-            "Full" : "A low tier ECM that adds {0} to sensor checks that can enable Stealth Systems but Lacks the ECM Bubble."
-        },
-        {
-            "Bonus" : "BlueShield",
-            "Short" : "BlueShield",
-            "Long" : "BlueShield",
-            "Full" : "Blue Shield Particle Field Damper creates a static EM field around the Mech, reducing incoming Energy Damage and scrambling enemy sensors by {0}"
-        },
-        {
-            "Bonus" : "ECMTier",
-            "Short" : "T{0} ECM",
-            "Long" : "Tier {0} ECM",
-            "Full" : "Tier {0} ECM"
-        },
-        {
-            "Bonus" : "ECMBubble",
-            "Short" : "{0} Bubble",
-            "Long" : "{0} ECM Bubble",
-            "Full" : "{0} radius of the ECM Bubble jamming Enemys and protecting Friendlies against Sensor Checks"
-        },
-        {
-            "Bonus" : "ECMPower",
-            "Short" : "{0} Strength",
-            "Long" : "{0} ECM Strength",
-            "Full" : "{0} strength of the ECM Jam"
-        },
-        {
-            "Bonus" : "AdvZoom",
-            "Short" : "AdvZoom",
-            "Long" : "S{0} Advanced Zoom",
-            "Full" : "Advanced Zoom grants an Accuracy bonus of {0} that decays with range"
-        },
-        {
-            "Bonus" : "AdvZoomRange",
-            "Short" : "AdvZoomRange",
-            "Long" : "R{0} Advanced Zoom",
-            "Full" : "Zoom decay range is each {0} meter"
-        },
-        {
-            "Bonus" : "ThermalVision",
-            "Short" : "ThermalVision",
-            "Long" : "S{0} Thermal Vision",
-            "Full" : "Thermal Vision grants a ranged Accuracy bonus of {0} for overheating targets. Maximum +5."
-        },
-        {
-            "Bonus" : "ThermalVisionHeat",
-            "Short" : "TV Heat",
-            "Long" : "S{0} TV Heat Threshhold",
-            "Full" : "Heat Threshhold of Thermal Vision is every {0} points of target heat"
-        },
-        {
-            "Bonus" : "UAV",
-            "Short" : "UAV",
-            "Long" : "S{0} UAV",
-            "Full" : "UAV compartment grants increased sensor distance and adds a bonus of {0} to sensor checks made by this unit"
-        },
-        {
-            "Bonus" : "SensorBoost",
-            "Short" : "SensorBooster",
-            "Long" : "S{0} Sensors Boost",
-            "Full" : "A low level Sensor Suite provides a stacking bonus of {0} to sensor checks made by this unit"
-        },
-        {
-            "Bonus" : "CockpitSensors",
-            "Short" : "Sensors",
-            "Long" : "Sensors",
-            "Full" : "Cockpit Sensors Suite providing a stacking bonus of {0} to sensor checks made by this unit."
-        },
-        {
-            "Bonus" : "CockpitEWS",
-            "Short" : "Cockpit EWS",
-            "Long" : "Cockpit EWS",
-            "Full" : "A advanced compact Electronic Warfare suite replacing the Cockpits Sensor Systems."
-        },
-        {
-            "Bonus" : "FCS",
-            "Short" : "FCS",
-            "Long" : "FireControlSystems",
-            "Full" : "Cockpit Fire Control Systems provides Targeting and Weapons Control Systems."
-        },
-        {
-            "Bonus" : "IsProbe",
-            "Short" : "S{0} Probe",
-            "Long" : "Strength {0} Active Probe",
-            "Full" : "Active Sensor Probes provide additional Sensor Information and Counters ECM/Stealth- Adds a bonus of {0} to sensor checks made by this unit"
-        },
-        {
-            "Bonus" : "ProbeTier",
-            "Short" : "T{0} Probe",
-            "Long" : "Tier {0} Prove",
-            "Full" : "Tier {0} Active Probe"
-        },
-        {
-            "Bonus" : "ProbeBubble",
-            "Short" : "{0} Bubble",
-            "Long" : "{0} Probe Bubble",
-            "Full" : "{0} radius of the Probe Bubble"
-        },
-        {
-            "Bonus" : "ProbePower",
-            "Short" : "{0} Strength",
-            "Long" : "{0} Probe Strength",
-            "Full" : "{0} strength of the Probe Detection"
-        },
-        {
-            "Bonus" : "Omni",
-            "Short" : "OmniMech",
-            "Long" : "OmniMech",
-            "Full" : "OmniMechs allow near instant Refits but have permanently affixed internals"
-        },
-        {
-            "Bonus" : "Explodium",
-            "Short" : "{0} chance to Explode",
-            "Long" : "{0} chance to Explode",
-            "Full" : "Weapon has a {0} chance to be Damaged or Explode after firing"
-        },
-        {
-            "Bonus" : "WeaponJAM",
-            "Short" : "{0} chance to Jam",
-            "Long" : "{0} chance to Jam",
-            "Full" : "Weapon has a {0} chance to Jam after firing"
-        },
-        {
-            "Bonus" : "Whitespace",
-            "Short" : " ",
-            "Long" : " "
-        },
-        {
-            "Bonus" : "EngineHSFreeExt",
-            "Short" : "- {0} HS ton",
-            "Long" : "- {0} HS ton",
-            "Full" : "{0} required external heat sinks, those count as weightless"
-        },
-        {
-            "Bonus" : "EngineHSCap",
-            "Short" : "+ {0} HS Cap",
-            "Long" : "+ {0} HS Cap",
-            "Full" : "+ {0} additional installable engine heat sinks"
-        },
-        {
-            "Bonus" : "EngineHSAdd",
-            "Short" : "+ {0} HS",
-            "Long" : "+ {0} Heat Sink",
-            "Full" : "+ {0} additional engine heat sinks"
-        },
-        {
-            "Bonus" : "CoolingSystemDHS",
-            "Short" : "DHS Kit",
-            "Long" : "DHS Kit",
-            "Full" : "Enables the Battlemech to use Double Heat Sinks"
-        },
-        {
-            "Bonus" : "CoolingSystemCHS",
-            "Short" : "CHS Kit",
-            "Long" : "CHS Kit",
-            "Full" : "Enables the Battlemech to use Compact Heat Sinks"
-        },
-        {
-            "Bonus" : "CoolingSystemCDHS",
-            "Short" : "(C)DHS Kit",
-            "Long" : "(C)DHS Kit",
-            "Full" : "Enables the Battlemech to use Clan Double Heat Sinks"
-        },
-        {
-            "Bonus" : "CoolingSystemProtoDHS",
-            "Short" : "Proto DHS",
-            "Long" : "Proto DHS",
-            "Full" : "Proto DHS Kit make the Mech compatible to Prototype Heatsinks"
-        },
-        {
-            "Bonus" : "BonusAmmo",
-            "Short" : "{0} Ammo",
-            "Long" : "{0} Extra Ammo",
-            "Full" : "Ammo Box carries {0} additional Rounds"
-        },
-        {
-            "Bonus" : "Caseless",
-            "Short" : "CL Ammo",
-            "Long" : "Caseless Ammo",
-            "Full" : "Caseless Ammo can be equipped multiple times"
-        },
-        {
-            "Bonus" : "Doubled",
-            "Short" : "DBL Ammo",
-            "Long" : "Double Ammo",
-            "Full" : "Double size Ammo bins provide additional ammo at twice the size"
-        },
-        {
-            "Bonus" : "MGAmmo",
-            "Short" : "MG Ammo",
-            "Long" : "MG Ammo",
-            "Full" : "Ammo Box grants buff to all MGs"
-        },
-        {
-            "Bonus" : "AC2Ammo",
-            "Short" : "AC2 Ammo",
-            "Long" : "AC2 Ammo",
-            "Full" : "Ammo Box grants buff to all AC/2s"
-        },
-        {
-            "Bonus" : "AC5Ammo",
-            "Short" : "AC5 Ammo",
-            "Long" : "AC5 Ammo",
-            "Full" : "Ammo Box grants buff to all AC/5s"
-        },
-        {
-            "Bonus" : "AC10Ammo",
-            "Short" : "AC10 Ammo",
-            "Long" : "AC10 Ammo",
-            "Full" : "Ammo Box grants buff to all AC/10s"
-        },
-        {
-            "Bonus" : "AC20Ammo",
-            "Short" : "AC20 Ammo",
-            "Long" : "AC20 Ammo",
-            "Full" : "Ammo Box grants buff to all AC/20s"
-        },
-        {
-            "Bonus" : "GaussAmmo",
-            "Short" : "Gauss Ammo",
-            "Long" : "Gauss Ammo",
-            "Full" : "Ammo Box grants buff to all Gauss Rifles"
-        },
-        {
-            "Bonus" : "LRMAmmo",
-            "Short" : "LRM Ammo",
-            "Long" : "LRM Ammo",
-            "Full" : "Ammo Box grants buff to all LRMs"
-        },
-        {
-            "Bonus" : "SRMAmmo",
-            "Short" : "SRM Ammo",
-            "Long" : "SRM Ammo",
-            "Full" : "Ammo Box grants buff to all SRMs"
-        },
-        {
-            "Bonus" : "DFAmmo",
-            "Short" : "DF Ammo",
-            "Long" : "DF Ammo",
-            "Full" : "Deadfire Ammo is incompatible with Artemis TTS"
-        },
-        {
-            "Bonus" : "GaussNoBoom",
-            "Short" : "No Explosion",
-            "Long" : "Doesn't Explode",
-            "Full" : "Gauss Ammo does not explode"
-        },
-        {
-            "Bonus" : "Protected",
-            "Short" : "Reduced Explosion",
-            "Long" : "Reduced Explosion",
-            "Full" : "Ammo Bin has {0} reduced explosive potential and can be used without limit"
-        },
-        {
-            "Bonus" : "enCASEd",
-            "Short" : "No Explosion",
-            "Long" : "No Explosion",
-            "Full" : "Ammo Bin will not explode when destroyed but has halved capacity"
-        },
-        {
-            "Bonus" : "Haywire",
-            "Short" : "Haywire EMP",
-            "Long" : "Haywire EMP scrambles a Target's systems",
-            "Full" : "Targets suffer reduced Movement, Accuracy and Heat Management"
-        },
-        {
-            "Bonus" : "Dueppel",
-            "Short" : "ChaffFlare",
-            "Long" : "Chaff-Flare",
-            "Full" : "Flare Chaff Countermeasures cloud a target in Radar inhibiting materials"
-        },
-        {
-            "Bonus" : "Acid",
-            "Short" : "Acid",
-            "Long" : "Corrosive Acid",
-            "Full" : "Targets take {0} more damage for 2 Turns"
-        },
-        {
-            "Bonus" : "Paint",
-            "Short" : "Paint",
-            "Long" : "Paintgun",
-            "Full" : "Targets suffer -50% Sight and -2 Accuracy for 2 Turns"
-        },
-        {
-            "Bonus" : "Inferno",
-            "Short" : "Inferno",
-            "Long" : "Inferno Liquid",
-            "Full" : "Targets generate {0} Heat for 2 Turns"
-        },
-        {
-            "Bonus" : "ThermoBurn",
-            "Short" : "Inferno",
-            "Long" : "Inferno Bomb",
-            "Full" : "Targets Heatsink Efficiency reduced by {0} for 4 turns"
-        },
-        {
-            "Bonus" : "InfernoIV",
-            "Short" : "Inferno",
-            "Long" : "Inferno Artillery",
-            "Full" : "Targets Heatsink Efficiency reduced by {0} for 6 turns"
-        },
-        {
-            "Bonus" : "Oilslick",
-            "Short" : "Oilslick",
-            "Long" : "Oil Slick",
-            "Full" : "Targets take {0} Stability Damage for 2 Turns"
-        },
-        {
-            "Bonus" : "ImpMove",
-            "Short" : "Impair Move",
-            "Long" : "Impair Movement",
-            "Full" : "Target has {0} impaired Movement for 2 Turns"
-        },
-        {
-            "Bonus" : "ImpAccuracy",
-            "Short" : "Impair Acc",
-            "Long" : "Impair Accuracy",
-            "Full" : "Target has {0} impaired Accuracy for 2 Turns"
-        },
-        {
-            "Bonus" : "ImpSight",
-            "Short" : "Impair Sight",
-            "Long" : "Impair Sight",
-            "Full" : "Target has {0} reduced Sight for 2 Turns"
-        },
-        {
-            "Bonus" : "ImpSensors",
-            "Short" : "Impair Sensors",
-            "Long" : "Impair Sensors",
-            "Full" : "Target has {0} reduced Sensors for 2 Turns"
-        },
-        {
-            "Bonus" : "BadShielding",
-            "Short" : "EM Interference",
-            "Long" : "EM Interference",
-            "Full" : "EM Interference impairs PPC Recharge by {0} Recoil for 2 Turns per shot."
-        },
-        {
-            "Bonus" : "ImpHeatSink",
-            "Short" : "Impair HS",
-            "Long" : "Impair Heatsinks",
-            "Full" : "Target has {0} impaired Heat Sinks for 2 Turns"
-        },
-        {
-            "Bonus" : "Tacticon",
-            "Short" : "{0} Initiative",
-            "Long" : "{0} Initiative",
-            "Full" : "Battle Computer provides {0} Initiative for all Lance units"
-        },
-        {
-            "Bonus" : "Sharer",
-            "Short" : "Shared Sensors",
-            "Long" : "Shared Sensors",
-            "Full" : "Shares Sensor Information"
-        },
-        {
-            "Bonus" : "C3",
-            "Short" : "C3 Slave",
-            "Long" : "C3 Slave",
-            "Full" : "C3 Network Slave Unit - Shares Sensor Information"
-        },
-        {
-            "Bonus" : "C3Master",
-            "Short" : "C3 Master",
-            "Long" : "C3 Master",
-            "Full" : "C3 Network Master Unit - Shares Sensor Information"
-        },
-        {
-            "Bonus" : "C3i",
-            "Short" : "C3i",
-            "Long" : "C3i",
-            "Full" : "C3 improved Network Unit - Shares Sensor Information"
-        },
-        {
-            "Bonus" : "NovaCEWS",
-            "Short" : "Nova CEWS",
-            "Long" : "Nova Combined Electronic Warfare System",
-            "Full" : "Nova Combined Electronic Warfare System combines a C3 Network unit with Advanced ECM and Sensor Suites - Shares Sensor Information"
-        },
-        {
-            "Bonus" : "PilotOverheat",
-            "Short" : "OH Injury",
-            "Long" : "Overheat Injury",
-            "Full" : "Take pilot damage on overheat"
-        },
-        {
-            "Bonus" : "PilotShutDown",
-            "Short" : "SD Injury",
-            "Long" : "Shutdown Injury",
-            "Full" : "Take pilot damage on shutdown"
-        },
-        {
-            "Bonus" : "ArtemisIV",
-            "Short" : "ArtemisIV",
-            "Long" : "Artemis IV TTS",
-            "Full" : "This TTS allows Artemis IV Ammo to be used"
-        },
-        {
-            "Bonus" : "Artemis",
-            "Short" : "Artemis",
-            "Long" : "Artemis IV Compatible",
-            "Full" : "Can be used with Artemis IV System"
-        },
-        {
-            "Bonus" : "ReqECM",
-            "Short" : "ECM Required",
-            "Long" : "ECM Required",
-            "Full" : "Requires an ECM system to be installed"
-        },
-        {
-            "Bonus" : "ReqWings",
-            "Short" : "PWS Required",
-            "Long" : "Partial Wings Required",
-            "Full" : "Requires Partial Wings system to be installed"
-        },
-        {
-            "Bonus" : "ReqArtemis",
-            "Short" : "Req. AIV",
-            "Long" : "Requires ArtemisIV",
-            "Full" : "Requires Artemis IV system to be installed"
-        },
-        {
-            "Bonus" : "InternalAmmo",
-            "Short" : "Int.Ammo.",
-            "Long" : "Internal Ammo",
-            "Full" : "Weapon carries internal Ammo that will explode for {0} Damage per remaining Shot"
-        },
-        {
-            "Bonus" : "DakkaBoom",
-            "Short" : "Volatile",
-            "Long" : "Exposed Ammo Feed",
-            "Full" : "Exposed Ammo feed will explode for {0} Damage"
-        },
-        {
-            "Bonus" : "WeaponBoom",
-            "Short" : "Volatile",
-            "Long" : "Volatile Capacitors",
-            "Full" : "High-Energy Capacitors will discharge violently for {0} Damage"
-        },
-        {
-            "Bonus" : "AMSBoom",
-            "Short" : "Volatile",
-            "Long" : "Internal Ammo",
-            "Full" : "Internal AMS feed will explode for {0} Damage"
-        },
-        {
-            "Bonus" : "FluidBoom",
-            "Short" : "Volatile",
-            "Long" : "Pressure Tanks",
-            "Full" : "High-Pressure Tanks will explode for {0} Damage"
-        },
-        {
-            "Bonus" : "CPBoom",
-            "Short" : "Volatile",
-            "Long" : "Pressurized Coolant",
-            "Full" : "Pressurized Coolant will explode for {0} Heat and 50% of that as Damage and Stability"
-        },
-        {
-            "Bonus" : "ChangerBoom",
-            "Short" : "Volatile",
-            "Long" : "Pressurized Coolant",
-            "Full" : "Pressurized Coolant will explode for {0} Heat and 33% of that as Damage and Stability"
-        },
-        {
-            "Bonus" : "BankBoom",
-            "Short" : "Volatile",
-            "Long" : "Pressurized Coolant",
-            "Full" : "Pressurized Coolant will explode for {0} Heat, Damage and Stability"
-        },
-        {
-            "Bonus" : "DmgFallOff",
-            "Short" : "Dmg FallOff",
-            "Long" : "Damage Falloff",
-            "Full" : "Weapon damage falls off to {0} their max Damage"
-        },
-        {
-            "Bonus" : "RangedDmg",
-            "Short" : "Ranged DMG",
-            "Long" : "Ranged DMG",
-            "Full" : "Weapon damage increases with distance to the target up to {0} extra"
-        },
-        {
-            "Bonus" : "MinRangeDamage",
-            "Short" : "Min.Dmg.Range.",
-            "Long" : "Minimum Damage Range",
-            "Full" : "Weapon deals {0}% reduced damage the closer it gets to the target"
-        },
-        {
-            "Bonus" : "VariableDmg",
-            "Short" : "{0} Var.Dmg.",
-            "Long" : "{0} Variable Damage",
-            "Full" : "Weapon's damage can vary between +/- {0} "
-        },
-        {
-            "Bonus" : "HSImmune",
-            "Short" : "HS Immune",
-            "Long" : "Headshot Immune",
-            "Full" : "Cockpit provides immunity against Headshots"
-        },
-        {
-            "Bonus" : "TorsoMount",
-            "Short" : "TorsoMount",
-            "Long" : "Torso Mounted",
-            "Full" : "Cockpit is mounted in Center Torso"
-        },
-        {
-            "Bonus" : "IsCockpit",
-            "Short" : "Cockpit",
-            "Long" : "Cockpit Systems",
-            "Full" : "Cockpit Life Support and Piloting Systems"
-        },
-        {
-            "Bonus" : "IsVRPP",
-            "Short" : "VRPP",
-            "Long" : "VRPP",
-            "Full" : "Virtual Reality Piloting Pod enhances the capabilities of DNI or EI cockpits"
-        },
-        {
-            "Bonus" : "CalledShot",
-            "Short" : "{0} Called Shot",
-            "Long" : "{0} Called Shot",
-            "Full" : "Improves Called Shot modifier by {0}"
-        },
-        {
-            "Bonus" : "IsMelee",
-            "Short" : "Melee Wpn",
-            "Long" : "Melee Weapon",
-            "Full" : "Weapon is able to fire during Melee combat"
-        },
-        {
-            "Bonus" : "1shot",
-            "Short" : "1-shot",
-            "Long" : "One Shot",
-            "Full" : "Weapon carries internal Ammo for a single salvo"
-        },
-        {
-            "Bonus" : "IsArtillery",
-            "Short" : "Artillery",
-            "Long" : "Artillery",
-            "Full" : "Artillery deal massive Damage at extreme range but have immense mass"
-        },
-        {
-            "Bonus" : "IsNOOK",
-            "Short" : "Davy Crockett",
-            "Long" : "Davy Crockett",
-            "Full" : "Davy Crockett Tactical Nuclear Missiles are launched from an Arrow IV Platform and are capable of eradicating any Target from existence"
-        },
-        {
-            "Bonus" : "IsRocket",
-            "Short" : "Rocket Launcher",
-            "Long" : "Rocket Launcher",
-            "Full" : "Fires a single salvo of {0} unguided Rockets"
-        },
-        {
-            "Bonus" : "IsInfernoRocket",
-            "Short" : "Inferno Launcher",
-            "Long" : "Inferno Launcher",
-            "Full" : "Fires a single salvo of {0} unguided Inferno Rockets"
-        },
-        {
-            "Bonus" : "IsThunderbolt",
-            "Short" : "Thunderbolt Missile",
-            "Long" : "Thunderbolt Missile",
-            "Full" : "Fires a single devastating Guided Missile"
-        },
-        {
-            "Bonus" : "IsThermobolt",
-            "Short" : "Thermobaric Missile",
-            "Long" : "Thermobaric Missile",
-            "Full" : "Fires a single modified Thermobaric Thunderbolt Missile"
-        },
-        {
-            "Bonus" : "IsPlasma",
-            "Short" : "Plasma",
-            "Long" : "Plasma",
-            "Full" : "Plasma weapons fire superheated material capable of delivering a powerful thermal and kinetic impact"
-        },
-        {
-            "Bonus" : "IsMG",
-            "Short" : "MG",
-            "Long" : "MG",
-            "Full" : "Machine Guns are large caliber rapid-fire weapons"
-        },
-        {
-            "Bonus" : "IsGauss",
-            "Short" : "Gauss Rifle",
-            "Long" : "Gauss Rifle",
-            "Full" : "Gauss Rifles are low-Heat long-range high-Damage ballistic weapons"
-        },
-        {
-            "Bonus" : "IsAPGauss",
-            "Short" : "AP Gauss Rifle",
-            "Long" : "AP Gauss Rifle",
-            "Full" : "AP Gauss Rifles fire a barrage of {0} smaller projectiles"
-        },
-        {
-            "Bonus" : "IsAC",
-            "Short" : "Autocannon",
-            "Long" : "Autocannon",
-            "Full" : "Autocannons are single-shot ballistic weapons that suffer from Recoil"
-        },
-        {
-            "Bonus" : "IsRifle",
-            "Short" : "Rifle",
-            "Long" : "Rifle",
-            "Full" : "Rifles are primitive rifled cannons with a limited internal Ammo store"
-        },
-        {
-            "Bonus" : "IsPepperbox",
-            "Short" : "Pepperbox",
-            "Long" : "Pepperbox",
-            "Full" : "Pepperboxes are {0}-barreled cannons with a limited internal Ammo store"
-        },
-        {
-            "Bonus" : "IsLightAC",
-            "Short" : "Light AC",
-            "Long" : "Light Autocannon",
-            "Full" : "Light Autocannons are recoilless, low-mass, compact but less powerful Autocannons"
-        },
-        {
-            "Bonus" : "HeavyLaser",
-            "Short" : "Heavy Laser",
-            "Long" : "Heavy Laser",
-            "Full" : "Heavy Lasers deal superior Damage but lack regular Lasers' inherent Accuracy"
-        },
-        {
-            "Bonus" : "ImpHeavyLaser",
-            "Short" : "Imp.Heavy Laser",
-            "Long" : "Improved Heavy Laser",
-            "Full" : "Improved Heavy Lasers deal superior Damage and have the inherent Laser Accuracy but are volatile and explode for {0} when destroyed"
-        },
-        {
-            "Bonus" : "Bombast",
-            "Short" : "Bombast",
-            "Long" : "Bombast Laser",
-            "Full" : "Bombast Lasers have exceptional Damage potential but lack regular Lasers' inherent Accuracy and deal less Damage at range"
-        },
-        {
-            "Bonus" : "IsLaser",
-            "Short" : "Laser",
-            "Long" : "Laser",
-            "Full" : "Laser weapons have +1 Accuracy"
-        },
-        {
-            "Bonus" : "MultiLaser",
-            "Short" : "Multishot",
-            "Long" : "Multishot",
-            "Full" : "Multishot Lasers fire a barrage of Laser beams"
-        },
-        {
-            "Bonus" : "Painter",
-            "Short" : "TargetPainter",
-            "Long" : "Target Painter",
-            "Full" : "Target Painters grant improved Accuracy against its Target"
-        },
-        {
-            "Bonus" : "Narc",
-            "Short" : "NARC",
-            "Long" : "NARC Beacon",
-            "Full" : "NARC Beacon's grant visbility on hit- counters ECM fields up to {0}"
-        },
-        {
-            "Bonus" : "TAG",
-            "Short" : "TAG",
-            "Long" : "Target Aquisition Gear",
-            "Full" : "Target Aquisition Gear grants {0} to sensor checks on hit that decays by -1 for each hex the Target moved"
-        },
-        {
-            "Bonus" : "LBX",
-            "Short" : "LBX",
-            "Long" : "LB-X Autocannon",
-            "Full" : "Large-Bore Extended Autocannons fire a cluster of {0} projectiles"
-        },
-        {
-            "Bonus" : "SBGR",
-            "Short" : "SB GR",
-            "Long" : "Silver Bullet Gauss",
-            "Full" : "Silver Bullet Gauss Rifles fire a cluster of {0} projectiles"
-        },
-        {
-            "Bonus" : "Canister",
-            "Short" : "Canister",
-            "Long" : "Canister Gauss",
-            "Full" : "BFG 9000 fire a canister with {0} projectiles"
-        },
-        {
-            "Bonus" : "HAGR",
-            "Short" : "HA GR",
-            "Long" : "Hyper Assault Gauss",
-            "Full" : "Hyper Assault Gauss Rifles fire a cluster of {0} projectiles"
-        },
-        {
-            "Bonus" : "Ultra",
-            "Short" : "U/AC",
-            "Long" : "Ultra Autocannon",
-            "Full" : "Ultra Autocannons have double the standard rate of fire but are unable to use Special Ammo"
-        },
-        {
-            "Bonus" : "Rotary",
-            "Short" : "R/AC",
-            "Long" : "Rotary Autocannon",
-            "Full" : "Rotary Autocannons fire a salvo of {0} shots but are unable to use Special Ammo"
-        },
-        {
-            "Bonus" : "Dakkaray",
-            "Short" : "R/AC",
-            "Long" : "Rotary Autocannon",
-            "Full" : "Pirate RAC fire a barrage of smaller caliber shots of {0} for each shot ammo used and are unable to use Special Ammo"
-        },
-        {
-            "Bonus" : "Pulse",
-            "Short" : "Pulse",
-            "Long" : "Pulse Laser",
-            "Full" : "Pulse Lasers have +2 Accuracy and ignore 2 Evasion Pips"
-        },
-        {
-            "Bonus" : "ERLaser",
-            "Short" : "ER Laser",
-            "Long" : "ER Laser",
-            "Full" : "Extended Range Lasers have increased range and deal higher Damage but generate more Heat"
-        },
-        {
-            "Bonus" : "ERPulse",
-            "Short" : "ER Pulse",
-            "Long" : "ER Pulse Laser",
-            "Full" : "Extended Range Pulse Lasers have +1 Accuracy and ignore 1 Evasion Pip"
-        },
-        {
-            "Bonus" : "VSPL",
-            "Short" : "VSPL",
-            "Long" : "Variable Pulse Laser",
-            "Full" : "Variable Speed Pulse Lasers have increased range and ignore 2 Evasion Pips"
-        },
-        {
-            "Bonus" : "Streak",
-            "Short" : "Streak",
-            "Long" : "Streak SRM",
-            "Full" : "Streak SRMs have +2 Accuracy and ignore 2 Evasion Pips"
-        },
-        {
-            "Bonus" : "MML",
-            "Short" : "MML",
-            "Long" : "Multi Missile Launcher",
-            "Full" : "Multi Missile Launchers fire LRMs and are able to use Special Ammo and TTS"
-        },
-        {
-            "Bonus" : "ATM",
-            "Short" : "ATM",
-            "Long" : "Adv. Tact. Mssl. Launcher",
-            "Full" : "Advanced Tactical Missile Launchers fire LRMs with increased accuracy but cannot use Special Ammo or TTS"
-        },
-        {
-            "Bonus" : "iATM",
-            "Short" : "iATM",
-            "Long" : "Imp. Adv. Tact. Mssl. Launcher",
-            "Full" : "Improved Advanced Tactical Missile Launchers fire LRMs with superior accuracy and can use Special Ammo but not TTS"
-        },
-        {
-            "Bonus" : "MRM",
-            "Short" : "MRM",
-            "Long" : "Medium Range Mssl. Launcher",
-            "Full" : "Medium Range Missile Launchers fire LRMs but cannot use Deadfire and Artemis Ammo or Artemis IV TTS"
-        },
-        {
-            "Bonus" : "CASE",
-            "Short" : "C.A.S.E",
-            "Long" : "C.A.S.E",
-            "Full" : "CASE prevents Ammo Explosion from travelling to Center Torso"
-        },
-        {
-            "Bonus" : "CASEII",
-            "Short" : "C.A.S.E II",
-            "Long" : "C.A.S.E II",
-            "Full" : "CASE II reduces Ammo Explosion Damage to only three points of Damage."
-        },
-        {
-            "Bonus" : "Bulwark",
-            "Short" : "Bulwark",
-            "Long" : "Grants Bulwark",
-            "Full" : "Grants BULWARK, increasing Damage reduction from GUARDED to 40%"
-        },
-        {
-            "Bonus" : "Breaching",
-            "Short" : "Breacher",
-            "Long" : "Grants Breaching Shot",
-            "Full" : "Breaching Shot ignores COVER and GUARDED when firing a single Weapon at a target"
-        },
-        {
-            "Bonus" : "NoEject",
-            "Short" : "No Eject",
-            "Long" : "No Ejection",
-            "Full" : "Cockpit lacks Ejection system"
-        },
-        {
-            "Bonus" : "SureFoot",
-            "Short" : "Sure Footing",
-            "Long" : "Sure Footing",
-            "Full" : "Grants ENTRENCHED when walking"
-        },
-        {
-            "Bonus" : "Shield",
-            "Short" : "Shield",
-            "Long" : "Combat Shield",
-            "Full" : "Combat Shield grants BULWARK, increasing Damage reduction from GUARDED to 40%"
-        },
-        {
-            "Bonus" : "WpnBonus",
-            "Short" : "+Stats",
-            "Long" : "+Stats",
-            "Full" : "Weapon has improved base stats"
-        },
-        {
-            "Bonus" : "BankMaxHeat",
-            "Short" : "{0} MaxHeat",
-            "Long" : "{0} Maximum Heat",
-            "Full" : "{0} Maximum Heat"
-        },
-        {
-            "Bonus" : "BankThreshhold",
-            "Short" : "{0} OH.Threshhold",
-            "Long" : "{0} OH Threshhold",
-            "Full" : "{0} Overheat Threshhold"
-        },
-        {
-            "Bonus" : "TEHeatgen",
-            "Short" : "{0} WpnHeat",
-            "Long" : "{0} Weapon Heat",
-            "Full" : "{0} Weapon Heat Generated"
-        },
-        {
-            "Bonus" : "MinRange",
-            "Short" : "{0} MinRange",
-            "Long" : "{0} Minimum Range",
-            "Full" : "{0} Minimum Range"
-        },
-        {
-            "Bonus" : "Range",
-            "Short" : "{0} Range",
-            "Long" : "{0} Range",
-            "Full" : "{0} to all Range Brackets"
-        },
-        {
-            "Bonus" : "BallisticMinRange",
-            "Short" : "{0} Ball.MinRange",
-            "Long" : "{0} Ballistic Min.Range",
-            "Full" : "{0} minimum Range with Ballistic Weapons"
-        },
-        {
-            "Bonus" : "BallisticACMinRange",
-            "Short" : "{0} AC.MinRange",
-            "Long" : "{0} AC Min.Range",
-            "Full" : "{0} minimum Range with AutoCannons"
-        },
-        {
-            "Bonus" : "EnergyMinRange",
-            "Short" : "{0} Enrg.MinRange",
-            "Long" : "{0} Energy Min.Range",
-            "Full" : "{0} minimum Range with Energy Weapons"
-        },
-        {
-            "Bonus" : "MissileMinRange",
-            "Short" : "{0} Miss.MinRange",
-            "Long" : "{0} Missile Min.Range",
-            "Full" : "{0} minimum Range with Missile Weapons"
-        },
-        {
-            "Bonus" : "BallisticRange",
-            "Short" : "{0} Ball.Range",
-            "Long" : "{0} Ballistic Range",
-            "Full" : "{0} increased Range with Ballistic Weapons"
-        },
-        {
-            "Bonus" : "BallisticACRange",
-            "Short" : "{0} AC.Range",
-            "Long" : "{0} AC Range",
-            "Full" : "{0} increased Range with AutoCannons"
-        },
-        {
-            "Bonus" : "EnergyRange",
-            "Short" : "{0} Enrg.Range",
-            "Long" : "{0} Energy Range",
-            "Full" : "{0} increased Range with Energy Weapons"
-        },
-        {
-            "Bonus" : "MissileRange",
-            "Short" : "{0} Miss.Range",
-            "Long" : "{0} Missile Range",
-            "Full" : "{0} increased Range with Missile Weapons"
-        },
-        {
-            "Bonus" : "SRMRange",
-            "Short" : "{0} SRM.Range",
-            "Long" : "{0} SRM Range",
-            "Full" : "{0} increased Range with SRM's"
-        },
-        {
-            "Bonus" : "WeaponDamage",
-            "Short" : "{0} Weapon Dmg",
-            "Long" : "{0} Weapon Damage",
-            "Full" : "{0} Weapon Damage dealt"
-        },
-        {
-            "Bonus" : "StabDamage",
-            "Short" : "{0} Stab.Dmg",
-            "Long" : "{0} Stability Damage",
-            "Full" : "{0} Stability Damage dealt"
-        },
-        {
-            "Bonus" : "HeatDamage",
-            "Short" : "{0} Heat Dmg",
-            "Long" : "{0} Heat Damage",
-            "Full" : "{0} Heat Damage dealt"
-        },
-        {
-            "Bonus" : "OHDamage",
-            "Short" : "{0} OH Dmg",
-            "Long" : "{0} OH.bonus Damage",
-            "Full" : "{0} bonus Damage against overheating Targets"
-        },
-        {
-            "Bonus" : "WpnHeat",
-            "Short" : "{0} Heat",
-            "Long" : "{0} Heat Generated",
-            "Full" : "{0} Heat generated by this weapon"
-        },
-        {
-            "Bonus" : "LaserDamage",
-            "Short" : "{0} Laser Dmg",
-            "Long" : "{0} Laser Damage",
-            "Full" : "{0} Laser Damage"
-        },
-        {
-            "Bonus" : "PPCDamage",
-            "Short" : "{0} PPC Dmg",
-            "Long" : "{0} PPC Damage",
-            "Full" : "{0} Particle Projector Cannon Damage"
-        },
-        {
-            "Bonus" : "MGDamage",
-            "Short" : "{0} MG Dmg",
-            "Long" : "{0} MG Damage",
-            "Full" : "{0} Machine Gun Damage"
-        },
-        {
-            "Bonus" : "GaussDamage",
-            "Short" : "{0} Gauss Dmg",
-            "Long" : "{0} Gauss Damage",
-            "Full" : "{0} Gauss Rifle Damage"
-        },
-        {
-            "Bonus" : "ACDamage",
-            "Short" : "{0} AC Dmg",
-            "Long" : "{0} AC Damage",
-            "Full" : "{0} Autocannon Damage"
-        },
-        {
-            "Bonus" : "LRMDamage",
-            "Short" : "{0} LRM Dmg",
-            "Long" : "{0} LRM Damage",
-            "Full" : "{0} Long-Range Missile Damage"
-        },
-        {
-            "Bonus" : "SRMDamage",
-            "Short" : "{0} SRM Dmg",
-            "Long" : "{0} SRM Damage",
-            "Full" : "{0} Short-Range Missile Damage"
-        },
-        {
-            "Bonus" : "EngineWeight",
-            "Short" : "{0} Eng.Weight",
-            "Long" : "{0} Engine Weight",
-            "Full" : "{0} Engine Weight Factor change"
-        },
-        {
-            "Bonus" : "EngineReserved",
-            "Short" : "{0} Reserved",
-            "Long" : "{0} Reserved Slots",
-            "Full" : "{0} Engine Slots reserved"
-        },
-        {
-            "Bonus" : "Placeholder",
-            "Short" : "INSTALL",
-            "Long" : "INSTALL",
-            "Full" : "'Mech Requires a Engine Core to be installed!"
-        },
-        {
-            "Bonus" : "COREBEHERE",
-            "Short" : "FUSION!",
-            "Long" : "FUSION!",
-            "Full" : "Invalid 'Mech without functioning Core!"
-        },
-        {
-            "Bonus" : "Reserved",
-            "Short" : "{0} Reserved",
-            "Long" : "{0} Reserved Slots",
-            "Full" : "{0} Dynamic Slots reserved"
-        },
-        {
-            "Bonus" : "ArmorTPCost",
-            "Short" : "{0} Armor TP",
-            "Long" : "{0} Armor TechPoints",
-            "Full" : "{0} Tech Point cost to Repair Armor"
-        },
-        {
-            "Bonus" : "ArmorCBCost",
-            "Short" : "{0} Armor CB",
-            "Long" : "{0} Armor C-Bills",
-            "Full" : "{0} C-Bill cost to Repair Armor"
-        },
-        {
-            "Bonus" : "StructureTPCost",
-            "Short" : "{0} Strct. TP",
-            "Long" : "{0} Strct. TechPoints",
-            "Full" : "{0} Tech Point cost to Repair Structure "
-        },
-        {
-            "Bonus" : "StructureCBCost",
-            "Short" : "{0} Strct. CB",
-            "Long" : "{0} Strct. C-Bills",
-            "Full" : "{0} C-Bills cost to Repair Structure "
-        },
-        {
-            "Bonus" : "KineticProtection",
-            "Short" : "{0} KineticRes",
-            "Long" : "{0} Kinetic Resistance",
-            "Full" : "{0} Resistance against Ballistic and Missile Attacks"
-        },
-        {
-            "Bonus" : "EnergyProtection",
-            "Short" : "{0} EnergyRes",
-            "Long" : "{0} Energy Resistance",
-            "Full" : "{0} Resistance against Energy based Attacks"
-        },
-        {
-            "Bonus" : "ArmorFactor",
-            "Short" : "{0} Weight",
-            "Long" : "{0} Arm.Weight",
-            "Full" : "{0} Weight change per point of Armor"
-        },
-        {
-            "Bonus" : "ArmorProtection",
-            "Short" : "{0} Armor",
-            "Long" : "{0} Protection",
-            "Full" : "{0} Armor Protection per point of armor"
-        },
-        {
-            "Bonus" : "DamageTaken",
-            "Short" : "{0} Dmg.Tkn",
-            "Long" : "{0} Damage taken",
-            "Full" : "{0} reduced Damage taken"
-        },
-        {
-            "Bonus" : "MissileDamageTaken",
-            "Short" : "{0} Miss.Dmg.Tkn",
-            "Long" : "{0} Missile Damage taken",
-            "Full" : "{0} reduced Damage taken from Missile Attacks"
-        },
-        {
-            "Bonus" : "AllyMissileDamageTaken",
-            "Short" : "{0} AllyMiss.Dmg.Tkn",
-            "Long" : "{0} Ally Missile Damage taken",
-            "Full" : "{0} reduced Damage taken from Missile Attacks for the Lance"
-        },
-        {
-            "Bonus" : "MeleeDamageTaken",
-            "Short" : "{0} Mel.Dmg.Tkn",
-            "Long" : "{0} Melee Damage taken",
-            "Full" : "{0} reduced Melee Damage taken"
-        },
-        {
-            "Bonus" : "UpgradeWeight",
-            "Short" : "{0} Weight",
-            "Long" : "{0} Weight",
-            "Full" : "Weighs {0} of 1/10 Chassis Tonnage"
-        },
-        {
-            "Bonus" : "ActuatorWeight",
-            "Short" : "{0} Act.Weight",
-            "Long" : "{0} Actuator Weight",
-            "Full" : "Weighs {0} of 1/10 Chassis Tonnage"
-        },
-        {
-            "Bonus" : "MASCWeight",
-            "Short" : "{0} MASC.Weight",
-            "Long" : "{0} MASC Weight",
-            "Full" : "Weighs {0} of 1/10 Chassis Tonnage"
-        },
-        {
-            "Bonus" : "GyroWeight",
-            "Short" : "{0} Gyro.Weight",
-            "Long" : "{0} Gyro Weight",
-            "Full" : "Weighs {0} of 1/10 Chassis Tonnage"
-        },
-        {
-            "Bonus" : "StructureFactor",
-            "Short" : "{0} Struct.Weight",
-            "Long" : "{0} Structure Weight",
-            "Full" : "{0} Structure Weight Change (1/10 Chassis weight)"
-        },
-        {
-            "Bonus" : "StructureProtection",
-            "Short" : "{0} Structure",
-            "Long" : "{0} Structure Points",
-            "Full" : "{0} Structure Points"
-        },
-        {
-            "Bonus" : "CritRes",
-            "Short" : "{0} Crit.Res",
-            "Long" : "{0} Crit Resist",
-            "Full" : "{0} Resistance against Critical Hits"
-        },
-        {
-            "Bonus" : "StabThreshhold",
-            "Short" : "{0} Stab",
-            "Long" : "{0} Stability Threshold",
-            "Full" : "{0} Stability Threshhold provided"
-        },
-        {
-            "Bonus" : "GyroStab",
-            "Short" : "{0} Stab",
-            "Long" : "{0} Stability Threshold",
-            "Full" : "{0} Stability Threshhold provided by Gyro"
-        },
-        {
-            "Bonus" : "GyroStab2",
-            "Short" : "{0} Stab",
-            "Long" : "{0} Stability",
-            "Full" : "{0} Maximum Stability provided by Gyro"
-        },
-        {
-            "Bonus" : "StabDamageTaken",
-            "Short" : "{0} Stab.Dmg.Tkn",
-            "Long" : "{0} Stability Damage Taken",
-            "Full" : "{0} Stability Damage taken"
-        },
-        {
-            "Bonus" : "EvaMax",
-            "Short" : "{0} Max.Eva",
-            "Long" : "{0} Maximum Evasion",
-            "Full" : "{0} Maximum Evasion Pips"
-        },
-        {
-            "Bonus" : "EvaPips",
-            "Short" : "{0} Eva.Pips",
-            "Long" : "{0} Evasion Pips",
-            "Full" : "{0} Evasion Pips gained from movement"
-        },
-        {
-            "Bonus" : "Defense",
-            "Short" : "{0} Defense",
-            "Long" : "{0} Defense",
-            "Full" : "{0} Defense against being hit"
-        },
-        {
-            "Bonus" : "MeleeDef",
-            "Short" : "{0} Melee Def",
-            "Long" : "{0} Melee Defense",
-            "Full" : "{0} Defense against being hit by Melee Attacks"
-        },
-        {
-            "Bonus" : "MissileDefense",
-            "Short" : "{0} Mssl.Def",
-            "Long" : "{0} Missile Defense",
-            "Full" : "{0} Defense against being hit by Missile Attacks"
-        },
-        {
-            "Bonus" : "AllyMissileDefense",
-            "Short" : "{0} Ally Mssl.Def",
-            "Long" : "{0} Ally Missile Defense",
-            "Full" : "{0} Defense against being hit by Missile Attacks for the Lance"
-        },
-        {
-            "Bonus" : "Initiative",
-            "Short" : "{0} Ini",
-            "Long" : "{0} Initiative",
-            "Full" : "{0} Initiative"
-        },
-        {
-            "Bonus" : "Crits",
-            "Short" : "{0} Crit",
-            "Long" : "{0} Criticals",
-            "Full" : "{0} Chance to deal a Critical Hit"
-        },
-        {
-            "Bonus" : "WpnCrits",
-            "Short" : "{0} Crit",
-            "Long" : "{0} Criticals",
-            "Full" : "{0} Chance to deal a Critical Hit with this Weapon"
-        },
-        {
-            "Bonus" : "ShotsFiredMG",
-            "Short" : "{0} Shots",
-            "Long" : "{0} MG Shots",
-            "Full" : "{0} Shots with Machine Guns"
-        },
-        {
-            "Bonus" : "ShotsFiredAC20",
-            "Short" : "{0} Shots",
-            "Long" : "{0} AC20 Shots",
-            "Full" : "{0} Shots with AC/20"
-        },
-        {
-            "Bonus" : "Recoil",
-            "Short" : "{0} Recoil",
-            "Long" : "{0} Recoil",
-            "Full" : "{0} Recoil with ranged Weapons"
-        },
-        {
-            "Bonus" : "Radius",
-            "Short" : "{0} Arc",
-            "Long" : "{0} Firing Arc",
-            "Full" : "{0} Firing Arc with ranged Weapons"
-        },
-        {
-            "Bonus" : "WpnRecoil",
-            "Short" : "{0} Recoil",
-            "Long" : "{0} Recoil",
-            "Full" : "This Weapon has a Recoil of {0}"
-        },
-        {
-            "Bonus" : "LRMRecoil",
-            "Short" : "{0} LRM Recoil",
-            "Long" : "{0} Recoil",
-            "Full" : "{0} Recoil with LRM's"
-        },
-        {
-            "Bonus" : "RecoilAC",
-            "Short" : "{0} Recoil",
-            "Long" : "{0} AC Recoil",
-            "Full" : "{0} Recoil with Autocannons"
-        },
-        {
-            "Bonus" : "RecoilMG",
-            "Short" : "{0} Recoil",
-            "Long" : "{0} MG Recoil",
-            "Full" : "{0} Recoil with Machine Guns"
-        },
-        {
-            "Bonus" : "RecoilAC10",
-            "Short" : "{0} Recoil",
-            "Long" : "{0} AC10 Recoil",
-            "Full" : "{0} Recoil with Autocannons/10"
-        },
-        {
-            "Bonus" : "RecoilAC2",
-            "Short" : "{0} Recoil",
-            "Long" : "{0} AC2 Recoil",
-            "Full" : "{0} Recoil with Autocannons/2"
-        },
-        {
-            "Bonus" : "WpnAccuracy",
-            "Short" : "{0} Acc",
-            "Long" : "{0} Accuracy",
-            "Full" : "{0} Accuracy with this Weapon"
-        },
-        {
-            "Bonus" : "PipsIgnored",
-            "Short" : "{0} Pips",
-            "Long" : "{0} Evasion Pips",
-            "Full" : "{0} Evasion Pips ignored by this Weapon"
-        },
-        {
-            "Bonus" : "Accuracy",
-            "Short" : "{0} Acc",
-            "Long" : "{0} Accuracy",
-            "Full" : "{0} Accuracy with ranged Weapons"
-        },
-        {
-            "Bonus" : "ArmAccuracy",
-            "Short" : "{0} Arm Acc",
-            "Long" : "{0} Arm Accuracy",
-            "Full" : "{0} Accuracy with arm-mounted Weapons"
-        },
-        {
-            "Bonus" : "ACAccuracy",
-            "Short" : "{0} AC Acc",
-            "Long" : "{0} AC Accuracy",
-            "Full" : "{0} Accuracy with Autocannons"
-        },
-        {
-            "Bonus" : "AC10Accuracy",
-            "Short" : "{0} AC10 Acc",
-            "Long" : "{0} AC10 Accuracy",
-            "Full" : "{0} Accuracy with Autocannons/10"
-        },
-        {
-            "Bonus" : "AC2Accuracy",
-            "Short" : "{0} AC2 Acc",
-            "Long" : "{0} AC2 Accuracy",
-            "Full" : "{0} Accuracy with Autocannons/2"
-        },
-        {
-            "Bonus" : "LBXCluster",
-            "Short" : "{0} Cluster",
-            "Long" : "{0} LBX Cluster",
-            "Full" : "{0} Additional Cluster munitions with LBX"
-        },
-        {
-            "Bonus" : "LBX10Cluster",
-            "Short" : "{0} Cluster",
-            "Long" : "{0} LBX10 Cluster",
-            "Full" : "{0} Additional Cluster munitions with LBX10"
-        },
-        {
-            "Bonus" : "LBX20Cluster",
-            "Short" : "{0} Cluster",
-            "Long" : "{0} LBX20 Cluster",
-            "Full" : "{0} Additional Cluster munitions with LBX20"
-        },
-        {
-            "Bonus" : "GaussAccuracy",
-            "Short" : "{0} Gauss Acc",
-            "Long" : "{0} Gauss Accuracy",
-            "Full" : "{0} Accuracy with Gauss Rifles"
-        },
-        {
-            "Bonus" : "LRMAccuracy",
-            "Short" : "{0} LRM Acc",
-            "Long" : "{0} LRM Accuracy",
-            "Full" : "{0} Accuracy with Long-Range Missiles"
-        },
-        {
-            "Bonus" : "SRMAccuracy",
-            "Short" : "{0} SRM Acc",
-            "Long" : "{0} SRM Accuracy",
-            "Full" : "{0} Accuracy with Short-Range Missiles"
-        },
-        {
-            "Bonus" : "BallisticAcc",
-            "Short" : "{0} Ball.Acc",
-            "Long" : "{0} Ballistic Acc.",
-            "Full" : "{0} Accuracy with Ballistic Weapons"
-        },
-        {
-            "Bonus" : "EnergyAcc",
-            "Short" : "{0} Enrg.Acc",
-            "Long" : "{0} Energy Acc",
-            "Full" : "{0} Accuracy with Energy Weapons"
-        },
-        {
-            "Bonus" : "MissileAcc",
-            "Short" : "{0} Miss.Acc",
-            "Long" : "{0} Missile Acc",
-            "Full" : "{0} Accuracy with Missile Weapons"
-        },
-        {
-            "Bonus" : "MGAcc",
-            "Short" : "{0} MG.Acc",
-            "Long" : "{0} MG Acc",
-            "Full" : "{0} Accuracy with Machineguns Weapons"
-        },
-        {
-            "Bonus" : "DFMissileAcc",
-            "Short" : "{0} Direct.Miss.Acc",
-            "Long" : "{0} Direct Missile Acc",
-            "Full" : "{0} Accuracy with Direct-Fire Missile Attacks"
-        },
-        {
-            "Bonus" : "IndirectAcc",
-            "Short" : "{0} Indirect.Acc",
-            "Long" : "{0} Indirect Acc",
-            "Full" : "{0} Accuracy with Indirect Fire"
-        },
-        {
-            "Bonus" : "LanceIndirectAcc",
-            "Short" : "{0} Lance Indirect.Acc",
-            "Long" : "{0} Lance Indirect Acc",
-            "Full" : "{0} Lance Accuracy with Indirect Fire"
-        },
-        {
-            "Bonus" : "BallisticCrit",
-            "Short" : "{0} Ball.Crit",
-            "Long" : "{0} Ballistic Crit.",
-            "Full" : "{0} increased Critical Chance with Ballistic Weapons"
-        },
-        {
-            "Bonus" : "EnergyCrit",
-            "Short" : "{0} Enrg.Crit",
-            "Long" : "{0} Energy Crit",
-            "Full" : "{0} increased Critical Chance with Energy Weapons"
-        },
-        {
-            "Bonus" : "MissileCrit",
-            "Short" : "{0} Mssl.Crit",
-            "Long" : "{0} Missile Criticals",
-            "Full" : "{0} increased Critical Chance with Missile Weapons"
-        },
-        {
-            "Bonus" : "SRMCrit",
-            "Short" : "{0} SRM.Crit",
-            "Long" : "{0} SRM Criticals",
-            "Full" : "{0} increased Critical Chance with SRM's"
-        },
-        {
-            "Bonus" : "BallisticRecoil",
-            "Short" : "{0} Ball.Rec",
-            "Long" : "{0} Ballistic Recoil",
-            "Full" : "{0} Recoil with Ballistic Weapons"
-        },
-        {
-            "Bonus" : "BallisticHeatGenerated",
-            "Short" : "{0} Ball.Wpn.Heat",
-            "Long" : "{0} Ball.Weapon Heat Generation",
-            "Full" : "{0} Heat generated from Ballistic Weapons Fire"
-        },
-        {
-            "Bonus" : "MissilesHeatGenerated",
-            "Short" : "{0} Mss.Wpn.Heat",
-            "Long" : "{0} Mss.Weapon Heat Generation",
-            "Full" : "{0} Heat generated from Missile Weapons Fire"
-        },
-        {
-            "Bonus" : "HeatGenerated",
-            "Short" : "{0} Wpn.Heat",
-            "Long" : "{0} Weapon Heat Generation",
-            "Full" : "{0} Heat generated from Weapons Fire"
-        },
-        {
-            "Bonus" : "EnergyHeatGenerated",
-            "Short" : "{0} NRG.Heat",
-            "Long" : "{0} Energy Heat Generation",
-            "Full" : "{0} Heat generated from Energy Weapons Fire"
-        },
-        {
-            "Bonus" : "AC2HeatGenerated",
-            "Short" : "{0} AC2.Heat",
-            "Long" : "{0} AC2 Heat Generation",
-            "Full" : "{0} Heat generated from AC2 Fire"
-        },
-        {
-            "Bonus" : "MGHeatGenerated",
-            "Short" : "{0} MG.Heat",
-            "Long" : "{0} MG Heat Generation",
-            "Full" : "{0} Heat generated from Machine gun Fire"
-        },
-        {
-            "Bonus" : "HeatPerTurn",
-            "Short" : "{0} Heat / Turn",
-            "Long" : "{0} Heat / Turn",
-            "Full" : "{0} Heat per Turn"
-        },
-        {
-            "Bonus" : "HeatEfficiency",
-            "Short" : "{0} HS. Eff",
-            "Long" : "{0} Heat Eff",
-            "Full" : "{0} Efficiency of Heat Sinks"
-        },
-        {
-            "Bonus" : "JumpDistance",
-            "Short" : "{0} JumpDist",
-            "Long" : "{0} Jump Distance",
-            "Full" : "{0} Jump Distance"
-        },
-        {
-            "Bonus" : "MeleeStab",
-            "Short" : "{0} MeleeStab.Dmg",
-            "Long" : "{0} Melee Stab. Damage",
-            "Full" : "{0} Melee Stability Damage"
-        },
-        {
-            "Bonus" : "Melee",
-            "Short" : "{0} MeleeDmg",
-            "Long" : "{0} Melee Damage",
-            "Full" : "{0} Melee Damage"
-        },
-        {
-            "Bonus" : "Melee2",
-            "Short" : "{0} MeleeDmg",
-            "Long" : "{0} Melee Damage",
-            "Full" : "{0} Additional Base Melee Damage"
-        },
-        {
-            "Bonus" : "MeleeHeat",
-            "Short" : "{0} H-MeleeDmg",
-            "Long" : "{0} Heat Melee Damage",
-            "Full" : "{0} Additional Heat Damage with Melee"
-        },
-        {
-            "Bonus" : "MeleeAcc",
-            "Short" : "{0} MeleeAcc",
-            "Long" : "{0} Melee Accuracy",
-            "Full" : "{0} Melee Accuracy"
-        },
-        {
-            "Bonus" : "MeleeCrit",
-            "Short" : "{0} MeleeCrit",
-            "Long" : "{0} Melee Criticals",
-            "Full" : "{0} Melee Critical Chance"
-        },
-        {
-            "Bonus" : "DFA",
-            "Short" : "{0} DFA Dmg",
-            "Long" : "{0} DFA Damage",
-            "Full" : "{0} Death from Above Damage"
-        },
-        {
-            "Bonus" : "DFA2",
-            "Short" : "{0} DFA Dmg",
-            "Long" : "{0} DFA Damage",
-            "Full" : "{0} Additional Base Death from Above Damage"
-        },
-        {
-            "Bonus" : "DFAAcc",
-            "Short" : "{0} DFA Acc",
-            "Long" : "{0} DFA Accuracy",
-            "Full" : "{0} Accuracy with Death from Above"
-        },
-        {
-            "Bonus" : "DFASelfDamage",
-            "Short" : "{0} DFA.Slf.Dmg",
-            "Long" : "{0} DFA Self Damage",
-            "Full" : "{0} Death from Above Self Damage taken"
-        },
-        {
-            "Bonus" : "Resolve",
-            "Short" : "{0} Resolve",
-            "Long" : "{0} Increased Resolve",
-            "Full" : "{0} increased Resolve gain per Action"
-        },
-        {
-            "Bonus" : "LanceResolve",
-            "Short" : "{0} Lance Resolve",
-            "Long" : "{0} Increased Lance Resolve",
-            "Full" : "{0} increased Resolve gain for all Lance Members"
-        },
-        {
-            "Bonus" : "LanceAcc",
-            "Short" : "{0} Lance Accuracy",
-            "Long" : "{0} Increased Lance Accuracy",
-            "Full" : "{0} Accuracy for all Lance Members"
-        },
-        {
-            "Bonus" : "Health",
-            "Short" : "{0} Injury",
-            "Long" : "{0} Injury res.",
-            "Full" : "{0} Injuries resisted"
-        },
-        {
-            "Bonus" : "LanceSensors",
-            "Short" : "{0} Sensors",
-            "Long" : "{0} Inc.Sensor Range",
-            "Full" : "{0} increased Sensor Range for the Lance"
-        },
-        {
-            "Bonus" : "LanceSight",
-            "Short" : "{0} Sight",
-            "Long" : "{0} Inc.Sight Range",
-            "Full" : "{0} increased Sight Range for the Lance"
-        },
-        {
-            "Bonus" : "Sensors",
-            "Short" : "{0} Sensors",
-            "Long" : "{0} Inc.Sensor Range",
-            "Full" : "{0} increased Sensor Range"
-        },
-        {
-            "Bonus" : "Sensors2",
-            "Short" : "{0} Sensors",
-            "Long" : "{0} Sensors",
-            "Full" : "{0} Base Sensor Range"
-        },
-        {
-            "Bonus" : "Sight",
-            "Short" : "{0} Sight",
-            "Long" : "{0} Inc.Sight Range",
-            "Full" : "{0} increased Sight Range"
-        },
-        {
-            "Bonus" : "Sight2",
-            "Short" : "{0} Sight",
-            "Long" : "{0} Sight",
-            "Full" : "{0} Base Sight Distance"
-        },
-        {
-            "Bonus" : "LanceSight2",
-            "Short" : "{0} Lance Sight",
-            "Long" : "{0} Lance Sight",
-            "Full" : "{0} Lance Base Sight Distance"
-        },
-        {
-            "Bonus" : "Visibility",
-            "Short" : "{0} Vis",
-            "Long" : "{0} Visibility",
-            "Full" : "{0} reduced Visibility"
-        },
-        {
-            "Bonus" : "Signature",
-            "Short" : "{0} Sig",
-            "Long" : "{0} Signature",
-            "Full" : "{0} Reduced Signature on Enemy Sensors"
-        },
-        {
-            "Bonus" : "Evasion",
-            "Short" : "{0} Evasion",
-            "Long" : "{0} Evasion Pips",
-            "Full" : "{0} Evasion Pips gained from Movement"
-        },
-        {
-            "Bonus" : "WalkSpeed",
-            "Short" : "{0} WalkDist",
-            "Long" : "{0} Walk Distance",
-            "Full" : "{0} Walking Distance"
-        },
-        {
-            "Bonus" : "RunSpeed",
-            "Short" : "{0} SprintDist.",
-            "Long" : "{0} Sprint Distance",
-            "Full" : "{0} Sprinting Distance"
-        },
-        {
-            "Bonus" : "PPCACC",
-            "Short" : "{0} PPC Acc",
-            "Long" : "{0} PPC Accuracy",
-            "Full" : "{0} Increased Accuracy with PPC"
-        },
-        {
-            "Bonus" : "PPCCAPDMG",
-            "Short" : "{0} PPC Dmg",
-            "Long" : "{0} PPC Damage",
-            "Full" : "{0} Increased Damage with PPC"
-        },
-        {
-            "Bonus" : "PPCCAPHEAT",
-            "Short" : "{0} PPC Heat",
-            "Long" : "{0} PPC Heat",
-            "Full" : "{0} Heat Generated with PPC"
-        },
-        {
-            "Bonus" : "PPCDEBUFF",
-            "Short" : "PPC Debuff",
-            "Long" : "PPC Debuff {0}",
-            "Full" : "PPC scrambles Target's systems for {0} Accuracy"
-        },
-        {
-            "Bonus" : "PLASMADEBUFF",
-            "Short" : "Plasma",
-            "Long" : "Plasma Debuff {0}",
-            "Full" : "Plasma residue increases Target's Heat Generation by {0}"
-        },
-        {
-            "Bonus" : "PIRATEFLAMERDEBUFF",
-            "Short" : "Burning",
-            "Long" : "Burning Debuff {0}",
-            "Full" : "Burning increases Targets Heat generation for {0}"
-        },
-        {
-            "Bonus" : "HAMMERFIST",
-            "Short" : "Destablizing",
-            "Long" : "Destablizing",
-            "Full" : "Weapon hits destabilize a targets Gyro by {0}"
-        },
-        {
-            "Bonus" : "PlasmaHeatDamage",
-            "Short" : "{0} Plasma Heat",
-            "Long" : "{0} Plasma Heat",
-            "Full" : "{0} extra Plasma Heat Damage"
-        },
-        {
-            "Bonus" : "PlasmaRange",
-            "Short" : "{0} Plasma Range",
-            "Long" : "{0} Plasma Range",
-            "Full" : "{0} extra Plasma Range"
-        }
-    ],
-    "EngineCriticalHitStates" : {
-        "MaxStates" : 2,
-        "DeathMethod" : "EngineDestroyed",
-        "HitEffects" : [
-            {
-                "State" : 1,
-                "StatusEffect" : {
-                    "durationData" : {
-                        "duration" : 0,
-                        "ticksOnActivations" : false,
-                        "useActivationsOfTarget" : false,
-                        "ticksOnEndOfRound" : false,
-                        "ticksOnMovements" : false,
-                        "stackLimit" : 0,
-                        "clearedWhenAttacked" : false
-                    },
-                    "targetingData" : {
-                        "effectTargetsCreator" : true,
-                        "effectTriggerType" : "Passive",
-                        "triggerLimit" : 0,
-                        "extendDurationOnTrigger" : 0,
-                        "specialRules" : "NotSet",
-                        "effectTargetType" : "Creator",
-                        "range" : 0,
-                        "forcePathRebuild" : false,
-                        "forceVisRebuild" : false,
-                        "showInTargetPreview" : true,
-                        "showInStatusPanel" : true
-                    },
-                    "effectType" : "StatisticEffect",
-                    "Description" : {
-                        "Id" : "StatusEffect-EngineCrit1",
-                        "Name" : "Engine Crit (1)",
-                        "Details" : "Engine was hit, additional 15 Heat / Turn",
-                        "Icon" : "uixSvgIcon_equipment_ThermalExchanger"
-                    },
-                    "nature" : "Debuff",
-                    "statisticData" : {
-                        "appliesEachTick" : false,
-                        "effectsPersistAfterDestruction" : false,
-                        "statName" : "HeatSinkCapacity",
-                        "operation" : "Int_Subtract",
-                        "modValue" : "15",
-                        "modType" : "System.Int32",
-                        "additionalRules" : "NotSet",
-                        "targetCollection" : "NotSet",
-                        "targetWeaponCategory" : "NotSet",
-                        "targetWeaponType" : "NotSet",
-                        "targetAmmoCategory" : "NotSet",
-                        "targetWeaponSubType" : "NotSet"
-                    }
-                }
-            },
-            {
-                "State" : 2,
-                "StatusEffect" : {
-                    "durationData" : {
-                        "duration" : 0,
-                        "ticksOnActivations" : false,
-                        "useActivationsOfTarget" : false,
-                        "ticksOnEndOfRound" : false,
-                        "ticksOnMovements" : false,
-                        "stackLimit" : 0,
-                        "clearedWhenAttacked" : false
-                    },
-                    "targetingData" : {
-                        "effectTargetsCreator" : true,
-                        "effectTriggerType" : "Passive",
-                        "triggerLimit" : 0,
-                        "extendDurationOnTrigger" : 0,
-                        "specialRules" : "NotSet",
-                        "effectTargetType" : "Creator",
-                        "range" : 0,
-                        "forcePathRebuild" : false,
-                        "forceVisRebuild" : false,
-                        "showInTargetPreview" : true,
-                        "showInStatusPanel" : true
-                    },
-                    "effectType" : "StatisticEffect",
-                    "Description" : {
-                        "Id" : "StatusEffect-EngineCrit2",
-                        "Name" : "Engine Crit (2)",
-                        "Details" : "Engine was hit, additional 30 Heat / Turn",
-                        "Icon" : "uixSvgIcon_equipment_ThermalExchanger"
-                    },
-                    "nature" : "Debuff",
-                    "statisticData" : {
-                        "appliesEachTick" : false,
-                        "effectsPersistAfterDestruction" : false,
-                        "statName" : "HeatSinkCapacity",
-                        "operation" : "Int_Subtract",
-                        "modValue" : "30",
-                        "modType" : "System.Int32",
-                        "additionalRules" : "NotSet",
-                        "targetCollection" : "NotSet",
-                        "targetWeaponCategory" : "NotSet",
-                        "targetWeaponType" : "NotSet",
-                        "targetAmmoCategory" : "NotSet",
-                        "targetWeaponSubType" : "NotSet"
-                    }
-                }
-            }
+    "AccuracyEffects" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Enables statistic effects for arm accuracy."
+    },
+    "ArmActuator" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Enables CBT arm actuators with CC like handling.",
+        "ForceFullDefaultActuators" : true,
+        "IgnoreFullActuatorsTag" : "OmniMech",
+        "DefaultCBTShoulder" : "emod_arm_part_shoulder",
+        "DefaultCBTLower" : "emod_arm_part_lower",
+        "DefaultCBTUpper" : "emod_arm_part_upper",
+        "DefaultCBTHand" : "emod_arm_part_hand",
+        "DefaultCBTDefLower" : "emod_arm_part_lower",
+        "DefaultCBTDefHand" : "emod_arm_part_hand",
+        "InterruptHandDropIfNoLower" : false,
+        "ExtendHandLimit" : true
+    },
+    "ArmorStructureChanges" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Enables statistic effects for multiplying structure and armor values, happens before/after combat."
+    },
+    "ArmorStructureRatio" : {
+        "Enabled" : false,
+        "EnabledDescription" : "CBT rule enforcement, that armor at every mechs location is not more than 2 times the structure, head is allowed to be 3 times.",
+        "SkipMechDefs" : [
+            
         ]
     },
-    "LogLevels" : [
-        {
-            "Name" : "MechEngineer",
-            "Level" : "Error"
-        }
-    ],
-    "AutoFixMechDefSkip" : [
-        
-    ],
-    "AutoFixUpgradeDefSkip" : [
-        "Gear_Cockpit_Generic_Small",
-        "emod_arm_lower",
-        "Gear_Actuator_Coventry_X55-Standard",
-        "Gear_Actuator_Coventry_X65-Standard",
-        "Gear_Actuator_Coventry_X75-Standard",
-        "Gear_Actuator_Friedhof_Behemoth",
-        "Gear_Actuator_Friedhof_Gargantuan",
-        "Gear_Actuator_Friedhof_Colossus",
-        "Gear_Actuator_Friedhof_Compensator",
-        "Gear_Actuator_Friedhof_CompensatorPlus",
-        "Gear_Gyro_Ultralight",
-        "Gear_Gyro_HeavyDuty",
-        "Gear_Gyro_XL",
-        "Gear_Gyro_Compact",
-        "Gear_Spiked_Fist",
-        "Gear_Spiked_Boots",
-        "Gear_Cockpit_Tacticon_B2000_Battle_Computer",
-        "Gear_Actuator_CoolingJacket",
-        "Gear_Cockpit_VR_POD",
-        "Gear_Gyro_HE_Optima",
-        "Gear_FCS_Generic_Standard",
-        "Gear_FCS_Improved",
-        "Gear_FCS_Energy",
-        "Gear_FCS_AdvancedTC",
-        "Gear_Sensors_Generic_Standard",
-        "Gear_AdvZoom",
-        "Gear_ThermalVision",
-        "Gear_IFFJammer",
-        "Gear_Sensors_HighPowered",
-        "Gear_FCS_Defiance",
-        "Gear_Sensors_AR12",
-        "Gear_Cockpit_Ceres_Metals_Hardened",
-        "Gear_Cockpit_Ceres_Metals_Reinforced",
-        "Gear_Cockpit_Majesty_M_M_60KL",
-        "Gear_Cockpit_Generic_Standard",
-        "Gear_Cockpit_Majesty_M_M_120KL",
-        "Gear_Cockpit_Majesty_M_M_180KL",
-        "Gear_Cockpit_SLDF_Custom",
-        "Gear_Cockpit_StarCorps_Advanced",
-        "Gear_Cockpit_StarCorps_Enhanced",
-        "Gear_Cockpit_StarCorps_Improved",
-        "Gear_Cockpit_CLAN_EI",
-        "Gear_Cockpit_CLAN_Standard",
-        "Gear_Cockpit_DNI",
-        "Gear_Cockpit_SLDF_Standard",
-        "Gear_Cockpit_Primitive",
-        "Gear_Cockpit_Spiked_Helmet"
-    ],
-    "AutoFixMechDefEngine" : false,
-    "AutoFixMechDefEngineTypeDef" : "null",
-    "AutoFixMechDefCoolingDef" : "false",
-    "AutoFixMechDefHeatBlockDef" : "false",
-    "AutoFixMechDefArmActuator" : true,
-    "AutoFixChassisDefSkip" : [
-        
-    ],
-    "AutoFixChassisDefInitialTonnage" : false,
-    "AutoFixChassisDefInitialToTotalTonnageFactor" : 0.1,
-    "AutoFixChassisDefMaxJumpjets" : true,
-    "AutoFixChassisDefMaxJumpjetsCount" : 8,
-    "AutoFixChassisDefMaxJumpjetsRating" : 400,
-    "CBTMovement" : {
+    "AutoFixer" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Fixes up mechs, chassis and components to adhere to CBT rules and defaults. Done programmatically to be compatible to new mechs in the future.",
+        "MechDefSkip" : [
+            
+        ],
+        "MechDefTagsSkip" : [
+            "noautofix"
+        ],
+        "MechDefEngine" : true,
+        "MechDefCoolingDef" : "emod_kit_shs",
+        "MechDefHeatBlockDef" : "emod_engine_cooling",
+        "MechDefCoreDummy" : "emod_engine_dummy",
+        "UpgradeDefSkip" : [
+            "Gear_Cockpit_Generic_Small",
+            "emod_arm_lower",
+            "Gear_Actuator_Coventry_X55-Standard",
+            "Gear_Actuator_Coventry_X65-Standard",
+            "Gear_Actuator_Coventry_X75-Standard",
+            "Gear_Actuator_Friedhof_Behemoth",
+            "Gear_Actuator_Friedhof_Gargantuan",
+            "Gear_Actuator_Friedhof_Colossus",
+            "Gear_Actuator_Friedhof_Compensator",
+            "Gear_Actuator_Friedhof_CompensatorPlus",
+            "Gear_Gyro_Ultralight",
+            "Gear_Gyro_HeavyDuty",
+            "Gear_Gyro_XL",
+            "Gear_Gyro_Compact",
+            "Gear_Spiked_Fist",
+            "Gear_Spiked_Boots",
+            "Gear_Cockpit_Tacticon_B2000_Battle_Computer",
+            "Gear_Actuator_CoolingJacket",
+            "Gear_Cockpit_VR_POD",
+            "Gear_Gyro_HE_Optima",
+            "Gear_FCS_Generic_Standard",
+            "Gear_FCS_Improved",
+            "Gear_FCS_Energy",
+            "Gear_FCS_AdvancedTC",
+            "Gear_Sensors_Generic_Standard",
+            "Gear_AdvZoom",
+            "Gear_ThermalVision",
+            "Gear_IFFJammer",
+            "Gear_Sensors_HighPowered",
+            "Gear_FCS_Defiance",
+            "Gear_Sensors_AR12",
+            "Gear_Cockpit_Ceres_Metals_Hardened",
+            "Gear_Cockpit_Ceres_Metals_Reinforced",
+            "Gear_Cockpit_Majesty_M_M_60KL",
+            "Gear_Cockpit_Generic_Standard",
+            "Gear_Cockpit_Majesty_M_M_120KL",
+            "Gear_Cockpit_Majesty_M_M_180KL",
+            "Gear_Cockpit_SLDF_Custom",
+            "Gear_Cockpit_StarCorps_Advanced",
+            "Gear_Cockpit_StarCorps_Enhanced",
+            "Gear_Cockpit_StarCorps_Improved",
+            "Gear_Cockpit_CLAN_EI",
+            "Gear_Cockpit_CLAN_Standard",
+            "Gear_Cockpit_DNI",
+            "Gear_Cockpit_SLDF_Standard",
+            "Gear_Cockpit_Primitive",
+            "Gear_Cockpit_Spiked_Helmet",
+            "Gear_Cockpit_LifeSupportA_Standard",
+            "Gear_Cockpit_LifeSupportB_Standard",
+            "Gear_Cockpit_CockpitFCS_Standard",
+            "Gear_Cockpit_SensorsB_Standard",
+            "Gear_Gyro_Generic_Standard",
+            "emod_arm_part_shoulder",
+            "emod_arm_part_upper",
+            "emod_arm_part_lower",
+            "emod_arm_part_hand",
+            "emod_leg_hip",
+            "emod_leg_upper",
+            "emod_leg_lower",
+            "emod_leg_foot"
+        ],
+        "UpgradeDefTagsSkip" : [
+            "noautofix"
+        ],
+        "GyroCategorizer" : null,
+        "GyroSlotChange" : null,
+        "CockpitCategorizer" : null,
+        "CockpitTonnageChange" : null,
+        "CockpitSlotChange" : null,
+        "LegUpgradesCategorizer" : null,
+        "LegUpgradesSlotChange" : null,
+        "ChassisDefSkip" : [
+            
+        ],
+        "ChassisDefTagsSkip" : [
+            "noautofix"
+        ],
+        "ChassisDefSlotsChanges" : null,
+        "ChassisDefInitialTonnage" : false,
+        "ChassisDefInitialToTotalTonnageFactor" : 0.1,
+        "ChassisDefMaxJumpjets" : true,
+        "ChassisDefMaxJumpjetsCount" : 100,
+        "ChassisDefMaxJumpjetsRating" : 400,
+        "WeaponDefTagsSkip" : [
+            "noautofix"
+        ],
+        "AutoFixWeaponDefSlotsChanges" : [
+            
+        ]
+    },
+    "BattleTechLoadFix" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Fixes a vanilla bug by loading unused components so they get displayed in the mech lab."
+    },
+    "ComponentExplosions" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows each component to define destructive forces in case they explode, also implements proper CASE."
+    },
+    "CompressFloatieMessages" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Compresses similar floatie messages to a single message with a multiplier. E.g. MEDIUM LASER DESTROYED x 4",
+        "DebugDestroyedFloaties" : false
+    },
+    "CriticalEffects" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows custom multiple critical hit states for individual components.",
+        "DescriptionTemplate" : "Critical Effects:<b><color=#F79B26FF>\r\n{{elements}}</color></b>\r\n{{originalDescription}}",
+        "ElementTemplate" : " <indent=10%><line-indent=-5%><line-height=65%>{{element}}</line-height></line-indent></indent>\r\n",
+        "DescriptionUseName" : false,
+        "CritFloatieMessage" : "{0} CRIT",
+        "DestroyedFloatieMessage" : "{0} DESTROYED"
+    },
+    "DebugCycleCombatSounds" : {
+        "Enabled" : false,
+        "EnabledDescription" : "Cycle through SFX sounds when pressing a specific button on the start menu",
+        "SpecificButton" : "Skirmish"
+    },
+    "DebugSaveMechToFile" : {
+        "Enabled" : false,
+        "EnabledDescription" : "Saves mechdefs to 'MechEngineer/Saves' when saving a mech in the mechlab"
+    },
+    "DynamicSlots" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows components to take up space dynamically on a mech.",
+        "DynamicSlotsValidateDropEnabled" : true,
+        "DynamicSlotsValidateDropEnabledDescription" : "Don't allow dropping of items that would exceed the available slots."
+    },
+    "Engine" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Provides engines that can be installed on mechs similar to how CBT works.",
+        "AllowMountingAllRatings" : false,
+        "AllowMountingAllRatingsDescription" : "Allow mounting all fusion core rating regardless of min/max sprint factors.",
+        "MinimumHeatSinksOnMech" : 10,
+        "MinimumHeatSinksOnMechDescription" : "Minimum heatsinks a mech requires.",
+        "EnforceRulesForAdditionalInternalHeatSinks" : true,
+        "EnforceRulesForAdditionalInternalHeatSinksDescription" : "Can't have those juicy ++ cooling systems with smaller fusion cores than the rules allow it.",
+        "AllowMixingHeatSinkTypes" : false,
+        "AllowMixingHeatSinkTypesDescription" : "Allow heat sinks patchwork.",
+        "DefaultEngineHeatSinkId" : "Gear_HeatSink_Generic_Standard",
+        "DefaultEngineHeatSinkIdDescription" : "Default heat sink type for engines without a kit.",
+        "EngineMissingFallbackHeatSinkCapacity" : 30,
+        "EngineMissingFallbackHeatSinkCapacityDescription" : "Heat sink capacity if no engine is detected.",
         "UseGameWalkValues" : true,
+        "UseGameWalkValuesDescription" : "Set to false to use more TT like walk values.",
         "JJRoundUp" : false,
+        "JJRoundUpDescription" : "The allowed number of jump jets is rounded up or down.",
         "TTWalkMultiplier" : 25,
         "TTSprintMultiplier" : 38
     },
-    "HardpointFix" : {
-        "AutoFixChassisDefWeaponHardpointCounts" : false,
-        "EnforceHardpointLimits" : false,
-        "AllowDefaultLoadoutWeapons" : false,
-        "AllowLRMInSmallerSlotsForAll" : false,
-        "AllowLRMInSmallerSlotsForMechs" : [
-            "atlas"
-        ],
-        "AllowLRMInLargerSlotsForAll" : true
+    "Globals" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows tooltips and other features to access the current mech from context."
     },
-    "Categories" : [
-        {
-            "Name" : "Armor",
-            "DisplayName" : "Armor",
-            "Unique" : true,
-            "UniqueForLocation" : false,
-            "Required" : true,
-            "displayName" : "Armor",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : 1,
-            "MaxEquipedPerLocation" : -1,
-            "MinEquiped" : 1,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "Sorter" : {
-                    "Order" : 0
-                },
-                "Flags" : {
-                    "Flags" : [
-                        "not_broken"
-                    ]
-                }
+    "HardpointFix" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Optimizes the way installed weapons are shown on a mech model.",
+        "AutoFixChassisDefWeaponHardpointCounts" : false,
+        "AutoFixChassisDefWeaponHardpointCountsDescription" : "Changes chassis hardpoints based on configured prefabs.",
+        "EnforceHardpointLimits" : false,
+        "EnforceHardpointLimitsDescription" : "Enforces hardpoint limits in mechlab only allowing configured prefabs.",
+        "AllowDefaultLoadoutWeapons" : false,
+        "AllowDefaultLoadoutWeaponsDescription" : "Ignore limits that would prevent mounting default loadouts.",
+        "WeaponPrefabMappings" : [
+            {
+                "PrefabIdentifier" : "AC2",
+                "HardpointCandidates" : [
+                    "ac2",
+                    "ac",
+                    "lbx"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "Structure",
-            "DisplayName" : "Structure",
-            "Unique" : true,
-            "UniqueForLocation" : false,
-            "Required" : true,
-            "displayName" : "Structure",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : 1,
-            "MaxEquipedPerLocation" : -1,
-            "MinEquiped" : 1,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "Sorter" : {
-                    "Order" : 1
-                },
-                "Flags" : {
-                    "Flags" : [
-                        "not_broken"
-                    ]
-                }
+            {
+                "PrefabIdentifier" : "AMS",
+                "HardpointCandidates" : [
+                    "ams",
+                    "laser",
+                    "mg",
+                    "MachineGun",
+                    "flamer",
+                    "ac2",
+                    "ppc",
+                    "ac",
+                    "lbx"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "Cockpit",
-            "DisplayName" : "Cockpit",
-            "Unique" : true,
-            "UniqueForLocation" : false,
-            "Required" : true,
-            "displayName" : "Cockpit",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : true,
-            "MaxEquiped" : 1,
-            "MaxEquipedPerLocation" : -1,
-            "MinEquiped" : 1,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "Sorter" : {
-                    "Order" : 1
-                },
-                "CriticalHitStates" : {
-                    "MaxStates" : 2,
-                    "DeathMethod" : "PilotKilled",
-                    "HitEffects" : [
-                        {
-                            "State" : 1,
-                            "StatusEffect" : {
-                                "durationData" : {
-                                    
-                                },
-                                "targetingData" : {
-                                    "effectTargetsCreator" : true,
-                                    "effectTriggerType" : "Passive",
-                                    "effectTargetType" : "Creator"
-                                },
-                                "effectType" : "StatisticEffect",
-                                "Description" : {
-                                    "Id" : "SensorsDestroyed",
-                                    "Name" : "Sensors Destroyed",
-                                    "Details" : "-50% Sight and Sensor",
-                                    "Icon" : "uixSvgIcon_equipment_Cockpit"
-                                },
-                                "nature" : "Debuff",
-                                "statisticData" : {
-                                    "statName" : "SensorDistanceAbsolute",
-                                    "operation" : "Float_Multiply",
-                                    "modValue" : "0.5",
-                                    "modType" : "System.Single"
-                                }
-                            }
-                        },
-                        {
-                            "State" : 1,
-                            "StatusEffect" : {
-                                "durationData" : {
-                                    
-                                },
-                                "targetingData" : {
-                                    "effectTargetsCreator" : true,
-                                    "effectTriggerType" : "Passive",
-                                    "effectTargetType" : "Creator"
-                                },
-                                "effectType" : "StatisticEffect",
-                                "Description" : {
-                                    "Id" : "SensorsDestroyed2",
-                                    "Name" : "Sensors Destroyed",
-                                    "Details" : "-50% Sight and Sensor",
-                                    "Icon" : "uixSvgIcon_equipment_Cockpit"
-                                },
-                                "nature" : "Debuff",
-                                "statisticData" : {
-                                    "statName" : "SpotterDistanceAbsolute",
-                                    "operation" : "Float_Multiply",
-                                    "modValue" : "0.5",
-                                    "modType" : "System.Single"
-                                }
-                            }
-                        },
-                        {
-                            "State" : 2,
-                            "StatusEffect" : {
-                                "durationData" : {
-                                    
-                                },
-                                "targetingData" : {
-                                    "effectTargetsCreator" : true,
-                                    "effectTriggerType" : "Passive",
-                                    "effectTargetType" : "Creator"
-                                },
-                                "effectType" : "StatisticEffect",
-                                "Description" : {
-                                    "Id" : "LifeSupportDestroyed",
-                                    "Name" : "Life Support Destroyed",
-                                    "Details" : "Take Damage on Shutdown",
-                                    "Icon" : "uixSvgIcon_equipment_Cockpit"
-                                },
-                                "nature" : "Debuff",
-                                "statisticData" : {
-                                    "statName" : "ReceiveShutdownInjury",
-                                    "operation" : "Set",
-                                    "modValue" : "true",
-                                    "modType" : "System.Boolean"
-                                }
-                            }
-                        }
-                    ]
-                },
-                "Flags" : {
-                    "Flags" : [
-                        "not_broken"
-                    ]
-                }
+            {
+                "PrefabIdentifier" : "Flamer",
+                "HardpointCandidates" : [
+                    "flamer",
+                    "laser",
+                    "mg",
+                    "MachineGun",
+                    "ac2",
+                    "ppc",
+                    "ac",
+                    "lbx"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "CockpitFCS",
-            "DisplayName" : "FCS",
-            "Unique" : true,
-            "UniqueForLocation" : true,
-            "Required" : true,
-            "displayName" : "FCS",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : 1,
-            "MaxEquipedPerLocation" : 1,
-            "MinEquiped" : 1,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "Sorter" : {
-                    "Order" : 0
-                }
+            {
+                "PrefabIdentifier" : "AC5",
+                "HardpointCandidates" : [
+                    "ac5",
+                    "uac5",
+                    "ac",
+                    "lbx"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "CockpitSensors",
-            "DisplayName" : "Sensors",
-            "Unique" : true,
-            "UniqueForLocation" : true,
-            "Required" : true,
-            "displayName" : "Sensors",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : 1,
-            "MaxEquipedPerLocation" : 1,
-            "MinEquiped" : 1,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "Sorter" : {
-                    "Order" : 2
-                }
+            {
+                "PrefabIdentifier" : "AC10",
+                "HardpointCandidates" : [
+                    "ac10",
+                    "lbx10",
+                    "ac",
+                    "lbx"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "Gyro",
-            "DisplayName" : "Gyro",
-            "Unique" : true,
-            "UniqueForLocation" : false,
-            "Required" : true,
-            "displayName" : "Gyro",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : 1,
-            "MaxEquipedPerLocation" : -1,
-            "MinEquiped" : 1,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "Sorter" : {
-                    "Order" : 2
-                },
-                "CriticalHitStates" : {
-                    "MaxStates" : 2,
-                    "HitEffects" : [
-                        {
-                            "State" : 1,
-                            "StatusEffect" : {
-                                "durationData" : {
-                                    
-                                },
-                                "targetingData" : {
-                                    "effectTargetsCreator" : true,
-                                    "effectTriggerType" : "Passive",
-                                    "effectTargetType" : "Creator"
-                                },
-                                "effectType" : "StatisticEffect",
-                                "Description" : {
-                                    "Id" : "Gyro_Critical",
-                                    "Name" : "Gyro Critical",
-                                    "Details" : "Double Stability Damage taken",
-                                    "Icon" : "uixSvgIcon_equipment_Gyro"
-                                },
-                                "nature" : "Debuff",
-                                "statisticData" : {
-                                    "statName" : "ReceivedInstabilityMultiplier",
-                                    "operation" : "Float_Multiply",
-                                    "modValue" : "2.0",
-                                    "modType" : "System.Single"
-                                }
-                            }
-                        },
-                        {
-                            "State" : 2,
-                            "StatusEffect" : {
-                                "durationData" : {
-                                    
-                                },
-                                "targetingData" : {
-                                    "effectTargetsCreator" : true,
-                                    "effectTriggerType" : "Passive",
-                                    "effectTargetType" : "Creator"
-                                },
-                                "effectType" : "StatisticEffect",
-                                "Description" : {
-                                    "Id" : "Gyro_Critical2",
-                                    "Name" : "Gyro Critical",
-                                    "Details" : "X2 Stability taken & -20 Threshhold",
-                                    "Icon" : "uixSvgIcon_equipment_Gyro"
-                                },
-                                "nature" : "Debuff",
-                                "statisticData" : {
-                                    "statName" : "UnsteadyThreshold",
-                                    "operation" : "Float_Add",
-                                    "modValue" : "-20.0",
-                                    "modType" : "System.Single"
-                                }
-                            }
-                        }
-                    ]
-                },
-                "Flags" : {
-                    "Flags" : [
-                        "not_broken"
-                    ]
-                }
+            {
+                "PrefabIdentifier" : "AC20",
+                "HardpointCandidates" : [
+                    "ac20",
+                    "ac",
+                    "lbx"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "EngineShield",
-            "DisplayName" : "Engine Shielding",
-            "Unique" : true,
-            "UniqueForLocation" : false,
-            "Required" : true,
-            "displayName" : "Engine Shielding",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : 1,
-            "MaxEquipedPerLocation" : -1,
-            "MinEquiped" : 1,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "Sorter" : {
-                    "Order" : 6
-                }
+            {
+                "PrefabIdentifier" : "BFG",
+                "HardpointCandidates" : [
+                    "bfg",
+                    "gauss",
+                    "ac20",
+                    "ac",
+                    "lbx",
+                    "laser"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "EngineHeatBlock",
-            "DisplayName" : "Engine Heat Block",
-            "Unique" : true,
-            "UniqueForLocation" : false,
-            "Required" : true,
-            "displayName" : "Engine Heat Block",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : 1,
-            "MaxEquipedPerLocation" : -1,
-            "MinEquiped" : 1,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "InventorySorter" : {
-                    "SortKey" : "00016"
-                },
-                "Sorter" : {
-                    "Order" : 4
-                },
-                "Flags" : {
-                    "Flags" : [
-                        "engine_part",
-                        "not_broken"
-                    ]
-                }
+            {
+                "PrefabIdentifier" : "Gauss",
+                "HardpointCandidates" : [
+                    "gauss",
+                    "ac20",
+                    "ac",
+                    "lbx",
+                    "laser"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "Cooling",
-            "DisplayName" : "Cooling System",
-            "Unique" : true,
-            "UniqueForLocation" : false,
-            "Required" : true,
-            "displayName" : "Cooling System",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : 1,
-            "MaxEquipedPerLocation" : -1,
-            "MinEquiped" : 1,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "InventorySorter" : {
-                    "SortKey" : "00016"
-                },
-                "Sorter" : {
-                    "Order" : 3
-                },
-                "Flags" : {
-                    "Flags" : [
-                        "ignore_damage"
-                    ]
-                }
+            {
+                "PrefabIdentifier" : "artillery",
+                "HardpointCandidates" : [
+                    "artillery",
+                    "ac20",
+                    "gauss",
+                    "ac",
+                    "lbx"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "EngineCore",
-            "DisplayName" : "Engine Core",
-            "Unique" : true,
-            "UniqueForLocation" : false,
-            "Required" : true,
-            "displayName" : "Engine Core",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : 1,
-            "MaxEquipedPerLocation" : -1,
-            "MinEquiped" : 1,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "Sorter" : {
-                    "Order" : 5
-                },
-                "Replace" : {
-                    "ComponentDefId" : "emod_engine_dummy",
-                    "Location" : "CenterTorso"
-                },
-                "Flags" : {
-                    "Flags" : [
-                        "engine_part",
-                        "not_broken"
-                    ]
-                }
+            {
+                "PrefabIdentifier" : "lrm5",
+                "HardpointCandidates" : [
+                    "lrm5",
+                    "lrm10",
+                    "lrm15",
+                    "lrm20",
+                    "srm20",
+                    "machinegun",
+                    "mg",
+                    "flamer"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "EngineSlots",
-            "DisplayName" : "Engine Slots",
-            "Unique" : false,
-            "UniqueForLocation" : false,
-            "Required" : false,
-            "displayName" : "Engine Slots",
-            "AllowMixTags" : true,
-            "AutoReplace" : false,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : -1,
-            "MaxEquipedPerLocation" : -1,
-            "MinEquiped" : 0,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "Sorter" : {
-                    "Order" : 0
-                },
-                "Flags" : {
-                    "Flags" : [
-                        "engine_part",
-                        "not_broken",
-                        "default"
-                    ]
-                }
+            {
+                "PrefabIdentifier" : "lrm10",
+                "HardpointCandidates" : [
+                    "lrm10",
+                    "lrm15",
+                    "lrm20",
+                    "srm20",
+                    "lrm5",
+                    "machinegun",
+                    "mg",
+                    "flamer"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "ArmActuator",
-            "DisplayName" : "Arm Actuator",
-            "Unique" : false,
-            "UniqueForLocation" : true,
-            "Required" : false,
-            "displayName" : "Arm Actuator",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : -1,
-            "MaxEquipedPerLocation" : 1,
-            "MinEquiped" : 0,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "Sorter" : {
-                    "Order" : 0
-                },
-                "Replace" : {
-                    "ComponentDefId" : "emod_arm_upper"
-                }
+            {
+                "PrefabIdentifier" : "lrm15",
+                "HardpointCandidates" : [
+                    "lrm15",
+                    "lrm20",
+                    "srm20",
+                    "lrm10",
+                    "lrm5",
+                    "machinegun",
+                    "mg",
+                    "flamer"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "LegUpgrade",
-            "DisplayName" : "Leg Upgrade",
-            "Unique" : false,
-            "UniqueForLocation" : true,
-            "Required" : false,
-            "displayName" : "Leg Upgrade",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : -1,
-            "MaxEquipedPerLocation" : 1,
-            "MinEquiped" : 0,
-            "AddCategoryToDescription" : true,
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "CASE",
-            "DisplayName" : "CASE",
-            "Unique" : false,
-            "UniqueForLocation" : true,
-            "Required" : false,
-            "displayName" : "CASE",
-            "AllowMixTags" : false,
-            "AutoReplace" : false,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : -1,
-            "MaxEquipedPerLocation" : 1,
-            "MinEquiped" : 0,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "CASE" : {
-                    
-                },
-                "Flags" : {
-                    "Flags" : [
-                        "ignore_damage"
-                    ]
-                }
+            {
+                "PrefabIdentifier" : "arrow",
+                "HardpointCandidates" : [
+                    "arrow",
+                    "lrm5",
+                    "lrm20",
+                    "srm20",
+                    "lrm15",
+                    "lrm10",
+                    "machinegun",
+                    "mg",
+                    "flamer"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "CASE2",
-            "DisplayName" : "CASE II",
-            "Unique" : false,
-            "UniqueForLocation" : true,
-            "Required" : false,
-            "displayName" : "CASE II",
-            "AllowMixTags" : false,
-            "AutoReplace" : false,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : -1,
-            "MaxEquipedPerLocation" : 1,
-            "MinEquiped" : 0,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "CASE" : {
-                    "MaximumDamage" : 3
-                },
-                "Flags" : {
-                    "Flags" : [
-                        "ignore_damage"
-                    ]
-                }
+            {
+                "PrefabIdentifier" : "lrm20",
+                "HardpointCandidates" : [
+                    "lrm20",
+                    "srm20",
+                    "lrm15",
+                    "lrm10",
+                    "lrm5",
+                    "machinegun",
+                    "mg",
+                    "flamer"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        }
-    ]
+            {
+                "PrefabIdentifier" : "MachineGun",
+                "HardpointCandidates" : [
+                    "machinegun",
+                    "mg",
+                    "flamer",
+                    "laser"
+                ]
+            },
+            {
+                "PrefabIdentifier" : "srm2",
+                "HardpointCandidates" : [
+                    "srm2",
+                    "srm4",
+                    "srm6",
+                    "machinegun",
+                    "mg",
+                    "flamer"
+                ]
+            },
+            {
+                "PrefabIdentifier" : "srm4",
+                "HardpointCandidates" : [
+                    "srm4",
+                    "srm6",
+                    "srm2",
+                    "machinegun",
+                    "mg",
+                    "flamer"
+                ]
+            },
+            {
+                "PrefabIdentifier" : "srm6",
+                "HardpointCandidates" : [
+                    "srm6",
+                    "srm4",
+                    "srm2",
+                    "machinegun",
+                    "mg",
+                    "flamer"
+                ]
+            }
+        ]
+    },
+    "InvalidInventory" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Make sure invalid mech configurations can't be saved in skirmish and can't be fielded in the campaign."
+    },
+    "LocationalEffects" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows other features to support locational statistic effects."
+    },
+    "MechLabSlots" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Makes the mech lab adhere to any custom mech slot counts.",
+        "MechLabArmTopPadding" : 120,
+        "MechLabGeneralSlots" : 0
+    },
+    "MoveMultiplierStat" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Introduces a new statistic effect to allow easy manipulation of (mech only) movement."
+    },
+    "NewSaveFolder" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Redirects all save operations to use one folder for all save related data.",
+        "Path" : "RogueTechSaves"
+    },
+    "OverrideDescriptions" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows other features to override tooltips and descriptions, also provides bonus description management.",
+        "BonusDescriptionsDescriptionTemplate" : "Traits:<b><color=#F79B26FF>\r\n{{elements}}</color></b>\r\n{{originalDescription}}",
+        "BonusDescriptionsElementTemplate" : " <indent=10%><line-indent=-5%><line-height=65%>{{element}}</line-height></line-indent></indent>\r\n"
+    },
+    "OverrideGhostVFX" : {
+        "Enabled" : false,
+        "EnabledDescription" : "Allows to turn off or reduce the strong and weak ghost effects of ECM, and allows to remove the ECM globe effect.",
+        "Blacklisted" : [
+            "vfxPrfPrtl_ECM_loop",
+            "vfxPrfPrtl_ECM_opponent_loop",
+            "vfxPrfPrtl_ECMcarrierAura_loop"
+        ],
+        "BlipWeak" : "Weak",
+        "BlipStrong" : "Weak"
+    },
+    "OverrideTonnage" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows other features to override tonnage calculations.",
+        "FractionalAccountingPrecision" : 0.5,
+        "ArmorRoundingPrecision" : null
+    },
+    "ShutdownInjuryProtection" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Pilots receive injury when mech receives overheat damage or has to shut down in case life support is destroyed.",
+        "HeatDamageInjuryEnabled" : true,
+        "ShutdownInjuryEnabled" : true
+    },
+    "TurretLimitedAmmo" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Turrets use up ammo and don't explode once ammo is gone."
+    },
+    "TurretMechComponents" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Turrets can now use components and benefit from their status effects."
+    }
 }

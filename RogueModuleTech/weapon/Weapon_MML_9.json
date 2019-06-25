@@ -1,9 +1,12 @@
 {
     "Custom": {
+        "Category": [
+			{ "CategoryID": "w/m/s/mml" }
+		],
         "BonusDescriptions": {
             "Bonuses": [
-                "DmgFallOff: 25%",
-                "MML"
+                "MML",
+				"IndirectMML"
             ]
         },
         "InventorySorter": {
@@ -13,7 +16,7 @@
     "Category": "Missile",
     "Type": "LRM",
     "WeaponSubType": "LRM20",
-    "MinRange": 0,
+    "MinRange": 180,
     "MaxRange": 690,
     "RangeSplit": [
         210,
@@ -23,7 +26,7 @@
     "AmmoCategory": "LRM",
     "StartingAmmoCapacity": 0,
     "HeatGenerated": 15,
-    "Damage": 9,
+    "Damage": 4,
     "OverheatedDamageMultiplier": 0,
     "EvasiveDamageMultiplier": 0,
     "EvasivePipsIgnored": 0,
@@ -37,8 +40,10 @@
     "ShotsWhenFired": 9,
     "ProjectilesPerShot": 1,
     "AttackRecoil": 1,
-    "Instability": 1.75,
-    "WeaponEffectID": "WeaponEffect-Weapon_SRM6",
+    "Instability": 1,
+	"FireTerrainChance": 0.005,
+	"StatusEffectsPerHit":true,
+    "WeaponEffectID": "WeaponEffect-Weapon_LRM20",
     "Description": {
         "Cost": 725000,
         "Rarity": 5,
@@ -48,7 +53,7 @@
         "UIName": "MML9",
         "Id": "Weapon_MML_9",
         "Name": "MML9",
-        "Details": "The Multi-Missile Launcher is capable of firing specialized long-range missiles that adjust their damage depending on Range to Target, including any special munitions designed for them, as well as use the Artemis IV fire control system and other TTS.",
+        "Details": "Multi-Missile Launchers can fire both LRM and SRM, including any special warhead types, and are compatible with the Artemis IV fire control system. \n\n <b><color=#ffcc00>Uses SRM/LRM Ammo.</color></b> \n\n <b><color=#00ffff>Left Click on Chance to hit during battle to toggle between LRM or SRM.</color> </b>",
         "Icon": "uixSvgIcon_weapon_Missile"
     },
     "BonusValueA": "",
@@ -62,11 +67,36 @@
     "AllowedLocations": "All",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
+	"Modes":[
+		{
+			"Id":"LRM",
+			"UIName":"LRM",
+			"isBaseMode":true,
+			"AIHitChanceCap": 0.99,
+			"AmmoCategory": "LRM"
+		},
+		{
+			"Id":"SRM",
+			"UIName":"SRM",
+			"isBaseMode":false,
+			"IndirectFireCapable" : false,
+			"DamagePerShot": 4.0,
+			"MinRange": -180.0,
+			"MaxRange": -360.0,
+			"ShortRange": -120.0,
+			"MiddleRange": -240.0,
+			"LongRange": -360.0,
+			"AIHitChanceCap": 0.99,
+			"AmmoCategory": "SRM",
+			"WeaponEffectID" : "WeaponEffect-Weapon_SRM6",
+			"Instability" : 1,
+			"FireTerrainChance": 0.005
+		}		
+	],
     "statusEffects": [],
     "ComponentTags": {
         "items": [
             "component_type_stock",
-            "WR-variance_by_distance-25",
             "range_extreme"
         ],
         "tagSetSourceFile": ""

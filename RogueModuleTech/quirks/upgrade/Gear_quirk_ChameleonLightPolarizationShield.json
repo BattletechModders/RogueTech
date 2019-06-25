@@ -3,12 +3,12 @@
         "Color": {
             "UIColor": "Gold"
         },
-        "Category": {
+        "Category": [{
             "CategoryID": "Armor"
-        },
+        }],
         "ArmorRepair": {
-            "ArmorTPCost": 1.3,
-            "ArmorCBCost": 1.4
+            "ArmorTPCost": 1.5,
+            "ArmorCBCost": 1.5
         },
         "Flags": {
             "flags": [
@@ -19,30 +19,34 @@
         },
         "BonusDescriptions": {
             "Bonuses": [
-                "Stealth: 5",
-                "StealthShort: 2",
-                "StealthMid: 4",
-                "StealthLong: 6",
-                "StealthExt: 8",
+                "Stealth: 4",
+                "StealthShort: 1",
+                "StealthMid: 3",
+                "StealthLong: 5",
+                "StealthExt: 7",
                 "StealthMove: 4",
                 "StealthDistance: 4",
-                "EvaPips: +1",
                 "Visibility: -50%",
                 "Signature: -50%",
-                "HeatGenerated: +10%",
-                "ArmorTPCost: 30%",
-                "ArmorCBCost: 40%"
+                "HeatGenerated: +15%",
+                "HeatPerTurn: +10",
+                "ReqECM",
+                "ArmorTPCost: 50%",
+                "ArmorCBCost: 50%"
             ]
         },
         "InventorySorter": {
             "SortKey": "00009"
+        },
+		"Lootable": {
+            "ItemID": "lootable_ChameleonLightPolarizationShield"
         }
     },
     "StatName": null,
     "RelativeModifier": 0,
     "AbsoluteModifier": 0,
     "Description": {
-        "Cost": 900000,
+        "Cost": 100,
         "Rarity": 99,
         "Purchasable": true,
         "Manufacturer": "Prototype",
@@ -73,24 +77,25 @@
             "targetingData": {
                 "effectTriggerType": "Passive",
                 "effectTargetType": "Creator",
+				"showInTargetPreview": false,
                 "showInStatusPanel": false
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "GainEvasion",
-                "Name": "EVASIVE MOVE",
-                "Details": "This unit generates an extra EVASIVE charge from movement actions (up to its maximum).",
-                "Icon": "uixSvgIcon_action_evasivemove"
+                "Id": "Stealth_Signature_Decrease_NSS",
+                "Name": "Stealth Signature Decrease",
+                "Details": "Signature Statuseffect.",
+                "Icon": "uixSvgIcon_equipment_TTS"
             },
+            "nature": "Buff",
             "statisticData": {
-                "statName": "EvasivePipsGainedAdditional",
-                "operation": "Int_Add",
-                "modValue": "1",
-                "modType": "System.Int32"
-            },
-            "nature": "Buff"
+                "statName": "SensorSignatureModifier",
+                "operation": "Float_Multiply",
+                "modValue": "0.5",
+                "modType": "System.Single"
+            }
         },
-        {
+		{
             "durationData": {
                 "duration": -1,
                 "ticksOnActivations": false,
@@ -114,32 +119,71 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StatusEffect-Heat_Nullsignature",
+                "Id": "Stealth_Visibility_Decrease_NSS",
+                "Name": "Stealth Visbility Decrease",
+                "Details": "Visibility Statuseffect.",
+                "Icon": "uixSvgIcon_equipment_TTS"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "SpottingVisibilityMultiplier",
+                "operation": "Float_Multiply",
+                "modValue": "0.5",
+                "modType": "System.Single"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "Stealth_Heat_Generation_NSS",
                 "Name": "Increased Heat",
-                "Details": "Heat generation increased by 20%.",
+                "Details": "Heat generation",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
                 "statName": "HeatGenerated",
                 "operation": "Float_Multiply",
-                "modValue": "1.1",
+                "modValue": "1.15",
                 "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "NotSet",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
+                "targetCollection": "Weapon"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
             },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "Stealth_Heat_Capacity_NSS",
+                "Name": "Decreased Heat Capacity",
+                "Details": "Heat Capacity Penalty",
+                "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+            },
+            "nature": "Debuff",
+            "statisticData": {
+                "statName": "HeatSinkCapacity",
+                "operation": "Int_Add",
+                "modValue": "-10",
+                "modType": "System.Int32"
+            }
         }
     ],
     "ComponentTags": {
@@ -147,8 +191,8 @@
 		"BLACKLISTED",
             "component_type_stock",
             "Chameleon",
-            "lv-stealth_t5",
-            "lv-stealth-range-mod_s2_m4_l6_e8",
+            "lv-stealth_t4",
+            "lv-stealth-range-mod_s1_m3_l5_e7",
             "lv-stealth-move-mod_m4_s4"
         ],
         "tagSetSourceFile": ""

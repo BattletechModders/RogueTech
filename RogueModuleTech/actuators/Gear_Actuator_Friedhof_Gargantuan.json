@@ -1,18 +1,24 @@
 {
     "Custom": {
-        "Category": {
-            "CategoryID": "ArmActuator"
+        "Category": [{
+            "CategoryID": "ArmShoulder"
         },
+		{
+            "CategoryID": "ArmUpperActuator"
+        }],
         "ArmActuator": {
-            "Type": "Upper",
-            "AccuracyBonus": "-0"
+            "Type": "PartUpper, PartShoulder"
         },
         "BonusDescriptions": {
             "Bonuses": [
                 "ActuatorWeight: 10%",
-                "BallisticAcc: +1"
+                "Reinforced: +10%",
+            "CASED: 10"
             ]
         },
+		"CASE" : {
+                    "MaximumDamage": 10
+                },
         "Weights": {
             "StructureFactor": 1.1
         },
@@ -29,10 +35,10 @@
         "Purchasable": true,
         "Manufacturer": "Friedhof",
         "Model": "Gargantuan",
-        "UIName": "Upper Ballistic",
+        "UIName": "Upper Armored",
         "Id": "Gear_Actuator_Friedhof_Gargantuan",
         "Name": "Friedhof Gargantuan Arm Mod ",
-        "Details": "Upper Arm Actuators usually are barely more then a connector for a limb. <b><color=#800080>WEAPON SHOULDER ACTUATOR.</color></b> Grants global bonus to 1 weapon type.",
+        "Details": "Upper Arm Actuators usually are barely more then a connector for a limb. <b><color=#800080>Shoulder/Upper Arm Actuator.</color></b>.",
         "Icon": "uixSvgIcon_equipment_ActuatorArm"
     },
     "BonusValueA": "+ 1 Acc. (Ballistic)",
@@ -47,56 +53,57 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
-        {
+       {
             "durationData": {
                 "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
                 "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
                 "showInTargetPreview": false,
                 "showInStatusPanel": false
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StatusEffect-Attack_ToHitBallistic-Shoulder",
-                "Name": "BALLISTIC WEAPON HIT CHANCE IMPROVED",
-                "Details": "Ballistic weapon attacks have their hit improved by 1.",
-                "Icon": "uixSvgIcon_equipment_TTS"
+                "Id" : "Status-ReinforcedArmor-{location}",
+                "Name": "Reinforced Leg Structure",
+                "Details": "Reinforced Leg Armor",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
-                "statName": "AccuracyModifier",
-                "operation": "Float_Add",
-                "modValue": "-1.0",
-                "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "Weapon",
-                "targetWeaponCategory": "Ballistic",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
+                "statName" : "{location}.Structure",
+                "operation" : "Float_Multiply",
+                "modValue" : "1.1",
+                "modType" : "System.Single"
+            }
+        },
+{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
             },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id" : "Status-ReinforcedArmor-{location}",
+                "Name": "Reinforced Leg Armor",
+                "Details": "Reinforced Leg Armor",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName" : "{location}.Armor",
+                "operation" : "Float_Multiply",
+                "modValue" : "1.1",
+                "modType" : "System.Single"
+            }
         }
     ],
     "ComponentTags": {

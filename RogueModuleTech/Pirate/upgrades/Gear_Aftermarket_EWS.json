@@ -1,16 +1,19 @@
 {
     "Custom": {
-        "Category": {
-            "CategoryID": "AdvECM"
-        },
+        "Category": [
+           { "CategoryID": "ECM"},
+		   { "CategoryID": "Probe"},
+		   { "CategoryID": "AdvECM" }
+        ],
         "BonusDescriptions": {
             "Bonuses": [
-                "EvaPips: +1",
                 "Sensors: +10%",
                 "Sight: +10%",
                 "TEHeatgen: +10%",
-                "IsECM: 1",
-                "ECMBubble: 120",
+                "IsECM: 2",
+                "ECMBubble: 180",
+				"Jammer: 3"
+				"JamBubble: 120"
                 "IsProbe: 2"
             ]
         },
@@ -30,7 +33,7 @@
         "UIName": "Warfare Suite QS",
         "Id": "Gear_Aftermarket_EWS",
         "Name": "Warfare Suite QS",
-        "Details": "Need a ECM but dont want to bother some Liao Sales rep for one of theirs? We at QuicSell got your back! Our lightweight EWS 6000X can everything theirs can do for only half the price!.",
+        "Details": "Need an ECM but dont want to bother some Liao Sales rep for one of theirs? We at QuicSell got your back! Our lightweight EWS 6000X can do everything theirs can do for only half the price!",
         "Icon": "uixSvgIcon_equipment_TTS"
     },
     "BonusValueA": "+1 Accuracy and 20% Sensors|",
@@ -45,30 +48,70 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
-        {
-            "durationData": {
+	{
+            "durationData" : {
                 "duration": -1,
-                "stackLimit": -1
+                "stackLimit": 1
             },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInStatusPanel": false
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "Aura",
+                "effectTargetType" : "AlliesWithinRange",
+                "range" : 180.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : false,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
             },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "GainEvasion",
-                "Name": "EVASIVE MOVE",
-                "Details": "This unit generates an extra EVASIVE charge from movement actions (up to its maximum).",
-                "Icon": "uixSvgIcon_action_evasivemove"
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "LV_ECM_SHIELD",
+				"Name" : "Makes it easier for enemies to know where you are, but harder to attack",
+				"Details" : "IPSUM SUCKUM",
+				"Icon" : "uixSvgIcon_status_ECM-missileDef"
             },
-            "statisticData": {
-                "statName": "EvasivePipsGainedAdditional",
-                "operation": "Int_Add",
-                "modValue": "1",
-                "modType": "System.Int32"
+            "statisticData" : 
+            {
+				"statName" : "LV_ECM_Shield",
+				"operation": "Int_Add",
+				"modValue": "2",
+				"modType": "System.Int32"
             },
-            "nature": "Buff"
+            "nature" : "Buff"
+        },
+        {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1,
+				"uniqueEffectIdStackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "Aura",
+                "effectTargetType" : "EnemiesWithinRange",
+                "range" : 120.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "LV_ECM_JAM",
+				"Name" : "ECM Jammer",
+				"Details" : "Jamming ECM, reduces sensor checks for enemies in field",
+				"Icon" : "uixSvgIcon_action_sensorlock"
+            },
+            "statisticData" : 
+            {
+				"statName" : "LV_ECM_Jammed",
+				"operation": "Int_Add",
+				"modValue": "3",
+				"modType": "System.Int32"
+            },
+            "nature" : "Debuff"
         },
         {
             "durationData": {
@@ -176,7 +219,7 @@
         "items": [
             "component_type_stock",
             "ElectronicCounterMeasures",
-            "lv-jammer_m1_r4",
+            "lv-jammer_m1_r3",
             "lv-probe_m2"
         ],
         "tagSetSourceFile": ""

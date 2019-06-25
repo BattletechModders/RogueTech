@@ -2,6 +2,8 @@
     "Custom": {
         "Category": [
            { "CategoryID": "CockpitSensors"},
+           { "CategoryID": "ECM"},
+		   { "CategoryID": "Probe"},
 		   { "CategoryID": "AdvECM" }
         ],
         "WorkOrderCosts": {
@@ -12,11 +14,12 @@
         },
         "BonusDescriptions": {
             "Bonuses": [
-                "EvaPips: +1",
-                "Sensors: +15%",
+                "Sensors: +10%",
                 "Sight: +15%",
-                "IsECM: 3",
-                "ECMBubble: 150",
+                "IsECM: 2",
+                "ECMBubble: 60",
+				"Jammer: 4"
+				"JamBubble: 270"
                 "IsProbe: 2",
                 "Sharer",
                 "CockpitEWS"
@@ -41,8 +44,8 @@
         "Details": "The AR-12 Sheathed Directional Beacon with Guardian ECM Suit is a Star League Cockpit and Sensor system specifically designed for the Exterminator BattleMech, combining the benefits of an Active probe with a ECM system.",
         "Icon": "uixSvgIcon_equipment_Comms"
     },
-    "BonusValueA": "+1 Health/Resolve.",
-    "BonusValueB": "+20% Sensors/Sight",
+    "BonusValueA": "Probe",
+    "BonusValueB": "ECM",
     "ComponentType": "Upgrade",
     "ComponentSubType": "NotSet",
     "PrefabIdentifier": "",
@@ -53,30 +56,70 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
-        {
-            "durationData": {
+	{
+            "durationData" : {
                 "duration": -1,
-                "stackLimit": -1
+                "stackLimit": 1
             },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInStatusPanel": false
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "Aura",
+                "effectTargetType" : "AlliesWithinRange",
+                "range" : 60.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : false,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
             },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "GainEvasion",
-                "Name": "EVASIVE MOVE",
-                "Details": "This unit generates an extra EVASIVE charge from movement actions (up to its maximum).",
-                "Icon": "uixSvgIcon_action_evasivemove"
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "LV_ECM_SHIELD",
+				"Name" : "Makes it easier for enemies to know where you are, but harder to attack",
+				"Details" : "IPSUM SUCKUM",
+				"Icon" : "uixSvgIcon_status_ECM-missileDef"
             },
-            "statisticData": {
-                "statName": "EvasivePipsGainedAdditional",
-                "operation": "Int_Add",
-                "modValue": "1",
-                "modType": "System.Int32"
+            "statisticData" : 
+            {
+				"statName" : "LV_ECM_Shield",
+				"operation": "Int_Add",
+				"modValue": "2",
+				"modType": "System.Int32"
             },
-            "nature": "Buff"
+            "nature" : "Buff"
+        },
+        {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1,
+				"uniqueEffectIdStackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "Aura",
+                "effectTargetType" : "EnemiesWithinRange",
+                "range" : 270.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "LV_ECM_JAM",
+				"Name" : "ECM Jammer",
+				"Details" : "Jamming ECM, reduces sensor checks for enemies in field",
+				"Icon" : "uixSvgIcon_action_sensorlock"
+            },
+            "statisticData" : 
+            {
+				"statName" : "LV_ECM_Jammed",
+				"operation": "Int_Add",
+				"modValue": "4",
+				"modType": "System.Int32"
+            },
+            "nature" : "Debuff"
         },
         {
             "durationData": {
@@ -113,7 +156,7 @@
                 "effectsPersistAfterDestruction": false,
                 "statName": "SensorDistanceAbsolute",
                 "operation": "Float_Multiply",
-                "modValue": "1.15",
+                "modValue": "1.1",
                 "modType": "System.Single",
                 "additionalRules": "NotSet",
                 "targetCollection": "NotSet",
@@ -186,8 +229,8 @@
             "component_type_stock",
             "lv-shares-sensors",
             "ElectronicCounterMeasures",
-            "lv-jammer_m3_r5",
-            "lv-probe_m3"
+            "lv-jammer_m2_r5",
+            "lv-probe_m2"
         ],
         "tagSetSourceFile": ""
     }

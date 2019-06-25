@@ -1,963 +1,525 @@
 {
-    "HeatDamageInjuryEnabled" : true,
-    "ShutdownInjuryEnabled" : true,
-    "MinimumHeatSinksOnMech" : 10,
-    "EnforceRulesForAdditionalInternalHeatSinks" : true,
-    "AllowMixingHeatSinkTypes" : false,
-    "FractionalAccountingPrecision" : 0.5,
-    "ArmorStructureRatioEnforcement" : true,
-    "ArmorStructureRatioEnforcementSkipMechDefs" : [
-        
-    ],
-    "SaveMechDefOnMechLabConfirm" : false,
-    "DefaultEngineHeatSinkId" : "Gear_HeatSink_Generic_Standard",
-    "EngineMissingFallbackHeatSinkCapacity" : 30,
-    "DynamicSlotsValidateDropEnabled" : false,
-    "TagRestrictions" : [
-        {
-            "Tag" : "emod_case",
-            "IncompatibleTags" : [
-                "emod_case2"
-            ]
-        }
-    ],
-    "BonusDescriptionsBonusTemplate" : " <indent=10%><line-indent=-5%><line-height=65%>{{bonus}}</line-height></line-indent></indent>\r\n",
-    "BonusDescriptionsDescriptionTemplate" : "Traits:<b><color=#F79B26FF>\r\n{{bonuses}}</color></b>\r\n{{originalDescription}}",
-    "BonusDescriptions" : [
-        {
-            "Bonus" : "Whitespace",
-            "Short" : " ",
-            "Long" : " "
+    "AccuracyEffects" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Enables statistic effects for arm accuracy."
+    },
+    "ArmActuator" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Enables CBT arm actuators with CC like handling.",
+        "ForceFullDefaultActuators" : false,
+        "IgnoreFullActuatorsTag" : null,
+        "DefaultCBTShoulder" : "emod_arm_part_shoulder",
+        "DefaultCBTLower" : "emod_arm_part_lower",
+        "DefaultCBTUpper" : "emod_arm_part_upper",
+        "DefaultCBTHand" : "emod_arm_part_hand",
+        "DefaultCBTDefLower" : "emod_arm_part_lower",
+        "DefaultCBTDefHand" : "emod_arm_part_hand",
+        "InterruptHandDropIfNoLower" : false,
+        "ExtendHandLimit" : true
+    },
+    "ArmorStructureChanges" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Enables statistic effects for multiplying structure and armor values, happens before/after combat."
+    },
+    "ArmorStructureRatio" : {
+        "Enabled" : true,
+        "EnabledDescription" : "CBT rule enforcement, that armor at every mechs location is not more than 2 times the structure, head is allowed to be 3 times.",
+        "SkipMechDefs" : [
+            
+        ]
+    },
+    "AutoFixer" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Fixes up mechs, chassis and components to adhere to CBT rules and defaults. Done programmatically to be compatible to new mechs in the future.",
+        "MechDefSkip" : [
+            
+        ],
+        "MechDefTagsSkip" : [
+            "noautofix"
+        ],
+        "MechDefEngine" : true,
+        "MechDefCoolingDef" : "emod_kit_shs",
+        "MechDefHeatBlockDef" : "emod_engine_cooling",
+        "MechDefCoreDummy" : "emod_engine_dummy",
+        "UpgradeDefSkip" : [
+            
+        ],
+        "UpgradeDefTagsSkip" : [
+            "noautofix"
+        ],
+        "GyroCategorizer" : {
+            "Prefix" : "Gear_Gyro_",
+            "AllowedLocations" : "CenterTorso",
+            "ComponentType" : "Upgrade",
+            "CategoryId" : "Gyro",
+            "AutoAddCategoryIdIfMissing" : true
         },
-        {
-            "Bonus" : "EngineHSFreeExt",
-            "Short" : "- {0} HS ton",
-            "Long" : "- {0} HS ton",
-            "Full" : "{0} required external heat sinks, those count as weightless"
+        "GyroSlotChange" : {
+            "From" : 3,
+            "By" : 1,
+            "FromIsMin" : false,
+            "NewMin" : null
         },
-        {
-            "Bonus" : "EngineHSCap",
-            "Short" : "+ {0} HS Cap",
-            "Long" : "+ {0} HS Cap",
-            "Full" : "+ {0} additional installable engine heat sinks"
+        "CockpitCategorizer" : {
+            "Prefix" : "Gear_Cockpit_",
+            "AllowedLocations" : "Head",
+            "ComponentType" : "Upgrade",
+            "CategoryId" : "Cockpit",
+            "AutoAddCategoryIdIfMissing" : true
         },
-        {
-            "Bonus" : "EngineHSAdd",
-            "Short" : "+ {0} HS",
-            "Long" : "+ {0} Heat Sink",
-            "Full" : "+ {0} additional engine heat sinks"
+        "CockpitTonnageChange" : {
+            "From" : 0,
+            "By" : 3,
+            "FromIsMin" : false,
+            "NewMin" : null
         },
-        {
-            "Bonus" : "EngineWeightReduction",
-            "Short" : "- {0} E. Weight",
-            "Long" : "- {0} Engine Weight",
-            "Full" : "- {0} engine weight"
+        "CockpitSlotChange" : {
+            "From" : 1,
+            "By" : 0,
+            "FromIsMin" : false,
+            "NewMin" : null
         },
-        {
-            "Bonus" : "StructureWeightReduction",
-            "Short" : "- {0} S. Weight",
-            "Long" : "- {0} Structure Weight",
-            "Full" : "- {0} structure weight"
+        "LegUpgradesCategorizer" : {
+            "Prefix" : null,
+            "AllowedLocations" : "Legs",
+            "ComponentType" : "Upgrade",
+            "CategoryId" : "LegFootActuator",
+            "AutoAddCategoryIdIfMissing" : true
         },
-        {
-            "Bonus" : "ArmorWeightReduction",
-            "Short" : "- {0} A. Weight",
-            "Long" : "- {0} Armor Weight",
-            "Full" : "- {0} armor weight"
+        "LegUpgradesSlotChange" : {
+            "From" : 3,
+            "By" : -1,
+            "FromIsMin" : true,
+            "NewMin" : 1
         },
-        {
-            "Bonus" : "ReservedSlots",
-            "Short" : "- {0} Slots",
-            "Long" : "- {0} Slots Available",
-            "Full" : "- {0} slots available"
-        },
-        {
-            "Bonus" : "ArmAccuracyBonus",
-            "Short" : "+ {0} Acc. (Arm)",
-            "Long" : "+ {0} Accuracy (Arm)",
-            "Full" : "+ {0} accuracy with arm mounted weapons"
-        },
-        {
-            "Bonus" : "MeleeAccuracyBonus",
-            "Short" : "+ {0} Melee Hit",
-            "Long" : "+ {0} Melee Hit",
-            "Full" : "+ {0} accuracy with all melee attacks"
-        },
-        {
-            "Bonus" : "CoolingSystemDHS",
-            "Short" : "2 x Cooling",
-            "Long" : "2 x Cooling",
-            "Full" : "2 x cooling throughout the BattleMech"
-        }
-    ],
-    "EngineCriticalHitStates" : {
-        "MaxStates" : 2,
-        "DeathMethod" : "EngineDestroyed",
-        "HitEffects" : [
+        "ChassisDefSkip" : [
+            
+        ],
+        "ChassisDefTagsSkip" : [
+            "noautofix"
+        ],
+        "ChassisDefSlotsChanges" : [
             {
-                "State" : 1,
-                "StatusEffect" : {
-                    "durationData" : {
-                        "duration" : 0,
-                        "ticksOnActivations" : false,
-                        "useActivationsOfTarget" : false,
-                        "ticksOnEndOfRound" : false,
-                        "ticksOnMovements" : false,
-                        "stackLimit" : 0,
-                        "clearedWhenAttacked" : false
-                    },
-                    "targetingData" : {
-                        "effectTargetsCreator" : true,
-                        "effectTriggerType" : "Passive",
-                        "triggerLimit" : 0,
-                        "extendDurationOnTrigger" : 0,
-                        "specialRules" : "NotSet",
-                        "effectTargetType" : "Creator",
-                        "range" : 0,
-                        "forcePathRebuild" : false,
-                        "forceVisRebuild" : false,
-                        "showInTargetPreview" : true,
-                        "showInStatusPanel" : true
-                    },
-                    "effectType" : "StatisticEffect",
-                    "Description" : {
-                        "Id" : "StatusEffect-EngineCrit1",
-                        "Name" : "Engine Crit (1)",
-                        "Details" : "Engine was hit, additional 15 Heat / Turn",
-                        "Icon" : "uixSvgIcon_equipment_ThermalExchanger"
-                    },
-                    "nature" : "Debuff",
-                    "statisticData" : {
-                        "appliesEachTick" : false,
-                        "effectsPersistAfterDestruction" : false,
-                        "statName" : "HeatSinkCapacity",
-                        "operation" : "Int_Subtract",
-                        "modValue" : "15",
-                        "modType" : "System.Int32",
-                        "additionalRules" : "NotSet",
-                        "targetCollection" : "NotSet",
-                        "targetWeaponCategory" : "NotSet",
-                        "targetWeaponType" : "NotSet",
-                        "targetAmmoCategory" : "NotSet",
-                        "targetWeaponSubType" : "NotSet"
-                    }
+                "Location" : "LeftTorso",
+                "Change" : {
+                    "From" : 10,
+                    "By" : 2,
+                    "FromIsMin" : false,
+                    "NewMin" : null
                 }
             },
             {
-                "State" : 2,
-                "StatusEffect" : {
-                    "durationData" : {
-                        "duration" : 0,
-                        "ticksOnActivations" : false,
-                        "useActivationsOfTarget" : false,
-                        "ticksOnEndOfRound" : false,
-                        "ticksOnMovements" : false,
-                        "stackLimit" : 0,
-                        "clearedWhenAttacked" : false
-                    },
-                    "targetingData" : {
-                        "effectTargetsCreator" : true,
-                        "effectTriggerType" : "Passive",
-                        "triggerLimit" : 0,
-                        "extendDurationOnTrigger" : 0,
-                        "specialRules" : "NotSet",
-                        "effectTargetType" : "Creator",
-                        "range" : 0,
-                        "forcePathRebuild" : false,
-                        "forceVisRebuild" : false,
-                        "showInTargetPreview" : true,
-                        "showInStatusPanel" : true
-                    },
-                    "effectType" : "StatisticEffect",
-                    "Description" : {
-                        "Id" : "StatusEffect-EngineCrit2",
-                        "Name" : "Engine Crit (2)",
-                        "Details" : "Engine was hit, additional 30 Heat / Turn",
-                        "Icon" : "uixSvgIcon_equipment_ThermalExchanger"
-                    },
-                    "nature" : "Debuff",
-                    "statisticData" : {
-                        "appliesEachTick" : false,
-                        "effectsPersistAfterDestruction" : false,
-                        "statName" : "HeatSinkCapacity",
-                        "operation" : "Int_Subtract",
-                        "modValue" : "30",
-                        "modType" : "System.Int32",
-                        "additionalRules" : "NotSet",
-                        "targetCollection" : "NotSet",
-                        "targetWeaponCategory" : "NotSet",
-                        "targetWeaponType" : "NotSet",
-                        "targetAmmoCategory" : "NotSet",
-                        "targetWeaponSubType" : "NotSet"
-                    }
+                "Location" : "RightTorso",
+                "Change" : {
+                    "From" : 10,
+                    "By" : 2,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "LeftLeg",
+                "Change" : {
+                    "From" : 4,
+                    "By" : 2,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "RightLeg",
+                "Change" : {
+                    "From" : 4,
+                    "By" : 2,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "Head",
+                "Change" : {
+                    "From" : 1,
+                    "By" : 5,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "CenterTorso",
+                "Change" : {
+                    "From" : 4,
+                    "By" : 11,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "LeftArm",
+                "Change" : {
+                    "From" : 8,
+                    "By" : 4,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "RightArm",
+                "Change" : {
+                    "From" : 8,
+                    "By" : 4,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "LeftLeg",
+                "Change" : {
+                    "From" : 2,
+                    "By" : 4,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "RightLeg",
+                "Change" : {
+                    "From" : 2,
+                    "By" : 4,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "Head",
+                "Change" : {
+                    "From" : 3,
+                    "By" : 3,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "LeftArm",
+                "Change" : {
+                    "From" : 11,
+                    "By" : 1,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "RightArm",
+                "Change" : {
+                    "From" : 11,
+                    "By" : 1,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            }
+        ],
+        "ChassisDefInitialTonnage" : true,
+        "ChassisDefInitialToTotalTonnageFactor" : 0.1,
+        "ChassisDefMaxJumpjets" : true,
+        "ChassisDefMaxJumpjetsCount" : 8,
+        "ChassisDefMaxJumpjetsRating" : 400,
+        "WeaponDefTagsSkip" : [
+            "noautofix"
+        ],
+        "AutoFixWeaponDefSlotsChanges" : [
+            {
+                "Type" : "AC5",
+                "Change" : {
+                    "From" : 2,
+                    "By" : 2,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Type" : "AC10",
+                "Change" : {
+                    "From" : 3,
+                    "By" : 4,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Type" : "AC20",
+                "Change" : {
+                    "From" : 4,
+                    "By" : 6,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Type" : "Gauss",
+                "Change" : {
+                    "From" : 5,
+                    "By" : 2,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Type" : "LRM20",
+                "Change" : {
+                    "From" : 4,
+                    "By" : 1,
+                    "FromIsMin" : false,
+                    "NewMin" : null
                 }
             }
         ]
     },
-    "LogLevels" : [
-        {
-            "Name" : "MechEngineer",
-            "Level" : "Debug"
-        },
-        {
-            "Name" : "MechEngineer.MechInitStats",
-            "Level" : "Log"
-        }
-    ],
-    "AutoFixMechDefSkip" : [
-        
-    ],
-    "AutoFixUpgradeDefSkip" : [
-        "Gear_Cockpit_Generic_Small",
-        "emod_arm_lower"
-    ],
-    "AutoFixMechDefEngine" : true,
-    "AutoFixMechDefEngineTypeDef" : "emod_engineslots_std_center",
-    "AutoFixMechDefCoolingDef" : "emod_kit_shs",
-    "AutoFixMechDefHeatBlockDef" : "emod_engine_cooling",
-    "AutoFixGyroCategorizer" : {
-        "Prefix" : "Gear_Gyro_",
-        "AllowedLocations" : "CenterTorso",
-        "ComponentType" : "Upgrade",
-        "CategoryId" : "Gyro",
-        "AutoAddCategoryIdIfMissing" : true
+    "BattleTechLoadFix" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Fixes a vanilla bug by loading unused components so they get displayed in the mech lab."
     },
-    "AutoFixMechDefGyroAdder" : {
-        "ComponentDefId" : "Gear_Gyro_Generic_Standard",
-        "ChassisLocation" : "CenterTorso",
-        "ComponentType" : "Upgrade"
+    "ComponentExplosions" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows each component to define destructive forces in case they explode, also implements proper CASE."
     },
-    "AutoFixGyroSlotChange" : {
-        "From" : 3,
-        "By" : 1,
-        "FromIsMin" : false
+    "CompressFloatieMessages" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Compresses similar floatie messages to a single message with a multiplier. E.g. MEDIUM LASER DESTROYED x 4",
+        "DebugDestroyedFloaties" : false
     },
-    "AutoFixCockpitCategorizer" : {
-        "Prefix" : "Gear_Cockpit_",
-        "AllowedLocations" : "Head",
-        "ComponentType" : "Upgrade",
-        "CategoryId" : "Cockpit",
-        "AutoAddCategoryIdIfMissing" : true
+    "CriticalEffects" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows custom multiple critical hit states for individual components.",
+        "DescriptionTemplate" : "Critical Effects:<b><color=#F79B26FF>\r\n{{elements}}</color></b>\r\n{{originalDescription}}",
+        "ElementTemplate" : " <indent=10%><line-indent=-5%><line-height=65%>{{element}}</line-height></line-indent></indent>\r\n",
+        "DescriptionUseName" : false,
+        "CritFloatieMessage" : "{0} CRIT",
+        "DestroyedFloatieMessage" : "{0} DESTROYED"
     },
-    "AutoFixMechDefCockpitAdder" : {
-        "ComponentDefId" : "Gear_Cockpit_Generic_Standard",
-        "ChassisLocation" : "Head",
-        "ComponentType" : "Upgrade"
+    "DebugCycleCombatSounds" : {
+        "Enabled" : false,
+        "EnabledDescription" : "Cycle through SFX sounds when pressing a specific button on the start menu",
+        "SpecificButton" : "Skirmish"
     },
-    "AutoFixCockpitTonnageChange" : {
-        "From" : 0,
-        "By" : 3,
-        "FromIsMin" : false
+    "DebugSaveMechToFile" : {
+        "Enabled" : false,
+        "EnabledDescription" : "Saves mechdefs to 'MechEngineer/Saves' when saving a mech in the mechlab"
     },
-    "AutoFixCockpitSlotChange" : {
-        "From" : 1,
-        "By" : 1,
-        "FromIsMin" : false
+    "DynamicSlots" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows components to take up space dynamically on a mech.",
+        "DynamicSlotsValidateDropEnabled" : false,
+        "DynamicSlotsValidateDropEnabledDescription" : "Don't allow dropping of items that would exceed the available slots."
     },
-    "AutoFixMechDefArmActuator" : true,
-    "AutoFixArmActuatorCategorizer" : {
-        "AllowedLocations" : "Arms",
-        "ComponentType" : "Upgrade",
-        "CategoryId" : "ArmActuator",
-        "AutoAddCategoryIdIfMissing" : true
-    },
-    "AutoFixArmActuatorSlotChange" : {
-        "From" : 2,
-        "By" : 1,
-        "FromIsMin" : false
-    },
-    "AutoFixLegUpgradesCategorizer" : {
-        "AllowedLocations" : "Legs",
-        "ComponentType" : "Upgrade",
-        "CategoryId" : "LegUpgrade",
-        "AutoAddCategoryIdIfMissing" : true
-    },
-    "AutoFixLegUpgradesSlotChange" : {
-        "From" : 3,
-        "By" : -2,
-        "FromIsMin" : true,
-        "NewMin" : 1
-    },
-    "AutoFixArmorCategorizer" : {
-        "AllowedLocations" : "None",
-        "ComponentType" : "NotSet",
-        "CategoryId" : "Armor",
-        "AutoAddCategoryIdIfMissing" : true
-    },
-    "AutoFixMechDefArmorAdder" : {
-        "ComponentDefId" : "emod_armorslots_standard",
-        "ChassisLocation" : "CenterTorso",
-        "ComponentType" : "Upgrade"
-    },
-    "AutoFixStructureCategorizer" : {
-        "AllowedLocations" : "None",
-        "ComponentType" : "NotSet",
-        "CategoryId" : "Structure",
-        "AutoAddCategoryIdIfMissing" : true
-    },
-    "AutoFixMechDefStructureAdder" : {
-        "ComponentDefId" : "emod_structureslots_standard",
-        "ChassisLocation" : "CenterTorso",
-        "ComponentType" : "Upgrade"
-    },
-    "AutoFixChassisDefSkip" : [
-        
-    ],
-    "AutoFixChassisDefSlotsChanges" : [
-        {
-            "Location" : "LeftTorso",
-            "Change" : {
-                "From" : 10,
-                "By" : 2,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Location" : "RightTorso",
-            "Change" : {
-                "From" : 10,
-                "By" : 2,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Location" : "LeftLeg",
-            "Change" : {
-                "From" : 4,
-                "By" : -2,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Location" : "RightLeg",
-            "Change" : {
-                "From" : 4,
-                "By" : -2,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Location" : "Head",
-            "Change" : {
-                "From" : 1,
-                "By" : 2,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Location" : "CenterTorso",
-            "Change" : {
-                "From" : 4,
-                "By" : 11,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Location" : "LeftArm",
-            "Change" : {
-                "From" : 8,
-                "By" : 3,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Location" : "RightArm",
-            "Change" : {
-                "From" : 8,
-                "By" : 3,
-                "FromIsMin" : false
-            }
-        }
-    ],
-    "AutoFixChassisDefInitialTonnage" : true,
-    "AutoFixChassisDefInitialToTotalTonnageFactor" : 0.1,
-    "AutoFixChassisDefMaxJumpjets" : true,
-    "AutoFixChassisDefMaxJumpjetsCount" : 8,
-    "AutoFixChassisDefMaxJumpjetsRating" : 400,
-    "AutoFixWeaponDefSlotsChanges" : [
-        {
-            "Type" : "AC5",
-            "Change" : {
-                "From" : 2,
-                "By" : 2,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Type" : "AC10",
-            "Change" : {
-                "From" : 3,
-                "By" : 4,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Type" : "AC20",
-            "Change" : {
-                "From" : 4,
-                "By" : 6,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Type" : "Gauss",
-            "Change" : {
-                "From" : 5,
-                "By" : 2,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Type" : "LargeLaserPulse",
-            "Change" : {
-                "From" : 2,
-                "By" : 1,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Type" : "LRM20",
-            "Change" : {
-                "From" : 4,
-                "By" : 1,
-                "FromIsMin" : false
-            }
-        }
-    ],
-    "CBTMovement" : {
+    "Engine" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Provides engines that can be installed on mechs similar to how CBT works.",
+        "AllowMountingAllRatings" : false,
+        "AllowMountingAllRatingsDescription" : "Allow mounting all fusion core rating regardless of min/max sprint factors.",
+        "MinimumHeatSinksOnMech" : 10,
+        "MinimumHeatSinksOnMechDescription" : "Minimum heatsinks a mech requires.",
+        "EnforceRulesForAdditionalInternalHeatSinks" : true,
+        "EnforceRulesForAdditionalInternalHeatSinksDescription" : "Can't have those juicy ++ cooling systems with smaller fusion cores than the rules allow it.",
+        "AllowMixingHeatSinkTypes" : false,
+        "AllowMixingHeatSinkTypesDescription" : "Allow heat sinks patchwork.",
+        "DefaultEngineHeatSinkId" : "Gear_HeatSink_Generic_Standard",
+        "DefaultEngineHeatSinkIdDescription" : "Default heat sink type for engines without a kit.",
+        "EngineMissingFallbackHeatSinkCapacity" : 30,
+        "EngineMissingFallbackHeatSinkCapacityDescription" : "Heat sink capacity if no engine is detected.",
         "UseGameWalkValues" : true,
+        "UseGameWalkValuesDescription" : "Set to false to use more TT like walk values.",
         "JJRoundUp" : false,
+        "JJRoundUpDescription" : "The allowed number of jump jets is rounded up or down.",
         "TTWalkMultiplier" : 30,
         "TTSprintMultiplier" : 50
     },
-    "HardpointFix" : {
-        "AutoFixChassisDefWeaponHardpointCounts" : false,
-        "EnforceHardpointLimits" : false,
-        "AllowDefaultLoadoutWeapons" : false,
-        "AllowLRMInSmallerSlotsForAll" : false,
-        "AllowLRMInSmallerSlotsForMechs" : [
-            "atlas"
-        ],
-        "AllowLRMInLargerSlotsForAll" : true
+    "Globals" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows tooltips and other features to access the current mech from context."
     },
-    "Categories" : [
-        {
-            "Name" : "Cockpit",
-            "DisplayName" : "Cockpit",
-            "Unique" : true,
-            "UniqueForLocation" : false,
-            "Required" : true,
-            "displayName" : "Cockpit",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : 1,
-            "MaxEquipedPerLocation" : -1,
-            "MinEquiped" : 1,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "InventorySorter" : {
-                    "SortKey" : "Cockpit"
-                },
-                "Sorter" : {
-                    "Order" : 0
-                },
-                "Replace" : {
-                    "ComponentDefId" : "Gear_Cockpit_Generic_Standard",
-                    "Location" : "Head"
-                },
-                "Flags" : {
-                    "Flags" : [
-                        "not_broken"
-                    ]
-                }
+    "HardpointFix" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Optimizes the way installed weapons are shown on a mech model.",
+        "AutoFixChassisDefWeaponHardpointCounts" : false,
+        "AutoFixChassisDefWeaponHardpointCountsDescription" : "Changes chassis hardpoints based on configured prefabs.",
+        "EnforceHardpointLimits" : false,
+        "EnforceHardpointLimitsDescription" : "Enforces hardpoint limits in mechlab only allowing configured prefabs.",
+        "AllowDefaultLoadoutWeapons" : false,
+        "AllowDefaultLoadoutWeaponsDescription" : "Ignore limits that would prevent mounting default loadouts.",
+        "WeaponPrefabMappings" : [
+            {
+                "PrefabIdentifier" : "AC2",
+                "HardpointCandidates" : [
+                    "ac2",
+                    "ac",
+                    "lbx"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "Armor",
-            "DisplayName" : "Armor",
-            "Unique" : true,
-            "UniqueForLocation" : false,
-            "Required" : true,
-            "displayName" : "Armor",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : 1,
-            "MaxEquipedPerLocation" : -1,
-            "MinEquiped" : 1,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "InventorySorter" : {
-                    "SortKey" : "CzOrder0"
-                },
-                "Color" : {
-                    "UIColor" : "ArmorDamaged"
-                },
-                "Sorter" : {
-                    "Order" : 0
-                },
-                "Replace" : {
-                    "ComponentDefId" : "emod_armorslots_standard",
-                    "Location" : "CenterTorso"
-                },
-                "Flags" : {
-                    "Flags" : [
-                        "ignore_damage",
-                        "no_salvage"
-                    ]
-                }
+            {
+                "PrefabIdentifier" : "AC5",
+                "HardpointCandidates" : [
+                    "ac5",
+                    "uac5",
+                    "ac",
+                    "lbx"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "Structure",
-            "DisplayName" : "Structure",
-            "Unique" : true,
-            "UniqueForLocation" : false,
-            "Required" : true,
-            "displayName" : "Structure",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : 1,
-            "MaxEquipedPerLocation" : -1,
-            "MinEquiped" : 1,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "Color" : {
-                    "UIColor" : "OrangeHalf"
-                },
-                "InventorySorter" : {
-                    "SortKey" : "CzOrder1"
-                },
-                "Sorter" : {
-                    "Order" : 1
-                },
-                "Replace" : {
-                    "ComponentDefId" : "emod_structureslots_standard",
-                    "Location" : "CenterTorso"
-                },
-                "Flags" : {
-                    "Flags" : [
-                        "ignore_damage",
-                        "no_salvage"
-                    ]
-                }
+            {
+                "PrefabIdentifier" : "AC10",
+                "HardpointCandidates" : [
+                    "ac10",
+                    "lbx10",
+                    "ac",
+                    "lbx"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "Cooling",
-            "DisplayName" : "Cooling System",
-            "Unique" : true,
-            "UniqueForLocation" : false,
-            "Required" : true,
-            "displayName" : "Cooling System",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : 1,
-            "MaxEquipedPerLocation" : -1,
-            "MinEquiped" : 1,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "InventorySorter" : {
-                    "SortKey" : "CzOrder2"
-                },
-                "Sorter" : {
-                    "Order" : 2
-                },
-                "Replace" : {
-                    "ComponentDefId" : "emod_kit_shs",
-                    "Location" : "CenterTorso"
-                },
-                "Flags" : {
-                    "Flags" : [
-                        "ignore_damage",
-                        "no_salvage"
-                    ]
-                }
+            {
+                "PrefabIdentifier" : "AC20",
+                "HardpointCandidates" : [
+                    "ac20",
+                    "ac",
+                    "lbx"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "Gyro",
-            "DisplayName" : "Gyro",
-            "Unique" : true,
-            "UniqueForLocation" : false,
-            "Required" : true,
-            "displayName" : "Gyro",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : 1,
-            "MaxEquipedPerLocation" : -1,
-            "MinEquiped" : 1,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "InventorySorter" : {
-                    "SortKey" : "CzOrder3"
-                },
-                "Sorter" : {
-                    "Order" : 3
-                },
-                "Replace" : {
-                    "ComponentDefId" : "Gear_Gyro_Generic_Standard",
-                    "Location" : "CenterTorso"
-                },
-                "Flags" : {
-                    "Flags" : [
-                        "not_broken"
-                    ]
-                }
+            {
+                "PrefabIdentifier" : "artillery",
+                "HardpointCandidates" : [
+                    "artillery",
+                    "ac20",
+                    "ac",
+                    "lbx"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "EngineShield",
-            "DisplayName" : "Engine Shielding",
-            "Unique" : true,
-            "UniqueForLocation" : false,
-            "Required" : true,
-            "displayName" : "Engine Shielding",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : 1,
-            "MaxEquipedPerLocation" : -1,
-            "MinEquiped" : 1,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "InventorySorter" : {
-                    "SortKey" : "CzOrder4"
-                },
-                "Sorter" : {
-                    "Order" : 4
-                },
-                "Replace" : {
-                    "ComponentDefId" : "emod_engineslots_std_center",
-                    "Location" : "CenterTorso"
-                },
-                "Flags" : {
-                    "Flags" : [
-                        "engine_part",
-                        "not_broken",
-                        "no_salvage"
-                    ]
-                }
+            {
+                "PrefabIdentifier" : "lrm5",
+                "HardpointCandidates" : [
+                    "lrm5",
+                    "lrm10",
+                    "lrm15",
+                    "lrm20",
+                    "srm20"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "EngineHeatBlock",
-            "DisplayName" : "Engine Heat Block",
-            "Unique" : true,
-            "UniqueForLocation" : false,
-            "Required" : true,
-            "displayName" : "Engine Heat Block",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : 1,
-            "MaxEquipedPerLocation" : -1,
-            "MinEquiped" : 1,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "InventorySorter" : {
-                    "SortKey" : "CzOrder5"
-                },
-                "Sorter" : {
-                    "Order" : 5
-                },
-                "Replace" : {
-                    "ComponentDefId" : "emod_engine_cooling",
-                    "Location" : "CenterTorso"
-                },
-                "Flags" : {
-                    "Flags" : [
-                        "engine_part",
-                        "not_broken"
-                    ]
-                }
+            {
+                "PrefabIdentifier" : "lrm10",
+                "HardpointCandidates" : [
+                    "lrm10",
+                    "lrm15",
+                    "lrm20",
+                    "srm20",
+                    "lrm5"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "EngineCore",
-            "DisplayName" : "Engine Core",
-            "Unique" : true,
-            "UniqueForLocation" : false,
-            "Required" : true,
-            "displayName" : "Engine Core",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : 1,
-            "MaxEquipedPerLocation" : -1,
-            "MinEquiped" : 1,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "InventorySorter" : {
-                    "SortKey" : "CzOrder6"
-                },
-                "Sorter" : {
-                    "Order" : 6
-                },
-                "Replace" : {
-                    "ComponentDefId" : "emod_engine_dummy",
-                    "Location" : "CenterTorso"
-                },
-                "Flags" : {
-                    "Flags" : [
-                        "engine_part",
-                        "not_broken"
-                    ]
-                }
+            {
+                "PrefabIdentifier" : "lrm15",
+                "HardpointCandidates" : [
+                    "lrm15",
+                    "lrm20",
+                    "srm20",
+                    "lrm10",
+                    "lrm5"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "EngineSlots",
-            "DisplayName" : "Engine Slots",
-            "Unique" : false,
-            "UniqueForLocation" : false,
-            "Required" : false,
-            "displayName" : "Engine Slots",
-            "AllowMixTags" : true,
-            "AutoReplace" : false,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : -1,
-            "MaxEquipedPerLocation" : -1,
-            "MinEquiped" : 0,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "Sorter" : {
-                    "Order" : 0
-                },
-                "Flags" : {
-                    "Flags" : [
-                        "engine_part",
-                        "not_broken",
-                        "default"
-                    ]
-                }
+            {
+                "PrefabIdentifier" : "lrm20",
+                "HardpointCandidates" : [
+                    "lrm20",
+                    "srm20",
+                    "lrm15",
+                    "lrm10",
+                    "lrm5"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "ArmActuator",
-            "DisplayName" : "Arm Actuator",
-            "Unique" : false,
-            "UniqueForLocation" : true,
-            "Required" : true,
-            "displayName" : "Arm Actuator",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : -1,
-            "MaxEquipedPerLocation" : 1,
-            "MinEquiped" : 2,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "InventorySorter" : {
-                    "SortKey" : "ActuatorArm"
-                },
-                "Sorter" : {
-                    "Order" : 0
-                },
-                "Replace" : {
-                    "ComponentDefId" : "emod_arm_upper"
-                },
-                "ArmActuator" : {
-                    "AccuracyBonus" : -1,
-                    "Type" : "Hand"
-                }
+            {
+                "PrefabIdentifier" : "MachineGun",
+                "HardpointCandidates" : [
+                    "machinegun",
+                    "mg"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "LegUpgrade",
-            "DisplayName" : "Leg Upgrade",
-            "Unique" : true,
-            "UniqueForLocation" : false,
-            "Required" : false,
-            "displayName" : "Leg Upgrade",
-            "AllowMixTags" : true,
-            "AutoReplace" : true,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : 1,
-            "MaxEquipedPerLocation" : -1,
-            "MinEquiped" : 0,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "InventorySorter" : {
-                    "SortKey" : "ActuatorLeg"
-                }
+            {
+                "PrefabIdentifier" : "srm2",
+                "HardpointCandidates" : [
+                    "srm2",
+                    "srm4",
+                    "srm6"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        },
-        {
-            "Name" : "CASE",
-            "DisplayName" : "CASE",
-            "Unique" : false,
-            "UniqueForLocation" : true,
-            "Required" : false,
-            "displayName" : "CASE",
-            "AllowMixTags" : true,
-            "AutoReplace" : false,
-            "ReplaceAnyLocation" : false,
-            "MaxEquiped" : -1,
-            "MaxEquipedPerLocation" : 1,
-            "MinEquiped" : 0,
-            "AddCategoryToDescription" : true,
-            "DefaultCustoms" : {
-                "InventorySorter" : {
-                    "SortKey" : "CASE"
-                },
-                "CASE" : {
-                    
-                },
-                "Flags" : {
-                    "Flags" : [
-                        "ignore_damage"
-                    ]
-                }
+            {
+                "PrefabIdentifier" : "srm4",
+                "HardpointCandidates" : [
+                    "srm4",
+                    "srm6",
+                    "srm2"
+                ]
             },
-            "AddAlreadyEquiped" : "{0} already installed on mech",
-            "AddAlreadyEquipedLocation" : "{0} already installed on {1}",
-            "AddMaximumReached" : "Mech already have {1} of {0} installed",
-            "AddMaximumLocationReached" : "Mech already have {1} of {0} installed at {2}",
-            "AddMixed" : "Mech can have only one type of {0}",
-            "ValidateRequred" : "MISSING {0}: This mech must mount a {1}",
-            "ValidateMinimum" : "MISSING {0}: This mech must mount at least {2} of {1}",
-            "ValidateMixed" : "WRONG {0}: Mech can have only one type of {1}",
-            "ValidateUnique" : "EXCESS {0}: This mech can't mount more then one {1}",
-            "ValidateMaximum" : "EXCESS {0}: This mech can't mount more then {2} of {1}",
-            "ValidateUniqueLocation" : "EXCESS {0}: This mech can't mount more then one {1} at any location",
-            "ValidateMaximumLocation" : "EXCESS {0}: This mech can't mount more then {2} of {1} any location"
-        }
-    ]
+            {
+                "PrefabIdentifier" : "srm6",
+                "HardpointCandidates" : [
+                    "srm6",
+                    "srm4",
+                    "srm2"
+                ]
+            }
+        ]
+    },
+    "InvalidInventory" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Make sure invalid mech configurations can't be saved in skirmish and can't be fielded in the campaign."
+    },
+    "LocationalEffects" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows other features to support locational statistic effects."
+    },
+    "MechLabSlots" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Makes the mech lab adhere to any custom mech slot counts.",
+        "MechLabArmTopPadding" : 120,
+        "MechLabGeneralSlots" : 3
+    },
+    "MoveMultiplierStat" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Introduces a new statistic effect to allow easy manipulation of (mech only) movement."
+    },
+    "NewSaveFolder" : {
+        "Enabled" : false,
+        "EnabledDescription" : "Redirects all save operations to use one folder for all save related data.",
+        "Path" : "Mods/Saves"
+    },
+    "OverrideDescriptions" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows other features to override tooltips and descriptions, also provides bonus description management.",
+        "BonusDescriptionsDescriptionTemplate" : "Traits:<b><color=#F79B26FF>\r\n{{elements}}</color></b>\r\n{{originalDescription}}",
+        "BonusDescriptionsElementTemplate" : " <indent=10%><line-indent=-5%><line-height=65%>{{element}}</line-height></line-indent></indent>\r\n"
+    },
+    "OverrideGhostVFX" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows to turn off or reduce the strong and weak ghost effects of ECM, and allows to remove the ECM globe effect.",
+        "Blacklisted" : [
+            "vfxPrfPrtl_ECM_loop",
+            "vfxPrfPrtl_ECM_opponent_loop",
+            "vfxPrfPrtl_ECMcarrierAura_loop"
+        ],
+        "BlipWeak" : "Weak",
+        "BlipStrong" : "Weak"
+    },
+    "OverrideTonnage" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows other features to override tonnage calculations.",
+        "FractionalAccountingPrecision" : 0.5,
+        "ArmorRoundingPrecision" : null
+    },
+    "ShutdownInjuryProtection" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Pilots receive injury when mech receives overheat damage or has to shut down in case life support is destroyed.",
+        "HeatDamageInjuryEnabled" : true,
+        "ShutdownInjuryEnabled" : true
+    },
+    "TurretLimitedAmmo" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Turrets use up ammo and don't explode once ammo is gone."
+    },
+    "TurretMechComponents" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Turrets can now use components and benefit from their status effects."
+    }
 }

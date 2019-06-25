@@ -3,12 +3,15 @@
     "contractName": "Stubborn Surrender",
     "contractDisplayStyle": "BaseCampaignNormal",
     "difficulty": 5,
+    "stopTellingMe": false,
+    "difficultyUIModifier": 0,
+    "filename": "SimpleBattle_StubbornSurrender.json",
     "weight": 1,
     "scope": "STANDARD",
     "finalDifficulty": 0,
     "shortDescription": "Many years ago, we fought a lengthy conflict with {TEAM_TAR.FactionDef.ShortName} here in {TGT_SYSTEM.name}. Recently, however, news has trickled in from a remote region of the planet: enemy forces harrying regional transportation. Eyewitness reports describe very old 'Mechs in colors from the conflict long since ended. You are to show these old MechWarriors that the war is over for them as well.",
-    "longDescription": "Commander, we can't understimate these old-timers, but fortunately we can expect poorly maintained 'Mechs. Finish them quickly.",
-    "salvagePotential": "12",
+    "longDescription": "Commander, we can't underestimate these old-timers, but fortunately we can expect poorly maintained 'Mechs. Finish them quickly.",
+    "salvagePotential": 12,
     "requirementList": [
         {
             "Scope": "StarSystem",
@@ -26,7 +29,14 @@
                 {
                     "obj": "Employer.IsOwner",
                     "op": "Equal",
-                    "val": "1"
+                    "val": 1,
+                    "valueConstant": null
+                },
+                {
+                    "obj": "Employer.AuriganPirates",
+                    "op": "Equal",
+                    "val": 0,
+                    "valueConstant": null
                 }
             ]
         }
@@ -36,6 +46,20 @@
     "contractType": "SimpleBattle",
     "encounterPlayStyle": "SinglePlayer",
     "maxNumberOfPlayerUnits": 4,
+    "lanceMinTonnage": -1,
+    "lanceMaxTonnage": -1,
+    "mechMinTonnages": [
+        -1,
+        -1,
+        -1,
+        -1
+    ],
+    "mechMaxTonnages": [
+        -1,
+        -1,
+        -1,
+        -1
+    ],
     "mapMood": null,
     "startingFogOfWarVisibility": "Surveyed",
     "contractObjectiveList": [
@@ -75,6 +99,7 @@
             "OnFailureResults": []
         }
     ],
+    "artilleryObjectiveList": [],
     "buildingList": [],
     "chunkList": [
         {
@@ -82,7 +107,8 @@
             "encounterChunk": {
                 "EncounterObjectGuid": "181d617b-02bc-4fd3-be25-d6d5cffb78de"
             },
-            "enableChunkFromContract": false
+            "enableChunkFromContract": false,
+            "requirementList": []
         }
     ],
     "cameraFocusHelperList": [
@@ -116,10 +142,10 @@
                 {
                     "words": "Looks like we've found our targets, Commander.",
                     "wordsColor": {
-                        "r": "1",
-                        "g": "1",
-                        "b": "1",
-                        "a": "1"
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
                     },
                     "selectedCastDefId": "castDef_DariusDefault",
                     "emote": "Default",
@@ -132,10 +158,10 @@
                 {
                     "words": "Move forward and clear them out.",
                     "wordsColor": {
-                        "r": "1",
-                        "g": "1",
-                        "b": "1",
-                        "a": "1"
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
                     },
                     "selectedCastDefId": "castDef_DariusDefault",
                     "emote": "Default",
@@ -148,10 +174,10 @@
                 {
                     "words": "Be careful. These Mechs may be old and poorly maintained, but they can still kill you.",
                     "wordsColor": {
-                        "r": "1",
-                        "g": "1",
-                        "b": "1",
-                        "a": "1"
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
                     },
                     "selectedCastDefId": "castDef_DariusDefault",
                     "emote": "Default",
@@ -173,10 +199,10 @@
                 {
                     "words": "Excellent work commander; the zone is clean, the board is green. Let's go home.",
                     "wordsColor": {
-                        "r": "1",
-                        "g": "1",
-                        "b": "1",
-                        "a": "1"
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
                     },
                     "selectedCastDefId": "castDef_DariusDefault",
                     "emote": "Default",
@@ -198,10 +224,10 @@
                 {
                     "words": "Well, those old timers still know a few tricks. They live to fight another day.",
                     "wordsColor": {
-                        "r": "1",
-                        "g": "1",
-                        "b": "1",
-                        "a": "1"
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
                     },
                     "selectedCastDefId": "castDef_DariusDefault",
                     "emote": "Default",
@@ -239,6 +265,7 @@
             ]
         }
     ],
+    "overrideAutoCompleteDialogueId": null,
     "disableNegotations": false,
     "disableLanceConfiguration": false,
     "disableCancelButton": false,
@@ -250,6 +277,7 @@
     "expirationTimeOverride": -1,
     "negotiatedSalary": 1,
     "negotiatedSalvage": 0,
+    "excludedFromProceduralGeneration": false,
     "player1Team": {
         "encounterLayerData": {
             "EncounterObjectGuid": "c1dd76b9-5f5f-46f1-b5a2-d1f22dd4991b"
@@ -267,15 +295,15 @@
                 "lanceDefId": "Manual",
                 "lanceTagSet": {
                     "items": [],
-                    "tagSetSourceFile": ""
+                    "tagSetSourceFile": "tags/LanceTags"
                 },
                 "lanceExcludedTagSet": {
                     "items": [],
-                    "tagSetSourceFile": "Tags/LanceTags"
+                    "tagSetSourceFile": "tags/LanceTags"
                 },
                 "spawnEffectTags": {
                     "items": [],
-                    "tagSetSourceFile": "Tags/SpawnEffectTags"
+                    "tagSetSourceFile": "tags/SpawnEffectTags"
                 },
                 "lanceDifficultyAdjustment": 0,
                 "selectedLanceDefId": null,
@@ -286,28 +314,29 @@
                             "EncounterObjectGuid": "ec9d2280-ca9a-4d90-8a20-963d8a4c0a39"
                         },
                         "customUnitName": null,
+                        "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "mechDef_None",
                         "unitTagSet": {
                             "items": [],
-                            "tagSetSourceFile": ""
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/UnitTags"
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "spawnEffectTags": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/SpawnEffectTags"
+                            "tagSetSourceFile": "tags/SpawnEffectTags"
                         },
                         "pilotDefId": "pilotDef_InheritLance",
                         "pilotTagSet": {
                             "items": [],
-                            "tagSetSourceFile": ""
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "pilotExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/PilotTags"
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "selectedUnitType": "UNDEFINED",
                         "selectedUnitDefId": null,
@@ -318,28 +347,29 @@
                             "EncounterObjectGuid": "ebc06b6a-c5a8-4165-95ce-480bcf335570"
                         },
                         "customUnitName": null,
+                        "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "mechDef_None",
                         "unitTagSet": {
                             "items": [],
-                            "tagSetSourceFile": ""
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/UnitTags"
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "spawnEffectTags": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/SpawnEffectTags"
+                            "tagSetSourceFile": "tags/SpawnEffectTags"
                         },
                         "pilotDefId": "pilotDef_InheritLance",
                         "pilotTagSet": {
                             "items": [],
-                            "tagSetSourceFile": ""
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "pilotExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/PilotTags"
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "selectedUnitType": "UNDEFINED",
                         "selectedUnitDefId": null,
@@ -350,28 +380,29 @@
                             "EncounterObjectGuid": "d50f1e9d-0a0b-4dc8-9a06-a33233aaa8a1"
                         },
                         "customUnitName": null,
+                        "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "mechDef_None",
                         "unitTagSet": {
                             "items": [],
-                            "tagSetSourceFile": ""
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/UnitTags"
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "spawnEffectTags": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/SpawnEffectTags"
+                            "tagSetSourceFile": "tags/SpawnEffectTags"
                         },
                         "pilotDefId": "pilotDef_InheritLance",
                         "pilotTagSet": {
                             "items": [],
-                            "tagSetSourceFile": ""
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "pilotExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/PilotTags"
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "selectedUnitType": "UNDEFINED",
                         "selectedUnitDefId": null,
@@ -382,28 +413,29 @@
                             "EncounterObjectGuid": "461141c2-f956-49a5-b2c6-6f951b957a94"
                         },
                         "customUnitName": null,
+                        "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "mechDef_None",
                         "unitTagSet": {
                             "items": [],
-                            "tagSetSourceFile": ""
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/UnitTags"
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "spawnEffectTags": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/SpawnEffectTags"
+                            "tagSetSourceFile": "tags/SpawnEffectTags"
                         },
                         "pilotDefId": "pilotDef_InheritLance",
                         "pilotTagSet": {
                             "items": [],
-                            "tagSetSourceFile": ""
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "pilotExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/PilotTags"
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "selectedUnitType": "UNDEFINED",
                         "selectedUnitDefId": null,
@@ -452,19 +484,19 @@
                     "items": [
                         "lance_type_mech"
                     ],
-                    "tagSetSourceFile": "Tags/LanceTags"
+                    "tagSetSourceFile": "tags/LanceTags"
                 },
                 "lanceExcludedTagSet": {
                     "items": [],
-                    "tagSetSourceFile": "Tags/LanceTags"
+                    "tagSetSourceFile": "tags/LanceTags"
                 },
                 "spawnEffectTags": {
                     "items": [
                         "spawn_poorly_maintained_25"
                     ],
-                    "tagSetSourceFile": "Tags/SpawnEffectTags"
+                    "tagSetSourceFile": "tags/SpawnEffectTags"
                 },
-                "lanceDifficultyAdjustment": 2,
+                "lanceDifficultyAdjustment": 1,
                 "selectedLanceDefId": null,
                 "selectedLanceDifficulty": 0,
                 "unitSpawnPointOverrideList": [
@@ -473,28 +505,29 @@
                             "EncounterObjectGuid": "9e2d0fed-3d92-42ee-92d0-2cc595709f2a"
                         },
                         "customUnitName": null,
+                        "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "UseLance",
                         "unitTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/EncounterTags"
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/UnitTags"
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "spawnEffectTags": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/SpawnEffectTags"
+                            "tagSetSourceFile": "tags/SpawnEffectTags"
                         },
                         "pilotDefId": "pilotDef_InheritLance",
                         "pilotTagSet": {
                             "items": [],
-                            "tagSetSourceFile": ""
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "pilotExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/PilotTags"
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "selectedUnitType": "UNDEFINED",
                         "selectedUnitDefId": null,
@@ -505,28 +538,29 @@
                             "EncounterObjectGuid": "e3e34fc2-c664-42ab-920b-6002c058ac55"
                         },
                         "customUnitName": null,
+                        "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "UseLance",
                         "unitTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/EncounterTags"
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/UnitTags"
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "spawnEffectTags": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/SpawnEffectTags"
+                            "tagSetSourceFile": "tags/SpawnEffectTags"
                         },
                         "pilotDefId": "pilotDef_InheritLance",
                         "pilotTagSet": {
                             "items": [],
-                            "tagSetSourceFile": ""
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "pilotExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/PilotTags"
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "selectedUnitType": "UNDEFINED",
                         "selectedUnitDefId": null,
@@ -537,28 +571,29 @@
                             "EncounterObjectGuid": "ab9e2bfb-f6c4-4b4b-b540-957dcfc48a27"
                         },
                         "customUnitName": null,
+                        "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "UseLance",
                         "unitTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/EncounterTags"
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/UnitTags"
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "spawnEffectTags": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/SpawnEffectTags"
+                            "tagSetSourceFile": "tags/SpawnEffectTags"
                         },
                         "pilotDefId": "pilotDef_InheritLance",
                         "pilotTagSet": {
                             "items": [],
-                            "tagSetSourceFile": ""
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "pilotExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/PilotTags"
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "selectedUnitType": "UNDEFINED",
                         "selectedUnitDefId": null,
@@ -569,28 +604,29 @@
                             "EncounterObjectGuid": "f46b3021-803a-41ed-87e0-1b8cb86663b8"
                         },
                         "customUnitName": null,
+                        "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "UseLance",
                         "unitTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/EncounterTags"
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/UnitTags"
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "spawnEffectTags": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/SpawnEffectTags"
+                            "tagSetSourceFile": "tags/SpawnEffectTags"
                         },
                         "pilotDefId": "pilotDef_InheritLance",
                         "pilotTagSet": {
                             "items": [],
-                            "tagSetSourceFile": ""
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "pilotExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/PilotTags"
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "selectedUnitType": "UNDEFINED",
                         "selectedUnitDefId": null,
@@ -609,15 +645,15 @@
                         "lance_type_fire",
                         "lance_type_notallvehicles"
                     ],
-                    "tagSetSourceFile": "Tags/LanceTags"
+                    "tagSetSourceFile": "tags/LanceTags"
                 },
                 "lanceExcludedTagSet": {
                     "items": [],
-                    "tagSetSourceFile": "Tags/LanceTags"
+                    "tagSetSourceFile": "tags/LanceTags"
                 },
                 "spawnEffectTags": {
                     "items": [],
-                    "tagSetSourceFile": "Tags/SpawnEffectTags"
+                    "tagSetSourceFile": "tags/SpawnEffectTags"
                 },
                 "lanceDifficultyAdjustment": 0,
                 "selectedLanceDefId": null,
@@ -628,28 +664,29 @@
                             "EncounterObjectGuid": "d7109e5f-7e09-4a9d-98a7-a0bf651532e6"
                         },
                         "customUnitName": null,
+                        "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "UseLance",
                         "unitTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/EncounterTags"
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/UnitTags"
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "spawnEffectTags": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/SpawnEffectTags"
+                            "tagSetSourceFile": "tags/SpawnEffectTags"
                         },
                         "pilotDefId": "pilotDef_InheritLance",
                         "pilotTagSet": {
                             "items": [],
-                            "tagSetSourceFile": ""
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "pilotExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/PilotTags"
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "selectedUnitType": "UNDEFINED",
                         "selectedUnitDefId": null,
@@ -660,28 +697,29 @@
                             "EncounterObjectGuid": "bdb37cd1-dff5-4740-b361-d5d1aebfd452"
                         },
                         "customUnitName": null,
+                        "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "UseLance",
                         "unitTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/EncounterTags"
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/UnitTags"
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "spawnEffectTags": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/SpawnEffectTags"
+                            "tagSetSourceFile": "tags/SpawnEffectTags"
                         },
                         "pilotDefId": "pilotDef_InheritLance",
                         "pilotTagSet": {
                             "items": [],
-                            "tagSetSourceFile": ""
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "pilotExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/PilotTags"
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "selectedUnitType": "UNDEFINED",
                         "selectedUnitDefId": null,
@@ -692,28 +730,29 @@
                             "EncounterObjectGuid": "5a7f08f5-3ceb-467e-b857-b3fc1874d016"
                         },
                         "customUnitName": null,
+                        "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "UseLance",
                         "unitTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/EncounterTags"
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/UnitTags"
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "spawnEffectTags": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/SpawnEffectTags"
+                            "tagSetSourceFile": "tags/SpawnEffectTags"
                         },
                         "pilotDefId": "pilotDef_InheritLance",
                         "pilotTagSet": {
                             "items": [],
-                            "tagSetSourceFile": ""
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "pilotExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/PilotTags"
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "selectedUnitType": "UNDEFINED",
                         "selectedUnitDefId": null,
@@ -724,28 +763,29 @@
                             "EncounterObjectGuid": "938ab06b-304b-4f45-ba86-abcaa0fe01c5"
                         },
                         "customUnitName": null,
+                        "customHeraldryDefId": null,
                         "unitType": "Mech",
                         "unitDefId": "UseLance",
                         "unitTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/EncounterTags"
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/UnitTags"
+                            "tagSetSourceFile": "tags/UnitTags"
                         },
                         "spawnEffectTags": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/SpawnEffectTags"
+                            "tagSetSourceFile": "tags/SpawnEffectTags"
                         },
                         "pilotDefId": "pilotDef_InheritLance",
                         "pilotTagSet": {
                             "items": [],
-                            "tagSetSourceFile": ""
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "pilotExcludedTagSet": {
                             "items": [],
-                            "tagSetSourceFile": "Tags/PilotTags"
+                            "tagSetSourceFile": "tags/PilotTags"
                         },
                         "selectedUnitType": "UNDEFINED",
                         "selectedUnitDefId": null,
@@ -784,7 +824,5 @@
         "faction": "INVALID_UNSET",
         "teamLeaderCastDefId": "castDef_TeamLeader_Current",
         "lanceOverrideList": []
-    },
-    "difficultyUIModifier": 0,
-    "filename": "SimpleBattle_StubbornSurrender.json"
+    }
 }

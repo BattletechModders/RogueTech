@@ -1,0 +1,461 @@
+{
+    "Description" : {
+        "Id" : "event_mw_dependableInformant",
+        "Name" : "Paid Informant",
+        "Details" : "When a crowd of Mechwarriors return from shore leave, [[TGT_MW,{TGT_MW.Callsign}]] trots over to you and Darius, frowning.\r\n\r\n\"Commander, I was out drinking when a stranger offered to buy the next round. He started asking about our company, but I could tell that he already knew about us. About you.\" {TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:pause|Default:pauses}, uncertain.\r\n\r\nDarius prods {TGT_MW.Obj}. \"Go on, you're not in trouble. Yet. Cut to the end.\"\r\n\r\n{TGT_MW.Callsign} clears {TGT_MW.Det} throat. \"He provided a method for secure communication and offered to pay for information about any more contracts we take in the system.\"",
+        "Icon" : "uixTxrSpot_HiringHall.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 10,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "Tags/PilotTags",
+            "items" : [
+                "pilot_dependable"
+            ]
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "Tags/PilotTags",
+            "items" : [
+                "event_mw_informant"
+            ]
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : "0"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "",
+                "items" : null
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/CompanyTags",
+                "items" : null
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "Travel",
+                    "op" : "Equal",
+                    "val" : 0,
+                    "valueConstant" : "0"
+                }
+            ]
+        },
+        {
+            "Scope" : "StarSystem",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "",
+                "items" : null
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/PlanetTags",
+                "items" : [
+                    "planet_pop_none"
+                ]
+            },
+            "RequirementComparisons" : []
+        }
+    ],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Spin your rival's fears into a negotiation advantage.",
+                "Details" : "fear for money",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "A little money",
+                        "Details" : "You rest a hand on [[TGT_MW,{TGT_MW.Callsign}]]'s shoulder. \"You did the right thing by telling us. We'll take it from here.\"\r\n\r\nAfter {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:leave|Default:leaves}, Darius speaks his mind. \"Honestly, I don't care if we've rattled a few cages here in {TGT_SYSTEM.Name}.\"\r\n\r\nYou agree. \"Might help with closing more contracts while we're here if we're the big 'Mech on the block.\"\r\n\r\nLater in the week, Darius reports that he's managed to turn this to his advantage by charging 'non-refundable negotiation fees' just to present a contract to the company. \"I should try this more often.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "event_mw_informant"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "chain_shoreLeave"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "40000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Feed the spy false information.",
+                "Details" : "shenanigans",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Some money",
+                        "Details" : "You rest a hand on [[TGT_MW,{TGT_MW.Callsign}]] shoulder. \"You did the right thing telling us. Darius and I may just take this stranger up on his offer.\"\r\n\r\n{TGT_MW.DET_C} brow furrows, confused. Darius laughs. \"Don't worry. We'll tell you exactly what to say, and you'll work with Sumire to send the messages. All above board. You go on and join the others.\"\r\n\r\nAfter {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:leave|Default:leaves}, Darius muses. \"Honestly, I like that we've rattled a few cages here in {TGT_SYSTEM.Name}. But you know what I like even better? The idea of messing with these jokers. Think we can make a few C-Bills on the side with a disinformation campaign?\"\r\n\r\nYou give a nod to Darius. \"I was thinking the same thing. Make it happen.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "event_mw_informant"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "chain_shoreLeave"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "20000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "Some money",
+                        "Details" : "You rest a hand on [[TGT_MW,{TGT_MW.Callsign}]] shoulder. \"You did the right thing telling us. Darius and I may just take this stranger up on his offer.\"\r\n\r\n{TGT_MW.DET_C} brow furrows, confused. Darius laughs. \"Don't worry. We'll tell you exactly what to say, and you'll work with Sumire to send the messages. All above board. You go on and join the others.\"\r\n\r\nAfter {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:leave|Default:leaves}, Darius muses. \"Honestly, I like that we've rattled a few cages here in {TGT_SYSTEM.Name}. But you know what I like even better? The idea of messing with these jokers. Think we can make a few C-Bills on the side with a disinformation campaign?\"\r\n\r\nYou give a nod to Darius. \"I was thinking the same thing. Make it happen.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "event_mw_informant"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "chain_shoreLeave"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "60000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Manipulate the spy to the advantage of local criminals.",
+                "Details" : "[Black Market]",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "StarSystem",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "Tags/PlanetTags",
+                        "items" : [
+                            "planet_other_blackmarket"
+                        ]
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "More money",
+                        "Details" : "You rest a hand on [[TGT_MW,{TGT_MW.Callsign}]] shoulder. \"You did the right thing telling us. Darius and I may just take this stranger up on his offer.\"\r\n\r\n{TGT_MW.DET_C} brow furrows, confused. Darius laughs. \"Don't worry. We'll tell you exactly what to say, and you'll work with Sumire to send the messages. All above board. You go on and join the others.\"\r\n\r\nAfter {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:leave|Default:leaves}, you whirl towards Darius, a half-formed idea gaining traction. \"Are you thinking what I'm thinking? There's a thriving black market here in {TGT_SYSTEM.Name}\u2026\"\r\n\r\nThat's all you had to say. You can see his clever brain churning. \"I was already planning to confuse these jokers with a disinformation campaign. But you're right! Whoever they are, they'll have enemies, and we can put everyone right where we want them.\"\r\n\r\nYou give a nod to Darius. \"I've always liked how you think. Make it happen.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "event_mw_informant"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "chain_shoreLeave"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "80000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Reputation.AuriganPirates",
+                                    "value" : "2",
+                                    "set" : false,
+                                    "valueConstant" : "[rep_gain_medium]"
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}

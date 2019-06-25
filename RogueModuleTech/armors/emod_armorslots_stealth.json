@@ -3,22 +3,46 @@
         "Color": {
             "UIColor": "Gold"
         },
-        "DynamicSlots": {
-            "ReservedSlots": 6,
-            "BackgroundColor": "GoldHalf",
-            "ShowIcon": false,
-            "NameText": "Dynamic Slot",
-            "BonusAText": "Dynamic Slot"
+        "Linked": {
+            "Links": [
+                {
+                    "ComponentDefId": "Linked_stealth",
+                    "Location": "LeftTorso"
+                },
+                {
+                    "ComponentDefId": "Linked_stealth",
+                    "Location": "RightTorso"
+                },
+				{
+                    "ComponentDefId": "Linked_stealth",
+                    "Location": "LeftArm"
+                },
+                {
+                    "ComponentDefId": "Linked_stealth",
+                    "Location": "RightArm"
+                },
+				{
+                    "ComponentDefId": "Linked_stealth",
+                    "Location": "LeftLeg"
+                },
+                {
+                    "ComponentDefId": "Linked_stealth",
+                    "Location": "RightLeg"
+                }
+            ]
         },
+		"CriticalEffects" : {
+                    "LinkedStatisticName" : "Stealth System"
+                },
         "WorkOrderCosts": {
             "Install": {
                 "TechCost": "1.15 * [[Chassis.Tonnage]] / 10",
                 "CBillCost": "1000 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]] / 45"
             }
         },
-        "Category": {
+        "Category": [{
             "CategoryID": "Armor"
-        },
+        }],
         "ArmorRepair": {
             "ArmorTPCost": 1.25,
             "ArmorCBCost": 1.35
@@ -28,6 +52,7 @@
                 "not_broken"
             ]
         },
+		"ErrorMessage": "Stealth Armor requires a ECM!",
         "BonusDescriptions": {
             "Bonuses": [
                 "Stealth: 2",
@@ -37,8 +62,8 @@
                 "StealthExt: 2",
                 "StealthMove: 2",
                 "StealthDistance: 3",
-                "EvaMax: +1",
-                "Visibility: -30%",
+                "Visibility: -15%",
+				"Signature: -15%",
                 "Reserved: 6",
                 "HeatGenerated: +5%",
                 "HeatPerTurn: +3",
@@ -82,175 +107,103 @@
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "effectTargetType": "Creator"
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "MaxEvasion",
-                "Name": "EVASIVE MOVE",
-                "Details": "This unit generates an extra EVASIVE charge from movement actions (up to its maximum).",
-                "Icon": "uixSvgIcon_action_evasivemove"
-            },
-            "statisticData": {
-                "statName": "MaxEvasivePips",
-                "operation": "Int_Add",
-                "modValue": "1",
-                "modType": "System.Int32"
-            },
-            "nature": "Buff"
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": 1,
-                "clearedWhenAttacked": false
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
                 "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": true
+				"showInTargetPreview": false,
+                "showInStatusPanel": false
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StealthArmor-visi",
-                "Name": "Active Stealth Armor",
-                "Details": "Provides increased Evasive bonus and reduced Visibility.",
-                "Icon": "uixSvgIcon_action_end"
+                "Id": "Stealth_Signature_Decrease_Stealth",
+                "Name": "Stealth Signature Decrease",
+                "Details": "Signature Statuseffect.",
+                "Icon": "uixSvgIcon_equipment_TTS"
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
-                "statName": "SpottingVisibilityMultiplier",
+                "statName": "SensorSignatureModifier",
                 "operation": "Float_Multiply",
-                "modValue": "0.7",
-                "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "NotSet",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+                "modValue": "0.85",
+                "modType": "System.Single"
+            }
         },
-        {
+		{
             "durationData": {
                 "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": 1,
-                "clearedWhenAttacked": false
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
                 "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
                 "showInTargetPreview": false,
                 "showInStatusPanel": false
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StatusEffect-Heat_Nullsignature",
+                "Id": "Stealth_Visibility_Decrease_Stealth",
+                "Name": "Stealth Visbility Decrease",
+                "Details": "Visibility Statuseffect.",
+                "Icon": "uixSvgIcon_equipment_TTS"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "SpottingVisibilityMultiplier",
+                "operation": "Float_Multiply",
+                "modValue": "0.85",
+                "modType": "System.Single"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "Stealth_Heat_Generation_Stealth",
                 "Name": "Increased Heat",
-                "Details": "Heat generation increased by 20%.",
+                "Details": "Heat generation",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
                 "statName": "HeatGenerated",
                 "operation": "Float_Multiply",
                 "modValue": "1.05",
                 "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "NotSet",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+                "targetCollection": "Weapon"
+            }
         },
         {
             "durationData": {
                 "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": 1,
-                "clearedWhenAttacked": false
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
                 "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
                 "showInTargetPreview": false,
                 "showInStatusPanel": false
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StatusEffect-Heat_Stealth",
-                "Name": "Stealth Heatsink Baffles",
-                "Details": "Generates an additional 10 heat per turn.",
+                "Id": "Stealth_Heat_Capacity_Stealth",
+                "Name": "Decreased Heat Capacity",
+                "Details": "Heat Capacity Penalty",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
             },
             "nature": "Debuff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
                 "statName": "HeatSinkCapacity",
                 "operation": "Int_Add",
                 "modValue": "-3",
-                "modType": "System.Int32",
-                "additionalRules": "NotSet",
-                "targetCollection": "NotSet",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+                "modType": "System.Int32"
+            }
         }
     ],
     "ComponentTags": {

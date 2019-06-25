@@ -1,20 +1,24 @@
 {
     "Custom": {
-        "Category": {
-            "CategoryID": "CockpitFCS"
+        "Category": [
+            {
+                "CategoryID": "CockpitFCS"
+            }
+        ],
+        "WorkOrderCosts": {
+            "Install": {
+                "TechCost": "[[Chassis.Tonnage]]/8",
+                "CBillCost": "[[Chassis.Tonnage]] * 1.2"
+            }
         },
         "BonusDescriptions": {
             "Bonuses": [
                 "Breaching",
-				"AdvZoom: 3",
-				"AdvZoomRange: 270",
-				"ThermalVision: 1",
-				"ThermalVisionHeat: 30"
-                "Accuracy: +1",
+                "OffensivePushAcc: +2",
                 "Recoil: -1",
                 "CalledShot: 30%",
-				"Range: +10%",
-				"MinRange: -50%",
+                "Range: +10%",
+                "MinRange: -50%",
                 "FCS"
             ]
         },
@@ -59,6 +63,29 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
+                "Id": "TC-CalledShotAcc",
+                "Name": "BREACHING SHOT",
+                "Details": "PASSIVE: Attacking with a single weapon ignores COVER and GUARDED on the target.",
+                "Icon": "uixSvgIcon_ability_precisionstrike"
+            },
+            "statisticData": {
+                "statName": "IRTCalledShotMod",
+                "operation": "Int_Add",
+                "modValue": "-2",
+                "modType": "System.Int32"
+            },
+            "nature": "Buff"
+        },
+        {
+            "durationData": {
+                "duration": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator"
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
                 "Id": "TC-Breaching",
                 "Name": "BREACHING SHOT",
                 "Details": "PASSIVE: Attacking with a single weapon ignores COVER and GUARDED on the target.",
@@ -71,57 +98,6 @@
                 "modType": "System.Boolean"
             },
             "nature": "Buff"
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
-                "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": true
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "TC-TO-HIT",
-                "Name": "Targeting Computer",
-                "Details": "Breaching Shot, Improved Accuracy/Recoil.",
-                "Icon": "uixSvgIcon_ability_precisionstrike"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
-                "statName": "AccuracyModifier",
-                "operation": "Float_Add",
-                "modValue": "-1.0",
-                "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "Weapon",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
         },
         {
             "durationData": {
@@ -168,138 +144,136 @@
                 "modType": "System.Single"
             }
         },
-		{
-			"durationData": {
-				"duration": -1,
-				"stackLimit": 1
-			},
-			"targetingData": {
-				"effectTriggerType": "Passive",
-				"effectTargetType": "Creator"
-			},
-			"effectType": "StatisticEffect",
-			"Description": {
-				"Id": "CLANTCRANGEMIN",
-				"Name": "CLANTCRANGEMIN",
-				"Details": "This unit fires Extreme Range LRM's.",
-				"Icon": "uixSvgIcon_action_evasivemove"
-			},
-			"statisticData": {
-				"statName": "MinRange",
-				"operation": "Float_Multiply",
-				"modValue": "0.5",
-				"modType": "System.Single",
-				"targetCollection": "Weapon"
-			},
-			"nature": "Buff"
-		},
-		{
-			"durationData": {
-				"duration": -1,
-				"stackLimit": 1
-			},
-			"targetingData": {
-				"effectTriggerType": "Passive",
-				"effectTargetType": "Creator"
-			},
-			"effectType": "StatisticEffect",
-			"Description": {
-				"Id": "CLANTCRANGESHORT",
-				"Name": "CLANTCRANGESHORT",
-				"Details": "DF Minrange by 50m",
-				"Icon": "uixSvgIcon_ability_mastertactician"
-			},
-			"statisticData": {
-				"statName": "ShortRange",
-				"operation": "Float_Multiply",
-				"modValue": "1.1",
-				"modType": "System.Single",
-				"targetCollection": "Weapon"
-			},
-			"nature": "Buff"
-		},
-		{
-			"durationData": {
-				"duration": -1,
-				"stackLimit": 1
-			},
-			"targetingData": {
-				"effectTriggerType": "Passive",
-				"effectTargetType": "Creator"
-			},
-			"effectType": "StatisticEffect",
-			"Description": {
-				"Id": "CLANTCRANGEMED",
-				"Name": "CLANTCRANGEMED",
-				"Details": "DF Minrange by 50m",
-				"Icon": "uixSvgIcon_ability_mastertactician"
-			},
-			"statisticData": {
-				"statName": "MediumRange",
-				"operation": "Float_Multiply",
-				"modValue": "1.1",
-				"modType": "System.Single",
-				"targetCollection": "Weapon"
-			},
-			"nature": "Buff"
-		},
-		{
-			"durationData": {
-				"duration": -1,
-				"stackLimit": 1
-			},
-			"targetingData": {
-				"effectTriggerType": "Passive",
-				"effectTargetType": "Creator"
-			},
-			"effectType": "StatisticEffect",
-			"Description": {
-				"Id": "CLANTCRANGEMINLONG",
-				"Name": "CLANTCRANGEMINLONG",
-				"Details": "DF Minrange by 50m",
-				"Icon": "uixSvgIcon_ability_mastertactician"
-			},
-			"statisticData": {
-				"statName": "LongRange",
-				"operation": "Float_Multiply",
-				"modValue": "1.1",
-				"modType": "System.Single",
-				"targetCollection": "Weapon"
-			},
-			"nature": "Buff"
-		},
-		{
-			"durationData": {
-				"duration": -1,
-				"stackLimit": 1
-			},
-			"targetingData": {
-				"effectTriggerType": "Passive",
-				"effectTargetType": "Creator"
-			},
-			"effectType": "StatisticEffect",
-			"Description": {
-				"Id": "CLANTCRANGEMINMAX",
-				"Name": "CLANTCRANGEMINMAX",
-				"Details": "DF Minrange by 50m",
-				"Icon": "uixSvgIcon_ability_mastertactician"
-			},
-			"statisticData": {
-				"statName": "MaxRange",
-				"operation": "Float_Multiply",
-				"modValue": "1.1",
-				"modType": "System.Single",
-				"targetCollection": "Weapon"
-			},
-			"nature": "Buff"
-		}		
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator"
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "CLANTCRANGEMIN",
+                "Name": "CLANTCRANGEMIN",
+                "Details": "This unit fires Extreme Range LRM's.",
+                "Icon": "uixSvgIcon_action_evasivemove"
+            },
+            "statisticData": {
+                "statName": "MinRange",
+                "operation": "Float_Multiply",
+                "modValue": "0.5",
+                "modType": "System.Single",
+                "targetCollection": "Weapon"
+            },
+            "nature": "Buff"
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator"
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "CLANTCRANGESHORT",
+                "Name": "CLANTCRANGESHORT",
+                "Details": "DF Minrange by 50m",
+                "Icon": "uixSvgIcon_ability_mastertactician"
+            },
+            "statisticData": {
+                "statName": "ShortRange",
+                "operation": "Float_Multiply",
+                "modValue": "1.1",
+                "modType": "System.Single",
+                "targetCollection": "Weapon"
+            },
+            "nature": "Buff"
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator"
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "CLANTCRANGEMED",
+                "Name": "CLANTCRANGEMED",
+                "Details": "DF Minrange by 50m",
+                "Icon": "uixSvgIcon_ability_mastertactician"
+            },
+            "statisticData": {
+                "statName": "MediumRange",
+                "operation": "Float_Multiply",
+                "modValue": "1.1",
+                "modType": "System.Single",
+                "targetCollection": "Weapon"
+            },
+            "nature": "Buff"
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator"
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "CLANTCRANGEMINLONG",
+                "Name": "CLANTCRANGEMINLONG",
+                "Details": "DF Minrange by 50m",
+                "Icon": "uixSvgIcon_ability_mastertactician"
+            },
+            "statisticData": {
+                "statName": "LongRange",
+                "operation": "Float_Multiply",
+                "modValue": "1.1",
+                "modType": "System.Single",
+                "targetCollection": "Weapon"
+            },
+            "nature": "Buff"
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator"
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "CLANTCRANGEMINMAX",
+                "Name": "CLANTCRANGEMINMAX",
+                "Details": "DF Minrange by 50m",
+                "Icon": "uixSvgIcon_ability_mastertactician"
+            },
+            "statisticData": {
+                "statName": "MaxRange",
+                "operation": "Float_Multiply",
+                "modValue": "1.1",
+                "modType": "System.Single",
+                "targetCollection": "Weapon"
+            },
+            "nature": "Buff"
+        }
     ],
     "ComponentTags": {
         "items": [
             "component_type_stock",
-			"ClanFCS",
-			"lv-vismode-zoom_m3_s9",
-			"lv-vismode-heat_m1_d30"
+            "ClanFCS"
         ],
         "tagSetSourceFile": ""
     }

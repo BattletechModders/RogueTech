@@ -1,18 +1,25 @@
 {
     "Custom": {
-        "Category": {
-            "CategoryID": "ArmActuator"
+        "Category": [{
+            "CategoryID": "ArmShoulder"
         },
+		{
+            "CategoryID": "ArmUpperActuator"
+        }],
         "ArmActuator": {
-            "Type": "Upper",
-            "AccuracyBonus": "-0"
+            "Type": "PartUpper, PartShoulder"
         },
         "BonusDescriptions": {
             "Bonuses": [
                 "ActuatorWeight: 10%",
-                "EnergyAcc: +1"
+                "MeleeDamageTaken: -10%",
+                "Melee: +10%",
+            "CASED: 10"
             ]
         },
+		"CASE" : {
+                    "MaximumDamage": 10
+                },
         "Weights": {
             "StructureFactor": 1.1
         },
@@ -29,10 +36,10 @@
         "Purchasable": true,
         "Manufacturer": "Friedhof",
         "Model": "Behemoth",
-        "UIName": "Upper Energy",
+        "UIName": "Upper Spiked",
         "Id": "Gear_Actuator_Friedhof_Behemoth",
         "Name": "Friedhof Behemoth Arm Mod",
-        "Details": "Upper Arm Actuators usually are barely more then a connector for a limb. <b><color=#800080>WEAPON SHOULDER ACTUATOR.</color></b> Grants global bonus to 1 weapon type.",
+        "Details": "Upper Arm Actuators usually are barely more then a connector for a limb. <b><color=#800080>Shoulder/Upper Arm Actuator.</color></b>",
         "Icon": "uixSvgIcon_equipment_ActuatorArm"
     },
     "BonusValueA": "+ 1 Acc. (Energy)",
@@ -54,10 +61,11 @@
                 "useActivationsOfTarget": false,
                 "ticksOnEndOfRound": false,
                 "ticksOnMovements": false,
-                "stackLimit": -1,
+                "stackLimit": 10,
                 "clearedWhenAttacked": false
             },
             "targetingData": {
+                "effectTargetsCreator": true,
                 "effectTriggerType": "Passive",
                 "triggerLimit": 0,
                 "extendDurationOnTrigger": 0,
@@ -67,29 +75,24 @@
                 "forcePathRebuild": false,
                 "forceVisRebuild": false,
                 "showInTargetPreview": false,
-                "showInStatusPanel": false
+                "showInStatusPanel": true
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StatusEffect-Attack_ToHitEnergy-Shoulder",
-                "Name": "ENERGY WEAPON HIT CHANCE IMPROVED",
-                "Details": "Energy weapon attacks have their hit improved by 1.",
-                "Icon": "uixSvgIcon_equipment_TTS"
+                "Id": "StatusEffect-SpikedPlates",
+                "Name": "Spiked Armour Plates",
+                "Details": "All incoming Melee damage reduced extra Melee Damage.",
+                "Icon": "uixSvgIcon_mwFury"
             },
             "nature": "Buff",
             "statisticData": {
                 "appliesEachTick": false,
                 "effectsPersistAfterDestruction": false,
-                "statName": "AccuracyModifier",
-                "operation": "Float_Add",
-                "modValue": "-1.0",
+                "statName": "DamageReductionMultiplierMelee",
+                "operation": "Float_Multiply",
+                "modValue": "0.9",
                 "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "Weapon",
-                "targetWeaponCategory": "Energy",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
+                "targetCollection": "Weapon"
             },
             "tagData": null,
             "floatieData": null,
@@ -97,6 +100,38 @@
             "vfxData": null,
             "instantModData": null,
             "poorlyMaintainedEffectData": null
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": 10
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator"
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "SpikedPlatesMelee",
+                "Name": "Jump Distance",
+                "Details": "Jump distance decreased by 20%",
+                "Icon": "uixSvgIcon_ability_mastertactician"
+            },
+            "statisticData": {
+                "appliesEachTick": false,
+                "effectsPersistAfterDestruction": false,
+                "statName": "DamagePerShot",
+                "operation": "Float_Multiply",
+                "modValue": "1.1",
+                "modType": "System.Single",
+                "additionalRules": "NotSet",
+                "targetCollection": "Weapon",
+                "targetWeaponCategory": "NotSet",
+                "targetWeaponType": "NotSet",
+                "targetAmmoCategory": "NotSet",
+                "targetWeaponSubType": "Melee"
+            },
+            "nature": "Buff"
         }
     ],
     "ComponentTags": {

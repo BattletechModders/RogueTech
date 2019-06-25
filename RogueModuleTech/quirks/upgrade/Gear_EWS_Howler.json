@@ -2,6 +2,8 @@
 	"Custom": {
         "Category": [
            { "CategoryID": "CockpitSensors"},
+           { "CategoryID": "ECM"},
+		   { "CategoryID": "Probe"},
 		   { "CategoryID": "AdvECM" }
         ],
 		"Flags": {
@@ -20,8 +22,10 @@
 		},
 		"BonusDescriptions": {
 			"Bonuses": [
-				"IsECM: 4",
-				"ECMBubble: 240",
+				"IsECM: 5",
+                "ECMBubble: 280",
+				"Jammer: 2"
+				"JamBubble: 160"
 				"IsProbe: 4",
 				"Sharer",
 				"CockpitEWS"
@@ -29,7 +33,10 @@
 		},
 		"InventorySorter": {
 			"SortKey": "00019"
-		}
+		},
+		"Lootable": {
+            "ItemID": "Gear_Sensors_EWS"
+        }
 	},
 	"StatName": null,
 	"RelativeModifier": 0,
@@ -58,13 +65,78 @@
 	"DisallowedLocations": "All",
 	"CriticalComponent": false,
 	"statusEffects": [
+	{
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "Aura",
+                "effectTargetType" : "AlliesWithinRange",
+                "range" : 280.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : false,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "LV_ECM_SHIELD",
+				"Name" : "Makes it easier for enemies to know where you are, but harder to attack",
+				"Details" : "IPSUM SUCKUM",
+				"Icon" : "uixSvgIcon_status_ECM-missileDef"
+            },
+            "statisticData" : 
+            {
+				"statName" : "LV_ECM_Shield",
+				"operation": "Int_Add",
+				"modValue": "5",
+				"modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        },
+        {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1,
+				"uniqueEffectIdStackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "Aura",
+                "effectTargetType" : "EnemiesWithinRange",
+                "range" : 160.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "LV_ECM_JAM",
+				"Name" : "ECM Jammer",
+				"Details" : "Jamming ECM, reduces sensor checks for enemies in field",
+				"Icon" : "uixSvgIcon_action_sensorlock"
+            },
+            "statisticData" : 
+            {
+				"statName" : "LV_ECM_Jammed",
+				"operation": "Int_Add",
+				"modValue": "2",
+				"modType": "System.Int32"
+            },
+            "nature" : "Debuff"
+        },
 	],
 	"ComponentTags": {
 		"items": [
 		"BLACKLISTED",
 			"component_type_stock",
 			"ElectronicCounterMeasures",
-			"lv-jammer_m4_r8",
+			"lv-jammer_m3_r8",
 			"lv-probe_m4"
 		],
 		"tagSetSourceFile": ""

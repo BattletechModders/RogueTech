@@ -5,23 +5,33 @@ I'm going to present some documentation since not many people seem to understand
 ----------------
 Lances Overview: Lance files define sets of units that may spawn together to fill a certain role. Most of the time when a Contract needs to spawn some mechs, or vehicles or turrets it looks for a Lance that fits a set of tags. That lance in turn dynamically selects units that fit it's own criteria. So a mission might say it needs a Support lance of mechs, it finds a lance that's marked as being that. Then that lance picks 4 units. The lance might be set to pick 2 Fire Support units, 1 Vanguard unit and 1 "Tank" unit. So it spawns a Jagermech, a Trebuchet, a Jenner and a Centurion respectively. Two long range, one fast, and one tough. (Preset lances which spawn specific units also exist but are not generally used). A unit's tags let it be picked by a lance. A lance's tags let it be picked by a Contract.
 
-We've altered the vanilia ones and added many new lance types.
+We've altered the vanilla ones and added many new lance types.
 
 Convoy: These are vanilla lances that spawn APCs for convoy missions. Our version of the pilot used by these units lives in RogueTanksCore.
 
-Depricated: These are all the vanilla lances (often in modified form for previous version of roguetech). They are now all BLACKLISTED because we now use completely custom lances for our spawner.
+Deprecated: These are all the vanilla lances (often in modified form for previous version of roguetech). They are now all BLACKLISTED because we now use completely custom lances for our spawner.
 
 MixedAgnosticBattle: These lances don't care if the unit they spawn is a mech or vehicle. They only care about weight class and role tags. These are the one set of lances that spawns things in the old style, left for variety sake.
 
 OpForConvoy: These are vehicle lances that are not allowed to spawn things with the "unit_hover" or "unit_noconvoy" tags. They are otherwise identical to VehicleBattle. These lances are only callable by a contract that specifically looks for the OpFor Convoy tag.
 
-SoloMech: This contains vanilla assasination target lances modified to spawn Elites. Additionally there are a handful of custom lances with varied support units assisting the target.
+SoloMech: This contains vanilla assassination target lances modified to spawn Elites. Additionally there are a handful of custom lances with varied support units assisting the target.
+
+Mech/Vehicle/Mixed Battle - Fully random unit roles.
+
+Cavalry - No Support units - This is supposed to be mobile direct combat units.
+
+Fire - Two Assassin units, Two Anything but Vanguard - This should trend toward heavy solid units with heavy firepower.
+
+Recon - 2 Vanguard units, 2 Units anything but Tank - Should trend toward faster units.
+
+Support - Two Support units, two that can't be Assassin - Should trend toward long range and scout/guard units
 
 ------------------------------
 
 Building custom Lances:
 
-The Difficulty you give your lance is the single most important thing determinging whether ot not it gets used in a given situation. If you want to be sure your lance can spawn at any stage of the game you need to make a version of it for difficulties 1-10
+The Difficulty you give your lance is the single most important thing determining whether ot not it gets used in a given situation. If you want to be sure your lance can spawn at any stage of the game you need to make a version of it for difficulties 1-10
 
 Beware of putting "unit_lance_xxxxx" tags in the Excluded Tags field. Many units have several role tags and you could accidentally create a very small pool of candidates.
 
@@ -55,9 +65,142 @@ CaptureEscort_SaveThePrototype - With Steiner Employer, kurita target and owner,
 
 Planned:
 
-Make MixedCavalry, MixedRecon, VehicleFire, VehicleRecon
+Make MixedRecon, VehicleFire, VehicleRecon
 
 Changelog:
+
+3.3.8 - 6/23/2019
+
++ Difficulty modifier for assassination targets.
+    +1 for Easy
+    +1/+2 for Medium
+    +2 for Hard
+
+3.4.0
+
+Excluded VBIED from half skull lances,
+Added Solaris 2v2 Medium division contracts,
+minor fixes
+
+3.3.7
+
+Tweaked SimpleBattle contract difficulty,
+    Improved quality of enemies in contracts with 1 lance, degraded it slightly in contracts with 2 lances for Dif 2 and Dif 5,
+    Upped difficulty of some Dif 8 lances,
+Added 2v2 Light mech Solaris VII contracts,
+    Renamed 1v1 contracts to make it clear that's what they are
+
+3.3.2 - 5/2/2019
+
+Excluded Lights from being assassination targets in dif 7-10,
+Excluded Mediums from being targets in dif 9-10
+
+Shifted pure vehicle lances half a skull heavier/harder. (e.g. 8 is the old 9)
+Added 3 Carrier+spotter lances diff 5,7,9
+
+Added Dif 9 and 10 Demolisher only lances
+
+3.2.5 - 4/30/2019
+
+(MechGenericBattle lances added by Lady, they're lower tech but a bit heavier.)
+Fixed some contradictory lance tagging and other minor errors.
+
+3.2.4
+
+Gave mech-convoy lances all low teir pilots for skill level, because in context they represent rookie or fatigued pilots.
+Finished some 3.2.1 things I'd overlooked.
+Fixed some contradictory tagging bugs in MechGenericBattle
+
+3.2.1 - 4/28/2019
+
+Removed restrictions on Generic units spawning in higher skulls, except for Difficulty 10.
+    It was causing problems when combined with weight limits. Mid-late game should have more variety now.
+Added team wildcard to some lances that were missing it on vehicles,
+Fixed some first unit pilot tags that had Med instead of High,
+Removed skill modifier tags from 2,3,4 slots to increase RNG. Result will be very slightly higher AI pilot skill on average.
+
+
+3.1.7 - 4/19/2019
+
+(Solaris Contracts spawn and work)
+Moved Solaris VII contracts to their own folder,
+Added Diff 2 versions of Light and Medium class fights,
+Added Diff 8 version of Heavy and Assault class fights,
+Minor tweaks.
+
+3.1.3
+
+Attempted fixes of Solaris VII contracts not spawning,
+Added Mech lances for convoys that exclude "unit_urbie" and "unit_noconvoy"
+Switched Nipped in the Bud and Protect the Mechs contracts to use new lances,
+Added noconvoy tag to power armor.
+
+3.0.5 - 4/13/2019
+
+Added Solaris VII only 1v1 fights in four weight classes.
+
+3.0.1 - 4/10/2019
+
+Added Nipped in the Bud convoy ambush, the targets are mechs.
+Added VBIED MASH Truck
+
+2.9.9 - 4/9/2019
+
+Adjusted Convoy lances to call specifically for APCs (instead of noncombat) in three of their slots and a Noncombat unit in one.
+    This goes along with removing the noncombat tag from the APC variants that give up cargo space for significant firepower.
+
+2.9.8 - 3/31/2019
+
+Removed Difficulty UI modifiers from contracts, a remnant of HBS balancing which we stripped out.
+
+2.9.7 - 3/30/2019
+
+Dialog rework on Assassinate_TheGeneral,
+Minor tweaks
+
+2.9.5 - 3/29/2019
+
+Rebuilt DefendBase_FrontalAssault_NEW to remove glitchy vehicle spawns.
+Added AmbushConvoy_AssetDenial_NEW, the counterpart of Escort Asset Security; ambush fire support vehicles instead of protect them.
+Made Darius' dialog match presence or absence of Blocking Force in several escort contracts,
+Made escort units in CaptureEscort_Appearances proper MASH trucks as the fluff suggests they should be.
+
+2.9.0 - 3/27/2019
+
+Added SimpleBattle_TakeTheBait_Reverse_NEW - A version in which due to a mixup you encounter the 'ambush' lance first and the 'bait' turns up later.
+Fixed opfor convoy lance tagging in a few flashpoint contracts.
+
+2.8.8 - 3/21/2019
+
+Many but not all Ambush contracts were not using the special OpFor_Convoy lance type for the targets. Fixed
+
+2.8.7
+
+Fixed Agnostic lances because something weird had happened to them.
+Better Escort (which I should release standalone) re-applied, so you always get attacked while convoy is in motion so it's not boring between pickup and extraction.
+Balance tweaks to Asset Security, added Hard version.
+Gave low skull Defend Base turrets a 25% armor malus because they were a cakewalk most of the time.
+
+2.8.1
+
+Reset lance difficulty adjustments in most contracts to 0 in prep for overhaul
+Reimported HBS 1.4 Contracts, linted, spellchecked, and set difficulties to baseline for:
+	Ambush, Assassinate, CaptureBase, Escort, DefendBase, DestroyBase, Rescue, SimpleBattle, FireMission
+All defend base reset to have turrets and wave 3.
+All custom Hard versions of vanilla contracts updated.
+
+Note: Fully Custom Contracts not yet updated!
+
+2.5.1
+
+Added Mixed Cavalry lances,
+Added Dif 2 small lances,
+Fixed small lances because I'm an idiot and didn't give them unique ID's before,
+
+2.4.8
+
+Added Difficulty 1 Small 3 unit lances so half skull missions have 0-2 fewer units.
+Lance tagging updated
 
 2.4.6
 
@@ -84,13 +227,13 @@ Tweaked the trap contract SimpleBattle_RaidingParty_NEW
 
 Added tonnage limits to D3 and D4 lances.
     No Heavies or Assaults in D1-D2, No Assaults in D3-D4
-    Does not apply to Convoy or MixedAgnosticBattle because they already have tonnage restrictions. Or Depricated because they are all blacklisted.
+    Does not apply to Convoy or MixedAgnosticBattle because they already have tonnage restrictions. Or Deprecated because they are all blacklisted.
 
 Spellchecked fluff text in AmbushConvoy
 
 2.3.7
 
-Added tonnage caps to units in D1 and D2 lances. More and/or adjustements later.
+Added tonnage caps to units in D1 and D2 lances. More and/or adjustments later.
 
 2.3.6
 
@@ -115,7 +258,7 @@ Changed Mech Cavalry, Fire, Recon, Support to never exclude more than 1 of the f
 Changed MechFire to require two Assassins and exclude the other two from being Vanguards
 Changed MechRecon to require two Vanguards and exclude the other two from being Tanks
 Changed MechSupport to require two Support and exclude the other two from being Assassins
-Changed MechCavalry to disalow Support units (they're supposed to get up close.)
+Changed MechCavalry to disallow Support units (they're supposed to get up close.)
 
 Changed MixedFire to match new MechFire
 
@@ -138,7 +281,7 @@ Tweaked some mixed lances,
 Fixed edge case of superheavy able to appear in some early game lances,
 Fixed MixedBattle folder not being in manifest,
 Fixed High Threat units not being fully excluded from a few D1 lances,
-Added Mixed Supoort lances,
+Added Mixed Support lances,
 minor fixes
 
 2.0.1 Test
@@ -148,7 +291,7 @@ minor fixes
 **** Clean Install Required ****
 
 Honestly too many changes to keep track of in detail.
-Moved vanilla lances and most older RT lances to Depricated folder and blacklisted them.
+Moved vanilla lances and most older RT lances to Deprecated folder and blacklisted them.
 Made some more lances with the new progression.
 Fixed some custom contracts to work better with the new lance system.
 
@@ -164,7 +307,7 @@ Added test versions of Mech Battle, Cavalry, Support, Fire, Recon, Vehicle Battl
 
 *Files Moved Notice, File Deleted Notice*
 
-Changed directory structure to seperate contracts by difficulty.
+Changed directory structure to separate contracts by difficulty.
 Removed beefedupsecurity2_new
 
 Created replacers for all vanilla contracts,
@@ -194,7 +337,7 @@ Minor fixes
 
 Beefed Up Security and Bodyguards base defense mission difficulty increased slightly after I found them super easy with only 3 mechs.
 
-Created Assassinate_TheGeneral, a challenging opertunity for a mid level player to get a few advanced mech parts, or a lot of money.
+Created Assassinate_TheGeneral, a challenging opportunity for a mid level player to get a few advanced mech parts, or a lot of money.
 
 0.9.0
 
@@ -210,12 +353,12 @@ Fixed wrong file in Mech Fire lance folder that obscured the fact that another l
 
 0.8.3
 
-Tweaked vanilla SimpleBattle_AgressiveIntrusion so it can't spawn only vehicles, upped difficulty of sole enemy lance by 1.
+Tweaked vanilla SimpleBattle_AggressiveIntrusion so it can't spawn only vehicles, upped difficulty of sole enemy lance by 1.
 Tweaked Protect The Mechs to keep convoy moving a little faster.
 
 0.8.2
 
-Minor rebalances of some solo lances,
+Minor imbalances of some solo lances,
 Added several new Solo mech lances,
 New Solo lance genre is "My Little Friend",
 Rebalanced TakeTheBait and TakeTheBait_Hard
@@ -273,13 +416,13 @@ All Defend Base balance redone from scratch.
 
 Added "Protect the Mechs" a customized escort contract.
 Upped Protect the Mechs difficulty somewhat from standalone/test version.
-Tweaked "Pride and Vanity" to prevent possiblity of only vehicles spawning.
+Tweaked "Pride and Vanity" to prevent possibility of only vehicles spawning.
 Altered "Show of Force" escort mission be less crap, enemies should now spawn on the otherwise boring trip to the pickup point.
 
 0.3.0
 
 Updated documentation above.
-Made slighlty more mechs spawn in the custom Mixed Difficulty 3 lances and tweaked their tags to increase task specificity.
+Made slightly more mechs spawn in the custom Mixed Difficulty 3 lances and tweaked their tags to increase task specificity.
 
 Tweaked Repo_Man contract so a Solo lance can't spawn as the supporting force.
 
@@ -308,6 +451,6 @@ Made OpForConvoy lances reject units with a "unit_noconvoy" tag.
 
 Tweaked some mid-late game lances in VehicleBattle to be a bit more random.
 
-Added light support vehicles to some understrength lances.
+Added light support vehicles to some under strength lances.
 
 Recordkeeping starts, Things done in the Before Times: Folders made for lance types. Vehicle lances tweaked for balance. Unit type Agnostic Battle lances added. "Solo" variations introduced. "Small" lance rosters filled out. Vehicle lances with Cavalry and Support roles made. Lance type for enemy convoys made. Tank added to friendly convoys. blah blah.

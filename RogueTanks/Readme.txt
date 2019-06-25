@@ -8,17 +8,19 @@ Some units by LadyAlecto and Justin Kase
 RogueTanks Modules:
 
 RogueTanks - The Majority of RT's vehicles, things available widely in the IS and Periphery.
-PrimitiveTanks - Units mostly armed with Rifles, RL, MG, and basic 3025 weapons, only the most ragtag of insterstelar powers use these, they're often found in the hands of local militia and cash strapped mercs.
+PrimitiveTanks - Units mostly armed with Rifles, RL, MG, and basic 3025 weapons, only the most ragtag of interstellar powers use these, they're often found in the hands of local militia and cash strapped mercs.
 CLANK - Clan tanks with clan gear.
 PLANK - Units mostly armed with the odd pirate weapons cobbled together by people who probably shout "Witness Me!"
 
 Custom Tags List:
 
 unit_hover,
-unit_noconvoy,
+unit_noconvoy, Things that are too fast, or too slow, to be appropriate and fun in convoys
 unit_primitive,
 unit_carrier,
 unit_stealth,
+unit_predator, Things with boosted sensor or tagging gear
+unit_vbied, Things with suicide bombs
 
 unit_galleon,
 unit_behemoth,
@@ -29,9 +31,479 @@ unit_brutus,
 unit_pegasus,
 unit_zephyr,
 unit_hunter,
+unit_demolisher <- Literally every faction has these
 
 
 Changelog:
+
+0.0.0
+
+Added Zhukov WOB,
+Added Zhukov WOB LBX,
+Added SRM Carrier WOB,
+Added LRM Carrier WOB,
+Added Puma 007,
+Added Puma 008,
+
+Pike from Schrek to Alacorn model,
+Light Flamer carrier to Striker model,
+Harasser from striker to bandit model,
+Demon to BTR model,
+minor fixes
+
+7.8.10
+
+Added Clan Maxim hover transport,
+Added Clan Asshur scout tanks
+
+7.8.8 - 6/12/2019
+
+Moving more things to eras,
+Added Nuke Long Tom,
+Added VBIED Primitive J. Edgar,
+Added VBIED Quickcell Hetzer,
+blacklisted a few well known VBIED temporarily,
+Added SRM Carrier Elite,
+minor fixes
+
+7.8.2 - 6/8/2019
+
+Added Gallant_Fusion,
+minor fixes
+
+7.8.1
+
+Added lore large laser Rotunda,
+Added lore packrats, ICE, SRM2, ML, base,
+minor fixes
+
+7.7.4
+
+The Big Move. Separating by Eras.
+Moved items in old Dark Age folder to proper locations.
+Added Packrat, Gallant and Rotunda,
+    Addapted same for RT
+Added Gallant_3050
+
+7.6.6 - 6/3/2019
+
+Added Heavy Mortar Carrier,
+Added Pirate Pike,
+Gave a couple things single shot TBM,
+minor fixes
+
+7.6.2
+
+Added Demon (PPC),
+Added Bandit medium hovers ( <3 Justin ),
+Minor tweaks
+
+7.5.1
+
+Rhino Fire Support Tank update
+    Added Rhino MG,
+    Added Rhino SL,
+    Added Base Rhino,
+    Tweaked Rhino Royal and Rhino Flamer
+
+7.4.7 <---- Corresponds to P11 release
+
+Fixed TBM20 carrier being undertonned,
+Tweaked a few techies to carry Generic_AP
+
+7.4.5 - 5/19/2019 <---- Corresponds to P11 A5
+
+Added Demolisher (Arrow IV) to arty folder,
+minor fixes
+
+7.4.3 - 5/15/2019
+
+Added Pirate Axel "Rose",
+Added Light Mortar Carrier with FASCAM,
+Added a second Clan LRM carrier with a different payload,
+Reworked Enhanced LRM Carrier,
+Reworked Extended LRM Carrier,
+Striker Light Tank Update:
+    Minor tweaks/fixes,
+    Added Striker (3061),
+    Added Striker (Ammo),
+    Added Striker (Narc),
+    Added Striker (Laser)
+
+7.3.3 - 5/14/2019 <---- Corresponds to P10 HF2
+
+Hunter Update
+    Added Hunter LPL,
+    Added Hunter ERL,
+    Added Hunter (Ammo),
+    Took overweight heavy flamers away from a couple Hunters,
+    Tweaked Hunter_LA because i goofed and it wasn't quite valid,
+    Adjusted some ammo
+
+7.2.7 - 5/13/2019
+
+Added Brutus (LRM), 
+Added Brutus (HPPC),
+Adjusted other Brutus ammo, tagging and + weapons,
+Fixed a misnamed manticore chassisdef,
+Added Manticore (LBX),
+Added Manticore (Command),
+Added Manticore (C3),
+Adjusted Manticore ammo, and tagging
+
+7.1.9
+
+Enabled blacklisted VBIEDs now that they have a self kill trigger,
+Added a new Pirate Marsden II
+
+7.1.7 - 5/3/2019
+
+Added Clan Gauss Demolisher,
+Fixed laser Morrigu having 4 engine cores LOL,
+
+7.1.5
+
+Added Clan ATM Carrier,
+Added missing CASE to Clan vehicles,
+Made "unit_demolisher" tag to enable special lances with them,
+minor fixes
+
+7.1.1
+
+Added MRM Demolisher
+
+7.1.0 - 4/30/2019
+
+Added Marksman Artilery Vehicle,
+Minor fixes for other arty vehicles
+
+Note that adding crit-able default internals, including motive systems, has been done to all vehicles on or about this date.
+
+7.0.9 - 4/27/2019
+
+Tweaked vehicle stealth to follow the current style of mech stealth,
+Removed LRM and SRM Artemis standin files that have long been unused.
+Tweaked the Bardiche,
+Found a couple tanks to give the double mg bin which otherwise was not used on *any* units,
+Fixed wrong ammo on Myrmimdon_INF
+Added Pirate Shepard
+Added Clan Oro (UAC5)
+Added Clan Oro (Gauss)
+minor fixes
+
+7.0.0 - 4/21/2019
+
+Added Clan Streak LRM Carrier,
+Added Clan Mixed Missile Carrier
+Added Hybrid Light Missile carrier,
+Designed and added Ferret medium hunter/killer tank,
+Tagging tweaks for APCs
+
+6.9.5 - 4/20/2019
+
+Added five Partisan variants using Colo's model
+
+6.9.0 - 4/15 -> 4/17/2019
+
+Oro to Colo's Oro model,
+Shamash to Savannah Master model,
+Marked VBIED vehicles as legendary to keep their numbers down,
+Clearer name for pirate Harrasser VBIED,
+Added unit_vbied tag,
+Recalced vehicle movedefs based on effective average hex size according to Cpt Moore.
+
+6.8.4
+
+Lady added new pathingdefs for minefield interactions
+Implemented new hover pathing defs on all hover units,
+Corrected some tracked/wheeled defs that were wrong type or weight.
+
+6.8.1
+
+Removed Noncombat tag from APCs that have had a bunch of cargo space replaced with serious weapon systems.
+    This will make them sometimes appear in combat lances.
+Added HPPC Demolisher
+
+6.8.0 - 4/8/2019
+
+Changed models used for 
+    JES II,
+    Gorgon,
+    Thumpers,
+    Ballista,
+    Po heavy tanks,
+    Ontos,
+    Behemoths
+
+6.7.9 - 4/7/2019
+
+Added Arrow IV Assault Vehicle to naga folder
+Added Ballista (Sniper Arty Tank)
+Added Pirate Thumper
+
+6.7.6 - 4/7/2019
+
+Gave missing TTS to some carriers. Removed some from the Light carriers that were not supposed to have them.
+Distributed more APFSDS ammo to primitive tanks.
+Gave FASCAM ARROW IV ammo to a couple Naga folder tanks.
+
+6.7.3
+
+Added JES-II (95 ton Jihad era lrm carrier),
+Added Pirate Harasser (Which...suspiciously...is missing an SRM rack)
+
+6.7.1 - 4/5/2019
+
+Added JES 1 (medium srm hovertank)
+Fixed a bunch of hovertank pathingdefs
+
+6.6.9
+
+Added VBIED APC
+
+6.6.8
+
+Added Alacorn IIC and Alacorn IIC-A
+
+6.6.6 - 4/3/2019
+
+Added Light Mortar Carrier,
+Ammo tweaks, (RIP Raza)
+Minor Fixes
+
+6.6.4 - 3/30/2019
+
+Added Thumper_Angel arty vehicle,
+Minor fixes
+
+6.6.2 - 3/29/2019
+
+Added crappy Hetzer with Quickcell AC10,
+misc minor vehicle fixes.
+
+6.6.0 - 3/23/2019
+
+Scale update. Fixed/Updated all vehicle scaling.
+Added Vehicle Born IED trucks, 15 tons for HE and Fire, and a Nuke one in the Urbienuke
+Added VBIED FIretruck
+
+6.5.5
+
+Added Mortar Techies,
+Added Mortar Carrier (60 ton),
+Minor fixes
+
+6.5.0
+
+Goblin Update
+    Added LRM and SRM variants,
+    Fixed Goblin scaling,
+    Fixed weight class
+Minor fixes
+
+6.4.5 - 3/16/2019
+
+Adjusted all vehicle filenames/ids to conform to current naming conventions,
+Fixed dupe IDs in SchreckAC and Primitive Schreck,
+Added Pegasus_MG,
+Added Drillson ICE, ERLL, SRM,
+Minor fixes
+
+6.2.9 - 3/13/2019
+
+Added Morrigu, three variants, using Colo's model.
+
+6.2.6
+
+Added Longtom and Thumper units in new Artillery folder.
+
+6.2.4 - 3/11/2019
+
+Hetzer Update
+    Added AC10, LRM, SRM, Laser, Scout, AP, UAC
+
+Added TBM20/LRM20 carrier.
+
+6.1.6
+
+Added Condor, Condor Flamer, Condor Liao, Condor Davion, Condor Laser, based on defs contributed by JK.
+
+6.1.1 3/5/2019
+
+Alacorn Model,
+Ares Model,
+Challenger Model - Also given to Ajax
+Devastator Model - Also given to Demolisher II's,
+Goblin Model,
+Heavy Carrier Model,
+Hetzer Model,
+J. Edgar model,
+Vedette Model,
+Zhukov Model,
+
+Changed Brutus to Bulldog Model
+
+Changed Ignis to Colo's Bradley model,
+Changed Ranger VV1 to Colo's BTR model
+Changed Marsden II to Colo's M1 Abrams model
+Gave Izula series Colo's Crusader model
+
+Added Savanha Master with model
+
+5.9.3 HF - 3/4/2019
+
+Fixed typo in LBX Marsden II and changed filenames for additional clarity.
+Fixed typo in Red October
+
+5.9.3
+
+Renamed Zephyr to Zephyr_SRM2
+Renamed ZephyrB_RT to Zephyr
+Added Zephyr_C3I for Comstar/Blake
+Minor fixes and tweaks
+
+5.8.9
+
+Vedette Update
+    Renamed VedetteB to Vedette_AC2
+    Added Vedette_LIAO
+    Added Vedette_NETC
+    Minor faction and tagging tweaks
+
+5.8.5
+
+Pegasus Update
+    Added Sealed and Sensor variants
+    Renamed PEGASUS_RT to PEGASUS_3058
+    Renamed PEGASUSB to PEGASUS_SRM
+    Minor Fixes,
+    Minor tweaks
+Fixed scaling of Izula tank family    
+
+5.7.9 - 3/2/2019
+
+Added M.A.S.H trucks, original jsons by JK, using model in the CAB by various.
+
+5.7.5 - 3/1/2019
+
+Added Saracen and Saracen MRM,
+Adjusted ScimitarB's ammo to make it less redundant with Saracen
+Removed Rarity values that were randomly on some vehicles. I'm 90% sure they do nothing, but if they do it wasn't organized.
+Gave some vehicles proper movedefs that had vanilla ones.
+
+5.7.1 - 2/27/2019
+
+Added a Clan Demolisher variant
+
+5.7.0
+
+Mars Update
+    Added new Streak LRM version,
+    Fixed updated others.
+
+Moooaar ammo tweaks; lower tech ammo on some early units, fancier ammo on higher tier things, a double bin or two for things with more than two tons of standard.
+
+5.6.0
+
+Misc ammo updates,
+Many minor fixes,
+Added Candiru - a light primitive tank smaller than the Izula.
+Added Joust variants
+
+5.5.4
+
+Added:
+    Clan Ares (Plasma),
+    Clan Epona B,
+    Clan Epona C,
+    Clan Zorya (Ammo)
+    Clan Oro,
+    Clan Oro (HAG)
+
+Minor updates for Ares, Epona and Bellona, Turhan, Balrog
+
+5.4.3
+
+Added Bardiche Heavy Strike Tank,
+Special fluid guns for Ivan since it's become a meme,
+
+Rocket Carrier Update:
+    Rebuilt carriers to comply with overlooked space restrictions.
+    Adapted RL carriers to the new AI only multi shot RL that keeps them from dumping every rocket at once,
+    Added Inferno focused Light RL carrier
+    Added Heavy RL Carrier
+
+Rifle Carrier Update:
+    Added Mixed Rifle Carrier,
+    Adjusted Medium Rifle Carrier
+
+Many minor fixes and tweaks
+
+5.2.9
+
+Added Ku IFV as a clan APC,
+Added two Indra APC for clans,
+Removed clans from normal APC faction lists,
+Added Battle Computers to Mobile HQs and Gulltoprs.
+Minor fixes
+
+5.2.3
+
+Set Bolas to use MLRS prefab (modern armor with rockets on top)
+Set Techies to use MLRS4 prefab (smallest looking truck)
+Set Red October to use MLRS
+Set 60 and 80 ton Thunderbolt carriers to use MLRS2
+Set Light Carriers to use MLRS3
+Added Light Thunderbolt 10 Carrier
+Added new Von Luckner,
+Many ammo fixes,
+Many minor other fixes
+
+5.0.5
+
+Updated faction tags on Assault, Heavy, Medium and Light tanks.
+Added Von Luckner K75N
+Renamed two previous Von Luckners with model numbers for clarity.
+
+4.9.9
+
+Gave SRM Carrier_RT it's missing C3 unit.
+Added SRM Carrier_3054
+Update pass on all tanks for CustomAmmo
+misc minor fixes in the proccess
+
+4.8.7
+
+Adding Alacorn Mk.VII
+Many minor fixes,
+Updates for new ammo system,
+Gave RL carriers a few chaff and inferno pods.
+Added LRM techies,
+updated gun techies,
+added an Arrow IV armed Demolisher II by Raza5
+
+4.7.7
+
+Adding prefab for Mars Assault Vehicle,
+Adjusted Mars and Mars_HAG to use it,
+Added Mars_XL, Mars_ATM, Mars_Cassius (legendary for the person who made the model)
+Minor fixes for Clan Axel and Puma XL engines.
+Lady updated Artemis IV item IDs.
+
+4.7.0
+
+Added Red October, an stealth Arrow IV tank, to the Nagas folder,
+Fixed superheavy and arty tank names for LowVisibility
+
+4.6.8
+
+Added Scorpion Light Tanks with MRM and Light AC/2,
+Minor updates and fixes for existing Scorpions,
+Added Pirate Demon
+
+4.6.4
+
+Minor fixes
 
 4.6.3
 
@@ -124,7 +596,7 @@ Adjustment pass on unit role tagging, mostly to mitigate some fallback spawning.
 
 4.0.1
 
-Fixed tags idenfitying carrier type vehicles and updated their threat level ratings.
+Fixed tags identifying carrier type vehicles and updated their threat level ratings.
 
 4.0.0 test
 
@@ -162,7 +634,7 @@ Added Myrmidon_INF
 
 Added Demolisher_Gauss,
 Added Demolisher_Primitive,
-Changed "MercenaryReviewBoard" faction tag to "mercenaryreviewboard" in all occurences so it will work right.
+Changed "MercenaryReviewBoard" faction tag to "mercenaryreviewboard" in all occurrences so it will work right.
 Removed illegal ATM3s and accidental IS Small Pulse Laser from PUMA_CLAN, replaced with SRM4_CLAN's
 
 3.5.8

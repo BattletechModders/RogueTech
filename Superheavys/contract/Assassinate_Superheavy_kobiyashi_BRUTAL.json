@@ -6,7 +6,7 @@
     "weight": 1,
     "scope": "STANDARD",
     "finalDifficulty": 0,
-    "shortDescription": "Inteligence sources indicate that a top secret {TEAM_TAR.FactionDef.Name} prototype super heavy mech is undergoing field trials on {TGT_SYSTEM.Name}. We'd like you to ensure that these trials go poorly.",
+    "shortDescription": "Intelligence sources indicate that a top secret {TEAM_TAR.FactionDef.Name} prototype super heavy mech is undergoing field trials on {TGT_SYSTEM.Name}. We'd like you to ensure that these trials go poorly.",
     "longDescription": "I've got a very a bad feeling about this, Commander. I'm not sure if we're expected to succeed or if they just want to know how fast it can kill a lance.",
     "salvagePotential": "8",
     "requirementList": [
@@ -14,7 +14,8 @@
             "Scope": "StarSystem",
             "RequirementTags": {
                 "items": [
-                    "planet_industry_research"
+                    "planet_industry_research",
+                    "planet_industry_manufacturing"
                 ],
                 "tagSetSourceFile": ""
             },
@@ -24,126 +25,31 @@
             },
             "RequirementComparisons": [
                 {
-                    "obj": "Employer.IsOwner",
+                    "obj": "Target.IsOwner",
                     "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Employer.locals",
-                    "op": "Equal",
-                    "val": "0"
+                    "val": "1"
                 },
                 {
                     "obj": "Target.locals",
                     "op": "Equal",
                     "val": "0"
-                },
-                {
-                    "obj": "Target.magistracyofcanopus",
-                    "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Target.marian",
-                    "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Target.rasalhague",
-                    "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Target.outworld",
-                    "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Target.ives",
-                    "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Target.elysia",
-                    "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Target.oberon",
-                    "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Target.valkyrate",
-                    "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Target.circinus",
-                    "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Target.illyrian",
-                    "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Target.lothian",
-                    "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Target.jarnfolk",
-                    "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Target.delphi",
-                    "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Target.hanse",
-                    "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Target.castile",
-                    "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Target.chainelane",
-                    "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Target.tortuga",
-                    "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Target.axumite",
-                    "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Target.auriganpirates",
-                    "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Target.aurigandirectorate",
-                    "op": "Equal",
-                    "val": "0"
-                },
-                {
-                    "obj": "Target.auriganrestoration",
-                    "op": "Equal",
-                    "val": "0"
                 }
             ]
+        },
+        {
+            "Scope": "Company",
+            "RequirementTags": {
+                "items": [
+                    "smooth_stones_done",
+                    "smooth_stones_brutal_done"
+                ],
+                "tagSetSourceFile": ""
+            },
+            "ExclusionTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+            },
+            "RequirementComparisons": []
         }
     ],
     "OnContractSuccessResults": [
@@ -190,9 +96,7 @@
                 "RequirementComparisons": []
             },
             "AddedTags": {
-                "items": [
-                    "smooth_stones_done"
-                ],
+                "items": [],
                 "tagSetSourceFile": ""
             },
             "RemovedTags": {
@@ -605,7 +509,7 @@
             "overrideDialogueBucketId": "DialogBucketDef_Assassinate_AmbushWarning",
             "dialogueContent": [
                 {
-                    "words": "Sensors are showing movement beyond our intitial enemy count. Be advised you might meet with increased resistance.",
+                    "words": "Sensors are showing movement beyond our initial enemy count. Be advised you might meet with increased resistance.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -865,8 +769,9 @@
                 },
                 "lanceExcludedTagSet": {
                     "items": [
-                        "lance_type_scout",
-                        "lance_type_cavalry"
+                        "lance_type_recon",
+                        "lance_type_cavalry",
+                        "lance_type_turret"
                     ],
                     "tagSetSourceFile": "Tags/LanceTags"
                 },
@@ -897,12 +802,9 @@
                             "items": [],
                             "tagSetSourceFile": "Tags/SpawnEffectTags"
                         },
-                        "pilotDefId": "Tagged",
+                        "pilotDefId": "pilotDef_InheritLance",
                         "pilotTagSet": {
-                            "items": [
-                                "pilot_npc_d10",
-                                "pilot_npc_high"
-                            ],
+                            "items": [],
                             "tagSetSourceFile": ""
                         },
                         "pilotExcludedTagSet": {
@@ -932,12 +834,9 @@
                             "items": [],
                             "tagSetSourceFile": "Tags/SpawnEffectTags"
                         },
-                        "pilotDefId": "Tagged",
+                        "pilotDefId": "pilotDef_InheritLance",
                         "pilotTagSet": {
-                            "items": [
-                                "pilot_npc_d10",
-                                "pilot_npc_high"
-                            ],
+                            "items": [],
                             "tagSetSourceFile": ""
                         },
                         "pilotExcludedTagSet": {
@@ -967,12 +866,9 @@
                             "items": [],
                             "tagSetSourceFile": "Tags/SpawnEffectTags"
                         },
-                        "pilotDefId": "Tagged",
+                        "pilotDefId": "pilotDef_InheritLance",
                         "pilotTagSet": {
-                            "items": [
-                                "pilot_npc_d10",
-                                "pilot_npc_high"
-                            ],
+                            "items": [],
                             "tagSetSourceFile": ""
                         },
                         "pilotExcludedTagSet": {
@@ -1002,12 +898,9 @@
                             "items": [],
                             "tagSetSourceFile": "Tags/SpawnEffectTags"
                         },
-                        "pilotDefId": "Tagged",
+                        "pilotDefId": "pilotDef_InheritLance",
                         "pilotTagSet": {
-                            "items": [
-                                "pilot_npc_d10",
-                                "pilot_npc_high"
-                            ],
+                            "items": [],
                             "tagSetSourceFile": ""
                         },
                         "pilotExcludedTagSet": {
@@ -1034,9 +927,10 @@
                 },
                 "lanceExcludedTagSet": {
                     "items": [
-                        "lance_type_scout",
+                        "lance_type_recon",
                         "lance_type_battle",
-                        "lance_type_fire"
+                        "lance_type_fire",
+                        "lance_type_turret"
                     ],
                     "tagSetSourceFile": "Tags/LanceTags"
                 },
@@ -1067,12 +961,9 @@
                             "items": [],
                             "tagSetSourceFile": "Tags/SpawnEffectTags"
                         },
-                        "pilotDefId": "Tagged",
+                        "pilotDefId": "pilotDef_InheritLance",
                         "pilotTagSet": {
-                            "items": [
-                                "pilot_npc_d10",
-                                "pilot_npc_high"
-                            ],
+                            "items": [],
                             "tagSetSourceFile": ""
                         },
                         "pilotExcludedTagSet": {
@@ -1102,12 +993,9 @@
                             "items": [],
                             "tagSetSourceFile": "Tags/SpawnEffectTags"
                         },
-                        "pilotDefId": "Tagged",
+                        "pilotDefId": "pilotDef_InheritLance",
                         "pilotTagSet": {
-                            "items": [
-                                "pilot_npc_d10",
-                                "pilot_npc_high"
-                            ],
+                            "items": [],
                             "tagSetSourceFile": ""
                         },
                         "pilotExcludedTagSet": {
@@ -1137,12 +1025,9 @@
                             "items": [],
                             "tagSetSourceFile": "Tags/SpawnEffectTags"
                         },
-                        "pilotDefId": "Tagged",
+                        "pilotDefId": "pilotDef_InheritLance",
                         "pilotTagSet": {
-                            "items": [
-                                "pilot_npc_d10",
-                                "pilot_npc_high"
-                            ],
+                            "items": [],
                             "tagSetSourceFile": ""
                         },
                         "pilotExcludedTagSet": {
@@ -1172,12 +1057,9 @@
                             "items": [],
                             "tagSetSourceFile": "Tags/SpawnEffectTags"
                         },
-                        "pilotDefId": "Tagged",
+                        "pilotDefId": "pilotDef_InheritLance",
                         "pilotTagSet": {
-                            "items": [
-                                "pilot_npc_d10",
-                                "pilot_npc_high"
-                            ],
+                            "items": [],
                             "tagSetSourceFile": ""
                         },
                         "pilotExcludedTagSet": {
@@ -1203,7 +1085,9 @@
                     "tagSetSourceFile": "Tags/LanceTags"
                 },
                 "lanceExcludedTagSet": {
-                    "items": [],
+                    "items": [
+                        "lance_type_turret"
+                    ],
                     "tagSetSourceFile": "Tags/LanceTags"
                 },
                 "spawnEffectTags": {

@@ -1,15 +1,18 @@
 {
     "Custom": {
+        "Category": [
+			{ "CategoryID": "w/e/p/hppc" }
+		],
         "ComponentExplosion": {
-            "ExplosionDamage": 150,
-            "StabilityDamage": 75
+            "ExplosionDamage": 100,
+            "StabilityDamage": 50
         },
         "BonusDescriptions": {
             "Bonuses": [
-                "DmgFallOff: 45%",
-                "WpnRecoil: 3",
-                "Explodium: 15%",
-                "WeaponBoom: 150"
+                "DmgFallOff: 55%",
+                "WpnRecoil: 2",
+				"PPCDEBUFF: 2",
+                "WeaponBoom: 100"
             ]
         },
         "InventorySorter": {
@@ -18,7 +21,7 @@
     },
     "Category": "Energy",
     "Type": "PPC",
-    "WeaponSubType": "PPC",
+    "WeaponSubType": "PPCER",
     "MinRange": 0,
     "MaxRange": 700,
     "RangeSplit": [
@@ -28,8 +31,8 @@
     ],
     "AmmoCategory": "NotSet",
     "StartingAmmoCapacity": 0,
-    "HeatGenerated": 70,
-    "Damage": 130,
+    "HeatGenerated": 50,
+    "Damage": 90,
     "OverheatedDamageMultiplier": 0,
     "EvasiveDamageMultiplier": 0,
     "EvasivePipsIgnored": 0,
@@ -39,11 +42,13 @@
     "CriticalChanceMultiplier": 1,
     "AOECapable": false,
     "IndirectFireCapable": false,
-    "RefireModifier": 3,
+    "RefireModifier": 2,
     "ShotsWhenFired": 1,
     "ProjectilesPerShot": 1,
     "AttackRecoil": 3,
     "Instability": 20,
+	"FireTerrainChance": 0.225,
+	"AlternateDamageCalc": true,
     "WeaponEffectID": "WeaponEffect-Weapon_PPC",
     "Description": {
         "Cost": 980000,
@@ -54,7 +59,7 @@
         "UIName": "Heavy PPC (P)",
         "Id": "Weapon_PPC_PPC_HEAVY_jrig",
         "Name": "HPPC",
-        "Details": "I... See Boss, this is a Heavy PPC but the safetys have been removed and a Capacitator is straight up wired into it, if you fire this too fast, it will overload and shut down   ...if youre lucky.",
+        "Details": "I... See Boss, this is a Heavy PPC but the safeties have been removed and a Capacitor is straight up wired into it, if you fire this too fast, it will overload and shut down   ...if you're lucky. \n\n <b><color=#00ffff>Left Click on Chance to hit during battle to switch firing mode</color> </b>",
         "Icon": "uixSvgIcon_weapon_Energy"
     },
     "BonusValueA": "",
@@ -68,14 +73,102 @@
     "AllowedLocations": "All",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
-    "statusEffects": [],
+	"Modes":[
+		{
+			"Id":"Std",
+			"UIName":"STD",
+			"isBaseMode":true,
+			"AIHitChanceCap": 0.3
+		},
+		{
+			"Id":"FastCharge",
+			"UIName":"FC",
+			"isBaseMode":false,
+			"HeatGenerated" : 10,
+			"DamagePerShot": -10,
+			"AccuracyModifier" : -2.0,
+			"EvasivePipsIgnored" : 2,
+			"RefireModifier" : -1,
+			"MinRange": -90.0,
+			"DamageOnJamming": true,
+			"FlatJammingChance": 0.15,
+			"GunneryJammingMult": 0.02,
+			"GunneryJammingBase": 5,
+			"AIHitChanceCap": 0.1,
+			"FireTerrainChance": -0.025
+		},
+		{
+			"Id":"OverCharge",
+			"UIName":"DMG",
+			"isBaseMode":false,
+			"HeatGenerated" : 20,
+			"DamagePerShot": 40,
+			"DamageOnJamming": true,
+			"FlatJammingChance": 0.15,
+			"GunneryJammingMult": 0.02,
+			"GunneryJammingBase": 5,
+			"AIHitChanceCap": 0.5,
+			"FireTerrainChance": 0.1
+		}		
+	],
+        "statusEffects": [
+        {
+            "durationData": {
+                "duration": 2,
+                "ticksOnActivations": true,
+                "useActivationsOfTarget": true,
+                "ticksOnEndOfRound": false,
+                "ticksOnMovements": false,
+                "stackLimit": 1,
+                "clearedWhenAttacked": false
+            },
+            "targetingData": {
+                "effectTriggerType": "OnHit",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
+                "effectTargetType": "NotSet",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": true
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "AbilityDefHPPC",
+                "Name": "HEAVY SENSOR IMPAIRMENT",
+                "Details": "+2 Difficulty to all of this unit's attacks.",
+                "Icon": "uixSvgIcon_status_sensorsImpaired"
+            },
+            "nature": "Debuff",
+            "statisticData": {
+                "appliesEachTick": false,
+                "effectsPersistAfterDestruction": false,
+                "statName": "AccuracyModifier",
+                "operation": "Float_Add",
+                "modValue": "2.0",
+                "modType": "System.Single",
+                "additionalRules": "NotSet",
+                "targetCollection": "NotSet",
+                "targetWeaponCategory": "NotSet",
+                "targetWeaponType": "NotSet",
+                "targetAmmoCategory": "NotSet",
+                "targetWeaponSubType": "NotSet"
+            },
+            "tagData": null,
+            "floatieData": null,
+            "actorBurningData": null,
+            "vfxData": null,
+            "instantModData": null,
+            "poorlyMaintainedEffectData": null
+        }
+    ],
     "ComponentTags": {
         "items": [
+ "OmniRestriction.{location}",
             "component_type_stock",
-            "WR-variance_by_distance-45",
-            "wr-jammable_weapon",
-            "wr-jam_chance_multiplier-5",
-            "wr-damage_when_jam",
+            "WR-variance_by_distance-55",
             "range_standard"
         ],
         "tagSetSourceFile": ""
