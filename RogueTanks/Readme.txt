@@ -44,6 +44,7 @@ Added SRM Carrier WOB,
 Added LRM Carrier WOB,
 Added Puma 007,
 Added Puma 008,
+Added Partisan (Quad RAC)
 
 Pike from Schrek to Alacorn model,
 Light Flamer carrier to Striker model,
