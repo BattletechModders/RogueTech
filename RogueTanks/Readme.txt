@@ -36,7 +36,7 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-0.0.0
+7.9.2
 
 Added Zhukov WOB,
 Added Zhukov WOB LBX,
