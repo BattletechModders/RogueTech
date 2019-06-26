@@ -38,12 +38,27 @@ Changelog:
 
 0.0.0
 
+Added Vehicle only simplified TComp with roughly TT functionality. (Currently unused),
+Added Demon (HGR WOB),
+Added Partisan AA (XL WOB),
+Added Condor Upgrade,
+Added Condor Upgrade Laser,
+minor fixes
+
+7.9.2 - 6/25/2019
+
 Added Zhukov WOB,
 Added Zhukov WOB LBX,
 Added SRM Carrier WOB,
 Added LRM Carrier WOB,
 Added Puma 007,
 Added Puma 008,
+Added Partisan (Quad RAC)
+
+Pike from Schrek to Alacorn model,
+Light Flamer carrier to Striker model,
+Harasser from striker to bandit model,
+Demon to BTR model,
 minor fixes
 
 7.8.10
