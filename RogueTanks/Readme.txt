@@ -41,6 +41,8 @@ Changelog:
 Added Vehicle only simplified TComp with roughly TT functionality. (Currently unused),
 Added Demon (HGR WOB),
 Added Partisan AA (XL WOB),
+Added Condor Upgrade,
+Added Condor Upgrade Laser,
 minor fixes
 
 7.9.2 - 6/25/2019
