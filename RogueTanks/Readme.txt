@@ -43,6 +43,7 @@ Added Demon (HGR WOB),
 Added Partisan AA (XL WOB),
 Added Condor Upgrade,
 Added Condor Upgrade Laser,
+Added RISC Pegasus,
 minor fixes
 
 7.9.2 - 6/25/2019
