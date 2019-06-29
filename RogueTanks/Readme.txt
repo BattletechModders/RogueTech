@@ -44,6 +44,7 @@ Added Partisan AA (XL WOB),
 Added Condor Upgrade,
 Added Condor Upgrade Laser,
 Added RISC Pegasus,
+Added Bandit-D_VBIED,
 minor fixes
 
 7.9.2 - 6/25/2019
