@@ -36,6 +36,12 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+0.0.0
+
+Set many <20 ton units to use the ultra-light pathingdef,
+Removed Medium Mortar Techie because it was terrible,
+Tweaked Small and Large Mortar Techies,
+
 8.0.2 - 7/1/2019
 
 Added Vehicle only simplified TComp with roughly TT functionality. (Currently unused),
