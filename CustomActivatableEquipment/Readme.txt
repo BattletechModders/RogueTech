@@ -238,6 +238,12 @@ AI related mod settings
 								   		  "name" - audio event name 
 										  "none" - none additional sound for this type name doesn't matter			
 				"ExplodeSoundActorStat":"" - actor stat name for statisticEffect explode sound override
+        "statusEffectsCollection": "NuclearExplosion", - name of static effect list
+        "statusEffectsCollectionActorStat": "EngineExplodeStatusEffects", - unit's statistic name to control from other components
+        "statusEffectsCollectionName": "NuclearExplosion", - name for status effect list in statusEffects list
+         "statusEffects" : [] - status effect on component explosion
+        NOTE! look in Gear_EngineCore, Gear_EngineType example to realise how component's AoE explosion status effects can be controlled 
+         
 			}, 			
 							NOTE: parent unit owner of component is not affected. Only other combatants. So component owner is not have to be destroyed or damaged at all. On other modders concern.
 							      Damage value calculation have same rules as CAC AoE damage.
@@ -251,6 +257,7 @@ AI related mod settings
 								NOTE: Please keep in mind that all status efeects will be canseled on unit destruction. Ejection counts as destruction too.
 								If you want to keep unit statistic after component/mech destruction you have to set "effectsPersistAfterDestruction" : true
 								It is really neaded by components altering explosion stats cause do mech destruction they returned to default state which is usualy unwanted
+      "offlineStatusEffects": [], - effects applying on component switch off. They removed if component will be switched on. If component have no ActiveByDefault - applying on combat start
 			"statusEffects": [  - status effect applied on activation. Same rules as for other component's passive effects. 
 				{
 					"durationData" : {

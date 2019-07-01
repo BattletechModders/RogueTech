@@ -36,7 +36,7 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-0.0.0
+8.0.2 - 7/1/2019
 
 Added Vehicle only simplified TComp with roughly TT functionality. (Currently unused),
 Added Demon (HGR WOB),
@@ -45,6 +45,8 @@ Added Condor Upgrade,
 Added Condor Upgrade Laser,
 Added RISC Pegasus,
 Added Bandit-D_VBIED,
+Added/Adapted SLDF Drone Medium,
+Added/Adapted SLDF Drone Heavy
 minor fixes
 
 7.9.2 - 6/25/2019
