@@ -36,13 +36,16 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-0.0.0
+8.1.7 - 7/1/2019
 
 Set many <20 ton units to use the ultra-light pathingdef,
 Removed Medium Mortar Techie, and Light Rocket Techie because they were bad,
     Also to increase the relative number of Gun Techies which i consider base.
 Tweaked Small and Large Mortar Techies,
-Rebuilt Med and Large Rocket Techies
+Rebuilt Med and Large Rocket Techies,
+Tweaked Primitive Schrek,
+Renamed some primitive tanks,
+minor fixes
 
 8.0.2 - 7/1/2019
 
