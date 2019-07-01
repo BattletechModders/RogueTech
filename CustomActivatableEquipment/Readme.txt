@@ -258,6 +258,32 @@ AI related mod settings
 								If you want to keep unit statistic after component/mech destruction you have to set "effectsPersistAfterDestruction" : true
 								It is really neaded by components altering explosion stats cause do mech destruction they returned to default state which is usualy unwanted
       "offlineStatusEffects": [], - effects applying on component switch off. They removed if component will be switched on. If component have no ActiveByDefault - applying on combat start
+			"Repair":{ 
+				"InnerStructure":10, - points of inner structure to repair (destroyed location can't be repaired)
+				"Armor":15, - points of armor to repair (destroyed location can't be repaired)
+				"MechStructureLocations":[], - list of mech structure locations to repair. 
+                     Supported values Head,LeftArm,LeftTorso,CenterTorso,RightTorso,RightArm,LeftLeg,RightLeg
+				"MechArmorLocations":[], - list of mech armor locations to repair. 
+                     Supported values Head,LeftArm,LeftTorso,CenterTorso,RightTorso,RightArm,LeftLeg,RightLeg,LeftTorsoRear,CenterTorsoRear,RightTorsoRear
+				"VehicleLocations":[], - list of vehicle locations to repair
+                         Supported values Turret,Front,Left,Right,Rear
+				"BuildingLocations":[], - list of turret locations to repair
+                         Supported value Structure
+				"AffectInstalledLocation":true, - if true location where component installed will be added to list. 
+                          NOTE: for meches both front and rear location will be added to affecte4d list (if available for location)
+				"repairTrigger":{  - repair triggers
+					"OnActivation":false, - if true repairing will be committed on component on component activation
+					"OnDamage":"InstalledLocation", - control on damage repair activation
+                        Supported values: "None","AllUnit","InstalledLocation"
+					"AtEndOfTurn":true - repair attempt making every turn. Combined with OnDamage setting
+                                        if OnDamage = None repair every turn
+                                          "AllUnit" - repair only if this turn damage was inflicted
+                                          "InstalledLocation" - repair only if this turn damage to location component installed (for meches both front and rear armor locations counts) was inflicted
+                                          NOTE: destroyed locations can't be repair. 
+                                          NOTE: in fact repairing done at turn begin (counts damage inflicted previous turn)
+                                          NOTE: if AtEndOfTurn - false repair can only performed on activation. If OnActivation - false too component is useless.
+				}
+			} 
 			"statusEffects": [  - status effect applied on activation. Same rules as for other component's passive effects. 
 				{
 					"durationData" : {
