@@ -553,35 +553,59 @@ Ammo definition
 					if ammo unguided is false or not set i'm looking at mode. if mode unguided is true launch will be unguided, 
 					if mode unguided is false or not set i'm looking at weapon. 
 					if weapon unguided is true launch will be unguided if not set or false launch will be guided
-   "MineFieldRadius": 3, - Radius of minefield in in-game cells (one cell have 4x4 size)
-   "MineFieldCount": 1, - Count of mines in one cell
-   "MineFieldHeat": 4, - Heat damage from one mine explosion
-   "MineFieldHitChance": 0.12, - Chance of mine explosion when actor steps to cell
-   "MineFieldDamage": 4, - normal damage from one mine explosion
-                      Notes: each projectile hited ground creates mine field. Projectile hits target inflicts normal damage and not creating minefield.
-					         On ground impact for each projectile affected cell is calculated base on MineFieldRadius.
-							 For radius 3 it will looks approximately like this(X it is cell where projectile hits ground)
-                               #####
-                              #######
-                             #########
-                             ####X####
-                             #########
-                              #######
-                               #####
-						     For each affected cell added record for mine field. This record contains info: MineFieldCount, MineFieldHitChance, MineFieldDamage, MineFieldHeat.
-							 Cell can have unlimited mine fields records count (as long as there is enough memory, but cause each record uses very little amount of memory maximum count is about billions and literally unreachable).
-							 On end on each move(or sprint) sequence list of cells actor visited is gathered.  
-							 For each cell actor visited for each mine field record in these cells check is performed.
-							 If count of mines in record grater than zero performed roll on MineFieldHitChance. If roll success mine counter in this record decremented, 
-							 heat and damage incremented by MineFieldHeat and MineFieldDamage accordingly.
-							 after all mine fields in path itterated damage and heat implemented to actor. If damage is lethal score added to owner of last minefield inflicted damage.
-							 For meches damage splited between two legs and heat implemented as heat. Heat applied at end of activation. 
-							 For vehicle damage splited between four locations (front,back,left,right) heat impemented as normal damage
-   						     Damage inflicted that way are not cause critical damage to internal components only armor and structure.
-	  					     Minefields not saved on battle save/reload.
-							 Note on melee through mine field: if mech while moving to melee targets suffer normal damage attack will be interrupted. 
-							 Mech get close to target but nor attack animation played nor melee damage inflicted.
-							 Note on DFA attack on target standing on mine field: damage will be inflicted normaly AFTER DFA attack completes 
+   "MineField":{
+      "InstallCellRange": 0, - radius in in-game cells to install minefield. On impact each hex cell containing at least one map cell with in radius will have minefield installed
+                                0 - means only hex containing cell where impact occurs (hex size controlling by BurningForestCellRadius setting)
+      "Count": 1, - count of land mines in each affected hex
+      "Heat": 10, - heat damage by each landmine
+      "Chance": 0.8, - chance of explosion 
+      "Damage": 100, - normal damage on explosion 
+      "AOEDamage" : 100, - area of effect damage
+      "AOERange" : 90, - area of effect range 
+      "AOEHeat" : 40, - area of effect heat damage (for non meches added to AOEDamage)
+      "AOEInstability": 0, - AoE stability damage
+      "VFXprefab": "WFX_Nuke", - visual effect played on landmine explosion
+      "VFXMinDistance": 30, - minimal distance between landmine explosion visual effects (to control its count if there are many explosions to not overwhelm GPU). Min value 20
+      "VFXScaleX": 10, - VFX scale
+      "VFXScaleY": 10,
+      "VFXScaleZ": 10,
+      "VFXOffsetX": 0, - VFX offset
+      "VFXOffsetY": 0,
+      "VFXOffsetZ": 0, 
+      "tempDesignMaskCellRadius":6, - radius in in-game cells to install temp design mask. On explode each hex cell containing at least one map cell with in radius will be affected by
+      "tempDesignMaskOnImpactTurns":99, - count of turns persistent terrain effect played
+      "tempDesignMaskOnImpact":"DesignMaskRadiation", - design mask applied on impact
+                                 NOTE: tempDesignMaskOnImpact design mask are not superseding original mask (if avaible) instead new design mask creating at runtime. 
+								                 This new mask is result of addition current terrain mask and tempDesignMaskOnImpact. All integer or float values is addiditve. 
+								                 Name will be result of concatenation as well as description. Sticky effects concatenating too. 
+       "LongVFXOnImpact": "", - terrain landmine explosion vfx supposed to be played few turns 
+       "LongVFXOnImpactScaleX":1, - scale for persistent terrain vfx 
+       "LongVFXOnImpactScaleY":1,
+       "LongVFXOnImpactScaleZ":1,
+      "SFX":"enum:AudioEventList_explosion.explosion_propane_tank", - sound effect on explosion
+      "FireTerrainChance":0.8, - chance to fireup hex cell.
+      "FireDurationWithoutForest":0, - duration of fire if hex cell has no forest, if > 0 even hex cell with no forest will burn. 
+                                      If cell have forest burn period is max from FireDurationWithoutForest and BurningForestTurns
+      "FireTerrainStrength":0, - strength of fire. If 0 and hex cell have no forest cell will not fire. If > 0 and hex cell have forest strength is max from FireTerrainStrength and BurningForestStrength
+      "FireOnSuccessHit" : true, - if true roll to fire hex cell will be permitted even on success hit. In that case fire hex cell will be detected as current target position. 
+                                   if false only projectiles that hits ground have chance to fire terrain. If ommited in weapon ammo and mode supposed as false.
+                                  NOTES: expanding logic each turn each burning cell (no matter having forest or not) have BurningForestBaseExpandChance to expand no neighbour cell with forest 
+                                         burning cell not counted as forest.
+                                       If mech or vehicle ending move in burning cell they suffer heat damage. For mech it is heat damage, for vehicle it is normal damage splitted by all locations except turret.
+                                       Damage inflicted to vehicle that way are not cause critical damage to internal components only armor and structure.
+                                       Fired cell not saved on battle save/reload.
+       "FireTerrainCellRadius":6, - radius in in-game cells to fire check roll. On impact each hex cell containing at least one map cell with in radius will have chance to be burned
+      "statusEffects" : [ - status effects applying on landmine explosion
+      ]
+      NOTE! For moving landmine hit roll performed every terrain cell, but only one landmine can explode. Moving and melee sequence will be interrupted after armor breach. 
+            For jumping every landmine in target hex cell rolling for explode.
+            Original unit triggered landmine receive only MineField.Damage. MineField.AOEDamage all other targets in MineField.AOERange
+   }
+   "MineFieldRadius": 3, - mapped to MineField.InstallCellRange
+   "MineFieldCount": 1, - mapped to MineField.Count
+   "MineFieldHeat": 4, - mapped to MineField.Heat
+   "MineFieldHitChance": 0.12, - mapped to MineField.Chance
+   "MineFieldDamage": 4, - mapped to MineField.Damage
   "FireTerrainChance":1, - chance to fireup hex cell. Additive for weapon, ammo and mode
   "FireDurationWithoutForest":1, - duration of fire if hex cell has no forest, if > 0 even hex cell with no forest will burn. 
                                   If cell have forest burn period is max from FireDurationWithoutForest and BurningForestTurns
