@@ -39,8 +39,10 @@ Changelog:
 0.0.0
 
 Set many <20 ton units to use the ultra-light pathingdef,
-Removed Medium Mortar Techie because it was terrible,
+Removed Medium Mortar Techie, and Light Rocket Techie because they were bad,
+    Also to increase the relative number of Gun Techies which i consider base.
 Tweaked Small and Large Mortar Techies,
+Rebuilt Med and Large Rocket Techies
 
 8.0.2 - 7/1/2019
 
