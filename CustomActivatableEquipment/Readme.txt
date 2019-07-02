@@ -238,6 +238,12 @@ AI related mod settings
 								   		  "name" - audio event name 
 										  "none" - none additional sound for this type name doesn't matter			
 				"ExplodeSoundActorStat":"" - actor stat name for statisticEffect explode sound override
+        "statusEffectsCollection": "NuclearExplosion", - name of static effect list
+        "statusEffectsCollectionActorStat": "EngineExplodeStatusEffects", - unit's statistic name to control from other components
+        "statusEffectsCollectionName": "NuclearExplosion", - name for status effect list in statusEffects list
+         "statusEffects" : [] - status effect on component explosion
+        NOTE! look in Gear_EngineCore, Gear_EngineType example to realise how component's AoE explosion status effects can be controlled 
+         
 			}, 			
 							NOTE: parent unit owner of component is not affected. Only other combatants. So component owner is not have to be destroyed or damaged at all. On other modders concern.
 							      Damage value calculation have same rules as CAC AoE damage.
@@ -251,6 +257,33 @@ AI related mod settings
 								NOTE: Please keep in mind that all status efeects will be canseled on unit destruction. Ejection counts as destruction too.
 								If you want to keep unit statistic after component/mech destruction you have to set "effectsPersistAfterDestruction" : true
 								It is really neaded by components altering explosion stats cause do mech destruction they returned to default state which is usualy unwanted
+      "offlineStatusEffects": [], - effects applying on component switch off. They removed if component will be switched on. If component have no ActiveByDefault - applying on combat start
+			"Repair":{ 
+				"InnerStructure":10, - points of inner structure to repair (destroyed location can't be repaired)
+				"Armor":15, - points of armor to repair (destroyed location can't be repaired)
+				"MechStructureLocations":[], - list of mech structure locations to repair. 
+                     Supported values Head,LeftArm,LeftTorso,CenterTorso,RightTorso,RightArm,LeftLeg,RightLeg
+				"MechArmorLocations":[], - list of mech armor locations to repair. 
+                     Supported values Head,LeftArm,LeftTorso,CenterTorso,RightTorso,RightArm,LeftLeg,RightLeg,LeftTorsoRear,CenterTorsoRear,RightTorsoRear
+				"VehicleLocations":[], - list of vehicle locations to repair
+                         Supported values Turret,Front,Left,Right,Rear
+				"BuildingLocations":[], - list of turret locations to repair
+                         Supported value Structure
+				"AffectInstalledLocation":true, - if true location where component installed will be added to list. 
+                          NOTE: for meches both front and rear location will be added to affecte4d list (if available for location)
+				"repairTrigger":{  - repair triggers
+					"OnActivation":false, - if true repairing will be committed on component on component activation
+					"OnDamage":"InstalledLocation", - control on damage repair activation
+                        Supported values: "None","AllUnit","InstalledLocation"
+					"AtEndOfTurn":true - repair attempt making every turn. Combined with OnDamage setting
+                                        if OnDamage = None repair every turn
+                                          "AllUnit" - repair only if this turn damage was inflicted
+                                          "InstalledLocation" - repair only if this turn damage to location component installed (for meches both front and rear armor locations counts) was inflicted
+                                          NOTE: destroyed locations can't be repair. 
+                                          NOTE: in fact repairing done at turn begin (counts damage inflicted previous turn)
+                                          NOTE: if AtEndOfTurn - false repair can only performed on activation. If OnActivation - false too component is useless.
+				}
+			} 
 			"statusEffects": [  - status effect applied on activation. Same rules as for other component's passive effects. 
 				{
 					"durationData" : {
