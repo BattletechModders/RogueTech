@@ -22,6 +22,11 @@ CACMediumRangeAccuracyMod - ShortRange <= X < MediumRange
 CACLongRangeAccuracyMod - MediumRange <= X < LongRange
 CACExtraLongRangeAccuracyMod - LongRange <= X < MaxRange
 
+
+vfxprfprtl_heatventlrg_loop
+vfxprfprtl_heatventsm_loop
+vfxprfprtl_heatdumplrg_burst
+
 {
 "debugLog":true, - enable debug log 
 "modHTTPServer":false, - enable debug http server
