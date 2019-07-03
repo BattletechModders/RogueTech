@@ -1,8 +1,92 @@
 {
     "Custom": {
-        "Category": [{
-            "CategoryID": "CockpitFCS"
-        }],
+        "Category": [
+			{"CategoryID": "CockpitFCS"},
+			{"CategoryID": "Cockpit"},
+			{"CategoryID": "LifeSupportA"},
+			{"CategoryID": "CockpitSensors"}
+			],
+			"CriticalHitStates": {
+            "MaxStates": 1,
+            "DeathMethod": "PilotKilled",
+            "HitEffects": [
+                {
+                    "State": 1,
+                    "StatusEffect": {
+                        "durationData": {},
+                        "targetingData": {
+                            "effectTargetsCreator": true,
+                            "effectTriggerType": "Passive",
+                            "effectTargetType": "Creator"
+                        },
+                        "effectType": "StatisticEffect",
+                        "Description": {
+                            "Id": "SCSensorsDestroyed",
+                            "Name": "Sensors Destroyed",
+                            "Details": "-50% Sight and Sensor",
+                            "Icon": "uixSvgIcon_equipment_Cockpit"
+                        },
+                        "nature": "Debuff",
+                        "statisticData": {
+                            "statName": "SensorDistanceAbsolute",
+                            "operation": "Float_Multiply",
+                            "modValue": "0.5",
+                            "modType": "System.Single"
+                        }
+                    }
+                },
+                {
+                    "State": 1,
+                    "StatusEffect": {
+                        "durationData": {},
+                        "targetingData": {
+                            "effectTargetsCreator": true,
+                            "effectTriggerType": "Passive",
+                            "effectTargetType": "Creator"
+                        },
+                        "effectType": "StatisticEffect",
+                        "Description": {
+                            "Id": "SCSensorsDestroyed2",
+                            "Name": "Sensors Destroyed",
+                            "Details": "-50% Sight and Sensor",
+                            "Icon": "uixSvgIcon_equipment_Cockpit"
+                        },
+                        "nature": "Debuff",
+                        "statisticData": {
+                            "statName": "SpotterDistanceAbsolute",
+                            "operation": "Float_Multiply",
+                            "modValue": "0.5",
+                            "modType": "System.Single"
+                        }
+                    }
+                },
+                {
+                    "State": 1,
+                    "StatusEffect": {
+                        "durationData": {},
+                        "targetingData": {
+                            "effectTargetsCreator": true,
+                            "effectTriggerType": "Passive",
+                            "effectTargetType": "Creator"
+                        },
+                        "effectType": "StatisticEffect",
+                        "Description": {
+                            "Id": "SCLifeSupportDestroyed",
+                            "Name": "Life Support Destroyed",
+                            "Details": "Take Damage on Overheat",
+                            "Icon": "uixSvgIcon_equipment_Cockpit"
+                        },
+                        "nature": "Debuff",
+                        "statisticData": {
+                            "statName": "ReceiveHeatDamageInjury",
+                            "operation": "Set",
+                            "modValue": "true",
+                            "modType": "System.Boolean"
+                        }
+                    }
+                }
+            ]
+        },
         "WorkOrderCosts": {
             "Install": {
                 "TechCost": "[[Chassis.Tonnage]]/6",
@@ -11,20 +95,25 @@
         },
         "BonusDescriptions": {
             "Bonuses": [
-				"Accuracy: +1",
+				"AccuracyER: +4",
+				"AccuracyLR: +2",
+				"AccuracyMR: +1",
+				"AccuracyMin: +4",
                 "Recoil: -1",
                 "CalledShot: 10%",
 				"StabDamageTaken: -25%",
-				"Sensors: +50%",
-                "Sight: +50%",
+				"Sensors: +30%",
+                "Sight: +30%",
                 "Initiative: +2",
+				"PilotShutDown"
 				"Activatable",
 				"ActivePilotOverheat",
 				"ActiveInitiative: +2",
 				"ActiveEvaMax: +2",
 				"ActiveCalledShot: +20%",
-				"ActiveAccuracy: +2",
-				"FCS"
+				"ActiveAllowsHeadshot",
+				"FCS",
+				"IsCockpit"
             ]
         },
         "InventorySorter": {
@@ -32,8 +121,15 @@
         },
 		"ActivatableComponent":{
 			"ButtonName":"Buffered VDNI",
+			"FailFlatChance": 0.01,
+			"FailRoundsStart": 2,
+			"FailChancePerTurn": 0.03,
+			"FailCrit":true,
 			"CanNotBeActivatedManualy": false,
 			"NoUniqueCheck": true,
+			"FailDamageLocations": ["Head"],
+			"FailPilotingBase": 2,
+			"FailPilotingMult": 0.15,
 			"statusEffects": [
 				{
             "durationData": {
@@ -82,13 +178,7 @@
                 "operation": "Int_Add",
                 "modValue": "-2",
                 "modType": "System.Int32"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+            }
         },
 		{
             "durationData": {
@@ -138,54 +228,26 @@
         },	
         {
             "durationData": {
-                "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
+                "duration": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
-                "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
+                "effectTargetType": "Creator"
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "TC-TO-HIT",
-                "Name": "Targeting Computer",
-                "Details": "Breaching Shot, Improved Accuracy/Recoil.",
+                "Id": "TC-Headshot",
+                "Name": "BREACHING SHOT",
+                "Details": "PASSIVE: Attacking with a single weapon ignores COVER and GUARDED on the target.",
                 "Icon": "uixSvgIcon_ability_precisionstrike"
             },
-            "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
-                "statName": "AccuracyModifier",
-                "operation": "Float_Add",
-                "modValue": "-2.0",
-                "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "Weapon",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
+                "statName": "IRTCalledShotAlwaysAllow",
+                "operation": "Set",
+                "modValue": "true",
+                "modType": "System.Boolean"
             },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+            "nature": "Buff"
         }
 			]
 		}
@@ -199,7 +261,7 @@
         "Purchasable": true,
         "Manufacturer": "Word of Blake",
         "Model": "Buffered VDNI Cockpit",
-        "UIName": "Buffered VDNI ",
+        "UIName": "Buffered VDNI w/ Small Cockpit",
         "Id": "Gear_FCS_Buffered_VDNI",
         "Name": "Buffered VDNI Cockpit",
         "Details": "Buffered Vehicular Direct Neural Interface was an improvement on standard VDNI developed for the Manei Domini. Introduced several years after the start of the Jihad, buffered VDNI was available only to those who held the rank of Omicron. While operating similarly to standard VDNI, the buffered model further enhanced the neurological fail-safes to create a safer, more potent system. <b><color=#F79232>Requires Small Cockpit to be installed</color></b> ",
@@ -211,8 +273,8 @@
     "ComponentSubType": "NotSet",
     "PrefabIdentifier": "",
     "BattleValue": 0,
-    "InventorySize": 1,
-    "Tonnage": 1,
+    "InventorySize": 3,
+    "Tonnage": 2,
     "AllowedLocations": "Head",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
@@ -220,22 +282,11 @@
         {
             "durationData": {
                 "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
                 "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
                 "showInTargetPreview": false,
                 "showInStatusPanel": false
             },
@@ -248,45 +299,20 @@
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
                 "statName": "SensorDistanceAbsolute",
                 "operation": "Float_Multiply",
-                "modValue": "1.5",
-                "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "NotSet",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+                "modValue": "1.3",
+                "modType": "System.Single"
+            }
         },
 	    {
             "durationData": {
                 "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
                 "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
                 "showInTargetPreview": false,
                 "showInStatusPanel": false
             },
@@ -299,45 +325,20 @@
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
                 "statName": "SpotterDistanceAbsolute",
                 "operation": "Float_Multiply",
-                "modValue": "1.5",
-                "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "NotSet",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+                "modValue": "1.3",
+                "modType": "System.Single"
+            }
         },
 	    {
             "durationData": {
                 "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
                 "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
                 "showInTargetPreview": false,
                 "showInStatusPanel": false
             },
@@ -350,77 +351,120 @@
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
                 "statName": "BaseInitiative",
                 "operation": "Int_Add",
                 "modValue": "-2",
                 "modType": "System.Int32",
-                "additionalRules": "NotSet",
-                "targetCollection": "NotSet",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+            }
         },
         {
             "durationData": {
                 "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
                 "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
                 "showInTargetPreview": false,
-                "showInStatusPanel": true
+                "showInStatusPanel": false
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "TC-TO-HIT",
-                "Name": "Targeting Computer",
-                "Details": "Breaching Shot, Improved Accuracy/Recoil.",
+                "Id": "RangeBracketBonusAccER",
+                "Name": "Bonus Accuracy at range",
+                "Details": "range bracket bonus accuracy",
                 "Icon": "uixSvgIcon_ability_precisionstrike"
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
-                "statName": "AccuracyModifier",
+                "statName": "CACExtraLongRangeAccuracyMod",
+                "operation": "Float_Add",
+                "modValue": "-4.0",
+                "modType": "System.Single",
+				"targetCollection": "Weapon"
+            }
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "RangeBracketBonusAccLR",
+                "Name": "Bonus Accuracy at range",
+                "Details": "range bracket bonus accuracy",
+                "Icon": "uixSvgIcon_ability_precisionstrike"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CACLongRangeAccuracyMod",
+                "operation": "Float_Add",
+                "modValue": "-2.0",
+                "modType": "System.Single",
+				"targetCollection": "Weapon"
+            }
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "RangeBracketBonusAccMR",
+                "Name": "Bonus Accuracy at range",
+                "Details": "range bracket bonus accuracy",
+                "Icon": "uixSvgIcon_ability_precisionstrike"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CACMediumRangeAccuracyMod",
                 "operation": "Float_Add",
                 "modValue": "-1.0",
                 "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "Weapon",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+				"targetCollection": "Weapon"
+            }
         },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "RangeBracketBonusAccSR",
+                "Name": "Bonus Accuracy at range",
+                "Details": "range bracket bonus accuracy",
+                "Icon": "uixSvgIcon_ability_precisionstrike"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CACMinRangeAccuracyMod",
+                "operation": "Float_Add",
+                "modValue": "-4.0",
+                "modType": "System.Single",
+				"targetCollection": "Weapon"
+            }
+        }
         {
             "durationData": {
                 "duration": -1
@@ -469,22 +513,11 @@
         {
             "durationData": {
                 "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
                 "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
                 "showInTargetPreview": false,
                 "showInStatusPanel": false
             },
@@ -497,25 +530,11 @@
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
                 "statName": "ReceivedInstabilityMultiplier",
                 "operation": "Float_Multiply",
                 "modValue": "0.75",
-                "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "NotSet",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+                "modType": "System.Single"
+            }
         }
     ],
     "ComponentTags": {
