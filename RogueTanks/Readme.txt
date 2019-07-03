@@ -36,6 +36,10 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+8.1.8
+
+Added MASH Compartment and added to MASH trucks
+
 8.1.7 - 7/1/2019
 
 Set many <20 ton units to use the ultra-light pathingdef,
