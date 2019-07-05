@@ -36,6 +36,12 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+8.2.0 - 7/5/2019
+
+Added SM2 Arty vehicle,
+Added Thor_Clan arty vehicle,
+many minor arty vehicle fixes
+
 8.1.8
 
 Added MASH Compartment and added to MASH trucks
