@@ -40,6 +40,7 @@ Changelog:
 
 Added SM2 Arty vehicle,
 Added Thor_Clan arty vehicle,
+Added TBM_TANK_PIRATE,
 many minor arty vehicle fixes
 
 8.1.8
