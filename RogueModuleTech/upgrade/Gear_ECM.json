@@ -10,44 +10,60 @@
                 "IsECM: 2",
                 "ECMBubble: 150",
 				"Jammer: 2",
-				"JamBubble: 210"
+				"JamBubble: 210",
+				"ECCMMode",
+				"ECCMStrength: 3",
+				"ECCMBubble: 210"
             ]
         },
         "InventorySorter": {
             "SortKey": "00024"
-        }
-    },
-    "StatName": null,
-    "RelativeModifier": 0,
-    "AbsoluteModifier": 0,
-    "Description": {
-        "Cost": 330000,
-        "Rarity": 1,
-        "Purchasable": true,
-        "Manufacturer": "Ceres",
-        "Model": "ECM",
-        "UIName": "ECM",
-        "Id": "Gear_ECM",
-        "Name": "ECM",
-        "Details": "This basic Electronics Counter Measures scrambles Enemy Targeting and Missile Systems and is a efficient upgrade to a 'Mech's standard ECM equipment.",
-        "Icon": "uixSvgIcon_equipment_TTS"
-    },
-    "BonusValueA": "+1 Defense.",
-    "BonusValueB": "+1 Missile Defense.",
-    "ComponentType": "Upgrade",
-    "ComponentSubType": "NotSet",
-    "PrefabIdentifier": "",
-    "BattleValue": 0,
-    "InventorySize": 1,
-    "Tonnage": 1,
-    "AllowedLocations": "All",
-    "DisallowedLocations": "All",
-    "CriticalComponent": false,
-    "statusEffects": [
-	{
+        },
+		"ActivatableComponent": {
+      "ButtonName": "ECCM",
+      "CanNotBeActivatedManualy": false,
+      "NoUniqueCheck": true,
+	  "ActivationMessage": "ECCM Mode",
+	  "DeactivationMessage": "ECM Mode",
+      "statusEffects": [
+        {
             "durationData" : {
                 "duration": -1,
-                "stackLimit": 1
+                "stackLimit": -1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "Aura",
+                "effectTargetType" : "EnemiesWithinRange",
+                "range" : 210.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : false,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "LV_ECM_SHIELD",
+				"Name" : "Makes it easier for enemies to know where you are, but harder to attack",
+				"Details" : "IPSUM SUCKUM",
+				"Icon" : "uixSvgIcon_status_ECM-missileDef"
+            },
+            "statisticData" : 
+            {
+				"statName" : "LV_ECM_Shield",
+				"operation": "Int_Add",
+				"modValue": "-3",
+				"modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        }
+      ],
+	  "offlineStatusEffects": [
+	  {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1
             },
             "targetingData" : {
                 "effectTriggerType" : "Passive",
@@ -108,8 +124,38 @@
 				"modType": "System.Int32"
             },
             "nature" : "Debuff"
-        } 
-	],
+        }
+	  ]
+    }
+    },
+    "StatName": null,
+    "RelativeModifier": 0,
+    "AbsoluteModifier": 0,
+    "Description": {
+        "Cost": 330000,
+        "Rarity": 1,
+        "Purchasable": true,
+        "Manufacturer": "Ceres",
+        "Model": "ECM",
+        "UIName": "ECM",
+        "Id": "Gear_ECM",
+        "Name": "ECM",
+        "Details": "This basic Electronics Counter Measures scrambles Enemy Targeting and Missile Systems and is a efficient upgrade to a 'Mech's standard ECM equipment.",
+        "Icon": "uixSvgIcon_equipment_TTS"
+    },
+    "BonusValueA": "+1 Defense.",
+    "BonusValueB": "+1 Missile Defense.",
+    "ComponentType": "Upgrade",
+    "ComponentSubType": "NotSet",
+    "PrefabIdentifier": "",
+    "BattleValue": 0,
+    "InventorySize": 1,
+    "Tonnage": 1,
+    "AllowedLocations": "All",
+    "DisallowedLocations": "All",
+    "CriticalComponent": false,
+    "statusEffects": [
+		],
     "ComponentTags": {
         "items": [
             "component_type_stock",
