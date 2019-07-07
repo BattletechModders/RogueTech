@@ -13,49 +13,89 @@
         ],
         "BonusDescriptions": {
             "Bonuses": [
-                "Defense: +1",
                 "Sensors: +20%",
                 "Sight: +15%",
-                "Signature: -50%",
+				"ECMDefense: +1",
+                "ECMSignature: -50%",
                 "IsECM: 2",
                 "ECMBubble: 150",
                 "Jammer: 2",
                 "JamBubble: 210",
-                "IsProbe: 5"
+                "IsProbe: 5",
+				"ECCMMode",
+				"ECCMStrength: 6",
+				"ECCMBubble: 230"
             ]
         },
         "InventorySorter": {
             "SortKey": "00024"
-        }
-    },
-    "StatName": null,
-    "RelativeModifier": 0,
-    "AbsoluteModifier": 0,
-    "Description": {
-        "Cost": 1158000,
-        "Rarity": 6,
-        "Purchasable": true,
-        "Manufacturer": "Clan",
-        "Model": "Watchdog (C)",
-        "UIName": "Watchdog Suite (C)",
-        "Id": "Gear_Watchdog_EWS",
-        "Name": "Watchdog Suite (C)",
-        "Details": "The 'Watchdog Composite Electronic Warfare System (CEWS)' combines the best of the Clan Active Probe systems and enhanced ECM suites. By performing the functions of both systems in one device, the Watchdog enables Clan OmniMechs to mount additional weapons or armor.",
-        "Icon": "uixSvgIcon_equipment_TTS"
-    },
-    "BonusValueA": "+1 Accuracy and 20% Sensors|",
-    "BonusValueB": "+2 Defense|-50%Signature",
-    "ComponentType": "Upgrade",
-    "ComponentSubType": "NotSet",
-    "PrefabIdentifier": "",
-    "BattleValue": 0,
-    "InventorySize": 1,
-    "Tonnage": 1.5,
-    "AllowedLocations": "All",
-    "DisallowedLocations": "All",
-    "CriticalComponent": false,
-    "statusEffects": [
+        },
+		"ActivatableComponent": {
+      "ButtonName": "ECCM",
+      "CanNotBeActivatedManualy": false,
+      "NoUniqueCheck": true,
+	  "ActivationMessage": "ECCM Mode",
+	  "DeactivationMessage": "ECM Mode",
+      "statusEffects": [
         {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "Aura",
+                "effectTargetType" : "EnemiesWithinRange",
+                "range" : 230.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : false,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "LV_ECM_SHIELD",
+				"Name" : "Makes it easier for enemies to know where you are, but harder to attack",
+				"Details" : "IPSUM SUCKUM",
+				"Icon" : "uixSvgIcon_status_ECM-missileDef"
+            },
+            "statisticData" : 
+            {
+				"statName" : "LV_ECM_Shield",
+				"operation": "Int_Add",
+				"modValue": "-6",
+				"modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        }
+      ],
+	  "offlineStatusEffects": [
+	  {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator"
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "CEWS-Signature_Decrease_35",
+                "Name": "REDUCED SENSOR SIGNATURE",
+                "Details": "Sensor Signature reduced by 35%.",
+                "Icon": "uixSvgIcon_equipment_TTS"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "SensorSignatureModifier",
+                "operation": "Float_Multiply",
+                "modValue": "0.5",
+                "modType": "System.Single"
+            }
+        },
+		{
             "durationData": {
                 "duration": -1,
                 "stackLimit": 1
@@ -166,7 +206,37 @@
             "vfxData": null,
             "instantModData": null,
             "poorlyMaintainedEffectData": null
-        },
+        }
+	  ]
+    }
+    },
+    "StatName": null,
+    "RelativeModifier": 0,
+    "AbsoluteModifier": 0,
+    "Description": {
+        "Cost": 1158000,
+        "Rarity": 6,
+        "Purchasable": true,
+        "Manufacturer": "Clan",
+        "Model": "Watchdog (C)",
+        "UIName": "Watchdog Suite (C)",
+        "Id": "Gear_Watchdog_EWS",
+        "Name": "Watchdog Suite (C)",
+        "Details": "The 'Watchdog Composite Electronic Warfare System (CEWS)' combines the best of the Clan Active Probe systems and enhanced ECM suites. By performing the functions of both systems in one device, the Watchdog enables Clan OmniMechs to mount additional weapons or armor.",
+        "Icon": "uixSvgIcon_equipment_TTS"
+    },
+    "BonusValueA": "+1 Accuracy and 20% Sensors|",
+    "BonusValueB": "+2 Defense|-50%Signature",
+    "ComponentType": "Upgrade",
+    "ComponentSubType": "NotSet",
+    "PrefabIdentifier": "",
+    "BattleValue": 0,
+    "InventorySize": 1,
+    "Tonnage": 1.5,
+    "AllowedLocations": "All",
+    "DisallowedLocations": "All",
+    "CriticalComponent": false,
+    "statusEffects": [
         {
             "durationData": {
                 "duration": -1,
@@ -188,30 +258,6 @@
                 "statName": "SensorDistanceAbsolute",
                 "operation": "Float_Multiply",
                 "modValue": "1.2",
-                "modType": "System.Single"
-            }
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator"
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "CEWS-Signature_Decrease_35",
-                "Name": "REDUCED SENSOR SIGNATURE",
-                "Details": "Sensor Signature reduced by 35%.",
-                "Icon": "uixSvgIcon_equipment_TTS"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "SensorSignatureModifier",
-                "operation": "Float_Multiply",
-                "modValue": "0.5",
                 "modType": "System.Single"
             }
         },

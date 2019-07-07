@@ -15,61 +15,72 @@
             "Bonuses": [
                 "Sensors: +15%",
                 "Sight: +20%",
-                "Signature: -10%",
-                "UnFriendlyAura: 400",
-                "AccuracyDebuff: -1",
+                "ECMSignature: -10%",
+                "UnFriendlyAura: 200",
+                "ECMAccuracyDebuff: -1",
                 "IsECM: 3",
                 "ECMBubble: 190",
                 "Jammer: 2",
-				"JamBubble: 260"
+				"JamBubble: 260",
+				"ECCMMode",
+				"ECCMStrength: 4",
+				"ECCMBubble: 260"
             ]
         },
         "InventorySorter": {
             "SortKey": "00024"
-        }
-    },
-    "StatName": null,
-    "RelativeModifier": 0,
-    "AbsoluteModifier": 0,
-    "Description": {
-        "Cost": 1230000,
-        "Rarity": 6,
-        "Purchasable": true,
-        "Manufacturer": "Ceres",
-        "Model": "EWS",
-        "UIName": "Warfare Suite",
-        "Id": "Gear_EWS",
-        "Name": "Warfare Suite",
-        "Details": "This advanced Electronics Warfare Suite is designed to mimic the more advanced Star League-era ECM, Active Probe and Targeting Computer. Containing a vast Array of Electronic Warfare Systems able to efficiently jam Enemy sensors and improving their Own.",
-        "Icon": "uixSvgIcon_equipment_TTS"
-    },
-    "BonusValueA": "+1 Accuracy and 20% Sensors|",
-    "BonusValueB": "+2 Defense|-50%Signature",
-    "ComponentType": "Upgrade",
-    "ComponentSubType": "NotSet",
-    "PrefabIdentifier": "",
-    "BattleValue": 0,
-    "InventorySize": 3,
-    "Tonnage": 3,
-    "AllowedLocations": "All",
-    "DisallowedLocations": "All",
-    "CriticalComponent": false,
-    "statusEffects": [
+        },
+		"ActivatableComponent": {
+      "ButtonName": "ECCM",
+      "CanNotBeActivatedManualy": false,
+      "NoUniqueCheck": true,
+	  "ActivationMessage": "ECCM Mode",
+	  "DeactivationMessage": "ECM Mode",
+      "statusEffects": [
         {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "Aura",
+                "effectTargetType" : "EnemiesWithinRange",
+                "range" : 260.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : false,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "LV_ECM_SHIELD",
+				"Name" : "Makes it easier for enemies to know where you are, but harder to attack",
+				"Details" : "IPSUM SUCKUM",
+				"Icon" : "uixSvgIcon_status_ECM-missileDef"
+            },
+            "statisticData" : 
+            {
+				"statName" : "LV_ECM_Shield",
+				"operation": "Int_Add",
+				"modValue": "-4",
+				"modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        }
+      ],
+	  "offlineStatusEffects": [
+	  {
             "durationData": {
                 "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
+                "stackLimit": 1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
                 "specialRules": "Aura",
                 "effectTargetType": "EnemiesWithinRange",
-                "range": 400.0,
+                "range": 200.0,
                 "forcePathRebuild": false,
                 "forceVisRebuild": false,
                 "showInTargetPreview": false,
@@ -94,7 +105,7 @@
         {
             "durationData": {
                 "duration": -1,
-                "stackLimit": 1
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
@@ -152,6 +163,60 @@
             },
             "nature": "Debuff"
         },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator"
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "EWS-Signature_Decrease_35",
+                "Name": "REDUCED SENSOR SIGNATURE",
+                "Details": "Sensor Signature reduced by 35%.",
+                "Icon": "uixSvgIcon_equipment_TTS"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "SensorSignatureModifier",
+                "operation": "Float_Multiply",
+                "modValue": "0.9",
+                "modType": "System.Single"
+            }
+        }
+	  ]
+    }
+    },
+    "StatName": null,
+    "RelativeModifier": 0,
+    "AbsoluteModifier": 0,
+    "Description": {
+        "Cost": 1230000,
+        "Rarity": 6,
+        "Purchasable": true,
+        "Manufacturer": "Ceres",
+        "Model": "EWS",
+        "UIName": "Warfare Suite",
+        "Id": "Gear_EWS",
+        "Name": "Warfare Suite",
+        "Details": "This advanced Electronics Warfare Suite is designed to mimic the more advanced Star League-era ECM, Active Probe and Targeting Computer. Containing a vast Array of Electronic Warfare Systems able to efficiently jam Enemy sensors and improving their Own.",
+        "Icon": "uixSvgIcon_equipment_TTS"
+    },
+    "BonusValueA": "+1 Accuracy and 20% Sensors|",
+    "BonusValueB": "+2 Defense|-50%Signature",
+    "ComponentType": "Upgrade",
+    "ComponentSubType": "NotSet",
+    "PrefabIdentifier": "",
+    "BattleValue": 0,
+    "InventorySize": 3,
+    "Tonnage": 3,
+    "AllowedLocations": "All",
+    "DisallowedLocations": "All",
+    "CriticalComponent": false,
+    "statusEffects": [
         {
             "durationData": {
                 "duration": -1,
@@ -173,30 +238,6 @@
                 "statName": "SensorDistanceAbsolute",
                 "operation": "Float_Multiply",
                 "modValue": "1.15",
-                "modType": "System.Single"
-            }
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator"
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "EWS-Signature_Decrease_35",
-                "Name": "REDUCED SENSOR SIGNATURE",
-                "Details": "Sensor Signature reduced by 35%.",
-                "Icon": "uixSvgIcon_equipment_TTS"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "SensorSignatureModifier",
-                "operation": "Float_Multiply",
-                "modValue": "0.9",
                 "modType": "System.Single"
             }
         },

@@ -1,8 +1,11 @@
 {
     "Custom": {
-        "Category": [{
-            "CategoryID": "CockpitFCS"
-        }],
+        "Category": [
+           {"CategoryID": "CockpitFCS"},
+			{"CategoryID": "Cockpit"},
+			{"CategoryID": "LifeSupportA"},
+			{"CategoryID": "CockpitSensors"}
+			],
         "WorkOrderCosts": {
             "Install": {
                 "TechCost": "[[Chassis.Tonnage]]/8",
@@ -11,29 +14,39 @@
         },
         "BonusDescriptions": {
             "Bonuses": [
-				"Accuracy: +1",
+				"AccuracyER: +2",
+				"AccuracyLR: +2",
+				"AccuracyMR: +1",
+				"AccuracyMin: +2",
                 "Recoil: -1",
                 "CalledShot: 10%",
-				"StabDamageTaken: -25%",
-                "Initiative: +2",
+				"StabDamageTaken: -15%",
+                "Initiative: +1",
+				"PilotShutDown",
 				"Activatable",
 				"ActivePilotOverheat",
 				"ActiveInitiative: +2",
-				"ActiveEvaMax: +2",
-				"ActiveCalledShot: +20%",
-				"ActiveAccuracy: +1",
-				"FCS"
+				"ActiveEvaMax: +1",
+				"ActiveCalledShot: +10%",
+				"FCS",
+				"IsCockpit"
             ]
         },
         "InventorySorter": {
             "SortKey": "00202"
         },
 		"ActivatableComponent":{
-			"ButtonName":"VDNI",
+			"FailFlatChance": 0.01,
+			"FailRoundsStart": 2,
+			"FailChancePerTurn": 0.03,
+			"FailCrit":true,
 			"CanNotBeActivatedManualy": false,
 			"NoUniqueCheck": true,
+			"FailDamageLocations": ["Head"],
+			"FailPilotingBase": 2,
+			"FailPilotingMult": 0.1,
 			"statusEffects": [
-				{
+		{
             "durationData": {
                 "duration": -1,
                 "stackLimit": -1
@@ -107,7 +120,7 @@
             "statisticData": {
                 "statName": "MaxEvasivePips",
                 "operation": "Int_Add",
-                "modValue": "2",
+                "modValue": "1",
                 "modType": "System.Int32"
             },
             "nature": "Buff"
@@ -130,7 +143,7 @@
             "statisticData": {
                 "statName": "CalledShotBonusMultiplier",
                 "operation": "Float_Multiply",
-                "modValue": "1.2",
+                "modValue": "1.1",
                 "modType": "System.Single"
             }
         },	
@@ -250,7 +263,7 @@
                 "effectsPersistAfterDestruction": false,
                 "statName": "BaseInitiative",
                 "operation": "Int_Add",
-                "modValue": "-2",
+                "modValue": "-1",
                 "modType": "System.Int32",
                 "additionalRules": "NotSet",
                 "targetCollection": "NotSet",
@@ -388,7 +401,7 @@
             "Description": {
                 "Id": "StatusEffect-DNI-StabDefense",
                 "Name": "INCOMING STABILITY DAMAGE DECREASED",
-                "Details": "Incoming stability damage reduced by 10%.",
+                "Details": "Incoming stability damage reduced by 15%.",
                 "Icon": "uixSvgIcon_equipment_Gyro"
             },
             "nature": "Buff",
@@ -397,7 +410,7 @@
                 "effectsPersistAfterDestruction": false,
                 "statName": "ReceivedInstabilityMultiplier",
                 "operation": "Float_Multiply",
-                "modValue": "0.75",
+                "modValue": "0.85",
                 "modType": "System.Single",
                 "additionalRules": "NotSet",
                 "targetCollection": "NotSet",
