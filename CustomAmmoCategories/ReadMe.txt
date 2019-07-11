@@ -167,7 +167,7 @@ vfxprfprtl_heatdumplrg_burst
   "ShutdownHeatChance":25,
   "UseHBSMercySetting":true
 },
-
+"WaterHeightFix":true - needed for proper hover's over water movements
 }
 
 now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
