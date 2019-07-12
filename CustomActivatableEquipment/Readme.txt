@@ -283,7 +283,19 @@ AI related mod settings
                                           NOTE: in fact repairing done at turn begin (counts damage inflicted previous turn)
                                           NOTE: if AtEndOfTurn - false repair can only performed on activation. If OnActivation - false too component is useless.
 				}
-			} 
+			},
+      "Linkage":{ - linked components info
+        "OnActivate":{  
+          "Activate":[],
+          "Deactivate":["ECM"] - array of ButtonName's 
+        },
+        "OnDeactivate":{
+          "Activate":[],
+          "Deactivate":[]
+        },
+      },
+      NOTE! Components activated by link counts as auto-activated and not suffer activation fail roll/
+      NOTE! You can create link structure as complicated as you want, but if you create cycle you encounter stack overflow exception. Use this feature wisely.
 			"statusEffects": [  - status effect applied on activation. Same rules as for other component's passive effects. 
 				{
 					"durationData" : {
