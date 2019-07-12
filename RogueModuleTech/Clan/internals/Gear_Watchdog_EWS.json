@@ -13,20 +13,194 @@
         ],
         "BonusDescriptions": {
             "Bonuses": [
-                "Defense: +1",
                 "Sensors: +20%",
                 "Sight: +15%",
-                "Signature: -50%",
+				"ECMDefense: +1",
+                "ECMSignature: -50%",
                 "IsECM: 2",
                 "ECMBubble: 150",
                 "Jammer: 2",
                 "JamBubble: 210",
-                "IsProbe: 5"
+                "IsProbe: 5",
+				"ECCMMode",
+				"ECCMStrength: 6",
+				"ECCMBubble: 230"
             ]
         },
         "InventorySorter": {
             "SortKey": "00024"
+        },
+		"ActivatableComponent": {
+      "ButtonName": "ECCM",
+      "CanNotBeActivatedManualy": false,
+      "NoUniqueCheck": true,
+	  "ActiveByDefault": false,
+	  "ActivationMessage": "ECCM Mode",
+	  "DeactivationMessage": "ECM Mode",
+	  "Linkage":{
+        "OnActivate":{  
+          "Activate":[],
+          "Deactivate":["Stealth"]
+        },
+        "OnDeactivate":{
+          "Activate":[],
+          "Deactivate":[]
+        },
+      },
+      "statusEffects": [
+        {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "Aura",
+                "effectTargetType" : "EnemiesWithinRange",
+                "range" : 230.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : false,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "WD_ECCM_SHIELD",
+				"Name" : "Makes it easier for enemies to know where you are, but harder to attack",
+				"Details" : "IPSUM SUCKUM",
+				"Icon" : "uixSvgIcon_status_ECM-missileDef"
+            },
+            "statisticData" : 
+            {
+				"statName" : "LV_ECM_Shield",
+				"operation": "Int_Add",
+				"modValue": "-6",
+				"modType": "System.Int32"
+            },
+            "nature" : "Buff"
         }
+      ],
+	  "offlineStatusEffects": [
+	  {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator"
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "WD-Signature_Decrease_35",
+                "Name": "REDUCED SENSOR SIGNATURE",
+                "Details": "Sensor Signature reduced by 35%.",
+                "Icon": "uixSvgIcon_equipment_TTS"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "SensorSignatureModifier",
+                "operation": "Float_Multiply",
+                "modValue": "0.5",
+                "modType": "System.Single"
+            }
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "specialRules": "Aura",
+                "effectTargetType": "AlliesWithinRange",
+                "range": 150.0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "WD_ECM_SHIELD",
+                "Name": "Makes it easier for enemies to know where you are, but harder to attack",
+                "Details": "IPSUM SUCKUM",
+                "Icon": "uixSvgIcon_status_ECM-missileDef"
+            },
+            "statisticData": {
+                "statName": "LV_ECM_Shield",
+                "operation": "Int_Add",
+                "modValue": "2",
+                "modType": "System.Int32"
+            },
+            "nature": "Buff"
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": 1,
+                "uniqueEffectIdStackLimit": 1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "specialRules": "Aura",
+                "effectTargetType": "EnemiesWithinRange",
+                "range": 210.0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": true,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "WD_ECM_JAM",
+                "Name": "ECM Jammer",
+                "Details": "Jamming ECM, reduces sensor checks for enemies in field",
+                "Icon": "uixSvgIcon_action_sensorlock"
+            },
+            "statisticData": {
+                "statName": "LV_ECM_Jammed",
+                "operation": "Int_Add",
+                "modValue": "2",
+                "modType": "System.Int32"
+            },
+            "nature": "Debuff"
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "GECMInterference",
+                "Name": "GECM Interference",
+                "Details": "Guardian ECM making this unit harder to hit.",
+                "Icon": "uixSvgIcon_equipment_Gyro"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "ToHitThisActor",
+                "operation": "Float_Add",
+                "modValue": "1.0",
+                "modType": "System.Single"
+            }
+        }
+	  ]
+    }
     },
     "StatName": null,
     "RelativeModifier": 0,
@@ -55,118 +229,6 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": 1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "specialRules": "Aura",
-                "effectTargetType": "AlliesWithinRange",
-                "range": 150.0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "LV_ECM_SHIELD",
-                "Name": "Makes it easier for enemies to know where you are, but harder to attack",
-                "Details": "IPSUM SUCKUM",
-                "Icon": "uixSvgIcon_status_ECM-missileDef"
-            },
-            "statisticData": {
-                "statName": "LV_ECM_Shield",
-                "operation": "Int_Add",
-                "modValue": "2",
-                "modType": "System.Int32"
-            },
-            "nature": "Buff"
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1,
-                "uniqueEffectIdStackLimit": 1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "specialRules": "Aura",
-                "effectTargetType": "EnemiesWithinRange",
-                "range": 210.0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": true,
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "LV_ECM_JAM",
-                "Name": "ECM Jammer",
-                "Details": "Jamming ECM, reduces sensor checks for enemies in field",
-                "Icon": "uixSvgIcon_action_sensorlock"
-            },
-            "statisticData": {
-                "statName": "LV_ECM_Jammed",
-                "operation": "Int_Add",
-                "modValue": "2",
-                "modType": "System.Int32"
-            },
-            "nature": "Debuff"
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
-                "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "GECMInterference",
-                "Name": "GECM Interference",
-                "Details": "Guardian ECM making this unit harder to hit.",
-                "Icon": "uixSvgIcon_equipment_Gyro"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
-                "statName": "ToHitThisActor",
-                "operation": "Float_Add",
-                "modValue": "1.0",
-                "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "NotSet",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
-        },
         {
             "durationData": {
                 "duration": -1,
@@ -202,30 +264,6 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "CEWS-Signature_Decrease_35",
-                "Name": "REDUCED SENSOR SIGNATURE",
-                "Details": "Sensor Signature reduced by 35%.",
-                "Icon": "uixSvgIcon_equipment_TTS"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "SensorSignatureModifier",
-                "operation": "Float_Multiply",
-                "modValue": "0.5",
-                "modType": "System.Single"
-            }
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator"
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
                 "Id": "CEWS-Spotting_Gain-T1",
                 "Name": "SPOTTING DISTANCE INCREASED",
                 "Details": "Increases spotting distance by 50m.",
@@ -233,8 +271,6 @@
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
                 "statName": "SpotterDistanceAbsolute",
                 "operation": "Float_Multiply",
                 "modValue": "1.15",
