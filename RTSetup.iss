@@ -55,13 +55,13 @@ UsePreviousAppDir=no
 UsePreviousTasks=no
 DisableWelcomePage=no
 OutputDir={#SourcePath}
-OutputBaseFilename=RogueTechCore-v{#RTVersion}
+OutputBaseFilename=RogueTechCore-{#RTVersion}
 BackColor=clRed
 BackColor2=clBlack
 
 [Files]
 ;Source: "/RogueTech Core/RogueTech.txt"; DestDir: "{app}/Mods/RogueTech Core"; Flags: isreadme ignoreversion
-Source: "/*"; Excludes: ".git,.modtek,.git,log.txt,Log_Turbine.txt,RTAssetsSetup.iss,*.log,Royals,DarkAgeArtillery,PirateTech,RISCtech module,Dark Age Unique,Jihad Urban Warfare,Jihad Unique,Jihad 3068-3080,Republic Unique Mechs,Republic Urban Warfare,Republic FlashPoint,Civil War Unique,Base FlashPoint,Civil War Urban Warfare,CivilWar 3062-3067,Base Unique 3061,Base UrbanWarfare,Republic 3081-3130,RogueTechSounds,UrbocalypseDarkAge,EnovaEmblems,FlashPointArtillery,DarkAge,FlashPointDarkAge,ExperimentalWeapons_SHcompat,Urbocalypse,ArtilleryUnits,LootedClanMechs,The Drones Of Syberia,ClanEmblems,BlackDisabler,Replacement_MechPortraits_Haree,Replacement_MechPortraits_JK,LootMagnet,SpeedMod,Flashpoint-The-Raid,Kas_events,SortByTonnage,SkipTravelCutscenes,RandomCampaignStart,InnerSphereMap,RandomTravelContracts,PersistentMapClient,VanillaEnabler,RogueModuleElites,CommanderPortraitLoader,PowerArmour,Superheavys,RogueFlashPointModule,ExperimentalWeapons,RaelM Emblem,UrbieNuke,RogueTechBrutal,RogueTechNormal,GlobalDifficultyByCompany,GlobalDifficultyByPlanets,Retrainer,Silence,FreeCam,BindableEscapeKey,ArmorRepair,ArmorPoints,Pilot_Quirks,StabilePiloting,Pilot_Fatigue,MoreIsLess_dZ,RogueEmblems,All 3025 Mercs,Capellan Emblems,Replacement_MechPortraits,SkipIntro,OnePointArmorStep,CrystalClear" ; DestDir: "{app}/Mods"; Flags: recursesubdirs ignoreversion
+Source: "/*"; Excludes: ".git,.modtek,.git,log.txt,Log_Turbine.txt,RTAssetsSetup.iss,*.log,Protomechs,GlobalDifficultyByRep,RogueFlashPointModuleStoryline,Royals,DarkAgeArtillery,PirateTech,RISCtech module,Dark Age Unique,Jihad Urban Warfare,Jihad Unique,Jihad 3068-3080,Republic Unique Mechs,Republic Urban Warfare,Republic FlashPoint,Civil War Unique,Base FlashPoint,Civil War Urban Warfare,CivilWar 3062-3067,Base UrbanWarfare,Republic 3081-3130,RogueTechSounds,UrbocalypseDarkAge,EnovaEmblems,FlashPointArtillery,DarkAge,FlashPointDarkAge,ExperimentalWeapons_SHcompat,Urbocalypse,ArtilleryUnits,LootedClanMechs,The Drones Of Syberia,ClanEmblems,BlackDisabler,Replacement_MechPortraits_Haree,Replacement_MechPortraits_JK,LootMagnet,SpeedMod,Flashpoint-The-Raid,Kas_events,SortByTonnage,SkipTravelCutscenes,InnerSphereMap,RandomTravelContracts,PersistentMapClient,VanillaEnabler,RogueModuleElites,CommanderPortraitLoader,Superheavys,RogueFlashPointModule,ExperimentalWeapons,RaelM Emblem,UrbieNuke,GlobalDifficultyByCompany,GlobalDifficultyByPlanets,Retrainer,Silence,FreeCam,BindableEscapeKey,ArmorRepair,ArmorPoints,Pilot_Quirks,StabilePiloting,Pilot_Fatigue,MoreIsLess_dZ,RogueEmblems,All 3025 Mercs,Capellan Emblems,Replacement_MechPortraits,SkipIntro,OnePointArmorStep,CrystalClear" ; DestDir: "{app}/Mods"; Flags: recursesubdirs ignoreversion
 
 Source: "/VanillaEnabler/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/VanillaEnabler"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechMode\Offline;
 
@@ -85,7 +85,6 @@ Source: "/EnovaEmblems/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/EnovaEmblem
 Source: "/SkipIntro/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/SkipIntro"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: qol\skipintro;
 Source: "/OnePointArmorStep/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/OnePointArmorStep"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: qol\onepointarmor;
 Source: "/BindableEscapeKey/*"; DestDir: "{app}/Mods/BindableEscapeKey"; Flags: ignoreversion; Components: qol\esckeybind;
-Source: "/BlackDisabler/*"; DestDir: "{app}/Mods/BlackDisabler"; Flags: ignoreversion; Components: qol\BlackDisabler;
 Source: "/Retrainer/*"; DestDir: "{app}/Mods/Retrainer"; Flags: ignoreversion; Components: qol\Retrainer;
 Source: "/SortByTonnage/*"; DestDir: "{app}/Mods/SortByTonnage"; Flags: ignoreversion; Components: qol\SortByTonnage;
 Source: "/SpeedMod/*"; DestDir: "{app}/Mods/SpeedMod"; Flags: ignoreversion; Components: qol\SpeedMod;
@@ -103,12 +102,11 @@ Source: "/Replacement_MechPortraits_Haree/*"; Excludes: "log.txt"; DestDir: "{ap
 Source: "/ArmorRepair/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/ArmorRepair"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: repair\on;
 Source: "/ArmorPoints/*"; DestDir: "{app}/Mods/ArmorPoints"; Flags: ignoreversion; Components: repair\off;
 
-Source: "/GlobalDifficultyByCompany/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/GlobalDifficultyByCompany"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: difficulty\on;
-Source: "/GlobalDifficultyByPlanets/*"; DestDir: "{app}/Mods/GlobalDifficultyByPlanets"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: difficulty\off;
+Source: "/GlobalDifficultyByCompany/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/GlobalDifficultyByCompany"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: difficulty\Company;
+Source: "/GlobalDifficultyByPlanets/*"; DestDir: "{app}/Mods/GlobalDifficultyByPlanets"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: difficulty\Planet;
+Source: "/GlobalDifficultyByRep/*"; DestDir: "{app}/Mods/GlobalDifficultyByRep"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: difficulty\Rep;
 
-Source: "/RogueTechNormal/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RogueTechNormal"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechDiff\Normal;
-Source: "/RogueTechBrutal/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RogueTechBrutal"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechDiff\Brutal;
-
+Source: "/Protomechs/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Protomechs"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\Protomechs;
 Source: "/UrbieNuke/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/UrbieNuke"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\Nukes;
 Source: "/ExperimentalWeapons/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/ExperimentalWeapons"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\ExperimentalWeapons;
 Source: "/ExperimentalWeapons_SHcompat/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/ExperimentalWeapons_SHcompat"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\ExperimentalWeapons;
@@ -118,22 +116,20 @@ Source: "/RoyalsFlashPoint/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RoyalsF
 Source: "/RogueModuleElites/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RogueModuleElites"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\RogueModuleElites;
 Source: "/RISCtech module/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RISCtech module"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\RISCtechmodule;
 Source: "/PirateTech/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/PirateTech"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\PirateTech;
-Source: "/PowerArmour/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/PowerArmour"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\PowerArmour;
 Source: "/ArtilleryUnits/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/ArtilleryUnits"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\ArtilleryUnits;
 Source: "/FlashPointArtillery/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/FlashPointArtillery"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\ArtilleryUnits;
 Source: "/The Drones Of Syberia/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/The Drones Of Syberia"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\Drones;
-Source: "/RandomCampaignStart/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RandomCampaignStart"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\RandomCampaignStart;
 Source: "/LootedClanMechs/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/LootedClanMechs"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\LootedClanMechs;
 Source: "/Urbocalypse/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Urbocalypse"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\Urbocalypse;
 Source: "/UrbocalypseDarkAge/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/UrbocalypseDarkAge"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\Urbocalypse;
 Source: "/LootMagnet/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/LootMagnet"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\LootMagnet;
+Source: "/RogueFlashPointModuleStoryline/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RogueFlashPointModuleStoryline"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\FlashpointStory;
 
 Source: "/RogueFlashPointModule/*"; DestDir: "{app}/Mods/RogueFlashPointModule"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: DLC\FLASHPOINT; 
 Source: "/Flashpoint-The-Raid/*"; DestDir: "{app}/Mods/Flashpoint-The-Raid"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: DLC\FLASHPOINT;
 Source: "/Base FlashPoint/*"; DestDir: "{app}/Mods/Base FlashPoint"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: DLC\FLASHPOINT;
 Source: "/Base UrbanWarfare/*"; DestDir: "{app}/Mods/Base UrbanWarfare"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: DLC\UrbanWarfare;
 
-Source: "/Base Unique 3061/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Base Unique 3061"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechEraUnique\UniqueMechs3061;
 Source: "/Civil War Unique/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Civil War Unique"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechEraUnique\CivilWarUnique;
 Source: "/Jihad Unique/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Jihad Unique"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechEraUnique\JihadUnique;
 Source: "/Republic Unique/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Republic Unique"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechEraUnique\RepublicUnique;
@@ -190,11 +186,9 @@ WelcomeLabel1=Welcome to the [name] Setup, Commander
 
 [Components]
 Name: "difficulty"; Description: "Choose difficulty scaling"; Types: full custom compact; Flags: fixed dontinheritcheck
-Name: "difficulty\on"; Description: "Difficulty by Company Rating"; Types: full compact; Flags: exclusive 
-Name: "difficulty\off"; Description: "Difficulty by Planet Rating"; Types: custom; Flags: exclusive
-Name: "RogueTechDiff"; Description: "Choose RogueTech Experience"; Types: full custom compact; Flags: fixed dontinheritcheck
-Name: "RogueTechDiff\Normal"; Description: "Normal RogueTech - Even playing field between AI and Players"; Types: full compact; Flags: exclusive 
-Name: "RogueTechDiff\Brutal"; Description: "Brutal RogueTech - Merciless Enemys and buffed AI"; Types: custom; Flags: exclusive
+Name: "difficulty\Rep"; Description: "Difficulty by Reputation"; Types: full compact; Flags: exclusive
+Name: "difficulty\Company"; Description: "Difficulty by Company Rating"; Types: custom; Flags: exclusive 
+Name: "difficulty\Planet"; Description: "Difficulty by Planet Rating"; Types: custom; Flags: exclusive
 Name: "DLC"; Description: "DLC Modules - Only use when you have it!"; Types: custom compact;
 Name: "DLC\FLASHPOINT"; Description: "Flashpoint"; Types: custom
 Name: "DLC\UrbanWarfare"; Description: "UrbanWarfare"; Types: custom
@@ -210,7 +204,6 @@ Name: "qol\onepointarmor"; Description: "Shift+Click to change armour by 1"; Typ
 Name: "qol\skipintro"; Description: "Skip Intro"; Types: full compact;
 Name: "qol\SpeedMod"; Description: "Speed Mod - Double the Game Speed"; Types: full compact;
 Name: "qol\SortByTonnage"; Description: "Sort Mechs by Cost"; Types: full compact;
-Name: "qol\BlackDisabler"; Description: "Disable Black Market Icons"; Types: full compact;
 Name: "qol\Retrainer"; Description: "Retrainer - Spend 500k Cbills to retrain your pilots once"; Types: custom;
 Name: "qol\esckeybind"; Description: "Use Mouse4 as ESC key"; Types: custom;
 Name: "RogueTechEra"; Description: "Select which Era's Units to Enable"; Types: full custom compact;
@@ -219,16 +212,15 @@ Name: "RogueTechEra\Jihad"; Description: "Mech's of the WoB Jihad Era 3068-3080"
 Name: "RogueTechEra\Republic"; Description: "Mech's of the Republic Era 3080-3130"; Types: full compact;
 Name: "RogueTechEra\DarkAge"; Description: "Mech's of the Dark Age Era 3130+"; Types: full compact;
 Name: "RogueTechEraUnique"; Description: "Select which Era's Unique and Hero Units to Enable"; Types: full custom compact;
-Name: "RogueTechEraUnique\UniqueMechs3061"; Description: "Unique Mech's up to the 3061 Era"; Types: full compact;
 Name: "RogueTechEraUnique\CivilWarUnique"; Description: "Unique Mech's of the Civil War Era"; Types: full compact;
 Name: "RogueTechEraUnique\JihadUnique"; Description: "Unique Mech's of the wob Jihad Era"; Types: full compact;
 Name: "RogueTechEraUnique\RepublicUnique"; Description: "Unique Mech's of the Republic Era"; Types: full compact;
 Name: "RogueTechEraUnique\DarkAgeUnique"; Description: "Unique Mech's of the Dark Age Era"; Types: full compact;
 Name: "RogueTechOptionals"; Description: "Optional Mods and Components"; Types: full custom compact; 
-Name: "RogueTechOptionals\LootMagnet"; Description: "LootMagnet - Lore-friendly Salvage Overhaul by FrostRaptor"; Types: full compact;
-Name: "RogueTechOptionals\RandomCampaignStart"; Description: "Randomized Campaign start - disable for a quicker new game and predefined lance"; Types: full compact;
+Name: "RogueTechOptionals\LootMagnet"; Description: "LootMagnet - Lore-friendly Salvage Overhaul by FrostRaptor"; Types: full compact; 
 Name: "RogueTechOptionals\Royals"; Description: "A collection of Royal Units"; Types: full compact;
-Name: "RogueTechOptionals\PowerArmour"; Description: "A collection of PowerArmours - by LadyAlekto"; Types: full compact;
+Name: "RogueTechOptionals\FlashpointStory"; Description: "HBS Battletech Story as Flashpoint - by Akodoreign"; Types: full compact;
+Name: "RogueTechOptionals\Protomechs"; Description: "Protomechs - by Rumia"; Types: full compact;
 Name: "RogueTechOptionals\LootedClanMechs"; Description: "Looted Clan Mechs - by LadyAlekto"; Types: custom;
 Name: "RogueTechOptionals\Urbocalypse"; Description: "Urbocalypse - UrbanMechs - by LadyAlekto&Raza"; Types: custom;
 Name: "RogueTechOptionals\Superheavys"; Description: "Superheavys - Oversized Mechs&Tanks and their Missions by LadyAlekto&CargoVroom"; Types: custom;
