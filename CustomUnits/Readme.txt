@@ -17,7 +17,7 @@ new section
 	}
 
 VehicleChassis/Chassis
-"Custom":{
+"CustomParts":{
     "AOEHeight": 55,  - this value will be added to y-coordinate of current position in AoE damage calculations (weapon/landmines/component's explosions). 
                         Can be altered runtime via CUAOEHeight actor's statistic value (float)
     "Unaffected":{  
