@@ -27,9 +27,14 @@ VehicleChassis/Chassis
 							If choosed as melee target attacker melee (NOT AP) weapon always miss. Ignore terrain move cost.
               Can be altered runtime via CUPathingUnaffected actor's statistic value (boolean)
       "Fire":"true",         - if true chassis not receive damage passing burning terrain. Can be altered runtime via CUFireActorStatUnaffected actor's statistic value (boolean)
-      "Landmines":"true"     - if true chassis not cause landmines to explode (still can receive AoE damage from landmines if explosion triggered by someone else).
+      "Landmines":"true",     - if true chassis not cause landmines to explode (still can receive AoE damage from landmines if explosion triggered by someone else).
                                Can be altered runtime via CULandminesUnaffected actor's statistic value (boolean)
+      "MoveCostBiome":true   - if true unaffected by move modify per biome. Can be altered runtime via CUMoveCostBiomeUnaffected actor's statistic value (boolean)
     },
+    "MoveCostModPerBiome":{  - dictionary of move cost modify per biome design mask
+      "DesignMaskBiomeMartianVacuum":2.0,
+      "DesignMaskBiomeLunarVacuum":10.0
+    }, 
 	"MoveCost":"Hover",     - move cost per design mask overridence (useless if Unaffected.Pathing is true).
                             Can be altered runtime via CUMoveCost actor's statistic value (string)
     "TieToGroundOnDeath":"true", - if true tied to ground on death (useful if prefab positions is altered by sections below)
