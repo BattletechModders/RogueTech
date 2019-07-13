@@ -21,11 +21,16 @@ CACShortRangeAccuracyMod - MinRange <= X < ShortRange
 CACMediumRangeAccuracyMod - ShortRange <= X < MediumRange
 CACLongRangeAccuracyMod - MediumRange <= X < LongRange
 CACExtraLongRangeAccuracyMod - LongRange <= X < MaxRange
+EvasivePipsIgnored
 
 
-vfxprfprtl_heatventlrg_loop
-vfxprfprtl_heatventsm_loop
-vfxprfprtl_heatdumplrg_burst
+KMiSSioNToday at 17:08
+float
+i know its nature is int, but there is some mess with them
+LadyAlektoToday at 17:08
+a float? thats... interesting possibilities
+KMiSSioNToday at 17:09
+it will be rounded at implementation
 
 {
 "debugLog":true, - enable debug log 
@@ -184,6 +189,7 @@ CustomAmmoCategories.json
 
 Weapon definition
 new fields
+  "EvasivePipsIgnored" : 1, This value can be controlled via weapon's EvasivePipsIgnored statistic value (float)
   "Streak": true/false - if true only success hits will be shown, ammo decremental and heat generation will be based on success hits. 
 							with "HitGenerator" : "Streak" - will be true streak effect all-hit-or-no-fire
   "HitGenerator" : "Streak", Set to hit generator. Supported values ("Individual"/"Cluster"/"Streak"). 
@@ -328,7 +334,7 @@ new fields
 		"Instability" : 0, This value will be added to Instability (current weapon status effects will be used too)
 		"AttackRecoil" : 0, This value will be added to AttackRecoil
 		"IndirectFireCapable" : false, Effective IndirectFireCapable will be taken from ammo. If not set in ammo define, weapon value will be used
-		"EvasivePipsIgnored" : 0, This value will be added to EvasivePipsIgnored (current weapon status effects will be used too)
+		"EvasivePipsIgnored" : 0, This value will be added to EvasivePipsIgnored.
 		"HitGenerator" : "Individual", Set to hit generator. Supported values ("Individual"/"Cluster"/"Streak"). 
 									  Streak hit generator is sort of cluster, 
 									  if first projectile hit, rest hit too (location distribution as cluster hit generator),
@@ -715,6 +721,10 @@ Ammo definition
 								   		  "name" - audio event name 
 										  "none" - none additional sound for this type name doesn't matter
 							 may be set per ammo, mode and weapon. Mode have priority than ammo than weapon
+   "ChassisTagsAccuracyModifiers":{ - Accuracy for mods tags (Meches - MechTags, Vehicles - VehicleTags, Turrets - turret tags) AIM aware
+      "unit_assault":-10,
+      "unit_mech":10,
+   },
    "statusEffects" : [   - will be applied on weapon hit (only "OnHit" effectTriggerType)
         {
             "durationData" : {
@@ -1150,28 +1160,28 @@ public enum AudioEventList_ui
   ui_esc_menu_select = 210, // 0x000000D2
   ui_generic_confirm = 211, // 0x000000D3
   ui_generic_hover = 212, // 0x000000D4
-  ui_vtol_action_choose_yes = 213, // 0x000000D5
-  ui_vtol_action_hover = 214, // 0x000000D6
-  ui_vtol_choose_hover = 215, // 0x000000D7
-  ui_vtol_choose_off = 216, // 0x000000D8
-  ui_vtol_choose_on = 217, // 0x000000D9
-  ui_vtol_move = 218, // 0x000000DA
-  ui_vtol_move_path = 219, // 0x000000DB
-  ui_vtol_move_path_confirm = 220, // 0x000000DC
-  ui_vtol_move_rotate_start = 221, // 0x000000DD
-  ui_vtol_move_rotate_stop = 222, // 0x000000DE
-  ui_vtol_restart = 223, // 0x000000DF
+  ui_mech_action_choose_yes = 213, // 0x000000D5
+  ui_mech_action_hover = 214, // 0x000000D6
+  ui_mech_choose_hover = 215, // 0x000000D7
+  ui_mech_choose_off = 216, // 0x000000D8
+  ui_mech_choose_on = 217, // 0x000000D9
+  ui_mech_move = 218, // 0x000000DA
+  ui_mech_move_path = 219, // 0x000000DB
+  ui_mech_move_path_confirm = 220, // 0x000000DC
+  ui_mech_move_rotate_start = 221, // 0x000000DD
+  ui_mech_move_rotate_stop = 222, // 0x000000DE
+  ui_mech_restart = 223, // 0x000000DF
   ui_mission_done = 224, // 0x000000E0
   ui_mission_fail = 225, // 0x000000E1
   ui_mission_popup_off = 226, // 0x000000E2
   ui_mission_popup_on = 227, // 0x000000E3
   ui_mission_withdraw = 228, // 0x000000E4
   ui_mp_chat_alert = 229, // 0x000000E5
-  ui_mp_go_to_vtol_select = 230, // 0x000000E6
+  ui_mp_go_to_mech_select = 230, // 0x000000E6
   ui_mp_menu_hover = 231, // 0x000000E7
   ui_mp_select_go = 232, // 0x000000E8
-  ui_mp_select_vtol_value_ok = 233, // 0x000000E9
-  ui_mp_select_vtol_value_over = 234, // 0x000000EA
+  ui_mp_select_mech_value_ok = 233, // 0x000000E9
+  ui_mp_select_mech_value_over = 234, // 0x000000EA
   ui_objective_add = 235, // 0x000000EB
   ui_objective_done = 236, // 0x000000EC
   ui_objective_fail = 237, // 0x000000ED
