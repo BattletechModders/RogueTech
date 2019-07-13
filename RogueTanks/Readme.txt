@@ -36,6 +36,12 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+0.0.0
+
+Switched some techies to toybota model.
+Added engines cores to VBIED vehicles because of Suspicious Cargo rework,
+Added higher bracket movedefs for vtols
+
 8.2.4 - 7/5/2019
 
 Added SM2 Arty vehicle,

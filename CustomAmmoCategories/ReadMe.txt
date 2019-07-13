@@ -167,7 +167,7 @@ vfxprfprtl_heatdumplrg_burst
   "ShutdownHeatChance":25,
   "UseHBSMercySetting":true
 },
-
+"WaterHeightFix":true - needed for proper hover's over water movements
 }
 
 now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
@@ -1150,28 +1150,28 @@ public enum AudioEventList_ui
   ui_esc_menu_select = 210, // 0x000000D2
   ui_generic_confirm = 211, // 0x000000D3
   ui_generic_hover = 212, // 0x000000D4
-  ui_mech_action_choose_yes = 213, // 0x000000D5
-  ui_mech_action_hover = 214, // 0x000000D6
-  ui_mech_choose_hover = 215, // 0x000000D7
-  ui_mech_choose_off = 216, // 0x000000D8
-  ui_mech_choose_on = 217, // 0x000000D9
-  ui_mech_move = 218, // 0x000000DA
-  ui_mech_move_path = 219, // 0x000000DB
-  ui_mech_move_path_confirm = 220, // 0x000000DC
-  ui_mech_move_rotate_start = 221, // 0x000000DD
-  ui_mech_move_rotate_stop = 222, // 0x000000DE
-  ui_mech_restart = 223, // 0x000000DF
+  ui_vtol_action_choose_yes = 213, // 0x000000D5
+  ui_vtol_action_hover = 214, // 0x000000D6
+  ui_vtol_choose_hover = 215, // 0x000000D7
+  ui_vtol_choose_off = 216, // 0x000000D8
+  ui_vtol_choose_on = 217, // 0x000000D9
+  ui_vtol_move = 218, // 0x000000DA
+  ui_vtol_move_path = 219, // 0x000000DB
+  ui_vtol_move_path_confirm = 220, // 0x000000DC
+  ui_vtol_move_rotate_start = 221, // 0x000000DD
+  ui_vtol_move_rotate_stop = 222, // 0x000000DE
+  ui_vtol_restart = 223, // 0x000000DF
   ui_mission_done = 224, // 0x000000E0
   ui_mission_fail = 225, // 0x000000E1
   ui_mission_popup_off = 226, // 0x000000E2
   ui_mission_popup_on = 227, // 0x000000E3
   ui_mission_withdraw = 228, // 0x000000E4
   ui_mp_chat_alert = 229, // 0x000000E5
-  ui_mp_go_to_mech_select = 230, // 0x000000E6
+  ui_mp_go_to_vtol_select = 230, // 0x000000E6
   ui_mp_menu_hover = 231, // 0x000000E7
   ui_mp_select_go = 232, // 0x000000E8
-  ui_mp_select_mech_value_ok = 233, // 0x000000E9
-  ui_mp_select_mech_value_over = 234, // 0x000000EA
+  ui_mp_select_vtol_value_ok = 233, // 0x000000E9
+  ui_mp_select_vtol_value_over = 234, // 0x000000EA
   ui_objective_add = 235, // 0x000000EB
   ui_objective_done = 236, // 0x000000EC
   ui_objective_fail = 237, // 0x000000ED
