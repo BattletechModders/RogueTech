@@ -17,17 +17,17 @@ new section
 	}
 
 VehicleChassis/Chassis
-"Custom":{
+"CustomParts":{
     "AOEHeight": 55,  - this value will be added to y-coordinate of current position in AoE damage calculations (weapon/landmines/component's explosions). 
                         Can be altered runtime via CUAOEHeight actor's statistic value (float)
     "Unaffected":{  
-      "DesignMasks":"true",   - if true chassis will be unaffected to all terrain design masks effects except move cost. Can be altered runtime via CUDesignMasksUnaffected actor's statistic value (boolean)
-      "Pathing":"true",       - if true chassis will be unaffected by pathing limitations 
+      "DesignMasks": true,   - if true chassis will be unaffected to all terrain design masks effects except move cost. Can be altered runtime via CUDesignMasksUnaffected actor's statistic value (boolean)
+      "Pathing": true,       - if true chassis will be unaffected by pathing limitations 
 							(eg can climb vertcall surface, other actors collisions, not cause filmsy objects destruction on impact). 
 							If choosed as melee target attacker melee (NOT AP) weapon always miss. Ignore terrain move cost.
               Can be altered runtime via CUPathingUnaffected actor's statistic value (boolean)
-      "Fire":"true",         - if true chassis not receive damage passing burning terrain. Can be altered runtime via CUFireActorStatUnaffected actor's statistic value (boolean)
-      "Landmines":"true",     - if true chassis not cause landmines to explode (still can receive AoE damage from landmines if explosion triggered by someone else).
+      "Fire": true,         - if true chassis not receive damage passing burning terrain. Can be altered runtime via CUFireActorStatUnaffected actor's statistic value (boolean)
+      "Landmines": true,     - if true chassis not cause landmines to explode (still can receive AoE damage from landmines if explosion triggered by someone else).
                                Can be altered runtime via CULandminesUnaffected actor's statistic value (boolean)
       "MoveCostBiome":true   - if true unaffected by move modify per biome. Can be altered runtime via CUMoveCostBiomeUnaffected actor's statistic value (boolean)
     },
@@ -37,7 +37,7 @@ VehicleChassis/Chassis
     }, 
 	"MoveCost":"Hover",     - move cost per design mask overridence (useless if Unaffected.Pathing is true).
                             Can be altered runtime via CUMoveCost actor's statistic value (string)
-    "TieToGroundOnDeath":"true", - if true tied to ground on death (useful if prefab positions is altered by sections below)
+    "TieToGroundOnDeath":false, - if true tied to ground on death (useful if prefab positions is altered by sections below)
 	"HighestLOSPosition":{"x":0,"y":60,"z":0}, - offset for targeting
 	"TurretAttach":{
 		"offset":{"x":-0.6,"y":52.3,"z":5.5}, - offset for turret location, if omitted not touched
