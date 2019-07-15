@@ -36,14 +36,14 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-8.2.13
+8.2.14
 
 Switched some techies to toybota model.
 Added engines cores to VBIED vehicles because of Suspicious Cargo rework,
 Added higher bracket movedefs for vtols,
-
 Added Thumper TAV-1 and TAV-2 (WOB),
-Added engine cores to ArtilleryUnits, Roguetanks/CLANK, Roguetanks/Primitive, UrbieNuke, BaseUrbanWarfare
+Replaced Vargr and Sleipnir APC with canonical ones from new House Arano sourcebook,
+Added engine cores to ArtilleryUnits, Roguetanks/CLANK, Roguetanks/Primitive, UrbieNuke, BaseUrbanWarfare, RogueTanks/vehicle/apc
 
 8.2.4 - 7/5/2019
 
