@@ -11,6 +11,7 @@ WARNING! Shipped versions of AIM and WR can't be loaded by ModTek and can't be u
 click on right side of HUD weapon slot to switch mode (near hit chance)
 click on center of HUD weapon slot to switch ammo (near ammo count)
 ctrl+left click on weapon slot will eject current ammo 
+ctrl+T will toggle attack direction marks visibility (circles under meches feets)
 NOTE: ammo can't be ejected if mech moved this round
      after ejection mech can't jump and sprint until end of round
     
@@ -190,7 +191,9 @@ CustomAmmoCategories.json
 Weapon definition
 new fields
   "EvasivePipsIgnored" : 1, This value can be controlled via weapon's EvasivePipsIgnored statistic value (float)
+  "FireDelayMultiplier": 10, - multiplier for ballistic fire delay. Only works with ImprovedBallistic. Default 10
   "Streak": true/false - if true only success hits will be shown, ammo decremental and heat generation will be based on success hits. 
+                          Can be set for mode/ammo/weapon. Mode have priority than ammo, than weapon.
 							with "HitGenerator" : "Streak" - will be true streak effect all-hit-or-no-fire
   "HitGenerator" : "Streak", Set to hit generator. Supported values ("Individual"/"Cluster"/"Streak"). 
                                   Streak hit generator is sort of cluster, 
@@ -311,6 +314,8 @@ new fields
 	[{
 		"Id": "x4",  - Must be unique per weapon
 		"UIName": "x4", - This string will be displayed near weapon name
+    "Streak": true/false - if true only success hits will be shown, ammo decremental and heat generation will be based on success hits. 
+                            Can be set for mode/ammo/weapon. Mode have priority than ammo, than weapon.
 		"isBaseMode":true, - Weapon must have one base mode. Mode with this setting will used by default
 		"WeaponEffectID" : "WeaponEffect-Weapon_PPC", Played fire effect can be set in mode definition
 		"EvasivePipsIgnored" : 0, This value will be added to EvasivePipsIgnored (current weapon status effects will be used too)
@@ -454,7 +459,8 @@ Ammo definition
    
    "WeaponEffectID" : "WeaponEffect-Weapon_PPC", Played fire effect can be set in ammo definition, for example this LBX AC10 will fire as PPC if ECM ammo is choosed
    "EvasivePipsIgnored" : 0, This value will be added to EvasivePipsIgnored (current weapon status effects will be used too)
-   
+    "Streak": true/false - if true only success hits will be shown, ammo decremental and heat generation will be based on success hits. 
+                            Can be set for mode/ammo/weapon. Mode have priority than ammo, than weapon.
    "AccuracyModifier" : -10.0, This value will be added to AccuracyModifier (current weapon status effects will be used too)
    "CriticalChanceMultiplier" : 0.0, This value will be added to CriticalChanceMultiplier (current weapon status effects will be used too)
    "DamagePerShot": -50.0, This value will be added to DamagePerShot (current weapon status effects will be used too)
