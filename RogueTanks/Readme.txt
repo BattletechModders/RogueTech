@@ -36,11 +36,14 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-0.0.0
+8.2.13
 
 Switched some techies to toybota model.
 Added engines cores to VBIED vehicles because of Suspicious Cargo rework,
-Added higher bracket movedefs for vtols
+Added higher bracket movedefs for vtols,
+
+Added Thumper TAV-1 and TAV-2 (WOB),
+Added engine cores to ArtilleryUnits, Roguetanks/CLANK, Roguetanks/Primitive, UrbieNuke, BaseUrbanWarfare
 
 8.2.4 - 7/5/2019
 
