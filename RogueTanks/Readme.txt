@@ -36,6 +36,10 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+0.0.0
+
+Added cores to Republic, Civil War and Jihad vees
+
 8.2.14
 
 Switched some techies to toybota model.
