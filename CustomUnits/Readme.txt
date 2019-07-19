@@ -75,24 +75,54 @@ VehicleChassis/Chassis
 		"CustomParts":[  - array for external animated parts for chassis (all prefabs will be requested on loading dependences for chassis)
 			{
 				"prefab":"warrior_rotor_top_x10_brass", - prefab name
+                            !READ NEXT NOTE CAREFULLY IF YOU EXPERIENCED PROBLEMS WITH SPAWNING YOUR PRESITANT OBJEJECTS USING CUSTOM UNITS MOD!
+                            To make it work you must follow some rules 
+                            1. You can't spawn prefab containing object with your models directly. You have to create empty object, name it as you want it to be referenced,
+                            and only than add objects with your models as childs for this object. 
+                            2. For name of parent object you have to use letters in LOWER case this is some sort of unity/game/modtek limitation.
+                            3. You can search at the unity package i'm providing with this mod for examples how to create asset with prefabs engine can successfully load.
 				"prefabTransform":{                     - prefab transformations
 					"offset":  {"x":0,"y":1.4,"z":0.5},
-					"scale":   {"x":20,"y":20,"z":20},
+					"scale":   {"x":1,"y":1,"z":1},
 					"rotation":{"x":0, "y":0, "z":0}
 				},
-        "VehicleChassisLocation":"Front",               - attach location
+        "VehicleChassisLocation":"Front",               - attach location for vehicles
+        "MechChassisLocation":"RightArm",               - attach location for meches
+                                                        NOTE! on location or entire unit destruction all spawned objects removing from game 
+                                                        maybe later, i will implement proper physics.
+        "MaterialInfo":{
+          !READ NEXT NOTE CAREFULLY IF YOU EXPERIENCED PROBJEMS WITH TEXTURING YOUR LOADABLE OBJECTS!
+          Some basics: model it is mesh + material. Material is shader + shader's settings relative to this model (textures is part of settings).
+          Shader is set of instruction for GPU telling it how draw your model properly. 
+          If you try to use standard unity shader for your prefabs - it will work wrong cause it does not know about game rendering features.
+          So, to get your models to be textured properly you have next options:
+          1. If you experienced enough you can write your own shader than will work correctly in game (but if you can, why are you reading this?)
+          Fortunately i've found basic shader developers using to texture objects and its settings are very similar to standard one. 
+          2. You can use UABE to replace standard unity's shader to game's one. (You can't import game's shader to your unity project cause absence of shader's source)
+             But it needs additional post-production phase for your asset. After every change and reassemble you have to modify your asset to replace shader.
+          3. You can include MaterialInfo to your custom part definition. If you do, my code while spawning objects will search through all models in your prefab for materials you point
+             and replace their shaders to ones you points (for example i'm providing possibility to replace shader to game's standard one)
+          "warrior_top_rotor_0Mat":{                              - name of material in your prefab to search
+            "shader": "battletechstandartshader",                 - name of shader
+            "shaderKeyWords":["_DETAIL_OVERLAY","_EMISSION","_METALLICGLOSSMAP","_NORMALMAP"] - list of shader keywords.
+          }
+        },
+        
 				"AnimationType":"SimpleRotator",        - animation type
 				"AnimationData":{ - data specific for animation type
         "speed":5, - rotor blades rotetion speed
         "sound":"AudioEventList_motor_motor_buzzy_start", - sound for rotor 
-        "axis":"y" - reserved for future use
+        "axis":"y" - axis to rotate around (note it is object's axis not world's one it is depends on object's rotation)
+        "rotateBone":"saw" - name of transform to rotate.
+            Some basics: your prefab can consist of many child objects (models). 
+            With SimpleRotator you can rotate whole set or just one of them. Look at king crab's chassis circle saw demo. 
         }  
 			},
 			{
 				"prefab":"warrior_rotor_bottom_x10_brass",
 				"prefabTransform":{
 					"offset":  {"x":0,"y":1.2,"z":0.5},
-					"scale":   {"x":20,"y":20,"z":20},
+					"scale":   {"x":1,"y":1,"z":1},
 					"rotation":{"x":0, "y":0, "z":0}
 				},
         "VehicleChassisLocation":"Front",
@@ -106,6 +136,7 @@ VehicleChassis/Chassis
 					"scale":   {"x":20,"y":20,"z":20},
 					"rotation":{"x":0, "y":0, "z":0}
 				},
+        "VehicleChassisLocation":"Turret",       - parent attach point (only have meaning only in visual plane)
         "VehicleChassisLocation":"Turret",       - parent attach point (only have meaning only in visual plane)
 				"AnimationType":"Turret",                - turret rotates toward target on fire 
 				"AnimationData":{
