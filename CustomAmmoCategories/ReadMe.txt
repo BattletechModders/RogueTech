@@ -191,7 +191,12 @@ CustomAmmoCategories.json
 Weapon definition
 new fields
   "EvasivePipsIgnored" : 1, This value can be controlled via weapon's EvasivePipsIgnored statistic value (float)
-  "FireDelayMultiplier": 10, - multiplier for ballistic fire delay. Only works with ImprovedBallistic. Default 10
+  "FireDelayMultiplier": 10, - multiplier for multi-shot fire delay. Only works with ImprovedBallistic. Default for weapon 10. Multiplicative per weapon/mode/ammo. For ammo and mode default is 1.
+                              !PLEASE READ NEXT NOTE CAREFULY: Now ImprovedBallistic works for lasers and PPCs, but laser ans PPC effects has no shotDelay parameter in assets which ballistic has. 
+                              So, for laser and PPC effects i have to use other parameter for shot delay. This parameter is projectileSpeed.
+                              For lasers projectileSpeed controls beam duration, so effective FireDelayMultiplier around 0.5 - 2 should be normal. 
+                              For PPC projectileSpeed it is really projectile speed and its default value ~200, so if you are not willing to force players to wait around 200 seconds,
+                              for PPC effects you should keep effective FireDelayMultiplier around 0.01 (!DO NOT FORGET! weapon default value is 10) to have delay ~2 second. 
   "Streak": true/false - if true only success hits will be shown, ammo decremental and heat generation will be based on success hits. 
                           Can be set for mode/ammo/weapon. Mode have priority than ammo, than weapon.
 							with "HitGenerator" : "Streak" - will be true streak effect all-hit-or-no-fire
@@ -293,16 +298,16 @@ new fields
    "ClearMineFieldRadius": 4, - radius in in-game terrain cells. Minefields in all cells within radius will be cleared in terrain impact.
                                 Clearing on success hit controled by FireOnSuccessHit flag.
    "Cooldown": 2, - number of rounds weapon will be unacceptable after fire this mode
-   "ImprovedBallistic": true, - whether use or not own ballistic weapon effect engine. 
+   "ImprovedBallistic": true, - whether use or not own ballistic/laser/PPC weapon effect engine. 
 								Difference between "improved" and vanilla engine:
 								1. Improved mode uses ShotsWhenFire properly (vanilla had not used them at all)
-								2. Improved mode can use curvy trajectory for indirect fire (indirect gauss bullet can be used too, but looks very funny)
+								2. Improved mode can use curvy trajectory for indirect fire (ballistic only) (indirect gauss bullet can be used too, but looks very funny)
 								3. Improved mode fire ShotsWhenFire volleys with ProjectilesPerShot bullets in each. 
-								   Bullets in one volley fired simultaneously instead of one by one (as in WeaponRealizer)
+								   Bullets/beams/pulses in one volley fired simultaneously instead of one by one (as in WeaponRealizer)
 								   But damage still dealt once per volley, not per bullet, to keep compatibility with vanilla.
 								NOTE! If ImprovedBallistic is set DisableClustering is forced to true and "wr-clustered_shots" tag removed from definition. 
-  "BallisticDamagePerPallet": true - if true damage inflicted per pallet instead of per shot. Only working with ImprovedBallistic true, ballistic weapon effect and HasShels false
-                                     Damage will be divided by ProjectilesPerShot value, heat damage and stable damage too. 
+  "BallisticDamagePerPallet": true - if true damage inflicted per pallet instead of per shot. Only working with ImprovedBallistic true, ballistic/laser/PPC weapon effect and HasShels false
+                                     Damage will be divided by ProjectilesPerShot value, heat damage and stable damage too.
 	"StatusEffectsPerHit":false - if true OnHit status effects applying on each hit instead on once. 
 	"AdditionalAudioEffect": "enum:AudioEventList_explosion.explosion_propane_tank", - additional sound effect on projectile impact. Value format "<type>:<name>".
 							 type values: "enum" - building in-game enum value
@@ -314,6 +319,12 @@ new fields
 	[{
 		"Id": "x4",  - Must be unique per weapon
 		"UIName": "x4", - This string will be displayed near weapon name
+    "FireDelayMultiplier": 1, - multiplier for multi-shot fire delay. Only works with ImprovedBallistic. Default for weapon 10. Multiplicative per weapon/mode/ammo. For ammo and mode default is 1.
+                              !PLEASE READ NEXT NOTE CAREFULY: Now ImprovedBallistic affects lasers and PPCs, but laser ans PPC effects has no shotDelay parameter in assets which ballistic has. 
+                              So, for laser and PPC effects i have to use other parameter for shot delay. This parameter is projectileSpeed.
+                              For lasers projectileSpeed controls beam duration, so effective FireDelayMultiplier around 0.5 - 2 should be normal. 
+                              For PPC projectileSpeed it is really projectile speed and its default value ~200, so if you are not willing to force players to wait around 200 seconds,
+                              for PPC effects you should keep effective FireDelayMultiplier around 0.01 (!DO NOT FORGET! weapon default value is 10) to have delay ~2 second. 
     "Streak": true/false - if true only success hits will be shown, ammo decremental and heat generation will be based on success hits. 
                             Can be set for mode/ammo/weapon. Mode have priority than ammo, than weapon.
 		"isBaseMode":true, - Weapon must have one base mode. Mode with this setting will used by default
@@ -461,6 +472,12 @@ Ammo definition
    "EvasivePipsIgnored" : 0, This value will be added to EvasivePipsIgnored (current weapon status effects will be used too)
     "Streak": true/false - if true only success hits will be shown, ammo decremental and heat generation will be based on success hits. 
                             Can be set for mode/ammo/weapon. Mode have priority than ammo, than weapon.
+    "FireDelayMultiplier": 1, - multiplier for multi-shot fire delay. Only works with ImprovedBallistic. Default for weapon 10. Multiplicative per weapon/mode/ammo. For ammo and mode default is 1.
+                              !PLEASE READ NEXT NOTE CAREFULY: Now ImprovedBallistic affects lasers and PPCs, but laser ans PPC effects has no shotDelay parameter in assets which ballistic has. 
+                              So, for laser and PPC effects i have to use other parameter for shot delay. This parameter is projectileSpeed.
+                              For lasers projectileSpeed controls beam duration, so effective FireDelayMultiplier around 0.5 - 2 should be normal. 
+                              For PPC projectileSpeed it is really projectile speed and its default value ~200, so if you are not willing to force players to wait around 200 seconds,
+                              for PPC effects you should keep effective FireDelayMultiplier around 0.01 (!DO NOT FORGET! weapon default value is 10) to have delay ~2 second. 
    "AccuracyModifier" : -10.0, This value will be added to AccuracyModifier (current weapon status effects will be used too)
    "CriticalChanceMultiplier" : 0.0, This value will be added to CriticalChanceMultiplier (current weapon status effects will be used too)
    "DamagePerShot": -50.0, This value will be added to DamagePerShot (current weapon status effects will be used too)
