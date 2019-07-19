@@ -133,7 +133,7 @@ VehicleChassis/Chassis
 				"prefab":"warrior_turret_x10_red",
 				"prefabTransform":{
 					"offset":  {"x":0,"y":0,"z":0},
-					"scale":   {"x":20,"y":20,"z":20},
+					"scale":   {"x":1,"y":1,"z":1},
 					"rotation":{"x":0, "y":0, "z":0}
 				},
         "VehicleChassisLocation":"Turret",       - parent attach point (only have meaning only in visual plane)
