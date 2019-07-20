@@ -19,17 +19,22 @@
         },
         "BonusDescriptions": {
             "Bonuses": [
-                "Stealth: 4",
-                "StealthShort: 1",
-                "StealthMid: 3",
-                "StealthLong: 5",
-                "StealthExt: 7",
-                "StealthMove: 4",
-                "StealthDistance: 4",
+                "Stealth",
+	"StealthVision: 2",
+	"StealthSensors: 2",
+	"StealthVisionDecay: 4",
+	"StealthVisionDecayDistance: 5",
+	"StealthSensorsDecay: 4",
+	"StealthSensorsDecayDistance: 5",
+	"StealthMin: 35%",
+	"StealthShort: 10%",
+	"StealthMed: 20%",
+	"StealthLong: 30%",
+	"StealthER: 40%",
                 "Visibility: -50%",
                 "Signature: -50%",
                 "HeatGenerated: +15%",
-                "HeatPerTurn: +10",
+                "HeatPerTurn: +15",
                 "ReqECM",
                 "ArmorTPCost: 50%",
                 "ArmorCBCost: 50%"
@@ -40,36 +45,209 @@
         },
 		"Lootable": {
             "ItemID": "lootable_ChameleonLightPolarizationShield"
-        }
-    },
-    "StatName": null,
-    "RelativeModifier": 0,
-    "AbsoluteModifier": 0,
-    "Description": {
-        "Cost": 100,
-        "Rarity": 99,
-        "Purchasable": true,
-        "Manufacturer": "Prototype",
-        "Model": "Chameleon LPS",
-        "UIName": "Chameleon LPS",
-        "Id": "lootable_ChameleonLightPolarizationShield",
-        "Name": "Chameleon Light Polarization Shield",
-        "Details": "The Chameleon Light Polarization Shield was designed to make a 'Mech invisible to the naked eye. By using a primitive mimetic system, the outline of the 'Mech carrying it was broken up, blending into the surrounding terrain. The Chameleon was very effective because unlike the Null Signature System it worked against sensor systems and visual observation.",
-        "Icon": "uixSvgIcon_equipment_TTS"
-    },
-    "BonusValueA": "Bulwark",
-    "BonusValueB": "Requires ECM",
-    "ComponentType": "Upgrade",
-    "ComponentSubType": "NotSet",
-    "PrefabIdentifier": "",
-    "BattleValue": 0,
-    "InventorySize": 1,
-    "Tonnage": 0,
-    "AllowedLocations": "All",
-    "DisallowedLocations": "All",
-    "CriticalComponent": false,
-    "statusEffects": [
+        },
+		"ActivatableComponent": {
+      "ButtonName": "CLPS",
+	  "ActiveByDefault": true,
+	  "ActivationIsBuff": true,
+      "CanNotBeActivatedManualy": false,
+      "NoUniqueCheck": true,
+	  "ActivationMessage": "Stealth Activated",
+	  "DeactivationMessage": "Stealth Deactivated",
+      "statusEffects": [
         {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : true,
+                "showInStatusPanel" : true
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Static_Sensor_Stealth_2",
+                "Name" : "SENSOR STEALTH",
+                "Details" : "Makes it harder to detect using sensors",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_Static_Sensor_Stealth",
+                "operation" : "Set",
+                "modValue": "2",
+                "modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        },
+         {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : true,
+                "showInStatusPanel" : true
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Decaying_Sensor_Stealth_4_5",
+                "Name" : "DECAYING SENSOR STEALTH",
+                "Details" : "Makes it harder to detect using sensors",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_Decaying_Sensor_Stealth",
+                "operation" : "Set",
+                "modValue": "4_5",
+                "modType": "System.String"
+            },
+            "nature" : "Buff"
+        },
+         {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : true,
+                "showInStatusPanel" : true
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Static_Vision_Stealth_2",
+                "Name" : "VISION STEALTH",
+                "Details" : "Makes it harder to detect using cameras",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_Static_Vision_Stealth",
+                "operation" : "Set",
+                "modValue": "2",
+                "modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        },
+         {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : true,
+                "showInStatusPanel" : true
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Decaying_Vision_Stealth_4_5",
+                "Name" : "DECAYING VISION STEALTH",
+                "Details" : "Makes it harder to detect using cameras",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_Decaying_Vision_Stealth",
+                "operation" : "Set",
+                "modValue": "4_5",
+                "modType": "System.String"
+            },
+            "nature" : "Buff"
+        },
+		{
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : true,
+                "showInStatusPanel" : true
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Sensor_Stealth_Attack_Multi_1.25_0_1.1_1.15_1.2",
+                "Name" : "VISION STEALTH ATTACK MOD",
+                "Details" : "Makes it harder to detect using cameras",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_Sensor_Stealth_Attack_Multi",
+                "operation" : "Set",
+                "modValue": "1.35_1.1_1.2_1.3_1.4",
+                "modType": "System.String"
+            },
+            "nature" : "Buff"
+        },
+                 {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : true,
+                "showInStatusPanel" : true
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Vision_Stealth_Attack_Multi_1.25_0_1.1_1.15_1.2",
+                "Name" : "VISION STEALTH ATTACK MOD",
+                "Details" : "Makes it harder to detect using cameras",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_Vision_Stealth_Attack_Multi",
+                "operation" : "Set",
+                "modValue": "1.35_1.1_1.2_1.3_1.4",
+                "modType": "System.String"
+            },
+            "nature" : "Buff"
+        },
+		{
             "durationData": {
                 "duration": -1,
                 "stackLimit": -1
@@ -82,7 +260,7 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "Stealth_Signature_Decrease_NSS",
+                "Id": "Stealth_Signature_Decrease_Stealth",
                 "Name": "Stealth Signature Decrease",
                 "Details": "Signature Statuseffect.",
                 "Icon": "uixSvgIcon_equipment_TTS"
@@ -98,28 +276,17 @@
 		{
             "durationData": {
                 "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": 1,
-                "clearedWhenAttacked": false
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
                 "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
                 "showInTargetPreview": false,
                 "showInStatusPanel": false
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "Stealth_Visibility_Decrease_NSS",
+                "Id": "Stealth_Visibility_Decrease_Stealth",
                 "Name": "Stealth Visbility Decrease",
                 "Details": "Visibility Statuseffect.",
                 "Icon": "uixSvgIcon_equipment_TTS"
@@ -132,7 +299,7 @@
                 "modType": "System.Single"
             }
         },
-        {
+		{
             "durationData": {
                 "duration": -1,
                 "stackLimit": -1
@@ -145,7 +312,7 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "Stealth_Heat_Generation_NSS",
+                "Id": "Stealth_Heat_Generation_Stealth",
                 "Name": "Increased Heat",
                 "Details": "Heat generation",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
@@ -172,7 +339,7 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "Stealth_Heat_Capacity_NSS",
+                "Id": "Stealth_Heat_Capacity_Stealth",
                 "Name": "Decreased Heat Capacity",
                 "Details": "Heat Capacity Penalty",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
@@ -181,19 +348,48 @@
             "statisticData": {
                 "statName": "HeatSinkCapacity",
                 "operation": "Int_Add",
-                "modValue": "-10",
+                "modValue": "-15",
                 "modType": "System.Int32"
             }
         }
+      ],
+	  "offlineStatusEffects": [
+	  ]
+    }
+    },
+    "StatName": null,
+    "RelativeModifier": 0,
+    "AbsoluteModifier": 0,
+    "Description": {
+        "Cost": 100,
+        "Rarity": 99,
+        "Purchasable": true,
+        "Manufacturer": "Prototype",
+        "Model": "Chameleon LPS",
+        "UIName": "Chameleon LPS",
+        "Id": "Gear_quirk_ChameleonLightPolarizationShield",
+        "Name": "Chameleon Light Polarization Shield",
+        "Details": "The Chameleon Light Polarization Shield was designed to make a 'Mech invisible to the naked eye. By using a primitive mimetic system, the outline of the 'Mech carrying it was broken up, blending into the surrounding terrain. The Chameleon was very effective because unlike the Null Signature System it worked against sensor systems and visual observation.",
+        "Icon": "uixSvgIcon_equipment_TTS"
+    },
+    "BonusValueA": "Bulwark",
+    "BonusValueB": "Requires ECM",
+    "ComponentType": "Upgrade",
+    "ComponentSubType": "NotSet",
+    "PrefabIdentifier": "",
+    "BattleValue": 0,
+    "InventorySize": 1,
+    "Tonnage": 0,
+    "AllowedLocations": "All",
+    "DisallowedLocations": "All",
+    "CriticalComponent": false,
+    "statusEffects": [
     ],
     "ComponentTags": {
         "items": [
 		"BLACKLISTED",
             "component_type_stock",
-            "Chameleon",
-            "lv-stealth_t4",
-            "lv-stealth-range-mod_s1_m3_l5_e7",
-            "lv-stealth-move-mod_m4_s4"
+            "Chameleon"
         ],
         "tagSetSourceFile": ""
     }

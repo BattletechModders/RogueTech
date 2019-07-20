@@ -1,0 +1,510 @@
+{
+    "Description" : {
+        "Id" : "event_mw_localWildlife",
+        "Name" : "Native Wildlife",
+        "Details" : "As shore leave ends, your MechWarriors and ship's crew arrive at the spaceport, sharing stories of their adventures and entertainments. Then Darius arrives, his brow furrowed in concern. He pulls you aside and puts his communicator on speaker, so both of you can hear [[TGT_MW,{TGT_MW.Callsign}]].\r\n\r\n\"Commander, I'm in a bit of a situation. I went on an expedition to some nearby ruins, and I, uh, I think I'm being hunted by some of the native wildlife. Whatever these things are, I'm pretty sure they're eating some of the other tourists right now\u2026 yeah, those are definitely 'I'm getting eaten' screams. Can I get a little help?\"",
+        "Icon" : "uixTxrSpot_RuralTown.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 40,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "items" : null,
+            "tagSetSourceFile" : ""
+        },
+        "ExclusionTags" : {
+            "items" : [
+                "chain_crana_Infection"
+            ],
+            "tagSetSourceFile" : "Tags/PilotTags"
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : "0"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "items" : null,
+                "tagSetSourceFile" : ""
+            },
+            "ExclusionTags" : {
+                "items" : null,
+                "tagSetSourceFile" : ""
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "Travel",
+                    "op" : "Equal",
+                    "val" : 0,
+                    "valueConstant" : "0"
+                }
+            ]
+        },
+        {
+            "Scope" : "StarSystem",
+            "RequirementTags" : {
+                "items" : [
+                    "planet_other_ruins"
+                ],
+                "tagSetSourceFile" : "Tags/PlanetTags"
+            },
+            "ExclusionTags" : {
+                "items" : [
+                    "planet_pop_none"
+                ],
+                "tagSetSourceFile" : "Tags/PlanetTags"
+            },
+            "RequirementComparisons" : []
+        }
+    ],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Advise concealment until rescue arrives.",
+                "Details" : "Safe option",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Injury",
+                        "Details" : "Leaving Darius to keep [[TGT_MW,{TGT_MW.Callsign}]] calm, you gather several MechWarriors and acquire an all-terrain vehicle.\r\n\r\nWhen you finally arrive at the emergency beacon, {TGT_MW.Callsign} is perched high in a tree. Blood drips from a mangled leg to the ground below, where several meter-long insectoids with trifurcated, razor-sharp mouthparts wait patiently for their prey to fall.\r\n\r\nA few well-placed gunshots send the creatures scurrying to the safety of the ruins, and you and the others manage to get the wounded MechWarrior to safety.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "chain_crana_Infection"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Injuries",
+                                    "value" : "2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Tell {TGT_MW.Obj} to fight back until you get there.",
+                "Details" : "[{TGT_MW.Callsign}: Brave]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "MechWarrior",
+                    "RequirementTags" : {
+                        "items" : [
+                            "pilot_brave"
+                        ],
+                        "tagSetSourceFile" : "Tags/PilotTags"
+                    },
+                    "ExclusionTags" : {
+                        "items" : null,
+                        "tagSetSourceFile" : ""
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Mild injury, XP",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] steels {TGT_MW.DET} nerve. \"You're right, Commander. I'm not going to let a pack of meter-long, razor-jawed insectoids push <i>me</i> around.\"\r\n\r\nSharing a look with Darius, you gather several MechWarriors and quickly acquire an all-terrain vehicle.\r\n\r\nWhen you finally arrive at the emergency beacon, {TGT_MW.Callsign} is leaning against the trunk of a tree, trying to tourniquet {TGT_MW.Det} own leg. Scattered around are the dead bodies of the massive insects {TGT_MW.Subj} described earlier. They didn't go down without a fight.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "chain_crana_Infection"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Injuries",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "ExperienceUnspent",
+                                    "value" : "100",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "No injury, XP, High Morale",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] steels {TGT_MW.DET} nerve. \"You're right, Commander. I'm not going to let a pack of meter-long, razor-jawed insectoids push <i>me</i> around.\"\r\n\r\nSharing a look with Darius, you gather several MechWarriors and quickly acquire an all-terrain vehicle.\r\n\r\nWhen you finally arrive at the emergency beacon, {TGT_MW.Callsign} is leaning against the trunk of a tree, exhausted but in one piece. Scattered around are the dead bodies of the massive insects {TGT_MW.Subj} described earlier.\r\n\r\n\"Commander!\" {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:shout|Default:shouts}. \"So glad you're here\u2014my ammo's nearly dry.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "ExperienceUnspent",
+                                    "value" : "100",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Tell {TGT_MW.Obj} to stay on the move until you get there.",
+                "Details" : "[{TGT_MW.Callsign}: Cautious]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "MechWarrior",
+                    "RequirementTags" : {
+                        "items" : [
+                            "pilot_cautious"
+                        ],
+                        "tagSetSourceFile" : "Tags/PilotTags"
+                    },
+                    "ExclusionTags" : {
+                        "items" : null,
+                        "tagSetSourceFile" : ""
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "Mild injury, XP",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] steels {TGT_MW.DET} nerve. \"You're right, Commander. I should be able to outsmart a pack of meter-long insectoids\u2026 I mean, they may have mandibles like hydraulic shears, but how <i>smart</i> could they be?\"\r\n\r\nSharing a look with Darius, you gather several MechWarriors and quickly acquire an all-terrain vehicle.\r\n\r\nWhen you finally arrive at the emergency beacon, you see {TGT_MW.Callsign} perched high in a tree. Blood drips from a mangled leg to the ground below, where the creatures wait patiently for your MechWarrior to fall into their gaping maws.\r\n\r\nA few well-placed gunshots send the creatures scurrying to the safety of the ruins, while you and the others manage to get the wounded MechWarrior to safety.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "chain_crana_Infection"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Injuries",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "ExperienceUnspent",
+                                    "value" : "100",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_1",
+                        "Name" : "No injury, XP, High Morale",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] steels {TGT_MW.DET} nerve. \"You're right, Commander. I should be able to outsmart a pack of meter-long insectoids\u2026 I mean, they may have mandibles like hydraulic shears, but how <i>smart</i> could they be?\"\r\n\r\nSharing a look with Darius, you gather several MechWarriors and quickly acquire an all-terrain vehicle.\r\n\r\nWhen you finally arrive at the emergency beacon, you see that several areas of the ruins are ablaze. Silhouetted against the fires, {TGT_MW.Callsign} marches toward you, cool as can be.\r\n\r\n\"Commander!\" {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:shout|Default:shouts}. \"They were tracking me by heat. So I gave those bugs a merry chase.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "ExperienceUnspent",
+                                    "value" : "100",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_3",
+                "Name" : "Ask if {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:know|Default:knows} anything about this creature.",
+                "Details" : "[{TGT_MW.Callsign}: Bookish]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "MechWarrior",
+                    "RequirementTags" : {
+                        "items" : [
+                            "pilot_bookish"
+                        ],
+                        "tagSetSourceFile" : "Tags/PilotTags"
+                    },
+                    "ExclusionTags" : {
+                        "items" : null,
+                        "tagSetSourceFile" : ""
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_3_0",
+                        "Name" : "No injuries",
+                        "Details" : "On the other end of the communicator you can practically hear [[TGT_MW,{TGT_MW.Callsign}]] thinking. \"Hey, I <i>have</i> read about these bugs. Shit! They're going to find me here. They can sense heat. I'll need to give them something hotter to chase after.\"\r\n\r\nWhile {TGT_MW.Callsign} rambles, you gather the attention of several MechWarriors, and they quickly acquire an all-terrain vehicle for you to pile into.\r\n\r\nWhen you finally arrive at the emergency beacon, you see that several areas of the ruins are ablaze. Silhouetted against the fires, {TGT_MW.Callsign} marches toward you, cool as can be.\r\n\r\n\"Commander!\" {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:shout|Default:shouts}. \"Thanks for picking me up. I gave those bugs a merry chase, but I was running out of things to light on fire.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "ExperienceUnspent",
+                                    "value" : "200",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}

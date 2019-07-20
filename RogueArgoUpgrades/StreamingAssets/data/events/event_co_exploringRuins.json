@@ -1,0 +1,393 @@
+{
+    "Description" : {
+        "Id" : "event_co_exploringRuins",
+        "Name" : "Exploring Ruins",
+        "Details" : "Sumire catches you after the morning briefing. \"In my downtime, I've been researching this planet. It has some amazing ruins. Detailed data about those ruins seems to sell pretty well in the Periphery.\"\r\n\r\n\"I was thinking, if we adjust the <i>Argo</i>'s orbit, I could take some sensor readings. It wouldn't cost us much.\" Then, casually, as if as an afterthought, she adds, \"Or I could take the Leopard down to the surface to, uh, do more extensive research. What do you think?\"",
+        "Icon" : "uixTxrSpot_ArgoParked.png"
+    },
+    "Scope" : "Company",
+    "Weight" : 10,
+    "Requirements" : {
+        "Scope" : "Company",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "Tags/CompanyTags",
+            "items" : []
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "Tags/CompanyTags",
+            "items" : []
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Travel",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : "0"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "StarSystem",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "Tags/PlanetTags",
+                "items" : [
+                    "planet_other_ruins"
+                ]
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/PlanetTags",
+                "items" : []
+            },
+            "RequirementComparisons" : []
+        }
+    ],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Pass on this opportunity.",
+                "Details" : "Non-participation option",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Nothing happens",
+                        "Details" : "After some consideration, you shake your head. \"I want to focus on the contracts available here in [[TGT_SYSTEM,{TGT_SYSTEM.Name}]]. We're not here to sightsee, no matter how lucrative it might be.\"\r\n\r\nSumire slowly nods in agreement. \"Of course, Commander. Perhaps when we've worn out our welcome here, we can spare some time before departing the system.\" She stiffly marches back to her post.",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : []
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Scan the ruins from orbit.",
+                "Details" : "[\u00A210,000]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Funds",
+                            "op" : "GreaterThan",
+                            "val" : 10000,
+                            "valueConstant" : "10000"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "The data you gather seems uninteresting",
+                        "Details" : "Sumire and her staff scan the ruins below, and over the course of the week she pores over the collected data and delivers a report.\r\n\r\n\"Commander, we didn't detect anything that hasn't been thoroughly documented already. My apologies for wasting the <i>Argo</i>'s time, but I thought it was worth a shot.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-10000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "You gather some data that might be interesting",
+                        "Details" : "Sumire and her staff scan the ruins below, and over the course of the week she pores over the collected data and delivers her report.\r\n\r\n\"Commander, we managed to scan some less documented regions. Nothing consequential but there's a bit of a market for it. We'll probably make back the cost of the fuel, at least.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "1000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_2",
+                        "Name" : "You discover something very valuable!",
+                        "Details" : "Sumire and her staff scan the ruins below, and over the course of the week she pores over the collected data and delivers her report. She is decidedly smug.\r\n\r\n\"Commander, look at this! See those shadows? That could be an underground complex nobody's ever found before! And there's a symposium of historians willing to pay a tidy little sum to preempt the general release of our findings.\"\r\n\r\nYou say, \"Well, I'm glad your sightseeing was profitable.\"\r\n\r\nShe smiles as she returns to her work.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : [
+                                    "chain_ruins_scans"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "10000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Send Sumire in the Leopard.",
+                "Details" : "[\u00A250,000]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Funds",
+                            "op" : "GreaterThan",
+                            "val" : 50000,
+                            "valueConstant" : "50000"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "You gather some data that might be interesting",
+                        "Details" : "Sumire takes the Leopard for what is supposed to be no more than a low altitude fly-by of the ruins, though some of her photos seem suspiciously close to the ground. After the trip, she spends a week cataloging the collected data and then delivers her report.\r\n\r\n\"Commander, those ruins are pretty interesting. I didn't stumble into anything that hasn't been seen before, but the data I collected is high enough definition that\u2026 well, I'm sure somebody will buy it. Eventually. Someday.\"\r\n\r\n\"And you did get some amazing pictures,\" you comment blandly.\r\n\r\nSumire gives a tiny smile. \"I did. Thanks.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-50000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_1",
+                        "Name" : "You discover something very valuable!",
+                        "Details" : "Sumire takes the Leopard for what is supposed to be no more than a low altitude fly-by of the ruins, though some of her photos seem suspiciously close to the ground. After the trip, she spends a week cataloging the collected data and then delivers her report.\r\n\r\n\"Commander, look at this! See those shadows? And this indentation? That's an underground complex nobody's ever found before! And there's a symposium of historians willing to pay a mint to preempt the general release of our findings.\r\n\r\nYou whistle at the sum and say, \"Are you leaving us to become an archaeologist now?\"\r\n\r\nShe only grins at you before returning to her work.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : [
+                                    "chain_ruins_scans"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "50000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_2",
+                        "Name" : "Sumire stumbles upon an excavation",
+                        "Details" : "Sumire sets out in the Leopard for what is supposed to be a low altitude fly-by of the ruins. Then she finds the excavation. And the pirates doing the excavation.\r\n\r\nListening to the comms, you spend a stress-filled twenty minutes wondering if you're going to have to shuttle down a strike force of MechWarriors to steal back the Leopard and rescue your pilot. But, somehow, Sumire talks her way out of it. The gang of smugglers give her a souvenir brick and send her on her way. \r\n\r\n\"Well, that was exciting,\" she says when she returns to the <i>Argo</i>. Her flight uniform is caked with half an excavation's worth of dust. \"Commander, they had 'Mechs. Do you think we could\u2014?\"\r\n\r\n\"No,\" you say firmly. \"Just no.\"\r\n\r\n\"Only an idea,\" Sumire says as she slinks off toward the showers.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : [
+                                    "chain_ruins_brick"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-50000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL",
+    "OneTimeEvent" : false
+}
