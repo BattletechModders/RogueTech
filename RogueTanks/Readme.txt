@@ -36,7 +36,7 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-0.0.0
+8.2.20
 
 Added cores to Republic, Civil War and Jihad vees,
 Made Techies easier to detect,
