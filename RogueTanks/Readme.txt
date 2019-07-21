@@ -38,7 +38,11 @@ Changelog:
 
 0.0.0
 
-Added cores to Republic, Civil War and Jihad vees
+Added cores to Republic, Civil War and Jihad vees,
+Made Techies easier to detect,
+Rebalanced Sensor/Sig buffs on Pegasus,
+Buffed Red October stealth,
+Made the Clan LRM carrier's loadouts more distinct,
 
 8.2.14
 
