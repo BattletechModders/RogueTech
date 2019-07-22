@@ -18,7 +18,10 @@ AI related mod settings
 	"AIDefenceUsefullCoeff":0.2, - if value if lesser AI will count cae_ai_defence more useful
 	"AIHeatCoeffCoeff":0.9, - if value if greater AI will count cae_ai_cool less useful and cae_ai_heat less dangerous
 	"AIOverheatCoeffCoeff":0.8 - if value if greater AI will count cae_ai_cool less useful and cae_ai_heat less dangerous
-	
+  "ToolTipWarningFailChance": 0.2, - if component can be activated manually, active and have fail chance grater than this value it will be shown in tooltip with orange color
+  "ToolTipAlertFailChance": 0.4, - if component can be activated manually, active and have fail chance grater than this value it will be shown in tooltip with red color
+                                   NOTE! Component will not be show in same turn it has been activated no matter fail chance, cause it will not suffer fail roll only this turn.
+
     "Custom":{
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
 		"ActivatableComponent":{

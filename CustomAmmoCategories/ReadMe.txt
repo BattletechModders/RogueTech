@@ -11,6 +11,7 @@ WARNING! Shipped versions of AIM and WR can't be loaded by ModTek and can't be u
 click on right side of HUD weapon slot to switch mode (near hit chance)
 click on center of HUD weapon slot to switch ammo (near ammo count)
 ctrl+left click on weapon slot will eject current ammo 
+ctrl+T will toggle attack direction marks visibility (circles under meches feets)
 NOTE: ammo can't be ejected if mech moved this round
      after ejection mech can't jump and sprint until end of round
     
@@ -190,7 +191,27 @@ CustomAmmoCategories.json
 Weapon definition
 new fields
   "EvasivePipsIgnored" : 1, This value can be controlled via weapon's EvasivePipsIgnored statistic value (float)
+  "ProjectileSpeedMultiplier": 0.1, - projectile speed multiplier. Less is slower. Multiplicative per weapon/mode/ammo. 
+                                     NOTE! Do not set this to low values cause if projectile flying takes too long attack sequence will be terminated by timeout.
+  "MissileFiringIntervalMultiplier": 10, - multiplier for firing interval. Only for missile firing effect. Greater is slower. 
+                                     NOTE! Do not set this to very high values cause if delay will be too long  attack sequence will be terminated by timeout.
+  "MissileVolleyIntervalMultiplier": 10, - multiplier for missile volley fire interval. Only for missile firing effect. Greater is slower. 
+                                     NOTE! Do not set this to very high values cause if delay will be too long  attack sequence will be terminated by timeout.
+                                     Some basics: every missile launcher prefab have emiter points. For example your missile launcher prefab have 3 emmiters and you lauching 4 missiles, 
+                                     than missile fire sequence looks like: 
+                                     missile 0 launch (emmiter 0) -> delay (firing interval) -> missile 1 launch (emmiter 1) -> delay (firing interval) 
+                                       -> missile 2 launch (emmiter 2) -> delay (volley interval) -> missile 3 launch (emmiter 0)
+  "FireDelayMultiplier": 10, - multiplier for multi-shot fire delay. Only works with ImprovedBallistic. Default for weapon 10. Multiplicative per weapon/mode/ammo. For ammo and mode default is 1.
+                              !PLEASE READ NEXT NOTE CAREFULY: Now ImprovedBallistic works for lasers and PPCs, but laser ans PPC effects has no shotDelay parameter in assets which ballistic has. 
+                              So, for laser and PPC effects i have to use other parameter for shot delay. This parameter is projectileSpeed.
+                              For lasers projectileSpeed controls beam duration, so improved laser fire sequence looks like: beam (projectileSpeed duration) -> delay (projectileSpeed*FireDelayMultiplier) -> next beam
+                              For PPC projectileSpeed it is projectile speed, so improved PPC fire sequence looks like: 
+                                pulse start -> pulse fly (duration distance/projectileSpeed) -> pulse hit -> delay ((distance/projectileSpeed)*FireDelayMultiplier) -> next pulse start
+  "CantHitUnaffecedByPathing": false, - if true this weapon can't hit targets unaffected by pathing. 
+                                        If user tries to perform DFA attack having this weapon enabled he/she will receive blocking popup message.
+                                        can be set per weapon/ammo/mode mode have priority than ammo than weapon
   "Streak": true/false - if true only success hits will be shown, ammo decremental and heat generation will be based on success hits. 
+                          Can be set for mode/ammo/weapon. Mode have priority than ammo, than weapon.
 							with "HitGenerator" : "Streak" - will be true streak effect all-hit-or-no-fire
   "HitGenerator" : "Streak", Set to hit generator. Supported values ("Individual"/"Cluster"/"Streak"). 
                                   Streak hit generator is sort of cluster, 
@@ -290,16 +311,16 @@ new fields
    "ClearMineFieldRadius": 4, - radius in in-game terrain cells. Minefields in all cells within radius will be cleared in terrain impact.
                                 Clearing on success hit controled by FireOnSuccessHit flag.
    "Cooldown": 2, - number of rounds weapon will be unacceptable after fire this mode
-   "ImprovedBallistic": true, - whether use or not own ballistic weapon effect engine. 
+   "ImprovedBallistic": true, - whether use or not own ballistic/laser/PPC weapon effect engine. 
 								Difference between "improved" and vanilla engine:
 								1. Improved mode uses ShotsWhenFire properly (vanilla had not used them at all)
-								2. Improved mode can use curvy trajectory for indirect fire (indirect gauss bullet can be used too, but looks very funny)
+								2. Improved mode can use curvy trajectory for indirect fire (ballistic only) (indirect gauss bullet can be used too, but looks very funny)
 								3. Improved mode fire ShotsWhenFire volleys with ProjectilesPerShot bullets in each. 
-								   Bullets in one volley fired simultaneously instead of one by one (as in WeaponRealizer)
+								   Bullets/beams/pulses in one volley fired simultaneously instead of one by one (as in WeaponRealizer)
 								   But damage still dealt once per volley, not per bullet, to keep compatibility with vanilla.
 								NOTE! If ImprovedBallistic is set DisableClustering is forced to true and "wr-clustered_shots" tag removed from definition. 
-  "BallisticDamagePerPallet": true - if true damage inflicted per pallet instead of per shot. Only working with ImprovedBallistic true, ballistic weapon effect and HasShels false
-                                     Damage will be divided by ProjectilesPerShot value, heat damage and stable damage too. 
+  "BallisticDamagePerPallet": true - if true damage inflicted per pallet instead of per shot. Only working with ImprovedBallistic true, ballistic/laser/PPC weapon effect and HasShels false
+                                     Damage will be divided by ProjectilesPerShot value, heat damage and stable damage too.
 	"StatusEffectsPerHit":false - if true OnHit status effects applying on each hit instead on once. 
 	"AdditionalAudioEffect": "enum:AudioEventList_explosion.explosion_propane_tank", - additional sound effect on projectile impact. Value format "<type>:<name>".
 							 type values: "enum" - building in-game enum value
@@ -311,6 +332,27 @@ new fields
 	[{
 		"Id": "x4",  - Must be unique per weapon
 		"UIName": "x4", - This string will be displayed near weapon name
+    "ProjectileSpeedMultiplier": 1, - projectile speed multiplier. Less is slower. Multiplicative per weapon/mode/ammo. 
+                                       NOTE! Do not set this to low values cause if projectile flying takes too long attack sequence will be terminated by timeout.
+    "MissileFiringIntervalMultiplier": 10, - multiplier for firing interval. Only for missile firing effect. Greater is slower. 
+                                       NOTE! Do not set this to very high values cause if delay will be too long  attack sequence will be terminated by timeout.
+    "MissileVolleyIntervalMultiplier": 10, - multiplier for missile volley fire interval. Only for missile firing effect. Greater is slower. 
+                                       NOTE! Do not set this to very high values cause if delay will be too long  attack sequence will be terminated by timeout.
+                                       Some basics: every missile launcher prefab have emiter points. For example your missile launcher prefab have 3 emmiters and you lauching 4 missiles, 
+                                       than missile fire sequence looks like: 
+                                       missile 0 launch (emmiter 0) -> delay (firing interval) -> missile 1 launch (emmiter 1) -> delay (firing interval) 
+                                         -> missile 2 launch (emmiter 2) -> delay (volley interval) -> missile 3 launch (emmiter 0)
+    "FireDelayMultiplier": 1, - multiplier for multi-shot fire delay. Only works with ImprovedBallistic. Default for weapon 10. Multiplicative per weapon/mode/ammo. For ammo and mode default is 1.
+                                !PLEASE READ NEXT NOTE CAREFULY: Now ImprovedBallistic works for lasers and PPCs, but laser ans PPC effects has no shotDelay parameter in assets which ballistic has. 
+                                So, for laser and PPC effects i have to use other parameter for shot delay. This parameter is projectileSpeed.
+                                For lasers projectileSpeed controls beam duration, so improved laser fire sequence looks like: beam (projectileSpeed duration) -> delay (projectileSpeed*FireDelayMultiplier) -> next beam
+                                For PPC projectileSpeed it is projectile speed, so improved PPC fire sequence looks like: 
+                                  pulse start -> pulse fly (duration distance/projectileSpeed) -> pulse hit -> delay ((distance/projectileSpeed)*FireDelayMultiplier) -> next pulse start
+    "CantHitUnaffecedByPathing": false, - if true this weapon can't hit targets unaffected by pathing. 
+                                          If user tries to perform DFA attack having this weapon enabled he/she will receive blocking popup message.
+                                          can be set per weapon/ammo/mode mode have priority than ammo than weapon
+    "Streak": true/false - if true only success hits will be shown, ammo decremental and heat generation will be based on success hits. 
+                            Can be set for mode/ammo/weapon. Mode have priority than ammo, than weapon.
 		"isBaseMode":true, - Weapon must have one base mode. Mode with this setting will used by default
 		"WeaponEffectID" : "WeaponEffect-Weapon_PPC", Played fire effect can be set in mode definition
 		"EvasivePipsIgnored" : 0, This value will be added to EvasivePipsIgnored (current weapon status effects will be used too)
@@ -454,7 +496,27 @@ Ammo definition
    
    "WeaponEffectID" : "WeaponEffect-Weapon_PPC", Played fire effect can be set in ammo definition, for example this LBX AC10 will fire as PPC if ECM ammo is choosed
    "EvasivePipsIgnored" : 0, This value will be added to EvasivePipsIgnored (current weapon status effects will be used too)
-   
+    "Streak": true/false - if true only success hits will be shown, ammo decremental and heat generation will be based on success hits. 
+                            Can be set for mode/ammo/weapon. Mode have priority than ammo, than weapon.
+    "ProjectileSpeedMultiplier": 1, - projectile speed multiplier. Less is slower. Multiplicative per weapon/mode/ammo. 
+                                       NOTE! Do not set this to low values cause if projectile flying takes too long attack sequence will be terminated by timeout.
+    "MissileFiringIntervalMultiplier": 10, - multiplier for firing interval. Only for missile firing effect. Greater is slower. 
+                                       NOTE! Do not set this to very high values cause if delay will be too long  attack sequence will be terminated by timeout.
+    "MissileVolleyIntervalMultiplier": 10, - multiplier for missile volley fire interval. Only for missile firing effect. Greater is slower. 
+                                       NOTE! Do not set this to very high values cause if delay will be too long  attack sequence will be terminated by timeout.
+                                       Some basics: every missile launcher prefab have emiter points. For example your missile launcher prefab have 3 emmiters and you lauching 4 missiles, 
+                                       than missile fire sequence looks like: 
+                                       missile 0 launch (emmiter 0) -> delay (firing interval) -> missile 1 launch (emmiter 1) -> delay (firing interval) 
+                                         -> missile 2 launch (emmiter 2) -> delay (volley interval) -> missile 3 launch (emmiter 0)
+    "FireDelayMultiplier": 1, - multiplier for multi-shot fire delay. Only works with ImprovedBallistic. Default for weapon 10. Multiplicative per weapon/mode/ammo. For ammo and mode default is 1.
+                                !PLEASE READ NEXT NOTE CAREFULY: Now ImprovedBallistic works for lasers and PPCs, but laser ans PPC effects has no shotDelay parameter in assets which ballistic has. 
+                                So, for laser and PPC effects i have to use other parameter for shot delay. This parameter is projectileSpeed.
+                                For lasers projectileSpeed controls beam duration, so improved laser fire sequence looks like: beam (projectileSpeed duration) -> delay (projectileSpeed*FireDelayMultiplier) -> next beam
+                                For PPC projectileSpeed it is projectile speed, so improved PPC fire sequence looks like: 
+                                  pulse start -> pulse fly (duration distance/projectileSpeed) -> pulse hit -> delay ((distance/projectileSpeed)*FireDelayMultiplier) -> next pulse start
+    "CantHitUnaffecedByPathing": false, - if true this weapon can't hit targets unaffected by pathing. 
+                                          If user tries to perform DFA attack having this weapon enabled he/she will receive blocking popup message.
+                                          can be set per weapon/ammo/mode mode have priority than ammo than weapon
    "AccuracyModifier" : -10.0, This value will be added to AccuracyModifier (current weapon status effects will be used too)
    "CriticalChanceMultiplier" : 0.0, This value will be added to CriticalChanceMultiplier (current weapon status effects will be used too)
    "DamagePerShot": -50.0, This value will be added to DamagePerShot (current weapon status effects will be used too)
@@ -502,10 +564,6 @@ Ammo definition
    "CriticalDamageModifier" : 1,
    "AOECapable" : false, - if true shoots will be included in AOE damage calculations 
    "AOERange": 100, - Area of effect range
-                   Notes: AOECapable will force AlwaysIndirectVisuals to true. 
-				             So it is good idea to use only missile weapon effects unless i've implement indirect visuals for ballistic effect.
-				          AOE projectiles always miss no matter toHit values, this is cause AOE dealt only AOE damage.
-						     So it is good idea to set -10 for AccuracyModifier to help AI understand fact that AoE weapon always inflicts damage.
 						  AOE shots can inflict heat damage. It value based on weapon heat damage per shot and decreasing linear by distance between target and impact base point.
 						  Projectiles intercepted by AMS will not cause AOE damage.
 						  AOE to hit effect will be implemented to all targets in AoE range. 
@@ -515,7 +573,7 @@ Ammo definition
 						  It is recommended to use LRM5, LRM10, LRM15 or LRM20 as weapon subtype cause other subtypes have too huge spread when misses
 						  It is good idea to set ForbiddenRage for AoE weapon and set NotUseInMelee to true
 						  AOE weapon can't hit mech head, cause every headshot inflicts pilot injury. With fact AoE always dealt damage it will be imbalance. 
-						  Damage variations for AoE weapon should not be used cause it will lead completely wrong result 
+						  Damage variations are not applying to AoE damage
   "AOEDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
                             one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
   "AOEHeatDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 

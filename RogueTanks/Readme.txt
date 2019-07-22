@@ -36,6 +36,14 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+8.2.20
+
+Added cores to Republic, Civil War and Jihad vees,
+Made Techies easier to detect,
+Rebalanced Sensor/Sig buffs on Pegasus,
+Buffed Red October stealth,
+Made the Clan LRM carrier's loadouts more distinct,
+
 8.2.14
 
 Switched some techies to toybota model.
