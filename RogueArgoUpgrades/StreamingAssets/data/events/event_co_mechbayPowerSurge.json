@@ -1,0 +1,322 @@
+{
+    "Description" : {
+        "Id" : "event_co_mechbayPowerSurge",
+        "Name" : "Power Surge in the Mech Bay",
+        "Details" : "While you're inspecting a {SCN_UNIT.Chassis.Description.Name}, an intense power surge ripples through the cavernous Mech Bay.\r\n\r\nFrom the top of a gantry ladder above you, Yang hollers at his MechTechs as repair tools spark wildly. Cables and lifts spasm, and a barrel of something oily-looking inexplicably combusts.\r\n\r\nScanning for a way to help, you find a master control panel. A massive emergency shut-off breaker beckons, as well as numerous individual power switches. Something labeled \"Automated Safety System\" blinks fitfully\u2026",
+        "Icon" : "uixTxrSpot_Accident.png"
+    },
+    "Scope" : "Company",
+    "Weight" : 10,
+    "Requirements" : {
+        "Scope" : "Company",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "",
+            "items" : null
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "Tags/CompanyTags",
+            "items" : [
+                "argo_mechBay_automation2",
+                "MODIFIED_STAT_MechTechSkill"
+            ]
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "TaskDuration",
+                "op" : "GreaterThanOrEqual",
+                "val" : 1,
+                "valueConstant" : "1"
+            },
+            {
+                "obj" : "MechTechSkill",
+                "op" : "GreaterThanOrEqual",
+                "val" : 3,
+                "valueConstant" : "3"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [],
+    "AdditionalObjects" : [
+        {
+            "Scope" : "SecondaryMechWarrior",
+            "Requirements" : {
+                "Scope" : "SecondaryMechWarrior",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "Tags/PilotTags",
+                    "items" : [
+                        "pilot_lucky"
+                    ]
+                },
+                "RequirementComparisons" : [
+                    {
+                        "obj" : "Injuries",
+                        "op" : "Equal",
+                        "val" : 0,
+                        "valueConstant" : "0"
+                    }
+                ]
+            }
+        },
+        {
+            "Scope" : "SecondaryMech",
+            "Requirements" : {
+                "Scope" : "SecondaryMech",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Pull the emergency shut-off.",
+                "Details" : "Safe option",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Lose some MechTech points",
+                        "Details" : "Resisting the urge to randomly turn off individual systems, you give the single emergency shut-off a decisive pull. The emergency breaker kicks in with an audible pop.\r\n\r\nA disquieting silence fills the Mech Bay. Yang casts a discerning eye over the {SCN_UNIT.Chassis.Description.Name} and the other 'Mechs in this bay, then calls down to you. \"Sorry Boss, but our current projects are going to be in the shop longer than planned.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "-1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Guess which individual systems to shut down.",
+                "Details" : "Risky option",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Lose nothing",
+                        "Details" : "As you start flipping switches, Yang's shouted \"Noooo!\" trails off as he realizes that the power surge has already run its course. A disquieting silence fills the Mech Bay.\r\n\r\nAs Yang turns a discerning gaze over all of the 'Mechs, a reluctant grin crawls across his face. \"Uhhh, yeah, good job, Boss. Looks like that did the trick. Next time, though, just lemme do my thing.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : []
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "Lose more MechTech points",
+                        "Details" : "As you start flipping switches, Yang's shouted \"Noooo!\" trails off as he realizes that the power surge has already run its course. A disquieting silence fills the Mech Bay.\r\n\r\nAs Yang turns a discerning gaze over all of the 'Mechs, he groans. \"Uhhh, yeah, Boss? Next time, just lemme do my thing. Looks like these old girls are gonna be in the shop longer than planned.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "-1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_2",
+                        "Name" : "Injured MechWarrior",
+                        "Details" : "As you start flipping switches, Yang's shouted \"Noooo!\" trails off as he realizes the power surge has already run its course. A disquieting silence fills the Mech Bay.\r\n\r\nThen there's a clatter of noise as a now-powerless winch drops a pile of scrap to the floor, clipping the shoulder of the loitering [[SCN_MW,{SCN_MW.Callsign}]] as {SCN_MW.Subj} {SCN_MW.Gender?NonBinary:fail|Default:fails} to dodge out of the way.\r\n\r\nAs the MechWarrior is shuttled off to MedBay, Yang delivers the other bad news. \"Sorry Boss, but these 'Mechs are gonna be in the shop longer than planned.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Injuries",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : null
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 7
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Prod the Safety System into action.",
+                "Details" : "[Argo: Mech Bay Automation]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "Tags/CompanyTags",
+                        "items" : [
+                            "argo_mechBay_automation1"
+                        ]
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : null
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "No time lost on current Task",
+                        "Details" : "With a bang of your balled-up fist on the control panel, the blinking light strobes urgently then settles into a solid, reassuring glow.\r\n\r\nImmediately, numerous safety systems spring into action. Between the automated systems and the coordinated efforts of Yang's MechTechs, the threatening disaster is averted.\r\n\r\nWith a widening grin on his face, Yang calls down to you, \"That's how we handle things here, Boss! If only the term 'automated' would mean 'always on' I'd be a lot happier.\" He thinks for a moment, \"You know, there are <i>more</i> improvements to automation in the <i>Argo</i> we could pursue, if we had the C-Bills\u2026\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : []
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : null
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}

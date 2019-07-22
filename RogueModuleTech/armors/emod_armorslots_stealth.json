@@ -3,13 +3,37 @@
         "Color": {
             "UIColor": "Gold"
         },
-        "DynamicSlots": {
-            "ReservedSlots": 6,
-            "BackgroundColor": "GoldHalf",
-            "ShowIcon": false,
-            "NameText": "Stealth",
-            "BonusAText": "Dynamic Slot"
+        "Linked": {
+            "Links": [
+                {
+                    "ComponentDefId": "Linked_stealth",
+                    "Location": "LeftTorso"
+                },
+                {
+                    "ComponentDefId": "Linked_stealth",
+                    "Location": "RightTorso"
+                },
+				{
+                    "ComponentDefId": "Linked_stealth",
+                    "Location": "LeftArm"
+                },
+                {
+                    "ComponentDefId": "Linked_stealth",
+                    "Location": "RightArm"
+                },
+				{
+                    "ComponentDefId": "Linked_stealth",
+                    "Location": "LeftLeg"
+                },
+                {
+                    "ComponentDefId": "Linked_stealth",
+                    "Location": "RightLeg"
+                }
+            ]
         },
+		"CriticalEffects" : {
+                    "LinkedStatisticName" : "Stealth System"
+                },
         "WorkOrderCosts": {
             "Install": {
                 "TechCost": "1.15 * [[Chassis.Tonnage]] / 10",
@@ -31,13 +55,15 @@
 		"ErrorMessage": "Stealth Armor requires a ECM!",
         "BonusDescriptions": {
             "Bonuses": [
-                "Stealth: 2",
-                "StealthShort: 1",
-                "StealthMid: 1",
-                "StealthLong: 2",
-                "StealthExt: 2",
-                "StealthMove: 2",
-                "StealthDistance: 3",
+                "Stealth",
+				"StealthSensors: 70%"
+				"SensorCharges: 2",
+				"MimeticStealth: 90%",
+				"MimeticCharges: 2",
+				"MimeticDecay: 3",
+				"StealthMed: 1",
+				"StealthLong: 2",
+				"StealthER: 3", 
                 "Visibility: -15%",
 				"Signature: -15%",
                 "Reserved: 6",
@@ -50,33 +76,91 @@
         },
         "InventorySorter": {
             "SortKey": "00009"
-        }
-    },
-    "Description": {
-        "Cost": 300000,
-        "Rarity": 5,
-        "Purchasable": true,
-        "Manufacturer": "Shengli Arms",
-        "Model": "Armor",
-        "UIName": "Stealth ",
-        "Id": "emod_armorslots_stealth",
-        "Name": "Stealth Armor",
-        "Details": "Developed by the Capellan Confederation, Stealth Armor is a modern day equivalent of the Star League era Null Signature System. Reserves 6 slots and requires an ECM.",
-        "Icon": "uixSvgIcon_action_end"
-    },
-    "BonusValueA": "Requires",
-    "BonusValueB": "ECM",
-    "ComponentType": "Upgrade",
-    "ComponentSubType": "NotSet",
-    "PrefabIdentifier": "",
-    "BattleValue": 0,
-    "InventorySize": 1,
-    "Tonnage": 0,
-    "AllowedLocations": "CenterTorso",
-    "DisallowedLocations": "All",
-    "CriticalComponent": false,
-    "statusEffects": [
+        },
+		"ActivatableComponent": {
+      "ButtonName": "Stealth",
+	  "ActiveByDefault": true,
+	  "ActivationIsBuff": true,
+      "CanNotBeActivatedManualy": false,
+      "NoUniqueCheck": true,
+	  "ActivationMessage": "Stealth Activated",
+	  "DeactivationMessage": "Stealth Deactivated",
+	  "Linkage":{
+        "OnActivate":{  
+          "Activate":[],
+          "Deactivate":["ECCM"]
+        },
+        "OnDeactivate":{
+          "Activate":[],
+          "Deactivate":[]
+        },
+      },
+      "statusEffects": [
         {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Stealth_Effect",
+                "Name" : "STEALTH",
+                "Details" : "Makes the carrier much harder to detect with stealth",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_STEALTH",
+                "operation" : "Set",
+                "modValue": "0.70_2_1_2_3",
+                "modType": "System.String"
+            },
+            "nature" : "Buff"
+        },
+         {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_MIMETIC",
+                "Name" : "MIMETIC ARMOR",
+                "Details" : "Makes the carrier much harder to see with eyes",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_MIMETIC",
+                "operation" : "Set",
+                "modValue": "0.9_2_3",
+                "modType": "System.String"
+            },
+            "nature" : "Buff"
+        },  
+		{
             "durationData": {
                 "duration": -1,
                 "stackLimit": -1
@@ -128,7 +212,7 @@
                 "modType": "System.Single"
             }
         },
-        {
+		{
             "durationData": {
                 "duration": -1,
                 "stackLimit": -1
@@ -181,13 +265,39 @@
                 "modType": "System.Int32"
             }
         }
+      ],
+	  "offlineStatusEffects": [
+	  ]
+    }
+    },
+    "Description": {
+        "Cost": 300000,
+        "Rarity": 5,
+        "Purchasable": true,
+        "Manufacturer": "Shengli Arms",
+        "Model": "Armor",
+        "UIName": "Stealth ",
+        "Id": "emod_armorslots_stealth",
+        "Name": "Stealth Armor",
+        "Details": "Developed by the Capellan Confederation, Stealth Armor is a modern day equivalent of the Star League era Null Signature System. Reserves 6 slots and requires an ECM.",
+        "Icon": "uixSvgIcon_action_end"
+    },
+    "BonusValueA": "Requires",
+    "BonusValueB": "ECM",
+    "ComponentType": "Upgrade",
+    "ComponentSubType": "NotSet",
+    "PrefabIdentifier": "",
+    "BattleValue": 0,
+    "InventorySize": 1,
+    "Tonnage": 0,
+    "AllowedLocations": "CenterTorso",
+    "DisallowedLocations": "All",
+    "CriticalComponent": false,
+    "statusEffects": [
     ],
     "ComponentTags": {
         "items": [
             "component_type_stock",
-            "lv-stealth_t2",
-            "lv-stealth-range-mod_s1_m1_l2_e2",
-            "lv-stealth-move-mod_m2_s3",
 			"StealthArmor"
         ],
         "tagSetSourceFile": ""

@@ -17,8 +17,11 @@
                 "Sensors: +10%",
                 "Sight: +15%",
                 "IsECM: 2",
-                "ECMBubble: 150",
-                "IsProbe: 2",
+                "ECMBubble: 60",
+				"Jammer: 4",
+				"JamBubble: 270",
+                "IsProbe: 3",
+				"ProbePower: 2",
                 "Sharer",
                 "CockpitEWS"
             ]
@@ -54,15 +57,139 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
+	{
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Probe_Carrier",
+                "Name" : "Active Probe (Passive)",
+                "Details" : "Reduces effectiveness of stealthed and ECM shielded units",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_Probe_Carrier",
+                "operation": "Int_Add",
+                "modValue": "3",
+                "modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        },		
+		   {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Advanced_Sensors",
+                "Name" : "Advanced Sensors",
+                "Details" : "Provides detailed information on enemy units",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_Advanced_Sensors",
+                "operation": "Int_Add",
+                "modValue": "2",
+                "modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        },
+	{
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "Aura",
+                "effectTargetType" : "AlliesWithinRange",
+                "range" : 60.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : false,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "AR12_ECM_SHIELD",
+				"Name" : "Makes it easier for enemies to know where you are, but harder to attack",
+				"Details" : "IPSUM SUCKUM",
+				"Icon" : "uixSvgIcon_status_ECM-missileDef"
+            },
+            "statisticData" : 
+            {
+				"statName" : "LV_ECM_SHIELD",
+				"operation": "Int_Add",
+				"modValue": "2",
+				"modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        },
+        {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1,
+				"uniqueEffectIdStackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "Aura",
+                "effectTargetType" : "EnemiesWithinRange",
+                "range" : 270.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "AR12_ECM_JAM",
+				"Name" : "ECM Jammer",
+				"Details" : "Jamming ECM, reduces sensor checks for enemies in field",
+				"Icon" : "uixSvgIcon_action_sensorlock"
+            },
+            "statisticData" : 
+            {
+				"statName" : "LV_ECM_JAMMED",
+				"operation": "Int_Add",
+				"modValue": "4",
+				"modType": "System.Int32"
+            },
+            "nature" : "Debuff"
+        },
         {
             "durationData": {
                 "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
+                "stackLimit": 1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
@@ -85,35 +212,16 @@
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
                 "statName": "SensorDistanceAbsolute",
                 "operation": "Float_Multiply",
                 "modValue": "1.1",
-                "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "NotSet",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+                "modType": "System.Single"
+            }
         },
         {
             "durationData": {
                 "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
+                "stackLimit": 1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
@@ -136,34 +244,18 @@
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
                 "statName": "SpotterDistanceAbsolute",
                 "operation": "Float_Multiply",
                 "modValue": "1.15",
-                "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "NotSet",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+                "modType": "System.Single"
+            }
         }
     ],
     "ComponentTags": {
         "items": [
             "component_type_stock",
             "lv-shares-sensors",
-            "ElectronicCounterMeasures",
-            "lv-jammer_m2_r5",
-            "lv-probe_m2"
+            "ElectronicCounterMeasures"
         ],
         "tagSetSourceFile": ""
     }

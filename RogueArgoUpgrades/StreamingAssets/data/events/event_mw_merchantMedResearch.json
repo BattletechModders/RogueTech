@@ -1,0 +1,663 @@
+{
+    "Description" : {
+        "Id" : "event_mw_merchantMedResearch",
+        "Name" : "Medical Research Opportunity",
+        "Details" : "During the morning briefing, Darius has a proposal. \"Commander, the {TGT_SYSTEM.Name} system is renowned for its research facilities. It so happens that [[TGT_MW,{TGT_MW.Callsign}]] has a background in the medical supplies industry. If we could spare {TGT_MW.OBJ} for a while, {TGT_MW.Subj} could source us some advanced medical supplies without stretching our usual budget.\"",
+        "Icon" : "uixTxrSpot_DailyBriefing.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 40,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "items" : [
+                "pilot_merchant"
+            ],
+            "tagSetSourceFile" : "Tags/PilotTags"
+        },
+        "ExclusionTags" : {
+            "items" : null,
+            "tagSetSourceFile" : ""
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : "0"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "items" : null,
+                "tagSetSourceFile" : ""
+            },
+            "ExclusionTags" : {
+                "items" : null,
+                "tagSetSourceFile" : ""
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "Travel",
+                    "op" : "Equal",
+                    "val" : 0,
+                    "valueConstant" : "0"
+                }
+            ]
+        },
+        {
+            "Scope" : "StarSystem",
+            "RequirementTags" : {
+                "items" : [
+                    "planet_industry_research"
+                ],
+                "tagSetSourceFile" : "Tags/PlanetTags"
+            },
+            "ExclusionTags" : {
+                "items" : null,
+                "tagSetSourceFile" : ""
+            },
+            "RequirementComparisons" : []
+        }
+    ],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Reject the proposal.",
+                "Details" : "non-participation option",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Nothing happens",
+                        "Details" : "Darius nods and the daily briefing moves on to the rest of the agenda.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : []
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Send {TGT_MW.Callsign} for a week.",
+                "Details" : "Low cost option",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "ineffective",
+                        "Details" : "Darius nods and arranges to send [[TGT_MW,{TGT_MW.Callsign}]] to the planet for a week of networking among the medical supplies vendors.\r\n\r\nSoon, the fruits of {TGT_MW.Det} labors begin to arrive, boosting the short-term effectiveness of the MedBay with samples of cutting-edge medicines from the {TGT_SYSTEM.Name} system's best labs.\r\n\r\nLater in the week, Darius delivers an update. \"{TGT_MW.Callsign} has done all that {TGT_MW.Subj} could in such a short timeframe. I was honestly hoping for a bit more, but it will have to do.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "7",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "chain_shoreLeave"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "moderately effective",
+                        "Details" : "Darius nods and arranges to send [[TGT_MW,{TGT_MW.Callsign}]] to the planet for a week of networking among the medical supplies vendors.\r\n\r\nSoon, the fruits of {TGT_MW.Det} labors begin to arrive, boosting the short-term effectiveness of the MedBay with samples of cutting-edge and experimental medicines from the {TGT_SYSTEM.Name} system's best labs.\r\n\r\nLater in the week, Darius delivers an update. \"{TGT_MW.Callsign} has done all that {TGT_MW.Subj} could. This is about what I was hoping for, given such a short window of opportunity.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "7",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "chain_shoreLeave"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Send {TGT_MW.Callsign} for a month.",
+                "Details" : "high cost option",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "ineffective",
+                        "Details" : "Darius nods and arranges to send [[TGT_MW,{TGT_MW.Callsign}]] to the planet for a month of networking among the medical supplies vendors.\r\n\r\nSoon, the fruits of {TGT_MW.Det} labors begin to arrive, boosting the effectiveness of the MedBay with generous samples of cutting-edge medicines from the {TGT_SYSTEM.Name} system's best labs.\r\n\r\nLater in the week, Darius delivers an update. \"{TGT_MW.Callsign} tells us {TGT_MW.Subj} {TGT_MW.Gender?NonBinary:have|Default:has} commitments stretching for the rest of the month, but doesn't expect to arrange much better than what we're getting now. Given the time spent planetside, I was honestly hoping for more\u2026 but it will have to do.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "30",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "chain_shoreLeave"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_1",
+                        "Name" : "moderately effective",
+                        "Details" : "Darius nods and arranges to send [[TGT_MW,{TGT_MW.Callsign}]] to the planet for a month of networking among the medical supplies vendors.\r\n\r\nSoon, the fruits of {TGT_MW.Det} labors begin to arrive, boosting the effectiveness of the MedBay with generous samples of full treatment regimens from the {TGT_SYSTEM.Name} system's best labs.\r\n\r\nLater in the week, Darius delivers an update with a satisfied expression on his face. \"{TGT_MW.Callsign} tells us {TGT_MW.Subj} {TGT_MW.Gender?NonBinary:have|Default:has} commitments stretching for the rest of the month, and expects to arrange even better supply drops than the ones we've already received.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "30",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "chain_shoreLeave"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_2",
+                        "Name" : "very effective",
+                        "Details" : "Darius nods and arranges to send [[TGT_MW,{TGT_MW.Callsign}]] to the planet for a month of networking among the medical supplies vendors.\r\n\r\nSoon, the fruits of {TGT_MW.Det} labors begin to arrive, boosting the effectiveness of the MedBay with generous samples and clinical trials from the {TGT_SYSTEM.Name} system's best labs.\r\n\r\nLater in the week, Darius delivers a smug update. \"{TGT_MW.Callsign} tells us {TGT_MW.Subj} {TGT_MW.Gender?NonBinary:have|Default:has} commitments stretching for the rest of the month. Given what {TGT_MW.Gender?Male:he's|Female:she's|NonBinary:they've} already accomplished, I'm looking forward to what's yet to come.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "30",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "3",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "chain_shoreLeave"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_3",
+                "Name" : "Establish a research partnership.",
+                "Details" : "[Argo: Hospital Bays]",
+                "Icon" : ""
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "items" : [
+                            "argo_medbay_hospital"
+                        ],
+                        "tagSetSourceFile" : "Tags/CompanyTags"
+                    },
+                    "ExclusionTags" : {
+                        "items" : null,
+                        "tagSetSourceFile" : ""
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_3_0",
+                        "Name" : "very effective",
+                        "Details" : "Darius nods and arranges to send [[TGT_MW,{TGT_MW.Callsign}]] to the planet for a month of networking among the medical supplies vendors.\r\n\r\n{TGT_MW.Subj} {TGT_MW.Gender?NonBinary:focus|Default:focuses} on establishing an ongoing clinical trial partnership between the <i>Argo</i>'s extensive Hospital Bay and planetside labs.\r\n\r\nLater in the week, Darius delivers an update. \"The fruits of {TGT_MW.Callsign}'s labors have begun to arrive, and they're very impressive. Our data on in-the-field applications of the newest drugs and experimental supplies will open up long-term benefits for all of us.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "30",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "3",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 90
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "chain_shoreLeave"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}

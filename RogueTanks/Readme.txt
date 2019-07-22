@@ -36,6 +36,116 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+8.2.20
+
+Added cores to Republic, Civil War and Jihad vees,
+Made Techies easier to detect,
+Rebalanced Sensor/Sig buffs on Pegasus,
+Buffed Red October stealth,
+Made the Clan LRM carrier's loadouts more distinct,
+
+8.2.14
+
+Switched some techies to toybota model.
+Added engines cores to VBIED vehicles because of Suspicious Cargo rework,
+Added higher bracket movedefs for vtols,
+Added Thumper TAV-1 and TAV-2 (WOB),
+Replaced Vargr and Sleipnir APC with canonical ones from new House Arano sourcebook,
+Added engine cores to ArtilleryUnits, Roguetanks/CLANK, Roguetanks/Primitive, UrbieNuke, BaseUrbanWarfare, RogueTanks/vehicle/apc
+
+8.2.4 - 7/5/2019
+
+Added SM2 Arty vehicle,
+Added Thor_Clan arty vehicle,
+Added Demolisher_Thumper pirate arty vehicle,
+Added TBM_TANK_PIRATE,
+many minor arty vehicle fixes
+
+8.1.8
+
+Added MASH Compartment and added to MASH trucks
+
+8.1.7 - 7/1/2019
+
+Set many <20 ton units to use the ultra-light pathingdef,
+Removed Medium Mortar Techie, and Light Rocket Techie because they were bad,
+    Also to increase the relative number of Gun Techies which i consider base.
+Tweaked Small and Large Mortar Techies,
+Rebuilt Med and Large Rocket Techies,
+Tweaked Primitive Schrek,
+Renamed some primitive tanks,
+minor fixes
+
+8.0.2 - 7/1/2019
+
+Added Vehicle only simplified TComp with roughly TT functionality. (Currently unused),
+Added Demon (HGR WOB),
+Added Partisan AA (XL WOB),
+Added Condor Upgrade,
+Added Condor Upgrade Laser,
+Added RISC Pegasus,
+Added Bandit-D_VBIED,
+Added/Adapted SLDF Drone Medium,
+Added/Adapted SLDF Drone Heavy
+minor fixes
+
+7.9.2 - 6/25/2019
+
+Added Zhukov WOB,
+Added Zhukov WOB LBX,
+Added SRM Carrier WOB,
+Added LRM Carrier WOB,
+Added Puma 007,
+Added Puma 008,
+Added Partisan (Quad RAC)
+
+Pike from Schrek to Alacorn model,
+Light Flamer carrier to Striker model,
+Harasser from striker to bandit model,
+Demon to BTR model,
+minor fixes
+
+7.8.10
+
+Added Clan Maxim hover transport,
+Added Clan Asshur scout tanks
+
+7.8.8 - 6/12/2019
+
+Moving more things to eras,
+Added Nuke Long Tom,
+Added VBIED Primitive J. Edgar,
+Added VBIED Quickcell Hetzer,
+blacklisted a few well known VBIED temporarily,
+Added SRM Carrier Elite,
+minor fixes
+
+7.8.2 - 6/8/2019
+
+Added Gallant_Fusion,
+minor fixes
+
+7.8.1
+
+Added lore large laser Rotunda,
+Added lore packrats, ICE, SRM2, ML, base,
+minor fixes
+
+7.7.4
+
+The Big Move. Separating by Eras.
+Moved items in old Dark Age folder to proper locations.
+Added Packrat, Gallant and Rotunda,
+    Addapted same for RT
+Added Gallant_3050
+
+7.6.6 - 6/3/2019
+
+Added Heavy Mortar Carrier,
+Added Pirate Pike,
+Gave a couple things single shot TBM,
+minor fixes
+
 7.6.2
 
 Added Demon (PPC),

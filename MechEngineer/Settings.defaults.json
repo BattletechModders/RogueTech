@@ -1,277 +1,352 @@
 {
-    "MechLabGeneralWidgetEnabled" : true,
-    "MechLabGeneralSlots" : 3,
-    "MechLabArmTopPadding" : 120,
-    "HeatDamageInjuryEnabled" : true,
-    "ShutdownInjuryEnabled" : true,
-    "MinimumHeatSinksOnMech" : 10,
-    "EnforceRulesForAdditionalInternalHeatSinks" : true,
-    "AllowMixingHeatSinkTypes" : false,
-    "FractionalAccountingPrecision" : 0.5,
-    "ArmorStructureRatioEnforcement" : true,
-    "ArmorStructureRatioEnforcementSkipMechDefs" : [
-        
-    ],
-    "SaveMechDefOnMechLabConfirm" : false,
-    "DefaultEngineHeatSinkId" : "Gear_HeatSink_Generic_Standard",
-    "EngineMissingFallbackHeatSinkCapacity" : 30,
-    "FeatureDynamicSlotsEnabled" : true,
-    "DynamicSlotsValidateDropEnabled" : false,
-    "FeatureAccuracyEffectsEnabled" : true,
-    "FeatureOverrideDescriptionsEnabled" : true,
-    "FeatureCompressFloatieMessagesEnabled" : true,
-    "DebugDestroyedFloaties" : true,
-    "FeatureCriticalEffectsEnabled" : true,
-    "FeatureMoveMultiplierEnabled" : true,
-    "NewSaveFolderFeatureEnabled" : false,
-    "FeatureTurretLimitedAmmoEnabled" : true,
-    "DebugCycleCombatSoundsFeatureEnabled" : false,
-    "BonusDescriptionsElementTemplate" : " <indent=10%><line-indent=-5%><line-height=65%>{{element}}</line-height></line-indent></indent>\r\n",
-    "BonusDescriptionsDescriptionTemplate" : "Traits:<b><color=#F79B26FF>\r\n{{elements}}</color></b>\r\n{{originalDescription}}",
-    "CriticalEffectsDescriptionTemplate" : "Critical Effects:<b><color=#F79B26FF>\r\n{{elements}}</color></b>\r\n{{originalDescription}}",
-    "CriticalEffectsDescriptionUseName" : false,
-    "AutoFixMechDefSkip" : [
-        
-    ],
-    "AutoFixUpgradeDefSkip" : [
-        "Gear_Cockpit_SLDF_Custom",
-        "Gear_Cockpit_Generic_Small",
-        "Gear_Cockpit_Generic_Standard",
-        "Gear_Cockpit_LifeSupportA_Standard",
-        "Gear_Cockpit_LifeSupportB_Standard",
-        "Gear_Cockpit_SensorsA_Standard",
-        "Gear_Cockpit_SensorsB_Standard",
-        "Gear_Gyro_Generic_Standard",
-        "emod_arm_part_shoulder",
-        "emod_arm_part_upper",
-        "emod_arm_part_lower",
-        "emod_arm_part_hand",
-        "emod_leg_hip",
-        "emod_leg_upper",
-        "emod_leg_lower",
-        "emod_leg_foot"
-    ],
-    "AutoFixMechDefEngine" : true,
-    "AutoFixMechDefCoolingDef" : "emod_kit_shs",
-    "AutoFixMechDefHeatBlockDef" : "emod_engine_cooling",
-    "AutoFixMechDefCoreDummy" : "emod_engine_dummy",
-    "AutoFixGyroCategorizer" : {
-        "Prefix" : "Gear_Gyro_",
-        "AllowedLocations" : "CenterTorso",
-        "ComponentType" : "Upgrade",
-        "CategoryId" : "Gyro",
-        "AutoAddCategoryIdIfMissing" : true
+    "AccuracyEffects" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Enables statistic effects for arm accuracy."
     },
-    "AutoFixGyroSlotChange" : {
-        "From" : 3,
-        "By" : 1,
-        "FromIsMin" : false
+    "ArmActuator" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Enables CBT arm actuators with CC like handling.",
+        "ForceFullDefaultActuators" : false,
+        "IgnoreFullActuatorsTag" : null,
+        "DefaultCBTShoulder" : "emod_arm_part_shoulder",
+        "DefaultCBTLower" : "emod_arm_part_lower",
+        "DefaultCBTUpper" : "emod_arm_part_upper",
+        "DefaultCBTHand" : "emod_arm_part_hand",
+        "DefaultCBTDefLower" : "emod_arm_part_lower",
+        "DefaultCBTDefHand" : "emod_arm_part_hand",
+        "InterruptHandDropIfNoLower" : false,
+        "ExtendHandLimit" : true
     },
-    "AutoFixCockpitCategorizer" : {
-        "Prefix" : "Gear_Cockpit_",
-        "AllowedLocations" : "Head",
-        "ComponentType" : "Upgrade",
-        "CategoryId" : "Cockpit",
-        "AutoAddCategoryIdIfMissing" : true
+    "ArmorStructureChanges" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Enables statistic effects for multiplying structure and armor values, happens before/after combat."
     },
-    "AutoFixCockpitTonnageChange" : {
-        "From" : 0,
-        "By" : 3,
-        "FromIsMin" : false
+    "ArmorStructureRatio" : {
+        "Enabled" : true,
+        "EnabledDescription" : "CBT rule enforcement, that armor at every mechs location is not more than 2 times the structure, head is allowed to be 3 times.",
+        "SkipMechDefs" : [
+            
+        ]
     },
-    "AutoFixCockpitSlotChange" : {
-        "From" : 1,
-        "By" : 0,
-        "FromIsMin" : false
+    "AutoFixer" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Fixes up mechs, chassis and components to adhere to CBT rules and defaults. Done programmatically to be compatible to new mechs in the future.",
+        "MechDefSkip" : [
+            
+        ],
+        "MechDefTagsSkip" : [
+            "noautofix"
+        ],
+        "MechDefEngine" : true,
+        "MechDefCoolingDef" : "emod_kit_shs",
+        "MechDefHeatBlockDef" : "emod_engine_cooling",
+        "MechDefCoreDummy" : "emod_engine_dummy",
+        "UpgradeDefSkip" : [
+            
+        ],
+        "UpgradeDefTagsSkip" : [
+            "noautofix"
+        ],
+        "GyroCategorizer" : {
+            "Prefix" : "Gear_Gyro_",
+            "AllowedLocations" : "CenterTorso",
+            "ComponentType" : "Upgrade",
+            "CategoryId" : "Gyro",
+            "AutoAddCategoryIdIfMissing" : true
+        },
+        "GyroSlotChange" : {
+            "From" : 3,
+            "By" : 1,
+            "FromIsMin" : false,
+            "NewMin" : null
+        },
+        "CockpitCategorizer" : {
+            "Prefix" : "Gear_Cockpit_",
+            "AllowedLocations" : "Head",
+            "ComponentType" : "Upgrade",
+            "CategoryId" : "Cockpit",
+            "AutoAddCategoryIdIfMissing" : true
+        },
+        "CockpitTonnageChange" : {
+            "From" : 0,
+            "By" : 3,
+            "FromIsMin" : false,
+            "NewMin" : null
+        },
+        "CockpitSlotChange" : {
+            "From" : 1,
+            "By" : 0,
+            "FromIsMin" : false,
+            "NewMin" : null
+        },
+        "LegUpgradesCategorizer" : {
+            "Prefix" : null,
+            "AllowedLocations" : "Legs",
+            "ComponentType" : "Upgrade",
+            "CategoryId" : "LegFootActuator",
+            "AutoAddCategoryIdIfMissing" : true
+        },
+        "LegUpgradesSlotChange" : {
+            "From" : 3,
+            "By" : -1,
+            "FromIsMin" : true,
+            "NewMin" : 1
+        },
+        "ChassisDefSkip" : [
+            
+        ],
+        "ChassisDefTagsSkip" : [
+            "noautofix"
+        ],
+        "ChassisDefSlotsChanges" : [
+            {
+                "Location" : "LeftTorso",
+                "Change" : {
+                    "From" : 10,
+                    "By" : 2,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "RightTorso",
+                "Change" : {
+                    "From" : 10,
+                    "By" : 2,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "LeftLeg",
+                "Change" : {
+                    "From" : 4,
+                    "By" : 2,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "RightLeg",
+                "Change" : {
+                    "From" : 4,
+                    "By" : 2,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "Head",
+                "Change" : {
+                    "From" : 1,
+                    "By" : 5,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "CenterTorso",
+                "Change" : {
+                    "From" : 4,
+                    "By" : 11,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "LeftArm",
+                "Change" : {
+                    "From" : 8,
+                    "By" : 4,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "RightArm",
+                "Change" : {
+                    "From" : 8,
+                    "By" : 4,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "LeftLeg",
+                "Change" : {
+                    "From" : 2,
+                    "By" : 4,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "RightLeg",
+                "Change" : {
+                    "From" : 2,
+                    "By" : 4,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "Head",
+                "Change" : {
+                    "From" : 3,
+                    "By" : 3,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "LeftArm",
+                "Change" : {
+                    "From" : 11,
+                    "By" : 1,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Location" : "RightArm",
+                "Change" : {
+                    "From" : 11,
+                    "By" : 1,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            }
+        ],
+        "ChassisDefInitialTonnage" : true,
+        "ChassisDefInitialToTotalTonnageFactor" : 0.1,
+        "ChassisDefMaxJumpjets" : true,
+        "ChassisDefMaxJumpjetsCount" : 8,
+        "ChassisDefMaxJumpjetsRating" : 400,
+        "WeaponDefTagsSkip" : [
+            "noautofix"
+        ],
+        "AutoFixWeaponDefSlotsChanges" : [
+            {
+                "Type" : "AC5",
+                "Change" : {
+                    "From" : 2,
+                    "By" : 2,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Type" : "AC10",
+                "Change" : {
+                    "From" : 3,
+                    "By" : 4,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Type" : "AC20",
+                "Change" : {
+                    "From" : 4,
+                    "By" : 6,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Type" : "Gauss",
+                "Change" : {
+                    "From" : 5,
+                    "By" : 2,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            },
+            {
+                "Type" : "LRM20",
+                "Change" : {
+                    "From" : 4,
+                    "By" : 1,
+                    "FromIsMin" : false,
+                    "NewMin" : null
+                }
+            }
+        ]
     },
-    "AutoFixLegUpgradesCategorizer" : {
-        "AllowedLocations" : "Legs",
-        "ComponentType" : "Upgrade",
-        "CategoryId" : "LegFootActuator",
-        "AutoAddCategoryIdIfMissing" : true
+    "BattleTechLoadFix" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Fixes a vanilla bug by loading unused components so they get displayed in the mech lab."
     },
-    "AutoFixLegUpgradesSlotChange" : {
-        "From" : 3,
-        "By" : -1,
-        "FromIsMin" : true,
-        "NewMin" : 1
+    "ComponentExplosions" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows each component to define destructive forces in case they explode, also implements proper CASE."
     },
-    "AutoFixChassisDefSkip" : [
-        
-    ],
-    "AutoFixChassisDefSlotsChanges" : [
-        {
-            "Location" : "LeftTorso",
-            "Change" : {
-                "From" : 10,
-                "By" : 2,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Location" : "RightTorso",
-            "Change" : {
-                "From" : 10,
-                "By" : 2,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Location" : "LeftLeg",
-            "Change" : {
-                "From" : 4,
-                "By" : 2,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Location" : "RightLeg",
-            "Change" : {
-                "From" : 4,
-                "By" : 2,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Location" : "Head",
-            "Change" : {
-                "From" : 1,
-                "By" : 5,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Location" : "CenterTorso",
-            "Change" : {
-                "From" : 4,
-                "By" : 11,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Location" : "LeftArm",
-            "Change" : {
-                "From" : 8,
-                "By" : 4,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Location" : "RightArm",
-            "Change" : {
-                "From" : 8,
-                "By" : 4,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Location" : "LeftLeg",
-            "Change" : {
-                "From" : 2,
-                "By" : 4,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Location" : "RightLeg",
-            "Change" : {
-                "From" : 2,
-                "By" : 4,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Location" : "Head",
-            "Change" : {
-                "From" : 3,
-                "By" : 3,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Location" : "LeftArm",
-            "Change" : {
-                "From" : 11,
-                "By" : 1,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Location" : "RightArm",
-            "Change" : {
-                "From" : 11,
-                "By" : 1,
-                "FromIsMin" : false
-            }
-        }
-    ],
-    "AutoFixChassisDefInitialTonnage" : true,
-    "AutoFixChassisDefInitialToTotalTonnageFactor" : 0.1,
-    "AutoFixChassisDefMaxJumpjets" : true,
-    "AutoFixChassisDefMaxJumpjetsCount" : 8,
-    "AutoFixChassisDefMaxJumpjetsRating" : 400,
-    "AutoFixWeaponDefSlotsChanges" : [
-        {
-            "Type" : "AC5",
-            "Change" : {
-                "From" : 2,
-                "By" : 2,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Type" : "AC10",
-            "Change" : {
-                "From" : 3,
-                "By" : 4,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Type" : "AC20",
-            "Change" : {
-                "From" : 4,
-                "By" : 6,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Type" : "Gauss",
-            "Change" : {
-                "From" : 5,
-                "By" : 2,
-                "FromIsMin" : false
-            }
-        },
-        {
-            "Type" : "LRM20",
-            "Change" : {
-                "From" : 4,
-                "By" : 1,
-                "FromIsMin" : false
-            }
-        }
-    ],
-    "UseArmActuators" : true,
-    "ForceFullDefaultActuators" : false,
-    "DefaultCBTShoulder" : "emod_arm_part_shoulder",
-    "DefaultCBTLower" : "emod_arm_part_lower",
-    "DefaultCBTUpper" : "emod_arm_part_upper",
-    "DefaultCBTHand" : "emod_arm_part_hand",
-    "DefaultCBTDefLower" : "emod_arm_part_lower",
-    "DefaultCBTDefHand" : "emod_arm_part_hand",
-    "InterruptHandDropIfNoLower" : false,
-    "ExtendHandLimit" : true,
-    "CBTMovement" : {
+    "CompressFloatieMessages" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Compresses similar floatie messages to a single message with a multiplier. E.g. MEDIUM LASER DESTROYED x 4",
+        "DebugDestroyedFloaties" : false
+    },
+    "CriticalEffects" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows custom multiple critical hit states for individual components.",
+        "DescriptionTemplate" : "Critical Effects:<b><color=#F79B26FF>\r\n{{elements}}</color></b>\r\n{{originalDescription}}",
+        "ElementTemplate" : " <indent=10%><line-indent=-5%><line-height=65%>{{element}}</line-height></line-indent></indent>\r\n",
+        "DescriptionUseName" : false,
+        "CritFloatieMessage" : "{0} CRIT",
+        "DestroyedFloatieMessage" : "{0} DESTROYED"
+    },
+    "DebugCycleCombatSounds" : {
+        "Enabled" : false,
+        "EnabledDescription" : "Cycle through SFX sounds when pressing a specific button on the start menu",
+        "SpecificButton" : "Skirmish"
+    },
+    "DebugSaveMechToFile" : {
+        "Enabled" : false,
+        "EnabledDescription" : "Saves mechdefs to 'MechEngineer/Saves' when saving a mech in the mechlab"
+    },
+    "DynamicSlots" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows components to take up space dynamically on a mech.",
+        "DynamicSlotsValidateDropEnabled" : false,
+        "DynamicSlotsValidateDropEnabledDescription" : "Don't allow dropping of items that would exceed the available slots."
+    },
+    "Engine" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Provides engines that can be installed on mechs similar to how CBT works.",
+        "AllowMountingAllRatings" : false,
+        "AllowMountingAllRatingsDescription" : "Allow mounting all fusion core rating regardless of min/max sprint factors.",
+        "MinimumHeatSinksOnMech" : 10,
+        "MinimumHeatSinksOnMechDescription" : "Minimum heatsinks a mech requires.",
+        "EnforceRulesForAdditionalInternalHeatSinks" : true,
+        "EnforceRulesForAdditionalInternalHeatSinksDescription" : "Can't have those juicy ++ cooling systems with smaller fusion cores than the rules allow it.",
+        "AllowMixingHeatSinkTypes" : false,
+        "AllowMixingHeatSinkTypesDescription" : "Allow heat sinks patchwork.",
+        "DefaultEngineHeatSinkId" : "Gear_HeatSink_Generic_Standard",
+        "DefaultEngineHeatSinkIdDescription" : "Default heat sink type for engines without a kit.",
+        "EngineMissingFallbackHeatSinkCapacity" : 30,
+        "EngineMissingFallbackHeatSinkCapacityDescription" : "Heat sink capacity if no engine is detected.",
         "UseGameWalkValues" : true,
+        "UseGameWalkValuesDescription" : "Set to false to use more TT like walk values.",
         "JJRoundUp" : false,
+        "JJRoundUpDescription" : "The allowed number of jump jets is rounded up or down.",
         "TTWalkMultiplier" : 30,
-        "TTSprintMultiplier" : 50
+        "TTSprintMultiplier" : 50,
+        "LimitEngineCoresToTonnage" : true,
+        "IgnoreLimitEngineChassisTag" : ""
+    },
+    "Globals" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows tooltips and other features to access the current mech from context."
     },
     "HardpointFix" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Optimizes the way installed weapons are shown on a mech model.",
         "AutoFixChassisDefWeaponHardpointCounts" : false,
+        "AutoFixChassisDefWeaponHardpointCountsDescription" : "Changes chassis hardpoints based on configured prefabs.",
         "EnforceHardpointLimits" : false,
+        "EnforceHardpointLimitsDescription" : "Enforces hardpoint limits in mechlab only allowing configured prefabs.",
         "AllowDefaultLoadoutWeapons" : false,
+        "AllowDefaultLoadoutWeaponsDescription" : "Ignore limits that would prevent mounting default loadouts.",
         "WeaponPrefabMappings" : [
             {
                 "PrefabIdentifier" : "AC2",
@@ -388,5 +463,75 @@
                 ]
             }
         ]
+    },
+    "InvalidInventory" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Make sure invalid mech configurations can't be saved in skirmish and can't be fielded in the campaign."
+    },
+    "LocationalEffects" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows other features to support locational statistic effects."
+    },
+    "MechLabSlots" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Makes the mech lab adhere to any custom mech slot counts.",
+        "MechLabArmTopPadding" : 120,
+        "MechLabGeneralSlots" : 3
+    },
+    "MoveMultiplierStat" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Introduces a new statistic effect to allow easy manipulation of (mech only) movement."
+    },
+    "NewSaveFolder" : {
+        "Enabled" : false,
+        "EnabledDescription" : "Redirects all save operations to use one folder for all save related data.",
+        "Path" : "Mods/Saves"
+    },
+    "OverrideDescriptions" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows other features to override tooltips and descriptions, also provides bonus description management.",
+        "BonusDescriptionsDescriptionTemplate" : "Traits:<b><color=#F79B26FF>\r\n{{elements}}</color></b>\r\n{{originalDescription}}",
+        "BonusDescriptionsElementTemplate" : " <indent=10%><line-indent=-5%><line-height=65%>{{element}}</line-height></line-indent></indent>\r\n"
+    },
+    "OverrideGhostVFX" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows to turn off or reduce the strong and weak ghost effects of ECM, and allows to remove the ECM globe effect.",
+        "Blacklisted" : [
+            "vfxPrfPrtl_ECM_loop",
+            "vfxPrfPrtl_ECM_opponent_loop",
+            "vfxPrfPrtl_ECMcarrierAura_loop"
+        ],
+        "BlipWeak" : "Weak",
+        "BlipStrong" : "Weak"
+    },
+    "OverrideTonnage" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows other features to override tonnage calculations.",
+        "PrecisionEpsilon" : 0.0001,
+        "PrecisionEpsilonDescription" : "The maximum tonnage two values can be apart to be viewed as being the same, vanilla uses 100 grams.",
+        "MechLabMechInfoWidgetDecimalPlaces" : 3,
+        "MechLabMechInfoWidgetDecimalPlacesDescription" : "How many digits to show after the comma in the mech lab.",
+        "TonnageStandardPrecision" : 0.5,
+        "TonnageStandardPrecisionDescription" : "Set to 0.001 for kg fractional accounting on BattleMechs, only modifies half-ton rounding operations as by rule",
+        "KilogramStandardPrecision" : 0.001,
+        "KilogramStandardPrecisionDescription" : "Used for Small Support Vehicles, ProtoMechs and battlesuits.",
+        "ArmorRoundingPrecision" : null,
+        "ArmorRoundingPrecisionDescription" : "If not set, default is ARMOR_PER_STEP * TONNAGE_PER_ARMOR_POINT",
+        "UnderweightWarningThreshold" : 1,
+        "UnderweightWarningThresholdDescription" : "How many tons a mech has to be underweight to show a warning"
+    },
+    "ShutdownInjuryProtection" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Pilots receive injury when mech receives overheat damage or has to shut down in case life support is destroyed.",
+        "HeatDamageInjuryEnabled" : true,
+        "ShutdownInjuryEnabled" : true
+    },
+    "TurretLimitedAmmo" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Turrets use up ammo and don't explode once ammo is gone."
+    },
+    "TurretMechComponents" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Turrets can now use components and benefit from their status effects."
     }
 }

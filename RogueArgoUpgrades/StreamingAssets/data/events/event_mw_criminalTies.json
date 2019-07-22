@@ -1,0 +1,516 @@
+{
+    "Description" : {
+        "Id" : "event_mw_criminalTies",
+        "Name" : "Criminal Ties",
+        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] joins you on a supply run in one of {TGT_SYSTEM.Name}'s major cities. As the trip winds down, you realize you're being followed. Not long after, a dirty man with a dangerous sneer steps in front of {TGT_MW.Callsign}. \"We've been looking for you, {TGT_MW.Firstname},\" he says as several more figures close in around you.\r\n\r\nYou look the man over. \"What's this about, {TGT_MW.Callsign}?\"\r\n\r\n\"Ah, this is a little creep I used to know, Commander. Back before I joined up with you. I don't think he likes me much anymore.\"",
+        "Icon" : "uixTxrSpot_BigCity.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 10,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "items" : [
+                "pilot_criminal"
+            ],
+            "tagSetSourceFile" : ""
+        },
+        "ExclusionTags" : {
+            "items" : null,
+            "tagSetSourceFile" : ""
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : null
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "items" : [],
+                "tagSetSourceFile" : ""
+            },
+            "ExclusionTags" : {
+                "items" : [],
+                "tagSetSourceFile" : ""
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "Travel",
+                    "op" : "Equal",
+                    "val" : 0,
+                    "valueConstant" : "0"
+                },
+                {
+                    "obj" : "Funds",
+                    "op" : "GreaterThan",
+                    "val" : 1000,
+                    "valueConstant" : "1000"
+                }
+            ]
+        },
+        {
+            "Scope" : "Commander",
+            "RequirementTags" : {
+                "items" : null,
+                "tagSetSourceFile" : ""
+            },
+            "ExclusionTags" : {
+                "items" : null,
+                "tagSetSourceFile" : ""
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "Injuries",
+                    "op" : "Equal",
+                    "val" : 0,
+                    "valueConstant" : "0"
+                }
+            ]
+        },
+        {
+            "Scope" : "StarSystem",
+            "RequirementTags" : {
+                "items" : [],
+                "tagSetSourceFile" : ""
+            },
+            "ExclusionTags" : {
+                "items" : [
+                    "planet_pop_none"
+                ],
+                "tagSetSourceFile" : "Tags/PlanetTags"
+            },
+            "RequirementComparisons" : []
+        }
+    ],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Run away.",
+                "Details" : "low morale",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Run for it",
+                        "Details" : "You shove the man out of the way and run, [[TGT_MW,{TGT_MW.Callsign}]] right beside you. The other men are surprised, which allows you to get some distance before they give chase. The pursuit lasts several blocks before you lose them in the crowded streets.\r\n\r\nOn the flight back to the <i>Argo</i>, you ask {TGT_MW.Callsign} if there are any more ghosts from {TGT_MW.DET} past you should know about. {TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:sigh|Default:sighs}. \"Probably.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : {
+                                "Scope" : "MechWarrior",
+                                "RequirementTags" : {
+                                    "items" : null,
+                                    "tagSetSourceFile" : ""
+                                },
+                                "ExclusionTags" : {
+                                    "items" : null,
+                                    "tagSetSourceFile" : ""
+                                },
+                                "RequirementComparisons" : []
+                            },
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [],
+                            "Actions" : [],
+                            "ForceEvents" : [],
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "chain_shoreLeave"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Talk your way out of the situation.",
+                "Details" : "Talk your way out of the situation",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Fast talk",
+                        "Details" : "\"You're talking to the wrong person, friend,\" you say to the dirty man. \"[[TGT_MW,{TGT_MW.Callsign}]] works for me now. So however your problem started, it ends with me.\"\r\n\r\nThe lowlife looks at you, and his eyes widen. \"Oh, okay. So the thing is, {TGT_MW.Firstname} owes me\u2014\"\r\n\r\nYou jab a finger at his chest. \"Wrong! {TGT_MW.SUBJ_C} no longer {TGT_MW.Gender?NonBinary:owe|Default:owes} you anything. Whatever your connection was, it's dead,\" you say. \"Now get out of my way. I'm busy.\"\r\n\r\nThe lowlife drops his gaze and steps aside. You and {TGT_MW.Callsign} move on before he can reconsider. On the flight back to the <i>Argo</i>, {TGT_MW.Subj} {TGT_MW.Gender?NonBinary:talk|Default:talks} to you about {TGT_MW.DET} past\u2014a rare event for such a secretive MechWarrior.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "chain_shoreLeave"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "Bad Outcome",
+                        "Details" : "\"You're talking to the wrong person, friend,\" you say to the dirty man. \"[[TGT_MW,{TGT_MW.Callsign}]] works for me, now. So however your problem started, it ends with me.\"\r\n\r\nThe lowlife shrugs. \"Right. You wanna settle {TGT_MW.Firstname}'s debts? Fine by me.\"\r\n\r\nThe kick to your leg from behind isn't exactly a shock, but it does take you down to your knees. {TGT_MW.Callsign} lashes out at your attacker, and unavoidable violence ensues.\r\n\r\nA few minutes later, all of the thugs are down and {TGT_MW.Callsign} is holding {TGT_MW.DET} side where someone stabbed {TGT_MW.OBJ}. \"We don't wanna be here when the police show up,\" {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:gasp|Default:gasps}.\r\n\r\nBut once you make it to the shuttle, it's all over except for applying first aid to {TGT_MW.Callsign}'s wound.",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Injuries",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "chain_shoreLeave"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Stand your ground and fight.",
+                "Details" : "Fight",
+                "Icon" : ""
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "Good Outcome",
+                        "Details" : "This is obviously going to be a fight, so you get things started early by sucker punching [[TGT_MW,{TGT_MW.Callsign}]]'s old pal. Meanwhile, {TGT_MW.Callsign} slugs another old friend in the gut. Then the rest charge, and everything devolves into a confusion of fists and arms and heavy boots.\r\n\r\nSome time later, you're swinging at someone's bloody face as he backs away, and you realize he's the last enemy left. {TGT_MW.Callsign} is bent over trying to catch {TGT_MW.DET} breath and the lead lowlife is gone, along with most of his gang. \"Go on, get out of here!\" you tell the last one. He turns and runs.\r\n\r\nYou offer {TGT_MW.Callsign} your hand. {TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:say|Default:says}, \"That was a good scrap, Commander. But we'd better go, too.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "chain_shoreLeave"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_morale_high"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [
+                                    "pilot_morale_low"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_1",
+                        "Name" : "Bad Outcome",
+                        "Details" : "This is obviously going to be a fight, so you get things started early by sucker punching [[TGT_MW,{TGT_MW.Callsign}]]'s old pal. Meanwhile, {TGT_MW.Callsign} slugs another thug in the gut. Then the rest charge, and you're quickly overwhelmed by sheer numbers. The fight is going poorly enough that when the local police arrive, you're relieved.\r\n\r\nThree hours later, you've paid a \u00A21,000 fine, the medics are done treating {TGT_MW.Callsign}'s injuries, and you're both on your way back to the <i>Argo</i>. {SCN_MW.SUBJ_C} {SCN_MW.Gender?NonBinary:say|Default:says}, \"Sorry about that, Commander. I didn't think that guy was still looking for me.\"",
+                        "Icon" : ""
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Injuries",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-1000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "chain_shoreLeave"
+                                ],
+                                "tagSetSourceFile" : "Tags/PilotTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : null,
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 60
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : null,
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}
