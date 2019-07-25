@@ -22,16 +22,6 @@ CACShortRangeAccuracyMod - MinRange <= X < ShortRange
 CACMediumRangeAccuracyMod - ShortRange <= X < MediumRange
 CACLongRangeAccuracyMod - MediumRange <= X < LongRange
 CACExtraLongRangeAccuracyMod - LongRange <= X < MaxRange
-EvasivePipsIgnored
-
-
-KMiSSioNToday at 17:08
-float
-i know its nature is int, but there is some mess with them
-LadyAlektoToday at 17:08
-a float? thats... interesting possibilities
-KMiSSioNToday at 17:09
-it will be rounded at implementation
 
 {
 "debugLog":true, - enable debug log 
@@ -191,11 +181,41 @@ CustomAmmoCategories.json
 Weapon definition
 new fields
   "EvasivePipsIgnored" : 1, This value can be controlled via weapon's EvasivePipsIgnored statistic value (float)
-  "ProjectileSpeedMultiplier": 0.1, - projectile speed multiplier. Less is slower. Multiplicative per weapon/mode/ammo. 
+  "ProjectileSpeedMultiplier": 0.1, - projectile speed multiplier. Less is slower. Multiplicative per weapon/mode/ammo. Works only with ImprovedBallistic true (ballistic/laser/ppc/missile)
                                      NOTE! Do not set this to low values cause if projectile flying takes too long attack sequence will be terminated by timeout.
-  "MissileFiringIntervalMultiplier": 10, - multiplier for firing interval. Only for missile firing effect. Greater is slower. 
+                                     NOTE! For lasers ProjectileSpeed it is duration so greater value will result longer firing 
+                                        (opposite for other effects greater value makes projectiles fly faster and lower duration).
+  "MissileVolleySize": 5, - volley size override for missile launchers. Only works with ImprovedBallistic true. 
+                             Some basics: every missile launcher model have emmiters. Launcher counts number of emmiters as volley size. 
+                             If model not setuped properly launcher effects it fallbacks to one emmiter with weapon object position so volley size always 1. 
+                             You can use this to override this behavior. 
+  "ProjectileScale": {"x":10,"y":10,"z":10}, - scale for projectile. Only works with ImprovedBallistic true or IsAMS/IsAAMS (only for AMS fire sequence). 
+                                                Works properly only for missiles/autocannons/gauss/ppc. Impact effects and missiles explosions scales accordingly.
+                                                Can be set per mode/ammo/weapon. Higher priority replace lower priority value. Mode have priority, than ammo, than weapon.
+  "ColorsTable" : [ - Colors array per weapon
+    {
+      "C":"red"     - Color in html notation. Note for ballistic and ppc effect color can be not fully accurate.
+      ,"I":5        - Color intensivity, used only for lasers 
+    },
+    {"C":"orange","I":5},{"C":"yellow","I":5},{"C":"green","I":5},{"C":"aqua","I":5},{"C":"blue","I":5},{"C":"purple","I":5}
+  ],
+  "ColorSpeedChange": 7, - Color change speed. Approximately this number shows how many colors changed during projectile flying. Per mode/ammo/weapon. 
+                            Higher priority replace lower priority value. Mode have priority, than ammo, than weapon. 0 counts as not set so will be used next value by priority.
+  "ColorChangeRule": "Linear", - Color changing rule. Possible values
+                                 None - original color
+                                 Linear - colors chanded one by one from start of weapon's colors table
+                                 Random - color will be choosed randomly from weapon's colors table. On change while firing next color will be choosed randomly also.
+                                 RandomOnce - color will be chosen randomly as projectile start and will not be changed during firing. 
+                                 t0 - color with index 0 will be choosen from weapon's colors table and will not be changed during firing. 
+                                 t1 - color with index 1 will be choosen from weapon's colors table and will not be changed during firing. 
+                                 ........................................................................................................
+                                 t31 - color with index 31 will be choosen from weapon's colors table and will not be changed during firing. 
+                                 Higher priority replace lower priority value. Mode have priority, than ammo, than weapon. "None" counts as not set so will be used next value by priority.
+                                 If color need to be changed it is always changed smoothly. 
+                          NOTE! Changing colors avaible only for ImprovedBallistic true or IsAMS/IsAAMS (only for AMS fire sequence) and only for laser/ppc/autocannon effects.
+  "MissileFiringIntervalMultiplier": 10, - multiplier for firing interval. Only for missile firing effect. Only works with ImprovedBallistic true. Greater is slower. 
                                      NOTE! Do not set this to very high values cause if delay will be too long  attack sequence will be terminated by timeout.
-  "MissileVolleyIntervalMultiplier": 10, - multiplier for missile volley fire interval. Only for missile firing effect. Greater is slower. 
+  "MissileVolleyIntervalMultiplier": 10, - multiplier for missile volley fire interval. Only for missile firing effect. Only works with ImprovedBallistic true. Greater is slower. 
                                      NOTE! Do not set this to very high values cause if delay will be too long  attack sequence will be terminated by timeout.
                                      Some basics: every missile launcher prefab have emiter points. For example your missile launcher prefab have 3 emmiters and you lauching 4 missiles, 
                                      than missile fire sequence looks like: 
@@ -221,7 +241,8 @@ new fields
 								  if not set hit generator will be choosed by weapon type.
 								  if weapon define has tag "wr-clustered_shots", "Cluster" hit generator will be forced. 
   "DirectFireModifier" : -10.0, Accuracy modifier if weapon can strike directly
-  "DamageOnJamming": true/false, - if true on jamm weapon will be damaged
+  "DamageOnJamming": true/false, - if true on jamming weapon will be damaged
+  "DestroyOnJamming": true/false, - if true on jamming weapon will be destroyed (need DamageOnJamming to be set true also)
   "FlatJammingChance": 1.0, - Chance of jamming weapon after fire. 1.0 is jamm always. Unjamming logic implemented as in WeaponRealizer
   "GunneryJammingBase": 5, - 
   "GunneryJammingMult": 0.05, - this values uses to alter flat jamming chance by pilot skills 
@@ -311,7 +332,7 @@ new fields
    "ClearMineFieldRadius": 4, - radius in in-game terrain cells. Minefields in all cells within radius will be cleared in terrain impact.
                                 Clearing on success hit controled by FireOnSuccessHit flag.
    "Cooldown": 2, - number of rounds weapon will be unacceptable after fire this mode
-   "ImprovedBallistic": true, - whether use or not own ballistic/laser/PPC weapon effect engine. 
+   "ImprovedBallistic": true, - whether use or not own ballistic/laser/PPC/missile weapon effect engine. 
 								Difference between "improved" and vanilla engine:
 								1. Improved mode uses ShotsWhenFire properly (vanilla had not used them at all)
 								2. Improved mode can use curvy trajectory for indirect fire (ballistic only) (indirect gauss bullet can be used too, but looks very funny)
@@ -397,6 +418,7 @@ new fields
 		"Cooldown": 2, - number of rounds weapon will be unacceptable after fire this mode
 		"AIHitChanceCap": 0.3, - not used any more
 		"DamageOnJamming": true/false, - if true on jamming weapon will be damaged
+    "DestroyOnJamming": true/false, - if true on jamming weapon will be destroyed (need DamageOnJamming to be set true also)
 		"DamageMultiplier":2.0, - damage multiplier for this mode effective value will be Weapon.DamagePerShot*Ammo.DamageMultiplier*Mode.DamageMultiplier rounded
 									to nearest integer. If omitted assumed to be 1.0. HeatDamagePerShot affected too. 
 		"AlwaysIndirectVisuals": false, if true missiles will always plays indirect visuals, even if direct line of sight exists
