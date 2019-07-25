@@ -63,7 +63,7 @@ AI related mod settings
 												fail check is not performed on activation of component activated by heat, 
 												but fail check after each move is still performed if crit chance is grater than zero
 			"AutoActivateOnOverheatLevel": 0.8, same as AutoActivateOnHeat but instead of Heat level used persentage of Overheat
-			"AutoDeactivateOnOverheatLevel": 0.8, same as AutoDeactivateOnHeat but instead of Heat level used persentage of Overheat
+			"AutoDeactivateOverheatLevel": 0.8, same as AutoDeactivateOnHeat but instead of Heat level used persentage of Overheat
 			"ActivationMessage": "ON", - string showing in activation floatie message along with component UI name
 			"DeactivationMessage": "OFF", - string showing in deactivation floatie message along with component UI name
 			"ActivationIsBuff": "true", - if true component activation floatie message will have buff icon, deactivation - debuff,
