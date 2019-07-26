@@ -26,6 +26,8 @@ AI related mod settings
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
 		"ActivatableComponent":{
 			"ButtonName":"MASC",  - string used in activation/deactivation dialog button. Keep as sort as possible. 
+      "activateVFXOutOfLOSHide":true, - if true active component's VFX will be shown only if unit is visible to player (default false)
+      "presistantVFXOutOfLOSHide":true, - if true static component's VFX will be shown only if unit is visible to player (default false)
 			"FailFlatChance":0.3, - chance of fail on cold activation. 
 			"FailRoundsStart":1, - round since fail checks will be perfomed
 			"FailChancePerTurn":0.5, - value which added to fail chance every round of activity.
