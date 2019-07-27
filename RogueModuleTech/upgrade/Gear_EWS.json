@@ -13,18 +13,195 @@
         ],
         "BonusDescriptions": {
             "Bonuses": [
-                "Defense: +1",
                 "Sensors: +15%",
                 "Sight: +20%",
-                "Signature: -10%",
-                "IsECM: 5",
-                "ECMBubble: 240",
-                "IsProbe: 5"
+				"IsProbe: 4",
+				"ProbePower: 2",
+                "ECMSignature: -10%",
+                "UnFriendlyAura: 200",
+                "ECMAccuracyDebuff: -1",
+                "IsECM: 3",
+                "ECMBubble: 190",
+                "Jammer: 2",
+				"JamBubble: 260",
+				"ECCMMode",
+				"ECCMStrength: 4",
+				"ECCMBubble: 260"
             ]
         },
         "InventorySorter": {
             "SortKey": "00024"
+        },
+		"ActivatableComponent": {
+      "ButtonName": "ECCM",
+      "CanNotBeActivatedManualy": false,
+      "NoUniqueCheck": true,
+	  "ActiveByDefault": false,
+	  "ActivationMessage": "ECCM Mode",
+	  "DeactivationMessage": "ECM Mode",
+	  "Linkage":{
+        "OnActivate":{  
+          "Activate":[],
+          "Deactivate":["Stealth"]
+        },
+        "OnDeactivate":{
+          "Activate":[],
+          "Deactivate":[]
+        },
+      },
+      "statusEffects": [
+        {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "Aura",
+                "effectTargetType" : "EnemiesWithinRange",
+                "range" : 260.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : false,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "GEWS_ECCM_SHIELD",
+				"Name" : "Makes it easier for enemies to know where you are, but harder to attack",
+				"Details" : "IPSUM SUCKUM",
+				"Icon" : "uixSvgIcon_status_ECM-missileDef"
+            },
+            "statisticData" : 
+            {
+				"statName" : "LV_ECM_SHIELD",
+				"operation": "Int_Add",
+				"modValue": "-4",
+				"modType": "System.Int32"
+            },
+            "nature" : "Buff"
         }
+      ],
+	  "offlineStatusEffects": [
+	  {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "specialRules": "Aura",
+                "effectTargetType": "EnemiesWithinRange",
+                "range": 200.0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "GEWS-ECM",
+                "Name": "SPOTTING DISTANCE INCREASED",
+                "Details": "Increases spotting distance by 50m.",
+                "Icon": "uixSvgIcon_equipment_Cockpit"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "AccuracyModifier",
+                "operation": "Float_Add",
+                "modValue": "1.0",
+                "modType": "System.Single",
+                "targetCollection": "Weapon"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "specialRules": "Aura",
+                "effectTargetType": "AlliesWithinRange",
+                "range": 190.0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "GEWS_ECM_SHIELD",
+                "Name": "Makes it easier for enemies to know where you are, but harder to attack",
+                "Details": "IPSUM SUCKUM",
+                "Icon": "uixSvgIcon_status_ECM-missileDef"
+            },
+            "statisticData": {
+                "statName": "LV_ECM_SHIELD",
+                "operation": "Int_Add",
+                "modValue": "3",
+                "modType": "System.Int32"
+            },
+            "nature": "Buff"
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": 1,
+                "uniqueEffectIdStackLimit": 1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "specialRules": "Aura",
+                "effectTargetType": "EnemiesWithinRange",
+                "range": 260.0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": true,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "GEWS_ECM_JAM",
+                "Name": "ECM Jammer",
+                "Details": "Jamming ECM, reduces sensor checks for enemies in field",
+                "Icon": "uixSvgIcon_action_sensorlock"
+            },
+            "statisticData": {
+                "statName": "LV_ECM_JAMMED",
+                "operation": "Int_Add",
+                "modValue": "2",
+                "modType": "System.Int32"
+            },
+            "nature": "Debuff"
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator"
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "GEWS-Signature_Decrease_35",
+                "Name": "REDUCED SENSOR SIGNATURE",
+                "Details": "Sensor Signature reduced by 35%.",
+                "Icon": "uixSvgIcon_equipment_TTS"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "SensorSignatureModifier",
+                "operation": "Float_Multiply",
+                "modValue": "0.9",
+                "modType": "System.Single"
+            }
+        }
+	  ]
+    }
     },
     "StatName": null,
     "RelativeModifier": 0,
@@ -53,31 +230,69 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
-        {
-            "durationData": {
+	{
+            "durationData" : {
                 "duration": -1,
                 "stackLimit": -1
             },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
             },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "GECMInterference",
-                "Name": "GECM Interference",
-                "Details": "Guardian ECM making this unit harder to hit.",
-                "Icon": "uixSvgIcon_equipment_Gyro"
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Probe_Carrier",
+                "Name" : "Active Probe (Passive)",
+                "Details" : "Reduces effectiveness of stealthed and ECM shielded units",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
             },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "ToHitThisActor",
-                "operation": "Float_Add",
-                "modValue": "1.0",
-                "modType": "System.Single"
-            }
+            "statisticData" : 
+            {
+                "statName" : "LV_Probe_Carrier",
+                "operation": "Int_Add",
+                "modValue": "4",
+                "modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        },		
+		   {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Advanced_Sensors",
+                "Name" : "Advanced Sensors",
+                "Details" : "Provides detailed information on enemy units",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_Advanced_Sensors",
+                "operation": "Int_Add",
+                "modValue": "2",
+                "modType": "System.Int32"
+            },
+            "nature" : "Buff"
         },
         {
             "durationData": {
@@ -90,7 +305,7 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "EWS-sensor_Gain",
+                "Id": "GEWS-sensor_Gain",
                 "Name": "Sensor DISTANCE INCREASED",
                 "Details": "Increases spotting distance by [AMT]m.",
                 "Icon": "uixSvgIcon_equipment_Cockpit"
@@ -114,31 +329,7 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "EWS-Signature_Decrease_35",
-                "Name": "REDUCED SENSOR SIGNATURE",
-                "Details": "Sensor Signature reduced by 35%.",
-                "Icon": "uixSvgIcon_equipment_TTS"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "SensorSignatureModifier",
-                "operation": "Float_Multiply",
-                "modValue": "0.9",
-                "modType": "System.Single"
-            }
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator"
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "EWS-Spotting_Gain-T1",
+                "Id": "GEWS-Spotting_Gain-T1",
                 "Name": "SPOTTING DISTANCE INCREASED",
                 "Details": "Increases spotting distance by 50m.",
                 "Icon": "uixSvgIcon_equipment_Cockpit"
@@ -155,9 +346,7 @@
     "ComponentTags": {
         "items": [
             "component_type_stock",
-            "ElectronicCounterMeasures",
-            "lv-jammer_m5_r7",
-            "lv-probe_m5"
+            "ElectronicCounterMeasures"
         ],
         "tagSetSourceFile": ""
     }

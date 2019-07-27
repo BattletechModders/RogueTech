@@ -1,0 +1,553 @@
+{
+    "Description" : {
+        "Id" : "event_mw_dubiousIntentions",
+        "Name" : "Dubious Intentions",
+        "Details" : "While planetside on [[TGT_SYSTEM,{TGT_SYSTEM.Name}]], [[TGT_MW,{TGT_MW.Callsign}]] pulls you and Darius aside. \"I found an unsecured warehouse <i>stuffed</i> with equipment. Looks like it belongs to some small-time corp. Say the word and I'll reappropriate the goods.\"\r\n\r\n\"Sounds like a good way to get shot.\" Darius scowls. \"Why not make a token offer? A few C-bills go a long way. Hell, you might even make some friends.\"\r\n\r\n{TGT_MW.Callsign} lowers {TGT_MW.DET} voice. \"The locals have no idea how valuable this stash is. Give 'em a whiff of cash and they might get wise and ask for more, but it's your call, Commander.\"",
+        "Icon" : "uixTxrSpot_BigCity.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 10000,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "",
+            "items" : [
+                "pilot_criminal",
+                "pilot_honest"
+            ]
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "",
+            "items" : [
+                "pilot_dishonest",
+                "pilot_dependable",
+                "pilot_rebellious",
+                "pilot_cautious"
+            ]
+        },
+        "RequirementComparisons" : []
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "",
+                "items" : []
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/CompanyTags",
+                "items" : [
+                    "event_mw_dubiousIntentions"
+                ]
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "Funds",
+                    "op" : "GreaterThan",
+                    "val" : 200000,
+                    "valueConstant" : "200000"
+                },
+                {
+                    "obj" : "Travel",
+                    "op" : "Equal",
+                    "val" : 0,
+                    "valueConstant" : "0"
+                }
+            ]
+        },
+        {
+            "Scope" : "StarSystem",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "",
+                "items" : []
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/PlanetTags",
+                "items" : [
+                    "planet_pop_none"
+                ]
+            },
+            "RequirementComparisons" : []
+        }
+    ],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Authorize {TGT_MW.Callsign} to reappropriate the equipment.",
+                "Details" : "Steal",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Theft + dependable",
+                        "Details" : "\"Make it happen, but if you catch any sign of trouble, get out of there, [[TGT_MW,{TGT_MW.Callsign}]].\" You place a hand on {TGT_MW.DET} shoulder. \"You're worth far more than any equipment.\"\r\n\r\n\"You got it, Commander.\" {TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:flash|Default:flashes} a devilish grin before disappearing down the street.\r\n\r\nHours later, you're waiting by the Leopard when {TGT_MW.Callsign} rolls up in in a rusty cargo truck. {TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:lean|Default:leans} out the window and excitedly {TGT_MW.Gender?NonBinary:slap|Default:slaps} the door panel as you approach.\r\n\r\nYou notice a tarp covering something massive on a trailer behind the truck. \"You didn't mention a truck.\"\r\n\r\n\"It followed me home.\" {TGT_MW.Callsign} winks and adds, \"Don't worry, I'll make sure it returns to its rightful owner. You can count on me, Commander.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_dependable"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_mw_dubiousIntentions"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "System_ShowRewards",
+                                    "value" : "itemCollection_loot_eventDubiousIntentions",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_1",
+                        "Name" : "Injury + remove criminal",
+                        "Details" : "\"Rob 'em blind, but if anything feels even slightly off, get out of there,\" you say firmly. \"It's not worth it.\" [[TGT_MW,{TGT_MW.Callsign}]] nods dutifully and disappears down another street.\r\n\r\nDay fades into night as you wait for {TGT_MW.Callsign} outside the Leopard. Finally, {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:limp|Default:limps} into view, clutching {TGT_MW.DET} abdomen. Blood stains {TGT_MW.DET} clothes. \"Turns out these weren't locals, Commander.\"\r\n\r\nSirens sound in the distance. You throw {TGT_MW.DET} arm over your shoulder, supporting the MechWarrior. \"What happened?\"\r\n\r\n\"Smuggling ring. Dodged their bullets, but my spleen got caught on a fence.\" {TGT_MW.Callsign} croaks. \"If I survive\u2026 I'm going straight. No more schemes. I swear it.\" For once, you actually believe {TGT_MW.OBJ}.",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_criminal"
+                                ]
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Injuries",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_mw_dubiousIntentions"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Refuse {TGT_MW.Callsign}'s offer.",
+                "Details" : "discipline",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Rebellious",
+                        "Details" : "\"Not this time.\" You shake your head. \"We need to keep a low profile. This is a routine visit.\"\r\n\r\n[[TGT_MW,{TGT_MW.Callsign}]] sighs. \"The one time I try to be honest with you and I'm shot down immediately.\"\r\n\r\n\"Honesty doesn't entitle you to agreement. What if they have cameras or guards hidden on the premise? If you're serious, then I need a real plan. I can't risk our entire outfit over a half-baked scheme.\"\r\n\r\n\"Fine, I get it. Next time I'll just show up with the gear. Then you can just thank me and move on.\" {TGT_MW.Callsign} sneers, raising {TGT_MW.DET} voice defiantly.\r\n\r\nYou grab {TGT_MW.DET} arm. \"That would be a mistake.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_rebellious"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_morale_low"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_mw_dubiousIntentions"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "Dependable",
+                        "Details" : "You incline your head toward [[TGT_MW,{TGT_MW.Callsign}]]. \"If anyone could pull off what you're suggesting, it's you, but let's not test that theory.\"\r\n\r\n{TGT_MW.DET_C} smile falters. \"This gear is going to rust in that dingy warehouse.\"\r\n\r\n\"You probably right, MechWarrior. But you've got a gift. I've seen you make fifty tons of steel dance. That kind of talent isn't worth risking on some spare parts.\"\r\n\r\n{TGT_MW.Callsign} swells with pride. \"Damn right. Well, if you change your mind, you know who to ask. I'll find a way to 'procure' whatever you need.\" {TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:wink|Default:winks} knowingly.",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_dependable"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_morale_low"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_mw_dubiousIntentions"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Provide {TGT_MW.Callsign} funds to buy the equipment.",
+                "Details" : "[\u00A2200,000]",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Funds",
+                            "op" : "GreaterThan",
+                            "val" : 200000,
+                            "valueConstant" : "200000"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "Gear + morale high",
+                        "Details" : "\"Look, we've got the money, let's take care of the locals.\" You fix [[TGT_MW,{TGT_MW.Callsign}]] with a stern look. \"If what you're saying is true, then we're still getting a huge discount.\"\r\n\r\n\"We'll see\u2026 \" {TGT_MW.SUBJ_C} begrudgingly {TGT_MW.Gender?NonBinary:agree|Default:agrees} and {TGT_MW.Gender?NonBinary:disappear|Default:disappears} down a busy street.\r\n\r\nHours later, you're waiting by the Leopard, when a stranger rolls up in a rusty cargo truck. {TGT_MW.Callsign} pops {TGT_MW.DET} head out of the passenger side. \"Special delivery!\" Something massive gleams beneath a fluttering tarp covering the back of the truck.\r\n\r\nWhile more locals drive up to help, {TGT_MW.Callsign} sidles up to you. \"You should have been there when I told these folks what they were sitting on. This old fella even teared up. It felt strangely... good. I think I could get used to this, Commander.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_morale_low"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_mw_dubiousIntentions"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-200000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : [
+                                {
+                                    "Type" : "System_ShowRewards",
+                                    "value" : "itemCollection_loot_eventDubiousIntentions",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_1",
+                        "Name" : "No gear + rebellious",
+                        "Details" : "You look between Darius and [[TGT_MW,{TGT_MW.Callsign}]]. \"We've got enough enemies in the Periphery, let's not make any more. Pay the locals or forget about the goods.\"\r\n\r\n\"I'll give it a shot.\" {TGT_MW.SUBJ_C} begrudgingly {TGT_MW.Gender?NonBinary:agree|Default:agrees} and {TGT_MW.Gender?NonBinary:dart|Default:darts} across a busy street.\r\n\r\nHours later, you're waiting by the Leopard, when {TGT_MW.Callsign} slinks into view empty-handed. You wave {TGT_MW.OBJ} down. \"No luck?\"\r\n\r\n{TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:sigh|Default:sighs}. \"Those rubes demanded two million after I made my offer!\"\r\n\r\n\"You tried your best.\"\r\n\r\n{TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:shake|Default:shakes} {TGT_MW.DET} head. \"No, I tried <i>your</i> way and it failed. Next time we'd be better off if we did <i>things</i> my way. What if something special just happened to <i>appear</i> in the cargo hold?\"\r\n\r\nYou narrow your eyes at {TGT_MW.Callsign}. \"You don't want to find out.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_rebellious"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_mw_dubiousIntentions"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}

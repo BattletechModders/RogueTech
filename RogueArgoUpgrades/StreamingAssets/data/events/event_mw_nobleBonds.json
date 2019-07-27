@@ -1,0 +1,344 @@
+{
+    "Description" : {
+        "Id" : "event_mw_nobleBonds",
+        "Name" : "Noble Bonds",
+        "Details" : "\"It's not like I'm the only noble-born person on the ship,\" says [[TGT_MW,{TGT_MW.Callsign}]], slumping low in your guest chair. \"I mean, there's you. Why can't [[SCN_MW,{SCN_MW.Callsign}]] harass you about their stupid idea?\" Apparently when {TGT_MW.Callsign} asked to speak to you privately about something 'Darius wouldn't understand', it was about the trials and tribulations of being nobility.\r\n\r\n\"Well, what is {SCN_MW.Callsign}'s idea?\" you ask.\r\n\r\n\"I don't know. Something about cooling systems. {SCN_MW.Subj_C} {TGT_MW.Gender?NonBinary:want|Default:wants} me to use my 'connections' to get the idea to people who can implement it. And {SCN_MW.Subj} {TGT_MW.Gender?NonBinary:don't|Default:doesn't} believe me when I say that my birth doesn't automatically open doors like that. And even if it did, I can't waste it on bullshit.\" {TGT_MW.Callsign} gives you a plaintive look, clearly hoping for advice, or at least sympathy.",
+        "Icon" : "uixTxrSpot_CommandersQuarters.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 40,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "Tags/PilotTags",
+            "items" : [
+                "pilot_noble"
+            ]
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "",
+            "items" : []
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : "0"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [],
+    "AdditionalObjects" : [
+        {
+            "Scope" : "SecondaryMechWarrior",
+            "Requirements" : {
+                "Scope" : "SecondaryMechWarrior",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "Tags/PilotTags",
+                    "items" : [
+                        "pilot_tech"
+                    ]
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "Tags/PilotTags",
+                    "items" : [
+                        "pilot_noble"
+                    ]
+                },
+                "RequirementComparisons" : [
+                    {
+                        "obj" : "Injuries",
+                        "op" : "Equal",
+                        "val" : 0,
+                        "valueConstant" : "0"
+                    }
+                ]
+            }
+        }
+    ],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Sympathize with {TGT_MW.Callsign}, but don't get involved.",
+                "Details" : "na",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "sympathy",
+                        "Details" : "You chat with [[TGT_MW,{TGT_MW.Callsign}]] for a while, emphasizing that this kind of situation is bound to come up anytime you mingle freely with the lower classes. Dealing with it gracefully is a duty\u2026 but it's okay to vent in private. Occasionally.",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : []
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Tell {TGT_MW.OBJ} to send {SCN_MW.Callsign} to you.",
+                "Details" : "na",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "project",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] looks relieved to pass along the burden to you, and later that afternoon [[SCN_MW,{SCN_MW.Callsign}]] shows up at your door.\r\n\r\nYou scan the roughly written idea and can immediately see that {SCN_MW.Subj} may actually be on to something. You tell {SCN_MW.Callsign} to work it up into a full spec and you'll arrange a follow-up meeting with Chief Virtanen to review it in more detail.",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "event_mw_nobleBonds_project"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_low"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "no project",
+                        "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] looks relieved to pass along the burden to you, and later that afternoon [[SCN_MW,{SCN_MW.Callsign}]] shows up at your door.\r\n\r\nYou scan the roughly written idea and can immediately see that {SCN_MW.Subj} is wasting your time. You tell {SCN_MW.Callsign} to focus {SCN_MW.Det} energy on being a better MechWarrior and leave the engineering to Chief Virtanen.",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "event_mw_nobleBonds_project"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_low"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Tell {TGT_MW.OBJ} to deal with it {TGT_MW.REFL}.",
+                "Details" : "na",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "high spirits",
+                        "Details" : "\"Oh, come on, [[TGT_MW,{TGT_MW.Callsign}]]. Aren't you using your 'connections' right now? If you can't find a way to handle this, I'd rather you pass it on to your own relatives than me. I have work to do.\"\r\n\r\n{TGT_MW.Callsign} flushes. \"Commander, I\u2026 you're right. I'll deal with it.\"\r\n\r\nLater, {TGT_MW.Callsign} jubilantly follows up with you. \"Commander, I passed along the cooling system improvement idea to my cousin, and she says it's quite promising. I never would have expected it of somebody like [[SCN_MW,{SCN_MW.Callsign}]]!\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_low"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_1",
+                        "Name" : "low spirits",
+                        "Details" : "\"Oh, come on, [[TGT_MW,{TGT_MW.Callsign}]]. Aren't you using your 'connections' right now? If you can't find a way to handle this, I'd rather you pass it on to your own relatives than me. I have work to do.\"\r\n\r\n{TGT_MW.Callsign} flushes. \"Commander, I\u2026 you're right. I'm sorry. I should have known better than to expect you to be sympathetic.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_low"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_morale_high"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL"
+}

@@ -7,9 +7,9 @@
         ],
         "BonusDescriptions": {
             "Bonuses": [
-                "UAV: 1",
-                "Sensors: 5%",
-                "Sight: 5%"
+                "UAV: 250",
+				"UAVCD: 3",
+				"UAVH: 5"
             ]
         },
         "InventorySorter": {
@@ -34,7 +34,7 @@
     "BonusValueA": "+1 Defense.",
     "BonusValueB": "+1 Missile Defense.",
     "ComponentType": "Upgrade",
-    "ComponentSubType": "NotSet",
+    "ComponentSubType": "Prototype_ElectronicWarfare",
     "PrefabIdentifier": "",
     "BattleValue": 0,
     "InventorySize": 1,
@@ -43,63 +43,30 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
+	{
+            "targetingData" : {
+                "effectTriggerType" : "OnActivation",
+                "effectTargetType" : "EnemiesWithinRange",
+				"alsoTargetsCreator" : true,
+                "forceVisRebuild" : true,
             },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "AdvZoom-Spotting_Gain",
-                "Name": "SPOTTING DISTANCE INCREASED",
-                "Details": "Increases spotting distance.",
-                "Icon": "uixSvgIcon_equipment_Cockpit"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "operation": "Float_Multiply",
-                "statName": "SensorDistanceAbsolute",
-                "modValue": "1.05",
-                "modType": "System.Single"
-            }
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "AdvZoom-Spotting_Gain",
-                "Name": "SPOTTING DISTANCE INCREASED",
-                "Details": "Increases spotting distance.",
-                "Icon": "uixSvgIcon_equipment_Cockpit"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "SpotterDistanceAbsolute",
-                "operation": "Float_Multiply",
-                "modValue": "1.05",
-                "modType": "System.Single"
-            }
-        }
+			"effectType" : "ActiveAbility",
+			"Description" :
+			{
+				"Id" : "UAV_Ping",
+				"Name" : "UAV PING",
+				"Details" : "Activated ability (uses Firing action). Performs a Sensor Lock against all enemies within its radius, as indicated by the spinning gold ring. Will go into cooldown state after use.",
+				"Icon" : "uixSvgIcon_action_sensorlock"
+			},
+			"activeAbilityEffectData" : 
+			{
+				"abilityName" : "AbilityDef_UAV_Ping",
+			},
+		}
     ],
     "ComponentTags": {
         "items": [
-            "component_type_stock",
-            "lv-probe-boost_m1"
+            "component_type_stock"
         ],
         "tagSetSourceFile": ""
     }
