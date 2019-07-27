@@ -26,6 +26,8 @@ AI related mod settings
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
 		"ActivatableComponent":{
 			"ButtonName":"MASC",  - string used in activation/deactivation dialog button. Keep as sort as possible. 
+      "activateVFXOutOfLOSHide":true, - if true active component's VFX will be shown only if unit is visible to player (default false)
+      "presistantVFXOutOfLOSHide":true, - if true static component's VFX will be shown only if unit is visible to player (default false)
 			"FailFlatChance":0.3, - chance of fail on cold activation. 
 			"FailRoundsStart":1, - round since fail checks will be perfomed
 			"FailChancePerTurn":0.5, - value which added to fail chance every round of activity.
@@ -63,7 +65,7 @@ AI related mod settings
 												fail check is not performed on activation of component activated by heat, 
 												but fail check after each move is still performed if crit chance is grater than zero
 			"AutoActivateOnOverheatLevel": 0.8, same as AutoActivateOnHeat but instead of Heat level used persentage of Overheat
-			"AutoDeactivateOnOverheatLevel": 0.8, same as AutoDeactivateOnHeat but instead of Heat level used persentage of Overheat
+			"AutoDeactivateOverheatLevel": 0.8, same as AutoDeactivateOnHeat but instead of Heat level used persentage of Overheat
 			"ActivationMessage": "ON", - string showing in activation floatie message along with component UI name
 			"DeactivationMessage": "OFF", - string showing in deactivation floatie message along with component UI name
 			"ActivationIsBuff": "true", - if true component activation floatie message will have buff icon, deactivation - debuff,
