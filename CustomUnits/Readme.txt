@@ -86,6 +86,9 @@ VehicleChassis/Chassis
 					"scale":   {"x":1,"y":1,"z":1},
 					"rotation":{"x":0, "y":0, "z":0}
 				},
+        "RequiredUpgrades":["Gear_Actuator_Coventry_Alpha"], - list of updrades required for this component to spawn. If list empty or omitted part will spawn always. 
+                                                                If at least one component from list present, part will spawn.
+                                                                For meches only MechChassisLocation checked. For vehicles all vehicle checked. 
         "VehicleChassisLocation":"Front",               - attach location for vehicles
         "MechChassisLocation":"RightArm",               - attach location for meches
                                                         NOTE! on location or entire unit destruction all spawned objects removing from game 
@@ -133,7 +136,7 @@ VehicleChassis/Chassis
 				"prefab":"warrior_turret_x10_red",
 				"prefabTransform":{
 					"offset":  {"x":0,"y":0,"z":0},
-					"scale":   {"x":1,"y":1,"z":1},
+					"scale":   {"x":20,"y":20,"z":20},
 					"rotation":{"x":0, "y":0, "z":0}
 				},
         "VehicleChassisLocation":"Turret",       - parent attach point (only have meaning only in visual plane)
