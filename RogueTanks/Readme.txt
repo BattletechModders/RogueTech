@@ -36,6 +36,10 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+8.3.0
+
+Switched Pegasus to new model by Colobos.
+
 8.2.20
 
 Added cores to Republic, Civil War and Jihad vees,
