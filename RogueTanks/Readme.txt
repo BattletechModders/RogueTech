@@ -36,6 +36,11 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+8.3.2
+
+Added two Stygian Strike Hovertanks to Jihad folder.
+Added Regulator II hovertank,
+
 8.3.0
 
 Switched Pegasus to new model by Colobos.
