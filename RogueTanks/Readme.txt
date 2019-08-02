@@ -36,6 +36,10 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+8.3.3 - 8/2/2019
+
+Added two Prowler apc'ish things to fill APC and Predator roles.
+
 8.3.2
 
 Added two Stygian Strike Hovertanks to Jihad folder.
