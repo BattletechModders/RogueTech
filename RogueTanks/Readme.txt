@@ -36,10 +36,14 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-8.3.4 - 8/2/2019
+
+
+8.4.3 - 8/2/2019
 
 Added two Prowler apc'ish things to fill APC and Predator roles,
-Added Brutus UAC because need more things with UAC2.
+Added Brutus UAC because need more things with UAC2,
+Updated remaining folders to have cores on ICE vehicles,
+minor fixes.
 
 8.3.2
 
