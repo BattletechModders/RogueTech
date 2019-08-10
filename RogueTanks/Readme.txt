@@ -36,7 +36,9 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+8.3.
 
+Added Heavy MML carrier
 
 8.4.3 - 8/2/2019
 
