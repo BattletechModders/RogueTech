@@ -163,7 +163,11 @@ CACExtraLongRangeAccuracyMod - LongRange <= X < MaxRange
   "ShutdownHeatChance":25,
   "UseHBSMercySetting":true
 },
-"WaterHeightFix":true - needed for proper hover's over water movements
+"AdvancedCirtProcessing":true, - if false vanilla crit processing used. Eg only meches, crit to can inflicted to empty slot. 
+                                If true crit to occupied slots and to meches, vehicles and turrets. 
+                                Basics: crit chance = (1 - (current location structure)/(max location structure)) * (crit chance for weapon)
+"DestroyedComponentsCritTrap":true, - if true destroyed component can be crit trap. Eg destroyed components is involved in crit roll but crit to destroyed component do nothing. 
+"CritLocationTransfer": true, - if true if there no components suitable for crit roll in mech's location crit will be transfered arm/leg->side torso->center torso 
 }
 
 now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
@@ -180,6 +184,13 @@ CustomAmmoCategories.json
 
 Weapon definition
 new fields
+  "APDamage": 10, - damage amount always inflicted to inner structure trough armor. If armor breached this damage will be added to normal damage. Additive per mode/ammo/weapon, default 0.
+  "APCriticalChanceMultiplier": 0.5, - armor pierce crit chance multiplier. Additive per mode/ammo/weapon, default 0.
+                                  NOTE: if effective APDamage > 0 crit roll is placed anyway. But if even if APDamage = 0 and APCriticalChanceMultiplier is set per mode ammo or weapon crit will be placed on each hit without damage to inner structure (like AP autocannon ammo). So weapon can inflict AP damage + AP crit or AP crit alone.
+                                  To have APCriticalChanceMultiplier apply normally AdvancedCirtProcessing should be true.
+                                  On crit resolve if there is still armor > 0 in location crit chance will be multiplied to APCriticalChanceMultiplier (if set). 
+                                  Consider to be used to lower crit chance if trough armor. If there no armor in location crit chance will not be altered.
+                                  If AdvancedCirtProcessing is false crit will still be rolled but chance will not be altered. 
   "EvasivePipsIgnored" : 1, This value can be controlled via weapon's EvasivePipsIgnored statistic value (float)
   "ProjectileSpeedMultiplier": 0.1, - projectile speed multiplier. Less is slower. Multiplicative per weapon/mode/ammo. Works only with ImprovedBallistic true (ballistic/laser/ppc/missile)
                                      NOTE! Do not set this to low values cause if projectile flying takes too long attack sequence will be terminated by timeout.
@@ -194,7 +205,7 @@ new fields
                                                 Can be set per mode/ammo/weapon. Higher priority replace lower priority value. Mode have priority, than ammo, than weapon.
   "ColorsTable" : [ - Colors array per weapon
     {
-      "C":"red"     - Color in html notation. Note for ballistic and ppc effect color can be not fully accurate.
+      "C":"red"     - Color in html notation. Note for ballistic and ppc effect color can be not fully accurate. If color can't be parsed fallback color is magenta
       ,"I":5        - Color intensivity, used only for lasers 
     },
     {"C":"orange","I":5},{"C":"yellow","I":5},{"C":"green","I":5},{"C":"aqua","I":5},{"C":"blue","I":5},{"C":"purple","I":5}
@@ -213,6 +224,9 @@ new fields
                                  Higher priority replace lower priority value. Mode have priority, than ammo, than weapon. "None" counts as not set so will be used next value by priority.
                                  If color need to be changed it is always changed smoothly. 
                           NOTE! Changing colors avaible only for ImprovedBallistic true or IsAMS/IsAAMS (only for AMS fire sequence) and only for laser/ppc/autocannon effects.
+                          NOTE! Coloring of missile trail possible too but only for normal missiles (not AMS) and without changing while flying. Eg ColorSpeedChange for missiles trail if useless
+                          ColorChangeRule - Linear equivalent t0,  Random = RandomOnce. 
+                          NOTE! "I" value in color table is used for missile trail too (consider be around 2, but you can experiment)
   "MissileFiringIntervalMultiplier": 10, - multiplier for firing interval. Only for missile firing effect. Only works with ImprovedBallistic true. Greater is slower. 
                                      NOTE! Do not set this to very high values cause if delay will be too long  attack sequence will be terminated by timeout.
   "MissileVolleyIntervalMultiplier": 10, - multiplier for missile volley fire interval. Only for missile firing effect. Only works with ImprovedBallistic true. Greater is slower. 
@@ -244,6 +258,7 @@ new fields
   "DamageOnJamming": true/false, - if true on jamming weapon will be damaged
   "DestroyOnJamming": true/false, - if true on jamming weapon will be destroyed (need DamageOnJamming to be set true also)
   "FlatJammingChance": 1.0, - Chance of jamming weapon after fire. 1.0 is jamm always. Unjamming logic implemented as in WeaponRealizer
+                              NOTE! There FlatJammingChance can be altered via CACFlatJammingChance statistic value per actor's and/or per weapon's statistic collections
   "GunneryJammingBase": 5, - 
   "GunneryJammingMult": 0.05, - this values uses to alter flat jamming chance by pilot skills 
                                   formula effective jamming chance = FlatJammingChance + (GunneryJammingBase - Pilot Gunnery)* GunneryJammingMult
@@ -280,10 +295,8 @@ new fields
   "AOECapable" : false, - if true weapon will included in AOE damage calculations. If true set in weapon definition 
                             all shoots will have AoE effect (even for energy weapon). If true, it can't be overridden by ammo.
   "AOERange": 100, - Area of effect range. If AOECapable in weapon is set to true this value will be used. If AOECapable is true, it can't be overridden by ammo.
-  "AOEDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
-                            one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
-  "AOEHeatDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
-                            one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
+  "AOEDamage": 0 - AoE damage. 
+  "AOEHeatDamage": 0 - AoE heat. 
   "AOEInstability": 0 - instability AoE damage 
   "SpreadRange": 0, - Area of projectiles spread effect. If > 0 projectiles will include in spread calculations. Per weapon, ammo, mode values are additive.
                          if used for missiles, and target have AMS it will fire no matter if it is not advanced and target is not primary.
@@ -294,7 +307,7 @@ new fields
   "HasShells": true/false, if defined determinate has shots shrapnel effect or not. If defined can't be overriden by ammo or mode. 
                             Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
                             Damage per shell - full damage per projectile / ProjectilesPerShot
-                            Only for missiles, ballistic and gauss effects. Should not be used with AoE.
+                            Only for missiles, ballistic and gauss effects.
 							NOTE! If ImprovedBallistic is false HasShells considered as false too no matter real value. 
   "ShellsRadius": 90, determines if shells will have spreading. Works same way as SpreadRange. Per weapon value will be used if HasShells is true for this weapon.
   "MinShellsDistance": 30, Minimum distance missile have to fly before explode. Min value 30.
@@ -353,6 +366,13 @@ new fields
 	[{
 		"Id": "x4",  - Must be unique per weapon
 		"UIName": "x4", - This string will be displayed near weapon name
+    "APDamage": 10, - damage amount always inflicted to inner structure trough armor. If armor breached this damage will be added to normal damage. Additive per mode/ammo/weapon, default 0.
+    "APCriticalChanceMultiplier": 0.5, - armor pierce crit chance multiplier. Additive per mode/ammo/weapon, default 0.
+                                    NOTE: if effective APDamage > 0 crit roll is placed anyway. But if even if APDamage = 0 and APCriticalChanceMultiplier is set per mode ammo or weapon crit will be placed on each hit without damage to inner structure (like AP autocannon ammo). So weapon can inflict AP damage + AP crit or AP crit alone.
+                                    To have APCriticalChanceMultiplier apply normally AdvancedCirtProcessing should be true.
+                                    On crit resolve if there is still armor > 0 in location crit chance will be multiplied to APCriticalChanceMultiplier (if set). 
+                                    Consider to be used to lower crit chance if trough armor. If there no armor in location crit chance will not be altered.
+                                    If AdvancedCirtProcessing is false crit will still be rolled but chance will not be altered. 
     "ProjectileSpeedMultiplier": 1, - projectile speed multiplier. Less is slower. Multiplicative per weapon/mode/ammo. 
                                        NOTE! Do not set this to low values cause if projectile flying takes too long attack sequence will be terminated by timeout.
     "MissileFiringIntervalMultiplier": 10, - multiplier for firing interval. Only for missile firing effect. Greater is slower. 
@@ -517,6 +537,13 @@ Ammo definition
       
    
    "WeaponEffectID" : "WeaponEffect-Weapon_PPC", Played fire effect can be set in ammo definition, for example this LBX AC10 will fire as PPC if ECM ammo is choosed
+    "APDamage": 10, - damage amount always inflicted to inner structure trough armor. If armor breached this damage will be added to normal damage. Additive per mode/ammo/weapon, default 0.
+    "APCriticalChanceMultiplier": 0.5, - armor pierce crit chance multiplier. Additive per mode/ammo/weapon, default 0.
+                                    NOTE: if effective APDamage > 0 crit roll is placed anyway. But if even if APDamage = 0 and APCriticalChanceMultiplier is set per mode ammo or weapon crit will be placed on each hit without damage to inner structure (like AP autocannon ammo). So weapon can inflict AP damage + AP crit or AP crit alone.
+                                    To have APCriticalChanceMultiplier apply normally AdvancedCirtProcessing should be true.
+                                    On crit resolve if there is still armor > 0 in location crit chance will be multiplied to APCriticalChanceMultiplier (if set). 
+                                    Consider to be used to lower crit chance if trough armor. If there no armor in location crit chance will not be altered.
+                                    If AdvancedCirtProcessing is false crit will still be rolled but chance will not be altered. 
    "EvasivePipsIgnored" : 0, This value will be added to EvasivePipsIgnored (current weapon status effects will be used too)
     "Streak": true/false - if true only success hits will be shown, ammo decremental and heat generation will be based on success hits. 
                             Can be set for mode/ammo/weapon. Mode have priority than ammo, than weapon.
