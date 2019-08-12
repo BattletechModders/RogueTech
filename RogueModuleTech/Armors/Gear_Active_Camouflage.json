@@ -6,33 +6,33 @@
 		"Linked": {
             "Links": [
                 {
-                    "ComponentDefId": "Linked_VoidSignatureSystem",
+                    "ComponentDefId": "Linked_ActiveCamouflage",
                     "Location": "LeftTorso"
                 },
                 {
-                    "ComponentDefId": "Linked_VoidSignatureSystem",
+                    "ComponentDefId": "Linked_ActiveCamouflage",
                     "Location": "RightTorso"
                 },
 				{
-                    "ComponentDefId": "Linked_VoidSignatureSystem",
+                    "ComponentDefId": "Linked_ActiveCamouflage",
                     "Location": "LeftArm"
                 },
                 {
-                    "ComponentDefId": "Linked_VoidSignatureSystem",
+                    "ComponentDefId": "Linked_ActiveCamouflage",
                     "Location": "RightArm"
                 },
 				{
-                    "ComponentDefId": "Linked_VoidSignatureSystem",
+                    "ComponentDefId": "Linked_ActiveCamouflage",
                     "Location": "LeftLeg"
                 },
                 {
-                    "ComponentDefId": "Linked_VoidSignatureSystem",
+                    "ComponentDefId": "Linked_ActiveCamouflage",
                     "Location": "RightLeg"
                 }
             ]
         },
 		"CriticalEffects" : {
-                    "LinkedStatisticName" : "Void Signature System"
+                    "LinkedStatisticName" : "Active Camouflage"
                 },
         "WorkOrderCosts": {
             "Install": {
@@ -40,57 +40,53 @@
                 "CBillCost": "1100 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]] / 20"
             }
         },
-        "Category": [{
-            "CategoryID": "Armor"
-        },
+        "Category": [
 		{
-                "CategoryID": "MimeticSystem"
+                "CategoryID": "MimeticSystemAdd"
             }],
         "ArmorRepair": {
-            "ArmorTPCost": 1.4,
-            "ArmorCBCost": 1.4
+            "ArmorTPCost": 1.15,
+            "ArmorCBCost": 1.2
         },
         "Flags": {
             "flags": [
                 "not_broken"
             ]
         },
-		"ErrorMessage": "Stealth Armor requires a ECM!",
         "BonusDescriptions": {
             "Bonuses": [
 	"Mimetic",
-				"MimeticStealth: 20%",
-				"MimeticCharges: 6",
-				"MimeticDecay: 7",
+				"MimeticStealth: 30%",
+				"MimeticCharges: 4",
+				"MimeticDecay: 3",
                 "Reserved: 6",
-                "Visibility: -70%",
-                "Signature: -15%",
+                "Visibility: -40%",
                 "HeatGenerated: +10%",
-                "HeatPerTurn: +10",
+                "HeatPerTurn: +5",
                 "ReqECM",
-                "ArmorTPCost: 40%",
-                "ArmorCBCost: 40%"
+                "ArmorTPCost: 15%",
+                "ArmorCBCost: 20%"
             ]
         },
         "InventorySorter": {
             "SortKey": "00009"
         },
 		"ActivatableComponent": {
-      "ButtonName": "Stealth",
+      "ButtonName": "Camouflage",
 	  "ActiveByDefault": true,
 	  "ActivationIsBuff": true,
       "CanNotBeActivatedManualy": false,
       "NoUniqueCheck": true,
-	  "ActivationMessage": "Stealth Activated",
-	  "DeactivationMessage": "Stealth Deactivated",
+	  "ActivationMessage": "Camouflage Activated",
+	  "DeactivationMessage": "Camouflage Deactivated",
 	  "Linkage":{
         "OnActivate":{  
-          "Activate":["Damper"],
+          "Activate":[],
           "Deactivate":["ECCM"]
         },
         "OnDeactivate":{
-          "Activate":["ECCM"],
-          "Deactivate":["Damper"]
+          "Activate":[],
+          "Deactivate":[]
         },
       },
       "statusEffects": [
@@ -121,37 +117,11 @@
             {
                 "statName" : "LV_MIMETIC",
                 "operation" : "Set",
-                "modValue": "0.2_6_7",
+                "modValue": "0.3_4_3",
                 "modType": "System.String"
             },
             "nature" : "Buff"
         },  
-		{
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-				"showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "Stealth_Signature_Decrease_Stealth",
-                "Name": "Stealth Signature Decrease",
-                "Details": "Signature Statuseffect.",
-                "Icon": "uixSvgIcon_equipment_TTS"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "SensorSignatureModifier",
-                "operation": "Float_Multiply",
-                "modValue": "0.85",
-                "modType": "System.Single"
-            }
-        },
 		{
             "durationData": {
                 "duration": -1,
@@ -174,7 +144,7 @@
             "statisticData": {
                 "statName": "SpottingVisibilityMultiplier",
                 "operation": "Float_Multiply",
-                "modValue": "0.3",
+                "modValue": "0.6",
                 "modType": "System.Single"
             }
         },
@@ -227,7 +197,7 @@
             "statisticData": {
                 "statName": "HeatSinkCapacity",
                 "operation": "Int_Add",
-                "modValue": "-10",
+                "modValue": "-5",
                 "modType": "System.Int32"
             }
         }
@@ -240,15 +210,15 @@
     "RelativeModifier": 0,
     "AbsoluteModifier": 0,
     "Description": {
-        "Cost": 1500000,
+        "Cost": 1000000,
         "Rarity": 8,
         "Purchasable": true,
         "Manufacturer": "Prototype",
-        "Model": "Void Signature System",
-        "UIName": "Void System",
-        "Id": "Gear_armorslots_VoidSignatureSystem",
-        "Name": "Void Signature System",
-        "Details": "The Void Signature System is a hybrid evolution of Star League era systems such as the Chameleon Light Polarization Shield and the Null Signature System. Essentially a scaled up version of the Battle Suits Mimetic Armor, the Void Signature System shields a BattleMech's presence from both visual and electronic detection with help from a paired ECM suite.  Reserves 1 slot in every Location except the Head and requires an ECM.",
+        "Model": "Active Camouflage System",
+        "UIName": "Active Camouflage",
+        "Id": "Gear_Active_Camouflage",
+        "Name": "Active Camouflage System",
+        "Details": "Active Camouflage Systems can be added to a existing Stealth Armour giving it Mimetic capabilities. Reserves 1 slot in every Location except the Head and requires a Stealth Armour.",
         "Icon": "uixSvgIcon_equipment_TTS"
     },
     "BonusValueA": "Bulwark",
