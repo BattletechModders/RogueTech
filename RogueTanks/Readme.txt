@@ -36,11 +36,12 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-8.4.9
+8.4.10
 
 Added Heavy MML carrier
 Added three Svandovit Clan hover IFV.
 Switched JES-I to svandovit model
+Added two Clan Pegasus,
 Created Infantry Compartment item for APCs
 
 8.4.3 - 8/2/2019

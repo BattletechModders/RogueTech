@@ -3,6 +3,13 @@ this mod allows you next things
 2. Changing chassiss terrain interactions
 3. Forbids certain meches/vehisles to spawn on certain biomes
 
+main settings in mod.json
+    "fixWaterHeight":true, - whether or not underwater terrain height should be fixed. If false hovers will not be able to move over water/deep water surface
+    "maxWaterSteepness":30, - max underwater terrain steepness - if underwater terrain cell will have steepness grater than this value it will be fixed to 0 and cell will be marked as deep water
+                              this needed for two things - hovers should not be affected by water cell steepness and not hovers should not be able to pass through this cell
+    "waterFlatDepth":2, - if underwater cell have depth grater than this value x2 it will be lifted up.
+    "deepWaterDepth":5  - if underwater cell have depth grater than this it will be marked as deep water. (Note: 5 it is greater than almost game's vehicle height)
+
 DesignMask definition
 new section 
 	"Custom":{
