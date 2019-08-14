@@ -36,6 +36,10 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+8.5.0 - 8/13/2019
+
+Added full set of Schiltron tanks Prime through F.
+
 8.4.10
 
 Added Heavy MML carrier
