@@ -187,6 +187,17 @@ if set as true all AP effects (damage and crits) will not affect unit.
 "CritLocationTransfer": true, - if true if there no components suitable for crit roll in mech's location crit will be transfered arm/leg->side torso->center torso 
 }
 
+
+KMiSSioNToday at 20:33
+yes. For example mech have 100 armor from 200 and full structure. Min crit chance 0.1. Weapon have APArmorShardsMod = 0.5 and APMaxArmorThickness = 150. APCritChance = 0.5
+shard mod = 1 + (1 - 100/200) = 1.5 
+thickness mod = 1 - 100/150 = 0.33333(3)
+overall chance  = 0.1 (base minimal) * 1.5 (shards) * 0.33333 (thickness) * 0.5 (AP chance) = 0.025
+while armor become lower both shard mod and thickness mod will rise
+ 
+LadyAlektoToday at 20:35
+so thickness defines the strength something can easily punch through, while shards defines how likely the hit causes spall to cause damage
+
 now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
 CustomAmmoCategories.json
 [

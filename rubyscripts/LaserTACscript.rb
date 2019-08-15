@@ -12,7 +12,9 @@ Dir.glob('*Laser*.json').each do |filename|
   parsed = JSON.parse(original_content)
   puts parsed
   puts "-------"
-  parsed["APCriticalChanceMultiplier"] = ((parsed["Damage"] * 0.1) / 90).ceil(5) 
+   parsed["APCriticalChanceMultiplier"] = ((parsed["Damage"] * 0.1) / 50).ceil(3) 
+  parsed["APMaxArmorThickness"] = (parsed["Damage"] * 1.2 ).ceil(3) 
+  parsed["APArmorShardsMod"] = 0.1 
   puts parsed
   puts "-------"
   File.open(filename, 'w') { |file| file.write(JSON.pretty_generate(parsed)) }
