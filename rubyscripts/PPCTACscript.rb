@@ -12,7 +12,9 @@ Dir.glob('*PPC*.json').each do |filename|
   parsed = JSON.parse(original_content)
   puts parsed
   puts "-------"
-  parsed["APCriticalChanceMultiplier"] = ((parsed["Damage"] * 0.15) / 80).ceil(5) 
+   parsed["APCriticalChanceMultiplier"] = ((parsed["Damage"] * 0.1) / 40).ceil(3) 
+  parsed["APMaxArmorThickness"] = (parsed["Damage"] * 1.3 ).ceil(3) 
+  parsed["APArmorShardsMod"] = 0.2
   puts parsed
   puts "-------"
   File.open(filename, 'w') { |file| file.write(JSON.pretty_generate(parsed)) }

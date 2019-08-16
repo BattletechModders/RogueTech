@@ -12,7 +12,9 @@ Dir.glob('*MRM*.json').each do |filename|
   parsed = JSON.parse(original_content)
   puts parsed
   puts "-------"
-  parsed["APCriticalChanceMultiplier"] = ((parsed["Damage"] * 0.15) / 55).ceil(5) 
+  parsed["APCriticalChanceMultiplier"] = ((parsed["Damage"] * 0.15) / 30).ceil(3) 
+  parsed["APMaxArmorThickness"] = (parsed["Damage"] * 5 ).ceil(3) 
+  parsed["APArmorShardsMod"] = 0.4
   puts parsed
   puts "-------"
   File.open(filename, 'w') { |file| file.write(JSON.pretty_generate(parsed)) }

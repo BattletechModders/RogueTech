@@ -12,7 +12,9 @@ Dir.glob('*Rocket*.json').each do |filename|
   parsed = JSON.parse(original_content)
   puts parsed
   puts "-------"
-  parsed["APCriticalChanceMultiplier"] = ((parsed["Damage"] * 0.1) / 70).ceil(5) 
+   parsed["APCriticalChanceMultiplier"] = ((parsed["Damage"] * 0.1) / 35).ceil(3) 
+  parsed["APMaxArmorThickness"] = (parsed["Damage"] * 7 ).ceil(3) 
+  parsed["APArmorShardsMod"] = 0.3
   puts parsed
   puts "-------"
   File.open(filename, 'w') { |file| file.write(JSON.pretty_generate(parsed)) }

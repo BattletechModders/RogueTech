@@ -23,6 +23,9 @@ CACMediumRangeAccuracyMod - ShortRange <= X < MediumRange
 CACLongRangeAccuracyMod - MediumRange <= X < LongRange
 CACExtraLongRangeAccuracyMod - LongRange <= X < MaxRange
 
+NOTE: You can influence AP infliction via CACAPProtection unit's staticstic value
+if set as true all AP effects (damage and crits) will not affect unit.
+
 {
 "debugLog":true, - enable debug log 
 "modHTTPServer":false, - enable debug http server
@@ -165,10 +168,35 @@ CACExtraLongRangeAccuracyMod - LongRange <= X < MaxRange
 },
 "AdvancedCirtProcessing":true, - if false vanilla crit processing used. Eg only meches, crit to can inflicted to empty slot. 
                                 If true crit to occupied slots and to meches, vehicles and turrets. 
-                                Basics: crit chance = (1 - (current location structure)/(max location structure)) * (crit chance for weapon)
+"APMinCritChance": 0.1, - Minimal crit chance on AP processing.
+                          Basics: 
+                            advanced crit calculations:
+                              normal crit: crit chance = Max(Constants.ResolutionConstants.MinCritChance, (1 - <current structure>/<max structure>))
+                              so minimal value is Constants.ResolutionConstants.MinCritChance maximum 1 (if structure near zero). If random roll less than this value crit success if grater - no crit
+                              AP crit:
+                                 basic crit chance = Max(APMinCritChance, (1 - <current structure>/<max structure>))
+                                 armor shards mod = 1 + (1 - <current armor>/<max armor>)*weapon.APArmorShardsMod. 
+                                 armor thickness mod = (1f - armor / weapon.APMaxArmorThickness) if weapon.APMaxArmorThickness = 0 armor thickness mod is 1.0. 
+                                 if armor greater weapon.APMaxArmorThickness and weapon.APMaxArmorThickness grater than zero armor thickness mod = 0 (mean no AP crit)
+                                 weapon ap crit mod = weapon.APCriticalChanceMultiplier (if weapon.APCriticalChanceMultiplier = 0, weapon ap crit mod set to 1.0)
+                                 crit chance =  basic crit chance * armor shards mod * armor thickness mod * weapon ap crit mod
+                                 Main idea: weapon can have two mechanics of armor piece - solid core and cumulative jet
+                                    first one cause shards from previously damaged armor hit components increasing crit chance
+                                    second one have limited cumulative jet length and can't penetrate armor if too thick 
 "DestroyedComponentsCritTrap":true, - if true destroyed component can be crit trap. Eg destroyed components is involved in crit roll but crit to destroyed component do nothing. 
 "CritLocationTransfer": true, - if true if there no components suitable for crit roll in mech's location crit will be transfered arm/leg->side torso->center torso 
 }
+
+
+KMiSSioNToday at 20:33
+yes. For example mech have 100 armor from 200 and full structure. Min crit chance 0.1. Weapon have APArmorShardsMod = 0.5 and APMaxArmorThickness = 150. APCritChance = 0.5
+shard mod = 1 + (1 - 100/200) = 1.5 
+thickness mod = 1 - 100/150 = 0.33333(3)
+overall chance  = 0.1 (base minimal) * 1.5 (shards) * 0.33333 (thickness) * 0.5 (AP chance) = 0.025
+while armor become lower both shard mod and thickness mod will rise
+ 
+LadyAlektoToday at 20:35
+so thickness defines the strength something can easily punch through, while shards defines how likely the hit causes spall to cause damage
 
 now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
 CustomAmmoCategories.json
@@ -191,6 +219,8 @@ new fields
                                   On crit resolve if there is still armor > 0 in location crit chance will be multiplied to APCriticalChanceMultiplier (if set). 
                                   Consider to be used to lower crit chance if trough armor. If there no armor in location crit chance will not be altered.
                                   If AdvancedCirtProcessing is false crit will still be rolled but chance will not be altered. 
+  "APMaxArmorThickness": 0f, - max armor thickness for AP crits. See APMinCritChance setting notes.
+  "APArmorShardsMod": 0f, - AP crit modifier for damaged armor. See APMinCritChance setting notes.
   "EvasivePipsIgnored" : 1, This value can be controlled via weapon's EvasivePipsIgnored statistic value (float)
   "ProjectileSpeedMultiplier": 0.1, - projectile speed multiplier. Less is slower. Multiplicative per weapon/mode/ammo. Works only with ImprovedBallistic true (ballistic/laser/ppc/missile)
                                      NOTE! Do not set this to low values cause if projectile flying takes too long attack sequence will be terminated by timeout.

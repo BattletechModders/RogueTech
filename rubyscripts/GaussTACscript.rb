@@ -12,7 +12,9 @@ Dir.glob('*gauss*.json').each do |filename|
   parsed = JSON.parse(original_content)
   puts parsed
   puts "-------"
-  parsed["APCriticalChanceMultiplier"] = ((parsed["Damage"] * 0.25) / 55).ceil(5) 
+   parsed["APCriticalChanceMultiplier"] = ((parsed["Damage"] * 0.15) / 10).ceil(3) 
+  parsed["APMaxArmorThickness"] = (parsed["Damage"] * 3 ).ceil(3) 
+  parsed["APArmorShardsMod"] = 0.5
   puts parsed
   puts "-------"
   File.open(filename, 'w') { |file| file.write(JSON.pretty_generate(parsed)) }
