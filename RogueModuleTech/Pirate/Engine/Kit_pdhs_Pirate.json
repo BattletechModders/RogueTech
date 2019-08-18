@@ -1,0 +1,371 @@
+{
+    "Custom": {
+	"ComponentExplosion": {
+            "HeatDamage": 100,
+            "ExplosionDamage": 50,
+            "StabilityDamage": 50
+        },
+        "BonusDescriptions": {
+            "Bonuses": [
+                "CoolingSystemProtoDHS",
+				"TEHeatgen: -15%",
+                "BankMaxHeat: 15",
+                "BankThreshhold: 15",
+				"HeatPerTurn: -10",
+				"ActivateHeatLevel: 80%",
+				"DeActivateHeatLevel: 20%",
+                "ActiveHeatPerTurn: -30",
+				"ActiveTEHeatgen: -15%",
+                "ActiveBankMaxHeat: 30",
+                "ActiveBankThreshhold: 30",
+				"FailChance: 10%",
+				"FailChanceTurn: 20%",
+				"FailCritSelf",
+                "CPBoom: 100"
+            ]
+        },
+        "Cooling": {
+            "HeatSinkDefId": "Gear_HeatSink_Prototype_Double"
+        },
+        "WorkOrderCosts": {
+            "Default": {
+                "TechCost": "[[Chassis.Tonnage]] / 5",
+                "CBillCost": "10 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]] / 10"
+            },
+            "Install": {
+                "TechCost": "[[Chassis.Tonnage]] / 5",
+                "CBillCost": "10 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]] / 10"
+            }
+        },
+        "Category" : [
+          {"CategoryID": "Cooling"},
+		  {"CategoryID": "EngineHeatBlock"},
+          {"CategoryID": "EnginePart"}
+        ],
+        "InventorySorter": {
+            "SortKey": "00016"
+        },
+		"ActivatableComponent":{
+			"ButtonName":"Radical Heatsink",
+			"AutoActivateOnOverheatLevel": 0.8,
+			"AutoDeactivateOverheatLevel": 0.2,
+			"FailFlatChance": 0.1,
+			"FailRoundsStart": 2,
+			"FailChancePerTurn": 0.2,
+			"SelfCrit": true,
+			"FailPilotingBase": 5,
+			"FailPilotingMult": 0.1,
+			"ActivationMessage": "COOLANT FLUSH!",
+			"DeactivationMessage": "HEAT NOMINAL!",
+			"CanNotBeActivatedManualy": true,
+			"NoUniqueCheck": true,
+			"statusEffects": [
+				{
+            "durationData": {
+                "duration": -1,
+                "ticksOnActivations": false,
+                "useActivationsOfTarget": false,
+                "ticksOnEndOfRound": false,
+                "ticksOnMovements": false,
+                "stackLimit": -1,
+                "clearedWhenAttacked": false
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "RadicalCooling",
+						"Name": "Radical Heatsink System",
+						"Details": "Radical Heatsink System drastically improves the mechs cooling",
+						"Icon": "uixSvgIcon_action_evasivemove"
+            },
+            "statisticData": {
+                "statName": "HeatSinkCapacity",
+                "operation": "Int_Add",
+                "modValue": "30",
+                "modType": "System.Int32"
+            },
+            "nature": "Buff"
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "ticksOnActivations": false,
+                "useActivationsOfTarget": false,
+                "ticksOnEndOfRound": false,
+                "ticksOnMovements": false,
+                "stackLimit": -1,
+                "clearedWhenAttacked": false
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect-Heat_Max-PDHSKIT",
+                "Name": "Prototype DHS system",
+                "Details": "Improves cooling and Heat Threshholds.",
+                "Icon": "uixSvgIcon_equipment_HeatBank"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "MaxHeat",
+                "operation": "Int_Add",
+                "modValue": "30",
+                "modType": "System.Int32"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "ticksOnActivations": false,
+                "useActivationsOfTarget": false,
+                "ticksOnEndOfRound": false,
+                "ticksOnMovements": false,
+                "stackLimit": -1,
+                "clearedWhenAttacked": false
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect-Overheat_Threshold-PDHSKIT",
+                "Name": "Increased Overheat Level",
+                "Details": "Overheat threshold increased by 5",
+                "Icon": "uixSvgIcon_equipment_HeatBank"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "appliesEachTick": false,
+                "effectsPersistAfterDestruction": false,
+                "statName": "OverheatLevel",
+                "operation": "Int_Add",
+                "modValue": "30",
+                "modType": "System.Int32"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "ticksOnActivations": false,
+                "useActivationsOfTarget": false,
+                "ticksOnEndOfRound": false,
+                "ticksOnMovements": false,
+                "stackLimit": -1,
+                "clearedWhenAttacked": false
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect-Heat_GenReduction-PDHSKIT",
+                "Name": "HEAT GENERATION DECREASED",
+                "Details": "Heat generation reduced by 10%.",
+                "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "HeatGenerated",
+                "operation": "Float_Multiply",
+                "modValue": "0.85",
+                "modType": "System.Single",
+                "targetCollection": "Weapon"
+            }
+        }
+			]
+		},
+		"Flags": {
+            "flags": [
+                "not_broken",
+                "autorepair"
+            ]
+        },
+    },
+    "DissipationCapacity": 10,
+    "Description": {
+        "Cost": 432000,
+        "Rarity": 10,
+        "Purchasable": true,
+        "Manufacturer": "Vengeance Inc.",
+        "Model": "SupahCoolah",
+        "UIName": "Radical PDHS Kit",
+        "Id": "Kit_pdhs_Pirate",
+        "Name": "PDHS Engine Kit",
+        "Details": "Converts an SHS engine to PDHS. <b>PDHS Cooling System</b>.  The Radical Heat Sink System, increases the ability of the heat sink to flush excess heat much like Coolant Pods. Radical Heat Sinks, however, can fail through repeated use, especially if used continuously.",
+        "Icon": "uixSvgIcon_equipment_Heatsink"
+    },
+    "BonusValueA": "",
+    "BonusValueB": "",
+    "ComponentType": "HeatSink",
+    "ComponentSubType": "Heatsink",
+    "PrefabIdentifier": "",
+    "BattleValue": 0,
+    "InventorySize": 2,
+    "Tonnage": 0,
+    "AllowedLocations": "CenterTorso",
+    "DisallowedLocations": "All",
+    "CriticalComponent": false,
+    "statusEffects": [
+	{
+            "durationData": {
+                "duration": -1,
+                "ticksOnActivations": false,
+                "useActivationsOfTarget": false,
+                "ticksOnEndOfRound": false,
+                "ticksOnMovements": false,
+                "stackLimit": -1,
+                "clearedWhenAttacked": false
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect-Heat_Max-PDHSKIT",
+                "Name": "Prototype DHS system",
+                "Details": "Improves cooling and Heat Threshholds.",
+                "Icon": "uixSvgIcon_equipment_HeatBank"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "MaxHeat",
+                "operation": "Int_Add",
+                "modValue": "15",
+                "modType": "System.Int32"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "ticksOnActivations": false,
+                "useActivationsOfTarget": false,
+                "ticksOnEndOfRound": false,
+                "ticksOnMovements": false,
+                "stackLimit": -1,
+                "clearedWhenAttacked": false
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect-Overheat_Threshold-PDHSKIT",
+                "Name": "Increased Overheat Level",
+                "Details": "Overheat threshold increased by 5",
+                "Icon": "uixSvgIcon_equipment_HeatBank"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "appliesEachTick": false,
+                "effectsPersistAfterDestruction": false,
+                "statName": "OverheatLevel",
+                "operation": "Int_Add",
+                "modValue": "15",
+                "modType": "System.Int32"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "ticksOnActivations": false,
+                "useActivationsOfTarget": false,
+                "ticksOnEndOfRound": false,
+                "ticksOnMovements": false,
+                "stackLimit": -1,
+                "clearedWhenAttacked": false
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect-Heat_GenReduction-PDHSKIT",
+                "Name": "HEAT GENERATION DECREASED",
+                "Details": "Heat generation reduced by 10%.",
+                "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "HeatGenerated",
+                "operation": "Float_Multiply",
+                "modValue": "0.85",
+                "modType": "System.Single",
+                "targetCollection": "Weapon"
+            }
+        }
+	],
+    "ComponentTags": {
+        "items": [
+            "component_type_stock",
+			"cae_ai_explode",
+			"cae_ai_cool"
+        ],
+        "tagSetSourceFile": ""
+    }
+}
