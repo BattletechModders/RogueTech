@@ -554,6 +554,15 @@ new fields
 								   		  "name" - audio event name 
 										  "none" - none additional sound for this type name doesn't matter
 							 may be set per ammo, mode and weapon. Mode have priority than ammo than weapon
+  "Lock":{ - setting to lock using of this mode. 
+    "HeatLevel":{"Low":40,"High":60}, - lock by absolute heat. If current heat is less Low or greater High, mode using will be forbidden.
+    "OverheatLevel":{"Low":0.5,"High":1.0}, - lock by heat relative to Overheat. If current heat level is less Low or greater High, mode using will be forbidden.
+    "MaxheatLevel":{"Low":0.3,"High":0.5}, - lock by heat relative to maximum heat. If current heat level is less Low or greater High, mode using will be forbidden.
+                                             NOTE! If two or more lock options defined check logic will be: at first checked HeatLevel(if available) if pass 
+                                             check OverheatLevel(if available) if pass check (MaxheatLevel is available) if all available options pass mode is allowed. 
+                                             NOTE! Heat level have sense only for meches, for vehicles and turrets check is always passed. 
+                                             NOTE! If all modes fail check weapon will be disabled.
+  }
 	}]
   
   
