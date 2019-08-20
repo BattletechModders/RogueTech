@@ -212,6 +212,10 @@ CustomAmmoCategories.json
 
 Weapon definition
 new fields
+  "isHeatVariation": true, - if true heat damage will be altered using DamageVariance/DistantVariance/DistantVarianceReversed values. Per mode/ammo/weapon.
+  "isStabilityVariation": true, - if true stability damage will be altered using DamageVariance/DistantVariance/DistantVarianceReversed values. Per mode/ammo/weapon.
+  "isDamageVariation": true, - if true normal damage will be altered using DamageVariance/DistantVariance/DistantVarianceReversed values. Per mode/ammo/weapon.
+  "DamageNotDivided": false, - if true and ImprovedBallistic and BallisticDamagePerPallet are true also damage(heat and stability) will not be divided by ProjectilesPerShot.
   "APDamage": 10, - damage amount always inflicted to inner structure trough armor. If armor breached this damage will be added to normal damage. Additive per mode/ammo/weapon, default 0.
   "APCriticalChanceMultiplier": 0.5, - armor pierce crit chance multiplier. Additive per mode/ammo/weapon, default 0.
                                   NOTE: if effective APDamage > 0 crit roll is placed anyway. But if even if APDamage = 0 and APCriticalChanceMultiplier is set per mode ammo or weapon crit will be placed on each hit without damage to inner structure (like AP autocannon ammo). So weapon can inflict AP damage + AP crit or AP crit alone.
@@ -285,6 +289,9 @@ new fields
 								  if not set hit generator will be choosed by weapon type.
 								  if weapon define has tag "wr-clustered_shots", "Cluster" hit generator will be forced. 
   "DirectFireModifier" : -10.0, Accuracy modifier if weapon can strike directly
+  "DamageVariance": 20, - Simple damage variance as implemented in WeaponRealizer
+  "DistantVariance": 0.3, - Distance damage variance as implemented in WeaponRealizer
+  "DistantVarianceReversed": false, - Set is distance damage variance is reversed
   "DamageOnJamming": true/false, - if true on jamming weapon will be damaged
   "DestroyOnJamming": true/false, - if true on jamming weapon will be destroyed (need DamageOnJamming to be set true also)
   "FlatJammingChance": 1.0, - Chance of jamming weapon after fire. 1.0 is jamm always. Unjamming logic implemented as in WeaponRealizer
@@ -547,6 +554,15 @@ new fields
 								   		  "name" - audio event name 
 										  "none" - none additional sound for this type name doesn't matter
 							 may be set per ammo, mode and weapon. Mode have priority than ammo than weapon
+  "Lock":{ - setting to lock using of this mode. 
+    "HeatLevel":{"Low":40,"High":60}, - lock by absolute heat. If current heat is less Low or greater High, mode using will be forbidden.
+    "OverheatLevel":{"Low":0.5,"High":1.0}, - lock by heat relative to Overheat. If current heat level is less Low or greater High, mode using will be forbidden.
+    "MaxheatLevel":{"Low":0.3,"High":0.5}, - lock by heat relative to maximum heat. If current heat level is less Low or greater High, mode using will be forbidden.
+                                             NOTE! If two or more lock options defined check logic will be: at first checked HeatLevel(if available) if pass 
+                                             check OverheatLevel(if available) if pass check (MaxheatLevel is available) if all available options pass mode is allowed. 
+                                             NOTE! Heat level have sense only for meches, for vehicles and turrets check is always passed. 
+                                             NOTE! If all modes fail check weapon will be disabled.
+  }
 	}]
   
   

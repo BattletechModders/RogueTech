@@ -4,7 +4,10 @@
         "Category": [
            { "CategoryID": "CockpitSensors"},
 		   { "CategoryID": "Cockpit" },
-		   { "CategoryID": "CockpitFCS" }
+		   { "CategoryID": "CockpitFCS" },
+		   {
+                "CategoryID": "UAV"
+            }
         ],
 		"WorkOrderCosts": {
 			"Install": {
@@ -15,14 +18,18 @@
         "BonusDescriptions": {
             "Bonuses": [
                 "Initiative: +1",
-				"Tacticon: +2",
-				"LanceSight2: 100",
+				"Tacticon: +1",
+				"LanceSight2: 50",
 				"LanceIndirectAcc: +2",
 				"LanceResolve: 2",
 				"Health: 2",
 				"CockpitSensors: 5",
+				"UAV: 500",
+				"UAVCD: 6",
+				"UAVH: 20",
 				"IsCockpit",
-				"FCS"
+				"FCS",
+				"Sharer"
             ]
         },
             "InventorySorter" : {
@@ -57,6 +64,26 @@
     "DisallowedLocations" : "All",
     "CriticalComponent" : false,
     "statusEffects" : [
+	{
+            "targetingData" : {
+                "effectTriggerType" : "OnActivation",
+                "effectTargetType" : "EnemiesWithinRange",
+				"alsoTargetsCreator" : true,
+                "forceVisRebuild" : true
+            },
+			"effectType" : "ActiveAbility",
+			"Description" :
+			{
+				"Id" : "SpySat_Ping",
+				"Name" : "SPY SAT PING",
+				"Details" : "Activated ability (uses Firing action). Performs a Sensor Lock against all enemies within its radius, as indicated by the spinning gold ring. Will go into cooldown state after use.",
+				"Icon" : "uixSvgIcon_action_sensorlock"
+			},
+			"activeAbilityEffectData" : 
+			{
+				"abilityName" : "AbilityDef_SPYSAT_Ping"
+			}
+		},
 	{
             "durationData" : {
                 "duration": -1,
@@ -149,7 +176,7 @@
             "statisticData" : {
                 "statName" : "BaseInitiative",
                 "operation" : "Int_Add",
-                "modValue" : "-2",
+                "modValue" : "-1",
                 "modType" : "System.Int32"
             }
         },	
@@ -314,9 +341,41 @@
             "statisticData" : {
                 "statName" : "SpotterDistanceAbsolute",
                 "operation" : "Float_Add",
-                "modValue" : "100.0",
+                "modValue" : "50.0",
                 "modType" : "System.Single"
             }
+        },
+		{
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Shares_Vision",
+                "Name" : "Vision Sharing",
+                "Details" : "Shows their vision when lancemattes move",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_SHARES_VISION",
+                "operation" : "Set",
+                "modValue": "true",
+                "modType": "System.Boolean"
+            },
+            "nature" : "Buff"
         }
     ],
     "ComponentTags" : {
