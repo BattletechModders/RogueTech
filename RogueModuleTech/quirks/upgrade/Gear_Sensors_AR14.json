@@ -5,11 +5,14 @@
            { "CategoryID": "ECM"},
 		   { "CategoryID": "Probe"},
 		   { "CategoryID": "AdvECM" },
-		   { "CategoryID": "C3" }
+		   { "CategoryID": "C3" },
+		   {
+                "CategoryID": "UAV"
+            }
         ],
         "WorkOrderCosts": {
             "Install": {
-                "TechCost": "[[Chassis.Tonnage]]/10",
+                "TechCost": "[[Chassis.Tonnage]] / 10",
                 "CBillCost": "[[Chassis.Tonnage]] * 1.1"
             }
         },
@@ -32,7 +35,10 @@
 				"Jammer: 5",
 				"JamBubble: 330",
                 "IsProbe: 5",
-                "Sharer",
+				"ProbePower: 4",
+				"UAV: 310",
+				"UAVCD: 2",
+				"UAVH: 15",
                 "CockpitEWS"
             ]
         },
@@ -61,7 +67,7 @@
     "BonusValueA": "+1 Health/Resolve.",
     "BonusValueB": "+20% Sensors/Sight",
     "ComponentType": "Upgrade",
-    "ComponentSubType": "NotSet",
+    "ComponentSubType" : "Prototype_ElectronicWarfare",
     "PrefabIdentifier": "",
     "BattleValue": 0,
     "InventorySize": 2,
@@ -70,6 +76,90 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
+	{
+            "targetingData" : {
+                "effectTriggerType" : "OnActivation",
+                "effectTargetType" : "EnemiesWithinRange",
+				"alsoTargetsCreator" : true,
+                "forceVisRebuild" : true
+            },
+			"effectType" : "ActiveAbility",
+			"Description" :
+			{
+				"Id" : "UAV_Ping",
+				"Name" : "UAV PING",
+				"Details" : "Activated ability (uses Firing action). Performs a Sensor Lock against all enemies within its radius, as indicated by the spinning gold ring. Will go into cooldown state after use.",
+				"Icon" : "uixSvgIcon_action_sensorlock"
+			},
+			"activeAbilityEffectData" : 
+			{
+				"abilityName" : "AbilityDef_EWS_Ping"
+			}
+		},
+	{
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Probe_Carrier",
+                "Name" : "Active Probe (Passive)",
+                "Details" : "Reduces effectiveness of stealthed and ECM shielded units",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_Probe_Carrier",
+                "operation": "Int_Add",
+                "modValue": "5",
+                "modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        },		
+		   {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Advanced_Sensors",
+                "Name" : "Advanced Sensors",
+                "Details" : "Provides detailed information on enemy units",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_Advanced_Sensors",
+                "operation": "Int_Add",
+                "modValue": "4",
+                "modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        },
 	{
             "durationData" : {
                 "duration": -1,
@@ -95,7 +185,7 @@
             },
             "statisticData" : 
             {
-				"statName" : "LV_ECM_Shield",
+				"statName" : "LV_ECM_SHIELD",
 				"operation": "Int_Add",
 				"modValue": "2",
 				"modType": "System.Int32"
@@ -128,7 +218,7 @@
             },
             "statisticData" : 
             {
-				"statName" : "LV_ECM_Jammed",
+				"statName" : "LV_ECM_JAMMED",
 				"operation": "Int_Add",
 				"modValue": "5",
 				"modType": "System.Int32"
@@ -218,9 +308,7 @@
         "items": [
 		"BLACKLISTED",
             "component_type_stock",
-            "lv-shares-sensors",
-            "lv-jammer_m5_r11",
-            "lv-probe_m5"
+            "lv-shares-sensors"
         ],
         "tagSetSourceFile": ""
     }

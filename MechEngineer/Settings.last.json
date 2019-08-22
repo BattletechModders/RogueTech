@@ -64,7 +64,7 @@
             "Gear_Gyro_HE_Optima",
             "Gear_FCS_Generic_Standard",
             "Gear_FCS_Improved",
-            "Gear_FCS_Energy",
+            "Gear_TargetingTrackingSystem_RCA_InstaTrac-VIII",
             "Gear_FCS_AdvancedTC",
             "Gear_Sensors_Generic_Standard",
             "Gear_AdvZoom",
@@ -132,18 +132,14 @@
             
         ]
     },
-    "BattleTechLoadFix" : {
-        "Enabled" : true,
-        "EnabledDescription" : "Fixes a vanilla bug by loading unused components so they get displayed in the mech lab."
-    },
     "ComponentExplosions" : {
         "Enabled" : true,
         "EnabledDescription" : "Allows each component to define destructive forces in case they explode, also implements proper CASE."
     },
     "CompressFloatieMessages" : {
-        "Enabled" : true,
+        "Enabled" : false,
         "EnabledDescription" : "Compresses similar floatie messages to a single message with a multiplier. E.g. MEDIUM LASER DESTROYED x 4",
-        "DebugDestroyedFloaties" : false
+        "DebugDestroyedFloaties" : true
     },
     "CriticalEffects" : {
         "Enabled" : true,
@@ -189,7 +185,9 @@
         "JJRoundUp" : false,
         "JJRoundUpDescription" : "The allowed number of jump jets is rounded up or down.",
         "TTWalkMultiplier" : 25,
-        "TTSprintMultiplier" : 38
+        "TTSprintMultiplier" : 38,
+        "LimitEngineCoresToTonnage" : true,
+        "IgnoreLimitEngineChassisTag" : ""
     },
     "Globals" : {
         "Enabled" : true,
@@ -262,6 +260,17 @@
                 ]
             },
             {
+                "PrefabIdentifier" : "PPC",
+                "HardpointCandidates" : [
+                    "PPC",
+                    "ac20",
+                    "ac",
+                    "lbx",
+                    "ac10",
+                    "lbx10"
+                ]
+            },
+            {
                 "PrefabIdentifier" : "AC20",
                 "HardpointCandidates" : [
                     "ac20",
@@ -271,9 +280,21 @@
                 ]
             },
             {
+                "PrefabIdentifier" : "RAC20",
+                "HardpointCandidates" : [
+                    "rac20",
+                    "ac20",
+                    "uac",
+                    "ac",
+                    "lbx",
+                    "PPC"
+                ]
+            },
+            {
                 "PrefabIdentifier" : "BFG",
                 "HardpointCandidates" : [
                     "bfg",
+                    "artillery",
                     "gauss",
                     "ac20",
                     "ac",
@@ -447,9 +468,7 @@
         "Enabled" : false,
         "EnabledDescription" : "Allows to turn off or reduce the strong and weak ghost effects of ECM, and allows to remove the ECM globe effect.",
         "Blacklisted" : [
-            "vfxPrfPrtl_ECM_loop",
-            "vfxPrfPrtl_ECM_opponent_loop",
-            "vfxPrfPrtl_ECMcarrierAura_loop"
+            
         ],
         "BlipWeak" : "Weak",
         "BlipStrong" : "Weak"
@@ -457,8 +476,18 @@
     "OverrideTonnage" : {
         "Enabled" : true,
         "EnabledDescription" : "Allows other features to override tonnage calculations.",
-        "FractionalAccountingPrecision" : null,
-        "ArmorRoundingPrecision" : null
+        "PrecisionEpsilon" : 0.0001,
+        "PrecisionEpsilonDescription" : "The maximum tonnage two values can be apart to be viewed as being the same, vanilla uses 100 grams.",
+        "MechLabMechInfoWidgetDecimalPlaces" : 3,
+        "MechLabMechInfoWidgetDecimalPlacesDescription" : "How many digits to show after the comma in the mech lab.",
+        "TonnageStandardPrecision" : 0.01,
+        "TonnageStandardPrecisionDescription" : "Set to 0.001 for kg fractional accounting on BattleMechs, only modifies half-ton rounding operations as by rule",
+        "KilogramStandardPrecision" : 0.001,
+        "KilogramStandardPrecisionDescription" : "Used for Small Support Vehicles, ProtoMechs and battlesuits.",
+        "ArmorRoundingPrecision" : 0.001,
+        "ArmorRoundingPrecisionDescription" : "If not set, default is ARMOR_PER_STEP * TONNAGE_PER_ARMOR_POINT",
+        "UnderweightWarningThreshold" : 0.1,
+        "UnderweightWarningThresholdDescription" : "How many tons a mech has to be underweight to show a warning"
     },
     "ShutdownInjuryProtection" : {
         "Enabled" : true,

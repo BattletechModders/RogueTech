@@ -9,6 +9,9 @@
             },
             {
                 "CategoryID": "AdvECM"
+            },
+			{
+                "CategoryID": "UAV"
             }
         ],
         "BonusDescriptions": {
@@ -21,10 +24,14 @@
                 "ECMBubble: 150",
                 "Jammer: 2",
                 "JamBubble: 210",
-                "IsProbe: 5",
+                "IsProbe: 3",
+				"ProbePower: 3",
 				"ECCMMode",
 				"ECCMStrength: 6",
-				"ECCMBubble: 230"
+				"ECCMBubble: 230",
+				"UAV: 360",
+				"UAVCD: 4",
+				"UAVH: 15"
             ]
         },
         "InventorySorter": {
@@ -40,14 +47,46 @@
 	  "Linkage":{
         "OnActivate":{  
           "Activate":[],
-          "Deactivate":["Stealth"]
+          "Deactivate":["Stealth", "Damper", "Camouflage"]
         },
         "OnDeactivate":{
           "Activate":[],
           "Deactivate":[]
-        },
+        }
       },
       "statusEffects": [
+	  {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "Aura",
+                "effectTargetType" : "EnemiesWithinRange",
+                "range" : 230.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : false,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "WD_ECCM_Probe",
+				"Name" : "Makes it easier for enemies to know where you are, but harder to attack",
+				"Details" : "IPSUM SUCKUM",
+				"Icon" : "uixSvgIcon_status_ECM-missileDef"
+            },
+            "statisticData" : 
+            {
+				"statName" : "LV_PROBE_PING",
+				"operation": "Int_Add",
+				"modValue": "1",
+				"modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        },
         {
             "durationData" : {
                 "duration": -1,
@@ -73,9 +112,9 @@
             },
             "statisticData" : 
             {
-				"statName" : "LV_ECM_Shield",
+				"statName" : "LV_ECM_SHIELD",
 				"operation": "Int_Add",
-				"modValue": "-6",
+				"modValue": "-5",
 				"modType": "System.Int32"
             },
             "nature" : "Buff"
@@ -129,7 +168,7 @@
                 "Icon": "uixSvgIcon_status_ECM-missileDef"
             },
             "statisticData": {
-                "statName": "LV_ECM_Shield",
+                "statName": "LV_ECM_SHIELD",
                 "operation": "Int_Add",
                 "modValue": "2",
                 "modType": "System.Int32"
@@ -160,7 +199,7 @@
                 "Icon": "uixSvgIcon_action_sensorlock"
             },
             "statisticData": {
-                "statName": "LV_ECM_Jammed",
+                "statName": "LV_ECM_JAMMED",
                 "operation": "Int_Add",
                 "modValue": "2",
                 "modType": "System.Int32"
@@ -220,7 +259,7 @@
     "BonusValueA": "+1 Accuracy and 20% Sensors|",
     "BonusValueB": "+2 Defense|-50%Signature",
     "ComponentType": "Upgrade",
-    "ComponentSubType": "NotSet",
+    "ComponentSubType" : "Prototype_ElectronicWarfare",
     "PrefabIdentifier": "",
     "BattleValue": 0,
     "InventorySize": 1,
@@ -229,6 +268,90 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
+	{
+            "targetingData" : {
+                "effectTriggerType" : "OnActivation",
+                "effectTargetType" : "EnemiesWithinRange",
+				"alsoTargetsCreator" : true,
+                "forceVisRebuild" : true
+            },
+			"effectType" : "ActiveAbility",
+			"Description" :
+			{
+				"Id" : "WDEWS_Ping",
+				"Name" : "EWS PING",
+				"Details" : "Activated ability (uses Firing action). Performs a Sensor Lock against all enemies within its radius, as indicated by the spinning gold ring. Will go into cooldown state after use.",
+				"Icon" : "uixSvgIcon_action_sensorlock"
+			},
+			"activeAbilityEffectData" : 
+			{
+				"abilityName" : "AbilityDef_WDEWS_Ping"
+			}
+		},
+	{
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Probe_Carrier",
+                "Name" : "Active Probe (Passive)",
+                "Details" : "Reduces effectiveness of stealthed and ECM shielded units",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_Probe_Carrier",
+                "operation": "Int_Add",
+                "modValue": "3",
+                "modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        },		
+		   {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Advanced_Sensors",
+                "Name" : "Advanced Sensors",
+                "Details" : "Provides detailed information on enemy units",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_Advanced_Sensors",
+                "operation": "Int_Add",
+                "modValue": "3",
+                "modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        },
         {
             "durationData": {
                 "duration": -1,
@@ -281,9 +404,7 @@
     "ComponentTags": {
         "items": [
             "component_type_stock",
-            "ElectronicCounterMeasures",
-            "lv-jammer_m4_r4",
-            "lv-probe_m5"
+            "ElectronicCounterMeasures"
         ],
         "tagSetSourceFile": ""
     }

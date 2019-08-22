@@ -50,7 +50,7 @@ KNOWN ISSUES - READ THEM!
 
 - Shops populate only after first contract on a planet- is being worked on
 
--  Flashpoints do not fully work with Vanilla Story option. There are NO PLANS to make this work properly together, story mode is a nicety, not the main concern.
+- Flashpoints do not fully work with Vanilla Story option. There are NO PLANS to make this work properly together, story mode is a nicety, not the main concern.
 
 - Sometimes there are visible health bars on remains, This is a vanilla bug and causes no real issues
 
@@ -60,34 +60,405 @@ KNOWN ISSUES - READ THEM!
 
 - a short slowdown and hang when meleed through a minefield and taking lethal damage, is being worked on
 
--  absence of burned trees on reaching limit
+- absence of burned trees on reaching limit
 
 - may crash when alt-tabbing during modtek load 
 
-- Sensor lock can cause some oddities with weapon gui but should mostly work
+- Pilot portraits staying blue after using sensor lock, known issue, cause not found yet
 
 - Negative mechparts count in salvage. Fixed, but require manual save edit. Use Saveeditor to remove negative count mechparts.
 
+- Cannot deploy during first contract = company not fully initialized = save and reload or spend xp, yet another vanilla bug
+
+- Purple ECM bubbles, shader failed to initialize, rare race condition issue, worked on
+
+- Fails to load on starting a new game, Go into skirmish lab once
+
+- Short Freeze when AI thinks really hard, being investigated
+
+- Crit Message saying destroyed when only crit
+
 =========
 
-**RogueTech Project B Pre-Alpha 12.3 "It loads..." *
+**RogueTech Project B Release Candidate 5.4 **
 
-Requires CAB 3.7.3 from nexus
-(3.7.1 + Bolla and VTOL still work for now)
+Low Vis Patch
+- Applies FogOfWar when player unit is selected, or friendly unit activates
+- FogOfWar detail now selectable; by default shows terrain that has been revealed but hides units. If ShowTerrainThroughFogOfWar=true in mod.json, area outside units immediate sight will be black.
+- Night vision effects now applied on player turn and friendly unit turn, but only during maps at night.
+
+- Changed LV_PROBE_PING; now increases sensor details in addition to decreasing stealth, mimetic, etc
+- Added LV_NIGHT_VISION; on dark maps will engage night vision effect and increase vision range to daylight standard
+- Overrides CrystalClear in some cases
+
+**RogueTech Project B Release Candidate 5.3.6 **
+
+Patch to CAC for simplevariance issues
+
+Tweak to colourcoding
+-Ammo icons coloured by projcetiles colour
+-Equipment text coloured by category
+-Weapon background coloured by category
+-Internals background coloured by category
+
+**RogueTech Project B Release Candidate 5.3.5.3 **
+
+Hotfix for Pirate Proto Kit
+
+**RogueTech Project B Release Candidate 5.3.5.2 **
+
+Hotfixing regex doing Gear_TargetingTrackingSystem_RCA_InstaTrac-VIIIPlus
+
+**RogueTech Project B Release Candidate 5.3.5.1 **
+Culled not loading def files
+
+**RogueTech Project B Release Candidate 5.3.5 **
+
+111 New Mechs
+Added more turret variants
+
+**RogueTech Project B Release Candidate 5.3.4 **
+
+Removed duplicate Energy FCS, get rid of any you have or start over
+
+MechEngineer Patch:
+Some Weapons can explode depending on Avaible Ammo
+Gauss now Automatically Power down when out of Ammo (Dont explode when empty)
+
+Colourcoded Majority of Equipment
+
+**RogueTech Project B Release Candidate 5.3.3 **
+
+Low Vis Patch
+
+- Added per-unit vision. When units move, the Fog of War will update to show only what that particular unit knows.
+- Added LV_SHARES_VISION effect. When present, the affected unit will remove the fog of war around their vision when a lance-member moves (as per above).
+
+**RogueTech Project B Release Candidate 5.3.2 **
+
+AC TAC Hotfix
+
+CAC Patch:
+-CAC: color table now can be set in ammo definition
+-CAC: weapon modes have now lock settings preventing using some modes in some situations (see readme)
+
+
+
+**RogueTech Project B Release Candidate 5.3.1 **
+
+Finished reshuffling of all ammo colour effects
+
+**RogueTech Project B Release Candidate 5.3 **
+
+Many fixes and additions
+
+Buff to Plasma and Flamer
+
+Patched LowVis
+- Attempted fixes for called shot issue where player can see details but cannot lock
+- Additional logging for edge cases releated to no lock cases
+- Some information restored to tooltips
+- Changed LV_ECM_SHIELD and LV_ECM_JAMMING to take into account negative values. Negative sources are now calculated independently of positive ones. Value will cap at 0 and will no go below.
+
+**RogueTech Project B Release Candidate 5.2 **
+
+CAC Patch
+-CAC: now "attack completely miss" audio not played if player hit only armor.
+-CAC: UI now not freezes if CombatHUD.OnAttackEnd() invoked after AttackDirector.OnAttackComplete() while attacking ground.
+-CAC: Damage variance settings now can be set in weapon definition.
+-CAC: added settings to control heat and stability variations.
+
+**RogueTech Project B Release Candidate 5.1.6 **
+Attempt fo fix weird crits
+Minor tweak to tohit calculations, reduced effect of gunnery, increased floor
+
+
+**RogueTech Project B Release Candidate 5.1.5 **
+Several fixes all over
+
+**RogueTech Project B Release Candidate 5.1.4 **
+
+CAC Patch
+1. There now two log files CAC_criticals_log.txt and CAC_main_log.txt <- fun hunting the weird crits
+2. Crit chance in this all is based on armor and structure at the hit moment
+
+**RogueTech Project B Release Candidate 5.1.3 **
+
+Ammo colour fix the third
+
+**RogueTech Project B Release Candidate 5.1.2 **
+
+Added TAC Armor modifiers to weapons
+todo: machine guns, melee
+
+LowVis Patch
+- Added AI prohibition preventing multi-attacks against stealth / mimetic protected units
+- Added AI prohibition preventing called shots against blips & low sensor info units
+
+**RogueTech Project B Release Candidate 5.1.1 **
+
+Patched SpawnProtection
+- Adds logging for braced condition. All logging at info level.
+
+Patched CAC
+- CAC: setting ColorChangeRule in mode or ammo for weapon without color table no longer cause exception.
+
+Patched IBLS
+- Fix issue where costs would overflow when there was nothing in storage.
+
+ReEnabled CAC and LowVis Logging
+
+**RogueTech Project B Release Candidate 5.1 **
+
+CAC Patch
+-CAC: now floatie "X from Y hit by AMS" should not be shown if there no AMS shoots.
+-CAC: now AP crits chance can be scaled by armor (see readme).
+-CAC: now minimal AP crit chance can be set via CAC's settings.
+
+LowVis Patch
+- Added restrictions to multi-targeting; cannot select a unit that has stealth (players only?)
+- Added restrictions to called shot; cannot select a unit that is a blip or when sensor info < SurfaceScan (players only?)
+- WIP: Apply restrictions to AI
+- Attempt to trap NRE reported in #ticket-1230 
+
+Todo: Fiture out a good math for armor penetration strengths and effects
+
+**RogueTech Project B Release Candidate 5.0.1 **
+
+Fixes and Tweak to TAC Values
+Hardened, Spall Liner and Lamellor Armors are TAC Immune
+
+**RogueTech Project B Release Candidate 5 **
+
+Minor Buff to Minefields
+-increased AoE and Chances
+
+CAC Patch:
+-AIM: trough armor criticals removed
+-CAC: added armor penetration per weapon concept (AP damage and AP crits).
+-CAC: new own crit system (see readme.txt)
+-CAC: HasShells and SpreadRange now can be used with AoE.
+-AIM: ShowMissingMargin removed (it was working wrong with 1.6+ stray)
+-CAC: own ShowMissingMargin system added (can't be switched off for now)
+-CAC: missiles trails now can be colored.
+
+TAC model redesigned to be more based on Weapons
+
+Basics: crit chance = (1 - (current location structure)/(max location structure)) * (crit chance for weapon)
+
+Gauss Receive a Bonus to TAC
+Autocannons are average
+Energy Weapons have vastly reduced TAC
+Flamers and Plasma Crit Chances made neglible, tiny buff to flamers
+
+
+**RogueTech Project B Release Candidate 4.2.2 **
+Several fixes
+Removed 2 deprecated fcs
+
+**RogueTech Project B Release Candidate 4.2.1 **
+Hotfix for Pilots above 10 with boosting cockpits
+Fix to the Raid and HGN-IIC-KP
+
+**RogueTech Project B Release Candidate 4.2 **
+
+New Pilot collection:
+RISC Pilots, using Republic Ranks, Can spawn for High Skill Pilots
++2 health and will never eject
+
+New thematic lances:
+RISC lances, compromising of combined arms RISC tech units
+
+Cockpit Rework
+Replacing many effects with skill modifiers
+
+Faction AI skill traits replaced with tweaks to pilot skills
+
+**RogueTech Project B Release Candidate 4.1 **
+
+Fixed Miscalculated Large Laser Heat
+Fixed Miscalculated Small Laser
+
+**RogueTech Project B Release Candidate 4 **
+
+Machine Gun Tweak
+-1 Dmg/Heat per weight size
+-Arrays produce only 75% heat per shot
+-Reduced Range
+-Removed Accuracy Penalty from rapid firing arrays
+-Clan mg to 0.2 0.4 0.6 weights
+
+Laser Rebalance
+-Back again to CBT Values
+-Medium Laser reduced damage (x4 CBT value)
+-Large laser greater Extreme Range
+
+LowVis Patch
+- Fixed load issue with stealth materials. Should prevent purple bubble issue.
+- Moved stealth bubble to be centered on mech + slightly ahead
+- Disabled some log spam
+- Working mimetic distortion effect
+- Fixed mimetic preview
+- Cleaned up debug logspam
+
+**RogueTech Project B Release Candidate 3 **
+
+Fix to a rare salvage bug
+
+Rework of Targeting Computer FCS and TTS
+-Modular System that can be improved with additional Pieces
+
+Your save breaks if you had a clan weapons computer
+
+**RogueTech Project B Release Candidate 2 **
+
+Requires CAB 3.8.1
+
+Removed ability to break travel contracts.
+
+Many fixes
+
+**RogueTech Project B Release Candidate 1 **
+
+NOT COMPATIBLE TO PRIOR VERSIONS!
+
+Requires CAB 3.8
+
+Lootmagnet is now non-optional
+
+Many major and minor fixes
+
+
+**RogueTech Project B Alpha 2.7 "Shiney" **
+
+Probable Proper fix for water move issues
+
+Patched Client
+-might fix the different factions on battlestart for prioritys
+
+**RogueTech Project B Alpha 2.6 "Shiney" **
+
+More work on Warstate priority contracts
+-attempt to fix wrong faction spawns
+
+Dirty fix for one water spawn issue
+
+Requires CAB 3.7.8
+
+**RogueTech Project B Alpha 2.5.1 "Shiney" **
+More tweaks to starters and faction tags
+
+**RogueTech Project B Alpha 2.5 "Shiney" **
+Patched ME and CC
+-Should fix the failing start issue
+Fixed TAG and NARC
+
+More tweaks to starters
+
+**RogueTech Project B Alpha 2.4.1 "Shiney" **
+Minor Fixes
+PPC revamp
+
+**RogueTech Project B Alpha 2.4 "Shiney" **
+Major and Minor fixes
+
+**RogueTech Project B Alpha 2.3.1 "Shiney" **
+LRM speeds fixed
+
+**RogueTech Project B Alpha 2.3 "Shiney" **
+
+Installer tweaks
+-Debuglog Optional
+-Retrainer Default On
+-Reworked Icon options
+
+Fixed some Rep-Me's
+
+LowVis
+- Track VFX startup so multiples aren't created
+- Attempted fix for shader loading issues
+- VFX only played when objects are within visual LOS
+- Reduced logging at debug
+- Displays 3d model of units instead of blip when detected by sensors; will still have the sensors arrow above them to indicate sensors only
+
+CAC: color restore point has been reconsidered. Now color restoring before puling not before pushing.
+CU: Water height detection now based on ray casting and performed "on demand" not on map loading.
+AIM: all DamageLocation method alterations now covered by try..catch blocks.
+
+**RogueTech Project B Alpha 2.2 "Shiney" **
+Minor fixes and tweaks
+
+**RogueTech Project B Alpha 2.1 "Shiney" **
+A fixed to merged davion starters
+More colours
+
+**RogueTech Project B Alpha 2 "Shiney" **
+Patches to LowVis
+NARC and TAG effects added and reworked
+Sensor lock tweaked
+-Counters Stealth and ECM effects
+-Increasing Targets Visual and Sensor signatures for 3 turns
+Shooting effect reworked
+-Increases Attackers Visual and Sensor signatures for 1 turn
+
+Coloured Weapons now working correctly
+-Ongoing effort to create visual distinction between all weapons
+
+**RogueTech Project B Alpha 1.5 "Shiney" **
+First pass at weapon recolour and presentation rework
+
+
+**RogueTech Project B Alpha 1.4.2 "A New Age" **
+Updated CAC
+-Possible fix for MC out of Bounds NRE
+
+**RogueTech Project B Alpha 1.4.1 "A New Age" **
+Fixed Several Typos
+Fixed additonal starter by submodule
+
+**RogueTech Project B Alpha 1.4 "A New Age" **
+
+Requires CAB 3.7.6 from nexus
+Disabled blip and bundle fix from performance fixer
+many minor fixes
+Disabled some excess logging for extra performance
+Removed Vanilla Enabler/Offline Mode
+
+**RogueTech Project B Alpha 1.3 "A New Age" **
+
+Requires CAB 3.7.5 from nexus
 
 Career mode can be started now and new randomstart is possible
 Difficulty menu allows to select friendly fire option
 
-Mod loads so far......
-
 Savefiles have been moved to "Battletech\RogueTechSaves"
 -this provides easier managing of saves between rt and unmodded
 
-LowVis alpha is back
+LowVis Functioning
 ECM and Stealth are implemented
-Sensor still WIP
+Probes are working
+Zoom types and narc/tag handle with care
+
+Known bugs:
+failing to load stealth material
 
 Friendly Fire can be toggled in the difficulty Menu
+
+Added MechSpin
+-spin your mechs in your mechbay
+
+Attack directions arcs visibility can now be toggled via ctrl+T hotkey.
+
+Items that may Fail will now show a tooltip when active
+
+Some Contracts will be gated behind conditions like days or beaten other
+
+Pilot Quirks and Fatigue now Core modules
+Quirks Updated and rebalanced
+-will show their exact effects
+
+Fractional Accounting
+Items and Armors now round more precisely to a tenth of a tonnage
 
 VTOLS!
 Completly new unit Type!
@@ -123,7 +494,6 @@ Flashpoint for the vanilla story as told by Duncan Fisher
 Added options to choose Era's
 
 Removed NAOP's pack
--things may reappear less op
 
 Mines Deal half of their Damage as an AoE Effect
 Mines Deal half their Damage as Stability

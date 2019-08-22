@@ -1,21 +1,27 @@
 {
     "Custom": {
-        "Category": [{
+         "Category": [
+		{
+            "CategoryID": "TargetingComputer"
+        },
+		{
             "CategoryID": "CockpitFCS"
-        }],
+        }
+		],
         "WorkOrderCosts": {
             "Install": {
-                "TechCost": "[[Chassis.Tonnage]]/15",
+                "TechCost": "[[Chassis.Tonnage]] / 15",
                 "CBillCost": "[[Chassis.Tonnage]] * 1.1"
             }
         },
         "BonusDescriptions": {
             "Bonuses": [
                 "Breaching",
-                "Accuracy: +2",
-                "Recoil: +2",
-                "TEHeatgen: +15%",
-                "FCS"
+                "Accuracy: +1",
+				"EvasionIgnore: +1",
+                "Recoil: +1",
+                "TEHeatgen: +10%",
+                "TCFCS"
             ]
         },
         "InventorySorter": {
@@ -49,6 +55,29 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
+	{
+            "durationData": {
+                "duration": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator"
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "TCRecoil",
+                "Name": "Improved Called Shot",
+                "Details": "Called Shots twice as reliable",
+                "Icon": "uixSvgIcon_ability_mastertactician"
+            },
+            "statisticData": {
+                "statName": "EvasivePipsIgnored",
+                "operation": "Float_Add",
+                "modValue": "1.0",
+                "modType": "System.Single",
+            "targetCollection": "Weapon"
+            }
+        },
         {
             "durationData": {
                 "duration": -1
@@ -79,15 +108,9 @@
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
                 "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
                 "showInTargetPreview": false,
-                "showInStatusPanel": true
+                "showInStatusPanel": false
             },
             "effectType": "StatisticEffect",
             "Description": {
@@ -98,13 +121,11 @@
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
                 "statName": "AccuracyModifier",
                 "operation": "Float_Add",
-                "modValue": "-2.0",
+                "modValue": "-1.0",
                 "modType": "System.Single",
-                "targetCollection": "Weapon",
+                "targetCollection": "Weapon"
             }
         },
         {
@@ -125,7 +146,7 @@
             "statisticData": {
                 "statName": "RefireModifier",
                 "operation": "Int_Add",
-                "modValue": "2",
+                "modValue": "1",
                 "modType": "System.Int32",
                 "targetCollection": "Weapon"
             }
@@ -133,22 +154,11 @@
         {
             "durationData": {
                 "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": 1,
-                "clearedWhenAttacked": false
+                "stackLimit": 1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
                 "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
                 "showInTargetPreview": false,
                 "showInStatusPanel": false
             },
@@ -161,31 +171,18 @@
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
                 "statName": "HeatGenerated",
                 "operation": "Float_Multiply",
-                "modValue": "1.15",
+                "modValue": "1.1",
                 "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "Weapon",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+                "targetCollection": "Weapon"
+            }
         }
     ],
     "ComponentTags": {
         "items": [
             "component_type_variant",
-            "component_type_variant1"
+			"TargetingComputer"
         ],
         "tagSetSourceFile": ""
     }

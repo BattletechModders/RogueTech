@@ -11,6 +11,7 @@ WARNING! Shipped versions of AIM and WR can't be loaded by ModTek and can't be u
 click on right side of HUD weapon slot to switch mode (near hit chance)
 click on center of HUD weapon slot to switch ammo (near ammo count)
 ctrl+left click on weapon slot will eject current ammo 
+ctrl+T will toggle attack direction marks visibility (circles under meches feets)
 NOTE: ammo can't be ejected if mech moved this round
      after ejection mech can't jump and sprint until end of round
     
@@ -22,10 +23,8 @@ CACMediumRangeAccuracyMod - ShortRange <= X < MediumRange
 CACLongRangeAccuracyMod - MediumRange <= X < LongRange
 CACExtraLongRangeAccuracyMod - LongRange <= X < MaxRange
 
-
-vfxprfprtl_heatventlrg_loop
-vfxprfprtl_heatventsm_loop
-vfxprfprtl_heatdumplrg_burst
+NOTE: You can influence AP infliction via CACAPProtection unit's staticstic value
+if set as true all AP effects (damage and crits) will not affect unit.
 
 {
 "debugLog":true, - enable debug log 
@@ -167,8 +166,37 @@ vfxprfprtl_heatdumplrg_burst
   "ShutdownHeatChance":25,
   "UseHBSMercySetting":true
 },
-"WaterHeightFix":true - needed for proper hover's over water movements
+"AdvancedCirtProcessing":true, - if false vanilla crit processing used. Eg only meches, crit to can inflicted to empty slot. 
+                                If true crit to occupied slots and to meches, vehicles and turrets. 
+"APMinCritChance": 0.1, - Minimal crit chance on AP processing.
+                          Basics: 
+                            advanced crit calculations:
+                              normal crit: crit chance = Max(Constants.ResolutionConstants.MinCritChance, (1 - <current structure>/<max structure>))
+                              so minimal value is Constants.ResolutionConstants.MinCritChance maximum 1 (if structure near zero). If random roll less than this value crit success if grater - no crit
+                              AP crit:
+                                 basic crit chance = Max(APMinCritChance, (1 - <current structure>/<max structure>))
+                                 armor shards mod = 1 + (1 - <current armor>/<max armor>)*weapon.APArmorShardsMod. 
+                                 armor thickness mod = (1f - armor / weapon.APMaxArmorThickness) if weapon.APMaxArmorThickness = 0 armor thickness mod is 1.0. 
+                                 if armor greater weapon.APMaxArmorThickness and weapon.APMaxArmorThickness grater than zero armor thickness mod = 0 (mean no AP crit)
+                                 weapon ap crit mod = weapon.APCriticalChanceMultiplier (if weapon.APCriticalChanceMultiplier = 0, weapon ap crit mod set to 1.0)
+                                 crit chance =  basic crit chance * armor shards mod * armor thickness mod * weapon ap crit mod
+                                 Main idea: weapon can have two mechanics of armor piece - solid core and cumulative jet
+                                    first one cause shards from previously damaged armor hit components increasing crit chance
+                                    second one have limited cumulative jet length and can't penetrate armor if too thick 
+"DestroyedComponentsCritTrap":true, - if true destroyed component can be crit trap. Eg destroyed components is involved in crit roll but crit to destroyed component do nothing. 
+"CritLocationTransfer": true, - if true if there no components suitable for crit roll in mech's location crit will be transfered arm/leg->side torso->center torso 
 }
+
+
+KMiSSioNToday at 20:33
+yes. For example mech have 100 armor from 200 and full structure. Min crit chance 0.1. Weapon have APArmorShardsMod = 0.5 and APMaxArmorThickness = 150. APCritChance = 0.5
+shard mod = 1 + (1 - 100/200) = 1.5 
+thickness mod = 1 - 100/150 = 0.33333(3)
+overall chance  = 0.1 (base minimal) * 1.5 (shards) * 0.33333 (thickness) * 0.5 (AP chance) = 0.025
+while armor become lower both shard mod and thickness mod will rise
+ 
+LadyAlektoToday at 20:35
+so thickness defines the strength something can easily punch through, while shards defines how likely the hit causes spall to cause damage
 
 now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
 CustomAmmoCategories.json
@@ -184,7 +212,74 @@ CustomAmmoCategories.json
 
 Weapon definition
 new fields
+  "isHeatVariation": true, - if true heat damage will be altered using DamageVariance/DistantVariance/DistantVarianceReversed values. Per mode/ammo/weapon.
+  "isStabilityVariation": true, - if true stability damage will be altered using DamageVariance/DistantVariance/DistantVarianceReversed values. Per mode/ammo/weapon.
+  "isDamageVariation": true, - if true normal damage will be altered using DamageVariance/DistantVariance/DistantVarianceReversed values. Per mode/ammo/weapon.
+  "DamageNotDivided": false, - if true and ImprovedBallistic and BallisticDamagePerPallet are true also damage(heat and stability) will not be divided by ProjectilesPerShot.
+  "APDamage": 10, - damage amount always inflicted to inner structure trough armor. If armor breached this damage will be added to normal damage. Additive per mode/ammo/weapon, default 0.
+  "APCriticalChanceMultiplier": 0.5, - armor pierce crit chance multiplier. Additive per mode/ammo/weapon, default 0.
+                                  NOTE: if effective APDamage > 0 crit roll is placed anyway. But if even if APDamage = 0 and APCriticalChanceMultiplier is set per mode ammo or weapon crit will be placed on each hit without damage to inner structure (like AP autocannon ammo). So weapon can inflict AP damage + AP crit or AP crit alone.
+                                  To have APCriticalChanceMultiplier apply normally AdvancedCirtProcessing should be true.
+                                  On crit resolve if there is still armor > 0 in location crit chance will be multiplied to APCriticalChanceMultiplier (if set). 
+                                  Consider to be used to lower crit chance if trough armor. If there no armor in location crit chance will not be altered.
+                                  If AdvancedCirtProcessing is false crit will still be rolled but chance will not be altered. 
+  "APMaxArmorThickness": 0f, - max armor thickness for AP crits. See APMinCritChance setting notes.
+  "APArmorShardsMod": 0f, - AP crit modifier for damaged armor. See APMinCritChance setting notes.
+  "EvasivePipsIgnored" : 1, This value can be controlled via weapon's EvasivePipsIgnored statistic value (float)
+  "ProjectileSpeedMultiplier": 0.1, - projectile speed multiplier. Less is slower. Multiplicative per weapon/mode/ammo. Works only with ImprovedBallistic true (ballistic/laser/ppc/missile)
+                                     NOTE! Do not set this to low values cause if projectile flying takes too long attack sequence will be terminated by timeout.
+                                     NOTE! For lasers ProjectileSpeed it is duration so greater value will result longer firing 
+                                        (opposite for other effects greater value makes projectiles fly faster and lower duration).
+  "MissileVolleySize": 5, - volley size override for missile launchers. Only works with ImprovedBallistic true. 
+                             Some basics: every missile launcher model have emmiters. Launcher counts number of emmiters as volley size. 
+                             If model not setuped properly launcher effects it fallbacks to one emmiter with weapon object position so volley size always 1. 
+                             You can use this to override this behavior. 
+  "ProjectileScale": {"x":10,"y":10,"z":10}, - scale for projectile. Only works with ImprovedBallistic true or IsAMS/IsAAMS (only for AMS fire sequence). 
+                                                Works properly only for missiles/autocannons/gauss/ppc. Impact effects and missiles explosions scales accordingly.
+                                                Can be set per mode/ammo/weapon. Higher priority replace lower priority value. Mode have priority, than ammo, than weapon.
+  "ColorsTable" : [ - Colors array per weapon
+    {
+      "C":"red"     - Color in html notation. Note for ballistic and ppc effect color can be not fully accurate. If color can't be parsed fallback color is magenta
+      ,"I":5        - Color intensivity, used only for lasers 
+    },
+    {"C":"orange","I":5},{"C":"yellow","I":5},{"C":"green","I":5},{"C":"aqua","I":5},{"C":"blue","I":5},{"C":"purple","I":5}
+  ],
+  "ColorSpeedChange": 7, - Color change speed. Approximately this number shows how many colors changed during projectile flying. Per mode/ammo/weapon. 
+                            Higher priority replace lower priority value. Mode have priority, than ammo, than weapon. 0 counts as not set so will be used next value by priority.
+  "ColorChangeRule": "Linear", - Color changing rule. Possible values
+                                 None - original color
+                                 Linear - colors chanded one by one from start of weapon's colors table
+                                 Random - color will be choosed randomly from weapon's colors table. On change while firing next color will be choosed randomly also.
+                                 RandomOnce - color will be chosen randomly as projectile start and will not be changed during firing. 
+                                 t0 - color with index 0 will be choosen from weapon's colors table and will not be changed during firing. 
+                                 t1 - color with index 1 will be choosen from weapon's colors table and will not be changed during firing. 
+                                 ........................................................................................................
+                                 t31 - color with index 31 will be choosen from weapon's colors table and will not be changed during firing. 
+                                 Higher priority replace lower priority value. Mode have priority, than ammo, than weapon. "None" counts as not set so will be used next value by priority.
+                                 If color need to be changed it is always changed smoothly. 
+                          NOTE! Changing colors avaible only for ImprovedBallistic true or IsAMS/IsAAMS (only for AMS fire sequence) and only for laser/ppc/autocannon effects.
+                          NOTE! Coloring of missile trail possible too but only for normal missiles (not AMS) and without changing while flying. Eg ColorSpeedChange for missiles trail if useless
+                          ColorChangeRule - Linear equivalent t0,  Random = RandomOnce. 
+                          NOTE! "I" value in color table is used for missile trail too (consider be around 2, but you can experiment)
+  "MissileFiringIntervalMultiplier": 10, - multiplier for firing interval. Only for missile firing effect. Only works with ImprovedBallistic true. Greater is slower. 
+                                     NOTE! Do not set this to very high values cause if delay will be too long  attack sequence will be terminated by timeout.
+  "MissileVolleyIntervalMultiplier": 10, - multiplier for missile volley fire interval. Only for missile firing effect. Only works with ImprovedBallistic true. Greater is slower. 
+                                     NOTE! Do not set this to very high values cause if delay will be too long  attack sequence will be terminated by timeout.
+                                     Some basics: every missile launcher prefab have emiter points. For example your missile launcher prefab have 3 emmiters and you lauching 4 missiles, 
+                                     than missile fire sequence looks like: 
+                                     missile 0 launch (emmiter 0) -> delay (firing interval) -> missile 1 launch (emmiter 1) -> delay (firing interval) 
+                                       -> missile 2 launch (emmiter 2) -> delay (volley interval) -> missile 3 launch (emmiter 0)
+  "FireDelayMultiplier": 10, - multiplier for multi-shot fire delay. Only works with ImprovedBallistic. Default for weapon 10. Multiplicative per weapon/mode/ammo. For ammo and mode default is 1.
+                              !PLEASE READ NEXT NOTE CAREFULY: Now ImprovedBallistic works for lasers and PPCs, but laser ans PPC effects has no shotDelay parameter in assets which ballistic has. 
+                              So, for laser and PPC effects i have to use other parameter for shot delay. This parameter is projectileSpeed.
+                              For lasers projectileSpeed controls beam duration, so improved laser fire sequence looks like: beam (projectileSpeed duration) -> delay (projectileSpeed*FireDelayMultiplier) -> next beam
+                              For PPC projectileSpeed it is projectile speed, so improved PPC fire sequence looks like: 
+                                pulse start -> pulse fly (duration distance/projectileSpeed) -> pulse hit -> delay ((distance/projectileSpeed)*FireDelayMultiplier) -> next pulse start
+  "CantHitUnaffecedByPathing": false, - if true this weapon can't hit targets unaffected by pathing. 
+                                        If user tries to perform DFA attack having this weapon enabled he/she will receive blocking popup message.
+                                        can be set per weapon/ammo/mode mode have priority than ammo than weapon
   "Streak": true/false - if true only success hits will be shown, ammo decremental and heat generation will be based on success hits. 
+                          Can be set for mode/ammo/weapon. Mode have priority than ammo, than weapon.
 							with "HitGenerator" : "Streak" - will be true streak effect all-hit-or-no-fire
   "HitGenerator" : "Streak", Set to hit generator. Supported values ("Individual"/"Cluster"/"Streak"). 
                                   Streak hit generator is sort of cluster, 
@@ -194,8 +289,13 @@ new fields
 								  if not set hit generator will be choosed by weapon type.
 								  if weapon define has tag "wr-clustered_shots", "Cluster" hit generator will be forced. 
   "DirectFireModifier" : -10.0, Accuracy modifier if weapon can strike directly
-  "DamageOnJamming": true/false, - if true on jamm weapon will be damaged
+  "DamageVariance": 20, - Simple damage variance as implemented in WeaponRealizer
+  "DistantVariance": 0.3, - Distance damage variance as implemented in WeaponRealizer
+  "DistantVarianceReversed": false, - Set is distance damage variance is reversed
+  "DamageOnJamming": true/false, - if true on jamming weapon will be damaged
+  "DestroyOnJamming": true/false, - if true on jamming weapon will be destroyed (need DamageOnJamming to be set true also)
   "FlatJammingChance": 1.0, - Chance of jamming weapon after fire. 1.0 is jamm always. Unjamming logic implemented as in WeaponRealizer
+                              NOTE! There FlatJammingChance can be altered via CACFlatJammingChance statistic value per actor's and/or per weapon's statistic collections
   "GunneryJammingBase": 5, - 
   "GunneryJammingMult": 0.05, - this values uses to alter flat jamming chance by pilot skills 
                                   formula effective jamming chance = FlatJammingChance + (GunneryJammingBase - Pilot Gunnery)* GunneryJammingMult
@@ -232,10 +332,8 @@ new fields
   "AOECapable" : false, - if true weapon will included in AOE damage calculations. If true set in weapon definition 
                             all shoots will have AoE effect (even for energy weapon). If true, it can't be overridden by ammo.
   "AOERange": 100, - Area of effect range. If AOECapable in weapon is set to true this value will be used. If AOECapable is true, it can't be overridden by ammo.
-  "AOEDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
-                            one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
-  "AOEHeatDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
-                            one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
+  "AOEDamage": 0 - AoE damage. 
+  "AOEHeatDamage": 0 - AoE heat. 
   "AOEInstability": 0 - instability AoE damage 
   "SpreadRange": 0, - Area of projectiles spread effect. If > 0 projectiles will include in spread calculations. Per weapon, ammo, mode values are additive.
                          if used for missiles, and target have AMS it will fire no matter if it is not advanced and target is not primary.
@@ -246,7 +344,7 @@ new fields
   "HasShells": true/false, if defined determinate has shots shrapnel effect or not. If defined can't be overriden by ammo or mode. 
                             Shells count is effective ProjectilesPerShot for this weapon/ammo/mode.
                             Damage per shell - full damage per projectile / ProjectilesPerShot
-                            Only for missiles, ballistic and gauss effects. Should not be used with AoE.
+                            Only for missiles, ballistic and gauss effects.
 							NOTE! If ImprovedBallistic is false HasShells considered as false too no matter real value. 
   "ShellsRadius": 90, determines if shells will have spreading. Works same way as SpreadRange. Per weapon value will be used if HasShells is true for this weapon.
   "MinShellsDistance": 30, Minimum distance missile have to fly before explode. Min value 30.
@@ -284,16 +382,16 @@ new fields
    "ClearMineFieldRadius": 4, - radius in in-game terrain cells. Minefields in all cells within radius will be cleared in terrain impact.
                                 Clearing on success hit controled by FireOnSuccessHit flag.
    "Cooldown": 2, - number of rounds weapon will be unacceptable after fire this mode
-   "ImprovedBallistic": true, - whether use or not own ballistic weapon effect engine. 
+   "ImprovedBallistic": true, - whether use or not own ballistic/laser/PPC/missile weapon effect engine. 
 								Difference between "improved" and vanilla engine:
 								1. Improved mode uses ShotsWhenFire properly (vanilla had not used them at all)
-								2. Improved mode can use curvy trajectory for indirect fire (indirect gauss bullet can be used too, but looks very funny)
+								2. Improved mode can use curvy trajectory for indirect fire (ballistic only) (indirect gauss bullet can be used too, but looks very funny)
 								3. Improved mode fire ShotsWhenFire volleys with ProjectilesPerShot bullets in each. 
-								   Bullets in one volley fired simultaneously instead of one by one (as in WeaponRealizer)
+								   Bullets/beams/pulses in one volley fired simultaneously instead of one by one (as in WeaponRealizer)
 								   But damage still dealt once per volley, not per bullet, to keep compatibility with vanilla.
 								NOTE! If ImprovedBallistic is set DisableClustering is forced to true and "wr-clustered_shots" tag removed from definition. 
-  "BallisticDamagePerPallet": true - if true damage inflicted per pallet instead of per shot. Only working with ImprovedBallistic true, ballistic weapon effect and HasShels false
-                                     Damage will be divided by ProjectilesPerShot value, heat damage and stable damage too. 
+  "BallisticDamagePerPallet": true - if true damage inflicted per pallet instead of per shot. Only working with ImprovedBallistic true, ballistic/laser/PPC weapon effect and HasShels false
+                                     Damage will be divided by ProjectilesPerShot value, heat damage and stable damage too.
 	"StatusEffectsPerHit":false - if true OnHit status effects applying on each hit instead on once. 
 	"AdditionalAudioEffect": "enum:AudioEventList_explosion.explosion_propane_tank", - additional sound effect on projectile impact. Value format "<type>:<name>".
 							 type values: "enum" - building in-game enum value
@@ -305,6 +403,34 @@ new fields
 	[{
 		"Id": "x4",  - Must be unique per weapon
 		"UIName": "x4", - This string will be displayed near weapon name
+    "APDamage": 10, - damage amount always inflicted to inner structure trough armor. If armor breached this damage will be added to normal damage. Additive per mode/ammo/weapon, default 0.
+    "APCriticalChanceMultiplier": 0.5, - armor pierce crit chance multiplier. Additive per mode/ammo/weapon, default 0.
+                                    NOTE: if effective APDamage > 0 crit roll is placed anyway. But if even if APDamage = 0 and APCriticalChanceMultiplier is set per mode ammo or weapon crit will be placed on each hit without damage to inner structure (like AP autocannon ammo). So weapon can inflict AP damage + AP crit or AP crit alone.
+                                    To have APCriticalChanceMultiplier apply normally AdvancedCirtProcessing should be true.
+                                    On crit resolve if there is still armor > 0 in location crit chance will be multiplied to APCriticalChanceMultiplier (if set). 
+                                    Consider to be used to lower crit chance if trough armor. If there no armor in location crit chance will not be altered.
+                                    If AdvancedCirtProcessing is false crit will still be rolled but chance will not be altered. 
+    "ProjectileSpeedMultiplier": 1, - projectile speed multiplier. Less is slower. Multiplicative per weapon/mode/ammo. 
+                                       NOTE! Do not set this to low values cause if projectile flying takes too long attack sequence will be terminated by timeout.
+    "MissileFiringIntervalMultiplier": 10, - multiplier for firing interval. Only for missile firing effect. Greater is slower. 
+                                       NOTE! Do not set this to very high values cause if delay will be too long  attack sequence will be terminated by timeout.
+    "MissileVolleyIntervalMultiplier": 10, - multiplier for missile volley fire interval. Only for missile firing effect. Greater is slower. 
+                                       NOTE! Do not set this to very high values cause if delay will be too long  attack sequence will be terminated by timeout.
+                                       Some basics: every missile launcher prefab have emiter points. For example your missile launcher prefab have 3 emmiters and you lauching 4 missiles, 
+                                       than missile fire sequence looks like: 
+                                       missile 0 launch (emmiter 0) -> delay (firing interval) -> missile 1 launch (emmiter 1) -> delay (firing interval) 
+                                         -> missile 2 launch (emmiter 2) -> delay (volley interval) -> missile 3 launch (emmiter 0)
+    "FireDelayMultiplier": 1, - multiplier for multi-shot fire delay. Only works with ImprovedBallistic. Default for weapon 10. Multiplicative per weapon/mode/ammo. For ammo and mode default is 1.
+                                !PLEASE READ NEXT NOTE CAREFULY: Now ImprovedBallistic works for lasers and PPCs, but laser ans PPC effects has no shotDelay parameter in assets which ballistic has. 
+                                So, for laser and PPC effects i have to use other parameter for shot delay. This parameter is projectileSpeed.
+                                For lasers projectileSpeed controls beam duration, so improved laser fire sequence looks like: beam (projectileSpeed duration) -> delay (projectileSpeed*FireDelayMultiplier) -> next beam
+                                For PPC projectileSpeed it is projectile speed, so improved PPC fire sequence looks like: 
+                                  pulse start -> pulse fly (duration distance/projectileSpeed) -> pulse hit -> delay ((distance/projectileSpeed)*FireDelayMultiplier) -> next pulse start
+    "CantHitUnaffecedByPathing": false, - if true this weapon can't hit targets unaffected by pathing. 
+                                          If user tries to perform DFA attack having this weapon enabled he/she will receive blocking popup message.
+                                          can be set per weapon/ammo/mode mode have priority than ammo than weapon
+    "Streak": true/false - if true only success hits will be shown, ammo decremental and heat generation will be based on success hits. 
+                            Can be set for mode/ammo/weapon. Mode have priority than ammo, than weapon.
 		"isBaseMode":true, - Weapon must have one base mode. Mode with this setting will used by default
 		"WeaponEffectID" : "WeaponEffect-Weapon_PPC", Played fire effect can be set in mode definition
 		"EvasivePipsIgnored" : 0, This value will be added to EvasivePipsIgnored (current weapon status effects will be used too)
@@ -328,7 +454,7 @@ new fields
 		"Instability" : 0, This value will be added to Instability (current weapon status effects will be used too)
 		"AttackRecoil" : 0, This value will be added to AttackRecoil
 		"IndirectFireCapable" : false, Effective IndirectFireCapable will be taken from ammo. If not set in ammo define, weapon value will be used
-		"EvasivePipsIgnored" : 0, This value will be added to EvasivePipsIgnored (current weapon status effects will be used too)
+		"EvasivePipsIgnored" : 0, This value will be added to EvasivePipsIgnored.
 		"HitGenerator" : "Individual", Set to hit generator. Supported values ("Individual"/"Cluster"/"Streak"). 
 									  Streak hit generator is sort of cluster, 
 									  if first projectile hit, rest hit too (location distribution as cluster hit generator),
@@ -349,6 +475,7 @@ new fields
 		"Cooldown": 2, - number of rounds weapon will be unacceptable after fire this mode
 		"AIHitChanceCap": 0.3, - not used any more
 		"DamageOnJamming": true/false, - if true on jamming weapon will be damaged
+    "DestroyOnJamming": true/false, - if true on jamming weapon will be destroyed (need DamageOnJamming to be set true also)
 		"DamageMultiplier":2.0, - damage multiplier for this mode effective value will be Weapon.DamagePerShot*Ammo.DamageMultiplier*Mode.DamageMultiplier rounded
 									to nearest integer. If omitted assumed to be 1.0. HeatDamagePerShot affected too. 
 		"AlwaysIndirectVisuals": false, if true missiles will always plays indirect visuals, even if direct line of sight exists
@@ -427,6 +554,15 @@ new fields
 								   		  "name" - audio event name 
 										  "none" - none additional sound for this type name doesn't matter
 							 may be set per ammo, mode and weapon. Mode have priority than ammo than weapon
+  "Lock":{ - setting to lock using of this mode. 
+    "HeatLevel":{"Low":40,"High":60}, - lock by absolute heat. If current heat is less Low or greater High, mode using will be forbidden.
+    "OverheatLevel":{"Low":0.5,"High":1.0}, - lock by heat relative to Overheat. If current heat level is less Low or greater High, mode using will be forbidden.
+    "MaxheatLevel":{"Low":0.3,"High":0.5}, - lock by heat relative to maximum heat. If current heat level is less Low or greater High, mode using will be forbidden.
+                                             NOTE! If two or more lock options defined check logic will be: at first checked HeatLevel(if available) if pass 
+                                             check OverheatLevel(if available) if pass check (MaxheatLevel is available) if all available options pass mode is allowed. 
+                                             NOTE! Heat level have sense only for meches, for vehicles and turrets check is always passed. 
+                                             NOTE! If all modes fail check weapon will be disabled.
+  }
 	}]
   
   
@@ -447,8 +583,35 @@ Ammo definition
       
    
    "WeaponEffectID" : "WeaponEffect-Weapon_PPC", Played fire effect can be set in ammo definition, for example this LBX AC10 will fire as PPC if ECM ammo is choosed
+    "APDamage": 10, - damage amount always inflicted to inner structure trough armor. If armor breached this damage will be added to normal damage. Additive per mode/ammo/weapon, default 0.
+    "APCriticalChanceMultiplier": 0.5, - armor pierce crit chance multiplier. Additive per mode/ammo/weapon, default 0.
+                                    NOTE: if effective APDamage > 0 crit roll is placed anyway. But if even if APDamage = 0 and APCriticalChanceMultiplier is set per mode ammo or weapon crit will be placed on each hit without damage to inner structure (like AP autocannon ammo). So weapon can inflict AP damage + AP crit or AP crit alone.
+                                    To have APCriticalChanceMultiplier apply normally AdvancedCirtProcessing should be true.
+                                    On crit resolve if there is still armor > 0 in location crit chance will be multiplied to APCriticalChanceMultiplier (if set). 
+                                    Consider to be used to lower crit chance if trough armor. If there no armor in location crit chance will not be altered.
+                                    If AdvancedCirtProcessing is false crit will still be rolled but chance will not be altered. 
    "EvasivePipsIgnored" : 0, This value will be added to EvasivePipsIgnored (current weapon status effects will be used too)
-   
+    "Streak": true/false - if true only success hits will be shown, ammo decremental and heat generation will be based on success hits. 
+                            Can be set for mode/ammo/weapon. Mode have priority than ammo, than weapon.
+    "ProjectileSpeedMultiplier": 1, - projectile speed multiplier. Less is slower. Multiplicative per weapon/mode/ammo. 
+                                       NOTE! Do not set this to low values cause if projectile flying takes too long attack sequence will be terminated by timeout.
+    "MissileFiringIntervalMultiplier": 10, - multiplier for firing interval. Only for missile firing effect. Greater is slower. 
+                                       NOTE! Do not set this to very high values cause if delay will be too long  attack sequence will be terminated by timeout.
+    "MissileVolleyIntervalMultiplier": 10, - multiplier for missile volley fire interval. Only for missile firing effect. Greater is slower. 
+                                       NOTE! Do not set this to very high values cause if delay will be too long  attack sequence will be terminated by timeout.
+                                       Some basics: every missile launcher prefab have emiter points. For example your missile launcher prefab have 3 emmiters and you lauching 4 missiles, 
+                                       than missile fire sequence looks like: 
+                                       missile 0 launch (emmiter 0) -> delay (firing interval) -> missile 1 launch (emmiter 1) -> delay (firing interval) 
+                                         -> missile 2 launch (emmiter 2) -> delay (volley interval) -> missile 3 launch (emmiter 0)
+    "FireDelayMultiplier": 1, - multiplier for multi-shot fire delay. Only works with ImprovedBallistic. Default for weapon 10. Multiplicative per weapon/mode/ammo. For ammo and mode default is 1.
+                                !PLEASE READ NEXT NOTE CAREFULY: Now ImprovedBallistic works for lasers and PPCs, but laser ans PPC effects has no shotDelay parameter in assets which ballistic has. 
+                                So, for laser and PPC effects i have to use other parameter for shot delay. This parameter is projectileSpeed.
+                                For lasers projectileSpeed controls beam duration, so improved laser fire sequence looks like: beam (projectileSpeed duration) -> delay (projectileSpeed*FireDelayMultiplier) -> next beam
+                                For PPC projectileSpeed it is projectile speed, so improved PPC fire sequence looks like: 
+                                  pulse start -> pulse fly (duration distance/projectileSpeed) -> pulse hit -> delay ((distance/projectileSpeed)*FireDelayMultiplier) -> next pulse start
+    "CantHitUnaffecedByPathing": false, - if true this weapon can't hit targets unaffected by pathing. 
+                                          If user tries to perform DFA attack having this weapon enabled he/she will receive blocking popup message.
+                                          can be set per weapon/ammo/mode mode have priority than ammo than weapon
    "AccuracyModifier" : -10.0, This value will be added to AccuracyModifier (current weapon status effects will be used too)
    "CriticalChanceMultiplier" : 0.0, This value will be added to CriticalChanceMultiplier (current weapon status effects will be used too)
    "DamagePerShot": -50.0, This value will be added to DamagePerShot (current weapon status effects will be used too)
@@ -496,10 +659,6 @@ Ammo definition
    "CriticalDamageModifier" : 1,
    "AOECapable" : false, - if true shoots will be included in AOE damage calculations 
    "AOERange": 100, - Area of effect range
-                   Notes: AOECapable will force AlwaysIndirectVisuals to true. 
-				             So it is good idea to use only missile weapon effects unless i've implement indirect visuals for ballistic effect.
-				          AOE projectiles always miss no matter toHit values, this is cause AOE dealt only AOE damage.
-						     So it is good idea to set -10 for AccuracyModifier to help AI understand fact that AoE weapon always inflicts damage.
 						  AOE shots can inflict heat damage. It value based on weapon heat damage per shot and decreasing linear by distance between target and impact base point.
 						  Projectiles intercepted by AMS will not cause AOE damage.
 						  AOE to hit effect will be implemented to all targets in AoE range. 
@@ -509,7 +668,7 @@ Ammo definition
 						  It is recommended to use LRM5, LRM10, LRM15 or LRM20 as weapon subtype cause other subtypes have too huge spread when misses
 						  It is good idea to set ForbiddenRage for AoE weapon and set NotUseInMelee to true
 						  AOE weapon can't hit mech head, cause every headshot inflicts pilot injury. With fact AoE always dealt damage it will be imbalance. 
-						  Damage variations for AoE weapon should not be used cause it will lead completely wrong result 
+						  Damage variations are not applying to AoE damage
   "AOEDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
                             one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
   "AOEHeatDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
@@ -715,6 +874,10 @@ Ammo definition
 								   		  "name" - audio event name 
 										  "none" - none additional sound for this type name doesn't matter
 							 may be set per ammo, mode and weapon. Mode have priority than ammo than weapon
+   "ChassisTagsAccuracyModifiers":{ - Accuracy for mods tags (Meches - MechTags, Vehicles - VehicleTags, Turrets - turret tags) AIM aware
+      "unit_assault":-10,
+      "unit_mech":10,
+   },
    "statusEffects" : [   - will be applied on weapon hit (only "OnHit" effectTriggerType)
         {
             "durationData" : {
@@ -1150,28 +1313,28 @@ public enum AudioEventList_ui
   ui_esc_menu_select = 210, // 0x000000D2
   ui_generic_confirm = 211, // 0x000000D3
   ui_generic_hover = 212, // 0x000000D4
-  ui_vtol_action_choose_yes = 213, // 0x000000D5
-  ui_vtol_action_hover = 214, // 0x000000D6
-  ui_vtol_choose_hover = 215, // 0x000000D7
-  ui_vtol_choose_off = 216, // 0x000000D8
-  ui_vtol_choose_on = 217, // 0x000000D9
-  ui_vtol_move = 218, // 0x000000DA
-  ui_vtol_move_path = 219, // 0x000000DB
-  ui_vtol_move_path_confirm = 220, // 0x000000DC
-  ui_vtol_move_rotate_start = 221, // 0x000000DD
-  ui_vtol_move_rotate_stop = 222, // 0x000000DE
-  ui_vtol_restart = 223, // 0x000000DF
+  ui_mech_action_choose_yes = 213, // 0x000000D5
+  ui_mech_action_hover = 214, // 0x000000D6
+  ui_mech_choose_hover = 215, // 0x000000D7
+  ui_mech_choose_off = 216, // 0x000000D8
+  ui_mech_choose_on = 217, // 0x000000D9
+  ui_mech_move = 218, // 0x000000DA
+  ui_mech_move_path = 219, // 0x000000DB
+  ui_mech_move_path_confirm = 220, // 0x000000DC
+  ui_mech_move_rotate_start = 221, // 0x000000DD
+  ui_mech_move_rotate_stop = 222, // 0x000000DE
+  ui_mech_restart = 223, // 0x000000DF
   ui_mission_done = 224, // 0x000000E0
   ui_mission_fail = 225, // 0x000000E1
   ui_mission_popup_off = 226, // 0x000000E2
   ui_mission_popup_on = 227, // 0x000000E3
   ui_mission_withdraw = 228, // 0x000000E4
   ui_mp_chat_alert = 229, // 0x000000E5
-  ui_mp_go_to_vtol_select = 230, // 0x000000E6
+  ui_mp_go_to_mech_select = 230, // 0x000000E6
   ui_mp_menu_hover = 231, // 0x000000E7
   ui_mp_select_go = 232, // 0x000000E8
-  ui_mp_select_vtol_value_ok = 233, // 0x000000E9
-  ui_mp_select_vtol_value_over = 234, // 0x000000EA
+  ui_mp_select_mech_value_ok = 233, // 0x000000E9
+  ui_mp_select_mech_value_over = 234, // 0x000000EA
   ui_objective_add = 235, // 0x000000EB
   ui_objective_done = 236, // 0x000000EC
   ui_objective_fail = 237, // 0x000000ED

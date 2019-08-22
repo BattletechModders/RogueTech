@@ -4,26 +4,32 @@
         "Category": [
            { "CategoryID": "CockpitSensors"},
 		   { "CategoryID": "Cockpit" },
-		   { "CategoryID": "CockpitFCS" }
+		   { "CategoryID": "CockpitFCS" },
+		   {
+                "CategoryID": "UAV"
+            }
         ],
 		"WorkOrderCosts": {
 			"Install": {
-				"TechCost": "[[Chassis.Tonnage]]/10",
+				"TechCost": "[[Chassis.Tonnage]] / 10",
 				"CBillCost": "[[Chassis.Tonnage]] * 1.15"
 			}
 		},
         "BonusDescriptions": {
             "Bonuses": [
                 "Initiative: +1",
-				"Tacticon: +2",
-				"LanceSight2: 100",
+				"Tacticon: +1",
+				"LanceSight2: 50",
 				"LanceIndirectAcc: +2",
 				"LanceResolve: 2",
-				"Sharer",
 				"Health: 2",
-				"CockpitSensors: 4",
+				"CockpitSensors: 5",
+				"UAV: 500",
+				"UAVCD: 6",
+				"UAVH: 20",
 				"IsCockpit",
-				"FCS"
+				"FCS",
+				"Sharer"
             ]
         },
             "InventorySorter" : {
@@ -58,15 +64,94 @@
     "DisallowedLocations" : "All",
     "CriticalComponent" : false,
     "statusEffects" : [
+	{
+            "targetingData" : {
+                "effectTriggerType" : "OnActivation",
+                "effectTargetType" : "EnemiesWithinRange",
+				"alsoTargetsCreator" : true,
+                "forceVisRebuild" : true
+            },
+			"effectType" : "ActiveAbility",
+			"Description" :
+			{
+				"Id" : "SpySat_Ping",
+				"Name" : "SPY SAT PING",
+				"Details" : "Activated ability (uses Firing action). Performs a Sensor Lock against all enemies within its radius, as indicated by the spinning gold ring. Will go into cooldown state after use.",
+				"Icon" : "uixSvgIcon_action_sensorlock"
+			},
+			"activeAbilityEffectData" : 
+			{
+				"abilityName" : "AbilityDef_SPYSAT_Ping"
+			}
+		},
+	{
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Probe_Carrier",
+                "Name" : "Active Probe (Passive)",
+                "Details" : "Reduces effectiveness of stealthed and ECM shielded units",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_Probe_Carrier",
+                "operation": "Int_Add",
+                "modValue": "2",
+                "modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        },		
+		   {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Advanced_Sensors",
+                "Name" : "Advanced Sensors",
+                "Details" : "Provides detailed information on enemy units",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_Advanced_Sensors",
+                "operation": "Int_Add",
+                "modValue": "5",
+                "modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        },
         {
             "durationData" : {
                 "duration" : -1,
-                "ticksOnActivations" : false,
-                "useActivationsOfTarget" : false,
-                "ticksOnEndOfRound" : false,
-                "ticksOnMovements" : false,
-                "stackLimit" : -1,
-                "clearedWhenAttacked" : false
+                "stackLimit" : -1
             },
             "targetingData" : {
                 "effectTriggerType" : "Passive",
@@ -89,35 +174,16 @@
             },
             "nature" : "Buff",
             "statisticData" : {
-                "appliesEachTick" : false,
-                "effectsPersistAfterDestruction" : false,
                 "statName" : "BaseInitiative",
                 "operation" : "Int_Add",
-                "modValue" : "-2",
-                "modType" : "System.Int32",
-                "additionalRules" : "NotSet",
-                "targetCollection" : "NotSet",
-                "targetWeaponCategory" : "NotSet",
-                "targetWeaponType" : "NotSet",
-                "targetAmmoCategory" : "NotSet",
-                "targetWeaponSubType" : "NotSet"
-            },
-            "tagData" : null,
-            "floatieData" : null,
-            "actorBurningData" : null,
-            "vfxData" : null,
-            "instantModData" : null,
-            "poorlyMaintainedEffectData" : null
+                "modValue" : "-1",
+                "modType" : "System.Int32"
+            }
         },	
         {
             "durationData" : {
                 "duration" : -1,
-                "ticksOnActivations" : false,
-                "useActivationsOfTarget" : false,
-                "ticksOnEndOfRound" : false,
-                "ticksOnMovements" : false,
-                "stackLimit" : -1,
-                "clearedWhenAttacked" : false
+                "stackLimit" : -1
             },
             "targetingData" : {
                 "effectTriggerType" : "Passive",
@@ -140,35 +206,16 @@
             },
             "nature" : "Buff",
             "statisticData" : {
-                "appliesEachTick" : false,
-                "effectsPersistAfterDestruction" : false,
                 "statName" : "BaseInitiative",
                 "operation" : "Int_Add",
                 "modValue" : "-1",
-                "modType" : "System.Int32",
-                "additionalRules" : "NotSet",
-                "targetCollection" : "NotSet",
-                "targetWeaponCategory" : "NotSet",
-                "targetWeaponType" : "NotSet",
-                "targetAmmoCategory" : "NotSet",
-                "targetWeaponSubType" : "NotSet"
-            },
-            "tagData" : null,
-            "floatieData" : null,
-            "actorBurningData" : null,
-            "vfxData" : null,
-            "instantModData" : null,
-            "poorlyMaintainedEffectData" : null
+                "modType" : "System.Int32"
+            }
         },
         {
             "durationData" : {
                 "duration" : -1,
-                "ticksOnActivations" : false,
-                "useActivationsOfTarget" : false,
-                "ticksOnEndOfRound" : false,
-                "ticksOnMovements" : false,
-                "stackLimit" : -1,
-                "clearedWhenAttacked" : false
+                "stackLimit" : -1
             },
             "targetingData" : {
                 "effectTriggerType" : "Passive",
@@ -191,35 +238,17 @@
             },
             "nature" : "Buff",
             "statisticData" : {
-                "appliesEachTick" : false,
-                "effectsPersistAfterDestruction" : false,
                 "statName" : "BonusHealth",
                 "operation" : "Int_Add",
                 "modValue" : "2",
                 "modType" : "System.Int32",
-                "additionalRules" : "NotSet",
-                "targetCollection" : "Pilot",
-                "targetWeaponCategory" : "NotSet",
-                "targetWeaponType" : "NotSet",
-                "targetAmmoCategory" : "NotSet",
-                "targetWeaponSubType" : "NotSet"
-            },
-            "tagData" : null,
-            "floatieData" : null,
-            "actorBurningData" : null,
-            "vfxData" : null,
-            "instantModData" : null,
-            "poorlyMaintainedEffectData" : null
+                "targetCollection" : "Pilot"
+            }
         },
         {
             "durationData" : {
                 "duration" : -1,
-                "ticksOnActivations" : false,
-                "useActivationsOfTarget" : false,
-                "ticksOnEndOfRound" : false,
-                "ticksOnMovements" : false,
-                "stackLimit" : -1,
-                "clearedWhenAttacked" : false
+                "stackLimit" : -1
             },
             "targetingData" : {
                 "effectTriggerType" : "Passive",
@@ -242,35 +271,16 @@
             },
             "nature" : "Buff",
             "statisticData" : {
-                "appliesEachTick" : false,
-                "effectsPersistAfterDestruction" : false,
                 "statName" : "MoraleBonusGain",
                 "operation" : "Int_Add",
                 "modValue" : "2",
-                "modType" : "System.Int32",
-                "additionalRules" : "NotSet",
-                "targetCollection" : "NotSet",
-                "targetWeaponCategory" : "NotSet",
-                "targetWeaponType" : "NotSet",
-                "targetAmmoCategory" : "NotSet",
-                "targetWeaponSubType" : "NotSet"
-            },
-            "tagData" : null,
-            "floatieData" : null,
-            "actorBurningData" : null,
-            "vfxData" : null,
-            "instantModData" : null,
-            "poorlyMaintainedEffectData" : null
+                "modType" : "System.Int32"
+            }
         },
         {
             "durationData" : {
                 "duration" : -1,
-                "ticksOnActivations" : false,
-                "useActivationsOfTarget" : false,
-                "ticksOnEndOfRound" : false,
-                "ticksOnMovements" : false,
-                "stackLimit" : -1,
-                "clearedWhenAttacked" : false
+                "stackLimit" : -1
             },
             "targetingData" : {
                 "effectTriggerType" : "Passive",
@@ -299,29 +309,14 @@
                 "operation" : "Float_Add",
                 "modValue" : "-2.0",
                 "modType" : "System.Single",
-                "additionalRules" : "NotSet",
                 "targetCollection" : "Weapon",
-                "targetWeaponCategory" : "Missile",
-                "targetWeaponType" : "NotSet",
-                "targetAmmoCategory" : "NotSet",
-                "targetWeaponSubType" : "NotSet"
-            },
-            "tagData" : null,
-            "floatieData" : null,
-            "actorBurningData" : null,
-            "vfxData" : null,
-            "instantModData" : null,
-            "poorlyMaintainedEffectData" : null
+                "targetWeaponCategory" : "Missile"
+            }
         },
         {
             "durationData" : {
                 "duration" : -1,
-                "ticksOnActivations" : false,
-                "useActivationsOfTarget" : false,
-                "ticksOnEndOfRound" : false,
-                "ticksOnMovements" : false,
-                "stackLimit" : -1,
-                "clearedWhenAttacked" : false
+                "stackLimit" : -1
             },
             "targetingData" : {
                 "effectTriggerType" : "Passive",
@@ -344,32 +339,49 @@
             },
             "nature" : "Buff",
             "statisticData" : {
-                "appliesEachTick" : false,
-                "effectsPersistAfterDestruction" : false,
                 "statName" : "SpotterDistanceAbsolute",
                 "operation" : "Float_Add",
-                "modValue" : "100.0",
-                "modType" : "System.Single",
-                "additionalRules" : "NotSet",
-                "targetCollection" : "NotSet",
-                "targetWeaponCategory" : "NotSet",
-                "targetWeaponType" : "NotSet",
-                "targetAmmoCategory" : "NotSet",
-                "targetWeaponSubType" : "NotSet"
+                "modValue" : "50.0",
+                "modType" : "System.Single"
+            }
+        },
+		{
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
             },
-            "tagData" : null,
-            "floatieData" : null,
-            "actorBurningData" : null,
-            "vfxData" : null,
-            "instantModData" : null,
-            "poorlyMaintainedEffectData" : null
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Shares_Vision",
+                "Name" : "Vision Sharing",
+                "Details" : "Shows their vision when lancemattes move",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_SHARES_VISION",
+                "operation" : "Set",
+                "modValue": "true",
+                "modType": "System.Boolean"
+            },
+            "nature" : "Buff"
         }
     ],
     "ComponentTags" : {
         "items" : [
             "component_type_stock",
-			"lv-shares-sensors",
-			"lv-probe-boost_m4"
+			"lv-shares-sensors"
         ],
         "tagSetSourceFile" : ""
     }

@@ -18,11 +18,16 @@ AI related mod settings
 	"AIDefenceUsefullCoeff":0.2, - if value if lesser AI will count cae_ai_defence more useful
 	"AIHeatCoeffCoeff":0.9, - if value if greater AI will count cae_ai_cool less useful and cae_ai_heat less dangerous
 	"AIOverheatCoeffCoeff":0.8 - if value if greater AI will count cae_ai_cool less useful and cae_ai_heat less dangerous
-	
+  "ToolTipWarningFailChance": 0.2, - if component can be activated manually, active and have fail chance grater than this value it will be shown in tooltip with orange color
+  "ToolTipAlertFailChance": 0.4, - if component can be activated manually, active and have fail chance grater than this value it will be shown in tooltip with red color
+                                   NOTE! Component will not be show in same turn it has been activated no matter fail chance, cause it will not suffer fail roll only this turn.
+
     "Custom":{
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
 		"ActivatableComponent":{
 			"ButtonName":"MASC",  - string used in activation/deactivation dialog button. Keep as sort as possible. 
+      "activateVFXOutOfLOSHide":true, - if true active component's VFX will be shown only if unit is visible to player (default false)
+      "presistantVFXOutOfLOSHide":true, - if true static component's VFX will be shown only if unit is visible to player (default false)
 			"FailFlatChance":0.3, - chance of fail on cold activation. 
 			"FailRoundsStart":1, - round since fail checks will be perfomed
 			"FailChancePerTurn":0.5, - value which added to fail chance every round of activity.
@@ -60,7 +65,7 @@ AI related mod settings
 												fail check is not performed on activation of component activated by heat, 
 												but fail check after each move is still performed if crit chance is grater than zero
 			"AutoActivateOnOverheatLevel": 0.8, same as AutoActivateOnHeat but instead of Heat level used persentage of Overheat
-			"AutoDeactivateOnOverheatLevel": 0.8, same as AutoDeactivateOnHeat but instead of Heat level used persentage of Overheat
+			"AutoDeactivateOverheatLevel": 0.8, same as AutoDeactivateOnHeat but instead of Heat level used persentage of Overheat
 			"ActivationMessage": "ON", - string showing in activation floatie message along with component UI name
 			"DeactivationMessage": "OFF", - string showing in deactivation floatie message along with component UI name
 			"ActivationIsBuff": "true", - if true component activation floatie message will have buff icon, deactivation - debuff,

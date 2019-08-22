@@ -30,7 +30,8 @@
         "NovaCEWS",
 		"ECCMMode",
 		"ECCMStrength: 3",
-		"ECCMBubble: 280"
+		"ECCMBubble: 280",
+		"Sharer"
       ]
     },
     "InventorySorter": {
@@ -46,14 +47,46 @@
 	  "Linkage":{
         "OnActivate":{  
           "Activate":[],
-          "Deactivate":["Stealth"]
+          "Deactivate":["Stealth", "Damper", "Camouflage"]
         },
         "OnDeactivate":{
           "Activate":[],
           "Deactivate":[]
-        },
+        }
       },
       "statusEffects": [
+	  {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "Aura",
+                "effectTargetType" : "EnemiesWithinRange",
+                "range" : 280.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : false,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "NOVA_ECCM_Probe",
+				"Name" : "Makes it easier for enemies to know where you are, but harder to attack",
+				"Details" : "IPSUM SUCKUM",
+				"Icon" : "uixSvgIcon_status_ECM-missileDef"
+            },
+            "statisticData" : 
+            {
+				"statName" : "LV_PROBE_PING",
+				"operation": "Int_Add",
+				"modValue": "1",
+				"modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        },
         {
             "durationData" : {
                 "duration": -1,
@@ -79,9 +112,9 @@
             },
             "statisticData" : 
             {
-				"statName" : "LV_ECM_Shield",
+				"statName" : "LV_ECM_SHIELD",
 				"operation": "Int_Add",
-				"modValue": "-3",
+				"modValue": "-2",
 				"modType": "System.Int32"
             },
             "nature" : "Buff"
@@ -111,7 +144,7 @@
         "Icon": "uixSvgIcon_status_ECM-missileDef"
       },
       "statisticData": {
-        "statName": "LV_ECM_Shield",
+        "statName": "LV_ECM_SHIELD",
         "operation": "Int_Add",
         "modValue": "1",
         "modType": "System.Int32"
@@ -142,7 +175,7 @@
         "Icon": "uixSvgIcon_action_sensorlock"
       },
       "statisticData": {
-        "statName": "LV_ECM_Jammed",
+        "statName": "LV_ECM_JAMMED",
         "operation": "Int_Add",
         "modValue": "1",
         "modType": "System.Int32"
@@ -201,7 +234,7 @@
   "BonusValueA": "+1 Accuracy and 20% Sensors|",
   "BonusValueB": "+2 Defense|-50%Signature",
   "ComponentType": "Upgrade",
-  "ComponentSubType": "NotSet",
+  "ComponentSubType" : "Prototype_ElectronicWarfare",
   "PrefabIdentifier": "",
   "BattleValue": 0,
   "InventorySize": 1,
@@ -326,7 +359,39 @@
         "modValue": "1.1",
         "modType": "System.Single"
       }
-    }
+    },
+	{
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Shares_Vision",
+                "Name" : "Vision Sharing",
+                "Details" : "Shows their vision when lancemattes move",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_SHARES_VISION",
+                "operation" : "Set",
+                "modValue": "true",
+                "modType": "System.Boolean"
+            },
+            "nature" : "Buff"
+        }
   ],
   "ComponentTags": {
     "items": [

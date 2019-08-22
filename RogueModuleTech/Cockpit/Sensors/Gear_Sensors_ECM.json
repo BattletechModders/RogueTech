@@ -8,13 +8,14 @@
         ],
         "WorkOrderCosts": {
             "Install": {
-                "TechCost": "[[Chassis.Tonnage]]/10",
+                "TechCost": "[[Chassis.Tonnage]] / 10",
                 "CBillCost": "[[Chassis.Tonnage]] * 1.1"
             }
         },
         "BonusDescriptions": {
             "Bonuses": [
                 "IsProbe: 2",
+				"ProbePower: 1",
 				"IsECM: 1",
                 "ECMBubble: 160",
 				"Jammer: 1",
@@ -44,7 +45,7 @@
     "BonusValueA": "Jammer",
     "BonusValueB": "Probe",
     "ComponentType": "Upgrade",
-    "ComponentSubType": "NotSet",
+    "ComponentSubType" : "Prototype_ElectronicWarfare",
     "PrefabIdentifier": "",
     "BattleValue": 0,
     "InventorySize": 1,
@@ -53,6 +54,70 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
+	{
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Probe_Carrier",
+                "Name" : "Active Probe (Passive)",
+                "Details" : "Reduces effectiveness of stealthed and ECM shielded units",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_Probe_Carrier",
+                "operation": "Int_Add",
+                "modValue": "2",
+                "modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        },		
+		   {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Advanced_Sensors",
+                "Name" : "Advanced Sensors",
+                "Details" : "Provides detailed information on enemy units",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_Advanced_Sensors",
+                "operation": "Int_Add",
+                "modValue": "1",
+                "modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        },
 	{
             "durationData" : {
                 "duration": -1,
@@ -78,7 +143,7 @@
             },
             "statisticData" : 
             {
-				"statName" : "LV_ECM_Shield",
+				"statName" : "LV_ECM_SHIELD",
 				"operation": "Int_Add",
 				"modValue": "1",
 				"modType": "System.Int32"
@@ -111,19 +176,18 @@
             },
             "statisticData" : 
             {
-				"statName" : "LV_ECM_Jammed",
+				"statName" : "LV_ECM_JAMMED",
 				"operation": "Int_Add",
 				"modValue": "1",
 				"modType": "System.Int32"
             },
             "nature" : "Debuff"
-        },
+        }
     ],
     "ComponentTags": {
         "items": [
             "component_type_stock",
-            "ElectronicCounterMeasures",
-            "lv-probe_m2"
+            "ElectronicCounterMeasures"
         ],
         "tagSetSourceFile": ""
     }

@@ -36,11 +36,50 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-0.0.0
+8.5.0 - 8/13/2019
+
+Added full set of Schiltron tanks Prime through F.
+
+8.4.10
+
+Added Heavy MML carrier
+Added three Svandovit Clan hover IFV.
+Switched JES-I to svandovit model
+Added two Clan Pegasus,
+Created Infantry Compartment item for APCs
+
+8.4.3 - 8/2/2019
+
+Added two Prowler apc'ish things to fill APC and Predator roles,
+Added Brutus UAC because need more things with UAC2,
+Updated remaining folders to have cores on ICE vehicles,
+minor fixes.
+
+8.3.2
+
+Added two Stygian Strike Hovertanks to Jihad folder.
+Added Regulator II hovertank,
+
+8.3.0
+
+Switched Pegasus to new model by Colobos.
+
+8.2.20
+
+Added cores to Republic, Civil War and Jihad vees,
+Made Techies easier to detect,
+Rebalanced Sensor/Sig buffs on Pegasus,
+Buffed Red October stealth,
+Made the Clan LRM carrier's loadouts more distinct,
+
+8.2.14
 
 Switched some techies to toybota model.
 Added engines cores to VBIED vehicles because of Suspicious Cargo rework,
-Added higher bracket movedefs for vtols
+Added higher bracket movedefs for vtols,
+Added Thumper TAV-1 and TAV-2 (WOB),
+Replaced Vargr and Sleipnir APC with canonical ones from new House Arano sourcebook,
+Added engine cores to ArtilleryUnits, Roguetanks/CLANK, Roguetanks/Primitive, UrbieNuke, BaseUrbanWarfare, RogueTanks/vehicle/apc
 
 8.2.4 - 7/5/2019
 
