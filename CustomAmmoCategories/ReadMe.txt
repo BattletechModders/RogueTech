@@ -185,6 +185,10 @@ if set as true all AP effects (damage and crits) will not affect unit.
                                     second one have limited cumulative jet length and can't penetrate armor if too thick 
 "DestroyedComponentsCritTrap":true, - if true destroyed component can be crit trap. Eg destroyed components is involved in crit roll but crit to destroyed component do nothing. 
 "CritLocationTransfer": true, - if true if there no components suitable for crit roll in mech's location crit will be transfered arm/leg->side torso->center torso 
+"NoCritFloatieMessage": false, - if set enables or disables criticals floatie messages. If omitted it tries to detect MechEngineer, if detects consider as true (eg. no floatie messages)
+"RemoveFromCritRollStatName": "IgnoreDamage", - on criticals resolution components having this staistic set as true will be excluded from list of available for crit. 
+                                                NOTE! excluding from list have side effect with CritLocationTransfer enabled. If in location there are only components with IgnoreDamage:true 
+                                                it consider as empty and crit will be transfered to another location according transfer logic. 
 }
 
 
