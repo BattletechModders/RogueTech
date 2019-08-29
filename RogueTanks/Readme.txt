@@ -36,6 +36,10 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+8.5.1 - 8/27/2019
+
+Added pirate "Disco Party Bus" with rainbow rotary chem lasers
+
 8.5.0 - 8/13/2019
 
 Added full set of Schiltron tanks Prime through F.
