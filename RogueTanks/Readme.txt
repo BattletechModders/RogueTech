@@ -33,8 +33,11 @@ unit_zephyr,
 unit_hunter,
 unit_demolisher <- Literally every faction has these
 
-
 Changelog:
+
+0.0.0
+
+Added RISC Hunter
 
 8.5.1 - 8/27/2019
 
