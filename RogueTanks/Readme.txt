@@ -35,9 +35,10 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-0.0.0
+8.5.3 - 8/30/2019
 
-Added RISC Hunter
+Added RISC Hunter,
+reworked clan carriers with fusion to operate in vacuum. 
 
 8.5.1 - 8/27/2019
 
