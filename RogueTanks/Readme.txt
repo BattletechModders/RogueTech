@@ -35,9 +35,12 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-0.0.0
+8.5.5 - 8/30/2019
 
-Added RISC Hunter
+Added RISC Hunter,
+reworked clan carriers with fusion to operate in vacuum. 
+reworked firetrucks to be ICE, except for Ivan and Suspicious which are Fuel Cell
+Added Obvious quirk to improvized combat vehicles; Techies and Firetrucks
 
 8.5.1 - 8/27/2019
 
