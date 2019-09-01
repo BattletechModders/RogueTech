@@ -311,6 +311,7 @@ new fields
   "AlternateDamageCalc": false, - if true alternate damage calc formula will be implemented 
                               DamagePerShot = (damage from weaponDef + (damage from ammo) + (damage from mode)*(damage multiplayer from ammo)*(damage multiplayer from mode)*(damage with effects)/(damage from weaponDef)
   "AlternateHeatDamageCalc": false, - same as  AlternateDamageCalc but for heat 
+  "AlternateInstabilityCalc": false, - same as  AlternateDamageCalc but for instability 
   "AMSHitChance": 0.0, - if this weapon is AMS, this value is AMS efficiency, 
                          if this weapon is missile launcher this value shows how difficult to intercept missile with AMS. Negative value - is harder, 
 						 positive is easer.
@@ -480,8 +481,9 @@ new fields
 		"AIHitChanceCap": 0.3, - not used any more
 		"DamageOnJamming": true/false, - if true on jamming weapon will be damaged
     "DestroyOnJamming": true/false, - if true on jamming weapon will be destroyed (need DamageOnJamming to be set true also)
-		"DamageMultiplier":2.0, - damage multiplier for this mode effective value will be Weapon.DamagePerShot*Ammo.DamageMultiplier*Mode.DamageMultiplier rounded
-									to nearest integer. If omitted assumed to be 1.0. HeatDamagePerShot affected too. 
+		"DamageMultiplier":2.0, - damage multiplier for this mode. Multiplicative per ammo/mode. If omitted assumed to be 1.0.
+		"HeatMultiplier":2.0, - heat multiplier for this mode. Multiplicative per ammo/mode. If omitted assumed to be 1.0.
+		"InstabilityMultiplier":2.0, - instability multiplier for this mode. Multiplicative per ammo/mode. If omitted assumed to be 1.0.
 		"AlwaysIndirectVisuals": false, if true missiles will always plays indirect visuals, even if direct line of sight exists
 		"AmmoCategory": "LRM", AmmoCategory can now be overridden by weapon mode. If setted as "NotSet" weapon wouldn't use any ammo. 
 		                       If weapon has mode with "NotSet" ammo category you will not see warnings in mechlab for this weapon, 
@@ -648,8 +650,9 @@ Ammo definition
    "DamageVariance": 20, - Simple damage variance as implemented in WeaponRealizer
    "DistantVariance": 0.3, - Distance damage variance as implemented in WeaponRealizer
    "DistantVarianceReversed": false - Set is distance damage variance is reversed
-   "DamageMultiplier":0.1667, - damage multiplier for this mode effective value will be Weapon.DamagePerShot*Ammo.DamageMultiplier*Mode.DamageMultiplier rounded
-								to nearest integer. If omitted assumed to be 1.0.
+		"DamageMultiplier":2.0, - damage multiplier for this mode. Multiplicative per ammo/mode. If omitted assumed to be 1.0.
+		"HeatMultiplier":2.0, - heat multiplier for this mode. Multiplicative per ammo/mode. If omitted assumed to be 1.0.
+		"InstabilityMultiplier":2.0, - instability multiplier for this mode. Multiplicative per ammo/mode. If omitted assumed to be 1.0.
 								I can't use existing "ArmorDamageModifier" and "ISDamageModifier" cause 
 								  1) it is unknown what damage must be displayed in HUD
 								  2) it is difficult separate damage at place of impact 
