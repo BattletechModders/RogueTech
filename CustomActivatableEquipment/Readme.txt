@@ -21,6 +21,21 @@ AI related mod settings
   "ToolTipWarningFailChance": 0.2, - if component can be activated manually, active and have fail chance grater than this value it will be shown in tooltip with orange color
   "ToolTipAlertFailChance": 0.4, - if component can be activated manually, active and have fail chance grater than this value it will be shown in tooltip with red color
                                    NOTE! Component will not be show in same turn it has been activated no matter fail chance, cause it will not suffer fail roll only this turn.
+  "StartupByHeatControl":true, - if true startup after overheat controlled by current heat ratio
+  "StartupMinHeatRatio":0.4, - min heat ratio that should be reached before mech can start up
+                               NOTE! How it is working: mech shut down, on start up try there is check CurrentHeatRatio < StartupMinHeatRatio. If check pass start up normal. 
+                               If fail mech will not start acting same as if you press "done with mech" (eg. mech remains down and only heatsinks applying lowering heat level).
+                               Next turn you can try to start mech up again same rules. AI meches acting same.
+  "StoodUpPilotingRoll":true, - if true mech stand up procedure becomes optional. Based on piloting roll.
+  "StoodUpPilotingRollCoeff":0.1,
+  "DefaultArmsAbsenceStoodUpMod":-0.1, - default value for CAEArmAbsenceStoodUpMod
+  "LegAbsenceStoodUpMod":-0.1
+                              NOTE! Mechanics: in stand up try there is roll(0-1) against 
+                                       stand chance = <Piloting Skill> * <StoodUpPilotingRollCoeff> + <CAEStoodUpRollMod stat value> 
+                                            + <count of destroyed arms> * <CAEArmAbsenceStoodUpMod stat value>
+                                            + <count of destroyed legs> * <LegAbsenceStoodUpMod>
+                                    if roll value less than stand chance mech starts normally, if not mech will not stand up acting same as if you press "done with mech".
+                              NOTE! You can use CAEStoodUpRollMod and CAEArmAbsenceStoodUpMod actors statistic values to control stand up roll per chassis/mech
 
     "Custom":{
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
