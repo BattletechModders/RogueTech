@@ -36,6 +36,21 @@ AI related mod settings
                                             + <count of destroyed legs> * <LegAbsenceStoodUpMod>
                                     if roll value less than stand chance mech starts normally, if not mech will not stand up acting same as if you press "done with mech".
                               NOTE! You can use CAEStoodUpRollMod and CAEArmAbsenceStoodUpMod actors statistic values to control stand up roll per chassis/mech
+  "auraUpdateFix": "Position" - type of fixing updating aura while unit movment.
+                                Some basics: vanilla's code updating auras while unit moving looks like sabotage. If someone under my command write something like this he/she will be fired immediately.
+                                !EVERY! frame while unit moves method recalculating all auras invoked, and this method is very slow, 
+                                worst of all it is called in frame draw thread which inflicts huge FPS drop if there is ECMs at battlefield.
+                                I've throttle calling this method. I'm offering next throttling strategies:
+                                "None" - vanilla behavior
+                                "Never" - fastest method. Auras not updating while moving, only at end of move or jump. 
+                                          Drawback of this - you will see stealth animations only at end of move. But cause it is turnbased game it will not alter gameplay at all.
+                                "Position" - auras updating while moving, but frequency of updates controlled by moving distance eg every 20 meters for example. 
+                                          Distance controlled by auraUpdateMinPosDelta.
+                                "Time" -  - auras updating while moving, but frequency of updates controlled by moving time eg every 2 seconds. Time delta controlled by auraUpdateMinTimeDelta.
+                                I'm suggesting Position strategy with update every 20 meters, cause, i think, this settings is compromise between performance and visual.  
+                                Maybe later i will reimplement update strategy to use unity's colliders subsystem it will remove any visual drawbacks cause auras will be updated only when it is needed. 
+  "auraUpdateMinPosDelta": 20 - position delta for Position aura update fix strategy
+  "auraUpdateMinTimeDelta": 2 - time delta for Time aura update fix strategy
 
     "Custom":{
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
