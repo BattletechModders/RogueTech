@@ -216,6 +216,8 @@ CustomAmmoCategories.json
 
 Weapon definition
 new fields
+  "AOEEffectsFalloff": false, if true and weapon inflicts AoE damage, random roll will be permitted before onHit effect apply. 
+                              Example: aoe range = 100m, projectile hits ground in 30m from combatant - onHits effects will be applied with 0.7 chance ((100 - 30) / 100).
   "isHeatVariation": true, - if true heat damage will be altered using DamageVariance/DistantVariance/DistantVarianceReversed values. Per mode/ammo/weapon.
   "isStabilityVariation": true, - if true stability damage will be altered using DamageVariance/DistantVariance/DistantVarianceReversed values. Per mode/ammo/weapon.
   "isDamageVariation": true, - if true normal damage will be altered using DamageVariance/DistantVariance/DistantVarianceReversed values. Per mode/ammo/weapon.
@@ -358,7 +360,7 @@ new fields
 							       example 2 trajectory length 100, min 80, max 100 - missile will separate 20m from end cause it have to fly 80m until separation. 
 								   example 3 trajectory length 100 min 120, max 200 - missile will not separate at all. 
   "Unguided": false, for missiles effect only. If true missile trajectory will be strait line instead of curvy. Like it is unguided as old WW2 rockets. 
-					True value tied IndirectCapablea and AlwaysIndirectVisuals to false. 
+          Have no influence to indirect fire curvy
 					logic: if ammo unguided is true - launch will be unguided no matter mode and weapon settings, 
 					if ammo unguided is false or not set i'm looking at mode. if mode unguided is true launch will be unguided, 
 					if mode unguided is false or not set i'm looking at weapon. 
@@ -509,7 +511,7 @@ new fields
 									   example 2 trajectory length 100, min 80, max 100 - missile will separate 20m from end cause it have to fly 80m until separation. 
 									   example 3 trajectory length 100 min 120, max 200 - missile will not separate at all. 
 	  "Unguided": false, for missiles effect only. If true missile trajectory will be strait line instead of curvy. Like it is unguided as old WW2 rockets. 
-						True value tied IndirectCapablea and AlwaysIndirectVisuals to false
+          Have no influence to indirect fire curvy
 					logic: if ammo unguided is true - launch will be unguided no matter mode and weapon settings, 
 					if ammo unguided is false or not set i'm looking at mode. if mode unguided is true launch will be unguided, 
 					if mode unguided is false or not set i'm looking at weapon. 
@@ -727,7 +729,7 @@ Ammo definition
 								Example: ammo box has capacity 10, ammo has CanBeExhaustedAt - 0.5, current ammo upon check - 4. Exhaustion chance = (0.5 - 0.4)/0.5 = 0.2
 								Note: if current ammo is 0, Exhaustion chance become 1. One ammo box checked once per attack. Ammo ejections initiates exhaustion check too. 
     "Unguided": false, for missiles effect only. If true missile trajectory will be strait line instead of curvy. Like it is unguided as old WW2 rockets. 
-	               True value tied IndirectCapablea and AlwaysIndirectVisuals to false
+          Have no influence to indirect fire curvy
 					logic: if ammo unguided is true - launch will be unguided no matter mode and weapon settings, 
 					if ammo unguided is false or not set i'm looking at mode. if mode unguided is true launch will be unguided, 
 					if mode unguided is false or not set i'm looking at weapon. 
@@ -939,6 +941,47 @@ Ammo definition
         }
     ]
 }
+
+
+Notes for external AI (CleverGirl):
+weapon.gatherDamagePrediction(Vector3 attackPos, ICombatant target) - returns Dictionary<AmmoModePair, WeaponFirePredictedEffect>
+AmmoModePair can be used in weapon.ApplyAmmoMode(AmmoModePair ammoMode) to switch weapon to this specific ammo and mode 
+                                      (no checking performed, eg. you can switch to ammo/mode not available for weapon)
+result will contain only valid for this weapon mode/ammo pairs with respect to mode locking subsystem and ammo boxes state and available ammo count.
+                                      
+public class WeaponFirePredictedEffect {
+  public AmmunitionDef ammo { get; set; } 
+  public ExtAmmunitionDef exAmmo { get; set; }
+  public Weapon weapon { get; set; }
+  public WeaponMode mode { get; set; }
+  public bool isAMS { get; set; }
+  public bool isAAMS { get; set; }
+  public float JammChance { get; set; }
+  public int Cooldown { get; set; }
+  public bool DamageOnJamm { get; set; }
+  public bool DestroyOnJamm { get; set; }
+  public int ammoUsage { get; set; } - is literally ShotsWhenFire for this ammo/mode
+  public int avaibleAmmo { get; set; } - if weapon not use ammo value will be -1. Calculated with respect to ammo boxes state and ammo count.
+  public List<DamagePredictionRecord> predictDamage { get; set; } - if weapon have stray, shells stray or AoE damage this list will be filled accordingly 
+}                                      
+
+public class DamagePredictionRecord {
+  public float Normal { get; set; } - normal damage
+  public float AP { get; set; } - damage penetrates armor
+  public float Heat { get; set; }
+  public float Instability { get; set; }
+                               NOTE: all damage values filled with respect to variance, attacker and target current design masks 
+                               (note, design mask and sticky effects on path from current position to attack position are not predicted)
+                               All damage to meant to be inflicted by one hit.
+  public float HitsCount { get; set; } - Actual hits count. Can be not integer cause of stray/shells range calculation
+  public bool isAoE { get; set; } - Flag for AoE damage. If damage is AoE AP is always 0. Normal, Heat, Instability - full damage with distance falloff. 
+  public List<int> PossibleHitLocations { get; set; } - List of possible hit locations
+  public List<EffectData> ApplyEffects { get; set; } - List of effects applied on hit
+  public ICombatant Target { get; set; } 
+  public float ToHit { get; set; } - To hit chance for this ammo/mode/target. Note: LoS/Range not checked, if damage is AoE ToHit always 1.0
+}
+
+NOTE! To disable internal ammo/mode choose CustomAmmoCategories.DisableInternalWeaponChoose can be set to true. It will prevent all internal AI ammo/mode alterations.
 
 audio enums:
 NOTE: I certainly don't know how they sounds like, you are welcome to try. 
