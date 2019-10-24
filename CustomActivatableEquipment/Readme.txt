@@ -447,6 +447,7 @@ AI related mod settings
 
   
   AURAS RELATED SETTINGS
+  Hotkey - you can use LCtrl + A to switch auras circles visibility. By default only auras with HideOnNotSelected: false is show. Default -> LCtrl+A -> Hide all auras -> LCtrl+A -> Show all auras (even with HideOnNotSelected: true) 
 COMPOPNENT 
 
   "Auras": [
@@ -462,6 +463,7 @@ COMPOPNENT
                                                     Online - aura enabled if component is actived
                                                     Offline - aura enabled if component is deactivated
                                                     Persistent - aura no matter component activation state
+      "HideOnNotSelected": false,                 - if true aura circle will be hidden while unit not selected. True by default
       "ApplySelf": true,                          - if true aura effects will be applied to component's owner
               Next variables is used to make AI and preview calculations faster. 
               their values not tied to actual effects. They just should be set correct by moder to make AI and preview calculations correct.
