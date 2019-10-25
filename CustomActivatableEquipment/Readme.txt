@@ -1,3 +1,8 @@
+!WARNING! This version of CAE disabling vanilla aura COMPLETELY. I have to do it cause vanilla aura's code is very bad. 
+Original code recalculating all auras for all combatant pairs every frame which is drop performance down especially if there many units on battle field.
+My auras implementation written from scratch and using colliders making Unity do all work for compare distances.
+!NOTE! FrostRaptor's AurasHelper is assumed to be incompatible new auras code. But cause original auras disabled it assumed to be not needed. 
+
 to invoke activation dialog ctrl+click on move button in mech HUD. 
 to invoke heat sinks manipulation dialog ctrl+click on brace (shield) button in mech HUD. 
    heat sinks manipulation limitations: you can switch on and off only dedicated heat sinks not engine internal ones
@@ -36,6 +41,8 @@ AI related mod settings
                                             + <count of destroyed legs> * <LegAbsenceStoodUpMod>
                                     if roll value less than stand chance mech starts normally, if not mech will not stand up acting same as if you press "done with mech".
                               NOTE! You can use CAEStoodUpRollMod and CAEArmAbsenceStoodUpMod actors statistic values to control stand up roll per chassis/mech
+-----------------------------------------------------------------------------------------------------------------------                              
+  NOT NEEDED ANY MORE. KEEPED FOR HISTORICAL REASONS.
   "auraUpdateFix": "Position" - type of fixing updating aura while unit movment.
                                 Some basics: vanilla's code updating auras while unit moving looks like sabotage. If someone under my command write something like this he/she will be fired immediately.
                                 !EVERY! frame while unit moves method recalculating all auras invoked, and this method is very slow, 
@@ -51,7 +58,7 @@ AI related mod settings
                                 Maybe later i will reimplement update strategy to use unity's colliders subsystem it will remove any visual drawbacks cause auras will be updated only when it is needed. 
   "auraUpdateMinPosDelta": 20 - position delta for Position aura update fix strategy
   "auraUpdateMinTimeDelta": 2 - time delta for Time aura update fix strategy
-
+------------------------------------------------------------------------------------------------------------------------
     "Custom":{
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
 		"ActivatableComponent":{
@@ -437,3 +444,212 @@ AI related mod settings
 			]
 		}
 	},
+
+  
+  AURAS RELATED SETTINGS
+  Hotkey - you can use LCtrl + A to switch auras circles visibility. By default only auras with HideOnNotSelected: false is show. Default -> LCtrl+A -> Hide all auras -> LCtrl+A -> Show all auras (even with HideOnNotSelected: true) 
+COMPOPNENT 
+
+  "Auras": [
+    {
+      "Id": "Gear_Sensor_Prototype_EWE_Aura_ECM", - Id should be unique per component definition. 
+                                                    If Id set as "AMS" and component is weapon than Range is tied to weapon MaxRange and reticle is only shown if weapon is enabled and in AMS mode. 
+                                                    Look at CustomAmmoCategories/weapon/Weapon_MachineGun_AMS_3-Hydra.json it defines empty aura not applying any effects just for colored circle showing range. 
+      "Name": "ECM",                              - Name used in UI
+      "ReticleColor": "#00f2ff",                  - Color of circle for aura
+      "Range": 100,                               - aura effect radius
+      "RangeStatistic":""                         - unit's statistic name used to inflict aura range at runtime
+      "RemoveOnSensorLock": true,                 - if true all aura effects will be removed if unit become sensor locked
+      "State": "Online",                          - Settings describing relationship with component activation state.
+                                                    Possible values: Online/Offline/Persistent
+                                                    Online - aura enabled if component is actived
+                                                    Offline - aura enabled if component is deactivated
+                                                    Persistent - aura no matter component activation state
+      "HideOnNotSelected": false,                 - if true aura circle will be hidden while unit not selected. True by default
+      "ApplySelf": true,                          - if true aura effects will be applied to component's owner
+              Next variables is used to make AI and preview calculations faster. 
+              their values not tied to actual effects. They just should be set correct by moder to make AI and preview calculations correct.
+      "AllyStealthAffection": "PositiveOne",      - affect to stealth charges. Possible values: None, Nullify, PositiveOne, PositiveTwo, PositiveThree, PositiveFour, PositiveFive, NegativeOne, NegativeTwo, NegativeThree, NegativeFour, NegativeFive
+      "EnemyStealthAffection": "None",            - affect to stealth charges. Possible values: None, Nullify, PositiveOne, PositiveTwo, PositiveThree, PositiveFour, PositiveFive, NegativeOne, NegativeTwo, NegativeThree, NegativeFour, NegativeFive
+      "IsPositiveToAlly": true,                   - next variables have names telling about their functions. Used by AI
+      "IsNegativeToAlly": false,
+      "IsNegativeToEnemy": false,
+      "IsPositiveToEnemy": false,
+      "onlineVFX": [                             - static aura effects. Playing if aura active. Linked to aura carrier.
+        {
+          "VFXname": "vfxPrfPrtl_ECM_loop",      - vfx name
+          "scale": true,                         - if true effect will be scaled by range
+          "scaleToRangeFactor": 100              - to range scale. actual scale = Range/scaleToRangeFactor
+        }
+      ],
+      "targetVFX": [                            - oneshot vfxes played when aura affects unit
+        "vfxPrfPrtl_ECMtargetAdd_burst"
+      ],
+      "removeTargetVFX": [                      - oneshot vfxes played when unit lives aura
+        "vfxPrfPrtl_ECMtargetRemove_burst"
+      ],
+      "ownerSFX": [                             - sound effect played at aura owner when someone enter aura
+        "AudioEventList_ui_ui_ecm_start"
+      ],
+      "targetSFX": [                            - sound effect played at unit entering aura
+        "AudioEventList_ecm_ecm_enter"
+      ],
+      "removeOwnerSFX": [                       - sound effect played at aura owner when someone leave aura
+        "AudioEventList_ui_ui_ecm_stop"
+      ],
+      "removeTargetSFX": [                      - sound effect played at unit leaving aura
+        "AudioEventList_ecm_ecm_exit"
+      ],
+      "statusEffects": [                        - list of status effects applied upon entering aura range
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": 1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",     - trigger should be passive
+            "specialRules": "NotSet",           - should be NotSet
+            "effectTargetType": "AlliesWithinRange",    - values: AlliesWithinRange, EnemiesWithinRange
+            "range": 0.0,                               - not used
+            "forcePathRebuild": false,
+            "forceVisRebuild": false,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "ECMEffect_IndirectImmunityAura",
+            "Name": "ECM MISSILE DEFENSE",
+            "Details": "Friendly units within an ECM field gain +[AMT] Difficulty to missile attacks against them and immunity to Indirect Fire. Being Sensor Locked removes this effect.",
+            "Icon": "uixSvgIcon_status_ECM-missileDef"
+          },
+          "statisticData": {
+            "statName": "IsIndirectImmune",
+            "operation": "Set",
+            "modValue": "true",
+            "modType": "System.Boolean"
+          },
+          "nature": "Buff"
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": 1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "specialRules": "NotSet",
+            "effectTargetType": "AlliesWithinRange",
+            "range": 0.0,
+            "forcePathRebuild": false,
+            "forceVisRebuild": false,
+            "showInTargetPreview": true,
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "ECMEffect_MissileDefense",
+            "Name": "ECM MISSILE DEFENSE",
+            "Details": "Friendly units within an ECM field gain +[AMT] Difficulty to missile attacks against them and immunity to Indirect Fire. Being Sensor Locked removes this effect.",
+            "Icon": "uixSvgIcon_status_ECM-missileDef"
+          },
+          "statisticData": {
+            "statName": "ToHitThisActorMissile",
+            "operation": "Float_Add",
+            "modValue": "4.0",
+            "modType": "System.Single"
+          },
+          "nature": "Buff"
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": 1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "specialRules": "NotSet",
+            "effectTargetType": "AlliesWithinRange",
+            "range": 0.0,
+            "forcePathRebuild": false,
+            "forceVisRebuild": true,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "ECMStealth_GhostEffect_Allies",
+            "Name": "STEALTH CHARGE",
+            "Details": "Units within an ECM field gain a Stealth Charge and cannot be targeted.\n\nFiring a weapon, using an activated ability, or an enemy penetrating the ECM field removes a Stealth Charge. Being Sensor Locked removes all Stealth Charges.",
+            "Icon": "uixSvgIcon_status_ECM-ghost"
+          },
+          "statisticData": {
+            "statName": "GhostEffectStacks",
+            "operation": "Int_Add",
+            "modValue": "1",
+            "modType": "System.Int32"
+          },
+          "nature": "Buff"
+        }
+      ]
+    },  
+
+    
+GLOBAL SETTINGS 
+Idea that unit inflicts all enemy units protected by ECM just standing in ECM range is looks insane and illogical to me.
+So original counter ECM behaviour is changed. All units have sensors aura not connected to component. This aura is used to counter ECMs.
+All enemies in this aura receive penalty to stealth charges.
+Sensors aura is defined at CAE settings.
+It have same definitions as component aura described above
+    "sensorsAura":{
+      "ReticleColor" : "white",
+      "Id": "Sensors",
+      "Name": "Sensors",
+      "Range": 60,
+      "RangeStatistic" : "CAE_SENSORS_RANGE",
+      "ApplySelf": false,
+      "EnemyStealthAffection": "NegativeOne",
+      "IsNegativeToEnemy": true,
+      "ownerVFX": [ ],
+      "targetVFX": [ ],
+      "removeOwnerVFX": [ ],
+      "removeTargetVFX": [ ],
+      "ownerSFX": [ ],
+      "targetSFX": [ ],
+      "removeOwnerSFX": [ ],
+      "removeTargetSFX": [ ],
+      "statusEffects" : [
+        {
+          "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "EnemiesWithinRange",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+          "effectType" : "StatisticEffect",
+          "Description" : {
+            "Id" : "ECMStealth_SensorsEffect",
+            "Name" : "ECM CARRIER",
+            "Details" : "",
+            "Icon" : ""
+          },
+          "statisticData" : {
+            "statName" : "GhostEffectStacks",
+            "operation": "Int_Add",
+            "modValue": "-1",
+            "modType": "System.Int32"
+          },
+          "nature" : "Buff"
+        }        
+      ]
+    }
+	},
+
