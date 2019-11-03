@@ -61,7 +61,7 @@ BackColor2=clBlack
 
 [Files]
 ;Source: "/RogueTech Core/RogueTech.txt"; DestDir: "{app}/Mods/RogueTech Core"; Flags: isreadme ignoreversion
-Source: "/*"; Excludes: ".git,.modtek,.git,log.txt,RTAssetsSetup.iss,*.log,ContractSort,GalaxyAtWar,PersistentMapClient,RogueUrbanWarfareModule,LV426,SortByTonnage,Warhammer Emblems,NROL Emblems,BiggerDrop,MissionControlRandom,MissionControlRandomLarge,MissionControl,HistoricPirateFlags,rubyscripts,RepublicArtillery,Risc Urban Warfare,RogueModuleElitesFlashpoint,MechPortraitsArmakoir,MechPortraitsENOVA,MechPortraitsJK,RoguePortraits,RogueTechDebug,ClanUpgrades,ClanUpgradesCivilWar,ClanUpgradesDarkAge,ClanUpgradesJihad,ClanUpgradesRepublic,Protomechs,GlobalDifficultyByRep,RogueFlashPointModuleStoryline,DarkAgeArtillery,PirateTech,RISCtech module,Dark Age Unique,Jihad Urban Warfare,Jihad Unique,Jihad 3068-3080,Republic Unique Mechs,Republic Urban Warfare,Republic FlashPoint,Civil War Unique,Base FlashPoint,Civil War Urban Warfare,CivilWar 3062-3067,Base UrbanWarfare,Republic 3081-3130,RogueTechSounds,UrbocalypseDarkAge,EnovaEmblems,FlashPointArtillery,DarkAge,FlashPointDarkAge,ExperimentalWeapons_SHcompat,Urbocalypse,ArtilleryUnits,LootedClanMechs,The Drones Of Syberia,ClanEmblems,SpeedMod,Flashpoint-The-Raid,SkipTravelCutscenes,RandomTravelContracts,PersistentMapClient,RogueModuleElites,CommanderPortraitLoader,Superheavys,RogueFlashPointModule,ExperimentalWeapons,RaelM Emblem,UrbieNuke,GlobalDifficultyByCompany,GlobalDifficultyByPlanets,Retrainer,Silence,FreeCam,BindableEscapeKey,ArmorRepair,ArmorPoints,RogueEmblems,All 3025 Mercs,Capellan Emblems,SkipIntro,CrystalClear" ; DestDir: "{app}/Mods"; Flags: recursesubdirs ignoreversion
+Source: "/*"; Excludes: ".git,.modtek,.git,log.txt,RTAssetsSetup.iss,*.log,ContractSort,GalaxyAtWar,PersistentMapClient,RogueUrbanWarfareModule,LV426,SortByTonnage,Warhammer Emblems,NROL Emblems,BiggerDrop,MissionControlRandom,MissionControlRandomLarge,MissionControlMassive,HistoricPirateFlags,rubyscripts,RepublicArtillery,Risc Urban Warfare,RogueModuleElitesFlashpoint,MechPortraitsArmakoir,MechPortraitsENOVA,MechPortraitsJK,RoguePortraits,RogueTechDebug,ClanUpgrades,ClanUpgradesCivilWar,ClanUpgradesDarkAge,ClanUpgradesJihad,ClanUpgradesRepublic,Protomechs,GlobalDifficultyByRep,RogueFlashPointModuleStoryline,DarkAgeArtillery,PirateTech,RISCtech module,Dark Age Unique,Jihad Urban Warfare,Jihad Unique,Jihad 3068-3080,Republic Unique Mechs,Republic Urban Warfare,Republic FlashPoint,Civil War Unique,Base FlashPoint,Civil War Urban Warfare,CivilWar 3062-3067,Base UrbanWarfare,Republic 3081-3130,RogueTechSounds,UrbocalypseDarkAge,EnovaEmblems,FlashPointArtillery,DarkAge,FlashPointDarkAge,ExperimentalWeapons_SHcompat,Urbocalypse,ArtilleryUnits,LootedClanMechs,The Drones Of Syberia,ClanEmblems,SpeedMod,Flashpoint-The-Raid,SkipTravelCutscenes,RandomTravelContracts,PersistentMapClient,RogueModuleElites,CommanderPortraitLoader,Superheavys,RogueFlashPointModule,ExperimentalWeapons,RaelM Emblem,UrbieNuke,GlobalDifficultyByCompany,GlobalDifficultyByPlanets,Retrainer,Silence,FreeCam,BindableEscapeKey,ArmorRepair,ArmorPoints,RogueEmblems,All 3025 Mercs,Capellan Emblems,SkipIntro,CrystalClear" ; DestDir: "{app}/Mods"; Flags: recursesubdirs ignoreversion
 
 Source: "/PersistentMapClient/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/PersistentMapClient"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechMode\Online;
 Source: "/RandomTravelContracts/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RandomTravelContracts"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechMode\Online;
@@ -129,9 +129,9 @@ Source: "/Urbocalypse/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Urbocalypse"
 Source: "/UrbocalypseDarkAge/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/UrbocalypseDarkAge"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\Urbocalypse;
 Source: "/RogueFlashPointModuleStoryline/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RogueFlashPointModuleStoryline"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\FlashpointStory;
 
-Source: "/MissionControl/*"; DestDir: "{app}/Mods/MissionControl"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: MC\MissionControl; 
 Source: "/MissionControlRandom/*"; DestDir: "{app}/Mods/MissionControl"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: MC\MissionControlRandom; 
 Source: "/MissionControlRandomLarge/*"; DestDir: "{app}/Mods/MissionControl"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: MC\MissionControlRandomLarge; 
+Source: "/MissionControlMassive/*"; DestDir: "{app}/Mods/MissionControl"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: MC\MissionControlmassive; 
 
 Source: "/RogueFlashPointModule/*"; DestDir: "{app}/Mods/RogueFlashPointModule"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: DLC\FLASHPOINT; 
 Source: "/Flashpoint-The-Raid/*"; DestDir: "{app}/Mods/Flashpoint-The-Raid"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: DLC\FLASHPOINT;
@@ -201,10 +201,10 @@ Name: "difficulty"; Description: "Choose difficulty scaling"; Types: full custom
 Name: "difficulty\Rep"; Description: "Difficulty by Reputation - Excellent for War Play"; Types: custom; Flags: exclusive
 Name: "difficulty\Company"; Description: "Difficulty by Company Rating - Scales with your Power Level"; Types: full compact; Flags: exclusive 
 Name: "difficulty\Planet"; Description: "Difficulty by Planet Rating - Planets never change their Skulls"; Types: custom; Flags: exclusive
-Name: "MC"; Description: "Mission Control - Alternate Battles!"; Types: custom compact;
+Name: "MC"; Description: "Mission Control - 2 Lances and battle Extras!"; Types: full custom compact;  Flags: fixed dontinheritcheck
 Name: "MC\MissionControlRandom"; Description: "Randomizes Battle Spawns"; Types: full compact; Flags: exclusive
 Name: "MC\MissionControlRandomLarge"; Description: "Randomized Spawns & Large Maps"; Types: custom; Flags: exclusive
-Name: "MC\MissionControl"; Description: "Massive Sized Battles & 2 Player Lances"; Types: custom; Flags: exclusive
+Name: "MC\MissionControlMassive"; Description: "Massive Sized Battles"; Types: custom; Flags: exclusive
 Name: "DLC"; Description: "DLC Modules - Only use when you have it!"; Types: custom compact;
 Name: "DLC\FLASHPOINT"; Description: "Flashpoint"; Types: custom
 Name: "DLC\UrbanWarfare"; Description: "UrbanWarfare"; Types: custom
