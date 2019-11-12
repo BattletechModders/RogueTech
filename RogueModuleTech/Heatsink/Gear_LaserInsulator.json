@@ -1,52 +1,64 @@
 {
     "Custom": {
-	"Category": [{
-            "CategoryID": "Heatsink"
-        }],
-        "EngineHeatSink": {
-            "FullName": "Proto Double Heat Sinks",
-            "Abbreviation": "PDHS",
-            "Tag": "PDHS"
+        "WorkOrderCosts": {
+            "Install": {
+                "TechCost": "1.1 * [[Chassis.Tonnage]] / 20",
+                "CBillCost": "500 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]] / 40"
+            }
         },
-        "ComponentExplosion": {
-            "HeatDamage": 20,
-            "ExplosionDamage": 20,
-            "StabilityDamage": 20
-        },
-        "BonusDescriptions": {
-            "Bonuses": [
-                "HeatPerTurn: -4",
-                "TEHeatgen: -4%",
-                "BankMaxHeat: 4",
-                "BankThreshhold: 4",
-                "BankBoom: 20"
+        "Category": [
+            {
+                "CategoryID": "Insulator"
+            }
+        ],
+        "Flags": {
+            "flags": [
+                "not_broken"
             ]
         },
         "InventorySorter": {
-            "SortKey": "00015"
-        }
+            "SortKey": "00012"
+        },
+		"ComponentExplosion": {
+            "HeatDamage": 10,
+            "ExplosionDamage": 10,
+            "StabilityDamage": 10
+        },
+		"BonusDescriptions": {
+            "Bonuses": [
+				"HeatPerTurn: -2",
+                "LASERHEAT: -5%",
+				"BankMaxHeat: +2",
+                "BankThreshhold: +2",
+				"BankBoom: 10"
+				"LaserInsulator"
+            ]
+        },
     },
-    "DissipationCapacity": 4,
+    "StatName": null,
+    "RelativeModifier": 0,
+    "AbsoluteModifier": 0,
+	"DissipationCapacity": 2,
     "Description": {
         "Cost": 200000,
-        "Rarity": 10,
+        "Rarity": 20,
         "Purchasable": true,
-        "Manufacturer": "Friden",
-        "Model": "Prototype",
-        "UIName": "Prototype DHS",
-        "Id": "Gear_HeatSink_Prototype_Double",
-        "Name": "Prototype Heatsink (D)",
-        "Details": "These Prototype Double Heat Sinks were created by House Davion researchers. Unlike the Double Heat Sinks used by the Star League and after the War of 3039 these prototype units were smaller. As an experiment, they worked adequately, but their use of liquid heavy metals instead of the safer (if larger) radiators used in SLDF double heat sinks meant that they have been highly unstable. <b><color=#099ff2>VOLATILE!</color></b>",
-        "Icon": "uixSvgIcon_equipment_Heatsink"
+        "Manufacturer": "SLDF",
+        "Model": "Insulator",
+        "UIName": "Laser Insulator",
+        "Id": "Gear_LaserInsulator",
+        "Name": "Laser Insulator",
+        "Details": "Introduced in 2575 by the Terran Hegemony, the Laser Insulators were an advanced heat sink first used in the SLDF's Chippewa fighter. The laser bays in the fighter's wings were insulated from its superstructure and core systems with robust, lightweight aerogel blankets. While providing the equivalent of two standard heat sinks at a fraction of the weight, the primary drawback of the system was that it trapped the heat close to the source rather than allowing it to flow through the entire fighter to act as a thermal mass.",
+        "Icon": "uixSvgIcon_action_end"
     },
-    "BonusValueA": "- 6 Heat / Turn",
+    "BonusValueA": "-0.2t",
     "BonusValueB": "",
     "ComponentType": "HeatSink",
     "ComponentSubType": "Heatsink",
     "PrefabIdentifier": "",
     "BattleValue": 0,
     "InventorySize": 1,
-    "Tonnage": 1,
+    "Tonnage": 0.5,
     "AllowedLocations": "All",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
@@ -75,7 +87,7 @@
                 "effectsPersistAfterDestruction": false,
                 "statName": "MaxHeat",
                 "operation": "Int_Add",
-                "modValue": "4",
+                "modValue": "2",
                 "modType": "System.Int32",
                 "additionalRules": "NotSet",
                 "targetCollection": "NotSet",
@@ -109,7 +121,7 @@
                 "effectsPersistAfterDestruction": false,
                 "statName": "OverheatLevel",
                 "operation": "Int_Add",
-                "modValue": "4",
+                "modValue": "2",
                 "modType": "System.Int32",
                 "additionalRules": "NotSet",
                 "targetCollection": "NotSet",
@@ -143,11 +155,11 @@
                 "effectsPersistAfterDestruction": false,
                 "statName": "HeatGenerated",
                 "operation": "Float_Multiply",
-                "modValue": "0.96",
+                "modValue": "0.95",
                 "modType": "System.Single",
                 "additionalRules": "NotSet",
                 "targetCollection": "Weapon",
-                "targetWeaponCategory": "NotSet",
+                "targetWeaponCategory": "Laser",
                 "targetWeaponType": "NotSet",
                 "targetAmmoCategory": "NotSet",
                 "targetWeaponSubType": "NotSet"
@@ -156,7 +168,8 @@
     ],
     "ComponentTags": {
         "items": [
-            "component_type_stock"
+            "component_type_stock",
+			"Insulator.{location}"
         ],
         "tagSetSourceFile": ""
     }
