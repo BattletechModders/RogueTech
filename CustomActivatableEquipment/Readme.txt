@@ -466,6 +466,8 @@ COMPOPNENT
                                                     Offline - aura enabled if component is deactivated
                                                     Persistent - aura no matter component activation state
       "HideOnNotSelected": false,                 - if true aura circle will be hidden while unit not selected. True by default
+      "FloatieAtEndOfMove": true,                 - if true floatie will be shown at end of move (jump) instead of aura collide. Default true.
+                                                    NOTE: this feature works only in combat movement style, only for floaties (VFXes playing and effects applying still at collide) and only floaties emitted by aura itself.
       "ApplySelf": true,                          - if true aura effects will be applied to component's owner
               Next variables is used to make AI and preview calculations faster. 
               their values not tied to actual effects. They just should be set correct by moder to make AI and preview calculations correct.
