@@ -2,7 +2,16 @@
     "Custom": {
          "Category": [
 		   { "CategoryID": "Cockpit" },
-			{ "CategoryID": "Gyro"}
+			{ "CategoryID": "Gyro"},
+			{ 
+			"CategoryID" : "LifeSupportA" 
+		},
+		{ 
+			"CategoryID" : "LifeSupportB" 
+		},
+		{
+            "CategoryID": "CockpitFCS"
+        }
         ],
         "WorkOrderCosts": {
             "Install": {
@@ -13,8 +22,23 @@
 		"Weights": {
             "StructureFactor": 0.7
         },
+		"Linked": {
+            "Links": [
+                {
+                    "ComponentDefId": "Gear_Cockpit_LifeSupportA_Torso",
+                    "Location": "LeftTorso",
+					"ComponentDefType": "Upgrade"
+                },
+                {
+                    "ComponentDefId": "Gear_Cockpit_LifeSupportB_Torso",
+                    "Location": "RightTorso",
+					"ComponentDefType": "Upgrade"
+                }
+            ]
+        },
         "BonusDescriptions": {
             "Bonuses": [
+				"Omni",
                 "Initiative: +1",
                 "Health: +3",
 				"SkillGunnery: 1",
@@ -27,8 +51,20 @@
 				"SureFoot",
                 "StabDamageTaken: -25%",
                 "GyroStab: 60",
-				"InterfaceWeight: -30%"
-                "IsCockpit"
+				"DesperadoInterfaceWeight: -30%"
+                "IsCockpit",
+				"TorsoMount",
+				"Sight: +5%",
+				"AccuracyER: +3",
+				"AccuracyLR: +2",
+				"AccuracyMR: +1",
+				"AccuracyMin: +3",
+				"NightVision",
+                "FCS"				
+                "ArmorTPCost: -50%",
+                "StructureTPCost: -50%",
+                "ArmorCBCost: +20%",
+                "StructureCBCost: +25%"
             ]
         },
         "Sorter": {
@@ -41,7 +77,10 @@
 			"flags": [
 				"not_broken"
 			]
-		}
+		},
+		"Lootable": {
+            "ItemID": "Gear_Cockpit_Interface"
+        }
     },
     "Description": {
         "Cost": 620000,
@@ -49,10 +88,10 @@
         "Purchasable": false,
         "Manufacturer": "Word of Blake",
         "Model": "Interface Cockpit",
-        "UIName": "Cockpit Interface",
-        "Id": "Gear_Cockpit_Interface",
+        "UIName": "Cockpit TM Interface",
+        "Id": "Gear_Cockpit_Interface_desperado",
         "Name": "Interface Cockpit",
-        "Details": "Designed to make use of the experimental Interface System developed by the Word of Blake based on Clan Protomech designs, does this cockpit completly remove the need for a BattleMech Gyro",
+        "Details": "A Specialised Torso Mounted Interface Cockpit commissioned on Solaris 7 with Experimental Smoke Jaguar EI Technology bought from Diamond Shark Traders with an Integrated Predator FCS",
         "Icon": "uixSvgIcon_equipment_Cockpit"
     },
     "BonusValueA": "Headshot Immunity",
@@ -61,11 +100,11 @@
     "ComponentSubType": "NotSet",
     "PrefabIdentifier": "",
     "BattleValue": 0,
-    "InventorySize": 2,
-    "Tonnage": 4,
-    "AllowedLocations": "Head",
+    "InventorySize": 3,
+    "Tonnage": 3,
+    "AllowedLocations": "CenterTorso",
     "DisallowedLocations": "All",
-    "CriticalComponent": false,
+    "CriticalComponent": true,
     "statusEffects": [
 	        {
             "durationData": {
@@ -415,6 +454,161 @@
                 "modValue": "3",
                 "modType": "System.Int32",
                 "targetCollection": "Pilot"
+            }
+        },
+		{
+            "durationData": {
+                "duration": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator"
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "NightVision",
+                "Name": "Night Vision Mode",
+                "Details": "PASSIVE: Enables Night Vision.",
+                "Icon": "uixSvgIcon_ability_precisionstrike"
+            },
+            "statisticData": {
+                "statName": "LV_NIGHT_VISION",
+                "operation": "Set",
+                "modValue": "true",
+                "modType": "System.Boolean"
+            },
+            "nature": "Buff"
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "HP-CockpitSensors-Spot",
+                "Name": "SPOTTING DISTANCE INCREASED",
+                "Details": "Increases spotting distance by 50m.",
+                "Icon": "uixSvgIcon_equipment_Cockpit"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "appliesEachTick": false,
+                "effectsPersistAfterDestruction": false,
+                "statName": "SpotterDistanceAbsolute",
+                "operation": "Float_Multiply",
+                "modValue": "1.05",
+                "modType": "System.Single"
+            }
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "RangeBracketBonusAccER",
+                "Name": "Bonus Accuracy at range",
+                "Details": "range bracket bonus accuracy",
+                "Icon": "uixSvgIcon_ability_precisionstrike"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CACExtraLongRangeAccuracyMod",
+                "operation": "Float_Add",
+                "modValue": "-3.0",
+                "modType": "System.Single"
+            }
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "RangeBracketBonusAccLR",
+                "Name": "Bonus Accuracy at range",
+                "Details": "range bracket bonus accuracy",
+                "Icon": "uixSvgIcon_ability_precisionstrike"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CACLongRangeAccuracyMod",
+                "operation": "Float_Add",
+                "modValue": "-2.0",
+                "modType": "System.Single"
+            }
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "RangeBracketBonusAccMR",
+                "Name": "Bonus Accuracy at range",
+                "Details": "range bracket bonus accuracy",
+                "Icon": "uixSvgIcon_ability_precisionstrike"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CACMediumRangeAccuracyMod",
+                "operation": "Float_Add",
+                "modValue": "-1.0",
+                "modType": "System.Single"
+            }
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "RangeBracketBonusAccSR",
+                "Name": "Bonus Accuracy at range",
+                "Details": "range bracket bonus accuracy",
+                "Icon": "uixSvgIcon_ability_precisionstrike"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CACMinRangeAccuracyMod",
+                "operation": "Float_Add",
+                "modValue": "-3.0",
+                "modType": "System.Single"
             }
         }
     ],
