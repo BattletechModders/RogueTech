@@ -359,6 +359,8 @@
     "TacticsDivisor": 20,
     "TacticsModifierDivisor": 10,
     "ToHitOffensivePush": 20,
+    "StrayShotsEnabled":true,
+	"StrayShotsHitUnits":true,
     "StrayShotValidTargets": 2
   },
   "ResolutionConstants": {
@@ -416,6 +418,8 @@
     "SearchForValidCritSlot": true,
     "MinCritChance": 0.5,
     "AllowTotalNegativeModifier": true,
+"COILUsesJumping": false,
+    "COILMultipliesShots": false,
     "CoolantVentEffect": {
       "durationData": {
         "duration": 1,
@@ -481,6 +485,7 @@
     "ArmorMultiplierVehicle": 0.8,
     "StructureMultiplierVehicle": 2.3,
     "GlobalDamageMultiplier": 1.0,
+"MortarBuildingDamageMultiplier": 3.0,
     "TEST_MechScaleMultiplier": 1.0
   },
   "HitTables": {
@@ -1111,14 +1116,14 @@
     "showFLoatiesForMisses": false,
     "showFloatiesForDodges": true,
     "showStateRemovals": false,
-    "ScreenShakeBuildingDestruction": [
+	"ScreenShakeBuildingDestruction": [
       600,
       250,
       500,
       750,
       1000
     ],
-    "ScreenShakeBuildingDestructionLength": 8,
+	"ScreenShakeBuildingDestructionLength": 8,
     "ScreenShakeRangedDamageRelativeMod": 2.0,
     "ScreenShakeRangedDamageAbsoluteMod": 0.0,
     "ScreenShakeMeleeDamageRelativeMod": 2.0,
@@ -1379,63 +1384,56 @@
     "InjuryStringSideTorso": "killed by an enemy {KILLEDBY_UNIT.Description.Name}",
     "InjuryStringSideTorsoGeneric": "lost in combat",
     "InjuryStringUnknown": "lost in a misadventure",
-    "InjuryStringWeapon": "killed by an enemy {KILLEDBY_UNIT.Description.Name}"
+    "InjuryStringWeapon": "killed by an enemy {KILLEDBY_UNIT.Description.Name}",
+	"COIL_Footstep_Charge_Med" : 2.0,
+	"COIL_Footstep_Charge_Max" : 4.0,
+	"COIL_Projectile_Charge_Med" : 70.0,
+	"COIL_Projectile_Charge_Max" : 140.0
   },
   "CameraConstants": {
-    "MoveSpeed": 560.0, /* acceleration of the camera */
-    "MaxSpeed": 430.0, /* max top speed of the camera */
-    "MoveFalloff": 0.5, /* this controls "friction" which slows the camera's momentum */
-    "ZoomSpeed": 2000.0, /* how fast the camera zooms in and out, under player control */
-    "RotationSpeed": 19.0, /* how fast the camera rotates via right mouse hold */
-    "RotationSpeedKeyboard": 21.0, /* how fast the camera rotates via Q and E */
-    "TargetRotLerpFactor":
-      1.55, /* how fast the camera will try to rotate to face its target during a camera sequence */
-    "EdgePushSize": 0.025, /* the size of the "screen edge", where it will start pushing the camera */
-    "EdgeAutoZoomSize":
-      0.25, /* the size of the "screen edge" when determining if the camera needs to refocus on an object */
-    "MinDistToFocalPoint": 65.0, /* how close you can move the camera to its focal point */
-    "MinHeightAboveTerrain": 20.0, /* minimum height the camera must be above terrain */
-    "MaxHeightAboveTerrain": 600.0, /* maximum height the camera can reach above terrain, or to its focal point */
-    "MinAngle": 5.0, /* how close you can get to looking flat toward the horizon - degrees */
-    "MaxAngle": 90.0, /* how close you can get to looking vertically straight down - degrees */
-    "DefaultAngle": 50.0, /* the starting vertical angle */
-    "DefaultFOV": 40.0, /* default Field Of View that the camera will always return to from zoom-in cams */
-    "TutorialMoveTime":
-      1.0, /* in first tutorial level... how long to pause after first successful "move" of camera before proceeding */
-    "TimeBetweenTutorials": 0.5, /* ... time to pause before second tutorial */
-    "TutorialRotateTime": 0.5, /* ... how long to pause after first successful "rotate" of camera before proceeding */
-    "TargetCamPosMultiplierSide":
-      1.3, /* over-the-shoulder targeting cam - adjusts distance to the side of the firing mech */
-    "TargetCamPosMultiplierBack":
-      3.5, /* over-the-shoulder targeting cam - adjusts distance back from the firing mech */
-    "TargetCamPosMultiplierHeight":
-      1.1, /* over-the-shoulder targeting cam - adjusts distance up from the firing mech */
-    "TargetCamTime": 0.2, /* time to move into over-the-shoulder cam */
-    "RestorePlayerCamTime": 0.4, /* time for camera to move back to player controlled cam */
-    "MovementCamTime": 0.25, /* time to move into position to show enemy moves (high angle) */
-    "ShowAttackCamTime": 0.5, /* for non-cinematic zoom, time to move camera into final position */
-    "ShakyCamTime":
-      0.75, /* for cinematic zoom on enemy movements, minimum time for the whole sequence (note, sequence can still be shorter than this) */
-    "ShakyCamOffset": 0.5, /* max position change when showing "shaky" zoom-in cam */
-    "ShakyMoveCamHeightMultiplier": 2.6, /* controls height when showing follow cam, and "fancy" melee cam */
-    "FollowCamGroundMin": 1.2, /* settings for the follow cam... min height from ground */
-    "FollowCamIdealHeight": 1.5, /* ... ideal height from ground */
-    "FollowCamMinDistMult": 2.0, /* ... min and max follow dists (multiplied by height of unit) */
+    "MoveSpeed": 560.0,
+    "MaxSpeed": 430.0,
+    "MoveFalloff": 0.5,
+    "ZoomSpeed": 2000.0,
+    "RotationSpeed": 19.0,
+    "RotationSpeedKeyboard": 21.0,
+    "TargetRotLerpFactor": 1.55,
+    "EdgePushSize": 0.025,
+    "EdgeAutoZoomSize": 0.25,
+    "MinDistToFocalPoint": 65.0,
+    "MinHeightAboveTerrain": 20.0,
+    "MaxHeightAboveTerrain": 600.0,
+    "MinAngle": 5.0,
+    "MaxAngle": 90.0,
+    "DefaultAngle": 50.0,
+    "DefaultFOV": 40.0,
+    "TutorialMoveTime": 1.0,
+    "TimeBetweenTutorials": 0.5,
+    "TutorialRotateTime": 0.5,
+    "TargetCamPosMultiplierSide": 1.3,
+    "TargetCamPosMultiplierBack": 3.5,
+    "TargetCamPosMultiplierHeight": 1.1,
+    "TargetCamTime": 0.2,
+    "RestorePlayerCamTime": 0.4,
+    "MovementCamTime": 0.25,
+    "ShowAttackCamTime": 0.5,
+    "ShakyCamTime": 0.75,
+    "ShakyCamOffset": 0.5,
+    "ShakyMoveCamHeightMultiplier": 2.6,
+    "FollowCamGroundMin": 1.2,
+    "FollowCamIdealHeight": 1.5,
+    "FollowCamMinDistMult": 2.0,
     "FollowCamMaxDistMult": 5.0,
-    "FollowCamTime":
-      0.8, /* ... controls how "lazy" the camera is in follow mode. Max value of laziness is, of course, infinite */
-    "FollowCamDelayTime": 0.5, /* ... at end of move, how long to pause before returning to player control */
-    "CutAngleTolerance":
-      45.0, /* when you've zoomed in, and the angle is now greater than this amount, just cut back to player cam position instead of smoothing */
-    "FramingSafeMultiplier":
-      1.5, /* used in low-level camera framing code, to figure out when to zoom to keep a point in frame */
-    "FramingZoomMultiplier": 0.015, /* when auto-framing, this controls how far back to zoom */
-    "FrameRightMultiplier": 2.0, /* framing constants, since the screen is not a square */
+    "FollowCamTime": 0.6,
+    "FollowCamDelayTime": 0.75,
+    "CutAngleTolerance": 45.0,
+    "FramingSafeMultiplier": 1.5,
+    "FramingZoomMultiplier": 0.015,
+    "FrameRightMultiplier": 2.0,
     "FrameUpMultiplier": 4.0,
-    "TimeToShowNewBlips": 0.6, /* when zooming to newly revealed contacts, how long to show them */
-    "MeleeAttackCamMinHeight":
-      85.0, /* used for non-cinematic purposes when showing units - for melee cam, as well as death cam */
-    "CamDelayDeath": 0.6, /* this section controls delays for different events */
+    "TimeToShowNewBlips": 0.6,
+    "MeleeAttackCamMinHeight": 85.0,
+    "CamDelayDeath": 0.5,
     "CamDelayBuildingDeath": 0.75,
     "CamDelayFall": 1.0,
     "CamDelayLocationDestroyed": 0.75,
@@ -1444,8 +1442,7 @@
     "CamDelayPilotInjured": 1.0,
     "CamDelayPilotInspired": 1.5,
     "CamDelayMiscInfo": 0.75,
-    "CamMultiplierSlowMove":
-      5.0 /* this multiplier controls "slow start" camera zooms: mission begin, mission end, and non-cinematic player attack zooms */
+    "CamMultiplierSlowMove": 5.0
   },
   "VFXNames": {
     "pilotEject": {
@@ -1724,151 +1721,151 @@
       "name": "vfxPrfPrtl_coolantExplosion",
       "cacheCount": 1
     },
-    "active_probe_Effect": {
+	"active_probe_Effect": {
       "name": "vfxPrfPrtl_activeProbe_loop",
       "cacheCount": 1
     },
-    "urbanRubbleCivilianNames": [
-      "UrbPrfBldn_Rubble_01_conc",
-      "UrbPrfBldn_Rubble_02_conc",
-      "UrbPrfBldn_Rubble_03_conc",
-      "UrbPrfBldn_Rubble_04_conc",
-      "UrbPrfBldn_Rubble_05_conc",
-      "UrbPrfBldn_Rubble_06_conc",
-      "UrbPrfBldn_Rubble_07_conc",
-      "UrbPrfBldn_Rubble_08_conc",
-      "UrbPrfBldn_Rubble_09_conc",
-      "UrbPrfBldn_Rubble_10_conc",
-      "UrbPrfBldn_Rubble_11_conc",
-      "UrbPrfBldn_Rubble_12_conc",
-      "UrbPrfBldn_Rubble_13_conc",
-      "UrbPrfBldn_Rubble_14_conc",
-      "UrbPrfBldn_Rubble_15_conc",
-      "UrbPrfBldn_Rubble_16_conc",
-      "UrbPrfBldn_Rubble_A_01",
-      "UrbPrfBldn_Rubble_A_02",
-      "UrbPrfBldn_Rubble_B_01",
-      "UrbPrfBldn_Rubble_B_02",
-      "UrbPrfBldn_Rubble_C_01",
-      "UrbPrfBldn_Rubble_C_02",
-      "UrbPrfBldn_Rubble_D_01",
-      "UrbPrfBldn_Rubble_D_02",
-      "UrbPrfBldn_Rubble_E_01",
-      "UrbPrfBldn_Rubble_E_02",
-      "UrbPrfBldn_Rubble_F_01",
-      "UrbPrfBldn_Rubble_F_02",
-      "UrbPrfBldn_Rubble_G_01",
-      "UrbPrfBldn_Rubble_Corp_01"
-    ],
-    "urbanRubbleCorporateNames": [
-      "UrbPrfBldn_Rubble_01_conc",
-      "UrbPrfBldn_Rubble_02_conc",
-      "UrbPrfBldn_Rubble_03_conc",
-      "UrbPrfBldn_Rubble_04_conc",
-      "UrbPrfBldn_Rubble_05_conc",
-      "UrbPrfBldn_Rubble_06_conc",
-      "UrbPrfBldn_Rubble_07_conc",
-      "UrbPrfBldn_Rubble_08_conc",
-      "UrbPrfBldn_Rubble_09_conc",
-      "UrbPrfBldn_Rubble_10_conc",
-      "UrbPrfBldn_Rubble_11_conc",
-      "UrbPrfBldn_Rubble_12_conc",
-      "UrbPrfBldn_Rubble_13_conc",
-      "UrbPrfBldn_Rubble_14_conc",
-      "UrbPrfBldn_Rubble_15_conc",
-      "UrbPrfBldn_Rubble_16_conc",
-      "UrbPrfBldn_Rubble_A_01",
-      "UrbPrfBldn_Rubble_A_02",
-      "UrbPrfBldn_Rubble_B_01",
-      "UrbPrfBldn_Rubble_B_02",
-      "UrbPrfBldn_Rubble_C_01",
-      "UrbPrfBldn_Rubble_C_02",
-      "UrbPrfBldn_Rubble_D_01",
-      "UrbPrfBldn_Rubble_D_02",
-      "UrbPrfBldn_Rubble_E_01",
-      "UrbPrfBldn_Rubble_E_02",
-      "UrbPrfBldn_Rubble_F_01",
-      "UrbPrfBldn_Rubble_F_02",
-      "UrbPrfBldn_Rubble_G_01",
-      "UrbPrfBldn_Rubble_Corp_01"
-    ],
-    "urbanRubbleConstructionNames": [
-      "UrbPrfBldn_Rubble_01_conc",
-      "UrbPrfBldn_Rubble_02_conc",
-      "UrbPrfBldn_Rubble_03_conc",
-      "UrbPrfBldn_Rubble_04_conc",
-      "UrbPrfBldn_Rubble_05_conc",
-      "UrbPrfBldn_Rubble_06_conc",
-      "UrbPrfBldn_Rubble_07_conc",
-      "UrbPrfBldn_Rubble_08_conc",
-      "UrbPrfBldn_Rubble_09_conc",
-      "UrbPrfBldn_Rubble_10_conc",
-      "UrbPrfBldn_Rubble_11_conc",
-      "UrbPrfBldn_Rubble_12_conc",
-      "UrbPrfBldn_Rubble_13_conc",
-      "UrbPrfBldn_Rubble_14_conc",
-      "UrbPrfBldn_Rubble_15_conc",
-      "UrbPrfBldn_Rubble_16_conc",
-      "UrbPrfBldn_Rubble_A_01",
-      "UrbPrfBldn_Rubble_A_02",
-      "UrbPrfBldn_Rubble_B_01",
-      "UrbPrfBldn_Rubble_B_02",
-      "UrbPrfBldn_Rubble_C_01",
-      "UrbPrfBldn_Rubble_C_02",
-      "UrbPrfBldn_Rubble_D_01",
-      "UrbPrfBldn_Rubble_D_02",
-      "UrbPrfBldn_Rubble_E_01",
-      "UrbPrfBldn_Rubble_E_02",
-      "UrbPrfBldn_Rubble_F_01",
-      "UrbPrfBldn_Rubble_F_02",
-      "UrbPrfBldn_Rubble_G_01",
-      "UrbPrfBldn_Rubble_Corp_01"
-    ],
-    "urbanRubbleMilitaryNames": [
-      "UrbPrfBldn_Rubble_01_conc",
-      "UrbPrfBldn_Rubble_02_conc",
-      "UrbPrfBldn_Rubble_03_conc",
-      "UrbPrfBldn_Rubble_04_conc",
-      "UrbPrfBldn_Rubble_05_conc",
-      "UrbPrfBldn_Rubble_06_conc",
-      "UrbPrfBldn_Rubble_07_conc",
-      "UrbPrfBldn_Rubble_08_conc",
-      "UrbPrfBldn_Rubble_09_conc",
-      "UrbPrfBldn_Rubble_10_conc",
-      "UrbPrfBldn_Rubble_11_conc",
-      "UrbPrfBldn_Rubble_12_conc",
-      "UrbPrfBldn_Rubble_13_conc",
-      "UrbPrfBldn_Rubble_14_conc",
-      "UrbPrfBldn_Rubble_15_conc",
-      "UrbPrfBldn_Rubble_16_conc",
-      "UrbPrfBldn_Rubble_A_01",
-      "UrbPrfBldn_Rubble_A_02",
-      "UrbPrfBldn_Rubble_B_01",
-      "UrbPrfBldn_Rubble_B_02",
-      "UrbPrfBldn_Rubble_C_01",
-      "UrbPrfBldn_Rubble_C_02",
-      "UrbPrfBldn_Rubble_D_01",
-      "UrbPrfBldn_Rubble_D_02",
-      "UrbPrfBldn_Rubble_E_01",
-      "UrbPrfBldn_Rubble_E_02",
-      "UrbPrfBldn_Rubble_F_01",
-      "UrbPrfBldn_Rubble_F_02",
-      "UrbPrfBldn_Rubble_G_01",
-      "UrbPrfBldn_Rubble_Corp_01"
-    ],
-    "urbanRubbleGenericByBuildingSize": [
-      "urbMdlBldn_Rubble_Medium",
-      "urbMdlBldn_Rubble_Small",
-      "urbMdlBldn_Rubble_Medium",
-      "urbMdlBldn_Rubble_Large",
-      "urbMdlBldn_Rubble_Mega"
-    ],
-    "UrbanBuildingPropDestructionShockwaveSpeed": 50,
-    "UrbanBuildingPropDestructionRadiusScale": 1.5,
-    "UrbanUtilityPropDestructionStartingRadius": 10,
-    "UrbanUtilityPropDestructionTotalRadius": 60,
-    "UrbanBuildingPropDestructionDelay": 0.1,
-    "UrbanDestructionVFXPrecacheAmount": 10
+	"urbanRubbleCivilianNames" : [
+		"UrbPrfBldn_Rubble_01_conc",
+		"UrbPrfBldn_Rubble_02_conc",
+		"UrbPrfBldn_Rubble_03_conc",
+		"UrbPrfBldn_Rubble_04_conc",
+		"UrbPrfBldn_Rubble_05_conc",
+		"UrbPrfBldn_Rubble_06_conc",
+		"UrbPrfBldn_Rubble_07_conc",
+		"UrbPrfBldn_Rubble_08_conc",
+		"UrbPrfBldn_Rubble_09_conc",
+		"UrbPrfBldn_Rubble_10_conc",
+		"UrbPrfBldn_Rubble_11_conc",
+		"UrbPrfBldn_Rubble_12_conc",
+		"UrbPrfBldn_Rubble_13_conc",
+		"UrbPrfBldn_Rubble_14_conc",
+		"UrbPrfBldn_Rubble_15_conc",
+		"UrbPrfBldn_Rubble_16_conc",
+		"UrbPrfBldn_Rubble_A_01",
+		"UrbPrfBldn_Rubble_A_02",
+		"UrbPrfBldn_Rubble_B_01",
+		"UrbPrfBldn_Rubble_B_02",
+		"UrbPrfBldn_Rubble_C_01",
+		"UrbPrfBldn_Rubble_C_02",
+		"UrbPrfBldn_Rubble_D_01",
+		"UrbPrfBldn_Rubble_D_02",
+		"UrbPrfBldn_Rubble_E_01",
+		"UrbPrfBldn_Rubble_E_02",
+		"UrbPrfBldn_Rubble_F_01",
+		"UrbPrfBldn_Rubble_F_02",
+		"UrbPrfBldn_Rubble_G_01",
+		"UrbPrfBldn_Rubble_Corp_01"
+	],
+	"urbanRubbleCorporateNames" : [
+		"UrbPrfBldn_Rubble_01_conc",
+		"UrbPrfBldn_Rubble_02_conc",
+		"UrbPrfBldn_Rubble_03_conc",
+		"UrbPrfBldn_Rubble_04_conc",
+		"UrbPrfBldn_Rubble_05_conc",
+		"UrbPrfBldn_Rubble_06_conc",
+		"UrbPrfBldn_Rubble_07_conc",
+		"UrbPrfBldn_Rubble_08_conc",
+		"UrbPrfBldn_Rubble_09_conc",
+		"UrbPrfBldn_Rubble_10_conc",
+		"UrbPrfBldn_Rubble_11_conc",
+		"UrbPrfBldn_Rubble_12_conc",
+		"UrbPrfBldn_Rubble_13_conc",
+		"UrbPrfBldn_Rubble_14_conc",
+		"UrbPrfBldn_Rubble_15_conc",
+		"UrbPrfBldn_Rubble_16_conc",
+		"UrbPrfBldn_Rubble_A_01",
+		"UrbPrfBldn_Rubble_A_02",
+		"UrbPrfBldn_Rubble_B_01",
+		"UrbPrfBldn_Rubble_B_02",
+		"UrbPrfBldn_Rubble_C_01",
+		"UrbPrfBldn_Rubble_C_02",
+		"UrbPrfBldn_Rubble_D_01",
+		"UrbPrfBldn_Rubble_D_02",
+		"UrbPrfBldn_Rubble_E_01",
+		"UrbPrfBldn_Rubble_E_02",
+		"UrbPrfBldn_Rubble_F_01",
+		"UrbPrfBldn_Rubble_F_02",
+		"UrbPrfBldn_Rubble_G_01",
+		"UrbPrfBldn_Rubble_Corp_01"
+	],
+	"urbanRubbleConstructionNames" : [
+		"UrbPrfBldn_Rubble_01_conc",
+		"UrbPrfBldn_Rubble_02_conc",
+		"UrbPrfBldn_Rubble_03_conc",
+		"UrbPrfBldn_Rubble_04_conc",
+		"UrbPrfBldn_Rubble_05_conc",
+		"UrbPrfBldn_Rubble_06_conc",
+		"UrbPrfBldn_Rubble_07_conc",
+		"UrbPrfBldn_Rubble_08_conc",
+		"UrbPrfBldn_Rubble_09_conc",
+		"UrbPrfBldn_Rubble_10_conc",
+		"UrbPrfBldn_Rubble_11_conc",
+		"UrbPrfBldn_Rubble_12_conc",
+		"UrbPrfBldn_Rubble_13_conc",
+		"UrbPrfBldn_Rubble_14_conc",
+		"UrbPrfBldn_Rubble_15_conc",
+		"UrbPrfBldn_Rubble_16_conc",
+		"UrbPrfBldn_Rubble_A_01",
+		"UrbPrfBldn_Rubble_A_02",
+		"UrbPrfBldn_Rubble_B_01",
+		"UrbPrfBldn_Rubble_B_02",
+		"UrbPrfBldn_Rubble_C_01",
+		"UrbPrfBldn_Rubble_C_02",
+		"UrbPrfBldn_Rubble_D_01",
+		"UrbPrfBldn_Rubble_D_02",
+		"UrbPrfBldn_Rubble_E_01",
+		"UrbPrfBldn_Rubble_E_02",
+		"UrbPrfBldn_Rubble_F_01",
+		"UrbPrfBldn_Rubble_F_02",
+		"UrbPrfBldn_Rubble_G_01",
+		"UrbPrfBldn_Rubble_Corp_01"
+	],
+	"urbanRubbleMilitaryNames" : [
+		"UrbPrfBldn_Rubble_01_conc",
+		"UrbPrfBldn_Rubble_02_conc",
+		"UrbPrfBldn_Rubble_03_conc",
+		"UrbPrfBldn_Rubble_04_conc",
+		"UrbPrfBldn_Rubble_05_conc",
+		"UrbPrfBldn_Rubble_06_conc",
+		"UrbPrfBldn_Rubble_07_conc",
+		"UrbPrfBldn_Rubble_08_conc",
+		"UrbPrfBldn_Rubble_09_conc",
+		"UrbPrfBldn_Rubble_10_conc",
+		"UrbPrfBldn_Rubble_11_conc",
+		"UrbPrfBldn_Rubble_12_conc",
+		"UrbPrfBldn_Rubble_13_conc",
+		"UrbPrfBldn_Rubble_14_conc",
+		"UrbPrfBldn_Rubble_15_conc",
+		"UrbPrfBldn_Rubble_16_conc",
+		"UrbPrfBldn_Rubble_A_01",
+		"UrbPrfBldn_Rubble_A_02",
+		"UrbPrfBldn_Rubble_B_01",
+		"UrbPrfBldn_Rubble_B_02",
+		"UrbPrfBldn_Rubble_C_01",
+		"UrbPrfBldn_Rubble_C_02",
+		"UrbPrfBldn_Rubble_D_01",
+		"UrbPrfBldn_Rubble_D_02",
+		"UrbPrfBldn_Rubble_E_01",
+		"UrbPrfBldn_Rubble_E_02",
+		"UrbPrfBldn_Rubble_F_01",
+		"UrbPrfBldn_Rubble_F_02",
+		"UrbPrfBldn_Rubble_G_01",
+		"UrbPrfBldn_Rubble_Corp_01"
+	],
+	"urbanRubbleGenericByBuildingSize" : [
+		"urbMdlBldn_Rubble_Medium",
+		"urbMdlBldn_Rubble_Small",
+		"urbMdlBldn_Rubble_Medium",
+		"urbMdlBldn_Rubble_Large",
+		"urbMdlBldn_Rubble_Mega",
+	]
+	"UrbanBuildingPropDestructionShockwaveSpeed": 50,
+	"UrbanBuildingPropDestructionRadiusScale": 1.5,
+	"UrbanUtilityPropDestructionStartingRadius": 10,
+	"UrbanUtilityPropDestructionTotalRadius": 60 ,
+	"UrbanBuildingPropDestructionDelay": 0.1 ,
+	"UrbanDestructionVFXPrecacheAmount": 10,
   },
   "MoveConstants": {
     "MoveTable": [
@@ -1941,5 +1938,11 @@
     { "Difficulty": 9, "SmallStructurePoints": 240, "MediumStructurePoints": 480, "LargeStructurePoints": 720 },
     { "Difficulty": 10, "SmallStructurePoints": 260, "MediumStructurePoints": 520, "LargeStructurePoints": 780 }
   ],
-  "RavenTutorialDialogID": "32cf9b93-a87d-4244-a9fe-ddaa9198f3d7"
+  "RavenTutorialDialogID": "32cf9b93-a87d-4244-a9fe-ddaa9198f3d7",
+  "CaptureEscortProximityDialogID": "e066d510-3c33-4caf-8c40-39f15c92936a",
+  "Story2TutorialSlides1ID": "e37a6b6d-6a50-4e05-9ecc-ca9407489911",
+  "Story2TutorialSlides2ID": "52a4d426-f166-484d-9c53-d56ca9095d7a",
+  "Story2TutorialSlides3ID": "e2a4cd2e-638f-47d7-bdd5-1506637c1ae2",
+  "Story2TutorialSlides4ID": "1f20029b-bcce-481c-ba50-fff26950b6a9"
+  
 }

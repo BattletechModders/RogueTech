@@ -41,6 +41,7 @@ AI related mod settings
                                             + <count of destroyed legs> * <LegAbsenceStoodUpMod>
                                     if roll value less than stand chance mech starts normally, if not mech will not stand up acting same as if you press "done with mech".
                               NOTE! You can use CAEStoodUpRollMod and CAEArmAbsenceStoodUpMod actors statistic values to control stand up roll per chassis/mech
+  "unaffectedByHeadHitStatName": "unaffectedByHeadHit" - unit statistic names if tits value set true at runtime mech will be unaffected by head hits
 -----------------------------------------------------------------------------------------------------------------------                              
   NOT NEEDED ANY MORE. KEEPED FOR HISTORICAL REASONS.
   "auraUpdateFix": "Position" - type of fixing updating aura while unit movment.

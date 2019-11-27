@@ -2,6 +2,7 @@ this mod allows you next things
 1. Add external animated parts to vehicles
 2. Changing chassiss terrain interactions
 3. Forbids certain meches/vehisles to spawn on certain biomes
+4. Add custom animated hardpoints
 
 main settings in mod.json
     "fixWaterHeight":true, - whether or not underwater terrain height should be fixed. If false hovers will not be able to move over water/deep water surface
@@ -198,6 +199,84 @@ current supported values:
 	NoBiome_jungleTropical,
 	NoBiome_urbanHighTech,
 
+  
+  
+CustomHardpoints section  
+
+  "CustomHardpoints": {
+    "prefabs": [                                                         - list for avaible prefabs
+      {
+        "prefab": "chrprfweap_kingcrab_leftarm_laser_eh1",               - prefab name. Should be mentioned in mod.json manifest section, any mod.json, game's engine just should be able to load this prefab 
+                                                                           and know which asset contains it. 
+                                                                           Some notes on correct prefab creation:
+                                                                             your object containing mesh renderer should not be root prefab object. I'm suggesting next prefab structure:
+                                                                             chrprfweap_kingcrab_leftarm_laser_eh1 (root object. name should be same with prefab)
+                                                                                  |
+                                                                                  ---> barrels (object containing Animator component. Animator should be one per prefab, if any, it presents not necessary)
+                                                                                         |
+                                                                                         -----> barrel_mesh (object containing mesh renderer)
+                                                                                                    |
+                                                                                                    -----> emitter point (empty object pointing fire vfx start position)
+                                                                           Your overall structure can be more complicated - for example you can add some particle vfxes. You should just follow next rules
+                                                                           1. Root object should be empty. 
+                                                                           2. No more than one animator allowed (count of animations clips are limited only by resource amount and your fantasy)
+        "shaderSrc": "chrPrfWeap_kingcrab_leftarm_ac10_bh1",             - game existing prefab used as source of shader. Game's engine have specific settings and default unity's shaders rendering not exactly correct. 
+                                                                           Objects becomes very bright. To avoid this, code can replace your shader to game's one. 
+                                                                           NOTE: if shaderSrc is not empty and pointing to existing prefab, ALL mesh renderers will be altered, but only mesh renderers will be affected. 
+                                                                           Particle system stay untouched. 
+        "emitters": [                                                    - list of names. This names points to objects which positions is used to calculate start coordinates for fire effects. 
+                                                                           This is very important, cause if you are not set this weapon will fire from wrong positions (fallback positions is 0,0,0 relative to location)
+          "fire1",
+          "fire2"
+        ],
+        "preFireAnimation": "prefire"                                    - name of bool variable used by code to make animator know when to start prefire animation. If not empty code will set this variable to true on prefire. 
+                                                                           Fire sequence not begins until animation is finished. Code suggesting this animation have 1 sec length. 
+                                                                           Modder can control speed of this animation by PrefireAnimationSpeedMod setting per weapon/mode/ammo definitions (multiplicative, default 1). 
+                                                                           Before starting animation code will set prefire_speed animator variable accordingly. So animation clip should be setuped to use this variable 
+                                                                           as source of speed modifier. 
+                                                                           At end of fire sequence this variable will be set to false. Animator should use this as trigger to move to idle state. 
+      },
+      {
+        "prefab": "chrprfweap_kingcrab_leftarm_rotatelaser_eh1",
+        "shaderSrc": "chrPrfWeap_kingcrab_leftarm_ac10_bh1",
+        "emitters": [
+          "fire1",
+          "fire2",
+          "fire3"
+        ],
+        "preFireAnimation": "prefire",
+        "fireEmitterAnimation": [                                        - names of bool variables controlling fire animations. 
+                                                                           On first shoot variable with index 0 will be set to true (if name is not empty). All other to false.
+                                                                           On second shoot variable with index 1 will be set to true (if name is not empty). All other to false.
+                                                                           And so on.
+                                                                           At fire complete all variables set to false. Animator should use this to return animation machine to idle state. 
+                                                                           In next example variable with index 0 is empty cause in current model at idle state barrels already in correct position for first shoot, so no animation needed.
+                                                                           Fire animation speed can be controlled same way as prefire. FireAnimationSpeedMod setting per ammo/mode/weapon (multiplicative, default 1).
+                                                                           "fire_speed" variable should be used in prefab's animation clips. 
+          "",
+          "fire1",
+          "fire2"
+        ]
+      }
+    ],
+    "aliases": {                                                        - aliases. This setups link between HardpointData element and prefab. You can setup replacement of one weapon type prefabs to prefabs of another type. 
+      "chrPrfWeap_kingcrab_leftarm_laser_eh1":{
+        "location": "leftarm",
+        "prefab": "chrprfweap_kingcrab_leftarm_laser_eh1"
+      },
+      "chrPrfWeap_kingcrab_leftarm_rotatelaser_eh1":{
+        "location": "leftarm",
+        "prefab": "chrprfweap_kingcrab_leftarm_rotatelaser_eh1"
+      },
+      "chrPrfWeap_kingcrab_leftarm_rotategauss_bh1":{
+        "location": "leftarm",
+        "prefab": "chrprfweap_kingcrab_leftarm_rotatelaser_eh1"
+      }
+    }
+  }, 
+  
+!NOTE! With current version even if game can't find prefab for weapon - empty object will be spawned and default weapon representation will be setup. It will have wrong fire position an no mesh but no circle of death. 
+  
 appendix A. Game's build-in audio events names in format '<name>':<id>
 id - just for info purposes
  'AudioEventList_aircraft_aircraft_dropship_gencon_landing':3307102648
