@@ -61,7 +61,7 @@ BackColor2=clBlack
 
 [Files]
 ;Source: "/RogueTech Core/RogueTech.txt"; DestDir: "{app}/Mods/RogueTech Core"; Flags: isreadme ignoreversion
-Source: "/*"; Excludes: ".git,.modtek,.git,log.txt,RTAssetsSetup.iss,*.log,UrbieNuke Heavy Metal,RogueModuleElitesHeavyMetal,PirateTech Urbanwarfare Module,PirateTech HeavyMetal Module,PirateTech Flashpoint Module,Jihad HeavyMetal Unique,Jihad Heavy metal,ClanUpgradesJihad HeavyMetal,Civil War Heavy Metal Unique,Civil War Heavy Metal,Base HeavyMetal Unique,Civil War FlashPoint,Base UrbanWarfare Unique,Base HeavyMetal,RogueHeavyMetalModule,MissionControlNoRandom,ContractSort,GalaxyAtWar,PersistentMapClient,RogueUrbanWarfareModule,LV426,SortByTonnage,Warhammer Emblems,NROL Emblems,MissionControlRandom,MissionControlRandomLarge,MissionControlMassive,HistoricPirateFlags,rubyscripts,RepublicArtillery,Risc Urban Warfare,RogueModuleElitesFlashpoint,MechPortraitsArmakoir,MechPortraitsENOVA,MechPortraitsJK,RoguePortraits,RogueTechDebug,ClanUpgrades,ClanUpgradesCivilWar,ClanUpgradesDarkAge,ClanUpgradesJihad,ClanUpgradesRepublic,Protomechs,GlobalDifficultyByRep,RogueFlashPointModuleStoryline,DarkAgeArtillery,PirateTech,RISCtech module,Dark Age Unique,Jihad Urban Warfare,Jihad Unique,Jihad 3068-3080,Republic Unique Mechs,Republic Urban Warfare,Republic FlashPoint,Civil War Unique,Base FlashPoint,Civil War Urban Warfare,CivilWar 3062-3067,Base UrbanWarfare,Republic 3081-3130,RogueTechSounds,UrbocalypseDarkAge,EnovaEmblems,FlashPointArtillery,DarkAge,FlashPointDarkAge,ExperimentalWeapons_SHcompat,Urbocalypse,ArtilleryUnits,LootedClanMechs,The Drones Of Syberia,ClanEmblems,SpeedMod,Flashpoint-The-Raid,SkipTravelCutscenes,RandomTravelContracts,PersistentMapClient,RogueModuleElites,CommanderPortraitLoader,Superheavys,RogueFlashPointModule,ExperimentalWeapons,RaelM Emblem,UrbieNuke,GlobalDifficultyByCompany,GlobalDifficultyByPlanets,Retrainer,Silence,FreeCam,BindableEscapeKey,ArmorRepair,ArmorPoints,RogueEmblems,All 3025 Mercs,Capellan Emblems,SkipIntro,CrystalClear" ; DestDir: "{app}/Mods"; Flags: recursesubdirs ignoreversion
+Source: "/*"; Excludes: ".git,.modtek,.git,log.txt,RTAssetsSetup.iss,*.log,Republic HeavyMetal Unique,Republic HeavyMetal,DarkAge HeavyMetal,UrbieNuke Heavy Metal,RogueModuleElitesHeavyMetal,PirateTech Urbanwarfare Module,PirateTech HeavyMetal Module,PirateTech Flashpoint Module,Jihad HeavyMetal Unique,Jihad Heavy metal,ClanUpgradesJihad HeavyMetal,Civil War Heavy Metal Unique,Civil War Heavy Metal,Base HeavyMetal Unique,Civil War FlashPoint,Base UrbanWarfare Unique,Base HeavyMetal,RogueHeavyMetalModule,MissionControlNoRandom,ContractSort,GalaxyAtWar,PersistentMapClient,RogueUrbanWarfareModule,LV426,SortByTonnage,Warhammer Emblems,NROL Emblems,MissionControlRandom,MissionControlRandomLarge,MissionControlMassive,HistoricPirateFlags,rubyscripts,RepublicArtillery,Risc Urban Warfare,RogueModuleElitesFlashpoint,MechPortraitsArmakoir,MechPortraitsENOVA,MechPortraitsJK,MechPortraitsCrew,RogueTechDebug,ClanUpgrades,ClanUpgradesCivilWar,ClanUpgradesDarkAge,ClanUpgradesJihad,ClanUpgradesRepublic,Protomechs,GlobalDifficultyByRep,RogueFlashPointModuleStoryline,DarkAgeArtillery,PirateTech,RISCtech module,Dark Age Unique,Jihad Urban Warfare,Jihad Unique,Jihad 3068-3080,Republic Unique Mechs,Republic Urban Warfare,Republic FlashPoint,Civil War Unique,Base FlashPoint,Civil War Urban Warfare,CivilWar 3062-3067,Base UrbanWarfare,Republic 3081-3130,RogueTechSounds,UrbocalypseDarkAge,EnovaEmblems,FlashPointArtillery,DarkAge,FlashPointDarkAge,ExperimentalWeapons_SHcompat,Urbocalypse,ArtilleryUnits,LootedClanMechs,The Drones Of Syberia,ClanEmblems,SpeedMod,Flashpoint-The-Raid,SkipTravelCutscenes,RandomTravelContracts,PersistentMapClient,RogueModuleElites,CommanderPortraitLoader,Superheavys,RogueFlashPointModule,ExperimentalWeapons,RaelM Emblem,UrbieNuke,GlobalDifficultyByCompany,GlobalDifficultyByPlanets,Retrainer,Silence,FreeCam,BindableEscapeKey,ArmorRepair,ArmorPoints,RogueEmblems,All 3025 Mercs,Capellan Emblems,SkipIntro,CrystalClear" ; DestDir: "{app}/Mods"; Flags: recursesubdirs ignoreversion
 
 Source: "/PersistentMapClient/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/PersistentMapClient"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechMode\Online;
 Source: "/RandomTravelContracts/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RandomTravelContracts"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechMode\Online;
@@ -91,17 +91,17 @@ Source: "/SkipTravelCutscenes/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Skip
 Source: "/Silence/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Silence"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: gfx\silence;
 Source: "/RogueTechSounds/*"; DestDir: "{app}/Mods/RogueTechSounds"; Flags: recursesubdirs ignoreversion uninsneveruninstall createallsubdirs; Components: gfx\soundmod
 
-Source: "/MechPortraitsJK/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/MechPortraitsJK"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: portraits\mechportraitsJK;
-Source: "/MechPortraitsENOVA/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/MechPortraitsENOVA"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: portraits\mechportraitsENOVA;
-Source: "/MechPortraitsArmakoir/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/MechPortraitsArmakoir"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: portraits\mechportraitsArmakor;
-Source: "/RoguePortraits/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RoguePortraits"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: portraits\RoguePortraits;
+Source: "/MechPortraitsJK/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RoguePortraits"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: portraits\mechportraitsJK;
+Source: "/MechPortraitsENOVA/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RoguePortraits"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: portraits\mechportraitsENOVA;
+Source: "/MechPortraitsArmakoir/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RoguePortraits"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: portraits\mechportraitsArmakor;
+Source: "/MechPortraitsCrew/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RoguePortraits"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: portraits\mechportraitsCrew;
 
 Source: "/ArmorRepair/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/ArmorRepair"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: repair\on;
 Source: "/ArmorPoints/*"; DestDir: "{app}/Mods/ArmorPoints"; Flags: ignoreversion; Components: repair\off;
 
 Source: "/GlobalDifficultyByCompany/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/GlobalDifficulty"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: difficulty\Company;
 Source: "/GlobalDifficultyByPlanets/*"; DestDir: "{app}/Mods/GlobalDifficulty"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: difficulty\Planet;
-Source: "/GlobalDifficultyByRep/*"; DestDir: "{app}/Mods/GlobalDifficulty"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: difficulty\Rep;
+;Source: "/GlobalDifficultyByRep/*"; DestDir: "{app}/Mods/GlobalDifficulty"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: difficulty\Rep;
 
 Source: "/ClanUpgrades/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/ClanUpgrades"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\ClanUpgrades;
 Source: "/ClanUpgradesCivilWar/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/ClanUpgradesCivilWar"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\ClanUpgrades;
@@ -165,6 +165,7 @@ Source: "/Jihad Unique/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Jihad Uniqu
 Source: "/Jihad HeavyMetal Unique/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Jihad HeavyMetal Unique"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechEraUnique\JihadUnique;
 
 Source: "/Republic Unique/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Republic Unique"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechEraUnique\RepublicUnique;
+Source: "/Republic HeavyMetal Unique/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Republic HeavyMetal Unique"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechEraUnique\RepublicUnique;
 
 Source: "/Dark Age Unique/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Dark Age Unique"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechEraUnique\DarkAgeUnique;
 
@@ -181,10 +182,12 @@ Source: "/Jihad Heavy metal/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Jihad 
 Source: "/Republic 3081-3130/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Republic 3081-3130"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechEra\Republic;
 Source: "/Republic FlashPoint/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Republic FlashPoint"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechEra\Republic;
 Source: "/Republic Urban Warfare/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Republic Urban Warfare"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechEra\Republic;
+Source: "/Republic HeavyMetal/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/Republic HeavyMetal"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechEra\Republic;
 
 Source: "/DarkAge/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/DarkAge"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechEra\DarkAge;
 Source: "/DarkAgeArtillery/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/DarkAgeArtillery"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechEra\DarkAge;
 Source: "/FlashPointDarkAge/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/FlashPointDarkAge"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechEra\DarkAge;
+Source: "/DarkAge HeavyMetal/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/DarkAge HeavyMetal"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechEra\DarkAge;
 
 Source: "{#SourcePath}Optionals\ModTek\0Harmony.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
 Source: "{#SourcePath}Optionals\ModTek\ModTekInjector.exe"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
@@ -225,7 +228,7 @@ Name: "RogueTechMode"; Description: "Choose Game Mode"; Types: full custom compa
 Name: "RogueTechMode\Online"; Description: "Online War Map Mode"; Types: custom; Flags: exclusive
 Name: "RogueTechMode\Offline"; Description: "Galaxy at War Offline Mode"; Types: full compact; Flags: exclusive 
 Name: "difficulty"; Description: "Choose difficulty scaling"; Types: full custom compact; Flags: fixed dontinheritcheck
-Name: "difficulty\Rep"; Description: "Difficulty by Reputation - Online Map Only"; Types: custom; Flags: exclusive
+;Name: "difficulty\Rep"; Description: "Difficulty by Reputation - Online Map Only"; Types: custom; Flags: exclusive
 Name: "difficulty\Company"; Description: "Difficulty by Company Rating - Scales with your Power Level"; Types: full compact; Flags: exclusive 
 Name: "difficulty\Planet"; Description: "Difficulty by Planet Rating - Planets never change their Skulls"; Types: custom; Flags: exclusive
 Name: "MC"; Description: "Mission Control - 2 Lances and Battle Extras!"; Types: full custom compact;  Flags: fixed dontinheritcheck
@@ -278,7 +281,7 @@ Name: "gfx\SkipTravelCutscenes"; Description: "Skip Travel cutscenes"; Types: fu
 Name: "gfx\crystal"; Description: "Crystal Clear - Drastically reduce Postprocessing"; Types: full compact;
 Name: "gfx\silence"; Description: "Silence - Disable most Ambient Chatter"; Types: custom;
 Name: "portraits"; Description: "Select Style of Alternative Portraits for Mechs"; Types: full custom compact; Flags: fixed dontinheritcheck
-Name: "portraits\RoguePortraits"; Description: "Default RogueTech Mech Portraits - by the RT Crew"; Types: full compact; Flags: exclusive
+Name: "portraits\mechportraitsCrew"; Description: "Default RogueTech Mech Portraits - by the RT Crew"; Types: full compact; Flags: exclusive
 Name: "portraits\MechPortraitsENOVA"; Description: "Photography styled Mech Icons - by ENOVA"; Types: custom; Flags: exclusive
 Name: "portraits\mechportraitsJK"; Description: "Vanilla styled nicer Mech Icons - by JK"; Types: custom; Flags: exclusive
 Name: "portraits\mechportraitsArmakor"; Description: "Coloured Mech Portraits by Armakoir"; Types: custom; Flags: exclusive
