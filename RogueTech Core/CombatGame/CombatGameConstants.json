@@ -50,14 +50,14 @@
     "ShowPeakHeat": false
   },
   "Visibility": {
-    "BaseSpotterDistance": 250.0,
+    "BaseSpotterDistance": 1.0,
     "SpotterTacticsMultiplier": 0.0,
     "RatioFullVis": 0.79,
     "RatioObstructedVis": 0.41,
     "MinRatioFromActors": 0.2,
     "ShutDownVisibilityModifier": 0.0,
     "ShutDownSignatureModifier": -0.5,
-    "BaseSensorDistance": 450.0,
+    "BaseSensorDistance": 1.0,
     "UseAsymmetricalSensors": true,
     "ShowExtendedBlipsBeforeContact": false,
     "ExtendedSensorDistanceMultiplier": 1.0,
@@ -68,7 +68,7 @@
     "NumSensorLockSteps": 1,
     "SensorLockSingleStepEffect": {
       "durationData": {
-        "duration": 3,
+        "duration": 2,
         "ticksOnEndOfRound": true,
         "stackLimit": 1
       },
@@ -94,7 +94,7 @@
     "NumSensorLockImpairedEffects": 1,
     "SensorsImpairedEffect": {
       "durationData": {
-        "duration": 3,
+        "duration": 2,
         "ticksOnActivations": true,
         "useActivationsOfTarget": true,
         "stackLimit": 1
@@ -122,7 +122,7 @@
     },
     "SensorLockAntiStealthEffect": {
       "durationData": {
-        "duration": 1,
+        "duration": 2,
         "ticksOnEndOfRound": true,
         "stackLimit": 1
       },
@@ -207,7 +207,7 @@
   },
   "ToHit": {
     "FiringArcDegrees": 60.0,
-    "ToHitBaseFloor": 0.8,
+    "ToHitBaseFloor": 0.7,
     "ToHitGunneryDivisor": 100,
     "ToHitUseSteppedAlgorithm": false,
     "ToHitStepThresholds": [
@@ -255,7 +255,7 @@
     "ToHitProneTargetBonusMelee": -10,
     "ToHitSelfOverheated": 0,
     "ToHitSelfSprinted": 2,
-    "ToHitSelfWalkLight": 0,
+    "ToHitSelfWalkLight": 1,
     "ToHitSelfWalkMedium": 1,
     "ToHitSelfWalkHeavy": 1,
     "ToHitSelfWalkAssault": 1,
@@ -347,13 +347,6 @@
       8,
       9
     ],
-    "WeaponCategoriesAffectedByEvasive": [
-      1,
-      2,
-      3,
-      4,
-      6
-    ],
     "WeaponTypesGuaranteedEvasiveStrip": [],
     "TacticsBaseFloor": 0.65,
     "TacticsDivisor": 20,
@@ -418,7 +411,7 @@
     "SearchForValidCritSlot": true,
     "MinCritChance": 0.5,
     "AllowTotalNegativeModifier": true,
-"COILUsesJumping": false,
+"COILUsesJumping": true,
     "COILMultipliesShots": false,
     "CoolantVentEffect": {
       "durationData": {
@@ -968,14 +961,14 @@
       "Description": {
         "Id": "AbilityDefInspired",
         "Name": "INSPIRED",
-        "Details": "-2 DIFFICULTY TO ALL ROLLS",
+        "Details": "+1 TO ECM State",
         "Icon": "uixSvgIcon_mwInspired"
       },
       "statisticData": {
-        "statName": "AccuracyModifier",
-        "operation": "Float_Add",
-        "modValue": "-2.0",
-        "modType": "System.Single"
+        "statName" : "LV_ECM_SHIELD",
+				"operation": "Int_Add",
+				"modValue": "1",
+				"modType": "System.Int32"
       },
       "nature": "Buff"
     },	
@@ -998,10 +991,10 @@
         "Icon": "uixSvgIcon_mwInspired"
       },
       "statisticData": {
-        "statName" : "BaseInitiative",
-        "operation" : "Int_Add",
-        "modValue" : "1",
-        "modType" : "System.Int32"
+        "statName" : "LV_PROBE_CARRIER",
+                "operation": "Int_Add",
+                "modValue": "1",
+                "modType": "System.Int32"
       },
       "nature": "Debuff"
     }
@@ -1198,7 +1191,7 @@
     "MoraleBarDescription": {
       "Name": "Resolve",
       "Details":
-        "Your lance gains <color=#F79B26>{0}</color> Resolve each round of combat.\n When your MechWarriors become Inspired, gain a +2 bonus to Accuracy for all attacks as well as +1 Initiative."
+        "Your lance gains <color=#F79B26>{0}</color> Resolve each round of combat.\n When your MechWarriors become Inspired, gain a +1 to ECM Status and Probe Rolls"
     },
     "FuryBarDescription": {
       "Name": "Fury",
@@ -1417,6 +1410,7 @@
     "RestorePlayerCamTime": 0.4,
     "MovementCamTime": 0.25,
     "ShowAttackCamTime": 0.5,
+	"DefaultBuildingHeight": 48.0,
     "ShakyCamTime": 0.75,
     "ShakyCamOffset": 0.5,
     "ShakyMoveCamHeightMultiplier": 2.6,
@@ -1427,6 +1421,8 @@
     "FollowCamTime": 0.6,
     "FollowCamDelayTime": 0.75,
     "CutAngleTolerance": 45.0,
+	"GroundCamFallbackHeight": 20.0,
+	"UrbanGroundCamFallbackHeight": 80.0,
     "FramingSafeMultiplier": 1.5,
     "FramingZoomMultiplier": 0.015,
     "FrameRightMultiplier": 2.0,
@@ -1926,18 +1922,18 @@
     "sniperMaxFrac": 0.5,
     "sniperTagMultiplier": 2.0
   },
-  "ScaledBuildingStructurePointsList": [
-    { "Difficulty": 1, "SmallStructurePoints": 80, "MediumStructurePoints": 160, "LargeStructurePoints": 240 },
-    { "Difficulty": 2, "SmallStructurePoints": 100, "MediumStructurePoints": 200, "LargeStructurePoints": 300 },
-    { "Difficulty": 3, "SmallStructurePoints": 120, "MediumStructurePoints": 240, "LargeStructurePoints": 360 },
-    { "Difficulty": 4, "SmallStructurePoints": 140, "MediumStructurePoints": 280, "LargeStructurePoints": 420 },
-    { "Difficulty": 5, "SmallStructurePoints": 160, "MediumStructurePoints": 320, "LargeStructurePoints": 480 },
-    { "Difficulty": 6, "SmallStructurePoints": 180, "MediumStructurePoints": 360, "LargeStructurePoints": 540 },
-    { "Difficulty": 7, "SmallStructurePoints": 200, "MediumStructurePoints": 400, "LargeStructurePoints": 600 },
-    { "Difficulty": 8, "SmallStructurePoints": 220, "MediumStructurePoints": 440, "LargeStructurePoints": 660 },
-    { "Difficulty": 9, "SmallStructurePoints": 240, "MediumStructurePoints": 480, "LargeStructurePoints": 720 },
-    { "Difficulty": 10, "SmallStructurePoints": 260, "MediumStructurePoints": 520, "LargeStructurePoints": 780 }
-  ],
+  "ScaledBuildingStructurePointsList" : [
+    {"Difficulty":  1, "SmallStructurePoints": 100, "MediumStructurePoints": 175, "LargeStructurePoints": 275, "SecondSmallStructurePoints": 50, "SecondMediumStructurePoints": 100, "SecondLargeStructurePoints": 150},
+    {"Difficulty":  2, "SmallStructurePoints": 100, "MediumStructurePoints": 175, "LargeStructurePoints": 275, "SecondSmallStructurePoints": 50, "SecondMediumStructurePoints": 100, "SecondLargeStructurePoints": 150},
+    {"Difficulty":  3, "SmallStructurePoints": 100, "MediumStructurePoints": 175, "LargeStructurePoints": 275, "SecondSmallStructurePoints": 50, "SecondMediumStructurePoints": 100, "SecondLargeStructurePoints": 150},
+    {"Difficulty":  4, "SmallStructurePoints": 125, "MediumStructurePoints": 200, "LargeStructurePoints": 325, "SecondSmallStructurePoints": 100, "SecondMediumStructurePoints": 150, "SecondLargeStructurePoints": 200},
+    {"Difficulty":  5, "SmallStructurePoints": 125, "MediumStructurePoints": 200, "LargeStructurePoints": 325, "SecondSmallStructurePoints": 100, "SecondMediumStructurePoints": 150, "SecondLargeStructurePoints": 200},
+    {"Difficulty":  6, "SmallStructurePoints": 125, "MediumStructurePoints": 200, "LargeStructurePoints": 325, "SecondSmallStructurePoints": 100, "SecondMediumStructurePoints": 150, "SecondLargeStructurePoints": 200},
+    {"Difficulty":  7, "SmallStructurePoints": 125, "MediumStructurePoints": 200, "LargeStructurePoints": 325, "SecondSmallStructurePoints": 100, "SecondMediumStructurePoints": 150, "SecondLargeStructurePoints": 200},
+    {"Difficulty":  8, "SmallStructurePoints": 150, "MediumStructurePoints": 325, "LargeStructurePoints": 400, "SecondSmallStructurePoints": 150, "SecondMediumStructurePoints": 200, "SecondLargeStructurePoints": 250},
+    {"Difficulty":  9, "SmallStructurePoints": 150, "MediumStructurePoints": 325, "LargeStructurePoints": 400, "SecondSmallStructurePoints": 150, "SecondMediumStructurePoints": 200, "SecondLargeStructurePoints": 250},
+    {"Difficulty": 10, "SmallStructurePoints": 150, "MediumStructurePoints": 325, "LargeStructurePoints": 400, "SecondSmallStructurePoints": 150, "SecondMediumStructurePoints": 200, "SecondLargeStructurePoints": 250}
+  ],  
   "RavenTutorialDialogID": "32cf9b93-a87d-4244-a9fe-ddaa9198f3d7",
   "CaptureEscortProximityDialogID": "e066d510-3c33-4caf-8c40-39f15c92936a",
   "Story2TutorialSlides1ID": "e37a6b6d-6a50-4e05-9ecc-ca9407489911",
