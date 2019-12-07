@@ -1,7 +1,7 @@
 ; Inno Setup
 
 #define isfiles "isfiles-unicode"
-#define BTDirectory "D:\RogueTechStuff\RogueTech"
+#define BTDirectory "E:\RogueTechStuff\RogueTech"
 
 #define AppVerJSON
 #define FileHandle
