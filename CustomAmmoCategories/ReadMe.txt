@@ -1,3 +1,6 @@
+Special thanks to janxious, LadyAlekto, MpStark, Morphyum, m22spencer, bloodydoves, Colobos, CptMoore, Danadan, LtShade, CWolf and many others make this mod possible
+
+CharlesB cannibalized. Readme in CharlesB_README.md. Settings in CharlesB_settings.json 
 Unpack to Mods folder
 CustomAmmoCategories settings 
 CustomAmmoCategoriesSettings.json
@@ -6,7 +9,8 @@ WeaponRealizerSettings.json (for description look at the WR-README)
 AttackImprovementMod settings
 AIM_settings.json (for description look at the AIM-README)
 
-WARNING! Shipped versions of AIM and WR can't be loaded by ModTek and can't be used standalone.
+WARNING! Shipped versions of AIM can't be loaded by ModTek and can't be used standalone.
+WARNING! This version of CAC can be used only with ModTek 0.7.6.5+ cause it utilizes dynamic enums for subsystem for AmmoCategory 
 
 click on right side of HUD weapon slot to switch mode (near hit chance)
 click on center of HUD weapon slot to switch ammo (near ammo count)
@@ -191,6 +195,17 @@ if set as true all AP effects (damage and crits) will not affect unit.
                                                 it consider as empty and crit will be transfered to another location according transfer logic. 
 }
 
+now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
+CustomAmmoCategories.json
+[
+{
+	"Id":"LGAUSS", - new ammo category name, precessed for WeaponDef.AmmoCategory and AmmunitionDef.Category fields, using it in other AmmoCategory field will lead load error
+	"BaseCategory":"GAUSS" - base category name. Must bt in (AC2/AC5/AC10/AC20/GAUSS/Flamer/AMS/MG/SRM/LRM), 
+	                         needed for backward compatibility. 
+							 All other game mechanic (for example status effect targeting), except ammo count in battle and mech validator in mech lab will use this value.
+							 !Flamer - is base category for energy ammo (plasma, chemical lasers etc)
+},
+]
 
 KMiSSioNToday at 20:33
 yes. For example mech have 100 armor from 200 and full structure. Min crit chance 0.1. Weapon have APArmorShardsMod = 0.5 and APMaxArmorThickness = 150. APCritChance = 0.5
@@ -221,22 +236,7 @@ so thickness defines the strength something can easily punch through, while shar
       "AOEDamage":0,
       "AOEHeatDamage":0,
       "AOEInstability":0
-  }, 
-
-now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
-CustomAmmoCategories.json
-[
-{
-	"Id":"LGAUSS", - new ammo category name, precessed for WeaponDef.AmmoCategory and AmmunitionDef.Category fields, using it in other AmmoCategory field will lead load error
-	"BaseCategory":"GAUSS" - base category name. Must bt in (AC2/AC5/AC10/AC20/GAUSS/Flamer/AMS/MG/SRM/LRM), 
-	                         needed for backward compatibility. 
-							 All other game mechanic (for example status effect targeting), except ammo count in battle and mech validator in mech lab will use this value.
-							 !Flamer - is base category for energy ammo (plasma, chemical lasers etc)
-},
-]
-
-Weapon definition
-new fields
+  },
   "AOEEffectsFalloff": false, if true and weapon inflicts AoE damage, random roll will be permitted before onHit effect apply. 
                               Example: aoe range = 100m, projectile hits ground in 30m from combatant - onHits effects will be applied with 0.7 chance ((100 - 30) / 100).
   "isHeatVariation": true, - if true heat damage will be altered using DamageVariance/DistantVariance/DistantVarianceReversed values. Per mode/ammo/weapon.
