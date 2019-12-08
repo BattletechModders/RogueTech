@@ -235,7 +235,12 @@ so thickness defines the strength something can easily punch through, while shar
       "AOERange":0,
       "AOEDamage":0,
       "AOEHeatDamage":0,
-      "AOEInstability":0
+      "AOEInstability":0,
+      "RefireModifier":0,
+      "APCriticalChanceMultiplier":0,
+      "AccuracyModifier":0,
+      "DamageVariance":0,
+      "CriticalChanceMultiplier":0
   },
   "AOEEffectsFalloff": false, if true and weapon inflicts AoE damage, random roll will be permitted before onHit effect apply. 
                               Example: aoe range = 100m, projectile hits ground in 30m from combatant - onHits effects will be applied with 0.7 chance ((100 - 30) / 100).
