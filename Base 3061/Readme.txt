@@ -35,6 +35,10 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+8.5.6 - 12/9/2019
+
+Added Clan Bandit B and E to cover gap in lower end fire support vehicles.
+
 8.5.5 - 8/30/2019
 
 Added RISC Hunter,
