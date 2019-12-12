@@ -193,6 +193,19 @@ if set as true all AP effects (damage and crits) will not affect unit.
 "RemoveFromCritRollStatName": "IgnoreDamage", - on criticals resolution components having this staistic set as true will be excluded from list of available for crit. 
                                                 NOTE! excluding from list have side effect with CritLocationTransfer enabled. If in location there are only components with IgnoreDamage:true 
                                                 it consider as empty and crit will be transfered to another location according transfer logic. 
+"bloodSettings":{   - if DestructibleUrbanFlimsy it can leave blood spot
+  "DecalScales":{    - sizes of blood spots by types. Types: NOT_SET, generic, smallMetal, mediumMetal, largeMetal, smallStone, mediumStone, largeStone, 
+                                                             smallGlass, mediumGlass, largeGlass, smallMixed, mediumMixed, largeMixed, smallFence, mediumFence,
+                                                             largeFence, smallRadiotower, mediumRadiotower, largeRadiotower, smallVehicle, mediumVehicle, largeVehicle, 
+                                                             electronic,lightPole, vehicleFiery
+    "smallVehicle":10,
+    "mediumVehicle":20,
+    "largeVehicle":30,
+    "vehicleFiery":15
+  },
+  "DecalTexture": "envTxrDecl_terrainDmgSmallBlood_alb", - texture for blood spot
+  "DrawBloodChance": 0.3 - chance on leave blood spot on destruction
+},
 }
 
 now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
