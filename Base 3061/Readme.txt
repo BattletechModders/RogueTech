@@ -3,7 +3,7 @@ By Cargo Vroom
 
 The vehicles of Roguetech. Originally based on Vehicle Improvement Project, now grown out of all proportion.
 
-Some units by LadyAlecto and Justin Kase
+Some units by, based on work by, or maintained by LadyAlecto, Justin Kase and Raza5
 
 RogueTanks Modules:
 
@@ -12,7 +12,7 @@ PrimitiveTanks - Units mostly armed with Rifles, RL, MG, and basic 3025 weapons,
 CLANK - Clan tanks with clan gear.
 PirateTech/vehicle - Units mostly armed with the odd pirate weapons cobbled together by people who probably shout "Witness Me!" when entering combat.
 Superheavys/vehicle - Tanks over 100 tons, mostly for use in special endgame missions.
-Era Subfolders- Most of these have a catch all vehicle folder and are not subdivided.
+Misc Era Subfolders- Most of these have a catch all vehicle folder and are not subdivided.
 
 Custom Tags List:
 
@@ -37,14 +37,15 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-8.5.13 - 12/15/2019
+8.5.14 - 12/15/2019
 
 Added Pirate Merkava VIII
 Added Maxim Hover Transport (C3M),
 Added Minelayer Techie (L),
 Put some of the rarer plus weapons on a few tanks,
 Gave missing custom hover gear to a few vehicle chassis defs that lacked it.
-Tweaked primitive unit rocket loadouts
+Tweaked primitive unit rocket loadouts.
+Updated readme,
 Minor fixes
 
 8.5.6 - 12/9/2019
