@@ -7,10 +7,12 @@ Some units by LadyAlecto and Justin Kase
 
 RogueTanks Modules:
 
-RogueTanks - The Majority of RT's vehicles, things available widely in the IS and Periphery.
+Base 3061/vehicle - The Majority of RT's vehicles, things available widely in the IS and Periphery.
 PrimitiveTanks - Units mostly armed with Rifles, RL, MG, and basic 3025 weapons, only the most ragtag of interstellar powers use these, they're often found in the hands of local militia and cash strapped mercs.
 CLANK - Clan tanks with clan gear.
-PLANK - Units mostly armed with the odd pirate weapons cobbled together by people who probably shout "Witness Me!"
+PirateTech/vehicle - Units mostly armed with the odd pirate weapons cobbled together by people who probably shout "Witness Me!" when entering combat.
+Superheavys/vehicle - Tanks over 100 tons, mostly for use in special endgame missions.
+Era Subfolders- Most of these have a catch all vehicle folder and are not subdivided.
 
 Custom Tags List:
 
@@ -35,9 +37,15 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-8.5.7
+8.5.13 - 12/15/2019
 
 Added Pirate Merkava VIII
+Added Maxim Hover Transport (C3M),
+Added Minelayer Techie (L),
+Put some of the rarer plus weapons on a few tanks,
+Gave missing custom hover gear to a few vehicle chassis defs that lacked it.
+Tweaked primitive unit rocket loadouts
+Minor fixes
 
 8.5.6 - 12/9/2019
 
