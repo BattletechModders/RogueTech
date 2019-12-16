@@ -390,7 +390,11 @@
         "ElementTemplate" : " <indent=10%><line-indent=-5%><line-height=65%>{{element}}</line-height></line-indent></indent>\r\n",
         "DescriptionUseName" : false,
         "CritFloatieMessage" : "{0} CRIT",
-        "DestroyedFloatieMessage" : "{0} DESTROYED"
+        "DestroyedFloatieMessage" : "{0} DESTROYED",
+        "CritHitText" : "HIT {0}: {1}",
+        "CritDestroyedText" : "DESTROYED: {0}",
+        "CritDestroyedDeathText" : "DESTROYED: Mech is incapacitated, reason is {0}",
+        "CritLinkedText" : "Critical hits are linked to '{0}'"
     },
     "DamageIgnore" : {
         "Enabled" : true,
@@ -439,11 +443,16 @@
         "EnforceHardpointLimitsDescription" : "Enforces hardpoint limits in mechlab only allowing configured prefabs.",
         "AllowDefaultLoadoutWeapons" : false,
         "AllowDefaultLoadoutWeaponsDescription" : "Ignore limits that would prevent mounting default loadouts.",
+        "CreateVanillaFallbackPrefabs" : true,
+        "CreateVanillaFallbackPrefabsDescription" : "If no mapping can be found, use the vanilla mapping code (which unfortunatly maps SRM to UAC), fixes mortar issues",
         "WeaponPrefabMappings" : [
             {
                 "PrefabIdentifier" : "AC2",
                 "HardpointCandidates" : [
                     "ac2",
+                    "uac2",
+                    "rac2",
+                    "lbx2",
                     "ac",
                     "lbx"
                 ]
@@ -453,6 +462,8 @@
                 "HardpointCandidates" : [
                     "ac5",
                     "uac5",
+                    "rac5",
+                    "lbx5",
                     "ac",
                     "lbx"
                 ]
@@ -461,6 +472,7 @@
                 "PrefabIdentifier" : "AC10",
                 "HardpointCandidates" : [
                     "ac10",
+                    "uac10",
                     "lbx10",
                     "ac",
                     "lbx"
@@ -470,6 +482,36 @@
                 "PrefabIdentifier" : "AC20",
                 "HardpointCandidates" : [
                     "ac20",
+                    "uac20",
+                    "ac",
+                    "lbx"
+                ]
+            },
+            {
+                "PrefabIdentifier" : "lbx10",
+                "HardpointCandidates" : [
+                    "lbx10",
+                    "lbx20",
+                    "lbx5",
+                    "lbx2",
+                    "ac10",
+                    "ac",
+                    "lbx"
+                ]
+            },
+            {
+                "PrefabIdentifier" : "uac5",
+                "HardpointCandidates" : [
+                    "uac5",
+                    "uac20",
+                    "uac10",
+                    "uac2",
+                    "ac5",
+                    "ac20",
+                    "ac10",
+                    "ac2",
+                    "rac5",
+                    "lbx5",
                     "ac",
                     "lbx"
                 ]
@@ -479,6 +521,8 @@
                 "HardpointCandidates" : [
                     "artillery",
                     "ac20",
+                    "uac20",
+                    "lbx20",
                     "ac",
                     "lbx"
                 ]
@@ -500,7 +544,8 @@
                     "lrm15",
                     "lrm20",
                     "srm20",
-                    "lrm5"
+                    "lrm5",
+                    "rl10"
                 ]
             },
             {
@@ -510,7 +555,9 @@
                     "lrm20",
                     "srm20",
                     "lrm10",
-                    "lrm5"
+                    "lrm5",
+                    "rl20",
+                    "rl15"
                 ]
             },
             {
@@ -520,14 +567,19 @@
                     "srm20",
                     "lrm15",
                     "lrm10",
-                    "lrm5"
+                    "lrm5",
+                    "rl20",
+                    "rl15",
+                    "rl10"
                 ]
             },
             {
                 "PrefabIdentifier" : "MachineGun",
                 "HardpointCandidates" : [
                     "machinegun",
-                    "mg"
+                    "mg",
+                    "lmg",
+                    "hmg"
                 ]
             },
             {
@@ -553,6 +605,24 @@
                     "srm4",
                     "srm2"
                 ]
+            },
+            {
+                "PrefabIdentifier" : "PPC",
+                "HardpointCandidates" : [
+                    "PPC",
+                    "ppc",
+                    "hppc",
+                    "lppc",
+                    "snppc"
+                ]
+            },
+            {
+                "PrefabIdentifier" : "Gauss",
+                "HardpointCandidates" : [
+                    "gauss",
+                    "hgauss",
+                    "lgauss"
+                ]
             }
         ]
     },
@@ -573,11 +643,6 @@
     "MoveMultiplierStat" : {
         "Enabled" : true,
         "EnabledDescription" : "Introduces a new statistic effect to allow easy manipulation of (mech only) movement."
-    },
-    "NewSaveFolder" : {
-        "Enabled" : false,
-        "EnabledDescription" : "Redirects all save operations to use one folder for all save related data.",
-        "Path" : "Mods/Saves"
     },
     "OverrideDescriptions" : {
         "Enabled" : true,
