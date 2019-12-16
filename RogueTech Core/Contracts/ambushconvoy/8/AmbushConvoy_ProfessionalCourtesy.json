@@ -1,9 +1,9 @@
 {
-    "ID": "AmbushConvoy_Robbery_Hard",
-    "contractName": "Stolen Goods",
+    "ID": "AmbushConvoy_ProfessionalCourtesy",
+    "contractName": "Professional Courtesy",
     "contractDisplayStyle": "BaseCampaignNormal",
     "difficulty": 8,
-    "difficultyUIModifier": 1,
+    "difficultyUIModifier": 0,
     "weight": 1,
     "scope": "STANDARD",
     "finalDifficulty": 0,
@@ -11,10 +11,45 @@
     "missionSuccessStatementOverride": null,
     "badFaithStatementOverride": null,
     "goodFaithStatementOverride": null,
-    "shortDescription": "A team of {TEAM_EMP.FactionDef.Demonym} agents has obtained the schedule and manifest of a {TEAM_TAR.FactionDef.Demonym} convoy. This convoy's cargo is extremely valuable technological components. We want you to steal them for us. Stage an ambush of the convoy, destroy the vehicles, and we'll send in a recovery team to gather the cargo. There's a bonus if you secure the area and eliminate all the convoy guards.",
-    "longDescription": "If this cargo is valuable enough to pay us to steal it, it's going to be extremely well-defended. Be prepared, Commander.",
-    "salvagePotential": 16,
-    "requirementList": [],
+    "shortDescription": "There's a convoy of military weaponry being transported in the open on the planet's surface. Normally we'd simply handle it ourselves, but {TEAM_TAR.FactionDef.Demonym} leadership has caught wind of our presence and hired a highly-skilled professional mercenary to cover the convoy's route and intercept any attackers. Being highly-skilled professionals yourselves, we thought perhaps you could pay a visit to this hired gun -- and destroy the convoy while you're at it.",
+    "longDescription": "There aren't many solo operators in this region who I'd describe as 'highly skilled'. I wonder if it's anyone we know?",
+    "salvagePotential": 32,
+    "requirementList": [
+        {
+            "Scope": "StarSystem",
+            "RequirementTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+            },
+            "ExclusionTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+            },
+            "RequirementComparisons": [
+                {
+                    "obj": "Employer.IsOwner",
+                    "op": "Equal",
+                    "val": 0,
+                    "valueConstant": null
+                }
+            ]
+        },
+        {
+            "Scope": "Company",
+            "RequirementTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+            },
+            "ExclusionTags": {
+                "items": [
+                    "chain_professional_finalConfrontation",
+                    "chain_professional_stage1"
+                ],
+                "tagSetSourceFile": ""
+            },
+            "RequirementComparisons": []
+        }
+    ],
     "OnContractSuccessResults": [],
     "OnContractFailureResults": [],
     "encounterPlayStyle": "SinglePlayer",
@@ -40,8 +75,8 @@
             "contractObjective": {
                 "EncounterObjectGuid": "bad503ac-4f47-47b0-a735-a5b13ff0e352"
             },
-            "title": "Destroy the Supply Convoy and Escape",
-            "description": "The ENEMYFACTION scum are trying to get from one place to another. Kill them.",
+            "title": "Destroy the Weapons Convoy and Escape",
+            "description": "",
             "isPrimary": true,
             "forPlayer": "Player1",
             "objectiveGuids": [
@@ -57,7 +92,7 @@
                 "EncounterObjectGuid": "e93b9c15-0cbd-46a7-87a4-1d3de6adfd59"
             },
             "title": "Destroy the Convoy Guards",
-            "description": "Send a message by not only destroy the convoy, but eliminte their escorts as well.",
+            "description": "",
             "isPrimary": false,
             "forPlayer": "Player1",
             "objectiveGuids": [
@@ -73,7 +108,27 @@
             "title": "Destroy the {TEAM_TAR.FactionDef.Demonym} Convoy",
             "description": "The objective for destroying the convoy units.",
             "isPrimary": true,
-            "OnSuccessResults": [],
+            "OnSuccessResults": [
+                {
+                    "Scope": "Company",
+                    "Requirements": null,
+                    "AddedTags": {
+                        "items": [
+                            "chain_professional_stage1"
+                        ],
+                        "tagSetSourceFile": ""
+                    },
+                    "RemovedTags": {
+                        "items": [],
+                        "tagSetSourceFile": ""
+                    },
+                    "Stats": [],
+                    "Actions": [],
+                    "ForceEvents": [],
+                    "TemporaryResult": false,
+                    "ResultDuration": 0
+                }
+            ],
             "OnFailureResults": [],
             "OnSuccessDialogueGUID": null,
             "OnFailureDialogueGUID": null
@@ -82,7 +137,7 @@
             "objective": {
                 "EncounterObjectGuid": "43fe5b1b-6c77-4daf-b6be-5735ab59ea11"
             },
-            "title": "Destroy the {TEAM_TAR.FactionDef.Demonym} Escorts",
+            "title": "Destroy the Convoy Escorts",
             "description": "The objective for destroying the units guarding the convoy.",
             "isPrimary": false,
             "OnSuccessResults": [
@@ -257,23 +312,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "Looks like the intel our employers provided was accurate. We're tracking multiple vehicles in the area.",
-                    "wordsColor": {
-                        "r": 1,
-                        "g": 1,
-                        "b": 1,
-                        "a": 1
-                    },
-                    "selectedCastDefId": "castDef_DariusDefault",
-                    "emote": "Default",
-                    "audioName": "audioevent_universal_hostilesInbound",
-                    "cameraFocusGuid": "",
-                    "cameraDistance": "Far",
-                    "cameraHeight": "Default",
-                    "revealRadius": -1
-                },
-                {
-                    "words": "Let's move up and make contact. Once we start shooting, the convoy will probably make a break for it. Intercept them.",
+                    "words": "According to these survey maps, you should be able to see the convoy's route from this location. Once you have eyes on them, destroy the vehicles.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -289,14 +328,30 @@
                     "revealRadius": -1
                 },
                 {
-                    "words": "Once they're dealt with, head to the evac zone for pickup, or clear out the convoy's guards. Your call.",
+                    "words": "Do you always discuss your operations on an open comms channel? Or is that a special treat for me, so I can mock your ineptitude?",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
                         "b": 1,
                         "a": 1
                     },
-                    "selectedCastDefId": "castDef_DariusDefault",
+                    "selectedCastDefId": "castDef_Contract_TheProfessional",
+                    "emote": "Default",
+                    "audioName": "NONE",
+                    "cameraFocusGuid": "",
+                    "cameraDistance": "Far",
+                    "cameraHeight": "Default",
+                    "revealRadius": -1
+                },
+                {
+                    "words": "Oh dear God save us from this dipshit's trash-talking. Commander, when you're ready for pickup, I'll meet you at this LZ.",
+                    "wordsColor": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                    },
+                    "selectedCastDefId": "castDef_SumireDefault",
                     "emote": "Default",
                     "audioName": "NONE",
                     "cameraFocusGuid": "a85da736-7a2e-4cc6-aff3-feb9d73fc7e1",
@@ -305,17 +360,33 @@
                     "revealRadius": -1
                 },
                 {
-                    "words": "Good luck, Commander.",
+                    "words": "I'll be right over here, <i>Commander</i>. Waiting for you.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
                         "b": 1,
                         "a": 1
                     },
-                    "selectedCastDefId": "castDef_DariusDefault",
+                    "selectedCastDefId": "castDef_Contract_TheProfessional",
                     "emote": "Default",
                     "audioName": "NONE",
-                    "cameraFocusGuid": "76b654a6-4f2c-4a6f-86e6-d4cf868335fe",
+                    "cameraFocusGuid": "10e8686f-8d19-4058-9541-119c4dff041c",
+                    "cameraDistance": "Far",
+                    "cameraHeight": "Default",
+                    "revealRadius": -1
+                },
+                {
+                    "words": "I know you probably can't tell from way down there, but I just want you to know I'm rolling my eyes right now. <i>Hard</i>.",
+                    "wordsColor": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                    },
+                    "selectedCastDefId": "castDef_SumireDefault",
+                    "emote": "Default",
+                    "audioName": "NONE",
+                    "cameraFocusGuid": "",
                     "cameraDistance": "Far",
                     "cameraHeight": "Default",
                     "revealRadius": -1
@@ -330,7 +401,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "Well done, Commander. Let's debrief back in orbit.",
+                    "words": "That mercenary certainly made things more interesting, but it was nothing we couldn't handle.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -355,7 +426,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "That's a disappointing result, Commander.",
+                    "words": "This contract turned out to be slightly more exciting than we were led to believe.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -430,7 +501,55 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "Escorts are down, Commander. Good work. Let's wrap this up.",
+                    "words": "<i>Thank</i> you for shutting that idiot up, Commander. I don't know how much more I could take.",
+                    "wordsColor": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                    },
+                    "selectedCastDefId": "castDef_SumireDefault",
+                    "emote": "Default",
+                    "audioName": "NONE",
+                    "cameraFocusGuid": "",
+                    "cameraDistance": "Far",
+                    "cameraHeight": "Default",
+                    "revealRadius": -1
+                },
+                {
+                    "words": "For a pilot, you talk an awfully big game. I wonder how your Leopard would look with a few missile holes in it?",
+                    "wordsColor": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                    },
+                    "selectedCastDefId": "castDef_Contract_TheProfessional",
+                    "emote": "Default",
+                    "audioName": "NONE",
+                    "cameraFocusGuid": "",
+                    "cameraDistance": "Far",
+                    "cameraHeight": "Default",
+                    "revealRadius": -1
+                },
+                {
+                    "words": "Oh for the love of-- Commander, that signal's coming from off-planet. They weren't even in that 'Mech.",
+                    "wordsColor": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                    },
+                    "selectedCastDefId": "castDef_SumireDefault",
+                    "emote": "Default",
+                    "audioName": "NONE",
+                    "cameraFocusGuid": "",
+                    "cameraDistance": "Far",
+                    "cameraHeight": "Default",
+                    "revealRadius": -1
+                },
+                {
+                    "words": "Cut the chatter, Meyer. Commander, stay focused; we're almost done here.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -455,14 +574,14 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "The convoy's almost escaped, Commander. You need to step it up or we're going to miss the window of opportunity.",
+                    "words": "Boss, those vehicles are about to leave the AO. If we lose them, we don't get paid.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
                         "b": 1,
                         "a": 1
                     },
-                    "selectedCastDefId": "castDef_DariusDefault",
+                    "selectedCastDefId": "castDef_SumireDefault",
                     "emote": "Default",
                     "audioName": "NONE",
                     "cameraFocusGuid": "3560382a-c082-4a0b-8cab-8e6327b74cce",
@@ -505,7 +624,7 @@
             "overrideDialogueBucketId": "DialogBucketDef_Universal_Escape",
             "dialogueContent": [
                 {
-                    "words": "The convoy is finished, now get what 'mechs you have to the extraction point and we'll pull you out. Move quickly.",
+                    "words": "The convoy is finished, now get what mechs you have to the extraction point and we'll pull you out. Move quickly.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -593,6 +712,7 @@
                 "lanceDifficultyAdjustment": 0,
                 "selectedLanceDefId": null,
                 "selectedLanceDifficulty": 0,
+                "overrideSpawnMethod": null,
                 "unitSpawnPointOverrideList": [
                     {
                         "unitSpawnPoint": {
@@ -779,9 +899,10 @@
                     "items": [],
                     "tagSetSourceFile": "tags/SpawnEffectTags"
                 },
-                "lanceDifficultyAdjustment": 0,
+                "lanceDifficultyAdjustment": 1,
                 "selectedLanceDefId": null,
                 "selectedLanceDifficulty": 0,
+                "overrideSpawnMethod": null,
                 "unitSpawnPointOverrideList": [
                     {
                         "unitSpawnPoint": {
@@ -789,8 +910,8 @@
                         },
                         "customUnitName": "",
                         "customHeraldryDefId": "",
-                        "unitType": "Vehicle",
-                        "unitDefId": "UseLance",
+                        "unitType": "Mech",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -822,8 +943,8 @@
                         },
                         "customUnitName": "",
                         "customHeraldryDefId": "",
-                        "unitType": "Vehicle",
-                        "unitDefId": "UseLance",
+                        "unitType": "Mech",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -855,8 +976,8 @@
                         },
                         "customUnitName": "",
                         "customHeraldryDefId": "",
-                        "unitType": "Vehicle",
-                        "unitDefId": "UseLance",
+                        "unitType": "Mech",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -888,8 +1009,8 @@
                         },
                         "customUnitName": "",
                         "customHeraldryDefId": "",
-                        "unitType": "Vehicle",
-                        "unitDefId": "UseLance",
+                        "unitType": "Mech",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -925,8 +1046,7 @@
                 "lanceDefId": "Tagged",
                 "lanceTagSet": {
                     "items": [
-                        "lance_type_battle",
-                        "lance_type_notallvehicles"
+                        "lance_type_battle"
                     ],
                     "tagSetSourceFile": "tags/LanceTags"
                 },
@@ -938,9 +1058,10 @@
                     "items": [],
                     "tagSetSourceFile": "tags/SpawnEffectTags"
                 },
-                "lanceDifficultyAdjustment": 1,
+                "lanceDifficultyAdjustment": 3,
                 "selectedLanceDefId": null,
                 "selectedLanceDifficulty": 0,
+                "overrideSpawnMethod": null,
                 "unitSpawnPointOverrideList": [
                     {
                         "unitSpawnPoint": {
@@ -949,7 +1070,7 @@
                         "customUnitName": "",
                         "customHeraldryDefId": "",
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -962,7 +1083,7 @@
                             "items": [],
                             "tagSetSourceFile": "tags/SpawnEffectTags"
                         },
-                        "pilotDefId": "pilotDef_InheritLance",
+                        "pilotDefId": "pilot_contract_TheProfessional",
                         "pilotTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/PilotTags"
@@ -982,7 +1103,7 @@
                         "customUnitName": "",
                         "customHeraldryDefId": "",
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -1015,7 +1136,7 @@
                         "customUnitName": "",
                         "customHeraldryDefId": "",
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_None",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -1084,8 +1205,7 @@
                 "lanceDefId": "Tagged",
                 "lanceTagSet": {
                     "items": [
-                        "lance_type_support",
-                        "lance_type_notallvehicles"
+                        "lance_type_fire"
                     ],
                     "tagSetSourceFile": "tags/LanceTags"
                 },
@@ -1100,6 +1220,7 @@
                 "lanceDifficultyAdjustment": 0,
                 "selectedLanceDefId": null,
                 "selectedLanceDifficulty": 0,
+                "overrideSpawnMethod": null,
                 "unitSpawnPointOverrideList": [
                     {
                         "unitSpawnPoint": {
@@ -1110,7 +1231,11 @@
                         "unitType": "Mech",
                         "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
-                            "items": [],
+                            "items": [
+                                "wheels",
+                                "light",
+                                "vehicle"
+                            ],
                             "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
@@ -1143,7 +1268,11 @@
                         "unitType": "Mech",
                         "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
-                            "items": [],
+                            "items": [
+                                "wheels",
+                                "medium",
+                                "vehicle"
+                            ],
                             "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
@@ -1176,7 +1305,9 @@
                         "unitType": "Mech",
                         "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
-                            "items": [],
+                            "items": [
+                                "heavy"
+                            ],
                             "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {

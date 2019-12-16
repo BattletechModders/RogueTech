@@ -1,9 +1,9 @@
 {
-    "ID": "AmbushConvoy_Robbery_Hard",
-    "contractName": "Stolen Goods",
+    "ID": "AmbushConvoy_ThornInTheSide",
+    "contractName": "Thorny Problem",
     "contractDisplayStyle": "BaseCampaignNormal",
-    "difficulty": 8,
-    "difficultyUIModifier": 1,
+    "difficulty": 2,
+    "difficultyUIModifier": 0,
     "weight": 1,
     "scope": "STANDARD",
     "finalDifficulty": 0,
@@ -11,10 +11,32 @@
     "missionSuccessStatementOverride": null,
     "badFaithStatementOverride": null,
     "goodFaithStatementOverride": null,
-    "shortDescription": "A team of {TEAM_EMP.FactionDef.Demonym} agents has obtained the schedule and manifest of a {TEAM_TAR.FactionDef.Demonym} convoy. This convoy's cargo is extremely valuable technological components. We want you to steal them for us. Stage an ambush of the convoy, destroy the vehicles, and we'll send in a recovery team to gather the cargo. There's a bonus if you secure the area and eliminate all the convoy guards.",
-    "longDescription": "If this cargo is valuable enough to pay us to steal it, it's going to be extremely well-defended. Be prepared, Commander.",
-    "salvagePotential": 16,
-    "requirementList": [],
+    "shortDescription": "The {TEAM_TAR.FactionDef.Demonym} control of this world is nearly absolute. We've identified a point of vulnerability, however: they move supplies and weapons by convoy, and those convoys are lightly defended by a single lance of 'Mechs. If we destroy enough of their supply convoys, their other operations will be weakened enough for our forces to move in and take advantage of their fragility. We don't want to tip our hand, however, so we'd like you to engage in a little guerilla warfare on our behalf.",
+    "longDescription": "It's a solid plan, Commander, as long as they're right about the light defenses.",
+    "salvagePotential": 12,
+    "requirementList": [
+        {
+            "Scope": "StarSystem",
+            "RequirementTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+            },
+            "ExclusionTags": {
+                "items": [
+                    "planet_other_empty"
+                ],
+                "tagSetSourceFile": ""
+            },
+            "RequirementComparisons": [
+                {
+                    "obj": "Target.IsOwner",
+                    "op": "Equal",
+                    "val": 1,
+                    "valueConstant": null
+                }
+            ]
+        }
+    ],
     "OnContractSuccessResults": [],
     "OnContractFailureResults": [],
     "encounterPlayStyle": "SinglePlayer",
@@ -41,7 +63,7 @@
                 "EncounterObjectGuid": "bad503ac-4f47-47b0-a735-a5b13ff0e352"
             },
             "title": "Destroy the Supply Convoy and Escape",
-            "description": "The ENEMYFACTION scum are trying to get from one place to another. Kill them.",
+            "description": "",
             "isPrimary": true,
             "forPlayer": "Player1",
             "objectiveGuids": [
@@ -57,7 +79,7 @@
                 "EncounterObjectGuid": "e93b9c15-0cbd-46a7-87a4-1d3de6adfd59"
             },
             "title": "Destroy the Convoy Guards",
-            "description": "Send a message by not only destroy the convoy, but eliminte their escorts as well.",
+            "description": "",
             "isPrimary": false,
             "forPlayer": "Player1",
             "objectiveGuids": [
@@ -257,23 +279,23 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "Looks like the intel our employers provided was accurate. We're tracking multiple vehicles in the area.",
+                    "words": "This is as close as I can get you without tripping every early warning system in the area. If you move up to here, you should be able to see the targets.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
                         "b": 1,
                         "a": 1
                     },
-                    "selectedCastDefId": "castDef_DariusDefault",
+                    "selectedCastDefId": "castDef_SumireDefault",
                     "emote": "Default",
-                    "audioName": "audioevent_universal_hostilesInbound",
-                    "cameraFocusGuid": "",
+                    "audioName": "NONE",
+                    "cameraFocusGuid": "cb50e1e4-aa0c-49b2-bd2e-5339c78dafb5",
                     "cameraDistance": "Far",
                     "cameraHeight": "Default",
                     "revealRadius": -1
                 },
                 {
-                    "words": "Let's move up and make contact. Once we start shooting, the convoy will probably make a break for it. Intercept them.",
+                    "words": "The escorts are optional targets, Commander, but knocking them out would make our employers happy, and we'll get a bonus.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -289,33 +311,17 @@
                     "revealRadius": -1
                 },
                 {
-                    "words": "Once they're dealt with, head to the evac zone for pickup, or clear out the convoy's guards. Your call.",
+                    "words": "Once you've wrapped this up, I'll pick your lance up at this LZ, Commander.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
                         "b": 1,
                         "a": 1
                     },
-                    "selectedCastDefId": "castDef_DariusDefault",
+                    "selectedCastDefId": "castDef_SumireDefault",
                     "emote": "Default",
                     "audioName": "NONE",
                     "cameraFocusGuid": "a85da736-7a2e-4cc6-aff3-feb9d73fc7e1",
-                    "cameraDistance": "Far",
-                    "cameraHeight": "Default",
-                    "revealRadius": -1
-                },
-                {
-                    "words": "Good luck, Commander.",
-                    "wordsColor": {
-                        "r": 1,
-                        "g": 1,
-                        "b": 1,
-                        "a": 1
-                    },
-                    "selectedCastDefId": "castDef_DariusDefault",
-                    "emote": "Default",
-                    "audioName": "NONE",
-                    "cameraFocusGuid": "76b654a6-4f2c-4a6f-86e6-d4cf868335fe",
                     "cameraDistance": "Far",
                     "cameraHeight": "Default",
                     "revealRadius": -1
@@ -330,7 +336,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "Well done, Commander. Let's debrief back in orbit.",
+                    "words": "Straightforward and successful: my favorite kind of mission.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -355,7 +361,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "That's a disappointing result, Commander.",
+                    "words": "I don't know what happened down there, Commander. Let's debrief back in orbit.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -380,7 +386,7 @@
             "overrideDialogueBucketId": "DialogBucketDef_AmbushConvoy_EyesOnTarget",
             "dialogueContent": [
                 {
-                    "words": "We have a lock on the target vehicles. They should be to your front. Engage and destroy, Commander.",
+                    "words": "We have a lock on the target vehicles. They should be to your front. Engage and destory, Commander.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -430,7 +436,23 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "Escorts are down, Commander. Good work. Let's wrap this up.",
+                    "words": "That's the escorts down, Commander. I'm not seeing any more 'Mech signatures in the AO.",
+                    "wordsColor": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                    },
+                    "selectedCastDefId": "castDef_SumireDefault",
+                    "emote": "Default",
+                    "audioName": "NONE",
+                    "cameraFocusGuid": "",
+                    "cameraDistance": "Far",
+                    "cameraHeight": "Default",
+                    "revealRadius": -1
+                },
+                {
+                    "words": "That bonus is ours, assuming we take out the convoy.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -455,14 +477,14 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "The convoy's almost escaped, Commander. You need to step it up or we're going to miss the window of opportunity.",
+                    "words": "Boss, those vehicles are about to leave the AO. If we lose them, we don't get paid.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
                         "b": 1,
                         "a": 1
                     },
-                    "selectedCastDefId": "castDef_DariusDefault",
+                    "selectedCastDefId": "castDef_SumireDefault",
                     "emote": "Default",
                     "audioName": "NONE",
                     "cameraFocusGuid": "3560382a-c082-4a0b-8cab-8e6327b74cce",
@@ -505,7 +527,7 @@
             "overrideDialogueBucketId": "DialogBucketDef_Universal_Escape",
             "dialogueContent": [
                 {
-                    "words": "The convoy is finished, now get what 'mechs you have to the extraction point and we'll pull you out. Move quickly.",
+                    "words": "The convoy is finished, now get what mechs you have to the extraction point and we'll pull you out. Move quickly.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -789,8 +811,8 @@
                         },
                         "customUnitName": "",
                         "customHeraldryDefId": "",
-                        "unitType": "Vehicle",
-                        "unitDefId": "UseLance",
+                        "unitType": "Mech",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -822,8 +844,8 @@
                         },
                         "customUnitName": "",
                         "customHeraldryDefId": "",
-                        "unitType": "Vehicle",
-                        "unitDefId": "UseLance",
+                        "unitType": "Mech",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -855,8 +877,8 @@
                         },
                         "customUnitName": "",
                         "customHeraldryDefId": "",
-                        "unitType": "Vehicle",
-                        "unitDefId": "UseLance",
+                        "unitType": "Mech",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -888,8 +910,8 @@
                         },
                         "customUnitName": "",
                         "customHeraldryDefId": "",
-                        "unitType": "Vehicle",
-                        "unitDefId": "UseLance",
+                        "unitType": "Mech",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -925,8 +947,7 @@
                 "lanceDefId": "Tagged",
                 "lanceTagSet": {
                     "items": [
-                        "lance_type_battle",
-                        "lance_type_notallvehicles"
+                        "lance_type_battle"
                     ],
                     "tagSetSourceFile": "tags/LanceTags"
                 },
@@ -935,10 +956,12 @@
                     "tagSetSourceFile": "tags/LanceTags"
                 },
                 "spawnEffectTags": {
-                    "items": [],
+                    "items": [
+                        "spawn_poorly_maintained_50"
+                    ],
                     "tagSetSourceFile": "tags/SpawnEffectTags"
                 },
-                "lanceDifficultyAdjustment": 1,
+                "lanceDifficultyAdjustment": 0,
                 "selectedLanceDefId": null,
                 "selectedLanceDifficulty": 0,
                 "unitSpawnPointOverrideList": [
@@ -949,7 +972,7 @@
                         "customUnitName": "",
                         "customHeraldryDefId": "",
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -982,7 +1005,7 @@
                         "customUnitName": "",
                         "customHeraldryDefId": "",
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -1015,7 +1038,7 @@
                         "customUnitName": "",
                         "customHeraldryDefId": "",
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -1048,7 +1071,7 @@
                         "customUnitName": "",
                         "customHeraldryDefId": "",
                         "unitType": "Mech",
-                        "unitDefId": "mechDef_None",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -1084,8 +1107,7 @@
                 "lanceDefId": "Tagged",
                 "lanceTagSet": {
                     "items": [
-                        "lance_type_support",
-                        "lance_type_notallvehicles"
+                        "lance_type_fire"
                     ],
                     "tagSetSourceFile": "tags/LanceTags"
                 },
@@ -1110,7 +1132,11 @@
                         "unitType": "Mech",
                         "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
-                            "items": [],
+                            "items": [
+                                "wheels",
+                                "light",
+                                "vehicle"
+                            ],
                             "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
@@ -1143,7 +1169,11 @@
                         "unitType": "Mech",
                         "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
-                            "items": [],
+                            "items": [
+                                "wheels",
+                                "medium",
+                                "vehicle"
+                            ],
                             "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
@@ -1176,7 +1206,9 @@
                         "unitType": "Mech",
                         "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
-                            "items": [],
+                            "items": [
+                                "heavy"
+                            ],
                             "tagSetSourceFile": "tags/UnitTags"
                         },
                         "unitExcludedTagSet": {
