@@ -1,13 +1,16 @@
 {
     "ID": "AmbushConvoy_WeaponShipment",
-	"filename": "AmbushConvoy_WeaponShipment.json",
     "contractName": "Weapon Shipment",
     "contractDisplayStyle": "BaseCampaignNormal",
     "difficulty": 8,
-    "difficultyUIModifier": 0,
+    "difficultyUIModifier": 1,
     "weight": 1,
     "scope": "STANDARD",
     "finalDifficulty": 0,
+    "representativeCastDefIDOverride": null,
+    "missionSuccessStatementOverride": null,
+    "badFaithStatementOverride": null,
+    "goodFaithStatementOverride": null,
     "shortDescription": "We need to make a deniable strike on a {TEAM_TAR.FactionDef.Demonym} convoy. Intel shows the convoy is a shipment of weapons, including at least one intact Star League era weapon system. That level of technology could shift the balance of power in {TGT_SYSTEM.name} - something {TEAM_EMP.FactionDef.Demonym} leadership isn't willing to tolerate.",
     "longDescription": "Obviously, {TEAM_EMP.FactionDef.ShortName} would prefer to salvage the lostech themselves, requiring us to clear out any defending forces. Thus, they're paying more if we clear out the defenders.",
     "salvagePotential": 20,
@@ -40,7 +43,6 @@
     ],
     "OnContractSuccessResults": [],
     "OnContractFailureResults": [],
-    "contractType": "AmbushConvoy",
     "encounterPlayStyle": "SinglePlayer",
     "maxNumberOfPlayerUnits": 4,
     "lanceMinTonnage": -1,
@@ -96,9 +98,11 @@
             },
             "title": "Destroy the {TEAM_TAR.FactionDef.Demonym} Convoy",
             "description": "",
-            "isPrimary": false,
+            "isPrimary": true,
             "OnSuccessResults": [],
-            "OnFailureResults": []
+            "OnFailureResults": [],
+            "OnSuccessDialogueGUID": null,
+            "OnFailureDialogueGUID": null
         },
         {
             "objective": {
@@ -134,7 +138,9 @@
                     "ResultDuration": 0
                 }
             ],
-            "OnFailureResults": []
+            "OnFailureResults": [],
+            "OnSuccessDialogueGUID": null,
+            "OnFailureDialogueGUID": null
         },
         {
             "objective": {
@@ -142,9 +148,11 @@
             },
             "title": "Stop Convoy From Escaping",
             "description": "",
-            "isPrimary": false,
+            "isPrimary": true,
             "OnSuccessResults": [],
-            "OnFailureResults": []
+            "OnFailureResults": [],
+            "OnSuccessDialogueGUID": null,
+            "OnFailureDialogueGUID": null
         },
         {
             "objective": {
@@ -152,9 +160,11 @@
             },
             "title": "Intercept {TEAM_TAR.FactionDef.Demonym} Convoy",
             "description": "",
-            "isPrimary": false,
+            "isPrimary": true,
             "OnSuccessResults": [],
-            "OnFailureResults": []
+            "OnFailureResults": [],
+            "OnSuccessDialogueGUID": null,
+            "OnFailureDialogueGUID": null
         },
         {
             "objective": {
@@ -162,9 +172,11 @@
             },
             "title": "Reach the Evac Zone",
             "description": "",
-            "isPrimary": false,
+            "isPrimary": true,
             "OnSuccessResults": [],
-            "OnFailureResults": []
+            "OnFailureResults": [],
+            "OnSuccessDialogueGUID": null,
+            "OnFailureDialogueGUID": null
         },
         {
             "objective": {
@@ -200,7 +212,9 @@
                     "ResultDuration": 0
                 }
             ],
-            "OnFailureResults": []
+            "OnFailureResults": [],
+            "OnSuccessDialogueGUID": null,
+            "OnFailureDialogueGUID": null
         }
     ],
     "artilleryObjectiveList": [],
@@ -212,6 +226,7 @@
                 "EncounterObjectGuid": "2e0d2e69-6335-49ae-b2bb-61ff3185306b"
             },
             "enableChunkFromContract": true,
+            "controlledByContractChunkGroupList": [],
             "requirementList": []
         }
     ],
@@ -488,7 +503,7 @@
                 "EncounterObjectGuid": "366443c6-7895-4b4c-aea9-544f1a88c43e"
             },
             "name": "Dialogue_ConvoyTargetDestroyed",
-            "overrideDialogueBucketId": "DialogBucketDef_Universal_KillConfirmed",
+            "overrideDialogueBucketId": "DialogBucketDef_AmbushConvoy_PriTarDamaged",
             "dialogueContent": [
                 {
                     "words": "One down. Keep engaging those threats and we'll be out of here. ",
@@ -516,7 +531,7 @@
             "overrideDialogueBucketId": "DialogBucketDef_Universal_Escape",
             "dialogueContent": [
                 {
-                    "words": "The convoy is finished, now get what 'mechs you have to the extraction point and we'll pull you out. Move quickly.",
+                    "words": "The convoy is finished, now get what mechs you have to the extraction point and we'll pull you out. Move quickly.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -559,7 +574,9 @@
             ]
         }
     ],
-    "overrideAutoCompleteDialogueId": null,
+    "extractionOverrideList": [],
+    "overwriteMissionCompleteWhenAutoComplete": true,
+    "overrideAutoCompleteDialogueId": "",
     "disableNegotations": false,
     "disableLanceConfiguration": false,
     "disableCancelButton": false,
@@ -571,6 +588,7 @@
     "expirationTimeOverride": -1,
     "negotiatedSalary": 1,
     "negotiatedSalvage": 0,
+    "excludedFromProceduralGeneration": false,
     "player1Team": {
         "encounterLayerData": {
             "EncounterObjectGuid": "e1e9093f-5cb2-4ece-889d-49aa6357e731"
@@ -787,7 +805,7 @@
                     "items": [],
                     "tagSetSourceFile": "tags/SpawnEffectTags"
                 },
-                "lanceDifficultyAdjustment": 0,
+                "lanceDifficultyAdjustment": 1,
                 "selectedLanceDefId": null,
                 "selectedLanceDifficulty": 0,
                 "unitSpawnPointOverrideList": [
@@ -1273,5 +1291,15 @@
         "faction": "INVALID_UNSET",
         "teamLeaderCastDefId": "castDef_TeamLeader_Current",
         "lanceOverrideList": []
-    }
+    },
+    "employersAllyTeam": {
+        "encounterLayerData": null,
+        "teamGuid": "70af7e7f-39a8-4e81-87c2-bd01dcb01b5e",
+        "teamName": "Employers Ally",
+        "faction": "INVALID_UNSET",
+        "teamLeaderCastDefId": "castDef_TeamLeader_Current",
+        "lanceOverrideList": []
+    },
+    "contractType": "AmbushConvoy",
+    "contractTypeID": "AmbushConvoy"
 }
