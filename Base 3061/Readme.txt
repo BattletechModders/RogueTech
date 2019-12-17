@@ -37,6 +37,13 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+8.6.0 - 12/17/2019
+
+Added Microwave truck,
+Added Pirate Myrmidon,
+Added Pirate Hetzer SRM,
+Added Pirate Puma
+
 8.5.16 - 12/15/2019
 
 Added Pirate Merkava VIII
