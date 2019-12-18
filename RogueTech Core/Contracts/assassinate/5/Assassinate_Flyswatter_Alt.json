@@ -1,8 +1,8 @@
 {
-    "ID": "Assassinate_KeyPersonnel",
-    "contractName": "Key Personnel",
+    "ID": "Assassinate_Flyswatter_Alt",
+    "contractName": "Flyswatter",
     "contractDisplayStyle": "BaseCampaignNormal",
-    "difficulty": 2,
+    "difficulty": 5,
     "difficultyUIModifier": 0,
     "weight": 1,
     "scope": "STANDARD",
@@ -11,10 +11,30 @@
     "missionSuccessStatementOverride": null,
     "badFaithStatementOverride": null,
     "goodFaithStatementOverride": null,
-    "shortDescription": "We have an opportunity to eliminate a key figure in the {TEAM_TAR.FactionDef.Demonym} hierarchy in this system, which will leave their organization in chaos and ensure safety for {TEAM_EMP.FactionDef.Demonym} operations. The target will be relatively unguarded and vulnerable, and we'd like you to strike in this window of opportunity.",
-    "longDescription": "Sounds like we'll be hitting a middle manager. Not much glory, but it pays. The target won't be alone, Commander, and there's a bonus if we clean up the escorting units. Still, if things get too hot, we can always hit and run.",
-    "salvagePotential": 4,
-    "requirementList": [],
+    "shortDescription": "Commander, this mission should be simple. A {TEAM_TAR.FactionDef.Demonym} noble is participating in a patrol, as a show of support for the troops. She's insisted on using her ancestral family 'Mech, which is a Cicada CDA-2A. This should make eliminating her quite easy. Recognizing the danger, her handlers have sent along an extremely heavy supporting lance. If you're quick, and aggressive, you should be able to destroy her little Cicada before her escorts can react.",
+    "longDescription": "A hit-and-run operation should be straightforward enough, Commander. Just remember that if you get bogged down in fighting the escorts, escape is always an option.",
+    "salvagePotential": 20,
+    "requirementList": [
+        {
+            "Scope": "StarSystem",
+            "RequirementTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+            },
+            "ExclusionTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+            },
+            "RequirementComparisons": [
+                {
+                    "obj": "Target.IsOwner",
+                    "op": "Equal",
+                    "val": 1,
+                    "valueConstant": null
+                }
+            ]
+        }
+    ],
     "OnContractSuccessResults": [],
     "OnContractFailureResults": [],
     "encounterPlayStyle": "SinglePlayer",
@@ -41,7 +61,7 @@
                 "EncounterObjectGuid": "edafecaf-4d24-4304-98b1-9e645898c6ee"
             },
             "title": "Destroy the Target and Escape",
-            "description": "Destroy the Target, clear area of additional enemies, and escape",
+            "description": "Destroy the Target, clear area of additional forces Enemies, and Escape",
             "isPrimary": true,
             "forPlayer": "Player1",
             "objectiveGuids": [
@@ -59,7 +79,7 @@
                 "EncounterObjectGuid": "650245ff-89b6-4c0f-9b72-31db69cf109c"
             },
             "title": "Destroy Supporting Enemy Forces",
-            "description": "",
+            "description": "The secondary objective to destroy an additional lance supporting the assassination target.",
             "isPrimary": false,
             "OnSuccessResults": [
                 {
@@ -77,7 +97,7 @@
                         {
                             "typeString": "System.Single",
                             "name": "ContractBonusRewardPct",
-                            "value": "0.25",
+                            "value": "0.1",
                             "set": false,
                             "valueConstant": null
                         }
@@ -134,8 +154,8 @@
             "objective": {
                 "EncounterObjectGuid": "504a1169-8858-4f3d-be89-48eb39f54e4d"
             },
-            "title": "Destroy Target Unit",
-            "description": "",
+            "title": "Destroy {TEAM_TAR.FactionDef.Demonym} Noble",
+            "description": "The objective to destroy the Assassination Target.",
             "isPrimary": true,
             "OnSuccessResults": [],
             "OnFailureResults": [],
@@ -158,8 +178,8 @@
             "objective": {
                 "EncounterObjectGuid": "cc0880d2-2c42-40ef-98ed-33fe754c96e6"
             },
-            "title": "Get to the Evac Zone",
-            "description": "",
+            "title": "Get to the evac zone",
+            "description": "The objective for the player to escape and complete the mission.",
             "isPrimary": true,
             "OnSuccessResults": [],
             "OnFailureResults": [],
@@ -170,8 +190,8 @@
             "objective": {
                 "EncounterObjectGuid": "3a4192be-2a53-4383-94ac-19c08883ea5f"
             },
-            "title": "Stop the Target from Escaping",
-            "description": "",
+            "title": "Keep the {TEAM_TAR.FactionDef.Demonym} Noble from Escaping",
+            "description": "The objective to stop the assassination target for escaping, the player will fail if the target escapes.",
             "isPrimary": true,
             "OnSuccessResults": [],
             "OnFailureResults": [],
@@ -199,7 +219,7 @@
             "encounterChunk": {
                 "EncounterObjectGuid": "19e8fa2a-f850-42f0-a067-15fcafcc8123"
             },
-            "enableChunkFromContract": false,
+            "enableChunkFromContract": true,
             "controlledByContractChunkGroupList": [],
             "requirementList": []
         },
@@ -208,7 +228,7 @@
             "encounterChunk": {
                 "EncounterObjectGuid": "9a27ee75-f33f-45ac-b0d3-ebc321ae7ffc"
             },
-            "enableChunkFromContract": false,
+            "enableChunkFromContract": true,
             "controlledByContractChunkGroupList": [],
             "requirementList": []
         }
@@ -260,7 +280,23 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "Commander, our intel was right; the target is in the AO and only lightly guarded.",
+                    "words": "If you ask me, boss, anyone who sends their VIPs out in a CDA-2A is asking to be shot.",
+                    "wordsColor": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                    },
+                    "selectedCastDefId": "castDef_YangDefault",
+                    "emote": "Default",
+                    "audioName": "NONE",
+                    "cameraFocusGuid": "",
+                    "cameraDistance": "Far",
+                    "cameraHeight": "Default",
+                    "revealRadius": -1
+                },
+                {
+                    "words": "Do you have anything helpful to offer, Yang?",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -276,14 +312,14 @@
                     "revealRadius": -1
                 },
                 {
-                    "words": "We're seeing a lot of {TEAM_TAR.FactionDef.Demonym} activity in the vicinity of the target.",
+                    "words": "These little bastards are fast, so watch for the VIP to make a run for it.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
                         "b": 1,
                         "a": 1
                     },
-                    "selectedCastDefId": "castDef_DariusDefault",
+                    "selectedCastDefId": "castDef_YangDefault",
                     "emote": "Default",
                     "audioName": "NONE",
                     "cameraFocusGuid": "9d973fb5-9b7e-4c49-969a-6bb3e60caa64",
@@ -292,7 +328,7 @@
                     "revealRadius": -1
                 },
                 {
-                    "words": "Take them out, get to the evac zone, and then we get paid.",
+                    "words": "Noted. Commander, remember that we're expecting a very heavy escort, so it might be wiser to hit the target and run for the LZ, here.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -302,7 +338,23 @@
                     "selectedCastDefId": "castDef_DariusDefault",
                     "emote": "Default",
                     "audioName": "NONE",
-                    "cameraFocusGuid": "49c80ae9-df2d-4788-a56e-3b21cf381691",
+                    "cameraFocusGuid": "a25a4728-0069-41cc-ac38-19b1f49023e7",
+                    "cameraDistance": "Far",
+                    "cameraHeight": "Default",
+                    "revealRadius": -1
+                },
+                {
+                    "words": "Good luck and good hunting.",
+                    "wordsColor": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                    },
+                    "selectedCastDefId": "castDef_DariusDefault",
+                    "emote": "Default",
+                    "audioName": "NONE",
+                    "cameraFocusGuid": "",
                     "cameraDistance": "Far",
                     "cameraHeight": "Default",
                     "revealRadius": -1
@@ -317,14 +369,14 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "The target is down, Commander. Well done. We'll debrief back in orbit.",
+                    "words": "See? Once you get 'em pinned down, Cicadas pop like balloons.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
                         "b": 1,
                         "a": 1
                     },
-                    "selectedCastDefId": "castDef_DariusDefault",
+                    "selectedCastDefId": "castDef_YangDefault",
                     "emote": "Default",
                     "audioName": "NONE",
                     "cameraFocusGuid": "",
@@ -342,7 +394,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "I'm scrubbing the mission, Commander. What a disaster.",
+                    "words": "Time to make a withdrawal. No way of pulling this one out of the fire.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -367,7 +419,7 @@
             "overrideDialogueBucketId": "",
             "dialogueContent": [
                 {
-                    "words": "That's a confirmed kill, Commander. We can evac whenever you're ready.",
+                    "words": "That's our target destroyed, Commander. Meyer, are you ready for the pickup?",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -378,6 +430,22 @@
                     "emote": "Default",
                     "audioName": "NONE",
                     "cameraFocusGuid": "",
+                    "cameraDistance": "Far",
+                    "cameraHeight": "Default",
+                    "revealRadius": -1
+                },
+                {
+                    "words": "I'm on station. Head for this LZ and I'll get you out of there.",
+                    "wordsColor": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                    },
+                    "selectedCastDefId": "castDef_SumireDefault",
+                    "emote": "Default",
+                    "audioName": "NONE",
+                    "cameraFocusGuid": "a25a4728-0069-41cc-ac38-19b1f49023e7",
                     "cameraDistance": "Far",
                     "cameraHeight": "Default",
                     "revealRadius": -1
@@ -704,8 +772,7 @@
                 "lanceDefId": "Tagged",
                 "lanceTagSet": {
                     "items": [
-                        "lance_type_battle",
-                        "lance_type_notallvehicles"
+                        "lance_type_heavy"
                     ],
                     "tagSetSourceFile": "tags/LanceTags"
                 },
@@ -714,12 +781,10 @@
                     "tagSetSourceFile": "tags/LanceTags"
                 },
                 "spawnEffectTags": {
-                    "items": [
-                        "spawn_poorly_maintained_50"
-                    ],
+                    "items": [],
                     "tagSetSourceFile": "tags/SpawnEffectTags"
                 },
-                "lanceDifficultyAdjustment": 0,
+                "lanceDifficultyAdjustment": 1,
                 "selectedLanceDefId": "",
                 "selectedLanceDifficulty": 0,
                 "unitSpawnPointOverrideList": [
@@ -730,7 +795,7 @@
                         "customUnitName": "",
                         "customHeraldryDefId": "",
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -763,7 +828,7 @@
                         "customUnitName": "",
                         "customHeraldryDefId": "",
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -796,7 +861,7 @@
                         "customUnitName": "",
                         "customHeraldryDefId": "",
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -829,7 +894,7 @@
                         "customUnitName": "",
                         "customHeraldryDefId": "",
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -865,7 +930,7 @@
                 "lanceDefId": "Tagged",
                 "lanceTagSet": {
                     "items": [
-                        "lance_type_recon"
+                        "lance_type_support"
                     ],
                     "tagSetSourceFile": "tags/LanceTags"
                 },
@@ -874,12 +939,10 @@
                     "tagSetSourceFile": "tags/LanceTags"
                 },
                 "spawnEffectTags": {
-                    "items": [
-                        "spawn_poorly_maintained_50"
-                    ],
+                    "items": [],
                     "tagSetSourceFile": "tags/SpawnEffectTags"
                 },
-                "lanceDifficultyAdjustment": 0,
+                "lanceDifficultyAdjustment": 1,
                 "selectedLanceDefId": "",
                 "selectedLanceDifficulty": 0,
                 "unitSpawnPointOverrideList": [
@@ -890,7 +953,7 @@
                         "customUnitName": "",
                         "customHeraldryDefId": "",
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -923,7 +986,7 @@
                         "customUnitName": "",
                         "customHeraldryDefId": "",
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -956,7 +1019,7 @@
                         "customUnitName": "",
                         "customHeraldryDefId": "",
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -989,7 +1052,7 @@
                         "customUnitName": "",
                         "customHeraldryDefId": "",
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechDef_InheritLance",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -1022,11 +1085,9 @@
                     "EncounterObjectGuid": "9d973fb5-9b7e-4c49-969a-6bb3e60caa64"
                 },
                 "name": "Lance_Enemy_AssassinationTarget",
-                "lanceDefId": "Tagged",
+                "lanceDefId": "Manual",
                 "lanceTagSet": {
-                    "items": [
-                        "lance_type_solo"
-                    ],
+                    "items": [],
                     "tagSetSourceFile": "tags/LanceTags"
                 },
                 "lanceExcludedTagSet": {
@@ -1034,9 +1095,7 @@
                     "tagSetSourceFile": "tags/LanceTags"
                 },
                 "spawnEffectTags": {
-                    "items": [
-                        "spawn_poorly_maintained_50"
-                    ],
+                    "items": [],
                     "tagSetSourceFile": "tags/SpawnEffectTags"
                 },
                 "lanceDifficultyAdjustment": 0,
@@ -1047,10 +1106,10 @@
                         "unitSpawnPoint": {
                             "EncounterObjectGuid": "6cd3107e-0f9d-4809-ab8c-fb30faf4cd80"
                         },
-                        "customUnitName": "Target",
+                        "customUnitName": "Noble",
                         "customHeraldryDefId": "",
                         "unitType": "Mech",
-                        "unitDefId": "UseLance",
+                        "unitDefId": "mechdef_cicada_CDA-2A",
                         "unitTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/UnitTags"
@@ -1063,7 +1122,7 @@
                             "items": [],
                             "tagSetSourceFile": "tags/SpawnEffectTags"
                         },
-                        "pilotDefId": "pilotDef_InheritLance",
+                        "pilotDefId": "pilot_d7_pilot",
                         "pilotTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/PilotTags"
@@ -1096,7 +1155,7 @@
                             "items": [],
                             "tagSetSourceFile": "tags/SpawnEffectTags"
                         },
-                        "pilotDefId": "pilotDef_InheritLance",
+                        "pilotDefId": "",
                         "pilotTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/PilotTags"
@@ -1129,7 +1188,7 @@
                             "items": [],
                             "tagSetSourceFile": "tags/SpawnEffectTags"
                         },
-                        "pilotDefId": "pilotDef_InheritLance",
+                        "pilotDefId": "",
                         "pilotTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/PilotTags"
@@ -1162,7 +1221,7 @@
                             "items": [],
                             "tagSetSourceFile": "tags/SpawnEffectTags"
                         },
-                        "pilotDefId": "pilotDef_InheritLance",
+                        "pilotDefId": "",
                         "pilotTagSet": {
                             "items": [],
                             "tagSetSourceFile": "tags/PilotTags"
