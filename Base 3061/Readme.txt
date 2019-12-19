@@ -37,7 +37,14 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
-8.5.14 - 12/15/2019
+8.6.0 - 12/17/2019
+
+Added Microwave truck,
+Added Pirate Myrmidon,
+Added Pirate Hetzer SRM,
+Added Pirate Puma
+
+8.5.16 - 12/15/2019
 
 Added Pirate Merkava VIII
 Added Maxim Hover Transport (C3M),
@@ -48,9 +55,14 @@ Tweaked primitive unit rocket loadouts.
 Updated readme,
 Minor fixes
 
-8.5.6 - 12/9/2019
+8.5.9 - 12/9/2019
 
 Added Clan Bandit B and E to cover gap in lower end fire support vehicles.
+
+8.5.7 - 12/2/2019
+
+Added Stygian Hovertank to Civil War,
+Fixed overides for HM flashpoint drones.
 
 8.5.5 - 8/30/2019
 
