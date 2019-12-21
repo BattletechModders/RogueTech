@@ -230,7 +230,9 @@ while armor become lower both shard mod and thickness mod will rise
 LadyAlektoToday at 20:35
 so thickness defines the strength something can easily punch through, while shards defines how likely the hit causes spall to cause damage
 
-  "evasivePipsMods": {  - list of modifiers for values by current evasive pips count. Additive per weapon/ammo/mode. 
+Weapon definition
+new fields
+  "evasivePipsMods": {  - list of modifiers for values by current evasive pips count. Additive per weapon/ammo/mode. \
                           Overall formula value = [base value] * ([evasive pips count]^[mod value]). Example base damage = 35, evasive pips count = 7, mod value = -1
                           damage = 35 * (7^-1) = 35 * 0.142857(142857) = 5.
                           NOTE: of evasive pips count = 0, value will not been altered. If mod value = 0 same behavior.
