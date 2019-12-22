@@ -1,6 +1,5 @@
 {
     "ID": "AmbushConvoy_InterceptedEvacuation",
-    "filename": "AmbushConvoy_InterceptedEvacuation.json",
     "contractName": "Intercepted Evacuation",
     "contractDisplayStyle": "BaseCampaignNormal",
     "difficulty": 2,
@@ -8,6 +7,10 @@
     "weight": 1,
     "scope": "STANDARD",
     "finalDifficulty": 0,
+    "representativeCastDefIDOverride": null,
+    "missionSuccessStatementOverride": null,
+    "badFaithStatementOverride": null,
+    "goodFaithStatementOverride": null,
     "shortDescription": "We have a report that {TEAM_TAR.FactionDef.Name} has been operating a hidden surveillance base somewhere on {TGT_SYSTEM.Name}. Unfortunately, they intercepted our spies' reports and have evacuated the base, torching everything useful. We'd like to prevent any of the data they've collected from leaving the planet. We've been able to identify their likely evacuation route, and we need you to intercept their evac convoy and destroy it.",
     "longDescription": "Guess the surveillance picked up something sensitive that {TEAM_EMP.FactionDef.ShortName} would prefer stay a secret.",
     "salvagePotential": 12,
@@ -36,7 +39,6 @@
     ],
     "OnContractSuccessResults": [],
     "OnContractFailureResults": [],
-    "contractType": "AmbushConvoy",
     "encounterPlayStyle": "SinglePlayer",
     "maxNumberOfPlayerUnits": 4,
     "lanceMinTonnage": -1,
@@ -92,9 +94,11 @@
             },
             "title": "Destroy the {TEAM_TAR.FactionDef.Demonym} Convoy",
             "description": "The objective for destroying the convoy units.",
-            "isPrimary": false,
+            "isPrimary": true,
             "OnSuccessResults": [],
-            "OnFailureResults": []
+            "OnFailureResults": [],
+            "OnSuccessDialogueGUID": null,
+            "OnFailureDialogueGUID": null
         },
         {
             "objective": {
@@ -130,7 +134,9 @@
                     "ResultDuration": 0
                 }
             ],
-            "OnFailureResults": []
+            "OnFailureResults": [],
+            "OnSuccessDialogueGUID": null,
+            "OnFailureDialogueGUID": null
         },
         {
             "objective": {
@@ -138,9 +144,11 @@
             },
             "title": "Stop Convoy from Escaping",
             "description": "The objective for preventing the enemy from reaching their escape point, if this happens the player will lose.",
-            "isPrimary": false,
+            "isPrimary": true,
             "OnSuccessResults": [],
-            "OnFailureResults": []
+            "OnFailureResults": [],
+            "OnSuccessDialogueGUID": null,
+            "OnFailureDialogueGUID": null
         },
         {
             "objective": {
@@ -148,9 +156,11 @@
             },
             "title": "Recon the Convoy's Route",
             "description": "The objective for the player to intercept/observe the enemy convoy.",
-            "isPrimary": false,
+            "isPrimary": true,
             "OnSuccessResults": [],
-            "OnFailureResults": []
+            "OnFailureResults": [],
+            "OnSuccessDialogueGUID": null,
+            "OnFailureDialogueGUID": null
         },
         {
             "objective": {
@@ -158,9 +168,11 @@
             },
             "title": "Get to the Evac Zone",
             "description": "The objective for the player units escaping and finishing the mission.",
-            "isPrimary": false,
+            "isPrimary": true,
             "OnSuccessResults": [],
-            "OnFailureResults": []
+            "OnFailureResults": [],
+            "OnSuccessDialogueGUID": null,
+            "OnFailureDialogueGUID": null
         },
         {
             "objective": {
@@ -196,7 +208,9 @@
                     "ResultDuration": 0
                 }
             ],
-            "OnFailureResults": []
+            "OnFailureResults": [],
+            "OnSuccessDialogueGUID": null,
+            "OnFailureDialogueGUID": null
         }
     ],
     "artilleryObjectiveList": [],
@@ -208,6 +222,7 @@
                 "EncounterObjectGuid": "2e0d2e69-6335-49ae-b2bb-61ff3185306b"
             },
             "enableChunkFromContract": false,
+            "controlledByContractChunkGroupList": [],
             "requirementList": []
         }
     ],
@@ -484,7 +499,7 @@
                 "EncounterObjectGuid": "366443c6-7895-4b4c-aea9-544f1a88c43e"
             },
             "name": "Dialogue_ConvoyTargetDestroyed",
-            "overrideDialogueBucketId": "DialogBucketDef_Universal_KillConfirmed",
+            "overrideDialogueBucketId": "DialogBucketDef_AmbushConvoy_PriTarDamaged",
             "dialogueContent": [
                 {
                     "words": "One down. Keep engaging those threats and we'll be out of here. ",
@@ -512,7 +527,7 @@
             "overrideDialogueBucketId": "DialogBucketDef_Universal_Escape",
             "dialogueContent": [
                 {
-                    "words": "The convoy is finished, now get what 'mechs you have to the extraction point and we'll pull you out. Move quickly.",
+                    "words": "The convoy is finished, now get what mechs you have to the extraction point and we'll pull you out. Move quickly.",
                     "wordsColor": {
                         "r": 1,
                         "g": 1,
@@ -555,7 +570,9 @@
             ]
         }
     ],
-    "overrideAutoCompleteDialogueId": null,
+    "extractionOverrideList": [],
+    "overwriteMissionCompleteWhenAutoComplete": true,
+    "overrideAutoCompleteDialogueId": "",
     "disableNegotations": false,
     "disableLanceConfiguration": false,
     "disableCancelButton": false,
@@ -567,6 +584,7 @@
     "expirationTimeOverride": -1,
     "negotiatedSalary": 1,
     "negotiatedSalvage": 0,
+    "excludedFromProceduralGeneration": false,
     "player1Team": {
         "encounterLayerData": {
             "EncounterObjectGuid": "e1e9093f-5cb2-4ece-889d-49aa6357e731"
@@ -1271,5 +1289,15 @@
         "faction": "INVALID_UNSET",
         "teamLeaderCastDefId": "castDef_TeamLeader_Current",
         "lanceOverrideList": []
-    }
+    },
+    "employersAllyTeam": {
+        "encounterLayerData": null,
+        "teamGuid": "70af7e7f-39a8-4e81-87c2-bd01dcb01b5e",
+        "teamName": "Employers Ally",
+        "faction": "INVALID_UNSET",
+        "teamLeaderCastDefId": "castDef_TeamLeader_Current",
+        "lanceOverrideList": []
+    },
+    "contractType": "AmbushConvoy",
+    "contractTypeID": "AmbushConvoy"
 }

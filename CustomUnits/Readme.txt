@@ -11,6 +11,54 @@ main settings in mod.json
     "waterFlatDepth":2, - if underwater cell have depth grater than this value x2 it will be lifted up.
     "deepWaterDepth":5  - if underwater cell have depth grater than this it will be marked as deep water. (Note: 5 it is greater than almost game's vehicle height)
 
+MechResizer has beed devoured
+## Settings
+
+All resize settings are exclusive, so you cannot apply layered resizing i.e. a default of 1.1 will not multiply a tag of 2. Resizing preference is in the following order: vector supplied in `<TYPE>ResizeMultiplierVectors`, tags, `<TYPE>ResizeMultipliers`, prefab, `mod.json`-supplied default, and a hard-coded default of 1.25.
+
+The dimensions for the `*Vectors` settings are measured like: <X> - width (shoulder to shoulder), <Y> - height (toes to head), <Z> - depth (chest to back)
+
+### Tag-Based Resizing
+In addition to the settings that follow that are set in `mod.json`, you can also change the size of elements using tags. There are two formats:
+
+1. `mr-resize-N`: `N` can be an integer or decimal number and will resize the given item equally in all dimensions
+2. `mr-resize-X-Y-Z`: `X`, `Y`, and `Z` can be an integers or decimal numbers and will scale on that axis
+
+The tags must be put in the following type of file to be applied:
+
+Type | File Type | Tag Location
+--- | --- | ---  
+Mechs | `data/chassis/chassisdef_<variant>.json` | `ChassisTags`->`items`
+Vehicles | `data/vehicle/vehicledef_<variant>.json` | `VehicleTags`->`items`
+Turrets | `data/turrets/turretdef_<variant>.json` | `TurretTags`->`items`
+Projectiles | `data/weapon/Weapon_<variant>.json` | `ComponentTags`->`items`
+
+### `mod.json` settings
+Setting | Type | Default | Description
+--- | --- | --- | ---
+`debug` | `boolean` | false | enable debug logging
+`defaultMechSizeMultiplier` | float | 0.9 | override this to globally change all mech sizes in combat. Vanilla is 1.25
+`defaultVehicleSizeMultiplier` | float | 1 | override this to globally change all vehicle sizes in combat. Vanilla is 1
+`defaultTurretSizeMultiplier` | float | 1 | override this to globally change all turret sizes in combat. Vanilla is 1
+`defaultProjectileSizeMultiplier` | float | 1 | override this to globally change certain weapon (missiles only ATM) projectile sizes in combat. Vanilla is 1
+`mechSizePrefabMultipliers` | json hash | {} | change the size of any set of mechs that share a common `PrefabBase` in their chassis definition files. For example, making all highlander variants very large might look like: `"highlander": {"x": 8, "y": 8, "z": 8}`
+`vehicleSizePrefabMultipliers` | json hash | {} | change the size of any set of vehicles that share a common `PrefabBase` in their vehicle chassis definition files.
+`turretSizePrefabMultipliers` | json hash | {} | change the size of any set of turrets that share a common `PrefabBase` in their turret chassis definition files.
+`projectileSizePrefabMultipliers` | json hash | {} | change the size of any set of projectiles that share a common `PrefabBase` in their weapon firing them's weapon definition files.
+
+### Deprecated `mod.json` Settings - please use the size change options above i
+Setting | Type | Default | Description
+--- | --- | --- | ---
+`mechResizeMultipliers` _deprecated_ | json hash | {} | change the size of mechs using the format `"chassis string" : multiplier`. A big locust would be like `"chassisdef_locust_LCT-1V": 15`
+`mechResizeMultiplierVectors` _deprecated_ | json hash | {} | change mech sizes using three dimensional multipliers with format `"chassis string": { "x": Xmulti, "y": Ymulti, "z": Zmulti }`. A very tall locust might look like `"chassisdef_locust_LCT-1V": {"x": 1,"y": 2, "z": 1}``
+`vehicleResizeMultipliers` _deprecated_ | json hash | {} | change the size of vehicles using the format `"chassis string" : multiplier`. A big APC would be like `"vehiclechassisdef_APC_Wheeled": 3`
+`vehicleResizeMultiplierVectors` _deprecated_ | json hash | {} | change vehicle sizes using three dimensional multipliers with format `"chassis string": { "x": Xmulti, "y": Ymulti, "z": Zmulti }`. A very long APC might look like `"vehiclechassisdef_APC_Wheeled": {"x": 1,"y": 1, "z": 2}``
+`turretResizeMultipliers` _deprecated_ | json hash | {} | change the size of turrets using the format `"chassis string" : multiplier`. 
+`turretResizeMultiplierVectors` _deprecated_ | json hash | {} | change turret sizes using three dimensional multipliers with format `"chassis string": { "x": Xmulti, "y": Ymulti, "z": Zmulti }`.
+`projectileResizeMultipliers` _deprecated_ | json hash | {} | change the size of projectiles using the format `"weapon id string" : multiplier`.
+`projectileResizeMultiplierVectors` _deprecated_ | json hash | {} | change projectile sizes using three dimensional multipliers with format `"weapon id string": { "x": Xmulti, "y": Ymulti, "z": Zmulti }`.
+    
+    
 DesignMask definition
 new section 
 	"Custom":{
@@ -28,7 +76,8 @@ VehicleChassis/Chassis
 "CustomParts":{
     "AOEHeight": 55,  - this value will be added to y-coordinate of current position in AoE damage calculations (weapon/landmines/component's explosions). 
                         Can be altered runtime via CUAOEHeight actor's statistic value (float)
-    "FiringArc":60, - if set and > 10 means vehicle firing arc in degrees and vehicle have to rotate toward target to fire.  
+    "FiringArc":60, - if set and > 10 means vehicle firing arc in degrees and vehicle have to rotate toward target to fire. 
+                      Working for mechs too, but you should note - direction decal will not been changed. 
     "Unaffected":{  
       "DesignMasks":"true",   - if true chassis will be unaffected to all terrain design masks effects except move cost. Can be altered runtime via CUDesignMasksUnaffected actor's statistic value (boolean)
       "Pathing":"true",       - if true chassis will be unaffected by pathing limitations 

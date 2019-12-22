@@ -193,6 +193,19 @@ if set as true all AP effects (damage and crits) will not affect unit.
 "RemoveFromCritRollStatName": "IgnoreDamage", - on criticals resolution components having this staistic set as true will be excluded from list of available for crit. 
                                                 NOTE! excluding from list have side effect with CritLocationTransfer enabled. If in location there are only components with IgnoreDamage:true 
                                                 it consider as empty and crit will be transfered to another location according transfer logic. 
+"bloodSettings":{   - if DestructibleUrbanFlimsy it can leave blood spot
+  "DecalScales":{    - sizes of blood spots by types. Types: NOT_SET, generic, smallMetal, mediumMetal, largeMetal, smallStone, mediumStone, largeStone, 
+                                                             smallGlass, mediumGlass, largeGlass, smallMixed, mediumMixed, largeMixed, smallFence, mediumFence,
+                                                             largeFence, smallRadiotower, mediumRadiotower, largeRadiotower, smallVehicle, mediumVehicle, largeVehicle, 
+                                                             electronic,lightPole, vehicleFiery
+    "smallVehicle":10,
+    "mediumVehicle":20,
+    "largeVehicle":30,
+    "vehicleFiery":15
+  },
+  "DecalTexture": "envTxrDecl_terrainDmgSmallBlood_alb", - texture for blood spot
+  "DrawBloodChance": 0.3 - chance on leave blood spot on destruction
+},
 }
 
 now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
@@ -217,7 +230,9 @@ while armor become lower both shard mod and thickness mod will rise
 LadyAlektoToday at 20:35
 so thickness defines the strength something can easily punch through, while shards defines how likely the hit causes spall to cause damage
 
-  "evasivePipsMods": {  - list of modifiers for values by current evasive pips count. Additive per weapon/ammo/mode. 
+Weapon definition
+new fields
+  "evasivePipsMods": {  - list of modifiers for values by current evasive pips count. Additive per weapon/ammo/mode. \
                           Overall formula value = [base value] * ([evasive pips count]^[mod value]). Example base damage = 35, evasive pips count = 7, mod value = -1
                           damage = 35 * (7^-1) = 35 * 0.142857(142857) = 5.
                           NOTE: of evasive pips count = 0, value will not been altered. If mod value = 0 same behavior.
