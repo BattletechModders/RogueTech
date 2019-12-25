@@ -1,15 +1,28 @@
 {
 	"Custom": {
         "Category": [
-			{ "CategoryID": "MeleeWeapon" }
+			{ "CategoryID": "MeleeWeapon" },
+			{
+            "CategoryID": "OmniLowerActuator"
+        },
+		{
+            "CategoryID": "OmniHandActuator"
+        }
 		],
         "BonusDescriptions": {
             "Bonuses": [
                 "IsMelee",
+				"MeleeAcc: +2",
+                "Melee: +30",
+                "Melee: +10%",
+                "MeleeStab: +10%"
                 "WpnAccuracy: +2",
-                "WpnCrits: 20%"
+                "WpnCrits: 20%",
+				"EvasiveExponent: 0.3",
+				"HeatPerCharge: 0.2"
             ]
-        }
+        },
+		"Flags" : { "flags" : [ "not_broken", "no_salvage", "autorepair" ] },
     },
     "Category" : "AntiPersonnel",
     "Type" : "MachineGun",
@@ -23,7 +36,7 @@
     ],
     "AmmoCategory" : "NotSet",
     "StartingAmmoCapacity" : 0,
-    "HeatGenerated" : 0,
+    "HeatGenerated" : 5,
     "Damage" : 50,
     "OverheatedDamageMultiplier" : 0,
     "EvasiveDamageMultiplier" : 0,
@@ -38,7 +51,7 @@
     "ShotsWhenFired" : 1,
     "ProjectilesPerShot" : 1,
     "AttackRecoil" : 0,
-    "Instability" : 50,
+    "Instability" : 20,
     "WeaponEffectID" : "WeaponEffect-Weapon_MachineGun",
     "Description" : {
         "Cost" : 12000,
@@ -49,7 +62,7 @@
         "UIName" : "Sword",
         "Id" : "Weapon_Templar_Sword",
         "Name" : "Sword",
-        "Details" : "This is a unique sword, designed for the Templar Omnimech. It cannot be removed or used elsewhere.",
+        "Details" : "This unique Sword was designed to cleave an target being charged by this Templar.",
         "Icon" : "uixSvgIcon_weapon_Support"
     },
     "BonusValueA" : "Sword",
@@ -63,13 +76,130 @@
     "AllowedLocations" : "All",
     "DisallowedLocations" : "All",
     "CriticalComponent" : false,
+	"evasivePipsMods": {
+   "Damage": 0.3,
+   "Instablility": 0.15,
+   "GeneratedHeat": 0.2
+   },
     "statusEffects" : [
-        
+         {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect-HandMelee",
+                "Name": "Hand Melee Damage",
+                "Details": "Melee attacks deal 50% Extra damage.",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "DamagePerShot",
+                "operation": "Float_Multiply",
+                "modValue": "1.1",
+                "modType": "System.Single",
+                "targetCollection": "Weapon",
+                "targetWeaponSubType": "Melee"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect-HandMeleeStab",
+                "Name": "Hand Melee Damage",
+                "Details": "Melee attacks deal 20% Extra stab damage.",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "Instability",
+                "operation": "Float_Multiply",
+                "modValue": "1.1",
+                "modType": "System.Single",
+                "targetCollection": "Weapon",
+                "targetWeaponSubType": "Melee"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect-Attack_DamageMelee-T6",
+                "Name": "MELEE DAMAGE INCREASED",
+                "Details": "Melee attacks deal [AMT] more damage.",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "DamagePerShot",
+                "operation": "Float_Add",
+                "modValue": "30.0",
+                "modType": "System.Single",
+                "targetCollection": "Weapon",
+                "targetWeaponSubType": "Melee"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect-EliteSword",
+                "Name": "Solaris ChainSword",
+                "Details": "Melee attacks have +2 Accuracy.",
+                "Icon": "uixSvgIcon_run_n_gun"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "AccuracyModifier",
+                "operation": "Float_Add",
+                "modValue": "-2.0",
+                "modType": "System.Single",
+                "targetCollection": "Weapon",
+                "targetWeaponSubType": "Melee"
+            }
+        }
     ],
     "ComponentTags" : {
         "items" : [
             "component_type_stock",
-            "range_close"
+            "range_close",
+			"BLACKLISTED"
         ],
         "tagSetSourceFile" : ""
     }
