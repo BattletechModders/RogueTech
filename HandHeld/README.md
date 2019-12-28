@@ -8,7 +8,7 @@ this custom component mark item as hand held and set it parameters
 ```
 "HandHeld" : {
 	"Tonnage" : 5,	// tonnage of item
-	"TwoHand" : false // is item requere both hands 
+	"HandsUsed" : 2 // how many hand actuators item use 
 }
 ```
 
@@ -44,6 +44,9 @@ when set to false use MechEngeneer ArmActuator custom to define hands. When se t
 "OneHandMisse" : "Mech need one free hand actuators to use {0}"
 ```
 Error messages shown in mechlab when try to equip wrong handheld item
+
+`"LocationLabel" : "HandHeld {0:0.00}/{1:0.00}t` 
+Text for handheld widget {0} - used tonnage, {1} - avaliable tonnage 
 
 `"Debug_IgnoreWeightFIlter" : false,`
 when set to true not filter avaliable handhelds by tonnage
