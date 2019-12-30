@@ -26,7 +26,7 @@
     ],
     "Enabled": false
   },
-  
+
   "AutoFixer": {
   "MechDefAutoFixAgainstMaxFreeTonnage" : [
         ],
@@ -151,22 +151,42 @@
         "ReservedSlotText" : "Reserved Slot",
         "MovableSlotText" : "Movable Slot"
   },
-  "Engine": {
-    "MinimumHeatSinksOnMech": 10,
-    "EnforceRulesForAdditionalInternalHeatSinks": true,
-    "AllowMixingHeatSinkTypes": false,
-    "DefaultEngineHeatSinkId": "Gear_HeatSink_Generic_Standard",
-    "EngineMissingFallbackHeatSinkCapacity": 30,
-    "UseGameWalkValues": true,
-    "JJRoundUp": false,
-    "TTWalkMultiplier": 25,
-    "TTSprintMultiplier": 38,
-    "Enabled": true
-  },
+    "Engine" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Provides engines that can be installed on mechs similar to how CBT works.",
+        "MovementPointDistanceMultiplierDescription" : "The distance of a TT movement point, 24 is vanilla CombatGameConstants.ExperimentalGridDistance .",
+        "MinimJumpHeatDescription" : "Minimum heat when doing a jump, even if only one jump jet exists and only when jumping one hex.",
+        "AutoConvertJumpCapacityInDefToStatDescription" : "All JumpCapacity values in JumpJetDefs will be auto-converted to the JumpCapacity statistic.",
+        "JumpJetDefaultJumpHeatDescription" : "The heat the jump jet produces when fully* used (* jumping below max distance reduces produced heat). Can be adjusted using the JumpHeat statistic.",
+        "RunMultiplierDescription" : "How much faster running is than walking.",
+        "EngineRatingForChassisMovementStatDescription" : "The engine rating to use when evaluating the movement stat of a mech.",
+        "AllowMountingAllRatings" : false,
+        "AllowMountingAllRatingsDescription" : "Allow mounting all fusion core rating regardless of min/max sprint factors.",
+        "MinimumHeatSinksOnMech" : 10,
+        "MinimumHeatSinksOnMechDescription" : "Minimum heatsinks a mech requires.",
+        "EnforceRulesForAdditionalInternalHeatSinks" : true,
+        "EnforceRulesForAdditionalInternalHeatSinksDescription" : "Can't have those juicy ++ cooling systems with smaller fusion cores than the rules allow it.",
+        "AllowMixingHeatSinkTypes" : false,
+        "AllowMixingHeatSinkTypesDescription" : "Allow heat sinks patchwork.",
+        "DefaultEngineHeatSinkId" : "Gear_HeatSink_Generic_Standard",
+        "DefaultEngineHeatSinkIdDescription" : "Default heat sink type for engines without a kit.",
+        "EngineMissingFallbackHeatSinkCapacity" : 30,
+        "EngineMissingFallbackHeatSinkCapacityDescription" : "Heat sink capacity if no engine is detected.",
+        "MovementPointDistanceMultiplier" : 24,
+        "MinimJumpHeat" : 9,
+        "AutoConvertJumpCapacityInDefToStat" : true,
+        "JumpJetDefaultJumpHeat" : 3,
+        "RunMultiplier" : 1.5,
+        "EngineRatingForChassisMovementStat" : 250,
+        "LimitEngineCoresToTonnage" : true,
+        "IgnoreLimitEngineChassisTag" : ""
+    },
   "HardpointFix": {
     "AutoFixChassisDefWeaponHardpointCounts": false,
     "EnforceHardpointLimits": false,
     "AllowDefaultLoadoutWeapons": false,
+	        "CreateVanillaFallbackPrefabs" : false,
+        "CreateVanillaFallbackPrefabsDescription" : "If no mapping can be found, use the vanilla mapping code (which unfortunatly maps SRM to UAC), fixes mortar issues",
     "WeaponPrefabMappings": [
       {
         "PrefabIdentifier": "AC2",
@@ -442,9 +462,10 @@
     "Enabled": true
   },
   "MechLabSlots": {
-    "MechLabGeneralWidgetEnabled": false,
+    "MechLabGeneralWidgetEnabled": true,
     "MechLabArmTopPadding": 120,
-    "MechLabGeneralSlots": 0,
+    "MechLabGeneralSlots": 3,
+	"MechLabGeneralWidgetLabel" : "Specialist",
     "Enabled": true
   },
   "MoveMultiplierStat": {
@@ -494,5 +515,19 @@
   },
   "TurretMechComponents": {
     "Enabled": true
-  }
+  },
+    "TagManager" : {
+        "Enabled" : false,
+        "SkirmishWhitelistTags" : [],
+		"WhitelistComponentTags" : [],
+        "BlacklistComponentTags" : [
+            "component_type_stock",
+            "component_type_variant",
+            "component_type_lostech"
+        ],
+    },
+  "DebugScreenshotMechs" : {
+        "Enabled" : false,
+		"ScreenshotDirectoryPath" : "Screenshots",
+	}
 }

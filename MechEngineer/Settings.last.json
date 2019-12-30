@@ -185,6 +185,12 @@
     "Engine" : {
         "Enabled" : true,
         "EnabledDescription" : "Provides engines that can be installed on mechs similar to how CBT works.",
+        "MovementPointDistanceMultiplierDescription" : "The distance of a TT movement point, 24 is vanilla CombatGameConstants.ExperimentalGridDistance .",
+        "MinimJumpHeatDescription" : "Minimum heat when doing a jump, even if only one jump jet exists and only when jumping one hex.",
+        "AutoConvertJumpCapacityInDefToStatDescription" : "All JumpCapacity values in JumpJetDefs will be auto-converted to the JumpCapacity statistic.",
+        "JumpJetDefaultJumpHeatDescription" : "The heat the jump jet produces when fully* used (* jumping below max distance reduces produced heat). Can be adjusted using the JumpHeat statistic.",
+        "RunMultiplierDescription" : "How much faster running is than walking.",
+        "EngineRatingForChassisMovementStatDescription" : "The engine rating to use when evaluating the movement stat of a mech.",
         "AllowMountingAllRatings" : false,
         "AllowMountingAllRatingsDescription" : "Allow mounting all fusion core rating regardless of min/max sprint factors.",
         "MinimumHeatSinksOnMech" : 10,
@@ -197,12 +203,12 @@
         "DefaultEngineHeatSinkIdDescription" : "Default heat sink type for engines without a kit.",
         "EngineMissingFallbackHeatSinkCapacity" : 30,
         "EngineMissingFallbackHeatSinkCapacityDescription" : "Heat sink capacity if no engine is detected.",
-        "UseGameWalkValues" : true,
-        "UseGameWalkValuesDescription" : "Set to false to use more TT like walk values.",
-        "JJRoundUp" : false,
-        "JJRoundUpDescription" : "The allowed number of jump jets is rounded up or down.",
-        "TTWalkMultiplier" : 25,
-        "TTSprintMultiplier" : 38,
+        "MovementPointDistanceMultiplier" : 24,
+        "MinimJumpHeat" : 9,
+        "AutoConvertJumpCapacityInDefToStat" : true,
+        "JumpJetDefaultJumpHeat" : 3,
+        "RunMultiplier" : 1.5,
+        "EngineRatingForChassisMovementStat" : 250,
         "LimitEngineCoresToTonnage" : true,
         "IgnoreLimitEngineChassisTag" : ""
     },
@@ -219,7 +225,7 @@
         "EnforceHardpointLimitsDescription" : "Enforces hardpoint limits in mechlab only allowing configured prefabs.",
         "AllowDefaultLoadoutWeapons" : false,
         "AllowDefaultLoadoutWeaponsDescription" : "Ignore limits that would prevent mounting default loadouts.",
-        "CreateVanillaFallbackPrefabs" : true,
+        "CreateVanillaFallbackPrefabs" : false,
         "CreateVanillaFallbackPrefabsDescription" : "If no mapping can be found, use the vanilla mapping code (which unfortunatly maps SRM to UAC), fixes mortar issues",
         "WeaponPrefabMappings" : [
             {
@@ -503,11 +509,35 @@
         "Enabled" : true,
         "EnabledDescription" : "Makes the mech lab adhere to any custom mech slot counts.",
         "MechLabArmTopPadding" : 120,
-        "MechLabGeneralSlots" : 0
+        "MechLabGeneralSlots" : 3,
+        "MechLabGeneralWidgetLabel" : "Specialist"
     },
     "MoveMultiplierStat" : {
         "Enabled" : true,
         "EnabledDescription" : "Introduces a new statistic effect to allow easy manipulation of (mech only) movement."
+    },
+    "OrderedStatusEffects" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Orders status effects, so e.g. install order of mechComponents does not matter for additive and multiplicative effects. Affects all statistic data.",
+        "OrderDescription" : "The order in which operations are sorted. Operations not part of the list are deemded unsortable and only sortable operations after such a unsortable operations are sorted. For Example: '* + SET / * +' =sort=> '* + SET + * /'.",
+        "Order" : [
+            "Int_Add",
+            "Float_Add",
+            "Int_Multiply",
+            "Int_Multiply_Float",
+            "Float_Multiply",
+            "Float_Multiply_Int",
+            "Int_Subtract",
+            "Float_Subtract",
+            "Int_Divide",
+            "Int_Divide_Float",
+            "Float_Divide",
+            "Float_Divide_Int",
+            "Int_Divide_Denom",
+            "Int_Divide_Denom_Float",
+            "Float_Divide_Denom",
+            "Float_Divide_Denom_Int"
+        ]
     },
     "OverrideDescriptions" : {
         "Enabled" : true,
@@ -560,17 +590,17 @@
         "LostechStockWeaponVariantFix" : true,
         "LostechStockWeaponVariantDescription" : "Fixes lostech variant weapon tagging by checking if id ends with -STOCK.",
         "SkirmishWhitelistTags" : [
-            "component_type_stock"
+            
         ],
         "SkirmishWhitelistTagsDescription" : "Components with these tags will appear in the skirmish mechlab, blacklisted tagged items never appear.",
         "WhitelistComponentTags" : [
-            "component_type_stock",
-            "component_type_variant",
-            "component_type_lostech"
+            
         ],
         "WhitelistComponentTagsDescription" : "Whitelists components with specified tags.",
         "BlacklistComponentTags" : [
-            
+            "component_type_stock",
+            "component_type_variant",
+            "component_type_lostech"
         ],
         "BlacklistComponentTagsDescription" : "Blacklists components with specified tags, has precedence over whitelisting.",
         "WhitelistMechTags" : [
@@ -594,7 +624,7 @@
     "DebugScreenshotMechs" : {
         "Enabled" : false,
         "EnabledDescription" : "Edit a mech then cancel, it then will go through all mechs and make screenshots for them. To improve loading times use the TagManager to blacklist all components so the MechLab doesn't have to load them.",
-        "ScreenshotDirectoryPath" : "screenshots",
+        "ScreenshotDirectoryPath" : "Screenshots",
         "ScreenshotDirectoryPathDescription" : "Create the directory manually first, otherwise it won't save any of the images."
     }
 }
