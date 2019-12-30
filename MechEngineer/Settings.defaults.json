@@ -428,6 +428,12 @@
     "Engine" : {
         "Enabled" : true,
         "EnabledDescription" : "Provides engines that can be installed on mechs similar to how CBT works.",
+        "MovementPointDistanceMultiplierDescription" : "The distance of a TT movement point, 24 is vanilla CombatGameConstants.ExperimentalGridDistance .",
+        "MinimJumpHeatDescription" : "Minimum heat when doing a jump, even if only one jump jet exists and only when jumping one hex.",
+        "AutoConvertJumpCapacityInDefToStatDescription" : "All JumpCapacity values in JumpJetDefs will be auto-converted to the JumpCapacity statistic.",
+        "JumpJetDefaultJumpHeatDescription" : "The heat the jump jet produces when fully* used (* jumping below max distance reduces produced heat). Can be adjusted using the JumpHeat statistic.",
+        "RunMultiplierDescription" : "How much faster running is than walking.",
+        "EngineRatingForChassisMovementStatDescription" : "The engine rating to use when evaluating the movement stat of a mech.",
         "AllowMountingAllRatings" : false,
         "AllowMountingAllRatingsDescription" : "Allow mounting all fusion core rating regardless of min/max sprint factors.",
         "MinimumHeatSinksOnMech" : 10,
@@ -440,12 +446,12 @@
         "DefaultEngineHeatSinkIdDescription" : "Default heat sink type for engines without a kit.",
         "EngineMissingFallbackHeatSinkCapacity" : 30,
         "EngineMissingFallbackHeatSinkCapacityDescription" : "Heat sink capacity if no engine is detected.",
-        "UseGameWalkValues" : true,
-        "UseGameWalkValuesDescription" : "Set to false to use more TT like walk values.",
-        "JJRoundUp" : false,
-        "JJRoundUpDescription" : "The allowed number of jump jets is rounded up or down.",
-        "TTWalkMultiplier" : 30,
-        "TTSprintMultiplier" : 50,
+        "MovementPointDistanceMultiplier" : 24,
+        "MinimJumpHeat" : 9,
+        "AutoConvertJumpCapacityInDefToStat" : true,
+        "JumpJetDefaultJumpHeat" : 3,
+        "RunMultiplier" : 1.5,
+        "EngineRatingForChassisMovementStat" : 250,
         "LimitEngineCoresToTonnage" : true,
         "IgnoreLimitEngineChassisTag" : ""
     },
@@ -657,11 +663,35 @@
         "Enabled" : true,
         "EnabledDescription" : "Makes the mech lab adhere to any custom mech slot counts.",
         "MechLabArmTopPadding" : 120,
-        "MechLabGeneralSlots" : 3
+        "MechLabGeneralSlots" : 3,
+        "MechLabGeneralWidgetLabel" : "General"
     },
     "MoveMultiplierStat" : {
         "Enabled" : true,
         "EnabledDescription" : "Introduces a new statistic effect to allow easy manipulation of (mech only) movement."
+    },
+    "OrderedStatusEffects" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Orders status effects, so e.g. install order of mechComponents does not matter for additive and multiplicative effects. Affects all statistic data.",
+        "OrderDescription" : "The order in which operations are sorted. Operations not part of the list are deemded unsortable and only sortable operations after such a unsortable operations are sorted. For Example: '* + SET / * +' =sort=> '* + SET + * /'.",
+        "Order" : [
+            "Int_Add",
+            "Float_Add",
+            "Int_Multiply",
+            "Int_Multiply_Float",
+            "Float_Multiply",
+            "Float_Multiply_Int",
+            "Int_Subtract",
+            "Float_Subtract",
+            "Int_Divide",
+            "Int_Divide_Float",
+            "Float_Divide",
+            "Float_Divide_Int",
+            "Int_Divide_Denom",
+            "Int_Divide_Denom_Float",
+            "Float_Divide_Denom",
+            "Float_Divide_Denom_Int"
+        ]
     },
     "OverrideDescriptions" : {
         "Enabled" : true,

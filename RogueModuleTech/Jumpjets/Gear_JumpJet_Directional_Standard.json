@@ -1,18 +1,25 @@
 {
     "Custom": {
+	"Category": [{
+            "CategoryID": "DirectionalJJ"
+        }],
         "BonusDescriptions": {
             "Bonuses": [
                 "DFA: +5%",
                 "DFASelfDamage: -5%",
                 "DFAAcc: +1",
-                "JumpDistance: -5%"
+                "JumpCapacity: 0.75",
+				"JumpHeat: 2",
+				"MinWeightJJ: 10",
+				"MaxWeightJJ: 55",
+				"MaxCountJJ: 1"
             ]
         },
         "InventorySorter": {
             "SortKey": "00028"
         }
     },
-    "JumpCapacity": 1,
+    "JumpCapacity": 0.75,
     "MinTonnage": 10,
     "MaxTonnage": 55,
     "Description": {
@@ -39,58 +46,66 @@
     "DisallowedLocations": "Head, Arms",
     "CriticalComponent": false,
     "statusEffects": [
-        {
+	{
             "durationData": {
-                "duration": -1
+                "duration": -1,
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
                 "effectTargetType": "Creator",
                 "showInTargetPreview": false,
-                "showInStatusPanel": true
+                "showInStatusPanel": false
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "Directional Jump Jets",
-                "Name": "Accurate Jumping",
-                "Details": "Improved DFA",
-                "Icon": "uixSvgIcon_ability_mastertactician"
+                "Id": "StatusEffect-JumpHeat",
+                "Name": "Jump Jet Heat",
+                "Details": "This Jump Jets Heat Generation per Hex",
+                "Icon": "uixSvgIcon_equipment_ThermalExchanger"
             },
+            "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
-                "statName": "JumpDistanceMultiplier",
-                "operation": "Float_Multiply",
-                "modValue": "0.95",
-                "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "NotSet",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
+                "statName": "JumpHeat",
+                "operation": "Float_Add",
+                "modValue": "2",
+                "modType": "System.Single"
+            }
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
             },
-            "nature": "Buff"
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect-JumpAmount",
+                "Name": "Jump Jet Amount",
+                "Details": "Max Jump Jet Amount per Walk MP",
+                "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "JumpJetCountMultiplier",
+                "operation": "Set",
+                "modValue": "1",
+                "modType": "System.Single"
+            }
         },
         {
             "durationData": {
                 "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
                 "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
                 "showInTargetPreview": false,
                 "showInStatusPanel": false
             },
@@ -103,45 +118,22 @@
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
                 "statName": "DamagePerShot",
                 "operation": "Float_Multiply",
                 "modValue": "1.05",
                 "modType": "System.Single",
-                "additionalRules": "NotSet",
                 "targetCollection": "Weapon",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
                 "targetWeaponSubType": "DFA"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+            }
         },
         {
             "durationData": {
                 "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
                 "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
                 "showInTargetPreview": false,
                 "showInStatusPanel": false
             },
@@ -154,45 +146,21 @@
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
                 "statName": "DFASelfDamage",
                 "operation": "Float_Multiply",
                 "modValue": "0.95",
                 "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "NotSet",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
                 "targetWeaponSubType": "DFA"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+            }
         },
         {
             "durationData": {
                 "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
                 "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
                 "showInTargetPreview": false,
                 "showInStatusPanel": false
             },
@@ -205,25 +173,12 @@
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
                 "statName": "AccuracyModifier",
                 "operation": "Float_Add",
                 "modValue": "-1.0",
                 "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "NotSet",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
                 "targetWeaponSubType": "DFA"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+            }
         }
     ],
     "ComponentTags": {
