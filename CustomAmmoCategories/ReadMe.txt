@@ -257,6 +257,51 @@ new fields
       "DamageVariance":0,
       "CriticalChanceMultiplier":0
   },
+  "deferredEffect":{                                   - deferred effect !!!CAN!!! be set per mode, ammo, weapon. Mode have priority than ammo and than weapon.
+    "id":"LOIC",                                       - id used in logs 
+    "rounds":2,                                        - rounds to effects apply
+    "text":"LOIC",                                     - text displayed while waiting 
+    "VFX":"vfxPrfPrtl_orbitalPPC_oneshot",             - vfx displayed after timeout
+    "waitVFX":"vfxPrfPrtl_artillerySmokeSignal_loop",  - vfx displayed while waiting
+    "SFX":"ion_cannon_example",                        - sound played on VFX played
+    "VFXtime":20,                                      - time in seconds while VFX is played. After this vfx will be stopped and pooled.
+    "damageApplyTime": 6,                              - time in seconds from start to apply damage/status effects/terrain effects. 
+	                                                     Once effect playing is starts turn can't be advanced until damage apply
+    "AOERange":50,                                     - AOE range
+    "AOEDamage": 1000,                                 - AOE damage
+    "AOEHeatDamage": 1000,                             - AOE heat damage
+    "AOEInstability": 1000,                            - AOE instability 
+	                                                   
+    "RangeColor":{"C":"#00FF00","I":1.5},              - Color for text and range circle	                                                   
+    "FireTerrainChance": 0.8,                          - fire terrain chance 
+    "FireDurationWithoutForest": 0,                    - turns fire will exists on terrain without forest 
+    "FireTerrainStrength": 30,                         - heat damage from fire
+    "FireTerrainCellRadius": 12,                       - radius in game cells (each cell have 4x4 size)
+    "TerrainVFX":"vfxPrfPrtl_terrainLavaCracks_loop",  - terrain vfx (apply to each hex cell)
+    "TerrainVFXScale": {"x":1,"y":1,"z":1},            - scale for vfx
+    "tempDesignMask":"DesignMaskGeothermalLava",       - design mask
+    "tempDesignMaskTurns": 99,                         - length in turns design mask and terrain vfx exists
+    "tempDesignMaskCellRadius": 12,                    - radius in game cells 
+	                                                   NOTE: all values above have same apply logic as mine explosions. 
+    "statusEffects": [],                               - status effects array
+	  "statusEffectsRangeFalloff": true,                 - range falloff for status effects - if true effect will be applience will be optional, 
+	                                                     chance is based on distance from center of effect. 
+	  "sticky": true                                     - it true on success hit deferred effect position links to target. Does not matter if it moves or become dead.
+  },
+  "ShotsPerAmmo": 1,              - shots per ammo. Example: you have effective shots count = 4 and ShotsPerAmmo = 0.5. After fire ammo will be decremented by 2 (4 * 0.5)
+                                    Mutiplicative per weapon, ammo, mode. Default value 1. NOTE: Ammo decrement value rounded to nearest integer. 
+                                    If it will be less than 0.5 - it will be your own problem - no ammo will be used.
+  "InternalAmmo":{                - starting ammo capacity per ammo category. Weapon will be counted as using default ammo for this category. 
+    "intSRM":20,                    StartingAmmoCapacity is counted as ammo count for category setted in ammoCategoryID/AmmoCategory for weapon
+    "intLRM":15
+  },
+  "preFireSFX":"Play_PPC3",       - sound played on weapon's fire !!!CAN!!! be set per mode, ammo, weapon. Mode have priority than ammo and than weapon.
+  "blockWeaponsInMechLocations": [], - list of mech locations. all weapons installed in this locations can't fire if this weapon is functional.
+                                       NOTE: weapon can block itself.
+  "CanBeBlocked": true               - if false weapon can't be blocked by other weapons presents (default is true).
+  "blockWeaponsInInstalledLocation": true - if true this weapon blocks weapons in location it installed. Weapon block itself until CanBeBlocked is false
+  "EjectWeapon": true,                 - if true weapon become non functional (without explosion) instead of ammo ejection on eject ammo command. 
+                                         Can be used to unblock other weapons. Default false.
   "AOEEffectsFalloff": false, if true and weapon inflicts AoE damage, random roll will be permitted before onHit effect apply. 
                               Example: aoe range = 100m, projectile hits ground in 30m from combatant - onHits effects will be applied with 0.7 chance ((100 - 30) / 100).
   "isHeatVariation": true, - if true heat damage will be altered using DamageVariance/DistantVariance/DistantVarianceReversed values. Per mode/ammo/weapon.
