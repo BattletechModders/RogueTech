@@ -7,8 +7,11 @@
             "Bonuses": [
                 "AdvZoom: 4",
 				"AdvZoomRange: 210",
+				"ThermalVision: 1",
+				"ThermalVisionHeat: 25",
+				"NightVision",
 				"Special",
-				"SpecialWeight: 0.2"
+				"SpecialWeight: 0.5"
             ]
         },
         "InventorySorter": {
@@ -17,7 +20,7 @@
 		"MechConfiguration" : {
                 },
 	"HandHeld" : {
-	"Tonnage" : 0.2,
+	"Tonnage" : 0.5,
 	"HandsUsed": 0
 }
     },
@@ -30,10 +33,10 @@
         "Purchasable": true,
         "Manufacturer": "Mitchell",
         "Model": "J-Peep Farsight",
-        "UIName": "Advanced Zoom",
-        "Id": "Gear_AdvZoom",
-        "Name": "Advanced Zoom",
-        "Details": "The J-Peep Farsight was originally designed by Mitchell for their vehicle Fire Control System line. But managed to find its way onto mechs sporting long range, and highly accurate weaponry sometime in the late 3030s.",
+        "UIName": "Advanced Optics MK",
+        "Id": "Special_AdvancedOptics_MK3",
+        "Name": "Advanced Optics",
+        "Details": "This Module allows any Mech to employ Advanced Optics, including a Zoom, Thermal and Night Vision Mode",
         "Icon": "uixSvgIcon_equipment_TTS"
     },
     "BonusValueA": "+1 Defense.",
@@ -48,6 +51,29 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
+	{
+            "durationData": {
+                "duration": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator"
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "NightVision",
+                "Name": "Night Vision Mode",
+                "Details": "PASSIVE: Enables Night Vision.",
+                "Icon": "uixSvgIcon_ability_precisionstrike"
+            },
+            "statisticData": {
+                "statName": "LV_NIGHT_VISION",
+                "operation": "Set",
+                "modValue": "true",
+                "modType": "System.Boolean"
+            },
+            "nature": "Buff"
+        },
 		{
             "durationData": {
                 "duration": -1,
@@ -71,6 +97,32 @@
                 "statName": "LV_ZOOM_VISION",
                 "operation": "Set",
                 "modValue": "0_-4_7",
+                "modType": "System.String"
+            }
+        },
+	{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "Heat Vision Effect",
+                "Name": "Bonus Accuracy against heat",
+                "Details": "heat bonus accuracy",
+                "Icon": "uixSvgIcon_ability_precisionstrike"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "LV_HEAT_VISION",
+                "operation": "Set",
+                "modValue": "1_25",
                 "modType": "System.String"
             }
         }
