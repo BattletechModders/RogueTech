@@ -2,7 +2,7 @@
     "Name": "CBTBehaviors",
     "Enabled": true,
 	"Hidden": true,
-    "Version": "0.3.7",
+    "Version": "0.3.9",
     "Description": "Provides TableTop like behaviors for heat, movement, and more",
     "Author": "FrostRaptor",
     "Website": "https://github.com/IceRaptor/CBTBehaviorsEnhanced/",
@@ -11,11 +11,12 @@
     "DependsOn" : [ "IRBTModUtils", "MechEngineer", "CustomComponents" ],
     "ConflictsWith" : [ "CharlesB" ],
     "Settings": {
-        "Debug" : false,
+        "Debug" : true,
         "Trace" : false,
         "ToHitSelfJumped": 0,
         "Features" : {
-            "StartupChecks" : false
+            "BiomeBreaches" : true,
+            "StartupChecks" : true
         },
         "Heat" : {
             "Movement" : { "15": -1, "30" : -2, "45" : -3, "60" : -4, "75" : -5, "93" : -6, "111" : -7, "129" : -8, "147" : -9 },
@@ -32,10 +33,10 @@
         "Melee" : {
             "SkillMulti" : 0.05,
             "MadeChargeFallChance" : 0.60,
-            "MadeDFAFallChance" : 0.90,
+            "MadeDFAFallChance" : 2.90,
             "MissedKickFallChance" : 0.30,
             "HitByChargeFallChance" : 0.60,
-            "HitByDFAFallChance" : 0.60,
+            "HitByDFAFallChance" : 2.60,
             "HitByKickFallChance" : 0.30,
             "AllowMeleeFromSprint" : true
         },
@@ -57,6 +58,11 @@
             "FallingDamagePerTenTons" : 5
         },
         
+        "Breaches" : {
+            "VacuumCheck" : 0.17,
+            "ThinAtmoCheck" : 0.03
+        },
+
         "LocalizedFloaties" : {
             "SHUTDOWN_OVERRIDE_SUCCESS" : "Passed Shutdown Override",
             "SHUTDOWN_OVERRIDE_FAILED" : "Failed Shutdown Override",
@@ -73,7 +79,8 @@
             "MELEE_DFA" : "DFA Falling Check",
             "RUN_AND_FALL" : "Sprinted with Damage",
             "JUMP_AND_FALL" : "Jumped with Damage",
-            "AUTO_FAIL" : "Automatic Failure"
+            "AUTO_FAIL" : "Automatic Failure",
+            "HULL_BREACH" : "Hull Breach Check"
         },
         "LocalizedCHUDTooltips" : {
             "TITLE" : "HEAT LEVEL",
@@ -87,8 +94,18 @@
             "ATTACK_PENALTY" : "\nAttack Penalty: +{0}",
             "MOVEMENT_PENALTY" : "\nMovement Penalty: -{0}m"
         },
-        "Quips": [
-                "Oh .. shit!",
+
+        "Quips": {
+            "Breach" : [
+                "Shit, explosive decomission!",
+                "Hull integrity breach detected!",
+                "I've lost something to atmo!",
+                "I hope life support holds up",
+                "I cant breathe!",
+                "There are cracks in my cockpit!"
+            ], 
+            "Knockdown" : [
+                 "Oh .. shit!",
                 "FML",
                 "This is going to hurt..",
                 "This takes the cake",
@@ -103,6 +120,16 @@
                 "I love you, too",
                 "Just some armor...",
                 "Biting the dust!"
-        ]
+            ],
+            "Startup" : [
+                "Start damn you",
+                "Can't see through this heat",
+                "Where is the start button?",
+                "Override damn it, override!",
+                "Time to void the warranty",
+                "Why won't you turn on",
+                "I put in the startup sequence!"
+            ]
+        }
     }
 }
