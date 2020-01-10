@@ -9,8 +9,8 @@
 		"MechConfiguration" : {
                 },
 				"HandHeld" : {
-	"Tonnage" : 0.75,
-	"HandsUsed": 0
+	"Tonnage" : 1.5,
+	"HandsUsed" : false
 },
         "ComponentExplosion": {
             "HeatDamage": 10,
@@ -20,18 +20,19 @@
         "BonusDescriptions": {
             "Bonuses": [
 				"Special",
-                "BankMaxHeatMulti: 40%",
-                "BankThreshholdMulti: 20%",
-                "HeatPerTurn: -5",
+                "HeatEfficiency: 20%",
+                "HeatPerTurn: -3",
                 "BankBoom: 10",
-				"SpecialWeight: 0.75"
+				"Visibility: +3%",
+                "Signature: +3%",
+				"SpecialWeight: 1.5"
             ]
         },
         "InventorySorter": {
             "SortKey": "00017"
         }
     },
-    "DissipationCapacity": 5,
+    "DissipationCapacity": 3,
     "Description": {
         "Cost": 470000,
         "Rarity": 3,
@@ -52,14 +53,40 @@
     "BattleValue": 0,
     "InventorySize": 1,
     "Tonnage": 0,
-    "AllowedLocations": "All",
+    "AllowedLocations": "CenterTorso",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
-        {
+	{
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "effectTargetType": "Creator",
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "BoltOnPenaltySensor",
+                        "Name": "BoltOn Sensor Penalty",
+                        "Details": "Signature Statuseffect.",
+                        "Icon": "uixSvgIcon_equipment_TTS"
+                    },
+                    "nature": "Buff",
+                    "statisticData": {
+                        "statName": "SensorSignatureModifier",
+                        "operation": "Float_Multiply",
+                        "modValue": "1.02",
+                        "modType": "System.Single"
+                    }
+                },
+				{
             "durationData": {
                 "duration": -1,
-                "stackLimit": 1
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
@@ -69,25 +96,23 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StatusEffect-Heat_Max-T3",
-                "Name": "MAX HEAT INCREASED",
-                "Details": "Improves Heat 40Max/20Threshhold.",
-                "Icon": "uixSvgIcon_equipment_HeatBank"
+                "Id": "BoltOnPenaltyVisual",
+                "Name": "BoltOn Visual Penalty",
+                "Details": "Visibility Statuseffect.",
+                "Icon": "uixSvgIcon_equipment_TTS"
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
-                "statName": "MaxHeat",
-                "operation": "Int_Multiply_Float",
-                "modValue": "1.40",
+                "statName": "SpottingVisibilityMultiplier",
+                "operation": "Float_Multiply",
+                "modValue": "1.02",
                 "modType": "System.Single"
             }
         },
-        {
+         {
             "durationData": {
                 "duration": -1,
-                "stackLimit": 1
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
@@ -97,16 +122,14 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StatusEffect-Overheat_Threshold-T3",
-                "Name": "Increased Overheat Level",
-                "Details": "Overheat threshold increased by 15",
+                "Id": "HeatSinkEfficiency_20",
+                "Name": "MAX HEAT INCREASED",
+                "Details": "Improves Heat 15Max/10Threshhold.",
                 "Icon": "uixSvgIcon_equipment_HeatBank"
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
-                "statName": "OverheatLevel",
+                "statName": "HeatSinkCapacity",
                 "operation": "Int_Multiply_Float",
                 "modValue": "1.2",
                 "modType": "System.Single"

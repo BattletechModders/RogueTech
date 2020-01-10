@@ -15,3 +15,5 @@ it creates custom resource for ModTek - VoicePackDef
    ...........................................
   }
 }
+
+creating voicepack video guide https://youtu.be/Q89cneezcAo

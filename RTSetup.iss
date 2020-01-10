@@ -61,7 +61,7 @@ BackColor2=clBlack
 
 [Files]
 ;Source: "/RogueTech Core/RogueTech.txt"; DestDir: "{app}/Mods/RogueTech Core"; Flags: isreadme ignoreversion
-Source: "/*"; Excludes: ".git,.modtek,.git,log.txt,RTAssetsSetup.iss,*.log,SaveMover,Speedx25,Speedx50,Speedx75,Speedx100,UrboCalypseMBT,Word of Blake Emblems,RogueOmnis,RogueOmnisFlashpoint,RogueOmnisHeavyMetal,MissionControlRandomX2,MissionControlRandomX3,MissionControlRandomX4,Republic HeavyMetal Unique,Republic HeavyMetal,DarkAge HeavyMetal,UrbieNuke Heavy Metal,RogueModuleElitesHeavyMetal,PirateTech Urbanwarfare Module,PirateTech HeavyMetal Module,PirateTech Flashpoint Module,Jihad HeavyMetal Unique,Jihad Heavy metal,ClanUpgradesJihad HeavyMetal,Civil War Heavy Metal Unique,Civil War Heavy Metal,Base HeavyMetal Unique,Civil War FlashPoint,Base UrbanWarfare Unique,Base HeavyMetal,RogueHeavyMetalModule,MissionControlNoRandom,ContractSort,GalaxyAtWar,PersistentMapClient,RogueUrbanWarfareModule,LV426,SortByTonnage,Warhammer Emblems,NROL Emblems,MissionControlRandom,MissionControlMassive,HistoricPirateFlags,rubyscripts,RepublicArtillery,Risc Urban Warfare,RogueModuleElitesFlashpoint,MechPortraitsArmakoir,MechPortraitsENOVA,MechPortraitsJK,MechPortraitsCrew,RogueTechDebug,ClanUpgrades,ClanUpgradesCivilWar,ClanUpgradesDarkAge,ClanUpgradesJihad,ClanUpgradesRepublic,Protomechs,GlobalDifficultyByRep,RogueFlashPointModuleStoryline,DarkAgeArtillery,PirateTech,RISCtech module,Dark Age Unique,Jihad Urban Warfare,Jihad Unique,Jihad 3068-3080,Republic Unique Mechs,Republic Urban Warfare,Republic FlashPoint,Civil War Unique,Base FlashPoint,Civil War Urban Warfare,CivilWar 3062-3067,Base UrbanWarfare,Republic 3081-3130,RogueTechSounds,UrbocalypseDarkAge,EnovaEmblems,FlashPointArtillery,DarkAge,FlashPointDarkAge,ExperimentalWeapons_SHcompat,Urbocalypse,ArtilleryUnits,LootedClanMechs,The Drones Of Syberia,ClanEmblems,SpeedMod,Flashpoint-The-Raid,SkipTravelCutscenes,RandomTravelContracts,PersistentMapClient,RogueModuleElites,CommanderPortraitLoader,Superheavys,RogueFlashPointModule,ExperimentalWeapons,RaelM Emblem,UrbieNuke,GlobalDifficultyByCompany,GlobalDifficultyByPlanets,Retrainer,Silence,FreeCam,BindableEscapeKey,ArmorRepair,ArmorPoints,RogueEmblems,All 3025 Mercs,Capellan Emblems,SkipIntro,CrystalClear" ; DestDir: "{app}/Mods"; Flags: recursesubdirs ignoreversion
+Source: "/*"; Excludes: ".git,.modtek,.git,log.txt,RTAssetsSetup.iss,*.log,BT_Advanced_Pilots,SaveMover,Speedx25,Speedx50,Speedx75,Speedx100,UrboCalypseMBT,Word of Blake Emblems,RogueOmnis,RogueOmnisFlashpoint,RogueOmnisHeavyMetal,MissionControlRandomX2,MissionControlRandomX3,MissionControlRandomX4,Republic HeavyMetal Unique,Republic HeavyMetal,DarkAge HeavyMetal,UrbieNuke Heavy Metal,RogueModuleElitesHeavyMetal,PirateTech Urbanwarfare Module,PirateTech HeavyMetal Module,PirateTech Flashpoint Module,Jihad HeavyMetal Unique,Jihad Heavy metal,ClanUpgradesJihad HeavyMetal,Civil War Heavy Metal Unique,Civil War Heavy Metal,Base HeavyMetal Unique,Civil War FlashPoint,Base UrbanWarfare Unique,Base HeavyMetal,RogueHeavyMetalModule,MissionControlNoRandom,ContractSort,GalaxyAtWar,PersistentMapClient,RogueUrbanWarfareModule,LV426,SortByTonnage,Warhammer Emblems,NROL Emblems,MissionControlRandom,MissionControlMassive,HistoricPirateFlags,rubyscripts,RepublicArtillery,Risc Urban Warfare,RogueModuleElitesFlashpoint,MechPortraitsArmakoir,MechPortraitsENOVA,MechPortraitsJK,MechPortraitsCrew,RogueTechDebug,ClanUpgrades,ClanUpgradesCivilWar,ClanUpgradesDarkAge,ClanUpgradesJihad,ClanUpgradesRepublic,Protomechs,GlobalDifficultyByRep,RogueFlashPointModuleStoryline,DarkAgeArtillery,PirateTech,RISCtech module,Dark Age Unique,Jihad Urban Warfare,Jihad Unique,Jihad 3068-3080,Republic Unique Mechs,Republic Urban Warfare,Republic FlashPoint,Civil War Unique,Base FlashPoint,Civil War Urban Warfare,CivilWar 3062-3067,Base UrbanWarfare,Republic 3081-3130,RogueTechSounds,UrbocalypseDarkAge,EnovaEmblems,FlashPointArtillery,DarkAge,FlashPointDarkAge,ExperimentalWeapons_SHcompat,Urbocalypse,ArtilleryUnits,LootedClanMechs,The Drones Of Syberia,ClanEmblems,SpeedMod,Flashpoint-The-Raid,SkipTravelCutscenes,RandomTravelContracts,PersistentMapClient,RogueModuleElites,CommanderPortraitLoader,Superheavys,RogueFlashPointModule,ExperimentalWeapons,RaelM Emblem,UrbieNuke,GlobalDifficultyByCompany,GlobalDifficultyByPlanets,Retrainer,Silence,FreeCam,BindableEscapeKey,ArmorRepair,ArmorPoints,RogueEmblems,All 3025 Mercs,Capellan Emblems,SkipIntro,CrystalClear" ; DestDir: "{app}/Mods"; Flags: recursesubdirs ignoreversion
 
 Source: "/PersistentMapClient/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/PersistentMapClient"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechMode\Online;
 Source: "/RandomTravelContracts/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RandomTravelContracts"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechMode\Online;
@@ -151,7 +151,9 @@ Source: "/UrboCalypseMBT/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/UrboCalyp
 Source: "/The Drones Of Syberia/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/The Drones Of Syberia"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\Drones;
 Source: "/LootedClanMechs/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/LootedClanMechs"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\LootedClanMechs;
 
-Source: "/RogueFlashPointModuleStoryline/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RogueFlashPointModuleStoryline"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\FlashpointStory;
+Source: "/BT_Advanced_Pilots/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/BT_Advanced_Pilots"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\LootedClanMechs;
+
+Source: "/RogueFlashPointModuleStoryline/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/RogueFlashPointModuleStoryline"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechOptionals\BT_Advanced_Pilots;
 
 Source: "/MissionControlRandom/*"; DestDir: "{app}/Mods/MissionControl"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: MC\MissionControlRandom; 
 Source: "/MissionControlNoRandom/*"; DestDir: "{app}/Mods/MissionControl"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: MC\MissionControlNoRandom;  
@@ -201,30 +203,19 @@ Source: "/DarkAge/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/DarkAge"; Flags:
 Source: "/FlashPointDarkAge/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/FlashPointDarkAge"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechEra\DarkAge;
 Source: "/DarkAge HeavyMetal/*"; Excludes: "log.txt"; DestDir: "{app}/Mods/DarkAge HeavyMetal"; Flags: recursesubdirs ignoreversion createallsubdirs; Components: RogueTechEra\DarkAge;
 
-Source: "{#SourcePath}Optionals\ModTek\0Harmony.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
-Source: "{#SourcePath}Optionals\ModTek\ModTekInjector.exe"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
-Source: "{#SourcePath}Optionals\ModTek\ModTek.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
-Source: "{#SourcePath}Optionals\ModTek\modtekassetbundle"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
-Source: "{#SourcePath}Optionals\ModTek\Ionic.Zip.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
-Source: "{#SourcePath}Optionals\ModTek\Mono.Cecil.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
-Source: "{#SourcePath}Optionals\ModTek\Mono.Cecil.Mdb.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
-Source: "{#SourcePath}Optionals\ModTek\Mono.Cecil.Pdb.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
-Source: "{#SourcePath}Optionals\ModTek\Mono.Cecil.Rocks.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
-Source: "{#SourcePath}Optionals\ModTek\Newtonsoft.Json.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
-Source: "{#SourcePath}Optionals\ModTek\System.Runtime.Serialization.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
-Source: "{#SourcePath}Optionals\ModTek\mod.json"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
-Source: "{#SourcePath}Optionals\ModTek\0Harmony.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
-Source: "{#SourcePath}Optionals\ModTek\ModTekInjector.exe"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
-Source: "{#SourcePath}Optionals\ModTek\ModTek.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
-Source: "{#SourcePath}Optionals\ModTek\modtekassetbundle"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
-Source: "{#SourcePath}Optionals\ModTek\Ionic.Zip.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
-Source: "{#SourcePath}Optionals\ModTek\Mono.Cecil.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
-Source: "{#SourcePath}Optionals\ModTek\Mono.Cecil.Mdb.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
-Source: "{#SourcePath}Optionals\ModTek\Mono.Cecil.Pdb.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
-Source: "{#SourcePath}Optionals\ModTek\Mono.Cecil.Rocks.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
-Source: "{#SourcePath}Optionals\ModTek\Newtonsoft.Json.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
-Source: "{#SourcePath}Optionals\ModTek\System.Runtime.Serialization.dll"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
-Source: "{#SourcePath}Optionals\ModTek\mod.json"; DestDir: "{app}\Mods\ModTek\"; Flags: ignoreversion; Tasks: BTML\BTMLinst2;
+Source: "/ModTek/0Harmony.dll"; DestDir: "{app}\Mods/ModTek/"; Flags: recursesubdirs ignoreversion createallsubdirs; Tasks: BTML\BTMLinst;
+Source: "/ModTek/ModTekInjector.exe"; DestDir: "{app}\Mods/ModTek/"; Flags: recursesubdirs ignoreversion createallsubdirs; Tasks: BTML\BTMLinst;
+Source: "/ModTek/ModTek.dll"; DestDir: "{app}\Mods/ModTek/"; Flags: recursesubdirs ignoreversion createallsubdirs; Tasks: BTML\BTMLinst;
+Source: "/ModTek/modtekassetbundle"; DestDir: "{app}\Mods/ModTek/"; Flags: recursesubdirs ignoreversion createallsubdirs; Tasks: BTML\BTMLinst;
+Source: "/ModTek/Ionic.Zip.dll"; DestDir: "{app}\Mods/ModTek/"; Flags: recursesubdirs ignoreversion createallsubdirs; Tasks: BTML\BTMLinst;
+Source: "/ModTek/Mono.Cecil.dll"; DestDir: "{app}\Mods/ModTek/"; Flags: recursesubdirs ignoreversion createallsubdirs; Tasks: BTML\BTMLinst;
+Source: "/ModTek/Mono.Cecil.Mdb.dll"; DestDir: "{app}\Mods/ModTek/"; Flags: recursesubdirs ignoreversion createallsubdirs; Tasks: BTML\BTMLinst;
+Source: "/ModTek/Mono.Cecil.Pdb.dll"; DestDir: "{app}\Mods/ModTek/"; Flags: recursesubdirs ignoreversion createallsubdirs; Tasks: BTML\BTMLinst;
+Source: "/ModTek/Mono.Cecil.Rocks.dll"; DestDir: "{app}\Mods/ModTek/"; Flags: recursesubdirs ignoreversion createallsubdirs; Tasks: BTML\BTMLinst;
+Source: "/ModTek/Newtonsoft.Json.dll"; DestDir: "{app}\Mods/ModTek/"; Flags: recursesubdirs ignoreversion createallsubdirs; Tasks: BTML\BTMLinst;
+Source: "/ModTek/System.Runtime.Serialization.dll"; DestDir: "{app}\Mods/ModTek/"; Flags: ignoreversion; Tasks: BTML\BTMLinst;
+Source: "/ModTek/mod.json"; DestDir: "{app}\Mods/ModTek/"; Flags: recursesubdirs ignoreversion createallsubdirs; Tasks: BTML\BTMLinst;
+Source: "/ModTek/README.md"; DestDir: "{app}\Mods/ModTek/"; Flags: recursesubdirs ignoreversion createallsubdirs; Tasks: BTML\BTMLinst;
 
 [Messages]
 SetupAppRunningError=Setup has detected that another RT setup or BATTLETECH game is currently running.%n%nPlease close all instances of it now, then click OK to continue, or Cancel to exit.
@@ -275,9 +266,10 @@ Name: "RogueTechOptionals\RogueOmnis"; Description: "Custom Omni's - Advanced ve
 Name: "RogueTechOptionals\RISCtechmodule"; Description: "Republic Institute of Strategic Combat - Black Ops R&D"; Types: custom;
 Name: "RogueTechOptionals\PirateTech"; Description: "Pirate Tech Units - 'Laws are to be Broken!'"; Types: custom;
 Name: "RogueTechOptionals\ExperimentalWeapons"; Description: "Experimental Weapons - by MXMach"; Types: custom;
-Name: "RogueTechOptionals\Drones"; Description: "Drones of Syberia- Barely Canon FP - Requires Flashpoint- by Akodoreign"; Types: custom;
+Name: "RogueTechOptionals\Drones"; Description: "Drones of Syberia- Barely Canon FP - Requires Flashpoint- by Akodoreign"; Types: custom;  
 Name: "RogueTechOptionals\Nukes"; Description: "Nuclear Weapon Carriers - The RT Team"; Types: custom;
 Name: "RogueTechOptionals\LV426"; Description: "LV-426 Flashpoint&Units - The RT Team"; Types: custom;
+Name: "RogueTechOptionals\BT_Advanced_Pilots"; Description: "Pilots of the Modding Communty - The BTA Team"; Types: custom;
 Name: "emblems"; Description: "Emblem Options"; Types: custom;      
 Name: "emblems\rogueemblems"; Description: "RogueTech Emblems"; Types: custom;
 Name: "emblems\raelmemblems"; Description: "RaelM Emblems"; Types: custom;
@@ -323,8 +315,7 @@ Name: "Custom"; Description: "Custom installation"; Flags: iscustom
 
 [Tasks]
 Name: BTML; Description: "Choose RogueTechModLoader-Modtek option";
-Name: BTML\BTMLinst; Description: "First Time install Modtek";Flags: unchecked exclusive
-Name: BTML\BTMLinst2; Description: "Patch ModTek"; Flags: exclusive
+Name: BTML\BTMLinst; Description: "Install Modtek";Flags: exclusive
 Name: idautofixer; Description: "Autofix Unicode File Id's"; Flags: unchecked
 Name: cleanup; Description: "Clean previous install"; GroupDescription: "Additional options:";
 Name: cleanup\modtek; Description: "Remove ModTek Cache (RECOMMENDED!)"; Flags: unchecked
@@ -341,9 +332,7 @@ Filename: "https://discord.gg/93kxWQZ"; Description: "The RogueTech Discord"; Fl
 Filename: "https://www.nexusmods.com/battletech/mods/393/"; Description: "The Assetbundle YOU NEED THIS!"; Flags: postinstall nowait shellexec skipifsilent
 ;Filename: "{app}/BattleTech.exe"; Description: "Launch BATTLETECH"; Flags: postinstall skipifsilent unchecked
 ;Filename: "{app}/Mods/RogueTech Core/RogueTech.txt"; Description: "View the Changelog file"; Flags: postinstall nowait shellexec skipifsilent unchecked
-Filename: "{app}\Mods\ModTek\ModTekInjector.exe"; Parameters: -f factions.zip /nokeypress ; Tasks: BTML\BTMLinst
-Filename: "{app}\Mods\ModTek\ModTekInjector.exe"; Parameters: /restore /nokeypress; Tasks: BTML\BTMLinst2
-Filename: "{app}\Mods\ModTek\ModTekInjector.exe"; Parameters: -f factions.zip /nokeypress ; Tasks: BTML\BTMLinst2
+Filename: "{app}\Mods/ModTek/ModTekInjector.exe"; Parameters: -f factions.zip /nokeypress ; Tasks: BTML\BTMLinst
 Filename: "{app}\Mods\BTJsonIDCheck.exe"; Parameters: -f factions.zip /nokeypress ; Tasks: idautofixer
 
 [UninstallRun]
