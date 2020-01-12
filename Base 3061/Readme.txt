@@ -37,6 +37,10 @@ unit_demolisher <- Literally every faction has these
 
 Changelog:
 
+8.6.4 - 1/9/2020
+
+Added Behemoth II, Behemoth II Support and Behemoth II Custom
+
 8.6.1 - 12/28/2019
 
 Added Aithlon Clan (Temporarily represented Armored Motive as just not having critable motive system items.)
