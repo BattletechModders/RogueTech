@@ -26,7 +26,7 @@
 				"UAVCD: 2",
 				"UAVH: 15",
                 "Special",
-				"SpecialWeight: 2",
+				"QuirkWeight: -50%",
 				"Quirk"
             ]
         },
@@ -43,9 +43,8 @@
     },
 		"MechConfiguration" : {
                 },
-	"HandHeld" : {
-	"Tonnage" : 2,
-	"HandsUsed" : false
+				"TSMInfo" : {
+	"HandHeldFactor" : 0.5
 }
     },
     "StatName": null,
@@ -69,7 +68,7 @@
     "ComponentSubType" : "Prototype_ElectronicWarfare",
     "PrefabIdentifier": "",
     "BattleValue": 0,
-    "InventorySize": 3,
+    "InventorySize": 1,
     "Tonnage": 0,
     "AllowedLocations": "CenterTorso",
     "DisallowedLocations": "All",
@@ -107,7 +106,7 @@
         {
             "durationData" : {
                 "duration": -1,
-                "stackLimit": 1
+                "stackLimit": -1
             },
             "targetingData" : {
                 "effectTriggerType" : "Passive",
@@ -135,7 +134,39 @@
 				"modType": "System.Int32"
             },
             "nature" : "Buff"
-        }
+        },
+		{
+                "durationData" : {
+                    "duration": -1,
+                    "stackLimit": -1
+                },
+                "targetingData" : {
+                    "effectTriggerType" : "Passive",
+                    "specialRules" : "NotSet",
+                    "effectTargetType" : "AlliesWithinRange",
+                    "range" : 0.0,
+                    "forcePathRebuild" : false,
+                    "forceVisRebuild" : false,
+                    "showInTargetPreview" : false,
+                    "showInStatusPanel" : false
+                },
+                "effectType" : "StatisticEffect",
+                "Description" :
+                {
+                    "Id" : "LV_ECM_SHIELD_EMITTER_COUNT",
+                    "Name" : "ECM Shield Emitter Count",
+                    "Details" : "Counter for the number of ECM emitters currently affecting an actor with shielding.",
+                    "Icon" : "uixSvgIcon_status_ECM-missileDef"
+                },
+                "statisticData" : 
+                {
+                    "statName" : "LV_ECM_SHIELD_EMITTER_COUNT",
+                    "operation": "Int_Add",
+                    "modValue": "1",
+                    "modType": "System.Int32"
+                },
+                "nature" : "Buff"
+            }
 		]
 		},
 		{
@@ -152,18 +183,12 @@
       "IsPositiveToAlly": false,
       "IsNegativeToEnemy": true,
       "ownerVFX": [
-        "vfxPrfPrtl_ECMtargetAdd_burst",
-        "vfxPrfPrtl_ECM_loop",
-        "vfxPrfPrtl_ECMcarrierAura_loop"
       ],
       "targetVFX": [
-        "vfxPrfPrtl_ECMtargetAdd_burst"
       ],
       "removeOwnerVFX": [
-        "vfxPrfPrtl_ECMtargetRemove_burst"
       ],
       "removeTargetVFX": [
-        "vfxPrfPrtl_ECMtargetRemove_burst"
       ],
       "ownerSFX": [
       ],
@@ -174,10 +199,42 @@
       "removeTargetSFX": [
       ],
       "statusEffects": [
+	  {
+                "durationData" : {
+                    "duration": -1,
+                    "stackLimit": -1
+                },
+                "targetingData" : {
+                    "effectTriggerType" : "Passive",
+                    "specialRules" : "NotSet",
+                    "effectTargetType" : "EnemiesWithinRange",
+                    "range" : 0.0,
+                    "forcePathRebuild" : false,
+                    "forceVisRebuild" : false,
+                    "showInTargetPreview" : false,
+                    "showInStatusPanel" : false
+                },
+                "effectType" : "StatisticEffect",
+                "Description" :
+                {
+                    "Id" : "LV_ECM_JAM_EMITTER_COUNT",
+                    "Name" : "ECM Jamming Emitter Count",
+                    "Details" : "Counter for the number of ECM emitters currently affecting an actor with jamming.",
+                    "Icon" : "uixSvgIcon_status_ECM-missileDef"
+                },
+                "statisticData" : 
+                {
+                    "statName" : "LV_ECM_JAM_EMITTER_COUNT",
+                    "operation": "Int_Add",
+                    "modValue": "1",
+                    "modType": "System.Int32"
+                },
+                "nature" : "Debuff"
+            },
         {
             "durationData" : {
                 "duration": -1,
-                "stackLimit": 1,
+                "stackLimit": -1,
 				"uniqueEffectIdStackLimit": 1
             },
             "targetingData" : {
@@ -298,7 +355,7 @@
         {
             "durationData": {
                 "duration": -1,
-                "stackLimit": 1
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
@@ -330,7 +387,7 @@
         {
             "durationData": {
                 "duration": -1,
-                "stackLimit": 1
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",

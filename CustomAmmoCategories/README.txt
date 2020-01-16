@@ -206,6 +206,11 @@ if set as true all AP effects (damage and crits) will not affect unit.
   "DecalTexture": "envTxrDecl_terrainDmgSmallBlood_alb", - texture for blood spot
   "DrawBloodChance": 0.3 - chance on leave blood spot on destruction
 },
+"showMissBehavior":"Default", - miss margin behavior.
+                                   None - miss floaties never shown
+                                   Vanilla - miss floaties shown as in vanilla (no miss margin)
+                                   Default - miss floaties shown as AIM's ShowMissMargin: true
+                                   All - show all miss floaties with miss margin
 }
 
 now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
@@ -395,7 +400,7 @@ new fields
 								  result = 1.0 + (6-10)*0.1 = 0.6
 								  GunneryJammingBase if ommited in weapon def., ammo def. and mode def. assumed as 5. 
   "DisableClustering": true/false - if true ProjectilesPerShot > 1 will affect only visual nor damage. If omitted consider as true.
-  "NotUseInMelee": true, - if true even AntiPersonel weapon type will not fire on melee attack, AI aware. 
+  (not used any more)"NotUseInMelee": true, - if true even AntiPersonel weapon type will not fire on melee attack, AI aware. 
   "AlternateDamageCalc": false, - if true alternate damage calc formula will be implemented 
                               DamagePerShot = (damage from weaponDef + (damage from ammo) + (damage from mode)*(damage multiplayer from ammo)*(damage multiplayer from mode)*(damage with effects)/(damage from weaponDef)
   "AlternateHeatDamageCalc": false, - same as  AlternateDamageCalc but for heat 
@@ -662,6 +667,7 @@ new fields
   
 Ammo definition
 {
+   "HideIfOnlyVariant": true, - if true this ammo name will be hidden if only variant for this mode. Default true.
    "Description" : {
       "Id" : "Ammunition_LBX10ECM",
       "Name" : "LBX/10 ECM Ammo",
@@ -761,7 +767,7 @@ Ammo definition
 						  Base point of AoE range calculations will be point where first projectile,
 						            (if weapon have ShotsWhenFired > 1) not intercepted by AMS, hits ground.
 						  It is recommended to use LRM5, LRM10, LRM15 or LRM20 as weapon subtype cause other subtypes have too huge spread when misses
-						  It is good idea to set ForbiddenRage for AoE weapon and set NotUseInMelee to true
+						  It is good idea to set ForbiddenRage for AoE weapon
 						  AOE weapon can't hit mech head, cause every headshot inflicts pilot injury. With fact AoE always dealt damage it will be imbalance. 
 						  Damage variations are not applying to AoE damage
   "AOEDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
