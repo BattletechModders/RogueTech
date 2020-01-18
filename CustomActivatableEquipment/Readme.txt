@@ -3,7 +3,6 @@ Original code recalculating all auras for all combatant pairs every frame which 
 My auras implementation written from scratch and using colliders making Unity do all work for compare distances.
 !NOTE! FrostRaptor's AurasHelper is assumed to be incompatible new auras code. But cause original auras disabled it assumed to be not needed. 
 
-to invoke activation dialog ctrl+click on move button in mech HUD. 
 to invoke heat sinks manipulation dialog ctrl+click on brace (shield) button in mech HUD. 
    heat sinks manipulation limitations: you can switch on and off only dedicated heat sinks not engine internal ones
    
