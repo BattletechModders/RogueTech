@@ -62,14 +62,11 @@
         "BonusDescriptions": {
             "Bonuses": [
 	"Mimetic",
-				"MimeticStealth: 20%",
-				"MimeticCharges: 6",
-				"MimeticDecay: 7",
-                "Reserved: 12",
-                "Visibility: -70%",
-                "Signature: -15%",
-                "HeatGenerated: +10%",
-                "HeatPerTurn: +10",
+	"MimeticStealth: 80%, 6, 7",
+                "StealthReserved: 2",
+                "ActiveVisibility: -70%",
+                "ActiveSignature: -15%",
+                "ActiveHeatEfficiency: -15%",
                 "ReqECM",
 				"ArmorFactor: -20%",
                 "ArmorTPCost: 75%",
@@ -89,11 +86,11 @@
 	  "DeactivationMessage": "Stealth Deactivated",
 	  "Linkage":{
         "OnActivate":{  
-          "Activate":["Damper"],
-          "Deactivate":["ECM Mode"]
+          "Activate":["Damper", "ECM Mode"],
+          "Deactivate":[]
         },
         "OnDeactivate":{
-          "Activate":["ECM Mode"],
+          "Activate":[],
           "Deactivate":["Damper"]
         }
       },
@@ -202,37 +199,10 @@
             },
             "nature": "Buff",
             "statisticData": {
-                "statName": "HeatGenerated",
-                "operation": "Float_Multiply",
-                "modValue": "1.1",
-                "modType": "System.Single",
-                "targetCollection": "Weapon"
-            }
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "Stealth_Heat_Capacity_Stealth",
-                "Name": "Decreased Heat Capacity",
-                "Details": "Heat Capacity Penalty",
-                "Icon": "uixSvgIcon_equipment_ThermalExchanger"
-            },
-            "nature": "Debuff",
-            "statisticData": {
                 "statName": "HeatSinkCapacity",
-                "operation": "Int_Add",
-                "modValue": "-10",
-                "modType": "System.Int32"
+                "operation": "Int_Multiply_Float",
+                "modValue": "0.85",
+                "modType": "System.Single"
             }
         }
       ],

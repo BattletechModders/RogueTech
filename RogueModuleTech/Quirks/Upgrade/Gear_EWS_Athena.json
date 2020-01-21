@@ -19,10 +19,8 @@
 				"Signature: -35%",
 				"Visibility: -35%",
 				"Initiative: +1",
-				"IsECM: 1",
-                "ECMBubble: 120",
-				"Jammer: 4",
-				"JamBubble: 400",
+				"IsECM: 1, 120",
+				"Jammer: 4, 400",
 				"IsProbe: 4",
 				"ProbePower: 3",
 				"CockpitEWS"
@@ -102,7 +100,7 @@
         {
             "durationData" : {
                 "duration": -1,
-                "stackLimit": 1
+                "stackLimit": -1
             },
             "targetingData" : {
                 "effectTriggerType" : "Passive",
@@ -118,7 +116,7 @@
             "Description" :
             {
 				"Id" : "LV_ECM_SHIELD",
-				"Name" : "Makes it easier for enemies to know where you are, but harder to attack",
+				"Name" : "ECM_Shield_Athena",
 				"Details" : "IPSUM SUCKUM",
 				"Icon" : "uixSvgIcon_status_ECM-missileDef"
             },
@@ -130,7 +128,39 @@
 				"modType": "System.Int32"
             },
             "nature" : "Buff"
-        }
+        },
+		{
+                "durationData" : {
+                    "duration": -1,
+                    "stackLimit": -1
+                },
+                "targetingData" : {
+                    "effectTriggerType" : "Passive",
+                    "specialRules" : "NotSet",
+                    "effectTargetType" : "AlliesWithinRange",
+                    "range" : 0.0,
+                    "forcePathRebuild" : false,
+                    "forceVisRebuild" : false,
+                    "showInTargetPreview" : false,
+                    "showInStatusPanel" : false
+                },
+                "effectType" : "StatisticEffect",
+                "Description" :
+                {
+                    "Id" : "LV_ECM_SHIELD_EMITTER_COUNT",
+                    "Name" : "ECM Shield Emitter Count",
+                    "Details" : "Counter for the number of ECM emitters currently affecting an actor with shielding.",
+                    "Icon" : "uixSvgIcon_status_ECM-missileDef"
+                },
+                "statisticData" : 
+                {
+                    "statName" : "LV_ECM_SHIELD_EMITTER_COUNT",
+                    "operation": "Int_Add",
+                    "modValue": "1",
+                    "modType": "System.Int32"
+                },
+                "nature" : "Buff"
+            }
 		]
 		},
 		{
@@ -146,39 +176,27 @@
       "EnemyStealthAffection": "NegativeOne",
       "IsPositiveToAlly": false,
       "IsNegativeToEnemy": true,
-      "ownerVFX": [
-        "vfxPrfPrtl_ECMtargetAdd_burst",
-        "vfxPrfPrtl_ECM_loop",
-        "vfxPrfPrtl_ECMcarrierAura_loop"
+       "ownerVFX": [
       ],
       "targetVFX": [
-        "vfxPrfPrtl_ECMtargetAdd_burst"
       ],
       "removeOwnerVFX": [
-        "vfxPrfPrtl_ECMtargetRemove_burst"
       ],
       "removeTargetVFX": [
-        "vfxPrfPrtl_ECMtargetRemove_burst"
       ],
       "ownerSFX": [
-        "AudioEventList_ecm_ecm_enter",
-        "AudioEventList_ui_ui_ecm_start"
       ],
       "targetSFX": [
-        "AudioEventList_ecm_ecm_enter"
       ],
       "removeOwnerSFX": [
-        "AudioEventList_ecm_ecm_exit",
-        "AudioEventList_ui_ui_ecm_stop"
       ],
       "removeTargetSFX": [
-        "AudioEventList_ecm_ecm_exit"
       ],
       "statusEffects": [
         {
             "durationData" : {
                 "duration": -1,
-                "stackLimit": 1,
+                "stackLimit": -1,
 				"uniqueEffectIdStackLimit": 1
             },
             "targetingData" : {
@@ -207,11 +225,75 @@
 				"modType": "System.Int32"
             },
             "nature" : "Debuff"
-        }		
+        },
+{
+                "durationData" : {
+                    "duration": -1,
+                    "stackLimit": -1
+                },
+                "targetingData" : {
+                    "effectTriggerType" : "Passive",
+                    "specialRules" : "NotSet",
+                    "effectTargetType" : "EnemiesWithinRange",
+                    "range" : 0.0,
+                    "forcePathRebuild" : false,
+                    "forceVisRebuild" : false,
+                    "showInTargetPreview" : false,
+                    "showInStatusPanel" : false
+                },
+                "effectType" : "StatisticEffect",
+                "Description" :
+                {
+                    "Id" : "LV_ECM_JAM_EMITTER_COUNT",
+                    "Name" : "ECM Jamming Emitter Count",
+                    "Details" : "Counter for the number of ECM emitters currently affecting an actor with jamming.",
+                    "Icon" : "uixSvgIcon_status_ECM-missileDef"
+                },
+                "statisticData" : 
+                {
+                    "statName" : "LV_ECM_JAM_EMITTER_COUNT",
+                    "operation": "Int_Add",
+                    "modValue": "1",
+                    "modType": "System.Int32"
+                },
+                "nature" : "Debuff"
+            }			
       ]
     }
   ],
 	"statusEffects": [
+	    {
+        "durationData" : {
+            "duration": -1,
+            "stackLimit": -1
+        },
+        "targetingData" : {
+            "effectTriggerType" : "Passive",
+            "specialRules" : "NotSet",
+            "effectTargetType" : "Creator",
+            "range" : 0.0,
+            "forcePathRebuild" : false,
+            "forceVisRebuild" : false,
+            "showInTargetPreview" : false,
+            "showInStatusPanel" : false
+        },
+        "effectType" : "StatisticEffect",
+        "Description" :
+        {
+            "Id" : "LV_ECM_CARRIER",
+            "Name" : "ECM Carrier",
+            "Details" : "You emit an ECM field",
+            "Icon" : "uixSvgIcon_status_ECM-missileDef"
+        },
+        "statisticData" : 
+        {
+            "statName" : "LV_ECM_CARRIER",
+            "operation": "Set",
+            "modValue": "true",
+            "modType": "System.Boolean"
+        },
+        "nature" : "Buff"
+    },
 	{
             "durationData" : {
                 "duration": -1,
@@ -375,7 +457,7 @@
         {
             "durationData": {
                 "duration": -1,
-                "stackLimit": 1
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
@@ -407,7 +489,7 @@
         {
             "durationData": {
                 "duration": -1,
-                "stackLimit": 1
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",

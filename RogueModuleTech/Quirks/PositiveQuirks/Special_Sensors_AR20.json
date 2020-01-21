@@ -14,20 +14,14 @@
         },
         "BonusDescriptions": {
             "Bonuses": [
+				"WeightedQuirk: 50%",
                 "Sensors: +10%",
                 "Sight: +15%",
-                "IsECM: 2",
-                "ECMBubble: 60",
-				"Jammer: 3",
-				"JamBubble: 200",
+                "IsECM: 2, 60",
+				"Jammer: 3, 200",
                 "IsProbe: 3",
 				"ProbePower: 2",
-				"UAV: 310",
-				"UAVCD: 2",
-				"UAVH: 15",
-                "Special",
-				"SpecialWeight: 2",
-				"Quirk"
+				"UAV: 310, 2, 15"
             ]
         },
         "InventorySorter": {
@@ -43,9 +37,8 @@
     },
 		"MechConfiguration" : {
                 },
-	"HandHeld" : {
-	"Tonnage" : 2,
-	"HandsUsed" : false
+				"TSMInfo" : {
+	"HandHeldFactor" : 0.5
 }
     },
     "StatName": null,
@@ -69,7 +62,7 @@
     "ComponentSubType" : "Prototype_ElectronicWarfare",
     "PrefabIdentifier": "",
     "BattleValue": 0,
-    "InventorySize": 3,
+    "InventorySize": 1,
     "Tonnage": 0,
     "AllowedLocations": "CenterTorso",
     "DisallowedLocations": "All",
@@ -107,7 +100,7 @@
         {
             "durationData" : {
                 "duration": -1,
-                "stackLimit": 1
+                "stackLimit": -1
             },
             "targetingData" : {
                 "effectTriggerType" : "Passive",
@@ -123,7 +116,7 @@
             "Description" :
             {
 				"Id" : "LV_ECM_SHIELD",
-				"Name" : "Makes it easier for enemies to know where you are, but harder to attack",
+				"Name" : "ECM_Shield_AR20",
 				"Details" : "IPSUM SUCKUM",
 				"Icon" : "uixSvgIcon_status_ECM-missileDef"
             },
@@ -135,7 +128,39 @@
 				"modType": "System.Int32"
             },
             "nature" : "Buff"
-        }
+        },
+		{
+                "durationData" : {
+                    "duration": -1,
+                    "stackLimit": -1
+                },
+                "targetingData" : {
+                    "effectTriggerType" : "Passive",
+                    "specialRules" : "NotSet",
+                    "effectTargetType" : "AlliesWithinRange",
+                    "range" : 0.0,
+                    "forcePathRebuild" : false,
+                    "forceVisRebuild" : false,
+                    "showInTargetPreview" : false,
+                    "showInStatusPanel" : false
+                },
+                "effectType" : "StatisticEffect",
+                "Description" :
+                {
+                    "Id" : "LV_ECM_SHIELD_EMITTER_COUNT",
+                    "Name" : "ECM Shield Emitter Count",
+                    "Details" : "Counter for the number of ECM emitters currently affecting an actor with shielding.",
+                    "Icon" : "uixSvgIcon_status_ECM-missileDef"
+                },
+                "statisticData" : 
+                {
+                    "statName" : "LV_ECM_SHIELD_EMITTER_COUNT",
+                    "operation": "Int_Add",
+                    "modValue": "1",
+                    "modType": "System.Int32"
+                },
+                "nature" : "Buff"
+            }
 		]
 		},
 		{
@@ -152,18 +177,12 @@
       "IsPositiveToAlly": false,
       "IsNegativeToEnemy": true,
       "ownerVFX": [
-        "vfxPrfPrtl_ECMtargetAdd_burst",
-        "vfxPrfPrtl_ECM_loop",
-        "vfxPrfPrtl_ECMcarrierAura_loop"
       ],
       "targetVFX": [
-        "vfxPrfPrtl_ECMtargetAdd_burst"
       ],
       "removeOwnerVFX": [
-        "vfxPrfPrtl_ECMtargetRemove_burst"
       ],
       "removeTargetVFX": [
-        "vfxPrfPrtl_ECMtargetRemove_burst"
       ],
       "ownerSFX": [
       ],
@@ -174,10 +193,42 @@
       "removeTargetSFX": [
       ],
       "statusEffects": [
+	  {
+                "durationData" : {
+                    "duration": -1,
+                    "stackLimit": -1
+                },
+                "targetingData" : {
+                    "effectTriggerType" : "Passive",
+                    "specialRules" : "NotSet",
+                    "effectTargetType" : "EnemiesWithinRange",
+                    "range" : 0.0,
+                    "forcePathRebuild" : false,
+                    "forceVisRebuild" : false,
+                    "showInTargetPreview" : false,
+                    "showInStatusPanel" : false
+                },
+                "effectType" : "StatisticEffect",
+                "Description" :
+                {
+                    "Id" : "LV_ECM_JAM_EMITTER_COUNT",
+                    "Name" : "ECM Jamming Emitter Count",
+                    "Details" : "Counter for the number of ECM emitters currently affecting an actor with jamming.",
+                    "Icon" : "uixSvgIcon_status_ECM-missileDef"
+                },
+                "statisticData" : 
+                {
+                    "statName" : "LV_ECM_JAM_EMITTER_COUNT",
+                    "operation": "Int_Add",
+                    "modValue": "1",
+                    "modType": "System.Int32"
+                },
+                "nature" : "Debuff"
+            },
         {
             "durationData" : {
                 "duration": -1,
-                "stackLimit": 1,
+                "stackLimit": -1,
 				"uniqueEffectIdStackLimit": 1
             },
             "targetingData" : {
@@ -211,6 +262,38 @@
     }
   ],
     "statusEffects": [
+	    {
+        "durationData" : {
+            "duration": -1,
+            "stackLimit": -1
+        },
+        "targetingData" : {
+            "effectTriggerType" : "Passive",
+            "specialRules" : "NotSet",
+            "effectTargetType" : "Creator",
+            "range" : 0.0,
+            "forcePathRebuild" : false,
+            "forceVisRebuild" : false,
+            "showInTargetPreview" : false,
+            "showInStatusPanel" : false
+        },
+        "effectType" : "StatisticEffect",
+        "Description" :
+        {
+            "Id" : "LV_ECM_CARRIER",
+            "Name" : "ECM Carrier",
+            "Details" : "You emit an ECM field",
+            "Icon" : "uixSvgIcon_status_ECM-missileDef"
+        },
+        "statisticData" : 
+        {
+            "statName" : "LV_ECM_CARRIER",
+            "operation": "Set",
+            "modValue": "true",
+            "modType": "System.Boolean"
+        },
+        "nature" : "Buff"
+    },
 	{
             "targetingData" : {
                 "effectTriggerType" : "OnActivation",
@@ -298,7 +381,7 @@
         {
             "durationData": {
                 "duration": -1,
-                "stackLimit": 1
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
@@ -330,7 +413,7 @@
         {
             "durationData": {
                 "duration": -1,
-                "stackLimit": 1
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",

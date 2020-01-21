@@ -16,32 +16,22 @@
         },
         "BonusDescriptions": {
             "Bonuses": [
+				"WeightedQuirk: 50%",
 				"Stealth",
-                "StealthSensors: 40%",
-                "SensorCharges: 3",
-                "MimeticStealth: 40%",
-                "MimeticCharges: 3",
-                "MimeticDecay: 3",
-                "StealthMed: 1",
-                "StealthLong: 2",
-                "StealthER: 3",
+				"StealthSensors: 40%, 3, 1, 2, 3",
+				"MimeticStealth: 40%, 3, 3",
                 "Visibility: -30%",
                 "Signature: -30%",
-                "HeatGenerated: +10%",
-                "HeatPerTurn: +10",
-				"LocalEcm: 3",
-				"Special",
-				"SpecialWeight: 2",
-				"Quirk"
+                "ActiveHeatEfficiency: -8%",
+				"LocalEcm: 3"
             ]
         },
 		"MechConfiguration" : {
 					
 		},
-		"HandHeld" : {
-			"HandsUsed" : false,
-			"Tonnage" : 2
-		}
+		"TSMInfo" : {
+	"HandHeldFactor" : 0.5
+}
     },
     "Description": {
         "Cost": 0,
@@ -61,7 +51,7 @@
     "ComponentSubType": "NotSet",
     "PrefabIdentifier": "",
     "BattleValue": 0,
-    "InventorySize": 3,
+    "InventorySize": 1,
     "Tonnage": 0,
     "AllowedLocations": "CenterTorso",
     "DisallowedLocations": "All",
@@ -82,7 +72,7 @@
             "Description" :
             {
 				"Id" : "LV_ECM_SHIELD",
-				"Name" : "Makes it easier for enemies to know where you are, but harder to attack",
+				"Name" : "ECM_Shield_OmniStealth",
 				"Details" : "IPSUM SUCKUM",
 				"Icon" : "uixSvgIcon_status_ECM-missileDef"
             },
@@ -95,6 +85,34 @@
             },
             "nature" : "Buff"
         },
+		{
+                "durationData" : {
+                    "duration": -1,
+                    "stackLimit": -1
+                },
+                "targetingData" : {
+                     "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+                },
+                "effectType" : "StatisticEffect",
+                "Description" :
+                {
+                    "Id" : "LV_ECM_SHIELD_EMITTER_COUNT",
+                    "Name" : "ECM Shield Emitter Count",
+                    "Details" : "Counter for the number of ECM emitters currently affecting an actor with shielding.",
+                    "Icon" : "uixSvgIcon_status_ECM-missileDef"
+                },
+                "statisticData" : 
+                {
+                    "statName" : "LV_ECM_SHIELD_EMITTER_COUNT",
+                    "operation": "Int_Add",
+                    "modValue": "1",
+                    "modType": "System.Int32"
+                },
+                "nature" : "Buff"
+            },
 		{
                     "durationData": {
                         "duration": -1,
@@ -227,37 +245,10 @@
                     },
                     "nature": "Buff",
                     "statisticData": {
-                        "statName": "HeatGenerated",
-                        "operation": "Float_Multiply",
-                        "modValue": "1.1",
-                        "modType": "System.Single",
-                        "targetCollection": "Weapon"
-                    }
-                },
-                {
-                    "durationData": {
-                        "duration": -1,
-                        "stackLimit": -1
-                    },
-                    "targetingData": {
-                        "effectTriggerType": "Passive",
-                        "effectTargetType": "Creator",
-                        "showInTargetPreview": false,
-                        "showInStatusPanel": false
-                    },
-                    "effectType": "StatisticEffect",
-                    "Description": {
-                        "Id": "Stealth_Heat_Capacity_Stealth",
-                        "Name": "Decreased Heat Capacity",
-                        "Details": "Heat Capacity Penalty",
-                        "Icon": "uixSvgIcon_equipment_ThermalExchanger"
-                    },
-                    "nature": "Debuff",
-                    "statisticData": {
                         "statName": "HeatSinkCapacity",
-                        "operation": "Int_Add",
-                        "modValue": "-10",
-                        "modType": "System.Int32"
+                "operation": "Int_Multiply_Float",
+                "modValue": "0.92",
+                "modType": "System.Single"
                     }
                 }
     ],

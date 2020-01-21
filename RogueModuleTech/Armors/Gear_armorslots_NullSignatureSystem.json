@@ -61,15 +61,10 @@
         "BonusDescriptions": {
             "Bonuses": [
                 "Stealth",
-                "StealthSensors: 30%",
-                "SensorCharges: 5",
-                "StealthMed: 2",
-                "StealthLong: 4",
-                "StealthER: 6",
-                "Reserved: 6",
-                "Signature: -70%",
-                "HeatGenerated: +15%",
-                "HeatPerTurn: +10",
+				"StealthSensors: 70%, 5, 2, 4, 6",
+                "StealthReserved: 1",
+                "ActiveSignature: -70%",
+                "ActiveHeatEfficiency: -15%",
                 "ReqECM",
                 "ArmorTPCost: 40%",
                 "ArmorCBCost: 40%"
@@ -88,11 +83,11 @@
             "DeactivationMessage": "Stealth Deactivated",
             "Linkage": {
                 "OnActivate": {
-                    "Activate": ["Camouflage"],
-                    "Deactivate": ["ECM Mode"]
+                    "Activate": ["Camouflage", "ECM Mode"],
+                    "Deactivate": []
                 },
                 "OnDeactivate": {
-                    "Activate": ["ECM Mode"],
+                    "Activate": [],
                     "Deactivate": ["Camouflage"]
                 }
             },
@@ -173,37 +168,10 @@
                     },
                     "nature": "Buff",
                     "statisticData": {
-                        "statName": "HeatGenerated",
-                        "operation": "Float_Multiply",
-                        "modValue": "1.15",
-                        "modType": "System.Single",
-                        "targetCollection": "Weapon"
-                    }
-                },
-                {
-                    "durationData": {
-                        "duration": -1,
-                        "stackLimit": -1
-                    },
-                    "targetingData": {
-                        "effectTriggerType": "Passive",
-                        "effectTargetType": "Creator",
-                        "showInTargetPreview": false,
-                        "showInStatusPanel": false
-                    },
-                    "effectType": "StatisticEffect",
-                    "Description": {
-                        "Id": "Stealth_Heat_Capacity_Stealth",
-                        "Name": "Decreased Heat Capacity",
-                        "Details": "Heat Capacity Penalty",
-                        "Icon": "uixSvgIcon_equipment_ThermalExchanger"
-                    },
-                    "nature": "Debuff",
-                    "statisticData": {
                         "statName": "HeatSinkCapacity",
-                        "operation": "Int_Add",
-                        "modValue": "-10",
-                        "modType": "System.Int32"
+                "operation": "Int_Multiply_Float",
+                "modValue": "0.85",
+                "modType": "System.Single"
                     }
                 }
             ],
