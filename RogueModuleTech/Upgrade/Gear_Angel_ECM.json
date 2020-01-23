@@ -13,7 +13,8 @@
                 "IsECM: 2, 190",
                 "Jammer: 5, 360",
 				"ECCMMode",
-				"ECCMStrength: 6, 360",
+				"ECCMStrength: 2, 190",
+				"ECCMFriendly: 5, 360"
             ]
         },
         "InventorySorter": {
@@ -27,7 +28,7 @@
 	  "ActivationMessage": "ECM",
 	  "DeactivationMessage": "ECCM",
 	  "Linkage":{
-        "OnActivate":{  
+        "OnActivate":{
           "Activate":[],
           "Deactivate":[]
         },
@@ -200,7 +201,7 @@
 				"Details" : "IPSUM SUCKUM",
 				"Icon" : "uixSvgIcon_status_ECM-missileDef"
             },
-            "statisticData" : 
+            "statisticData" :
             {
 				"statName" : "LV_ECM_SHIELD",
 				"operation": "Int_Add",
@@ -232,7 +233,7 @@
                     "Details" : "Counter for the number of ECM emitters currently affecting an actor with shielding.",
                     "Icon" : "uixSvgIcon_status_ECM-missileDef"
                 },
-                "statisticData" : 
+                "statisticData" :
                 {
                     "statName" : "LV_ECM_SHIELD_EMITTER_COUNT",
                     "operation": "Int_Add",
@@ -297,7 +298,7 @@
 				"Details" : "Jamming ECM, reduces sensor checks for enemies in field",
 				"Icon" : "uixSvgIcon_action_sensorlock"
             },
-            "statisticData" : 
+            "statisticData" :
             {
 				"statName" : "LV_ECM_JAMMED",
 				"operation": "Int_Add",
@@ -329,7 +330,7 @@
                     "Details" : "Counter for the number of ECM emitters currently affecting an actor with jamming.",
                     "Icon" : "uixSvgIcon_status_ECM-missileDef"
                 },
-                "statisticData" : 
+                "statisticData" :
                 {
                     "statName" : "LV_ECM_JAM_EMITTER_COUNT",
                     "operation": "Int_Add",
@@ -344,7 +345,7 @@
       "Id": "Gear_AECM_ECCM",
       "Name": "ECCM",
       "ReticleColor": "#a31aff",
-      "Range": 360,
+      "Range": 190,
 	  "HideOnNotSelected": false,
       "RemoveOnSensorLock": false,
       "State": "Offline",
@@ -393,15 +394,80 @@
 				"Details" : "IPSUM SUCKUM",
 				"Icon" : "uixSvgIcon_status_ECM-missileDef"
             },
-            "statisticData" : 
+            "statisticData" :
             {
 				"statName" : "LV_ECM_SHIELD",
 				"operation": "Int_Add",
-				"modValue": "-6",
+				"modValue": "-2",
 				"modType": "System.Int32"
             },
             "nature" : "Buff"
         }		
+      ]
+    },
+	{
+      "Id": "Gear_AECM_ECCM_JAMMER",
+      "Name": "ECCM",
+      "ReticleColor": "#a31aff",
+      "Range": 360,
+	  "HideOnNotSelected": false,
+      "RemoveOnSensorLock": false,
+      "State": "Online",
+      "ApplySelf": false,
+      "AllyStealthAffection": "PositiveTwo",
+      "EnemyStealthAffection": "None",
+      "IsPositiveToAlly": true,
+      "IsNegativeToEnemy": false,
+      "ownerVFX": [
+      ],
+      "targetVFX": [
+      ],
+      "removeOwnerVFX": [
+      ],
+      "removeTargetVFX": [
+      ],
+      "ownerSFX": [
+      ],
+      "targetSFX": [
+      ],
+      "removeOwnerSFX": [
+      ],
+      "removeTargetSFX": [
+      ],
+      "statusEffects": [
+        {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1,
+				"uniqueEffectIdStackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "AlliesWithinRange",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "LV_ECM_JAM",
+				"Name" : "ECM Jammer",
+				"Details" : "Jamming ECM, reduces sensor checks for enemies in field",
+				"Icon" : "uixSvgIcon_action_sensorlock"
+            },
+            "statisticData" :
+            {
+				"statName" : "LV_ECM_JAMMED",
+				"operation": "Int_Add",
+				"modValue": "-5",
+				"modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        }			
       ]
     }
   ],
@@ -429,7 +495,7 @@
             "Details" : "You emit an ECM field",
             "Icon" : "uixSvgIcon_status_ECM-missileDef"
         },
-        "statisticData" : 
+        "statisticData" :
         {
             "statName" : "LV_ECM_CARRIER",
             "operation": "Set",
