@@ -71,7 +71,7 @@
     "Id": "Weapon_PPC_PPC_SILLY",
     "Name": "ULN PPC",
     "Details": "It's a gigantic PPC. The EMP Field is generates is massive affecting units near the target, disrupting myomer and sensor systems. It's hard to focus it on nearby targets; damage increases with distance. \n\n <b><color=#00ffff>Left Click on Chance to Hit during battle to toggle the Field Inhibitor.  (FIOFF) Has no minimum range penalty and does full damage at close range, but is very likely to fry the weapon. \n\n Range Mode greatly increases range and damage at the cost of heat and requiring a cooldown turn.</color> </b>",
-    "Icon": "uixSvgIcon_weapon_Energy"
+    "Icon": "@sinusoidal-beam"
   },
   "BonusValueA": "",
   "BonusValueB": "",
@@ -162,52 +162,9 @@
       "statisticData": {
         "statName": "LV_ECM_JAMMED",
         "operation": "Int_Add",
-        "modValue": "2",
+        "modValue": "1",
         "modType": "System.Int32"
       }
-    },
-    {
-      "durationData": {
-        "duration": 2,
-        "ticksOnActivations": true,
-        "useActivationsOfTarget": true,
-        "ticksOnEndOfRound": false,
-        "ticksOnMovements": false,
-        "stackLimit": -1,
-        "clearedWhenAttacked": false
-      },
-      "targetingData": {
-        "effectTriggerType": "OnHit",
-        "triggerLimit": 0,
-        "extendDurationOnTrigger": 0,
-        "specialRules": "NotSet",
-        "effectTargetType": "NotSet",
-        "range": 0,
-        "forcePathRebuild": false,
-        "forceVisRebuild": false,
-        "showInTargetPreview": false,
-        "showInStatusPanel": true
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "Chaff-Effect3",
-        "Name": "SENSOR SCRAMBLE",
-        "Details": "Mech's sensors are clouded.",
-        "Icon": "uixSvgIcon_shipUpgrade_power2"
-      },
-      "nature": "Debuff",
-      "statisticData": {
-        "statName": "SensorDistanceAbsolute",
-        "operation": "Float_Multiply",
-        "modValue": "0.75",
-        "modType": "System.Single"
-      },
-      "tagData": null,
-      "floatieData": null,
-      "actorBurningData": null,
-      "vfxData": null,
-      "instantModData": null,
-      "poorlyMaintainedEffectData": null
     },
     {
       "durationData": {
@@ -244,7 +201,7 @@
         "effectsPersistAfterDestruction": false,
         "statName": "WalkSpeed",
         "operation": "Float_Multiply",
-        "modValue": "0.85",
+        "modValue": "0.9",
         "modType": "System.Single",
         "additionalRules": "NotSet",
         "targetCollection": "NotSet",
@@ -259,6 +216,80 @@
       "vfxData": null,
       "instantModData": null,
       "poorlyMaintainedEffectData": null
+    },
+    {
+      "durationData": {
+        "duration": 2,
+        "ticksOnActivations": true,
+        "useActivationsOfTarget": true,
+        "ticksOnEndOfRound": false,
+        "ticksOnMovements": false,
+        "stackLimit": 6,
+        "clearedWhenAttacked": false
+      },
+      "targetingData": {
+        "effectTriggerType": "OnHit",
+        "triggerLimit": 0,
+        "extendDurationOnTrigger": 0,
+        "specialRules": "NotSet",
+        "effectTargetType": "NotSet",
+        "range": 0,
+        "forcePathRebuild": false,
+        "forceVisRebuild": false,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "HAYWIRE-Effect2",
+        "Name": "HAYWIRED",
+        "Details": "The Mech's Movement is reduced.",
+        "Icon": "uixSvgIcon_status_sensorsImpaired"
+      },
+      "nature": "Debuff",
+      "statisticData": {
+        "statName": "RunSpeed",
+        "operation": "Float_Multiply",
+        "modValue": "0.9",
+        "modType": "System.Single",
+        "additionalRules": "NotSet",
+        "targetCollection": "NotSet",
+        "targetWeaponCategory": "NotSet",
+        "targetWeaponType": "NotSet",
+        "targetAmmoCategory": "NotSet",
+        "targetWeaponSubType": "NotSet"
+      }
+    },
+    {
+      "durationData": {
+        "duration": 1,
+        "ticksOnActivations": true,
+        "useActivationsOfTarget": true,
+        "ticksOnEndOfRound": false,
+        "ticksOnMovements": false,
+        "stackLimit": 2,
+        "clearedWhenAttacked": false
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInStatusPanel": true
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "StatusEffect-Attack_PPCSILLY_Recoil",
+        "Name": "TWITCHING MYOMER",
+        "Details": "All weapons +6 Recoil.",
+        "Icon": "uixSvgIcon_equipment_TTS"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "targetCollection": "Weapon",
+        "statName": "RefireModifier",
+        "operation": "Int_Add",
+        "modValue": "5",
+        "modType": "System.Int32"
+      }
     }
   ],
   "ComponentTags": {
