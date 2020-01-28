@@ -11,7 +11,8 @@
                 "IsECM: 4, 180",
                 "Jammer: 4, 240",
 				"ECCMMode",
-				"ECCMStrength: 6, 210"
+				"ECCMStrength: 4, 180",
+				"ECCMFriendly: 4, 240"
             ]
         },
 		"Flags": {
@@ -35,7 +36,7 @@
 	  "ActivationMessage": "ECM",
 	  "DeactivationMessage": "ECCM",
 	  "Linkage":{
-        "OnActivate":{  
+        "OnActivate":{
           "Activate":[],
           "Deactivate":[]
         },
@@ -73,7 +74,7 @@
         }
       ],
 	  "offlineStatusEffects": [
-	  
+	
 	  ]
     }
     },
@@ -90,7 +91,7 @@
         "Id": "Quirk_Guardian_ECM",
         "Name": "Guardian ECM",
         "Details": "The Guardian ECM Suite was introduced in 2597 by Johnston Industries of the Terran Hegemony. Designed to interfere with guided weaponry, targeting computers, and communication systems, the Guardian was typically used to shield allied units from such equipment by emitting a broad-band signal meant to confuse radar, infrared, ultraviolet, magscan and sonar sensors.",
-        "Icon": "uixSvgIcon_equipment_TTS"
+        "Icon": "@lightningshield"
     },
     "BonusValueA": "+2 Defense.",
     "BonusValueB": "+1 Missile Defense.",
@@ -156,7 +157,7 @@
 				"Details" : "IPSUM SUCKUM",
 				"Icon" : "uixSvgIcon_status_ECM-missileDef"
             },
-            "statisticData" : 
+            "statisticData" :
             {
 				"statName" : "LV_ECM_SHIELD",
 				"operation": "Int_Add",
@@ -188,7 +189,7 @@
                     "Details" : "Counter for the number of ECM emitters currently affecting an actor with shielding.",
                     "Icon" : "uixSvgIcon_status_ECM-missileDef"
                 },
-                "statisticData" : 
+                "statisticData" :
                 {
                     "statName" : "LV_ECM_SHIELD_EMITTER_COUNT",
                     "operation": "Int_Add",
@@ -253,7 +254,7 @@
 				"Details" : "Jamming ECM, reduces sensor checks for enemies in field",
 				"Icon" : "uixSvgIcon_action_sensorlock"
             },
-            "statisticData" : 
+            "statisticData" :
             {
 				"statName" : "LV_ECM_JAMMED",
 				"operation": "Int_Add",
@@ -285,7 +286,7 @@
                     "Details" : "Counter for the number of ECM emitters currently affecting an actor with jamming.",
                     "Icon" : "uixSvgIcon_status_ECM-missileDef"
                 },
-                "statisticData" : 
+                "statisticData" :
                 {
                     "statName" : "LV_ECM_JAM_EMITTER_COUNT",
                     "operation": "Int_Add",
@@ -300,7 +301,7 @@
       "Id": "Gear_GECM_ECCM",
       "Name": "ECCM",
       "ReticleColor": "#a31aff",
-      "Range": 210,
+      "Range": 180,
 	  "HideOnNotSelected": false,
       "RemoveOnSensorLock": false,
       "State": "Offline",
@@ -349,51 +350,84 @@
 				"Details" : "IPSUM SUCKUM",
 				"Icon" : "uixSvgIcon_status_ECM-missileDef"
             },
-            "statisticData" : 
+            "statisticData" :
             {
 				"statName" : "LV_ECM_SHIELD",
 				"operation": "Int_Add",
-				"modValue": "-6",
+				"modValue": "-4",
 				"modType": "System.Int32"
             },
             "nature" : "Buff"
         }		
       ]
+    },
+	{
+      "Id": "Gear_EWS_ECCM_JAMMER",
+      "Name": "ECCM",
+      "ReticleColor": "#a31aff",
+      "Range": 240,
+	  "HideOnNotSelected": false,
+      "RemoveOnSensorLock": false,
+      "State": "Online",
+      "ApplySelf": false,
+      "AllyStealthAffection": "PositiveTwo",
+      "EnemyStealthAffection": "None",
+      "IsPositiveToAlly": true,
+      "IsNegativeToEnemy": false,
+      "ownerVFX": [
+      ],
+      "targetVFX": [
+      ],
+      "removeOwnerVFX": [
+      ],
+      "removeTargetVFX": [
+      ],
+      "ownerSFX": [
+      ],
+      "targetSFX": [
+      ],
+      "removeOwnerSFX": [
+      ],
+      "removeTargetSFX": [
+      ],
+      "statusEffects": [
+        {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1,
+				"uniqueEffectIdStackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "AlliesWithinRange",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "LV_ECM_JAM",
+				"Name" : "ECM Jammer",
+				"Details" : "Jamming ECM, reduces sensor checks for enemies in field",
+				"Icon" : "uixSvgIcon_action_sensorlock"
+            },
+            "statisticData" :
+            {
+				"statName" : "LV_ECM_JAMMED",
+				"operation": "Int_Add",
+				"modValue": "-4",
+				"modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        }			
+      ]
     }
   ],
     "statusEffects": [
-            {
-        "durationData" : {
-            "duration": -1,
-            "stackLimit": -1
-        },
-        "targetingData" : {
-            "effectTriggerType" : "Passive",
-            "specialRules" : "NotSet",
-            "effectTargetType" : "Creator",
-            "range" : 0.0,
-            "forcePathRebuild" : false,
-            "forceVisRebuild" : false,
-            "showInTargetPreview" : false,
-            "showInStatusPanel" : false
-        },
-        "effectType" : "StatisticEffect",
-        "Description" :
-        {
-            "Id" : "LV_ECM_CARRIER",
-            "Name" : "ECM Carrier",
-            "Details" : "You emit an ECM field",
-            "Icon" : "uixSvgIcon_status_ECM-missileDef"
-        },
-        "statisticData" : 
-        {
-            "statName" : "LV_ECM_CARRIER",
-            "operation": "Set",
-            "modValue": "true",
-            "modType": "System.Boolean"
-        },
-        "nature" : "Buff"
-    }
     ],
     "ComponentTags": {
         "items": [

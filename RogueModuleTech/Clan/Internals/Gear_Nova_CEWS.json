@@ -27,7 +27,8 @@
         "HeatPerTurn: 6",
         "NovaCEWS",
         "ECCMMode",
-        "ECCMStrength: 3, 280",
+        "ECCMStrength: 1, 190",
+		"ECCMFriendly: 2, 300",
         "Sharer"
       ]
     },
@@ -72,7 +73,7 @@
     "Id": "Gear_Nova_CEWS",
     "Name": "Nova CEWS (C)",
     "Details": "The rogue scientists of the Society developed the Nova CEWS after hearing about the C3 Systems used by the Inner Sphere. By combining elements of the Watchdog CEWS with a C3 system, they created a tool that could find enemy forces, hide the unit using it in an ECM bubble, and automatically provide targeting data to other friendly units. In addition, the Nova CEWS didn't require pre-configuration for the C3 capability; It could be programmed on the fly to respond to availability of friendly forces. ",
-    "Icon": "uixSvgIcon_equipment_TTS"
+    "Icon": "@EWS"
   },
   "BonusValueA": "+1 Accuracy and 20% Sensors|",
   "BonusValueB": "+2 Defense|-50%Signature",
@@ -289,7 +290,7 @@
       "Id": "Gear_ECM_ECCM",
       "Name": "ECCM",
       "ReticleColor": "#a31aff",
-      "Range": 210,
+      "Range": 190,
       "HideOnNotSelected": false,
       "RemoveOnSensorLock": false,
       "State": "Offline",
@@ -332,11 +333,76 @@
           "statisticData": {
             "statName": "LV_ECM_SHIELD",
             "operation": "Int_Add",
-            "modValue": "-3",
+            "modValue": "-1",
             "modType": "System.Int32"
           },
           "nature": "Buff"
         }
+      ]
+    },
+	{
+      "Id": "Gear_EWS_ECCM_JAMMER",
+      "Name": "ECCM",
+      "ReticleColor": "#a31aff",
+      "Range": 300,
+	  "HideOnNotSelected": false,
+      "RemoveOnSensorLock": false,
+      "State": "Online",
+      "ApplySelf": false,
+      "AllyStealthAffection": "PositiveTwo",
+      "EnemyStealthAffection": "None",
+      "IsPositiveToAlly": true,
+      "IsNegativeToEnemy": false,
+      "ownerVFX": [
+      ],
+      "targetVFX": [
+      ],
+      "removeOwnerVFX": [
+      ],
+      "removeTargetVFX": [
+      ],
+      "ownerSFX": [
+      ],
+      "targetSFX": [
+      ],
+      "removeOwnerSFX": [
+      ],
+      "removeTargetSFX": [
+      ],
+      "statusEffects": [
+        {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1,
+				"uniqueEffectIdStackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "AlliesWithinRange",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "LV_ECM_JAM",
+				"Name" : "ECM Jammer",
+				"Details" : "Jamming ECM, reduces sensor checks for enemies in field",
+				"Icon" : "uixSvgIcon_action_sensorlock"
+            },
+            "statisticData" : 
+            {
+				"statName" : "LV_ECM_JAMMED",
+				"operation": "Int_Add",
+				"modValue": "-2",
+				"modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        }			
       ]
     },
     {
@@ -445,38 +511,6 @@
     }
   ],
   "statusEffects": [
-      {
-        "durationData" : {
-            "duration": -1,
-            "stackLimit": -1
-        },
-        "targetingData" : {
-            "effectTriggerType" : "Passive",
-            "specialRules" : "NotSet",
-            "effectTargetType" : "Creator",
-            "range" : 0.0,
-            "forcePathRebuild" : false,
-            "forceVisRebuild" : false,
-            "showInTargetPreview" : false,
-            "showInStatusPanel" : false
-        },
-        "effectType" : "StatisticEffect",
-        "Description" :
-        {
-            "Id" : "LV_ECM_CARRIER",
-            "Name" : "ECM Carrier",
-            "Details" : "You emit an ECM field",
-            "Icon" : "uixSvgIcon_status_ECM-missileDef"
-        },
-        "statisticData" : 
-        {
-            "statName" : "LV_ECM_CARRIER",
-            "operation": "Set",
-            "modValue": "true",
-            "modType": "System.Boolean"
-        },
-        "nature" : "Buff"
-    },
     {
       "durationData": {
         "duration": -1,
