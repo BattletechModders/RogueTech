@@ -1,27 +1,32 @@
 {
     "Custom": {
         "Category": [
-			{ "CategoryID": "HandHeld" },
-			{ "CategoryID": "w/s/h/HandHeld" }
-		],
+            {
+                "CategoryID": "HandHeld"
+            },
+            {
+                "CategoryID": "w/s/h/HandHeld"
+            }
+        ],
         "BonusDescriptions": {
             "Bonuses": [
                 "HandHeldMelee: 3.5",
                 "WpnAccuracy: +1",
                 "WpnCrits: 20%",
-                "MeleeAcc: +1",
-				"NoAA"
+                "MeleeAcc: +2",
+                "Melee: +8",
+                "MeleeStab: +4%",
+                "NoAA"
             ]
         },
         "InventorySorter": {
             "SortKey": "04001"
         },
-		"MechConfiguration" : {
-                },
-	"HandHeld" : {
-	"Tonnage" : 3.5,
-	"HandsUsed" : true
-}
+        "MechConfiguration": {},
+        "HandHeld": {
+            "Tonnage": 3.5,
+            "HandsUsed": true
+        }
     },
     "weaponCategoryID": "SpecialMelee",
     "Type": "MachineGun",
@@ -36,7 +41,7 @@
     "AmmoCategory": "NotSet",
     "StartingAmmoCapacity": 0,
     "HeatGenerated": 0,
-    "Damage": 12,
+    "Damage": 8,
     "OverheatedDamageMultiplier": 0,
     "EvasiveDamageMultiplier": 0,
     "EvasivePipsIgnored": 0,
@@ -44,9 +49,9 @@
     "HeatDamage": 0,
     "AccuracyModifier": -1,
     "CriticalChanceMultiplier": 1.2,
-	"APArmorShardsMod": 0,
-	"APMaxArmorThickness": 1,
-	"APCriticalChanceMultiplier": 0.5,
+    "APArmorShardsMod": 0,
+    "APMaxArmorThickness": 1,
+    "APCriticalChanceMultiplier": 0.5,
     "AOECapable": false,
     "IndirectFireCapable": false,
     "RefireModifier": 0,
@@ -54,7 +59,7 @@
     "ProjectilesPerShot": 1,
     "AttackRecoil": 0,
     "Instability": 7,
-	"CantHitUnaffecedByPathing": true,
+    "CantHitUnaffecedByPathing": true,
     "WeaponEffectID": "WeaponEffect-Weapon_MachineGun",
     "Description": {
         "Cost": 1150000,
@@ -104,7 +109,63 @@
                 "effectsPersistAfterDestruction": false,
                 "statName": "AccuracyModifier",
                 "operation": "Float_Add",
-                "modValue": "-1.0",
+                "modValue": "-2.0",
+                "modType": "System.Single",
+                "targetCollection": "Weapon",
+                "targetWeaponSubType": "Melee"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect-HandMeleeStab",
+                "Name": "Hand Melee Damage",
+                "Details": "Melee attacks deal 20% Extra stab damage.",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "Instability",
+                "operation": "Float_Multiply",
+                "modValue": "1.04",
+                "modType": "System.Single",
+                "targetCollection": "Weapon",
+                "targetWeaponSubType": "Melee"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "StatusEffect-Attack_DamageMelee-T6",
+                "Name": "MELEE DAMAGE INCREASED",
+                "Details": "Melee attacks deal [AMT] more damage.",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "DamagePerShot",
+                "operation": "Float_Add",
+                "modValue": "8.0",
                 "modType": "System.Single",
                 "targetCollection": "Weapon",
                 "targetWeaponSubType": "Melee"
@@ -115,7 +176,7 @@
         "items": [
             "component_type_stock",
             "range_close",
-			"MeleeWeapon.{location}"
+            "MeleeWeapon.{location}"
         ],
         "tagSetSourceFile": ""
     }

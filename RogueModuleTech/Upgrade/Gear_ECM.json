@@ -10,7 +10,8 @@
                 "IsECM: 2, 150",
 				"Jammer: 2, 210",
 				"ECCMMode",
-				"ECCMStrength: 3, 210"
+				"ECCMStrength: 2, 150",
+				"ECCMFriendly: 2, 210"
             ]
         },
         "InventorySorter": {
@@ -53,7 +54,7 @@
         "Id": "Gear_ECM",
         "Name": "ECM",
         "Details": "This basic Electronics Counter Measures scrambles Enemy Targeting and Missile Systems and is a efficient upgrade to a 'Mech's standard ECM equipment.",
-        "Icon": "uixSvgIcon_equipment_TTS"
+        "Icon": "ECMGear"
     },
     "BonusValueA": "+1 Defense.",
     "BonusValueB": "+1 Missile Defense.",
@@ -263,7 +264,7 @@
       "Id": "Gear_ECM_ECCM",
       "Name": "ECCM",
       "ReticleColor": "#a31aff",
-      "Range": 210,
+      "Range": 150,
 	  "HideOnNotSelected": false,
       "RemoveOnSensorLock": false,
       "State": "Offline",
@@ -316,53 +317,85 @@
             {
 				"statName" : "LV_ECM_SHIELD",
 				"operation": "Int_Add",
-				"modValue": "-3",
+				"modValue": "-1",
 				"modType": "System.Int32"
             },
             "nature" : "Buff"
         }		
       ]
+    },
+	{
+      "Id": "Gear_EWS_ECCM_JAMMER",
+      "Name": "ECCM",
+      "ReticleColor": "#a31aff",
+      "Range": 210,
+	  "HideOnNotSelected": false,
+      "RemoveOnSensorLock": false,
+      "State": "Online",
+      "ApplySelf": false,
+      "AllyStealthAffection": "PositiveTwo",
+      "EnemyStealthAffection": "None",
+      "IsPositiveToAlly": true,
+      "IsNegativeToEnemy": false,
+      "ownerVFX": [
+      ],
+      "targetVFX": [
+      ],
+      "removeOwnerVFX": [
+      ],
+      "removeTargetVFX": [
+      ],
+      "ownerSFX": [
+      ],
+      "targetSFX": [
+      ],
+      "removeOwnerSFX": [
+      ],
+      "removeTargetSFX": [
+      ],
+      "statusEffects": [
+        {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1,
+				"uniqueEffectIdStackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "AlliesWithinRange",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "LV_ECM_JAM",
+				"Name" : "ECM Jammer",
+				"Details" : "Jamming ECM, reduces sensor checks for enemies in field",
+				"Icon" : "uixSvgIcon_action_sensorlock"
+            },
+            "statisticData" : 
+            {
+				"statName" : "LV_ECM_JAMMED",
+				"operation": "Int_Add",
+				"modValue": "-2",
+				"modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        }			
+      ]
     }
   ],
     "statusEffects": [
-	    {
-        "durationData" : {
-            "duration": -1,
-            "stackLimit": -1
-        },
-        "targetingData" : {
-            "effectTriggerType" : "Passive",
-            "specialRules" : "NotSet",
-            "effectTargetType" : "Creator",
-            "range" : 0.0,
-            "forcePathRebuild" : false,
-            "forceVisRebuild" : false,
-            "showInTargetPreview" : false,
-            "showInStatusPanel" : false
-        },
-        "effectType" : "StatisticEffect",
-        "Description" :
-        {
-            "Id" : "LV_ECM_CARRIER",
-            "Name" : "ECM Carrier",
-            "Details" : "You emit an ECM field",
-            "Icon" : "uixSvgIcon_status_ECM-missileDef"
-        },
-        "statisticData" : 
-        {
-            "statName" : "LV_ECM_CARRIER",
-            "operation": "Set",
-            "modValue": "true",
-            "modType": "System.Boolean"
-        },
-        "nature" : "Buff"
-    }
 		],
     "ComponentTags": {
         "items": [
             "component_type_stock",
-            "ElectronicCounterMeasures",
-            "lv-jammer_m1_r5"
+            "ElectronicCounterMeasures"
         ],
         "tagSetSourceFile": ""
     }
