@@ -79,6 +79,9 @@ VehicleChassis/Chassis
     "FiringArc":60, - if set and > 10 means vehicle firing arc in degrees and vehicle have to rotate toward target to fire. 
                       Working for mechs too, but you should note - direction decal will not been changed. 
     "Unaffected":{  
+      "MoveClamp": 0.3,       - this value controls inertia of unit. Unit move distance can't be greater [move distance prev. round] + MoveClamp*Speed 
+                                and less [move distance prev. round] - MoveClamp*Speed. Only for AI. For Pathing: true value should be between 0.2 and 0.5. 
+                                For Pathing: true default value 0.2. For others  default 0 (mean not apply at all).
       "DesignMasks":"true",   - if true chassis will be unaffected to all terrain design masks effects except move cost. Can be altered runtime via CUDesignMasksUnaffected actor's statistic value (boolean)
       "Pathing":"true",       - if true chassis will be unaffected by pathing limitations 
 							(eg can climb vertcall surface, other actors collisions, not cause filmsy objects destruction on impact). 
