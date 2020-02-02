@@ -667,7 +667,7 @@ new fields
   
 Ammo definition
 {
-   "HideIfOnlyVariant": true, - if true this ammo name will be hidden if only variant for this mode. Default true.
+   "HideIfOnlyVariant": true, - if true this ammo name will be hidden if only variant for this mode. Default false.
    "Description" : {
       "Id" : "Ammunition_LBX10ECM",
       "Name" : "LBX/10 ECM Ammo",
