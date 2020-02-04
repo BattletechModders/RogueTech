@@ -11,10 +11,9 @@
         },
         "BonusDescriptions": {
             "Bonuses": [
+				"AcePilot",
                 "SkillGunnery: 1",
-				"SkillPiloting: 2",
-				"SkillGuts: 1",
-				"SkillTactics: 1",
+				"SkillPiloting: 1",
 				"Activatable",
 				"ActivePilotOverheat",
 				"ActiveInitiative: +2",
@@ -218,7 +217,7 @@
         "Id": "Gear_Cockpit_DNI",
         "Name": "Dark Mirage DNI Cockpit",
         "Details": "This cockpit mod allows for the use of a Direct Neural Interface, granting improved control of a ‘Mech at the risk of injury.",
-        "Icon": "@robothelmet"
+        "Icon": "interface"
     },
     "BonusValueA": "Neural",
     "BonusValueB": "Interface",
@@ -232,6 +231,29 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
+	{
+			"durationData": {
+				"duration": -1
+			},
+			"targetingData": {
+				"effectTriggerType": "OnActivation",
+				"effectTargetType": "Creator"
+			},
+			"effectType": "StatisticEffect",
+			"Description": {
+				"Id": "InterFaceMoveAfterShoot",
+				"Name": "ACE PILOT",
+				"Details": "This unit can use its movement before or after shooting.",
+				"Icon": "uixSvgIcon_run_n_gun"
+			},
+			"statisticData": {
+				"statName": "CanMoveAfterShooting",
+				"operation": "Set",
+				"modValue": "true",
+				"modType": "System.Boolean"
+			},
+			"nature": "Buff"
+		},
         {
             "durationData": {
                 "duration": -1,
@@ -281,65 +303,11 @@
             "statisticData": {
                 "statName": "Piloting",
                 "operation": "Int_Add",
-                "modValue": "2",
-                "modType": "System.Int32",
-                "targetCollection": "Pilot"
-            }
-        },
-		{
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "StatusEffect_Cockpit_Skill_Guts",
-                "Name": "Guts Buff",
-                "Details": "Buffs Guts Skill",
-                "Icon": "uixSvgIcon_equipment_Cockpit"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "Guts",
-                "operation": "Int_Add",
                 "modValue": "1",
                 "modType": "System.Int32",
                 "targetCollection": "Pilot"
             }
         },
-		{
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "StatusEffect_Cockpit_Skill_Tactics",
-                "Name": "Tactics Buff",
-                "Details": "Buffs Tactics Skill",
-                "Icon": "uixSvgIcon_equipment_Cockpit"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "Tactics",
-                "operation": "Int_Add",
-                "modValue": "1",
-                "modType": "System.Int32",
-                "targetCollection": "Pilot"
-            }
-        }
     ],
     "ComponentTags": {
         "items": [

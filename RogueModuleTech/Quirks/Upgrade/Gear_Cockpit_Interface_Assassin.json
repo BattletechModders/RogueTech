@@ -36,7 +36,7 @@
         "BonusDescriptions": {
             "Bonuses": [
 				"Omni",
-                "Initiative: +1",
+				"AcePilot",
                 "HSImmune",
 				"AllSkills: 1",
 				"EvaMax: +1",
@@ -61,7 +61,9 @@
         },
 		"Flags": {
 			"flags": [
-				"not_broken"
+				"not_broken",
+				"no_salvage",
+				"autorepair"
 			]
 		},
 		"Lootable": {
@@ -78,7 +80,7 @@
         "Id": "Gear_Cockpit_Interface_Assassin",
         "Name": "Interface Cockpit",
         "Details": "Specifically Designed for OmniMechs this Interface Cockpit has less weight then the Standard Model and completly removes any need for a Gyro",
-        "Icon": "@robothelmet"
+        "Icon": "interface"
     },
     "BonusValueA": "Headshot Immunity",
     "BonusValueB": "",
@@ -92,6 +94,30 @@
     "DisallowedLocations": "All",
     "CriticalComponent": true,
     "statusEffects": [
+	{
+			"durationData": {
+				"duration": -1
+			},
+			"targetingData": {
+				"effectTriggerType": "OnActivation",
+				"effectTargetType": "Creator"
+			},
+			"effectType": "StatisticEffect",
+			"Description": {
+				"Id": "InterFaceMoveAfterShoot",
+				"Name": "ACE PILOT",
+				"Details": "This unit can use its movement before or after shooting.",
+				"Icon": "uixSvgIcon_run_n_gun"
+			},
+			"statisticData": {
+				"statName": "CanMoveAfterShooting",
+				"operation": "Set",
+				"modValue": "true",
+				"modType": "System.Boolean",
+				"targetCollection": "Pilot"
+			},
+			"nature": "Buff"
+		},
 	        {
             "durationData": {
                 "duration": -1,
@@ -354,32 +380,6 @@
                 "modValue": "1",
                 "modType": "System.Int32",
                 "targetCollection": "Pilot"
-            }
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "CockpitInitativeEffect",
-                "Name": "CockpitTechBonus",
-                "Details": "Provides + 1 Initiative and several buffs.",
-                "Icon": "uixSvgIcon_equipment_Cockpit"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "BaseInitiative",
-                "operation": "Int_Add",
-                "modValue": "-1",
-                "modType": "System.Int32"
             }
         },
         {
