@@ -7,7 +7,10 @@
         ],
         "BonusDescriptions": {
             "Bonuses": [
-                "AdvancedSensors: 3"
+				"Sensors: +5%",
+                "Sight: +5%",
+				"IsProbe: 1",
+                "AdvancedSensors: 2"
             ]
         },
         "InventorySorter": {
@@ -22,7 +25,7 @@
             ]
         },
 		"Lootable": {
-			"ItemID": "lootable_Sensors_Society"
+			"ItemID": "lootable_Sensors_Clan"
 		}
     },
     "Description": {
@@ -49,6 +52,38 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [	
+	{
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_PROBE_CARRIER",
+                "Name" : "Active Probe (Passive)",
+                "Details" : "Reduces effectiveness of stealthed and ECM shielded units",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_PROBE_CARRIER",
+                "operation": "Int_Add",
+                "modValue": "1",
+                "modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        },
 		   {
             "durationData" : {
                 "duration": -1,
@@ -76,10 +111,62 @@
             {
                 "statName" : "LV_ADVANCED_SENSORS",
                 "operation": "Int_Add",
-                "modValue": "3",
+                "modValue": "2",
                 "modType": "System.Int32"
             },
             "nature" : "Buff"
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "BAProbe",
+                "Name": "HP-CockpitSensors-Sensor",
+                "Details": "Increased Sight/Sensors",
+                "Icon": "uixSvgIcon_equipment_Comms"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "SensorDistanceAbsolute",
+                "operation": "Float_Multiply",
+                "modValue": "1.05",
+                "modType": "System.Single"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "HP-CockpitSensors-Spot",
+                "Name": "SPOTTING DISTANCE INCREASED",
+                "Details": "Increases spotting distance by 50m.",
+                "Icon": "uixSvgIcon_equipment_Comms"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "SpotterDistanceAbsolute",
+                "operation": "Float_Multiply",
+                "modValue": "1.05",
+                "modType": "System.Single"
+            }
         }
 	],
     "ComponentTags": {
