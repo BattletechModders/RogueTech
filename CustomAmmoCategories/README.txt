@@ -296,9 +296,9 @@ new fields
   "ShotsPerAmmo": 1,              - shots per ammo. Example: you have effective shots count = 4 and ShotsPerAmmo = 0.5. After fire ammo will be decremented by 2 (4 * 0.5)
                                     Mutiplicative per weapon, ammo, mode. Default value 1. NOTE: Ammo decrement value rounded to nearest integer. 
                                     If it will be less than 0.5 - it will be your own problem - no ammo will be used.
-  "InternalAmmo":{                - starting ammo capacity per ammo category. Weapon will be counted as using default ammo for this category. 
-    "intSRM":20,                    StartingAmmoCapacity is counted as ammo count for category setted in ammoCategoryID/AmmoCategory for weapon
-    "intLRM":15
+  "InternalAmmo":{                - starting ammo capacity per ammo id.
+    "Ammunition_intLRM":20,                    StartingAmmoCapacity is counted as default ammo for base category
+    "Ammunition_intSRM":15
   },
   "preFireSFX":"Play_PPC3",       - sound played on weapon's fire !!!CAN!!! be set per mode, ammo, weapon. Mode have priority than ammo and than weapon.
   "blockWeaponsInMechLocations": [], - list of mech locations. all weapons installed in this locations can't fire if this weapon is functional.
