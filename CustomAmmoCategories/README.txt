@@ -205,6 +205,34 @@ if set as true all AP effects (damage and crits) will not affect unit.
   },
   "DecalTexture": "envTxrDecl_terrainDmgSmallBlood_alb", - texture for blood spot
   "DrawBloodChance": 0.3 - chance on leave blood spot on destruction
+  "DefaultAoEDamageMult": {  - AoE modifiers by unit's types. Available types: Mech, Vehicle, Turret, Building
+    "Building": {
+      "Range": 1.2,
+      "Damage": 5
+    }
+  },
+  "TagAoEDamageMult": {      - AoE modifiers by unit's tags. Tags watching lists: for mechs: MechTags, ChassisTags; for vehicles: VehicleTags; for turrets: TurretTags
+    "aoe_increased_minor": {
+      "Range": 1.2,
+      "Damage": 1.2
+    },
+    "aoe_increased_major": {
+      "Range": 2,
+      "Damage": 2
+    },
+    "aoe_reduced_minor": {
+      "Range": 0.8,
+      "Damage": 0.8
+    },
+    "aoe_reduced_major": {
+      "Range": 0.5,
+      "Damage": 0.5
+    },
+    "aoe_reduced_huge": {
+      "Range": 0.1,
+      "Damage": 0.1
+    }
+  },
 },
 "showMissBehavior":"Default", - miss margin behavior.
                                    None - miss floaties never shown
