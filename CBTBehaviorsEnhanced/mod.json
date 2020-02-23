@@ -1,8 +1,8 @@
 {
-    "Name": "CBTBehaviors",
+    "Name": "CBTBehaviorsEnhanced",
     "Enabled": true,
 	"Hidden": true,
-    "Version": "0.3.10",
+    "Version": "0.4.1",
     "Description": "Provides TableTop like behaviors for heat, movement, and more",
     "Author": "FrostRaptor",
     "Website": "https://github.com/IceRaptor/CBTBehaviorsEnhanced/",
@@ -15,9 +15,12 @@
         "Trace" : false,
         "ToHitSelfJumped": 0,
         "Features" : {
-            "BiomeBreaches" : false,
+            "BiomeBreaches" : true,
             "StartupChecks" : true
         },
+        
+        "EnablePermanentEvasion" : true,
+        "dZ_Abilities" : false,
 
         "Heat" : {
             "Movement" : { "15": -1, "30" : -2, "45" : -3, "60" : -4, "75" : -5, "93" : -6, "111" : -7, "129" : -8, "147" : -9 },
@@ -28,7 +31,9 @@
             "SystemFailures" : { "108" : 0.3, "132" : 0.6 },
             "ShowLowOverheatAnim" : 42,
             "ShowExtremeOverheatAnim" : 90,
-            "ShutdownFallThreshold" : 0.75
+            "ShutdownFallThreshold" : 0.75,
+            "MaxHeat" : 150,
+            "WarnAtHeat" : 42
         },
 
         "Melee" : {
@@ -68,6 +73,7 @@
             "SHUTDOWN_OVERRIDE_SUCCESS" : "Passed Shutdown Override",
             "SHUTDOWN_OVERRIDE_FAILED" : "Failed Shutdown Override",
             "SHUTDOWN_FALL" : "Falling from Shutdown",
+
             "EXPLOSION_CHECK" : "Ammo Explosion Check",
             "VOLATILE_EXPLOSION_CHECK" : "Volatile Ammo Explosion Check",
             "SHUTDOWN_CHECK" : "Shutdown Check",
@@ -75,38 +81,41 @@
             "INJURY_CHECK" : "Pilot Injury Check",
             "SYSTEM_FAILURE_CHECK": "System Failure Check",
             "FALLING_CHECK" : "Falling Check",
+
             "MELEE_KICK" : "Kick Falling Check",
             "MELEE_CHARGE" : "Charge Falling Check",
             "MELEE_DFA" : "DFA Falling Check",
+
             "RUN_AND_FALL" : "Sprinted with Damage",
             "JUMP_AND_FALL" : "Jumped with Damage",
+
             "AUTO_FAIL" : "Automatic Failure",
             "HULL_BREACH" : "Hull Breach Check"
         },
 
         "LocalizedCHUDTooltips" : {
             "TITLE" : "HEAT LEVEL",
-            "HEAT_AND_SINKING" : "Heat: {0} of {1}  Will Sink: {2} of {3} (<color=#{4}>x{5:#.#}</color>)",
-            "AMMO_EXP_CHANCE" : "\nAmmo Explosion on d100+{0} < {1:P1}",
+            "END_OF_TURN_HEAT" : "Projected Heat: {0} of {1}",
+            "HEAT_AND_SINKING" : "\n  Heat: {0} of {1}  Will Sink: {2} of {3} (<color=#{4}>x{5:#.#}</color>)",
+            "AMMO_EXP_CHANCE" : "\nAmmo Explosion on (d100+{0}) < {1}",
             "AMMO_EXP_WARNING" : "Guaranteed Ammo Explosion!",
-            "PILOT_INJURY_CHANCE" : "\nPilot Injury on d100+{0} < {1:P1}",
-            "SYSTEM_FAILURE_CHANCE" : "\nSystem Failure on d100+{0} < {1:P1}",
-            "SHUTDOWN_CHANCE" : "\nShutdown on d100+{0} < {1:P1}",
+            "PILOT_INJURY_CHANCE" : "\nPilot Injury on (d100+{0}) < {1}",
+            "SYSTEM_FAILURE_CHANCE" : "\nSystem Failure on (d100+{0}) < {1}",
+            "SHUTDOWN_CHANCE" : "\nShutdown on (d100+{0}) < {1}",
             "SHUTDOWN_WARNING" : "\nGuaranteed Shutdown!",
-            "ATTACK_PENALTY" : "\nAttack Penalty: <color=#FF0000>+{0}</color>",
-            "MOVEMENT_PENALTY" : "\nMovement Penalty: <color=#FF0000>-{0}m</color>",
+            "ATTACK_PENALTY" : "\nAttack Penalty: +{0}",
+            "MOVEMENT_PENALTY" : "\nMovement Penalty: -{0}m",
 
             "SHUTDOWN_ICON_TITLE" : "SHUT DOWN",
             "SHUTDOWN_ICON_TEXT" : "This target is easier to hit, and Called Shots can be made against this target. When clicking the restart button, a piloting check will if the BattleMech restarts.",
             "OVERHEAT_ICON_TITLE" : "OVERHEATING",
             "OVERHEAT_ICON_TEXT " : "This unit will suffer penalties, may shutdown or even explode unless heat is reduced past critical levels.\n<i>Hover over the heat bar to see a detailed breakdown.</i>"
-
         },
 
         "Quips": {
             "Breach" : [
-                "Shit, explosive decomission!",
-                "Hull integrity breach detected!",
+                "Shit, explosive decompression!",
+                "Hull breach detected!",
                 "I've lost something to atmo!",
                 "I hope life support holds up",
                 "I cant breathe!",
