@@ -149,6 +149,15 @@ VehicleChassis/Chassis
         "RequiredUpgrades":["Gear_Actuator_Coventry_Alpha"], - list of updrades required for this component to spawn. If list empty or omitted part will spawn always. 
                                                                 If at least one component from list present, part will spawn.
                                                                 For meches only MechChassisLocation checked. For vehicles all vehicle checked. 
+        "RequiredComponents": [                             - list of components required for this component to spawn. If list empty or omitted part will spawn always. 
+                                                                If at least one component from list present, part will spawn.
+          {
+            "MechSearchLocations": [ "LeftArm" ],           - list of locations where component will be searched. If empty or omitted every location is suitable.
+            "VehicleSearchLocations": []                    - same but for vehicles.
+            "DefId": "Gear_Actuator_Coventry_Alpha"         - definition id. If empty or omitted every component is suitable.
+            "CategoryId": ""                                - CustomComponents category id. If empty or omitted every component category is suitable.
+          }
+        ],
         "VehicleChassisLocation":"Front",               - attach location for vehicles
         "MechChassisLocation":"RightArm",               - attach location for meches
                                                         NOTE! on location or entire unit destruction all spawned objects removing from game 
