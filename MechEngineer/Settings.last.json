@@ -146,6 +146,7 @@
     "CriticalEffects" : {
         "Enabled" : true,
         "EnabledDescription" : "Allows custom multiple critical hit states for individual components.",
+        "DescriptionIdentifier" : "Criticals",
         "DescriptionTemplate" : "Critical Effects:<b><color=#F79B26FF>\r\n{{elements}}</color></b>\r\n{{originalDescription}}",
         "ElementTemplate" : " <indent=10%><line-indent=-5%><line-height=65%>{{element}}</line-height></line-indent></indent>\r\n",
         "DescriptionUseName" : false,
@@ -176,13 +177,14 @@
             "RightArm"
         ],
         "LocationPriorityOrderDescription" : "From highest to lowest priority where to add dynamic slots too, relevant if locations have same amount of free slots. Visual impact only.",
-        "ReservedSlotText" : "Reserved Slot",
-        "MovableSlotText" : "Movable Slot"
+        "ReservedSlotText" : "Reserved slot",
+        "MovableSlotText" : "Movable slot"
     },
     "Engine" : {
         "Enabled" : true,
         "EnabledDescription" : "Provides engines that can be installed on mechs similar to how CBT works.",
         "MovementPointDistanceMultiplierDescription" : "The distance of a TT movement point, 24 is vanilla CombatGameConstants.ExperimentalGridDistance .",
+        "JumpJetMovementPointDistanceMultiplierDescription" : "The distance of a TT movement point when calculating jump distances, if undefined falls back to MovementPointDistanceMultiplier.",
         "MinimJumpHeatDescription" : "Minimum heat when doing a jump, even if only one jump jet exists and only when jumping one hex.",
         "AutoConvertJumpCapacityInDefToStatDescription" : "All JumpCapacity values in JumpJetDefs will be auto-converted to the JumpCapacity statistic.",
         "JumpJetDefaultJumpHeatDescription" : "The heat the jump jet produces when fully* used (* jumping below max distance reduces produced heat). Can be adjusted using the JumpHeat statistic.",
@@ -201,6 +203,7 @@
         "EngineMissingFallbackHeatSinkCapacity" : 30,
         "EngineMissingFallbackHeatSinkCapacityDescription" : "Heat sink capacity if no engine is detected.",
         "MovementPointDistanceMultiplier" : 25,
+        "JumpJetMovementPointDistanceMultiplier" : null,
         "MinimJumpHeat" : 9,
         "AutoConvertJumpCapacityInDefToStat" : true,
         "JumpJetDefaultJumpHeat" : 3,
@@ -216,6 +219,8 @@
     "HardpointFix" : {
         "Enabled" : true,
         "EnabledDescription" : "Optimizes the way installed weapons are shown on a mech model.",
+        "TraceLogDebugMappings" : false,
+        "TraceLogDebugMappingsDescription" : "Trace all GetComponentBlankNames and GetComponentPrefabName calls. Otherwise only some of them are logged.",
         "AutoFixChassisDefWeaponHardpointCounts" : false,
         "AutoFixChassisDefWeaponHardpointCountsDescription" : "Changes chassis hardpoints based on configured prefabs.",
         "EnforceHardpointLimits" : false,
@@ -541,14 +546,16 @@
         "EnabledDescription" : "Makes the mech lab adhere to any custom mech slot counts.",
         "MechLabArmTopPadding" : 120,
         "MechLabGeneralSlots" : 3,
-        "MechLabGeneralWidgetLabel" : "Specialist"
+        "MechLabGeneralWidgetLabel" : "Specialist",
+        "HideHelpButton" : true,
+        "HideECMButton" : true
     },
     "MoveMultiplierStat" : {
         "Enabled" : true,
         "EnabledDescription" : "Introduces a new statistic effect to allow easy manipulation of (mech only) movement."
     },
     "OrderedStatusEffects" : {
-        "Enabled" : true,
+        "Enabled" : false,
         "EnabledDescription" : "Orders status effects, so e.g. install order of mechComponents does not matter for additive and multiplicative effects. Affects all statistic data.",
         "OrderDescription" : "The order in which operations are sorted. Operations not part of the list are deemded unsortable and only sortable operations after such a unsortable operations are sorted. For Example: '* + SET / * +' =sort=> '* + SET + * /'.",
         "Order" : [
@@ -573,6 +580,7 @@
     "OverrideDescriptions" : {
         "Enabled" : true,
         "EnabledDescription" : "Allows other features to override tooltips and descriptions, also provides bonus description management.",
+        "DescriptionIdentifier" : "Bonuses",
         "BonusDescriptionsDescriptionTemplate" : "Traits:<b><color=#F79B26FF>\r\n{{elements}}</color></b>\r\n{{originalDescription}}",
         "BonusDescriptionsElementTemplate" : " <indent=10%><line-indent=-5%><line-height=65%>{{element}}</line-height></line-indent></indent>\r\n"
     },
@@ -584,6 +592,19 @@
         ],
         "BlipWeak" : "Weak",
         "BlipStrong" : "Weak"
+    },
+    "OverrideStatTooltips" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Overrides stat tooltips of mechs including 'progress bar' summaries.",
+        "MovementTitleText" : "Medium Range",
+        "HeatEfficiencyTitleText" : "Heat Efficiency",
+        "DurabilityTitleText" : "Long Range",
+        "AvgRangeTitleText" : "Movement",
+        "MeleeTitleText" : "Durability",
+        "FirepowerTitleText" : "Close Range",
+        "CloseRangeMax" : 89,
+        "MediumRangeMax" : 359,
+        "LongRangeMax" : 569
     },
     "OverrideTonnage" : {
         "Enabled" : true,
