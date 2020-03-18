@@ -7,6 +7,7 @@
   },
   "ArmActuator": {
     "ForceFullDefaultActuators": true,
+"EnabledDescription" : "Enables CBT arm actuators with CC like handling.",
     "IgnoreFullActuatorsTag": "OmniMech",
     "DefaultCBTShoulder": "emod_arm_part_shoulder",
     "DefaultCBTLower": "emod_arm_part_lower",
@@ -151,11 +152,16 @@
   "CriticalEffects" : {
         "Enabled" : true,
         "EnabledDescription" : "Allows custom multiple critical hit states for individual components.",
+	"DescriptionIdentifier" : "Criticals",
         "DescriptionTemplate" : "Critical Effects:<b><color=#F79B26FF>\r\n{{elements}}</color></b>\r\n{{originalDescription}}",
         "ElementTemplate" : " <indent=10%><line-indent=-5%><line-height=65%>{{element}}</line-height></line-indent></indent>\r\n",
         "DescriptionUseName" : false,
         "CritFloatieMessage" : "{0} CRIT",
-        "DestroyedFloatieMessage" : "{0} DESTROYED"
+        "DestroyedFloatieMessage" : "{0} DESTROYED",
+        "CritHitText" : "HIT {0}: {1}",
+        "CritDestroyedText" : "DESTROYED: {0}",
+        "CritDestroyedDeathText" : "DESTROYED: Mech is incapacitated, reason is {0}",
+        "CritLinkedText" : "Critical hits are linked to '{0}'"
     },
   "DebugCycleCombatSounds": {
     "Enabled": false
@@ -168,9 +174,20 @@
         "EnabledDescription" : "Allows components to take up space dynamically on a mech.",
         "DynamicSlotsValidateDropEnabledDescription" : "Don't allow dropping of items that would exceed the available slots.",
         "DynamicSlotsValidateDropEnabled" : true,
-        "ReservedSlotText" : "Reserved Slot",
-        "MovableSlotText" : "Movable Slot"
-  },
+        "LocationPriorityOrder" : [
+            "CenterTorso",
+            "Head",
+            "LeftTorso",
+            "LeftLeg",
+            "RightTorso",
+            "RightLeg",
+            "LeftArm",
+            "RightArm"
+        ],
+        "LocationPriorityOrderDescription" : "From highest to lowest priority where to add dynamic slots too, relevant if locations have same amount of free slots. Visual impact only.",
+        "ReservedSlotText" : "Reserved slot",
+        "MovableSlotText" : "Movable slot"
+    },
     "Engine" : {
         "Enabled" : true,
         "EnabledDescription" : "Provides engines that can be installed on mechs similar to how CBT works.",
@@ -201,9 +218,15 @@
         "LimitEngineCoresToTonnage" : true,
         "IgnoreLimitEngineChassisTag" : ""
     },
+ "Globals" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Allows tooltips and other features to access the current mech from context."
+    },
   "HardpointFix": {
     "Enabled" : true,
         "EnabledDescription" : "Optimizes the way installed weapons are shown on a mech model.",
+        "TraceLogDebugMappings" : false,
+        "TraceLogDebugMappingsDescription" : "Trace all GetComponentBlankNames and GetComponentPrefabName calls. Otherwise only some of them are logged.",
         "AutoFixChassisDefWeaponHardpointCounts" : false,
         "AutoFixChassisDefWeaponHardpointCountsDescription" : "Changes chassis hardpoints based on configured prefabs.",
         "EnforceHardpointLimits" : false,
@@ -567,16 +590,19 @@
         "UnderweightWarningThresholdDescription" : "How many tons a mech has to be underweight to show a warning"
     },
   "ShutdownInjuryProtection": {
+	"EnabledDescription" : "Pilots receive injury when mech receives overheat damage or has to shut down in case life support is destroyed.",
     "HeatDamageInjuryEnabled": true,
     "ShutdownInjuryEnabled": true,
     "Enabled": true
   },
-  "TurretLimitedAmmo": {
-    "Enabled": true
-  },
-  "TurretMechComponents": {
-    "Enabled": true
-  },
+    "TurretLimitedAmmo" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Turrets use up ammo and don't explode once ammo is gone."
+    },
+    "TurretMechComponents" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Turrets can now use components and benefit from their status effects."
+    },
     "TagManager" : {
         "Enabled" : false,
         "SkirmishWhitelistTags" : [],
