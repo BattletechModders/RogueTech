@@ -159,7 +159,7 @@ if set as true all AP effects (damage and crits) will not affect unit.
 	"DesignMaskBiomePolarFrozen":0.5,
 	"DesignMaskBiomeTundraFrozen":0.5
 }
-								NOTE: Current values is my own vision of flame mechanics process, adjust them for you own will
+NOTE: Current values is my own vision of flame mechanics process, adjust them for you own will
 								
 "AmmoCookoff":{ - AmmoCookoffSettings
 					Ammo explosions roll a chance to explode every time your mech overheats, and they roll a more severe chance if you overheat enough to force a shut down.
@@ -205,6 +205,34 @@ if set as true all AP effects (damage and crits) will not affect unit.
   },
   "DecalTexture": "envTxrDecl_terrainDmgSmallBlood_alb", - texture for blood spot
   "DrawBloodChance": 0.3 - chance on leave blood spot on destruction
+  "DefaultAoEDamageMult": {  - AoE modifiers by unit's types. Available types: Mech, Vehicle, Turret, Building
+    "Building": {
+      "Range": 1.2,
+      "Damage": 5
+    }
+  },
+  "TagAoEDamageMult": {      - AoE modifiers by unit's tags. Tags watching lists: for mechs: MechTags, ChassisTags; for vehicles: VehicleTags; for turrets: TurretTags
+    "aoe_increased_minor": {
+      "Range": 1.2,
+      "Damage": 1.2
+    },
+    "aoe_increased_major": {
+      "Range": 2,
+      "Damage": 2
+    },
+    "aoe_reduced_minor": {
+      "Range": 0.8,
+      "Damage": 0.8
+    },
+    "aoe_reduced_major": {
+      "Range": 0.5,
+      "Damage": 0.5
+    },
+    "aoe_reduced_huge": {
+      "Range": 0.1,
+      "Damage": 0.1
+    }
+  },
 },
 "showMissBehavior":"Default", - miss margin behavior.
                                    None - miss floaties never shown
@@ -237,7 +265,13 @@ so thickness defines the strength something can easily punch through, while shar
 
 Weapon definition
 new fields
-  "evasivePipsMods": {  - list of modifiers for values by current evasive pips count. Additive per weapon/ammo/mode. \
+  "MinMissRadius": 5,
+  "MaxMissRadius": 15,
+                        - min and max raduis. Used only in ground attack and indirect attack. Additive for ammo/mode/weapon
+						  If MinMissRadius less than target raduis (for mechs in chassis definition, for vehicels and turrets 5) raduis value will be used.
+						  If MaxMissRadius less or equal than MinMissRadius value MinMissRadius * 3 will be used.
+						  actual scatter radius = ((MaxMissRadius - MinMissRadius) * (hitRoll - toHitChance) / (1 - toHitChance) + MinMissRadius) * Random.Range(Constants.ResolutionConstants.MissOffsetHorizontalMin, Constants.ResolutionConstants.MissOffsetHorizontalMax)
+  "evasivePipsMods": {  - list of modifiers for values by current evasive pips count. Additive per weapon/ammo/mode. 
                           Overall formula value = [base value] * ([evasive pips count]^[mod value]). Example base damage = 35, evasive pips count = 7, mod value = -1
                           damage = 35 * (7^-1) = 35 * 0.142857(142857) = 5.
                           NOTE: of evasive pips count = 0, value will not been altered. If mod value = 0 same behavior.
