@@ -17,7 +17,10 @@
         "DefaultCBTDefLower" : "emod_arm_part_lower",
         "DefaultCBTDefHand" : "emod_arm_part_hand",
         "InterruptHandDropIfNoLower" : false,
-        "ExtendHandLimit" : true
+        "ExtendHandLimit" : true,
+        "DescriptionIdentifier" : "ArmActuatorSupport",
+        "DescriptionTemplate" : "<color=#F79B26FF><b>Arm Actuator Limit</b>: <b>{0}</b> on left and <b>{1}</b> on right</color>\r\n",
+        "CustomDescriptionTemplate" : "<color=#F79B26FF><b>Arm Actuator Limit</b>: {0}</color>\r\n"
     },
     "ArmorStructureChanges" : {
         "Enabled" : true,
@@ -392,7 +395,8 @@
     "CriticalEffects" : {
         "Enabled" : true,
         "EnabledDescription" : "Allows custom multiple critical hit states for individual components.",
-        "DescriptionTemplate" : "Critical Effects:<b><color=#F79B26FF>\r\n{{elements}}</color></b>\r\n{{originalDescription}}",
+        "DescriptionIdentifier" : "Criticals",
+        "DescriptionTemplate" : "Critical Effects:<b><color=#F79B26FF>\r\n{{elements}}</color></b>\r\n",
         "ElementTemplate" : " <indent=10%><line-indent=-5%><line-height=65%>{{element}}</line-height></line-indent></indent>\r\n",
         "DescriptionUseName" : false,
         "CritFloatieMessage" : "{0} CRIT",
@@ -429,6 +433,7 @@
         "Enabled" : true,
         "EnabledDescription" : "Provides engines that can be installed on mechs similar to how CBT works.",
         "MovementPointDistanceMultiplierDescription" : "The distance of a TT movement point, 24 is vanilla CombatGameConstants.ExperimentalGridDistance .",
+        "JumpJetMovementPointDistanceMultiplierDescription" : "The distance of a TT movement point when calculating jump distances, if undefined falls back to MovementPointDistanceMultiplier.",
         "MinimJumpHeatDescription" : "Minimum heat when doing a jump, even if only one jump jet exists and only when jumping one hex.",
         "AutoConvertJumpCapacityInDefToStatDescription" : "All JumpCapacity values in JumpJetDefs will be auto-converted to the JumpCapacity statistic.",
         "JumpJetDefaultJumpHeatDescription" : "The heat the jump jet produces when fully* used (* jumping below max distance reduces produced heat). Can be adjusted using the JumpHeat statistic.",
@@ -447,6 +452,7 @@
         "EngineMissingFallbackHeatSinkCapacity" : 30,
         "EngineMissingFallbackHeatSinkCapacityDescription" : "Heat sink capacity if no engine is detected.",
         "MovementPointDistanceMultiplier" : 24,
+        "JumpJetMovementPointDistanceMultiplier" : null,
         "MinimJumpHeat" : 9,
         "AutoConvertJumpCapacityInDefToStat" : true,
         "JumpJetDefaultJumpHeat" : 3,
@@ -462,6 +468,8 @@
     "HardpointFix" : {
         "Enabled" : true,
         "EnabledDescription" : "Optimizes the way installed weapons are shown on a mech model.",
+        "TraceLogDebugMappings" : false,
+        "TraceLogDebugMappingsDescription" : "Trace all GetComponentBlankNames and GetComponentPrefabName calls. Otherwise only some of them are logged.",
         "AutoFixChassisDefWeaponHardpointCounts" : false,
         "AutoFixChassisDefWeaponHardpointCountsDescription" : "Changes chassis hardpoints based on configured prefabs.",
         "EnforceHardpointLimits" : false,
@@ -549,6 +557,17 @@
                 "PrefabIdentifier" : "artillery",
                 "HardpointCandidates" : [
                     "artillery",
+                    "ac20",
+                    "uac20",
+                    "lbx20",
+                    "ac",
+                    "lbx"
+                ]
+            },
+            {
+                "PrefabIdentifier" : "mortar",
+                "HardpointCandidates" : [
+                    "mortar",
                     "ac20",
                     "uac20",
                     "lbx20",
@@ -668,7 +687,9 @@
         "EnabledDescription" : "Makes the mech lab adhere to any custom mech slot counts.",
         "MechLabArmTopPadding" : 120,
         "MechLabGeneralSlots" : 3,
-        "MechLabGeneralWidgetLabel" : "General"
+        "MechLabGeneralWidgetLabel" : "General",
+        "HideHelpButton" : false,
+        "HideECMButton" : false
     },
     "MoveMultiplierStat" : {
         "Enabled" : true,
@@ -700,7 +721,8 @@
     "OverrideDescriptions" : {
         "Enabled" : true,
         "EnabledDescription" : "Allows other features to override tooltips and descriptions, also provides bonus description management.",
-        "BonusDescriptionsDescriptionTemplate" : "Traits:<b><color=#F79B26FF>\r\n{{elements}}</color></b>\r\n{{originalDescription}}",
+        "DescriptionIdentifier" : "Bonuses",
+        "BonusDescriptionsDescriptionTemplate" : "Traits:<b><color=#F79B26FF>\r\n{{elements}}</color></b>\r\n",
         "BonusDescriptionsElementTemplate" : " <indent=10%><line-indent=-5%><line-height=65%>{{element}}</line-height></line-indent></indent>\r\n"
     },
     "OverrideGhostVFX" : {
@@ -713,6 +735,19 @@
         ],
         "BlipWeak" : "Weak",
         "BlipStrong" : "Weak"
+    },
+    "OverrideStatTooltips" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Overrides stat tooltips of mechs including 'progress bar' summaries.",
+        "MovementTitleText" : "Medium Range",
+        "HeatEfficiencyTitleText" : "Heat Efficiency",
+        "DurabilityTitleText" : "Long Range",
+        "AvgRangeTitleText" : "Movement",
+        "MeleeTitleText" : "Durability",
+        "FirepowerTitleText" : "Close Range",
+        "CloseRangeMax" : 89,
+        "MediumRangeMax" : 359,
+        "LongRangeMax" : 569
     },
     "OverrideTonnage" : {
         "Enabled" : true,
