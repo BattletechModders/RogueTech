@@ -1,7 +1,7 @@
 {
 	"Custom": {
 		"Weights": {
-			"ReservedSlots": 3,
+			"ReservedSlots": 4,
 			"EngineFactor": 0.75
 		},
 		"WorkOrderCosts": {
@@ -13,7 +13,8 @@
 		"Category": [
 			{
 				"CategoryID": "EngineShield"
-			}
+			},
+	                {"CategoryID": "EnginePart"}
 		],
 		"Linked": {
 			"Links": [
@@ -32,6 +33,7 @@
 				"engine_part",
 				"not_broken",
 				"no_salvage",
+				"vital",
 				"autorepair"
 			]
 		},
@@ -41,9 +43,9 @@
 				"EvaMax: +1",
 				"EvaPips: +1",
 				"EngineWeight: -25%",
-				"EngineReserved: 6",
-				"RunSpeed: +25%",
+				"EngineReserved: 4",
 				"WalkSpeed: +10%",
+				"RunMod: +25%",
 				"HeatGenerated: +10%",
 				"ReqWings"
 			]
@@ -62,7 +64,7 @@
 		"Id": "emod_engineslots_supercharged_LAM_LIGHT",
 		"Name": "Engine Light S-LAM",
 		"Details": "This specialy modified Marauder Engine Core enables the mech's thrusters to work in conjunction with a LAM system strapped into it while retaining the weight savings of a Light Engine, this effectively makes the engine lighter and makes the mech go faster, it adds a lot more bulk then normal LAM or Light engines.",
-		"Icon": "uixSvgIcon_equipment_Heatsink"
+		"Icon": "power-generator"
 	},
 	"BonusValueA": "- 25% Engine Weight",
 	"BonusValueB": "+ 6 Slots Required",
@@ -214,30 +216,33 @@
 			"nature": "Buff"
 		},
 		{
-			"durationData": {
-				"duration": -1,
-				"stackLimit": 1
-			},
-			"targetingData": {
-				"effectTriggerType": "Passive",
-				"effectTargetType": "Creator",
-				"showInStatusPanel": false
-			},
-			"effectType": "StatisticEffect",
-			"Description": {
-				"Id": "Supercharged_Run_S_LAM_Light",
-				"Name": "ChargerSprint",
-				"Details": "MORE SPEED.",
-				"Icon": "uixSvgIcon_run_n_gun"
-			},
-			"statisticData": {
-				"statName": "RunSpeed",
-				"operation": "Float_Multiply",
-				"modValue": "1.25",
-				"modType": "System.Single"
-			},
-			"nature": "Buff"
-		},
+                                        "durationData" : {
+                                                "duration" : -1,
+                                                "stackLimit" : -1
+                                        },
+                                        "targetingData" : {
+                                                "effectTriggerType" : "Passive",
+                                                "effectTargetType" : "Creator",
+                                                "forcePathRebuild" : true,
+                                                "forceVisRebuild" : false,
+                                                "showInTargetPreview" : false,
+                                                "showInStatusPanel" : false
+                                        },
+                                        "effectType" : "StatisticEffect",
+                                        "Description" : {
+                                                "Id": "MASCWalk",
+                                                "Name": "MASC",
+                                                "Details": "Myomer Accelerator Signal Circuitry",
+                                                "Icon": "uixSvgIcon_action_evasivemove"
+                                        },
+                                        "nature" : "Buff",
+                                        "statisticData" : {
+                                                "statName" : "CBTBE_RunMultiMod",
+                                                "operation" : "Float_Add",
+                                                "modValue" : "0.25",
+                                                "modType" : "System.Single"
+                                        }
+                },
 		{
 			"durationData": {
 				"duration": -1,
