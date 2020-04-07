@@ -52,7 +52,8 @@
                 "StealthSensors: 80%, 1, 1, 2, 3",
                 "ActiveSignature: -10%",
                 "Dynamic: 6",
-                "ActiveHeatEfficiency: -10%",
+                "TEHeatgen: +6%",
+                "HeatPerTurn: +6",
                 "ReqECM",
                 "ArmorTPCost: 20%",
                 "ArmorCBCost: 30%"
@@ -158,10 +159,37 @@
                     },
                     "nature": "Buff",
                     "statisticData": {
-                        "statName": "HeatSinkCapacity",
-                        "operation": "Int_Multiply_Float",
-                        "modValue": "0.9",
-                        "modType": "System.Single"
+                        "statName": "HeatGenerated",
+                        "operation": "Float_Multiply",
+                        "modValue": "1.06",
+                        "modType": "System.Single",
+                        "targetCollection": "Weapon"
+                    }
+                },
+                {
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "effectTargetType": "Creator",
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "Stealth_Heat_Capacity_Stealth",
+                        "Name": "Decreased Heat Capacity",
+                        "Details": "Heat Capacity Penalty",
+                        "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+                    },
+                    "nature": "Debuff",
+                     "statisticData": {
+                         "statName": "HeatSinkCapacity",
+                        "operation": "Int_Add",
+                        "modValue": "-6",
+                        "modType": "System.Int32"
                     }
                 }
             ],
@@ -172,7 +200,7 @@
         }
     },
     "Description": {
-        "Cost": 100000,
+        "Cost": 500000,
         "Rarity": 5,
         "Purchasable": true,
         "Manufacturer": "QuicSell",
