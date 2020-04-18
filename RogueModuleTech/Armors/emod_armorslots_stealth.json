@@ -61,11 +61,12 @@
         "BonusDescriptions": {
             "Bonuses": [
                 "Stealth",
-				"StealthSensors: 40%, 3, 2, 2, 3",
+		"StealthSensors: 40%, 3, 2, 2, 3",
                 "ActiveVisibility: -15%",
                 "ActiveSignature: -15%",
                 "StealthReserved: 1",
-                "ActiveHeatEfficiency: -6%",
+                "ActiveTEHeatgen: +5%",
+                "ActiveHeatPerTurn: +3",
                 "ReqECM",
                 "ArmorTPCost: 25%",
                 "ArmorCBCost: 35%"
@@ -195,10 +196,37 @@
                     },
                     "nature": "Buff",
                     "statisticData": {
+                        "statName": "HeatGenerated",
+                        "operation": "Float_Multiply",
+                        "modValue": "1.05",
+                        "modType": "System.Single",
+                        "targetCollection": "Weapon"
+                    }
+                },
+                {
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "effectTargetType": "Creator",
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "Stealth_Heat_Capacity_Stealth",
+                        "Name": "Decreased Heat Capacity",
+                        "Details": "Heat Capacity Penalty",
+                        "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+                    },
+                    "nature": "Debuff",
+                    "statisticData": {
                         "statName": "HeatSinkCapacity",
-                "operation": "Int_Multiply_Float",
-                "modValue": "0.94",
-                "modType": "System.Single"
+                        "operation": "Int_Add",
+                        "modValue": "-3",
+                        "modType": "System.Int32"
                     }
                 }
             ],
