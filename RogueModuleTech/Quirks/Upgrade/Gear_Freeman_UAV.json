@@ -3,9 +3,6 @@
         "Category": [
             {
                 "CategoryID": "AdvUAV"
-            },
-			{
-                "CategoryID": "UAV"
             }
         ],
         "Flags": {
@@ -18,20 +15,12 @@
         },
         "BonusDescriptions": {
             "Bonuses": [
-                "UAV: 310, 2, 15",
+                "AdvancedUAV: 3, 300",
                 "Sensors: 10%",
                 "Sight: 10%",
 				"NightVision"
             ]
         },
-		"ActivatableComponent":{
-                        "CanNotBeActivatedManualy": false,
-                        "NoUniqueCheck": true,
-						"ActivationMessage": "UAV",
-            "DeactivationMessage": "",
-                        "statusEffects": [],
-						"offlineStatusEffects": []
-                },
         "InventorySorter": {
             "SortKey": "00024"
         }
@@ -48,7 +37,7 @@
         "UIName": "Adv.UAV",
         "Id": "Gear_Freeman_UAV",
         "Name": "Scanner",
-        "Details": "A compartment of small UAV's (Unmanned Aerial Vehicles) with remote control equipment, improving Battlefield surveillance capabilities.",
+        "Details": "This Advanced UAV passively scans the surroundings and highlights any enemys it spots.",
         "Icon": "uav"
     },
     "BonusValueA": "",
@@ -62,6 +51,59 @@
     "AllowedLocations": "All",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
+	 "Auras": [
+        {
+            "Id": "Gear_Freeman_UAV",
+            "Name": "AdvUAC",
+            "ReticleColor": "#cccc00",
+            "Range": 300,
+            "RemoveOnSensorLock": false,
+            "State": "Persistent",
+            "ApplySelf": false,
+            "AllyStealthAffection": "None",
+            "EnemyStealthAffection": "NegativeOne",
+            "IsPositiveToAlly": false,
+            "IsNegativeToEnemy": true,
+            "ownerVFX": [],
+            "targetVFX": [],
+            "removeOwnerVFX": [],
+            "removeTargetVFX": [],
+            "ownerSFX": [],
+            "targetSFX": [],
+            "removeOwnerSFX": [],
+            "removeTargetSFX": [],
+            "statusEffects": [
+                {
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": 1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "specialRules": "NotSet",
+                        "effectTargetType": "EnemiesWithinRange",
+                        "range": 0.0,
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "C3-SensorInfo",
+                        "Name": "C3 Sensor Information",
+                        "Details": "Shares Sensor Information on nearby Targets",
+                        "Icon": "uixSvgIcon_equipment_Cockpit"
+                    },
+                    "nature": "Buff",
+                    "statisticData": {
+                        "statName": "LV_PROBE_PING",
+                        "operation": "Int_Add",
+                        "modValue": "3",
+                        "modType": "System.Int32"
+                    }
+                }
+            ]
+        }
+    ],
     "statusEffects": [
 	{
             "durationData": {
@@ -86,26 +128,6 @@
             },
             "nature": "Buff"
         },
-	{
-            "targetingData" : {
-                "effectTriggerType" : "OnActivation",
-                "effectTargetType" : "EnemiesWithinRange",
-				"alsoTargetsCreator" : true,
-                "forceVisRebuild" : true
-            },
-			"effectType" : "ActiveAbility",
-			"Description" :
-			{
-				"Id" : "UAV_Ping",
-				"Name" : "UAV PING",
-				"Details" : "Activated ability (uses Firing action). Performs a Sensor Lock against all enemies within its radius, as indicated by the spinning gold ring. Will go into cooldown state after use.",
-				"Icon" : "uixSvgIcon_action_sensorlock"
-			},
-			"activeAbilityEffectData" : 
-			{
-				"abilityName" : "AbilityDef_EWS_Ping"
-			}
-		},
         {
             "durationData": {
                 "duration": -1,
