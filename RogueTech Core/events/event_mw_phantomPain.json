@@ -1,0 +1,469 @@
+{
+    "Description" : {
+        "Id" : "event_mw_phantomPain",
+        "Name" : "Phantom Pain",
+        "Details" : "Passing by the MedBay, you spot [[TGT_MW,{TGT_MW.Callsign}]] wrestling a medical monitor from a MedTech. \"You need to take a second look!\" {TGT_MW.Callsign} presses a hand against {TGT_MW.DET} stomach and winces. \"I know <i>something</i> is wrong. I feel like I'm dying.\"\r\n\r\nYou pause in the doorway. \"What is going on here?\"\r\n\r\n{TGT_MW.Callsign} relinquishes the monitor, and the MedTech clears her throat. \"{TGT_MW.Callsign}'s complaints of abdominal pain are purely neurological. Phantom pain, Commander. There's nothing to treat. We've checked.\"\r\n\r\n\"Please, Commander, I'm not making this up.\" {TGT_MW.Callsign} takes a deep breath. \"If you authorize an exploratory surgery or another examination, I know the MedTechs will find something.\"",
+        "Icon" : "uixTxrSpot_MedBay.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 100,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "",
+            "items" : [
+                "pilot_cautious"
+            ]
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "",
+            "items" : [
+                "pilot_dependable",
+                "pilot_rebellious",
+                "pilot_honest",
+                "pilot_dishonest"
+            ]
+        },
+        "RequirementComparisons" : []
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "Tags/CompanyTags",
+                "items" : []
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/CompanyTags",
+                "items" : [
+                    "event_mw_phantomPain",
+                    "MODIFIED_STAT_MedTechSkill"
+                ]
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "MedTechSkill",
+                    "op" : "GreaterThan",
+                    "val" : 1,
+                    "valueConstant" : "1"
+                }
+            ]
+        }
+    ],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Authorize a second medical examination.",
+                "Details" : "Second opinion",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Find something + dependable",
+                        "Details" : "\"I trust your judgment, [[TGT_MW,{TGT_MW.Callsign}]].\" You turn your gaze to the MedTech. \"Get {TGT_MW.OBJ} another examination. Nothing invasive, unless it's warranted.\"\r\n\r\nLater in the day, you receive a report from the MedTechs. Their second examination of {TGT_MW.Callsign} revealed a large cyst hidden behind {TGT_MW.DET} appendix. They had to operate immediately.\r\n\r\nYou rush back to the MedBay and visit {TGT_MW.OBJ} in a recovery room. The medical equipment surrounding {TGT_MW.OBJ} blinks and beeps at a steady rate.\r\n\r\n\"How are you feeling?\" you ask.\r\n\r\n{TGT_MW.Callsign} carefully pats {TGT_MW.DET} abdomen. \"You should have seen this <i>thing</i> they took out of me. Nearly the size of a shotgun shell. That's no way for a mercenary to go, Commander. I won't forget this. You saved my life.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 33,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_dependable"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_rebellious"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_mw_phantomPain"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_1",
+                        "Name" : "Find nothing. Lose cautious. -1 MedTech 30 days.",
+                        "Details" : "\"It doesn't hurt to be extra careful, [[TGT_MW,{TGT_MW.Callsign}]].\" You turn your gaze to the MedTech. \"I'm authorizing a second exam. Nothing invasive.\"\r\n\r\nLater in the day, you receive a report from the MedTechs. Their second examination of {TGT_MW.Callsign} revealed no physiological basis for {TGT_MW.DET} pain.\r\n\r\nYou visit {TGT_MW.OBJ} in the barracks after {TGT_MW.SUBJ}{TGT_MW.Gender?NonBinary:'re|Default:'s} discharged. \"Feeling better, MechWarrior?\"\r\n\r\n{TGT_MW.SUBJ_C} frowns. \"It's strange. The painkillers did nothing, but the anti-anxiety meds made the pain vanish. I'll be checking in regularly with the MedTechs for counseling until we figure out what's going on.\"\r\n\r\n{TGT_MW.Callsign} sticks to {TGT_MW.DET} word, not missing a day with the MedTechs. {TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:are|Default:is} far less anxious when you next chat. There are no further incidents in the MedBay either.",
+                        "Icon" : null
+                    },
+                    "Weight" : 33,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_cautious"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 30
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_mw_phantomPain"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Refuse to authorize any further examinations.",
+                "Details" : "no more exams",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Emergency. Gain 1 wound. Gain rebellious.",
+                        "Details" : "You look [[TGT_MW,{TGT_MW.Callsign}]] in the eye. \"I believe you, but let's take this slowly. I'll make sure you get a low-dose pain reliever. If that doesn't help, then we'll keep trying until we find a treatment that works for you.\"\r\n\r\nLater in the day, you receive an urgent message from Darius. {TGT_MW.Callsign} collapsed on the floor spasming in pain during daily training. The MedTechs operated immediately.\r\n\r\nYou rush back to the MedBay and visit {TGT_MW.OBJ} in a recovery room. {TGT_MW.DET_C} eyes flutter open and settle into a glare. You keep a respectful distance. \"I'm sorry, {TGT_MW.Callsign}. I should have trusted your instincts.\" \r\n\r\n\"And I should have ignored yours. They found a tumor the size of my fist hidden behind my kidney.\" {TGT_MW.Callsign} pushes {TGT_MW.OBJ}{TGT_MW.Gender?NonBinary:selves|Default:self} up. {TGT_MW.DET_C} heart rate monitor blips rapidly.\r\n\r\nBefore you can respond, a MedTech gently pulls you out of the room. \"{TGT_MW.Callsign} is having an adverse reaction to {TGT_MW.DET} surgery. We had to sedate {TGT_MW.OBJ} earlier. We recommend that the XO keep an eye on {TGT_MW.OBJ} from now on.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_rebellious"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_dependable"
+                                ]
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Injuries",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_mw_phantomPain"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "Healthy + honest",
+                        "Details" : "You incline your head. \"I'm not going to discount your feelings, [[TGT_MW,{TGT_MW.Callsign}]], but let's try some low-dose painkillers before we do anything more drastic.\"\r\n\r\nDays later, {TGT_MW.Callsign} knocks on the door to your quarters. {TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:clear|Default:clears} {TGT_MW.DET} throat. \"Sorry for the fuss earlier. That pain I was feeling went away before I even took the first painkiller. I think I was just stressed. Being listened to helped more than anything.\"\r\n\r\n\"Your pain was real. It just required a different treatment.\" You gesture to an open chair. \"Take a load off. I know this is a rough job, but speaking openly about what you're going through can make a difference.\"\r\n\r\n{TGT_MW.Callsign} sits down. \"You know, I just kept thinking about a MechTech scraping me out of a cockpit. I thought a 'real' MechWarrior wouldn't worry about those concerns, so I bottled it up. Kept my mouth shut\u2014but no more. Next time I'll ask for help.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_honest"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_dishonest"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_mw_phantomPain"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Order the MedTechs to perform exploratory surgery on {TGT_MW.Callsign}.",
+                "Details" : "exploratory surgery",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "Find something and remove it. Gain dependable.",
+                        "Details" : "\"You know your body, [[TGT_MW,{TGT_MW.Callsign}]].\" You jab a finger at the MedTech. \"Perform exploratory surgery immediately. I want answers.\"\r\n\r\nHours later, you find {TGT_MW.Callsign} in the MedBay. \"The MedTechs let me keep a souvenir. Turns out this <i>thing</i> was hiding behind my liver.\" Sitting up in bed, {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:hold|Default:holds} up a jar with a fist-sized lump of flesh floating inside. \r\n\r\nYou examine it with a mix of curiosity and disgust. \"That's no way to go out, MechWarrior.\"\r\n\r\n\"Thanks to you, I'll live to fight another day. The MedTechs say I'm cleared for combat once the painkillers wear off.\" {TGT_MW.Callsign} smiles and then turns serious for a moment. \"You saved my life. I won't forget that. I owe you, Commander.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_dependable"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_rebellious"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_mw_phantomPain"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_1",
+                        "Name" : "Find nothing, but complications. Out 7 days",
+                        "Details" : "\"I've heard enough.\" You gesture to the MedTech. \"Get [[TGT_MW,{TGT_MW.Callsign}]] ready for exploratory surgery ASAP.\"\r\n\r\nWhen you visit {TGT_MW.OBJ} after surgery, {TGT_MW.Callsign} groans indistinctly and turns onto {TGT_MW.DET} side, closing {TGT_MW.DET} eyes. You motion to the MedTech, lowering your voice. \"What happened?\"\r\n\r\n\"The surgery failed to uncover any physiological basis for {TGT_MW.Callsign}'s abdominal pain. {TGT_MW.SUBJ_C}{TGT_MW.Gender?NonBinary:'re|Default:'s} physically fit by all metrics, but an artery was nicked during the procedure and {TGT_MW.SUBJ} lost a lot of blood before we could stem the bleeding.\"\r\n\r\n\"Really?\" You rub your brow.\r\n\r\nThe MedTech continues. \"We're going to need to monitor {TGT_MW.OBJ} for a week and make sure there are no other complications.\"\r\n\r\n{TGT_MW.Callsign} groans again, and {TGT_MW.DET} heart rate monitor starts beeping rapidly. The MedTechs politely suggest that it'd be best if you allowed {TGT_MW.Callsign} to rest uninterrupted.",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "7",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_mw_phantomPain"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL",
+    "OneTimeEvent" : true
+}
