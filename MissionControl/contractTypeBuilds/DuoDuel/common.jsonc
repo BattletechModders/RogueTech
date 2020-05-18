@@ -1,0 +1,156 @@
+{
+  "Key": "DuoDuel", // Links to the ContractType Name
+  "Chunks": [
+    {
+      "Name": "Chunk_PlayerLance",
+      "Type": "Chunk",
+      "SubType": "PlayerLance",
+      "Children": [
+        {
+          "Name": "Spawner_PlayerLance",
+          "Type": "Spawner",
+          "SubType": "SimpleSpawner",
+          "Position": {
+            "Type": "World", // World, Local, SpawnProfile (Anywhere, AtBoundary, AtTarget, NearTarget)
+            "Value": { "x": -90, "y": 86, "z": 40 }
+          },
+          "Rotation": {
+            "Type": "World", // World, Local
+            "Value": { "x": 0, "y": 30, "z": 0 }
+          },
+          "Team": "Player1",
+          "Guid": "76b654a6-4f2c-4a6f-86e6-d4cf868335fe", // Must be this Guid and the contract .json must have this specific. It's hardcoded in BT for PlayerLance.
+          "SpawnPoints": 2,
+          "SpawnPointGuids": [
+            "ec9d2280-ca9a-4d90-8a20-963d8a4c0a39",
+            "5df48a48-1840-49b0-84e9-126847053afa"
+          ], // Must match the unit spawn guids in the contract .json
+          "SpawnType": "Instant" // Leopard, DropPod, Instant
+        }
+      ]
+    },
+    {
+      "Name": "Chunk_DestroyWholeLance",
+      "Type": "Chunk",
+      "SubType": "DestroyWholeLance",
+      "Position": {
+        "Type": "World", // World, Local, SpawnProfile (Anywhere, AtBoundary, AtTarget, NearTarget)
+        "Value": { "x": 0, "y": 0, "z": 0 }
+      },
+      "Children": [
+        {
+          "Name": "Lance_Enemy_OpposingForce",
+          "Type": "Spawner",
+          "SubType": "SimpleSpawner",
+          "Position": {
+            "Type": "World", // World, Local, SpawnProfile (Anywhere, AtBoundary, AtTarget, NearTarget)
+            "Value": { "x": 0, "y": 60, "z": 650 }
+          },
+          "Rotation": {
+            "Type": "World", // World, Local
+            "Value": { "x": 0, "y": 180, "z": 0 }
+          },
+          "Team": "Target",
+          "Guid": "f426f0dc-969d-477d-81a9-d02f9e1eff79", // Must match the spawner guids in the contract .json
+          "SpawnPoints": 2,
+          "SpawnPointGuids": [
+            "6cd3107e-0f9d-4809-ab8c-fb30faf4cd80",
+            "14c58a13-96a6-4f91-a1e5-47b5d02b81d1"
+          ], // Must match the unit spawn guids in the contract .json
+          "SpawnType": "Instant", // Leopard, DropPod, Instant
+          "AI": [
+            {
+              "Type": "MagicKnowledgeByTag",
+              "Action": "Add",
+              "Tags": ["Player 1"]
+            }
+          ]
+        },
+        {
+          "Name": "Objective_DestroyLance",
+          "Type": "Objective",
+          "SubType": "DestroyLance",
+          "Guid": "a0b9c5b2-c594-4c5a-be1d-028a51c51519", // Must match the objective guid in the contract .json
+          "ContractObjectiveGuid": "73275787-720a-4c33-9f20-953b1bbf48bd", // Must match the contract guid in the contract .json
+          "Title": "Destroy the enemy lance",
+          "Priority": 1,
+          "IsPrimaryObjective": true,
+          "LanceToDestroyGuid": "f426f0dc-969d-477d-81a9-d02f9e1eff79"
+        }
+      ]
+    },
+    {
+      "Name": "Chunk_EncounterBoundary",
+      "Type": "Chunk",
+      "SubType": "EncounterBoundary",
+      "Children": [
+        {
+          "Name": "EncounterBoundaryRect",
+          "Type": "Region",
+          "SubType": "Boundary",
+          "Position": {
+            "Type": "World", // World, Local, SpawnProfile (Anywhere, AtBoundary, AtTarget, NearTarget)
+            "Value": { "x": 15, "y": 50, "z": 450 }
+          },
+          "Width": 900,
+          "Length": 1024
+        }
+      ]
+    },
+    {
+      "Name": "Chunk_DefaultDialogue",
+      "Type": "Chunk",
+      "SubType": "Dialogue",
+      "Children": [
+        {
+          "Name": "Dialogue_MissionStart",
+          "Type": "Dialogue",
+          "SubType": "Simple",
+          "Guid": "73df8d9c-a274-48fd-98c9-2bd0d7860e83" // Must match the dialogue guid in the contract .json
+        },
+        {
+          "Name": "Dialogue_MissionSuccess",
+          "Type": "Dialogue",
+          "SubType": "Simple",
+          "Guid": "4011a4c3-cba2-4d22-b2b3-3b19a3297ab9" // Must match the dialogue guid in the contract .json
+        },
+        {
+          "Name": "Dialogue_MissionFailure",
+          "Type": "Dialogue",
+          "SubType": "Simple",
+          "Guid": "d3d33d95-9ed7-4686-b9eb-954ebe51cc02" // Must match the dialogue guid in the contract .json
+        }
+      ]
+    },
+    {
+      "Name": "Chunk_DuelTaunt",
+      "Type": "Chunk",
+      "SubType": "Dialogue",
+      "Children": [
+        {
+          "Name": "Dialogue_DuelTaunt",
+          "Type": "Dialogue",
+          "SubType": "Simple",
+          "Guid": "8971ddc6-a882-4066-923f-f8be03450ce2", // Must match the dialogue guid in the contract .json
+          "Trigger": "OnFirstContact"
+        }
+      ]
+    },
+    {
+      "Name": "Chunk_SwapSpawnerPlacement",
+      "Type": "Chunk",
+      "SubType": "Placement",
+      "ControlledByContract": true,
+      "Guid": "ed007c52-f4cb-4bfc-842a-a50454d8a82a",
+      "Children": [
+        {
+          "Name": "SwapPlacement_SwapLanceSpawners",
+          "Type": "SwapPlacement",
+          "SubType": "EncounterStructure",
+          "TargetGuid1": "76b654a6-4f2c-4a6f-86e6-d4cf868335fe", // Player spawner
+          "TargetGuid2": "f426f0dc-969d-477d-81a9-d02f9e1eff79" // Enemy spawner
+        }
+      ]
+    }
+  ]
+}

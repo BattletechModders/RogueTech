@@ -239,6 +239,21 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
                                    Vanilla - miss floaties shown as in vanilla (no miss margin)
                                    Default - miss floaties shown as AIM's ShowMissMargin: true
                                    All - show all miss floaties with miss margin
+"DestoryedLocationDamageTransferStructure":true - if true damage to destroyed locations transferred to structure directly instead of armor 
+"NullifyDestoryedLocationDamage": true - if true damage to destroyed locations will be nullified 
+"DestoryedLocationCriticalAllow": true - if false and on hit locations had 0 structure criticals will not be rolled 
+"uiIcons": [ "weapon_up", "weapon_down" ] - some prewarm icons 
+  "WeaponPanelWidthScale": 1.1,   - width scale for weapon panel background
+  "OrderButtonWidthScale": 0.5,   - width scale for order switch buttons
+  "OrderButtonPaddingScale": 0.3,
+  "SidePanelInfoSelfExternal": false, - if true info side panel panel content about selected unit is controlled by external mod
+  "SidePanelInfoTargetExternal": true - if true info side panel panel content about selected target is controlled by external mod
+  there two methods in API 
+    CustAmmoCategories.CombatHUDInfoSidePanelHelper.SetSelfInfo(AbstractActor actor, Text text) 
+    CustAmmoCategories.CombatHUDInfoSidePanelHelper.SetTargetInfo(AbstractActor actor,ICombatant target, Text text)
+  on each invocation side panel refreshing. 
+  "MechHasNoStabilityTag": "mech_no_stability", - if mech chassis have this tag no instability damage applied by incoming attacks, land mines, components explosions.
+  "TransferHeatDamageToNormalTag": "heat_damage_to_normal", - if mech chassis have this tag incoming heat damage from attacks, land mines, burning terrain, components explosions transferred to normal damage instead.
 }
 
 now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
@@ -460,7 +475,9 @@ new fields
   "AMSShootsEveryAttack": false, - if true AMS will not share AMS.ShootsWhenFired between all missile attacks this round. 
                                        Every missile attack will cause AMS.ShootsWhenFired shoots. 
 								   if false AMS will shoot AMS.ShootsWhenFired per round
-  "AMSImmune": false - if true, weapon missiles is immune to AMS and none AMS will try to intercept them.
+  "AMSImmune": false - if true, weapon missiles is immune to AMS and none AMS will try to intercept them. Can be set for mode ammo and weapon
+  "MissileHealth": 1, - health of missile. Used while AMS working. If missile health become 0 missile counted as intercepted. Additive for ammo, mode, weapon.
+  "AMSDamage": 1, - damage AMS inflicting to missiles subtracting from missile health on success hit. Used while AMS working. If missile health become 0 missile counted as intercepted. Additive for ammo, mode, weapon.
   "AOECapable" : false, - if true weapon will included in AOE damage calculations. If true set in weapon definition 
                             all shoots will have AoE effect (even for energy weapon). If true, it can't be overridden by ammo.
   "AOERange": 100, - Area of effect range. If AOECapable in weapon is set to true this value will be used. If AOECapable is true, it can't be overridden by ammo.
