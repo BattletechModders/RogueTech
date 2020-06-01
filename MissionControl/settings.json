@@ -1,22 +1,17 @@
 {
-  "DebugMode": false,
-  "VersionCheck": false,
+  "DebugMode": true,
+  "VersionCheck": true,
   "DebugSkirmishMode": true,
   "DisableIfFlashpointContract": true,
     "RandomSpawns": {
     "Enable": true,
     "ExcludeContractTypes": ["SoloDuel", "DuoDuel"]
   },
-  "Spawners": {
-  "SpawnLanceAtEdgeBoundary": {
-    "MinBuffer": 100,
-    "MaxBuffer": 200
-  }
-},
   "HotDrop": {
-    "Enable": false,
+    "Enable": true,
+    "ExcludeContractTypes": ["SoloDuel", "DuoDuel"],
     "GuardOnHotDrop": false,
-    "EvasionPipsOnHotDrop": 4,
+    "EvasionPipsOnHotDrop": 6,
     "IncludeEnemies": true,
     "IncludeAllyTurrets": false,
     "IncludeEnemyTurrets": false
@@ -25,6 +20,10 @@
     "Enable": true,
 	"ExcludeContractTypes": ["SoloDuel", "DuoDuel", "AttackDefend"],
 	"IsPrimaryObjectiveIn": ["SimpleBattle", "CaptureBase"],
+    "ExcludeFromAutocomplete": ["DefendBase", "FireMission"],
+    "HideObjective": true,
+    "ShowObjectiveOnLanceDetected": true,
+    "AlwaysDisplayHiddenObjectiveIfPrimary": false,
     "UseElites": false,
     "UseDialogue": true,
     "SkullValueMatters": true,
@@ -34,11 +33,8 @@
     "DisableWhenMaxTonnage": {
       "Enable": false,
       "Limited": false,
-      "LimitedToUnder": 400
+      "LimitedToUnder": 300
     },
-	"HideObjective": true,
-"ShowObjectiveOnLanceDetected": true,
-"AlwaysDisplayHiddenObjectiveIfPrimary": false,
 "MatchAllyLanceCountToEnemy": false,
 "DropWeightInfluence": {
   "Enable": true,
@@ -52,11 +48,11 @@
   },
   "ExtendedLances": {
     "Enable": true,
+    "Autofill": true,
+    "ExcludeContractTypes": ["SoloDuel", "DuoDuel"],
 	"SkipWhenTaggedWithAny": ["lance_type_solo"],
 "SkipWhenTaggedWithAll": [],
 "SkipWhenExcludeTagsContain": ["no_extended_lance"],
-	"ExcludeContractTypes": ["SoloDuel", "DuoDuel"],
-    "Autofill": true,
     "LanceSizes": {
       "5": [
         {
@@ -138,7 +134,7 @@
   },
   "ExtendedBoundaries": {
     "Enable": true,
-    "ExcludeContractTypes": ["SoloDuel", "DuoDuel"],
+    "ExcludeContractTypes": ["SoloDuel", "DuoDuel", "DefendBase"],
     "IncreaseBoundarySizeByPercentage": 0.1,
     "Overrides": [
       {
@@ -173,19 +169,27 @@
     ]
   },
   "DynamicWithdraw": {
-    "Enabled": true,
+    "Enable": true,
 	"ExcludeContractTypes": ["SoloDuel", "DuoDuel"],
 	"MinDistanceForZone": 50,
-    "MaxDistanceForZone": 400,
+    "MaxDistanceForZone": 288,
     "DisorderlyWithdrawalCompatibility": true
   },
   "AI": {
     "FollowPlayer": {
+      "Pathfinding": "Alternative",
       "Target": "HeaviestMech",
       "StopWhen": "OnEnemyVisible",
-	  "Pathfinding": "Alternative",
       "MaxDistanceFromTargetBeforeSprinting": 120,
-      "TargetZoneRadius": 120
+      "TargetZoneRadius": 120,
+      "TimeToWaitForPathfinding": 60,
+      "TicksToWaitForPathfinding": 20
+    }
+  },
+  "Spawners": {
+    "SpawnLanceAtEdgeBoundary": {
+      "MinBuffer": 100,
+      "MaxBuffer": 200
     }
   }
 }
