@@ -252,8 +252,12 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
     CustAmmoCategories.CombatHUDInfoSidePanelHelper.SetSelfInfo(AbstractActor actor, Text text) 
     CustAmmoCategories.CombatHUDInfoSidePanelHelper.SetTargetInfo(AbstractActor actor,ICombatant target, Text text)
   on each invocation side panel refreshing. 
-  "MechHasNoStabilityTag": "mech_no_stability", - if mech chassis have this tag no instability damage applied by incoming attacks, land mines, components explosions.
-  "TransferHeatDamageToNormalTag": "heat_damage_to_normal", - if mech chassis have this tag incoming heat damage from attacks, land mines, burning terrain, components explosions transferred to normal damage instead.
+  "MechHasNoStabilityTag": ["mech_no_stability"], - if mech chassis have this tag no instability damage applied by incoming attacks, land mines, components explosions.
+  "TransferHeatDamageToNormalTag": ["heat_damage_to_normal"], - if mech chassis have this tag incoming heat damage from attacks, land mines, burning terrain, components explosions transferred to normal damage instead.
+  "InfoPanelDefaultState": false, - if true side info panel is shown by default
+  "AttackLogWrite": false - if true csv attack log will be created in CustomAmmoCatogories/AttacksLogs
+  "ShowAttackGroundButton": false - if false no attack ground button will be shown,
+  "ShowWeaponOrderButtons": false - if false no weapon order buttons will be shown
 }
 
 now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
@@ -1085,6 +1089,32 @@ Ammo definition
     ]
 }
 
+Note for Explosion API
+CustAmmoCategories.ExplosionAPIHelper.AoEExplode(
+string VFX - VFX name
+, Vector3 vfxScale - VFX scale
+, float vfxDuration - VFX playing duration in seconds
+, string SFX - sound effect
+, Vector3 pos - position
+, float radius - AoE radius in meters
+, float damage - AoE damage
+, float heat - AoE heat
+, float stability - AoE stability damage
+, List<EffectData> effects - list of applying effects
+, bool effectsFalloff - not used
+, int fireRadius - fire radius in cells
+, int fireStrength - fire strength
+, float fireChance - fire chance
+, int fireDurationNoForest - fire duration in turns if no forest in affected hex
+   (all values allied with respect to biome)
+, string LongVFX - long VFX prefab
+, Vector3 longVFXScale - long VFX scale
+, string designMask - design mask to apply
+, int dmRadius - radius in cells to apply design mask
+, int turns - duration of design mask and long VFX if set
+)
+example
+ExplosionAPIHelper.AoEExplode("WFX_Nuke", Vector3.one * 50f, 20f, "big_explosion", this.targetPosition, 100f, 2000f, 100f, 100f, new List<EffectData>(), false, 3, 40, 1f, 5, string.Empty, Vector3.zero, string.Empty, 0, 0);
 
 Notes for external AI (CleverGirl):
 weapon.gatherDamagePrediction(Vector3 attackPos, ICombatant target) - returns Dictionary<AmmoModePair, WeaponFirePredictedEffect>
