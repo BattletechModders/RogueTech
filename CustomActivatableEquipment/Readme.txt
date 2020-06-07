@@ -40,7 +40,8 @@ AI related mod settings
                                             + <count of destroyed legs> * <LegAbsenceStoodUpMod>
                                     if roll value less than stand chance mech starts normally, if not mech will not stand up acting same as if you press "done with mech".
                               NOTE! You can use CAEStoodUpRollMod and CAEArmAbsenceStoodUpMod actors statistic values to control stand up roll per chassis/mech
-  "unaffectedByHeadHitStatName": "unaffectedByHeadHit" - unit statistic names if tits value set true at runtime mech will be unaffected by head hits
+  "unaffectedByHeadHitStatName": "unaffectedByHeadHit" - unit statistic names if this value is set true at runtime mech will be unaffected by head hits
+  "equipmentFlashFailChance": 0.1 if component is active currentlly and its fail chance more than this value its slot will flash red.
 -----------------------------------------------------------------------------------------------------------------------                              
   NOT NEEDED ANY MORE. KEEPED FOR HISTORICAL REASONS.
   "auraUpdateFix": "Position" - type of fixing updating aura while unit movment.
@@ -313,6 +314,7 @@ AI related mod settings
                          Supported value Structure
 				"AffectInstalledLocation":true, - if true location where component installed will be added to list. 
                           NOTE: for meches both front and rear location will be added to affecte4d list (if available for location)
+        "TurnsSinceDamage": 1, - if this value >= 0 and location has been damaged more than this value rounds ago - no repair performed
 				"repairTrigger":{  - repair triggers
 					"OnActivation":false, - if true repairing will be committed on component on component activation
 					"OnDamage":"InstalledLocation", - control on damage repair activation
