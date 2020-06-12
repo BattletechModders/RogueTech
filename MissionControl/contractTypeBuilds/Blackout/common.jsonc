@@ -164,7 +164,8 @@
           "LanceToUseRegionGuid": "76b654a6-4f2c-4a6f-86e6-d4cf868335fe", // Player lance GUID
           "ProgressFormat": "with [unitsOccupyingSoFar]/[numberOfUnitsToOccupy] unit(s)",
           "Description": "The objective for the player to investigate the blackout",
-          "RequiredTagsOnUnit": ["Player 1"]
+          "RequiredTagsOnUnit": ["Player 1"],
+          "NumberOfUnitsToOccupy": 2
         },
         {
           "Name": "Region_Investigate_Blackout",
@@ -510,6 +511,9 @@
       "ControlledByContract": true,
       "Guid": "832ae497-f3d3-467f-b4da-8e95a3d757b0",
       "StartingStatus": "Inactive",
+      "ConflictsWith": [
+        "1fdeca88-c2d9-46af-b443-cf95aae707b6" // Chunk_Stage_Post_3a_Enemy_Turrets
+      ],
       "OnActiveExecute": [
         {
           "Type": "Dialogue",
@@ -532,7 +536,10 @@
       "ControlledByContract": true,
       "Guid": "df31d9e4-762f-4556-bc49-ce8dc1659c0a",
       "StartingStatus": "Inactive",
-      "ConflictsWith": ["38a28d0b-4688-41b5-a9e8-825a55c38c93"], // Chunk_Stage_Post_3a
+      "ConflictsWith": [
+        "38a28d0b-4688-41b5-a9e8-825a55c38c93", // Chunk_Stage_Post_3a
+        "1fdeca88-c2d9-46af-b443-cf95aae707b6" // Chunk_Stage_Post_3a_Enemy_Turrets
+      ],
       "OnActiveExecute": [
         {
           "Type": "Dialogue",
@@ -912,9 +919,24 @@
           ]
         },
         {
+          /*
+            If the 'Destroy Invading Lance' objective is completed before the turrets activate
+            Then immediately activate the enemy turret event for Phase 2 OR just end the game.
+            There's no need to have friendly turrets activate then.
+          */
           "Type": "Delay",
           "Name": "Activate 3a Turrets",
-          "Rounds": 3,
+          "Rounds": 2,
+          "SkipIf": {
+            "TriggerOn": "OnObjectiveUpdated",
+            "Conditionals": [
+              {
+                "Type": "ObjectiveStatusConditional",
+                "Guid": "bfa3d339-c304-4fba-87db-ac725acb4c10", // Chunk_Stage_Post_3a Destroy Invading Lance
+                "Status": "Success"
+              }
+            ]
+          },
           "Results": [
             {
               "Type": "SetStateAtRandom",
@@ -923,6 +945,25 @@
                 "832ae497-f3d3-467f-b4da-8e95a3d757b0" // Chunk_Stage_Post_3a_Friendly_Turrets
               ],
               "State": "Active"
+            }
+          ],
+          "ResultsIfSkipped": [
+            {
+              "Type": "TriggerResultAtRandom",
+              "Results": [
+                {
+                  "Type": "SetState",
+                  "EncounterGuid": "1fdeca88-c2d9-46af-b443-cf95aae707b6", // Chunk_Stage_Post_3a_Enemy_Turrets
+                  "State": "Active"
+                },
+                {
+                  "Type": "IgnoreChunks",
+                  "EncounterGuids": [
+                    "1fdeca88-c2d9-46af-b443-cf95aae707b6" // Chunk_Stage_Post_3a_Enemy_Turrets
+                    // "832ae497-f3d3-467f-b4da-8e95a3d757b0" // Chunk_Stage_Post_3a_Friendly_Turrets
+                  ]
+                }
+              ]
             }
           ]
         }

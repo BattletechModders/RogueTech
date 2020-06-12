@@ -252,8 +252,12 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
     CustAmmoCategories.CombatHUDInfoSidePanelHelper.SetSelfInfo(AbstractActor actor, Text text) 
     CustAmmoCategories.CombatHUDInfoSidePanelHelper.SetTargetInfo(AbstractActor actor,ICombatant target, Text text)
   on each invocation side panel refreshing. 
-  "MechHasNoStabilityTag": "mech_no_stability", - if mech chassis have this tag no instability damage applied by incoming attacks, land mines, components explosions.
-  "TransferHeatDamageToNormalTag": "heat_damage_to_normal", - if mech chassis have this tag incoming heat damage from attacks, land mines, burning terrain, components explosions transferred to normal damage instead.
+  "MechHasNoStabilityTag": ["mech_no_stability"], - if mech chassis have this tag no instability damage applied by incoming attacks, land mines, components explosions.
+  "TransferHeatDamageToNormalTag": ["heat_damage_to_normal"], - if mech chassis have this tag incoming heat damage from attacks, land mines, burning terrain, components explosions transferred to normal damage instead.
+  "InfoPanelDefaultState": false, - if true side info panel is shown by default
+  "AttackLogWrite": false - if true csv attack log will be created in CustomAmmoCatogories/AttacksLogs
+  "ShowAttackGroundButton": false - if false no attack ground button will be shown,
+  "ShowWeaponOrderButtons": false - if false no weapon order buttons will be shown
 }
 
 now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
@@ -436,8 +440,37 @@ new fields
 								  if weapon define has tag "wr-clustered_shots", "Cluster" hit generator will be forced. 
   "DirectFireModifier" : -10.0, Accuracy modifier if weapon can strike directly
   "DamageVariance": 20, - Simple damage variance as implemented in WeaponRealizer
-  "DistantVariance": 0.3, - Distance damage variance as implemented in WeaponRealizer
-  "DistantVarianceReversed": false, - Set is distance damage variance is reversed
+  "DamageFalloffStartDistance": 0, - distance where damage starts to change, additive per ammo/mode/weapon.
+  "DamageFalloffEndDistance": 0, - distance where damage stops to change, additive per ammo/mode/weapon.
+  "DistantVariance": 0.3, - Distance damage variance addiditve per ammo/mode/weapon
+  "DistantVarianceReversed": false, - Set is distance damage variance is reversed (mode have priority, than ammo, than weapon)
+	Distance variance logic:
+	1. If DistantVarianceReversed false
+	  a) if DistantVariance > 1.0 - (0 <= distance <= DamageFalloffStartDistance) damage coeff = DistantVariance
+	                       (DamageFalloffStartDistance < distance < DamageFalloffEndDistance)
+						   damage coeff decrease from DistantVariance(at DamageFalloffStartDistance) to 1(at DamageFalloffEndDistance)
+	  b) if DistantVariance < 1.0 - (0 <= distance <= DamageFalloffStartDistance) damage coeff = 1
+	                       (DamageFalloffStartDistance < distance < DamageFalloffEndDistance)
+						   damage coeff decrease from 1(at DamageFalloffStartDistance) to DistantVariance(at DamageFalloffEndDistance)
+						   if DamageFalloffStartDistance is 0 assumed to be MediumRange
+						   if DamageFalloffEndDistance is less than DamageFalloffStartDistance assumed to be MaxRange
+	2. If DistantVarianceReversed true
+	  a) if DistantVariance > 1.0 - (0 <= distance <= DamageFalloffStartDistance) damage coeff = 1
+	                       (DamageFalloffStartDistance < distance < DamageFalloffEndDistance) 
+						   damage coeff grow from 1(at DamageFalloffStartDistance) to DistantVariance(at DamageFalloffEndDistance)
+						   (DamageFalloffEndDistance <= distance < MaxRange) damage coeff = DistantVariance
+	  b) if DistantVariance < 1.0 - (0 <= distance <= DamageFalloffStartDistance) damage coeff = DistantVariance
+	                       (DamageFalloffStartDistance < distance < DamageFalloffEndDistance) 
+						   damage coeff grow from DistantVariance(at DamageFalloffStartDistance) to 1(at DamageFalloffEndDistance)
+						   (DamageFalloffEndDistance <= distance < MaxRange) damage coeff = 1
+						   if DamageFalloffStartDistance is 0 assumed to be MinRange
+						   if DamageFalloffEndDistance is less than DamageFalloffStartDistance assumed to be MediumRange						   
+  "RangedDmgFalloffType": "Linear", - function to recalculate distance ratio to damage in distance variance
+                           Posible values: "Quadratic", "Cubic", "SquareRoot", "Log10", "LogE", "Exp", "Linear"
+						   mode have priority, than ammo, than weapon. Default value Quadratic
+  "AoEDmgFalloffType": "Linear", - function to distance ratio to damage in AoE damage processing
+                           Posible values: "Quadratic", "Cubic", "SquareRoot", "Log10", "LogE", "Exp", "Linear"
+						   mode have priority, than ammo, than weapon. Default value Linear
   "DamageOnJamming": true/false, - if true on jamming weapon will be damaged
   "DestroyOnJamming": true/false, - if true on jamming weapon will be destroyed (need DamageOnJamming to be set true also)
   "FlatJammingChance": 1.0, - Chance of jamming weapon after fire. 1.0 is jamm always. Unjamming logic implemented as in WeaponRealizer
@@ -619,8 +652,6 @@ new fields
 									  result = 1.0 + (6-10)*0.1 = 0.6
 								      GunneryJammingBase if omitted in weapon def., ammo def. and mode def. assumed as 5. 
 		"DamageVariance": 20, - Simple damage variance as implemented in WeaponRealizer
-		"DistantVariance": 0.3, - Distance damage variance as implemented in WeaponRealizer
-		"DistantVarianceReversed": false, - Set is distance damage variance is reversed
 		"Cooldown": 2, - number of rounds weapon will be unacceptable after fire this mode
 		"AIHitChanceCap": 0.3, - not used any more
 		"DamageOnJamming": true/false, - if true on jamming weapon will be damaged
@@ -793,8 +824,6 @@ Ammo definition
    "DirectFireModifier" : -10.0, Accuracy modifier if weapon can strike directly
    "FlatJammingChance": 1.0, - Chance of jamming weapon after fire. 1.0 is jamm always. Unjamming logic implemented as in WeaponRealizer
    "DamageVariance": 20, - Simple damage variance as implemented in WeaponRealizer
-   "DistantVariance": 0.3, - Distance damage variance as implemented in WeaponRealizer
-   "DistantVarianceReversed": false - Set is distance damage variance is reversed
 		"DamageMultiplier":2.0, - damage multiplier for this mode. Multiplicative per ammo/mode. If omitted assumed to be 1.0.
 		"HeatMultiplier":2.0, - heat multiplier for this mode. Multiplicative per ammo/mode. If omitted assumed to be 1.0.
 		"InstabilityMultiplier":2.0, - instability multiplier for this mode. Multiplicative per ammo/mode. If omitted assumed to be 1.0.
@@ -919,9 +948,13 @@ Ammo definition
                                        Damage inflicted to vehicle that way are not cause critical damage to internal components only armor and structure.
                                        Fired cell not saved on battle save/reload.
        "FireTerrainCellRadius":6, - radius in in-game cells to fire check roll. On impact each hex cell containing at least one map cell with in radius will have chance to be burned
+	  "AoEDmgFalloffType": "Linear", - function to distance ratio to damage in AoE damage processing
+                           Posible values: "Quadratic", "Cubic", "SquareRoot", "Log10", "LogE", "Exp", "Linear"
+						   Default value - "Linear"
       "statusEffects" : [ - status effects applying on landmine explosion
       ]
-      NOTE! For moving landmine hit roll performed every terrain cell, but only one landmine can explode. Moving and melee sequence will be interrupted after armor breach. 
+      NOTE! For moving landmine hit roll performed every terrain cell, but only one landmine can explode. Moving and melee sequence will be interrupted after armor breach.
+            But if armor has been breached already move sequence will ne interrupted only on location destroy.
             For jumping every landmine in target hex cell rolling for explode.
             Original unit triggered landmine receive only MineField.Damage. MineField.AOEDamage all other targets in MineField.AOERange
    }
@@ -1085,6 +1118,33 @@ Ammo definition
     ]
 }
 
+Note for Explosion API
+CustAmmoCategories.ExplosionAPIHelper.AoEExplode(
+string VFX - VFX name
+, Vector3 vfxScale - VFX scale
+, float vfxDuration - VFX playing duration in seconds
+, string SFX - sound effect
+, Vector3 pos - position
+, float radius - AoE radius in meters
+, float damage - AoE damage
+, float heat - AoE heat
+, float stability - AoE stability damage
+, List<EffectData> effects - list of applying effects
+, bool effectsFalloff - not used
+, int fireRadius - fire radius in cells
+, int fireStrength - fire strength
+, float fireChance - fire chance
+, int fireDurationNoForest - fire duration in turns if no forest in affected hex
+   (all values allied with respect to biome)
+, string LongVFX - long VFX prefab
+, Vector3 longVFXScale - long VFX scale
+, string designMask - design mask to apply
+, int dmRadius - radius in cells to apply design mask
+, int turns - duration of design mask and long VFX if set
+)
+example
+ExplosionAPIHelper.AoEExplode("WFX_Nuke", Vector3.one * 50f, 20f, "big_explosion", this.targetPosition, 100f, 2000f, 100f, 100f, new List<EffectData>(), false, 3, 40, 1f, 5, string.Empty, Vector3.zero, string.Empty, 0, 0);
+CustAmmoCategories.ExplosionAPIHelper.LayMineField(MineFieldDef def, Vector3 pos)
 
 Notes for external AI (CleverGirl):
 weapon.gatherDamagePrediction(Vector3 attackPos, ICombatant target) - returns Dictionary<AmmoModePair, WeaponFirePredictedEffect>
@@ -1648,264 +1708,4 @@ public enum AudioEventList_whoosh
 
 
 overriden methods
-
-!!!BattleTech.AttackDirector.AttackSequence.GenerateHitInfo
-	Prefix
-Implement HitGenerator choosing. Original method completely rewritten and never invoking. 
-
-!!!BattleTech.AttackDirector.AttackSequence.OnAttackSequenceResolveDamage:
-	Prefix
-add per ammo modification to applying status effects. Original method completely rewritten and never invoking
-
-!!!BattleTech.Weapon.DecrementAmmo:
-	Prefix
-method completely rewritten to make weapon use only selected ammo and implement streak ammo decremental (decrement only success hits)
-	
-!!!BattleTech.AbstractActor.CalcAndSetAlphaStrikesRemaining:
-	Prefix:
-Method completely rewritten to make AI calc remaining alpha strikes correctly base on real weapon ammo category. Original method never invoking
-	
-!!!BattleTech.Weapon.SetAmmoBoxes
-	Prefix
-Method completely rewritten to make weapon use right ammo. Original method never invoking.
-
-!!!BattleTech.Weapon.CurrentAmmo
-	Prefix
-Method completely rewritten to make weapon use right ammo. Original method never invoking.
-
-!!!BattleTech.MechValidationRules.ValidateMechHasAppropriateAmmo:
-	Prefix
-Method completely rewritten to make mechlab validator functioning correctly.
-
-!!!BattleTech.WeaponRepresentation.PlayWeaponEffect:
-	Prefix
-Method completely rewritten to play correct effect for each ammo. Original method never invoking.
-	
-!!!WeaponEffect.PlayProjectile:
-	Prefix
-Method completely rewritten to make correct AttackRecoil. Original method never invoking.
-
-!BattleTech.ToHit.GetEvasivePipsModifier
-	Prefix
-add per ammo modification. If modification is done original method not invoked.
-
-!BattleTech.WeaponDef.FromJSON
-	Prefix
-method make some modification on json. Original method always invoking.
-
-!BattleTech.AmmunitionDef.FromJSON
-	Prefix
-method make some modification on json. Original method always invoking.
-
-!BattleTech.UI.CombatHUDWeaponSlot.OnPointerDown
-	Prefix
-add trigger to ammo cycling. If click detected on right side of weapon slot original method not invoking.
-
-!BattleTech.UI.CombatHUDWeaponSlot.OnPointerUp
-	Prefix
-add trigger to ammo cycling. If click detected on right side of weapon slot original method not invoking.
-
-!BattleTech.UI.CombatHUDWeaponSlot.RefreshHighlighted
-	Prefix
-add check on DisplayWeapon == null if so original method not invoking.
-
-BattleTech.Weapon.DamagePerShot getter
-	Postfix
-add per ammo/mode modification
-
-BattleTech.Weapon.HeatDamagePerShot getter
-	Postfix
-add per ammo/mode modification
-
-BattleTech.Weapon.get_ShotsWhenFired
-	Postfix
-add per ammo/mode modification
-
-BattleTech.Weapon.get_ProjectilesPerShot:
-	Postfix
-add per ammo/mode modification
-
-BattleTech.Weapon.get_CriticalChanceMultiplier:
-	Postfix
-add per ammo/mode modification
-
-BattleTech.Weapon.get_AccuracyModifier:
-	Postfix
-add per ammo/mode modification
-
-BattleTech.Weapon.get_MinRange:
-	Postfix
-add per ammo/mode modification
-
-BattleTech.Weapon.get_MaxRange:
-	Postfix
-add per ammo/mode modification
-
-BattleTech.Weapon.get_ShortRange:
-	Postfix
-add per ammo/mode modification
-
-BattleTech.Weapon.get_MediumRange:
-	Postfix
-add per ammo/mode modification
-
-BattleTech.Weapon.get_LongRange:
-	Postfix
-add per ammo/mode modification
-
-BattleTech.Weapon.get_HeatGenerated:
-	Postfix
-add per ammo/mode modification
-
-BattleTech.Weapon.get_IndirectFireCapable:
-	Postfix
-add per ammo/mode modification
-
-BattleTech.Weapon.get_AOECapable:
-	Postfix
-add per ammo/mode modification
-
-BattleTech.Weapon.Instability:
-	Postfix
-add per ammo/mode modification
-
-BattleTech.Weapon.get_WillFire:
-	Postfix
-add per ammo/mode modification
-
-BattleTech.Weapon.RefireModifier getter
-	Postfix
-add per ammo/mode modification
-	
-BattleTech.MechComponent.UIName getter:
-	Postfix
-add per ammo/mode modification
-
-BattleTech.WeaponRepresentation.Init:
-	Postfix
-Registering additional weapon visual effects.
-
-BattleTech.WeaponRepresentation.ResetWeaponEffect:
-	Postfix
-resetting additional per ammo visual effects
-
-BattleTech.CombatGameState.ShutdownCombatState:
-	Postfix
-make some cleaning
-
-BattleTech.AttackDirector.AttackSequence.Cleanup:
-	Postfix
-helps AI to cycle ammo on depletion 
-
-BattleTech.UI.CombatHUDWeaponSlot.RefreshDisplayedWeapon:
-	Transpiler
-needed show real projectiles count when ProjectilesPerShot > 1
-
-BattleTech.CombatGameState.RebuildAllLists
-	Postfix
-registering all weapon and ammo on battlefield.
-
-BattleTech.CombatGameState.OnCombatGameDestroyed:
-	Postfix
-make some cleaning
-
-BattleTech.UI.CombatHUD.Init:
-	Prefix
-registering all weapon and ammo on battlefield. Original method always invoking
-
-AttackEvaluator.MakeAttackOrderForTarget
-	Prefix
-AI make decision what ammo he must use to hit target. Original method invoking always
-	
-AttackEvaluator.MakeAttackOrder
-	Postfix
-AI make decision what ammo he must use to hit target.
-
-AIUtil.UnitHasLOFToTargetFromPosition:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
-
-AIUtil.UnitHasLOFToUnit:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
-
-BattleTech.AIRoleAssignment.EvaluateSniper:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
-
-BattleTech.AbstractActor.GetLongestRangeWeapon:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
-
-BattleTech.AbstractActor.HasIndirectLOFToTargetUnit:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
-
-BattleTech.AbstractActor.HasLOFToTargetUnit:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
-
-BattleTech.HostileDamageFactor.expectedDamageForShooting:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
-
-BattleTech.MultiAttack.FindWeaponToHitTarget:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
-
-BattleTech.MultiAttack.GetExpectedDamageForMultiTargetWeapon:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
-
-BattleTech.MultiAttack.PartitionWeaponListToKillTarget:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
-
-BattleTech.MultiAttack.ValidateMultiAttackOrder:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
-
-BattleTech.PreferExposedAlonePositionalFactor.InitEvaluationForPhaseForUnit:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
-
-BattleTech.PreferFiringSolutionWhenExposedAllyPositionalFactor.EvaluateInfluenceMapFactorAtPosition:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
-
-BattleTech.PreferLethalDamageToRearArcFromHostileFactor.expectedDamageForShooting:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
-
-BattleTech.PreferNotLethalPositionFactor.expectedDamageForShooting:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
-
-BattleTech.ToHit.GetAllModifiers:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
-	Postfix
-add per ammo or weapon modificator if direct fire detected.
-
-BattleTech.ToHit.GetAllModifiersDescription:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
-	Postfix
-add per ammo or weapon modificator if direct fire detected.
-
-BattleTech.UI.CombatHUDWeaponSlot.UpdateToolTipsFiring:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
-
-BattleTech.UI.CombatHUDWeaponTickMarks.GetValidSlots:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
-
-BattleTech.Weapon.WillFireAtTargetFromPosition:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
-
-LOFCache.UnitHasLOFToTarget:
-	Transpiler
-add per ammo modification of IndirectFireCapable. weapon.IndirectFireCapable changed to CustomAmmoCategories.getIndirectFireCapable(weapon)
 
