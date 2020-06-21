@@ -27,8 +27,13 @@ CACMediumRangeAccuracyMod - ShortRange <= X < MediumRange
 CACLongRangeAccuracyMod - MediumRange <= X < LongRange
 CACExtraLongRangeAccuracyMod - LongRange <= X < MaxRange
 
-NOTE: You can influence AP infliction via CACAPProtection unit's staticstic value
-if set as true all AP effects (damage and crits) will not affect unit.
+
+Additional unit statistic
+CACAPProtection - boolean - if true unit is protected from all AP damage including AP crits. If armor is absent crits will be rolled anyway
+CACAoEDamageMult - float - multipicator for all AoE damage to unit including AoE heat and stability if applicable. (Working for weapon attacks, landmines and component explosions)
+CACAPDamageMult - float - multipicator for all AP damage to unit (only pierce through part of damage)
+CACIncomingHeatMult - float - multipicator for all incoming heat (weapon attacks, landmines, burning terrain, AoE damage)
+CACIncomingStabilityMult - float - multipicator for all incoming stability (weapon attacks, landmines, burning terrain, AoE damage)
 
 {
 "debugLog":true, - enable debug log 
