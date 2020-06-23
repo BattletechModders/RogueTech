@@ -9,11 +9,12 @@
         "BonusDescriptions": {
             "Bonuses": [
 				"ArmAccuracy: +2",
-                "MeleeAcc: +2",
-                "Melee: +30%",
-                "Melee2: +10",
-                "MeleeStab: +20%",
-                "MeleeCrit: +35%"
+                "CBTBEPhysicalSupportWeapon: 1",
+                "CBTBEPhysicalDamageMulti: +20%",
+                "CBTBEPhysicalStabilityMulti: +10%",
+                "CBTBEPunchDamageMulti: +20%",
+                "CBTBEPunchStabilityMulti: +10%",
+				"CBTBEPhysicalAttackAccuracyUpgrade: 1"
             ]
         },
         "InventorySorter": {
@@ -87,16 +88,16 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StatusEffect-HandMeleeCrit",
-                "Name": "Hand Melee Damage",
-                "Details": "Melee attacks deal 50% Extra damage.",
-                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+                "Id": "Hand_MeleeAttacks_Punch",
+                "Name": "MeleeWeapon Accuracy Modifier",
+                "Details": "MeleeWeapon Accuracy Modifier",
+                "Icon": "uixSvgIcon_run_n_gun"
             },
             "nature": "Buff",
             "statisticData": {
-                "statName": "CriticalChanceMultipler",
+                "statName": "CBTBE_Punch_Extra_Hits_Count",
                 "operation": "Float_Add",
-                "modValue": "0.35",
+                "modValue": "0.5",
                 "modType": "System.Single",
                 "targetCollection": "Weapon",
                 "targetWeaponSubType": "Melee"
@@ -115,16 +116,16 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StatusEffect-HandMelee",
-                "Name": "Hand Melee Damage",
-                "Details": "Melee attacks deal 50% Extra damage.",
-                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+                "Id": "MeleeAttacks_Weapon",
+                "Name": "MeleeWeapon Accuracy Modifier",
+                "Details": "MeleeWeapon Accuracy Modifier",
+                "Icon": "uixSvgIcon_run_n_gun"
             },
             "nature": "Buff",
             "statisticData": {
-                "statName": "DamagePerShot",
-                "operation": "Float_Multiply",
-                "modValue": "1.3",
+                "statName": "CBTBE_Physical_Weapon_Extra_Hits_Count",
+                "operation": "Float_Add",
+                "modValue": "1",
                 "modType": "System.Single",
                 "targetCollection": "Weapon",
                 "targetWeaponSubType": "Melee"
@@ -143,44 +144,72 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StatusEffect-HandMeleeStab",
-                "Name": "Hand Melee Damage",
-                "Details": "Melee attacks deal 20% Extra stab damage.",
+                "Id": "Claws_Damage_Mod",
+                "Name": "Melee Weapon Damage Mod",
+                "Details": "Damage Modifier",
                 "Icon": "uixSvgIcon_equipment_ActuatorArm"
             },
             "nature": "Buff",
             "statisticData": {
-                "statName": "Instability",
+                "statName": "CBTBE_Physical_Target_Damage_Multi",
                 "operation": "Float_Multiply",
-                "modValue": "1.15",
+                "modValue": "1.2",
                 "modType": "System.Single",
                 "targetCollection": "Weapon",
                 "targetWeaponSubType": "Melee"
             }
         },
-        {
+		{
             "durationData": {
                 "duration": -1,
                 "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "effectTargetType": "Creator"
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StatusEffect-ClawsMelee",
-                "Name": "SHREDDER CLAWS",
-                "Details": "Melee attacks deal 20 more damage and have +2 Accuracy.",
+                "Id": "Claws_Stability_Mod",
+                "Name": "Melee Weapon Damage Mod",
+                "Details": "Damage Modifier",
                 "Icon": "uixSvgIcon_equipment_ActuatorArm"
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
-                "statName": "DamagePerShot",
+                "statName": "CBTBE_Physical_Weapon_Target_Instability_Multi",
+                "operation": "Float_Multiply",
+                "modValue": "1.1",
+                "modType": "System.Single",
+                "targetCollection": "Weapon",
+                "targetWeaponSubType": "Melee"
+            }
+        },
+{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "MeleeAttacks_Punch",
+                "Name": "MeleeWeapon Accuracy Modifier",
+                "Details": "MeleeWeapon Accuracy Modifier",
+                "Icon": "uixSvgIcon_run_n_gun"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CBTBE_Punch_Extra_Hits_Count",
                 "operation": "Float_Add",
-                "modValue": "10.0",
+                "modValue": "1",
                 "modType": "System.Single",
                 "targetCollection": "Weapon",
                 "targetWeaponSubType": "Melee"
@@ -193,22 +222,78 @@
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "effectTargetType": "Creator"
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "StatusEffect-ClawsMeleeACC",
-                "Name": "MELEE HIT CHANCE DECREASED",
-                "Details": "Melee attacks attempted have their hit decreased by 2.",
-                "Icon": "uixSvgIcon_equipment_Gyro"
+                "Id": "Claws_Punch_Damage_Mod",
+                "Name": "Melee Weapon Damage Mod",
+                "Details": "Damage Modifier",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
-                "statName": "AccuracyModifier",
+                "statName": "CBTBE_Punch_Target_Damage_Multi",
+                "operation": "Float_Multiply",
+                "modValue": "1.2",
+                "modType": "System.Single",
+                "targetCollection": "Weapon",
+                "targetWeaponSubType": "Melee"
+            }
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "ClawsPunch_Stability_Mod",
+                "Name": "Melee Weapon Damage Mod",
+                "Details": "Damage Modifier",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CBTBE_Punch_Target_Instability_Multi",
+                "operation": "Float_Multiply",
+                "modValue": "1.1",
+                "modType": "System.Single",
+                "targetCollection": "Weapon",
+                "targetWeaponSubType": "Melee"
+            }
+        },
+{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "MeleeAccuracy_Claws",
+                "Name": "MeleeWeapon Accuracy Modifier",
+                "Details": "MeleeWeapon Accuracy Modifier",
+                "Icon": "uixSvgIcon_run_n_gun"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CBTBE_Physical_Weapon_Attack_Mod",
                 "operation": "Float_Add",
-                "modValue": "-2.0",
+                "modValue": "-1.0",
                 "modType": "System.Single",
                 "targetCollection": "Weapon",
                 "targetWeaponSubType": "Melee"
