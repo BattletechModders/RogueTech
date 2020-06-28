@@ -6,9 +6,15 @@
 		}],
 		"BonusDescriptions": {
 			"Bonuses": [
-				"MeleeAcc: +1",
-                "Melee: +10%",
-                "MeleeStab: +10%",
+				"CBTBEPhysicalAttackAccuracyUpgrade: +1",
+				"CBTBEPhysicalDamageMulti: +10%",
+				"CBTBEPhysicalStabilityMulti: +5%",
+                "CBTBEPunchAttackAccuracyUpgrade: +1",
+				"CBTBEPunchDamageMulti: +10%",
+				"CBTBEPunchStabilityMulti: +5%",
+				"CBTBEKickDamageMulti: +10%",
+				"CBTBEKickStabilityMulti: +5%",
+                "CBTBEKickAttackAccuracyUpgrade: +1",
 				"Quirk"
 			]
 		},
@@ -55,7 +61,7 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
-                {
+        {
             "durationData": {
                 "duration": -1,
                 "stackLimit": -1
@@ -68,16 +74,44 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "QuirkMeleeDmg",
-                "Name": "Hand Melee Damage",
-                "Details": "Melee attacks deal 50% Extra damage.",
+                "Id": "Quirk_Damage_Mod",
+                "Name": "Melee Weapon Damage Mod",
+                "Details": "Damage Modifier",
                 "Icon": "uixSvgIcon_equipment_ActuatorArm"
             },
             "nature": "Buff",
             "statisticData": {
-                "statName": "DamagePerShot",
+                "statName": "CBTBE_Physical_Target_Damage_Multi",
                 "operation": "Float_Multiply",
                 "modValue": "1.1",
+                "modType": "System.Single",
+                "targetCollection": "Weapon",
+                "targetWeaponSubType": "Melee"
+            }
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "Quirk_Stability_Mod",
+                "Name": "Melee Weapon Damage Mod",
+                "Details": "Damage Modifier",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CBTBE_Physical_Weapon_Target_Instability_Multi",
+                "operation": "Float_Multiply",
+                "modValue": "1.05",
                 "modType": "System.Single",
                 "targetCollection": "Weapon",
                 "targetWeaponSubType": "Melee"
@@ -96,14 +130,14 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "QuirkMeleeStabDmg",
-                "Name": "Hand Melee Damage",
-                "Details": "Melee attacks deal 20% Extra stab damage.",
+                "Id": "Quirk_Punch_Damage_Mod",
+                "Name": "Melee Weapon Damage Mod",
+                "Details": "Damage Modifier",
                 "Icon": "uixSvgIcon_equipment_ActuatorArm"
             },
             "nature": "Buff",
             "statisticData": {
-                "statName": "Instability",
+                "statName": "CBTBE_Punch_Target_Damage_Multi",
                 "operation": "Float_Multiply",
                 "modValue": "1.1",
                 "modType": "System.Single",
@@ -111,7 +145,7 @@
                 "targetWeaponSubType": "Melee"
             }
         },
-        {
+		{
             "durationData": {
                 "duration": -1,
                 "stackLimit": -1
@@ -124,21 +158,161 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "QuirkMeleeAcc",
-                "Name": "Articulate Actuators",
-                "Details": "Melee attacks have +1 Accuracy.",
+                "Id": "Quirk_Punch_Stability_Mod",
+                "Name": "Melee Weapon Damage Mod",
+                "Details": "Damage Modifier",
                 "Icon": "uixSvgIcon_equipment_ActuatorArm"
             },
             "nature": "Buff",
             "statisticData": {
-                "statName": "AccuracyModifier",
+                "statName": "CBTBE_Punch_Target_Instability_Multi",
+                "operation": "Float_Multiply",
+                "modValue": "1.05",
+                "modType": "System.Single",
+                "targetCollection": "Weapon",
+                "targetWeaponSubType": "Melee"
+            }
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "Quirk_Kick_Damage_Mod",
+                "Name": "Melee Weapon Damage Mod",
+                "Details": "Damage Modifier",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CBTBE_Kick_Target_Damage_Multi",
+                "operation": "Float_Multiply",
+                "modValue": "1.1",
+                "modType": "System.Single",
+                "targetCollection": "Weapon",
+                "targetWeaponSubType": "Melee"
+            }
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "Quirk_Punch_Stability_Mod",
+                "Name": "Melee Weapon Damage Mod",
+                "Details": "Damage Modifier",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CBTBE_Kick_Target_Instability_Multi",
+                "operation": "Float_Multiply",
+                "modValue": "1.05",
+                "modType": "System.Single",
+                "targetCollection": "Weapon",
+                "targetWeaponSubType": "Melee"
+            }
+        },
+{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "Quirk_Accuracy_Weapon",
+                "Name": "MeleeWeapon Accuracy Modifier",
+                "Details": "MeleeWeapon Accuracy Modifier",
+                "Icon": "uixSvgIcon_run_n_gun"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CBTBE_Physical_Weapon_Attack_Mod",
                 "operation": "Float_Add",
                 "modValue": "-1.0",
                 "modType": "System.Single",
                 "targetCollection": "Weapon",
                 "targetWeaponSubType": "Melee"
             }
-        }
+        },
+{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "Quirk_Accuracy_Punch",
+                "Name": "MeleeWeapon Accuracy Modifier",
+                "Details": "MeleeWeapon Accuracy Modifier",
+                "Icon": "uixSvgIcon_run_n_gun"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CBTBE_Punch_Attack_Mod",
+                "operation": "Float_Add",
+                "modValue": "-1.0",
+                "modType": "System.Single",
+                "targetCollection": "Weapon",
+                "targetWeaponSubType": "Melee"
+            }
+        },
+{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "Quirk_Accuracy_Kick",
+                "Name": "MeleeWeapon Accuracy Modifier",
+                "Details": "MeleeWeapon Accuracy Modifier",
+                "Icon": "uixSvgIcon_run_n_gun"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CBTBE_Kick_Attack_Mod",
+                "operation": "Float_Add",
+                "modValue": "-1.0",
+                "modType": "System.Single",
+                "targetCollection": "Weapon",
+                "targetWeaponSubType": "Melee"
+            }
+        }		
     ],
     "ComponentTags": {
         "items": [

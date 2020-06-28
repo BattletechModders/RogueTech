@@ -1,15 +1,14 @@
 {
     "Name": "CBTBehaviorsEnhanced",
     "Enabled": true,
-	"Hidden": true,
-    "Version": "0.4.10",
+    "Version": "0.5.3",
     "Description": "Provides TableTop like behaviors for heat, movement, and more",
     "Author": "FrostRaptor",
     "Website": "https://github.com/IceRaptor/CBTBehaviorsEnhanced/",
     "Contact": "",
     "DLL": "CBTBehaviorsEnhanced.dll",
     "DLLEntryPoint": "CBTBehaviorsEnhanced.Mod.Init",
-    "DependsOn" : [ "IRBTModUtils", "MechEngineer", "CustomComponents" ],
+    "DependsOn" : [ "IRBTModUtils", "MechEngineer", "CustomComponents", "Custom Ammo Categories" ],
     "ConflictsWith" : [ "CharlesB" ],
     "Settings": {
         "Debug" : false,
@@ -17,13 +16,23 @@
 
         "Features" : {
             "BiomeBreaches" : true,
+            "PermanentEvasion" : true,
             "StartupChecks" : true
         },
 
-        "EnablePermanentEvasion" : true,
-        "dZ_Abilities" : false,
+        "ToHitSelfJumped": 3,
 
-        "ToHitSelfJumped": 2,
+        "CustomCategories" : {
+           "HipActuatorCategoryId" : "LegHip",
+           "UpperLegActuatorCategoryId" : "LegUpperActuator",
+           "LowerLegActuatorCategoryId" : "LegLowerActuator",
+           "FootActuatorCategoryId" : "LegFootActuator",
+
+           "ShoulderActuatorCategoryId" : "ArmShoulder",
+           "UpperArmActuatorCategoryId" : "ArmUpperActuator",
+           "LowerArmActuatorCategoryId" : "ArmLowerActuator",
+           "HandActuatorCategoryId" : "ArmHandActuator"
+        },
 
         "Heat" : {
             "Movement" : { "15": -1, "30" : -2, "45" : -3, "60" : -4, "75" : -5, "93" : -6, "111" : -7, "129" : -8, "147" : -9 },
@@ -40,16 +49,65 @@
         },
 
         "Melee" : {
-            "SkillMulti" : 0.05,
-            "MadeChargeFallChance" : 0.60,
-            "MadeDFAFallChance" : 0.90,
-            "MissedKickFallChance" : 0.30,
-            "HitByChargeFallChance" : 0.60,
-            "HitByDFAFallChance" : 0.60,
-            "HitByKickFallChance" : 0.30,
-            "AllowMeleeFromSprint" : true
-        },
+            "Charge" : {
+                "AttackerDamagePerTargetTon" : 0.5,
+                "TargetDamagePerAttackerTon" : 0.5,
+                "AttackerInstabilityPerTargetTon" : 0.5,
+                "TargetInstabilityPerAttackerTon" : 0.5,
+                "DamageClusterDivisor" : 25.0,
+                "UnsteadyAttackerOnHit" : false,
+                "UnsteadyAttackerOnMiss" : true,
+                "UnsteadyTargetOnHit" : true,
+            },
 
+            "DFA" : {
+                "AttackerDamagePerTargetTon" : 1.5,
+                "TargetDamagePerAttackerTon" : 1.5,
+                "AttackerInstabilityPerTargetTon" : 0.5,
+                "TargetInstabilityPerAttackerTon" : 0.5,
+                "DamageClusterDivisor" : 25.0,
+                "UnsteadyAttackerOnHit" : true,
+                "UnsteadyAttackerOnMiss" : true,
+                "UnsteadyTargetOnHit" : true,
+            },
+
+            "Kick" : {
+                "BaseAttackBonus" : -2,
+                "LegActuatorDamageMalus" : 2,
+                "FootActuatorDamageMalus" : 1,
+                "TargetDamagePerAttackerTon" : 1,
+                "TargetInstabilityPerAttackerTon" : 0.5,
+                "LegActuatorDamageReduction" : 0.5,
+                "UnsteadyAttackerOnHit" : false,
+                "UnsteadyAttackerOnMiss" : true,
+                "UnsteadyTargetOnHit" : true,
+            },
+
+            "PhysicalWeapon" : {
+                "ArmActuatorDamageMalus" : 2,
+                "DefaultDamagePerAttackerTon" : 0,
+                "DefaultInstabilityPerAttackerTon" : 0,
+                "DefaultUnsteadyAttackerOnHit" : false,
+                "DefaultUnsteadyAttackerOnMiss" : false,
+                "DefaultUnsteadyTargetOnHit" : false,
+            },
+
+            "Punch" : {
+                "ArmActuatorDamageMalus" : 2,
+                "HandActuatorDamageMalus" : 1,
+                "TargetDamagePerAttackerTon" : 0.5,
+                "TargetInstabilityPerAttackerTon" : 0.5,
+                "ArmActuatorDamageReduction" : 0.5,
+                "UnsteadyAttackerOnHit" : true,
+                "UnsteadyAttackerOnMiss" : true,
+                "UnsteadyTargetOnHit" : true,
+            },
+
+            "AllowMeleeFromSprint" : true,
+            "ProneTargetAttackModifier" : -2,
+			"ExtraHitsAverageAllDamage" : true
+        },
+        
         "Move" : {
             "SkillMulti" : 0.05,
             "RunMulti" : 1.5,
@@ -58,103 +116,20 @@
             "MinimumMove" : 40.0,
             "HeatMovePenalty": 24.0,
             "SpeedAsMP" : false,
-            "MPMetersPerHex" : 25.0
+            "MPMetersPerHex" : 24.0
         },
-
+        
         "Piloting" : {
             "SkillMulti" : 0.05,
             "StabilityCheck" : 0.30,
             "DFAReductionMulti" : 0.05,
             "FallingDamagePerTenTons" : 5
         },
-
+        
         "Breaches" : {
             "VacuumCheck" : 0.17,
             "ThinAtmoCheck" : 0.03
-        },
-
-        "LocalizedFloaties" : {
-            "SHUTDOWN_OVERRIDE_SUCCESS" : "Passed Shutdown Override",
-            "SHUTDOWN_OVERRIDE_FAILED" : "Failed Shutdown Override",
-            "SHUTDOWN_FALL" : "Falling from Shutdown",
-
-            "EXPLOSION_CHECK" : "Ammo Explosion Check",
-            "VOLATILE_EXPLOSION_CHECK" : "Volatile Ammo Explosion Check",
-            "SHUTDOWN_CHECK" : "Shutdown Check",
-            "STARTUP_CHECK" : "Startup Check",
-            "INJURY_CHECK" : "Pilot Injury Check",
-            "SYSTEM_FAILURE_CHECK": "System Failure Check",
-            "FALLING_CHECK" : "Falling Check",
-
-            "MELEE_KICK" : "Kick Falling Check",
-            "MELEE_CHARGE" : "Charge Falling Check",
-            "MELEE_DFA" : "DFA Falling Check",
-
-            "RUN_AND_FALL" : "Sprinted with Damage",
-            "JUMP_AND_FALL" : "Jumped with Damage",
-
-            "AUTO_FAIL" : "Automatic Failure",
-            "HULL_BREACH" : "Hull Breach Check"
-        },
-
-        "LocalizedCHUDTooltips" : {
-            "TITLE" : "HEAT LEVEL",
-            "END_OF_TURN_HEAT" : "Projected Heat: {0} of {1}",
-            "HEAT_AND_SINKING" : "\n  Heat: {0} of {1}  Will Sink: {2} of {3} (<color=#{4}>x{5:#.#}</color>)",
-            "AMMO_EXP_CHANCE" : "\nAmmo Explosion on (d100+{0}) < {1}",
-            "AMMO_EXP_WARNING" : "Guaranteed Ammo Explosion!",
-            "PILOT_INJURY_CHANCE" : "\nPilot Injury on (d100+{0}) < {1}",
-            "SYSTEM_FAILURE_CHANCE" : "\nSystem Failure on (d100+{0}) < {1}",
-            "SHUTDOWN_CHANCE" : "\nShutdown on (d100+{0}) < {1}",
-            "SHUTDOWN_WARNING" : "\nGuaranteed Shutdown!",
-            "ATTACK_PENALTY" : "\nAttack Penalty: +{0}",
-            "MOVEMENT_PENALTY" : "\nMovement Penalty: -{0}m",
-
-            "SHUTDOWN_ICON_TITLE" : "SHUT DOWN",
-            "SHUTDOWN_ICON_TEXT" : "This target is easier to hit, and Called Shots can be made against this target. When clicking the restart button, a piloting check will if the BattleMech restarts.",
-            "OVERHEAT_ICON_TITLE" : "OVERHEATING",
-            "OVERHEAT_ICON_TEXT " : "This unit will suffer penalties, may shutdown or even explode unless heat is reduced past critical levels.\n<i>Hover over the heat bar to see a detailed breakdown.</i>"
-        },
-
-        "Quips": {
-            "Breach" : [
-                "Shit, explosive decompression!",
-                "Hull breach detected!",
-                "I've lost something to atmo!",
-                "I hope life support holds up",
-                "I cant breathe!",
-                "There are cracks in my cockpit!",
-                "Components crippled by vacuum",
-                "Alot of red from that hit",
-                "Damn, lost alot of gear"
-            ], 
-            "Knockdown" : [
-                 "Oh .. shit!",
-                "FML",
-                "This is going to hurt..",
-                "Can't keep her steady!",
-                "Gyro's not compensating!",
-                "Screw you gravity!",
-                "Going down",
-                "You're a bastard Newton",
-                "Stability lost, controls unresponsive!",
-                "Controls are locked up, can't stop the fall!",
-                "Past the critical point, she's going down!",
-                "Bracing for ground impact",
-                "Impact protection don't fail",
-                "Dampening neurohelm feedback",
-                "Hope the armor takes it",
-                "About to bite the dust!"
-            ],
-            "Startup" : [
-                "Start damn you",
-                "Can't see through this heat",
-                "Where is the start button?",
-                "Override damn it, override!",
-                "Time to void the warranty",
-                "Why won't you turn on",
-                "I put in the startup sequence!"
-            ]
         }
+
     }
 }

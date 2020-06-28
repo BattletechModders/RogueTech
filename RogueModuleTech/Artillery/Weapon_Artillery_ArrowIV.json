@@ -8,11 +8,11 @@
         "BonusDescriptions": {
             "Bonuses": [
                 "IsArtillery",
-                "VariableDmg: 20",
-                "WpnRecoil: 3",
-                "Indirect",
                 "FLAKmode",
-                "ForbiddenRange: 120"
+                "DIRECTmode",
+                "WpnRecoil: 3",
+                "ForbiddenRange: 180",
+                "MissileHP: 20"
             ]
         },
         "InventorySorter": {
@@ -23,26 +23,26 @@
     "Type": "LRM",
     "WeaponSubType": "LRM20",
     "MinRange": 180,
-    "MaxRange": 1750,
+    "MaxRange": 2000,
     "RangeSplit": [
-        460,
-        800,
-        1480
+        2000,
+        2000,
+        2000
     ],
     "AmmoCategory": "ArrowIV",
     "StartingAmmoCapacity": 0,
     "HeatGenerated": 30,
-    "Damage": 60,
+    "Damage": 100,
     "OverheatedDamageMultiplier": 0,
     "EvasiveDamageMultiplier": 0,
     "EvasivePipsIgnored": 0,
-    "DamageVariance": 20,
+    "DamageVariance": 0,
     "HeatDamage": 0,
     "AccuracyModifier": 0,
     "CriticalChanceMultiplier": 1,
-    "APArmorShardsMod": 0,
-    "APMaxArmorThickness": 1,
-    "APCriticalChanceMultiplier": 1,
+    "APArmorShardsMod": 0.25,
+    "APMaxArmorThickness": 500,
+    "APCriticalChanceMultiplier": 0.5,
     "RefireModifier": 3,
     "ShotsWhenFired": 1,
     "ProjectilesPerShot": 1,
@@ -50,7 +50,7 @@
     "Instability": 10,
     "FireTerrainChance": 0.075,
     "AOEEffectsFalloff": true,
-    "ProjectileSpeedMultiplier": 0.8,
+    "ProjectileSpeedMultiplier": 1,
     "WeaponEffectID": "WeaponEffect-Weapon_LRM20",
     "Description": {
         "Cost": 1152000,
@@ -61,7 +61,7 @@
         "UIName": "Arrow IV",
         "Id": "Weapon_Artillery_ArrowIV",
         "Name": "Arrow IV",
-        "Details": "The Arrow IV is a stand-alone, missile based, artillery system, designed to augment conventional systems such as the Long Tom and the Sniper. It was first introduced by the Terran Hegemony in 2600 and became a staple of the Star League Defense Force. Although the technology to create Arrow IVs was lost during the Star League's collapse, it was recovered by Capellan Confederation engineers in 3044 working off of surviving examples and the Helm Memory Core. \n\n <b><color=#ffcc00>Uses ArrowIV Ammo.</color></b>",
+        "Details": "The Arrow IV is a stand-alone, missile based, artillery system, designed to augment conventional systems such as the Long Tom and the Sniper. It was first introduced by the Terran Hegemony in 2600 and became a staple of the Star League Defense Force. Although the technology to create Arrow IVs was lost during the Star League's collapse, it was recovered by Capellan Confederation engineers in 3044 working off of surviving examples and the Helm Memory Core.\n\n <b><color=#00ffff>Left Click on Chance to hit during battle to switch firing mode</color> </b> \n\n <b><color=#ffcc00>Uses ArrowIV Ammo.</color></b>",
         "Icon": "ArrowIV"
     },
     "BonusValueA": "",
@@ -77,14 +77,21 @@
     "CriticalComponent": false,
     "Modes": [
         {
-            "Id": "indirectfire",
-            "UIName": "Indirect",
-            "isBaseMode": true,
-            "DirectFireModifier": 1.0,
+            "Id": "directfire",
+            "UIName": "Direct",
+            "isBaseMode": false,
             "CantHitUnaffecedByPathing": true,
-            "AlwaysIndirectVisuals": true,
-            "IndirectFireCapable": true,
-            "ForbiddenRange": 120
+            "EvasivePipsIgnored": 15,
+            "DirectFireModifier": 4.0,
+            "MinMissRadius": 9,
+            "MaxMissRadius": 15,
+            "IndirectFireCapable": false,
+            "AlwaysIndirectVisuals": false,
+            "ShortRange": -1490.0,
+            "MiddleRange": -1490.0,
+            "LongRange": -1490.0,
+            "MaxRange": -1490.0,
+            "ForbiddenRange": 180
         },
         {
             "Id": "flak",
@@ -92,10 +99,26 @@
             "isBaseMode": false,
             "CantHitUnaffecedByPathing": false,
             "EvasivePipsIgnored": 15,
-            "DirectFireModifier": 55.0,
+            "DirectFireModifier": 57.0,
+            "MinMissRadius": 9,
+            "MaxMissRadius": 15,
             "IndirectFireCapable": false,
             "AlwaysIndirectVisuals": false,
-            "ForbiddenRange": 120
+            "MinRange": -180
+        },
+        {
+            "Id": "indirectfire",
+            "UIName": "Indirect",
+            "isBaseMode": true,
+            "CantHitUnaffecedByPathing": true,
+            "DirectFireModifier": 4,
+            "AccuracyModifier": 3,
+            "EvasivePipsIgnored": 15,
+            "MinMissRadius": 9,
+            "MaxMissRadius": 32,
+            "AlwaysIndirectVisuals": true,
+            "IndirectFireCapable": true,
+            "ForbiddenRange": 180
         }
     ],
     "statusEffects": [],
