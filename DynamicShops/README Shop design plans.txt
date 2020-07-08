@@ -59,10 +59,15 @@ Level II Assualt Tank = 2
 
 
 Phases of shops:
-1: Overhaul tag shops and do the deep periphery
+1: Overhaul tag shops (In progress) and do the deep periphery
 2: Periphery
-3: Clans
-4: Inner Sphere
+3: Clans (Done)
+4: Inner Sphere (Done)
 5: Individual tweaks and balance passes
 
-
+06/07/20 Current Progress 
+Battlefield and Chemical shops have been tweaked (amounts and odds could be tweaked, currently standardised)
+Mining and Manufacturing are done (excepting balancing and tweaks)
+IS factions and Clans are done
+Common ammo list and intro tech lists are done
+Started adding planet specific extras
