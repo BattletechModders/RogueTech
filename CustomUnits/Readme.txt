@@ -36,6 +36,8 @@ In addition to the settings that follow that are set in `mod.json`, you can also
 
 The tags must be put in the following type of file to be applied:
 
+The dimensions for the *Vectors settings are measured like: - width (shoulder to shoulder), - height (toes to head), - depth (chest to back)
+
 Type | File Type | Tag Location
 --- | --- | ---  
 Mechs | `data/chassis/chassisdef_<variant>.json` | `ChassisTags`->`items`
