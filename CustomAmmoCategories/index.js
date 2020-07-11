@@ -83,6 +83,22 @@ function addItem(){
 	});
 }
 
+function endContract(){
+	var data = {};
+	$.ajax({
+	  dataType: "json",
+	  data: JSON.stringify(data),
+	  method: "POST",
+	  url: "/endcontract",
+	  success: function (data){
+		  if(data.hasOwnProperty("error")){
+			alert(data.error);
+		  }else{
+			alert("Success");
+		  }
+	  }
+	});
+}
 
 $( document ).ready(function() {
 	updateReputation();
