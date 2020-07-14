@@ -274,6 +274,28 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
   "WeaponPanelHeightScale":0.7 - scale for weapon panel
 }
 
+now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
+CustomAmmoCategories.json
+[
+{
+	"Id":"LGAUSS", - new ammo category name, precessed for WeaponDef.AmmoCategory and AmmunitionDef.Category fields, using it in other AmmoCategory field will lead load error
+	"BaseCategory":"GAUSS" - base category name. Must bt in (AC2/AC5/AC10/AC20/GAUSS/Flamer/AMS/MG/SRM/LRM), 
+	                         needed for backward compatibility. 
+							 All other game mechanic (for example status effect targeting), except ammo count in battle and mech validator in mech lab will use this value.
+							 !Flamer - is base category for energy ammo (plasma, chemical lasers etc)
+},
+]
+
+KMiSSioNToday at 20:33
+yes. For example mech have 100 armor from 200 and full structure. Min crit chance 0.1. Weapon have APArmorShardsMod = 0.5 and APMaxArmorThickness = 150. APCritChance = 0.5
+shard mod = 1 + (1 - 100/200) = 1.5 
+thickness mod = 1 - 100/150 = 0.33333(3)
+overall chance  = 0.1 (base minimal) * 1.5 (shards) * 0.33333 (thickness) * 0.5 (AP chance) = 0.025
+while armor become lower both shard mod and thickness mod will rise
+ 
+LadyAlektoToday at 20:35
+so thickness defines the strength something can easily punch through, while shards defines how likely the hit causes spall to cause damage
+
 Weapon definition
 new fields
   "MinMissRadius": 5,
