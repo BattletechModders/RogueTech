@@ -248,7 +248,7 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
 "NullifyDestoryedLocationDamage": true - if true damage to destroyed locations will be nullified 
 "DestoryedLocationCriticalAllow": true - if false and on hit locations had 0 structure criticals will not be rolled 
 "uiIcons": [ "weapon_up", "weapon_down" ] - some prewarm icons 
-  "WeaponPanelWidthScale": 1.1,   - width scale for weapon panel background
+  "WeaponPanelBackWidthScale": 1.1,   - width scale for weapon panel background
   "OrderButtonWidthScale": 0.5,   - width scale for order switch buttons
   "OrderButtonPaddingScale": 0.3,
   "SidePanelInfoSelfExternal": false, - if true info side panel panel content about selected unit is controlled by external mod
@@ -263,6 +263,15 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
   "AttackLogWrite": false - if true csv attack log will be created in CustomAmmoCatogories/AttacksLogs
   "ShowAttackGroundButton": false - if false no attack ground button will be shown,
   "ShowWeaponOrderButtons": false - if false no weapon order buttons will be shown
+  "ToHitSelfJumped":2, - from AIM
+  "ToHitMechFromFront":0, - from AIM
+  "ToHitMechFromSide":-1, - from AIM
+  "ToHitMechFromRear":-2, - from AIM
+  "ToHitVehicleFromFront":0, - from AIM
+  "ToHitVehicleFromSide":-1, - from AIM
+  "ToHitVehicleFromRear":-2, - from AIM
+  "WeaponPanelWidthScale":0.7, - scale for weapon panel
+  "WeaponPanelHeightScale":0.7 - scale for weapon panel
 }
 
 now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
@@ -1122,6 +1131,39 @@ Ammo definition
         }
     ]
 }
+
+Note on toHit modifiers
+CustAmmoCategories.ToHitModifiersHelper.registerModifier(
+      string id, - modifier id. If modifier with same id already exists it will be replaced
+      string name,  - name, string will be added to tooltip if dname is null
+      bool ranged, - flag is modifier is ranged
+      bool melee, - flag is modifier is melee
+                 if both true modifier will be applied both ranged and melee if target selected
+                 if both false modifier will be applied both ranged and melee if target is not selected
+      Func<ToHit, 
+        AbstractActor, - attacker
+        Weapon, - weapon
+        ICombatant, - target
+        Vector3, - attack position
+        Vector3, - target position
+        LineOfFireLevel, - line of fire level
+        MeleeAttackType, - melee attack type
+        bool, - is calledShot
+        float - result
+        > modifier, - delegate method to calculate modifier value 
+      Func<ToHit, 
+        AbstractActor, - attacker
+        Weapon, - weapon
+        ICombatant, - target
+        Vector3, - attack position
+        Vector3, - target position
+        LineOfFireLevel, - line of fire level
+        MeleeAttackType, - melee attack type
+        bool, - is calledShot
+        string - result
+        > dname - delegate method to calcualte modifier name, if UI name should be dynamic (if null name value will be used)
+      ) 
+      
 
 Note for Explosion API
 CustAmmoCategories.ExplosionAPIHelper.AoEExplode(
