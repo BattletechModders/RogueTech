@@ -6,20 +6,21 @@
             }
         ],
         "ComponentExplosion": {
-            "ExplosionDamagePerAmmo": 15,
+            "ExplosionDamagePerAmmo": 20,
             "StabilityDamagePerAmmo": 2,
             "HeatDamagePerAmmo": 20
         },
         "BonusDescriptions": {
             "Bonuses": [
+                "AmmoPerShot: 2",
+                "Inferno: 5",
                 "OHDamage: 25%",
-                "Range: 33%",
-                "ExplodiumFlat: 15%",
-                "DmgFallOff: 35%",
-                "NoAA",
+                "DmgFallOff: 50%",
                 "AlwaysStartsFire",
+                "NoAA",
                 "AccuracyUnit: Battle Armor",
-                "AccuracyUnit2: +5"
+                "AccuracyUnit2: +5",
+                "ExplodiumFlat: 15%"
             ]
         },
         "InventorySorter": {
@@ -45,17 +46,17 @@
     "AmmoCategory": "HeavyFlamer",
     "StartingAmmoCapacity": 0,
     "HeatGenerated": 5,
-    "Damage": 15,
+    "Damage": 20,
     "OverheatedDamageMultiplier": 1.25,
     "EvasiveDamageMultiplier": 0,
     "EvasivePipsIgnored": 0,
     "DamageVariance": 5,
-    "HeatDamage": 20,
+    "HeatDamage": 15,
     "AccuracyModifier": 0,
     "ChassisTagsAccuracyModifiers": {
         "unit_powerarmor": -5
     },
-    "DistantVariance": 0.35,
+    "DistantVariance": 0.50,
     "DistantVarianceReversed": false,
     "isHeatVariation": true,
     "isStabilityVariation": true,
@@ -69,8 +70,9 @@
     "RefireModifier": 0,
     "ShotsWhenFired": 1,
     "ProjectilesPerShot": 1,
+    "ShotsPerAmmo": 0.5,
     "AttackRecoil": 0,
-    "Instability": 0,
+    "Instability": 2,
     "FireOnSuccessHit": true,
     "DamageOnJamming": true,
     "GunneryJammingMult": 0.03,
@@ -100,7 +102,79 @@
     "AllowedLocations": "All",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
-    "statusEffects": [],
+    "statusEffects": [
+        {
+            "durationData": {
+                "duration": 1,
+                "ticksOnActivations": true,
+                "useActivationsOfTarget": true,
+                "stackLimit": 45
+            },
+            "targetingData": {
+                "effectTriggerType": "OnHit",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
+                "effectTargetType": "NotSet",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "HeatDamageTakenSoftCapMultiplier",
+                "Name": "Heat Damage SoftCap",
+                "Details": "Reduce Heat Damage by 1%",
+                "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CACIncomingHeatMult",
+                "operation": "Float_Multiply",
+                "modValue": "0.98",
+                "modType": "System.Single"
+            }
+        },
+        {
+            "durationData": {
+                "duration": 1,
+                "ticksOnActivations": true,
+                "useActivationsOfTarget": true,
+                "ticksOnEndOfRound": false,
+                "ticksOnMovements": false,
+                "stackLimit": -1,
+                "clearedWhenAttacked": false
+            },
+            "targetingData": {
+                "effectTriggerType": "OnHit",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 2,
+                "specialRules": "NotSet",
+                "effectTargetType": "NotSet",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": true,
+                "showInStatusPanel": true
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "Effect_PirateHeavyFlamer",
+                "Name": "Tastes Like Burning",
+                "Details": "This unit is coated with burning chemicals. It will gain 15 heat on its next activation.",
+                "Icon": "uixSvgIcon_biome_Heated"
+            },
+            "statisticData": {
+                "statName": "HeatSinkCapacity",
+                "operation": "Int_Add",
+                "modValue": "-5",
+                "modType": "System.Int32"
+            },
+            "nature": "Debuff"
+        }
+    ],
     "ComponentTags": {
         "items": [
             "component_type_stock",
