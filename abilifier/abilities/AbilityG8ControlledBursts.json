@@ -1,0 +1,67 @@
+{
+    "Description": {
+        "Id": "AbilityG8ControlledBursts",
+        "Name": "Controlled Burts",
+        "Details": "ACTION: Gain -10% Heat Generated, -1 Recoil for 2 Turns. 3 Turn Cooldown.",
+        "Icon": "uixSvgIcon_skullAtlas"
+    },
+    "DisplayParams": "ShowInMWTRay",
+    "ReqSkill": "Gunnery",
+    "ReqSkillLevel": 8,
+    "ActivationTime": "ConsumedByFiring",
+    "ActivationCooldown": 3,
+    "Targeting": "ActorSelf",
+    "EffectData": [
+	{
+			"durationData": {
+				"duration": 2,
+                "stackLimit": 1
+			},
+			"targetingData": {
+				"effectTriggerType": "OnActivation",
+				"effectTargetType": "Creator"
+			},
+			"effectType": "StatisticEffect",
+			"Description": {
+				"Id": "FocusFireRecoil",
+				"Name": "Reduced Recoil",
+				"Details": "Ballistic recoil penalties reduced by 1",
+				"Icon": "uixSvgIcon_ability_mastertactician"
+			},
+			"statisticData": {
+				"targetCollection": "Weapon",
+				"statName": "RefireModifier",
+				"operation": "Int_Add",
+				"modValue": "-1",
+				"modType": "System.Int32"
+			}
+		},
+         {
+            "durationData": {
+                "duration": 2,
+                "stackLimit": 1
+            },
+            "targetingData": {
+				"effectTargetsCreator": true,
+                "effectTriggerType": "OnActivation",
+                "effectTargetType": "Creator"
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "Warlord-Heat2",
+                "Name": "Flush Coolant2",
+                "Details": "-50 Heat",
+                "Icon": "uixSvgIcon_skullAtlas"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "HeatGenerated",
+                "operation": "Float_Multiply",
+                "modValue": "0.9",
+                "modType": "System.Single",
+                "targetCollection": "Weapon"
+            }
+        }
+    ],
+    "IsPrimaryAbility": true
+}
