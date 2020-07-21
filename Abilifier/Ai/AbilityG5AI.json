@@ -1,8 +1,8 @@
 {
 	"Description": {
-		"Id": "AbilityDefG5",
+		"Id": "AbilityG5AI",
 		"Name": "Bandit",
-		"Details": "25% Increased Critical Strike Chance. +4 to Clustering Roll modifiers. +5% to Called Shot Multiplier.",
+		"Details": "25% Increased Critical Strike Chance. +6% to Called Shot Multiplier.",
 		"Icon": "bandit"
 	},
 	"DisplayParams": "ShowInMWTRay",
@@ -29,7 +29,7 @@
             "statisticData": {
                 "statName": "CalledShotBonusMultiplier",
                 "operation": "Float_Multiply",
-                "modValue": "1.05",
+                "modValue": "1.03",
                 "modType": "System.Single"
             }
         },
@@ -53,10 +53,34 @@
 			"statisticData": {
 				"statName": "CriticalChanceMultipler",
 				"operation": "Float_Multiply",
-				"modValue": "1.25",
+				"modValue": "1.1",
 				"modType": "System.Single",
 				"targetCollection": "Weapon"
 			}
+		},
+		{
+			"durationData": {
+				"duration": -1
+			},
+			"targetingData": {
+				"effectTriggerType": "OnActivation",
+				"effectTargetType": "Creator"
+			},
+			"effectType": "StatisticEffect",
+			"Description": {
+				"Id": "FocusFireRecoil",
+				"Name": "Reduced Recoil",
+				"Details": "Ballistic recoil penalties reduced by 1",
+				"Icon": "uixSvgIcon_ability_mastertactician"
+			},
+			"statisticData": {
+				"targetCollection": "Weapon",
+				"statName": "RefireModifier",
+				"operation": "Int_Add",
+				"modValue": "-1",
+				"modType": "System.Int32"
+			},
+			"nature" : "Buff"
 		},
 		{
             "durationData" : {
@@ -71,7 +95,7 @@
             },
             "effectType" : "StatisticEffect",
             "Description" : {
-                "Id" : "BanditClustering",
+                "Id" : "FocusFireCluster",
                 "Name" : "MISSILERY SUITE",
                 "Details" : "Substantially increases the clustering of this unit's LRM weapons and boosts the stability damage of SRMs by 50%.",
                 "Icon" : "UixSvgIcon_specialEquip_System"
@@ -79,7 +103,7 @@
             "statisticData" : {
                 "statName" : "ClusteringModifier",
                 "operation" : "Float_Add",
-                "modValue" : "4",
+                "modValue" : "3",
                 "modType" : "System.Single",
                 "targetCollection" : "Weapon"
             },
