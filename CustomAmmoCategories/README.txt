@@ -248,7 +248,7 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
 "NullifyDestoryedLocationDamage": true - if true damage to destroyed locations will be nullified 
 "DestoryedLocationCriticalAllow": true - if false and on hit locations had 0 structure criticals will not be rolled 
 "uiIcons": [ "weapon_up", "weapon_down" ] - some prewarm icons 
-  "WeaponPanelWidthScale": 1.1,   - width scale for weapon panel background
+  "WeaponPanelBackWidthScale": 1.1,   - width scale for weapon panel background
   "OrderButtonWidthScale": 0.5,   - width scale for order switch buttons
   "OrderButtonPaddingScale": 0.3,
   "SidePanelInfoSelfExternal": false, - if true info side panel panel content about selected unit is controlled by external mod
@@ -263,29 +263,16 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
   "AttackLogWrite": false - if true csv attack log will be created in CustomAmmoCatogories/AttacksLogs
   "ShowAttackGroundButton": false - if false no attack ground button will be shown,
   "ShowWeaponOrderButtons": false - if false no weapon order buttons will be shown
+  "ToHitSelfJumped":2, - from AIM
+  "ToHitMechFromFront":0, - from AIM
+  "ToHitMechFromSide":-1, - from AIM
+  "ToHitMechFromRear":-2, - from AIM
+  "ToHitVehicleFromFront":0, - from AIM
+  "ToHitVehicleFromSide":-1, - from AIM
+  "ToHitVehicleFromRear":-2, - from AIM
+  "WeaponPanelWidthScale":0.7, - scale for weapon panel
+  "WeaponPanelHeightScale":0.7 - scale for weapon panel
 }
-
-now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
-CustomAmmoCategories.json
-[
-{
-	"Id":"LGAUSS", - new ammo category name, precessed for WeaponDef.AmmoCategory and AmmunitionDef.Category fields, using it in other AmmoCategory field will lead load error
-	"BaseCategory":"GAUSS" - base category name. Must bt in (AC2/AC5/AC10/AC20/GAUSS/Flamer/AMS/MG/SRM/LRM), 
-	                         needed for backward compatibility. 
-							 All other game mechanic (for example status effect targeting), except ammo count in battle and mech validator in mech lab will use this value.
-							 !Flamer - is base category for energy ammo (plasma, chemical lasers etc)
-},
-]
-
-KMiSSioNToday at 20:33
-yes. For example mech have 100 armor from 200 and full structure. Min crit chance 0.1. Weapon have APArmorShardsMod = 0.5 and APMaxArmorThickness = 150. APCritChance = 0.5
-shard mod = 1 + (1 - 100/200) = 1.5 
-thickness mod = 1 - 100/150 = 0.33333(3)
-overall chance  = 0.1 (base minimal) * 1.5 (shards) * 0.33333 (thickness) * 0.5 (AP chance) = 0.025
-while armor become lower both shard mod and thickness mod will rise
- 
-LadyAlektoToday at 20:35
-so thickness defines the strength something can easily punch through, while shards defines how likely the hit causes spall to cause damage
 
 Weapon definition
 new fields
@@ -1123,6 +1110,91 @@ Ammo definition
     ]
 }
 
+Note on toHit modifiers
+CustAmmoCategories.ToHitModifiersHelper.registerModifier(
+      string id, - modifier id. If modifier with same id already exists it will be replaced
+      string name,  - name, string will be added to tooltip if dname is null
+      bool ranged, - flag is modifier is ranged
+      bool melee, - flag is modifier is melee
+                 if both true modifier will be applied both ranged and melee if target selected
+                 if both false modifier will be applied both ranged and melee if target is not selected
+      Func<ToHit, 
+        AbstractActor, - attacker
+        Weapon, - weapon
+        ICombatant, - target
+        Vector3, - attack position
+        Vector3, - target position
+        LineOfFireLevel, - line of fire level
+        MeleeAttackType, - melee attack type
+        bool, - is calledShot
+        float - result
+        > modifier, - delegate method to calculate modifier value 
+      Func<ToHit, 
+        AbstractActor, - attacker
+        Weapon, - weapon
+        ICombatant, - target
+        Vector3, - attack position
+        Vector3, - target position
+        LineOfFireLevel, - line of fire level
+        MeleeAttackType, - melee attack type
+        bool, - is calledShot
+        string - result
+        > dname - delegate method to calcualte modifier name, if UI name should be dynamic (if null name value will be used)
+      ) 
+      
+
+demo code 
+
+using BattleTech;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using UnityEngine;
+
+namespace CACAccModDemo {
+  public class Core {
+    private static MethodInfo ToHitModifiersHelper_registerModifier = null;
+    public static bool CACModifierHelperDetected() { return ToHitModifiersHelper_registerModifier != null; }
+    public static float MyCACModifier(ToHit toHit, AbstractActor attacker, Weapon weapon, ICombatant target, Vector3 attackPos, Vector3 targetPos, LineOfFireLevel lof, MeleeAttackType meleType, bool isCalled) {
+      return 1f;
+    }
+    public static string MyCACModifierName(ToHit toHit, AbstractActor attacker, Weapon weapon, ICombatant target, Vector3 attackPos, Vector3 targetPos, LineOfFireLevel lof, MeleeAttackType meleType, bool isCalled) {
+      return "Cust. mod. "+attacker.DisplayName;
+    }
+    public static void registerCACModifier(string id, string name, bool ranged, bool melee,
+      Func<ToHit, AbstractActor, Weapon, ICombatant, Vector3, Vector3, LineOfFireLevel, MeleeAttackType, bool, float> modifier,
+      Func<ToHit, AbstractActor, Weapon, ICombatant, Vector3, Vector3, LineOfFireLevel, MeleeAttackType, bool, string> dname
+    ) {
+      if (ToHitModifiersHelper_registerModifier == null) { return; }
+      ToHitModifiersHelper_registerModifier.Invoke(null, new object[] { id, name, ranged, melee, modifier, dname });
+    }
+    public static void detectCAC() {
+      Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+      foreach (Assembly assembly in assemblies) {
+        if (assembly.FullName.StartsWith("CustomAmmoCategories")) {
+          Type helperType = assembly.GetType("CustAmmoCategories.ToHitModifiersHelper");
+          if (helperType != null) {
+            ToHitModifiersHelper_registerModifier = helperType.GetMethod("registerModifier", BindingFlags.Static | BindingFlags.Public);
+            break;
+          }
+        }
+      }
+    }
+    public static void FinishedLoading(List<string> loadOrder) {
+      detectCAC();
+      registerCACModifier("MYMOD DYN NAME", "MYMOD", true, false, MyCACModifier, null);
+      registerCACModifier("MYMOD", "MYMOD", true, false, MyCACModifier, MyCACModifierName);
+    }
+    public static void Init(string directory, string settingsJson) {
+    }
+  }
+}
+     
 Note for Explosion API
 CustAmmoCategories.ExplosionAPIHelper.AoEExplode(
 string VFX - VFX name
