@@ -34,16 +34,73 @@
     "AutoFixer" : {
         "Enabled" : true,
         "EnabledDescription" : "Fixes up mechs, chassis and components to adhere to CBT rules and defaults. Done programmatically to be compatible to new mechs in the future.",
-        "MechDefAutoFixAgainstMaxFreeTonnage" : [
-            "mechdef_atlas_AS7-D-HT",
-            "mechdef_blackknight_BL-6b-KNT",
-            "mechdef_highlander_HGN-732b"
-        ],
-        "MechDefAutoFixInitialTonnageDiffThreshold" : 0.4,
+        "MechLocationNamingTemplatesDescription" : "If any of the listed tags are found, and the chassis has no ChassisLocationNaming component, add the associated ChassisLocationNaming component",
         "MechDefEngine" : true,
-        "MechDefCoolingDef" : "emod_kit_shs",
+        "MechTagsAutoFixEnabled" : [
+            "unit_release"
+        ],
         "MechDefHeatBlockDef" : "emod_engine_cooling",
         "MechDefCoreDummy" : "emod_engine_dummy",
+        "MechLocationNamingTemplates" : [
+            {
+                "Tags" : [
+                    "unit_vtol"
+                ],
+                "Template" : {
+                    "Names" : [
+                        {
+                            "location" : "LeftArm",
+                            "text" : "FRONT"
+                        },
+                        {
+                            "location" : "RightArm",
+                            "text" : "REAR"
+                        },
+                        {
+                            "location" : "LeftLeg",
+                            "text" : "LEFT SIDE"
+                        },
+                        {
+                            "location" : "RightLeg",
+                            "text" : "RIGHT SIDE"
+                        },
+                        {
+                            "location" : "Head",
+                            "text" : "ROTOR"
+                        }
+                    ]
+                }
+            },
+            {
+                "Tags" : [
+                    "fake_vehicle_chassis"
+                ],
+                "Template" : {
+                    "Names" : [
+                        {
+                            "location" : "LeftArm",
+                            "text" : "FRONT"
+                        },
+                        {
+                            "location" : "RightArm",
+                            "text" : "REAR"
+                        },
+                        {
+                            "location" : "LeftLeg",
+                            "text" : "LEFT SIDE"
+                        },
+                        {
+                            "location" : "RightLeg",
+                            "text" : "RIGHT SIDE"
+                        },
+                        {
+                            "location" : "Head",
+                            "text" : "TURRET"
+                        }
+                    ]
+                }
+            }
+        ],
         "GyroCategorizer" : {
             "Prefix" : "Gear_Gyro_",
             "AllowedLocations" : "CenterTorso",
@@ -260,9 +317,9 @@
             {
                 "Type" : "Gauss",
                 "SlotChange" : {
-                    "From" : 5,
+                    "From" : 4,
                     "By" : 2,
-                    "FromIsMin" : false,
+                    "FromIsMin" : true,
                     "NewMin" : null
                 },
                 "TonnageChange" : null
@@ -426,7 +483,6 @@
         "MovementPointDistanceMultiplierDescription" : "The distance of a TT movement point, 24 is vanilla CombatGameConstants.ExperimentalGridDistance .",
         "JumpJetMovementPointDistanceMultiplierDescription" : "The distance of a TT movement point when calculating jump distances, if undefined falls back to MovementPointDistanceMultiplier.",
         "MinimJumpHeatDescription" : "Minimum heat when doing a jump, even if only one jump jet exists and only when jumping one hex.",
-        "AutoConvertJumpCapacityInDefToStatDescription" : "All JumpCapacity values in JumpJetDefs will be auto-converted to the JumpCapacity statistic.",
         "JumpJetDefaultJumpHeatDescription" : "The heat the jump jet produces when fully* used (* jumping below max distance reduces produced heat). Can be adjusted using the JumpHeat statistic.",
         "RunMultiplierDescription" : "How much faster running is than walking.",
         "EngineRatingForChassisMovementStatDescription" : "The engine rating to use when evaluating the movement stat of a mech.",
@@ -438,15 +494,12 @@
         "EnforceRulesForAdditionalInternalHeatSinksDescription" : "Can't have those juicy ++ cooling systems with smaller fusion cores than the rules allow it.",
         "AllowMixingHeatSinkTypes" : false,
         "AllowMixingHeatSinkTypesDescription" : "Allow heat sinks patchwork.",
-        "DefaultEngineHeatSinkId" : "Gear_HeatSink_Generic_Standard",
-        "DefaultEngineHeatSinkIdDescription" : "Default heat sink type for engines without a kit.",
         "EngineMissingFallbackHeatSinkCapacity" : 30,
         "EngineMissingFallbackHeatSinkCapacityDescription" : "Heat sink capacity if no engine is detected.",
         "CBTWalkAndRunMPRounding" : false,
         "MovementPointDistanceMultiplier" : 24,
         "JumpJetMovementPointDistanceMultiplier" : null,
         "MinimJumpHeat" : 9,
-        "AutoConvertJumpCapacityInDefToStat" : true,
         "JumpJetDefaultJumpHeat" : 3,
         "RunMultiplier" : 1.5,
         "EngineRatingForChassisMovementStat" : 250,
@@ -664,6 +717,10 @@
             }
         ]
     },
+    "HeatSinkCapacityStat" : {
+        "Enabled" : true,
+        "EnabledDescription" : "Required by the engine feature to work. Disabled the mech.GetHeatSinkDissipation method."
+    },
     "InvalidInventory" : {
         "Enabled" : true,
         "EnabledDescription" : "Make sure invalid mech configurations can't be saved in skirmish and can't be fielded in the campaign."
@@ -676,6 +733,7 @@
         "Enabled" : true,
         "EnabledDescription" : "Makes the mech lab adhere to any custom mech slot counts.",
         "MechLabArmTopPadding" : 120,
+        "MechLabViewMechAnchorY" : -20,
         "MechLabGeneralSlots" : 3,
         "MechLabGeneralWidgetLabel" : "General",
         "HideHelpButton" : false,
@@ -688,7 +746,14 @@
     "OrderedStatusEffects" : {
         "Enabled" : true,
         "EnabledDescription" : "Orders status effects, so e.g. install order of mechComponents does not matter for additive and multiplicative effects. Affects all statistic data.",
-        "OrderDescription" : "The order in which operations are sorted. Operations not part of the list are deemded unsortable and only sortable operations after such a unsortable operations are sorted. For Example: '* + SET / * +' =sort=> '* + SET + * /'.",
+        "OtherStatisticsRequiredDescription" : "One of the listed statistics is required to be in the same statCollection, otherwise no reordering occurs.",
+        "FilterStatisticsDescription" : "If set, only statistics listed by name will be reordered.",
+        "OrderDescription" : "The order in which operations are sorted. Operations not part of the list are deemed unsortable and only sortable operations after such a unsortable operations are sorted. For Example: '* + SET / * +' =sort=> '* + SET + * /'.",
+        "OtherStatisticsRequired" : [
+            "BaseInitiative",
+            "DamageLevel"
+        ],
+        "FilterStatistics" : null,
         "Order" : [
             "Int_Add",
             "Float_Add",
