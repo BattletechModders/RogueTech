@@ -20,11 +20,11 @@
       "Bonuses": [
         "EngineWeight: +10%",
         "Activatable",
-        "ActiveWalkSpeed: +60%",
+        "ActiveWalkSpeed: +50%",
+        "ActiveRunMod: +34%",
         "FailChance: 0%",
-        "FailChanceTurn: 10%",
-        "FailCritSelf",
-        "FailReducPilot",
+        "FailChanceTurn: 5%",
+        "SkillPiloting: -2",
         "WeaponBoom: 20"
       ]
     },
@@ -32,16 +32,45 @@
       "SortKey": "00023"
     },
     "ActivatableComponent": {
-      "ButtonName": "SuperCharger",
+      "ButtonName": "Jet Booster",
       "CanNotBeActivatedManualy": false,
       "FailFlatChance": 0.0,
       "FailRoundsStart": 2,
-      "FailChancePerTurn": 0.1,
-      "SelfCrit": false,
-      "FailPilotingBase": 5,
-      "FailPilotingMult": 0.1,
+      "FailChancePerTurn": 0.05,
+      "FailPilotingBase": 0,
+      "FailPilotingMult": 0.01,
       "NoUniqueCheck": true,
+      "ActivationIsBuff": "true",
+      "ActivationMessage": "Jet Boost",
+      "DeactivationMessage": "Boost Off",
       "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "StatusEffect_Cockpit_Skill_Piloting",
+            "Name": "Piloting Buff",
+            "Details": "Buffs Piloting Skill",
+            "Icon": "uixSvgIcon_equipment_Cockpit"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "Piloting",
+            "operation": "Int_Add",
+            "modValue": "-2",
+            "modType": "System.Int32",
+            "targetCollection": "Pilot"
+          }
+        },
         {
           "durationData": {
             "duration": -1,
@@ -64,7 +93,33 @@
           "statisticData": {
             "statName": "CruiseSpeed",
             "operation": "Float_Multiply",
-            "modValue": "1.6",
+            "modValue": "1.5",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "JetBoosterSpeed",
+            "Name": "Jet Boosted",
+            "Details": "Supercharged Engines",
+            "Icon": "uixSvgIcon_action_evasivemove"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "FlankSpeed",
+            "operation": "Float_Multiply",
+            "modValue": "1.34",
             "modType": "System.Single"
           }
         }
