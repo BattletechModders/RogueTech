@@ -21,6 +21,11 @@ main settings in mod.json
     "CannotPilotMechTag": "pilot_nomech_crew", - name of tag showing pilot CAN NOT control mech
     "BaysCountExternalControl":false - if true mechbays count controlled by external mod via API
     "ArgoBaysFix":1, -               - if BaysCountExternalControl is true and player controls Argo, active bays count is modified by this value.
+	"AllowVehiclesEdit": false - if true vehicles allowed to edit and move to/from storage.
+    "MechBaySwitchIconMech": "mech" - icon showing mech bays are showed
+    "MechBaySwitchIconVehicle":"vehicle" - icon showing vehcile bays are showed
+    "MechBaySwitchIconUp":"weapon_up" - icon to scroll bays up
+    "MechBaySwitchIconDown":"weapon_down" - icon to scroll bays down
 	"PlayerControlConvoyTag": "convoy_player_control" - tag added to lance's spawnEffects to turn on player controllable convoy to mechanic
 example from contract override definition:
 .............
@@ -73,8 +78,6 @@ In addition to the settings that follow that are set in `mod.json`, you can also
 2. `mr-resize-X-Y-Z`: `X`, `Y`, and `Z` can be an integers or decimal numbers and will scale on that axis
 
 The tags must be put in the following type of file to be applied:
-
-The dimensions for the *Vectors settings are measured like: - width (shoulder to shoulder), - height (toes to head), - depth (chest to back)
 
 Type | File Type | Tag Location
 --- | --- | ---  
