@@ -26,6 +26,10 @@ main settings in mod.json
     "MechBaySwitchIconVehicle":"vehicle" - icon showing vehcile bays are showed
     "MechBaySwitchIconUp":"weapon_up" - icon to scroll bays up
     "MechBaySwitchIconDown":"weapon_down" - icon to scroll bays down
+    "ShowActiveAbilitiesIcon": "futuristic", - icons for show/hide active buttons. If empty Move/Sprint icons used. 
+    "ShowPassiveAbilitiesIcon": "ram",
+    "HideActiveAbilitiesIcon": "futuristic",
+    "HidePassiveAbilitiesIcon": "ram",
 	"PlayerControlConvoyTag": "convoy_player_control" - tag added to lance's spawnEffects to turn on player controllable convoy to mechanic
 example from contract override definition:
 .............
