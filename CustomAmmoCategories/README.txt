@@ -1141,7 +1141,6 @@ CustAmmoCategories.ToHitModifiersHelper.registerModifier(
         string - result
         > dname - delegate method to calcualte modifier name, if UI name should be dynamic (if null name value will be used)
       ) 
-      
 
 demo code 
 
