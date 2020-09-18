@@ -53,7 +53,7 @@ CACIncomingStabilityMult - float - multipicator for all incoming stability (weap
 "BurningForestDesignMask":"DesignMaskBurningForest", - design mask for burning forest
 "BurnedForestDesignMask":"DesignMaskBurnedForest",  - design mask for burned forest
 "BurningTerrainDesignMask":"DesignMaskBurningTerrain" - design mask for burning terrain
-"BurningForestCellRadius":3, - size of hex cell in grid used for terrain effects supported values 3,4 (you should not change this until you know what doing)
+"BurningForestCellRadius":3, - obsolete. You should avoid change this value
 "BurningForestTurns":3, - rounds forest on fire
 "AdditinalAssets": ["nuked"], - additional assets for VFX to load on init
 "BurningForestStrength":30, - heat damage for burning forest
@@ -175,8 +175,8 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
   "ShutdownHeatChance":25,
   "UseHBSMercySetting":true
 },
-"AdvancedCirtProcessing":true, - if false vanilla crit processing used. Eg only meches, crit to can inflicted to empty slot. 
-                                If true crit to occupied slots and to meches, vehicles and turrets. 
+"AdvancedCirtProcessing":true, - if false vanilla crit processing used. Eg only mechs, crit to can inflicted to empty slot. 
+                                If true crit to occupied slots and to mechs, vehicles and turrets. 
 "APMinCritChance": 0.1, - Minimal crit chance on AP processing.
                           Basics: 
                             advanced crit calculations:
@@ -248,11 +248,11 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
 "NullifyDestoryedLocationDamage": true - if true damage to destroyed locations will be nullified 
 "DestoryedLocationCriticalAllow": true - if false and on hit locations had 0 structure criticals will not be rolled 
 "uiIcons": [ "weapon_up", "weapon_down" ] - some prewarm icons 
-  "WeaponPanelBackWidthScale": 1.1,   - width scale for weapon panel background
-  "OrderButtonWidthScale": 0.5,   - width scale for order switch buttons
-  "OrderButtonPaddingScale": 0.3,
-  "SidePanelInfoSelfExternal": false, - if true info side panel panel content about selected unit is controlled by external mod
-  "SidePanelInfoTargetExternal": true - if true info side panel panel content about selected target is controlled by external mod
+  "WeaponPanelBackWidthScale": 1.45,   - you should avoid change this value
+  "OrderButtonWidthScale": 0.5, - obsolete 
+  "OrderButtonPaddingScale": 0.3, - obsolete 
+  "SidePanelInfoSelfExternal": false, - if true info side panel content about selected unit is controlled by external mod
+  "SidePanelInfoTargetExternal": true - if true info side panel content about selected target is controlled by external mod
   there two methods in API 
     CustAmmoCategories.CombatHUDInfoSidePanelHelper.SetSelfInfo(AbstractActor actor, Text text) 
     CustAmmoCategories.CombatHUDInfoSidePanelHelper.SetTargetInfo(AbstractActor actor,ICombatant target, Text text)
@@ -907,7 +907,7 @@ Ammo definition
       "Damage": 100, - normal damage on explosion 
       "AOEDamage" : 100, - area of effect damage
       "AOERange" : 90, - area of effect range 
-      "AOEHeat" : 40, - area of effect heat damage (for non meches added to AOEDamage)
+      "AOEHeat" : 40, - area of effect heat damage (for non mechs added to AOEDamage)
       "AOEInstability": 0, - AoE stability damage
       "VFXprefab": "WFX_Nuke", - visual effect played on landmine explosion
       "VFXMinDistance": 30, - minimal distance between landmine explosion visual effects (to control its count if there are many explosions to not overwhelm GPU). Min value 20
