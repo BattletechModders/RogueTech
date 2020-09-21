@@ -15,7 +15,7 @@ WARNING! This version of CAC can be used only with ModTek 0.7.6.5+ cause it util
 click on right side of HUD weapon slot to switch mode (near hit chance)
 click on center of HUD weapon slot to switch ammo (near ammo count)
 ctrl+left click on weapon slot will eject current ammo 
-ctrl+T will toggle attack direction marks visibility (circles under meches feets)
+ctrl+T will toggle attack direction marks visibility (circles under mechs feets)
 NOTE: ammo can't be ejected if mech moved this round
      after ejection mech can't jump and sprint until end of round
     
@@ -272,6 +272,8 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
   "ToHitVehicleFromRear":-2, - from AIM
   "WeaponPanelWidthScale":0.7, - scale for weapon panel
   "WeaponPanelHeightScale":0.7 - scale for weapon panel
+  "MinefieldDetectorStatName": "MinefieldDetection" - stat name for actor's landmines detection level (float). Default value 1.
+  "MinefieldIFFStatName": "MinefieldIFF" - stat name for actor landmines IFF ability (float). Default value 0. 
 }
 
 now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
@@ -755,7 +757,7 @@ new fields
     "MaxheatLevel":{"Low":0.3,"High":0.5}, - lock by heat relative to maximum heat. If current heat level is less Low or greater High, mode using will be forbidden.
                                              NOTE! If two or more lock options defined check logic will be: at first checked HeatLevel(if available) if pass 
                                              check OverheatLevel(if available) if pass check (MaxheatLevel is available) if all available options pass mode is allowed. 
-                                             NOTE! Heat level have sense only for meches, for vehicles and turrets check is always passed. 
+                                             NOTE! Heat level have sense only for mechs, for vehicles and turrets check is always passed. 
                                              NOTE! If all modes fail check weapon will be disabled.
   }
 	}]
@@ -921,8 +923,23 @@ Ammo definition
 					if mode unguided is false or not set i'm looking at weapon. 
 					if weapon unguided is true launch will be unguided if not set or false launch will be guided
    "MineField":{
-      "InstallCellRange": 0, - radius in in-game cells to install minefield. On impact each hex cell containing at least one map cell with in radius will have minefield installed
-                                0 - means only hex containing cell where impact occurs (hex size controlling by BurningForestCellRadius setting)
+      "UIName": "cool landmine", - UI name. It is good idea to fill this field
+	  "stealthLevel": 1, - Inital landmine stealth level. If effective stealth level is 1 landmine is visible on map but its type and damage marked as unknown
+	                       If effective stealth level <= 0 landmine is visible and its info and type is showed in side panel.
+						   If effective stealth level > 1 landmine is fully invisible.
+						   effective stealth level = inital stealth level - team's landmines detection level for current hex.
+						   Landmines detection level is highest <MinefieldDetectorStatName> value form team's actors (and team's allies) 
+						   which basic sensors (from CAE) cover this current hex. 
+						   Default inital landmine stealth level is 1.
+	  "IFFLevel": 1, - Inital IFF level. If effective IFFLevel > 0 landmine will not explode if triggered by creator's team member or its ally and for creator and its allies 
+	                   effective stealth level is always 0. If landmine with IFFLevel > 0 is triggered by enemy and its <MinefieldIFFStatName> > landmine effective IFFLevel
+					   landmine will not explode. If landmine IFFLevel = 0 it is hostile to all. 
+	  "burnReaction": "None" - How landmine reacts on hex burn.
+	                           "None" - nothing happens. Default
+							   "Destroy" - minefield vanished 
+							   "LooseElectronic" - stealth level becomes 1, IFFlevel becomes 0
+	  "InstallCellRange": 0, - radius in in-game cells to install minefield. On impact each hex cell containing at least one map cell with in radius will have minefield installed
+                                0 - means only hex containing cell where impact occurs
       "Count": 1, - count of land mines in each affected hex
       "Heat": 10, - heat damage by each landmine
       "Chance": 0.8, - chance of explosion 
@@ -1073,7 +1090,7 @@ Ammo definition
 								   		  "name" - audio event name 
 										  "none" - none additional sound for this type name doesn't matter
 							 may be set per ammo, mode and weapon. Mode have priority than ammo than weapon
-   "ChassisTagsAccuracyModifiers":{ - Accuracy for mods tags (Meches - MechTags, Vehicles - VehicleTags, Turrets - turret tags) AIM aware
+   "ChassisTagsAccuracyModifiers":{ - Accuracy for mods tags (mechs - MechTags, Vehicles - VehicleTags, Turrets - turret tags) AIM aware
       "unit_assault":-10,
       "unit_mech":10,
    },
