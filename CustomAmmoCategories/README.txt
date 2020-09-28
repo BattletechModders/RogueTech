@@ -248,7 +248,7 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
 "NullifyDestoryedLocationDamage": true - if true damage to destroyed locations will be nullified 
 "DestoryedLocationCriticalAllow": true - if false and on hit locations had 0 structure criticals will not be rolled 
 "uiIcons": [ "weapon_up", "weapon_down" ] - some prewarm icons 
-  "WeaponPanelBackWidthScale": 1.45,   - you should avoid change this value
+  "WeaponPanelBackWidthScale": 1.45, - !!you should avoid change this value!!
   "OrderButtonWidthScale": 0.5, - obsolete 
   "OrderButtonPaddingScale": 0.3, - obsolete 
   "SidePanelInfoSelfExternal": false, - if true info side panel content about selected unit is controlled by external mod
@@ -261,8 +261,8 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
   "TransferHeatDamageToNormalTag": ["heat_damage_to_normal"], - if mech chassis have this tag incoming heat damage from attacks, land mines, burning terrain, components explosions transferred to normal damage instead.
   "InfoPanelDefaultState": false, - if true side info panel is shown by default
   "AttackLogWrite": false - if true csv attack log will be created in CustomAmmoCatogories/AttacksLogs
-  "ShowAttackGroundButton": false - if false no attack ground button will be shown,
-  "ShowWeaponOrderButtons": false - if false no weapon order buttons will be shown
+  "ShowAttackGroundButton": false - obsolete, attack ground button showing always
+  "ShowWeaponOrderButtons": false - obsolete, order buttons showing always
   "ToHitSelfJumped":2, - from AIM
   "ToHitMechFromFront":0, - from AIM
   "ToHitMechFromSide":-1, - from AIM
@@ -271,32 +271,12 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
   "ToHitVehicleFromSide":-1, - from AIM
   "ToHitVehicleFromRear":-2, - from AIM
   "WeaponPanelWidthScale":0.7, - scale for weapon panel
-  "WeaponPanelHeightScale":0.7 - scale for weapon panel
-  "MinefieldDetectorStatName": "MinefieldDetection" - stat name for actor's landmines detection level (float). Default value 1.
-  "MinefieldIFFStatName": "MinefieldIFF" - stat name for actor landmines IFF ability (float). Default value 0. 
+  "WeaponPanelHeightScale":0.7, - scale for weapon panel
+  "MinefieldDetectorStatName": "MinefieldDetection", - stat name for actor's landmines detection level (float). Default value 1.
+  "MinefieldIFFStatName": "MinefieldIFF", - stat name for actor landmines IFF ability (float). Default value 0. 
+  "AmmoNameInSidePanel": true - if true in side panel AmmunitionDef.Name will be shown instead of AmmunitionDef.UIName
+  "ShowApplyHeatSinkMessage": true - show floatie message on heatsinks appying.
 }
-
-now CustomAmmoCategories.dll searching CustomAmmoCategories.json in every subfolder of Mods folder. 
-CustomAmmoCategories.json
-[
-{
-	"Id":"LGAUSS", - new ammo category name, precessed for WeaponDef.AmmoCategory and AmmunitionDef.Category fields, using it in other AmmoCategory field will lead load error
-	"BaseCategory":"GAUSS" - base category name. Must bt in (AC2/AC5/AC10/AC20/GAUSS/Flamer/AMS/MG/SRM/LRM), 
-	                         needed for backward compatibility. 
-							 All other game mechanic (for example status effect targeting), except ammo count in battle and mech validator in mech lab will use this value.
-							 !Flamer - is base category for energy ammo (plasma, chemical lasers etc)
-},
-]
-
-KMiSSioNToday at 20:33
-yes. For example mech have 100 armor from 200 and full structure. Min crit chance 0.1. Weapon have APArmorShardsMod = 0.5 and APMaxArmorThickness = 150. APCritChance = 0.5
-shard mod = 1 + (1 - 100/200) = 1.5 
-thickness mod = 1 - 100/150 = 0.33333(3)
-overall chance  = 0.1 (base minimal) * 1.5 (shards) * 0.33333 (thickness) * 0.5 (AP chance) = 0.025
-while armor become lower both shard mod and thickness mod will rise
- 
-LadyAlektoToday at 20:35
-so thickness defines the strength something can easily punch through, while shards defines how likely the hit causes spall to cause damage
 
 Weapon definition
 new fields
@@ -1148,6 +1128,20 @@ Ammo definition
         }
     ]
 }
+
+Note on damage modifiers
+you can register your own modifier via API
+	void CustAmmoCategories.DamageModifiersCache.RegisterExternalModes(string id, - id should be unique
+		Func<Weapon, string> nameDelegate,                                    - delegate not get name of your modifier base on weapon and you internal weapon's state
+																					  if you return string.Empty or null next delegates will not be invoked
+		Func<Weapon,float> damageDelegate,                                     - delegate for damage. Function should return multiplier
+		Func<Weapon, float> apDelegate,                                       - delegate for AP damage. Function should return multiplier
+		Func<Weapon, float> heatDelegate,                                     - delegate for heat. Function should return multiplier
+		Func<Weapon, float> stabilityDelegate                                 - delegate for stability. Function should return multiplier
+	)
+if your internal state for weapon has bee changed you should invoke 
+	void CustAmmoCategories.DamageModifiersCache.ClearDamageCache(this Weapon weapon) to clear damage calculations cache for weapon. 
+    Invoking weapon panel slots refreshing is also your responsibility and should be performed after cache reseting
 
 Note on toHit modifiers
 CustAmmoCategories.ToHitModifiersHelper.registerModifier(
