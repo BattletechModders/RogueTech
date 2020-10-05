@@ -2,7 +2,7 @@
 	"Description": {
 		"Id": "AbilityG5FocusFire",
 		"Name": "Focus Fire",
-		"Details": "6% Improved Called Shot Multiplier. +6 to Clustering Roll modifiers.",
+		"Details": "6% Improved Called Shot Multiplier. -1 Recoil.",
 		"Icon": "bandit"
 	},
 	"DisplayParams": "ShowInMWTRay",
@@ -10,6 +10,30 @@
 	"ReqSkillLevel": 5,
 	"ActivationTime": "Passive",
 	"EffectData": [
+	{
+			"durationData": {
+				"duration": -1
+			},
+			"targetingData": {
+				"effectTriggerType": "OnActivation",
+				"effectTargetType": "Creator"
+			},
+			"effectType": "StatisticEffect",
+			"Description": {
+				"Id": "FocusFireRecoil",
+				"Name": "Reduced Recoil",
+				"Details": "Ballistic recoil penalties reduced by 1",
+				"Icon": "uixSvgIcon_ability_mastertactician"
+			},
+			"statisticData": {
+				"targetCollection": "Weapon",
+				"statName": "RefireModifier",
+				"operation": "Int_Add",
+				"modValue": "-1",
+				"modType": "System.Int32"
+			},
+			"nature" : "Buff"
+		},
 	{
             "durationData": {
                 "duration": -1,
@@ -32,34 +56,7 @@
                 "modValue": "1.06",
                 "modType": "System.Single"
             }
-        },
-		{
-            "durationData" : {
-                "duration" : -1,
-                "stackLimit" : -1
-            },
-            "targetingData" : {
-                "effectTriggerType" : "Passive",
-                "effectTargetType" : "Creator",
-                "showInTargetPreview" : false,
-                "showInStatusPanel" : false
-            },
-            "effectType" : "StatisticEffect",
-            "Description" : {
-                "Id" : "FocusFireCluster",
-                "Name" : "MISSILERY SUITE",
-                "Details" : "Substantially increases the clustering of this unit's LRM weapons and boosts the stability damage of SRMs by 50%.",
-                "Icon" : "UixSvgIcon_specialEquip_System"
-            },
-            "statisticData" : {
-                "statName" : "ClusteringModifier",
-                "operation" : "Float_Add",
-                "modValue" : "6",
-                "modType" : "System.Single",
-                "targetCollection" : "Weapon"
-            },
-            "nature" : "Buff"
-        }
+        }		
 	],
 	"IsPrimaryAbility": true
 }
