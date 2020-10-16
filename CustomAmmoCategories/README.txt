@@ -37,6 +37,9 @@ CACIncomingStabilityMult - float - multipicator for all incoming stability (weap
 
 {
 "debugLog":true, - enable debug log 
+"ResetHeatSinkMessageTemplate":"USED HEAT SINKS:{0}=>{1}", - template for reset used heatsinks message
+"ApplyHeatSinkMessageTemplate":"APPLY HEAT SINKS:{0}=>{1} HCAP:{1} USED:{2}=>{3}", - template for allied heatsinks message
+"ApplyHeatSinkActorStat":"CACOverrallHeatSinked", - actor stat name for overall heat sinked during battle
 "modHTTPServer":false, - enable debug http server
 "modHTTPListen":"http://localhost:65080/" - debug http server url, if enabled
 "forbiddenRangeEnable:true, - enable or disable forbidden range mechanic, if false ForbiddenRange always counts as 0 
