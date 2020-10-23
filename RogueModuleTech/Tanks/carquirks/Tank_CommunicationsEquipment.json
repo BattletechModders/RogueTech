@@ -10,8 +10,10 @@
     },
     "BonusDescriptions": {
         "Bonuses": [
-            "SkillTactics: +1",
-            "CritRes: 10%"
+            "ComGearTac: +1",
+            "ECCMAlways",
+            "ECCMStrength: 3, 210",
+            "ECCMFriendly: 3, 150"
         ]
     },
     "Description": {
@@ -23,7 +25,7 @@
         "UIName": "Communications Equipment",
         "Id": "Tank_CommunicationsEquipment",
         "Name": "Communications Equipment",
-        "Details": "This is where we stick all the random nuts and bolts that fall off the vehicle while out in the field. And any other cargo.",
+        "Details": "Expanded Communications equipment improves lance coordination and effectiveness.",
         "Icon": "uixSvgIcon_equipment_HeatBank"
     },
     "BonusValueA": "",
@@ -37,32 +39,118 @@
     "AllowedLocations": "All",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
-    "statusEffects": [
+    "Auras": [
         {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "TankCritPenalizedCrew",
-                "Name": "ChargerSprint",
-                "Details": "MORE SPEED.",
-                "Icon": "uixSvgIcon_run_n_gun"
-            },
-            "statisticData": {
-                "statName": "CriticalHitChanceReceivedMultiplier",
-                "operation": "Float_Multiply",
-                "modValue": "0.9",
-                "modType": "System.Single"
-            },
-            "nature": "Buff"
+            "Id": "Gear_GECM_ECCM_SHIELD",
+            "Name": "ECCM",
+            "ReticleColor": "#a31aff",
+            "Range": 210,
+            "HideOnNotSelected": false,
+            "RemoveOnSensorLock": false,
+            "State": "Passive",
+            "ApplySelf": true,
+            "AllyStealthAffection": "None",
+            "EnemyStealthAffection": "Nullify",
+            "IsPositiveToAlly": false,
+            "IsNegativeToEnemy": true,
+            "ownerVFX": [],
+            "targetVFX": [],
+            "removeOwnerVFX": [],
+            "removeTargetVFX": [],
+            "ownerSFX": [],
+            "targetSFX": [],
+            "removeOwnerSFX": [],
+            "removeTargetSFX": [],
+            "statusEffects": [
+                {
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "specialRules": "NotSet",
+                        "effectTargetType": "EnemiesWithinRange",
+                        "range": 0.0,
+                        "forcePathRebuild": false,
+                        "forceVisRebuild": false,
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "LV_ECCM_SHIELD",
+                        "Name": "ECCM_Shield_Guardian",
+                        "Details": "IPSUM SUCKUM",
+                        "Icon": "uixSvgIcon_status_ECM-missileDef"
+                    },
+                    "statisticData": {
+                        "statName": "LV_ECM_SHIELD",
+                        "operation": "Int_Add",
+                        "modValue": "-3",
+                        "modType": "System.Int32"
+                    },
+                    "nature": "Debuff"
+                }
+            ]
         },
+        {
+            "Id": "Gear_GECM_ECCM_JAMMER",
+            "Name": "ECCM Protect",
+            "ReticleColor": "#0066ff",
+            "Range": 150,
+            "HideOnNotSelected": false,
+            "RemoveOnSensorLock": false,
+            "State": "Passive",
+            "ApplySelf": true,
+            "AllyStealthAffection": "PositiveTwo",
+            "EnemyStealthAffection": "None",
+            "IsPositiveToAlly": true,
+            "IsNegativeToEnemy": false,
+            "ownerVFX": [],
+            "targetVFX": [],
+            "removeOwnerVFX": [],
+            "removeTargetVFX": [],
+            "ownerSFX": [],
+            "targetSFX": [],
+            "removeOwnerSFX": [],
+            "removeTargetSFX": [],
+            "statusEffects": [
+                {
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1,
+                        "uniqueEffectIdStackLimit": 1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "specialRules": "NotSet",
+                        "effectTargetType": "AlliesWithinRange",
+                        "range": 0.0,
+                        "forcePathRebuild": false,
+                        "forceVisRebuild": true,
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "LV_ECM_JAM",
+                        "Name": "ECM Jammer",
+                        "Details": "Jamming ECM, reduces sensor checks for enemies in field",
+                        "Icon": "uixSvgIcon_action_sensorlock"
+                    },
+                    "statisticData": {
+                        "statName": "LV_ECM_JAMMED",
+                        "operation": "Int_Add",
+                        "modValue": "-3",
+                        "modType": "System.Int32"
+                    },
+                    "nature": "Buff"
+                }
+            ]
+        }
+    ],
+    "statusEffects": [
         {
             "durationData": {
                 "duration": -1,
