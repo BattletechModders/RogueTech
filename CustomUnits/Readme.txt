@@ -5,6 +5,13 @@ this mod allows you next things
 4. Add custom animated hardpoints
 
 main settings in mod.json
+	"DeployManual": true, - allowing manual deploy in random contract.
+	"ManualDeployForbidContractTypes": [] - list of contract types names, for listed contract types manual deploy will be forbidden
+	"DeployMaxDistanceFromOriginal": 30 - max distance from original deploy position
+	"DeployMinDistanceFromEnemy": 300 - min distance form enemy unit
+	              NOTE: DeployMaxDistanceFromOriginal and DeployMinDistanceFromEnemy working like OR. Eg. your manual deploy position should be near than <DeployMaxDistanceFromOriginal>
+				  from original spawn point OR farer than <DeployMinDistanceFromEnemy> every enemy
+				  Also no pathing checking performed - if you deploy your lance to deep water or mountain it will be your own damn fault. 
     "fixWaterHeight":true, - whether or not underwater terrain height should be fixed. If false hovers will not be able to move over water/deep water surface
     "maxWaterSteepness":30, - max underwater terrain steepness - if underwater terrain cell will have steepness grater than this value it will be fixed to 0 and cell will be marked as deep water
                               this needed for two things - hovers should not be affected by water cell steepness and not hovers should not be able to pass through this cell
@@ -21,6 +28,15 @@ main settings in mod.json
     "CannotPilotMechTag": "pilot_nomech_crew", - name of tag showing pilot CAN NOT control mech
     "BaysCountExternalControl":false - if true mechbays count controlled by external mod via API
     "ArgoBaysFix":1, -               - if BaysCountExternalControl is true and player controls Argo, active bays count is modified by this value.
+	"AllowVehiclesEdit": false - if true vehicles allowed to edit and move to/from storage.
+    "MechBaySwitchIconMech": "mech" - icon showing mech bays are showed
+    "MechBaySwitchIconVehicle":"vehicle" - icon showing vehcile bays are showed
+    "MechBaySwitchIconUp":"weapon_up" - icon to scroll bays up
+    "MechBaySwitchIconDown":"weapon_down" - icon to scroll bays down
+    "ShowActiveAbilitiesIcon": "futuristic", - icons for show/hide abilities buttons. If empty Move/Sprint icons used. 
+    "ShowPassiveAbilitiesIcon": "ram",
+    "HideActiveAbilitiesIcon": "futuristic",
+    "HidePassiveAbilitiesIcon": "ram",
 	"PlayerControlConvoyTag": "convoy_player_control" - tag added to lance's spawnEffects to turn on player controllable convoy to mechanic
 example from contract override definition:
 .............
@@ -73,8 +89,6 @@ In addition to the settings that follow that are set in `mod.json`, you can also
 2. `mr-resize-X-Y-Z`: `X`, `Y`, and `Z` can be an integers or decimal numbers and will scale on that axis
 
 The tags must be put in the following type of file to be applied:
-
-The dimensions for the *Vectors settings are measured like: - width (shoulder to shoulder), - height (toes to head), - depth (chest to back)
 
 Type | File Type | Tag Location
 --- | --- | ---  
@@ -148,6 +162,21 @@ VehicleChassis/Chassis
       "DesignMaskBiomeMartianVacuum":2.0,
       "DesignMaskBiomeLunarVacuum":10.0
     }, 
+	"NoIdleAnimations": false - restrict idle animation for chassis. Can be altered runtime using CUNoMoveAnimation statistic value, boolean
+	"NoMoveAnimations": false - restrict move animation for chassis. Can be altered runtime using CUNoRandomIdleAnimations statistic value, boolean
+	"ArmsCountedAsLegs": false - setting this flag true will cause next consequences
+									 1. Side torso crush not lead to attached arm destroy
+									 2. Mech will not die if both legs destroyed. It will be destroyed on destruction head, center torso or all four limbs
+									 3. Loosing leg do not remove sprint ability. Mech is not counted as legged until two limbs destroyed.
+									 4. Arm destruction leads to increase minimum instability even with OnlyPermanentLossFromLegs: true in constants.
+									 5. Destruction of arm counts as leg destruction in terms of added instability after attack
+									 6. Destruction one leg not force mech to fall. To fall on limb destruction two limbs should be destroyed.
+	"LegDestroyedMovePenalty": -1f - move speed penalty on leg destroy. if < 0 or omitted Constants.MoveConstants.LegDestroyedPenalty used
+	"LegDamageRedMovePenalty": -1f - move speed penalty on leg penalized. if < 0 or omitted Constants.MoveConstants.LegDamageRedPenalty used
+	"LegDamageYellowMovePenalty": -1f - move speed penalty on leg damages. if < 0 or omitted Constants.MoveConstants.LegDamageYellowPenalty used
+	"LegDamageRelativeInstability": -1f - leg damage relative instability. if < 0 or omitted Constants.PilotingConstants.LegDamageRelativeInstability used
+	"LegDestroyRelativeInstability": 1f - leg destroy relative instability. if < 0 or omitted 1.0 used
+
 	"MoveCost":"Hover",     - move cost per design mask overridence (useless if Unaffected.Pathing is true).
                             Can be altered runtime via CUMoveCost actor's statistic value (string)
     "TieToGroundOnDeath":"true", - if true tied to ground on death (useful if prefab positions is altered by sections below)
@@ -227,7 +256,7 @@ VehicleChassis/Chassis
           3. You can include MaterialInfo to your custom part definition. If you do, my code while spawning objects will search through all models in your prefab for materials you point
              and replace their shaders to ones you points (for example i'm providing possibility to replace shader to game's standard one)
           "warrior_top_rotor_0Mat":{                              - name of material in your prefab to search
-            "shader": "battletechstandartshader",                 - name of shader
+            "shader": "battletechstandartshader",                 - name of shader object
             "shaderKeyWords":["_DETAIL_OVERLAY","_EMISSION","_METALLICGLOSSMAP","_NORMALMAP"] - list of shader keywords.
           }
         },
@@ -292,7 +321,19 @@ VehicleChassis/Chassis
           ]
         }
 			},
-		]
+		
+        "AnimationType": "MechTurret",
+        "AnimationData": {
+          "TurnAnimator":"base", - name of game object turn animator attached
+          "AttachPoints":[
+            {"Location":"LeftTorso", - all custom hardpoints with attach type "Turret" in this location will be attached to turret
+				"AttachTo":"WeaponAttachL", - name of game object hardpoints will be attached
+				"Animator":"WeaponMountL" - name of game object vertical move animator attached
+				},
+            {"Location":"RightTorso","AttachTo":"WeaponAttachR","Animator":"WeaponMountR"}
+          ]
+        },
+	]
 }, 
 
 you can control per-biome spawning via vehicle/mech tags

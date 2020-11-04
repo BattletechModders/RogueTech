@@ -9,7 +9,8 @@
                 "Sight: +10%",
 				"AdvancedSensors: 2",
                 "Jammer: 1, 190",
-				"Sharer"
+				"Sharer",
+				"DetectMine: 90"
             ]
         },
         "InventorySorter": {
@@ -24,10 +25,10 @@
         "Rarity": 3,
         "Purchasable": true,
         "Manufacturer": "CLAN",
-        "Model": "Recon battleComp",
+        "Model": "Recon Sensors",
         "UIName": "Sensor Recon (C)",
         "Id": "Gear_Sensors_Recon_Clan",
-        "Name": "Recon Battle Computer",
+        "Name": "Recon Sensor Package",
         "Details": "A Clan upgraded sensor package combining advanced Rangefinders, Seismic Sensors and Scanning Algorithms with a IFF Jammer, also carrying a set of thermal and zoom systems.",
         "Icon": "uixSvgIcon_equipment_Comms"
     },
@@ -43,6 +44,41 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
 	"Auras": [
+	{
+      "Id": "MINEDETECTIONAURA",
+      "Name": "Minesweeper",
+      "ReticleColor": "white",
+      "LineType": "Dots",
+      "isSpining": false,
+	  "MinefieldDetector": true,
+	  "HideOnNotSelected": true,
+      "Range": 90,
+      "RemoveOnSensorLock": false,
+      "State": "Persistent",
+      "ApplySelf": true,
+      "AllyStealthAffection": "None",
+      "EnemyStealthAffection": "None",
+      "IsPositiveToAlly": false,
+      "IsNegativeToEnemy": false,
+      "ownerVFX": [
+      ],
+      "targetVFX": [
+      ],
+      "removeOwnerVFX": [
+      ],
+      "removeTargetVFX": [
+      ],
+      "ownerSFX": [
+      ],
+      "targetSFX": [
+      ],
+      "removeOwnerSFX": [
+      ],
+      "removeTargetSFX": [
+      ],
+      "statusEffects": [
+		]
+		},
 		{
       "Id": "Gear_SenECM_ECM_JAMMER",
       "Name": "JAMMER",
@@ -268,6 +304,36 @@
                 "modType": "System.Boolean"
             },
             "nature" : "Buff"
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0.0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": true,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "MineFieldDetection",
+                "Name": "Active Probe (Passive)",
+                "Details": "Detects Minefields",
+                "Icon": "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData": {
+                "statName": "MinefieldDetection",
+                "operation": "Float_Add",
+                "modValue": "1",
+                "modType": "System.Single"
+            },
+            "nature": "Buff"
         }
 		],
     "ComponentTags": {

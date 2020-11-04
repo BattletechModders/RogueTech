@@ -11,7 +11,7 @@
     "DependsOn" : [ "IRBTModUtils", "MechEngineer", "CustomComponents", "Custom Ammo Categories" ],
     "ConflictsWith" : [ "CharlesB" ],
     "Settings": {
-        "Debug" : false,
+        "Debug" : true,
         "Trace" : false,
 
         "Features" : {
@@ -23,15 +23,15 @@
         "ToHitSelfJumped": 3,
 
         "CustomCategories" : {
-           "HipActuatorCategoryId" : "LegHip",
-           "UpperLegActuatorCategoryId" : "LegUpperActuator",
-           "LowerLegActuatorCategoryId" : "LegLowerActuator",
-           "FootActuatorCategoryId" : "LegFootActuator",
+           "HipActuatorCategoryId" : [ "LegHip" ],
+           "UpperLegActuatorCategoryId" : [ "LegUpperActuator" ],
+           "LowerLegActuatorCategoryId" :[ "LegLowerActuator" ],
+           "FootActuatorCategoryId" : [ "LegFootActuator" ],
 
-           "ShoulderActuatorCategoryId" : "ArmShoulder",
-           "UpperArmActuatorCategoryId" : "ArmUpperActuator",
-           "LowerArmActuatorCategoryId" : "ArmLowerActuator",
-           "HandActuatorCategoryId" : "ArmHandActuator"
+           "ShoulderActuatorCategoryId" : [ "ArmShoulder" ],
+           "UpperArmActuatorCategoryId" : [ "ArmUpperActuator" ],
+           "LowerArmActuatorCategoryId" : ["ArmLowerActuator", "OmniLowerActuator" ],
+           "HandActuatorCategoryId" : ["ArmHandActuator", "OmniHandActuator" ]
         },
 
         "Heat" : {
@@ -55,7 +55,7 @@
                 "AttackerInstabilityPerTargetTon" : 0.5,
                 "TargetInstabilityPerAttackerTon" : 0.5,
                 "DamageClusterDivisor" : 25.0,
-                "UnsteadyAttackerOnHit" : false,
+                "UnsteadyAttackerOnHit" : true,
                 "UnsteadyAttackerOnMiss" : true,
                 "UnsteadyTargetOnHit" : true
             },
@@ -80,7 +80,8 @@
                 "LegActuatorDamageReduction" : 0.5,
                 "UnsteadyAttackerOnHit" : false,
                 "UnsteadyAttackerOnMiss" : true,
-                "UnsteadyTargetOnHit" : true,
+                "UnsteadyTargetOnHit" : true
+				},
 
             "PhysicalWeapon" : {
                 "ArmActuatorDamageMalus" : 2,
@@ -97,14 +98,23 @@
                 "TargetDamagePerAttackerTon" : 0.5,
                 "TargetInstabilityPerAttackerTon" : 0.5,
                 "ArmActuatorDamageReduction" : 0.5,
-                "UnsteadyAttackerOnHit" : true,
-                "UnsteadyAttackerOnMiss" : true,
-                "UnsteadyTargetOnHit" : true
+                "UnsteadyAttackerOnHit" : false,
+                "UnsteadyAttackerOnMiss" : false,
+                "UnsteadyTargetOnHit" : false
+            },
+			
+			"Turrets" : {
+                "DefaultTonnage" : 100.0,
+                "LightTonnage" : 35.0,
+                "MediumTonnage" : 55.0,
+                "HeavyTonnage" : 75.0
             },
 
             "AllowMeleeFromSprint" : true,
             "ProneTargetAttackModifier" : -2,
-			"ExtraHitsAverageAllDamage" : true
+	    "ExtraHitsAverageAllDamage" : true,
+	    "FilterCanUseInMeleeWeaponsByAttack" : true,
+	    "WalkAttackAdditionalRange" : 18.0
         }
 		},
         
@@ -129,7 +139,12 @@
         "Breaches" : {
             "VacuumCheck" : 0.17,
             "ThinAtmoCheck" : 0.03
-        }
+        },
+		
+		            "AI" : {
+                "EvasionPipRemovedUtility" : 10.0,
+                "EvasionPipLostUtility" : 5.0,
+                "PilotInjuryMultiUtility" : 1.0
+            }
 
-    }
 }

@@ -39,7 +39,8 @@
                 "C3M: 1, 260",
                 "Sharer",
                 "UAV: 310, 2, 15",
-                "WeaponBoom: 40"
+                "CapacitorBoom: 40",
+				"DetectMine: 300"
             ]
         },
         "InventorySorter": {
@@ -74,13 +75,48 @@
     "ComponentType": "Upgrade",
     "ComponentSubType": "Prototype_ElectronicWarfare",
     "PrefabIdentifier": "",
-    "BattleValue": 0,
+    "BattleValue": 100,
     "InventorySize": 5,
     "Tonnage": 5,
     "AllowedLocations": "All",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "Auras": [
+	{
+      "Id": "MINEDETECTIONAURA",
+      "Name": "Minesweeper",
+      "ReticleColor": "white",
+      "LineType": "Dots",
+      "isSpining": false,
+	  "MinefieldDetector": true,
+	  "HideOnNotSelected": true,
+      "Range": 300,
+      "RemoveOnSensorLock": false,
+      "State": "Persistent",
+      "ApplySelf": true,
+      "AllyStealthAffection": "None",
+      "EnemyStealthAffection": "None",
+      "IsPositiveToAlly": false,
+      "IsNegativeToEnemy": false,
+      "ownerVFX": [
+      ],
+      "targetVFX": [
+      ],
+      "removeOwnerVFX": [
+      ],
+      "removeTargetVFX": [
+      ],
+      "ownerSFX": [
+      ],
+      "targetSFX": [
+      ],
+      "removeOwnerSFX": [
+      ],
+      "removeTargetSFX": [
+      ],
+      "statusEffects": [
+		]
+		},
         {
             "Id": "Gear_C3m",
             "Name": "C3m",
@@ -307,8 +343,8 @@
                     "effectType": "StatisticEffect",
                     "Description": {
                         "Id": "GEWS-ECM",
-                        "Name": "SPOTTING DISTANCE INCREASED",
-                        "Details": "Increases spotting distance by 50m.",
+                        "Name": "Accuracy Reduced",
+                        "Details": "Accuracy reduced by 1",
                         "Icon": "uixSvgIcon_equipment_Cockpit"
                     },
                     "nature": "Buff",
@@ -643,6 +679,36 @@
                 "modValue": "1.1",
                 "modType": "System.Single"
             }
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0.0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": true,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "MineFieldDetection",
+                "Name": "Active Probe (Passive)",
+                "Details": "Detects Minefields",
+                "Icon": "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData": {
+                "statName": "MinefieldDetection",
+                "operation": "Float_Add",
+                "modValue": "1",
+                "modType": "System.Single"
+            },
+            "nature": "Buff"
         }
     ],
     "ComponentTags": {

@@ -63,9 +63,10 @@ AI related mod settings
     "Custom":{
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
 		"ActivatableComponent":{
+			"SafeActivation": false, - if true component will not begin activation on component toggle. Assumed to be true if component have no influence on pathing and can't fail.
 			"ButtonName":"MASC",  - string used in activation/deactivation dialog button. Keep as sort as possible. 
-      "activateVFXOutOfLOSHide":true, - if true active component's VFX will be shown only if unit is visible to player (default false)
-      "presistantVFXOutOfLOSHide":true, - if true static component's VFX will be shown only if unit is visible to player (default false)
+			"activateVFXOutOfLOSHide":true, - if true active component's VFX will be shown only if unit is visible to player (default false)
+			"presistantVFXOutOfLOSHide":true, - if true static component's VFX will be shown only if unit is visible to player (default false)
 			"FailFlatChance":0.3, - chance of fail on cold activation. 
 			"FailRoundsStart":1, - round since fail checks will be perfomed
 			"FailChancePerTurn":0.5, - value which added to fail chance every round of activity.
@@ -482,7 +483,8 @@ COMPOPNENT
       "Id": "Gear_Sensor_Prototype_EWE_Aura_ECM", - Id should be unique per component definition. 
                                                     If Id set as "AMS" and component is weapon than Range is tied to weapon MaxRange and reticle is only shown if weapon is enabled and in AMS mode. 
                                                     Look at CustomAmmoCategories/weapon/Weapon_MachineGun_AMS_3-Hydra.json it defines empty aura not applying any effects just for colored circle showing range. 
-      "LineType": "Dashes"                        - Line type of range circle. Possible values
+      "MinefieldDetector": false                  - if true aura is used as minefield detector. Basic sensors have this forced true other auras default false. 
+	  "LineType": "Dashes"                        - Line type of range circle. Possible values
                                                           Dashes - default. Looks as previous
                                                           Dots - looks like active probe range indicator
       "isSpining": false                          - if true range circle is spinning. Can be applied both Dashes and Dots line types                                   

@@ -6,47 +6,68 @@
                 "CBillCost": "[[Chassis.Tonnage]]"
             }
         },
-		"Cooling": {
+        "Cooling": {
             "HeatSinkDefId": "Gear_HeatSink_Compact_Standard"
         },
-		"EngineCore": {
+        "EngineCore": {
             "Rating": "5"
         },
-		"EngineHeatBlock": {
+        "EngineHeatBlock": {
             "HeatSinkCount": 0
         },
-       "Category" : [
-			{"CategoryID": "EngineShield"},
-            {"CategoryID": "EnginePart"},
-			{"CategoryID": "Cooling"},
-			{"CategoryID": "EngineHeatBlock"},
-			{"CategoryID": "EngineCore"},
-			{"CategoryID": "Gyro"},
-			{"CategoryID": "Armor"},
-			{"CategoryID": "Structure"}
-			],
+        "Category": [
+            {
+                "CategoryID": "EngineShield"
+            },
+            {
+                "CategoryID": "EnginePart"
+            },
+            {
+                "CategoryID": "Cooling"
+            },
+            {
+                "CategoryID": "EngineHeatBlock"
+            },
+            {
+                "CategoryID": "EngineCore"
+            },
+            {
+                "CategoryID": "Gyro"
+            },
+            {
+                "CategoryID": "Armor"
+            },
+            {
+                "CategoryID": "Structure"
+            }
+        ],
         "TonnageLimit": {
             "Min": 5,
             "Max": 10
         },
         "Flags": {
-		  "flags": [
-			"vital",
-			"not_broken",
-			"not_destroyed",
-			"default",
-			"ignore_damage",
-			"no_salvage"
-		  ]
-		},
-		"BonusDescriptions": {
+            "flags": [
+                "vital",
+                "not_broken",
+                "not_destroyed",
+                "default",
+                "ignore_damage",
+                "no_salvage"
+            ]
+        },
+        "BonusDescriptions": {
             "Bonuses": [
+                "Radius: 360",
                 "EvaMax: +2",
-                "EvaPips: +3"
+                "EvaPips: +3",
+                "CBTBEDFADamageMultiSelf: -100%",
+                "CBTBEDFAStabilityMultiSelf: -100%",
+                "CBTBEDFAStabilityMulti: +50%",
+                "CBTBEDFADamageMulti: +50%"
             ]
         }
     },
-	"DissipationCapacity": 300,
+    "DissipationCapacity": 300,
     "Description": {
         "Cost": 0,
         "Rarity": 0,
@@ -84,9 +105,9 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "SuperchargerWalk",
-                "Name": "Supercharged",
-                "Details": "Supercharged Engines",
+                "Id": "PAWalk",
+                "Name": "Power Armor Walk",
+                "Details": "Power armor walk distance multiplier",
                 "Icon": "uixSvgIcon_action_evasivemove"
             },
             "statisticData": {
@@ -97,7 +118,7 @@
             },
             "nature": "Buff"
         },
-		{
+        {
             "durationData": {
                 "duration": -1,
                 "stackLimit": -1
@@ -146,7 +167,7 @@
             },
             "nature": "Buff"
         },
-		{
+        {
             "durationData": {
                 "duration": -1
             },
@@ -171,32 +192,6 @@
             },
             "nature": "Buff"
         },
-		{
-            "durationData": {
-                "duration": -1,
-                "stackLimit": 1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "PowerArmorReduceMove",
-                "Name": "Movement Adjusment",
-                "Details": "WalkSpeed reduced 50%.",
-                "Icon": "uixSvgIcon_equipment_HeatBank"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "WalkSpeed",
-                "operation": "Float_Multiply",
-                "modValue": "0.5",
-                "modType": "System.Single"
-            }
-        },
         {
             "durationData": {
                 "duration": -1
@@ -217,17 +212,121 @@
                 "operation": "Set",
                 "modValue": "false",
                 "modType": "System.Boolean",
-				"targetCollection": "Pilot"
+                "targetCollection": "Pilot"
             },
             "nature": "Buff"
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "Talons_Damage_Mod",
+                "Name": "Melee Weapon Damage Mod",
+                "Details": "Damage Modifier",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CBTBE_DFA_Target_Damage_Mod",
+                "operation": "Int_Add",
+                "modValue": "100",
+                "modType": "System.Int32"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "Talons_Stability_Mod",
+                "Name": "Melee Weapon Damage Mod",
+                "Details": "Damage Modifier",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CBTBE_DFA_Target_Instability_Mod",
+                "operation": "Int_Add",
+                "modValue": "50",
+                "modType": "System.Int32"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "Talons_Damage_Mod",
+                "Name": "Melee Weapon Damage Mod",
+                "Details": "Damage Modifier",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CBTBE_DFA_Attacker_Damage_Multi",
+                "operation": "Float_Multiply",
+                "modValue": "0.01",
+                "modType": "System.Single"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "Talons_Stability_Mod",
+                "Name": "Melee Weapon Damage Mod",
+                "Details": "Damage Modifier",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CBTBE_DFA_Attacker_Instability_Multi",
+                "operation": "Float_Multiply",
+                "modValue": "0.01",
+                "modType": "System.Single"
+            }
         }
-	],
+    ],
     "ComponentTags": {
         "items": [
             "component_type_stock",
-			"ProtoEngine",
-			"PAGear",
-			"BLACKLISTED"
+            "ProtoEngine",
+            "PAGear",
+            "BLACKLISTED"
         ],
         "tagSetSourceFile": ""
     }
