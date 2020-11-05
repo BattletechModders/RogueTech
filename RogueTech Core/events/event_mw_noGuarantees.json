@@ -1,0 +1,563 @@
+{
+    "Description" : {
+        "Id" : "event_mw_noGuarantees",
+        "Name" : "No Guarantees",
+        "Details" : "In the MedBay, [[TGT_MW,{TGT_MW.Callsign}]] cradles an old photo. Stitches lace {TGT_MW.DET} temple. \"The MedTechs tell me this is my mother, but I can't remember her\u2026\"\r\n\r\nA MedTech steps in. \"{TGT_MW.Gender?NonBinary:They've|Male:He's|Female:She's} developed a [[DM.BaseDescriptionDefs[LoreTBI],TBI]]. {TGT_MW.DET_C} next head injury will be fatal if we don't intervene. Retirement is the safest option, but the damage is done. While there are no guarantees, there is a chance of recovery if {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:are|Default:is} confined to bed rest, but it could take weeks or months.\"\r\n\r\n{TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:sit|Default:sits} up, wincing. \"I don't need bed rest. I need to be in the cockpit. It's all I know, Commander.\"\r\n\r\n\"There is one more option.\" The MedTech hesitates. \"We could implant a Davion neurostimulator. The procedure poses a high risk\u2014the <i>slightest</i> error will result in complete brain death\u2014but if the neurostimulator is successfully implanted, {TGT_MW.SUBJ}'ll be combat ready within days.\"",
+        "Icon" : "uixTxrSpot_MedBayPatient.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 10000,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "Tags/PilotTags",
+            "items" : [
+                "pilot_honest"
+            ]
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "",
+            "items" : [
+                "pilot_dishonest",
+                "pilot_dependable",
+                "pilot_rebellious"
+            ]
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "ExperienceSpent",
+                "op" : "GreaterThan",
+                "val" : 20000,
+                "valueConstant" : "20000"
+            },
+            {
+                "obj" : "Injuries",
+                "op" : "GreaterThanOrEqual",
+                "val" : 3,
+                "valueConstant" : "3"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "Tags/CompanyTags",
+                "items" : [
+                    "argo_medBay2"
+                ]
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/CompanyTags",
+                "items" : [
+                    "event_mw_noGuarantees"
+                ]
+            },
+            "RequirementComparisons" : []
+        }
+    ],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Force {TGT_MW.Callsign} to retire.",
+                "Details" : "Retire MW",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Morale Up",
+                        "Details" : "You push past the MedTech. \"I'm sorry, [[TGT_MW,{TGT_MW.Callsign}]], but you need to get as far away from the battlefield as you can. It's time to retire, settle down somewhere nice. If I kept you on, you'd deploy eventually, and I can't let that happen.\"\r\n\r\nAfter giving {TGT_MW.Callsign} time to prepare, you summon the entire crew to the mess for a retirement party. As each MechWarrior tells stories about {TGT_MW.Callsign}, {TGT_MW.DET} anguish dissolves into laughter and teary-eyed gratitude. As crumpled beer cans stack up, the stories veer into rowdier territory.\r\n\r\nThe mess quiets when Dr. Murad approaches {TGT_MW.Callsign}. \"For your distinguished service aboard the <i>Argo</i>.\" She holds out a star welded from scrap. \"There's no medal quite like it.\" The company cheers as she pins it to {TGT_MW.DET} chest.\r\n\r\nThe next day, the remaining MechWarriors pull you aside. \"You did the right thing, Commander. {TGT_MW.Callsign} was going to get {TGT_MW.OBJ}{TGT_MW.Gender?NonBinary:selves|Default:self} killed. We won't forget this.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_mw_noGuarantees"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "15",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_Fire",
+                                    "value" : "1",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Allow {TGT_MW.Callsign} to return to combat.",
+                "Details" : "risky",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Dependable, but terminal",
+                        "Details" : "Ignoring the MedTech, you pat the edge of [[TGT_MW,{TGT_MW.Callsign}]]'s bed. \"If you want to saddle up, I won't stop you, but there's no rush.\"\r\n\r\nThe MedTech's eyes widen in surprise, but she says nothing.\r\n\r\nYou lean in close to {TGT_MW.Callsign}. \"You're on borrowed time. We all are, but you've earned the right to call your own shots.\"\r\n\r\n{TGT_MW.Callsign} looks down at the photo of {TGT_MW.DET} mother, then back up with a bittersweet smile. \"This company is all I've got left, Commander.\"\r\n\r\n\"We're lucky to have you. Now get some rest. You'll need it.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_dependable",
+                                    "pilot_terminal"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_mw_noGuarantees"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "brave + terminal",
+                        "Details" : "You brush the MedTech aside and incline your head toward [[TGT_MW,{TGT_MW.Callsign}]]. \"If you want to get back on the battlefield, then why would I get in your way?\"\r\n\r\n\"You're condemning {TGT_MW.OBJ} to death!\" the MedTech interrupts.\r\n\r\nYou look the MedTech straight in the eyes. \"It's {TGT_MW.DET} choice, not yours. {TGT_MW.Callsign} deserves the basic dignity of deciding how {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:want|Default:wants} to go out.\"\r\n\r\n{TGT_MW.Callsign} looks down at the photo clutched in {TGT_MW.DET} hand, then back to you. \"Thank you, Commander. I know what I signed up for. I'm not afraid.\"\r\n\r\n\"It'd be okay if you were, MechWarrior. It wouldn't make you any less brave. You've had a hell of a career, and it's not over yet.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "pilot_terminal",
+                                    "pilot_brave"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_mw_noGuarantees"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Confine {TGT_MW.Callsign} to bed rest.",
+                "Details" : "Slow but safe option",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "3 months + healed",
+                        "Details" : "You dismiss the MedTech and rest a hand on [[TGT_MW,{TGT_MW.Callsign}]]'s shoulder. \"I don't know your mother, but the lady in this photo looks like she'd chew me out if I let you throw your life away. You'll rest until you're cleared by the MedTechs.\"\r\n\r\n{TGT_MW.Callsign} lowers {TGT_MW.DET} eyes, squinting down at the photo as if looking for an answer. \"When this is all over, hopefully I'll be able to tell you if that's true or not.\"\r\n\r\nA few days later, a MedTech reports in. \"The medication has reduced {TGT_MW.Callsign}'s brain swelling and blood loss. At this rate, {TGT_MW.DET} cognitive functioning and motor skills will return to normal levels in three months, but the tissues will never fully heal.\"\r\n\r\nYou sigh. \"So, {TGT_MW.Callsign} will be fit for duty, but if {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:suffer|Default:suffers} another major injury, {TGT_MW.SUBJ} might never recover. Got it.\"\r\n\r\nSomber, the MedTech says, \"It's a small miracle that {TGT_MW.Callsign} is standing at all.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "90",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                },
+                                {
+                                    "Type" : "MechWarrior_Heal",
+                                    "value" : null,
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_mw_noGuarantees"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_1",
+                        "Name" : "Rebellious + Healed",
+                        "Details" : "You turn from the MedTech to [[TGT_MW,{TGT_MW.Callsign}]]. \"You'll return to active duty, but only when you're ready. For now, it's bed rest. No battles. No drills. That's an order, MechWarrior.\"\r\n\r\n{TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:lie|Default:lies} back, defeated. \"This is almost as bad as retirement.\"\r\n\r\n\"If you don't take your health seriously, you won't even remember how to pilot a 'Mech. Take up a hobby. Read a book. It doesn't really matter, as long as you stay put.\"\r\n\r\nA few days later, a MedTech reports in. \"{TGT_MW.Callsign} is showing remarkable signs of recovery. In fact, we caught {TGT_MW.OBJ} trying to sneak out a couple times already. You'll need to keep an eye on {TGT_MW.OBJ} after {TGT_MW.SUBJ}{TGT_MW.Gender?NonBinary:'re|Default:'s} discharged.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_rebellious",
+                                    "pilot_terminal"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "Tags/PilotTags",
+                                "items" : [
+                                    "pilot_dependable"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "60",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                },
+                                {
+                                    "Type" : "MechWarrior_Heal",
+                                    "value" : null,
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_mw_noGuarantees"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_3",
+                "Name" : "Authorize an experimental procedure for {TGT_MW.Callsign}.",
+                "Details" : "risky",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_3_0",
+                        "Name" : "healed",
+                        "Details" : "You incline your head toward [[TGT_MW,{TGT_MW.Callsign}]] and point a finger at the MedTech. \"Go ahead with the neurostimulator. {TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:aren't|Default:isn't} going out without a fight.\"\r\n\r\nAfter surgery, you find {TGT_MW.Callsign} in a recovery room triumphantly tossing down a straight flush against a MedTech's two-pair. You pat the edge of {TGT_MW.DET} bed. \"How do you feel, MechWarrior?\"\r\n\r\n\"It's all coming back, Commander.\" {TGT_MW.SUBJ_C} {TGT_MW.Gender?NonBinary:tap|Default:taps} lightly on {TGT_MW.DET} bandaged head. \"I feel like myself again.\"\r\n\r\n\"Good. Let's do a test.\" You grab the photo of {TGT_MW.Callsign}'s mother off a nearby table and hold it up. \"Do you know who this is?\"\r\n\r\n{TGT_MW.Callsign} cocks {TGT_MW.DET} head, arching an eyebrow. \"That old hag? How could I forget that face? She's the reason I'm here\u2014kicked me out when I was 15.\"\r\n\r\nYou smile. \"That's the {TGT_MW.Callsign} I remember.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SubtractInjuries",
+                                    "value" : "3",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_mw_noGuarantees"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_3_1",
+                        "Name" : "MW dies",
+                        "Details" : "You look at [[TGT_MW,{TGT_MW.Callsign}]] and then at the MedTech. \"Prepare for surgery. That neurostimulator is {TGT_MW.DET} only chance at getting back in a 'Mech.\"\r\n\r\n\"Thanks, Commander. That's all I could ask for.\" {TGT_MW.Callsign}'s voice trembles, but {TGT_MW.SUBJ} {TGT_MW.Gender?NonBinary:nod|Default:nods} {TGT_MW.DET} head resolutely.\r\n\r\nHours later, a MedTech finds you in the Command Center. Her mouth is drawn into a tight line. She struggles to meet your gaze. You fill in the silence. \"It's not a good sign if you're here in person.\"\r\n\r\nShe shakes her head. \"We tried our best, but there was a complication. Major hemorrhaging. {TGT_MW.Callsign} was a fighter. {TGT_MW.SUBJ_C} held on longer than most would, but by the time we stopped the bleeding, it was too late. I've informed the XO to make arrangements. The crew will need time to grieve.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_Kill",
+                                    "value" : "1",
+                                    "valueConstant" : null,
+                                    "additionalValues" : [
+                                        "died from complications during an experimental procedure."
+                                    ]
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_mw_noGuarantees"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-10",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL",
+    "OneTimeEvent" : true
+}

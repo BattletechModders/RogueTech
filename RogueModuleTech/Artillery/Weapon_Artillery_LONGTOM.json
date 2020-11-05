@@ -1,16 +1,21 @@
 {
     "Custom": {
         "Category": [
-			{ "CategoryID": "w/a/o/artillery" }
-		],
+      {
+        "CategoryID": "NeverMelee"
+      },
+            {
+                "CategoryID": "w/a/o/artillery"
+            },
+			{ "CategoryID": "CritsArtillery6" }
+        ],
         "BonusDescriptions": {
             "Bonuses": [
                 "IsArtillery",
-                "DFAccuracy: -1",
-                "VariableDmg: 30",
+                "FLAKmode",
+                "DIRECTmode",
                 "WpnRecoil: 5",
-				"NoAA",
-                "Indirect"
+                "ForbiddenRange: 180"
             ]
         },
         "InventorySorter": {
@@ -20,35 +25,35 @@
     "Category": "Ballistic",
     "Type": "Autocannon",
     "WeaponSubType": "AC20",
-    "MinRange": 120,
-    "MaxRange": 1560,
+    "MinRange": 180,
+    "MaxRange": 3000,
     "RangeSplit": [
-        360,
-        780,
-        1200
+        3000,
+        3000,
+        3000
     ],
     "AmmoCategory": "LongTom",
     "StartingAmmoCapacity": 0,
     "HeatGenerated": 60,
-    "Damage": 90,
+    "Damage": 150,
     "OverheatedDamageMultiplier": 0,
     "EvasiveDamageMultiplier": 0,
     "EvasivePipsIgnored": 0,
-    "DamageVariance": 30,
+    "DamageVariance": 0,
     "HeatDamage": 0,
     "AccuracyModifier": 0,
     "CriticalChanceMultiplier": 1,
-	"APArmorShardsMod": 0,
-	"APMaxArmorThickness": 1,
-	"APCriticalChanceMultiplier": 0.1,
+    "APArmorShardsMod": 1,
+    "APMaxArmorThickness": 300,
+    "APCriticalChanceMultiplier": 0.5,
     "RefireModifier": 5,
     "ShotsWhenFired": 1,
     "ProjectilesPerShot": 1,
     "AttackRecoil": 6,
-    "Instability": 30,
+    "Instability": 35,
     "AMSImmune": true,
     "FireTerrainChance": 0.085,
-	"CantHitUnaffecedByPathing": true,
+    "AOEEffectsFalloff": true,
     "WeaponEffectID": "WeaponEffect-Weapon_AC20_Single",
     "Description": {
         "Cost": 3500000,
@@ -60,14 +65,14 @@
         "Id": "Weapon_Artillery_LONGTOM",
         "Name": "Long Tom Artillery",
         "Details": "The Long Tom Artillery Piece is the largest conventional artillery piece designed by Armstrong Industries. It is the primary weapon of the LT-MOB-25 Mobile Long Tom Artillery vehicle, which is better known as the Mobile Long Tom. \n\n <b><color=#ffcc00>Uses LongTom Ammo.</color></b>",
-        "Icon": "uixSvgIcon_weapon_Ballistic"
+        "Icon": "Artillery"
     },
     "BonusValueA": "",
     "BonusValueB": "",
     "ComponentType": "Weapon",
     "ComponentSubType": "Weapon",
     "PrefabIdentifier": "artillery",
-    "BattleValue": 0,
+    "BattleValue": 368,
     "InventorySize": 12,
     "Tonnage": 30,
     "AllowedLocations": "All",
@@ -79,28 +84,50 @@
             "Id": "directfire",
             "UIName": "Direct",
             "isBaseMode": false,
-            "DirectFireModifier": -1.0,
+            "CantHitUnaffecedByPathing": true,
+            "EvasivePipsIgnored": 15,
+            "DirectFireModifier": 0,
+            "AccuracyModifier": 4,
             "IndirectFireCapable": false,
-            "ShortRange": -120.0,
-            "MiddleRange": -540.0,
-            "LongRange": -810.0,
-            "MaxRange": -1080.0
+            "AlwaysIndirectVisuals": false,
+            "ShortRange": -2400.0,
+            "MiddleRange": -2400.0,
+            "LongRange": -2400.0,
+            "MaxRange": -2400.0,
+            "ForbiddenRange": 180
+        },
+        {
+            "Id": "flak",
+            "UIName": "FLAK",
+            "isBaseMode": false,
+            "CantHitUnaffecedByPathing": false,
+            "EvasivePipsIgnored": 15,
+            "AccuracyModifier": 53.0,
+            "IndirectFireCapable": false,
+            "AlwaysIndirectVisuals": false,
+            "MinRange": -180
         },
         {
             "Id": "indirectfire",
             "UIName": "Indirect",
             "isBaseMode": true,
+            "CantHitUnaffecedByPathing": true,
+            "DirectFireModifier": 2,
+            "AccuracyModifier": 5,
+            "EvasivePipsIgnored": 15,
+            "MinMissRadius": 5,
+            "MaxMissRadius": 60,
             "AlwaysIndirectVisuals": true,
             "IndirectFireCapable": true,
-            "ForbiddenRange": 120
+            "ForbiddenRange": 180
         }
     ],
     "statusEffects": [],
     "ComponentTags": {
         "items": [
             "OmniRestriction.{location}",
+			"TurretRestriction.{location}",
             "component_type_stock",
-            "mr-resize-12",
             "range_extreme"
         ],
         "tagSetSourceFile": ""

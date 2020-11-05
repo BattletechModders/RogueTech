@@ -36,8 +36,10 @@
 				"CritRes: 50%",
 				"HaarJel",
 				"HaarJelTurn",
-                "HaarJelArmor: 15",
-                "HaarJelStructure: 5",
+                "HaarJelArmor: 20",
+                "HaarJelStructure: 10",
+				"HaarJelDuration: 2",
+				"BreachImmunity",
 				"Reserved: 15",
 				"ArmorTPCost: X2",
 				"ArmorCBCost: X2"
@@ -50,16 +52,17 @@
             "ButtonName": "Repair Systems",
 			"CanNotBeActivatedManualy": true,
 			"NoUniqueCheck": true,
-			"ActivationMessage": "Repairs Initiated",
-			"DeactivationMessage": "Repairs Complete",
+			"ActivationMessage": "Repairing",
+			"DeactivationMessage": "System OK",
             "Repair":{ 
-				"InnerStructure": 5,
-				"Armor": 15,
+				"InnerStructure": 10,
+				"Armor": 20,
 				"MechStructureLocations":[],
 				"MechArmorLocations":[],
 				"VehicleLocations":[],
 				"BuildingLocations":[],
 				"AffectInstalledLocation":true,
+				"TurnsSinceDamage": 2,
 				"repairTrigger":{
 					"OnActivation":false,
 					"OnDamage":"None",
@@ -81,7 +84,7 @@
         "Id": "Linked_RISC_Hardened",
         "Name": "Hardened Ferro-Fibrous",
         "Details": "Advances in Material Sciences since and recovered from the Star League in combination with RISC ingenuity alloed the creation of this Armor. Combining the Toughness of Hardened Structure and the weight savings of Heavy Ferro with a refurbished unique HarJel Self Repair System does this Armor turn anything into an undying Juggernaut.",
-        "Icon": "uixSvgIcon_action_end"
+        "Icon": "shieldcomb"
     },
     "BonusValueA": "Bulwark",
     "BonusValueB": "Requires ECM",
@@ -94,7 +97,31 @@
     "AllowedLocations": "All",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
-    "statusEffects": [],
+    "statusEffects": [
+	{
+            "durationData": {
+                "duration": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator"
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "BreachImmunity",
+                "Name": "BreachImmunity",
+                "Details": "Immune to Hull Breach",
+                "Icon": "uixSvgIcon_ability_precisionstrike"
+            },
+            "statisticData": {
+                "statName": "CBTBE_HullBreachImmunity",
+                "operation": "Set",
+                "modValue": "true",
+                "modType": "System.Boolean"
+            },
+            "nature": "Buff"
+        }
+	],
     "ComponentTags": {
         "items": [
             "component_type_stock",

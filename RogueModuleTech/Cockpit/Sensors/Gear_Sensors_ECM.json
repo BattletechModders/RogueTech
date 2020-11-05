@@ -14,13 +14,12 @@
         },
         "BonusDescriptions": {
             "Bonuses": [
-                "IsProbe: 2",
-				"ProbePower: 1",
-				"IsECM: 1",
-                "ECMBubble: 160",
-				"Jammer: 1",
-				"JamBubble: 160",
-                "CockpitEWS"
+                "IsProbe: 1",
+				"IsECM: 1, 160",
+                "Jammer: 1, 160",
+                "AdvancedSensors: 1",
+                "CockpitEWS",
+		"DetectMine: 90"
             ]
         },
         "InventorySorter": {
@@ -40,7 +39,7 @@
         "Id": "Gear_Sensors_ECM",
         "Name": "Black Ops Jammer",
         "Details": "An Attempt to recreate the SLDF AR12 Integrated ECM and Sensor Suite providing a low Yield ECM and Scanning System.",
-        "Icon": "uixSvgIcon_equipment_Comms"
+        "Icon": "EWS"
     },
     "BonusValueA": "Jammer",
     "BonusValueB": "Probe",
@@ -53,6 +52,235 @@
     "AllowedLocations": "Head",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
+	"Auras": [
+        {
+      "Id": "MINEDETECTIONAURA",
+      "Name": "Minesweeper",
+      "ReticleColor": "white",
+      "LineType": "Dots",
+      "isSpining": false,
+          "MinefieldDetector": true,
+          "HideOnNotSelected": true,
+      "Range": 90,
+      "RemoveOnSensorLock": false,
+      "State": "Persistent",
+      "ApplySelf": true,
+      "AllyStealthAffection": "None",
+      "EnemyStealthAffection": "None",
+      "IsPositiveToAlly": false,
+      "IsNegativeToEnemy": false,
+      "ownerVFX": [
+      ],
+      "targetVFX": [
+      ],
+      "removeOwnerVFX": [
+      ],
+      "removeTargetVFX": [
+      ],
+      "ownerSFX": [
+      ],
+      "targetSFX": [
+      ],
+      "removeOwnerSFX": [
+      ],
+      "removeTargetSFX": [
+      ],
+      "statusEffects": [
+                ]
+                },
+    {
+      "Id": "Gear_SenECM_ECM",
+      "Name": "ECM",
+      "ReticleColor": "#00f2ff",
+      "Range": 160,
+      "RemoveOnSensorLock": false,
+      "State": "Persistent",
+      "ApplySelf": true,
+      "AllyStealthAffection": "PositiveOne",
+      "EnemyStealthAffection": "None",
+      "IsPositiveToAlly": true,
+      "IsNegativeToEnemy": false,
+      "ownerVFX": [
+      ],
+      "targetVFX": [
+      ],
+      "removeOwnerVFX": [
+      ],
+      "removeTargetVFX": [
+      ],
+      "ownerSFX": [
+      ],
+      "targetSFX": [
+      ],
+      "removeOwnerSFX": [
+      ],
+      "removeTargetSFX": [
+      ],
+      "statusEffects": [
+        {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "AlliesWithinRange",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : false,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "LV_ECM_SHIELD",
+				"Name" : "Makes it easier for enemies to know where you are, but harder to attack",
+				"Details" : "IPSUM SUCKUM",
+				"Icon" : "uixSvgIcon_status_ECM-missileDef"
+            },
+            "statisticData" : 
+            {
+				"statName" : "LV_ECM_SHIELD",
+				"operation": "Int_Add",
+				"modValue": "1",
+				"modType": "System.Int32"
+            },
+            "nature" : "Buff"
+        },
+		{
+                "durationData" : {
+                    "duration": -1,
+                    "stackLimit": -1
+                },
+                "targetingData" : {
+                    "effectTriggerType" : "Passive",
+                    "specialRules" : "NotSet",
+                    "effectTargetType" : "AlliesWithinRange",
+                    "range" : 0.0,
+                    "forcePathRebuild" : false,
+                    "forceVisRebuild" : false,
+                    "showInTargetPreview" : false,
+                    "showInStatusPanel" : false
+                },
+                "effectType" : "StatisticEffect",
+                "Description" :
+                {
+                    "Id" : "LV_ECM_SHIELD_EMITTER_COUNT",
+                    "Name" : "ECM Shield Emitter Count",
+                    "Details" : "Counter for the number of ECM emitters currently affecting an actor with shielding.",
+                    "Icon" : "uixSvgIcon_status_ECM-missileDef"
+                },
+                "statisticData" : 
+                {
+                    "statName" : "LV_ECM_SHIELD_EMITTER_COUNT",
+                    "operation": "Int_Add",
+                    "modValue": "1",
+                    "modType": "System.Int32"
+                },
+                "nature" : "Buff"
+            }
+		]
+		},
+		{
+      "Id": "Gear_SenECM_ECM_JAMMER",
+      "Name": "JAMMER",
+      "ReticleColor": "#0066ff",
+      "Range": 160,
+	  "HideOnNotSelected": false,
+      "RemoveOnSensorLock": false,
+      "State": "Persistent",
+      "ApplySelf": false,
+      "AllyStealthAffection": "None",
+      "EnemyStealthAffection": "NegativeOne",
+      "IsPositiveToAlly": false,
+      "IsNegativeToEnemy": true,
+       "ownerVFX": [
+      ],
+      "targetVFX": [
+      ],
+      "removeOwnerVFX": [
+      ],
+      "removeTargetVFX": [
+      ],
+      "ownerSFX": [
+      ],
+      "targetSFX": [
+      ],
+      "removeOwnerSFX": [
+      ],
+      "removeTargetSFX": [
+      ],
+      "statusEffects": [
+        {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": -1,
+				"uniqueEffectIdStackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "EnemiesWithinRange",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+				"Id" : "LV_ECM_JAM",
+				"Name" : "ECM Jammer",
+				"Details" : "Jamming ECM, reduces sensor checks for enemies in field",
+				"Icon" : "uixSvgIcon_action_sensorlock"
+            },
+            "statisticData" : 
+            {
+				"statName" : "LV_ECM_JAMMED",
+				"operation": "Int_Add",
+				"modValue": "1",
+				"modType": "System.Int32"
+            },
+            "nature" : "Debuff"
+        },
+{
+                "durationData" : {
+                    "duration": -1,
+                    "stackLimit": -1
+                },
+                "targetingData" : {
+                    "effectTriggerType" : "Passive",
+                    "specialRules" : "NotSet",
+                    "effectTargetType" : "EnemiesWithinRange",
+                    "range" : 0.0,
+                    "forcePathRebuild" : false,
+                    "forceVisRebuild" : false,
+                    "showInTargetPreview" : false,
+                    "showInStatusPanel" : false
+                },
+                "effectType" : "StatisticEffect",
+                "Description" :
+                {
+                    "Id" : "LV_ECM_JAM_EMITTER_COUNT",
+                    "Name" : "ECM Jamming Emitter Count",
+                    "Details" : "Counter for the number of ECM emitters currently affecting an actor with jamming.",
+                    "Icon" : "uixSvgIcon_status_ECM-missileDef"
+                },
+                "statisticData" : 
+                {
+                    "statName" : "LV_ECM_JAM_EMITTER_COUNT",
+                    "operation": "Int_Add",
+                    "modValue": "1",
+                    "modType": "System.Int32"
+                },
+                "nature" : "Debuff"
+            }			
+      ]
+    }
+  ],
     "statusEffects": [
 	{
             "durationData" : {
@@ -81,7 +309,7 @@
             {
                 "statName" : "LV_PROBE_CARRIER",
                 "operation": "Int_Add",
-                "modValue": "2",
+                "modValue": "1",
                 "modType": "System.Int32"
             },
             "nature" : "Buff"
@@ -118,70 +346,35 @@
             },
             "nature" : "Buff"
         },
-	{
-            "durationData" : {
+               {
+            "durationData": {
                 "duration": -1,
-                "stackLimit": 1
+                "stackLimit": -1
             },
-            "targetingData" : {
-                "effectTriggerType" : "Passive",
-                "specialRules" : "Aura",
-                "effectTargetType" : "AlliesWithinRange",
-                "range" : 160.0,
-                "forcePathRebuild" : false,
-                "forceVisRebuild" : false,
-                "showInTargetPreview" : false,
-                "showInStatusPanel" : false
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0.0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": true,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
             },
-            "effectType" : "StatisticEffect",
-            "Description" :
-            {
-				"Id" : "SECM_ECM_SHIELD",
-				"Name" : "Makes it easier for enemies to know where you are, but harder to attack",
-				"Details" : "IPSUM SUCKUM",
-				"Icon" : "uixSvgIcon_status_ECM-missileDef"
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "MineFieldDetection",
+                "Name": "Active Probe (Passive)",
+                "Details": "Detects Minefields",
+                "Icon": "uixSvgIcon_status_ECM-ghost"
             },
-            "statisticData" : 
-            {
-				"statName" : "LV_ECM_SHIELD",
-				"operation": "Int_Add",
-				"modValue": "1",
-				"modType": "System.Int32"
+            "statisticData": {
+                "statName": "MinefieldDetection",
+                "operation": "Float_Add",
+                "modValue": "1",
+                "modType": "System.Single"
             },
-            "nature" : "Buff"
-        },
-        {
-            "durationData" : {
-                "duration": -1,
-                "stackLimit": 1,
-				"uniqueEffectIdStackLimit": 1
-            },
-            "targetingData" : {
-                "effectTriggerType" : "Passive",
-                "specialRules" : "Aura",
-                "effectTargetType" : "EnemiesWithinRange",
-                "range" : 160.0,
-                "forcePathRebuild" : false,
-                "forceVisRebuild" : true,
-                "showInTargetPreview" : false,
-                "showInStatusPanel" : false
-            },
-            "effectType" : "StatisticEffect",
-            "Description" :
-            {
-				"Id" : "SECM_ECM_JAM",
-				"Name" : "ECM Jammer",
-				"Details" : "Jamming ECM, reduces sensor checks for enemies in field",
-				"Icon" : "uixSvgIcon_action_sensorlock"
-            },
-            "statisticData" : 
-            {
-				"statName" : "LV_ECM_JAMMED",
-				"operation": "Int_Add",
-				"modValue": "1",
-				"modType": "System.Int32"
-            },
-            "nature" : "Debuff"
+            "nature": "Buff"
         }
     ],
     "ComponentTags": {

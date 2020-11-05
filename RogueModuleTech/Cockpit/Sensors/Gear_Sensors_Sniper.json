@@ -7,9 +7,8 @@
             "Bonuses": [
 				"Sensors: +5%",
                 "Sight: +10%",
-				"CockpitSensors: 2",
-                "Jammer: 2",
-				"JamBubble: 190"
+				"AdvancedSensors: 2",
+                "Jammer: 2, 190"
             ]
         },
         "InventorySorter": {
@@ -29,7 +28,7 @@
         "Id": "Gear_Sensors_Sniper",
         "Name": "Sniper Battle Computer",
         "Details": "A upgraded sensor package combining advanced Rangefinders, Seismic Sensors and Scanning Algorithms with a IFF Jammer.",
-        "Icon": "uixSvgIcon_equipment_TTS"
+        "Icon": "uixSvgIcon_equipment_Comms"
     },
     "BonusValueA": "+1 Defense.",
     "BonusValueB": "+1 Missile Defense.",
@@ -42,49 +41,47 @@
     "AllowedLocations": "Head",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
-    "statusEffects": [
-{
+	"Auras": [
+		{
+      "Id": "Gear_SenECM_ECM_JAMMER",
+      "Name": "JAMMER",
+      "ReticleColor": "#0066ff",
+      "Range": 190,
+	  "HideOnNotSelected": false,
+      "RemoveOnSensorLock": false,
+      "State": "Persistent",
+      "ApplySelf": false,
+      "AllyStealthAffection": "None",
+      "EnemyStealthAffection": "NegativeOne",
+      "IsPositiveToAlly": false,
+      "IsNegativeToEnemy": true,
+       "ownerVFX": [
+      ],
+      "targetVFX": [
+      ],
+      "removeOwnerVFX": [
+      ],
+      "removeTargetVFX": [
+      ],
+      "ownerSFX": [
+      ],
+      "targetSFX": [
+      ],
+      "removeOwnerSFX": [
+      ],
+      "removeTargetSFX": [
+      ],
+      "statusEffects": [
+        {
             "durationData" : {
                 "duration": -1,
-                "stackLimit": 1,
+                "stackLimit": -1,
 				"uniqueEffectIdStackLimit": 1
             },
             "targetingData" : {
                 "effectTriggerType" : "Passive",
-                "specialRules" : "Aura",
-                "effectTargetType" : "EnemiesWithinRange",
-                "range" : 190.0,
-                "forcePathRebuild" : false,
-                "forceVisRebuild" : true,
-                "showInTargetPreview" : false,
-                "showInStatusPanel" : false
-            },
-            "effectType" : "StatisticEffect",
-            "Description" :
-            {
-				"Id" : "EWS_ECM_JAM",
-				"Name" : "ECM Jammer",
-				"Details" : "Jamming ECM, reduces sensor checks for enemies in field",
-				"Icon" : "uixSvgIcon_action_sensorlock"
-            },
-            "statisticData" : 
-            {
-				"statName" : "LV_ECM_Jammed",
-				"operation": "Int_Add",
-				"modValue": "2",
-				"modType": "System.Int32"
-            },
-            "nature" : "Debuff"
-        },
-	{
-            "durationData" : {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData" : {
-                "effectTriggerType" : "Passive",
                 "specialRules" : "NotSet",
-                "effectTargetType" : "Creator",
+                "effectTargetType" : "EnemiesWithinRange",
                 "range" : 0.0,
                 "forcePathRebuild" : false,
                 "forceVisRebuild" : true,
@@ -94,20 +91,56 @@
             "effectType" : "StatisticEffect",
             "Description" :
             {
-                "Id" : "LV_PROBE_CARRIER",
-                "Name" : "Active Probe (Passive)",
-                "Details" : "Reduces effectiveness of stealthed and ECM shielded units",
-                "Icon" : "uixSvgIcon_status_ECM-ghost"
+				"Id" : "LV_ECM_JAM",
+				"Name" : "ECM Jammer",
+				"Details" : "Jamming ECM, reduces sensor checks for enemies in field",
+				"Icon" : "uixSvgIcon_action_sensorlock"
             },
             "statisticData" : 
             {
-                "statName" : "LV_PROBE_CARRIER",
-                "operation": "Int_Add",
-                "modValue": "1",
-                "modType": "System.Int32"
+				"statName" : "LV_ECM_JAMMED",
+				"operation": "Int_Add",
+				"modValue": "2",
+				"modType": "System.Int32"
             },
-            "nature" : "Buff"
-        },		
+            "nature" : "Debuff"
+        },
+{
+                "durationData" : {
+                    "duration": -1,
+                    "stackLimit": -1
+                },
+                "targetingData" : {
+                    "effectTriggerType" : "Passive",
+                    "specialRules" : "NotSet",
+                    "effectTargetType" : "EnemiesWithinRange",
+                    "range" : 0.0,
+                    "forcePathRebuild" : false,
+                    "forceVisRebuild" : false,
+                    "showInTargetPreview" : false,
+                    "showInStatusPanel" : false
+                },
+                "effectType" : "StatisticEffect",
+                "Description" :
+                {
+                    "Id" : "LV_ECM_JAM_EMITTER_COUNT",
+                    "Name" : "ECM Jamming Emitter Count",
+                    "Details" : "Counter for the number of ECM emitters currently affecting an actor with jamming.",
+                    "Icon" : "uixSvgIcon_status_ECM-missileDef"
+                },
+                "statisticData" : 
+                {
+                    "statName" : "LV_ECM_JAM_EMITTER_COUNT",
+                    "operation": "Int_Add",
+                    "modValue": "1",
+                    "modType": "System.Int32"
+                },
+                "nature" : "Debuff"
+            }			
+      ]
+    }
+  ],
+    "statusEffects": [	
 		   {
             "durationData" : {
                 "duration": -1,
@@ -142,22 +175,11 @@
         },	{
             "durationData": {
                 "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
                 "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
                 "showInTargetPreview": false,
                 "showInStatusPanel": false
             },
@@ -175,40 +197,17 @@
                 "statName": "SensorDistanceAbsolute",
                 "operation": "Float_Multiply",
                 "modValue": "1.05",
-                "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "NotSet",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+                "modType": "System.Single"
+            }
         },
         {
             "durationData": {
                 "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
                 "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
                 "showInTargetPreview": false,
                 "showInStatusPanel": false
             },
@@ -226,26 +225,12 @@
                 "statName": "SpotterDistanceAbsolute",
                 "operation": "Float_Multiply",
                 "modValue": "1.1",
-                "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "NotSet",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+                "modType": "System.Single"
+            }
         }],
     "ComponentTags": {
         "items": [
-            "component_type_stock",
-            "lv-scrambler_m2",
-			"lv-probe-boost_m2"
+            "component_type_stock"
         ],
         "tagSetSourceFile": ""
     }

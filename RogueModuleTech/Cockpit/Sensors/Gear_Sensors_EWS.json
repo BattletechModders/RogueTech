@@ -1,10 +1,21 @@
 {
     "Custom": {
         "Category": [
-           { "CategoryID": "CockpitSensors"},
-           { "CategoryID": "ECM"},
-		   { "CategoryID": "Probe"},
-		   { "CategoryID": "AdvECM" }
+            {
+                "CategoryID": "CockpitSensors"
+            },
+            {
+                "CategoryID": "ECM"
+            },
+            {
+                "CategoryID": "Probe"
+            },
+            {
+                "CategoryID": "AdvECM"
+            },
+            {
+                "CategoryID": "UAV"
+            }
         ],
         "WorkOrderCosts": {
             "Install": {
@@ -16,17 +27,22 @@
             "Bonuses": [
                 "Sensors: +5%",
                 "Sight: +10%",
-                "IsECM: 2",
-                "ECMBubble: 160",
-				"Jammer: 2",
-				"JamBubble: 190",
+                "IsECM: 2, 160",
+                "Jammer: 2, 190",
                 "IsProbe: 2",
-				"ProbePower: 2",
-				"UAV: 310",
-				"UAVCD: 2",
-				"UAVH: 15",
-                "CockpitEWS"
+                "AdvancedSensors: 2",
+                "UAV: 310, 2, 15",
+                "CockpitEWS",
+		"DetectMine: 120"
             ]
+        },
+        "ActivatableComponent": {
+            "CanNotBeActivatedManualy": true,
+            "NoUniqueCheck": true,
+            "ActivationMessage": "UAV",
+            "DeactivationMessage": "",
+            "statusEffects": [],
+            "offlineStatusEffects": []
         },
         "InventorySorter": {
             "SortKey": "00203"
@@ -43,14 +59,14 @@
         "Model": "NewTech",
         "UIName": "AR-24 Sheathed Beacon",
         "Id": "Gear_Sensors_EWS",
-        "Name": "Black Ops Cockpit",
+        "Name": "AR-24 Sheathed Beacon",
         "Details": "The AR-24 Sheathed Directional Beacon with ECM Suit is based on a a Star League Sensor system, combining the benefits of an Active probe with a ECM system, sadly it cannot provide the same benefits as most of its Technology is lost.",
-        "Icon": "uixSvgIcon_equipment_Comms"
+        "Icon": "EWS"
     },
     "BonusValueA": "Probe",
     "BonusValueB": "ECM",
     "ComponentType": "Upgrade",
-    "ComponentSubType" : "Prototype_ElectronicWarfare",
+    "ComponentSubType": "Prototype_ElectronicWarfare",
     "PrefabIdentifier": "",
     "BattleValue": 0,
     "InventorySize": 1,
@@ -58,155 +74,289 @@
     "AllowedLocations": "Head",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
-    "statusEffects": [
-	{
-            "targetingData" : {
-                "effectTriggerType" : "OnActivation",
-                "effectTargetType" : "EnemiesWithinRange",
-				"alsoTargetsCreator" : true,
-                "forceVisRebuild" : true
-            },
-			"effectType" : "ActiveAbility",
-			"Description" :
-			{
-				"Id" : "UAV_Ping",
-				"Name" : "UAV PING",
-				"Details" : "Activated ability (uses Firing action). Performs a Sensor Lock against all enemies within its radius, as indicated by the spinning gold ring. Will go into cooldown state after use.",
-				"Icon" : "uixSvgIcon_action_sensorlock"
-			},
-			"activeAbilityEffectData" : 
-			{
-				"abilityName" : "AbilityDef_EWS_Ping"
-			}
-		},
-	{
-            "durationData" : {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData" : {
-                "effectTriggerType" : "Passive",
-                "specialRules" : "NotSet",
-                "effectTargetType" : "Creator",
-                "range" : 0.0,
-                "forcePathRebuild" : false,
-                "forceVisRebuild" : true,
-                "showInTargetPreview" : false,
-                "showInStatusPanel" : false
-            },
-            "effectType" : "StatisticEffect",
-            "Description" :
-            {
-                "Id" : "LV_PROBE_CARRIER",
-                "Name" : "Active Probe (Passive)",
-                "Details" : "Reduces effectiveness of stealthed and ECM shielded units",
-                "Icon" : "uixSvgIcon_status_ECM-ghost"
-            },
-            "statisticData" : 
-            {
-                "statName" : "LV_PROBE_CARRIER",
-                "operation": "Int_Add",
-                "modValue": "2",
-                "modType": "System.Int32"
-            },
-            "nature" : "Buff"
-        },		
-		   {
-            "durationData" : {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData" : {
-                "effectTriggerType" : "Passive",
-                "specialRules" : "NotSet",
-                "effectTargetType" : "Creator",
-                "range" : 0.0,
-                "forcePathRebuild" : false,
-                "forceVisRebuild" : true,
-                "showInTargetPreview" : false,
-                "showInStatusPanel" : false
-            },
-            "effectType" : "StatisticEffect",
-            "Description" :
-            {
-                "Id" : "LV_ADVANCED_SENSORS",
-                "Name" : "Advanced Sensors",
-                "Details" : "Provides detailed information on enemy units",
-                "Icon" : "uixSvgIcon_status_ECM-ghost"
-            },
-            "statisticData" : 
-            {
-                "statName" : "LV_ADVANCED_SENSORS",
-                "operation": "Int_Add",
-                "modValue": "2",
-                "modType": "System.Int32"
-            },
-            "nature" : "Buff"
-        },
-	{
-            "durationData" : {
-                "duration": -1,
-                "stackLimit": 1
-            },
-            "targetingData" : {
-                "effectTriggerType" : "Passive",
-                "specialRules" : "Aura",
-                "effectTargetType" : "AlliesWithinRange",
-                "range" : 160.0,
-                "forcePathRebuild" : false,
-                "forceVisRebuild" : false,
-                "showInTargetPreview" : false,
-                "showInStatusPanel" : false
-            },
-            "effectType" : "StatisticEffect",
-            "Description" :
-            {
-				"Id" : "EWS_ECM_SHIELD",
-				"Name" : "Makes it easier for enemies to know where you are, but harder to attack",
-				"Details" : "IPSUM SUCKUM",
-				"Icon" : "uixSvgIcon_status_ECM-missileDef"
-            },
-            "statisticData" : 
-            {
-				"statName" : "LV_ECM_SHIELD",
-				"operation": "Int_Add",
-				"modValue": "2",
-				"modType": "System.Int32"
-            },
-            "nature" : "Buff"
+    "Auras": [
+        {
+      "Id": "MINEDETECTIONAURA",
+      "Name": "Minesweeper",
+      "ReticleColor": "white",
+      "LineType": "Dots",
+      "isSpining": false,
+          "MinefieldDetector": true,
+          "HideOnNotSelected": true,
+      "Range": 120,
+      "RemoveOnSensorLock": false,
+      "State": "Persistent",
+      "ApplySelf": true,
+      "AllyStealthAffection": "None",
+      "EnemyStealthAffection": "None",
+      "IsPositiveToAlly": false,
+      "IsNegativeToEnemy": false,
+      "ownerVFX": [
+      ],
+      "targetVFX": [
+      ],
+      "removeOwnerVFX": [
+      ],
+      "removeTargetVFX": [
+      ],
+      "ownerSFX": [
+      ],
+      "targetSFX": [
+      ],
+      "removeOwnerSFX": [
+      ],
+      "removeTargetSFX": [
+      ],
+      "statusEffects": [
+                ]
         },
         {
-            "durationData" : {
+            "Id": "Gear_SenECM_ECM",
+            "Name": "ECM",
+            "ReticleColor": "#00f2ff",
+            "Range": 160,
+            "RemoveOnSensorLock": false,
+            "State": "Persistent",
+            "ApplySelf": true,
+            "AllyStealthAffection": "PositiveOne",
+            "EnemyStealthAffection": "None",
+            "IsPositiveToAlly": true,
+            "IsNegativeToEnemy": false,
+            "ownerVFX": [],
+            "targetVFX": [],
+            "removeOwnerVFX": [],
+            "removeTargetVFX": [],
+            "ownerSFX": [],
+            "targetSFX": [],
+            "removeOwnerSFX": [],
+            "removeTargetSFX": [],
+            "statusEffects": [
+                {
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "specialRules": "NotSet",
+                        "effectTargetType": "AlliesWithinRange",
+                        "range": 0.0,
+                        "forcePathRebuild": false,
+                        "forceVisRebuild": false,
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "LV_ECM_SHIELD",
+                        "Name": "ECM_Shield_EWS",
+                        "Details": "IPSUM SUCKUM",
+                        "Icon": "uixSvgIcon_status_ECM-missileDef"
+                    },
+                    "statisticData": {
+                        "statName": "LV_ECM_SHIELD",
+                        "operation": "Int_Add",
+                        "modValue": "2",
+                        "modType": "System.Int32"
+                    },
+                    "nature": "Buff"
+                },
+                {
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "specialRules": "NotSet",
+                        "effectTargetType": "AlliesWithinRange",
+                        "range": 0.0,
+                        "forcePathRebuild": false,
+                        "forceVisRebuild": false,
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "LV_ECM_SHIELD_EMITTER_COUNT",
+                        "Name": "ECM Shield Emitter Count",
+                        "Details": "Counter for the number of ECM emitters currently affecting an actor with shielding.",
+                        "Icon": "uixSvgIcon_status_ECM-missileDef"
+                    },
+                    "statisticData": {
+                        "statName": "LV_ECM_SHIELD_EMITTER_COUNT",
+                        "operation": "Int_Add",
+                        "modValue": "1",
+                        "modType": "System.Int32"
+                    },
+                    "nature": "Buff"
+                }
+            ]
+        },
+        {
+            "Id": "Gear_SenECM_ECM_JAMMER",
+            "Name": "JAMMER",
+            "ReticleColor": "#0066ff",
+            "Range": 160,
+            "HideOnNotSelected": false,
+            "RemoveOnSensorLock": false,
+            "State": "Persistent",
+            "ApplySelf": false,
+            "AllyStealthAffection": "None",
+            "EnemyStealthAffection": "NegativeOne",
+            "IsPositiveToAlly": false,
+            "IsNegativeToEnemy": true,
+            "ownerVFX": [],
+            "targetVFX": [],
+            "removeOwnerVFX": [],
+            "removeTargetVFX": [],
+            "ownerSFX": [],
+            "targetSFX": [],
+            "removeOwnerSFX": [],
+            "removeTargetSFX": [],
+            "statusEffects": [
+                {
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1,
+                        "uniqueEffectIdStackLimit": 1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "specialRules": "NotSet",
+                        "effectTargetType": "EnemiesWithinRange",
+                        "range": 0.0,
+                        "forcePathRebuild": false,
+                        "forceVisRebuild": true,
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "LV_ECM_JAM",
+                        "Name": "ECM Jammer",
+                        "Details": "Jamming ECM, reduces sensor checks for enemies in field",
+                        "Icon": "uixSvgIcon_action_sensorlock"
+                    },
+                    "statisticData": {
+                        "statName": "LV_ECM_JAMMED",
+                        "operation": "Int_Add",
+                        "modValue": "2",
+                        "modType": "System.Int32"
+                    },
+                    "nature": "Debuff"
+                },
+                {
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "specialRules": "NotSet",
+                        "effectTargetType": "EnemiesWithinRange",
+                        "range": 0.0,
+                        "forcePathRebuild": false,
+                        "forceVisRebuild": false,
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "LV_ECM_JAM_EMITTER_COUNT",
+                        "Name": "ECM Jamming Emitter Count",
+                        "Details": "Counter for the number of ECM emitters currently affecting an actor with jamming.",
+                        "Icon": "uixSvgIcon_status_ECM-missileDef"
+                    },
+                    "statisticData": {
+                        "statName": "LV_ECM_JAM_EMITTER_COUNT",
+                        "operation": "Int_Add",
+                        "modValue": "1",
+                        "modType": "System.Int32"
+                    },
+                    "nature": "Debuff"
+                }
+            ]
+        }
+    ],
+    "statusEffects": [
+        {
+            "targetingData": {
+                "effectTriggerType": "OnActivation",
+                "effectTargetType": "EnemiesWithinRange",
+                "alsoTargetsCreator": true,
+                "forceVisRebuild": true
+            },
+            "effectType": "ActiveAbility",
+            "Description": {
+                "Id": "UAV_Ping",
+                "Name": "UAV PING",
+                "Details": "Activated ability (uses Firing action). Performs a Sensor Lock against all enemies within its radius, as indicated by the spinning gold ring. Will go into cooldown state after use.",
+                "Icon": "uixSvgIcon_action_sensorlock"
+            },
+            "activeAbilityEffectData": {
+                "abilityName": "AbilityDef_EWS_Ping"
+            }
+        },
+        {
+            "durationData": {
                 "duration": -1,
-                "stackLimit": 1,
-				"uniqueEffectIdStackLimit": 1
+                "stackLimit": -1
             },
-            "targetingData" : {
-                "effectTriggerType" : "Passive",
-                "specialRules" : "Aura",
-                "effectTargetType" : "EnemiesWithinRange",
-                "range" : 190.0,
-                "forcePathRebuild" : false,
-                "forceVisRebuild" : true,
-                "showInTargetPreview" : false,
-                "showInStatusPanel" : false
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0.0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": true,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
             },
-            "effectType" : "StatisticEffect",
-            "Description" :
-            {
-				"Id" : "EWS_ECM_JAM",
-				"Name" : "ECM Jammer",
-				"Details" : "Jamming ECM, reduces sensor checks for enemies in field",
-				"Icon" : "uixSvgIcon_action_sensorlock"
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "LV_PROBE_CARRIER",
+                "Name": "Active Probe (Passive)",
+                "Details": "Reduces effectiveness of stealthed and ECM shielded units",
+                "Icon": "uixSvgIcon_status_ECM-ghost"
             },
-            "statisticData" : 
-            {
-				"statName" : "LV_ECM_JAMMED",
-				"operation": "Int_Add",
-				"modValue": "2",
-				"modType": "System.Int32"
+            "statisticData": {
+                "statName": "LV_PROBE_CARRIER",
+                "operation": "Int_Add",
+                "modValue": "2",
+                "modType": "System.Int32"
             },
-            "nature" : "Debuff"
+            "nature": "Buff"
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0.0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": true,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "LV_ADVANCED_SENSORS",
+                "Name": "Advanced Sensors",
+                "Details": "Provides detailed information on enemy units",
+                "Icon": "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData": {
+                "statName": "LV_ADVANCED_SENSORS",
+                "operation": "Int_Add",
+                "modValue": "2",
+                "modType": "System.Int32"
+            },
+            "nature": "Buff"
         },
         {
             "durationData": {
@@ -230,7 +380,7 @@
                 "Id": "SLIC-BLACKOPS",
                 "Name": "SLIC Black Ops",
                 "Details": "Increased Sight/Sensors/Health.",
-                "Icon": "uixSvgIcon_equipment_Cockpit"
+                "Icon": "uixSvgIcon_equipment_Comms"
             },
             "nature": "Buff",
             "statisticData": {
@@ -262,7 +412,7 @@
                 "Id": "SLIC-Spotting_Gain-T1",
                 "Name": "SPOTTING DISTANCE INCREASED",
                 "Details": "Increases spotting distance by 50m.",
-                "Icon": "uixSvgIcon_equipment_Cockpit"
+                "Icon": "uixSvgIcon_equipment_Comms"
             },
             "nature": "Buff",
             "statisticData": {
@@ -271,6 +421,36 @@
                 "modValue": "1.1",
                 "modType": "System.Single"
             }
+        },
+               {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0.0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": true,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "MineFieldDetection",
+                "Name": "Active Probe (Passive)",
+                "Details": "Detects Minefields",
+                "Icon": "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData": {
+                "statName": "MinefieldDetection",
+                "operation": "Float_Add",
+                "modValue": "1",
+                "modType": "System.Single"
+            },
+            "nature": "Buff"
         }
     ],
     "ComponentTags": {

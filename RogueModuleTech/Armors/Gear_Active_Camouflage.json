@@ -55,14 +55,12 @@
         },
         "BonusDescriptions": {
             "Bonuses": [
-	"MimeticEnhance",
-				"MimeticStealth: 30%",
-				"MimeticCharges: 4",
-				"MimeticDecay: 3",
-                "Reserved: 6",
+		"MimeticEnhance",
+		"MimeticStealth: 35%, 4, 3",
+                "StealthReserved: 1",
                 "Visibility: -40%",
-                "HeatGenerated: +10%",
-                "HeatPerTurn: +5",
+                "ActiveTEHeatgen: +10%",
+                "ActiveHeatPerTurn: +5",
                 "ReqECM",
                 "ArmorTPCost: 15%",
                 "ArmorCBCost: 20%"
@@ -77,8 +75,8 @@
 	  "ActivationIsBuff": true,
       "CanNotBeActivatedManualy": false,
       "NoUniqueCheck": true,
-	  "ActivationMessage": "Camouflage Activated",
-	  "DeactivationMessage": "Camouflage Deactivated",
+	  "ActivationMessage": "Camouflaged",
+	  "DeactivationMessage": "Camouflage Off",
 	  "Linkage":{
         "OnActivate":{  
           "Activate":[],
@@ -117,7 +115,7 @@
             {
                 "statName" : "LV_MIMETIC",
                 "operation" : "Set",
-                "modValue": "0.3_4_3",
+                "modValue": "0.65_4_3",
                 "modType": "System.String"
             },
             "nature" : "Buff"
@@ -167,38 +165,38 @@
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
             },
             "nature": "Buff",
-            "statisticData": {
-                "statName": "HeatGenerated",
-                "operation": "Float_Multiply",
-                "modValue": "1.1",
-                "modType": "System.Single",
-                "targetCollection": "Weapon"
-            }
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "Stealth_Heat_Capacity_Stealth",
-                "Name": "Decreased Heat Capacity",
-                "Details": "Heat Capacity Penalty",
-                "Icon": "uixSvgIcon_equipment_ThermalExchanger"
-            },
-            "nature": "Debuff",
-            "statisticData": {
-                "statName": "HeatSinkCapacity",
-                "operation": "Int_Add",
-                "modValue": "-5",
-                "modType": "System.Int32"
+                    "statisticData": {
+                        "statName": "HeatGenerated",
+                        "operation": "Float_Multiply",
+                        "modValue": "1.10",
+                        "modType": "System.Single",
+                        "targetCollection": "Weapon"
+                    }
+                },
+                {
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "effectTargetType": "Creator",
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "Stealth_Heat_Capacity_Stealth",
+                        "Name": "Decreased Heat Capacity",
+                        "Details": "Heat Capacity Penalty",
+                        "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+                    },
+                    "nature": "Debuff",
+                     "statisticData": {
+                         "statName": "HeatSinkCapacity",
+                        "operation": "Int_Add",
+                        "modValue": "-5",
+                        "modType": "System.Int32"
             }
         }
       ],
@@ -219,7 +217,7 @@
         "Id": "Gear_Active_Camouflage",
         "Name": "Active Camouflage System",
         "Details": "Active Camouflage Systems can be added to a existing Stealth Armour giving it Mimetic capabilities. Reserves 1 slot in every Location except the Head and requires a Stealth Armour.",
-        "Icon": "uixSvgIcon_equipment_TTS"
+        "Icon": "StealthArmor"
     },
     "BonusValueA": "Bulwark",
     "BonusValueB": "Requires ECM",
@@ -237,9 +235,6 @@
     "ComponentTags": {
         "items": [
             "component_type_stock",
-            "lv-stealth_t3",
-            "lv-stealth-range-mod_s1_m2_l4_e6",
-            "lv-stealth-move-mod_m8_s5",
 			"StealthArmor"
         ],
         "tagSetSourceFile": ""

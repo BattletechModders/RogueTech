@@ -1,89 +1,150 @@
 {
   "Name": "PanicSystem",
-
+	"Hidden": true,
   "Enabled": true,
-
-  "Version": "3.4.2",
-  "Description": "Simulates mechwarrior panic and automatic ejections",
-  "Website": "https://github.com/gnivler/PanicSystem",
-
+  "Version": "4.1.0",
+  "Description": "Simulates MechWarrior and vehicle crew panic, and automatic ejections",
+  "Website": "https://github.com/BattletechModders/PanicSystem",
   "DLL": "PanicSystem.dll",
-  "ConflictsWith": [ "RogueTech Enhanced", "RogueTech Enhanced Clans"],
-
+  "DLLEntryPoint": "PanicSystem.PanicSystem.Init",
+	"OptionallyDependsOn" : [ "Custom Ammo Categories" ],
+  /* ModTek manifest for custom icons */
+  "Manifest": [
+    {
+      "Type": "SVGAsset",
+      "Path": "icons",
+      "ShouldMergeJSON": false
+    }
+  ],
   "Settings": {
-    "Debug": true,
+    "Debug": false,
+    "CombatLog": false,
 
-    /* readds phrases.txt file and displays one randomly at eject */
+    /* custom strings for floaties */
+    "PanicStates": [
+      "CONFIDENT",
+      "UNSETTLED",
+      "STRESSED",
+      "PANICKED"
+    ],
+    "PanicSpamSaveString": "SAVE",
+    "PanicSpamFailString": "FAIL",
+    "PanicSpamRollString": "ROLL",
+    "PanicSpamCritSaveString": "CRIT SAVE!",
+    "PanicSpamNoWeaponsString": "NO WEAPONS!",
+    "PanicSpamAloneString": "ALONE!",
+    "PanicSpamEjectResistString": "EJECT RESIST!",
+    "PanicCritFailString": "PANIC LEVEL CRITICAL!",
+    "PanicImprovedString": "IMPROVED TO",
+    "PanicWorsenedString": "",
+    "PanicCritSaveString": "CRIT SAVE!",
+
+    /* 0 is Confident.  Prevent manual ejection at this threshold status */
+    "LimitManualEjection": false,
+    "LimitManualEjectionLevel": 0,
+
+    /* prevent manual ejection with these pilot tags */
+    "LimitManualEjectionTags": [
+      "pilot_example_tag",
+      "pilot_npc_testpilot"
+    ],
+
+    /* reads phrases.txt file and displays one randomly at eject */
     "EnableEjectPhrases": true,
-	"EjectPhraseChance": 100,
+    "EjectPhraseChance": 100,
 
     /* greatly increases the visual feedback, like saving throw results */
     "FloatieSpam": false,
-    
+
+    /* Modify floatie appearance? */
+    "ColorizeFloaties": true,
+
+    /* Do Ejections count as kills? */
+    "CountAsKills": true,
+
     /* Panic Settings */
     "PlayersCanPanic": true,
     "EnemiesCanPanic": true,
+    "VehiclesCanPanic": true,
     "ConsiderEjectingWithNoWeaps": true,
-	"LosingLimbAlwaysPanics": false,
-    "OneChangePerTurn": true,
+    "LosingLimbAlwaysPanics": false,
 
     /* percent of remaining armor that must be destroyed to cause a panic save */
-    "MinimumArmorDamagePercentageRequired": 10,
+    "MinimumDamagePercentageRequired": 12,
 
     /* integer number of cumulative structure damage required to cause a panic save */
-    "MinimumStructureDamageRequired": 5,
+    "MinimumMechStructureDamageRequired": 5,
+    "MinimumVehicleStructureDamageRequired": 5,
 
-	/* Effect Modifiers */
+    /* Effect Modifiers */
     "UnsteadyModifier": 5,
     "PilotHealthMaxModifier": 25,
     "HeadMaxModifier": 25,
     "CenterTorsoMaxModifier": 100,
     "SideTorsoMaxModifier": 25,
     "LeggedMaxModifier": 15,
-    "WeaponlessModifier": 15,
-    "AloneModifier": 5,
+    "WeaponlessModifier": 20,
+    "AloneModifier": 20,
     "ResolveMaxModifier": 10,
-	"OverheatedModifier": 2,
+    "OverheatedModifier": 2,
     "ShutdownModifier": 4,
-	"HeatDamageModifier": 1.1,
+    "HeatDamageFactor": 0.5,
+    "VehicleDamageFactor": 40,
+    "ArmorDamageThreshold": 0,
 
-    /* AI morale goes to 50 */
-    "MedianResolve": 20,
-    
+    /* AI Resolve goes to 50 */
+    "MedianResolve": 75,
+    "VehicleResolveFactor": 2,
+
     /* factors that affect only panic saving throws based on existing panic state */
-    "UnsettledPanicModifier": 1,
-    "StressedPanicModifier" : 0.77,
-    "PanickedPanicModifier" : 0.44,
+    "UnsettledPanicFactor": 1,
+    "StressedPanicFactor" : 0.77,
+    "PanickedPanicFactor" : 0.44,
 
-	/* Ejection Bonuses and Limits */
+    /* Ejection Bonuses and Limits */
     "GutsEjectionResistPerPoint": 1,
-    "TacticsEjectionResistPerPoint": 1,	
-    
+    "TacticsEjectionResistPerPoint": 1,
+    "VehicleGutAndTacticsFactor": 1,
+
     /* subtracted from all eject saving throws */
-    "BaseEjectionResist": 65,
+    "BaseEjectionResist": 60,
+    "BaseVehicleEjectionResist": 70,
 
     /* ceiling for eject saving throw */
-    "MaxEjectChance": 100,
-    
+    "MaxEjectChance": 95,
+
     /* applied after entire calculation */
-    "EjectChanceMultiplier": 1,
-    
+    "EjectChanceFactor": 1,
+
     /* Pilot Quirk Effects https://www.nexusmods.com/battletech/mods/282/ */
     "QuirksEnabled": true,
     "BraveModifier": 5,
     "DependableModifier": 5,
 
-	/* to-hit and to-be-hit modifiers, by panic level */
-    "UnsettledAttackModifier": 1,
+    /* new Mech Quirk effects TBA */
+    "DistractingModifier": 5,
+
+    /* to-hit and to-be-hit modifiers, by panic level */
+    "UnsettledAimModifier": 1,
     "StressedAimModifier": 1,
     "StressedToHitModifier": -1,
     "PanickedAimModifier": 2,
     "PanickedToHitModifier": -2,
-    
+
     /* panic crits won't occur below this percentage */
     "MechHealthForCrit": 30,
 
     /* if you miss your saving throw by this number it's a critical failure */
     "CritOver": 25,
-	}
+
+    /* Misc */
+    "OneChangePerTurn" : false,
+	"CombatSaves": false,
+	
+	    /*Block Ejection for Pilots with CanEject Stat set to false*/
+    "ObeyPilotCanEjectStat": true,
+
+    /*Block Ejection for Pilots with pilot_cannot_eject Tag*/
+    "ObeyPilotCannotEjectTag": true
+  }
 }

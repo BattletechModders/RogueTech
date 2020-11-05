@@ -1,32 +1,35 @@
 {
     "Custom": {
-         "Category": [
-			{ "CategoryID": "w/e/p/flamer" }
-		],
-       "BonusDescriptions": {
+        "Category": [
+            {
+                "CategoryID": "w/e/p/flamer"
+            }
+        ],
+        "BonusDescriptions": {
             "Bonuses": [
                 "WpnRecoil: 2",
                 "VariableDmg: 5",
                 "PipsIgnored: 1",
-                "BankMaxHeat: 10",
-                "BankThreshhold: 10",
+                "HeatPerTurn: -2",
                 "OHDamage: 75%",
-				"DmgFallOff: 35%",
-				"NoAA",
-				"AlwaysStartsFire"
+                "DmgFallOff: 35%",
+                "AccuracyUnit: Battle Armor",
+                "AccuracyUnit2: +5",
+                "NoAA",
+                "AlwaysStartsFire"
             ]
         },
         "InventorySorter": {
             "SortKey": "02001"
         },
-		"Flags": {
-      "flags": [
-        "not_broken",
-		"not_destroyed"
-      ]
-    }
+        "Flags": {
+            "flags": [
+                "not_broken",
+                "not_destroyed"
+            ]
+        }
     },
-    "Category": "AntiPersonnel",
+    "Category": "Energy",
     "Type": "Flamer",
     "WeaponSubType": "Flamer",
     "MinRange": 0,
@@ -46,15 +49,18 @@
     "DamageVariance": 5,
     "HeatDamage": 15,
     "AccuracyModifier": 0,
-	"DistantVariance": 0.2,
-  "DistantVarianceReversed": false,
-  "isHeatVariation": true,
-  "isStabilityVariation": true,
-  "isDamageVariation": true,
+    "ChassisTagsAccuracyModifiers": {
+        "unit_powerarmor": -5
+    },
+    "DistantVariance": 0.2,
+    "DistantVarianceReversed": false,
+    "isHeatVariation": true,
+    "isStabilityVariation": true,
+    "isDamageVariation": true,
     "CriticalChanceMultiplier": 0.1,
-	"APArmorShardsMod": 0.1,
-	"APMaxArmorThickness": 1,
-	"APCriticalChanceMultiplier": 0.01,
+    "APArmorShardsMod": 0.1,
+    "APMaxArmorThickness": 1,
+    "APCriticalChanceMultiplier": 0.01,
     "AOECapable": false,
     "IndirectFireCapable": false,
     "RefireModifier": 2,
@@ -62,9 +68,9 @@
     "ProjectilesPerShot": 1,
     "AttackRecoil": 0,
     "Instability": 0,
-	"FireOnSuccessHit" : true,
-	"FireTerrainChance": 1,
-	"CantHitUnaffecedByPathing": true,
+    "FireOnSuccessHit": true,
+    "FireTerrainChance": 1,
+    "CantHitUnaffecedByPathing": true,
     "WeaponEffectID": "WeaponEffect-Weapon_Flamer",
     "Description": {
         "Cost": 180000,
@@ -75,15 +81,15 @@
         "UIName": "Flame Breath",
         "Id": "Weapon_Flamer_JuryRigged_Cockpit",
         "Name": "Pirate Cockpit",
-        "Details": "Boss, I donât know what this is, but some jokester welded a flamer onto the cockpit, and hot-wired a heat bank into it that runs throughâ¦ a coffee machine. Bunch of bÃ¡ichÄ«. This can only be installed in the head.",
-        "Icon": "uixSvgIcon_equipment_Cockpit"
+        "Details": "Boss, I don't know what this is, but some jokester welded a flamer onto the cockpit, and hotwired a heat bank into it that runs through a coffee machine. This can only be installed in the head.",
+        "Icon": "dragon-breath"
     },
     "BonusValueA": "Flame Breath!",
     "BonusValueB": "Bonus WHEN overheat",
     "ComponentType": "Weapon",
     "ComponentSubType": "Weapon",
     "PrefabIdentifier": "Flamer",
-    "BattleValue": 0,
+    "BattleValue": 15,
     "InventorySize": 1,
     "Tonnage": 1,
     "AllowedLocations": "Head",
@@ -92,25 +98,48 @@
     "statusEffects": [
         {
             "durationData": {
-                "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
+                "duration": 1,
+                "ticksOnActivations": true,
+                "useActivationsOfTarget": true,
+                "stackLimit": 45
             },
             "targetingData": {
-                "effectTriggerType": "Passive",
+                "effectTriggerType": "OnHit",
                 "triggerLimit": 0,
                 "extendDurationOnTrigger": 0,
                 "specialRules": "NotSet",
-                "effectTargetType": "Creator",
+                "effectTargetType": "NotSet",
                 "range": 0,
                 "forcePathRebuild": false,
                 "forceVisRebuild": false,
                 "showInTargetPreview": false,
-                "showInStatusPanel": true
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "HeatDamageTakenSoftCapMultiplier",
+                "Name": "Heat SoftCap 4%",
+                "Details": "Reduce Heat Damage by 1%",
+                "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "CACIncomingHeatMult",
+                "operation": "Float_Multiply",
+                "modValue": "0.96",
+                "modType": "System.Single"
+            }
+        },
+        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
             },
             "effectType": "StatisticEffect",
             "Description": {
@@ -121,76 +150,11 @@
             },
             "nature": "Buff",
             "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
-                "statName": "MaxHeat",
+                "statName": "HeatSinkCapacity",
                 "operation": "Int_Add",
-                "modValue": "10",
-                "modType": "System.Int32",
-                "additionalRules": "NotSet",
-                "targetCollection": "NotSet",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "ticksOnActivations": false,
-                "useActivationsOfTarget": false,
-                "ticksOnEndOfRound": false,
-                "ticksOnMovements": false,
-                "stackLimit": -1,
-                "clearedWhenAttacked": false
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
-                "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "StatusEffect-Overheat_Threshold-FB",
-                "Name": "Increased Overheat Level",
-                "Details": "Overheat threshold increased by 5",
-                "Icon": "uixSvgIcon_equipment_HeatBank"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
-                "statName": "OverheatLevel",
-                "operation": "Int_Add",
-                "modValue": "10",
-                "modType": "System.Int32",
-                "additionalRules": "NotSet",
-                "targetCollection": "NotSet",
-                "targetWeaponCategory": "NotSet",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
-            },
-            "tagData": null,
-            "floatieData": null,
-            "actorBurningData": null,
-            "vfxData": null,
-            "instantModData": null,
-            "poorlyMaintainedEffectData": null
+                "modValue": "2",
+                "modType": "System.Int32"
+            }
         }
     ],
     "ComponentTags": {

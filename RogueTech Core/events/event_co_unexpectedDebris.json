@@ -1,0 +1,501 @@
+{
+    "Description" : {
+        "Id" : "event_co_unexpectedDebris",
+        "Name" : "Unexpected Debris",
+        "Details" : "In Navigation, Sumire highlights a blinking red alert in the <i>Argo</i>'s path. \"We've got some space junk in our way, Commander. Permission to blast it to dust with the Leopard?\"\r\n\r\n\"Debris,\" Dr. Murad corrects her. \"I recommend that we attempt to avoid it. Otherwise, you risk sending the debris in unexpected directions. You could damage our most vital systems and bays.\"\r\n\r\nSumire rolls her eyes. \"The <i>Argo</i> isn't exactly an agile ship. I mean, I'm good, but she's never going to turn on a dime. We've got about five minutes, roughly. We need a decision, Commander.\"",
+        "Icon" : "uixTxrSpot_ArgoTravel.png"
+    },
+    "Scope" : "Company",
+    "Weight" : 10,
+    "Requirements" : {
+        "Scope" : "Company",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "",
+            "items" : []
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "Tags/CompanyTags",
+            "items" : [
+                "MODIFIED_STAT_MechTechSkill",
+                "MODIFIED_STAT_MedTechSkill"
+            ]
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "MechTechSkill",
+                "op" : "GreaterThanOrEqual",
+                "val" : 5,
+                "valueConstant" : "5"
+            },
+            {
+                "obj" : "MedTechSkill",
+                "op" : "GreaterThanOrEqual",
+                "val" : 5,
+                "valueConstant" : "5"
+            },
+            {
+                "obj" : "Travel",
+                "op" : "GreaterThanOrEqual",
+                "val" : 3,
+                "valueConstant" : "3"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Perform a standard evasive maneuver.",
+                "Details" : "safest option",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "minor scrape",
+                        "Details" : "You watch with amazement as Sumire directs the <i>Argo</i> past the free-floating debris. The DropShip groans as it slowly wheels. On a viewscreen, you see jagged metal drift harmlessly beneath the belly of the ship.\r\n\r\nAfter the <i>Argo</i> reaches a safe distance, Dr. Murad reports in over the comms. \"Hull integrity is stable\u2014well, as stable as it ever was. You've proven yourself once again, Sumire!\"\r\n\r\nSumire punches a fist into the air. \"That's why they pay me the big C-Bills!\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "5",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_1",
+                        "Name" : "Damage to Med Bay",
+                        "Details" : "You watch with trepidation as Sumire wrestles with the control panel. The DropShip's trajectory shifts at a glacial speed. You hear scraping and brace yourself. On a viewscreen, you see the remains of a satellite collide with the hull, and a shudder rattles through the ship.\r\n\r\nAfter the <i>Argo</i> pushes past the wreckage and reaches a safe distance, Dr. Murad reports in over the comms. \"We're lucky that the damage isn't more extensive, but the MedBay suffered a direct hit. Expect delays for the next couple of weeks.\"\r\n\r\nSumire slumps in her chair. \"I really thought I had it that time.\"\r\n\r\n\"That maneuver was nearly impossible, but hey, we're still here,\" you say. \"That's what counts.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : [
+                                    "chain_hull_damage"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_2",
+                        "Name" : "Damage to Mech Bay",
+                        "Details" : "You watch with trepidation as Sumire wrestles with the control panel. The DropShip's trajectory shifts at a glacial speed. You hear scraping and brace yourself. On a viewscreen, you see the remains of a satellite collide with the hull, and a shudder rattles through the ship.\r\n\r\nAfter the <i>Argo</i> pushes past the wreckage and reaches a safe distance, Dr. Murad reports into Navigation over the comms. \"The Mech Bay suffered a direct hit. Luckily, the 'Mechs are safe. Expect a slowdown for the next couple of weeks.\"\r\n\r\nSumire slumps in her chair. \"I tried my best, Commander.\"\r\n\r\n\"That maneuver was nearly impossible, but hey, we're still here,\" you say. \"That's what counts.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "chain_hull_damage"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Deploy the Leopard to destroy the debris.",
+                "Details" : "Risky",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Major success",
+                        "Details" : "You watch with amazement from a viewscreen as the Leopard jumps from the <i>Argo</i>'s docking collar and fires at the debris. With precise PPC barrages, Sumire carves out a gap for the DropShip to slip through as the rest of the junk drifts away.\r\n\r\nAfter the <i>Argo</i> reaches a safe distance, Dr. Murad reports into Navigation over the comms. \"We were pelted by smaller shards, but hull damage was minimal. I'll run a diagnostic, but congratulations are in order\u2014Sumire, no one else could have pulled that off.\"\r\n\r\nSumire punches a fist into the air and says, \"It's a whole lot easier to thread a needle after you blast a giant hole through it!\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 33,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "Major damage to Med Bay",
+                        "Details" : "You watch from a viewscreen as the Leopard jumps from the <i>Argo</i>'s docking collar and fires at the debris. The LRM barrage scatters the scrap metal in unexpected directions. Pieces spin, break apart, and smack against the hull.\r\n\r\nAfter the <i>Argo</i> reaches a safe distance, Dr. Murad reports in over the comms. \"The Med Bay took a serious hit. Expect a delay for a couple weeks as the MedTechs will be forced to operate with limited power until repairs are finalized.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 33,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-3",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : [
+                                    "chain_hull_damage"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_2",
+                        "Name" : "Explosion in the Mech Bay",
+                        "Details" : "You watch from a viewscreen as the Leopard jumps from the <i>Argo</i>'s docking collar and fires at the debris. The PPC barrage scatters the scrap metal in unexpected directions. Pieces spin, break apart, and smack against the hull.\r\n\r\nAfter the <i>Argo</i> reaches a safe distance, Dr. Murad reports in over the comms. \"We sustained serious damage to the Mech Bay. The 'Mechs are safe, but an unsecured canister exploded, injuring some of the technicians. It'll be a couple weeks before their injuries heal, and the MedBay will be a little cramped during this time.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 33,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "-4",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : [
+                                    "chain_hull_damage"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Force more power to the engines.",
+                "Details" : "[Argo: Improved Power Conduits]",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "Tags/CompanyTags",
+                        "items" : [
+                            "argo_power2"
+                        ]
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "Superficial damage",
+                        "Details" : "Coordinating with Sumire, Dr. Murad manages to squeeze some extra thrust from the power conduits. The <i>Argo</i> lurches forward with a burst of speed, and the entire ship vibrates as if it might explode. Though the extra power lasts only for a few minutes, the DropShip evades the debris.\r\n\r\nAfter the <i>Argo</i> reaches a safe distance, Dr. Murad reports into Navigation over the comms. \"I'm still kind of shocked that actually worked. Stray particles caused some superficial damage, but nothing too concerning. You made the right call, Commander.\"\r\n\r\nCheers echo down the halls of the <i>Argo</i> as the rest of the outfit return to their posts.",
+                        "Icon" : null
+                    },
+                    "Weight" : 75,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_1",
+                        "Name" : "minor damage",
+                        "Details" : "The <i>Argo</i> lurches forward dangerously as Dr. Murad manages to squeeze some extra thrust from the power conduits. Sumire wrestles with the control panel, but the <i>Argo</i> veers unpredictably close to the debris. Metal shrieks. Before she can correct course, jagged wreckage scrapes across the hull.\r\n\r\nAfter the <i>Argo</i> reaches a safe distance, Dr. Murad reports into Navigation over the comms. \"While some scrap metal got caught in the debris shield, the collision didn't damage any major components. I'll run a full diagnostic to be sure.\"\r\n\r\n\"I used every trick I knew to get us through that mess in one piece,\" Sumire explains.\r\n\r\n\"And you succeeded,\" you say. \"This was a calculated risk, but no one could have maneuvered the ship better than you, Sumire.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : [
+                                    "chain_hull_damage"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL",
+    "OneTimeEvent" : true
+}
