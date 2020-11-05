@@ -2,8 +2,9 @@
   "Custom": {
     "Category": [
       {
-        "CategoryID": "w/s/m/energy"
-      }
+        "CategoryID": "w/e/p/tsemp"
+      },
+	  {"CategoryID": "CritsHeatWeapon4"}
     ],
     "ComponentExplosion": {
       "ExplosionDamage": 35,
@@ -16,25 +17,28 @@
         "ImpMove: 60%",
         "ImpAccuracy: -3",
         "ImpHeatSink: -80%",
-        "WpnRecoil: 8",
-        "Explodium: 5",
-        "WeaponBoom: 35",
-        "NoAA"
+        "WpnRecoil: 2",
+        "RecoilExponent: 0.5",
+        "AccuracyExponent: -0.3",
+        "ExplodiumFlat: 20",
+        "CapacitorBoom: 35",
+        "NoAA",
+        "MineClearanceBoom: 1"
       ]
     },
     "InventorySorter": {
       "SortKey": "02013"
     },
-	"Flags": {
+    "Flags": {
       "flags": [
         "not_broken",
-		"not_destroyed"
+        "not_destroyed"
       ]
     }
   },
-  "Category": "AntiPersonnel",
+  "Category": "Energy",
   "Type": "PPC",
-  "WeaponSubType": "PPCER",
+  "WeaponSubType": "PPCSnub",
   "MinRange": 0,
   "MaxRange": 430,
   "RangeSplit": [
@@ -58,11 +62,15 @@
   "APCriticalChanceMultiplier": 0.013,
   "AOECapable": false,
   "IndirectFireCapable": false,
-  "RefireModifier": 8,
+  "RefireModifier": 2,
   "ShotsWhenFired": 1,
   "ProjectilesPerShot": 1,
   "AttackRecoil": 3,
-  "Instability": 10,
+  "Instability": 20,
+  "DamageOnJamming": true,
+  "FlatJammingChance": 0.2,
+  "GunneryJammingMult": 0.01,
+  "GunneryJammingBase": 0,
   "AdditionalImpactVFX": "WFX_SPlasma",
   "AdditionalImpactVFXScaleX": 1,
   "AdditionalImpactVFXScaleY": 1,
@@ -92,7 +100,7 @@
     "Id": "Weapon_PPC_TSEMP",
     "Name": "TSEMP",
     "Details": "The Tight Stream Electro Magnetic Pulse Cannon is a directed energy weapon based on the Taser system, but doesn't require the cabling and capacitors. The unit mounting the TSEMP Cannon suffers from sensor and electronic system interference every time it fires the TSEMP. The capacitors used to charge the Cannon also require time to recharge between shots, so an operator will have to wait ten seconds between shots.",
-    "Icon": "uixSvgIcon_weapon_Energy"
+    "Icon": "PPC"
   },
   "BonusValueA": "1 Evasion Ignore",
   "BonusValueB": "No Recoil",
@@ -105,16 +113,18 @@
   "AllowedLocations": "All",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
+  "ClearMineFieldRadius": 8,
+  "evasivePipsMods": {
+    "RefireModifier": 0.5,
+    "AccuracyModifier": -0.35
+  },
   "statusEffects": [
     {
       "durationData": {
-        "duration": 2,
+        "duration": 1,
         "ticksOnActivations": true,
         "useActivationsOfTarget": true,
-        "ticksOnEndOfRound": false,
-        "ticksOnMovements": false,
-        "stackLimit": 6,
-        "clearedWhenAttacked": false
+        "stackLimit": 45
       },
       "targetingData": {
         "effectTriggerType": "OnHit",
@@ -126,7 +136,41 @@
         "forcePathRebuild": false,
         "forceVisRebuild": false,
         "showInTargetPreview": false,
-        "showInStatusPanel": true
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "HeatDamageTakenSoftCapMultiplier",
+        "Name": "Heat SoftCap 5%",
+        "Details": "Reduce Heat Damage by 1%",
+        "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "CACIncomingHeatMult",
+        "operation": "Float_Multiply",
+        "modValue": "0.95",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": 2,
+        "ticksOnActivations": true,
+        "useActivationsOfTarget": true,
+        "stackLimit": 6
+      },
+      "targetingData": {
+        "effectTriggerType": "OnHit",
+        "triggerLimit": 0,
+        "extendDurationOnTrigger": 0,
+        "specialRules": "NotSet",
+        "effectTargetType": "NotSet",
+        "range": 0,
+        "forcePathRebuild": false,
+        "forceVisRebuild": false,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
       "Description": {
@@ -137,25 +181,11 @@
       },
       "nature": "Debuff",
       "statisticData": {
-        "appliesEachTick": false,
-        "effectsPersistAfterDestruction": false,
         "statName": "AccuracyModifier",
         "operation": "Float_Add",
         "modValue": "3.0",
-        "modType": "System.Single",
-        "additionalRules": "NotSet",
-        "targetCollection": "NotSet",
-        "targetWeaponCategory": "NotSet",
-        "targetWeaponType": "NotSet",
-        "targetAmmoCategory": "NotSet",
-        "targetWeaponSubType": "NotSet"
-      },
-      "tagData": null,
-      "floatieData": null,
-      "actorBurningData": null,
-      "vfxData": null,
-      "instantModData": null,
-      "poorlyMaintainedEffectData": null
+        "modType": "System.Single"
+      }
     },
     {
       "durationData": {
@@ -188,76 +218,11 @@
       },
       "nature": "Debuff",
       "statisticData": {
-        "appliesEachTick": false,
-        "effectsPersistAfterDestruction": false,
         "statName": "WalkSpeed",
         "operation": "Float_Multiply",
         "modValue": "0.4",
-        "modType": "System.Single",
-        "additionalRules": "NotSet",
-        "targetCollection": "NotSet",
-        "targetWeaponCategory": "NotSet",
-        "targetWeaponType": "NotSet",
-        "targetAmmoCategory": "NotSet",
-        "targetWeaponSubType": "NotSet"
-      },
-      "tagData": null,
-      "floatieData": null,
-      "actorBurningData": null,
-      "vfxData": null,
-      "instantModData": null,
-      "poorlyMaintainedEffectData": null
-    },
-    {
-      "durationData": {
-        "duration": 2,
-        "ticksOnActivations": true,
-        "useActivationsOfTarget": true,
-        "ticksOnEndOfRound": false,
-        "ticksOnMovements": false,
-        "stackLimit": 6,
-        "clearedWhenAttacked": false
-      },
-      "targetingData": {
-        "effectTriggerType": "OnHit",
-        "triggerLimit": 0,
-        "extendDurationOnTrigger": 0,
-        "specialRules": "NotSet",
-        "effectTargetType": "NotSet",
-        "range": 0,
-        "forcePathRebuild": false,
-        "forceVisRebuild": false,
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "TSEMP-Effect2",
-        "Name": "Move Impaired",
-        "Details": "The Mech's Movement is reduced.",
-        "Icon": "uixSvgIcon_status_sensorsImpaired"
-      },
-      "nature": "Debuff",
-      "statisticData": {
-        "appliesEachTick": false,
-        "effectsPersistAfterDestruction": false,
-        "statName": "RunSpeed",
-        "operation": "Float_Multiply",
-        "modValue": "0.4",
-        "modType": "System.Single",
-        "additionalRules": "NotSet",
-        "targetCollection": "NotSet",
-        "targetWeaponCategory": "NotSet",
-        "targetWeaponType": "NotSet",
-        "targetAmmoCategory": "NotSet",
-        "targetWeaponSubType": "NotSet"
-      },
-      "tagData": null,
-      "floatieData": null,
-      "actorBurningData": null,
-      "vfxData": null,
-      "instantModData": null,
-      "poorlyMaintainedEffectData": null
+        "modType": "System.Single"
+      }
     },
     {
       "durationData": {
@@ -295,30 +260,15 @@
         "statName": "HeatGenerated",
         "operation": "Float_Multiply",
         "modValue": "1.8",
-        "modType": "System.Single",
-        "additionalRules": "NotSet",
-        "targetCollection": "Weapon",
-        "targetWeaponCategory": "NotSet",
-        "targetWeaponType": "NotSet",
-        "targetAmmoCategory": "NotSet",
-        "targetWeaponSubType": "NotSet"
-      },
-      "tagData": null,
-      "floatieData": null,
-      "actorBurningData": null,
-      "vfxData": null,
-      "instantModData": null,
-      "poorlyMaintainedEffectData": null
+        "modType": "System.Single"
+      }
     }
   ],
   "ComponentTags": {
     "items": [
       "OmniRestriction.{location}",
       "component_type_stock",
-      "range_standard",
-      "wr-jammable_weapon",
-      "wr-damage_when_jam",
-      "wr-jam_chance_multiplier-5"
+      "range_standard"
     ],
     "tagSetSourceFile": ""
   }

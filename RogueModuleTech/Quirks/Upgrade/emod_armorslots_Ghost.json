@@ -1,0 +1,327 @@
+{
+    "Custom": {
+		"Color": {
+            "UIColor": "Gold"
+        },
+		"Linked": {
+            "Links": [
+                {
+                    "ComponentDefId": "Linked_GhostArmor",
+                    "Location": "LeftTorso"
+                },
+                {
+                    "ComponentDefId": "Linked_GhostArmor",
+                    "Location": "RightTorso"
+                },
+				{
+                    "ComponentDefId": "Linked_GhostArmor",
+                    "Location": "LeftArm"
+                },
+                {
+                    "ComponentDefId": "Linked_GhostArmor",
+                    "Location": "RightArm"
+                },
+				{
+                    "ComponentDefId": "Linked_GhostArmor",
+                    "Location": "LeftLeg"
+                },
+                {
+                    "ComponentDefId": "Linked_GhostArmor",
+                    "Location": "RightLeg"
+                }
+            ]
+        },
+		"CriticalEffects" : {
+                    "LinkedStatisticName" : "Void Ferro-Fibrous"
+                },
+        "WorkOrderCosts": {
+            "Install": {
+                "TechCost": "1.6 * [[Chassis.Tonnage]] / 15",
+                "CBillCost": "1100 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]] / 20"
+            }
+        },
+        "Category": [
+            {
+                "CategoryID": "Armor"
+            },
+			{
+                "CategoryID": "Chameleon"
+            }
+        ],
+        "Weights": {
+            "ArmorFactor": 0.89286
+        },
+        "CASE": {
+            "AllLocations": true
+        },
+        "ArmorRepair": {
+            "ArmorTPCost": 1.7,
+            "ArmorCBCost": 2.25
+        },
+        "Flags": {
+            "flags": [
+                "default",
+                "not_broken",
+                "no_salvage",
+                "autorepair"
+            ]
+        },
+		"ErrorMessage": "Stealth Armor requires a ECM!",
+        "BonusDescriptions": {
+            "Bonuses": [
+                "ArmorFactor: -12%",
+                "CLPS",
+		"StealthSensors: 20%, 2, 1, 2, 3",
+		"MimeticStealth: 25%, 3, 4",
+                "StealthReserved: 1",
+                "ActiveVisibility: -70%",
+                "ActiveSignature: -15%",
+                "TEHeatgen: +10%",
+                "HeatPerTurn: +10",
+		"StealthReserved: 1",
+		"ReqECM",
+                "ArmorTPCost: 70%",
+                "ArmorCBCost: 125%",
+                "CASE"
+            ]
+        },
+		"Lootable": {
+            "ItemID": "lootable_ChameleonLightPolarizationShield"
+        },
+        "InventorySorter": {
+            "SortKey": "00009"
+        },
+		"ActivatableComponent": {
+      "ButtonName": "Stealth",
+	  "ActiveByDefault": true,
+	  "ActivationIsBuff": true,
+      "CanNotBeActivatedManualy": false,
+      "NoUniqueCheck": true,
+	  "ActivationMessage": "CLPS On",
+	  "DeactivationMessage": "CLPS Off",
+	  "Linkage": {
+                "OnActivate": {
+                    "Activate": ["ECM Mode"],
+                    "Deactivate": []
+                },
+                "OnDeactivate": {
+                    "Activate": [],
+                    "Deactivate": []
+                }
+            },
+      "statusEffects": [
+        {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_Stealth_Effect",
+                "Name" : "STEALTH",
+                "Details" : "Makes the carrier much harder to detect with stealth",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_STEALTH",
+                "operation" : "Set",
+                "modValue": "0.8_2_1_2_3",
+                "modType": "System.String"
+            },
+            "nature" : "Buff"
+        },
+         {
+            "durationData" : {
+                "duration": -1,
+                "stackLimit": 1
+            },
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
+            },
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_MIMETIC",
+                "Name" : "MIMETIC ARMOR",
+                "Details" : "Makes the carrier much harder to see with eyes",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData" : 
+            {
+                "statName" : "LV_MIMETIC",
+                "operation" : "Set",
+                "modValue": "0.75_3_4",
+                "modType": "System.String"
+            },
+            "nature" : "Buff"
+        }, 
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+				"showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "Stealth_Signature_Decrease_Stealth",
+                "Name": "Stealth Signature Decrease",
+                "Details": "Signature Statuseffect.",
+                "Icon": "uixSvgIcon_equipment_TTS"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "SensorSignatureModifier",
+                "operation": "Float_Multiply",
+                "modValue": "0.85",
+                "modType": "System.Single"
+            }
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "Stealth_Visibility_Decrease_Stealth",
+                "Name": "Stealth Visbility Decrease",
+                "Details": "Visibility Statuseffect.",
+                "Icon": "uixSvgIcon_equipment_TTS"
+            },
+            "nature": "Buff",
+            "statisticData": {
+                "statName": "SpottingVisibilityMultiplier",
+                "operation": "Float_Multiply",
+                "modValue": "0.3",
+                "modType": "System.Single"
+            }
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "Stealth_Heat_Generation_Stealth",
+                "Name": "Increased Heat",
+                "Details": "Heat generation",
+                "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+            },
+            "nature": "Buff",
+                    "statisticData": {
+                        "statName": "HeatGenerated",
+                        "operation": "Float_Multiply",
+                        "modValue": "1.1",
+                        "modType": "System.Single",
+                        "targetCollection": "Weapon"
+                    }
+                },
+                {
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "effectTargetType": "Creator",
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "Stealth_Heat_Capacity_Stealth",
+                        "Name": "Decreased Heat Capacity",
+                        "Details": "Heat Capacity Penalty",
+                        "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+                    },
+                    "nature": "Debuff",
+                     "statisticData": {
+                         "statName": "HeatSinkCapacity",
+                        "operation": "Int_Add",
+                        "modValue": "-10",
+                        "modType": "System.Int32"
+            }
+        }
+      ],
+	  "offlineStatusEffects": [
+	  ]
+    }
+    },
+    "StatName": null,
+    "RelativeModifier": 0,
+    "AbsoluteModifier": 0,
+    "Description": {
+        "Cost": 1000000,
+        "Rarity": 99,
+        "Purchasable": true,
+        "Manufacturer": "Clan",
+        "Model": "Armor Critical Slot",
+        "UIName": "Void Ferro-Fibrous (C)",
+        "Id": "emod_armorslots_Ghost",
+        "Name": "Void Ferro-Fibrous Armor (C)",
+        "Details": "Clan Ferro-Fibrous armor merged with a Void signature system creating a new special armor, that not only stealths the mech, but also protects it with the properties of the ferro-fibrous armor. Reserves 6 slots and requires an ECM. <b><color=#00ff00>CASE Enabled</color></b>",
+        "Icon": "StealthArmor"
+    },
+    "BonusValueA": "Bulwark",
+    "BonusValueB": "Requires ECM",
+    "ComponentType": "Upgrade",
+    "ComponentSubType": "NotSet",
+    "PrefabIdentifier": "",
+    "BattleValue": 0,
+    "InventorySize": 1,
+    "Tonnage": 0,
+    "AllowedLocations": "CenterTorso",
+    "DisallowedLocations": "All",
+    "CriticalComponent": false,
+    "statusEffects": [],
+    "ComponentTags": {
+        "items": [
+            "BLACKLISTED",
+            "component_type_stock",
+            "lv-stealth_t3",
+            "lv-stealth-range-mod_s1_m2_l4_e6",
+            "lv-stealth-move-mod_m8_s5",
+			"Chameleon",
+            "ClanArmor",
+			"CasedArmor"
+        ],
+        "tagSetSourceFile": ""
+    }
+}	

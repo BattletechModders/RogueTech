@@ -6,6 +6,10 @@
 		"Cooling": {
 			"HeatSinkDefId": "Gear_HeatSink_Generic_Standard"
 		},
+		"HeatSinkingCost" : {
+		"HeatUpkeepCost" : 3,
+      "HeatUpkeepMult" : 0.6
+    },
 		"Weights": {
 			"EngineFactor": 1.6
 		},
@@ -31,8 +35,12 @@
 		],
 		"Flags": {
 			"flags": [
-				"vital"
+				"vital",
+				"no_salvage"
 			]
+		},
+		"Lootable": {
+			"ItemID": "lootable_engineslots_FuelCell_center"
 		},
 		"ArmorRepair": {
 			"ArmorTPCost": 0.9,
@@ -43,7 +51,9 @@
 				"EngineWeight: X1.6",
 				"HeatGenerated: -60%",
 				"ArmorTPCost: -10%",
-				"ArmorCBCost: -10%"
+				"ArmorCBCost: -10%",
+				"CoolantCost: 3",
+				"CoolantCostMulti: -40%"
 			]
 		},
 		"InventorySorter": {
@@ -71,13 +81,11 @@
 				"TempDesignMaskTurnsActorStat": "EngineExplodeDesignMaskDuration",
 				"TempDesignMaskCellRadiusActorStat": "EngineExplodeDesignMaskRadius"
 			},
-			"statusEffects": [
-				
-			]
+			"statusEffects": []
 		}
 	},
 	"Description": {
-		"Cost": 2250000,
+		"Cost": 0,
 		"Rarity": 1,
 		"Purchasable": false,
 		"Manufacturer": "Vlar",
@@ -86,7 +94,7 @@
 		"Id": "emod_engineslots_FuelCell",
 		"Name": "Fuel Cell Engine",
 		"Details": "Fuel Cell engines are primarily used in civilian applications like rail systems, personal transport, and IndustrialMechs. Fuel Cell engines generate electrical power that is then used by the vehicle to operate its propulsion system. A Fuel Cell engine has several advantages over the typical Internal Combustion Engine. While they require an oxidizer to operate, they are readily able to accept a stored oxidizer along with their fuel, making it a good choice for submarines, satellites, and naval applications. As most fuel cells run on hydrogen and oxygen, they have no exhaust other than water vapor so Fuel Cells are also used as generators for buildings and other large structures. Cannot use Additional Cooling Kits, Exchanger or Banks.",
-		"Icon": "uixSvgIcon_equipment_Heatsink"
+		"Icon": "power-generator"
 	},
 	"BonusValueA": "X2 Weight",
 	"BonusValueB": "",
@@ -100,32 +108,6 @@
 	"DisallowedLocations": "All",
 	"CriticalComponent": false,
 	"statusEffects": [
-	{
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "Obviously",
-                "Name": "Obvious Target",
-                "Details": "Easy to Spot",
-                "Icon": "uixSvgIcon_equipment_Gyro"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "statName" : "LV_PROBE_PING",
-				"operation": "Int_Add",
-				"modValue": "1",
-				"modType": "System.Int32"
-            }
-        },
 		{
 			"durationData": {
 				"duration": -1,
@@ -160,194 +142,194 @@
 			}
 		},
 		{
-					"durationData": {
-						"duration": -1,
-						"stackLimit": -1
-					},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInTargetPreview": false,
-						"showInStatusPanel": false
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "FuelCellExplosionRange",
-						"Name": "FuelCell EXTRA CRITICAL",
-						"Details": "Engine very boom",
-						"Icon": "uixSvgIcon_equipment_Cockpit"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"effectsPersistAfterDestruction" : true,
-						"statName": "EngineExplodeRange",
-						"operation": "Float_Multiply",
-						"modValue": "0.5",
-						"modType": "System.Single"
-					}
-				},
-				{
-					"durationData": {
-						"duration": -1,
-						"stackLimit": -1
-					},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInTargetPreview": false,
-						"showInStatusPanel": false
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "FuelCellExplosionDamage",
-						"Name": "FuelCell EXTRA CRITICAL",
-						"Details": "Engine very boom",
-						"Icon": "uixSvgIcon_equipment_Cockpit"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"effectsPersistAfterDestruction" : true,
-						"statName": "EngineExplodeDamage",
-						"operation": "Float_Multiply",
-						"modValue": "0.1",
-						"modType": "System.Single"
-					}
-				},
-				{
-					"durationData": {
-						"duration": -1,
-						"stackLimit": -1
-					},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInTargetPreview": false,
-						"showInStatusPanel": false
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "FuelCellExplosionHeat",
-						"Name": "FuelCell EXTRA CRITICAL",
-						"Details": "Engine very boom",
-						"Icon": "uixSvgIcon_equipment_Cockpit"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"effectsPersistAfterDestruction" : true,
-						"statName": "EngineExplodeHeat",
-						"operation": "Float_Multiply",
-						"modValue": "2",
-						"modType": "System.Single"
-					}
-				},
-				{
-					"durationData": {
-						"duration": -1,
-						"stackLimit": -1
-					},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInTargetPreview": false,
-						"showInStatusPanel": false
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "FuelCellExplosionStability",
-						"Name": "FuelCell EXTRA CRITICAL",
-						"Details": "Engine very boom",
-						"Icon": "uixSvgIcon_equipment_Cockpit"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"effectsPersistAfterDestruction" : true,
-						"statName": "EngineExplodeStability",
-						"operation": "Float_Multiply",
-						"modValue": "0.1",
-						"modType": "System.Single"
-					}
-				},
-				{
-					"durationData": {
-						"duration": -1,
-						"stackLimit": -1
-					},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInTargetPreview": false,
-						"showInStatusPanel": false
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "FuelCellExplosionFireStrength",
-						"Name": "FuelCell EXTRA CRITICAL",
-						"Details": "Engine very boom",
-						"Icon": "uixSvgIcon_equipment_Cockpit"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"effectsPersistAfterDestruction" : true,
-						"statName": "EngineExplodeFireStrength",
-						"operation": "Float_Multiply",
-						"modValue": "1.5",
-						"modType": "System.Single"
-					}
-				},
-				{
-					"durationData": {
-						"duration": -1,
-						"stackLimit": -1
-					},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInTargetPreview": false,
-						"showInStatusPanel": false
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "FuelCellExplosionFireRadius",
-						"Name": "FuelCell EXTRA CRITICAL",
-						"Details": "Engine very boom",
-						"Icon": "uixSvgIcon_equipment_Cockpit"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"effectsPersistAfterDestruction" : true,
-						"statName": "EngineExplodeFireRadius",
-						"operation": "Float_Multiply",
-						"modValue": "2",
-						"modType": "System.Single"
-					}
-				},
-				{
-					"durationData": {
-						"duration": -1,
-						"stackLimit": -1
-					},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInTargetPreview": false,
-						"showInStatusPanel": false
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "FuelCellExplosionMaskRadius",
-						"Name": "FuelCell EXTRA CRITICAL",
-						"Details": "Engine very boom",
-						"Icon": "uixSvgIcon_equipment_Cockpit"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"effectsPersistAfterDestruction" : true,
-						"statName": "EngineExplodeDesignMaskRadius",
-						"operation": "Float_Multiply",
-						"modValue": "1.3",
-						"modType": "System.Single"
-					}
-				}
+			"durationData": {
+				"duration": -1,
+				"stackLimit": -1
+			},
+			"targetingData": {
+				"effectTriggerType": "Passive",
+				"effectTargetType": "Creator",
+				"showInTargetPreview": false,
+				"showInStatusPanel": false
+			},
+			"effectType": "StatisticEffect",
+			"Description": {
+				"Id": "FuelCellExplosionRange",
+				"Name": "FuelCell EXTRA CRITICAL",
+				"Details": "Engine very boom",
+				"Icon": "uixSvgIcon_equipment_Cockpit"
+			},
+			"nature": "Buff",
+			"statisticData": {
+				"effectsPersistAfterDestruction": true,
+				"statName": "EngineExplodeRange",
+				"operation": "Float_Multiply",
+				"modValue": "0.5",
+				"modType": "System.Single"
+			}
+		},
+		{
+			"durationData": {
+				"duration": -1,
+				"stackLimit": -1
+			},
+			"targetingData": {
+				"effectTriggerType": "Passive",
+				"effectTargetType": "Creator",
+				"showInTargetPreview": false,
+				"showInStatusPanel": false
+			},
+			"effectType": "StatisticEffect",
+			"Description": {
+				"Id": "FuelCellExplosionDamage",
+				"Name": "FuelCell EXTRA CRITICAL",
+				"Details": "Engine very boom",
+				"Icon": "uixSvgIcon_equipment_Cockpit"
+			},
+			"nature": "Buff",
+			"statisticData": {
+				"effectsPersistAfterDestruction": true,
+				"statName": "EngineExplodeDamage",
+				"operation": "Float_Multiply",
+				"modValue": "0.1",
+				"modType": "System.Single"
+			}
+		},
+		{
+			"durationData": {
+				"duration": -1,
+				"stackLimit": -1
+			},
+			"targetingData": {
+				"effectTriggerType": "Passive",
+				"effectTargetType": "Creator",
+				"showInTargetPreview": false,
+				"showInStatusPanel": false
+			},
+			"effectType": "StatisticEffect",
+			"Description": {
+				"Id": "FuelCellExplosionHeat",
+				"Name": "FuelCell EXTRA CRITICAL",
+				"Details": "Engine very boom",
+				"Icon": "uixSvgIcon_equipment_Cockpit"
+			},
+			"nature": "Buff",
+			"statisticData": {
+				"effectsPersistAfterDestruction": true,
+				"statName": "EngineExplodeHeat",
+				"operation": "Float_Multiply",
+				"modValue": "2",
+				"modType": "System.Single"
+			}
+		},
+		{
+			"durationData": {
+				"duration": -1,
+				"stackLimit": -1
+			},
+			"targetingData": {
+				"effectTriggerType": "Passive",
+				"effectTargetType": "Creator",
+				"showInTargetPreview": false,
+				"showInStatusPanel": false
+			},
+			"effectType": "StatisticEffect",
+			"Description": {
+				"Id": "FuelCellExplosionStability",
+				"Name": "FuelCell EXTRA CRITICAL",
+				"Details": "Engine very boom",
+				"Icon": "uixSvgIcon_equipment_Cockpit"
+			},
+			"nature": "Buff",
+			"statisticData": {
+				"effectsPersistAfterDestruction": true,
+				"statName": "EngineExplodeStability",
+				"operation": "Float_Multiply",
+				"modValue": "0.1",
+				"modType": "System.Single"
+			}
+		},
+		{
+			"durationData": {
+				"duration": -1,
+				"stackLimit": -1
+			},
+			"targetingData": {
+				"effectTriggerType": "Passive",
+				"effectTargetType": "Creator",
+				"showInTargetPreview": false,
+				"showInStatusPanel": false
+			},
+			"effectType": "StatisticEffect",
+			"Description": {
+				"Id": "FuelCellExplosionFireStrength",
+				"Name": "FuelCell EXTRA CRITICAL",
+				"Details": "Engine very boom",
+				"Icon": "uixSvgIcon_equipment_Cockpit"
+			},
+			"nature": "Buff",
+			"statisticData": {
+				"effectsPersistAfterDestruction": true,
+				"statName": "EngineExplodeFireStrength",
+				"operation": "Float_Multiply",
+				"modValue": "1.5",
+				"modType": "System.Single"
+			}
+		},
+		{
+			"durationData": {
+				"duration": -1,
+				"stackLimit": -1
+			},
+			"targetingData": {
+				"effectTriggerType": "Passive",
+				"effectTargetType": "Creator",
+				"showInTargetPreview": false,
+				"showInStatusPanel": false
+			},
+			"effectType": "StatisticEffect",
+			"Description": {
+				"Id": "FuelCellExplosionFireRadius",
+				"Name": "FuelCell EXTRA CRITICAL",
+				"Details": "Engine very boom",
+				"Icon": "uixSvgIcon_equipment_Cockpit"
+			},
+			"nature": "Buff",
+			"statisticData": {
+				"effectsPersistAfterDestruction": true,
+				"statName": "EngineExplodeFireRadius",
+				"operation": "Float_Multiply",
+				"modValue": "2",
+				"modType": "System.Single"
+			}
+		},
+		{
+			"durationData": {
+				"duration": -1,
+				"stackLimit": -1
+			},
+			"targetingData": {
+				"effectTriggerType": "Passive",
+				"effectTargetType": "Creator",
+				"showInTargetPreview": false,
+				"showInStatusPanel": false
+			},
+			"effectType": "StatisticEffect",
+			"Description": {
+				"Id": "FuelCellExplosionMaskRadius",
+				"Name": "FuelCell EXTRA CRITICAL",
+				"Details": "Engine very boom",
+				"Icon": "uixSvgIcon_equipment_Cockpit"
+			},
+			"nature": "Buff",
+			"statisticData": {
+				"effectsPersistAfterDestruction": true,
+				"statName": "EngineExplodeDesignMaskRadius",
+				"operation": "Float_Multiply",
+				"modValue": "1.3",
+				"modType": "System.Single"
+			}
+		}
 	],
 	"ComponentTags": {
 		"items": [

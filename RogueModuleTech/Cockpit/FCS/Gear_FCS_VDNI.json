@@ -13,18 +13,23 @@
         },
         "BonusDescriptions": {
             "Bonuses": [
+				"AcePilot",
 				"AccuracyER: +2",
 				"AccuracyLR: +1",
 				"AccuracyMR: +1",
 				"AccuracyMin: +1",
                 		"Recoil: -1",
-                		"Initiative: +1",
 				"PilotShutDown",
 				"Activatable",
 				"ActivePilotOverheat",
 				"ActiveInitiative: +1",
 				"ActiveEvaMax: +1",
 				"ActiveCalledShot: +10%",
+				"FailChance: 0%",
+				"FailChanceTurn: 3%",
+				"FailLocation: Head",
+				"FailCritLoc",
+				"FailReducPilot",
 				"FCS",
 				"IsCockpit"
             ]
@@ -155,7 +160,7 @@
         "Id": "Gear_FCS_VDNI",
         "Name": "VDNI Cockpit",
         "Details": "The Vehicular Direct Neural Interface was a special type of cybernetic implant developed for the Manei Domini. The system worked in principle similar to the Clans' Enhanced Imaging system, allowing MechWarriors, aerospace fighter pilots, battle armor troopers and even combat vehicle and Small Craft crews to become one with their machines. Unlike the EI system, however, VDNI was able to ward off the short-term negative effects of the technology by employing improved circuit breakers and forcing users to regularly ingest a special chemical agent.",
-        "Icon": "uixSvgIcon_equipment_Cockpit"
+        "Icon": "interface"
     },
     "BonusValueA": "Neural",
     "BonusValueB": "Interface",
@@ -169,38 +174,30 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "statusEffects": [
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
-                "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "CockpitInitativeEffect",
-                "Name": "CockpitTechBonus",
-                "Details": "Provides + 1 Initiative and several buffs.",
-                "Icon": "uixSvgIcon_equipment_Cockpit"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "BaseInitiative",
-                "operation": "Int_Add",
-                "modValue": "-1",
-                "modType": "System.Int32"
-            }
-        },
+	{
+                        "durationData": {
+                                "duration": -1,
+                                "stackLimit": 1
+                        },
+                        "targetingData": {
+                                "effectTriggerType": "Passive",
+                                "effectTargetType": "Creator"
+                        },
+                        "effectType": "StatisticEffect",
+                        "Description": {
+                                "Id": "InterFaceMoveAfterShoot",
+                                "Name": "ACE PILOT",
+                                "Details": "This unit can use its movement before or after shooting.",
+                                "Icon": "uixSvgIcon_run_n_gun"
+                        },
+                        "statisticData": {
+                                "statName": "CanMoveAfterShooting",
+                                "operation": "Set",
+                                "modValue": "true",
+                                "modType": "System.Boolean"
+                        },
+                        "nature": "Buff"
+                },
         {
             "durationData": {
                 "duration": -1

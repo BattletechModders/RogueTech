@@ -5,16 +5,12 @@
         }],
         "BonusDescriptions": {
             "Bonuses": [
-				"Sensors: +6%",
-                "Sight: +7%",
-				"AdvZoom: 2",
-				"AdvZoomRange: 180",
-				"ThermalVision: 2",
-				"ThermalVisionHeat: 60",
-				"CockpitSensors: 1",
-                "Jammer: 1",
-				"JamBubble: 190",
-				"Sharer"
+				"Sensors: +10%",
+                "Sight: +10%",
+				"AdvancedSensors: 2",
+                "Jammer: 1, 190",
+				"Sharer",
+				"DetectMine: 90"
             ]
         },
         "InventorySorter": {
@@ -29,12 +25,12 @@
         "Rarity": 3,
         "Purchasable": true,
         "Manufacturer": "CLAN",
-        "Model": "Recon battleComp",
+        "Model": "Recon Sensors",
         "UIName": "Sensor Recon (C)",
         "Id": "Gear_Sensors_Recon_Clan",
-        "Name": "Recon Battle Computer",
+        "Name": "Recon Sensor Package",
         "Details": "A Clan upgraded sensor package combining advanced Rangefinders, Seismic Sensors and Scanning Algorithms with a IFF Jammer, also carrying a set of thermal and zoom systems.",
-        "Icon": "uixSvgIcon_equipment_TTS"
+        "Icon": "uixSvgIcon_equipment_Comms"
     },
     "BonusValueA": "+1 Defense.",
     "BonusValueB": "+1 Missile Defense.",
@@ -47,18 +43,83 @@
     "AllowedLocations": "Head",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
-    "statusEffects": [ 
-{
+	"Auras": [
+	{
+      "Id": "MINEDETECTIONAURA",
+      "Name": "Minesweeper",
+      "ReticleColor": "white",
+      "LineType": "Dots",
+      "isSpining": false,
+	  "MinefieldDetector": true,
+	  "HideOnNotSelected": true,
+      "Range": 90,
+      "RemoveOnSensorLock": false,
+      "State": "Persistent",
+      "ApplySelf": true,
+      "AllyStealthAffection": "None",
+      "EnemyStealthAffection": "None",
+      "IsPositiveToAlly": false,
+      "IsNegativeToEnemy": false,
+      "ownerVFX": [
+      ],
+      "targetVFX": [
+      ],
+      "removeOwnerVFX": [
+      ],
+      "removeTargetVFX": [
+      ],
+      "ownerSFX": [
+      ],
+      "targetSFX": [
+      ],
+      "removeOwnerSFX": [
+      ],
+      "removeTargetSFX": [
+      ],
+      "statusEffects": [
+		]
+		},
+		{
+      "Id": "Gear_SenECM_ECM_JAMMER",
+      "Name": "JAMMER",
+      "ReticleColor": "#0066ff",
+      "Range": 190,
+	  "HideOnNotSelected": false,
+      "RemoveOnSensorLock": false,
+      "State": "Persistent",
+      "ApplySelf": false,
+      "AllyStealthAffection": "None",
+      "EnemyStealthAffection": "NegativeOne",
+      "IsPositiveToAlly": false,
+      "IsNegativeToEnemy": true,
+       "ownerVFX": [
+      ],
+      "targetVFX": [
+      ],
+      "removeOwnerVFX": [
+      ],
+      "removeTargetVFX": [
+      ],
+      "ownerSFX": [
+      ],
+      "targetSFX": [
+      ],
+      "removeOwnerSFX": [
+      ],
+      "removeTargetSFX": [
+      ],
+      "statusEffects": [
+        {
             "durationData" : {
                 "duration": -1,
-                "stackLimit": 1,
+                "stackLimit": -1,
 				"uniqueEffectIdStackLimit": 1
             },
             "targetingData" : {
                 "effectTriggerType" : "Passive",
-                "specialRules" : "Aura",
+                "specialRules" : "NotSet",
                 "effectTargetType" : "EnemiesWithinRange",
-                "range" : 190.0,
+                "range" : 0.0,
                 "forcePathRebuild" : false,
                 "forceVisRebuild" : true,
                 "showInTargetPreview" : false,
@@ -67,7 +128,7 @@
             "effectType" : "StatisticEffect",
             "Description" :
             {
-				"Id" : "EWS_ECM_JAM",
+				"Id" : "LV_ECM_JAM",
 				"Name" : "ECM Jammer",
 				"Details" : "Jamming ECM, reduces sensor checks for enemies in field",
 				"Icon" : "uixSvgIcon_action_sensorlock"
@@ -81,38 +142,42 @@
             },
             "nature" : "Debuff"
         },
-	{
-            "durationData" : {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData" : {
-                "effectTriggerType" : "Passive",
-                "specialRules" : "NotSet",
-                "effectTargetType" : "Creator",
-                "range" : 0.0,
-                "forcePathRebuild" : false,
-                "forceVisRebuild" : true,
-                "showInTargetPreview" : false,
-                "showInStatusPanel" : false
-            },
-            "effectType" : "StatisticEffect",
-            "Description" :
-            {
-                "Id" : "LV_PROBE_CARRIER",
-                "Name" : "Active Probe (Passive)",
-                "Details" : "Reduces effectiveness of stealthed and ECM shielded units",
-                "Icon" : "uixSvgIcon_status_ECM-ghost"
-            },
-            "statisticData" : 
-            {
-                "statName" : "LV_PROBE_CARRIER",
-                "operation": "Int_Add",
-                "modValue": "1",
-                "modType": "System.Int32"
-            },
-            "nature" : "Buff"
-        },		
+{
+                "durationData" : {
+                    "duration": -1,
+                    "stackLimit": -1
+                },
+                "targetingData" : {
+                    "effectTriggerType" : "Passive",
+                    "specialRules" : "NotSet",
+                    "effectTargetType" : "EnemiesWithinRange",
+                    "range" : 0.0,
+                    "forcePathRebuild" : false,
+                    "forceVisRebuild" : false,
+                    "showInTargetPreview" : false,
+                    "showInStatusPanel" : false
+                },
+                "effectType" : "StatisticEffect",
+                "Description" :
+                {
+                    "Id" : "LV_ECM_JAM_EMITTER_COUNT",
+                    "Name" : "ECM Jamming Emitter Count",
+                    "Details" : "Counter for the number of ECM emitters currently affecting an actor with jamming.",
+                    "Icon" : "uixSvgIcon_status_ECM-missileDef"
+                },
+                "statisticData" : 
+                {
+                    "statName" : "LV_ECM_JAM_EMITTER_COUNT",
+                    "operation": "Int_Add",
+                    "modValue": "1",
+                    "modType": "System.Int32"
+                },
+                "nature" : "Debuff"
+            }			
+      ]
+    }
+  ],
+    "statusEffects": [ 	
 		   {
             "durationData" : {
                 "duration": -1,
@@ -140,7 +205,7 @@
             {
                 "statName" : "LV_ADVANCED_SENSORS",
                 "operation": "Int_Add",
-                "modValue": "1",
+                "modValue": "2",
                 "modType": "System.Int32"
             },
             "nature" : "Buff"
@@ -172,7 +237,7 @@
             "statisticData": {
                 "statName": "SensorDistanceAbsolute",
                 "operation": "Float_Multiply",
-                "modValue": "1.06",
+                "modValue": "1.1",
                 "modType": "System.Single"
             }
         },
@@ -204,66 +269,14 @@
             "statisticData": {
                 "statName": "SpotterDistanceAbsolute",
                 "operation": "Float_Multiply",
-                "modValue": "1.07",
+                "modValue": "1.1",
                 "modType": "System.Single"
-            }
-        },
-		{
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "Heat Vision Effect",
-                "Name": "Bonus Accuracy against heat",
-                "Details": "heat bonus accuracy",
-                "Icon": "uixSvgIcon_ability_precisionstrike"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "LV_HEAT_VISION",
-                "operation": "Set",
-                "modValue": "2_60",
-                "modType": "System.String"
-            }
-        },
-		{
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "Zoom Vision Effect",
-                "Name": "Bonus Accuracy at range",
-                "Details": "range bracket bonus accuracy",
-                "Icon": "uixSvgIcon_ability_precisionstrike"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "LV_ZOOM_VISION",
-                "operation": "Set",
-                "modValue": "0_-2_6",
-                "modType": "System.String"
             }
         },
 		{
             "durationData" : {
                 "duration": -1,
-                "stackLimit": 1
+                "stackLimit": -1
             },
             "targetingData" : {
                 "effectTriggerType" : "Passive",
@@ -280,7 +293,7 @@
             {
                 "Id" : "LV_Shares_Vision",
                 "Name" : "Vision Sharing",
-                "Details" : "Shows their vision when lancemattes move",
+                "Details" : "Shows their vision when lancemates move",
                 "Icon" : "uixSvgIcon_status_ECM-ghost"
             },
             "statisticData" : 
@@ -291,13 +304,41 @@
                 "modType": "System.Boolean"
             },
             "nature" : "Buff"
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0.0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": true,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "MineFieldDetection",
+                "Name": "Active Probe (Passive)",
+                "Details": "Detects Minefields",
+                "Icon": "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData": {
+                "statName": "MinefieldDetection",
+                "operation": "Float_Add",
+                "modValue": "1",
+                "modType": "System.Single"
+            },
+            "nature": "Buff"
         }
 		],
     "ComponentTags": {
         "items": [
-            "component_type_stock",
-			"lv-vismode-zoom_m0_c-2_s6",
-			"lv-vismode-heat_m2_d60"
+            "component_type_stock"
         ],
         "tagSetSourceFile": ""
     }

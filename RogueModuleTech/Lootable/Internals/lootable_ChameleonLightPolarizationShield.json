@@ -4,7 +4,7 @@
             "UIColor": "Gold"
         },
 		"DynamicSlots": {
-            "ReservedSlots": 10,
+            "ReservedSlots": 12,
             "BackgroundColor": "GoldHalf",
             "ShowIcon": false,
             "NameText": "Chameleon LPS",
@@ -33,24 +33,16 @@
             "Bonuses": [
 				"Sensors: +20%",
                 "Sight: +20%",
-                "IsECM: 2",
-                "ECMBubble: 90",
-				"Jammer: 5",
-				"JamBubble: 330",
-                "IsProbe: 5",
-                "Stealth",
-				"StealthSensors: 60%",
-				"SensorCharges: 3",
-				"MimeticStealth: 60%",
-				"MimeticCharges: 4",
-				"MimeticDecay: 4",
-				"StealthMed: 2",
-				"StealthLong: 3",
-				"StealthER: 5",	
-                "Visibility: -50%",
-                "Signature: -50%",
-                "HeatGenerated: +20%",
-                "HeatPerTurn: +15",
+                "IsECM: 2, 90",
+				"Jammer: 5, 330",
+                "IsProbe: 2",
+                "CLPS",
+				"StealthSensors: 40%, 3, 2, 3, 5",
+				"MimeticStealth: 50%, 4, 4",
+                "ActiveVisibility: -50%",
+                "ActiveSignature: -50%",
+		"ActiveHeatPerTurn: 15",
+		"ActiveTEHeatgen: 20%",
 				"Reserved: 12",
                 "ArmorTPCost: 55%",
                 "ArmorCBCost: 55%"
@@ -65,13 +57,13 @@
 	  "ActivationIsBuff": true,
       "CanNotBeActivatedManualy": false,
       "NoUniqueCheck": true,
-	  "ActivationMessage": "Stealth Activated",
-	  "DeactivationMessage": "Stealth Deactivated",
+	  "ActivationMessage": "CLPS On",
+	  "DeactivationMessage": "CLPS Off",
       "statusEffects": [
         {
             "durationData" : {
                 "duration": -1,
-                "stackLimit": 1
+                "stackLimit": -1
             },
             "targetingData" : {
                 "effectTriggerType" : "Passive",
@@ -103,7 +95,7 @@
          {
             "durationData" : {
                 "duration": -1,
-                "stackLimit": 1
+                "stackLimit": -1
             },
             "targetingData" : {
                 "effectTriggerType" : "Passive",
@@ -202,7 +194,7 @@
                 "Details": "Heat generation",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
             },
-            "nature": "Buff",
+            "nature": "Debuff",
             "statisticData": {
                 "statName": "HeatGenerated",
                 "operation": "Float_Multiply",
@@ -255,7 +247,7 @@
         "Id": "lootable_ChameleonLightPolarizationShield",
         "Name": "Chameleon Light Polarization Shield",
         "Details": "The Chameleon Light Polarization Shield was designed to make a 'Mech invisible to the naked eye. By using a primitive mimetic system, the outline of the 'Mech carrying it was broken up, blending into the surrounding terrain. The Chameleon was very effective because unlike the Null Signature System it worked against sensor systems and visual observation. Reserves 12 slots and contains an ECM.",
-        "Icon": "uixSvgIcon_equipment_TTS"
+        "Icon": "StealthArmor"
     },
     "BonusValueA": "Bulwark",
     "BonusValueB": "Requires ECM",
@@ -263,22 +255,51 @@
     "ComponentSubType" : "Prototype_ElectronicWarfare",
     "PrefabIdentifier": "",
     "BattleValue": 0,
-    "InventorySize": 3,
+    "InventorySize": 1,
     "Tonnage": 2,
-    "AllowedLocations": "All",
+    "AllowedLocations": "CenterTorso",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
-    "statusEffects": [
-	{
+	"Auras": [
+    {
+      "Id": "Gear_SenECM_ECM",
+      "Name": "ECM",
+      "ReticleColor": "#00f2ff",
+      "Range": 90,
+      "RemoveOnSensorLock": false,
+      "State": "Persistent",
+      "ApplySelf": true,
+      "AllyStealthAffection": "PositiveOne",
+      "EnemyStealthAffection": "None",
+      "IsPositiveToAlly": true,
+      "IsNegativeToEnemy": false,
+      "ownerVFX": [
+      ],
+      "targetVFX": [
+      ],
+      "removeOwnerVFX": [
+      ],
+      "removeTargetVFX": [
+      ],
+      "ownerSFX": [
+      ],
+      "targetSFX": [
+      ],
+      "removeOwnerSFX": [
+      ],
+      "removeTargetSFX": [
+      ],
+      "statusEffects": [
+        {
             "durationData" : {
                 "duration": -1,
-                "stackLimit": 1
+                "stackLimit": -1
             },
             "targetingData" : {
                 "effectTriggerType" : "Passive",
-                "specialRules" : "Aura",
+                "specialRules" : "NotSet",
                 "effectTargetType" : "AlliesWithinRange",
-                "range" : 90.0,
+                "range" : 0.0,
                 "forcePathRebuild" : false,
                 "forceVisRebuild" : false,
                 "showInTargetPreview" : false,
@@ -288,7 +309,7 @@
             "Description" :
             {
 				"Id" : "LV_ECM_SHIELD",
-				"Name" : "Makes it easier for enemies to know where you are, but harder to attack",
+				"Name" : "ECM_Shield_CLPS",
 				"Details" : "IPSUM SUCKUM",
 				"Icon" : "uixSvgIcon_status_ECM-missileDef"
             },
@@ -301,6 +322,70 @@
             },
             "nature" : "Buff"
         },
+		{
+                "durationData" : {
+                    "duration": -1,
+                    "stackLimit": -1
+                },
+                "targetingData" : {
+                    "effectTriggerType" : "Passive",
+                    "specialRules" : "NotSet",
+                    "effectTargetType" : "AlliesWithinRange",
+                    "range" : 0.0,
+                    "forcePathRebuild" : false,
+                    "forceVisRebuild" : false,
+                    "showInTargetPreview" : false,
+                    "showInStatusPanel" : false
+                },
+                "effectType" : "StatisticEffect",
+                "Description" :
+                {
+                    "Id" : "LV_ECM_SHIELD_EMITTER_COUNT",
+                    "Name" : "ECM Shield Emitter Count",
+                    "Details" : "Counter for the number of ECM emitters currently affecting an actor with shielding.",
+                    "Icon" : "uixSvgIcon_status_ECM-missileDef"
+                },
+                "statisticData" : 
+                {
+                    "statName" : "LV_ECM_SHIELD_EMITTER_COUNT",
+                    "operation": "Int_Add",
+                    "modValue": "1",
+                    "modType": "System.Int32"
+                },
+                "nature" : "Buff"
+            }
+		]
+		},
+		{
+      "Id": "Gear_SenECM_ECM_JAMMER",
+      "Name": "JAMMER",
+      "ReticleColor": "#0066ff",
+      "Range": 330,
+	  "HideOnNotSelected": false,
+      "RemoveOnSensorLock": false,
+      "State": "Persistent",
+      "ApplySelf": false,
+      "AllyStealthAffection": "None",
+      "EnemyStealthAffection": "NegativeTwo",
+      "IsPositiveToAlly": false,
+      "IsNegativeToEnemy": true,
+       "ownerVFX": [
+      ],
+      "targetVFX": [
+      ],
+      "removeOwnerVFX": [
+      ],
+      "removeTargetVFX": [
+      ],
+      "ownerSFX": [
+      ],
+      "targetSFX": [
+      ],
+      "removeOwnerSFX": [
+      ],
+      "removeTargetSFX": [
+      ],
+      "statusEffects": [
         {
             "durationData" : {
                 "duration": -1,
@@ -309,9 +394,9 @@
             },
             "targetingData" : {
                 "effectTriggerType" : "Passive",
-                "specialRules" : "Aura",
+                "specialRules" : "NotSet",
                 "effectTargetType" : "EnemiesWithinRange",
-                "range" : 330.0,
+                "range" : 0.0,
                 "forcePathRebuild" : false,
                 "forceVisRebuild" : true,
                 "showInTargetPreview" : false,
@@ -334,6 +419,42 @@
             },
             "nature" : "Debuff"
         },
+{
+                "durationData" : {
+                    "duration": -1,
+                    "stackLimit": -1
+                },
+                "targetingData" : {
+                    "effectTriggerType" : "Passive",
+                    "specialRules" : "NotSet",
+                    "effectTargetType" : "EnemiesWithinRange",
+                    "range" : 0.0,
+                    "forcePathRebuild" : false,
+                    "forceVisRebuild" : false,
+                    "showInTargetPreview" : false,
+                    "showInStatusPanel" : false
+                },
+                "effectType" : "StatisticEffect",
+                "Description" :
+                {
+                    "Id" : "LV_ECM_JAM_EMITTER_COUNT",
+                    "Name" : "ECM Jamming Emitter Count",
+                    "Details" : "Counter for the number of ECM emitters currently affecting an actor with jamming.",
+                    "Icon" : "uixSvgIcon_status_ECM-missileDef"
+                },
+                "statisticData" : 
+                {
+                    "statName" : "LV_ECM_JAM_EMITTER_COUNT",
+                    "operation": "Int_Add",
+                    "modValue": "1",
+                    "modType": "System.Int32"
+                },
+                "nature" : "Debuff"
+            }			
+      ]
+    }
+  ],
+    "statusEffects": [
         {
             "durationData": {
                 "duration": -1,
@@ -386,31 +507,37 @@
                 "modType": "System.Single"
             }
         },
-        {
-            "durationData": {
+		{
+            "durationData" : {
                 "duration": -1,
                 "stackLimit": -1
             },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
+            "targetingData" : {
+                "effectTriggerType" : "Passive",
+                "specialRules" : "NotSet",
+                "effectTargetType" : "Creator",
+                "range" : 0.0,
+                "forcePathRebuild" : false,
+                "forceVisRebuild" : true,
+                "showInTargetPreview" : false,
+                "showInStatusPanel" : false
             },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "CockpitInitativeEffect",
-                "Name": "CockpitTechBonus",
-                "Details": "Provides + 1 Initiative and several buffs.",
-                "Icon": "uixSvgIcon_equipment_Cockpit"
+            "effectType" : "StatisticEffect",
+            "Description" :
+            {
+                "Id" : "LV_PROBE_CARRIER",
+                "Name" : "Active Probe (Passive)",
+                "Details" : "Reduces effectiveness of stealthed and ECM shielded units",
+                "Icon" : "uixSvgIcon_status_ECM-ghost"
             },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "BaseInitiative",
+            "statisticData" : 
+            {
+                "statName" : "LV_PROBE_CARRIER",
                 "operation": "Int_Add",
-                "modValue": "-1",
+                "modValue": "2",
                 "modType": "System.Int32"
-            }
+            },
+            "nature" : "Buff"
         }
     ],
     "ComponentTags": {

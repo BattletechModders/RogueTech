@@ -3,12 +3,13 @@
     "Category": [
       {
         "CategoryID": "w/a/g/taser"
-      }
+      },
+	  {"CategoryID": "CritsHeatWeapon2"}
     ],
     "ComponentExplosion": {
       "ExplosionDamage": 10,
-      "HeatDamage": 10,
-      "StabilityDamage": 10
+      "HeatDamage": 5,
+      "StabilityDamage": 5
     },
     "BonusDescriptions": {
       "Bonuses": [
@@ -17,23 +18,23 @@
         "ImpAccuracy: -2",
         "ImpHeatSink: -50%",
         "WpnRecoil: 3",
-        "Explodium: 10",
+        "ExplodiumFlat: 25%",
         "IsGauss",
-        "WeaponBoom: 10",
+        "WeaponGaussBoom: 10",
         "NoAA"
       ]
     },
     "InventorySorter": {
       "SortKey": "04003"
     },
-	"Flags": {
+    "Flags": {
       "flags": [
         "not_broken",
-		"not_destroyed"
+        "not_destroyed"
       ]
     }
   },
-  "Category": "AntiPersonnel",
+  "Category": "Ballistic",
   "Type": "Gauss",
   "WeaponSubType": "Gauss",
   "MinRange": 0,
@@ -69,6 +70,10 @@
   "ProjectilesPerShot": 1,
   "AttackRecoil": 4,
   "Instability": 5,
+  "DamageOnJamming": true,
+  "FlatJammingChance": 0.25,
+  "GunneryJammingMult": 0.01,
+  "GunneryJammingBase": 0,
   "ProjectileScale": {
     "x": 0.6,
     "y": 0.6,
@@ -86,7 +91,7 @@
     "Id": "Weapon_Gauss_Taser",
     "Name": "Taser Rifle",
     "Details": "The BattleMech Taser uses a specially modified metal harpoon that sends a massive electrical pulse down a wire connected to the firing unit. This electrical pulse is designed to overload the target's electrical system and hopefully cause the target unit to shut down. This allows the Taser carrying unit to capture the target rather than destroying it. \n\n<b><color=#ffcc00>Uses Taser Ammo.</color></b> \n\n<b><color=#099ff2>VOLATILE!</color></b>",
-    "Icon": "uixSvgIcon_weapon_Ballistic"
+    "Icon": "GAUSS"
   },
   "BonusValueA": "Damage Falloff|",
   "BonusValueB": "1 Recoil",
@@ -95,11 +100,45 @@
   "PrefabIdentifier": "Gauss",
   "BattleValue": 0,
   "InventorySize": 3,
-  "Tonnage": 5,
+  "Tonnage": 4,
   "AllowedLocations": "All",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
   "statusEffects": [
+    {
+      "durationData": {
+        "duration": 1,
+        "ticksOnActivations": true,
+        "useActivationsOfTarget": true,
+        "stackLimit": 45
+      },
+      "targetingData": {
+        "effectTriggerType": "OnHit",
+        "triggerLimit": 0,
+        "extendDurationOnTrigger": 0,
+        "specialRules": "NotSet",
+        "effectTargetType": "NotSet",
+        "range": 0,
+        "forcePathRebuild": false,
+        "forceVisRebuild": false,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "HeatDamageTakenSoftCapMultiplier",
+        "Name": "Heat SoftCap 4%",
+        "Details": "Reduce Heat Damage by 1%",
+        "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "CACIncomingHeatMult",
+        "operation": "Float_Multiply",
+        "modValue": "0.96",
+        "modType": "System.Single"
+      }
+    },
     {
       "durationData": {
         "duration": 2,
@@ -143,13 +182,7 @@
         "targetWeaponType": "NotSet",
         "targetAmmoCategory": "NotSet",
         "targetWeaponSubType": "NotSet"
-      },
-      "tagData": null,
-      "floatieData": null,
-      "actorBurningData": null,
-      "vfxData": null,
-      "instantModData": null,
-      "poorlyMaintainedEffectData": null
+      }
     },
     {
       "durationData": {
@@ -194,64 +227,7 @@
         "targetWeaponType": "NotSet",
         "targetAmmoCategory": "NotSet",
         "targetWeaponSubType": "NotSet"
-      },
-      "tagData": null,
-      "floatieData": null,
-      "actorBurningData": null,
-      "vfxData": null,
-      "instantModData": null,
-      "poorlyMaintainedEffectData": null
-    },
-    {
-      "durationData": {
-        "duration": 2,
-        "ticksOnActivations": true,
-        "useActivationsOfTarget": true,
-        "ticksOnEndOfRound": false,
-        "ticksOnMovements": false,
-        "stackLimit": 6,
-        "clearedWhenAttacked": false
-      },
-      "targetingData": {
-        "effectTriggerType": "OnHit",
-        "triggerLimit": 0,
-        "extendDurationOnTrigger": 0,
-        "specialRules": "NotSet",
-        "effectTargetType": "NotSet",
-        "range": 0,
-        "forcePathRebuild": false,
-        "forceVisRebuild": false,
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "Taser-Effect2",
-        "Name": "Move Impaired",
-        "Details": "The Mech's Movement is reduced.",
-        "Icon": "uixSvgIcon_status_sensorsImpaired"
-      },
-      "nature": "Debuff",
-      "statisticData": {
-        "appliesEachTick": false,
-        "effectsPersistAfterDestruction": false,
-        "statName": "RunSpeed",
-        "operation": "Float_Multiply",
-        "modValue": "0.6",
-        "modType": "System.Single",
-        "additionalRules": "NotSet",
-        "targetCollection": "NotSet",
-        "targetWeaponCategory": "NotSet",
-        "targetWeaponType": "NotSet",
-        "targetAmmoCategory": "NotSet",
-        "targetWeaponSubType": "NotSet"
-      },
-      "tagData": null,
-      "floatieData": null,
-      "actorBurningData": null,
-      "vfxData": null,
-      "instantModData": null,
-      "poorlyMaintainedEffectData": null
+      }
     },
     {
       "durationData": {
@@ -284,34 +260,18 @@
       },
       "nature": "Debuff",
       "statisticData": {
-        "appliesEachTick": false,
-        "effectsPersistAfterDestruction": false,
         "statName": "HeatGenerated",
         "operation": "Float_Multiply",
         "modValue": "1.5",
         "modType": "System.Single",
-        "additionalRules": "NotSet",
-        "targetCollection": "Weapon",
-        "targetWeaponCategory": "NotSet",
-        "targetWeaponType": "NotSet",
-        "targetAmmoCategory": "NotSet",
-        "targetWeaponSubType": "NotSet"
-      },
-      "tagData": null,
-      "floatieData": null,
-      "actorBurningData": null,
-      "vfxData": null,
-      "instantModData": null,
-      "poorlyMaintainedEffectData": null
+        "targetCollection": "Weapon"
+      }
     }
   ],
   "ComponentTags": {
     "items": [
       "component_type_stock",
-      "range_standard",
-      "wr-jammable_weapon",
-      "wr-damage_when_jam",
-      "wr-jam_chance_multiplier-10"
+      "range_standard"
     ],
     "tagSetSourceFile": ""
   }
