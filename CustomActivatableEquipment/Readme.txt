@@ -63,6 +63,7 @@ AI related mod settings
     "Custom":{
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
 		"ActivatableComponent":{
+			"CanActivateAfterMove": false, - if true component can be activated after move.
 			"SafeActivation": false, - if true component will not begin activation on component toggle. Assumed to be true if component have no influence on pathing and can't fail.
 			"ButtonName":"MASC",  - string used in activation/deactivation dialog button. Keep as sort as possible. 
 			"activateVFXOutOfLOSHide":true, - if true active component's VFX will be shown only if unit is visible to player (default false)

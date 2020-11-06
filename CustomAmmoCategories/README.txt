@@ -39,7 +39,9 @@ CACIncomingStabilityMult - float - multipicator for all incoming stability (weap
 "debugLog":true, - enable debug log 
 "ResetHeatSinkMessageTemplate":"USED HEAT SINKS:{0}=>{1}", - template for reset used heatsinks message
 "ApplyHeatSinkMessageTemplate":"APPLY HEAT SINKS:{0}=>{1} HCAP:{1} USED:{2}=>{3}", - template for allied heatsinks message
-"ApplyHeatSinkActorStat":"CACOverrallHeatSinked", - actor stat name for overall heat sinked during battle
+"ApplyHeatSinkActorStat":"CACOverrallHeatSinked", - actor's stat name for overall heat sinked during battle
+"OverrallShootsCountWeaponStat": "CACOverallShoots" - actor's stat name for overall shoots from weapon during battle
+"AmmoGenericBoxUINameAsName": true - if true for fake ammo box UIName needed to buy ammo without box Name of ammunition will be used rather than UIName.
 "modHTTPServer":false, - enable debug http server
 "modHTTPListen":"http://localhost:65080/" - debug http server url, if enabled
 "forbiddenRangeEnable:true, - enable or disable forbidden range mechanic, if false ForbiddenRange always counts as 0 
@@ -748,6 +750,13 @@ new fields
   
 Ammo definition
 {
+   "Custom" : {} - custom section on ammunition will be merged to all boxes definitions using this ammo. 
+   "AutoRefill": "Automatic" - how this ammunition will be refilled after battle. Available values
+							  "Automatic" - same behavior as before. Default
+							  "Shop" - ammo will be bought automatically if available in system store and player have sufficient c-bills amount
+							  "Manual" - player have to buy ammo by himself
+							  NOTE! "Shop" and "Manual" is not recommended to use at current development stage
+   "AvailableOnPlanet": [], - tags list planet should have to ammo (without boxes) can be bought.
    "HideIfOnlyVariant": true, - if true this ammo name will be hidden if only variant for this mode. Default false.
    "Description" : {
       "Id" : "Ammunition_LBX10ECM",

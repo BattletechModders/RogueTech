@@ -140,6 +140,30 @@ new section
 
 VehicleChassis/Chassis
 "CustomParts":{
+    "SquadInfo": {            - ONLY for mech's chassis 
+      "Troopers":5,           - units count in trooper squad, up to 8. If set as 1 no logic changing performed 
+      "UnitSize": 0.2,        - unit scale
+      "DeadUnitToHitMod": 9,  - to-hit mod when last trooper squad remain. Example squad - 4 units, DeadUnitToHitMod - 9. When all 4 units operational modifier = 0
+	                            one unit dead modifier = 3, two units dead, modifier = 6, three units dead, modifier = 9. Formula: modifier = <DeadUnitToHitMod> * <dead units> / (<Troopers> - 1)
+      "Hardpoints":{          - visual hardpoints mapping. Internally squad it is one mech, each trooper is its location. MechDef reflects this fact.
+	                            Visually each trooper is shrinked mech representation. To properly align weapons representation in this sub mechs models this mad is needed.
+								In example all energy weapons goes to left arms of troopers etc. Should be made corresponded to base chassis hardpoints definition.
+        "Energy": "LeftArm",
+        "Missile": "LeftTorso",
+        "AntiPersonnel": "RightArm"
+      }
+    },
+	NOTE: squad can have no more than one jumpjet. This means no matter amount of actual jumpjets components you install. 
+	If each operational location (squad trooper) have working jumpjet it will be counted as whole squad have one jupmjet in jump distance calculation.
+	Squad can't have stability nor heat. 
+	Squad can't be legged cause it have no legs internally.
+	Squad can be destroyed only all units destroyed.
+	Squad will get less AoE damage if some troopers dead
+	Squad will get less damage from landmines if some troopers dead.
+
+    "MeleeWeaponOverride":{    - override melee weapon for chassis. If you'll set weapon with non-melee weapon category or weapon than needs ammo, it will be only your fucken problem.
+      "DefaultWeapon": "Weapon_MeleeAttackBattleClaw"
+    }
     "AOEHeight": 55,  - this value will be added to y-coordinate of current position in AoE damage calculations (weapon/landmines/component's explosions). 
                         Can be altered runtime via CUAOEHeight actor's statistic value (float)
     "FiringArc":60, - if set and > 10 means vehicle firing arc in degrees and vehicle have to rotate toward target to fire. 
