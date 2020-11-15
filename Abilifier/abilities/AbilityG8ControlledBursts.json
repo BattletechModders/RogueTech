@@ -2,8 +2,8 @@
     "Description": {
         "Id": "AbilityG8ControlledBursts",
         "Name": "Controlled Bursts",
-        "Details": "ACTION: Gain -10% Heat Generated, -1 Recoil for 2 Turns. 3 Turn Cooldown.",
-        "Icon": "uixSvgIcon_skullAtlas"
+        "Details": "ACTION: Gain -10% Heat Generated, -1 Recoil, -20% Jam Chance Multiplier for 2 Turns. 3 Turn Cooldown.",
+        "Icon": "controlledbursts"
     },
     "DisplayParams": "ShowInMWTRay",
     "ReqSkill": "Gunnery",
@@ -12,10 +12,34 @@
     "ActivationCooldown": 3,
     "Targeting": "ActorSelf",
     "EffectData": [
+	{
+            "durationData": {
+                "duration": 2,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator"
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "ControlledBurstJamMitigation",
+                "Name": "Improved Called Shot",
+                "Details": "Called Shots twice as reliable",
+                "Icon": "uixSvgIcon_ability_mastertactician"
+            },
+            "statisticData": {
+                "statName": "CACModJammingChance",
+        "operation": "Float_Multiply",
+        "modValue": "0.8",
+        "modType": "System.Single",
+		"targetCollection": "Weapon"
+            }
+        },
         {
             "durationData": {
                 "duration": 2,
-                "stackLimit": 1
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTriggerType": "OnActivation",
@@ -39,7 +63,7 @@
         {
             "durationData": {
                 "duration": 2,
-                "stackLimit": 1
+                "stackLimit": -1
             },
             "targetingData": {
                 "effectTargetsCreator": true,

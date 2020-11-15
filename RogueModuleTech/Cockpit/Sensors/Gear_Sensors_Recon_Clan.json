@@ -8,8 +8,9 @@
 				"Sensors: +10%",
                 "Sight: +10%",
 				"AdvancedSensors: 2",
-                "Jammer: 1, 190",
-				"Sharer"
+                "IFFJammer: 1",
+				"Sharer",
+				"DetectMine: 90"
             ]
         },
         "InventorySorter": {
@@ -43,20 +44,23 @@
     "DisallowedLocations": "All",
     "CriticalComponent": false,
 	"Auras": [
-		{
-      "Id": "Gear_SenECM_ECM_JAMMER",
-      "Name": "JAMMER",
-      "ReticleColor": "#0066ff",
-      "Range": 190,
-	  "HideOnNotSelected": false,
+	{
+      "Id": "MINEDETECTIONAURA",
+      "Name": "Minesweeper",
+      "ReticleColor": "white",
+      "LineType": "Dots",
+      "isSpining": false,
+	  "MinefieldDetector": true,
+	  "HideOnNotSelected": true,
+      "Range": 90,
       "RemoveOnSensorLock": false,
       "State": "Persistent",
-      "ApplySelf": false,
+      "ApplySelf": true,
       "AllyStealthAffection": "None",
-      "EnemyStealthAffection": "NegativeOne",
+      "EnemyStealthAffection": "None",
       "IsPositiveToAlly": false,
-      "IsNegativeToEnemy": true,
-       "ownerVFX": [
+      "IsNegativeToEnemy": false,
+      "ownerVFX": [
       ],
       "targetVFX": [
       ],
@@ -73,75 +77,40 @@
       "removeTargetSFX": [
       ],
       "statusEffects": [
-        {
-            "durationData" : {
-                "duration": -1,
-                "stackLimit": -1,
-				"uniqueEffectIdStackLimit": 1
-            },
-            "targetingData" : {
-                "effectTriggerType" : "Passive",
-                "specialRules" : "NotSet",
-                "effectTargetType" : "EnemiesWithinRange",
-                "range" : 0.0,
-                "forcePathRebuild" : false,
-                "forceVisRebuild" : true,
-                "showInTargetPreview" : false,
-                "showInStatusPanel" : false
-            },
-            "effectType" : "StatisticEffect",
-            "Description" :
-            {
-				"Id" : "LV_ECM_JAM",
-				"Name" : "ECM Jammer",
-				"Details" : "Jamming ECM, reduces sensor checks for enemies in field",
-				"Icon" : "uixSvgIcon_action_sensorlock"
-            },
-            "statisticData" : 
-            {
-				"statName" : "LV_ECM_JAMMED",
-				"operation": "Int_Add",
-				"modValue": "1",
-				"modType": "System.Int32"
-            },
-            "nature" : "Debuff"
-        },
-{
-                "durationData" : {
-                    "duration": -1,
-                    "stackLimit": -1
-                },
-                "targetingData" : {
-                    "effectTriggerType" : "Passive",
-                    "specialRules" : "NotSet",
-                    "effectTargetType" : "EnemiesWithinRange",
-                    "range" : 0.0,
-                    "forcePathRebuild" : false,
-                    "forceVisRebuild" : false,
-                    "showInTargetPreview" : false,
-                    "showInStatusPanel" : false
-                },
-                "effectType" : "StatisticEffect",
-                "Description" :
-                {
-                    "Id" : "LV_ECM_JAM_EMITTER_COUNT",
-                    "Name" : "ECM Jamming Emitter Count",
-                    "Details" : "Counter for the number of ECM emitters currently affecting an actor with jamming.",
-                    "Icon" : "uixSvgIcon_status_ECM-missileDef"
-                },
-                "statisticData" : 
-                {
-                    "statName" : "LV_ECM_JAM_EMITTER_COUNT",
-                    "operation": "Int_Add",
-                    "modValue": "1",
-                    "modType": "System.Int32"
-                },
-                "nature" : "Debuff"
-            }			
-      ]
-    }
+		]
+		}
   ],
     "statusEffects": [ 	
+	        {
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0.0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": true,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "LV_ECM_SHIELD",
+                "Name": "IFFJAMMER2",
+                "Details": "Reduces effectiveness of stealthed and ECM shielded units",
+                "Icon": "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData": {
+                "statName": "LV_ECM_SHIELD",
+                "operation": "Int_Add",
+                "modValue": "1",
+                "modType": "System.Int32"
+            },
+            "nature": "Buff"
+        },
 		   {
             "durationData" : {
                 "duration": -1,
@@ -268,6 +237,36 @@
                 "modType": "System.Boolean"
             },
             "nature" : "Buff"
+        },
+		{
+            "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+            },
+            "targetingData": {
+                "effectTriggerType": "Passive",
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0.0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": true,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+                "Id": "MineFieldDetection",
+                "Name": "Active Probe (Passive)",
+                "Details": "Detects Minefields",
+                "Icon": "uixSvgIcon_status_ECM-ghost"
+            },
+            "statisticData": {
+                "statName": "MinefieldDetection",
+                "operation": "Float_Add",
+                "modValue": "1",
+                "modType": "System.Single"
+            },
+            "nature": "Buff"
         }
 		],
     "ComponentTags": {

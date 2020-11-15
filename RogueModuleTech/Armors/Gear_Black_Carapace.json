@@ -73,8 +73,6 @@
 				"HaarJelDuration: 4",
 				"BreachImmunity",
                 "FluidBoom: 30",
-                "IsECM: 2, 190",
-                "Jammer: 1, 280",
                 "ArmorFactor: +15%",
 				"StealthSensors: 30%, 3, 2, 3, 4",
 				"MimeticStealth: 30%, 3, 4",
@@ -84,7 +82,10 @@
 		"TEHeatgen: +15%",
 		"HeatPerTurn: +10",
                 "ArmorTPCost: 75%",
-                "ArmorCBCost: 75%"
+                "ArmorCBCost: 75%",
+				"PersistentECM",
+"PersistentECMAura: 3, 2, 150",
+"PersistentECMSelf: 1, 2"
             ]
         },
         "InventorySorter": {
@@ -145,201 +146,168 @@
     "AllowedLocations": "CenterTorso",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
-	"Auras": [
-    {
-      "Id": "Gear_ZECM_ECM",
-      "Name": "ECM",
-      "ReticleColor": "#00f2ff",
-      "Range": 190,
-      "RemoveOnSensorLock": false,
-      "State": "Persistent",
-      "ApplySelf": true,
-      "AllyStealthAffection": "PositiveOne",
-      "EnemyStealthAffection": "None",
-      "IsPositiveToAlly": true,
-      "IsNegativeToEnemy": false,
-      "ownerVFX": [
-      ],
-      "targetVFX": [
-      ],
-      "removeOwnerVFX": [
-      ],
-      "removeTargetVFX": [
-      ],
-      "ownerSFX": [
-      ],
-      "targetSFX": [
-      ],
-      "removeOwnerSFX": [
-      ],
-      "removeTargetSFX": [
-      ],
-      "statusEffects": [
+"Auras": [
         {
-            "durationData" : {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData" : {
-                "effectTriggerType" : "Passive",
-                "specialRules" : "NotSet",
-                "effectTargetType" : "AlliesWithinRange",
-                "range" : 0.0,
-                "forcePathRebuild" : false,
-                "forceVisRebuild" : false,
-                "showInTargetPreview" : false,
-                "showInStatusPanel" : false
-            },
-            "effectType" : "StatisticEffect",
-            "Description" :
-            {
-				"Id" : "LV_ECM_SHIELD",
-				"Name" : "ECM_Shield_BC",
-				"Details" : "IPSUM SUCKUM",
-				"Icon" : "uixSvgIcon_status_ECM-missileDef"
-            },
-            "statisticData" : 
-            {
-				"statName" : "LV_ECM_SHIELD",
-				"operation": "Int_Add",
-				"modValue": "2",
-				"modType": "System.Int32"
-            },
-            "nature" : "Buff"
+            "Id": "Jammer_Aura",
+            "Name": "JAMMED",
+            "ReticleColor": "#00f2ff",
+            "Range": 150,
+            "HideOnNotSelected": false,
+            "RemoveOnSensorLock": false,
+            "State": "Online",
+            "ApplySelf": false,
+            "AllyStealthAffection": "None",
+            "EnemyStealthAffection": "NegativeOne",
+            "IsPositiveToAlly": false,
+            "IsNegativeToEnemy": true,
+            "ownerVFX": [],
+            "targetVFX": [],
+            "removeOwnerVFX": [],
+            "removeTargetVFX": [],
+            "ownerSFX": [],
+            "targetSFX": [],
+            "removeOwnerSFX": [],
+            "removeTargetSFX": [],
+            "statusEffects": [
+                {
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1,
+                        "uniqueEffectIdStackLimit": 1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "specialRules": "NotSet",
+                        "effectTargetType": "EnemiesWithinRange",
+                        "range": 0.0,
+						"forceVisRebuild": true,
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "LV_ECM_JAM",
+                        "Name": "ECM Jammer",
+                        "Details": "Jamming ECM, reduces sensor checks for enemies in field",
+                        "Icon": "uixSvgIcon_action_sensorlock"
+                    },
+                    "statisticData": {
+                        "statName": "LV_ECM_JAMMED",
+                        "operation": "Int_Add",
+                        "modValue": "3",
+                        "modType": "System.Int32"
+                    },
+                    "nature": "Debuff"
+                }
+            ]
         },
-		{
-                "durationData" : {
-                    "duration": -1,
-                    "stackLimit": -1
-                },
-                "targetingData" : {
-                    "effectTriggerType" : "Passive",
-                    "specialRules" : "NotSet",
-                    "effectTargetType" : "AlliesWithinRange",
-                    "range" : 0.0,
-                    "forcePathRebuild" : false,
-                    "forceVisRebuild" : false,
-                    "showInTargetPreview" : false,
-                    "showInStatusPanel" : false
-                },
-                "effectType" : "StatisticEffect",
-                "Description" :
-                {
-                    "Id" : "LV_ECM_SHIELD_EMITTER_COUNT",
-                    "Name" : "ECM Shield Emitter Count",
-                    "Details" : "Counter for the number of ECM emitters currently affecting an actor with shielding.",
-                    "Icon" : "uixSvgIcon_status_ECM-missileDef"
-                },
-                "statisticData" : 
-                {
-                    "statName" : "LV_ECM_SHIELD_EMITTER_COUNT",
-                    "operation": "Int_Add",
-                    "modValue": "1",
-                    "modType": "System.Int32"
-                },
-                "nature" : "Buff"
-            }
-		]
-		},
-		{
-      "Id": "Gear_ZECM_ECM_JAMMER",
-      "Name": "JAMMER",
-      "ReticleColor": "#0066ff",
-      "Range": 280,
-	  "HideOnNotSelected": false,
-      "RemoveOnSensorLock": false,
-      "State": "Persistent",
-      "ApplySelf": false,
-      "AllyStealthAffection": "None",
-      "EnemyStealthAffection": "NegativeOne",
-      "IsPositiveToAlly": false,
-      "IsNegativeToEnemy": true,
-       "ownerVFX": [
-      ],
-      "targetVFX": [
-      ],
-      "removeOwnerVFX": [
-      ],
-      "removeTargetVFX": [
-      ],
-      "ownerSFX": [
-      ],
-      "targetSFX": [
-      ],
-      "removeOwnerSFX": [
-      ],
-      "removeTargetSFX": [
-      ],
-      "statusEffects": [
         {
-            "durationData" : {
-                "duration": -1,
-                "stackLimit": -1,
-				"uniqueEffectIdStackLimit": 1
-            },
-            "targetingData" : {
-                "effectTriggerType" : "Passive",
-                "specialRules" : "NotSet",
-                "effectTargetType" : "EnemiesWithinRange",
-                "range" : 0.0,
-                "forcePathRebuild" : false,
-                "forceVisRebuild" : true,
-                "showInTargetPreview" : false,
-                "showInStatusPanel" : false
-            },
-            "effectType" : "StatisticEffect",
-            "Description" :
-            {
-				"Id" : "LV_ECM_JAM",
-				"Name" : "ECM Jammer",
-				"Details" : "Jamming ECM, reduces sensor checks for enemies in field",
-				"Icon" : "uixSvgIcon_action_sensorlock"
-            },
-            "statisticData" : 
-            {
-				"statName" : "LV_ECM_JAMMED",
-				"operation": "Int_Add",
-				"modValue": "1",
-				"modType": "System.Int32"
-            },
-            "nature" : "Debuff"
-        },
-{
-                "durationData" : {
-                    "duration": -1,
-                    "stackLimit": -1
-                },
-                "targetingData" : {
-                    "effectTriggerType" : "Passive",
-                    "specialRules" : "NotSet",
-                    "effectTargetType" : "EnemiesWithinRange",
-                    "range" : 0.0,
-                    "forcePathRebuild" : false,
-                    "forceVisRebuild" : false,
-                    "showInTargetPreview" : false,
-                    "showInStatusPanel" : false
-                },
-                "effectType" : "StatisticEffect",
-                "Description" :
+            "Id": "ECCM_Anitjam",
+            "Name": "CounterJamming",
+            "ReticleColor": "#00f2ff",
+            "Range": 150,
+            "HideOnNotSelected": false,
+            "RemoveOnSensorLock": false,
+            "State": "Online",
+            "ApplySelf": false,
+            "AllyStealthAffection": "PositiveTwo",
+            "EnemyStealthAffection": "None",
+            "IsPositiveToAlly": true,
+            "IsNegativeToEnemy": false,
+            "ownerVFX": [],
+            "targetVFX": [],
+            "removeOwnerVFX": [],
+            "removeTargetVFX": [],
+            "ownerSFX": [],
+            "targetSFX": [],
+            "removeOwnerSFX": [],
+            "removeTargetSFX": [],
+            "statusEffects": [
                 {
-                    "Id" : "LV_ECM_JAM_EMITTER_COUNT",
-                    "Name" : "ECM Jamming Emitter Count",
-                    "Details" : "Counter for the number of ECM emitters currently affecting an actor with jamming.",
-                    "Icon" : "uixSvgIcon_status_ECM-missileDef"
-                },
-                "statisticData" : 
-                {
-                    "statName" : "LV_ECM_JAM_EMITTER_COUNT",
-                    "operation": "Int_Add",
-                    "modValue": "1",
-                    "modType": "System.Int32"
-                },
-                "nature" : "Debuff"
-            }		
-      ]
-    }
-  ],
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1,
+                        "uniqueEffectIdStackLimit": 1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "effectTargetType": "AlliesWithinRange",
+                        "range": 0.0,
+                        "forceVisRebuild": true,
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "UNJAM",
+                        "Name": "ECM Anti-Jammer",
+                        "Details": "Reduce Jamming on Allies",
+                        "Icon": "uixSvgIcon_action_sensorlock"
+                    },
+                    "statisticData": {
+                        "statName": "LV_ECM_JAMMED",
+                        "operation": "Int_Add",
+                        "modValue": "-2",
+                        "modType": "System.Int32"
+                    },
+                    "nature": "Buff"
+                }
+            ]
+        }
+    ],
     "statusEffects": [
+				{
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "effectTargetType": "Creator",
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "ECMPassiveShield",
+                        "Name": "ECMPassiveShield",
+                        "Details": "Passive ECM Protection",
+                        "Icon": "uixSvgIcon_equipment_Gyro"
+                    },
+                    "nature": "Buff",
+                    "statisticData": {
+                         "statName": "LV_ECM_SHIELD",
+                        "operation": "Int_Add",
+                        "modValue": "1",
+                        "modType": "System.Int32"
+                    }
+                },
+{
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "effectTargetType": "Creator",
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "ECMPassiveJam",
+                        "Name": "ECMPassiveJam",
+                        "Details": "Passive Jamming Protection",
+                        "Icon": "uixSvgIcon_equipment_Gyro"
+                    },
+                    "nature": "Buff",
+                    "statisticData": {
+                         "statName": "LV_ECM_JAMMED",
+                        "operation": "Int_Add",
+                        "modValue": "-2",
+                        "modType": "System.Int32"
+                    }
+                },
         {
             "durationData" : {
                 "duration": -1,
