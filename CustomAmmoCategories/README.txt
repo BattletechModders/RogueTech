@@ -37,6 +37,7 @@ CACIncomingStabilityMult - float - multipicator for all incoming stability (weap
 
 {
 "debugLog":true, - enable debug log 
+"ShowEvasiveAsNumber": true, - if true near evasive pips bar its amount will be showed as number
 "ResetHeatSinkMessageTemplate":"USED HEAT SINKS:{0}=>{1}", - template for reset used heatsinks message
 "ApplyHeatSinkMessageTemplate":"APPLY HEAT SINKS:{0}=>{1} HCAP:{1} USED:{2}=>{3}", - template for allied heatsinks message
 "ApplyHeatSinkActorStat":"CACOverrallHeatSinked", - actor's stat name for overall heat sinked during battle
