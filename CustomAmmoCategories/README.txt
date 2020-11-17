@@ -37,6 +37,7 @@ CACIncomingStabilityMult - float - multipicator for all incoming stability (weap
 
 {
 "debugLog":true, - enable debug log 
+"ShowEvasiveAsNumber": true, - if true near evasive pips bar its amount will be showed as number
 "ResetHeatSinkMessageTemplate":"USED HEAT SINKS:{0}=>{1}", - template for reset used heatsinks message
 "ApplyHeatSinkMessageTemplate":"APPLY HEAT SINKS:{0}=>{1} HCAP:{1} USED:{2}=>{3}", - template for allied heatsinks message
 "ApplyHeatSinkActorStat":"CACOverrallHeatSinked", - actor's stat name for overall heat sinked during battle
@@ -281,6 +282,8 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
   "MinefieldIFFStatName": "MinefieldIFF", - stat name for actor landmines IFF ability (float). Default value 0. 
   "AmmoNameInSidePanel": true - if true in side panel AmmunitionDef.Name will be shown instead of AmmunitionDef.UIName
   "ShowApplyHeatSinkMessage": true - show floatie message on heatsinks appying.
+  "AMSCantFireFloatie": false, - if true if AMS can't fire reason will be shown in floatie message
+  "ShowJammChance": true - if true side panel will show jam chance calculation formula
 }
 
 Weapon definition
@@ -515,9 +518,9 @@ new fields
   "AOECapable" : false, - if true weapon will included in AOE damage calculations. If true set in weapon definition 
                             all shoots will have AoE effect (even for energy weapon). If true, it can't be overridden by ammo.
   "AOERange": 100, - Area of effect range. If AOECapable in weapon is set to true this value will be used. If AOECapable is true, it can't be overridden by ammo.
-  "AOEDamage": 0 - AoE damage. 
-  "AOEHeatDamage": 0 - AoE heat. 
-  "AOEInstability": 0 - instability AoE damage 
+  "AOEDamage": 0 - AoE damage. Same rules as for AOERange
+  "AOEHeatDamage": 0 - AoE heat. Same rules as for AOERange 
+  "AOEInstability": 0 - instability AoE damage. Same rules as for AOERange 
   "SpreadRange": 0, - Area of projectiles spread effect. If > 0 projectiles will include in spread calculations. Per weapon, ammo, mode values are additive.
                          if used for missiles, and target have AMS it will fire no matter if it is not advanced and target is not primary.
   "IFFDef" : "IFFComponentDefId", if not empty and target have component with such defId it will exclude form AoE and spread targets list. 
@@ -586,6 +589,8 @@ new fields
 	[{
 		"Id": "x4",  - Must be unique per weapon
 		"UIName": "x4", - This string will be displayed near weapon name
+		"Name": "x4", - This string will be displayed in side panel. If absent UIName used.
+		"Description":"", - This string will be displayed in side panel if this mode is selected.
     "APDamage": 10, - damage amount always inflicted to inner structure trough armor. If armor breached this damage will be added to normal damage. Additive per mode/ammo/weapon, default 0.
     "APCriticalChanceMultiplier": 0.5, - armor pierce crit chance multiplier. Additive per mode/ammo/weapon, default 0.
                                     NOTE: if effective APDamage > 0 crit roll is placed anyway. But if even if APDamage = 0 and APCriticalChanceMultiplier is set per mode ammo or weapon crit will be placed on each hit without damage to inner structure (like AP autocannon ammo). So weapon can inflict AP damage + AP crit or AP crit alone.
@@ -1140,6 +1145,12 @@ Ammo definition
         }
     ]
 }
+
+Note:
+ MinMissRadius,MaxMissRadius,AMSDamage,MissileHealth have special processing
+ For this values weapon have statistic values "CAC_<name>" and "CAC_<name>_Mod" (eg CAC_MinMissRadius and CAC_MinMissRadius_Mod etc)
+ Effective value formula value = (<value from ammo> + <value from mode> + <CAC_<name> statistic value>) * (<CAC_MinMissRadius_Mod statistic value>)
+ For CAC_<name> default value is from definition, for CAC_<name>_Mod is 1.0
 
 Note on damage modifiers
 you can register your own modifier via API
