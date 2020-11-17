@@ -38,6 +38,9 @@ CACIncomingStabilityMult - float - multipicator for all incoming stability (weap
 {
 "debugLog":true, - enable debug log 
 "ShowEvasiveAsNumber": true, - if true near evasive pips bar its amount will be showed as number
+"EvasiveNumberFontSize" : 24 - font size for evasive pips count
+"EvasiveNumberWidth": 25 - size of background for evasive pips count. You should adjust this if changed font size. 
+"EvasiveNumberHeight": 20
 "ResetHeatSinkMessageTemplate":"USED HEAT SINKS:{0}=>{1}", - template for reset used heatsinks message
 "ApplyHeatSinkMessageTemplate":"APPLY HEAT SINKS:{0}=>{1} HCAP:{1} USED:{2}=>{3}", - template for allied heatsinks message
 "ApplyHeatSinkActorStat":"CACOverrallHeatSinked", - actor's stat name for overall heat sinked during battle
@@ -293,7 +296,7 @@ new fields
                         - min and max raduis. Used only in ground attack and indirect attack. Additive for ammo/mode/weapon
 						  If MinMissRadius less than target raduis (for mechs in chassis definition, for vehicels and turrets 5) raduis value will be used.
 						  If MaxMissRadius less or equal than MinMissRadius value MinMissRadius * 3 will be used.
-						  actual scatter radius = ((MaxMissRadius - MinMissRadius) * (hitRoll - toHitChance) / (1 - toHitChance) + MinMissRadius) * Random.Range(Constants.ResolutionConstants.MissOffsetHorizontalMin, Constants.ResolutionConstants.MissOffsetHorizontalMax)
+						  actual scatter radius = ((MaxMissRadius - MinMissRadius) * (hitRoll - toHitChance) / (1 - toHitChance) + MinMissRadius)
   "evasivePipsMods": {  - list of modifiers for values by current evasive pips count. Additive per weapon/ammo/mode. 
                           Overall formula value = [base value] * ([evasive pips count]^[mod value]). Example base damage = 35, evasive pips count = 7, mod value = -1
                           damage = 35 * (7^-1) = 35 * 0.142857(142857) = 5.
@@ -847,7 +850,7 @@ Ammo definition
                          if this weapon is missile launcher this value shows how difficult to intercept missile with AMS. Negative value - is harder, 
 						 positive is easer.
    "AlwaysIndirectVisuals": false, if true missiles will always plays indirect visuals, even if direct line of sight exists
-   "HeatGeneratedModifier" : 1,
+   "HeatGeneratedModifier" : 1, - heat generated modifier multiplicative for ammo/mode default 1
    "ArmorDamageModifier" : 1,
    "ISDamageModifier" : 1,
    "CriticalDamageModifier" : 1,
