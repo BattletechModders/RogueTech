@@ -37,6 +37,10 @@ CACIncomingStabilityMult - float - multipicator for all incoming stability (weap
 
 {
 "debugLog":true, - enable debug log 
+"ShowEvasiveAsNumber": true, - if true near evasive pips bar its amount will be showed as number
+"EvasiveNumberFontSize" : 24 - font size for evasive pips count
+"EvasiveNumberWidth": 25 - size of background for evasive pips count. You should adjust this if changed font size. 
+"EvasiveNumberHeight": 20
 "ResetHeatSinkMessageTemplate":"USED HEAT SINKS:{0}=>{1}", - template for reset used heatsinks message
 "ApplyHeatSinkMessageTemplate":"APPLY HEAT SINKS:{0}=>{1} HCAP:{1} USED:{2}=>{3}", - template for allied heatsinks message
 "ApplyHeatSinkActorStat":"CACOverrallHeatSinked", - actor's stat name for overall heat sinked during battle
@@ -281,6 +285,8 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
   "MinefieldIFFStatName": "MinefieldIFF", - stat name for actor landmines IFF ability (float). Default value 0. 
   "AmmoNameInSidePanel": true - if true in side panel AmmunitionDef.Name will be shown instead of AmmunitionDef.UIName
   "ShowApplyHeatSinkMessage": true - show floatie message on heatsinks appying.
+  "AMSCantFireFloatie": false, - if true if AMS can't fire reason will be shown in floatie message
+  "ShowJammChance": true - if true side panel will show jam chance calculation formula
 }
 
 Weapon definition
@@ -290,7 +296,7 @@ new fields
                         - min and max raduis. Used only in ground attack and indirect attack. Additive for ammo/mode/weapon
 						  If MinMissRadius less than target raduis (for mechs in chassis definition, for vehicels and turrets 5) raduis value will be used.
 						  If MaxMissRadius less or equal than MinMissRadius value MinMissRadius * 3 will be used.
-						  actual scatter radius = ((MaxMissRadius - MinMissRadius) * (hitRoll - toHitChance) / (1 - toHitChance) + MinMissRadius) * Random.Range(Constants.ResolutionConstants.MissOffsetHorizontalMin, Constants.ResolutionConstants.MissOffsetHorizontalMax)
+						  actual scatter radius = ((MaxMissRadius - MinMissRadius) * (hitRoll - toHitChance) / (1 - toHitChance) + MinMissRadius)
   "evasivePipsMods": {  - list of modifiers for values by current evasive pips count. Additive per weapon/ammo/mode. 
                           Overall formula value = [base value] * ([evasive pips count]^[mod value]). Example base damage = 35, evasive pips count = 7, mod value = -1
                           damage = 35 * (7^-1) = 35 * 0.142857(142857) = 5.
@@ -515,9 +521,9 @@ new fields
   "AOECapable" : false, - if true weapon will included in AOE damage calculations. If true set in weapon definition 
                             all shoots will have AoE effect (even for energy weapon). If true, it can't be overridden by ammo.
   "AOERange": 100, - Area of effect range. If AOECapable in weapon is set to true this value will be used. If AOECapable is true, it can't be overridden by ammo.
-  "AOEDamage": 0 - AoE damage. 
-  "AOEHeatDamage": 0 - AoE heat. 
-  "AOEInstability": 0 - instability AoE damage 
+  "AOEDamage": 0 - AoE damage. Same rules as for AOERange
+  "AOEHeatDamage": 0 - AoE heat. Same rules as for AOERange 
+  "AOEInstability": 0 - instability AoE damage. Same rules as for AOERange 
   "SpreadRange": 0, - Area of projectiles spread effect. If > 0 projectiles will include in spread calculations. Per weapon, ammo, mode values are additive.
                          if used for missiles, and target have AMS it will fire no matter if it is not advanced and target is not primary.
   "IFFDef" : "IFFComponentDefId", if not empty and target have component with such defId it will exclude form AoE and spread targets list. 
@@ -844,7 +850,7 @@ Ammo definition
                          if this weapon is missile launcher this value shows how difficult to intercept missile with AMS. Negative value - is harder, 
 						 positive is easer.
    "AlwaysIndirectVisuals": false, if true missiles will always plays indirect visuals, even if direct line of sight exists
-   "HeatGeneratedModifier" : 1,
+   "HeatGeneratedModifier" : 1, - heat generated modifier multiplicative for ammo/mode default 1
    "ArmorDamageModifier" : 1,
    "ISDamageModifier" : 1,
    "CriticalDamageModifier" : 1,
@@ -1142,6 +1148,12 @@ Ammo definition
         }
     ]
 }
+
+Note:
+ MinMissRadius,MaxMissRadius,AMSDamage,MissileHealth have special processing
+ For this values weapon have statistic values "CAC_<name>" and "CAC_<name>_Mod" (eg CAC_MinMissRadius and CAC_MinMissRadius_Mod etc)
+ Effective value formula value = (<value from ammo> + <value from mode> + <CAC_<name> statistic value>) * (<CAC_MinMissRadius_Mod statistic value>)
+ For CAC_<name> default value is from definition, for CAC_<name>_Mod is 1.0
 
 Note on damage modifiers
 you can register your own modifier via API
