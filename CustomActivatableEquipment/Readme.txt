@@ -63,6 +63,8 @@ AI related mod settings
     "Custom":{
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
 		"ActivatableComponent":{
+			"ActivateOncePerRound": false, - if true component set up for auto activation on heat can be activated only once per round
+			"CanActivateAfterFire": true, - if true component can be activated after fire. Default true.
 			"CanActivateAfterMove": false, - if true component can be activated after move.
 			"SafeActivation": false, - if true component will not begin activation on component toggle. Assumed to be true if component have no influence on pathing and can't fail.
 			"ButtonName":"MASC",  - string used in activation/deactivation dialog button. Keep as sort as possible. 

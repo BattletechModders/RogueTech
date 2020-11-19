@@ -1,388 +1,393 @@
 {
-    "Custom": {
-        "Category": [
-            {
-                "CategoryID": "CockpitSensors"
-            },
-            {
-                "CategoryID": "Cockpit"
-            },
-            {
-                "CategoryID": "CockpitFCS"
-            },
-            {
-                "CategoryID": "UAV"
-            }
-        ],
-        "WorkOrderCosts": {
-            "Install": {
-                "TechCost": "[[Chassis.Tonnage]] / 10",
-                "CBillCost": "[[Chassis.Tonnage]] * 1.15"
-            }
-        },
-        "BonusDescriptions": {
-            "Bonuses": [
-                "Initiative: +1",
-                "Tacticon: +1",
-                "LanceSight3: 50",
-                "LanceIndirectAcc: +1",
-                "LanceResolve2: 2",
-                "Health: 2",
-                "IsProbe: 1",
-                "AdvancedSensors: 5",
-                "UAV: 500, 6, 20",
-                "IsCockpit",
-                "FCS",
-                "Sharer"
-            ]
-        },
-        "ActivatableComponent": {
-            "CanNotBeActivatedManualy": true,
-            "NoUniqueCheck": true,
-            "ActivationMessage": "UAV",
-            "DeactivationMessage": "",
-            "statusEffects": [],
-            "offlineStatusEffects": []
-        },
-        "InventorySorter": {
-            "SortKey": "00202"
-        }
-    },
-    "StatName": null,
-    "RelativeModifier": 0,
-    "AbsoluteModifier": 0,
-    "Description": {
-        "Cost": 900000,
-        "Rarity": 5,
-        "Purchasable": false,
-        "Manufacturer": "Doering Electronics",
-        "Model": "Unknown",
-        "UIName": "Command Console",
-        "Id": "Gear_Cockpit_CommandConsole",
-        "Name": "Doering Electronics Command Console",
-        "Details": "All 'Mechs come equipped with a stock cockpit configuration, which can be upgraded for improved performance. The Console adds a complete set of controls for a second MechWarrior with added command and control facilities, allowing for better Lance coordination by upgrading initiative.\n\nStar League-vintage Command Consoles are very rare by 3025 because 'Mechs equipped in this way were favoured targets in battle.",
-        "Icon": "satellite-communication"
-    },
-    "BonusValueA": "+ 1 Initiative",
-    "BonusValueB": "",
-    "ComponentType": "Upgrade",
-    "ComponentSubType": "NotSet",
-    "PrefabIdentifier": "",
-    "BattleValue": 0,
-    "InventorySize": 4,
-    "Tonnage": 6,
-    "AllowedLocations": "Head",
-    "DisallowedLocations": "All",
-    "CriticalComponent": false,
-    "statusEffects": [
-        {
-            "targetingData": {
-                "effectTriggerType": "OnActivation",
-                "effectTargetType": "EnemiesWithinRange",
-                "alsoTargetsCreator": true,
-                "forceVisRebuild": true
-            },
-            "effectType": "ActiveAbility",
-            "Description": {
-                "Id": "SpySat_Ping",
-                "Name": "SPY SAT PING",
-                "Details": "Activated ability (uses Firing action). Performs a Sensor Lock against all enemies within its radius, as indicated by the spinning gold ring. Will go into cooldown state after use.",
-                "Icon": "uixSvgIcon_action_sensorlock"
-            },
-            "activeAbilityEffectData": {
-                "abilityName": "AbilityDef_SPYSAT_Ping"
-            }
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "specialRules": "NotSet",
-                "effectTargetType": "Creator",
-                "range": 0.0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": true,
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "LV_PROBE_CARRIER",
-                "Name": "Active Probe (Passive)",
-                "Details": "Reduces effectiveness of stealthed and ECM shielded units",
-                "Icon": "uixSvgIcon_status_ECM-ghost"
-            },
-            "statisticData": {
-                "statName": "LV_PROBE_CARRIER",
-                "operation": "Int_Add",
-                "modValue": "1",
-                "modType": "System.Int32"
-            },
-            "nature": "Buff"
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "specialRules": "NotSet",
-                "effectTargetType": "Creator",
-                "range": 0.0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": true,
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "LV_ADVANCED_SENSORS",
-                "Name": "Advanced Sensors",
-                "Details": "Provides detailed information on enemy units",
-                "Icon": "uixSvgIcon_status_ECM-ghost"
-            },
-            "statisticData": {
-                "statName": "LV_ADVANCED_SENSORS",
-                "operation": "Int_Add",
-                "modValue": "5",
-                "modType": "System.Int32"
-            },
-            "nature": "Buff"
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
-                "effectTargetType": "AllLanceMates",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "StatusEffect-Initiative_Lance",
-                "Name": "Command Consoles",
-                "Details": "Provides + 1 Initiative and several buffs.",
-                "Icon": "uixSvgIcon_equipment_Cockpit"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "BaseInitiative",
-                "operation": "Int_Add",
-                "modValue": "-1",
-                "modType": "System.Int32"
-            }
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
-                "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "CockpitInitativeEffect",
-                "Name": "Command Consoles",
-                "Details": "Provides + 1 Initiative and several buffs.",
-                "Icon": "uixSvgIcon_equipment_Cockpit"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "BaseInitiative",
-                "operation": "Int_Add",
-                "modValue": "-1",
-                "modType": "System.Int32"
-            }
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
-                "effectTargetType": "Creator",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "StatusEffect-Pilot_HealthAdd-T3",
-                "Name": "MAX INJURIES INCREASED",
-                "Details": "Prevents Injuries against a MechWarrior.",
-                "Icon": "uixSvgIcon_equipment_Cockpit"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "BonusHealth",
-                "operation": "Int_Add",
-                "modValue": "2",
-                "modType": "System.Int32",
-                "targetCollection": "Pilot"
-            }
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
-                "effectTargetType": "AllLanceMates",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "StatusEffect-Morale_Gain-T3",
-                "Name": "MORALE GENERATION INCREASED",
-                "Details": "Provides a bonus to actions that generate Morale.",
-                "Icon": "uixSvgIcon_equipment_Cockpit"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "MoraleBonusGain",
-                "operation": "Int_Add",
-                "modValue": "2",
-                "modType": "System.Int32"
-            }
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
-                "effectTargetType": "AllLanceMates",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "StatusEffect-IndirectAccuracy_Add-T1",
-                "Name": "MISSILE WEAPON INDIRECT HIT CHANCE IMPROVED",
-                "Details": "Indirect fire penalties reduced by 1.",
-                "Icon": "uixSvgIcon_equipment_Cockpit"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "ToHitIndirectModifier",
-                "operation": "Float_Add",
-                "modValue": "-1.0",
-                "modType": "System.Single",
-                "targetCollection": "Weapon"
-            }
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
-                "effectTargetType": "AllLanceMates",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "StatusEffect-Spotting_Gain-T1",
-                "Name": "SPOTTING DISTANCE INCREASED",
-                "Details": "Increases spotting distance by 25m.",
-                "Icon": "uixSvgIcon_equipment_Cockpit"
-            },
-            "nature": "Buff",
-            "statisticData": {
-                "statName": "SpotterDistanceAbsolute",
-                "operation": "Float_Add",
-                "modValue": "50.0",
-                "modType": "System.Single"
-            }
-        },
-        {
-            "durationData": {
-                "duration": -1,
-                "stackLimit": 1
-            },
-            "targetingData": {
-                "effectTriggerType": "Passive",
-                "specialRules": "NotSet",
-                "effectTargetType": "Creator",
-                "range": 0.0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": true,
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
-                "Id": "LV_Shares_Vision",
-                "Name": "Vision Sharing",
-                "Details": "Shows their vision when lancemates move",
-                "Icon": "uixSvgIcon_status_ECM-ghost"
-            },
-            "statisticData": {
-                "statName": "LV_SHARES_VISION",
-                "operation": "Set",
-                "modValue": "true",
-                "modType": "System.Boolean"
-            },
-            "nature": "Buff"
-        }
+  "Custom": {
+    "Category": [
+      {
+        "CategoryID": "CockpitSensors"
+      },
+      {
+        "CategoryID": "Cockpit"
+      },
+      {
+        "CategoryID": "CockpitFCS"
+      },
+      {
+        "CategoryID": "UAV"
+      }
     ],
-    "ComponentTags": {
-        "items": [
-            "component_type_stock",
-            "lv-shares-sensors"
-        ],
-        "tagSetSourceFile": ""
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "[[Chassis.Tonnage]] / 10",
+        "CBillCost": "[[Chassis.Tonnage]] * 1.15"
+      }
+    },
+    "BonusDescriptions": {
+      "Bonuses": [
+        "Initiative: +1",
+        "Tacticon: +1",
+        "LanceSight3: 50",
+        "LanceIndirectAcc: +1",
+        "LanceResolve2: 2",
+        "Health: 2",
+        "IsProbe: 1",
+        "AdvancedSensors: 5",
+        "UAV: 500, 6, 20",
+        "IsCockpit",
+        "FCS",
+        "Sharer"
+      ]
+    },
+    "ActivatableComponent": {
+      "CanNotBeActivatedManualy": true,
+      "NoUniqueCheck": true,
+      "ActivationMessage": "UAV",
+      "DeactivationMessage": "",
+      "statusEffects": [],
+      "offlineStatusEffects": []
+    },
+    "InventorySorter": {
+      "SortKey": "00202"
+    },
+    "Flags": {
+      "flags": [
+        "not_broken"
+      ]
     }
+  },
+  "StatName": null,
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
+  "Description": {
+    "Cost": 900000,
+    "Rarity": 5,
+    "Purchasable": false,
+    "Manufacturer": "Doering Electronics",
+    "Model": "Unknown",
+    "UIName": "Command Console",
+    "Id": "Gear_Cockpit_CommandConsole",
+    "Name": "Doering Electronics Command Console",
+    "Details": "All 'Mechs come equipped with a stock cockpit configuration, which can be upgraded for improved performance. The Console adds a complete set of controls for a second MechWarrior with added command and control facilities, allowing for better Lance coordination by upgrading initiative.\n\nStar League-vintage Command Consoles are very rare by 3025 because 'Mechs equipped in this way were favoured targets in battle.",
+    "Icon": "satellite-communication"
+  },
+  "BonusValueA": "+ 1 Initiative",
+  "BonusValueB": "",
+  "ComponentType": "Upgrade",
+  "ComponentSubType": "NotSet",
+  "PrefabIdentifier": "",
+  "BattleValue": 0,
+  "InventorySize": 4,
+  "Tonnage": 6,
+  "AllowedLocations": "Head",
+  "DisallowedLocations": "All",
+  "CriticalComponent": false,
+  "statusEffects": [
+    {
+      "targetingData": {
+        "effectTriggerType": "OnActivation",
+        "effectTargetType": "EnemiesWithinRange",
+        "alsoTargetsCreator": true,
+        "forceVisRebuild": true
+      },
+      "effectType": "ActiveAbility",
+      "Description": {
+        "Id": "SpySat_Ping",
+        "Name": "SPY SAT PING",
+        "Details": "Activated ability (uses Firing action). Performs a Sensor Lock against all enemies within its radius, as indicated by the spinning gold ring. Will go into cooldown state after use.",
+        "Icon": "uixSvgIcon_action_sensorlock"
+      },
+      "activeAbilityEffectData": {
+        "abilityName": "AbilityDef_UAV_D500_H20_CD6"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "specialRules": "NotSet",
+        "effectTargetType": "Creator",
+        "range": 0.0,
+        "forcePathRebuild": false,
+        "forceVisRebuild": true,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "LV_PROBE_CARRIER",
+        "Name": "Active Probe (Passive)",
+        "Details": "Reduces effectiveness of stealthed and ECM shielded units",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "LV_PROBE_CARRIER",
+        "operation": "Int_Add",
+        "modValue": "1",
+        "modType": "System.Int32"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "specialRules": "NotSet",
+        "effectTargetType": "Creator",
+        "range": 0.0,
+        "forcePathRebuild": false,
+        "forceVisRebuild": true,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "LV_ADVANCED_SENSORS",
+        "Name": "Advanced Sensors",
+        "Details": "Provides detailed information on enemy units",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "LV_ADVANCED_SENSORS",
+        "operation": "Int_Add",
+        "modValue": "5",
+        "modType": "System.Int32"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "triggerLimit": 0,
+        "extendDurationOnTrigger": 0,
+        "specialRules": "NotSet",
+        "effectTargetType": "AllLanceMates",
+        "range": 0,
+        "forcePathRebuild": false,
+        "forceVisRebuild": false,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "StatusEffect-Initiative_Lance",
+        "Name": "Command Consoles",
+        "Details": "Provides + 1 Initiative and several buffs.",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "BaseInitiative",
+        "operation": "Int_Add",
+        "modValue": "-1",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "triggerLimit": 0,
+        "extendDurationOnTrigger": 0,
+        "specialRules": "NotSet",
+        "effectTargetType": "Creator",
+        "range": 0,
+        "forcePathRebuild": false,
+        "forceVisRebuild": false,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "CockpitInitativeEffect",
+        "Name": "Command Consoles",
+        "Details": "Provides + 1 Initiative and several buffs.",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "BaseInitiative",
+        "operation": "Int_Add",
+        "modValue": "-1",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "triggerLimit": 0,
+        "extendDurationOnTrigger": 0,
+        "specialRules": "NotSet",
+        "effectTargetType": "Creator",
+        "range": 0,
+        "forcePathRebuild": false,
+        "forceVisRebuild": false,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "StatusEffect-Pilot_HealthAdd-T3",
+        "Name": "MAX INJURIES INCREASED",
+        "Details": "Prevents Injuries against a MechWarrior.",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "BonusHealth",
+        "operation": "Int_Add",
+        "modValue": "2",
+        "modType": "System.Int32",
+        "targetCollection": "Pilot"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "triggerLimit": 0,
+        "extendDurationOnTrigger": 0,
+        "specialRules": "NotSet",
+        "effectTargetType": "AllLanceMates",
+        "range": 0,
+        "forcePathRebuild": false,
+        "forceVisRebuild": false,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "StatusEffect-Morale_Gain-T3",
+        "Name": "MORALE GENERATION INCREASED",
+        "Details": "Provides a bonus to actions that generate Morale.",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "MoraleBonusGain",
+        "operation": "Int_Add",
+        "modValue": "2",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "triggerLimit": 0,
+        "extendDurationOnTrigger": 0,
+        "specialRules": "NotSet",
+        "effectTargetType": "AllLanceMates",
+        "range": 0,
+        "forcePathRebuild": false,
+        "forceVisRebuild": false,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "StatusEffect-IndirectAccuracy_Add-T1",
+        "Name": "MISSILE WEAPON INDIRECT HIT CHANCE IMPROVED",
+        "Details": "Indirect fire penalties reduced by 1.",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "ToHitIndirectModifier",
+        "operation": "Float_Add",
+        "modValue": "-1.0",
+        "modType": "System.Single",
+        "targetCollection": "Weapon"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "triggerLimit": 0,
+        "extendDurationOnTrigger": 0,
+        "specialRules": "NotSet",
+        "effectTargetType": "AllLanceMates",
+        "range": 0,
+        "forcePathRebuild": false,
+        "forceVisRebuild": false,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "StatusEffect-Spotting_Gain-T1",
+        "Name": "SPOTTING DISTANCE INCREASED",
+        "Details": "Increases spotting distance by 25m.",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "SpotterDistanceAbsolute",
+        "operation": "Float_Add",
+        "modValue": "50.0",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": 1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "specialRules": "NotSet",
+        "effectTargetType": "Creator",
+        "range": 0.0,
+        "forcePathRebuild": false,
+        "forceVisRebuild": true,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "LV_Shares_Vision",
+        "Name": "Vision Sharing",
+        "Details": "Shows their vision when lancemates move",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "LV_SHARES_VISION",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
+      },
+      "nature": "Buff"
+    }
+  ],
+  "ComponentTags": {
+    "items": [
+      "component_type_stock",
+      "lv-shares-sensors"
+    ],
+    "tagSetSourceFile": ""
+  }
 }
