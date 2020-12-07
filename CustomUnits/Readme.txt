@@ -5,6 +5,8 @@ this mod allows you next things
 4. Add custom animated hardpoints
 
 main settings in mod.json
+	"ConvoyRouteBeaconVFX":"vfxPrfPrtl_artillerySmokeSignal_loop", - VFX for convoy route points
+	"ConvoyRouteBeaconVFXScale":{"x":1,"y":1,"z":1}, - VFX scale for convoy route points
 	"DeployManual": true, - allowing manual deploy in random contract.
 	"ManualDeployForbidContractTypes": [] - list of contract types names, for listed contract types manual deploy will be forbidden
 	"DeployMaxDistanceFromOriginal": 30 - max distance from original deploy position
