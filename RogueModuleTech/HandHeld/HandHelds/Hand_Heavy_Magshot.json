@@ -1,17 +1,20 @@
 {
   "Custom": {
-    "Category": [
-      {
-        "CategoryID": "HandHeldNoArmMelee"
-      },
+   "Category": [
       {
         "CategoryID": "HandHeld"
       },
       {
-        "CategoryID": "w/s/h/HandHeld"
+        "CategoryID": "HandHeldArmRA"
+      },
+	  {
+        "CategoryID": "HandHeldArmLA"
+      },
+	  {
+        "CategoryID": "HandHeldArm"
       }
     ],
-    "MechConfiguration": { },
+    "UseCarryWeight" : { "Tonnage" : 10 },
     "ComponentExplosion": {
       "ExplosionDamagePerAmmo": 20,
       "StabilityDamagePerAmmo": 5,
@@ -30,7 +33,9 @@
         "CRITExponent: -0.2",
         "IsGauss",
         "WeaponGaussBoom: 20",
-        "AmmoCost: 200"
+        "AmmoCost: 200",
+		"HandHeldArmor: 40",
+		"RequiresHands"
       ]
     },
     "AmmoCost": {
@@ -39,17 +44,13 @@
     "InventorySorter": {
       "SortKey": "01414"
     },
-    "HandHeld": {
-      "Tonnage": 10,
-      "HandsUsed": true
-    },
     "Flags": {
       "flags": [
         "not_broken"
       ]
     }
   },
-  "weaponCategoryID": "Special",
+  "weaponCategoryID": "SpecialHandHeld",
   "Type": "Gauss",
   "WeaponSubType": "Gauss",
   "MinRange": 180,
@@ -112,7 +113,7 @@
   "BattleValue": 0,
   "InventorySize": 1,
   "Tonnage": 0,
-  "AllowedLocations": "CenterTorso",
+  "AllowedLocations": "Arms",
   "DisallowedLocations": "All",
   "ImprovedBallistic": true,
   "CriticalComponent": false,
@@ -122,11 +123,37 @@
     "APCriticalChanceMultiplier": -0.2,
     "CriticalChanceMultiplier": -0.2
   },
-  "statusEffects": [],
+  "statusEffects": [{
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Status-HHArmor-{location}",
+        "Name": "HandHeldArmor",
+        "Details": "Hand Held Armour",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "{location}.Armor",
+        "operation": "Float_Add",
+        "modValue": "40",
+        "modType": "System.Single"
+      }
+    }],
   "ComponentTags": {
     "items": [
       "component_type_stock",
-      "range_standard"
+      "range_standard",
+	  "HandHeld.{location}"
     ],
     "tagSetSourceFile": ""
   }

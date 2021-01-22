@@ -2,16 +2,19 @@
   "Custom": {
     "Category": [
       {
-        "CategoryID": "HandHeldNoArmMelee"
-      },
-      {
         "CategoryID": "HandHeld"
       },
       {
-        "CategoryID": "w/s/h/HandHeld"
+        "CategoryID": "HandHeldArmRA"
+      },
+	  {
+        "CategoryID": "HandHeldArmLA"
+      },
+	  {
+        "CategoryID": "HandHeldArm"
       }
     ],
-    "MechConfiguration": { },
+    "UseCarryWeight" : { "Tonnage" : 11 },
     "ComponentExplosion": {
       "ExplosionDamage": 40,
       "StabilityDamage": 10,
@@ -23,15 +26,13 @@
         "ERLaser",
         "IsLaser",
         "ExplodiumFlat: 20%",
-        "CapacitorBoom: 10"
+        "CapacitorBoom: 10",
+		"HandHeldArmor: 40",
+		"RequiresHands"
       ]
     },
     "InventorySorter": {
       "SortKey": "02009"
-    },
-    "HandHeld": {
-      "Tonnage": 11,
-      "HandsUsed": true
     },
     "Flags": {
       "flags": [
@@ -39,7 +40,7 @@
       ]
     }
   },
-  "weaponCategoryID": "Special",
+  "weaponCategoryID": "SpecialHandHeld",
   "Type": "Laser",
   "WeaponSubType": "LargeLaser",
   "MinRange": 0,
@@ -92,18 +93,43 @@
   "BattleValue": 0,
   "InventorySize": 1,
   "Tonnage": 0,
-  "AllowedLocations": "CenterTorso",
+  "AllowedLocations": "Arms",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
   "FlatJammingChance": 0.2,
   "GunneryJammingMult": 0.01,
   "GunneryJammingBase": 1,
   "DamageOnJamming": true,
-  "statusEffects": [],
+  "statusEffects": [{
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Status-HHArmor-{location}",
+        "Name": "HandHeldArmor",
+        "Details": "Hand Held Armour",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "{location}.Armor",
+        "operation": "Float_Add",
+        "modValue": "40",
+        "modType": "System.Single"
+      }
+    }],
   "ComponentTags": {
     "items": [
       "component_type_stock",
-      "LaserIns.{location}",
+      "HandHeld.{location}",
       "range_very-long"
     ],
     "tagSetSourceFile": ""

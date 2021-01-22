@@ -2,22 +2,27 @@
   "Custom": {
     "Category": [
       {
-        "CategoryID": "HandHeldNoArmMelee"
-      },
-      {
         "CategoryID": "HandHeld"
       },
       {
-        "CategoryID": "w/s/h/HandHeld"
+        "CategoryID": "HandHeldArmRA"
+      },
+	  {
+        "CategoryID": "HandHeldArmLA"
+      },
+	  {
+        "CategoryID": "HandHeldArm"
       }
     ],
+    "UseCarryWeight" : { "Tonnage" : 6 },
     "BonusDescriptions": {
       "Bonuses": [
         "HandHeld: 6",
         "ChemicalLaser",
         "HandHeldAmmo: 20",
 		"AmmoCost: 200",
-        "HandHeldArmored"
+        "HandHeldArmor: 40",
+		"RequiresHands"
       ]
     },
 	"AmmoCost" : {
@@ -26,20 +31,13 @@
     "InventorySorter": {
       "SortKey": "02008"
     },
-    "MechConfiguration": {},
     "Flags": {
       "flags": [
-        "not_broken",
-        "not_destroyed",
-        "ignore_damage"
+        "not_broken"
       ]
-    },
-    "HandHeld": {
-      "Tonnage": 6,
-      "HandsUsed": true
     }
   },
-  "weaponCategoryID": "Special",
+  "weaponCategoryID": "SpecialHandHeld",
   "Type": "Laser",
   "WeaponSubType": "LargeLaser",
   "MinRange": 0,
@@ -100,10 +98,37 @@
   "BattleValue": 0,
   "InventorySize": 1,
   "Tonnage": 0,
-  "AllowedLocations": "CenterTorso",
+  "AllowedLocations": "Arms",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "statusEffects": [],
+  "statusEffects": [
+  {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Status-HHArmor-{location}",
+        "Name": "HandHeldArmor",
+        "Details": "Hand Held Armour",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "{location}.Armor",
+        "operation": "Float_Add",
+        "modValue": "40",
+        "modType": "System.Single"
+      }
+    }
+  ],
   "Modes": [
     {
       "Id": "x1",
@@ -145,7 +170,7 @@
   "ComponentTags": {
     "items": [
       "component_type_stock",
-      "HandHeld",
+      "HandHeld.{location}",
       "range_long"
     ],
     "tagSetSourceFile": ""

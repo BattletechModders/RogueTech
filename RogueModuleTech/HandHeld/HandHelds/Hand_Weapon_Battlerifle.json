@@ -2,21 +2,27 @@
   "Custom": {
     "Category": [
       {
-        "CategoryID": "HandHeldNoArmMelee"
+        "CategoryID": "HandHeld"
       },
-            {
-                "CategoryID": "HandHeld"
-            },
-            {
-                "CategoryID": "w/s/h/HandHeld"
-            }
-        ],
+      {
+        "CategoryID": "HandHeldArmRA"
+      },
+	  {
+        "CategoryID": "HandHeldArmLA"
+      },
+	  {
+        "CategoryID": "HandHeldArm"
+      }
+    ],
+    "UseCarryWeight" : { "Tonnage" : 16 },
     "BonusDescriptions": {
       "Bonuses": [
         "HandHeld: 16",
 		"HandHeldAmmo: 40",
 				"AmmoCost: 333",
-        "WpnRecoil: 1"
+        "WpnRecoil: 1",
+		"HandHeldArmor: 60",
+		"RequiresHands"
       ]
     },
     "InventorySorter": {
@@ -24,21 +30,14 @@
     },
     "Flags": {
             "flags": [
-                "not_broken",
-                "not_destroyed",
-                "ignore_damage"
+                "not_broken"
             ]
         },
 		"AmmoCost" : {
       "PerUnitCost" : 333
-    },
-	"MechConfiguration": {},
-	"HandHeld": {
-            "Tonnage": 16,
-            "HandsUsed": true
-        }
+    }
   },
-  "weaponCategoryID": "Special",
+  "weaponCategoryID": "SpecialHandHeld",
   "Type": "Autocannon",
   "WeaponSubType": "AC10",
   "MinRange": 0,
@@ -135,12 +134,38 @@
       "GunneryJammingBase": 1
     }
   ],
-  "statusEffects": [],
+  "statusEffects": [{
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Status-HHArmor-{location}",
+        "Name": "HandHeldArmor",
+        "Details": "Hand Held Armour",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "{location}.Armor",
+        "operation": "Float_Add",
+        "modValue": "60",
+        "modType": "System.Single"
+      }
+    }],
   "ComponentTags": {
     "items": [
       "component_type_stock",
       "range_long",
-	  "BLACKLISTED"
+	  "BLACKLISTED",
+	  "HandHeld.{location}"
     ],
     "tagSetSourceFile": ""
   }

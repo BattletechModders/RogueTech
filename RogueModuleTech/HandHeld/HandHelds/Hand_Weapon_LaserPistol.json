@@ -2,22 +2,27 @@
   "Custom": {
     "Category": [
       {
-        "CategoryID": "HandHeldNoArmMelee"
-      },
-      {
         "CategoryID": "HandHeld"
       },
       {
-        "CategoryID": "w/s/h/HandHeld"
+        "CategoryID": "HandHeldArmRA"
+      },
+	  {
+        "CategoryID": "HandHeldArmLA"
+      },
+	  {
+        "CategoryID": "HandHeldArm"
       }
     ],
+    "UseCarryWeight" : { "Tonnage" : 1 },
     "BonusDescriptions": {
       "Bonuses": [
         "HandHeldMelee: 1",
         "ChemicalLaser",
         "HandHeldAmmo: 30",
 		"AmmoCost: 75",
-        "HandHeldArmored"
+        "HandHeldArmor: 20",
+		"RequiresHands"
       ]
     },
 	"AmmoCost" : {
@@ -26,17 +31,10 @@
     "InventorySorter": {
       "SortKey": "02002"
     },
-    "MechConfiguration": {},
     "Flags": {
       "flags": [
-        "not_broken",
-        "not_destroyed",
-        "ignore_damage"
+        "not_broken"
       ]
-    },
-    "HandHeld": {
-      "Tonnage": 1,
-      "HandsUsed": true
     }
   },
   "weaponCategoryID": "SpecialHandHeld",
@@ -100,14 +98,39 @@
   "BattleValue": 0,
   "InventorySize": 1,
   "Tonnage": 0,
-  "AllowedLocations": "CenterTorso",
+  "AllowedLocations": "Arms",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "statusEffects": [],
+  "statusEffects": [{
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Status-HHArmor-{location}",
+        "Name": "HandHeldArmor",
+        "Details": "Hand Held Armour",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "{location}.Armor",
+        "operation": "Float_Add",
+        "modValue": "20",
+        "modType": "System.Single"
+      }
+    }],
   "ComponentTags": {
     "items": [
       "component_type_stock",
-      "LaserIns.{location}",
+      "HandHeld.{location}",
       "range_close"
     ],
     "tagSetSourceFile": ""

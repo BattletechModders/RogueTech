@@ -1,16 +1,20 @@
 {
   "Custom": {
-    "Category": [
-      {
-        "CategoryID": "HandHeldNoArmMelee"
-      },
+     "Category": [
       {
         "CategoryID": "HandHeld"
       },
       {
-        "CategoryID": "w/s/h/HandHeld"
+        "CategoryID": "HandHeldArmRA"
+      },
+	  {
+        "CategoryID": "HandHeldArmLA"
+      },
+	  {
+        "CategoryID": "HandHeldArm"
       }
     ],
+    "UseCarryWeight" : { "Tonnage" : 3 },
     "BonusDescriptions": {
       "Bonuses": [
 		"HandHeld: 3",
@@ -22,7 +26,8 @@
         "AccuracyUnit2: +10",
 		"HandHeldAmmo: 10",
 		"AmmoCost: 150",
-        "HandHeldArmored"
+        "HandHeldArmor: 40",
+		"RequiresHands"
       ]
     },
 	"AmmoCost" : {
@@ -33,18 +38,11 @@
     },
 	"Flags": {
       "flags": [
-        "not_broken",
-        "not_destroyed",
-        "ignore_damage"
+        "not_broken"
       ]
-    },
-    "MechConfiguration": {},
-    "HandHeld": {
-      "Tonnage": 3,
-      "HandsUsed": true
     }
   },
-  "weaponCategoryID": "Special",
+  "weaponCategoryID": "SpecialHandHeld",
   "Type": "Gauss",
   "WeaponSubType": "Gauss",
   "MinRange": 0,
@@ -115,11 +113,39 @@
   "BallisticDamagePerPallet": true,
   "DamageNotDivided": true,
   "CriticalComponent": false,
-  "statusEffects": [],
+  "statusEffects": [
+  {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Status-HHArmor-{location}",
+        "Name": "HandHeldArmor",
+        "Details": "Hand Held Armour",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "{location}.Armor",
+        "operation": "Float_Add",
+        "modValue": "40",
+        "modType": "System.Single"
+      }
+    }
+  ],
   "ComponentTags": {
     "items": [
       "component_type_stock",
-      "range_long"
+      "range_long",
+	  "HandHeld.{location}"
     ],
     "tagSetSourceFile": ""
   }

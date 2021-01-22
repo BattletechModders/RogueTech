@@ -2,24 +2,31 @@
   "Custom": {
     "Category": [
       {
-        "CategoryID": "HandHeldNoArmMelee"
-      },
-      {
         "CategoryID": "HandHeld"
       },
+	  {
+        "CategoryID": "SpecialShield"
+      },
       {
-        "CategoryID": "w/s/h/HandHeld"
+        "CategoryID": "HandHeldArmRA"
+      },
+	  {
+        "CategoryID": "HandHeldArmLA"
+      },
+	  {
+        "CategoryID": "HandHeldArm"
       }
     ],
-    "MechConfiguration": {},
+    "UseCarryWeight" : { "Tonnage" : 20 },
     "BonusDescriptions": {
       "Bonuses": [
         "HandHeld: 20",
 	"WpnRecoilShot: 1",
 	"WeaponJAMFlatShot: 8%",
         "HandHeldAmmo: 120",
-        "HandHeldArmored",
-        "Rotary"
+        "HandHeldArmor: 120",
+        "Rotary",
+		"RequiresHands"
       ]
     },
     "InventorySorter": {
@@ -27,17 +34,11 @@
     },
     "Flags": {
       "flags": [
-        "not_broken",
-        "not_destroyed",
-        "ignore_damage"
+        "not_broken"
       ]
-    },
-    "HandHeld": {
-      "Tonnage": 20,
-      "HandsUsed": true
     }
   },
-  "weaponCategoryID": "Special",
+  "weaponCategoryID": "SpecialHandHeld",
   "Type": "Autocannon",
   "WeaponSubType": "AC5",
   "MinRange": 120,
@@ -178,10 +179,37 @@
       "GunneryJammingBase": 1
     }
   ],
-  "statusEffects": [],
+  "statusEffects": [
+  {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Status-HHArmor-{location}",
+        "Name": "HandHeldArmor",
+        "Details": "Hand Held Armour",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "{location}.Armor",
+        "operation": "Float_Add",
+        "modValue": "120",
+        "modType": "System.Single"
+      }
+    }
+  ],
   "ComponentTags": {
     "items": [
-      "HandHeld",
+      "HandHeld.{location}",
       "component_type_stock",
       "range_long"
     ],

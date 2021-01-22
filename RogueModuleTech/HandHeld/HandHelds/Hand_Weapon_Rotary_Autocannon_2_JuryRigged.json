@@ -2,16 +2,19 @@
     "Custom": {
         "Category": [
       {
-        "CategoryID": "HandHeldNoArmMelee"
+        "CategoryID": "HandHeld"
       },
-            {
-                "CategoryID": "HandHeld"
-            },
-            {
-                "CategoryID": "w/s/h/HandHeld"
-            }
-        ],
-        "MechConfiguration": {},
+      {
+        "CategoryID": "HandHeldArmRA"
+      },
+	  {
+        "CategoryID": "HandHeldArmLA"
+      },
+	  {
+        "CategoryID": "HandHeldArm"
+      }
+    ],
+    "UseCarryWeight" : { "Tonnage" : 20 },
         "BonusDescriptions": {
             "Bonuses": [
                 "HandHeld: 20",
@@ -22,7 +25,8 @@
                 "Dakkaray: 5",
                 "WpnAccuracy: +1",
                 "HandHeldAmmo: 150",
-                "HandHeldArmored"
+                "HandHeldArmor: 80",
+				"RequiresHands"
             ]
         },
         "InventorySorter": {
@@ -30,17 +34,11 @@
         },
         "Flags": {
             "flags": [
-                "not_broken",
-                "not_destroyed",
-                "ignore_damage"
+                "not_broken"
             ]
-        },
-        "HandHeld": {
-            "Tonnage": 20,
-            "HandsUsed": true
         }
     },
-    "weaponCategoryID": "Special",
+    "weaponCategoryID": "SpecialHandHeld",
     "Type": "Autocannon",
     "WeaponSubType": "AC2",
     "MinRange": 90,
@@ -100,7 +98,7 @@
     "BattleValue": 0,
     "InventorySize": 1,
     "Tonnage": 0,
-    "AllowedLocations": "CenterTorso",
+    "AllowedLocations": "Arms",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
     "Modes": [
@@ -175,16 +173,38 @@
             "AIHitChanceCap": 0.4
         }
     ],
-    "statusEffects": [],
+    "statusEffects": [{
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Status-HHArmor-{location}",
+        "Name": "HandHeldArmor",
+        "Details": "Hand Held Armour",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "{location}.Armor",
+        "operation": "Float_Add",
+        "modValue": "80",
+        "modType": "System.Single"
+      }
+    }],
     "ComponentTags": {
         "items": [
-            "HandHeld",
+            "HandHeld.{location}",
             "component_type_stock",
             "range_long",
-            "BLACKLISTED",
-            "wr-jammable_weapon",
-            "wr-damage_when_jam",
-            "wr-jam_chance_multiplier-5"
+            "BLACKLISTED"
         ],
         "tagSetSourceFile": ""
     }

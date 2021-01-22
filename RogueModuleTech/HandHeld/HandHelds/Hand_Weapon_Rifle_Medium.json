@@ -2,22 +2,28 @@
   "Custom": {
     "Category": [
       {
-        "CategoryID": "HandHeldNoArmMelee"
-      },
-      {
         "CategoryID": "HandHeld"
       },
       {
-        "CategoryID": "w/s/h/HandHeld"
+        "CategoryID": "HandHeldArmRA"
+      },
+	  {
+        "CategoryID": "HandHeldArmLA"
+      },
+	  {
+        "CategoryID": "HandHeldArm"
       }
     ],
+    "UseCarryWeight" : { "Tonnage" : 7.5 },
     "BonusDescriptions": {
       "Bonuses": [
 		"HandHeld: 7.5",
 		"HandHeldAmmo: 10",
         "ArmorDmgMod: -25%",
         "WpnRecoil: 2",
-        "IsRifle"
+        "IsRifle",
+		"HandHeldArmor: 40",
+		"RequiresHands"
       ]
     },
     "InventorySorter": {
@@ -28,14 +34,9 @@
         "not_broken",
         "not_destroyed"
       ]
-    },
-	"MechConfiguration": {},
-	"HandHeld": {
-      "Tonnage": 7.5,
-      "HandsUsed": true
     }
   },
-  "weaponCategoryID": "Special",
+  "weaponCategoryID": "SpecialHandHeld",
   "Type": "Autocannon",
   "WeaponSubType": "AC10",
   "MinRange": 30,
@@ -93,10 +94,35 @@
   "DisallowedLocations": "All",
   "ImprovedBallistic": true,
   "CriticalComponent": false,
-  "statusEffects": [],
+  "statusEffects": [{
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Status-HHArmor-{location}",
+        "Name": "HandHeldArmor",
+        "Details": "Hand Held Armour",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "{location}.Armor",
+        "operation": "Float_Add",
+        "modValue": "40",
+        "modType": "System.Single"
+      }
+    }],
   "ComponentTags": {
     "items": [
-      "OmniRestriction.{location}",
+      "HandHeld.{location}",
       "component_type_stock",
       "range_long"
     ],

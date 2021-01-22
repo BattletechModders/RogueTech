@@ -2,15 +2,19 @@
   "Custom": {
     "Category": [
       {
-        "CategoryID": "HandHeldNoArmMelee"
-      },
-      {
         "CategoryID": "HandHeld"
       },
       {
-        "CategoryID": "w/s/t/tag"
+        "CategoryID": "HandHeldArmRA"
+      },
+	  {
+        "CategoryID": "HandHeldArmLA"
+      },
+	  {
+        "CategoryID": "HandHeldArm"
       }
     ],
+    "UseCarryWeight" : { "Tonnage" : 3 },
     "BonusDescriptions": {
       "Bonuses": [
 		"HandHeld: 3",
@@ -20,7 +24,8 @@
         "Painter: +2",
         "PainterSensors: 200%",
         "PainterVisibility: 200%",
-		"HandHeldArmored"
+		"HandHeldArmor: 40",
+		"RequiresHands"
       ]
     },
     "InventorySorter": {
@@ -28,18 +33,11 @@
     },
 	"Flags": {
       "flags": [
-        "not_broken",
-        "not_destroyed",
-        "ignore_damage"
+        "not_broken"
       ]
-    },
-    "MechConfiguration": {},
-    "HandHeld": {
-      "Tonnage": 3,
-      "HandsUsed": true
     }
   },
-  "weaponCategoryID": "Special",
+  "weaponCategoryID": "SpecialHandHeld",
   "Type": "Laser",
   "WeaponSubType": "SmallLaserER",
   "MinRange": 0,
@@ -96,6 +94,32 @@
   "DisallowedLocations": "All",
   "CriticalComponent": false,
   "statusEffects": [
+  {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Status-HHArmor-{location}",
+        "Name": "HandHeldArmor",
+        "Details": "Hand Held Armour",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "{location}.Armor",
+        "operation": "Float_Add",
+        "modValue": "40",
+        "modType": "System.Single"
+      }
+    },
     {
       "durationData": {
         "duration": 12,
@@ -393,7 +417,8 @@
   "ComponentTags": {
     "items": [
       "component_type_stock",
-      "range_long"
+      "range_long",
+	  "HandHeld.{location}"
     ],
     "tagSetSourceFile": ""
   }

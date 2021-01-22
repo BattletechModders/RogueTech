@@ -5,28 +5,32 @@
         "CategoryID": "HandHeld"
       },
       {
-        "CategoryID": "w/s/h/HandHeld"
+        "CategoryID": "HandHeldArmRA"
+      },
+	  {
+        "CategoryID": "HandHeldArmLA"
+      },
+	  {
+        "CategoryID": "HandHeldArm"
       }
     ],
+    "UseCarryWeight" : { "Tonnage" : 1 },
     "BonusDescriptions": {
       "Bonuses": [
-        "HandHeldMelee: 0.75",
+        "HandHeldMelee: 1",
         "VariableDmg: 5",
         "PipsIgnored: 1",
         "WpnAccuracy: +1",
         "OHDamage: 80%",
         "DmgFallOff: 20%",
         "AlwaysStartsFire",
-        "NoAA"
+        "NoAA",
+		"HandHeldArmor: 20",
+		"RequiresHands"
       ]
     },
     "InventorySorter": {
       "SortKey": "02001"
-    },
-    "MechConfiguration": { },
-    "HandHeld": {
-      "Tonnage": 0.75,
-      "HandsUsed": true
     },
     "Flags": {
       "flags": [
@@ -94,10 +98,36 @@
   "BattleValue": 0,
   "InventorySize": 1,
   "Tonnage": 0,
-  "AllowedLocations": "CenterTorso",
+  "AllowedLocations": "Arms",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
   "statusEffects": [
+  {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Status-HHArmor-{location}",
+        "Name": "HandHeldArmor",
+        "Details": "Hand Held Armour",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "{location}.Armor",
+        "operation": "Float_Add",
+        "modValue": "20",
+        "modType": "System.Single"
+      }
+    },
     {
       "durationData": {
         "duration": 1,
@@ -136,7 +166,8 @@
   "ComponentTags": {
     "items": [
       "component_type_stock",
-      "range_close"
+      "range_close",
+	  "HandHeld.{location}"
     ],
     "tagSetSourceFile": ""
   }

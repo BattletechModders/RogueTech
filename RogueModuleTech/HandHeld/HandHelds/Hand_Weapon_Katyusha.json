@@ -2,15 +2,19 @@
   "Custom": {
     "Category": [
       {
-        "CategoryID": "HandHeldNoArmMelee"
-      },
-      {
         "CategoryID": "HandHeld"
       },
       {
-        "CategoryID": "w/s/h/HandHeld"
+        "CategoryID": "HandHeldArmRA"
+      },
+	  {
+        "CategoryID": "HandHeldArmLA"
+      },
+	  {
+        "CategoryID": "HandHeldArm"
       }
     ],
+    "UseCarryWeight" : { "Tonnage" : 20 },
     "ComponentExplosion": {
       "ExplosionDamagePerAmmo": 12,
       "StabilityDamagePerAmmo": 4
@@ -24,7 +28,9 @@
         "IsRocket: 20",
         "InternalAmmo: 12",
         "HandHeldArmored",
-		"AmmoCost: 60"
+		"AmmoCost: 60",
+		"HandHeldArmor: 40",
+		"RequiresHands"
       ]
     },
 	"AmmoCost" : {
@@ -33,20 +39,13 @@
     "InventorySorter": {
       "SortKey": "03004"
     },
-    "MechConfiguration": {},
     "Flags": {
       "flags": [
-        "not_broken",
-        "not_destroyed",
-        "ignore_damage"
+        "not_broken"
       ]
-    },
-    "HandHeld": {
-      "Tonnage": 20,
-      "HandsUsed": true
     }
   },
-  "weaponCategoryID": "Special",
+  "weaponCategoryID": "SpecialHandHeld",
   "Type": "LRM",
   "WeaponSubType": "LRM20",
   "MinRange": 0,
@@ -109,15 +108,40 @@
   "BattleValue": 0,
   "InventorySize": 1,
   "Tonnage": 0,
-  "AllowedLocations": "CenterTorso",
+  "AllowedLocations": "Arms",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "statusEffects": [],
+  "statusEffects": [{
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Status-HHArmor-{location}",
+        "Name": "HandHeldArmor",
+        "Details": "Hand Held Armour",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "{location}.Armor",
+        "operation": "Float_Add",
+        "modValue": "40",
+        "modType": "System.Single"
+      }
+    }],
   "ComponentTags": {
     "items": [
       "component_type_stock",
       "range_standard",
-      "HandHeld"
+      "HandHeld.{location}"
     ],
     "tagSetSourceFile": ""
   }
