@@ -1,0 +1,283 @@
+{
+    "Custom": {
+        "Color": {
+            "UIColor": "Gold"
+        },
+        "Linked": {
+            "Links": [
+                {
+                    "ComponentDefId": "Linked_LAM_Aluminium_Stealth",
+                    "Location": "LeftTorso"
+                },
+                {
+                    "ComponentDefId": "Linked_LAM_Aluminium_Stealth",
+                    "Location": "RightTorso"
+                },
+                {
+                    "ComponentDefId": "Linked_LAM_Aluminium_Stealth",
+                    "Location": "LeftArm"
+                },
+                {
+                    "ComponentDefId": "Linked_LAM_Aluminium_Stealth",
+                    "Location": "RightArm"
+                },
+                {
+                    "ComponentDefId": "Linked_LAM_Aluminium_Stealth",
+                    "Location": "LeftLeg"
+                },
+                {
+                    "ComponentDefId": "Linked_LAM_Aluminium_Stealth",
+                    "Location": "RightLeg"
+                }
+            ]
+        },
+        "Weights": {
+            "ArmorFactor": 1.1
+        },
+        "CriticalEffects": {
+            "LinkedStatisticName": "LAM Stealth System"
+        },
+        "WorkOrderCosts": {
+            "Install": {
+                "TechCost": "1.15 * [[Chassis.Tonnage]] / 10",
+                "CBillCost": "1000 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]] / 45"
+            }
+        },
+        "Category": [
+            {
+                "CategoryID": "Armor"
+            },
+			{
+                "CategoryID": "LAM-Armor"
+            },
+            {
+                "CategoryID": "StealthSystem"
+            }
+        ],
+        "ArmorRepair": {
+            "ArmorTPCost": 1.35,
+            "ArmorCBCost": 1.65
+        },
+        "Flags": {
+            "flags": [
+                "not_broken"
+            ]
+        },
+        "ErrorMessage": "Stealth Armor requires a ECM!",
+        "BonusDescriptions": {
+            "Bonuses": [
+                "Stealth",
+                "StealthSensors: 50%, 4, 2, 3, 4",
+                "ActiveVisibility: -15%",
+                "ActiveSignature: -25%",
+                "JumpDistance: 10%",
+                "ArmorFactor: +10%",
+                "StealthReserved: 1",
+                "TEHeatgen: +10%",
+                "HeatPerTurn: +9",
+                "ReqECM",
+				"ReqLandAirMech",
+                "ArmorTPCost: 35%",
+                "ArmorCBCost: 65%"
+            ]
+        },
+        "InventorySorter": {
+            "SortKey": "00009"
+        },
+        "ActivatableComponent": {
+            "CanActivateAfterMove": true,
+            "CanActivateAfterFire": false,
+            "SafeActivation": true,
+            "ButtonName": "Stealth",
+            "ActiveByDefault": true,
+            "ActivationIsBuff": true,
+            "CanNotBeActivatedManualy": false,
+            "NoUniqueCheck": true,
+            "ActivationMessage": "Stealth On",
+            "DeactivationMessage": "Stealth Off",
+            "Linkage": {
+                "OnActivate": {
+                    "Activate": [
+                        "Camouflage"
+                    ],
+                    "Deactivate": []
+                },
+                "OnDeactivate": {
+                    "Activate": [],
+                    "Deactivate": [
+                        "Camouflage"
+                    ]
+                }
+            },
+            "statusEffects": [
+                {
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": 1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "specialRules": "NotSet",
+                        "effectTargetType": "Creator",
+                        "range": 0.0,
+                        "forcePathRebuild": false,
+                        "forceVisRebuild": true,
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "LV_Stealth_Effect",
+                        "Name": "STEALTH",
+                        "Details": "Makes the carrier much harder to detect with stealth",
+                        "Icon": "uixSvgIcon_status_ECM-ghost"
+                    },
+                    "statisticData": {
+                        "statName": "LV_STEALTH",
+                        "operation": "Set",
+                        "modValue": "0.5_4_2_3_4",
+                        "modType": "System.String"
+                    },
+                    "nature": "Buff"
+                },
+                {
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "effectTargetType": "Creator",
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "Stealth_Signature_Decrease_Stealth",
+                        "Name": "Stealth Signature Decrease",
+                        "Details": "Signature Statuseffect.",
+                        "Icon": "uixSvgIcon_equipment_TTS"
+                    },
+                    "nature": "Buff",
+                    "statisticData": {
+                        "statName": "SensorSignatureModifier",
+                        "operation": "Float_Multiply",
+                        "modValue": "0.75",
+                        "modType": "System.Single"
+                    }
+                },
+                {
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "effectTargetType": "Creator",
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "Stealth_Visibility_Decrease_Stealth",
+                        "Name": "Stealth Visbility Decrease",
+                        "Details": "Visibility Statuseffect.",
+                        "Icon": "uixSvgIcon_equipment_TTS"
+                    },
+                    "nature": "Buff",
+                    "statisticData": {
+                        "statName": "SpottingVisibilityMultiplier",
+                        "operation": "Float_Multiply",
+                        "modValue": "0.85",
+                        "modType": "System.Single"
+                    }
+                },
+                {
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "effectTargetType": "Creator",
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "Stealth_Heat_Generation_Stealth",
+                        "Name": "Increased Heat",
+                        "Details": "Heat generation",
+                        "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+                    },
+                    "nature": "Buff",
+                    "statisticData": {
+                        "statName": "HeatGenerated",
+                        "operation": "Float_Multiply",
+                        "modValue": "1.1",
+                        "modType": "System.Single",
+                        "targetCollection": "Weapon"
+                    }
+                },
+                {
+                    "durationData": {
+                        "duration": -1,
+                        "stackLimit": -1
+                    },
+                    "targetingData": {
+                        "effectTriggerType": "Passive",
+                        "effectTargetType": "Creator",
+                        "showInTargetPreview": false,
+                        "showInStatusPanel": false
+                    },
+                    "effectType": "StatisticEffect",
+                    "Description": {
+                        "Id": "Stealth_Heat_Capacity_Stealth",
+                        "Name": "Decreased Heat Capacity",
+                        "Details": "Heat Capacity Penalty",
+                        "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+                    },
+                    "nature": "Debuff",
+                    "statisticData": {
+                        "statName": "HeatSinkCapacity",
+                        "operation": "Int_Add",
+                        "modValue": "-9",
+                        "modType": "System.Int32"
+                    }
+                }
+            ],
+            "offlineStatusEffects": []
+        }
+    },
+    "Description": {
+        "Cost": 1300000,
+        "Rarity": 25,
+        "Purchasable": true,
+        "Manufacturer": "Shengli Arms",
+        "Model": "Armor",
+        "UIName": "Stealth LAM",
+        "Id": "LAM_Aluminium_Stealth",
+        "Name": "Stealth Armor",
+        "Details": "An Attempt to create advanced Recon Units has Shengli Arm's incorporated their latest advanced of Stealth tech into a LAM Alumium Armor. It Includes a Specialised CASE System. Reserves 1 slot in every Location except the Head and requires an ECM.",
+        "Icon": "StealthArmor"
+    },
+    "BonusValueA": "Requires",
+    "BonusValueB": "ECM",
+    "ComponentType": "Upgrade",
+    "ComponentSubType": "NotSet",
+    "PrefabIdentifier": "",
+    "BattleValue": 0,
+    "InventorySize": 1,
+    "Tonnage": 0,
+    "AllowedLocations": "CenterTorso",
+    "DisallowedLocations": "All",
+    "CriticalComponent": false,
+    "statusEffects": [],
+    "ComponentTags": {
+        "items": [
+            "component_type_stock",
+            "StealthArmor"
+        ],
+        "tagSetSourceFile": ""
+    }
+}
