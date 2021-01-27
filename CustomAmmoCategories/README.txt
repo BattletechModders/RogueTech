@@ -636,7 +636,7 @@ new fields
 		"MinRange": 0.0, This value will be added to MinRange (current weapon status effects will be used too)
 		"MaxRange": 0.0, This value will be added to MaxRange (current weapon status effects will be used too)
 		"ShortRange": 0.0, This value will be added to ShortRange (current weapon status effects will be used too)
-		"MiddleRange": 0.0, This value will be added to MiddleRange (current weapon status effects will be used too)
+		"MediumRange": 0.0, This value will be added to MediumRange (current weapon status effects will be used too)
 		"LongRange": 0.0, This value will be added to LongRange (current weapon status effects will be used too)
 			 NOTE: Range modifications not always displays correctly while viewing shooting arc, but hit chance and possibility calculated normally. 
 		"ForbiddenRange": 90, - weapon can't fire at all if range to target is less than this value
@@ -821,7 +821,7 @@ Ammo definition
    "MinRange": 0.0, This value will be added to MinRange (current weapon status effects will be used too)
    "MaxRange": 0.0, This value will be added to MaxRange (current weapon status effects will be used too)
    "ShortRange": 0.0, This value will be added to ShortRange (current weapon status effects will be used too)
-   "MiddleRange": 0.0, This value will be added to MiddleRange (current weapon status effects will be used too)
+   "MediumRange": 0.0, This value will be added to MediumRange (current weapon status effects will be used too)
    "LongRange": 0.0, This value will be added to LongRange (current weapon status effects will be used too)
          NOTE: Range modifications not always displays correctly while viewing shooting arc, but hit chance and possibility calculated normally. 
 		 
@@ -1090,10 +1090,11 @@ Ammo definition
 								   		  "name" - audio event name 
 										  "none" - none additional sound for this type name doesn't matter
 							 may be set per ammo, mode and weapon. Mode have priority than ammo than weapon
-   "ChassisTagsAccuracyModifiers":{ - Accuracy for mods tags (mechs - MechTags, Vehicles - VehicleTags, Turrets - turret tags) AIM aware
+   "ChassisTagsAccuracyModifiers":{ - Accuracy for mods tags (mechs - MechTags and ChassisTags, Vehicles - VehicleTags, Turrets - TurretTags)
       "unit_assault":-10,
       "unit_mech":10,
    },
+   Note: all unit types also use EncounterTags. This tags listed at contract definitions. Also alternate representation switching can alter unit EncounterTags
    "statusEffects" : [   - will be applied on weapon hit (only "OnHit" effectTriggerType)
         {
             "durationData" : {
