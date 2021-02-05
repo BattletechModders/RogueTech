@@ -1,16 +1,20 @@
 {
   "Custom": {
     "Category": [
-            {
-        "CategoryID": "HandHeldNoArmMelee"
-      },
       {
         "CategoryID": "HandHeld"
       },
       {
-        "CategoryID": "w/s/h/HandHeld"
+        "CategoryID": "HandHeldArmRA"
+      },
+	  {
+        "CategoryID": "HandHeldArmLA"
+      },
+	  {
+        "CategoryID": "HandHeldArm"
       }
     ],
+    "UseCarryWeight" : { "Tonnage" : 6.5 },
     "BonusDescriptions": {
       "Bonuses": [
 	  "HandHeld: 6.5",
@@ -22,7 +26,9 @@
         "WpnRecoil: 3",
         "ExplodiumFlat: 25%",
         "IsGauss",
-        "NoAA"
+        "NoAA",
+		"HandHeldArmor: 40",
+		"RequiresHands"
       ]
     },
     "InventorySorter": {
@@ -33,14 +39,9 @@
         "not_broken",
         "not_destroyed"
       ]
-    },
-	"MechConfiguration": {},
-	"HandHeld": {
-      "Tonnage": 6.5,
-      "HandsUsed": true
     }
   },
-  "weaponCategoryID": "Special",
+  "weaponCategoryID": "SpecialMelee",
   "Type": "Gauss",
   "WeaponSubType": "Gauss",
   "MinRange": 0,
@@ -50,7 +51,7 @@
     180,
     270
   ],
-  "AmmoCategory": "MagShot",
+  "AmmoCategory": "MagShotInternal",
   "StartingAmmoCapacity": 10,
   "HeatGenerated": 0,
   "Damage": 3,
@@ -111,6 +112,32 @@
   "DisallowedLocations": "All",
   "CriticalComponent": false,
   "statusEffects": [
+  {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Status-HHArmor-{location}",
+        "Name": "HandHeldArmor",
+        "Details": "Hand Held Armour",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "{location}.Armor",
+        "operation": "Float_Add",
+        "modValue": "40",
+        "modType": "System.Single"
+      }
+    },
     {
       "durationData": {
         "duration": 1,
@@ -277,7 +304,8 @@
   "ComponentTags": {
     "items": [
       "component_type_stock",
-      "range_standard"
+      "range_standard",
+	  "HandHeld.{location}"
     ],
     "tagSetSourceFile": ""
   }
