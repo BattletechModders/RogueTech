@@ -225,7 +225,9 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
       "Damage": 5
     }
   },
-  "TagAoEDamageMult": {      - AoE modifiers by unit's tags. Tags watching lists: for mechs: MechTags, ChassisTags; for vehicles: VehicleTags; for turrets: TurretTags
+  "TagAoEDamageMult": {      - AoE modifiers by unit's tags. Tags watching lists: for mechs: MechTags and ChassisTags; for vehicles: VehicleTags; for turrets: TurretTags
+							   Note: all unit types also use EncounterTags. This tags listed at contract definitions. 
+							   Also alternate representation switching can alter unit EncounterTags
     "aoe_increased_minor": {
       "Range": 1.2,
       "Damage": 1.2

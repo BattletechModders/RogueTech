@@ -154,6 +154,16 @@ VehicleChassis/Chassis
 		"additionalEncounterTags": [ "unit_vtol" ],                     - encounter tags list will be applied to actor. Note: you should be careful with this option, 
 																		  tags in this list should not be equal to tags in contracts definitions otherwise you can break 
 																		  objectives logic. 
+		"NoJumpjetsBlock": false,                                       - if true mech in airmech mode do not have restriction on jumping regardless flying height 
+																		  but it still can't use DFA attack
+		"MoveClamp": 0,                                                 - move clamp, same rules as for Unaffected section, but per representation
+		                                                                  0 - counted as not set. Example on math: clamp = 0.5, speed = 100
+																		  at start unit will be able to move 0-50 distance
+																		  if previous turn move distance was 50 it will be able to move 25-75
+																		  at maximum speed it will be able to move 50-100
+		"MinJumpDistance": 0,                                           - min jump distance. Effective value will be <JumpDistance> * <MinJumpDistance>. 
+		                                                                  Unit in this mode can't jump distance less than this. 
+																		  Value less or equal 0 or greater or equal 1 counted as unset
         "FlyHeight": 15.0,                                              - Flying height
         "AirMechVerticalJets":[                                         - list of jump jets
           {
