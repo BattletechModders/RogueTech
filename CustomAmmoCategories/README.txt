@@ -289,6 +289,46 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
   "ShowApplyHeatSinkMessage": true - show floatie message on heatsinks appying.
   "AMSCantFireFloatie": false, - if true if AMS can't fire reason will be shown in floatie message
   "ShowJammChance": true - if true side panel will show jam chance calculation formula
+  "RemoveToHitModifiers":[] - list of to-hit modifiers to forbid 
+                              posible values
+								ranged only
+							        "RANGE"
+									"OBSTRUCTED"
+									"ARM MOUNTED"
+									"HEIGHT DIFF"
+									"FROM" - attacker design mask
+									"INTO" - target design mask
+									"TARGET MOVED"
+									"ATTACKER ACCURACY" - (SENSORS IMPAIRED/INSPIRED)
+									"REFIRE"
+									"SENSOR LOCK"
+									"INDIRECT FIRE"
+									"MORALE"
+									"DIRECT"
+									"TARGET TYPE"  - tags
+								both
+									"JUMPED"
+									"MOVED SELF"
+									"HEAT"
+									"STOOD UP"
+									"WEAPON ACCURACY"
+									"SPRINTED"
+									"WEAPON DAMAGED"
+									"DAMAGED" - location damaged
+									"DIRECTION" - flank/rear
+									"TARGET SIZE"
+									"TARGET SHUTDOWN"
+									"TARGET PRONE"
+									"ENEMY EFFECTS"
+								melee
+									"DEATH FROM ABOVE"
+									"CHASSIS BONUS"
+									"TERRAIN" - same as INTO for ranged
+									"MELEE ARM MOUNTED"
+									"MELEE HEIGHT DIFF"
+									"MELEE RECOIL"
+									"MELEE TARGET MOVED"
+
 }
 
 Weapon definition
