@@ -63,6 +63,7 @@ AI related mod settings
     "Custom":{
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
 		"ActivatableComponent":{
+			"SwitchOffOnFall": false, - if true component will be switched off on mech knockdown. You should set it to true if you want your LAM animations working properly. 
 			"ActivateOncePerRound": false, - if true component set up for auto activation on heat can be activated only once per round
 			"CanActivateAfterFire": true, - if true component can be activated after fire. Default true.
 			"CanActivateAfterMove": false, - if true component can be activated after move.
@@ -71,7 +72,7 @@ AI related mod settings
 			"activateVFXOutOfLOSHide":true, - if true active component's VFX will be shown only if unit is visible to player (default false)
 			"presistantVFXOutOfLOSHide":true, - if true static component's VFX will be shown only if unit is visible to player (default false)
 			"FailFlatChance":0.3, - chance of fail on cold activation. 
-			"FailRoundsStart":1, - round since fail checks will be perfomed
+			"FailRoundsStart":1, - round since fail checks will be performed
 			"FailChancePerTurn":0.5, - value which added to fail chance every round of activity.
 			                        Fail mechanic notes: on battle start each active component's <FailChance> setted to FailFlatChance.
 									On activation component will have <FailChance> to fail, than every time at end of moving sequence since FailRoundsStart round (activation round count as 0) 
