@@ -63,7 +63,7 @@ AI related mod settings
     "Custom":{
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
 		"ActivatableComponent":{
-			"SwitchOffOnFail": false, - if true component will be switched off on mech knockdown. You should set it to true if you want your LAM animations working properly. 
+			"SwitchOffOnFall": false, - if true component will be switched off on mech knockdown. You should set it to true if you want your LAM animations working properly. 
 			"ActivateOncePerRound": false, - if true component set up for auto activation on heat can be activated only once per round
 			"CanActivateAfterFire": true, - if true component can be activated after fire. Default true.
 			"CanActivateAfterMove": false, - if true component can be activated after move.
