@@ -37,6 +37,7 @@ CACIncomingStabilityMult - float - multipicator for all incoming stability (weap
 
 {
 "debugLog":true, - enable debug log 
+"ImprovedBallisticByDefault": true - Default value for ImprovedBallistic flag if not set explicitly in weapon definition. Default true.
 "ShowEvasiveAsNumber": true, - if true near evasive pips bar its amount will be showed as number
 "EvasiveNumberFontSize" : 24 - font size for evasive pips count
 "EvasiveNumberWidth": 25 - size of background for evasive pips count. You should adjust this if changed font size. 
