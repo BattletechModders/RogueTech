@@ -164,6 +164,7 @@ Since this is not possible to use as a VariantName in most cases an abbreviation
 * There are some inconsistencies on if *Prime* should be in all capital letters or not, but usually it is not.
 * If there are roman numerals in the chassis name, they are generally included in the variant name as well. E.g *Mad Cat
   Mk II 1* has the variant name *MCII-1*
+* If the base configuration does not have a *Prime*, *A*, *1* or similar designation, use the one that matches with the sequence of the other configurations.
 
 ###### ProtoMech / Powered Armor
 
