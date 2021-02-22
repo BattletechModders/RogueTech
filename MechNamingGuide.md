@@ -15,7 +15,7 @@
 1. Is it a ProtoMech or Powered Armor?
     * See [ProtoMech / Powered Armor](#ProtoMech / Powered Armor)
 1. Is it a RISC or Society model of a standard Mech?
-   * Use the [Base Case](#Base Case) but use *-S*, *-RX*, *-RSC* or similar ending suffix to its `VariantName`.
+   * Use the [Base Case](#Base Case) but use *-Z*, *-RX*, *-RSC* or similar ending suffix to its `VariantName`.
 1. Is it a standard mech?
     1. Are there mechs of the same chassis?
         * Yes: Use same naming convention
@@ -26,7 +26,7 @@
             * ChassisDef.Name/UIName: Chassis name
             * ChassisDef.VariantName: Make up a fitting abbreviation for the chassis, add the configuration
               letter or number at the end.
-            * MechDef.Name: `ChassisDef.Name` + `ChassisDef.VariantName`
+            * MechDef.Name: `ChassisDef.Name` + configuration designation (e.g. Prime, A, etc)
             * UIName: `MechDef.Name`
 1. Is it named after its MechWarrior?
     1. Is it based on a standard model of the same chassis?
@@ -53,7 +53,7 @@ Not covered? Check examples, read the detailed explanations or ask Redbat.
 |mechdef_flea_FLE-4| Flea FLE-4 | Flea | FLE-4 | Flea FLE-4  | Flea FLE-4 | Base Case |
 |mechdef_blackjack_BJ2-O| Blackjack BJ2-O | Blackjack | BJ2-O | Blackjack BJ2-O  | Blackjack BJ2-O | OmniMech, Inner Sphere, base configuration |
 |mechdef_blackjack_BJ2-OE| Blackjack BJ2-OE | Blackjack | BJ2-OE | Blackjack BJ2-OE  | Blackjack BJ2-OE | OmniMech, Inner Sphere, alternate configuration |
-|mechdef_adder_ADR-Prime|  Clan: Adder Prime <br>IS: Puma Prime| Adder | ADR-Prime | Adder ADR-Prime  | Adder ADR-Prime | OmniMech, Clan, base configuration |
+|mechdef_adder_ADR-Prime|  Clan: Adder Prime <br>IS: Puma Prime| Adder | ADR-Prime | Adder Prime  | Adder Prime | OmniMech, Clan, base configuration |
 |chassisdef_mad_cat_mk_ii_MCII-4|  Mad Cat Mark II A| Mad Cat Mk II | MCII-4 | Mad Cat Mk II MCII-4  | Mad Cat Mk II MCII-4 | OmniMech, Clan, alternate configuration |
 |mechdef_babd_catha_BC-O|    | Archer  | BC-O  | Archer BC-O  | Babd Catha BC-O  | RogueOmni |
 
@@ -70,7 +70,14 @@ Not covered? Check examples, read the detailed explanations or ask Redbat.
 |---|---|---|---|---|---|---|
 |mechdef_rifleman_ii_RFL-3N-2_LK2|  Rifleman II RFL-3N-2 *Legend Killer*   | Rifleman II  | RFL-3N-2-LK2  | Rifleman II RFL-3N-2  | Legend Killer  | Elite mech based on a base model |
 |mechdef_rifleman_RFL-DB|  *Dao Breaker*  | Rifleman  | RFL-DB  | Rifleman RFL-DB  | Dao Breaker  | Elite mech **not** based on a base model |
-|mechdef_blood_asp_BAS-S|    | Blood Asp  | BAS-S  | Blood Asp BAS-S  | Blood Asp BAS-S  | Society Mech |
+|mechdef_blood_asp_BAS-Z|    | Blood Asp  | BAS-Z  | Blood Asp BAS-Z  | Blood Asp BAS-Z  | Society Mech |
+
+### Power Armor / ProtoMech
+
+| MechDef ID | Offical Name (if applicable)  | ChassisDef Name/UIName   | VariantName   | MechDef Name  | MechDef UIName   | Comment |
+|---|---|---|---|---|---|---|
+|mechdef_amazon_IS-A_Rifle|  Amazon IS-A (Rifle loadout)   | Amazon  | IS-A  | Amazon IS-A  | Amazon IS-A  | Non-base loadout of Power Armor |
+|mechdef_harpy_HRP-1| Harpy 1   | Harpy  | HRP-1 | Harpy 1  | Harpy 1 | ProtoMech|
 
 # Use in Roguetech Mods
 
@@ -153,14 +160,15 @@ This pattern is also followed by the Word of Blake Celestial series of OmniMechs
 
 Clan OmniMechs generally follow the pattern of either a single letter, or a number, for the configurations, and with the base configuration being named *Prime* or *1*.\
 Since this is not possible to use as a VariantName in most cases an abbreviation of their chassis name is made up, and the VariantName is created by adding the actual configuration name after a dash, e.g.
-*Adder Prime* results into the VariantName *ADR-Prime*.
+*Adder Prime* results into the VariantName *ADR-Prime*.\
 * There are some inconsistencies on if *Prime* should be in all capital letters or not, but usually it is not.
 * If there are roman numerals in the chassis name, they are generally included in the variant name as well. E.g *Mad Cat
   Mk II 1* has the variant name *MCII-1*
 
 ###### ProtoMech / Powered Armor
 
-Another exception to the base rule for ProtoMechs and Powered Armor is that they have the same model name if the
+* ProtMechs generally follow the base rule combined with the clan OmniMech VariantName rule
+* Another exception to the base rule for Powered Armor is that they have the same model name if the
 load-out is the only difference.\
 E.g. both versions of the *Amazon IS-A* have the VariantName *IS-A*.
 
@@ -184,7 +192,7 @@ exceptions.
 
 The original intent was to have Clan OmniMechs actually display their canon name, e.g. *Adder Prime* rather than *Adder
 ADR-Prime*.\
-However this has not been, implemented so for now they follow the base rule in most cases.\
+However this has not been fully implemented yet, but we should aim to use it from now on.\
 If it is a RogueOmni mech, use the *fake* chassis name together with the actual VariantName.
 
 #### Special (Hero, Legendary or EliteMechs)
