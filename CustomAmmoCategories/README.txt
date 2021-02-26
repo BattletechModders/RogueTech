@@ -1201,17 +1201,42 @@ Note:
 
 Note on damage modifiers
 you can register your own modifier via API
-	void CustAmmoCategories.DamageModifiersCache.RegisterExternalModes(string id, - id should be unique
-		Func<Weapon, string> nameDelegate,                                    - delegate not get name of your modifier base on weapon and you internal weapon's state
-																					  if you return string.Empty or null next delegates will not be invoked
-		Func<Weapon,float> damageDelegate,                                     - delegate for damage. Function should return multiplier
-		Func<Weapon, float> apDelegate,                                       - delegate for AP damage. Function should return multiplier
-		Func<Weapon, float> heatDelegate,                                     - delegate for heat. Function should return multiplier
-		Func<Weapon, float> stabilityDelegate                                 - delegate for stability. Function should return multiplier
+	DamageModifiersCache.RegisterDamageModifier(
+		 string id,					- your modifier unique id
+	     string staticName,         - static name will be shown in UI
+		 bool isStatic,             - true means your damage modifier actual value can be calculated before actual fire. 
+		                              For example target type can't be changed during attack, if your modifier based on target type it can be static,
+									  but if your modifier based on specific hit location it can't be static
+		 bool isNormal,             - true if your modifier is normal damage modifier
+		 bool isAP,                 - true if your modifier is through armor damage modifier
+		 bool isHeat,               - true if your modifier is heat modifier
+		 bool isStability,          - true if your modifier is stability modifier
+		                              all this flags can be used simultaneity 
+		 Func<                      - delegate, function will be called when damage engine will calculate your modifier actual value
+			Weapon,                 - weapon
+			Vector3,                - attack position
+			ICombatant,             - target combatant
+			bool,                   - is shot is breaching
+			int,                    - hit location (for static modifiers function will be called with value = 0)
+			float,                  - current normal damage (for static modifiers function will be called with value = 0.0f)
+			float,                  - current ap damage (for static modifiers function will be called with value = 0.0f)
+			float,                  - current heat damage (for static modifiers function will be called with value = 0.0f)
+			float,                  - current stability damage (for static modifiers function will be called with value = 0.0f)
+			float                   - return result type
+		> modifier, 
+		Func<						- delegate, function will be called when damage engine will calculate your modifier actual name to show in UI
+			Weapon,                 - weapon
+			Vector3,                - attack position
+			ICombatant,             - target combatant
+			bool,                   - is shot is breaching
+			int,                    - hit location (for static modifiers function will be called with value = 0)
+			float,                  - current normal damage (for static modifiers function will be called with value = 0.0f)
+			float,                  - current ap damage (for static modifiers function will be called with value = 0.0f)
+			float,                  - current heat damage (for static modifiers function will be called with value = 0.0f)
+			float,                  - current stability damage (for static modifiers function will be called with value = 0.0f)
+			string					- return result type
+		> modname
 	)
-if your internal state for weapon has bee changed you should invoke 
-	void CustAmmoCategories.DamageModifiersCache.ClearDamageCache(this Weapon weapon) to clear damage calculations cache for weapon. 
-    Invoking weapon panel slots refreshing is also your responsibility and should be performed after cache reseting
 
 Note on toHit modifiers
 CustAmmoCategories.ToHitModifiersHelper.registerModifier(
@@ -1261,12 +1286,20 @@ using UnityEngine;
 namespace CACAccModDemo {
   public class Core {
     private static MethodInfo ToHitModifiersHelper_registerModifier = null;
+    private static MethodInfo DamageModifiersCache_RegisterDamageModifier = null;
     public static bool CACModifierHelperDetected() { return ToHitModifiersHelper_registerModifier != null; }
+    public static bool CACDamageModifierHelperDetected() { return DamageModifiersCache_RegisterDamageModifier != null; }
     public static float MyCACModifier(ToHit toHit, AbstractActor attacker, Weapon weapon, ICombatant target, Vector3 attackPos, Vector3 targetPos, LineOfFireLevel lof, MeleeAttackType meleType, bool isCalled) {
       return 1f;
     }
     public static string MyCACModifierName(ToHit toHit, AbstractActor attacker, Weapon weapon, ICombatant target, Vector3 attackPos, Vector3 targetPos, LineOfFireLevel lof, MeleeAttackType meleType, bool isCalled) {
       return "Cust. mod. "+attacker.DisplayName;
+    }
+    public static float MyDmgCACModifier(Weapon weapon, Vector3 attackPosition, ICombatant target, bool IsBreachingShot, int location, float dmg, float ap, float heat, float stab) {
+      return 0f;
+    }
+    public static string MyDmgCACModifierName(Weapon weapon, Vector3 attackPosition, ICombatant target, bool IsBreachingShot, int location, float dmg, float ap, float heat, float stab) {
+      return "Cust. mod. " + target.DisplayName;
     }
     public static void registerCACModifier(string id, string name, bool ranged, bool melee,
       Func<ToHit, AbstractActor, Weapon, ICombatant, Vector3, Vector3, LineOfFireLevel, MeleeAttackType, bool, float> modifier,
@@ -1275,6 +1308,13 @@ namespace CACAccModDemo {
       if (ToHitModifiersHelper_registerModifier == null) { return; }
       ToHitModifiersHelper_registerModifier.Invoke(null, new object[] { id, name, ranged, melee, modifier, dname });
     }
+    public static void registerCACDmgModifier(string id, string staticName, bool isStatic, bool isNormal, bool isAP, bool isHeat, bool isStability,
+      Func<Weapon, Vector3, ICombatant, bool, int, float, float, float, float, float> modifier,
+      Func<Weapon, Vector3, ICombatant, bool, int, float, float, float, float, string> modname
+    ) {
+      if (DamageModifiersCache_RegisterDamageModifier == null) { return; }
+      DamageModifiersCache_RegisterDamageModifier.Invoke(null, new object[] { id, staticName, isStatic, isNormal, isAP, isHeat, isStability, modifier, modname });
+    }
     public static void detectCAC() {
       Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
       foreach (Assembly assembly in assemblies) {
@@ -1282,7 +1322,10 @@ namespace CACAccModDemo {
           Type helperType = assembly.GetType("CustAmmoCategories.ToHitModifiersHelper");
           if (helperType != null) {
             ToHitModifiersHelper_registerModifier = helperType.GetMethod("registerModifier", BindingFlags.Static | BindingFlags.Public);
-            break;
+          }
+          Type dmgHelperType = assembly.GetType("CustAmmoCategories.DamageModifiersCache");
+          if (dmgHelperType != null) {
+            DamageModifiersCache_RegisterDamageModifier = dmgHelperType.GetMethod("RegisterDamageModifier", BindingFlags.Static | BindingFlags.Public);
           }
         }
       }
@@ -1291,6 +1334,7 @@ namespace CACAccModDemo {
       detectCAC();
       registerCACModifier("MYMOD DYN NAME", "MYMOD", true, false, MyCACModifier, null);
       registerCACModifier("MYMOD", "MYMOD", true, false, MyCACModifier, MyCACModifierName);
+      registerCACDmgModifier("MYMOD", "MYMOD", false, true, false, false, false, MyDmgCACModifier, MyDmgCACModifierName);
     }
     public static void Init(string directory, string settingsJson) {
     }
