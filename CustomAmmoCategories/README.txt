@@ -334,10 +334,23 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
 
 Weapon definition
 new fields
+  "BuildingsDamageModifier":1,    - weapon damage modifier if target is building
+  "TurretDamageModifier":1,       - weapon damage modifier if target is turret
+  "VehicleDamageModifier":1,      - weapon damage modifier if target is vehicle
+  "MechDamageModifier":1,         - weapon damage modifier if target is mech  
+  "QuadDamageModifier":1,         - weapon damage modifier if target is quad
+  "TrooperSquadDamageModifier":1, - weapon damage modifier if target is trooper squad
+  "AirMechDamageModifier":1,      - weapon damage modifier if target is in air mech mode
+  "VTOLDamageModifier":1,         - weapon damage modifier if target is VTOL (unaffected by pathing and flying height > 1m)
+	                       NOTE: to make this modifiers work you should also have CustomUnits mod enabled
+						   NOTE: this modifiers multiplicative for weapon, ammo, mode. Default value - 1.0
+						   NOTE: this modifiers affects all damage types - normal, ap, heat, stability
+						   NOTE: this modifiers multiplicative per target type. Quad is still a mech so it will have both modifiers. 
+						         VTOL is still vehicle, mech in air mech mode is still mech.
   "MinMissRadius": 5,
   "MaxMissRadius": 15,
-                        - min and max raduis. Used only in ground attack and indirect attack. Additive for ammo/mode/weapon
-						  If MinMissRadius less than target raduis (for mechs in chassis definition, for vehicels and turrets 5) raduis value will be used.
+                        - min and max radius. Used only in ground attack and indirect attack. Additive for ammo/mode/weapon
+						  If MinMissRadius less than target radius (for mechs in chassis definition, for vehicles and turrets 5) radius value will be used.
 						  If MaxMissRadius less or equal than MinMissRadius value MinMissRadius * 3 will be used.
 						  actual scatter radius = ((MaxMissRadius - MinMissRadius) * (hitRoll - toHitChance) / (1 - toHitChance) + MinMissRadius)
   "evasivePipsMods": {  - list of modifiers for values by current evasive pips count. Additive per weapon/ammo/mode. 
