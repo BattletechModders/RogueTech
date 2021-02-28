@@ -334,10 +334,23 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
 
 Weapon definition
 new fields
+  "BuildingsDamageModifier":1,    - weapon damage modifier if target is building
+  "TurretDamageModifier":1,       - weapon damage modifier if target is turret
+  "VehicleDamageModifier":1,      - weapon damage modifier if target is vehicle
+  "MechDamageModifier":1,         - weapon damage modifier if target is mech  
+  "QuadDamageModifier":1,         - weapon damage modifier if target is quad
+  "TrooperSquadDamageModifier":1, - weapon damage modifier if target is trooper squad
+  "AirMechDamageModifier":1,      - weapon damage modifier if target is in air mech mode
+  "VTOLDamageModifier":1,         - weapon damage modifier if target is VTOL (unaffected by pathing and flying height > 1m)
+	                       NOTE: to make this modifiers work you should also have CustomUnits mod enabled
+						   NOTE: this modifiers multiplicative for weapon, ammo, mode. Default value - 1.0
+						   NOTE: this modifiers affects all damage types - normal, ap, heat, stability
+						   NOTE: this modifiers multiplicative per target type. Quad is still a mech so it will have both modifiers. 
+						         VTOL is still vehicle, mech in air mech mode is still mech.
   "MinMissRadius": 5,
   "MaxMissRadius": 15,
-                        - min and max raduis. Used only in ground attack and indirect attack. Additive for ammo/mode/weapon
-						  If MinMissRadius less than target raduis (for mechs in chassis definition, for vehicels and turrets 5) raduis value will be used.
+                        - min and max radius. Used only in ground attack and indirect attack. Additive for ammo/mode/weapon
+						  If MinMissRadius less than target radius (for mechs in chassis definition, for vehicles and turrets 5) radius value will be used.
 						  If MaxMissRadius less or equal than MinMissRadius value MinMissRadius * 3 will be used.
 						  actual scatter radius = ((MaxMissRadius - MinMissRadius) * (hitRoll - toHitChance) / (1 - toHitChance) + MinMissRadius)
   "evasivePipsMods": {  - list of modifiers for values by current evasive pips count. Additive per weapon/ammo/mode. 
@@ -1201,17 +1214,42 @@ Note:
 
 Note on damage modifiers
 you can register your own modifier via API
-	void CustAmmoCategories.DamageModifiersCache.RegisterExternalModes(string id, - id should be unique
-		Func<Weapon, string> nameDelegate,                                    - delegate not get name of your modifier base on weapon and you internal weapon's state
-																					  if you return string.Empty or null next delegates will not be invoked
-		Func<Weapon,float> damageDelegate,                                     - delegate for damage. Function should return multiplier
-		Func<Weapon, float> apDelegate,                                       - delegate for AP damage. Function should return multiplier
-		Func<Weapon, float> heatDelegate,                                     - delegate for heat. Function should return multiplier
-		Func<Weapon, float> stabilityDelegate                                 - delegate for stability. Function should return multiplier
+	DamageModifiersCache.RegisterDamageModifier(
+		 string id,					- your modifier unique id
+	     string staticName,         - static name will be shown in UI
+		 bool isStatic,             - true means your damage modifier actual value can be calculated before actual fire. 
+		                              For example target type can't be changed during attack, if your modifier based on target type it can be static,
+									  but if your modifier based on specific hit location it can't be static
+		 bool isNormal,             - true if your modifier is normal damage modifier
+		 bool isAP,                 - true if your modifier is through armor damage modifier
+		 bool isHeat,               - true if your modifier is heat modifier
+		 bool isStability,          - true if your modifier is stability modifier
+		                              all this flags can be used simultaneity 
+		 Func<                      - delegate, function will be called when damage engine will calculate your modifier actual value
+			Weapon,                 - weapon
+			Vector3,                - attack position
+			ICombatant,             - target combatant
+			bool,                   - is shot is breaching
+			int,                    - hit location (for static modifiers function will be called with value = 0)
+			float,                  - current normal damage (for static modifiers function will be called with value = 0.0f)
+			float,                  - current ap damage (for static modifiers function will be called with value = 0.0f)
+			float,                  - current heat damage (for static modifiers function will be called with value = 0.0f)
+			float,                  - current stability damage (for static modifiers function will be called with value = 0.0f)
+			float                   - return result type
+		> modifier, 
+		Func<						- delegate, function will be called when damage engine will calculate your modifier actual name to show in UI
+			Weapon,                 - weapon
+			Vector3,                - attack position
+			ICombatant,             - target combatant
+			bool,                   - is shot is breaching
+			int,                    - hit location (for static modifiers function will be called with value = 0)
+			float,                  - current normal damage (for static modifiers function will be called with value = 0.0f)
+			float,                  - current ap damage (for static modifiers function will be called with value = 0.0f)
+			float,                  - current heat damage (for static modifiers function will be called with value = 0.0f)
+			float,                  - current stability damage (for static modifiers function will be called with value = 0.0f)
+			string					- return result type
+		> modname
 	)
-if your internal state for weapon has bee changed you should invoke 
-	void CustAmmoCategories.DamageModifiersCache.ClearDamageCache(this Weapon weapon) to clear damage calculations cache for weapon. 
-    Invoking weapon panel slots refreshing is also your responsibility and should be performed after cache reseting
 
 Note on toHit modifiers
 CustAmmoCategories.ToHitModifiersHelper.registerModifier(
@@ -1261,12 +1299,20 @@ using UnityEngine;
 namespace CACAccModDemo {
   public class Core {
     private static MethodInfo ToHitModifiersHelper_registerModifier = null;
+    private static MethodInfo DamageModifiersCache_RegisterDamageModifier = null;
     public static bool CACModifierHelperDetected() { return ToHitModifiersHelper_registerModifier != null; }
+    public static bool CACDamageModifierHelperDetected() { return DamageModifiersCache_RegisterDamageModifier != null; }
     public static float MyCACModifier(ToHit toHit, AbstractActor attacker, Weapon weapon, ICombatant target, Vector3 attackPos, Vector3 targetPos, LineOfFireLevel lof, MeleeAttackType meleType, bool isCalled) {
       return 1f;
     }
     public static string MyCACModifierName(ToHit toHit, AbstractActor attacker, Weapon weapon, ICombatant target, Vector3 attackPos, Vector3 targetPos, LineOfFireLevel lof, MeleeAttackType meleType, bool isCalled) {
       return "Cust. mod. "+attacker.DisplayName;
+    }
+    public static float MyDmgCACModifier(Weapon weapon, Vector3 attackPosition, ICombatant target, bool IsBreachingShot, int location, float dmg, float ap, float heat, float stab) {
+      return 0f;
+    }
+    public static string MyDmgCACModifierName(Weapon weapon, Vector3 attackPosition, ICombatant target, bool IsBreachingShot, int location, float dmg, float ap, float heat, float stab) {
+      return "Cust. mod. " + target.DisplayName;
     }
     public static void registerCACModifier(string id, string name, bool ranged, bool melee,
       Func<ToHit, AbstractActor, Weapon, ICombatant, Vector3, Vector3, LineOfFireLevel, MeleeAttackType, bool, float> modifier,
@@ -1275,6 +1321,13 @@ namespace CACAccModDemo {
       if (ToHitModifiersHelper_registerModifier == null) { return; }
       ToHitModifiersHelper_registerModifier.Invoke(null, new object[] { id, name, ranged, melee, modifier, dname });
     }
+    public static void registerCACDmgModifier(string id, string staticName, bool isStatic, bool isNormal, bool isAP, bool isHeat, bool isStability,
+      Func<Weapon, Vector3, ICombatant, bool, int, float, float, float, float, float> modifier,
+      Func<Weapon, Vector3, ICombatant, bool, int, float, float, float, float, string> modname
+    ) {
+      if (DamageModifiersCache_RegisterDamageModifier == null) { return; }
+      DamageModifiersCache_RegisterDamageModifier.Invoke(null, new object[] { id, staticName, isStatic, isNormal, isAP, isHeat, isStability, modifier, modname });
+    }
     public static void detectCAC() {
       Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
       foreach (Assembly assembly in assemblies) {
@@ -1282,7 +1335,10 @@ namespace CACAccModDemo {
           Type helperType = assembly.GetType("CustAmmoCategories.ToHitModifiersHelper");
           if (helperType != null) {
             ToHitModifiersHelper_registerModifier = helperType.GetMethod("registerModifier", BindingFlags.Static | BindingFlags.Public);
-            break;
+          }
+          Type dmgHelperType = assembly.GetType("CustAmmoCategories.DamageModifiersCache");
+          if (dmgHelperType != null) {
+            DamageModifiersCache_RegisterDamageModifier = dmgHelperType.GetMethod("RegisterDamageModifier", BindingFlags.Static | BindingFlags.Public);
           }
         }
       }
@@ -1291,6 +1347,7 @@ namespace CACAccModDemo {
       detectCAC();
       registerCACModifier("MYMOD DYN NAME", "MYMOD", true, false, MyCACModifier, null);
       registerCACModifier("MYMOD", "MYMOD", true, false, MyCACModifier, MyCACModifierName);
+      registerCACDmgModifier("MYMOD", "MYMOD", false, true, false, false, false, MyDmgCACModifier, MyDmgCACModifierName);
     }
     public static void Init(string directory, string settingsJson) {
     }
