@@ -1,0 +1,649 @@
+{
+	"behaviorVariables": [
+		
+		{
+			/* Optimal distance to nearest ally. (See
+	       PreferOptimalDistanceToAllyFactor.) */
+			"k": "Float_OptimalAllyDistance",
+			"v": {
+				"type": "Float",
+				"floatVal": 122.0
+			}
+		},
+				
+		{
+			/* DEPRECATED */
+			"k": "Float_ThreatBattleValueRoot",
+			"v": {
+				"type": "Float",
+				"floatVal": 0.0
+			}
+		},
+		{
+			/* When considering different kinds of attacks, multiply
+	       the shooting damage by this value to decide which
+	       attack to use. */
+			"k": "Float_ShootingDamageMultiplier",
+			"v": {
+				"type": "Float",
+				"floatVal": 1.7
+			}
+		},
+			
+		
+		
+		{
+			/* Influence Factor Weight to control the desire to attack
+	       a hostile's weak armor. */
+			"k": "Float_PreferAttackingLowerArmorHostileFactorWeight",
+			"v": {
+				"type": "Float",
+				"floatVal": 1.5
+			}
+		},
+		{
+			/* Influence Factor Weight to control the desire to attack
+	       a hostile's weak armor WHEN SPRINTING. */
+			"k": "Float_SprintPreferAttackingLowerArmorHostileFactorWeight",
+			"v": {
+				"type": "Float",
+				"floatVal": 0.3
+			}
+		},
+		{
+			/* Ratio between expected damage and target hit points to
+	       be used for "Vulnerable" threat sorting. */
+			"k": "Float_VulnerableDamageRatioThreshold",
+			"v": {
+				"type": "Float",
+				"floatVal": 0.5
+			}
+		},
+		{
+			/* Damage multiplier when measuring vulnerability of called
+	       shot targets. */
+			"k": "Float_CalledShotVulnerabilityMultiplier",
+			"v": {
+				"type": "Float",
+				"floatVal": 4.5
+			}
+		},
+		{
+			/* Ratio between hostile's expected damage and my hit points to
+	       be used for "Threat" threat sorting. */
+			"k": "Float_ThreatDamageRatioThreshold",
+			"v": {
+				"type": "Float",
+				"floatVal": 0.4
+			}
+		},
+		
+		{
+			/* If a unit takes this percentage damage or more in a
+	       round, consider it "major damage", and react
+	       accordingly (make a defensive move, maybe do a suicidal
+	       charge?) */
+			"k": "Float_MajorDamageRatio",
+			"v": {
+				"type": "Float",
+				"floatVal": 5.0
+			}
+		},
+		{
+			/* When a weapon (e.g. flamer) generates heat, use this
+	       ratio to convert heat to "virtual" damage for AI
+	       calculations. */
+			"k": "Float_HeatToDamageRatio",
+			"v": {
+				"type": "Float",
+				"floatVal": 2.5
+			}
+		},
+		
+		{
+			/* The number of hostiles considered when evaluating
+	       influence maps. */
+			"k": "Int_HostileInfluenceCount",
+			"v": {
+				"type": "Int",
+				"intVal": 6
+			}
+		},
+		{
+			/* The number of allies considered when evaluating
+	       influence maps. */
+			"k": "Int_AllyInfluenceCount",
+			"v": {
+				"type": "Int",
+				"intVal": 3
+			}
+		},
+		{
+			/* If unsteady, the chance of just deciding to switch to
+	       defensive. */
+			"k": "Float_UnsteadyCausesDefensiveMovePercentage",
+			"v": {
+				"type": "Float",
+				"floatVal": 10
+			}
+		},
+		{
+			/* If my move would not result in being able to fire,
+	       should I rewrite that move as a sprint? */
+			"k": "Bool_RewriteNonAttackMoves",
+			"v": {
+				"type": "Bool",
+				"boolVal": true
+			}
+		},
+		{
+			/* Tag to control the desire to be near a tagged
+	       target. */
+			"k": "String_PreferProximityToTaggedTargetFactorTag",
+			"v": {
+				"type": "String",
+				"stringVal": ""
+			}
+		},
+		{
+			/* How many degrees apart should I consider different
+	       facings when choosing moves? */
+			"k": "Float_AngularSelectionResolution",
+			"v": {
+				"type": "Float",
+				"floatVal": 60.0
+			}
+		},
+		{
+			/* Use dynamic lance roles (brawler, flanker, spotter, sniper) */
+			"k": "Bool_UseDynamicLanceRoles",
+			"v": {
+				"type": "Bool",
+				"boolVal": false
+			}
+		},
+		
+		{
+			/* How many damage points one unit of unsteadiness
+	       converts to when calculating virtual damage when
+	       attacking unstable targets. */
+			"k": "Float_UnsteadinessToVirtualDamageConversionRatio",
+			"v": {
+				"type": "Float",
+				"floatVal": 1.70
+			}
+		},
+		
+		{
+			/* Percentage (0-100) of best available move that will be
+	       accepted for bulwark skill moves. */
+			"k": "Float_BulwarkThresholdPercentage",
+			"v": {
+				"type": "Float",
+				"floatVal": 5
+			}
+		},
+		{
+			/* Directory for influence map logs. Can be an absolute
+	       directory (e.g. c:\tmp, but beware of OS dependencies)
+	       or relative to BattleTech. */
+			"k": "String_InfluenceMapCalculationLogDirectory",
+			"v": {
+				"type": "String",
+				"stringVal": "AI_Logs"
+			}
+		},
+		
+		
+		
+		
+		
+		
+		{
+			/* How long the AI is allowed to think, in seconds per
+	       unit per activation. */
+			"k": "Float_MaxThinkSeconds",
+			"v": {
+				"type": "Float",
+				"floatVal": 60.0
+			}
+		},
+		
+		
+		
+		{
+			/* DEPRECATED: Whether to use the new threat sorting that
+	       incorporates target damage output, or the earlier
+	       (Pre-July) version, which only looks at my ability to
+	       do damage to the target, and then distance. (Update:
+	       now always true.) */
+			"k": "Bool_UseNewThreatDEPRECATED",
+			"v": {
+				"type": "Bool",
+				"boolVal": true
+			}
+		},
+		
+		
+		
+		{
+			/*
+	      Description: Number of points of damage that a sensor
+	      locking turn needs to do over a straight up shooting
+	      turn before deciding to sensor lock. Positive is a
+	      shooting bias, negative is a sensor lock bias.*/
+			"k": "Float_MinimumSensorLockQuality",
+			"v": {
+				"type": "Float",
+				"floatVal": 25
+			}
+		},
+		{
+			/* Multiplier for how 'strong' each point of head armor is
+	       when looking for weak armor. */
+			"k": "Float_HeadArmorMultiplier",
+			"v": {
+				"type": "Float",
+				"floatVal": 100.0
+			}
+		},
+		{
+			/* Multiplier for how 'strong' each point of center torso
+	       front armor is when looking for weak armor. */
+			"k": "Float_CenterTorsoArmorMultiplier",
+			"v": {
+				"type": "Float",
+				"floatVal": 0.8
+			}
+		},
+		{
+			/* Multiplier for how 'strong' each point of center torso
+	       rear armor is when looking for weak armor. */
+			"k": "Float_CenterTorsoRearArmorMultiplier",
+			"v": {
+				"type": "Float",
+				"floatVal": 0.8
+			}
+		},
+		{
+			/* Multiplier for how 'strong' each point of center torso
+	       rear armor is when looking for weak armor *for rear arc
+	       influence factor*. */
+			"k": "Float_CenterTorsoRearArmorMultiplierForRearArc",
+			"v": {
+				"type": "Float",
+				"floatVal": 0.9
+			}
+		},
+		{
+			/* Multiplier for how 'strong' each point of leg armor is
+	       when looking for weak armor on a legged mech. */
+			"k": "Float_RemainingLegArmorMultiplier",
+			"v": {
+				"type": "Float",
+				"floatVal": 0.5
+			}
+		},
+		
+		{
+			/* When predicting whether an attack will strip a pip,
+	       compare the attack hit probability to this
+	       threshold. Attacks with a lower probability than this
+	       will not be considered to strip an evasive pip. */
+			"k": "Float_PipStripAttackProbabilityThreshold",
+			"v": {
+				"type": "Float",
+				"floatVal": 0.75
+			}
+		},
+		
+		
+		{
+			/* Percentage (0.0 - 100.0+) of my "critical hit points"
+	       (weakest armor, vital structure) above which the AI
+	       won't brace to get rid of instability. */
+			"k": "Float_UnsteadyOverkillThreshold",
+			"v": {
+				"type": "Float",
+				"floatVal": 65.0
+			}
+		},		
+		{
+			/* Whether to use Bulwark actions*/
+			"k": "Bool_UseBulwarkActions",
+			"v": {
+				"type": "Bool",
+				"boolVal": true
+			}
+		},
+		
+		{
+			/* Percent chance (0-100) of actually using the "Reckless" skill. */
+			"k": "Float_UseRecklessSkillPercentageChance",
+			"v": {
+				"type": "Float",
+				"floatVal": 0
+			}
+		},
+		
+		{
+			/* Whether to allow long range pathfinding when following
+	     * routes. (Defaults to True) */
+			"k": "Bool_AllowLongRangePathfindingWhenPatrolling",
+			"v": {
+				"type": "Bool",
+				"boolVal": true
+			}
+		},
+		{
+			/* Whether to use the dynamic hex-based long range
+	     * pathfinding.  Currently (February 13, 2018) in test,
+	     * should be more accurate and efficient than the old
+	     * incline mesh pathfinding.
+	     */
+			"k": "Bool_UseDynamicLongRangePathfinding",
+			"v": {
+				"type": "Bool",
+				"boolVal": true
+			}
+		},
+		{
+			/* How fast (percentage of full speed, 0% = 0, 100% = 100.0) to
+             * follow patrol routes.
+	     */
+			"k": "Float_PatrolRouteThrottlePercentage",
+			"v": {
+				"type": "Float",
+				"floatVal": 90.0
+			}
+		},
+		
+		{
+			/* If true, drop out of long range pathfinding if we can walk to
+             * a destination with LOF to a hostile. (TODO: roll this behavior out to
+             * all encounters.)
+	     */
+			"k": "Bool_SimpleShortRangeLOF",
+			"v": {
+				"type": "Bool",
+				"boolVal": false
+			}
+		},
+		
+		{
+			/* If true, allow AI to attack hostiles. Otherwise, only move and brace.
+	     */
+			"k": "Bool_AllowAttack",
+			"v": {
+				"type": "Bool",
+				"boolVal": true
+			}
+		},
+		{
+			/* An alerted unit will act on visibility information,
+	       closing, attacking. Non-alerted units will still follow
+	       patrol orders or movement orders. This will be set by
+	       visibility logic.
+	       For internal AI use, do not set. */
+			"k": "Bool_Alerted",
+			"v": {
+				"type": "Bool",
+				"boolVal": false
+			}
+		},
+		{
+			/* For internal AI use, do not set. */
+			"k": "Int_ReserveCalculationsLastDoneForRoundNumber",
+			"v": {
+				"type": "Int",
+				"intVal": 0
+			}
+		},
+		{
+			/* For internal AI use, do not set. */
+			"k": "Int_ReserveCalculationsLastDoneForPhaseNumber",
+			"v": {
+				"type": "Int",
+				"intVal": 0
+			}
+		},
+		{
+			/* For internal AI use, do not set. */
+			"k": "Int_ReserveToPhaseNumber",
+			"v": {
+				"type": "Int",
+				"intVal": 0
+			}
+		},
+		{
+			/* For internal AI use, do not set. */
+			"k": "String_GuardLanceGUID",
+			"v": {
+				"type": "String",
+				"stringVal": ""
+			}
+		},
+		{
+			/* For internal AI use, do not set. */
+			"k": "Float_GuardLanceSpeedPercent",
+			"v": {
+				"type": "Float",
+				"floatVal": 100
+			}
+		},
+		{
+			/* For internal AI use, do not set. */
+			"k": "Float_GuardLanceTetherDistance",
+			"v": {
+				"type": "Float",
+				"floatVal": 0
+			}
+		},
+		{
+			/* For internal AI use, do not set. */
+			"k": "String_StayInsideRegionGUID",
+			"v": {
+				"type": "String",
+				"stringVal": ""
+			}
+		},
+		{
+			/* For internal AI use, do not set. */
+			"k": "String_SensorLockedTargetGUID",
+			"v": {
+				"type": "String",
+				"stringVal": ""
+			}
+		},
+		{
+			/* For internal AI use, do not set. */
+			"k": "Int_LastAloneRoundNumber",
+			"v": {
+				"type": "Int",
+				"intVal": "-1"
+			}
+		},
+		{
+			/* For internal AI use, do not set. */
+			"k": "Int_LastNotAloneRoundNumber",
+			"v": {
+				"type": "Int",
+				"intVal": "-1"
+			}
+		},
+		{
+	    /* Weight for an influence factor that seeks to stay
+	       within ECM range of friendlies */
+		"k" : "Float_PreferFriendlyECMFields",
+		"v" : 
+		{
+			"type" : "Float",
+			"floatVal" : 0.75
+		}
+	},
+	{
+	    /* Weight for an influence factor that seeks to stay
+	       within ECM range of friendlies WHEN SPRINTING */
+		"k" : "Float_SprintPreferFriendlyECMFields",
+		"v" : 
+		{
+			"type" : "Float",
+			"floatVal" : 0.0
+		}
+	},
+	{
+	    /* Weight for an influence factor that seeks to stay
+	       within range of hostile ECM fields */
+		"k" : "Float_PreferHostileECMFields",
+		"v" : 
+		{
+			"type" : "Float",
+			"floatVal" : 0.3
+		}
+	},
+	{
+	    /* Weight for an influence factor that seeks to stay
+	       within range of hostile ECM fields WHEN SPRINTING */
+		"k" : "Float_SprintPreferHostileECMFields",
+		"v" : 
+		{
+			"type" : "Float",
+			"floatVal" : 0.2
+		}
+	},
+	{
+	    /* Weight for an influence factor that seeks to stay
+	       within range of hostile ECM fields to use Active Probe */
+		"k" : "Float_PreferActiveProbePositions",
+		"v" : 
+		{
+			"type" : "Float",
+			"floatVal" : 0
+		}
+	},
+	{
+	    /* Weight for an influence factor that seeks to stay
+	       within range of hostile ECM fields to use Active Probe */
+		"k" : "Float_SprintPreferActiveProbePositions",
+		"v" : 
+		{
+			"type" : "Float",
+			"floatVal" : 0
+		}
+	},
+	{
+	    /* Number of active probe targets before we even try to activate 
+	    active probe */
+		"k" : "Int_MinimumActiveProbeCount",
+		"v" : 
+		{
+			"type" : "Int",
+			"IntVal" : "1"
+		}
+	},
+	{
+	    /* Minimum number of stealth pips to allow for an ECM
+		ghosted mech to fire weapons */
+		"k" : "Int_MinimumECMGhostedPipsToFire",
+		"v" : 
+		{
+			"type" : "Int",
+			"IntVal" : "1"
+		}
+	},
+	{
+	    /* Enables advanced navigation behaviors only in urban biomes */
+		"k" : "Bool_EnableUrbanBiomeNavigation",
+		"v" : 
+		{
+			"type" : "Bool",
+			"boolVal" : true
+		}
+	},
+	{
+	    /* Enables advanced navigation behaviors on all biome types */
+		"k" : "Bool_EnableUrbanBiomeNavigationEverywhere",
+		"v" : 
+		{
+			"type" : "Bool",
+			"boolVal" : true
+		}
+	},
+	{
+	    /*  Description: Float to track confidence in causing structural damage. Used to gague whether we should fire our weapon
+		from a ghosted state */
+		"k" : "Float_ConfidenceInSignificantDamageWhileGhostedLevel",
+		"v" : 
+		{
+			"type" : "Float",
+			"floatVal" : 0.8
+		}
+	},
+	{
+	    /* When calculatiing expected damage, how much to lerp between the damage divided by number of weapons and the damage if every hit
+		was in the same location. 0 is damage divided and 1 is damage concentrated. 
+		Increases with Float_GhostStateHysteresisMultiplierTurnIncrease */
+		"k" : "Float_WeaponDamageSpreadLerpValue",
+		"v" : 
+		{
+			"type" : "Float",
+			"floatVal" : 0.5
+		}
+	},
+	{
+	    /*  When getting the chance in causing significant damage, how much weight to give the amount of structural damage caused. */
+		"k" : "Float_StructuralDamagePercentageMultiplier",
+		"v" : 
+		{
+			"type" : "Float",
+			"floatVal" : 1.5
+		}
+	},
+	{
+	    /* When shooting in ghost state, lerp value to go from expected damage and max possible damage.
+		Increases with Float_GhostStateHysteresisMultiplierTurnIncrease */
+		"k" : "Float_ExpectedAndMaxDamageShootingInGhostStateLerp",
+		"v" : 
+		{
+			"type" : "Float",
+			"floatVal" : 0.6
+		}
+	},
+	{	
+	    /* For every round the ai does not shoot in ghost state, it adds to a mutiplier that increases the confidence in causing higher damage */
+		"k" : "Float_GhostStateHysteresisMultiplierTurnIncrease",
+		"v" : 
+		{
+			"type" : "Float",
+			"floatVal" : 0.4
+	}
+	},
+	{	
+	    /* Enables more precise predictions about expected damage by counting weapons in range and damage reductions of the unit*/
+		"k" : "Bool_ExpectedDamageAccuracyIncrease",
+		"v" : 
+		{
+			"type" : "Bool",
+			"boolVal" : true
+		}
+	},
+	{
+	    /*Enables the long-range pathfinding to be aware of actors blocking movement in nodes globally */
+		"k" : "Bool_EnableLongRangePathfindingBeActorAware",
+		"v" : 
+		{
+			"type" : "Bool",
+			"boolVal" : true
+		}
+	},
+	{
+	    /* How close to the target region do we switch to short-range pathfinding */
+		"k" : "Float_LongRangeToShortRangeDistanceThreshold",
+		"v" : 
+		{
+			"type" : "Float",
+			"floatVal" : 200
+		}
+	}
+	]
+}
