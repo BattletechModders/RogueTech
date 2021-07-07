@@ -1,49 +1,43 @@
 {
     "Custom": {
-        "BonusDescriptions": {
-            "Bonuses": [
-                "CoolingSystemLHS",
-				"Signature: +40%",
-				"EndMoveHeat: -60",
-				"CoolantCost: 17"
-            ]
+        "EngineHeatBlock": {
+            "HeatSinkCount": 2
         },
-		"HeatSinkingCost" : {
-		"HeatUpkeepCost" : 17
-    },
-        "Cooling": {
-            "HeatSinkDefId": "Gear_HeatSink_Generic_Laser_Clan"
+            "BonusDescriptions": {
+                "Bonuses": [
+                    "Whitespace",
+                    "EndMoveHeat: -12",
+                    "Signature: +10%",
+                    "EngineHSAdd: 2"
+                ]
         },
         "WorkOrderCosts": {
             "Default": {
-                "TechCost": "[[Chassis.Tonnage]] / 5",
-                "CBillCost": "10 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]] / 10"
+                "TechCost": "[[Chassis.Tonnage]] / 80",
+                "CBillCost": "12 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
             },
             "Install": {
-                "TechCost": "[[Chassis.Tonnage]] / 5",
-                "CBillCost": "10 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]] / 10"
+                "TechCost": "[[Chassis.Tonnage]] / 80",
+                "CBillCost": "12 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
             }
         },
         "Category" : [
-          {"CategoryID": "Cooling"},
-          {"CategoryID": "EnginePart"}
-        ],
-        "InventorySorter": {
-            "SortKey": "00016"
-        }
+            {"CategoryID": "EngineHeatBlock"},
+            {"CategoryID": "EnginePart"}
+        ]
     },
     "DissipationCapacity": 0,
     "Description": {
-        "Cost": 3500000,
-        "Rarity": 0,
+        "Cost": 1500000,
+        "Rarity": 5,
         "Purchasable": true,
         "Manufacturer": "Clan",
-        "Model": "Engine Kit",
-        "UIName": "Laser Heat Sink Kit (C)",
-        "Id": "emod_kit_lhs",
-        "Name": "Engine Kit (C)",
-        "Details": "Converts an SHS engine to LHS. A Mech' <b>Cooling System</b> provides heat dissipation for components inside the mech and compatible extension points for additional heat sinks throughout the mech. It differs from the closed cooling system of the engine. Unlike a normal heat sink which uses radiators and heat-conductive fluids to cool a 'Mech, a laser heat sink uses lasers to excite the hot exhaust gasses to a higher-energy state, converting the infrared energy of the gasses to light which is then shunted out of the 'Mech via a series of highly polished surfaces. Functionally identical to a Clan-tech double heat sink, the lack of liquid and gas in the system reduces the chances of heat-based ammunition cook-off and means that laser heat sinks don't get the decreased performance on warmer worlds that single and double heat sinks have, while at the same time preventing laser heat sinks from taking advantage of immersion in water or colder weather to boost their performance.",
-        "Icon": "thermometer-cold"
+        "Model": "Engine Cooling System",
+        "UIName": "Engine Laser HS +2",
+        "Id": "Gear_Engine_LaserHeatsinks_2",
+        "Name": "Engine Cooling +2",
+        "Details": "An internal Laser Heat Sink that can be added to a 'Mech's engine of suitable size that is equipped with a Laser Heat Sink Cooling Kit. The engines integral heat sinks (a.k.a free heat sinks) are not common Mech' heat sinks and use up less volume.",
+        "Icon": "EngineCooling"
     },
     "BonusValueA": "",
     "BonusValueB": "",
@@ -52,7 +46,7 @@
     "PrefabIdentifier": "",
     "BattleValue": 0,
     "InventorySize": 1,
-    "Tonnage": 0,
+    "Tonnage": 2,
     "AllowedLocations": "CenterTorso",
     "DisallowedLocations": "All",
     "CriticalComponent": false,
@@ -81,9 +75,9 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "LHS_Signature_Increase_40",
+                "Id": "LDHS_Signature_Increase_10",
                 "Name": "Laser Heat Sink",
-                "Details": "Laser Heat Sink system increasing signature by 40%",
+                "Details": "Laser Heat Sink system increasing signature by 10%",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
             },
             "nature": "Buff",
@@ -92,7 +86,7 @@
                 "effectsPersistAfterDestruction": false,
                 "statName": "SensorSignatureModifier",
                 "operation": "Float_Multiply",
-                "modValue": "1.40",
+                "modValue": "1.1",
                 "modType": "System.Single",
                 "additionalRules": "NotSet",
                 "targetCollection": "NotSet",
@@ -108,14 +102,14 @@
             "instantModData": null,
             "poorlyMaintainedEffectData": null
         },
-		{
+        {
             "durationData": {
                 "duration": -1,
                 "ticksOnActivations": false,
                 "useActivationsOfTarget": false,
                 "ticksOnEndOfRound": false,
                 "ticksOnMovements": false,
-                "stackLimit": 1,
+                "stackLimit": -1,
                 "clearedWhenAttacked": false
             },
             "targetingData": {
@@ -132,9 +126,9 @@
             },
             "effectType": "StatisticEffect",
             "Description": {
-                "Id": "LHS_Heat_Venting_60",
+                "Id": "LHS_Heat_Venting_6",
                 "Name": "Laser Heat Sink",
-                "Details": "Laser Heat Sink system venting 60 heat",
+                "Details": "Laser Heat Sink system venting 12 heat",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
             },
             "nature": "Buff",
@@ -143,7 +137,7 @@
                 "effectsPersistAfterDestruction": false,
                 "statName": "EndMoveHeat",
                 "operation": "Int_Add",
-                "modValue": "-60",
+                "modValue": "-12",
                 "modType": "System.Int32",
                 "additionalRules": "NotSet",
                 "targetCollection": "NotSet",
@@ -159,11 +153,11 @@
             "instantModData": null,
             "poorlyMaintainedEffectData": null
         }
-	],
+    ],
     "ComponentTags": {
         "items": [
             "component_type_stock",
-        "emod_kit_lhs"
+        "Gear_Engine_LaserHeatsinks_2"    
         ],
         "tagSetSourceFile": ""
     }
