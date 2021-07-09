@@ -70,6 +70,7 @@
       "tag": "pilot_npc_high",
       "quirksToPick": 3,
       "quirksAvailable": [
+        "pilot_painshunt",
         "pilot_command",
         "pilot_comstar",
         "pilot_mechwarrior",
@@ -94,6 +95,7 @@
       "tag": "pilot_npc_testpilot",
       "quirksToPick": 10,
       "quirksAvailable": [
+        "pilot_painshunt",
         "pilot_command",
         "pilot_comstar",
         "pilot_mechwarrior",
@@ -118,6 +120,7 @@
       "tag": "pilot_npc_kobiyashi",
       "quirksToPick": 16,
       "quirksAvailable": [
+        "pilot_painshunt",
         "pilot_command",
         "pilot_comstar",
         "pilot_mechwarrior",
@@ -162,6 +165,20 @@
     }
   ],
   "pilotQuirks": [
+    {
+      "tag": "pilot_painshunt",
+      "quirkName": "Pain Shunt",
+      "description": "Pilot is Immune to Injurys from Overheat, Internal Explosion and DNI Feedback. 25% Pilot Upkeep.",
+      "effectData": [],
+      "quirkEffects": [
+        {
+          "type": "PilotCostFactor ",
+          "modifier": 0.25,
+          "secondaryModifier": 0,
+          "affectedIds": []
+        }
+      ]
+    },
     {
       "tag": "pilot_spacer",
       "quirkName": "Spacer",
@@ -1016,7 +1033,7 @@
     {
       "tag": "pilot_lucky",
       "quirkName": "Lucky",
-      "description": "+2 Clustering. -10% Jam Chance Multi. +10% Upkeep",
+      "description": "+0.5 Clustering. -10% Jam Chance Multi. +10% Upkeep",
       "effectData": [
         {
           "durationData": {
@@ -1062,7 +1079,7 @@
           "statisticData": {
             "statName": "ClusteringModifier",
             "operation": "Float_Add",
-            "modValue": "2",
+            "modValue": "0.5",
             "modType": "System.Single",
             "targetCollection": "Weapon"
           }
@@ -3135,8 +3152,8 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "LightShowQuirk",
-                "Name": "HEAT GENERATION DECREASED",
-                "Details": "Heat generation reduced by 10%.",
+                "Name": "Heat generation decreased",
+                "Details": "Heat generation reduced by 5%.",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
               },
               "nature": "Buff",
@@ -4200,7 +4217,7 @@
               "Description": {
                 "Id": "StatusEffect-FCS_AC21",
                 "Name": "Cooling Jacket",
-                "Details": "-5% Heat for Autocannons.",
+                "Details": "-5% Heat for Lasers.",
                 "Icon": "uixSvgIcon_equipment_TTS"
               },
               "nature": "Buff",
@@ -5763,7 +5780,7 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "StatusEffect_BCHeat",
-                "Name": "HEAT GENERATION DECREASED",
+                "Name": "Heat generation decreased.",
                 "Details": "Heat generation reduced by 5%.",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
               },
@@ -5790,15 +5807,15 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "StatusEffect_BCHeat",
-                "Name": "HEAT GENERATION DECREASED",
-                "Details": "Heat generation reduced by 5%.",
+                "Name": "Heat sinking increased",
+                "Details": "Heat sinking capacity increased by 6.",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
               },
               "nature": "Buff",
               "statisticData": {
                 "statName": "HeatSinkCapacity",
                 "operation": "Int_Add",
-                "modValue": "-6",
+                "modValue": "6",
                 "modType": "System.Int32"
               }
             }
@@ -6096,7 +6113,7 @@
         {
           "missionsRequired": 40,
           "levelName": "Zeroed In",
-          "decription": "+4 Clustering, +10% Called Shot Chance, +1 Called Shot Accuracy",
+          "decription": "+0.15 Clustering, +10% Called Shot Chance, +1 Called Shot Accuracy",
           "effectData": [
             {
               "durationData": {
@@ -6142,7 +6159,7 @@
               "statisticData": {
                 "statName": "ClusteringModifier",
                 "operation": "Float_Add",
-                "modValue": "4",
+                "modValue": "0.15",
                 "modType": "System.Single",
                 "targetCollection": "Weapon"
               },
@@ -6192,42 +6209,8 @@
         {
           "missionsRequired": 40,
           "levelName": "Smart Warheads",
-          "decription": "+1 Missile Evasion Ignore, +8 Missile Clustering",
+          "decription": "+2 Missile Evasion Ignore",
           "effectData": [
-            {
-              "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-              },
-              "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInTargetPreview": true,
-                "showInStatusPanel": true
-              },
-              "effectType": "StatisticEffect",
-              "Description": {
-                "Id": "StatusEffect-EnhMS-ClusterBonusLRM",
-                "Name": "MISSILERY SUITE",
-                "Details": "Substantially increases the clustering of this unit's LRM weapons and boosts the stability damage of SRMs by 50%.",
-                "Icon": "UixSvgIcon_specialEquip_System"
-              },
-              "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
-                "statName": "ClusteringModifier",
-                "operation": "Float_Add",
-                "modValue": "8",
-                "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "Weapon",
-                "targetWeaponCategory": "Missile",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
-              },
-              "nature": "Buff"
-            },
             {
               "durationData": {
                 "duration": -1,
@@ -6243,13 +6226,13 @@
               "Description": {
                 "Id": "StatusEffect-EnhMS-EvasionIgnore",
                 "Name": "MISSILERY SUITE",
-                "Details": "Substantially increases the clustering of this unit's LRM weapons and boosts the stability damage of SRMs by 50%.",
+                "Details": "Grants +2 evasion ignore to missiles",
                 "Icon": "UixSvgIcon_specialEquip_System"
               },
               "statisticData": {
                 "statName": "EvasivePipsIgnored",
                 "operation": "Float_Add",
-                "modValue": "1.0",
+                "modValue": "2.0",
                 "modType": "System.Single",
                 "targetCollection": "Weapon",
                 "targetWeaponCategory": "Missile"
@@ -6424,7 +6407,7 @@
               "Description": {
                 "Id": "StatusEffect-FCS_AC21",
                 "Name": "Cooling Jacket",
-                "Details": "-5% Heat for Autocannons.",
+                "Details": "-10% Heat for Autocannons.",
                 "Icon": "uixSvgIcon_equipment_TTS"
               },
               "nature": "Buff",
@@ -6466,7 +6449,7 @@
               "Description": {
                 "Id": "StatusEffect-FCS_AC21",
                 "Name": "Cooling Jacket",
-                "Details": "-5% Heat for Autocannons.",
+                "Details": "-10% Heat for Lasers.",
                 "Icon": "uixSvgIcon_equipment_TTS"
               },
               "nature": "Buff",
@@ -6508,7 +6491,7 @@
               "Description": {
                 "Id": "StatusEffect-FCS_AC21",
                 "Name": "Cooling Jacket",
-                "Details": "-5% Heat for Autocannons.",
+                "Details": "-10% Heat for Missiles.",
                 "Icon": "uixSvgIcon_equipment_TTS"
               },
               "nature": "Buff",
@@ -6550,7 +6533,7 @@
               "Description": {
                 "Id": "StatusEffect-FCS_AC21",
                 "Name": "Cooling Jacket",
-                "Details": "-5% Heat for Autocannons.",
+                "Details": "-10% Heat for PPCs.",
                 "Icon": "uixSvgIcon_equipment_TTS"
               },
               "nature": "Buff",
@@ -7691,7 +7674,7 @@
         {
           "missionsRequired": 40,
           "levelName": "Steady Aim",
-          "decription": "+1 Gunnery, +1 Offensive Push Accuracy, +10% Offensive Push Chance",
+          "decription": "+1 Gunnery, +1 Offensive Push Accuracy, +10% Called Shot",
           "effectData": [
             {
               "durationData": {
@@ -7997,8 +7980,8 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "Stealth_Heat_Generation_Stealth",
-                "Name": "Increased Heat",
-                "Details": "Heat generation",
+                "Name": "Heat generation decreased",
+                "Details": "Heat generation reduced by 6%.",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
               },
               "nature": "Buff",
@@ -8024,8 +8007,8 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "Stealth_Heat_Capacity_Stealth",
-                "Name": "Decreased Heat Capacity",
-                "Details": "Heat Capacity Penalty",
+                "Name": "Improved Heat Sinking",
+                "Details": "Heat sinking increased by 3",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
               },
               "nature": "Debuff",
@@ -10240,7 +10223,7 @@
         {
           "missionsRequired": 20,
           "levelName": "Gunslinger",
-          "decription": "+4 Cluster, +20% Called Shot Chance, +1 Offensive Push Accuracy",
+          "decription": "+0.3 Cluster to Ballistic Weapons, +20% Called Shot Chance, +1 Offensive Push Accuracy",
           "effectData": [
             {
               "Description": {
@@ -10258,11 +10241,11 @@
               "statisticData": {
                 "statName": "ClusteringModifier",
                 "operation": "Float_Add",
-                "modValue": "4",
+                "modValue": "0.3",
                 "modType": "System.Single",
                 "targetAmmoCategory": "NotSet",
                 "targetCollection": "Weapon",
-                "targetWeaponCategory": "NotSet",
+                "targetWeaponCategory": "Ballistic",
                 "targetWeaponSubType": "NotSet",
                 "targetWeaponType": "NotSet"
               },
@@ -10606,9 +10589,9 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "Affinity_HPC",
-                "Name": "PPC Accuracy Quirk",
-                "Details": "+1 Acc for PPC Weapons.",
-                "Icon": "uixSvgIcon_equipment_TTS"
+                "Name": "Heat generation decreased",
+                "Details": "Heat generation reduced by 10%.",
+                "Icon": "uixSvgIcon_equipment_ThermalExchanger"
               },
               "nature": "Buff",
               "statisticData": {
@@ -10668,8 +10651,8 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "Affinity_Supercooled",
-                "Name": "PPC Accuracy Quirk",
-                "Details": "+1 Acc for PPC Weapons.",
+                "Name": "Improved Heat Sinking",
+                "Details": "Heat sinking increased by 10",
                 "Icon": "uixSvgIcon_equipment_TTS"
               },
               "nature": "Buff",
@@ -10993,36 +10976,8 @@
         {
           "missionsRequired": 20,
           "levelName": "Missile Boat",
-          "decription": "+6 Missile Cluster, +1 Missile Evasion Ignore, +2 Indirect Missile Accuracy,",
+          "decription": "+2 Missile Evasion Ignore, +3 Indirect Missile Accuracy,",
           "effectData": [
-            {
-              "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-              },
-              "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-              },
-              "effectType": "StatisticEffect",
-              "Description": {
-                "Id": "StatusEffect-EnhMS-ClusterBonusLRM",
-                "Name": "MISSILERY SUITE",
-                "Details": "Substantially increases the clustering of this unit's LRM weapons and boosts the stability damage of SRMs by 50%.",
-                "Icon": "UixSvgIcon_specialEquip_System"
-              },
-              "statisticData": {
-                "statName": "ClusteringModifier",
-                "operation": "Float_Add",
-                "modValue": "6",
-                "modType": "System.Single",
-                "targetCollection": "Weapon",
-                "targetWeaponCategory": "Missile"
-              },
-              "nature": "Buff"
-            },
             {
               "durationData": {
                 "duration": -1,
@@ -11044,7 +10999,7 @@
               "statisticData": {
                 "statName": "EvasivePipsIgnored",
                 "operation": "Float_Add",
-                "modValue": "1",
+                "modValue": "2",
                 "modType": "System.Single",
                 "targetCollection": "Weapon",
                 "targetWeaponCategory": "Missile"
@@ -11073,7 +11028,7 @@
               "statisticData": {
                 "statName": "ToHitIndirectModifier",
                 "operation": "Float_Add",
-                "modValue": "-2.0",
+                "modValue": "-3.0",
                 "modType": "System.Single",
                 "targetCollection": "Weapon",
                 "targetWeaponCategory": "Missile"
@@ -11226,8 +11181,8 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "StatusEffect_BCBallistic",
-                "Name": "BALLISTIC WEAPON HIT CHANCE IMPROVED",
-                "Details": "Ballistic weapon attacks have their hit improved by [AMT].",
+                "Name": "FLAMER HIT CHANCE IMPROVED",
+                "Details": "Flamer attacks have their hit improved by [AMT].",
                 "Icon": "AdvancedTC"
               },
               "nature": "Buff",
@@ -11254,8 +11209,8 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "StatusEffect_BCBallistic",
-                "Name": "BALLISTIC WEAPON HIT CHANCE IMPROVED",
-                "Details": "Ballistic weapon attacks have their hit improved by [AMT].",
+                "Name": "MACHINE GUN HIT CHANCE IMPROVED",
+                "Details": "Machinegun attacks have their hit improved by [AMT].",
                 "Icon": "AdvancedTC"
               },
               "nature": "Buff",
@@ -11282,8 +11237,8 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "StatusEffect_BCHeat",
-                "Name": "HEAT GENERATION DECREASED",
-                "Details": "Heat generation reduced by 15%.",
+                "Name": "Heat generation decreased",
+                "Details": "Flamer heat generation reduced by 10%.",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
               },
               "nature": "Buff",
@@ -11310,8 +11265,8 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "StatusEffect_BCHeat",
-                "Name": "HEAT GENERATION DECREASED",
-                "Details": "Heat generation reduced by 15%.",
+                "Name": "Machinegun heat generation decreased",
+                "Details": "Machinegun heat generation reduced by 10%.",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
               },
               "nature": "Buff",
