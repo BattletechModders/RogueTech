@@ -5,6 +5,11 @@ this mod allows you next things
 4. Add custom animated hardpoints
 
 main settings in mod.json
+	"SortBy": {
+		"orderByCbillValue":false,
+		"orderByNickname":false,
+		"orderByTonnage":false
+	},                                       - sorting order settings
 	"PartialMovementOnlyWalkByDefault": true, - if true and AllowPartialSprint is not overridden via value in Unaffected section or CUAllowPartialSprint stat value, 
 	                                            units allow partial movement only walk not sprint
 	"AllowRotateWhileJumpByDefault": true, - if false and player units will not be able to rotate while normal jumping unless overridden by unit CUAllowRotateWhileJump stat value 

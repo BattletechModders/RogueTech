@@ -34,6 +34,8 @@ CACAoEDamageMult - float - multipicator for all AoE damage to unit including AoE
 CACAPDamageMult - float - multipicator for all AP damage to unit (only pierce through part of damage)
 CACIncomingHeatMult - float - multipicator for all incoming heat (weapon attacks, landmines, burning terrain, AoE damage)
 CACIncomingStabilityMult - float - multipicator for all incoming stability (weapon attacks, landmines, burning terrain, AoE damage)
+CACAPShardsMult - float - multipicator for weapon shards TAC modifier (shardsMod = weapon.APArmorShardsMod() * unit.{CACAPShardsMult}) default 1.0
+CACAPMaxThiknessMult - float - multipicator for weapon max armor thikness TAC modifier (maxThickness = weapon.APMaxArmorThickness() * unit.{CACAPMaxThiknessMult}) default 1.0
 
 {
 "debugLog":true, - enable debug log 
@@ -637,6 +639,8 @@ new fields
 								NOTE! If ImprovedBallistic is set DisableClustering is forced to true and "wr-clustered_shots" tag removed from definition. 
   "BallisticDamagePerPallet": true - if true damage inflicted per pallet instead of per shot. Only working with ImprovedBallistic true, ballistic/laser/PPC weapon effect and HasShels false
                                      Damage will be divided by ProjectilesPerShot value, heat damage and stable damage too.
+	"statusEffects" : [] - list of status effects applying on hit. Can be set for weapon, ammo, mode. 
+	                       Effective list is result of merging all three lists.
 	"StatusEffectsPerHit":false - if true OnHit status effects applying on each hit instead on once. 
 	"AdditionalAudioEffect": "enum:AudioEventList_explosion.explosion_propane_tank", - additional sound effect on projectile impact. Value format "<type>:<name>".
 							 type values: "enum" - building in-game enum value
