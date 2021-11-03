@@ -13,18 +13,21 @@
     },
     "BonusDescriptions": {
       "Bonuses": [
-        "ActivateHeatLevel: 0",
-        "DeActivateHeatLevel: 30",
-        "ActiveMelee: X1.5",
-        "ActiveWalkSpeed: +60m",
+        "ActivateHeatLevel: 10",
+        "DeActivateHeatLevel: 1",
+        "UndeadMelee: X1.5",
+        "UndeadWalkSpeed: +60m",
+        "UndeadMeleeHot",
+        "UndeadWalkSpeedHot",
+        "HeatPerTurn: 15",
         "Reserved: 6",
         "CarryWeight: X2"
       ]
     },
     "ActivatableComponent": {
-      "ButtonName": "TSM",
-      "AutoActivateOnHeat": 0,
-      "AutoDeactivateOnHeat": 30,
+      "ButtonName": "Undead TSM",
+      "AutoActivateOnHeat": 10,
+      "AutoDeactivateOnHeat": 1,
       "CanNotBeActivatedManualy": true,
       "NoUniqueCheck": true,
       "statusEffects": [
@@ -50,7 +53,7 @@
           "statisticData": {
             "statName": "CBTBE_Physical_Weapon_Target_Damage_Multi",
             "operation": "Float_Multiply",
-            "modValue": "1.5",
+            "modValue": "0.45",
             "modType": "System.Single"
           }
         },
@@ -76,7 +79,7 @@
           "statisticData": {
             "statName": "CBTBE_Physical_Weapon_Target_Instability_Multi",
             "operation": "Float_Multiply",
-            "modValue": "1.25",
+            "modValue": "0.45",
             "modType": "System.Single"
           }
         },
@@ -102,7 +105,7 @@
           "statisticData": {
             "statName": "CBTBE_Punch_Target_Damage_Multi",
             "operation": "Float_Multiply",
-            "modValue": "1.5",
+            "modValue": "0.45",
             "modType": "System.Single"
           }
         },
@@ -128,7 +131,7 @@
           "statisticData": {
             "statName": "CBTBE_Punch_Target_Instability_Multi",
             "operation": "Float_Multiply",
-            "modValue": "1.25",
+            "modValue": "0.45",
             "modType": "System.Single"
           }
         },
@@ -154,7 +157,7 @@
           "statisticData": {
             "statName": "CBTBE_Kick_Target_Damage_Multi",
             "operation": "Float_Multiply",
-            "modValue": "1.5",
+            "modValue": "0.45",
             "modType": "System.Single"
           }
         },
@@ -180,7 +183,7 @@
           "statisticData": {
             "statName": "CBTBE_Kick_Target_Instability_Multi",
             "operation": "Float_Multiply",
-            "modValue": "1.25",
+            "modValue": "0.45",
             "modType": "System.Single"
           }
         },
@@ -205,7 +208,7 @@
           "statisticData": {
             "statName": "WalkSpeed",
             "operation": "Float_Add",
-            "modValue": "60",
+            "modValue": "-60",
             "modType": "System.Single"
           },
           "nature": "Buff"
@@ -231,7 +234,7 @@
   "RelativeModifier": 0,
   "AbsoluteModifier": 0,
   "Description": {
-    "Cost": 800000,
+    "Cost": 250000,
     "Rarity": 5,
     "Purchasable": true,
     "Manufacturer": "Necromo",
@@ -239,7 +242,7 @@
     "UIName": "Undead Sinew TSM",
     "Id": "Gear_Myomer_UTSM",
     "Name": "TripleStrengthMyomer  ",
-    "Details": "Boss, if I'm reading the serial numbers right, this TSM is from the very first batch made by the Capellans. And chemical analysis shows that the Anti-TSM chemicals used by the Fed Suns somehow caused a slow reaction that resulted in the TSM going, well, wonky, over the years. You can use it, sure, but don't expect it to help you when you overheat. I'm guessing the Capellans used 'Mechs equipped with it for some research projects instead of paying for a whole new 'Mech or doing the expensive repairs.",
+    "Details": "Boss, if I'm reading the serial numbers right, this TSM is from the very first batch made by the Capellans. And chemical analysis shows that the Anti-TSM chemicals used by the Fed Suns somehow caused a slow reaction that resulted in the TSM going, well, wonky, over the years. You can use it, sure, but don't expect it to help you when you overheat, in fact I'm pretty sure it will have some negative effects. I'm guessing the Capellans used 'Mechs equipped with it for some research projects instead of paying for a whole new 'Mech or doing the expensive repairs.",
     "Icon": "biceps"
   },
   "BonusValueA": "",
@@ -253,7 +256,222 @@
   "AllowedLocations": "All",
   "DisallowedLocations": "Head",
   "CriticalComponent": false,
-  "statusEffects": [],
+  "statusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "triggerLimit": 0,
+        "extendDurationOnTrigger": 0,
+        "specialRules": "NotSet",
+        "effectTargetType": "Creator",
+        "range": 0,
+        "forcePathRebuild": false,
+        "forceVisRebuild": false,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "UndeadTSMHeat",
+        "Name": "UndeadTSMHeat",
+        "Details": "UndeadTSMHeat",
+        "Icon": "uixSvgIcon_action_evasivemove"
+      },
+      "statisticData": {
+        "statName": "HeatSinkCapacity",
+        "operation": "Int_Add",
+        "modValue": "-15",
+        "modType": "System.Int32"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "TSM_Damage_Weapon",
+        "Name": "Melee Weapon Damage Mod",
+        "Details": "Damage Modifier",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "CBTBE_Physical_Weapon_Target_Damage_Multi",
+        "operation": "Float_Multiply",
+        "modValue": "1.5",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "TSM_Stability_Weapon",
+        "Name": "Melee Weapon Damage Mod",
+        "Details": "Damage Modifier",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "CBTBE_Physical_Weapon_Target_Instability_Multi",
+        "operation": "Float_Multiply",
+        "modValue": "1.25",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "TSM_Damage_Punch",
+        "Name": "Melee Weapon Damage Mod",
+        "Details": "Damage Modifier",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "CBTBE_Punch_Target_Damage_Multi",
+        "operation": "Float_Multiply",
+        "modValue": "1.5",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "TSM_Stability_Punch",
+        "Name": "Melee Weapon Damage Mod",
+        "Details": "Damage Modifier",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "CBTBE_Punch_Target_Instability_Multi",
+        "operation": "Float_Multiply",
+        "modValue": "1.25",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "TSM_Damage_Kick",
+        "Name": "Melee Weapon Damage Mod",
+        "Details": "Damage Modifier",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "CBTBE_Kick_Target_Damage_Multi",
+        "operation": "Float_Multiply",
+        "modValue": "1.5",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "TSM_Stability_Kick",
+        "Name": "Melee Weapon Damage Mod",
+        "Details": "Damage Modifier",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "CBTBE_Kick_Target_Instability_Multi",
+        "operation": "Float_Multiply",
+        "modValue": "1.25",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "TSMActive1",
+        "Name": "TSM ACTIVATED!",
+        "Details": "Stronger Melee and faster Movement",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "statisticData": {
+        "statName": "WalkSpeed",
+        "operation": "Float_Add",
+        "modValue": "60",
+        "modType": "System.Single"
+      },
+      "nature": "Buff"
+    }
+  ],
   "ComponentTags": {
     "items": [
       "component_type_stock",

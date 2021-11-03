@@ -7,12 +7,12 @@
     ],
     "BonusDescriptions": {
       "Bonuses": [
-        "TrackedMotive",
-        "Recoil: -1",
-        "MotiveSystemCrit",
         "ArmoredMotive",
+        "TrackedMotive",
         "DamageTaken: -5%",
-        "CritRes: 25%"
+        "ModularArmor: +10%",
+        "CritRes: 25%",
+        "MotiveSystemCrit"
       ]
     },
     "Flags": [
@@ -60,7 +60,7 @@
     "Id": "Gear_Armored_Tracked_Left",
     "Name": "Tracked Propulsion",
     "Details": "Tracked Propulsion",
-    "Icon": "uixSvgIcon_equipment_HeatBank"
+    "Icon": "tank-tread"
   },
   "BonusValueA": "",
   "BonusValueB": "",
@@ -74,33 +74,6 @@
   "DisallowedLocations": "All",
   "CriticalComponent": false,
   "statusEffects": [
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "StatusEffect-TrackedRecoilMitigation",
-        "Name": "Stable Gun Platform",
-        "Details": "Stable Gun Platform",
-        "Icon": "targeting"
-      },
-      "nature": "Buff",
-      "statisticData": {
-        "statName": "RefireModifier",
-        "operation": "Int_Add",
-        "modValue": "-1",
-        "modType": "System.Int32",
-        "targetCollection": "Weapon"
-      }
-    },
     {
       "durationData": {
         "duration": -1,
@@ -146,13 +119,40 @@
       "targetingData": {
         "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Status-MotiveArmor-{location}",
+        "Name": "Armored Motive Durability",
+        "Details": "Armored Motive Durability",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "effectsPersistAfterDestruction": true,
+        "statName": "{location}.Armor",
+        "operation": "Float_Multiply",
+        "modValue": "1.1",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
       "Description": {
         "Id": "TankCritPenalizedMotiveL",
-        "Name": "ChargerSprint",
-        "Details": "MORE SPEED.",
+        "Name": "Crit Resist",
+        "Details": "Armored Motive Crit Bonus",
         "Icon": "uixSvgIcon_run_n_gun"
       },
       "statisticData": {
