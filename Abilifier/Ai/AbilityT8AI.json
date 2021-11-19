@@ -1,9 +1,9 @@
 {
   "Description": {
     "Id": "AbilityT8AI",
-    "Name": "Cautious",
-    "Details": "PASSIVE: Remove one bar of stability damage when Reserving.  +1 to Initiative and Tactics Rolls.",
-    "Icon": "uixSvgIcon_ability_mastertactician"
+    "Name": "FIELD COMMAND",
+    "Details": "Lancemates Receive Night Vision, +1 Probe, -1 Jamming, +10% Sight/Sensors, +1 Initiative",
+    "Icon": "fieldcommand"
   },
   "DisplayParams": "ShowInMWTRay",
   "ReqSkill": "Tactics",
@@ -69,7 +69,7 @@
       "statisticData": {
         "statName": "SpotterDistanceAbsolute",
         "operation": "Float_Multiply",
-        "modValue": "1.05",
+        "modValue": "1.1",
         "modType": "System.Single"
       },
       "nature": "Buff"
@@ -101,8 +101,91 @@
       "statisticData": {
         "statName": "SensorDistanceAbsolute",
         "operation": "Float_Multiply",
-        "modValue": "1.05",
+        "modValue": "1.1",
         "modType": "System.Single"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "triggerLimit": 0,
+        "extendDurationOnTrigger": 0,
+        "specialRules": "NotSet",
+        "effectTargetType": "AllLanceMates",
+        "range": 0,
+        "forcePathRebuild": false,
+        "forceVisRebuild": false,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "FieldCommandAI4",
+        "Name": "Battle Computer",
+        "Details": "Provides +2 Initiative.",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "SBI_MOD_MISC",
+        "operation": "Int_Add",
+        "modValue": "1",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "AllLanceMates",
+        "range": 0.0,
+        "forceVisRebuild": true,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "FieldCommandAI5",
+        "Name": "ECM Anti-Jammer",
+        "Details": "Reduce Jamming on Allies",
+        "Icon": "uixSvgIcon_action_sensorlock"
+      },
+      "statisticData": {
+        "statName": "LV_ECM_JAMMED",
+        "operation": "Int_Add",
+        "modValue": "-1",
+        "modType": "System.Int32"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "AllLanceMates"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "NightVision",
+        "Name": "Night Vision Mode",
+        "Details": "",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "statisticData": {
+        "statName": "LV_NIGHT_VISION",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
       },
       "nature": "Buff"
     }
