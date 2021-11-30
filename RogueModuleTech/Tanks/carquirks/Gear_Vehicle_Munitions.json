@@ -5,31 +5,29 @@
       "CanNotBeActivatedManualy": true,
       "NoUniqueCheck": true,
       "Explosion": {
-        "VFXActorStat": "EngineExplodeVFX",
-        "RangeActorStat": "EngineExplodeRange",
-        "DamageActorStat": "EngineExplodeDamage",
-        "HeatActorStat": "EngineExplodeHeat",
-        "StabilityActorStat": "EngineExplodeStability",
-        "ChanceActorStat": "EngineExplodeChance",
-        "FireTerrainChanceActorStat": "EngineExplodeFireChance",
-        "FireTerrainStrengthActorStat": "EngineExplodeFireStrength",
-        "FireDurationWithoutForestActorStat": "EngineExplodeTerrainDuration",
-        "FireTerrainCellRadiusActorStat": "EngineExplodeFireRadius",
-        "TempDesignMaskActorStat": "EngineExplodeDesignMask",
-        "TempDesignMaskTurnsActorStat": "EngineExplodeDesignMaskDuration",
-        "TempDesignMaskCellRadiusActorStat": "EngineExplodeDesignMaskRadius"
+        "Range": 90,
+        "Damage": 150,
+        "Heat": 200,
+        "Stability": 150,
+        "Chance": 0.8,
+        "ExplodeOnDamage": true
       },
       "statusEffects": []
     },
-    "ComponentExplosion": {
-      "ExplosionDamage": 150,
-      "HeatDamage": 200,
-      "StabilityDamage": 150
+    "BonusDescriptions": {
+      "Bonuses": [
+        "CritRes: -20",
+        "GenericAOEBoom",
+        "AreaOfEffect: 90",
+        "AreaOfEffectDmg: 150",
+        "AreaOfEffectHeatDmg: 150",
+        "AreaOfEffectSTABDmg: 150"
+      ]
     },
+    "ComponentExplosion": {},
     "Flags": {
       "flags": [
         "not_broken",
-        "no_salvage",
         "autorepair"
       ]
     }
@@ -38,16 +36,16 @@
   "RelativeModifier": 0,
   "AbsoluteModifier": 0,
   "Description": {
-    "Cost": 50000,
-    "Rarity": 99,
+    "Cost": 500000,
+    "Rarity": 10,
     "Purchasable": true,
     "Manufacturer": "Generic",
     "Model": "Munitions Compartment",
     "UIName": "Munitions",
     "Id": "Gear_Vehicle_Munitions",
     "Name": "Munitions",
-    "Details": "Crates and crates of munitions",
-    "Icon": "uixSvgIcon_equipment_Comms"
+    "Details": "Crates and crates of small arms munitions, fuel, chemicals and other war materiel. There's always a buyer for such things.",
+    "Icon": "uixSvgIcon_ammoBox_Ballistic"
   },
   "BonusValueA": "",
   "BonusValueB": "",
@@ -69,213 +67,22 @@
       "targetingData": {
         "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
-        "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "CargExplodeChance",
-        "Name": "SuicideBomb",
-        "Details": "Engine very boom",
-        "Icon": "uixSvgIcon_equipment_Cockpit"
+        "Id": "MunitionsCrit",
+        "Name": "Munitions Crit",
+        "Details": "Ammo goes boom",
+        "Icon": "uixSvgIcon_run_n_gun"
       },
-      "nature": "Buff",
       "statisticData": {
-        "effectsPersistAfterDestruction": true,
-        "statName": "EngineExplodeChance",
-        "operation": "Float_Add",
-        "modValue": "1",
-        "modType": "System.Single"
-      }
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "CargExplodeDmg",
-        "Name": "SuicideBomb",
-        "Details": "Engine very boom",
-        "Icon": "uixSvgIcon_equipment_Cockpit"
-      },
-      "nature": "Buff",
-      "statisticData": {
-        "effectsPersistAfterDestruction": true,
-        "statName": "EngineExplodeDamage",
-        "operation": "Float_Add",
-        "modValue": "100",
-        "modType": "System.Single"
-      }
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "CargExplodeHeat",
-        "Name": "SuicideBomb",
-        "Details": "Engine very boom",
-        "Icon": "uixSvgIcon_equipment_Cockpit"
-      },
-      "nature": "Buff",
-      "statisticData": {
-        "effectsPersistAfterDestruction": true,
-        "statName": "EngineExplodeHeat",
-        "operation": "Float_Add",
-        "modValue": "100",
-        "modType": "System.Single"
-      }
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "CargExplodeRange",
-        "Name": "SuicideBomb",
-        "Details": "Engine very boom",
-        "Icon": "uixSvgIcon_equipment_Cockpit"
-      },
-      "nature": "Buff",
-      "statisticData": {
-        "effectsPersistAfterDestruction": true,
-        "statName": "EngineExplodeRange",
+        "statName": "CriticalHitChanceReceivedMultiplier",
         "operation": "Float_Multiply",
-        "modValue": "1.5",
+        "modValue": "1.2",
         "modType": "System.Single"
-      }
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
       },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "CargExplodeDmg",
-        "Name": "SuicideBomb",
-        "Details": "Engine very boom",
-        "Icon": "uixSvgIcon_equipment_Cockpit"
-      },
-      "nature": "Buff",
-      "statisticData": {
-        "effectsPersistAfterDestruction": true,
-        "statName": "EngineExplodeStability",
-        "operation": "Float_Add",
-        "modValue": "20",
-        "modType": "System.Single"
-      }
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "CargExplodeFireStr",
-        "Name": "SuicideBomb",
-        "Details": "Engine very boom",
-        "Icon": "uixSvgIcon_equipment_Cockpit"
-      },
-      "nature": "Buff",
-      "statisticData": {
-        "effectsPersistAfterDestruction": true,
-        "statName": "EngineExplodeFireStrength",
-        "operation": "Float_Add",
-        "modValue": "20",
-        "modType": "System.Single"
-      }
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "CargExplodeFireAOE",
-        "Name": "SuicideBomb",
-        "Details": "Engine very boom",
-        "Icon": "uixSvgIcon_equipment_Cockpit"
-      },
-      "nature": "Buff",
-      "statisticData": {
-        "effectsPersistAfterDestruction": true,
-        "statName": "EngineExplodeFireRadius",
-        "operation": "Float_Add",
-        "modValue": "6",
-        "modType": "System.Single"
-      }
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "CargExplodeFireDuration",
-        "Name": "SuicideBomb",
-        "Details": "Engine very boom",
-        "Icon": "uixSvgIcon_equipment_Cockpit"
-      },
-      "nature": "Buff",
-      "statisticData": {
-        "effectsPersistAfterDestruction": true,
-        "statName": "EngineExplodeTerrainDuration",
-        "operation": "Float_Add",
-        "modValue": "1",
-        "modType": "System.Single"
-      }
+      "nature": "Buff"
     }
   ],
   "ComponentTags": {
