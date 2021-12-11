@@ -15,3 +15,8 @@ it creates custom resource for ModTek - VoicePackDef
    ...........................................
   }
 }
+
+now loading mp3/ogg/wav files is supported
+to make voice over bank with mp3/ogg/wav such files you should add them to manifest with AudioFile type 
+and refer them in VoicePackDef. For using external samples vobank and stop_event fields should be empty.
+absent phrases will be played from baseVoice. There are no way to mix external soundbanks (vobank not empty) and external samples
