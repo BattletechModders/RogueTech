@@ -9,7 +9,7 @@ main settings in mod.json
 		"orderByCbillValue":false,
 		"orderByNickname":false,
 		"orderByTonnage":false
-	},                                       - sorting order settings
+	},                                        - sorting order settings
 	"PartialMovementOnlyWalkByDefault": true, - if true and AllowPartialSprint is not overridden via value in Unaffected section or CUAllowPartialSprint stat value, 
 	                                            units allow partial movement only walk not sprint
 	"AllowRotateWhileJumpByDefault": true, - if false and player units will not be able to rotate while normal jumping unless overridden by unit CUAllowRotateWhileJump stat value 
@@ -19,6 +19,8 @@ main settings in mod.json
 	"ConvoyRouteBeaconVFX":"vfxPrfPrtl_artillerySmokeSignal_loop", - VFX for convoy route points
 	"ConvoyRouteBeaconVFXScale":{"x":1,"y":1,"z":1}, - VFX scale for convoy route points
 	"DeployManual": true, - allowing manual deploy in random contract.
+	"AskForDeployManual": true - if true and manual deployment is allowed will ask if player wants to set deploy position. 
+	                             if false and manual deployment is allowed - deploy will be manual. 
 	"ManualDeployForbidContractTypes": [] - list of contract types names, for listed contract types manual deploy will be forbidden
 	"DeployMaxDistanceFromOriginal": 30 - max distance from original deploy position
 	"DeployMinDistanceFromEnemy": 300 - min distance form enemy unit
