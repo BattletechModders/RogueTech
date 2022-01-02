@@ -13,8 +13,8 @@
     ],
     "WorkOrderCosts": {
       "Install": {
-        "TechCost": "[[Chassis.Tonnage]] / 8",
-        "CBillCost": "[[Chassis.Tonnage]] * 1.35"
+        "TechCost": "0.125 * [[Chassis.Tonnage]]",
+        "CBillCost": "1.35 * [[Chassis.Tonnage]]"
       }
     },
     "BonusDescriptions": {
@@ -37,16 +37,14 @@
         "FailCritLoc",
         "FailReducPilot",
         "FCS",
-        "IsCockpit"
+        "IsCockpit",
+        "BleedReduction: 40%"
       ]
-    },
-    "InventorySorter": {
-      "SortKey": "00202"
     },
     "ActivatableComponent": {
       "ButtonName": "VDNI",
-	  "CanActivateAfterFire": false,
-	  "CanActivateAfterMove": true,
+      "CanActivateAfterFire": false,
+      "CanActivateAfterMove": true,
       "FailFlatChance": 0.01,
       "FailRoundsStart": 2,
       "FailChancePerTurn": 0.03,
@@ -78,10 +76,10 @@
           },
           "nature": "Debuff",
           "statisticData": {
-              "statName": "InjureOnStructDmg",
-              "operation": "Set",
-              "modValue": "true",
-              "modType": "System.Boolean"
+            "statName": "InjureOnStructDmg",
+            "operation": "Set",
+            "modValue": "true",
+            "modType": "System.Boolean"
           }
         },
         {
@@ -95,16 +93,16 @@
           },
           "effectType": "StatisticEffect",
           "Description": {
-            "Id": "CockpitInitativeEffect",
+            "Id": "CockpitInitiativeEffect",
             "Name": "CockpitTechBonus",
             "Details": "Provides + 2 Initiative and several buffs.",
             "Icon": "uixSvgIcon_equipment_Cockpit"
           },
           "nature": "Buff",
           "statisticData": {
-            "statName": "BaseInitiative",
+            "statName": "SBI_MOD_MISC",
             "operation": "Int_Add",
-            "modValue": "-1",
+            "modValue": "1",
             "modType": "System.Int32"
           }
         },
@@ -160,14 +158,17 @@
       "flags": [
         "not_broken"
       ]
+    },
+    "InventorySorter": {
+      "SortKey": "00202"
     }
   },
   "StatName": null,
   "RelativeModifier": 0,
   "AbsoluteModifier": 0,
   "Description": {
-    "Cost": 830000,
-    "Rarity": 10,
+    "Cost": 300000,
+    "Rarity": 5,
     "Purchasable": true,
     "Manufacturer": "Word of Blake",
     "Model": "VDNI Cockpit",
@@ -338,6 +339,33 @@
         "operation": "Float_Add",
         "modValue": "-2.0",
         "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "CockpitBleed",
+        "Name": "Bleed reduction",
+        "Details": "Bleed Rate x 0.6",
+        "Icon": "blood"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "BleedingRateMulti",
+        "operation": "Float_Multiply",
+        "modValue": "0.6",
+        "modType": "System.Single",
+        "targetCollection": "Pilot"
       }
     }
   ],

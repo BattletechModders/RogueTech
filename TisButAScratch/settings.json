@@ -7,18 +7,18 @@
 	"BleedingOutTimerString": "activations",
 	"enableInternalDmgInjuries": true,
 	"pilotPainShunt": "pilot_painshunt",
-        "pilotingReqs": [
-                {
-                        "ComponentTag": "PilotNeedsSpecialTag",
-                        "PilotTag": "commander_player",
-                        "PilotTagDisplay": "Level 5 Fancy Pants"
-                }
-        ],
+	"pilotingReqs": [
+		{
+			"ComponentTag": "PilotNeedsSpecialTag",
+			"PilotTag": "commander_player",
+			"PilotTagDisplay": "Level 5 Fancy Pants"
+		}
+	],
 	"internalDmgStatName": "InjureOnStructDmg",
 	"internalDmgInjuryLimit": 1,
 	"internalDmgLvlReq": 5,
 	"timeHealsAllWounds": true,
-	"missionKillSeverityThreshold": 6,
+	"missionKillSeverityThreshold": 3,
 	"reInjureWeightAppliesCurrentContract": false,
 	"reInjureLocWeight": 11,
 	"debilSeverityThreshold": 4,
@@ -28,10 +28,15 @@
 	"injuryHealTimeMultiplier": 1.0,
 	"injureVehiclePilotOnDestroy": "SINGLE",
 	"crewOrCockpitCustomID": [
-		"CrewCompartment", 
-		"Cockpit" 
+		"CrewCompartment",
+		"Cockpit"
 	],
-	"lifeSupportCustomID": ["LifeSupportA", "LifeSupportB"],
+	"lifeSupportCustomID": [
+		"LifeSupportA",
+		"LifeSupportB"
+	],
+	"disableTBASTag": "TBAS_Disabled",
+	"OverheatInjuryStat": "InjureOnOverheat",
 	"isTorsoMountStatName": "isTorsoMount",
 	"lifeSupportSupportsLifeTM": true,
 	"internalDmgInjuryLocs": [
@@ -64,15 +69,15 @@
 					"Description": {
 						"Id": "Concussed",
 						"Name": "Concussed",
-						"Details": "This pilot is concussed. Things are spinny.",
+						"Details": "This pilot is concussed. Things are spinny. Initiative Decreased",
 						"Icon": "seeingstars"
 					},
 					"nature": "Buff",
 					"statisticData": {
-						"statName": "UnsteadyThreshold",
-						"operation": "Float_Multiply",
-						"modValue": "0.75",
-						"modType": "System.Single"
+						"statName": "SBI_MOD_INJURY",
+						"operation": "Int_Add",
+						"modValue": "-3",
+						"modType": "System.Int32"
 					}
 				}
 			]
@@ -155,7 +160,7 @@
 			"injuryLoc": "Head",
 			"couldBeThermal": false,
 			"severity": 2,
-			"description": "This pilot has suffered barotrauma to the head. Unsteady threshold decreased.",
+			"description": "This pilot has suffered barotrauma to the head. Initiative decreased.",
 			"effectDataJO": [
 				{
 					"durationData": {},
@@ -168,15 +173,15 @@
 					"Description": {
 						"Id": "EyesBaroUnsteady",
 						"Name": "Barotrauma",
-						"Details": "This pilot has suffered barotrauma to the head. Unsteady threshold decreased.",
+						"Details": "This pilot has suffered barotrauma to the head. Initiative decreased.",
 						"Icon": "seeingstars"
 					},
 					"nature": "Buff",
 					"statisticData": {
-						"statName": "UnsteadyThreshold",
-						"operation": "Float_Add",
-						"modValue": "-50.0",
-						"modType": "System.Single"
+						"statName": "SBI_MOD_INJURY",
+						"operation": "Int_Add",
+						"modValue": "-5",
+						"modType": "System.Int32"
 					}
 				}
 			]
@@ -411,7 +416,7 @@
 			"injuryLoc": "LegL",
 			"couldBeThermal": true,
 			"severity": 1,
-			"description": "This pilot has been severely burned and is suffering a movement penalty.",
+			"description": "This pilot has been severely burned and is suffering a Piloting Skill penalty.",
 			"effectDataJO": [
 				{
 					"durationData": {},
@@ -424,37 +429,16 @@
 					"Description": {
 						"Id": "LegLBurnedWalk",
 						"Name": "Severe Burns - Left Leg",
-						"Details": "This pilot has been severely burned and is suffering a movement penalty.",
+						"Details": "This pilot has been severely burned and is suffering a Piloting Skill penalty.",
 						"Icon": "flamingskull"
 					},
 					"nature": "Buff",
 					"statisticData": {
-						"statName": "WalkSpeed",
-						"operation": "Float_Multiply",
-						"modValue": "0.75",
-						"modType": "System.Single"
-					}
-				},
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "LegLBurnedJump",
-						"Name": "Severe Burns - Left Leg",
-						"Details": "This pilot has been severely burned and is suffering a jump distance penalty.",
-						"Icon": "flamingskull"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "JumpDistance",
-						"operation": "Float_Multiply",
-						"modValue": "0.75",
-						"modType": "System.Single"
+						"statName": "Piloting",
+						"operation": "Int_Add",
+						"modValue": "-2",
+						"modType": "System.Int32",
+						"targetCollection": "Pilot"
 					}
 				}
 			]
@@ -465,7 +449,7 @@
 			"injuryLoc": "LegR",
 			"couldBeThermal": true,
 			"severity": 1,
-			"description": "This pilot has been severely burned and is suffering a movement penalty.",
+			"description": "This pilot has been severely burned and is suffering a Piloting Skill penalty.",
 			"effectDataJO": [
 				{
 					"durationData": {},
@@ -478,37 +462,16 @@
 					"Description": {
 						"Id": "LegRBurnedWalk",
 						"Name": "Severe Burns - Right Leg",
-						"Details": "This pilot has been severely burned and is suffering a movement penalty.",
+						"Details": "This pilot has been severely burned and is suffering a Piloting Skill penalty.",
 						"Icon": "flamingskull"
 					},
 					"nature": "Buff",
 					"statisticData": {
-						"statName": "WalkSpeed",
-						"operation": "Float_Multiply",
-						"modValue": "0.75",
-						"modType": "System.Single"
-					}
-				},
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "LegRBurnedJump",
-						"Name": "Severe Burns - Right Leg",
-						"Details": "This pilot has been severely burned and is suffering a jump distance penalty.",
-						"Icon": "flamingskull"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "JumpDistance",
-						"operation": "Float_Multiply",
-						"modValue": "0.75",
-						"modType": "System.Single"
+						"statName": "Piloting",
+						"operation": "Int_Add",
+						"modValue": "-2",
+						"modType": "System.Int32",
+						"targetCollection": "Pilot"
 					}
 				}
 			]
@@ -519,7 +482,7 @@
 			"injuryLoc": "LegL",
 			"couldBeThermal": false,
 			"severity": 1,
-			"description": "This pilot has a broken leg and is suffering a movement penalty.",
+			"description": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
 			"effectDataJO": [
 				{
 					"durationData": {},
@@ -532,37 +495,16 @@
 					"Description": {
 						"Id": "LegLBrokeWalk",
 						"Name": "Simple Fracture - Left Leg",
-						"Details": "This pilot has a broken leg and is suffering a movement penalty.",
+						"Details": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
 						"Icon": "footcast"
 					},
 					"nature": "Buff",
 					"statisticData": {
-						"statName": "WalkSpeed",
-						"operation": "Float_Multiply",
-						"modValue": "0.75",
-						"modType": "System.Single"
-					}
-				},
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "LegLBrokeJump",
-						"Name": "Simple Fracture - Left Leg",
-						"Details": "This pilot has a broken leg and is suffering a jump distance penalty.",
-						"Icon": "footcast"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "JumpDistance",
-						"operation": "Float_Multiply",
-						"modValue": "0.75",
-						"modType": "System.Single"
+						"statName": "Piloting",
+						"operation": "Int_Add",
+						"modValue": "-3",
+						"modType": "System.Int32",
+						"targetCollection": "Pilot"
 					}
 				}
 			]
@@ -574,7 +516,7 @@
 			"injuryLoc": "LegL",
 			"couldBeThermal": false,
 			"severity": 1,
-			"description": "This pilot has a compound fracture to their leg and is suffering a severe movement penalty.",
+			"description": "This pilot has a compound fracture to their leg and is suffering a severe Piloting Skill penalty.",
 			"effectDataJO": [
 				{
 					"durationData": {},
@@ -587,37 +529,16 @@
 					"Description": {
 						"Id": "LegLBrokeCmpndWalk_bleedout",
 						"Name": "Compound Fracture - Left Leg",
-						"Details": "This pilot has a broken leg and is suffering a movement penalty.",
+						"Details": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
 						"Icon": "footcast"
 					},
 					"nature": "Buff",
 					"statisticData": {
-						"statName": "WalkSpeed",
-						"operation": "Float_Multiply",
-						"modValue": "0.5",
-						"modType": "System.Single"
-					}
-				},
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "LegLBrokeCmpndJump_bleedout",
-						"Name": "Compound Fracture - Left Leg",
-						"Details": "This pilot has a broken leg and is suffering a jump distance penalty.",
-						"Icon": "footcast"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "JumpDistance",
-						"operation": "Float_Multiply",
-						"modValue": "0.5",
-						"modType": "System.Single"
+						"statName": "Piloting",
+						"operation": "Int_Add",
+						"modValue": "-5",
+						"modType": "System.Int32",
+						"targetCollection": "Pilot"
 					}
 				}
 			]
@@ -628,7 +549,7 @@
 			"injuryLoc": "LegR",
 			"couldBeThermal": false,
 			"severity": 1,
-			"description": "This pilot has a broken leg and is suffering a movement penalty.",
+			"description": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
 			"effectDataJO": [
 				{
 					"durationData": {},
@@ -641,37 +562,16 @@
 					"Description": {
 						"Id": "LegRBrokeWalk",
 						"Name": "Simple Fracture - Right Leg",
-						"Details": "This pilot has a broken leg and is suffering a movement penalty.",
+						"Details": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
 						"Icon": "footcast"
 					},
 					"nature": "Buff",
 					"statisticData": {
-						"statName": "WalkSpeed",
-						"operation": "Float_Multiply",
-						"modValue": "0.75",
-						"modType": "System.Single"
-					}
-				},
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "LegRBrokeJump",
-						"Name": "Simple Fracture - Right Leg",
-						"Details": "This pilot has a broken leg and is suffering a jump distance penalty.",
-						"Icon": "footcast"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "JumpDistance",
-						"operation": "Float_Multiply",
-						"modValue": "0.75",
-						"modType": "System.Single"
+						"statName": "Piloting",
+						"operation": "Int_Add",
+						"modValue": "-3",
+						"modType": "System.Int32",
+						"targetCollection": "Pilot"
 					}
 				}
 			]
@@ -683,7 +583,7 @@
 			"injuryLoc": "LegR",
 			"couldBeThermal": false,
 			"severity": 1,
-			"description": "This pilot has a compound fracture to their leg and is suffering a severe movement penalty.",
+			"description": "This pilot has a compound fracture to their leg and is suffering a severe Piloting Skill penalty.",
 			"effectDataJO": [
 				{
 					"durationData": {},
@@ -696,37 +596,16 @@
 					"Description": {
 						"Id": "LegRBrokeCmpndWalk_bleedout",
 						"Name": "Compound Fracture - Right Leg",
-						"Details": "This pilot has a broken leg and is suffering a movement penalty.",
+						"Details": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
 						"Icon": "footcast"
 					},
 					"nature": "Buff",
 					"statisticData": {
-						"statName": "WalkSpeed",
-						"operation": "Float_Multiply",
-						"modValue": "0.5",
-						"modType": "System.Single"
-					}
-				},
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "LegRBrokeJump_bleedout",
-						"Name": "Compound Fracture - Right Leg",
-						"Details": "This pilot has a broken leg and is suffering a jump distance penalty.",
-						"Icon": "footcast"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "JumpDistance",
-						"operation": "Float_Multiply",
-						"modValue": "0.5",
-						"modType": "System.Single"
+						"statName": "Piloting",
+						"operation": "Int_Add",
+						"modValue": "-5",
+						"modType": "System.Int32",
+						"targetCollection": "Pilot"
 					}
 				}
 			]
@@ -981,7 +860,7 @@
 			"bleedingEffectID": "BleedingDizzy",
 			"bleedingName": "Dizzy",
 			"bleedingEffectLvl": 2,
-			"description": "This pilot has suffered significant blood loss and has reduced stability.",
+			"description": "This pilot has suffered significant blood loss and is suffering an Initiative Penalty.",
 			"effectDataJO": [
 				{
 					"durationData": {},
@@ -994,15 +873,15 @@
 					"Description": {
 						"Id": "BleedDizzy",
 						"Name": "Blood Loss: Dizzy",
-						"Details": "This pilot has lost a lot of blood. Things are spinny and unstable.",
+						"Details": "This pilot has lost a lot of blood. Things are spinny. Initiative Decreased.",
 						"Icon": "seeingstars"
 					},
 					"nature": "Buff",
 					"statisticData": {
-						"statName": "UnsteadyThreshold",
-						"operation": "Float_Multiply",
-						"modValue": "0.85",
-						"modType": "System.Single"
+						"statName": "SBI_MOD_INJURY",
+						"operation": "Int_Add",
+						"modValue": "-7",
+						"modType": "System.Int32"
 					}
 				}
 			]
@@ -1011,7 +890,7 @@
 			"bleedingEffectID": "BleedingRun",
 			"bleedingName": "Groggy",
 			"bleedingEffectLvl": 3,
-			"description": "This pilot has suffered major blood loss and has a movement penalty.",
+			"description": "This pilot has suffered major blood loss and has a Piloting Skill penalty.",
 			"effectDataJO": [
 				{
 					"durationData": {},
@@ -1023,38 +902,17 @@
 					"effectType": "StatisticEffect",
 					"Description": {
 						"Id": "BleedingRun_Walk",
-						"Name": "Blood Loss: Movement Penalty",
-						"Details": "This pilot has a broken leg and is suffering a walking, running, and jumping penalty.",
+						"Name": "Blood Loss: Piloting Penalty",
+						"Details": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
 						"Icon": "footcast"
 					},
 					"nature": "Buff",
 					"statisticData": {
-						"statName": "WalkSpeed",
-						"operation": "Float_Multiply",
-						"modValue": "0.75",
-						"modType": "System.Single"
-					}
-				},
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": false
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "BleedingRun_Run",
-						"Name": "Blood Loss: Jump Distance Penalty",
-						"Details": "This pilot has a broken leg and is suffering a jump distance penalty.",
-						"Icon": "footcast"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "JumpDistance",
-						"operation": "Float_Multiply",
-						"modValue": "0.75",
-						"modType": "System.Single"
+						"statName": "Piloting",
+						"operation": "Int_Add",
+						"modValue": "-5",
+						"modType": "System.Int32",
+						"targetCollection": "Pilot"
 					}
 				}
 			]
