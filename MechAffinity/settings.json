@@ -17,6 +17,8 @@
   "pqArgoAdditive": false,
   "pqArgoMin": 0.1,
   "pqArgoMultiAutoAdjust": false,
+  "enablePilotSelect" : true,
+  "enableMonthlyMoraleReset": true,
   "quirkPools": [
     {
       "tag": "pilot_npc_low",
@@ -70,6 +72,7 @@
       "tag": "pilot_npc_high",
       "quirksToPick": 3,
       "quirksAvailable": [
+        "pilot_painshunt",
         "pilot_command",
         "pilot_comstar",
         "pilot_mechwarrior",
@@ -94,6 +97,7 @@
       "tag": "pilot_npc_testpilot",
       "quirksToPick": 10,
       "quirksAvailable": [
+        "pilot_painshunt",
         "pilot_command",
         "pilot_comstar",
         "pilot_mechwarrior",
@@ -118,6 +122,7 @@
       "tag": "pilot_npc_kobiyashi",
       "quirksToPick": 16,
       "quirksAvailable": [
+        "pilot_painshunt",
         "pilot_command",
         "pilot_comstar",
         "pilot_mechwarrior",
@@ -162,6 +167,20 @@
     }
   ],
   "pilotQuirks": [
+    {
+      "tag": "pilot_painshunt",
+      "quirkName": "Pain Shunt",
+      "description": "Pilot is Immune to Injuries from Overheat, Internal Explosion and DNI Feedback. 25% Pilot Upkeep.",
+      "effectData": [],
+      "quirkEffects": [
+        {
+          "type": "PilotCostFactor ",
+          "modifier": 0.25,
+          "secondaryModifier": 0,
+          "affectedIds": []
+        }
+      ]
+    },
     {
       "tag": "pilot_spacer",
       "quirkName": "Spacer",
@@ -593,9 +612,9 @@
           },
           "nature": "Buff",
           "statisticData": {
-            "statName": "BaseInitiative",
+            "statName": "SBI_MOD_MISC",
             "operation": "Int_Add",
-            "modValue": "-1",
+            "modValue": "1",
             "modType": "System.Int32"
           }
         }
@@ -673,7 +692,40 @@
       "tag": "pilot_athletic",
       "quirkName": "Athletic",
       "description": "+1 Bonus Health. +5% Upkeep",
-      "effectData": [],
+      "effectData": [
+        {
+          "durationData": {
+            "duration": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "triggerLimit": 0,
+            "extendDurationOnTrigger": 0,
+            "specialRules": "NotSet",
+            "effectTargetType": "Creator",
+            "range": 0,
+            "forcePathRebuild": false,
+            "forceVisRebuild": false,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "QuirkAthleticKillThreshold",
+            "Name": "Decreases Heat Generation",
+            "Details": "Heat generation reduced by 10%",
+            "Icon": "uixSvgIcon_ability_mastertactician"
+          },
+          "statisticData": {
+            "targetCollection": "Pilot",
+            "statName": "MissionKilledThreshold",
+            "operation": "Int_Add",
+            "modValue": "1",
+            "modType": "System.Int32"
+          },
+          "nature": "Buff"
+        }
+      ],
       "quirkEffects": [
         {
           "type": "PilotCostFactor ",
@@ -773,6 +825,38 @@
             "modValue": "-1",
             "modType": "System.Int32"
           }
+        },
+        {
+          "durationData": {
+            "duration": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "triggerLimit": 0,
+            "extendDurationOnTrigger": 0,
+            "specialRules": "NotSet",
+            "effectTargetType": "Creator",
+            "range": 0,
+            "forcePathRebuild": false,
+            "forceVisRebuild": false,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "QuirkMilitaryKillThreshold",
+            "Name": "Decreases Heat Generation",
+            "Details": "Heat generation reduced by 10%",
+            "Icon": "uixSvgIcon_ability_mastertactician"
+          },
+          "statisticData": {
+            "targetCollection": "Pilot",
+            "statName": "MissionKilledThreshold",
+            "operation": "Int_Add",
+            "modValue": "1",
+            "modType": "System.Int32"
+          },
+          "nature": "Buff"
         }
       ],
       "quirkEffects": [
@@ -1016,7 +1100,7 @@
     {
       "tag": "pilot_lucky",
       "quirkName": "Lucky",
-      "description": "+2 Clustering. -10% Jam Chance Multi. +10% Upkeep",
+      "description": "+0.5 Clustering. -10% Jam Chance Multi. +10% Upkeep",
       "effectData": [
         {
           "durationData": {
@@ -1062,7 +1146,7 @@
           "statisticData": {
             "statName": "ClusteringModifier",
             "operation": "Float_Add",
-            "modValue": "2",
+            "modValue": "0.5",
             "modType": "System.Single",
             "targetCollection": "Weapon"
           }
@@ -1640,8 +1724,359 @@
   "quirkAffinities": [
     {
       "quirkNames": [
+        "PA_Controls"
+      ],
+      "affinityLevels": [
+        {
+          "missionsRequired": 90,
+          "levelName": "Skeet Shooter",
+          "decription": "+1 Evasion Ignore",
+          "effectData": [
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "Quirk_Damage_Mod",
+                "Name": "Melee Weapon Damage Mod",
+                "Details": "Damage Modifier",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "EvasivePipsIgnored",
+                "operation": "Float_Add",
+                "modValue": "1.0",
+                "modType": "System.Single",
+                "targetCollection": "Weapon"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "quirkNames": [
+          "PA_General",
+          "PA_Magnetic",
+          "PA_NotHandsy",
+          "PA_Quad"
+      ],
+      "affinityLevels": [
+        {
+          "missionsRequired": 100,
+          "levelName": "Dodge!",
+          "decription": "+1 Defense",
+          "effectData": [
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "StatusEffect-Defense_ToHit-T2",
+                "Name": "HARDER TO HIT",
+                "Details": "Provides a penalty to all attacks against this unit.",
+                "Icon": "uixSvgIcon_equipment_Gyro"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "ToHitThisActor",
+                "operation": "Float_Add",
+                "modValue": "1.0",
+                "modType": "System.Single"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "quirkNames": [
+        "PA_JumpJetsCU",
+        "PA_JumpJetsBooster",
+        "PA_JumpJetsHeavy",
+        "PA_JumpJetsLight"
+      ],
+      "affinityLevels": [
+        {
+          "missionsRequired": 120,
+          "levelName": "Jumpy",
+          "decription": "+33% Jump Distance",
+          "effectData": [
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "AFTAHBURNAH",
+                "Name": "CLAN TTS",
+                "Details": "+2Acc, +50% Crit, +30% Range, -50%MinRange for ALL Weapons.",
+                "Icon": "AdvancedTC"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "JumpDistanceMultiplier",
+                "operation": "Float_Multiply",
+                "modValue": "1.34",
+                "modType": "System.Single"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "quirkNames": [
+        "PA_BoardingClawCU",
+        "PA_VibroClaw",
+        "PA_BasicManipulators"
+      ],
+      "affinityLevels": [
+        {
+          "missionsRequired": 60,
+          "levelName": "Swarm!",
+          "decription": "+1 to Swarm success roll",
+          "effectData": [
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "Swarm_to_Hit",
+                "Name": "Swarm_to_Hit",
+                "Details": "+2Acc, +50% Crit, +30% Range, -50%MinRange for ALL Weapons.",
+                "Icon": "AdvancedTC"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "AccuracyModifier",
+                 "operation": "Float_Add",
+                 "modValue": "-1.0",
+                 "modType": "System.Single",
+                 "targetCollection": "Weapon",
+                 "targetWeaponSubType": "Melee"
+              }
+            }
+          ]
+        },
+        {
+          "missionsRequired": 80,
+          "levelName": "Go for the knees!",
+          "decription": "+1 Physical Accuracy, +10% Physical Weapon Damage and Stability",
+          "effectData": [
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "TunedActuatorsAffinityAccPhys",
+                "Name": "MeleeWeapon Accuracy Modifier",
+                "Details": "MeleeWeapon Accuracy Modifier",
+                "Icon": "uixSvgIcon_run_n_gun"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "CBTBE_Physical_Weapon_Attack_Mod",
+                "operation": "Int_Add",
+                "modValue": "-1",
+                "modType": "System.Int32"
+              }
+            },
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "Quirk_Damage_Mod",
+                "Name": "Melee Weapon Damage Mod",
+                "Details": "Damage Modifier",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "CBTBE_Physical_Weapon_Target_Damage_Multi",
+                "operation": "Float_Multiply",
+                "modValue": "1.1",
+                "modType": "System.Single"
+              }
+            },
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "Quirk_Stability_Mod",
+                "Name": "Melee Weapon Damage Mod",
+                "Details": "Damage Modifier",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "CBTBE_Physical_Weapon_Target_Instability_Multi",
+                "operation": "Float_Multiply",
+                "modValue": "1.1",
+                "modType": "System.Single"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "quirkNames": [
+        "PA_HeavyBattleClaw",
+        "PA_BattleClaw"
+      ],
+      "affinityLevels": [
+        {
+          "missionsRequired": 80,
+          "levelName": "Go for the knees!",
+          "decription": "+1 Physical Accuracy, +10% Physical Weapon Damage and Stability",
+          "effectData": [
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "TunedActuatorsAffinityAccPhys",
+                "Name": "MeleeWeapon Accuracy Modifier",
+                "Details": "MeleeWeapon Accuracy Modifier",
+                "Icon": "uixSvgIcon_run_n_gun"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "CBTBE_Physical_Weapon_Attack_Mod",
+                "operation": "Int_Add",
+                "modValue": "-1",
+                "modType": "System.Int32"
+              }
+            },
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "Quirk_Damage_Mod",
+                "Name": "Melee Weapon Damage Mod",
+                "Details": "Damage Modifier",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "CBTBE_Physical_Weapon_Target_Damage_Multi",
+                "operation": "Float_Multiply",
+                "modValue": "1.1",
+                "modType": "System.Single"
+              }
+            },
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "Quirk_Stability_Mod",
+                "Name": "Melee Weapon Damage Mod",
+                "Details": "Damage Modifier",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "CBTBE_Physical_Weapon_Target_Instability_Multi",
+                "operation": "Float_Multiply",
+                "modValue": "1.1",
+                "modType": "System.Single"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "quirkNames": [
         "Special_LandAirMech_Active",
-		"Special_LandAirMech_Disabled"
+        "Special_LandAirMech_Disabled"
       ],
       "affinityLevels": [
         {
@@ -1649,7 +2084,7 @@
           "levelName": "Alpha Mike Foxtrot",
           "decription": "+20% Jump Attack Damage",
           "effectData": [
-             {
+            {
               "Description": {
                 "Details": "Pilot has Mastered the Chassis.",
                 "Icon": "UixSvgIcon_specialEquip_System",
@@ -1663,7 +2098,7 @@
               "effectType": "StatisticEffect",
               "nature": "Buff",
               "statisticData": {
-               "statName": "JumpingWeaponDamageModifier",
+                "statName": "JumpingWeaponDamageModifier",
                 "operation": "Float_Add",
                 "modValue": "0.2",
                 "modType": "System.Single",
@@ -1684,7 +2119,7 @@
     {
       "quirkNames": [
         "LAM_Turbine",
-		"LAM_Turbine_Heavy"
+        "LAM_Turbine_Heavy"
       ],
       "affinityLevels": [
         {
@@ -1692,32 +2127,32 @@
           "levelName": "Push the Envelope",
           "decription": "-20% Jump Heat Generation",
           "effectData": [
-             {
-            "durationData": {
+            {
+              "durationData": {
                 "duration": -1,
                 "stackLimit": -1
-            },
-            "targetingData": {
+              },
+              "targetingData": {
                 "effectTriggerType": "Passive",
                 "effectTargetType": "Creator",
                 "showInTargetPreview": false,
                 "showInStatusPanel": false
-            },
-            "effectType": "StatisticEffect",
-            "Description": {
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
                 "Id": "StatusEffect-JumpHeat",
                 "Name": "Jump Jet Heat",
                 "Details": "This Jump Jets Heat Generation per Hex",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
-            },
-            "nature": "Buff",
-            "statisticData": {
+              },
+              "nature": "Buff",
+              "statisticData": {
                 "statName": "JumpHeat",
                 "operation": "Float_Multiply",
                 "modValue": "0.8",
                 "modType": "System.Single"
+              }
             }
-        }
           ]
         }
       ]
@@ -1733,58 +2168,58 @@
           "levelName": "Leaf on the Wind!",
           "decription": "+20% Stability Threshhold and Max",
           "effectData": [
-             {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "LAM_STAB_QUIRK_Threshold",
-        "Name": "LAM_STAB_QUIRK_Threshold",
-        "Details": "Provides 70 stability and -20% stability damage taken.",
-        "Icon": "uixSvgIcon_equipment_Gyro"
-      },
-      "statisticData": {
-        "statName": "UnsteadyThreshold",
-        "operation": "Float_Multiply",
-        "modValue": "1.2",
-        "modType": "System.Single"
-      },
-      "nature": "Buff"
-    },
-	{
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "LAM_STAB_QUIRK_Max",
-        "Name": "LAM_STAB_QUIRK_Max",
-        "Details": "Provides 70 stability and -20% stability damage taken.",
-        "Icon": "uixSvgIcon_equipment_Gyro"
-      },
-      "statisticData": {
-        "statName": "MaxStability",
-        "operation": "Float_Multiply",
-        "modValue": "1.2",
-        "modType": "System.Single"
-      },
-      "nature": "Buff"
-    }
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "LAM_STAB_QUIRK_Threshold",
+                "Name": "LAM_STAB_QUIRK_Threshold",
+                "Details": "Provides 70 stability and -20% stability damage taken.",
+                "Icon": "uixSvgIcon_equipment_Gyro"
+              },
+              "statisticData": {
+                "statName": "UnsteadyThreshold",
+                "operation": "Float_Multiply",
+                "modValue": "1.2",
+                "modType": "System.Single"
+              },
+              "nature": "Buff"
+            },
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "LAM_STAB_QUIRK_Max",
+                "Name": "LAM_STAB_QUIRK_Max",
+                "Details": "Provides 70 stability and -20% stability damage taken.",
+                "Icon": "uixSvgIcon_equipment_Gyro"
+              },
+              "statisticData": {
+                "statName": "MaxStability",
+                "operation": "Float_Multiply",
+                "modValue": "1.2",
+                "modType": "System.Single"
+              },
+              "nature": "Buff"
+            }
           ]
         }
       ]
@@ -1982,13 +2417,15 @@
         "Gear_Actuator_Friedhof_Behemoth",
         "Gear_Actuator_Friedhof_CompensatorPlus",
         "Gear_Actuator_Friedhof_Heracles",
-        "emod_arm_omni_hand"
+        "emod_arm_omni_hand",
+	"emod_arm_omni_lower",
+        "Gear_Actuator_Hydraulic_Recoil_Absorber"
       ],
       "affinityLevels": [
         {
           "missionsRequired": 140,
           "levelName": "Tuned Actuators",
-          "decription": "+1 Punch/Physical Accuracy, +5% Punch/Physical Damage",
+          "decription": "+1 Punch/Physical Accuracy, +5% Punch/Physical Damage, +1 Arm Mounted Accuracy",
           "effectData": [
             {
               "durationData": {
@@ -2093,6 +2530,70 @@
                 "modValue": "1.05",
                 "modType": "System.Single"
               }
+            },
+            {
+              "Description": {
+                "Details": "Pilot has Mastered the Chassis.",
+                "Icon": "UixSvgIcon_specialEquip_System",
+                "Id": "Affinity_FocusFire_LA",
+                "Name": "BattleMechAffinity"
+              },
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "effectType": "StatisticEffect",
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "LeftArm.Accuracy",
+                "operation": "Float_Add",
+                "modValue": "-1",
+                "modType": "System.Single",
+                "targetAmmoCategory": "NotSet",
+                "targetCollection": "NotSet",
+                "targetWeaponCategory": "NotSet",
+                "targetWeaponSubType": "NotSet",
+                "targetWeaponType": "NotSet"
+              },
+              "targetingData": {
+                "effectTargetType": "Creator",
+                "effectTriggerType": "Passive",
+                "hideApplicationFloatie": true,
+                "showInStatusPanel": false,
+                "showInTargetPreview": false
+              }
+            },
+            {
+              "Description": {
+                "Details": "Pilot has Mastered the Chassis.",
+                "Icon": "UixSvgIcon_specialEquip_System",
+                "Id": "Affinity_FocusFire_RA",
+                "Name": "BattleMechAffinity"
+              },
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "effectType": "StatisticEffect",
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "RightArm.Accuracy",
+                "operation": "Float_Add",
+                "modValue": "-1",
+                "modType": "System.Single",
+                "targetAmmoCategory": "NotSet",
+                "targetCollection": "NotSet",
+                "targetWeaponCategory": "NotSet",
+                "targetWeaponSubType": "NotSet",
+                "targetWeaponType": "NotSet"
+              },
+              "targetingData": {
+                "effectTargetType": "Creator",
+                "effectTriggerType": "Passive",
+                "hideApplicationFloatie": true,
+                "showInStatusPanel": false,
+                "showInTargetPreview": false
+              }
             }
           ]
         }
@@ -2100,10 +2601,12 @@
     },
     {
       "quirkNames": [
+        "Gear_MASC",
         "Gear_MASC_CLAN",
         "Gear_Myomer_TSM",
         "Quirk_Cockpit_Ceres_TSM",
-        "Lootable_structureslots_EndoTSM"
+        "Lootable_structureslots_EndoTSM",
+        "PA_Systems"
       ],
       "affinityLevels": [
         {
@@ -2152,7 +2655,8 @@
         "Hand_Weapon_STREAKSRM4_CLAN",
         "Hand_Weapon_SuperShotgun",
         "Hand_Weapon_SuperTAG_CLAN",
-        "Weapon_Hand_BoomStick"
+        "Weapon_Hand_BoomStick",
+        "Weapon_LoaderKing_Industrial_Crane"
       ],
       "affinityLevels": [
         {
@@ -2232,7 +2736,8 @@
         "Gear_Cockpit_Advanced_Small",
         "Gear_Cockpit_Generic_Small",
         "Gear_Cockpit_Torsomount",
-        "Gear_Cockpit_LifeSupportB_Knife"
+        "Gear_Cockpit_LifeSupportB_Knife",
+        "SLDF_Small_Industrial"
       ],
       "affinityLevels": [
         {
@@ -2310,9 +2815,12 @@
         "emod_case",
         "LAM_Structure_TSM",
         "LAM_Structure_Composite",
-		"LAM_Structure_EndoSteel",
+        "LAM_Structure_EndoSteel",
         "LAM_Structure_Default",
-        "emod_structureslots_clanendorigged"
+        "emod_structureslots_clanendorigged",
+        "Gear_Reinforced_Leg_MK1",
+        "Quirk_whammy_case2",
+        "emod_structure_MAD"
       ],
       "affinityLevels": [
         {
@@ -2328,7 +2836,7 @@
               "targetingData": {
                 "effectTriggerType": "Passive",
                 "effectTargetType": "Creator",
-                "showInStatusPanel": true
+                "showInStatusPanel": false
               },
               "effectType": "StatisticEffect",
               "Description": {
@@ -2351,7 +2859,8 @@
     },
     {
       "quirkNames": [
-        "Gear_FCS_AdvancedTC"
+        "Gear_FCS_AdvancedTC",
+        "Gear_FCS_Lonewolf"
       ],
       "affinityLevels": [
         {
@@ -2392,7 +2901,9 @@
         "Elemental_Harjel",
         "Structure_InternalRepairSystem",
         "emod_armorslots_clanferrolamellor",
-		"LAM_Aluminium_Lamellor"
+        "LAM_Aluminium_Lamellor",
+        "Gear_HarJel2",
+        "emod_armor_MAD"
       ],
       "affinityLevels": [
         {
@@ -2423,7 +2934,48 @@
               "statisticData": {
                 "statName": "DamageReductionMultiplierAll",
                 "operation": "Float_Multiply",
-                "modValue": "0.8",
+                "modValue": "0.95",
+                "modType": "System.Single"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "quirkNames": [
+        "emod_armorslots_clanferrosfibrous"
+      ],
+      "affinityLevels": [
+        {
+          "missionsRequired": 120,
+          "levelName": "Hardy",
+          "decription": "-3% Damage Taken",
+          "effectData": [
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "Indomitable",
+                "Name": "CLAN TTS",
+                "Details": "+2Acc, +50% Crit, +30% Range, -50%MinRange for ALL Weapons.",
+                "Icon": "AdvancedTC"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "DamageReductionMultiplierAll",
+                "operation": "Float_Multiply",
+                "modValue": "0.97",
                 "modType": "System.Single"
               }
             }
@@ -2486,7 +3038,9 @@
         "Gear_Gyro_Hyperion_Omni",
         "Gear_Gyro_Ultralight_Stabilized",
         "Gear_Gyro_XXL",
-        "Gear_Gyro_Friedhof_Sparrow"
+        "Gear_Gyro_Friedhof_Sparrow",
+        "Gear_Gyro_Omnimech_Quicsell",
+        "Gear_Gyro_Coventry_Dreadnought"
       ],
       "affinityLevels": [
         {
@@ -2529,11 +3083,14 @@
       "quirkNames": [
         "Type_InnerSphereStandard",
         "Type_Armored",
-        "Type_Elemental"
+        "Type_Elemental",
+        "Type_Rider",
+        "Type_Ravager",
+        "Type_Advanced"
       ],
       "affinityLevels": [
         {
-          "missionsRequired": 130,
+          "missionsRequired": 40,
           "levelName": "Anti Mech Tactics",
           "decription": "-20% Damage Taken",
           "effectData": [
@@ -2570,10 +3127,9 @@
     },
     {
       "quirkNames": [
-        "Type_Stealthed",
-        "Type_Mimetic",
         "armorslots_ff_stealth",
-        "emod_armorslots_stealth"
+        "emod_armorslots_stealth",
+        "emod_armorslots_stealth_CLAN"
       ],
       "affinityLevels": [
         {
@@ -2667,16 +3223,134 @@
       ]
     },
     {
-      "quirkNames": [        
+      "quirkNames": [
+        "Type_Stealthed",
+        "Type_Mimetic",
+        "Type_Void",
+        "Type_RISC"
+      ],
+      "affinityLevels": [
+        {
+          "missionsRequired": 40,
+          "levelName": "Black Ops Recon",
+          "decription": "-15% Signature and Visibility and +1 Local ECM",
+          "effectData": [
+            {
+              "Description": {
+                "Details": "Pilot has Mastered the Chassis.",
+                "Icon": "UixSvgIcon_specialEquip_System",
+                "Id": "Affinity_Predator_Signature",
+                "Name": "BattleMechAffinity"
+              },
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "effectType": "StatisticEffect",
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "SensorSignatureModifier",
+                "operation": "Float_Multiply",
+                "modValue": "0.85",
+                "modType": "System.Single"
+              },
+              "targetingData": {
+                "effectTargetType": "Creator",
+                "effectTriggerType": "Passive",
+                "hideApplicationFloatie": true,
+                "showInStatusPanel": false,
+                "showInTargetPreview": false
+              }
+            },
+            {
+              "Description": {
+                "Details": "Pilot has Mastered the Chassis.",
+                "Icon": "UixSvgIcon_specialEquip_System",
+                "Id": "Affinity_Predator_Visibility",
+                "Name": "BattleMechAffinity"
+              },
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "effectType": "StatisticEffect",
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "SpottingVisibilityMultiplier",
+                "operation": "Float_Multiply",
+                "modValue": "0.85",
+                "modType": "System.Single"
+              },
+              "targetingData": {
+                "effectTargetType": "Creator",
+                "effectTriggerType": "Passive",
+                "hideApplicationFloatie": true,
+                "showInStatusPanel": false,
+                "showInTargetPreview": false
+              }
+            },
+            {
+              "Description": {
+                "Details": "Pilot has Mastered the Chassis.",
+                "Icon": "UixSvgIcon_specialEquip_System",
+                "Id": "Affinity_Predator_ECM",
+                "Name": "BattleMechAffinity"
+              },
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "effectType": "StatisticEffect",
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "LV_ECM_SHIELD",
+                "operation": "Int_Add",
+                "modValue": "1",
+                "modType": "System.Int32"
+              },
+              "targetingData": {
+                "effectTargetType": "Creator",
+                "effectTriggerType": "Passive",
+                "hideApplicationFloatie": true,
+                "showInStatusPanel": false,
+                "showInTargetPreview": false
+              }
+            }
+          ]
+        }
+      ]
+    },
+
+
+    {
+      "quirkNames": [
         "Gear_LegJet_Queen_Upper",
         "Gear_JumpJet_Extended_Superheavy",
         "Gear_JumpJet_Generic_Assault",
         "Gear_JumpJet_Generic_Heavy",
-        "Gear_JumpJet_Generic_Standard",
+        "Gear_JumpJet_Generic_Standard",        
+        "Gear_JumpJet_Quad_FrontLeg_Assault",
+        "Gear_JumpJet_Quad_FrontLeg_Heavy",
+        "Gear_JumpJet_Quad_FrontLeg_Standard",
+        "Gear_JumpJet_Prototype_Assault",
+        "Gear_JumpJet_Prototype_Heavy",
+        "Gear_JumpJet_Prototype_Standard",
         "Gear_JumpJet_Proto_Standard",
         "Gear_JumpJet_Proto_Superheavy",
         "Gear_JumpJet_SyberianHeavy",
-        "Gear_PartialWing_Phoenix"
+        "Gear_PartialWing_Phoenix",
+        "Gear_LegJet_Assault_Upper",
+        "Gear_JumpJet_Booster_clan",
+        "Gear_JumpJet_Directional_MAD-DER",
+        "Gear_JumpJet_Improved_Standard",
+        "Gear_JumpJet_Improved_Heavy",
+        "Gear_JumpJet_Improved_Assault",
+        "Gear_JumpJet_Improved_Quad_FrontLeg_Standard",
+        "Gear_JumpJet_Improved_Quad_FrontLeg_Heavy",
+        "Gear_JumpJet_Improved_Quad_FrontLeg_Assault",
+        "Gear_PartialWing_IS",
+        "Gear_PartialWing_Clan",
+        "RedLabmorBoostpack"
       ],
       "affinityLevels": [
         {
@@ -2769,7 +3443,9 @@
         "Weapon_ATM9_JuryRigged_Corsair",
         "Weapon_HEAVYAOE_ROCKETLAUNCHER20_Corsair",
         "Weapon_MRM_40_JuryRigged",
-        "Weapon_Artillery_ArrowIV_CLAN"
+        "Weapon_Artillery_ArrowIV_CLAN",
+        "Weapon_HEAVY_MRM_40",
+        "ShoulderMount_Ground-Control"
       ],
       "affinityLevels": [
         {
@@ -2860,7 +3536,9 @@
         "Weapon_Gauss_Gauss_Prototype",
         "Weapon_Gauss_RAILGUN_BFG",
         "Weapon_Gauss_Prototype_HEAVY",
-        "Weapon_Gauss_Magshot_Battery_Clan"
+        "Weapon_Gauss_Magshot_Battery_Clan",
+        "Weapon_Gauss_Railgun_PROTOTYPE",
+        "Weapon_HGauss_SB_CLAN"
       ],
       "affinityLevels": [
         {
@@ -2882,7 +3560,7 @@
               "effectType": "StatisticEffect",
               "nature": "Buff",
               "statisticData": {
-                "statName": "CriticalChanceMultipler",
+                "statName": "CriticalChanceMultiplier",
                 "operation": "Float_Add",
                 "modValue": "1",
                 "modType": "System.Single",
@@ -3040,6 +3718,45 @@
     },
     {
       "quirkNames": [
+        "Gear_TargetingTrackingSystem_Orssos",
+        "Gear_TargetingTrackingSystem_Snafu",
+        "Gear_TargetingTrackingSystem_Sniper"
+      ],
+      "affinityLevels": [
+        {
+          "missionsRequired": 120,
+          "levelName": "Tuned Battlecomputers",
+          "decription": "+5% Called Shot Chance",
+          "effectData": [
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator"
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "BC_CALLED_SHOT",
+                "Name": "Improved Called Shot",
+                "Details": "Called Shots twice as reliable",
+                "Icon": "uixSvgIcon_ability_mastertactician"
+              },
+              "statisticData": {
+                "statName": "CalledShotBonusMultiplier",
+                "operation": "Float_Multiply",
+                "modValue": "1.05",
+                "modType": "System.Single"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "quirkNames": [
         "prototype_light_fusion_center",
         "Quirk_300_Compact_Engine",
         "supercharged_xl_engine",
@@ -3053,7 +3770,12 @@
         "emod_engineslots_light_center",
         "LAM_Engine",
         "LAM_Engine_XL",
-        "Gear_HeatSink_Compact_Standard"
+        "Gear_HeatSink_Compact_Standard",
+        "emod_engineslots_FuelCell",
+        "emod_engineslots_ICE_XL_center_Quicsell",
+        "emod_engineslots_slight_center",
+        "emod_engineslots_supercharged_LAM_LIGHT",
+        "emod_quicsel_xl_center"
       ],
       "affinityLevels": [
         {
@@ -3075,8 +3797,8 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "LightShowQuirk",
-                "Name": "HEAT GENERATION DECREASED",
-                "Details": "Heat generation reduced by 10%.",
+                "Name": "Heat generation decreased",
+                "Details": "Heat generation reduced by 5%.",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
               },
               "nature": "Buff",
@@ -3104,7 +3826,8 @@
         "Gear_Actuator_CoolingJacket",
         "radical_kit_chs",
         "Gear_HeatSink_Generic_Thermal-Exchanger-Clan",
-        "Gear_HeatSink_Generic_Thermal-Exchanger-III"
+        "Gear_HeatSink_Generic_Thermal-Exchanger-III",
+        "BoltOn_LRM_INFERNOLAUNCHER20_X5"
       ],
       "affinityLevels": [
         {
@@ -3152,7 +3875,8 @@
         "Gear_Cockpit_Interface",
         "Gear_FCS_VDNI",
         "Gear_Cockpit_Cripple",
-        "Gear_Cockpit_TorsoDNI"
+        "Gear_Cockpit_TorsoDNI",
+        "Gear_FCS_Beserk"
       ],
       "affinityLevels": [
         {
@@ -3274,10 +3998,62 @@
     },
     {
       "quirkNames": [
+        "Weapon_Laser_Light_TAG_CLAN",
+        "Weapon_Laser_TAG",
+        "Weapon_Laser_TAG_AIV",
+        "Weapon_Laser_TAG_Barrage",
+        "Weapon_Laser_TAG_Cuss",
+        "Weapon_Laser_TAG_FBOMB",
+        "Weapon_Laser_TAG_Orbital"
+      ],
+      "affinityLevels": [
+        {
+          "missionsRequired": 120,
+          "levelName": "Stake Out",
+          "decription": "+1 Tactics Skill",
+          "effectData": [
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "StatusEffect_Cockpit_Skill_Tactics",
+                "Name": "Tactics Buff",
+                "Details": "Buffs Tactics Skill",
+                "Icon": "uixSvgIcon_equipment_Cockpit"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "Tactics",
+                "operation": "Int_Add",
+                "modValue": "1",
+                "modType": "System.Int32",
+                "targetCollection": "Pilot"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "quirkNames": [
         "Gear_General_Advanced_Command_Module",
         "Gear_C3",
         "Gear_C3i",
-        "Weapon_FCS_Command_C3"
+        "Weapon_FCS_Command_C3",
+        "Gear_Cockpit_CommandConsole",
+        "Gear_Cockpit_CommandConsole_ArtemisIV",
+        "Gear_Cockpit_CommandConsole_Armored",
+        "Gear_Sensors_Improved_Communication",
+        "PA_C3"
       ],
       "affinityLevels": [
         {
@@ -3311,9 +4087,9 @@
               },
               "nature": "Buff",
               "statisticData": {
-                "statName": "BaseInitiative",
+                "statName": "SBI_MOD_MISC",
                 "operation": "Int_Add",
-                "modValue": "-1",
+                "modValue": "1",
                 "modType": "System.Int32"
               }
             },
@@ -3448,7 +4224,11 @@
         "Gear_Owens_C3BAP",
         "Gear_Sensors_AR12",
         "Gear_Society_Nova_CEWS",
-        "Weapon_Laser_BeholderStare"
+        "Gear_AP_CLAN",
+        "Weapon_Laser_BeholderStare",
+        "PA_ECM",
+        "PA_Probe",
+        "PA_EWS"
       ],
       "affinityLevels": [
         {
@@ -3554,10 +4334,11 @@
               },
               "nature": "Buff",
               "statisticData": {
-                "statName": "AMSDamage",
+                "statName": "CAC_AMSDamage",
                 "operation": "Float_Add",
                 "modValue": "1.0",
-                "modType": "System.Single"
+                "modType": "System.Single",
+                "targetCollection": "Weapon"
               }
             },
             {
@@ -3609,7 +4390,10 @@
         "Xenorauder_Claws_Queen",
         "Gear_Arm_Claws",
         "Gear_Arm_Blade",
-        "Gear_Spiked_Fist"
+        "Gear_Spiked_Fist",
+        "Gear_Actuator_Prototype_ToothedClaws",
+        "Gear_Arm_Blade_Cyclone",
+        "Weapon_Crosscut_Chainsaw"
       ],
       "affinityLevels": [
         {
@@ -3725,7 +4509,9 @@
         "Special_VibroSword_10tons",
         "Special_Sword_10tons",
         "Gear_Actuator_Large_Vibrosword",
-        "Gear_Actuator_EnergySword"
+        "Gear_Actuator_EnergySword",
+        "Gear_Actuator_Damios",
+        "Gear_Actuator_Prototype_VibroBlade"
       ],
       "affinityLevels": [
         {
@@ -3906,7 +4692,8 @@
         "Special_Mace_9tons",
         "Special_Mace_10tons",
         "Special_Mace_Locust",
-        "Special_Mace_PolePlanter"
+        "Special_Mace_PolePlanter",
+        "Special_Mace_KitchenSink"
       ],
       "affinityLevels": [
         {
@@ -4051,6 +4838,308 @@
                 "hideApplicationFloatie": true,
                 "showInStatusPanel": false,
                 "showInTargetPreview": false
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "quirkNames": [
+        "Weapon_Laser_LargeLaserER_2-BlazeFire",
+        "Weapon_Laser_MediumLaserER_CLAN",
+        "Weapon_Laser_MediumLaser_2-Diverse_Optics"
+      ],
+      "affinityLevels": [
+        {
+          "missionsRequired": 120,
+          "levelName": "Cooled Laser",
+          "decription": "-5% Heat generated with Laser",
+          "effectData": [
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "StatusEffect-FCS_AC21",
+                "Name": "Cooling Jacket",
+                "Details": "-5% Heat for Lasers.",
+                "Icon": "uixSvgIcon_equipment_TTS"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "HeatGenerated",
+                "operation": "Float_Multiply",
+                "modValue": "0.95",
+                "modType": "System.Single",
+                "targetCollection": "Weapon",
+                "targetWeaponType": "Laser"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "quirkNames": [
+        "Gear_Quad_Turret"
+      ],
+      "affinityLevels": [
+        {
+          "missionsRequired": 120,
+          "levelName": "Sieged",
+          "decription": "-3 Recoil with Ranged weapons and -10% Stability Damage taken",
+          "effectData": [
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "QuadRecoil",
+                "Name": "Quad Turret Recoil Affinity",
+                "Details": "-3 Recoil",
+                "Icon": "targeting"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "RefireModifier",
+                "operation": "Int_Add",
+                "modValue": "-3",
+                "modType": "System.Int32",
+                "targetCollection": "Weapon"
+              }
+            },
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "QuadStabilityReceived",
+                "Name": "QuadStabilityReceived",
+                "Details": "Incoming stability damage reduced by [AMT].",
+                "Icon": "uixSvgIcon_equipment_Gyro"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "appliesEachTick": false,
+                "effectsPersistAfterDestruction": false,
+                "statName": "ReceivedInstabilityMultiplier",
+                "operation": "Float_Multiply",
+                "modValue": "0.9",
+                "modType": "System.Single"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "quirkNames": [
+        "Tank_CrewCompartment"
+      ],
+      "affinityLevels": [
+        {
+          "missionsRequired": 40,
+          "levelName": "Skilled Sensor Operator",
+          "decription": "+1 Probe, +1 Adv. Sensors, +10% Sight and Sensors",
+          "effectData": [
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0.0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": true,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "LV_PROBE_CARRIER",
+                "Name": "Active Probe (Passive)",
+                "Details": "Reduces effectiveness of stealthed and ECM shielded units",
+                "Icon": "uixSvgIcon_status_ECM-ghost"
+              },
+              "statisticData": {
+                "statName": "LV_PROBE_CARRIER",
+                "operation": "Int_Add",
+                "modValue": "1",
+                "modType": "System.Int32"
+              },
+              "nature": "Buff"
+            },
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0.0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": true,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "LV_ADVANCED_SENSORS",
+                "Name": "Advanced Sensors",
+                "Details": "Provides detailed information on enemy units",
+                "Icon": "uixSvgIcon_status_ECM-ghost"
+              },
+              "statisticData": {
+                "statName": "LV_ADVANCED_SENSORS",
+                "operation": "Int_Add",
+                "modValue": "1",
+                "modType": "System.Int32"
+              },
+              "nature": "Buff"
+            },
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "BAProbe",
+                "Name": "HP-CockpitSensors-Sensor",
+                "Details": "Increased Sight/Sensors",
+                "Icon": "uixSvgIcon_equipment_Cockpit"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "SensorDistanceAbsolute",
+                "operation": "Float_Multiply",
+                "modValue": "1.1",
+                "modType": "System.Single"
+              }
+            },
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "HP-CockpitSensors-Spot",
+                "Name": "SPOTTING DISTANCE INCREASED",
+                "Details": "Increases spotting distance by 50m.",
+                "Icon": "uixSvgIcon_equipment_Cockpit"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "SpotterDistanceAbsolute",
+                "operation": "Float_Multiply",
+                "modValue": "1.1",
+                "modType": "System.Single"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "quirkNames": [
+        "Tank_Turret"
+      ],
+      "affinityLevels": [
+        {
+          "missionsRequired": 40,
+          "levelName": "Hunter Killer Team Training",
+          "decription": "Multi-Target Ability",
+          "effectData": [
+            {
+              "durationData": {
+                "duration": -1,
+                "ticksOnActivations": false,
+                "useActivationsOfTarget": false,
+                "ticksOnEndOfRound": false,
+                "ticksOnMovements": false,
+                "stackLimit": -1,
+                "clearedWhenAttacked": false
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "triggerLimit": 0,
+                "extendDurationOnTrigger": 0,
+                "specialRules": "NotSet",
+                "effectTargetType": "Creator",
+                "range": 0,
+                "forcePathRebuild": false,
+                "forceVisRebuild": false,
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "IRAllowMultiTargetEffect",
+                "Name": "IRMULTITARGET",
+                "Details": "Enables multi-target.",
+                "Icon": "uixSvgIcon_equipment_ActuatorArm"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "IRAllowMultiTarget",
+                "operation": "Set",
+                "modValue": "true",
+                "modType": "System.Boolean"
               }
             }
           ]
@@ -4540,7 +5629,7 @@
               "effectType": "StatisticEffect",
               "nature": "Buff",
               "statisticData": {
-                "statName": "CriticalChanceMultipler",
+                "statName": "CriticalChanceMultiplier",
                 "operation": "Float_Add",
                 "modValue": "1",
                 "modType": "System.Single",
@@ -5268,7 +6357,173 @@
     },
     {
       "quirkNames": [
-        "Special_Anti_Air_Targeting"
+        "Type_Marauder"
+      ],
+      "affinityLevels": [
+        {
+          "missionsRequired": 40,
+          "levelName": "Sharpshooter",
+          "decription": "+2 Long Range Accuracy, +3 Extreme Range Accuracy",
+          "effectData": [
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "RangeBracketBonusAccLR",
+                "Name": "Bonus Accuracy at range",
+                "Details": "range bracket bonus accuracy",
+                "Icon": "uixSvgIcon_ability_precisionstrike"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "CACLongRangeAccuracyMod",
+                "operation": "Float_Add",
+                "modValue": "-2.0",
+                "modType": "System.Single"
+              }
+            },
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "RangeBracketBonusAccER",
+                "Name": "Bonus Accuracy at range",
+                "Details": "range bracket bonus accuracy",
+                "Icon": "uixSvgIcon_ability_precisionstrike"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "CACExtraLongRangeAccuracyMod",
+                "operation": "Float_Add",
+                "modValue": "-3.0",
+                "modType": "System.Single"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "quirkNames": [
+        "PA_Quad_Turret"
+      ],
+      "affinityLevels": [
+        {
+          "missionsRequired": 60,
+          "levelName": "Range Tracking",
+          "decription": "+1 Long Range Accuracy, +2 Extreme Range Accuracy",
+          "effectData": [
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "RangeBracketBonusAccLR",
+                "Name": "Bonus Accuracy at range",
+                "Details": "range bracket bonus accuracy",
+                "Icon": "uixSvgIcon_ability_precisionstrike"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "CACLongRangeAccuracyMod",
+                "operation": "Float_Add",
+                "modValue": "-1.0",
+                "modType": "System.Single"
+              }
+            },
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "RangeBracketBonusAccER",
+                "Name": "Bonus Accuracy at range",
+                "Details": "range bracket bonus accuracy",
+                "Icon": "uixSvgIcon_ability_precisionstrike"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "CACExtraLongRangeAccuracyMod",
+                "operation": "Float_Add",
+                "modValue": "-2.0",
+                "modType": "System.Single"
+              }
+            }
+          ]
+        },
+        {
+          "missionsRequired": 100,
+          "levelName": "Dodge!",
+          "decription": "+1 Defense",
+          "effectData": [
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "StatusEffect-Defense_ToHit-T2",
+                "Name": "HARDER TO HIT",
+                "Details": "Provides a penalty to all attacks against this unit.",
+                "Icon": "uixSvgIcon_equipment_Gyro"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "ToHitThisActor",
+                "operation": "Float_Add",
+                "modValue": "1.0",
+                "modType": "System.Single"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "quirkNames": [
+        "Special_Anti_Air_Targeting",
+        "Special_LegendKiller"
       ],
       "affinityLevels": [
         {
@@ -5528,9 +6783,9 @@
               },
               "nature": "Buff",
               "statisticData": {
-                "statName": "BaseInitiative",
+                "statName": "SBI_MOD_MISC",
                 "operation": "Int_Add",
-                "modValue": "-1",
+                "modValue": "1",
                 "modType": "System.Int32"
               }
             }
@@ -5602,7 +6857,7 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "StatusEffect_BCHeat",
-                "Name": "HEAT GENERATION DECREASED",
+                "Name": "Heat generation decreased.",
                 "Details": "Heat generation reduced by 5%.",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
               },
@@ -5629,15 +6884,15 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "StatusEffect_BCHeat",
-                "Name": "HEAT GENERATION DECREASED",
-                "Details": "Heat generation reduced by 5%.",
+                "Name": "Heat sinking increased",
+                "Details": "Heat sinking capacity increased by 6.",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
               },
               "nature": "Buff",
               "statisticData": {
                 "statName": "HeatSinkCapacity",
                 "operation": "Int_Add",
-                "modValue": "-6",
+                "modValue": "6",
                 "modType": "System.Int32"
               }
             }
@@ -5682,9 +6937,9 @@
               },
               "nature": "Buff",
               "statisticData": {
-                "statName": "BaseInitiative",
+                "statName": "SBI_MOD_MISC",
                 "operation": "Int_Add",
-                "modValue": "-1",
+                "modValue": "1",
                 "modType": "System.Int32"
               }
             },
@@ -5935,7 +7190,7 @@
         {
           "missionsRequired": 40,
           "levelName": "Zeroed In",
-          "decription": "+4 Clustering, +10% Called Shot Chance, +1 Called Shot Accuracy",
+          "decription": "+0.15 Clustering, +10% Called Shot Chance, +1 Offensive Push Accuracy",
           "effectData": [
             {
               "durationData": {
@@ -5981,7 +7236,7 @@
               "statisticData": {
                 "statName": "ClusteringModifier",
                 "operation": "Float_Add",
-                "modValue": "4",
+                "modValue": "0.15",
                 "modType": "System.Single",
                 "targetCollection": "Weapon"
               },
@@ -6031,7 +7286,7 @@
         {
           "missionsRequired": 40,
           "levelName": "Smart Warheads",
-          "decription": "+1 Missile Evasion Ignore, +8 Missile Clustering",
+          "decription": "+2 Missile Evasion Ignore",
           "effectData": [
             {
               "durationData": {
@@ -6042,53 +7297,19 @@
                 "effectTriggerType": "Passive",
                 "effectTargetType": "Creator",
                 "showInTargetPreview": true,
-                "showInStatusPanel": true
-              },
-              "effectType": "StatisticEffect",
-              "Description": {
-                "Id": "StatusEffect-EnhMS-ClusterBonusLRM",
-                "Name": "MISSILERY SUITE",
-                "Details": "Substantially increases the clustering of this unit's LRM weapons and boosts the stability damage of SRMs by 50%.",
-                "Icon": "UixSvgIcon_specialEquip_System"
-              },
-              "statisticData": {
-                "appliesEachTick": false,
-                "effectsPersistAfterDestruction": false,
-                "statName": "ClusteringModifier",
-                "operation": "Float_Add",
-                "modValue": "8",
-                "modType": "System.Single",
-                "additionalRules": "NotSet",
-                "targetCollection": "Weapon",
-                "targetWeaponCategory": "Missile",
-                "targetWeaponType": "NotSet",
-                "targetAmmoCategory": "NotSet",
-                "targetWeaponSubType": "NotSet"
-              },
-              "nature": "Buff"
-            },
-            {
-              "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-              },
-              "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInTargetPreview": true,
-                "showInStatusPanel": true
+                "showInStatusPanel": false
               },
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "StatusEffect-EnhMS-EvasionIgnore",
                 "Name": "MISSILERY SUITE",
-                "Details": "Substantially increases the clustering of this unit's LRM weapons and boosts the stability damage of SRMs by 50%.",
+                "Details": "Grants +2 evasion ignore to missiles",
                 "Icon": "UixSvgIcon_specialEquip_System"
               },
               "statisticData": {
                 "statName": "EvasivePipsIgnored",
                 "operation": "Float_Add",
-                "modValue": "1.0",
+                "modValue": "2.0",
                 "modType": "System.Single",
                 "targetCollection": "Weapon",
                 "targetWeaponCategory": "Missile"
@@ -6107,7 +7328,7 @@
         {
           "missionsRequired": 40,
           "levelName": "Ronin",
-          "decription": "+1 Pyhsical Weapon Attacks, +10% Pyhsical Weapon Damage and Stability",
+          "decription": "+1 Physical Weapon Attacks, +10% Physical Weapon Damage and Stability",
           "effectData": [
             {
               "durationData": {
@@ -6263,7 +7484,7 @@
               "Description": {
                 "Id": "StatusEffect-FCS_AC21",
                 "Name": "Cooling Jacket",
-                "Details": "-5% Heat for Autocannons.",
+                "Details": "-10% Heat for Autocannons.",
                 "Icon": "uixSvgIcon_equipment_TTS"
               },
               "nature": "Buff",
@@ -6305,7 +7526,7 @@
               "Description": {
                 "Id": "StatusEffect-FCS_AC21",
                 "Name": "Cooling Jacket",
-                "Details": "-5% Heat for Autocannons.",
+                "Details": "-10% Heat for Lasers.",
                 "Icon": "uixSvgIcon_equipment_TTS"
               },
               "nature": "Buff",
@@ -6347,7 +7568,7 @@
               "Description": {
                 "Id": "StatusEffect-FCS_AC21",
                 "Name": "Cooling Jacket",
-                "Details": "-5% Heat for Autocannons.",
+                "Details": "-10% Heat for Missiles.",
                 "Icon": "uixSvgIcon_equipment_TTS"
               },
               "nature": "Buff",
@@ -6389,7 +7610,7 @@
               "Description": {
                 "Id": "StatusEffect-FCS_AC21",
                 "Name": "Cooling Jacket",
-                "Details": "-5% Heat for Autocannons.",
+                "Details": "-10% Heat for PPCs.",
                 "Icon": "uixSvgIcon_equipment_TTS"
               },
               "nature": "Buff",
@@ -6609,7 +7830,8 @@
     },
     {
       "quirkNames": [
-        "Special_Intimidating"
+        "Special_Intimidating",
+        "Special_Tank_Monolithic"
       ],
       "affinityLevels": [
         {
@@ -6901,12 +8123,13 @@
     },
     {
       "quirkNames": [
-        "Special_Nimble"
+        "Special_Nimble",
+        "Special_Quad"
       ],
       "affinityLevels": [
         {
           "missionsRequired": 40,
-          "levelName": "Hull Down",
+          "levelName": "Alacrity",
           "decription": "+1 Evasion Generated",
           "effectData": [
             {
@@ -7022,7 +8245,7 @@
               "targetingData": {
                 "effectTriggerType": "Passive",
                 "effectTargetType": "Creator",
-                "showInStatusPanel": true
+                "showInStatusPanel": false
               },
               "effectType": "StatisticEffect",
               "Description": {
@@ -7156,7 +8379,7 @@
               "targetingData": {
                 "effectTriggerType": "Passive",
                 "effectTargetType": "Creator",
-                "showInStatusPanel": true
+                "showInStatusPanel": false
               },
               "effectType": "StatisticEffect",
               "Description": {
@@ -7529,7 +8752,7 @@
         {
           "missionsRequired": 40,
           "levelName": "Steady Aim",
-          "decription": "+1 Gunnery, +1 Offensive Push Accuracy, +10% Offensive Push Chance",
+          "decription": "+1 Gunnery, +1 Offensive Push Accuracy, +10% Called Shot Chance",
           "effectData": [
             {
               "durationData": {
@@ -7835,8 +9058,8 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "Stealth_Heat_Generation_Stealth",
-                "Name": "Increased Heat",
-                "Details": "Heat generation",
+                "Name": "Heat generation decreased",
+                "Details": "Heat generation reduced by 6%.",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
               },
               "nature": "Buff",
@@ -7862,8 +9085,8 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "Stealth_Heat_Capacity_Stealth",
-                "Name": "Decreased Heat Capacity",
-                "Details": "Heat Capacity Penalty",
+                "Name": "Improved Heat Sinking",
+                "Details": "Heat sinking increased by 3",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
               },
               "nature": "Debuff",
@@ -8076,7 +9299,9 @@
     {
       "quirkNames": [
         "Special_Extended_Torso_Twist",
-        "Special_Extreme_Torso_Twist"
+        "Special_Extreme_Torso_Twist",
+        "Special_MBT_Bulwark",
+        "Type_Exoskeleton"
       ],
       "affinityLevels": [
         {
@@ -8156,6 +9381,7 @@
     {
       "chassisNames": [
         "griffin_55",
+        "griffin_60",
         "griffin_65",
         "griffiniic_40",
         "charger_80",
@@ -8170,11 +9396,15 @@
         "atlasii_100",
         "atlasiic_100",
         "atlasiii_100",
+        "atlasiv_100",
         "kodiak_100",
-        "bearcub_25",
-		"Gojira_200",
-		"Gojira_100",
-		"CGR-QS_80"
+        "Gojira_200",
+        "Gojira_100",
+        "CGR-QS_80",
+        "DigLord_65",
+        "dominator_65",
+        "kodiak_40",
+        "sarath_50"
       ],
       "affinityLevels": [
         {
@@ -8743,10 +9973,10 @@
         "septicemia_55",
         "Sojourner_60",
         "Swordsman_40",
-		"BL-QS_75",
-		"BLR-QS_85",
-		"crockett_85",
-		"rifleman3m_60"
+        "BL-QS_75",
+        "BLR-QS_85",
+        "crockett_85",
+        "rifleman3m_60"
       ],
       "affinityLevels": [
         {
@@ -8857,8 +10087,10 @@
         "Stag II_45",
         "Stag_45",
         "Koshi_25",
-		"TBT-QS_50",
-		"hellhound_50"
+        "TBT-QS_50",
+        "hellhound_50",
+        "Goliath_80",
+        "barghest_70"
       ],
       "affinityLevels": [
         {
@@ -8954,14 +10186,22 @@
         "screamer_55",
         "pwwka_30",
         "Gunsmith_25",
-		"CLNT-QS_40",
-		"PNT-QS_35",
-		"WSP-QS_20",
-		"cyclone_30",
-		"phantom_40",
-		"PhoenixHawkLAM_45",
-		"PhoenixHawkLAM_50",
-		"valkyrielam_30"
+        "CLNT-QS_40",
+        "PNT-QS_35",
+        "WSP-QS_20",
+        "cyclone_30",
+        "phantom_40",
+        "PhoenixHawkLAM_45",
+        "PhoenixHawkLAM_50",
+        "valkyrielam_30",
+        "eris_50",
+        "coyotl_40",
+        "hellion_30",
+        "jaguar_35",
+        "mercury_20",
+        "mercuryii_40",
+        "rimeotter_55",
+        "snowfox_20"
       ],
       "affinityLevels": [
         {
@@ -9065,11 +10305,12 @@
         "rifleman_60",
         "wolfman_55",
         "Mhacha_60",
-		"Lynx_55",
-		"Perseus_75",
-		"doloire_80",
-		"riflemanii_90",
-		"riflemaniia_80"		
+        "Lynx_55",
+        "Perseus_75",
+        "doloire_80",
+        "riflemanii_90",
+        "riflemaniia_80",
+        "enforceriii_50"
       ],
       "affinityLevels": [
         {
@@ -9169,11 +10410,14 @@
         "summoner_200",
         "Deimos_85",
         "scarecrow_40",
-		"BNC-QS_95",
-		"GHR-QS_70",
-		"QKD-QS_60",
-		"dragonfireiic_75",
-		"sorcerer_95"
+        "BNC-QS_95",
+        "GHR-QS_70",
+        "QKD-QS_60",
+        "dragonfireiic_75",
+        "sorcerer_95",
+        "CarrierGuns_60",
+        "bandersnatch_75",
+        "ironcheetah_100"
       ],
       "affinityLevels": [
         {
@@ -9278,12 +10522,14 @@
         "omega_200",
         "Flashman_75",
         "Sunder_90",
-		"TDR-QS_65",
-		"VultureMkIV_60",
-		"Mothball_150",
-		"pulverizer_90",
-		"valkyrieiilam_60",
-		"ajaxlam_55"
+        "TDR-QS_65",
+        "VultureMkIV_60",
+        "Mothball_150",
+        "pulverizer_90",
+        "valkyrieiilam_60",
+        "ajaxlam_55",
+        "doomturtle_200",
+        "xanthos_100"
       ],
       "affinityLevels": [
         {
@@ -9380,10 +10626,10 @@
         "UrbanMech_35",
         "UrbanmechIIC_30",
         "urbanlord_70",
-		"helios_60",
-		"phoenix_50",
-		"visionquest_60",
-		"thunder_70"
+        "helios_60",
+        "phoenix_50",
+        "visionquest_60",
+        "thunder_70"
       ],
       "affinityLevels": [
         {
@@ -9514,7 +10760,9 @@
         "Menshen_55",
         "Anubis_30",
         "cephalus_25",
-		"shayu_40"
+        "shayu_40",
+        "hermitcrab_25",
+        "blue_flame_45"
       ],
       "affinityLevels": [
         {
@@ -9655,11 +10903,14 @@
         "Gun_20",
         "Vulcan II_40",
         "NightHawk_35",
-		"COM-QS_25",
-		"VLK-QS_30",
-		"blackheart_70",
-		"hecatoncheires_65",
-		"hermes_30"		
+        "COM-QS_25",
+        "VLK-QS_30",
+        "blackheart_70",
+        "hecatoncheires_65",
+        "hermes_30",
+        "gunslinger_85",
+        "battlecobrawob_40",
+        "doomcourser_70"
       ],
       "affinityLevels": [
         {
@@ -9778,8 +11029,8 @@
         "packhunterii_30",
         "hollander_35",
         "hollanderii_45",
-        "hussar_30",
-        "Blitzkrieg_50"
+        "Blitzkrieg_50",
+        "howler_20"
       ],
       "affinityLevels": [
         {
@@ -9933,9 +11184,10 @@
         }
       ]
     },
-	    {
+    {
       "chassisNames": [
-        "anvil_60"
+        "anvil_60",
+        "hussar_30"
       ],
       "affinityLevels": [
         {
@@ -9975,7 +11227,7 @@
                 "showInTargetPreview": false
               }
             },
-			{
+            {
               "Description": {
                 "Details": "Pilot has Mastered the Chassis.",
                 "Icon": "UixSvgIcon_specialEquip_System",
@@ -10007,7 +11259,118 @@
                 "showInTargetPreview": false
               }
             },
-			{
+            {
+              "Description": {
+                "Details": "Pilot has Mastered the Chassis.",
+                "Icon": "UixSvgIcon_specialEquip_System",
+                "Id": "Affinity_HeavyGunner_RTA",
+                "Name": "BattleMechAffinity"
+              },
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "effectType": "StatisticEffect",
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "CenterTorso.Accuracy",
+                "operation": "Float_Add",
+                "modValue": "-1",
+                "modType": "System.Single",
+                "targetAmmoCategory": "NotSet",
+                "targetCollection": "NotSet",
+                "targetWeaponCategory": "NotSet",
+                "targetWeaponSubType": "NotSet",
+                "targetWeaponType": "NotSet"
+              },
+              "targetingData": {
+                "effectTargetType": "Creator",
+                "effectTriggerType": "Passive",
+                "hideApplicationFloatie": true,
+                "showInStatusPanel": false,
+                "showInTargetPreview": false
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chassisNames": [
+        "chassisdef_howler_hwr-5"
+      ],
+      "idType": "ChassisId",
+      "affinityLevels": [
+        {
+          "missionsRequired": 20,
+          "levelName": "All Out",
+          "decription": "+1 ALL Torso Accuracy",
+          "effectData": [
+            {
+              "Description": {
+                "Details": "Pilot has Mastered the Chassis.",
+                "Icon": "UixSvgIcon_specialEquip_System",
+                "Id": "Affinity_HeavyGunner_RTA",
+                "Name": "BattleMechAffinity"
+              },
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "effectType": "StatisticEffect",
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "LeftTorso.Accuracy",
+                "operation": "Float_Add",
+                "modValue": "-1",
+                "modType": "System.Single",
+                "targetAmmoCategory": "NotSet",
+                "targetCollection": "NotSet",
+                "targetWeaponCategory": "NotSet",
+                "targetWeaponSubType": "NotSet",
+                "targetWeaponType": "NotSet"
+              },
+              "targetingData": {
+                "effectTargetType": "Creator",
+                "effectTriggerType": "Passive",
+                "hideApplicationFloatie": true,
+                "showInStatusPanel": false,
+                "showInTargetPreview": false
+              }
+            },
+            {
+              "Description": {
+                "Details": "Pilot has Mastered the Chassis.",
+                "Icon": "UixSvgIcon_specialEquip_System",
+                "Id": "Affinity_HeavyGunner_RTA",
+                "Name": "BattleMechAffinity"
+              },
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "effectType": "StatisticEffect",
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "RightTorso.Accuracy",
+                "operation": "Float_Add",
+                "modValue": "-1",
+                "modType": "System.Single",
+                "targetAmmoCategory": "NotSet",
+                "targetCollection": "NotSet",
+                "targetWeaponCategory": "NotSet",
+                "targetWeaponSubType": "NotSet",
+                "targetWeaponType": "NotSet"
+              },
+              "targetingData": {
+                "effectTargetType": "Creator",
+                "effectTriggerType": "Passive",
+                "hideApplicationFloatie": true,
+                "showInStatusPanel": false,
+                "showInTargetPreview": false
+              }
+            },
+            {
               "Description": {
                 "Details": "Pilot has Mastered the Chassis.",
                 "Icon": "UixSvgIcon_specialEquip_System",
@@ -10064,20 +11427,22 @@
         "Catapult3_55",
         "warhawk_85",
         "marauder_75",
+        "MarauderOmni_75",
         "leviathan_200",
         "Anand_75",
         "Razorback_30",
         "hector_70",
         "StormGiant_100",
-		"dragonfire_75",
-		"fafnirII_100",
-		"onager_90"
+        "dragonfire_75",
+        "fafnirII_100",
+        "onager_90",
+        "PHXIICLAM_90"
       ],
       "affinityLevels": [
         {
           "missionsRequired": 20,
           "levelName": "Gunslinger",
-          "decription": "+4 Cluster, +20% Called Shot Chance, +1 Offensive Push Accuracy",
+          "decription": "+0.3 Cluster to Ballistic Weapons, +20% Called Shot Chance, +1 Offensive Push Accuracy",
           "effectData": [
             {
               "Description": {
@@ -10095,11 +11460,11 @@
               "statisticData": {
                 "statName": "ClusteringModifier",
                 "operation": "Float_Add",
-                "modValue": "4",
+                "modValue": "0.3",
                 "modType": "System.Single",
                 "targetAmmoCategory": "NotSet",
                 "targetCollection": "Weapon",
-                "targetWeaponCategory": "NotSet",
+                "targetWeaponCategory": "Ballistic",
                 "targetWeaponSubType": "NotSet",
                 "targetWeaponType": "NotSet"
               },
@@ -10195,10 +11560,14 @@
         "shrike_95",
         "spider_45",
         "Eyrie_35",
+        "JadePhoenix_85",
         "Scyla_100",
-		"guillotine_70",
-		"shadowcat_60",
-		"starslayer_50"
+        "guillotine_70",
+        "shadowcat_60",
+        "starslayer_50",
+        "guillotineIIC_70",
+        "monster_200",
+        "trebaruna_95"
       ],
       "affinityLevels": [
         {
@@ -10220,7 +11589,77 @@
               "effectType": "StatisticEffect",
               "nature": "Buff",
               "statisticData": {
-               "statName": "JumpingWeaponDamageModifier",
+                "statName": "JumpingWeaponDamageModifier",
+                "operation": "Float_Add",
+                "modValue": "0.1",
+                "modType": "System.Single",
+                "targetCollection": "Weapon"
+              },
+              "targetingData": {
+                "effectTargetType": "Creator",
+                "effectTriggerType": "Passive",
+                "hideApplicationFloatie": true,
+                "showInStatusPanel": false,
+                "showInTargetPreview": false
+              }
+            },
+            {
+              "Description": {
+                "Details": "Pilot has Mastered the Chassis.",
+                "Icon": "UixSvgIcon_specialEquip_System",
+                "Id": "Affinity_HeavyGunner_Recoil",
+                "Name": "BattleMechAffinity"
+              },
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "effectType": "StatisticEffect",
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "JumpDistanceMultiplier",
+                "operation": "Float_Multiply",
+                "modValue": "1.1",
+                "modType": "System.Single"
+              },
+              "targetingData": {
+                "effectTargetType": "Creator",
+                "effectTriggerType": "Passive",
+                "hideApplicationFloatie": true,
+                "showInStatusPanel": false,
+                "showInTargetPreview": false
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "chassisNames": [
+        "chassisdef_blue_flame_BLF-21_gerry"
+      ],
+      "idType": "ChassisId",
+      "affinityLevels": [
+        {
+          "missionsRequired": 20,
+          "levelName": "Jump Trooper",
+          "decription": "+10% Jump Attack Damage, +10% Jump Distance",
+          "effectData": [
+            {
+              "Description": {
+                "Details": "Pilot has Mastered the Chassis.",
+                "Icon": "UixSvgIcon_specialEquip_System",
+                "Id": "Affinity_HeavyGunner_RTA",
+                "Name": "BattleMechAffinity"
+              },
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
+              },
+              "effectType": "StatisticEffect",
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "JumpingWeaponDamageModifier",
                 "operation": "Float_Add",
                 "modValue": "0.1",
                 "modType": "System.Single",
@@ -10273,8 +11712,8 @@
         "PirateWasp_20",
         "Crosscut_30",
         "bushranger_45",
-		"bushranger_75",
-		"Mantis_30"
+        "bushranger_75",
+        "Mantis_30"
       ],
       "affinityLevels": [
         {
@@ -10419,9 +11858,15 @@
         "defiance_75",
         "Hammertime_70",
         "BattleAxe_70",
-		"HGN-QS_90",
-		"rifleman_70",
-		"lancelot_60"
+        "HGN-QS_90",
+        "rifleman_70",
+        "lancelot_60",
+        "Hammerhands_75",
+        "maelstrom_75",
+        "battlecobra_40",
+        "bearcub_25",
+        "kodiakearly_85",
+        "regent_90"
       ],
       "affinityLevels": [
         {
@@ -10443,9 +11888,9 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "Affinity_HPC",
-                "Name": "PPC Accuracy Quirk",
-                "Details": "+1 Acc for PPC Weapons.",
-                "Icon": "uixSvgIcon_equipment_TTS"
+                "Name": "Heat generation decreased",
+                "Details": "Heat generation reduced by 10%.",
+                "Icon": "uixSvgIcon_equipment_ThermalExchanger"
               },
               "nature": "Buff",
               "statisticData": {
@@ -10482,8 +11927,12 @@
         "viper_40",
         "blackpython_75",
         "prometheus_75",
-		"MadCatLam_75",
-		"bellerophon_60"
+        "MadCatLam_75",
+        "bellerophon_60",
+        "Fox_50",
+        "mastodon_95",
+        "thunderstallion_85",
+        "whiteflame_70"
       ],
       "affinityLevels": [
         {
@@ -10505,8 +11954,8 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "Affinity_Supercooled",
-                "Name": "PPC Accuracy Quirk",
-                "Details": "+1 Acc for PPC Weapons.",
+                "Name": "Improved Heat Sinking",
+                "Details": "Heat sinking increased by 10",
                 "Icon": "uixSvgIcon_equipment_TTS"
               },
               "nature": "Buff",
@@ -10663,7 +12112,7 @@
         "bombardier_65",
         "devastator_100",
         "hazard_45",
-		"WVR-QS_55"
+        "WVR-QS_55"
       ],
       "affinityLevels": [
         {
@@ -10715,7 +12164,7 @@
         "ionraptor_70",
         "wyvernIIC_45",
         "wyvern_45",
-		"VND-QS_45"
+        "VND-QS_45"
       ],
       "affinityLevels": [
         {
@@ -10814,6 +12263,7 @@
         "yeoman_60",
         "BadbCatha_70",
         "archer_70",
+        "archeriic_70",
         "maddog_60",
         "VultureMkIII_60",
         "longbow_100",
@@ -10822,44 +12272,24 @@
         "RabidCoyote_55",
         "pendragon_95",
         "Sling_25",
-		"Naja_55",
-		"naga_80",
-		"salamander_80"
+        "Naja_55",
+        "naga_80",
+        "salamander_80",
+        "VLightCarrier_20",
+        "LightCarrier_40",
+        "CarrierMissiles_55",
+        "CarrierMissiles_60",
+        "ClanCarrier_60",
+        "HeavyCarrier_80",
+        "cougarx_35",
+        "kodiakii_100"
       ],
       "affinityLevels": [
         {
           "missionsRequired": 20,
           "levelName": "Missile Boat",
-          "decription": "+6 Missile Cluster, +1 Missile Evasion Ignore, +2 Indirect Missile Accuracy,",
+          "decription": "+1 Missile Evasion Ignore, +2 Indirect Missile Accuracy,",
           "effectData": [
-            {
-              "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-              },
-              "targetingData": {
-                "effectTriggerType": "Passive",
-                "effectTargetType": "Creator",
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-              },
-              "effectType": "StatisticEffect",
-              "Description": {
-                "Id": "StatusEffect-EnhMS-ClusterBonusLRM",
-                "Name": "MISSILERY SUITE",
-                "Details": "Substantially increases the clustering of this unit's LRM weapons and boosts the stability damage of SRMs by 50%.",
-                "Icon": "UixSvgIcon_specialEquip_System"
-              },
-              "statisticData": {
-                "statName": "ClusteringModifier",
-                "operation": "Float_Add",
-                "modValue": "6",
-                "modType": "System.Single",
-                "targetCollection": "Weapon",
-                "targetWeaponCategory": "Missile"
-              },
-              "nature": "Buff"
-            },
             {
               "durationData": {
                 "duration": -1,
@@ -10923,7 +12353,17 @@
     {
       "chassisNames": [
         "helepolis_75",
-        "helepolisiic_85"
+        "helepolisiic_85",
+        "ThumperSPG_60",
+        "Thor_55",
+        "Teppo_150",
+        "Sniper_80",
+        "SM2arty_75",
+        "Reaper_55",
+        "Pollux_75",
+        "PadillaArty_55",
+        "LongTomSPG_65",
+        "Marksman_65"
       ],
       "affinityLevels": [
         {
@@ -11063,8 +12503,8 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "StatusEffect_BCBallistic",
-                "Name": "BALLISTIC WEAPON HIT CHANCE IMPROVED",
-                "Details": "Ballistic weapon attacks have their hit improved by [AMT].",
+                "Name": "FLAMER HIT CHANCE IMPROVED",
+                "Details": "Flamer attacks have their hit improved by [AMT].",
                 "Icon": "AdvancedTC"
               },
               "nature": "Buff",
@@ -11091,8 +12531,8 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "StatusEffect_BCBallistic",
-                "Name": "BALLISTIC WEAPON HIT CHANCE IMPROVED",
-                "Details": "Ballistic weapon attacks have their hit improved by [AMT].",
+                "Name": "MACHINE GUN HIT CHANCE IMPROVED",
+                "Details": "Machinegun attacks have their hit improved by [AMT].",
                 "Icon": "AdvancedTC"
               },
               "nature": "Buff",
@@ -11119,8 +12559,8 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "StatusEffect_BCHeat",
-                "Name": "HEAT GENERATION DECREASED",
-                "Details": "Heat generation reduced by 15%.",
+                "Name": "Heat generation decreased",
+                "Details": "Flamer heat generation reduced by 10%.",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
               },
               "nature": "Buff",
@@ -11147,8 +12587,8 @@
               "effectType": "StatisticEffect",
               "Description": {
                 "Id": "StatusEffect_BCHeat",
-                "Name": "HEAT GENERATION DECREASED",
-                "Details": "Heat generation reduced by 15%.",
+                "Name": "Machinegun heat generation decreased",
+                "Details": "Machinegun heat generation reduced by 10%.",
                 "Icon": "uixSvgIcon_equipment_ThermalExchanger"
               },
               "nature": "Buff",
@@ -11239,7 +12679,7 @@
         "quickdraw_60",
         "Cazador_35",
         "Reptar_35",
-		"neanderthal_80"
+        "neanderthal_80"
       ],
       "affinityLevels": [
         {
@@ -11351,8 +12791,11 @@
         "stalkerii_85",
         "orochi_90",
         "talon_35",
-		"thunderhawk_100",
-		"grandtitan_100"
+        "thunderhawk_100",
+        "grandtitan_100",
+        "minsk_70",
+        "crucible_100",
+        "alphawolf_90"
       ],
       "affinityLevels": [
         {
@@ -11382,7 +12825,7 @@
               "statisticData": {
                 "statName": "CACLongRangeAccuracyMod",
                 "operation": "Float_Add",
-                "modValue": "-2.0",
+                "modValue": "-1.0",
                 "modType": "System.Single"
               }
             },
@@ -11419,20 +12862,38 @@
     {
       "chassisNames": [
         "Salamander_5",
-        "Fashih_5",
+        "Fashih_4",
         "Toadie_5",
-        "Phalanx_10",
+        "Phalanx",
         "Sprite_15",
-        "ISSTandard_5",
+        "ISSTandard",
         "Harpy_2",
-        "Amazon_5",
-        "Angerona_5",
+        "Amazon_4",
+        "Angerona_4",
         "Erinyes_2",
         "Erinyes_9",
-        "Kanazuchi_10",
-        "Nephilim_10",
+        "Kanazuchi_8",
+        "Nephilim_12",
         "PlasmaBeak_5",
-        "SpaceMarine_5"
+        "SpaceMarine_5",
+        "Shamash_11",
+        "SavannahMaster_5",
+        "cyclo_6",
+        "Ravager",
+        "MarauderBA",
+        "Gnome_7.5",
+        "Purifier_6",
+        "Infiltrator_4",
+        "Void",
+        "GDSS_4",
+        "TunnelRat_2",
+        "Kobold",
+        "Corona_7.5",
+        "FenrirII_8",
+        "Fenrir_8",
+        "Rottweiler_4",
+        "Sloth_6",
+        "ShenLong"
       ],
       "affinityLevels": [
         {
@@ -11604,6 +13065,53 @@
             }
           ]
         }
+      ]
+    }
+  ],
+  "affinityGroups": [
+    {
+      "affinityId" : "MarauderBA",
+      "assemblyGroup" : [
+        "MarauderBA_7.5",
+        "MarauderBA_6"
+      ]
+    },
+    {
+      "affinityId" : "ISSTandard",
+      "assemblyGroup" : [
+        "ISSTandard_4",
+        "ISSTandard_5",
+        "GDStandard_4",
+        "Longinus_4",
+        "Longinus_6"
+      ]
+    },
+    {
+      "affinityId" : "Void",
+      "assemblyGroup" : [
+        "Void_4",
+        "Void_5"
+      ]
+    },
+    {
+      "affinityId" : "Ravager",
+      "assemblyGroup" : [
+        "Ravager_8",
+        "Ravager_10"
+      ]
+    },
+    {
+      "affinityId" : "Phalanx",
+      "assemblyGroup" : [
+        "Phalanx_6",
+        "Phalanx_9"
+      ]
+    },
+    {
+      "affinityId" : "Kobold",
+      "assemblyGroup" : [
+        "Kobold_3",
+        "Kobold_4.5"
       ]
     }
   ]

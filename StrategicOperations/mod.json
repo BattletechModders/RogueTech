@@ -1,0 +1,1428 @@
+{
+  "Name": "StrategicOperations",
+  "DLL": "StrategicOperations.dll",
+  "Hidden": true,
+  "Version": "2.0.1.4",
+  "Description": "",
+  "Author": "T-Bone",
+  "Website": "https://github.com/ajkroeg/StrategicOperations",
+  "ConflictsWith": [],
+  "DependsOn": [
+    "Abilifier",
+    "MechEngineer",
+    "CustomComponents",
+    "LowVisibility"
+  ],
+  "CustomResourceTypes": [],
+  "Settings": {
+    "DEVTEST_AIPOS": false,
+    "enableLogging": true,
+    "enableTrace": true,
+    "showStrafeCamera": false,
+    "strafeEndsActivation": true,
+    "spawnTurretEndsActivation": true,
+    "deployProtection": 8,
+    "strafeTargetsFriendliesChance": 0.5,
+    "strafeNeutralBuildingsChance": 0.0,
+    "strafeSensorFactor": 5.0,
+    "strafeVelocityDefault": 55.0,
+    "timeBetweenAttacks": 0.1,
+    "strafeAltitudeMin": 75.0,
+    "strafeAltitudeMax": 200.0,
+    "strafePreDistanceMult": 10.0,
+    "strafeMinDistanceToEnd": 15.0,
+    "commandUseCostsMulti": 0,
+    "customSpawnReticleColor": {
+      "r": 0,
+      "g": 204,
+      "b": 0
+    },
+    "customSpawnReticleAsset": "select_spawn_reticle",
+    "deploymentBeaconEquipment": [],
+    "strafeWaves": 3,
+    "commandAbilities_AI": [],
+    "AI_SpawnBehavior": [],
+    "BattleArmorMountAndSwarmID": "AbilityDefBattleArmorMount",
+    "BattleArmorDeSwarmRoll": "AbilityDefDeSwarmerRoll",
+    "BattleArmorDeSwarmSwat": "AbilityDefDeSwarmerSwat",
+    "ArmActuatorCategoryIDs": [
+      "ArmShoulder",
+      "ArmUpperActuator",
+      "ArmLowerActuator",
+      "OmniLowerActuator",
+      "ArmHandActuator",
+      "OmniHandActuator"
+    ],
+    "BPodComponentIDs": [
+      "Gear_B_Pod"
+    ],
+    "BPodsAutoActivate": false,
+    "BATargetEffect": {
+      "ID": "BA_AccurateFire",
+      "Name": "Battle Armor - SwarmingAccuracy",
+      "description": "Battle Armor has greatly increased accuracy against the unit it is swarming.",
+      "effectDataJO": [
+        {
+          "durationData": { },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "BA_EasyTargetingPassive",
+            "Name": "Easy shots",
+            "Details": "Battle Armor has increased accuracy while swarming.",
+            "Icon": "allied-star"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "AccuracyModifier",
+            "operation": "Set",
+            "modValue": "-9001",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator"
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "BA_CALLED_SHOT",
+            "Name": "BA Called Shot",
+            "Details": "Called Shots twice as reliable when swarming",
+            "Icon": "uixSvgIcon_ability_mastertactician"
+          },
+          "statisticData": {
+            "statName": "CalledShotBonusMultiplier",
+            "operation": "Float_Multiply",
+            "modValue": "9001.0",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "BA_FocusFireCluster",
+            "Name": "BA ClusterFuck",
+            "Details": "Better clustering for BA while swarming.",
+            "Icon": "UixSvgIcon_specialEquip_System"
+          },
+          "statisticData": {
+            "statName": "ClusteringModifier",
+            "operation": "Float_Add",
+            "modValue": "9001",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
+          },
+          "nature": "Buff"
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "BA_SwarmingDamage",
+            "Name": "Targeting Computer",
+            "Details": "Breaching Shot, Improved Accuracy/Recoil.",
+            "Icon": "uixSvgIcon_ability_precisionstrike"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "DamagePerShot",
+            "operation": "Float_Multiply",
+            "modValue": "1.20",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
+          }
+        }
+      ]
+    },
+    "BattleArmorFactionAssociations": [
+      {
+        "FactionIDs": [
+          "AuriganMercenaries",
+          "Locals"
+        ],
+        "SpawnChanceBase": -0.15,
+        "SpawnChanceDiffMod": 0.03,
+        "MaxSquadsPerContract": 3,
+        "InternalBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 10,
+          "mechdef_inner_sphere_standard_IS-INF": 15,
+          "mechdef_inner_sphere_standard_IS-MG": 10,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "mechdef_inner_sphere_standard_IS-RF": 10,
+          "mechdef_inner_sphere_standard_IS-RX": 2,
+          "mechdef_inner_sphere_standard_IS-STL": 2,
+          "mechdef_inner_sphere_standard_IS-TAG": 2,
+          "mechdef_the_hive_IS-HIVE": 2,
+          "mechdef_gray_death_standard_GDS-FL": 5,
+          "mechdef_gray_death_standard_GDS-L": 5,
+          "mechdef_gray_death_standard_GDS-MG": 5,
+          "mechdef_gray_death_standard_GDS-RF": 5,
+          "mechdef_aegis_point_defense_suit": 2,
+          "mechdef_angerona_scout_suit": 2,
+                    "mechdef_marauderba_MAD-BA": 8,
+                    "mechdef_sloth_interdictor": 3,
+                    "mechdef_sloth_huntsman": 3,
+                    "mechdef_fenrir-ML": 2,
+                    "mechdef_fenrir-MPL": 2,
+                    "mechdef_fenrir-MTR": 2,
+                    "mechdef_fenrir-SPL": 2,
+                    "mechdef_fenrir-SRM": 2,
+                    "mechdef_ravager_RAV": 10
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 10,
+          "mechdef_inner_sphere_standard_IS-INF": 15,
+          "mechdef_inner_sphere_standard_IS-MG": 10,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "mechdef_inner_sphere_standard_IS-RF": 10,
+          "mechdef_inner_sphere_standard_IS-RX": 2,
+          "mechdef_inner_sphere_standard_IS-STL": 2,
+          "mechdef_inner_sphere_standard_IS-TAG": 2,
+          "mechdef_the_hive_IS-HIVE": 2,
+          "mechdef_gray_death_standard_GDS-FL": 5,
+          "mechdef_gray_death_standard_GDS-L": 5,
+          "mechdef_gray_death_standard_GDS-MG": 5,
+          "mechdef_gray_death_standard_GDS-RF": 5,
+          "mechdef_aegis_point_defense_suit": 2,
+          "mechdef_angerona_scout_suit": 2,
+          "mechdef_marauderba_MAD-BA": 10,
+          "mechdef_ravager_RAV": 15,
+          "BA_EMPTY": 107
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_marauderba_MAD-BA": 10,
+          "mechdef_inner_sphere_standard_IS-RX": 2,
+          "BA_EMPTY": 48
+        }
+      },
+      {
+        "FactionIDs": [
+          "AuriganPirates",
+          "Circinus",
+          "Oberon",
+          "Tortuga",
+          "Valkyrate"
+        ],
+        "SpawnChanceBase": -0.2,
+        "SpawnChanceDiffMod": 0.04,
+        "MaxSquadsPerContract": 2,
+        "InternalBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 10,
+          "mechdef_inner_sphere_standard_IS-INF": 15,
+          "mechdef_inner_sphere_standard_IS-MG": 10,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "mechdef_inner_sphere_standard_IS-RF": 10,
+          "mechdef_privateer_IS-P": 25,
+          "mechdef_the_hive_IS-HIVE": 5,
+          "mechdef_ravager_RAV": 25
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 10,
+          "mechdef_inner_sphere_standard_IS-INF": 15,
+          "mechdef_inner_sphere_standard_IS-MG": 10,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "mechdef_inner_sphere_standard_IS-RF": 10,
+          "mechdef_privateer_IS-P": 25,
+          "mechdef_the_hive_IS-HIVE": 5,
+          "BA_EMPTY": 80
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_tunnel_rat": 1,
+          "BA_EMPTY": 6
+        }
+      },
+      {
+        "FactionIDs": [
+          "Axumite",
+          "Chainelane",
+          "Delphi",
+          "Elysia",
+          "Illyrian",
+          "JarnFolk",
+          "Lothian",
+          "Outworld",
+          "NoFaction"
+        ],
+        "SpawnChanceBase": -0.1,
+        "SpawnChanceDiffMod": 0.02,
+        "MaxSquadsPerContract": 2,
+        "InternalBattleArmorWeight": {
+          "mechdef_tunnel_rat": 1
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_tunnel_rat": 1,
+          "BA_EMPTY": 1
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_tunnel_rat": 1,
+          "BA_EMPTY": 6
+        }
+      },
+      {
+        "FactionIDs": [
+          "Rasalhague"
+        ],
+        "SpawnChanceBase": -0.15,
+        "SpawnChanceDiffMod": 0.03,
+        "MaxSquadsPerContract": 3,
+        "InternalBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 10,
+          "mechdef_inner_sphere_standard_IS-INF": 15,
+          "mechdef_inner_sphere_standard_IS-MG": 10,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "mechdef_inner_sphere_standard_IS-RF": 10,
+          "mechdef_inner_sphere_standard_IS-STL": 5,
+          "mechdef_inner_sphere_standard_IS-TAG": 5,
+          "mechdef_kobold_laser": 20,
+          "mechdef_kobold_mg": 20
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 10,
+          "mechdef_inner_sphere_standard_IS-INF": 15,
+          "mechdef_inner_sphere_standard_IS-MG": 10,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "mechdef_inner_sphere_standard_IS-RF": 10,
+          "mechdef_inner_sphere_standard_IS-STL": 5,
+          "mechdef_inner_sphere_standard_IS-TAG": 5,
+          "mechdef_kobold_laser": 20,
+          "mechdef_kobold_mg": 20,
+          "BA_EMPTY": 100
+        },
+        "HandsyBattleArmorWeight": {
+          "BA_EMPTY": 1
+        }
+      },
+      {
+        "FactionIDs": [
+          "Republic"
+        ],
+        "SpawnChanceBase": -0.2,
+        "SpawnChanceDiffMod": 0.04,
+        "MaxSquadsPerContract": 4,
+        "InternalBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 2,
+          "mechdef_inner_sphere_standard_IS-INF": 3,
+          "mechdef_inner_sphere_standard_IS-MG": 2,
+          "mechdef_inner_sphere_standard_IS-MTR": 1,
+          "mechdef_inner_sphere_standard_IS-RF": 2,
+          "mechdef_inner_sphere_standard_IS-RX": 1,
+          "mechdef_inner_sphere_standard_IS-STL": 1,
+          "mechdef_inner_sphere_standard_IS-TAG": 1,
+          "mechdef_infiltratormkii": 10,
+          "mechdef_aegis_point_defense_suit": 25,
+          "mechdef_angerona_scout_suit": 25,
+          "mechdef_longinus_david": 5,
+          "mechdef_longinus_flamer": 10,
+          "mechdef_longinus_laser": 5,
+          "mechdef_longinus_mg": 5,
+          "mechdef_purifier": 10,
+          "mechdef_purifier_laser": 10,
+                    "mechdef_sloth_interdictor": 10,
+          "mechdef_phalanx_PX-A": 20,
+          "mechdef_phalanx_PX-D": 20
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 2,
+          "mechdef_inner_sphere_standard_IS-INF": 3,
+          "mechdef_inner_sphere_standard_IS-MG": 2,
+          "mechdef_inner_sphere_standard_IS-MTR": 1,
+          "mechdef_inner_sphere_standard_IS-RF": 2,
+          "mechdef_inner_sphere_standard_IS-RX": 1,
+          "mechdef_inner_sphere_standard_IS-STL": 1,
+          "mechdef_inner_sphere_standard_IS-TAG": 1,
+          "mechdef_infiltratormkii": 10,
+          "mechdef_aegis_point_defense_suit": 25,
+          "mechdef_angerona_scout_suit": 25,
+          "mechdef_longinus_david": 5,
+          "mechdef_longinus_flamer": 10,
+          "mechdef_longinus_laser": 5,
+          "mechdef_longinus_mg": 5,
+          "mechdef_purifier": 10,
+          "mechdef_purifier_laser": 10,
+          "mechdef_phalanx_PX-A": 20,
+          "mechdef_phalanx_PX-D": 20,
+          "BA_EMPTY": 158
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_infiltratormkii": 5,
+          "mechdef_inner_sphere_standard_IS-RX": 1,
+          "BA_EMPTY": 24
+        }
+      },
+      {
+        "FactionIDs": [
+          "TaurianConcordat"
+        ],
+        "SpawnChanceBase": -0.15,
+        "SpawnChanceDiffMod": 0.03,
+        "MaxSquadsPerContract": 3,
+        "InternalBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 10,
+          "mechdef_inner_sphere_standard_IS-INF": 15,
+          "mechdef_inner_sphere_standard_IS-MG": 10,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "mechdef_inner_sphere_standard_IS-RF": 10,
+          "mechdef_inner_sphere_standard_IS-STL": 5,
+          "mechdef_inner_sphere_standard_IS-TAG": 5,
+          "mechdef_amazon_IS-A": 15,
+          "mechdef_amazon_IS-A_Rifle": 15,
+          "mechdef_infiltratormkii": 15,
+          "mechdef_marauderba_MAD-BA": 15,
+          "mechdef_ravager_RAV": 20
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 10,
+          "mechdef_inner_sphere_standard_IS-INF": 15,
+          "mechdef_inner_sphere_standard_IS-MG": 10,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "mechdef_inner_sphere_standard_IS-RF": 10,
+          "mechdef_inner_sphere_standard_IS-STL": 5,
+          "mechdef_inner_sphere_standard_IS-TAG": 5,
+          "mechdef_amazon_IS-A": 15,
+          "mechdef_amazon_IS-A_Rifle": 15,
+          "mechdef_infiltratormkii": 15,
+          "mechdef_marauderba_MAD-BA": 15,
+          "BA_EMPTY": 120
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_infiltratormkii": 3,
+          "mechdef_marauderba_MAD-BA": 1,
+          "BA_EMPTY": 16
+        }
+      },
+      {
+        "FactionIDs": [
+          "MagistracyOfCanopus"
+        ],
+        "SpawnChanceBase": -0.15,
+        "SpawnChanceDiffMod": 0.03,
+        "MaxSquadsPerContract": 3,
+        "InternalBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 10,
+          "mechdef_inner_sphere_standard_IS-INF": 15,
+          "mechdef_inner_sphere_standard_IS-MG": 10,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "mechdef_inner_sphere_standard_IS-RF": 10,
+          "mechdef_inner_sphere_standard_IS-STL": 5,
+          "mechdef_inner_sphere_standard_IS-TAG": 5,
+          "mechdef_amazon_IS-A": 15,
+          "mechdef_amazon_IS-A_Rifle": 15,
+          "mechdef_marauderba_MAD-BA": 3,
+          "mechdef_shen_long_david": 7,
+          "mechdef_shen_long_mg": 7,
+          "mechdef_shen_long_interdictor": 7,
+          "mechdef_ravager_RAV": 6
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 10,
+          "mechdef_inner_sphere_standard_IS-INF": 15,
+          "mechdef_inner_sphere_standard_IS-MG": 10,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "mechdef_inner_sphere_standard_IS-RF": 10,
+          "mechdef_inner_sphere_standard_IS-STL": 5,
+          "mechdef_inner_sphere_standard_IS-TAG": 5,
+          "mechdef_amazon_IS-A": 15,
+          "mechdef_amazon_IS-A_Rifle": 15,
+          "mechdef_marauderba_MAD-BA": 10,
+          "BA_EMPTY": 100
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_marauderba_MAD-BA": 1,
+          "BA_EMPTY": 4
+        }
+      },
+      {
+        "FactionIDs": [
+          "AuriganDirectorate",
+          "AuriganRestoration"
+        ],
+        "SpawnChanceBase": -0.15,
+        "SpawnChanceDiffMod": 0.03,
+        "MaxSquadsPerContract": 2,
+        "InternalBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 10,
+          "mechdef_inner_sphere_standard_IS-INF": 15,
+          "mechdef_inner_sphere_standard_IS-MG": 10,
+          "mechdef_inner_sphere_standard_IS-MTR": 5
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 10,
+          "mechdef_inner_sphere_standard_IS-INF": 15,
+          "mechdef_inner_sphere_standard_IS-MG": 10,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "BA_EMPTY": 40
+        },
+        "HandsyBattleArmorWeight": {
+          "BA_EMPTY": 1
+        }
+      },
+      {
+        "FactionIDs": [
+          "Ives"
+        ],
+        "SpawnChanceBase": -0.15,
+        "SpawnChanceDiffMod": 0.03,
+        "MaxSquadsPerContract": 2,
+        "InternalBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 10,
+          "mechdef_inner_sphere_standard_IS-INF": 15,
+          "mechdef_inner_sphere_standard_IS-MG": 10,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "mechdef_inner_sphere_standard_IS-RF": 10,
+          "mechdef_infiltratormkii": 20
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 10,
+          "mechdef_inner_sphere_standard_IS-INF": 15,
+          "mechdef_inner_sphere_standard_IS-MG": 10,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "mechdef_inner_sphere_standard_IS-RF": 10,
+          "mechdef_infiltratormkii": 20,
+          "BA_EMPTY": 70
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_infiltratormkii": 1,
+          "BA_EMPTY": 4
+        }
+      },
+      {
+        "FactionIDs": [
+          "ComStar"
+        ],
+        "SpawnChanceBase": -0.2,
+        "SpawnChanceDiffMod": 0.04,
+        "MaxSquadsPerContract": 3,
+        "InternalBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 2,
+          "mechdef_inner_sphere_standard_IS-INF": 3,
+          "mechdef_inner_sphere_standard_IS-MG": 2,
+          "mechdef_inner_sphere_standard_IS-MTR": 1,
+          "mechdef_kobold_laser_cs": 40,
+          "mechdef_kobold_mg_cs": 40,
+          "mechdef_purifier": 10,
+          "mechdef_purifier_laser": 10
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 2,
+          "mechdef_inner_sphere_standard_IS-INF": 3,
+          "mechdef_inner_sphere_standard_IS-MG": 2,
+          "mechdef_inner_sphere_standard_IS-MTR": 1,
+          "mechdef_kobold_laser_cs": 40,
+          "mechdef_kobold_mg_cs": 40,
+          "mechdef_purifier": 10,
+          "mechdef_purifier_laser": 10,
+          "BA_EMPTY": 108
+        },
+        "HandsyBattleArmorWeight": {
+          "BA_EMPTY": 1
+        }
+      },
+      {
+        "FactionIDs": [
+          "Marik"
+        ],
+        "SpawnChanceBase": -0.15,
+        "SpawnChanceDiffMod": 0.03,
+        "MaxSquadsPerContract": 4,
+        "InternalBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-MTR": 4,
+          "mechdef_inner_sphere_standard_IS-RX": 2,
+          "mechdef_inner_sphere_standard_IS-STL": 2,
+          "mechdef_inner_sphere_standard_IS-TAG": 2,
+          "mechdef_longinus_david": 5,
+          "mechdef_longinus_flamer": 10,
+          "mechdef_longinus_laser": 5,
+          "mechdef_longinus_mg": 5,
+          "mechdef_longinus_magnetic": 10,
+          "mechdef_amazon_IS-A.": 20,
+          "mechdef_amazon_IS-A_Rifle": 20,
+          "mechdef_phalanx_PX-A": 20,
+          "mechdef_phalanx_PX-D": 20,
+          "mechdef_aegis_point_defense_suit": 5,
+          "mechdef_angerona_scout_suit": 5,
+          "mechdef_ravager_RAV": 5
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-MTR": 4,
+          "mechdef_inner_sphere_standard_IS-RX": 2,
+          "mechdef_inner_sphere_standard_IS-STL": 2,
+          "mechdef_inner_sphere_standard_IS-TAG": 2,
+          "mechdef_longinus_david": 5,
+          "mechdef_longinus_flamer": 10,
+          "mechdef_longinus_laser": 5,
+          "mechdef_longinus_mg": 5,
+          "mechdef_longinus_magnetic": 10,
+          "mechdef_amazon_IS-A.": 20,
+          "mechdef_amazon_IS-A_Rifle": 20,
+          "mechdef_phalanx_PX-A": 20,
+          "mechdef_phalanx_PX-D": 20,
+          "mechdef_aegis_point_defense_suit": 5,
+          "mechdef_angerona_scout_suit": 5,
+          "BA_EMPTY": 135
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_longinus_magnetic": 10,
+          "mechdef_inner_sphere_standard_IS-RX": 1,
+          "BA_EMPTY": 44
+        }
+      },
+      {
+        "FactionIDs": [
+          "Steiner"
+        ],
+        "SpawnChanceBase": -0.15,
+        "SpawnChanceDiffMod": 0.03,
+        "MaxSquadsPerContract": 3,
+        "InternalBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 10,
+          "mechdef_inner_sphere_standard_IS-INF": 15,
+          "mechdef_inner_sphere_standard_IS-MG": 10,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "mechdef_inner_sphere_standard_IS-RF": 10,
+          "mechdef_inner_sphere_standard_IS-RX": 5,
+          "mechdef_inner_sphere_standard_IS-STL": 5,
+          "mechdef_inner_sphere_standard_IS-TAG": 5,
+          "mechdef_gray_death_standard_GDS-FL": 5,
+          "mechdef_gray_death_standard_GDS-L": 5,
+          "mechdef_gray_death_standard_GDS-MG": 5,
+          "mechdef_gray_death_standard_GDS-RF": 5,
+                    "mechdef_gray_death_strike_suit_GDSS": 10,
+          "mechdef_infiltratormkii": 20,
+          "mechdef_aegis_point_defense_suit": 5,
+          "mechdef_angerona_scout_suit": 5,
+                    "mechdef_rottweiler-L": 5,
+                    "mechdef_rottweiler-CC": 5,
+                    "mechdef_rottweiler-GSS": 5,
+                    "mechdef_sloth": 2,
+                    "mechdef_sloth_interdictor": 5,
+                    "mechdef_sloth_huntsman": 5,
+                    "mechdef_fenrir-ML": 4,
+                    "mechdef_fenrir-MPL": 4,
+                    "mechdef_fenrir-MTR": 4,
+                    "mechdef_fenrir-SPL": 4,
+                    "mechdef_fenrir-SRM": 4,
+                    "mechdef_fenrir-ii-LRM": 4,
+                    "mechdef_fenrir-ii-MG": 4,
+                    "mechdef_fenrir-ii-RF": 4,
+                    "mechdef_fenrir-ii-SRM": 4,
+                    "mechdef_fenrir-ii-ML": 4,
+                    "mechdef_ravager_RAV": 2
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 10,
+          "mechdef_inner_sphere_standard_IS-INF": 15,
+          "mechdef_inner_sphere_standard_IS-MG": 10,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "mechdef_inner_sphere_standard_IS-RF": 10,
+          "mechdef_inner_sphere_standard_IS-RX": 5,
+          "mechdef_inner_sphere_standard_IS-STL": 5,
+          "mechdef_inner_sphere_standard_IS-TAG": 5,
+          "mechdef_gray_death_standard_GDS-FL": 5,
+          "mechdef_gray_death_standard_GDS-L": 5,
+          "mechdef_gray_death_standard_GDS-MG": 5,
+          "mechdef_gray_death_standard_GDS-RF": 5,
+          "mechdef_gray_death_strike_suit_GDSS": 20,
+          "mechdef_infiltratormkii": 20,
+          "mechdef_aegis_point_defense_suit": 5,
+          "mechdef_angerona_scout_suit": 5,
+          "BA_EMPTY": 135
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_infiltratormkii": 5,
+          "mechdef_inner_sphere_standard_IS-RX": 1,
+          "BA_EMPTY": 24
+        }
+      },
+      {
+        "FactionIDs": [
+          "Kurita"
+        ],
+        "SpawnChanceBase": -0.15,
+        "SpawnChanceDiffMod": 0.03,
+        "MaxSquadsPerContract": 3,
+        "InternalBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 5,
+          "mechdef_inner_sphere_standard_IS-INF": 10,
+          "mechdef_inner_sphere_standard_IS-MG": 5,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "mechdef_inner_sphere_standard_IS-RF": 10,
+          "mechdef_inner_sphere_standard_IS-RX": 5,
+          "mechdef_inner_sphere_standard_IS-STL": 5,
+          "mechdef_inner_sphere_standard_IS-TAG": 5,
+          "mechdef_inner_sphere_standard_IS-Baka": 15,
+          "mechdef_void": 30,
+          "mechdef_kanazuchi_KZ-1": 30,
+          "mechdef_aegis_point_defense_suit": 5,
+          "mechdef_angerona_scout_suit": 5,
+          "mechdef_ravager_RAV": 5
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 5,
+          "mechdef_inner_sphere_standard_IS-INF": 10,
+          "mechdef_inner_sphere_standard_IS-MG": 5,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "mechdef_inner_sphere_standard_IS-RF": 10,
+          "mechdef_inner_sphere_standard_IS-RX": 5,
+          "mechdef_inner_sphere_standard_IS-STL": 5,
+          "mechdef_inner_sphere_standard_IS-TAG": 5,
+          "mechdef_inner_sphere_standard_IS-Baka": 15,
+          "mechdef_void": 30,
+          "mechdef_aegis_point_defense_suit": 5,
+          "mechdef_angerona_scout_suit": 5,
+          "BA_EMPTY": 105
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-RX": 1,
+          "BA_EMPTY": 4
+        }
+      },
+      {
+        "FactionIDs": [
+          "Liao"
+        ],
+        "SpawnChanceBase": -0.15,
+        "SpawnChanceDiffMod": 0.03,
+        "MaxSquadsPerContract": 3,
+        "InternalBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 10,
+          "mechdef_inner_sphere_standard_IS-INF": 15,
+          "mechdef_inner_sphere_standard_IS-MG": 10,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "mechdef_inner_sphere_standard_IS-RF": 10,
+          "mechdef_inner_sphere_standard_IS-RX": 5,
+          "mechdef_inner_sphere_standard_IS-STL": 5,
+          "mechdef_inner_sphere_standard_IS-TAG": 5,
+          "mechdef_fa_shih_FS-1": 40,
+          "mechdef_amazon_IS-A": 20,
+          "mechdef_amazon_IS-A_Rifle": 20,
+          "mechdef_aegis_point_defense_suit": 5,
+          "mechdef_angerona_scout_suit": 5,
+          "mechdef_shen_long_david": 15,
+          "mechdef_shen_long_mg": 15,
+          "mechdef_shen_long_interdictor": 15,
+          "mechdef_ravager_RAV": 5
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 10,
+          "mechdef_inner_sphere_standard_IS-INF": 15,
+          "mechdef_inner_sphere_standard_IS-MG": 10,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "mechdef_inner_sphere_standard_IS-RF": 10,
+          "mechdef_inner_sphere_standard_IS-RX": 5,
+          "mechdef_inner_sphere_standard_IS-STL": 5,
+          "mechdef_inner_sphere_standard_IS-TAG": 5,
+          "mechdef_amazon_IS-A": 20,
+          "mechdef_amazon_IS-A_Rifle": 20,
+          "mechdef_fa_shih_FS-1": 40,
+          "mechdef_aegis_point_defense_suit": 5,
+          "mechdef_angerona_scout_suit": 5,
+          "BA_EMPTY": 155
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_fa_shih_FS-1": 10,
+          "mechdef_inner_sphere_standard_IS-RX": 1,
+          "BA_EMPTY": 44
+        }
+      },
+      {
+        "FactionIDs": [
+          "Davion"
+        ],
+        "SpawnChanceBase": -0.15,
+        "SpawnChanceDiffMod": 0.03,
+        "MaxSquadsPerContract": 3,
+        "InternalBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 10,
+          "mechdef_inner_sphere_standard_IS-INF": 15,
+          "mechdef_inner_sphere_standard_IS-MG": 10,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "mechdef_inner_sphere_standard_IS-RF": 10,
+          "mechdef_inner_sphere_standard_IS-RX": 5,
+          "mechdef_inner_sphere_standard_IS-STL": 5,
+          "mechdef_inner_sphere_standard_IS-TAG": 5,
+          "mechdef_gray_death_standard_GDS-FL": 5,
+          "mechdef_gray_death_standard_GDS-L": 5,
+          "mechdef_gray_death_standard_GDS-MG": 5,
+          "mechdef_gray_death_standard_GDS-RF": 5,
+          "mechdef_infiltratormkii": 30,
+          "mechdef_infiltratormkii-s": 20,
+          "mechdef_infiltratormkii-ci": 10,
+          "mechdef_aegis_point_defense_suit": 5,
+          "mechdef_angerona_scout_suit": 5,
+                    "mechdef_sloth": 2,
+                    "mechdef_sloth_interdictor": 15,
+                    "mechdef_sloth_huntsman": 15,
+                    "mechdef_ravager_RAV": 5
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_inner_sphere_standard_IS-1": 10,
+          "mechdef_inner_sphere_standard_IS-INF": 15,
+          "mechdef_inner_sphere_standard_IS-MG": 10,
+          "mechdef_inner_sphere_standard_IS-MTR": 5,
+          "mechdef_inner_sphere_standard_IS-RF": 10,
+          "mechdef_inner_sphere_standard_IS-RX": 5,
+          "mechdef_inner_sphere_standard_IS-STL": 5,
+          "mechdef_inner_sphere_standard_IS-TAG": 5,
+          "mechdef_gray_death_standard_GDS-FL": 5,
+          "mechdef_gray_death_standard_GDS-L": 5,
+          "mechdef_gray_death_standard_GDS-MG": 5,
+          "mechdef_gray_death_standard_GDS-RF": 5,
+          "mechdef_infiltratormkii": 30,
+          "mechdef_infiltratormkii-s": 20,
+          "mechdef_infiltratormkii-ci": 10,
+          "mechdef_aegis_point_defense_suit": 5,
+          "mechdef_angerona_scout_suit": 5,
+          "BA_EMPTY": 155
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_infiltratormkii": 6,
+          "mechdef_infiltratormkii-s": 4,
+          "mechdef_infiltratormkii-ci": 2,
+          "mechdef_inner_sphere_standard_IS-RX": 1,
+          "BA_EMPTY": 52
+        }
+      },
+      {
+        "FactionIDs": [
+          "WordOfBlake"
+        ],
+        "SpawnChanceBase": -0.2,
+        "SpawnChanceDiffMod": 0.04,
+        "MaxSquadsPerContract": 4,
+        "InternalBattleArmorWeight": {
+          "mechdef_longinus_david_WoB": 1,
+          "mechdef_longinus_flamer_WoB": 2,
+          "mechdef_longinus_laser_WoB": 1,
+          "mechdef_longinus_mg_WoB": 1,
+          "mechdef_purifier": 30,
+          "mechdef_purifier_laser": 20,
+          "mechdef_nephilim_WB-1": 10,
+          "mechdef_nephilim_WB-GSS": 5,
+          "mechdef_phalanx_PX-A-WoB": 10,
+          "mechdef_phalanx_PX-C": 10
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_longinus_david_WoB": 1,
+          "mechdef_longinus_flamer_WoB": 2,
+          "mechdef_longinus_laser_WoB": 1,
+          "mechdef_longinus_mg_WoB": 1,
+          "mechdef_purifier": 30,
+          "mechdef_purifier_laser": 20,
+          "mechdef_phalanx_PX-A-WoB": 10,
+          "mechdef_phalanx_PX-C": 10,
+          "BA_EMPTY": 75
+        },
+        "HandsyBattleArmorWeight": {
+          "BA_EMPTY": 1
+        }
+      },
+      {
+        "FactionIDs": [
+          "Marian"
+        ],
+        "SpawnChanceBase": -0.15,
+        "SpawnChanceDiffMod": 0.03,
+        "MaxSquadsPerContract": 4,
+        "InternalBattleArmorWeight": {
+          "mechdef_longinus_david": 5,
+          "mechdef_longinus_flamer": 10,
+          "mechdef_longinus_laser": 5,
+          "mechdef_longinus_mg": 5,
+          "mechdef_ravager_RAV-MH": 20,
+          "mechdef_ravager_RAV-LRM": 10,
+          "mechdef_marauderba_MAD-BA-MH": 10
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_longinus_david": 5,
+          "mechdef_longinus_flamer": 10,
+          "mechdef_longinus_laser": 5,
+          "mechdef_longinus_mg": 5,
+          "mechdef_marauderba_MAD-BA-MH": 25,
+          "BA_EMPTY": 50
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_marauderba_MAD-BA-MH": 1,
+          "BA_EMPTY": 4
+        }
+      },
+      {
+        "FactionIDs": [
+          "Castile",
+          "Hanse"
+        ],
+        "SpawnChanceBase": -0.15,
+        "SpawnChanceDiffMod": 0.03,
+        "MaxSquadsPerContract": 2,
+        "InternalBattleArmorWeight": {
+          "mechdef_longinus_david": 5,
+          "mechdef_longinus_flamer": 10,
+          "mechdef_longinus_laser": 5,
+          "mechdef_longinus_mg": 5
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_longinus_david": 5,
+          "mechdef_longinus_flamer": 10,
+          "mechdef_longinus_laser": 5,
+          "mechdef_longinus_mg": 5,
+          "BA_EMPTY": 25
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_tunnel_rat": 1,
+          "BA_EMPTY": 6
+        }
+      },
+      {
+        "FactionIDs": [
+          "ClansGeneric",
+          "ClanBurrock",
+          "ClanCloudCobra",
+          "ClanCoyote",
+          "ClanIceHellion",
+          "ClanSmokeJaguar",
+          "ClanSteelViper",
+          "ClanBloodSpirit",
+          "Society"
+        ],
+        "SpawnChanceBase": -0.2,
+        "SpawnChanceDiffMod": 0.04,
+        "MaxSquadsPerContract": 4,
+        "InternalBattleArmorWeight": {
+          "mechdef_elemental_toad_ap": 20,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "mechdef_corona": 6,
+          "mechdef_gnome": 15,
+          "mechdef_salamander": 10
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_elemental_toad_ap": 20,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "mechdef_corona": 6,
+          "mechdef_gnome": 15,
+          "mechdef_salamander": 10,
+          "BA_EMPTY": 85
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_salamander": 1,
+          "BA_EMPTY": 4
+        }
+      },
+      {
+        "FactionIDs": [
+          "ClanStarAdder"
+        ],
+        "SpawnChanceBase": -0.2,
+        "SpawnChanceDiffMod": 0.04,
+        "MaxSquadsPerContract": 4,
+        "InternalBattleArmorWeight": {
+          "mechdef_elemental_toad_ap": 20,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "mechdef_corona": 8,
+          "mechdef_corona_srm": 8,
+          "mechdef_gnome": 5,
+          "mechdef_salamander": 10
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_elemental_toad_ap": 20,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "mechdef_corona": 8,
+          "mechdef_corona_srm": 8,
+          "mechdef_gnome": 5,
+          "mechdef_salamander": 10,
+          "BA_EMPTY": 85
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_salamander": 1,
+          "BA_EMPTY": 4
+        }
+      },
+      {
+        "FactionIDs": [
+          "ClanGoliathScorpion"
+        ],
+        "SpawnChanceBase": -0.2,
+        "SpawnChanceDiffMod": 0.04,
+        "MaxSquadsPerContract": 4,
+        "InternalBattleArmorWeight": {
+          "mechdef_elemental_toad_ap": 20,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "mechdef_elemental_undine": 10,
+          "mechdef_corona": 5,
+          "mechdef_corona_srm": 10,
+          "mechdef_gnome": 10,
+          "mechdef_salamander": 10
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_elemental_toad_ap": 20,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "mechdef_elemental_undine": 10,
+          "mechdef_corona": 5,
+          "mechdef_corona_srm": 10,
+          "mechdef_gnome": 10,
+          "mechdef_salamander": 10,
+          "BA_EMPTY": 99
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_salamander": 1,
+          "BA_EMPTY": 4
+        }
+      },
+      {
+        "FactionIDs": [
+          "ClanFireMandrill"
+        ],
+        "SpawnChanceBase": -0.2,
+        "SpawnChanceDiffMod": 0.04,
+        "MaxSquadsPerContract": 4,
+        "InternalBattleArmorWeight": {
+          "mechdef_elemental_toad_ap": 10,
+          "mechdef_elemental_toad_mg": 5,
+          "mechdef_elemental_toad": 5,
+          "mechdef_elemental_toad_Flamer": 5,
+          "mechdef_corona": 7,
+          "mechdef_gnome": 18,
+          "mechdef_salamander": 40
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_elemental_toad_ap": 10,
+          "mechdef_elemental_toad_mg": 5,
+          "mechdef_elemental_toad": 5,
+          "mechdef_elemental_toad_Flamer": 5,
+          "mechdef_corona": 7,
+          "mechdef_gnome": 18,
+          "mechdef_salamander": 40,
+          "BA_EMPTY": 90
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_salamander": 1,
+          "BA_EMPTY": 2
+        }
+      },
+      {
+        "FactionIDs": [
+          "ClanGhostBear"
+        ],
+        "SpawnChanceBase": -0.2,
+        "SpawnChanceDiffMod": 0.04,
+        "MaxSquadsPerContract": 4,
+        "InternalBattleArmorWeight": {
+          "mechdef_elemental_toad_iii": 30,
+          "mechdef_elemental_toad_ap": 20,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "mechdef_corona": 10,
+          "mechdef_gnome": 25,
+          "mechdef_salamander": 10
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_elemental_toad_iii": 30,
+          "mechdef_elemental_toad_ap": 20,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "mechdef_corona": 10,
+          "mechdef_gnome": 25,
+          "mechdef_salamander": 10,
+          "BA_EMPTY": 129
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_salamander": 1,
+          "BA_EMPTY": 4
+        }
+      },
+      {
+        "FactionIDs": [
+          "ClanJadeFalcon"
+        ],
+        "SpawnChanceBase": -0.2,
+        "SpawnChanceDiffMod": 0.04,
+        "MaxSquadsPerContract": 4,
+        "InternalBattleArmorWeight": {
+          "mechdef_elemental_toad_iii": 30,
+          "mechdef_elemental_toad_ap": 20,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "mechdef_corona": 10,
+          "mechdef_gnome": 25,
+          "mechdef_salamander_AP": 15,
+          "mechdef_salamander": 5
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_elemental_toad_iii": 30,
+          "mechdef_elemental_toad_ap": 20,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "mechdef_corona": 10,
+          "mechdef_gnome": 25,
+          "mechdef_salamander_AP": 15,
+          "mechdef_salamander": 5,
+          "BA_EMPTY": 139
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_salamander_AP": 2,
+          "mechdef_salamander": 1,
+          "BA_EMPTY": 12
+        }
+      },
+      {
+        "FactionIDs": [
+          "ClanSnowRaven"
+        ],
+        "SpawnChanceBase": -0.2,
+        "SpawnChanceDiffMod": 0.04,
+        "MaxSquadsPerContract": 4,
+        "InternalBattleArmorWeight": {
+          "mechdef_elemental_toad_iii": 30,
+          "mechdef_elemental_toad_ap": 20,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "mechdef_corona": 10,
+          "mechdef_gnome": 25,
+          "mechdef_salamander_laser": 15,
+          "mechdef_salamander": 5
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_elemental_toad_iii": 30,
+          "mechdef_elemental_toad_ap": 20,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "mechdef_corona": 10,
+          "mechdef_gnome": 25,
+          "mechdef_salamander_laser": 15,
+          "mechdef_salamander": 5,
+          "BA_EMPTY": 139
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_salamander_laser": 2,
+          "mechdef_salamander": 1,
+          "BA_EMPTY": 12
+        }
+      },
+      {
+        "FactionIDs": [
+          "ClanNovaCat"
+        ],
+        "SpawnChanceBase": -0.2,
+        "SpawnChanceDiffMod": 0.04,
+        "MaxSquadsPerContract": 4,
+        "InternalBattleArmorWeight": {
+          "mechdef_elemental_toad_iii": 30,
+          "mechdef_elemental_toad_ap": 20,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "mechdef_void_nc": 30,
+          "mechdef_corona": 15,
+          "mechdef_gnome": 35,
+          "mechdef_salamander": 10
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_elemental_toad_iii": 30,
+          "mechdef_elemental_toad_ap": 20,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "mechdef_void_nc": 30,
+          "mechdef_corona": 15,
+          "mechdef_gnome": 35,
+          "mechdef_salamander": 10,
+          "BA_EMPTY": 174
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_salamander": 1,
+          "BA_EMPTY": 4
+        }
+      },
+      {
+        "FactionIDs": [
+          "ClanWolf"
+        ],
+        "SpawnChanceBase": -0.2,
+        "SpawnChanceDiffMod": 0.04,
+        "MaxSquadsPerContract": 4,
+        "InternalBattleArmorWeight": {
+          "mechdef_elemental_toad_iii": 30,
+          "mechdef_elemental_toad_ap": 20,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "mechdef_elemental_undine": 10,
+          "mechdef_corona": 15,
+          "mechdef_gnome": 35,
+          "mechdef_salamander_laser": 15,
+          "mechdef_salamander": 5
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_elemental_toad_iii": 30,
+          "mechdef_elemental_toad_ap": 20,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "mechdef_elemental_undine": 10,
+          "mechdef_corona": 15,
+          "mechdef_gnome": 35,
+          "mechdef_salamander_laser": 15,
+          "mechdef_salamander": 5,
+          "BA_EMPTY": 165
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_salamander_laser": 2,
+          "mechdef_salamander": 1,
+          "BA_EMPTY": 12
+        }
+      },
+      {
+        "FactionIDs": [
+          "ClanDiamondShark"
+        ],
+        "SpawnChanceBase": -0.2,
+        "SpawnChanceDiffMod": 0.04,
+        "MaxSquadsPerContract": 4,
+        "InternalBattleArmorWeight": {
+          "mechdef_elemental_toad_iii": 30,
+          "mechdef_elemental_toad_ap": 20,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "mechdef_elemental_undine": 30,
+          "mechdef_corona": 15,
+          "mechdef_gnome": 35,
+          "mechdef_salamander": 10
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_elemental_toad_iii": 30,
+          "mechdef_elemental_toad_ap": 20,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "mechdef_elemental_undine": 30,
+          "mechdef_corona": 15,
+          "mechdef_gnome": 35,
+          "mechdef_salamander": 10,
+          "BA_EMPTY": 174
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_salamander": 1,
+          "BA_EMPTY": 4
+        }
+      },
+      {
+        "FactionIDs": [
+          "ClanHellsHorses"
+        ],
+        "SpawnChanceBase": 0.0,
+        "SpawnChanceDiffMod": 0.04,
+        "MaxSquadsPerContract": 6,
+        "InternalBattleArmorWeight": {
+          "mechdef_elemental_toad_ii": 15,
+          "mechdef_elemental_toad_iii": 30,
+          "mechdef_elemental_toad_ap": 20,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "mechdef_corona": 5,
+          "mechdef_gnome": 30,
+          "mechdef_gnome_mg": 15,
+          "mechdef_gnome_rf": 15,
+          "mechdef_salamander": 10
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_elemental_toad_ii": 15,
+          "mechdef_elemental_toad_iii": 30,
+          "mechdef_elemental_toad_ap": 20,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "mechdef_corona": 5,
+          "mechdef_gnome": 30,
+          "mechdef_gnome_mg": 15,
+          "mechdef_gnome_rf": 15,
+          "mechdef_salamander": 10,
+          "BA_EMPTY": 174
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_salamander": 1,
+          "BA_EMPTY": 4
+        }
+      }
+    ],
+    "AttackOnSwarmSuccess": true,
+    "AI_BattleArmorExcludedContractTypes": [
+      "DuoDuel",
+      "SoloDuel"
+    ],
+    "AI_BattleArmorExcludedContractIDs": [
+	"solaris_assault_4x4battle_mech_2.json",
+	"solaris_assault_4x4battle_mech_5.json",
+	"solaris_assault_4x4battle_mech_8.json",
+	"solaris_assault_4x4ctf_mech_2.json",
+	"solaris_assault_4x4ctf_mech_5.json",
+	"solaris_assault_4x4ctf_mech_8.json",
+	"solaris_assault_4x4freeforall_mech_2.json",
+	"solaris_assault_4x4freeforall_mech_5.json",
+	"solaris_assault_4x4freeforall_mech_8.json",
+	"solaris_heavy_4x4battle_mech_2.json",
+	"solaris_heavy_4x4battle_mech_5.json",
+	"solaris_heavy_4x4battle_mech_8.json",
+	"solaris_heavy_4x4ctf_mech_2.json",
+	"solaris_heavy_4x4ctf_mech_5.json",
+	"solaris_heavy_4x4ctf_mech_8.json",
+	"solaris_heavy_4x4freeforall_mech_2.json",
+	"solaris_heavy_4x4freeforall_mech_5.json",
+	"solaris_heavy_4x4freeforall_mech_8.json",
+	"solaris_light_4x4battle_mech_2.json",
+	"solaris_light_4x4battle_mech_5.json",
+	"solaris_light_4x4battle_mech_8.json",
+	"solaris_light_4x4ctf_mech_2.json",
+	"solaris_light_4x4ctf_mech_5.json",
+	"solaris_light_4x4ctf_mech_8.json",
+	"solaris_light_4x4freeforall_mech_2.json",
+	"solaris_light_4x4freeforall_mech_5.json",
+	"solaris_light_4x4freeforall_mech_8.json",
+	"solaris_medium_4x4battle_mech_2.json",
+	"solaris_medium_4x4battle_mech_5.json",
+	"solaris_medium_4x4battle_mech_8.json",
+	"solaris_medium_4x4ctf_mech_2.json",
+	"solaris_medium_4x4ctf_mech_5.json",
+	"solaris_medium_4x4ctf_mech_8.json",
+	"solaris_medium_4x4freeforall_mech_2.json",
+	"solaris_medium_4x4freeforall_mech_5.json",
+	"solaris_medium_4x4freeforall_mech_8.json",
+	"solaris_offseason_4x4battle_mech_2.json",
+	"solaris_offseason_4x4battle_mech_5.json",
+	"solaris_offseason_4x4battle_mech_8.json",
+	"solaris_offseason_4x4ctf_mech_2.json",
+	"solaris_offseason_4x4ctf_mech_5.json",
+	"solaris_offseason_4x4ctf_mech_8.json",
+	"solaris_offseason_4x4freeforall_mech_2.json",
+	"solaris_offseason_4x4freeforall_mech_5.json",
+	"solaris_offseason_4x4freeforall_mech_8.json"
+    ],
+    "BeaconExcludedContractTypes": [
+      "DuoDuel",
+      "SoloDuel"
+    ],
+    "BeaconExcludedContractIDs": [
+	"solaris_assault_4x4battle_mech_2.json",
+	"solaris_assault_4x4battle_mech_5.json",
+	"solaris_assault_4x4battle_mech_8.json",
+	"solaris_assault_4x4ctf_mech_2.json",
+	"solaris_assault_4x4ctf_mech_5.json",
+	"solaris_assault_4x4ctf_mech_8.json",
+	"solaris_assault_4x4freeforall_mech_2.json",
+	"solaris_assault_4x4freeforall_mech_5.json",
+	"solaris_assault_4x4freeforall_mech_8.json",
+	"solaris_heavy_4x4battle_mech_2.json",
+	"solaris_heavy_4x4battle_mech_5.json",
+	"solaris_heavy_4x4battle_mech_8.json",
+	"solaris_heavy_4x4ctf_mech_2.json",
+	"solaris_heavy_4x4ctf_mech_5.json",
+	"solaris_heavy_4x4ctf_mech_8.json",
+	"solaris_heavy_4x4freeforall_mech_2.json",
+	"solaris_heavy_4x4freeforall_mech_5.json",
+	"solaris_heavy_4x4freeforall_mech_8.json",
+	"solaris_light_4x4battle_mech_2.json",
+	"solaris_light_4x4battle_mech_5.json",
+	"solaris_light_4x4battle_mech_8.json",
+	"solaris_light_4x4ctf_mech_2.json",
+	"solaris_light_4x4ctf_mech_5.json",
+	"solaris_light_4x4ctf_mech_8.json",
+	"solaris_light_4x4freeforall_mech_2.json",
+	"solaris_light_4x4freeforall_mech_5.json",
+	"solaris_light_4x4freeforall_mech_8.json",
+	"solaris_medium_4x4battle_mech_2.json",
+	"solaris_medium_4x4battle_mech_5.json",
+	"solaris_medium_4x4battle_mech_8.json",
+	"solaris_medium_4x4ctf_mech_2.json",
+	"solaris_medium_4x4ctf_mech_5.json",
+	"solaris_medium_4x4ctf_mech_8.json",
+	"solaris_medium_4x4freeforall_mech_2.json",
+	"solaris_medium_4x4freeforall_mech_5.json",
+	"solaris_medium_4x4freeforall_mech_8.json",
+	"solaris_offseason_4x4battle_mech_2.json",
+	"solaris_offseason_4x4battle_mech_5.json",
+	"solaris_offseason_4x4battle_mech_8.json",
+	"solaris_offseason_4x4ctf_mech_2.json",
+	"solaris_offseason_4x4ctf_mech_5.json",
+	"solaris_offseason_4x4ctf_mech_8.json",
+	"solaris_offseason_4x4freeforall_mech_2.json",
+	"solaris_offseason_4x4freeforall_mech_5.json",
+	"solaris_offseason_4x4freeforall_mech_8.json"
+     ]
+  },
+  "Manifest": [
+    {
+      "Type": "AbilityDef",
+      "Path": "abilities"
+    },
+    {
+      "Type": "UpgradeDef",
+      "Path": "upgrade"
+    },
+    {
+      "Type": "UpgradeDef",
+      "Path": "contracts"
+    },
+    {
+      "Type": "VehicleDef",
+      "Path": "aerospace"
+    },
+    {
+      "Type": "VehicleChassisDef",
+      "Path": "aerospacechassis"
+    },
+    {
+      "Type": "PilotDef",
+      "Path": "pilot"
+    },
+    {
+      "Type": "Texture2D",
+      "Path": "texture"
+    }
+  ]
+}
