@@ -189,6 +189,7 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
 },
 "AdvancedCirtProcessing":true, - if false vanilla crit processing used. Eg only mechs, crit to can inflicted to empty slot. 
                                 If true crit to occupied slots and to mechs, vehicles and turrets. 
+"AoECanCrit": false, - if false AoE damage can't crit components even if no armor in location
 "APMinCritChance": 0.1, - Minimal crit chance on AP processing.
                           Basics: 
                             advanced crit calculations:
