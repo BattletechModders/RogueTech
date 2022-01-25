@@ -182,6 +182,7 @@ AI related mod settings
 			  "Heat":100, - Heat damage. If target is not mech this value will be added to Damage in calcualtion
 			  "Stability":100, - Stability damage. If target is not mech this value is ommited
 			  "Chance":0.6, - Chance of explosion if commited
+			  "ExplosionMessage" : "", - floatie message on explosion commit
 			  "VFX":"WFX_Nuke" - additional VFX on explosion 
 				"VFXScaleX":1, - VFX scale
 				"VFXScaleY":1,
