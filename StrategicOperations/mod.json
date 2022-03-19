@@ -693,6 +693,34 @@
       "ArmHandActuator",
       "OmniHandActuator"
     ],
+		"DeswarmConfigs": {
+			"AbilityDefDeSwarmerRoll": {
+				"BaseSuccessChance": 0.55,
+				"MaxSuccessChance": 0.95,
+				"PilotingSuccessFactor": 0.05,
+				"TotalDamage": 200,
+				"Clusters": 4,
+				"InitPenalty": 11
+			},
+			"AbilityDefDeSwarmerSwat": {
+				"BaseSuccessChance": 0.33,
+				"MaxSuccessChance": 0.95,
+				"PilotingSuccessFactor": 0.05,
+				"TotalDamage": 100,
+				"Clusters": 2,
+				"InitPenalty": 8
+			}
+		},
+		"DeswarmMovementConfig": {
+			"AbilityDefID": "AbilityDefDeSwarmerMovement",
+			"BaseSuccessChance": 0.30,
+			"MaxSuccessChance": 0.95,
+			"EvasivePipsFactor": 0.1,
+			"JumpMovementModifier": 1.2,
+			"UseDFADamage": true,
+			"LocationDamageOverride": 0,
+			"PilotingDamageReductionFactor": 0.1
+		},
     "BPodComponentIDs": [
       "Gear_B_Pod"
     ],
@@ -802,7 +830,30 @@
               "modType": "System.Single",
               "targetCollection": "Weapon"
             }
-          }
+          },
+          {
+						"durationData": {
+							"duration": -1
+						},
+						"targetingData": {
+							"effectTriggerType": "Passive",
+							"effectTargetType": "Creator"
+						},
+						"effectType": "StatisticEffect",
+						"Description": {
+							"Id": "BA_SwarmBreaching",
+							"Name": "BREACHING SHOT",
+							"Details": "PASSIVE: Attacking with a single weapon ignores COVER and GUARDED on the target.",
+							"Icon": "uixSvgIcon_ability_precisionstrike"
+						},
+						"statisticData": {
+							"statName": "SuperPrecisionShot",
+							"operation": "Set",
+							"modValue": "true",
+							"modType": "System.Boolean"
+						},
+						"nature": "Buff"
+					}
         ]
       },
       {
@@ -812,7 +863,10 @@
         "description": "Battle Armor has decreased accuracy when firing while mounted.",
         "effectDataJO": [
           {
-            "durationData": {},
+            "durationData": {
+              "duration": -1,
+              "stackLimit": -1
+            },
             "targetingData": {
               "effectTriggerType": "Passive",
               "effectTargetType": "Creator",
@@ -828,9 +882,10 @@
             "nature": "Buff",
             "statisticData": {
               "statName": "AccuracyModifier",
-              "operation": "Set",
+              "operation": "Float_Add",
               "modValue": "2",
-              "modType": "System.Single"
+              "modType": "System.Single",
+              "targetCollection": "Weapon"
             }
           }
         ]
@@ -842,11 +897,14 @@
         "description": "Battle Armor takes no damage when mounted internally.",
         "effectDataJO": [
           {
-            "durationData": {},
+            "durationData": {
+              "duration": -1,
+              "stackLimit": -1
+            },
             "targetingData": {
               "effectTriggerType": "Passive",
               "effectTargetType": "Creator",
-              "showInStatusPanel": true
+              "showInStatusPanel": false
             },
             "effectType": "StatisticEffect",
             "Description": {
@@ -864,8 +922,162 @@
             }
           }
         ]
-      }
+      },
+			{
+				"ID": "BA_GarrisonDefense",
+				"TargetEffectType": "GARRISON",
+				"Name": "Battle Armor - Garrisoned Defensive Bonuses",
+				"Description": "Garrisoned units have Defensive bosnuses.",
+				"effectDataJO": [
+					{
+						"durationData": {
+              "duration": -1,
+              "stackLimit": -1
+            },
+						"targetingData": {
+							"effectTriggerType": "Passive",
+							"effectTargetType": "Creator",
+							"showInStatusPanel": true
+						},
+						"effectType": "StatisticEffect",
+						"Description": {
+							"Id": "BA_GarrisonDamageResistance",
+							"Name": "AOE Immune",
+							"Details": "arrisoned units have 30% additional damage resist.",
+							"Icon": "allied-star"
+						},
+						"nature": "Buff",
+						"statisticData": {
+							"statName": "DamageReductionMultiplierAll",
+							"operation": "Float_Multiply",
+							"modValue": "0.7",
+							"modType": "System.Single"
+						}
+					},
+					{
+						"durationData": {
+              "duration": -1,
+              "stackLimit": -1
+            },
+						"targetingData": {
+							"effectTriggerType": "Passive",
+							"effectTargetType": "Creator",
+							"showInStatusPanel": true
+						},
+						"effectType": "StatisticEffect",
+						"Description": {
+							"Id": "BA_GarrisonHardToHit",
+							"Name": "harder to hit",
+							"Details": "garrisoned are harder to hit becuase reasons",
+							"Icon": "allied-star"
+						},
+						"nature": "Buff",
+						"statisticData": {
+							"statName": "ToHitThisActor",
+							"operation": "Float_Add",
+							"modValue": "3.0",
+							"modType": "System.Single"
+						}
+					}
+				]
+			}
     ],
+		"AirliftTargetEffects": [
+			{
+				"ID": "Airlift_Immobile",
+				"FriendlyAirlift": false,
+				"Name": "Airlift Airlift_Immobile",
+				"Description": "Airlifted enemies are immobilezed (but can still shoot).",
+				"effectDataJO": [
+					{
+						"durationData": {
+              "duration": -1,
+              "stackLimit": -1
+            },
+						"targetingData": {
+							"effectTriggerType": "Passive",
+							"effectTargetType": "Creator",
+							"showInStatusPanel": true
+						},
+						"effectType": "StatisticEffect",
+						"Description": {
+							"Id": "Airlift_Airlift_Immobile",
+							"Name": "Immobilized",
+							"Details": "Imnmobiledzed",
+							"Icon": "allied-star"
+						},
+						"nature": "Buff",
+						"statisticData": {
+							"statName": "irbtmu_immobile_unit",
+							"operation": "Set",
+							"modValue": "true",
+							"modType": "System.Boolean"
+						}
+					}
+				]
+			}
+		],
+		"OnGarrisonCollapseEffects": [
+			{
+				"ID": "GarrisonCollapseAccuracy",
+				"TargetEffectType": "GARRISON",
+				"Name": "Accuracy Penalty",
+				"Description": "Accuracy Penalty when building collapse",
+				"effectDataJO": [
+					{
+						"durationData": {
+							"duration": 2,
+							"stackLimit": 1
+						},
+						"targetingData": {
+							"effectTriggerType": "Passive",
+							"effectTargetType": "Creator",
+							"showInStatusPanel": true
+						},
+						"effectType": "StatisticEffect",
+						"Description": {
+							"Id": "Garrison_Collapse_accuracy",
+							"Name": "hard shots",
+							"Details": "BA has worse accuracy and initiative after collpase.",
+							"Icon": "allied-star"
+						},
+						"nature": "Buff",
+						"statisticData": {
+							"statName": "AccuracyModifier",
+							"operation": "Float_Add",
+							"modValue": "3",
+							"modType": "System.Single",
+              "targetCollection": "Weapon"
+						}
+					},
+					{
+						"durationData": {
+							"duration": 2,
+							"stackLimit": 1
+						},
+						"targetingData": {
+							"effectTriggerType": "Passive",
+							"effectTargetType": "Creator",
+							"showInStatusPanel": false
+						},
+						"effectType": "StatisticEffect",
+						"Description": {
+							"Id": "Garrison_Collapse_initiative",
+							"Name": "hard shots",
+							"Details": "BA has worse accuracy and initiative after collpase.",
+							"Icon": "allied-star"
+						},
+						"nature": "Buff",
+						"statisticData": {
+              "statName": "SBI_MOD_MISC",
+              "operation": "Int_Add",
+              "modValue": "-5",
+              "modType": "System.Int32"
+						}
+					}
+				]
+			}
+		],
     "BattleArmorFactionAssociations": [
       {
         "FactionIDs": [
@@ -2179,7 +2391,14 @@
       "solaris_offseason_8x8ctf_mech_2",
       "solaris_offseason_8x8ctf_mech_5",
       "solaris_offseason_8x8ctf_mech_8"
-    ]
+    ],
+		"DisableGarrisons": false,
+		"GarrisonBuildingArmorFactor": 0.5,
+		"UsingMechAffinityForSwarmBreach": true,
+		"AirliftAbilityID": "AbilityDefAirliftActivate",
+		"AirliftCapacityByTonnage": false,
+		"CanDropOffAfterMoving": false,
+		"AirliftImmuneTags": []
   },
   "Manifest": [
     {
