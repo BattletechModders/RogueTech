@@ -7,15 +7,21 @@
     ],
     "BonusDescriptions": {
       "Bonuses": [
-        "LandAirMechDisabled",
-        "LAMNoGround",
-        "LAMFlight: 4, 20%, 10%",
-        "LAMAfterBurner: 70%",
+        "ProtoMech",
+        "WiGEActive",
+        "WiGENoGround",
+        "WiGEFlight: 2, 1",
         "LAMFiringArc: 360",
         "Activatable",
         "OnlyBeforeMove",
-        "Quirk"
+        "ArmorFactor: -20%",
+        "ArmorTPCost: -50%",
+        "ArmorCBCost: -20%"
       ]
+    },
+    "ArmorRepair": {
+      "ArmorTPCost": 0.5,
+      "ArmorCBCost": 0.8
     },
     "ActivatableComponent": {
       "CanActivateAfterMove": false,
@@ -25,21 +31,17 @@
       "ButtonName": "Avionics",
       "CanNotBeActivatedManualy": false,
       "NoUniqueCheck": true,
-      "ActiveByDefault": false,
-      "ActivationMessage": "LAM-Mode",
-      "DeactivationMessage": "Mech-Mode",
+      "ActiveByDefault": true,
+      "ActivationMessage": "WiGE-Mode",
+      "DeactivationMessage": "Ground-Mode",
       "Linkage": {
         "OnActivate": {
-          "Activate": [
-            "LAM-Turbine"
-          ],
+          "Activate": [],
           "Deactivate": []
         },
         "OnDeactivate": {
           "Activate": [],
-          "Deactivate": [
-            "LAM-Turbine"
-          ]
+          "Deactivate": []
         }
       },
       "statusEffects": [
@@ -259,113 +261,7 @@
             "modType": "System.Single"
           }
         },
-        {
-          "durationData": {
-            "duration": -1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "Passive",
-            "effectTargetType": "Creator",
-            "showInTargetPreview": false,
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
-          "Description": {
-            "Id": "LAM_Afterburner_Base",
-            "Name": "LAM_Afterburner_Base",
-            "Details": "Provides 70 stability and -20% stability damage taken.",
-            "Icon": "uixSvgIcon_equipment_Gyro"
-          },
-          "statisticData": {
-            "statName": "JumpDistanceMultiplier",
-            "operation": "Float_Multiply",
-            "modValue": "1.7",
-            "modType": "System.Single"
-          },
-          "nature": "Buff"
-        },
-        {
-          "durationData": {
-            "duration": -1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "Passive",
-            "effectTargetType": "Creator",
-            "showInTargetPreview": false,
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
-          "Description": {
-            "Id": "LAM_STAB_PENALTY",
-            "Name": "LAM_STAB_PENALTY",
-            "Details": "Incoming stability damage reduced by [AMT].",
-            "Icon": "uixSvgIcon_equipment_Gyro"
-          },
-          "nature": "Buff",
-          "statisticData": {
-            "appliesEachTick": false,
-            "effectsPersistAfterDestruction": false,
-            "statName": "ReceivedInstabilityMultiplier",
-            "operation": "Float_Multiply",
-            "modValue": "1.2",
-            "modType": "System.Single"
-          }
-        },
-        {
-          "durationData": {
-            "duration": -1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "Passive",
-            "effectTargetType": "Creator",
-            "showInTargetPreview": false,
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
-          "Description": {
-            "Id": "LAM_STAB_PENALTY_Threshold",
-            "Name": "LAM_STAB_PENALTY_Threshold",
-            "Details": "Provides 70 stability and -20% stability damage taken.",
-            "Icon": "uixSvgIcon_equipment_Gyro"
-          },
-          "statisticData": {
-            "statName": "UnsteadyThreshold",
-            "operation": "Float_Multiply",
-            "modValue": "0.9",
-            "modType": "System.Single"
-          },
-          "nature": "Buff"
-        },
-        {
-          "durationData": {
-            "duration": -1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "Passive",
-            "effectTargetType": "Creator",
-            "showInTargetPreview": false,
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
-          "Description": {
-            "Id": "LAM_STAB_PENALTY_Max",
-            "Name": "LAM_STAB_PENALTY_Max",
-            "Details": "Provides 70 stability and -20% stability damage taken.",
-            "Icon": "uixSvgIcon_equipment_Gyro"
-          },
-          "statisticData": {
-            "statName": "MaxStability",
-            "operation": "Float_Multiply",
-            "modValue": "0.9",
-            "modType": "System.Single"
-          },
-          "nature": "Buff"
-        },
-    {
+   {
       "durationData": {
         "duration": -1,
         "stackLimit": -1
@@ -384,13 +280,147 @@
       "statisticData": {
         "statName": "MaxEvasivePips",
         "operation": "Int_Add",
-        "modValue": "4",
+        "modValue": "2",
         "modType": "System.Int32"
       },
       "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "GainEvasion",
+        "Name": "EVASIVE MOVE",
+        "Details": "This unit generates an extra EVASIVE charge from movement actions (up to its maximum).",
+        "Icon": "uixSvgIcon_action_evasivemove"
+      },
+      "statisticData": {
+        "statName": "EvasivePipsGainedAdditional",
+        "operation": "Int_Add",
+        "modValue": "1",
+        "modType": "System.Int32"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "TSMActive1",
+        "Name": "TSM ACTIVATED!",
+        "Details": "Stronger Melee and faster Movement",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "statisticData": {
+        "statName": "WalkSpeed",
+        "operation": "Float_Add",
+        "modValue": "40",
+        "modType": "System.Single"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "forcePathRebuild": true,
+        "forceVisRebuild": false,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "BAWalk",
+        "Name": "BA",
+        "Details": "Myomer Accelerator Signal Circuitry",
+        "Icon": "uixSvgIcon_action_evasivemove"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "CBTBE_RunMultiMod",
+        "operation": "Float_Add",
+        "modValue": "0.25",
+        "modType": "System.Single"
+      }
     }
       ],
-      "offlineStatusEffects": []
+      "offlineStatusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "TSMActive1",
+        "Name": "TSM ACTIVATED!",
+        "Details": "Stronger Melee and faster Movement",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "statisticData": {
+        "statName": "WalkSpeed",
+        "operation": "Set",
+        "modValue": "30",
+        "modType": "System.Single"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "forcePathRebuild": true,
+        "forceVisRebuild": false,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "BAWalk",
+        "Name": "BA",
+        "Details": "Myomer Accelerator Signal Circuitry",
+        "Icon": "uixSvgIcon_action_evasivemove"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "CBTBE_RunMultiMod",
+        "operation": "Float_Add",
+        "modValue": "-0.5",
+        "modType": "System.Single"
+      }
+    }
+    ]
     },
     "Flags": {
       "flags": [
@@ -404,22 +434,25 @@
     "InventorySorter": {
       "SortKey": "00201"
     },
-    "MechConfiguration": { }
+    "MechConfiguration": { },
+    "Weights": {
+      "ArmorFactor": 0.8
+    }
   },
   "StatName": null,
   "RelativeModifier": 0,
   "AbsoluteModifier": 0,
   "Description": {
-    "Cost": 0,
-    "Rarity": 3,
+    "Cost": 250000,
+    "Rarity": 0,
     "Purchasable": true,
     "Manufacturer": "General",
     "Model": "Standard",
-    "UIName": "Land Air Mech",
-    "Id": "Special_LandAirMech_Disabled",
-    "Name": "Land Air Mech",
-    "Details": "Originally conceived during the Star League era, the Land-Air 'Mech (or LAM) is a hybrid military unit capable of transforming between BattleMech and Aerospace Fighter forms. This ability conveys great speed and flexibility at the cost of power and protection.",
-    "Icon": "SpecialistSlot"
+    "UIName": "UltraHeavy WiGE ProtoMech",
+    "Id": "Type_UltraHeavyProtoWiGE",
+    "Name": "UltraHeavy WiGE ProtoMech",
+    "Details": "ProtoMechs mass between two to fifteen metric tons and stand anywhere from four to six meters in height, with the cockpit mounted in the upper chest. With their fusion engines, they can move considerably faster than battle armor but are more compact than BattleMechs. The ultimate goal of these machines is for a Point of five, working in unison, to be as effective as a BattleMech, while requiring less than half the amount of construction resources. WiGE Protomechs has 1 MP on the ground and get bonus speed in the air.",
+    "Icon": "space-suit"
   },
   "BonusValueA": "",
   "BonusValueB": "",
@@ -428,16 +461,17 @@
   "PrefabIdentifier": "",
   "BattleValue": 0,
   "InventorySize": 1,
-  "Tonnage": 0.0,
-  "AllowedLocations": "CenterTorso",
+  "Tonnage": 0,
+  "AllowedLocations": "All",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "statusEffects": [],
+  "statusEffects": [
+  ],
   "ComponentTags": {
     "items": [
+      "ProtoGear",
       "component_type_stock",
-      "BAIncompatible",
-      "ProtoIncompatible"
+      "BAIncompatible"
     ],
     "tagSetSourceFile": ""
   }
