@@ -2,7 +2,7 @@
   "Name": "StrategicOperations",
   "DLL": "StrategicOperations.dll",
   "Hidden": true,
-  "Version": "2.0.1.4",
+  "Version": "3.0.0.2",
   "Description": "",
   "Author": "T-Bone",
   "Website": "https://github.com/ajkroeg/StrategicOperations",
@@ -46,6 +46,7 @@
       "b": 255
     },
     "deploymentBeaconEquipment": [],
+    "strafeAAFailThreshold": 0.75,
     "strafeWaves": 3,
     "commandAbilities_AI": [
       {
@@ -68,7 +69,11 @@
           "ClanStarAdder",
           "ClanSteelViper",
           "ClanWolf",
+          "RavenAlliance",
           "Society",
+          "GhostBearDominion",
+          "DarkCaste",
+          "ClanStoneLion",
           "ClanBloodSpirit"
         ],
         "AddChance": -0.2,
@@ -620,12 +625,71 @@
       {
         "AbilityDefID": "AbilityDefCMD_Strafe_AI",
         "FactionIDs": [
+          "GreenGhosts"
+        ],
+        "AddChance": -0.2,
+        "DiffMod": 0.02,
+        "MaxUsersAddedPerContract": 2,
+        "AvailableBeacons": [
+          {
+            "UnitDefID": "vehicledef_HELLCAT_II_214_AERO",
+            "Weight": 2,
+            "StrafeWaves": 3
+          },
+          {
+            "UnitDefID": "vehicledef_GOTHA_ROYAL_AERO",
+            "Weight": 2,
+            "StrafeWaves": 3
+          },
+          {
+            "UnitDefID": "vehicledef_STINGRAY_F92_AERO",
+            "Weight": 2,
+            "StrafeWaves": 3
+          },
+          {
+            "UnitDefID": "vehicledef_STINGRAY_F94_AERO",
+            "Weight": 1,
+            "StrafeWaves": 3
+          },
+          {
+            "UnitDefID": "vehicledef_LIGHTNING_ROYAL_AERO",
+            "Weight": 1,
+            "StrafeWaves": 3
+          },
+          {
+            "UnitDefID": "vehicledef_CORSAIR_ROYAL_AERO",
+            "Weight": 1,
+            "StrafeWaves": 3
+          },
+          {
+            "UnitDefID": "vehicledef_LUCIFER_R16_AERO",
+            "Weight": 1,
+            "StrafeWaves": 3
+          },
+          {
+            "UnitDefID": "vehicledef_TYRE_AERO",
+            "Weight": 1,
+            "StrafeWaves": 3
+          },
+          {
+            "UnitDefID": "vehicledef_TYRE_2_AERO",
+            "Weight": 1,
+            "StrafeWaves": 3
+          }
+        ]
+      },
+      {
+        "AbilityDefID": "AbilityDefCMD_Strafe_AI",
+        "FactionIDs": [
           "TaurianConcordat",
+          "CalderonProtectorate",
           "MagistracyOfCanopus",
           "AuriganDirectorate",
           "AuriganRestoration",
           "AuriganPirates",
           "AuriganMercenaries",
+          "Rim",
+          "FiltveltCoalition",
           "Locals",
           "Axumite",
           "Castile",
@@ -693,6 +757,34 @@
       "ArmHandActuator",
       "OmniHandActuator"
     ],
+    "DeswarmConfigs": {
+      "AbilityDefDeSwarmerRoll": {
+        "BaseSuccessChance": 0.55,
+        "MaxSuccessChance": 0.95,
+        "PilotingSuccessFactor": 0.05,
+        "TotalDamage": 200,
+        "Clusters": 4,
+        "InitPenalty": 11
+      },
+      "AbilityDefDeSwarmerSwat": {
+        "BaseSuccessChance": 0.33,
+        "MaxSuccessChance": 0.95,
+        "PilotingSuccessFactor": 0.05,
+        "TotalDamage": 100,
+        "Clusters": 2,
+        "InitPenalty": 8
+      }
+    },
+    "DeswarmMovementConfig": {
+      "AbilityDefID": "AbilityDefDeSwarmerMovement",
+      "BaseSuccessChance": 0.3,
+      "MaxSuccessChance": 0.95,
+      "EvasivePipsFactor": 0.1,
+      "JumpMovementModifier": 1.2,
+      "UseDFADamage": true,
+      "LocationDamageOverride": 0,
+      "PilotingDamageReductionFactor": 0.1
+    },
     "BPodComponentIDs": [
       "Gear_B_Pod"
     ],
@@ -705,7 +797,7 @@
         "description": "Battle Armor has greatly increased accuracy against the unit it is swarming.",
         "effectDataJO": [
           {
-            "durationData": {},
+            "durationData": { },
             "targetingData": {
               "effectTriggerType": "Passive",
               "effectTargetType": "Creator",
@@ -802,6 +894,30 @@
               "modType": "System.Single",
               "targetCollection": "Weapon"
             }
+          },
+          {
+            "durationData": {
+              "duration": -1,
+              "stackLimit": -1
+            },
+            "targetingData": {
+              "effectTriggerType": "Passive",
+              "effectTargetType": "Creator"
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+              "Id": "BA_SwarmBreaching",
+              "Name": "BREACHING SHOT",
+              "Details": "PASSIVE: Attacking with a single weapon ignores COVER and GUARDED on the target.",
+              "Icon": "uixSvgIcon_ability_precisionstrike"
+            },
+            "statisticData": {
+              "statName": "SuperPrecisionShot",
+              "operation": "Set",
+              "modValue": "true",
+              "modType": "System.Boolean"
+            },
+            "nature": "Buff"
           }
         ]
       },
@@ -812,7 +928,10 @@
         "description": "Battle Armor has decreased accuracy when firing while mounted.",
         "effectDataJO": [
           {
-            "durationData": {},
+            "durationData": {
+              "duration": -1,
+              "stackLimit": -1
+            },
             "targetingData": {
               "effectTriggerType": "Passive",
               "effectTargetType": "Creator",
@@ -828,9 +947,10 @@
             "nature": "Buff",
             "statisticData": {
               "statName": "AccuracyModifier",
-              "operation": "Set",
+              "operation": "Float_Add",
               "modValue": "2",
-              "modType": "System.Single"
+              "modType": "System.Single",
+              "targetCollection": "Weapon"
             }
           }
         ]
@@ -842,11 +962,14 @@
         "description": "Battle Armor takes no damage when mounted internally.",
         "effectDataJO": [
           {
-            "durationData": {},
+            "durationData": {
+              "duration": -1,
+              "stackLimit": -1
+            },
             "targetingData": {
               "effectTriggerType": "Passive",
               "effectTargetType": "Creator",
-              "showInStatusPanel": true
+              "showInStatusPanel": false
             },
             "effectType": "StatisticEffect",
             "Description": {
@@ -861,6 +984,162 @@
               "operation": "Set",
               "modValue": "0.0",
               "modType": "System.Single"
+            }
+          }
+        ]
+      },
+      {
+        "ID": "BA_GarrisonDefense",
+        "TargetEffectType": "GARRISON",
+        "Name": "Battle Armor - Garrisoned Defensive Bonuses",
+        "Description": "Garrisoned units have Defensive bosnuses.",
+        "effectDataJO": [
+          {
+            "durationData": {
+              "duration": -1,
+              "stackLimit": -1
+            },
+            "targetingData": {
+              "effectTriggerType": "Passive",
+              "effectTargetType": "Creator",
+              "showInStatusPanel": true
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+              "Id": "BA_GarrisonDamageResistance",
+              "Name": "AOE Immune",
+              "Details": "arrisoned units have 30% additional damage resist.",
+              "Icon": "allied-star"
+            },
+            "nature": "Buff",
+            "statisticData": {
+              "statName": "DamageReductionMultiplierAll",
+              "operation": "Float_Multiply",
+              "modValue": "0.7",
+              "modType": "System.Single"
+            }
+          },
+          {
+            "durationData": {
+              "duration": -1,
+              "stackLimit": -1
+            },
+            "targetingData": {
+              "effectTriggerType": "Passive",
+              "effectTargetType": "Creator",
+              "showInStatusPanel": true
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+              "Id": "BA_GarrisonHardToHit",
+              "Name": "harder to hit",
+              "Details": "garrisoned are harder to hit becuase reasons",
+              "Icon": "allied-star"
+            },
+            "nature": "Buff",
+            "statisticData": {
+              "statName": "ToHitThisActor",
+              "operation": "Float_Add",
+              "modValue": "3.0",
+              "modType": "System.Single"
+            }
+          }
+        ]
+      }
+    ],
+    "AirliftTargetEffects": [
+      {
+        "ID": "Airlift_Immobile",
+        "FriendlyAirlift": false,
+        "Name": "Airlift Airlift_Immobile",
+        "Description": "Airlifted enemies are immobilezed (but can still shoot).",
+        "effectDataJO": [
+          {
+            "durationData": {
+              "duration": -1,
+              "stackLimit": -1
+            },
+            "targetingData": {
+              "effectTriggerType": "Passive",
+              "effectTargetType": "Creator",
+              "showInStatusPanel": true
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+              "Id": "Airlift_Airlift_Immobile",
+              "Name": "Immobilized",
+              "Details": "Imnmobiledzed",
+              "Icon": "allied-star"
+            },
+            "nature": "Buff",
+            "statisticData": {
+              "statName": "irbtmu_immobile_unit",
+              "operation": "Set",
+              "modValue": "true",
+              "modType": "System.Boolean"
+            }
+          }
+        ]
+      }
+    ],
+    "OnGarrisonCollapseEffects": [
+      {
+        "ID": "GarrisonCollapseAccuracy",
+        "TargetEffectType": "GARRISON",
+        "Name": "Accuracy Penalty",
+        "Description": "Accuracy Penalty when building collapse",
+        "effectDataJO": [
+          {
+            "durationData": {
+              "duration": 2,
+              "ticksOnActivations": true,
+              "stackLimit": 1
+            },
+            "targetingData": {
+              "effectTriggerType": "Passive",
+              "effectTargetType": "Creator",
+              "showInStatusPanel": true
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+              "Id": "Garrison_Collapse_accuracy",
+              "Name": "hard shots",
+              "Details": "BA has worse accuracy and initiative after collpase.",
+              "Icon": "allied-star"
+            },
+            "nature": "Buff",
+            "statisticData": {
+              "statName": "AccuracyModifier",
+              "operation": "Float_Add",
+              "modValue": "3",
+              "modType": "System.Single",
+              "targetCollection": "Weapon"
+            }
+          },
+          {
+            "durationData": {
+              "duration": 2,
+              "ticksOnActivations": true,
+              "stackLimit": 1
+            },
+            "targetingData": {
+              "effectTriggerType": "Passive",
+              "effectTargetType": "Creator",
+              "showInStatusPanel": false
+            },
+            "effectType": "StatisticEffect",
+            "Description": {
+              "Id": "Garrison_Collapse_initiative",
+              "Name": "hard shots",
+              "Details": "BA has worse accuracy and initiative after collpase.",
+              "Icon": "allied-star"
+            },
+            "nature": "Buff",
+            "statisticData": {
+              "statName": "SBI_MOD_MISC",
+              "operation": "Int_Add",
+              "modValue": "-5",
+              "modType": "System.Int32"
             }
           }
         ]
@@ -1550,6 +1829,39 @@
       },
       {
         "FactionIDs": [
+          "GreenGhosts"
+        ],
+        "SpawnChanceBase": -0.15,
+        "SpawnChanceDiffMod": 0.03,
+        "MaxSquadsPerContract": 3,
+        "InternalBattleArmorWeight": {
+          "mechdef_elemental_toad_ap": 4,
+          "mechdef_elemental_toad_mg": 4,
+          "mechdef_elemental_toad": 4,
+          "mechdef_elemental_toad_Flamer": 4,
+          "mechdef_purifier_laser": 4,
+          "mechdef_purifier": 4,
+          "mechdef_fenrir-ML": 4,
+          "mechdef_fenrir-MPL": 4,
+          "mechdef_fenrir-MTR": 4,
+          "mechdef_fenrir-SPL": 4,
+          "mechdef_fenrir-SRM": 4
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_elemental_toad_ap": 10,
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 10,
+          "mechdef_purifier": 10,
+          "mechdef_purifier_laser": 10,
+          "BA_EMPTY": 60
+        },
+        "HandsyBattleArmorWeight": {
+          "BA_EMPTY": 1
+        }
+      },
+      {
+        "FactionIDs": [
           "Marian"
         ],
         "SpawnChanceBase": -0.15,
@@ -1605,6 +1917,7 @@
       },
       {
         "FactionIDs": [
+          "GhostBearDominion",
           "ClansGeneric",
           "ClanBurrock",
           "ClanCloudCobra",
@@ -1613,6 +1926,8 @@
           "ClanSmokeJaguar",
           "ClanSteelViper",
           "ClanBloodSpirit",
+          "RavenAlliance",
+          "ClanStoneLion",
           "Society"
         ],
         "SpawnChanceBase": -0.2,
@@ -1996,6 +2311,29 @@
           "mechdef_salamander": 1,
           "BA_EMPTY": 4
         }
+      },
+      {
+        "FactionIDs": [
+          "DarkCaste"
+        ],
+        "SpawnChanceBase": 0.0,
+        "SpawnChanceDiffMod": 0.04,
+        "MaxSquadsPerContract": 6,
+        "InternalBattleArmorWeight": {
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15
+        },
+        "MountedBattleArmorWeight": {
+          "mechdef_elemental_toad_mg": 10,
+          "mechdef_elemental_toad": 10,
+          "mechdef_elemental_toad_Flamer": 15,
+          "BA_EMPTY": 35
+        },
+        "HandsyBattleArmorWeight": {
+          "mechdef_salamander": 1,
+          "BA_EMPTY": 4
+        }
       }
     ],
     "AttackOnSwarmSuccess": true,
@@ -2179,7 +2517,56 @@
       "solaris_offseason_8x8ctf_mech_2",
       "solaris_offseason_8x8ctf_mech_5",
       "solaris_offseason_8x8ctf_mech_8"
-    ]
+    ],
+    "DisableGarrisons": false,
+    "GarrisonBuildingArmorFactor": 0.5,
+    "UsingMechAffinityForSwarmBreach": true,
+    "AirliftAbilityID": "AbilityDefAirliftActivate",
+    "AirliftCapacityByTonnage": false,
+    "CanDropOffAfterMoving": false,
+    "AirliftImmuneTags": [],
+    "ResupplyConfig": {
+      "ResupplyIndicatorAsset": "Target",
+      "ResupplyIndicatorColor": {
+        "r": 255,
+        "g": 0,
+        "b": 255
+      },
+      "ResupplyIndicatorInRangeAsset": "Target",
+      "ResupplyIndicatorInRangeColor": {
+        "r": 255,
+        "g": 255,
+        "b": 0
+      },
+      "ResupplyAbilityID": "AbilityDefResupply",
+      "ResupplyUnitTag": "unit_resupply",
+      "SPAMMYAmmoDefId": "Ammunition_SPAMMY",
+      "SPAMMYBlackList": [
+        "Ammunition_ArrowIV_Nuke",
+        "Ammunition_LongTom_Nuke",
+        "Ammunition_Sniper_Nuke",
+        "Ammunition_TBOLT10_Nuke",
+        "Ammunition_TBOLT15_Nuke",
+        "Ammunition_TBOLT20_Nuke",
+        "Ammunition_TBOLT5_Nuke",
+        "Ammunition_Thumper_Nuke"
+      ],
+      "InternalSPAMMYDefId": "Ammunition_IntSPAMMY",
+      "InternalSPAMMYBlackList": [],
+      "ArmorSupplyAmmoDefId": "Ammunition_ARMORAMMO",
+      "ArmorRepairMax": 0.8,
+      "BasePhasesToResupply": 45,
+      "ResupplyPhasesPerAmmoTonnage": 10,
+      "ResupplyPhasesPerArmorPoint": 0.5,
+      "UnitTagFactor": {
+        "omni_mech": 0.5,
+        "omni_tank": 0.5,
+        "unit_powerarmor": 0.7
+      }
+    },
+    "ShowAmmoInVehicleTooltips": true,
+    "EnforceIFFForAmmoTooltips": true,
+    "EnableQuickReserve": false
   },
   "Manifest": [
     {
@@ -2209,6 +2596,14 @@
     {
       "Type": "Texture2D",
       "Path": "texture"
+    },
+    {
+      "Type": "AmmunitionDef",
+      "Path": "Resupply/Ammo"
+    },
+    {
+      "Type": "AmmunitionBoxDef",
+      "Path": "Resupply/AmmoBox"
     }
   ]
 }
