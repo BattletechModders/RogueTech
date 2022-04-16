@@ -5,31 +5,28 @@
         "CategoryID": "Armor"
       },
       {
-        "CategoryID": "MimeticSystem"
+        "CategoryID": "StealthSystem"
       }
     ],
     "WorkOrderCosts": {
       "Install": {
-        "TechCost": "0.35 * [[Chassis.Tonnage]]",
-        "CBillCost": "175 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+        "TechCost": "0.5 * [[Chassis.Tonnage]]",
+        "CBillCost": "420 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
       }
     },
     "BonusDescriptions": {
       "Bonuses": [
-        "ArmorFactor: -12%",
-        "CLPS",
-        "StealthSensors: 20%, 2, 1, 2, 3",
-        "MimeticStealth: 25%, 3, 4",
-        "StealthReserved: 1",
-        "ActiveVisibility: -70%",
-        "ActiveSignature: -15%",
-        "HeatGenerated: +10%",
-        "HeatPerTurn: +10",
-        "StealthReserved: 1",
-        "ReqECM",
-        "ArmorTPCost: +100%",
-        "ArmorCBCost: +100%",
-        "CASE"
+        "Stealth",
+        "StealthSensors: 20%, 2, 1, 1, 2",
+        "ActiveVisibility: -10%",
+        "ActiveSignature: -10%",
+        "ActiveHeatGenerated: +15%",
+        "ArmorFactor: -40%",
+        "Reserved: 24",
+        "ArmorTPCost: X3",
+        "ArmorCBCost: X3",
+        "CASEII",
+        "ReqECM"
       ]
     },
     "ActivatableComponent": {
@@ -41,16 +38,20 @@
       "ActivationIsBuff": true,
       "CanNotBeActivatedManualy": false,
       "NoUniqueCheck": true,
-      "ActivationMessage": "CLPS On",
-      "DeactivationMessage": "CLPS Off",
+      "ActivationMessage": "Stealth Activated",
+      "DeactivationMessage": "Stealth Deactivated",
       "Linkage": {
         "OnActivate": {
-          "Activate": [],
+          "Activate": [
+            "Camouflage"
+          ],
           "Deactivate": []
         },
         "OnDeactivate": {
           "Activate": [],
-          "Deactivate": []
+          "Deactivate": [
+            "Camouflage"
+          ]
         }
       },
       "statusEffects": [
@@ -79,37 +80,7 @@
           "statisticData": {
             "statName": "LV_STEALTH",
             "operation": "Set",
-            "modValue": "0.8_2_1_2_3",
-            "modType": "System.String"
-          },
-          "nature": "Buff"
-        },
-        {
-          "durationData": {
-            "duration": -1,
-            "stackLimit": 1
-          },
-          "targetingData": {
-            "effectTriggerType": "Passive",
-            "specialRules": "NotSet",
-            "effectTargetType": "Creator",
-            "range": 0.0,
-            "forcePathRebuild": false,
-            "forceVisRebuild": true,
-            "showInTargetPreview": false,
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
-          "Description": {
-            "Id": "LV_MIMETIC",
-            "Name": "MIMETIC ARMOR",
-            "Details": "Makes the carrier much harder to see with eyes",
-            "Icon": "uixSvgIcon_status_ECM-ghost"
-          },
-          "statisticData": {
-            "statName": "LV_MIMETIC",
-            "operation": "Set",
-            "modValue": "3_0.25_1_4",
+            "modValue": "0.8_2_1_1_2",
             "modType": "System.String"
           },
           "nature": "Buff"
@@ -136,7 +107,7 @@
           "statisticData": {
             "statName": "SensorSignatureModifier",
             "operation": "Float_Multiply",
-            "modValue": "0.85",
+            "modValue": "0.9",
             "modType": "System.Single"
           }
         },
@@ -162,7 +133,7 @@
           "statisticData": {
             "statName": "SpottingVisibilityMultiplier",
             "operation": "Float_Multiply",
-            "modValue": "0.3",
+            "modValue": "0.9",
             "modType": "System.Single"
           }
         },
@@ -188,7 +159,7 @@
           "statisticData": {
             "statName": "HeatGenerated",
             "operation": "Float_Multiply",
-            "modValue": "1.1",
+            "modValue": "1.15",
             "modType": "System.Single",
             "targetCollection": "Weapon"
           }
@@ -215,7 +186,7 @@
           "statisticData": {
             "statName": "HeatSinkCapacity",
             "operation": "Int_Add",
-            "modValue": "-10",
+            "modValue": "-9",
             "modType": "System.Int32"
           }
         }
@@ -223,17 +194,20 @@
       "offlineStatusEffects": []
     },
     "ArmorRepair": {
-      "ArmorTPCost": 2.0,
-      "ArmorCBCost": 2.0
+      "ArmorTPCost": 3,
+      "ArmorCBCost": 3
     },
     "CASE": {
-      "AllLocations": true
+      "MaximumDamage": 5
     },
     "Color": {
       "UIColor": "Gold"
     },
+    "ComponentExplosion": {
+      "ExplosionDamage": 30
+    },
     "CriticalEffects": {
-      "LinkedStatisticName": "Void Ferro-Fibrous"
+      "LinkedStatisticName": "Stealth System"
     },
     "ErrorMessage": "Stealth Armor requires a ECM!",
     "Flags": {
@@ -247,49 +221,54 @@
     "Linked": {
       "Links": [
         {
-          "ComponentDefId": "Linked_GhostArmor",
+          "ComponentDefId": "Linked_RISC_Superheavy_Armor_4",
           "Location": "LeftTorso"
         },
         {
-          "ComponentDefId": "Linked_GhostArmor",
+          "ComponentDefId": "Linked_RISC_Superheavy_Armor_4",
           "Location": "RightTorso"
         },
         {
-          "ComponentDefId": "Linked_GhostArmor",
+          "ComponentDefId": "Linked_RISC_Superheavy_Armor_4",
           "Location": "LeftArm"
         },
         {
-          "ComponentDefId": "Linked_GhostArmor",
+          "ComponentDefId": "Linked_RISC_Superheavy_Armor_4",
           "Location": "RightArm"
         },
         {
-          "ComponentDefId": "Linked_GhostArmor",
+          "ComponentDefId": "Linked_RISC_Superheavy_Armor_3",
+          "Location": "CenterTorso"
+        },
+        {
+          "ComponentDefId": "Linked_RISC_Superheavy_Armor_2",
           "Location": "LeftLeg"
         },
         {
-          "ComponentDefId": "Linked_GhostArmor",
+          "ComponentDefId": "Linked_RISC_Superheavy_Armor_2",
           "Location": "RightLeg"
+        },
+        {
+          "ComponentDefId": "Linked_RISC_Superheavy_Armor_1",
+          "Location": "Head"
         }
       ]
     },
     "Weights": {
-      "ArmorFactor": 0.89286
+      "ArmorFactor": 0.6
     }
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
-    "Cost": 3000000,
-    "Rarity": 99,
+    "Cost": 50000000,
+    "Rarity": 50,
     "Purchasable": true,
-    "Manufacturer": "Clan",
-    "Model": "Armor Critical Slot",
-    "UIName": "Void Ferro-Fibrous (C) RTO ",
-    "Id": "emod_armorslots_Ghost-RTO",
-    "Name": "Void Ferro-Fibrous Armor (C) RTO",
-    "Details": "Clan Ferro-Fibrous armor merged with a Void signature system creating a new special armor, that not only stealths the mech, but also protects it with the properties of the ferro-fibrous armor. Reserves 6 slots and requires an ECM. <b><color=#00ff00>CASE Enabled</color></b>",
-    "Icon": "StealthArmor"
+    "Manufacturer": "RISC",
+    "Model": "Experimental Superheavy Armor",
+    "UIName": "Micro-Alloyed Ferro-Fibrous Armor",
+    "Id": "Gear_armorslots_superheavy_stealth_RISC",
+    "Name": "Micro-Alloyed Ferro-Fibrous Armor",
+    "Details": "By combining the latest in advanced micro alloyed polymer technology with prototype Superheavy Stealth armor, RISC has created this highly experimental armor for Superheavy 'Mechs which is both light and good stealth capabilities.",
+    "Icon": "shieldcomb"
   },
   "BonusValueA": "",
   "BonusValueB": "",
@@ -302,20 +281,12 @@
   "AllowedLocations": "CenterTorso",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "statusEffects": [],
   "ComponentTags": {
     "items": [
-      "BLACKLISTED",
       "component_type_stock",
-      "lv-stealth_t3",
-      "lv-stealth-range-mod_s1_m2_l4_e6",
-      "lv-stealth-move-mod_m8_s5",
-      "StealthArmor",
-      "ClanArmor",
       "CasedArmor",
-      "BAIncompatible",
-      "ProtoIncompatible",
-      "SHIncompatible"
+      "StealthArmor",
+      "SHInternals"
     ],
     "tagSetSourceFile": ""
   }

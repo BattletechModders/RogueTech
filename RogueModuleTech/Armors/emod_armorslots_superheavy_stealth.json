@@ -5,31 +5,28 @@
         "CategoryID": "Armor"
       },
       {
-        "CategoryID": "MimeticSystem"
+        "CategoryID": "StealthSystem"
       }
     ],
     "WorkOrderCosts": {
       "Install": {
-        "TechCost": "0.35 * [[Chassis.Tonnage]]",
-        "CBillCost": "175 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+        "TechCost": "0.3 * [[Chassis.Tonnage]]",
+        "CBillCost": "50 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
       }
     },
     "BonusDescriptions": {
       "Bonuses": [
-        "ArmorFactor: -12%",
-        "CLPS",
-        "StealthSensors: 20%, 2, 1, 2, 3",
-        "MimeticStealth: 25%, 3, 4",
-        "StealthReserved: 1",
-        "ActiveVisibility: -70%",
-        "ActiveSignature: -15%",
-        "HeatGenerated: +10%",
-        "HeatPerTurn: +10",
-        "StealthReserved: 1",
+        "Stealth",
+        "StealthSensors: 15%, 1, 1, 1, 2",
+        "ActiveVisibility: -5%",
+        "ActiveSignature: -5%",
+        "StealthReserved: 2",
+        "ActiveHeatGenerated: +10%",
+        "ActiveHeatPerTurn: +9",
         "ReqECM",
-        "ArmorTPCost: +100%",
-        "ArmorCBCost: +100%",
-        "CASE"
+        "ArmorFactor: +15%",
+        "ArmorTPCost: +50%",
+        "ArmorCBCost: +60%"
       ]
     },
     "ActivatableComponent": {
@@ -41,16 +38,20 @@
       "ActivationIsBuff": true,
       "CanNotBeActivatedManualy": false,
       "NoUniqueCheck": true,
-      "ActivationMessage": "CLPS On",
-      "DeactivationMessage": "CLPS Off",
+      "ActivationMessage": "Stealth Activated",
+      "DeactivationMessage": "Stealth Deactivated",
       "Linkage": {
         "OnActivate": {
-          "Activate": [],
+          "Activate": [
+            "Camouflage"
+          ],
           "Deactivate": []
         },
         "OnDeactivate": {
           "Activate": [],
-          "Deactivate": []
+          "Deactivate": [
+            "Camouflage"
+          ]
         }
       },
       "statusEffects": [
@@ -79,37 +80,7 @@
           "statisticData": {
             "statName": "LV_STEALTH",
             "operation": "Set",
-            "modValue": "0.8_2_1_2_3",
-            "modType": "System.String"
-          },
-          "nature": "Buff"
-        },
-        {
-          "durationData": {
-            "duration": -1,
-            "stackLimit": 1
-          },
-          "targetingData": {
-            "effectTriggerType": "Passive",
-            "specialRules": "NotSet",
-            "effectTargetType": "Creator",
-            "range": 0.0,
-            "forcePathRebuild": false,
-            "forceVisRebuild": true,
-            "showInTargetPreview": false,
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
-          "Description": {
-            "Id": "LV_MIMETIC",
-            "Name": "MIMETIC ARMOR",
-            "Details": "Makes the carrier much harder to see with eyes",
-            "Icon": "uixSvgIcon_status_ECM-ghost"
-          },
-          "statisticData": {
-            "statName": "LV_MIMETIC",
-            "operation": "Set",
-            "modValue": "3_0.25_1_4",
+            "modValue": "0.85_1_1_1_2",
             "modType": "System.String"
           },
           "nature": "Buff"
@@ -136,7 +107,7 @@
           "statisticData": {
             "statName": "SensorSignatureModifier",
             "operation": "Float_Multiply",
-            "modValue": "0.85",
+            "modValue": "0.95",
             "modType": "System.Single"
           }
         },
@@ -162,7 +133,7 @@
           "statisticData": {
             "statName": "SpottingVisibilityMultiplier",
             "operation": "Float_Multiply",
-            "modValue": "0.3",
+            "modValue": "0.95",
             "modType": "System.Single"
           }
         },
@@ -215,7 +186,7 @@
           "statisticData": {
             "statName": "HeatSinkCapacity",
             "operation": "Int_Add",
-            "modValue": "-10",
+            "modValue": "-9",
             "modType": "System.Int32"
           }
         }
@@ -223,17 +194,14 @@
       "offlineStatusEffects": []
     },
     "ArmorRepair": {
-      "ArmorTPCost": 2.0,
-      "ArmorCBCost": 2.0
-    },
-    "CASE": {
-      "AllLocations": true
+      "ArmorTPCost": 1.5,
+      "ArmorCBCost": 1.6
     },
     "Color": {
       "UIColor": "Gold"
     },
     "CriticalEffects": {
-      "LinkedStatisticName": "Void Ferro-Fibrous"
+      "LinkedStatisticName": "Stealth System"
     },
     "ErrorMessage": "Stealth Armor requires a ECM!",
     "Flags": {
@@ -247,48 +215,45 @@
     "Linked": {
       "Links": [
         {
-          "ComponentDefId": "Linked_GhostArmor",
+          "ComponentDefId": "Linked_stealth_superheavy",
           "Location": "LeftTorso"
         },
         {
-          "ComponentDefId": "Linked_GhostArmor",
+          "ComponentDefId": "Linked_stealth_superheavy",
           "Location": "RightTorso"
         },
         {
-          "ComponentDefId": "Linked_GhostArmor",
+          "ComponentDefId": "Linked_stealth_superheavy",
           "Location": "LeftArm"
         },
         {
-          "ComponentDefId": "Linked_GhostArmor",
+          "ComponentDefId": "Linked_stealth_superheavy",
           "Location": "RightArm"
         },
         {
-          "ComponentDefId": "Linked_GhostArmor",
+          "ComponentDefId": "Linked_stealth_superheavy",
           "Location": "LeftLeg"
         },
         {
-          "ComponentDefId": "Linked_GhostArmor",
+          "ComponentDefId": "Linked_stealth_superheavy",
           "Location": "RightLeg"
         }
       ]
     },
     "Weights": {
-      "ArmorFactor": 0.89286
+      "ArmorFactor": 1.15
     }
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
-    "Cost": 3000000,
-    "Rarity": 99,
+    "Cost": 3785000,
+    "Rarity": 10,
     "Purchasable": true,
-    "Manufacturer": "Clan",
-    "Model": "Armor Critical Slot",
-    "UIName": "Void Ferro-Fibrous (C) RTO ",
-    "Id": "emod_armorslots_Ghost-RTO",
-    "Name": "Void Ferro-Fibrous Armor (C) RTO",
-    "Details": "Clan Ferro-Fibrous armor merged with a Void signature system creating a new special armor, that not only stealths the mech, but also protects it with the properties of the ferro-fibrous armor. Reserves 6 slots and requires an ECM. <b><color=#00ff00>CASE Enabled</color></b>",
+    "Manufacturer": "Shengli Arms",
+    "Model": "Armor",
+    "UIName": "Superheavy Stealth Armor",
+    "Id": "emod_armorslots_superheavy_stealth",
+    "Name": "Stealth Armor",
+    "Details": "Developed by the Capellan Confederation, Superheavy Stealth Armor is an attempt to give stealth capabilities to the massive 'Mechs. Reserves 12 slots and requires an ECM.",
     "Icon": "StealthArmor"
   },
   "BonusValueA": "",
@@ -305,17 +270,9 @@
   "statusEffects": [],
   "ComponentTags": {
     "items": [
-      "BLACKLISTED",
       "component_type_stock",
-      "lv-stealth_t3",
-      "lv-stealth-range-mod_s1_m2_l4_e6",
-      "lv-stealth-move-mod_m8_s5",
       "StealthArmor",
-      "ClanArmor",
-      "CasedArmor",
-      "BAIncompatible",
-      "ProtoIncompatible",
-      "SHIncompatible"
+      "SHInternals"
     ],
     "tagSetSourceFile": ""
   }
