@@ -1,0 +1,281 @@
+{
+  "Custom": {
+    "Category": [
+      {
+        "CategoryID": "Armor"
+      },
+      {
+        "CategoryID": "StealthSystem"
+      }
+    ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.33 * [[Chassis.Tonnage]]",
+        "CBillCost": "55 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
+    "BonusDescriptions": {
+      "Bonuses": [
+        "CASE",
+        "Stealth",
+        "StealthSensors: 20%, 2, 1, 1, 2",
+        "ActiveVisibility: -8%",
+        "ActiveSignature: -8%",
+        "StealthReserved: 1",
+        "ActiveHeatGenerated: +8%",
+        "ActiveHeatPerTurn: +5",
+        "ReqECM",
+        "ArmorFactor: +20%",
+        "ArmorTPCost: +60%",
+        "ArmorCBCost: +70%"
+      ]
+    },
+    "ActivatableComponent": {
+      "CanActivateAfterMove": true,
+      "CanActivateAfterFire": false,
+      "SafeActivation": true,
+      "ButtonName": "Stealth",
+      "ActiveByDefault": true,
+      "ActivationIsBuff": true,
+      "CanNotBeActivatedManualy": false,
+      "NoUniqueCheck": true,
+      "ActivationMessage": "Stealth Activated",
+      "DeactivationMessage": "Stealth Deactivated",
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [
+            "Camouflage"
+          ],
+          "Deactivate": []
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": [
+            "Camouflage"
+          ]
+        }
+      },
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": 1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "specialRules": "NotSet",
+            "effectTargetType": "Creator",
+            "range": 0.0,
+            "forcePathRebuild": false,
+            "forceVisRebuild": true,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "LV_Stealth_Effect",
+            "Name": "STEALTH",
+            "Details": "Makes the carrier much harder to detect with stealth",
+            "Icon": "uixSvgIcon_status_ECM-ghost"
+          },
+          "statisticData": {
+            "statName": "LV_STEALTH",
+            "operation": "Set",
+            "modValue": "0.80_2_1_1_2",
+            "modType": "System.String"
+          },
+          "nature": "Buff"
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "Stealth_Signature_Decrease_Stealth",
+            "Name": "Stealth Signature Decrease",
+            "Details": "Signature Statuseffect.",
+            "Icon": "uixSvgIcon_equipment_TTS"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "SensorSignatureModifier",
+            "operation": "Float_Multiply",
+            "modValue": "0.92",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "Stealth_Visibility_Decrease_Stealth",
+            "Name": "Stealth Visbility Decrease",
+            "Details": "Visibility Statuseffect.",
+            "Icon": "uixSvgIcon_equipment_TTS"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "SpottingVisibilityMultiplier",
+            "operation": "Float_Multiply",
+            "modValue": "0.92",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "Stealth_Heat_Generation_Stealth",
+            "Name": "Increased Heat",
+            "Details": "Heat generation",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "HeatGenerated",
+            "operation": "Float_Multiply",
+            "modValue": "1.08",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "Stealth_Heat_Capacity_Stealth",
+            "Name": "Decreased Heat Capacity",
+            "Details": "Heat Capacity Penalty",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "nature": "Debuff",
+          "statisticData": {
+            "statName": "HeatSinkCapacity",
+            "operation": "Int_Add",
+            "modValue": "-5",
+            "modType": "System.Int32"
+          }
+        }
+      ],
+      "offlineStatusEffects": []
+    },
+    "ArmorRepair": {
+      "ArmorTPCost": 1.6,
+      "ArmorCBCost": 1.7
+    },
+    "Color": {
+      "UIColor": "Gold"
+    },
+    "CriticalEffects": {
+      "LinkedStatisticName": "Stealth System"
+    },
+    "ErrorMessage": "Stealth Armor requires a ECM!",
+    "Flags": {
+      "flags": [
+        "not_broken"
+      ]
+    },
+    "InventorySorter": {
+      "SortKey": "00009"
+    },
+    "Linked": {
+      "Links": [
+        {
+          "ComponentDefId": "Linked_stealth_superheavy_CLAN",
+          "Location": "LeftTorso"
+        },
+        {
+          "ComponentDefId": "Linked_stealth_superheavy_CLAN",
+          "Location": "RightTorso"
+        },
+        {
+          "ComponentDefId": "Linked_stealth_superheavy_CLAN",
+          "Location": "LeftArm"
+        },
+        {
+          "ComponentDefId": "Linked_stealth_superheavy_CLAN",
+          "Location": "RightArm"
+        },
+        {
+          "ComponentDefId": "Linked_stealth_superheavy_CLAN",
+          "Location": "LeftLeg"
+        },
+        {
+          "ComponentDefId": "Linked_stealth_superheavy_CLAN",
+          "Location": "RightLeg"
+        }
+      ]
+    },
+    "Weights": {
+      "ArmorFactor": 1.2
+    }
+  },
+  "Description": {
+    "Cost": 4525000,
+    "Rarity": 10,
+    "Purchasable": true,
+    "Manufacturer": "Clan Diamond Shark",
+    "Model": "",
+    "UIName": "Superheavy Stealth Armor (C)",
+    "Id": "emod_armorslots_superheavy_stealth_CLAN",
+    "Name": "Superheavy Stealth Armor (C)",
+    "Details": "",
+    "Icon": "StealthArmor"
+  },
+  "BonusValueA": "",
+  "BonusValueB": "",
+  "ComponentType": "Upgrade",
+  "ComponentSubType": "NotSet",
+  "PrefabIdentifier": "",
+  "BattleValue": 0,
+  "InventorySize": 1,
+  "Tonnage": 0,
+  "AllowedLocations": "CenterTorso",
+  "DisallowedLocations": "All",
+  "CriticalComponent": false,
+  "statusEffects": [],
+  "ComponentTags": {
+    "items": [
+      "component_type_stock",
+      "ClanArmor",
+      "StealthArmor",
+      "SHInternals"
+    ],
+    "tagSetSourceFile": ""
+  }
+}
