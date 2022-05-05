@@ -19,18 +19,17 @@
     },
     "BonusDescriptions": {
       "Bonuses": [
-        "AcePilot",
+        "AcePilotNI",
         "AccuracyER: +2",
         "AccuracyLR: +1",
         "AccuracyMR: +1",
-        "AccuracyMin: +1",
-        "Recoil: -1",
-        "PilotShutDown",
-        "Activatable",
+        "AccuracyMin: +2",
+        "ActivatableNI",
         "ActivePilotStructureInjury",
         "ActiveInitiative: +1",
         "ActiveEvaMax: +1",
         "ActiveCalledShot: +10%",
+        "ActiveRecoil: -1",
         "FailChance: 0%",
         "FailChanceTurn: 3%",
         "FailLocation: Head",
@@ -69,7 +68,7 @@
           },
           "effectType": "StatisticEffect",
           "Description": {
-            "Id": "DNI-Penalty",
+            "Id": "StatusEffect-RequireNI",
             "Name": "OverheatPilotDamage",
             "Details": "Take Damage on Overheat",
             "Icon": "uixSvgIcon_equipment_Cockpit"
@@ -93,7 +92,7 @@
           },
           "effectType": "StatisticEffect",
           "Description": {
-            "Id": "CockpitInitiativeEffect",
+            "Id": "StatusEffect-RequireNI",
             "Name": "CockpitTechBonus",
             "Details": "Provides + 2 Initiative and several buffs.",
             "Icon": "uixSvgIcon_equipment_Cockpit"
@@ -117,7 +116,7 @@
           },
           "effectType": "StatisticEffect",
           "Description": {
-            "Id": "MaxEvasion",
+            "Id": "StatusEffect-RequireNI",
             "Name": "EVASIVE MOVE",
             "Details": "This unit generates an extra EVASIVE charge from movement actions (up to its maximum).",
             "Icon": "uixSvgIcon_action_evasivemove"
@@ -130,9 +129,34 @@
           },
           "nature": "Buff"
         },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "StatusEffect-RequireNI",
+        "Name": "Improved Called Shot",
+        "Details": "Called Shots twice as reliable",
+        "Icon": "uixSvgIcon_ability_mastertactician"
+      },
+      "statisticData": {
+        "statName": "RefireModifier",
+        "operation": "Int_Add",
+        "modValue": "-1",
+        "modType": "System.Int32",
+        "targetCollection": "Weapon"
+      }
+    },
         {
           "durationData": {
-            "duration": -1
+            "duration": -1,
+            "stackLimit": -1
           },
           "targetingData": {
             "effectTriggerType": "Passive",
@@ -140,7 +164,7 @@
           },
           "effectType": "StatisticEffect",
           "Description": {
-            "Id": "TCCALLSHOT",
+            "Id": "StatusEffect-RequireNI",
             "Name": "Improved Called Shot",
             "Details": "Called Shots twice as reliable",
             "Icon": "uixSvgIcon_ability_mastertactician"
@@ -193,7 +217,7 @@
     {
       "durationData": {
         "duration": -1,
-        "stackLimit": 1
+        "stackLimit": -1
       },
       "targetingData": {
         "effectTriggerType": "Passive",
@@ -201,7 +225,7 @@
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "InterFaceMoveAfterShoot",
+        "Id": "StatusEffect-RequireNI",
         "Name": "ACE PILOT",
         "Details": "This unit can use its movement before or after shooting.",
         "Icon": "uixSvgIcon_run_n_gun"
@@ -213,29 +237,6 @@
         "modType": "System.Boolean"
       },
       "nature": "Buff"
-    },
-    {
-      "durationData": {
-        "duration": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator"
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "TCRecoil",
-        "Name": "Improved Called Shot",
-        "Details": "Called Shots twice as reliable",
-        "Icon": "uixSvgIcon_ability_mastertactician"
-      },
-      "statisticData": {
-        "statName": "RefireModifier",
-        "operation": "Int_Add",
-        "modValue": "-1",
-        "modType": "System.Int32",
-        "targetCollection": "Weapon"
-      }
     },
     {
       "durationData": {
@@ -285,7 +286,7 @@
       "statisticData": {
         "statName": "CACLongRangeAccuracyMod",
         "operation": "Float_Add",
-        "modValue": "-2.0",
+        "modValue": "-1.0",
         "modType": "System.Single"
       }
     },
