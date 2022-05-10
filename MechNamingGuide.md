@@ -218,6 +218,6 @@ Depending on the canon name the special 'Mechs can be handled in several ways.\
 
 * If the name is unique and same as the **MechDef.Name**, just use that.
 * If the name is a base mech with the MechWarriors name added at the end (e.g. *Atlas AS7-D Danielle*), the **UIName** is
-  constructed by adding the hero name to the **MechDef.Name**-fields value, which most of the time then will match the canon
+  constructed by adding the hero name within single quotes (') to the **MechDef.Name**-fields value, which most of the time then will match the canon
   name.
-* If the name is a specific Hero, Elite, Prototype model or similar, e.g. the *Supernova* (a *Boiler* custom model), the **UIName** can be just the special name.
+* If the name is a specific Hero, Elite, Prototype model or similar, e.g. the *Supernova* (a *Boiler* custom model), the **UIName** can be just the special name - without variant unless it has a official custom variant.
