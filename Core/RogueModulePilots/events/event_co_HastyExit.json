@@ -1,0 +1,176 @@
+{
+  "Description": {
+    "Id": "event_co_HastyExit",
+    "Name": "Hasty Exit",
+    "Details": "Darius's voice rings out over the intercom.\"Could the Comander please report to the Command Center? Incoming message for you.\"\" In the Command Center, Darius is arguing with someone on  the Holovid.\"\r\n\r\n\"Commander? Good to know I got through to you, I was beginning to think I’d die of old age before your XO would put me through. You don’t remember me but, some idiot misplaced a few crates of my AC/5 ammo on your shuttle sometime back. You did me a favour then and I’d like you to do another for me now.\"\r\n\r\n\"Really?\r\n\r\n\"Yes. I’m in a spot of bother with the local crime syndicate over some misplaced demolition charges. Nothing too serious, but they want blood. You hire me and get me out of this system and I’ll give you the coordinates of a supply cache I know about.\" Suddenly the Holovid blinks out.\r\n\r\n\"Commander, I’d recommend not associating with such a shady character, it won't end well for us.\" Darius says.",
+    "Icon": "uixTxrSpot_Darius.png"
+  },
+  "Scope": "Company",
+  "Weight": 100,
+  "Requirements": {
+    "Scope": "Company",
+    "RequirementTags": {
+      "tagSetSourceFile": "",
+      "items": [
+        "event_co_HastyExit_Prep"
+      ]
+    },
+    "ExclusionTags": {
+      "tagSetSourceFile": "Tags/CompanyTags",
+      "items": [
+        "event_co_HastyExit_nohire",
+        "event_co_HastyExit_Hired"
+      ]
+    },
+    "RequirementComparisons": [
+      {
+        "obj": "Travel",
+        "op": "Equal",
+        "val": 0,
+        "valueConstant": "0"
+      }
+    ]
+  },
+  "AdditionalRequirements": [
+    {
+      "Scope": "StarSystem",
+      "RequirementTags": {
+        "tagSetSourceFile": "Tags/PlanetTags",
+        "items": []
+      },
+      "ExclusionTags": {
+        "tagSetSourceFile": "",
+        "items": [
+          "planet_pop_none"
+        ]
+      },
+      "RequirementComparisons": [
+        {
+          "obj": "Travel",
+          "op": "Equal",
+          "val": 0,
+          "valueConstant": "0"
+        }
+      ]
+    }
+  ],
+  "AdditionalObjects": [],
+  "Options": [
+    {
+      "Description": {
+        "Id": "outcome_0",
+        "Name": "Refuse to hire the Black Marketeer.",
+        "Details": "Safe option.",
+        "Icon": null
+      },
+      "RequirementList": [],
+      "ResultSets": [
+        {
+          "Description": {
+            "Id": "outcome_0_0",
+            "Name": "No pilot.",
+            "Details": "You send a brief message back to the Black Marketeer explaining that your company can't take the risk. Later that night, when you return to your quarters you receive a message. Magpie fills the screen, her face flushed with rage. \"God dammit, you just had to go and be a dick didn’t you?.\"\r\n\r\n\"I have the local cops on my trail now and the crime syndicate. When they come looking for me, I’ll be sure to point both of them at you and yours Commander.\"\r\n\r\n\"Watch your back from now on.",
+            "Icon": null
+          },
+          "Weight": 100,
+          "Results": [
+            {
+              "Scope": "Company",
+              "Requirements": null,
+              "AddedTags": {
+                "tagSetSourceFile": "Tags/CompanyTags",
+                "items": [
+                  "event_co_HastyExit_nohire"
+                ]
+              },
+              "RemovedTags": {
+                "tagSetSourceFile": "",
+                "items": []
+              },
+              "Stats": null,
+              "Actions": null,
+              "ForceEvents": null,
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        }
+      ],
+      "Requirements": {
+        "Scope": "Company",
+        "RequirementTags": {
+          "tagSetSourceFile": "",
+          "items": []
+        },
+        "ExclusionTags": {
+          "tagSetSourceFile": "",
+          "items": []
+        },
+        "RequirementComparisons": []
+      }
+    },
+    {
+      "Description": {
+        "Id": "outcome_1",
+        "Name": "Agree to hire Magpie.",
+        "Details": "Safe option.",
+        "Icon": null
+      },
+      "RequirementList": [],
+      "ResultSets": [
+        {
+          "Description": {
+            "Id": "outcome_1_0",
+            "Name": "Agree to hire Magpie.",
+            "Details": "Later that night, when you return to your quarters you receive a message titled: \"Thanks.\" Magpie appears on your screen. \"Thank you for giving me the benefit of the doubt Commander\"\r\n\r\n\"I’m making final arrangements now and liquidating what is left of my stock, but I’ll be at the space port as agreed\"\r\n\r\nOh and Commander, don’t think I haven’t forgotten our deal. I’ll have the coordinates for you once I’m on the Argo.\"",
+            "Icon": null
+          },
+          "Weight": 100,
+          "Results": [
+            {
+              "Scope": "Company",
+              "Requirements": null,
+              "AddedTags": {
+                "tagSetSourceFile": "",
+                "items": [
+                  "event_co_HastyExit_Hired"
+                ]
+              },
+              "RemovedTags": {
+                "tagSetSourceFile": "",
+                "items": []
+              },
+              "Stats": null,
+              "Actions": [
+                {
+                  "Type": "MechWarrior_AddHiring",
+                  "value": "pilot_Magpie",
+                  "valueConstant": null,
+                  "additionalValues": null
+                }
+              ],
+              "ForceEvents": null,
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        }
+      ],
+      "Requirements": {
+        "Scope": "Company",
+        "RequirementTags": {
+          "tagSetSourceFile": "",
+          "items": []
+        },
+        "ExclusionTags": {
+          "tagSetSourceFile": "",
+          "items": []
+        },
+        "RequirementComparisons": []
+      }
+    }
+  ],
+  "PublishState": "PUBLISHED",
+  "ValidationState": "UNTESTED",
+  "EventType": "NORMAL"
+}
