@@ -4,6 +4,30 @@
 
 #### Battletech version 1.9.1 and Roguetech Launcher version 1.3.3 are required
 
+### Table of Contents
+
+- [Map Updates - *The times They Are a-Changin'*](#map-updates----the-times-they-are-a-changin--)
+- [Kill Teams (Optional) - *You asked for harder content, here it is...*](#kill-teams--optional-----you-asked-for-harder-content--here-it-is-)
+- [Superheavy 'Mechs Rework (Optional) - *Run, you fools!*](#superheavy--mechs-rework--optional-----run--you-fools--)
+- [Equipment and weapon changes - *The salt must flow*](#equipment-and-weapon-changes----the-salt-must-flow-)
+    + [Missile Ammunition](#missile-ammunition)
+    + [Heavy Rotary Autocannons](#heavy-rotary-autocannons)
+    + [Heavy MRM](#heavy-mrm)
+    + [Neural Interfaces / Pain Shunt](#neural-interfaces---pain-shunt)
+    + [Airlift / Crane](#airlift---crane)
+- [Operation Revival (Optional) - *New unofficial Content*](#operation-revival--optional-----new-unofficial-content-)
+- [General Changes - *To keep ya on yer toes*](#general-changes----to-keep-ya-on-yer-toes-)
+    + [Anti Air Stance](#anti-air-stance)
+    + [Mech Hardpoints](#mech-hardpoints)
+    + [Unit Cost](#unit-cost)
+    + [DLC Installation Options](#dlc-installation-options)
+    + [Internal Folder Restructure](#internal-folder-restructure)
+    + [Misc Fixes](#misc-fixes)
+- [Questions and Bugs](#questions-and-bugs)
+
+### Map Updates - *The times They Are a-Changin'*
+insert text
+
 ### Kill Teams (Optional) - *You asked for harder content, here it is...*
 **Kill Teams** is a new feature in Roguetech to increase late game difficulty and attempt to make the Mod more challenging for those that so desire. The feature enables lances of optimized (non-canon) 'Mechs and Vehicles with elite pilots that might drop as support for the enemy. These 'Mechs have been customized by our team to be as deadly as possible. Attempts to balance the difficulty for these units have been made, but this will be an ongoing process.
 
