@@ -17,7 +17,7 @@ To install it, choose the **Kill Teams** option under **Enemy Support Lances** s
 
 ---
 
-### Superheavy 'Mechs Rework - *Run, you fools!*
+### Superheavy 'Mechs Rework (Optional) - *Run, you fools!*
 
 Superheavy Mechs have gone through a major rework to make them more viable and interesting to play. Besides updating the current ones, a large amount of new Roguetech custom designs have also been added to expand this area of the gameplay.
 
@@ -67,7 +67,7 @@ A new feature to airlift or lift units by crane has been added. So far only a si
 
 ----
 
-### Operation Revival - *New unofficial Content*
+### Operation Revival (Optional) - *New unofficial Content*
 Based on the Zhukov series of Alternative Universe TRO's made by *Sharlin* (https://thezhukovau.wordpress.com/), this submod adds a selection of new Clan Mechs and Tanks primarily for the Hell's Horses. Highlights include a speedy UAC/20 hover tank, a 100 ton tank with 90 LRM's and a series of refits of frontline OmniMechs. 
 **Used with original creators permission.**
 
