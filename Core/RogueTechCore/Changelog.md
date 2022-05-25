@@ -21,6 +21,7 @@
     + [Mech Hardpoints](#mech-hardpoints)
     + [Unit Cost](#unit-cost)
     + [DLC Installation Options](#dlc-installation-options)
+    + [Protomechs Converted to Core Mod](#iprotomechs-converted-to-core-mod)
     + [Internal Folder Restructure](#internal-folder-restructure)
     + [Misc Fixes](#misc-fixes)
 - [Questions and Bugs](#questions-and-bugs)
@@ -118,6 +119,9 @@ All Mechs and Vehicles costs have been reworked, in most cases resulting in a sl
 ##### DLC Installation Options
 
 During the Roguetech installation through the launcher you no longer have to choose which DLC you own. Instead, it will be autodetected as the game is started and only content which you have access to will be enabled.
+
+##### Protomechs Converted to Core Mod
+The previously optional *Protomechs* mod has been added into the core install, making them always available.
 
 ##### Internal Folder Restructure
 We have adapted new, cleaner folder structure for how the Mod is set up - both the source and installed version. This will have a major impact on any Mods that build on top of Roguetech or tools. However, we feel with the new structure it is easier to keep track of things and maintain the Mod.
