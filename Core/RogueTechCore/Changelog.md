@@ -128,6 +128,7 @@ We have adapted new, cleaner folder structure for how the Mod is set up - both t
 
 ##### Misc Fixes
 * Added new Quicsell Outlet stores, with the best deals of the Galaxy!
+* Sniper, Thumper and Long Tom Oneshot versions can no longer use external ammunition.
 * As usual the release contains countless small fixes, tweaks and changes - far too many to list here.
 
 ----
