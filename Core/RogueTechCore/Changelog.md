@@ -27,7 +27,16 @@
 - [Questions and Bugs](#questions-and-bugs)
 
 ### Map Updates - *The Times They Are a-Changin'*
-insert text
+
+Galaxy At War (aka old offline Mode) has been removed.
+
+Offline Mode/WarTech IIC now supports a selectable starting map era:
+
+- 3040's Map: This is the classic RT map you know and love. All standard factions are available
+- 3080's Map: This is map based on the canonical state of the Inner Sphere circa 3081 - 3085. New canon factions for this era have been added and a number of dead factions have been removed.
+
+*Note: Once you have chosen a map year, you must commit to it, changing map era's mid career is not supported*
+*Note 2: Map Year Selection is not available for Online Map Players*
 
 ### Kill Teams (Optional) - *You asked for harder content, here it is...*
 **Kill Teams** is a new feature in Roguetech to increase late game difficulty and attempt to make the Mod more challenging for those that so desire. The feature enables lances of optimized (non-canon) 'Mechs and Vehicles with elite pilots that might drop as support for the enemy. These 'Mechs have been customized by our team to be as deadly as possible. Attempts to balance the difficulty for these units have been made, but this will be an ongoing process.
