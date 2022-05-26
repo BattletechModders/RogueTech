@@ -128,7 +128,7 @@ We have adapted new, cleaner folder structure for how the Mod is set up - both t
 
 ##### Career Backgrounds
 * Added Test Subject.  Neural Implant!  Random Protomech!
-* Updated Soldier.  Added the choice of an energy, ballistic or missile weapon to the day 2 lootbox event.  No longer completely at the mercy of RNGesus.  Review your lance before advancing a day!
+* Updated Soldier.  No longer completely at the mercy of RNGesus.  Added the choice of an energy, ballistic or missile weapon to the day 2 lootbox event.  Review your lance before advancing a day!
 
 ##### Misc Fixes
 * Added new Quicsell Outlet stores, with the best deals of the Galaxy!
