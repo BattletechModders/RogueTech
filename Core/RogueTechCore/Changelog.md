@@ -21,11 +21,12 @@
     + [Mech Hardpoints](#mech-hardpoints)
     + [Unit Cost](#unit-cost)
     + [DLC Installation Options](#dlc-installation-options)
+    + [Protomechs Converted to Core Mod](#iprotomechs-converted-to-core-mod)
     + [Internal Folder Restructure](#internal-folder-restructure)
     + [Misc Fixes](#misc-fixes)
 - [Questions and Bugs](#questions-and-bugs)
 
-### Map Updates - *The times They Are a-Changin'*
+### Map Updates - *The Times They Are a-Changin'*
 insert text
 
 ### Kill Teams (Optional) - *You asked for harder content, here it is...*
@@ -119,11 +120,15 @@ All Mechs and Vehicles costs have been reworked, in most cases resulting in a sl
 
 During the Roguetech installation through the launcher you no longer have to choose which DLC you own. Instead, it will be autodetected as the game is started and only content which you have access to will be enabled.
 
+##### Protomechs Converted to Core Mod
+The previously optional *Protomechs* mod has been added into the core install, making them always available.
+
 ##### Internal Folder Restructure
 We have adapted new, cleaner folder structure for how the Mod is set up - both the source and installed version. This will have a major impact on any Mods that build on top of Roguetech or tools. However, we feel with the new structure it is easier to keep track of things and maintain the Mod.
 
 ##### Misc Fixes
-As usual the release contains countless small fixes, tweaks and changes - far too many to list here.
+* Added new Quicsell Outlet stores, with the best deals of the Galaxy!
+* As usual the release contains countless small fixes, tweaks and changes - far too many to list here.
 
 ----
 ### Questions and Bugs
