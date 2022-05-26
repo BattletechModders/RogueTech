@@ -126,6 +126,10 @@ The previously optional *Protomechs* mod has been added into the core install, m
 ##### Internal Folder Restructure
 We have adapted new, cleaner folder structure for how the Mod is set up - both the source and installed version. This will have a major impact on any Mods that build on top of Roguetech or tools. However, we feel with the new structure it is easier to keep track of things and maintain the Mod.
 
+##### Career Backgrounds
+* Added Test Subject.  Neural Implant!  Random Protomech!
+* Updated Soldier.  Added the choice of an energy, ballistic or missile weapon to the day 2 lootbox event.  No longer completely at the mercy of RNGesus.  Review your lance before advancing a day!
+
 ##### Misc Fixes
 * Added new Quicsell Outlet stores, with the best deals of the Galaxy!
 * Sniper, Thumper and Long Tom Oneshot versions can no longer use external ammunition.
