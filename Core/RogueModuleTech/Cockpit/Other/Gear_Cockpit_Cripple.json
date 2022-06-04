@@ -26,17 +26,17 @@
     "BonusDescriptions": {
       "Bonuses": [
         "RequireNI",
-        "AcePilot",
         "Breaching",
-        "CalledShot: 10%",
-        "SkillGunnery: 2",
-        "SkillPiloting: 2",
-        "SkillGuts: 2",
-        "SkillTactics: 2",
+        "TCFCS",
+        "Accuracy: +2",
+        "MeleeAcc: +2",
+        "AllSkills: 2",
+        "WalkSpeed: +30m",
         "EvaMax: +2",
         "EvaPips: +1",
-        "FCS",
-        "IsCockpit",
+        "Sensors: +15%",
+        "Sight: +15%",
+        "AdvancedSensors: 2",
         "BleedReduction: 50%"
       ]
     },
@@ -76,30 +76,6 @@
   "DisallowedLocations": "All",
   "CriticalComponent": false,
   "statusEffects": [
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator"
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "InterFaceMoveAfterShoot",
-        "Name": "ACE PILOT",
-        "Details": "This unit can use its movement before or after shooting.",
-        "Icon": "uixSvgIcon_run_n_gun"
-      },
-      "statisticData": {
-        "statName": "CanMoveAfterShooting",
-        "operation": "Set",
-        "modValue": "true",
-        "modType": "System.Boolean"
-      },
-      "nature": "Buff"
-    },
     {
       "durationData": {
         "duration": -1
@@ -171,29 +147,6 @@
         "modType": "System.Int32"
       },
       "nature": "Buff"
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator"
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "TCCALLSHOT",
-        "Name": "Improved Called Shot",
-        "Details": "Called Shots twice as reliable",
-        "Icon": "uixSvgIcon_ability_mastertactician"
-      },
-      "statisticData": {
-        "statName": "CalledShotBonusMultiplier",
-        "operation": "Float_Multiply",
-        "modValue": "1.1",
-        "modType": "System.Single"
-      }
     },
     {
       "durationData": {
@@ -329,6 +282,249 @@
         "modType": "System.Single",
         "targetCollection": "Pilot"
       }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "not crippled",
+        "Name": "not crippled",
+        "Details": "Faster Movement",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "statisticData": {
+        "statName": "WalkSpeed",
+        "operation": "Float_Add",
+        "modValue": "30",
+        "modType": "System.Single"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "StatusEffect-RequireNI",
+        "Name": "Targeting Computer",
+        "Details": "Breaching Shot, Improved Accuracy/Recoil.",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "AccuracyModifier",
+        "operation": "Float_Add",
+        "modValue": "-2.0",
+        "modType": "System.Single",
+        "targetCollection": "Weapon"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "FCS_MeleeAccuracy",
+        "Name": "MeleeWeapon Accuracy Modifier",
+        "Details": "MeleeWeapon Accuracy Modifier",
+        "Icon": "uixSvgIcon_run_n_gun"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "CBTBE_Physical_Weapon_Attack_Mod",
+        "operation": "Int_Add",
+        "modValue": "-2",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "FCS_MeleeAccuracy1",
+        "Name": "MeleeWeapon Accuracy Modifier",
+        "Details": "MeleeWeapon Accuracy Modifier",
+        "Icon": "uixSvgIcon_run_n_gun"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "CBTBE_Charge_Attack_Mod",
+        "operation": "Int_Add",
+        "modValue": "-2",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "FCS_MeleeAccuracy2",
+        "Name": "MeleeWeapon Accuracy Modifier",
+        "Details": "MeleeWeapon Accuracy Modifier",
+        "Icon": "uixSvgIcon_run_n_gun"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "CBTBE_Kick_Attack_Mod",
+        "operation": "Int_Add",
+        "modValue": "-2",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "FCS_MeleeAccuracy3",
+        "Name": "MeleeWeapon Accuracy Modifier",
+        "Details": "MeleeWeapon Accuracy Modifier",
+        "Icon": "uixSvgIcon_run_n_gun"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "CBTBE_Punch_Attack_Mod",
+        "operation": "Int_Add",
+        "modValue": "-2",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "specialRules": "NotSet",
+        "effectTargetType": "Creator",
+        "range": 0.0,
+        "forcePathRebuild": false,
+        "forceVisRebuild": true,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "LV_ADVANCED_SENSORS",
+        "Name": "Advanced Sensors",
+        "Details": "Provides detailed information on enemy units",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "LV_ADVANCED_SENSORS",
+        "operation": "Int_Add",
+        "modValue": "2",
+        "modType": "System.Int32"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "BAProbe",
+        "Name": "HP-CockpitSensors-Sensor",
+        "Details": "Increased Sight/Sensors",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "appliesEachTick": false,
+        "effectsPersistAfterDestruction": false,
+        "statName": "SensorDistanceAbsolute",
+        "operation": "Float_Multiply",
+        "modValue": "1.15",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "HP-CockpitSensors-Spot",
+        "Name": "SPOTTING DISTANCE INCREASED",
+        "Details": "Increases spotting distance by 50m.",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "appliesEachTick": false,
+        "effectsPersistAfterDestruction": false,
+        "statName": "SpotterDistanceAbsolute",
+        "operation": "Float_Multiply",
+        "modValue": "1.15",
+        "modType": "System.Single"
+      }
     }
   ],
   "ComponentTags": {
@@ -337,7 +533,8 @@
       "DirectNeuralInterface",
       "RequireNI",
       "BAIncompatible",
-      "ProtoIncompatible"
+      "ProtoIncompatible",
+      "TargetingComputer"
     ],
     "tagSetSourceFile": ""
   }
