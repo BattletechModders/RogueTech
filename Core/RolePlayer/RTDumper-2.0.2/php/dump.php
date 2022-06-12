@@ -200,7 +200,7 @@ class Dump extends Config{
 		echo "MODJSON:".count($json_type_2_filenames[JSONType::MODJSON]).PHP_EOL;
 		echo "MESETTINGSJSON:".count($json_type_2_filenames[JSONType::MESETTINGSJSON]).PHP_EOL;
 		echo "COMBATGAMECONSTANTS:".count($json_type_2_filenames[JSONType::COMBATGAMECONSTANTS]).PHP_EOL;
-		echo "AMMO:".count($json_type_2_filenames[JSONType::AMMO]).PHP_EOL;
+		echo "AmmoCount".count($json_type_2_filenames[JSONType::AMMO]).PHP_EOL;
 		//echo json_encode(json_for_pk(JSONType::MODJSON,"#MESettings"));
 		//echo json_encode(json_for_pk(JSONType::MODJSON,"#CombatGameConstants"));
    }
