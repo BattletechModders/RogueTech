@@ -5081,6 +5081,8 @@
         "emod_structureslots_superheavy_reinforced",
         "emod_structureslots_superheavy_lam",
         "emod_case",
+        "Tank_CASE_CLAN",
+        "Tank_CASE",
         "LAM_Structure_TSM",
         "LAM_Structure_Composite",
         "LAM_Structure_EndoSteel",
@@ -7721,8 +7723,8 @@
       "affinityLevels": [
         {
           "missionsRequired": 40,
-          "levelName": "Hunter Killer Team Training",
-          "decription": "Multi-Target +Breaching Shot Ability",
+          "levelName": "Hunter/Killer Team Training",
+          "decription": "Multi-Target & Breaching Shot Ability",
           "effectData": [
             {
               "durationData": {
@@ -8362,7 +8364,7 @@
         {
           "missionsRequired": 40,
           "levelName": "Gauss Mastery",
-          "decription": "+1 Accuracy, -1 Recoil and +100% Crit for Gauss",
+          "decription": "+1 Accuracy, +1 Evasion Ignore and +100% Crit for Gauss",
           "effectData": [
             {
               "Description": {
@@ -8397,7 +8399,7 @@
               "Description": {
                 "Details": "Pilot has Mastered the Chassis.",
                 "Icon": "UixSvgIcon_specialEquip_System",
-                "Id": "QuirkAffinity_AccurateGauss_RF",
+                "Id": "QuirkAffinity_AccurateGauss_Eva",
                 "Name": "BattleMechAffinity"
               },
               "durationData": {
@@ -8407,10 +8409,10 @@
               "effectType": "StatisticEffect",
               "nature": "Buff",
               "statisticData": {
-                "statName": "RefireModifier",
-                "operation": "Int_Add",
-                "modValue": "-1",
-                "modType": "System.Int32",
+                "statName": "EvasivePipsIgnored",
+                "operation": "Float_Add",
+                "modValue": "1.0",
+                "modType": "System.Single",
                 "targetCollection": "Weapon",
                 "targetWeaponType": "Gauss"
               },
@@ -9205,6 +9207,7 @@
     },
     {
       "quirkNames": [
+        "Special_Breaching_Shot",
         "Type_Marauder"
       ],
       "affinityLevels": [
@@ -10942,7 +10945,7 @@
         {
           "missionsRequired": 40,
           "levelName": "Hull Down",
-          "decription": "+1 Max Evasion",
+          "decription": "+1 Defence, -5% Visibility",
           "effectData": [
             {
               "durationData": {
@@ -10951,22 +10954,50 @@
               },
               "targetingData": {
                 "effectTriggerType": "Passive",
-                "effectTargetType": "Creator"
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
               },
               "effectType": "StatisticEffect",
               "Description": {
-                "Id": "MaxEvasion",
-                "Name": "EVASIVE MOVE",
-                "Details": "This unit generates an extra EVASIVE charge from movement actions (up to its maximum).",
-                "Icon": "uixSvgIcon_action_evasivemove"
+                "Id": "StatusEffect-Defense_ToHit-T3",
+                "Name": "HARDER TO HIT",
+                "Details": "Provides a penalty to all attacks against this unit.",
+                "Icon": "uixSvgIcon_equipment_Gyro"
               },
+              "nature": "Buff",
               "statisticData": {
-                "statName": "MaxEvasivePips",
-                "operation": "Int_Add",
-                "modValue": "1",
-                "modType": "System.Int32"
+                "statName": "ToHitThisActor",
+                "operation": "Float_Add",
+                "modValue": "1.0",
+                "modType": "System.Single"
+              }
+            },
+            {
+              "durationData": {
+                "duration": -1,
+                "stackLimit": -1
               },
-              "nature": "Buff"
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "Stealth_Visibility_Decrease_Stealth",
+                "Name": "Stealth Visibility Decrease",
+                "Details": "Visibility Statuseffect.",
+                "Icon": "uixSvgIcon_equipment_TTS"
+              },
+              "nature": "Buff",
+              "statisticData": {
+                "statName": "SpottingVisibilityMultiplier",
+                "operation": "Float_Multiply",
+                "modValue": "0.95",
+                "modType": "System.Single"
+              }
             }
           ]
         }
@@ -11087,6 +11118,7 @@
     },
     {
       "quirkNames": [
+        "Special_Protected_Mechanisms",
         "Special_Protected_Actuators"
       ],
       "affinityLevels": [
@@ -12971,7 +13003,7 @@
         {
           "missionsRequired": 20,
           "levelName": "Scrapper",
-          "decription": "Ace Pilot and Multi-Tracker",
+          "decription": "Ace Pilot & Multi-Tracker",
           "effectData": [
             {
               "durationData": {
@@ -13059,6 +13091,7 @@
         "venom_35",
         "flea_15",
         "flea_20",
+        "flea-ul_40",
         "DragonX_70",
         "dragon_60",
         "dragon_65",
@@ -13090,7 +13123,7 @@
         {
           "missionsRequired": 20,
           "levelName": "Agile",
-          "decription": "+1 Defense and +1 Melee Defense",
+          "decription": "+1 Defense & +1 Melee Defense",
           "effectData": [
             {
               "Description": {
@@ -13423,7 +13456,7 @@
         {
           "missionsRequired": 20,
           "levelName": "Gunboat",
-          "decription": "+1 Evasion Ignore and +1 Gunnery",
+          "decription": "+1 Evasion Ignore & +1 Gunnery",
           "effectData": [
             {
               "Description": {
@@ -15696,7 +15729,8 @@
         "quickdraw_60",
         "Cazador_35",
         "Reptar_35",
-        "neanderthal_80"
+        "neanderthal_80",
+        "Weapon_Laser_SmallLaserREX_Quicsell"
       ],
       "affinityLevels": [
         {
