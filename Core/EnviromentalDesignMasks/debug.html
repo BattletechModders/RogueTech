@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html class="dark">
+  <head>
+    <meta charset="utf8">
+    <link rel="icon" type="image/png" href="https://www.bta3062.com/images/thumb/d/d5/BTAFavicon.png/30px-BTAFavicon.png">
+    <script type="text/javascript" src="https://unpkg.com/jquery@3.6.0/dist/jquery.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/axios@0.26.1/dist/axios.min.js"></script>
+    <script>
+      module = {}
+    </script>
+    <script type="text/javascript" src="https://unpkg.com/json-stringify-pretty-compact@3.0.0/index.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      stringifyPrettyCompact = module.exports
+      tailwind.config = {
+        darkMode: 'class',
+        content: [
+          './index.html',
+        ],
+        theme: {
+          extend: {
+            width: {
+              '300': '75rem',
+            }
+          }
+        }
+      }
+
+      const allMoods = []
+
+      async function displaySelectedMood() {
+        console.log($('#allMoods').val())
+        if ($('#allMoods').val() === 'Current') {
+          const response = await axios.get('/currentMood')
+          $('#currentMood').val(stringifyPrettyCompact(response.data))
+          return
+        }
+
+        const baseMood = $('#allMoods').val()
+        const response = await axios({url: '/getMood', method: 'POST', data: baseMood})
+        delete response.data.moodTags;
+        $('#currentMood').val(stringifyPrettyCompact(response.data))
+        try {
+          const override = JSON.parse($('#override').val())
+          override.baseMood = baseMood
+          $('#override').val(stringifyPrettyCompact(override))
+        } catch (e) {
+          showAlert(e)
+        }
+      }
+
+      async function applyMood(selector) {
+        try {
+          const data = JSON.parse($(selector).val())
+
+          if (!data.ID) {
+            throw new Error(`'ID' is required`)
+          }
+
+          if (allMoods.indexOf(data.ID) !== -1) {
+            throw new Error(`'ID' already used`)
+          }
+
+          if (allMoods.indexOf(data.baseMood) === -1) {
+            throw new Error(`'baseMood' "${data.baseMood}" not recognized`)
+          }
+
+          await axios({url: '/updateMood', method: 'POST', data: JSON.stringify(data)})
+        } catch (e) {
+          showAlert(e)
+        }
+      }
+
+      function makeError(text) {
+        return $(`<div class='text-center w-fit p-2 m-4 mx-auto bg-slate-900 rounded border-red-600 border-2'>${text}</div>`)
+      }
+
+      function showAlert(error) {
+        const alert = makeError(error.message);
+        $('#override').after(alert);
+        alert.delay(5000).animate({opacity: 0}, 500, () => {
+          alert.remove()
+        })
+      }
+
+      function setWeatherVFX() {
+        const weather = $('#weatherVFX').val()
+        try {
+          const override = JSON.parse($('#override').val())
+          override.weatherSettings = override.weatherSettings || {}
+          if (weather === 'empty') {
+            delete override.weatherSettings.weatherVFXName
+            if (Object.keys(override.weatherSettings).length === 0) {
+              delete override.weatherSettings
+            }
+          } else {
+            override.weatherSettings.weatherVFXName = weather
+          }
+          $('#override').val(stringifyPrettyCompact(override))
+        } catch (e) {
+          showAlert(e)
+        }
+      }
+
+      $(async () => {
+        if (location.protocol != 'http:') {
+          $('.flex').before(makeError("Visit <a class='text-slate-500' href='http://localhost:3062'>http://localhost:3062</a> while BattleTech is running to use this tool."))
+          return
+        }
+
+        const response = await axios.get('/listMoods')
+        $('#allMoods').empty().append(`<option value="Current">Current</option>`)
+        response.data.forEach(m => {
+          allMoods.push(m)
+          $('#allMoods').append(`<option value="${m}">${m}</option>`)
+        })
+      })
+    </script>
+  </head>
+  <body class="bg-slate-900 antialiased text-slate-300 min-h-screen">
+    <div class="container mx-auto w-300 shadow-xl p-2 bg-slate-800 min-h-screen text-center">
+      <div class="flex flex-row">
+        <div class="basis-1/2 p-2">
+          <div>
+            <label class="shadow-m bg-slate-900 p-3 m-2 rounded-md border-2 border-slate-600 inline-block">
+              Mood:
+              <select class="bg-slate-900" id="allMoods" onChange="displaySelectedMood()"></select>
+            </label>
+            <button class="shadow-m bg-slate-900 p-3 m-2 rounded-md border-2 border-slate-600" onclick="displaySelectedMood()">
+              <svg class="h-4 inline-block" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="CachedIcon"><path class="stroke-slate-300 fill-slate-300" d="m19 8-4 4h3c0 3.31-2.69 6-6 6-1.01 0-1.97-.25-2.8-.7l-1.46 1.46C8.97 19.54 10.43 20 12 20c4.42 0 8-3.58 8-8h3l-4-4zM6 12c0-3.31 2.69-6 6-6 1.01 0 1.97.25 2.8.7l1.46-1.46C15.03 4.46 13.57 4 12 4c-4.42 0-8 3.58-8 8H1l4 4 4-4H6z"></path></svg>
+              Refresh
+            </button>
+          </div>
+          <textarea class="w-full rounded bg-slate-900 p-2 h-96 font-mono text-xs" id="currentMood">{}</textarea>
+        </div>
+        <div class="basis-1/2 p-2">
+          <button class="shadow-m bg-slate-900 p-3 m-2 rounded-md border-2 border-slate-600" onclick="applyMood('#override')">
+            Apply Mood
+          </button>
+          <textarea class="w-full rounded bg-slate-900 p-2 h-96 font-mono text-xs" id="override">{
+  "ID": "Testing",
+  "baseMood": "ArcticDayFoggy"
+}</textarea>
+          <label class="shadow-m bg-slate-900 p-3 m-2 rounded-md border-2 border-slate-600 inline-block">
+            Weather:
+            <select class="bg-slate-900" id="weatherVFX" onChange="setWeatherVFX()">
+              <option value="empty">Inherited</option>
+              <option value="">None</option>
+              <option value="vfxPrfPrtl_weatherCamRain">Rain</option>
+              <option value="vfxPrfPrtl_weatherCamRain_drizzle">Rain - Drizzle</option>
+              <option value="vfxPrfPrtl_weatherCamRain_storm">Rain - Storm</option>
+              <option value="vfxPrfPrtl_weatherCamRain_heavy">Rain - Heavy</option>
+              <option value="vfxPrfPrtl_weatherCamRain_jungleMist">Jungle Mist</option>
+              <option value="vfxPrfPrtl_weatherCamRain_jungleStorm">Jungle Storm</option>
+              <option value="vfxPrfPrtl_weatherCamSnow_calm">Snow - Calm</option>
+              <option value="vfxPrfPrtl_weatherCamSnow_blizzard">Snow - Blizzard</option>
+              <option value="vfxPrfPrtl_weatherCamSnow_martian">Snow - Martian</option>
+              <option value="vfxPrfPrtl_weatherCam_windstorm">Windstorm</option>
+              <option value="vfxPrfPrtl_weatherCam_windstorm_martian">Windstorm - Martian</option>
+              <option value="vfxPrfPrtl_weatherCam_allergySeason">Allergy Season</option>
+            </select>
+          </label>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
