@@ -1,0 +1,142 @@
+<html>
+<head>
+    <title>Mechdef Importer</title>
+    <meta charset="utf-8" />
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        'use strict';
+        const {useEffect, useState} = React;
+
+        const App = () => {
+        const [modSettings, setModSettings] = useState(localStorage.modSettings && JSON.parse(localStorage.modSettings));
+        const updateModSettings = async function (event) {
+        const text = await event.target.files[0].text();
+        localStorage.modSettings = text;
+        setModSettings(JSON.parse(text));
+        }
+
+        return
+        <div className="container-fluid" style={{marginTop: 30}}>
+            <div className="row justify-content-center">
+                <div className="col-4">
+                    <h2 style={{textAlign: 'center'}}>Mech Editor Mod</h2>
+                    <div className="alert alert-primary">
+                        <div className="custom-file">
+                            <input type="file" className="custom-file-input" id="modJson" accept=".json" onChange={updateModSettings} />
+                            <label className="custom-file-label" htmlFor="modJson">{modSettings ? 'Update' : 'Load'} mod.json</label>
+                        </div>
+                        {modSettings && <ModSettings port={modSettings.Settings.httpServerPort} version={modSettings.Version} />}
+                    </div>
+                </div>
+            </div>
+            {modSettings && (<AllBays port={modSettings.Settings.httpServerPort} />)}
+        </div>
+        }
+
+        const ModSettings = ({port, version}) => {
+        return (
+        <table className="table table-dark">
+            <tbody>
+                <tr><td>Version</td><td>{version}</td></tr>
+                <tr><td>Port</td><td>{port}</td></tr>
+            </tbody>
+        </table>);
+        }
+
+        const AllBays = ({port}) => {
+        const [mechs, setMechs] = useState();
+        const [retry, setRetries] = useState(0);
+
+        const refreshMechs = async () => {
+        try {
+        const response = await fetch(`http://localhost:${port}/listhangar`);
+        setMechs(await response.json());
+        } catch (e) {
+        console.log(e);
+        }
+        setRetries(retry + 1);
+        }
+
+        useEffect(
+        () => {
+        const id= setTimeout(() => {
+        refreshMechs();
+        }, 2000);
+        return () => {
+        clearTimeout(id);
+        };
+        },
+        [retry],
+        );
+
+        if (!mechs) {
+        return (
+        <div className="row justify-content-center">
+            <div className="col-4">
+                <div className="alert alert-warning">Couldn't load mechs from game. You probably don't have it running. Retrying ({retry}).</div>
+            </div>
+        </div>)
+        }
+
+        if (mechs.error && mechs.error.id === 'NOSIMGAME') {
+        return (
+        <div className="row justify-content-center">
+            <div className="col-4">
+                <div className="alert alert-warning">Server contacted, but no game is loaded. Retrying ({retry}).</div>
+            </div>
+        </div>)
+        }
+
+        return (
+        <div className="row row-cols-6">
+            {mechs.mechBays.map(bay => (<MechBay key={bay.index} bay={bay} port={port} />))}
+        </div>);
+        }
+
+        const MechBay = ({bay, port}) => {
+        const postMech = async event => {
+        const text = await event.target.files[0].text();
+        try {
+        JSON.parse(text);
+        } catch (e) {
+        console.log('malformed json');
+        console.log(e);
+        return;
+        }
+
+        await fetch(`http://localhost:${port}/addmechfromfile`, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+        bayIndex: bay.index,
+        mechDef: JSON.parse(text),
+        }),
+        });
+        }
+
+        return
+        <div className="col">
+            <div className="card">
+                <div className="card-header">{bay.definition.ChassisID ? bay.definition.Description.UIName : 'Empty Bay'}</div>
+                <div className="card-body">
+                    <div className="custom-file">
+                        <input type="file" className="custom-file-input" id={`mechBay-${bay.index}`} accept=".json" onChange={postMech} />
+                        <label className="custom-file-label" htmlFor={`mechBay-${bay.index}`}>Load Mechdef</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+
+        ReactDOM.render(
+        <App />, document.querySelector('#app'));
+    </script>
+</body>
+</html>
