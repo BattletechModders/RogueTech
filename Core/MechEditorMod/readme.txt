@@ -41,7 +41,11 @@ note on API
 
 /set/<list name> - POST json - update database, write specified json to database (not all lists available for writing: can be used chassisDefs,mechDefs,vehicleDefs,vehicleChassisDefs,turretChassisDefs,ammoDefs,ammoBoxDefs,HeatSinkDefs,hardpointDataDefs,upgradeDefs,weaponDefs)
 
-/reload/<BattleTechResourceType>/<Id> - GET reload specific definition from file system  (not all types available for reloading - )
+/view/<BattleTechResourceType> - GET - view item's ids of list (list names can be get from /getavaibleres)
+
+/getavaibleres - GET - returns all available database lists for reading
+
+/reload/<BattleTechResourceType>/<Id> - GET reload specific definition from file system  (not all types available for reloading - ChassisDef,VehicleChassisDef,TurretChassisDef,TurretDef,AmmunitionDef,AmmunitionBoxDef,JumpJetDef,HeatSinkDef,BattleTechResourceType.UpgradeDef,WeaponDef,HardpointDataDef,VehicleDef,MechDef supported)
 
 /ui/* - GET - file from <mod dir>/ui
 
