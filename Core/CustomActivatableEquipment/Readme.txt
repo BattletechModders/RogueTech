@@ -1,6 +1,6 @@
 !WARNING! This version of CAE disabling vanilla aura COMPLETELY. I have to do it cause vanilla aura's code is very bad. 
 Original code recalculating all auras for all combatant pairs every frame which is drop performance down especially if there many units on battle field.
-My auras implementation written from scratch and using colliders making Unity do all work for compare distances.
+My auras implementation written from scratch and using collides making Unity do all work for compare distances.
 !NOTE! FrostRaptor's AurasHelper is assumed to be incompatible new auras code. But cause original auras disabled it assumed to be not needed. 
 
 to invoke heat sinks manipulation dialog ctrl+click on brace (shield) button in mech HUD. 
@@ -9,7 +9,7 @@ to invoke heat sinks manipulation dialog ctrl+click on brace (shield) button in 
 AI can activate component if it have correct tags
 AI related tags:
 	cae_ai_offence - component provides damage and/or accuracy boost
-    cae_ai_defence - component provides defence boost
+    cae_ai_defence - component provides defense boost
     cae_ai_explode - component can explode and damage other components in location and/or inner structure
     cae_ai_heat - component have negative impact on heat dissipation
     cae_ai_cool - component have positive impact on heat dissipation
@@ -41,10 +41,11 @@ AI related mod settings
                                     if roll value less than stand chance mech starts normally, if not mech will not stand up acting same as if you press "done with mech".
                               NOTE! You can use CAEStoodUpRollMod and CAEArmAbsenceStoodUpMod actors statistic values to control stand up roll per chassis/mech
   "unaffectedByHeadHitStatName": "unaffectedByHeadHit" - unit statistic names if this value is set true at runtime mech will be unaffected by head hits
-  "equipmentFlashFailChance": 0.1 if component is active currentlly and its fail chance more than this value its slot will flash red.
+  "equipmentFlashFailChance": 0.1 if component is active currently and its fail chance more than this value its slot will flash red.
+  "C3NetworkEncounterTags": [ "C3_network" ] - if any of this tags exists in unit's encounter tags it will be target of C3 calculations. See C3 implementation section
 -----------------------------------------------------------------------------------------------------------------------                              
   NOT NEEDED ANY MORE. KEEPED FOR HISTORICAL REASONS.
-  "auraUpdateFix": "Position" - type of fixing updating aura while unit movment.
+  "auraUpdateFix": "Position" - type of fixing updating aura while unit movement.
                                 Some basics: vanilla's code updating auras while unit moving looks like sabotage. If someone under my command write something like this he/she will be fired immediately.
                                 !EVERY! frame while unit moves method recalculating all auras invoked, and this method is very slow, 
                                 worst of all it is called in frame draw thread which inflicts huge FPS drop if there is ECMs at battlefield.
@@ -56,7 +57,7 @@ AI related mod settings
                                           Distance controlled by auraUpdateMinPosDelta.
                                 "Time" -  - auras updating while moving, but frequency of updates controlled by moving time eg every 2 seconds. Time delta controlled by auraUpdateMinTimeDelta.
                                 I'm suggesting Position strategy with update every 20 meters, cause, i think, this settings is compromise between performance and visual.  
-                                Maybe later i will reimplement update strategy to use unity's colliders subsystem it will remove any visual drawbacks cause auras will be updated only when it is needed. 
+                                Maybe later i will reimplemented update strategy to use unity's collides subsystem it will remove any visual drawbacks cause auras will be updated only when it is needed. 
   "auraUpdateMinPosDelta": 20 - position delta for Position aura update fix strategy
   "auraUpdateMinTimeDelta": 2 - time delta for Time aura update fix strategy
 ------------------------------------------------------------------------------------------------------------------------
@@ -537,6 +538,8 @@ COMPOPNENT
       "IsNegativeToAlly": false,
       "IsNegativeToEnemy": false,
       "IsPositiveToEnemy": false,
+	  "neededTags": [ "C3_slave" ],              - list of encounter tags unit should have for aura to be applied. 
+	                                               See Encounter tags by statistic effect section for more detail and notes
       "onlineVFX": [                             - static aura effects. Playing if aura active. Linked to aura carrier.
         {
           "VFXname": "vfxPrfPrtl_ECM_loop",      - vfx name
@@ -715,3 +718,50 @@ It have same definitions as component aura described above
     }
 	},
 
+
+C3 implementation
+
+if unit have at least one tag from C3NetworkEncounterTags in its encounter tags, its RANGE (and only RANGE) to-hit modifier will be calculated differently
+Math:
+code will iterate all allies of current unit and search for unit closest to target having at least one C3 encounter tag same as current unit.
+example:
+ C3NetworkEncounterTags: "C3_network_a", "C3_network_b"
+ unit A: have "C3_network_a"
+ unit B: have "C3_network_b"
+ unit C: have "C3_network_a", "C3_network_b"
+ unit D: have "C3_network_b"
+while detecting RANGE modifier for unit A only unit C will be tested
+while detecting RANGE modifier for unit B units C and D will be tested
+while detecting RANGE modifier for unit C units A, B and D will be tested 
+Eg. there are two types of C3 networks - "C3_network_a", "C3_network_b", network A units A and C, network B units B,C and D
+When closest unit found its distance to target (C3-distance) is used to calculate RANGE instead of current unit distance(original distance).
+Exceptions: 
+1. C3-distance should be less than original distance, if not original distance will be used
+2. C3-distance less than minimal weapon range, C3-distance is counted equal to weapon min range. Eg short range modifier will be used.
+
+NOTE even if RANGE modifier is 0 it is still will be added to list of weapon modifiers in case C3-distance is used for calculation.
+
+Encounter tags by statistic effect
+
+you can add or remove unit encounter tag by applying statistic effect
+Statistic name should be "ADD_ENCOUNTER_TAG_<encounter tag name>"
+"ADD_ENCOUNTER_TAG_<encounter tag name>" is float, default 0
+if value is greater than 0 tag will be added if less or equal removed.
+
+!!!NOTE!!!
+if you are using Abilifier to limit effects appliance by encounter tags you should note 
+Abilifier does no handle encounter tags dynamic nature. 
+Example you have component applying passive bonus A only if encounter tag B is set.
+encounter tag B added by passive statistic effect by component C.
+If component C is installed before A - most things is ok, component C will be processed before A 
+and add encounter tag B before component A processing. Bonus will be applied. 
+But if component C installed after component A, on processing component A, unit will not have encounter tag B, bonus will be skipped.
+Even if bonus applied correctly on component C destruction tag B will be removed, but bonus will remain still cause does not handle encounter tag removal.
+Same story if component C adds tag B as activatable. Bonus will not be applied cause activatables processed after passive components.
+
+That is why only method correctly working in dynamic is - made "ADD_ENCOUNTER_TAG_<encounter tag name>" as activatable and tag bonus itself as
+aura with proper "neededTags" setting. Aura effect will be applied or removed according encounter tags even if changed.
+Also it is very bad idea to apply encounter tags needed for aura to be have an effect by another aura. 
+Only safe place for it is activatable section. 
+
+You can make aura lowering "ADD_ENCOUNTER_TAG_<tag from C3NetworkEncounterTags>" statistic to simulate counter C3 electronic 
