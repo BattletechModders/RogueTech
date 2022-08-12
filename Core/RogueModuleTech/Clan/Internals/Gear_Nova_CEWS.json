@@ -20,7 +20,9 @@
         "ActiveEWS: 2, 2, 210",
         "EWSSelf: 1, 1",
         "EWSProbe: 15%, 2, 1, 210",
-        "C3Sytem: 1, 10%, 3%, 2%, 210"
+        "C3Nova",
+        "C3iBonus: Nova CEWS, +4%, +2%",
+        "C3BonusNoStack: Nova CEWS. +1 Evasion pips ignored"
       ]
     },
     "Flags": {
@@ -63,25 +65,32 @@
   "CriticalComponent": false,
   "Auras": [
     {
-      "Id": "C3SystemEnemy",
-      "Name": "C3 Scan",
-      "ReticleColor": "#00e600",
-      "Range": 210,
+      "Id": "Gear_C3n_Aura",
+      "Name": "C3 network",
+      "ReticleColor": "#00f2ff",
+      "Range": 8000,
       "RemoveOnSensorLock": false,
       "State": "Persistent",
       "ApplySelf": false,
+      "HideOnNotSelected": true,
+      "FloatieAtEndOfMove": false,
       "AllyStealthAffection": "None",
-      "EnemyStealthAffection": "NegativeOne",
-      "IsPositiveToAlly": false,
-      "IsNegativeToEnemy": true,
-      "ownerVFX": [],
-      "targetVFX": [],
-      "removeOwnerVFX": [],
-      "removeTargetVFX": [],
-      "ownerSFX": [],
-      "targetSFX": [],
-      "removeOwnerSFX": [],
-      "removeTargetSFX": [],
+      "EnemyStealthAffection": "None",
+      "IsPositiveToAlly": true,
+      "onlineVFX": [
+      ],
+      "targetVFX": [
+      ],
+      "removeTargetVFX": [
+      ],
+      "ownerSFX": [
+      ],
+      "targetSFX": [
+      ],
+      "removeOwnerSFX": [
+      ],
+      "removeTargetSFX": [
+      ],
       "statusEffects": [
         {
           "durationData": {
@@ -90,26 +99,28 @@
           },
           "targetingData": {
             "effectTriggerType": "Passive",
-            "effectTargetType": "EnemiesWithinRange",
+            "specialRules": "NotSet",
+            "effectTargetType": "AlliesWithinRange",
             "range": 0.0,
-            "forceVisRebuild": true,
+            "forcePathRebuild": false,
+            "forceVisRebuild": false,
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
           "Description": {
-            "Id": "C3M-SensorInfo",
-            "Name": "C3 Sensor Information",
-            "Details": "Shares Sensor Information on nearby Targets",
-            "Icon": "uixSvgIcon_equipment_Cockpit"
+            "Id": "C3n_network_bonus",
+            "Name": "Nova Sensors Bonus",
+            "Details": "C3 network",
+            "Icon": "uixSvgIcon_status_ECM-missileDef"
           },
-          "nature": "Buff",
           "statisticData": {
-            "statName": "LV_PROBE_PING",
-            "operation": "Int_Add",
-            "modValue": "1",
-            "modType": "System.Int32"
-          }
+            "statName": "SensorDistanceAbsolute",
+            "operation": "Float_Multiply",
+            "modValue": "1.04",
+            "modType": "System.Single"
+          },
+          "nature": "Buff"
         },
         {
           "durationData": {
@@ -118,54 +129,59 @@
           },
           "targetingData": {
             "effectTriggerType": "Passive",
-            "effectTargetType": "EnemiesWithinRange",
+            "specialRules": "NotSet",
+            "effectTargetType": "AlliesWithinRange",
             "range": 0.0,
-            "forceVisRebuild": true,
+            "forcePathRebuild": false,
+            "forceVisRebuild": false,
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
           "Description": {
-            "Id": "C3DetectionStrengthSignature",
-            "Name": "C3 Signature Detection",
-            "Details": "C3 Signature Statuseffect.",
-            "Icon": "uixSvgIcon_equipment_TTS"
+            "Id": "C3n_network_bonus",
+            "Name": "Nova Vision Bonus",
+            "Details": "C3 network",
+            "Icon": "uixSvgIcon_status_ECM-missileDef"
           },
-          "nature": "Buff",
           "statisticData": {
-            "statName": "SensorSignatureModifier",
+            "statName": "SpotterDistanceAbsolute",
             "operation": "Float_Multiply",
-            "modValue": "1.1",
+            "modValue": "1.02",
             "modType": "System.Single"
-          }
+          },
+          "nature": "Buff"
         },
         {
           "durationData": {
             "duration": -1,
-            "stackLimit": -1
+            "stackLimit": 1
           },
           "targetingData": {
             "effectTriggerType": "Passive",
-            "effectTargetType": "EnemiesWithinRange",
+            "specialRules": "NotSet",
+            "effectTargetType": "AlliesWithinRange",
             "range": 0.0,
-            "forceVisRebuild": true,
+            "forcePathRebuild": false,
+            "forceVisRebuild": false,
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
           "Description": {
-            "Id": "C3DetectionStrengthVisibility",
-            "Name": "C3 Visibility Detection",
-            "Details": "C3 Visibility Statuseffect.",
-            "Icon": "uixSvgIcon_equipment_TTS"
+            "Id": "C3n_network_bonus_evaignore",
+            "Name": "Nova Accuracy bonus",
+            "Details": "C3 network",
+            "Icon": "uixSvgIcon_status_ECM-missileDef"
           },
-          "nature": "Buff",
           "statisticData": {
-            "statName": "SpottingVisibilityMultiplier",
-            "operation": "Float_Multiply",
-            "modValue": "1.1",
-            "modType": "System.Single"
-          }
+            "statName": "EvasivePipsIgnored",
+            "operation": "Float_Add",
+            "modValue": "1.0",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
+          },
+          "nature": "Buff"
         }
       ]
     },
@@ -307,24 +323,24 @@
       },
       "targetingData": {
         "effectTriggerType": "Passive",
-        "effectTargetType": "AllLanceMates",
+        "effectTargetType": "Creator",
         "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "C3AllySensor",
-        "Name": "SLIC Black Ops",
-        "Details": "Increased Sight/Sensors/Health.",
-        "Icon": "uixSvgIcon_equipment_Cockpit"
+        "Id": "C3Nova",
+        "Name": "C3 Nova",
+        "Details": "Shows their vision when lancemates move",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
       },
-      "nature": "Buff",
       "statisticData": {
-        "statName": "SensorDistanceAbsolute",
-        "operation": "Float_Multiply",
-        "modValue": "1.03",
+        "statName": "ADD_ENCOUNTER_TAG_C3n_network",
+        "operation": "Float_Add",
+        "modValue": "1",
         "modType": "System.Single"
-      }
+      },
+      "nature": "Buff"
     },
     {
       "durationData": {
@@ -333,24 +349,24 @@
       },
       "targetingData": {
         "effectTriggerType": "Passive",
-        "effectTargetType": "AllLanceMates",
+        "effectTargetType": "Creator",
         "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "C3AllySight",
-        "Name": "SPOTTING DISTANCE INCREASED",
-        "Details": "Increases spotting distance by 25m.",
-        "Icon": "uixSvgIcon_equipment_Cockpit"
+        "Id": "C3_AI",
+        "Name": "C3 AI",
+        "Details": "Shows their vision when lancemates move",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
       },
-      "nature": "Buff",
       "statisticData": {
-        "statName": "SpotterDistanceAbsolute",
-        "operation": "Float_Multiply",
-        "modValue": "1.02",
+        "statName": "ADD_ENCOUNTER_TAG_C3AI_network",
+        "operation": "Float_Add",
+        "modValue": "1",
         "modType": "System.Single"
-      }
+      },
+      "nature": "Buff"
     },
     {
       "durationData": {
@@ -564,6 +580,7 @@
   ],
   "ComponentTags": {
     "items": [
+      "C3Nova",
       "component_type_stock",
       "ElectronicCounterMeasures",
       "BAIncompatible",
