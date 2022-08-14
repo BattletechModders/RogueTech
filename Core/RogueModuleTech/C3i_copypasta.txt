@@ -1,57 +1,21 @@
-{
-  "Custom": {
-    "Category": [
+Category
+
       {
-        "CategoryID": "C3Slave"
+        "CategoryID": "C3i"
       }
-    ],
-    "BonusDescriptions": {
-      "Bonuses": [
-        "C3Slave",
-        "C3Bonus: C3 master, +3%, +2%, +1"
-      ]
-    },
-    "Flags": {
-      "flags": [
-        "not_broken"
-      ]
-    },
-    "InventorySorter": {
-      "SortKey": "00024"
-    },
-    "IBLS": {
-      "StorageSize": 1
-    }
-  },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
-  "Description": {
-    "Cost": 250000,
-    "Rarity": 4,
-    "Purchasable": true,
-    "Manufacturer": "Tanadi",
-    "Model": "C3 Unit",
-    "UIName": "C3 Slave",
-    "Id": "Gear_C3",
-    "Name": "C3 Network Slave Unit",
-    "Details": "The C3 Slave is a computer system that shares tactical data over a Network. Weighing a single ton and carried by the members of a lance or company. Requires presence of C3 Master to oparate.",
-    "Icon": "C3Systems"
-  },
-  "BonusValueA": "",
-  "BonusValueB": "",
-  "ComponentType": "Upgrade",
-  "ComponentSubType": "NotSet",
-  "PrefabIdentifier": "",
-  "BattleValue": 0,
-  "InventorySize": 1,
-  "Tonnage": 1,
-  "AllowedLocations": "All",
-  "DisallowedLocations": "All",
-  "CriticalComponent": false,
-  "Auras": [
+
+
+Bonuses
+
+          "C3i",
+          "C3iBonus: C3i, +3%, +2%",
+          "C3BonusNoStack: C3i, +1 Accuracy"
+
+
+Aura
+
     {
-      "Id": "Gear_C3_Slave_Aura",
+      "Id": "Gear_C3i_Aura",
       "Name": "C3 network",
       "ReticleColor": "#00f2ff",
       "Range": 8000,
@@ -95,8 +59,8 @@
           },
           "effectType": "StatisticEffect",
           "Description": {
-            "Id": "C3_network_slave_bonus",
-            "Name": "C3 Slave Sensors Bonus",
+            "Id": "C3i_network_bonus",
+            "Name": "C3i Sensors Bonus",
             "Details": "C3 network",
             "Icon": "uixSvgIcon_status_ECM-missileDef"
           },
@@ -125,8 +89,8 @@
           },
           "effectType": "StatisticEffect",
           "Description": {
-            "Id": "C3_network_slave_bonus",
-            "Name": "C3 Slave Vision Bonus",
+            "Id": "C3i_network_bonus",
+            "Name": "C3i Vision Bonus",
             "Details": "C3 network",
             "Icon": "uixSvgIcon_status_ECM-missileDef"
           },
@@ -141,7 +105,7 @@
         {
           "durationData": {
             "duration": -1,
-            "stackLimit": -1
+            "stackLimit": 1
           },
           "targetingData": {
             "effectTriggerType": "Passive",
@@ -155,23 +119,52 @@
           },
           "effectType": "StatisticEffect",
           "Description": {
-            "Id": "C3_network_slave_bonus",
-            "Name": "C3 Slave Sensor Check Bonus",
+            "Id": "C3i_network_bonus_accuracy",
+            "Name": "C3i Accuracy bonus",
             "Details": "C3 network",
             "Icon": "uixSvgIcon_status_ECM-missileDef"
           },
           "statisticData": {
-            "statName": "LV_ADVANCED_SENSORS",
-            "operation": "Int_Add",
-            "modValue": "1",
-            "modType": "System.Int32"
+            "statName": "AccuracyModifier",
+            "operation": "Float_Add",
+            "modValue": "-1.0",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
           },
           "nature": "Buff"
         }
       ]
     }
-  ],
-  "statusEffects": [
+
+
+SelfEffect
+
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "C3i",
+        "Name": "C3i network",
+        "Details": "Shows their vision when lancemates move",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "ADD_ENCOUNTER_TAG_C3i_network",
+        "operation": "Float_Add",
+        "modValue": "1",
+        "modType": "System.Single"
+      },
+      "nature": "Buff"
+    },
     {
       "durationData": {
         "duration": -1,
@@ -225,15 +218,8 @@
       },
       "nature": "Buff"
     }
-  ],
-  "ComponentTags": {
-    "items": [
-      "C3Slave",
-      "component_type_stock",
-      "lv-shares-sensors",
-      "BAIncompatible",
-      "ProtoIncompatible"
-    ],
-    "tagSetSourceFile": ""
-  }
-}
+
+
+ComponentTags
+
+      "C3i",
