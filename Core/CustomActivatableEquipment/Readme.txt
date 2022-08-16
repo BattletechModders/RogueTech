@@ -540,6 +540,10 @@ COMPOPNENT
       "IsPositiveToEnemy": false,
 	  "neededTags": [ "C3_slave" ],              - list of encounter tags unit should have for aura to be applied. 
 	                                               See Encounter tags by statistic effect section for more detail and notes
+	  "neededOwnerTags": [ "fancy_tag_name" ],   - list of encounter tags owner unit should have for aura to be working.
+	                                               if owner does not have needed tags aura's effective radius counted as 0
+												   once owner get all tags from list aura's effective radius stars to grow up to Range
+												   if aura carrier state and source component state allow it. 
       "onlineVFX": [                             - static aura effects. Playing if aura active. Linked to aura carrier.
         {
           "VFXname": "vfxPrfPrtl_ECM_loop",      - vfx name
