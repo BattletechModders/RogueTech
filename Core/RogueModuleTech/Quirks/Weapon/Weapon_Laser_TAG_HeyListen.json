@@ -7,12 +7,15 @@
     ],
     "BonusDescriptions": {
       "Bonuses": [
-        "TAG: 7",
-        "PipsIgnored: 15",
-        "WpnAccuracy: +15",
-        "Painter: +1",
-        "PainterSensors: 25%",
-        "PainterVisibility: 25%"
+        "PainterDuration: 5",
+        "Painter: +2",
+        "Narc: +2",
+        "ECCMPainter: 2",
+        "PainterSensors: 50%",
+        "PainterVisibility: 50%",
+        "TAG: 4",
+        "PipsIgnored: 10",
+        "WpnAccuracy: +10"
       ]
     },
     "Flags": {
@@ -32,11 +35,11 @@
   "Type": "Laser",
   "WeaponSubType": "SmallLaserER",
   "MinRange": 0,
-  "MaxRange": 600,
+  "MaxRange": 720,
   "RangeSplit": [
-    150,
-    300,
-    450
+    180,
+    360,
+    540
   ],
   "AmmoCategory": "NotSet",
   "StartingAmmoCapacity": 0,
@@ -44,10 +47,10 @@
   "Damage": 1,
   "OverheatedDamageMultiplier": 0,
   "EvasiveDamageMultiplier": 0,
-  "EvasivePipsIgnored": 15,
+  "EvasivePipsIgnored": 10,
   "DamageVariance": 0,
   "HeatDamage": 1,
-  "AccuracyModifier": -15,
+  "AccuracyModifier": -10,
   "CriticalChanceMultiplier": 0,
   "APArmorShardsMod": 0.1,
   "APMaxArmorThickness": 1.2,
@@ -69,7 +72,7 @@
     "Purchasable": false,
     "Manufacturer": "NAIS",
     "Model": "Target Acquisition Gear",
-    "UIName": "TAG",
+    "UIName": "TAG Ho!",
     "Id": "Weapon_Laser_TAG_HeyListen",
     "Name": "TAG",
     "Details": "There's something a little weird about this TAG.",
@@ -89,7 +92,7 @@
   "statusEffects": [
     {
       "durationData": {
-        "duration": 7,
+        "duration": 5,
         "ticksOnActivations": true,
         "useActivationsOfTarget": true,
         "ticksOnEndOfRound": false,
@@ -111,27 +114,27 @@
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "PainterEffect",
+        "Id": "PainterEffectNavi",
         "Name": "TAGed",
-        "Details": "This target was TAG'ed. +1 to hit.",
+        "Details": "This target should follow us to the Great Deku Tree!",
         "Icon": "uixSvgIcon_artillery"
       },
       "nature": "Debuff",
       "statisticData": {
         "statName": "LV_TAG",
         "operation": "Set",
-        "modValue": "0.25_2_1",
+        "modValue": "0.5_4_2",
         "modType": "System.String"
       }
     },
     {
       "durationData": {
-        "duration": 7,
+        "duration": 5,
         "ticksOnActivations": true,
         "useActivationsOfTarget": true,
         "ticksOnEndOfRound": false,
         "ticksOnMovements": true,
-        "stackLimit": 3
+        "stackLimit": 1
       },
       "targetingData": {
         "effectTriggerType": "OnHit",
@@ -147,7 +150,7 @@
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "HeyListen2",
+        "Id": "HeyListen",
         "Name": "Hey! Listen!",
         "Details": "TAG increases Visibility",
         "Icon": "uixSvgIcon_artillery"
@@ -156,13 +159,78 @@
       "statisticData": {
         "statName": "SpottingVisibilityMultiplier",
         "operation": "Float_Multiply",
-        "modValue": "1.1",
+        "modValue": "1.5",
         "modType": "System.Single"
       }
     },
     {
       "durationData": {
-        "duration": 7,
+        "duration": 5,
+        "ticksOnActivations": true,
+        "useActivationsOfTarget": true,
+        "ticksOnEndOfRound": false,
+        "ticksOnMovements": false,
+        "stackLimit": 1,
+        "clearedWhenAttacked": false
+      },
+      "targetingData": {
+        "effectTriggerType": "OnHit",
+        "triggerLimit": 0,
+        "extendDurationOnTrigger": 0,
+        "specialRules": "NotSet",
+        "effectTargetType": "NotSet",
+        "range": 0,
+        "forcePathRebuild": false,
+        "forceVisRebuild": false,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "HeyListen2",
+        "Name": "NARCED",
+        "Details": "Narc Missiles Bonus",
+        "Icon": "uixSvgIcon_artillery"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "ToHitThisActorMissile",
+        "operation": "Float_Add",
+        "modValue": "-2",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": 5,
+        "stackLimit": 1
+      },
+      "targetingData": {
+        "effectTriggerType": "OnHit",
+        "specialRules": "NotSet",
+        "effectTargetType": "NotSet",
+        "range": 0.0,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "HeyListen3",
+        "Name": "",
+        "Details": "",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "LV_PROBE_PING",
+        "operation": "Int_Add",
+        "modValue": "2",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": 5,
         "ticksOnActivations": true,
         "useActivationsOfTarget": true,
         "ticksOnEndOfRound": false,
@@ -203,6 +271,7 @@
   ],
   "ComponentTags": {
     "items": [
+      "BLACKLISTED",
       "component_type_stock",
       "component_type_lostech",
       "range_long",
