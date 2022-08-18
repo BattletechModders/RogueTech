@@ -522,7 +522,7 @@
     {
       "tag": "pilot_comstar",
       "quirkName": "Ex-Comstar",
-      "description": "+5%Sight&Sensors. +0.5 MechTech. +10% Pilot Upkeep",
+      "description": "+5% Sight&Sensors. +0.5 MechTech. +10% Pilot Upkeep",
       "effectData": [
         {
           "durationData": {
@@ -3418,7 +3418,7 @@
     {
       "tag": "pilot_inspiringPresence",
       "quirkName": "Inspiring Presence",
-      "description": "+1 Lance Resolve. +1 Lance Initiative. +1 Lance Accuracy. +50% Pilot Upkeep",
+      "description": "+1 Lance Resolve. +1 Lance Initiative. +1 Lance Accuracy. +600% Pilot Upkeep",
       "effectData": [
         {
           "durationData": {
@@ -3515,7 +3515,7 @@
       "quirkEffects": [
         {
           "type": "PilotCostFactor",
-          "modifier": 0.50,
+          "modifier": 6.0,
           "secondaryModifier": 0,
           "affectedIds": []
         }
@@ -6519,14 +6519,92 @@
     },
     {
       "quirkNames": [
+        "Gear_Cockpit_CommandConsole",
+        "Gear_Cockpit_CommandConsole_ArtemisIV",
+        "Gear_Cockpit_CommandConsole_Armored"
+      ],
+      "affinityLevels": [
+        {
+          "missionsRequired": 140,
+          "levelName": "Field Command",
+          "decription": "Command Console provides additional non-stacking +5% Sight&Sensors and +1 Initiative to all Company units",
+          "effectData": [
+	    {
+	      "durationData": {
+		"duration": -1,
+	        "stackLimit": -1
+                },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "CommandConsole_Affinity",
+                "Name": "CommandConsole Affinity",
+                "Details": "Shows their vision when lancemates move",
+                "Icon": "uixSvgIcon_status_ECM-ghost"
+              },
+              "statisticData": {
+                "statName": "ADD_ENCOUNTER_TAG_CommandConsole_Affinity",
+                "operation": "Float_Add",
+                "modValue": "1",
+                "modType": "System.Single"
+              },
+              "nature": "Buff"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "quirkNames": [
         "Gear_General_Advanced_Command_Module",
-        "Gear_General_Advanced_Command_Module_Mk2",
+        "Gear_General_Advanced_Command_Module_Mk2"
+      ],
+      "affinityLevels": [
+        {
+          "missionsRequired": 140,
+          "levelName": "Advanced Field Command",
+          "decription": "Command Module provides additional non-stacking +5% Sight&Sensors, +1 Initiative, +1 Indirect Accuracy and +1 Tactics to all Company units",
+          "effectData": [
+	    {
+	      "durationData": {
+		"duration": -1,
+	        "stackLimit": -1
+                },
+              "targetingData": {
+                "effectTriggerType": "Passive",
+                "effectTargetType": "Creator",
+                "showInTargetPreview": false,
+                "showInStatusPanel": false
+              },
+              "effectType": "StatisticEffect",
+              "Description": {
+                "Id": "CommandModule_Affinity",
+                "Name": "CommandModule Affinity",
+                "Details": "Shows their vision when lancemates move",
+                "Icon": "uixSvgIcon_status_ECM-ghost"
+              },
+              "statisticData": {
+                "statName": "ADD_ENCOUNTER_TAG_CommandModule_Affinity",
+                "operation": "Float_Add",
+                "modValue": "1",
+                "modType": "System.Single"
+              },
+              "nature": "Buff"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "quirkNames": [
         "Gear_C3",
         "Gear_C3i",
         "Weapon_FCS_Command_C3",
-        "Gear_Cockpit_CommandConsole",
-        "Gear_Cockpit_CommandConsole_ArtemisIV",
-        "Gear_Cockpit_CommandConsole_Armored",
         "Gear_Sensors_Improved_Communication",
         "PA_C3",
         "Tank_CommunicationsEquipment_1ton",
@@ -6536,41 +6614,9 @@
       "affinityLevels": [
         {
           "missionsRequired": 140,
-          "levelName": "Field Command",
-          "decription": "+1 Lance Resolve, +1 Lance Initiative",
+          "levelName": "Coordination",
+          "decription": "+1 Lance Resolve",
           "effectData": [
-            {
-              "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-              },
-              "targetingData": {
-                "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
-                "effectTargetType": "AllLanceMates",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-              },
-              "effectType": "StatisticEffect",
-              "Description": {
-                "Id": "StatusEffect-Initiative_Lance",
-                "Name": "Battle Computer",
-                "Details": "Provides + 1 Initiative.",
-                "Icon": "uixSvgIcon_equipment_Cockpit"
-              },
-              "nature": "Buff",
-              "statisticData": {
-                "statName": "SBI_MOD_MISC",
-                "operation": "Int_Add",
-                "modValue": "1",
-                "modType": "System.Int32"
-              }
-            },
             {
               "durationData": {
                 "duration": -1,
@@ -9718,52 +9764,6 @@
     },
     {
       "quirkNames": [
-        "Special_Battle_Computer"
-      ],
-      "affinityLevels": [
-        {
-          "missionsRequired": 40,
-          "levelName": "Coordination",
-          "decription": "+1 Lance Initiative",
-          "effectData": [
-            {
-              "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-              },
-              "targetingData": {
-                "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
-                "effectTargetType": "AllLanceMates",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-              },
-              "effectType": "StatisticEffect",
-              "Description": {
-                "Id": "StatusEffect-Initiative_Lance",
-                "Name": "Battle Computer",
-                "Details": "Provides +2 Initiative.",
-                "Icon": "uixSvgIcon_equipment_Cockpit"
-              },
-              "nature": "Buff",
-              "statisticData": {
-                "statName": "SBI_MOD_MISC",
-                "operation": "Int_Add",
-                "modValue": "1",
-                "modType": "System.Int32"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "quirkNames": [
         "Special_CASE2"
       ],
       "affinityLevels": [
@@ -9872,46 +9872,15 @@
     {
       "quirkNames": [
         "Special_Command_Mech",
+        "Special_Battle_Computer",
         "Gear_Cockpit_Tacticon_B2000_Battle_Computer"
       ],
       "affinityLevels": [
         {
           "missionsRequired": 40,
           "levelName": "High Command",
-          "decription": "+1 Lance Resolve, +1 Lance Initiative",
+          "decription": "+1 Lance Resolve",
           "effectData": [
-            {
-              "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-              },
-              "targetingData": {
-                "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
-                "effectTargetType": "AllLanceMates",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
-                "showInTargetPreview": false,
-                "showInStatusPanel": false
-              },
-              "effectType": "StatisticEffect",
-              "Description": {
-                "Id": "StatusEffect-Initiative_Lance",
-                "Name": "Battle Computer",
-                "Details": "Provides + 1 Initiative.",
-                "Icon": "uixSvgIcon_equipment_Cockpit"
-              },
-              "nature": "Buff",
-              "statisticData": {
-                "statName": "SBI_MOD_MISC",
-                "operation": "Int_Add",
-                "modValue": "1",
-                "modType": "System.Int32"
-              }
-            },
             {
               "durationData": {
                 "duration": -1,
@@ -10980,39 +10949,33 @@
         {
           "missionsRequired": 40,
           "levelName": "Advanced Network",
-          "decription": "+1 Lance Probe Strength",
+          "decription": "All Company units with C3 Master/C3i gear receive non-stacking bonus of +1 Probe.",
           "effectData": [
-            {
-              "durationData": {
-                "duration": -1,
-                "stackLimit": -1
-              },
+	    {
+	      "durationData": {
+		"duration": -1,
+	        "stackLimit": -1
+                },
               "targetingData": {
                 "effectTriggerType": "Passive",
-                "triggerLimit": 0,
-                "extendDurationOnTrigger": 0,
-                "specialRules": "NotSet",
-                "effectTargetType": "AllLanceMates",
-                "range": 0,
-                "forcePathRebuild": false,
-                "forceVisRebuild": false,
+                "effectTargetType": "Creator",
                 "showInTargetPreview": false,
                 "showInStatusPanel": false
               },
               "effectType": "StatisticEffect",
               "Description": {
-                "Id": "QuirkLanceProbe",
-                "Name": "MORALE GENERATION INCREASED",
-                "Details": "Provides a bonus to actions that generate Morale.",
-                "Icon": "uixSvgIcon_equipment_Cockpit"
+                "Id": "CommandConsole_Affinity",
+                "Name": "CommandConsole Affinity",
+                "Details": "Shows their vision when lancemates move",
+                "Icon": "uixSvgIcon_status_ECM-ghost"
               },
-              "nature": "Buff",
               "statisticData": {
-                "statName": "LV_PROBE_CARRIER",
-                "operation": "Int_Add",
+                "statName": "ADD_ENCOUNTER_TAG_Morrigan_Affinity",
+                "operation": "Float_Add",
                 "modValue": "1",
-                "modType": "System.Int32"
-              }
+                "modType": "System.Single"
+              },
+              "nature": "Buff"
             }
           ]
         }
