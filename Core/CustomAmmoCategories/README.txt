@@ -334,7 +334,9 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
 									"MELEE TARGET MOVED"
 
 }
-
+	"AIPathingOptimization": true - enable/disable AI pathing optimization
+	"AIPathingSamplesLimit": 120 - amount of AI move destination positions AI can have if AIPathingOptimization enabled
+	"AIPathingMultithread": true - enable/disable AI pathing multithread (code by Ashakar)
 Weapon definition
 new fields
   "BuildingsDamageModifier":1,    - weapon damage modifier if target is building
