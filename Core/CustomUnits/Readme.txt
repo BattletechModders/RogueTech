@@ -248,7 +248,11 @@ VehicleChassis/Chassis
 	  "MoveClamp": 0.3,       - this value controls inertia of unit. Unit move distance can't be greater [move distance prev. round] + MoveClamp*Speed 
                                 and less [move distance prev. round] - MoveClamp*Speed. Only for AI. For Pathing: true value should be between 0.2 and 0.5. 
                                 For Pathing: true default value 0.2. For others  default 0 (mean not apply at all).
-      "DesignMasks":"true",   - if true chassis will be unaffected to all terrain design masks effects except move cost. Can be altered runtime via CUDesignMasksUnaffected actor's statistic value (boolean)
+      "DesignMasks":"true",   - if true chassis will be unaffected to all terrain design masks effects except move cost. 
+								Can be altered runtime via CUDesignMasksUnaffected actor's statistic value (boolean)
+								Note! when CUDesignMasksUnaffected becomes true unit looses all design mask sticky effects previously applied
+								and its current occupied design mask counted as empty, that is why changing CUDesignMasksUnaffected in design mask is very foolish move
+								CUDesignMasksUnaffected becomes false only design mask effects from current position is applied. 
       "Pathing":"true",       - if true chassis will be unaffected by pathing limitations 
 							(eg can climb vertical surface, other actors collisions, not cause filmsy objects destruction on impact). 
 							If choosed as melee target attacker melee (NOT AP) weapon always miss. Ignore terrain move cost.
