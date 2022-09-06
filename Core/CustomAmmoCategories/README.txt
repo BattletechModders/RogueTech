@@ -12,9 +12,6 @@ AIM_settings.json (for description look at the AIM-README)
 WARNING! Shipped versions of AIM can't be loaded by ModTek and can't be used standalone.
 WARNING! This version of CAC can be used only with ModTek 0.7.6.5+ cause it utilizes dynamic enums for subsystem for AmmoCategory 
 
-click on right side of HUD weapon slot to switch mode (near hit chance)
-click on center of HUD weapon slot to switch ammo (near ammo count)
-ctrl+left click on weapon slot will eject current ammo 
 ctrl+T will toggle attack direction marks visibility (circles under mechs feets)
 NOTE: ammo can't be ejected if mech moved this round
      after ejection mech can't jump and sprint until end of round
@@ -36,6 +33,10 @@ CACIncomingHeatMult - float - multipicator for all incoming heat (weapon attacks
 CACIncomingStabilityMult - float - multipicator for all incoming stability (weapon attacks, landmines, burning terrain, AoE damage)
 CACAPShardsMult - float - multipicator for weapon shards TAC modifier (shardsMod = weapon.APArmorShardsMod() * unit.{CACAPShardsMult}) default 1.0
 CACAPMaxThiknessMult - float - multipicator for weapon max armor thikness TAC modifier (maxThickness = weapon.APMaxArmorThickness() * unit.{CACAPMaxThiknessMult}) default 1.0
+CAC_FlatCritChance - float - multipicator for any crit roll, default 1.0
+CAC_BaseCritChance - float - multipicator for crit roll if armor exposed, default 1.0
+CAC_APCritChance - float - multipicator for through armor crit roll, default 1.0
+CACMinefieldMult - float - multipicator for minefield triggering chance, default 1.0
 
 {
 "debugLog":true, - enable debug log 
@@ -334,6 +335,10 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
 									"MELEE TARGET MOVED"
 
 }
+
+"AIPathingOptimization": true - enable/disable AI pathing optimization
+"AIPathingSamplesLimit": 120 - amount of AI move destination positions AI can have if AIPathingOptimization enabled
+"AIPathingMultithread": false - enable/disable AI pathing multithread (code by Ashakar) assumed to be off cause does not do anything good
 
 Weapon definition
 new fields
