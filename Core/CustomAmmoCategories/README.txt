@@ -340,6 +340,18 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
 "AIPathingSamplesLimit": 120 - amount of AI move destination positions AI can have if AIPathingOptimization enabled
 "AIPathingMultithread": false - enable/disable AI pathing multithread (code by Ashakar) assumed to be off cause does not do anything good
 
+"AIMinefieldAware": true - if true AI will try to avoid significant direct minefield damage
+"AIMinefieldAwareAllMines": false - if true AI will be aware of all minefields not only visible ones
+"AIMinefieldAwareAllMinesCritical": true - if true AI eventually becomes aware of all minefields in critical situation (one of locations can be damaged by mine exposed)
+"AIMinefieldDamageTreshold": 0.1 - greater value makes AI less care about minefields direct damage
+"AIMinefieldIgnoreMoveDistance": 36 - better to leave as is
+"AIMinefieldIgnorePosDelta": 5 - better to leave as is
+
+NOTE! on AI minefields behavior. If on move calculation AI detect all possible positions could inflict unacceptable damage, 
+it will gain minefield immunity for next move invocation, max move distance decrease to 1 hex. 
+
+"ObjectiveBlackBackgroundOnEnter": true - if true objective will gain black non-transparent background on mouse hover
+
 Weapon definition
 new fields
   "BuildingsDamageModifier":1,    - weapon damage modifier if target is building
