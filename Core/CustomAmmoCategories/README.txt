@@ -346,6 +346,25 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
 "AIMinefieldDamageTreshold": 0.1 - greater value makes AI less care about minefields direct damage
 "AIMinefieldIgnoreMoveDistance": 36 - better to leave as is
 "AIMinefieldIgnorePosDelta": 5 - better to leave as is
+  "ObjectiveBlackBackgroundOnEnter": true, - if true objective background becomes black on mouse enter
+  "EnableMinimap": true,                   - if true minimap is enabled
+  "MinimapBurnigTerrainColor": "#FF9700FF", - color for burning terrain on minimap
+  "MinimapBurnedTerrainColor": "#FFFFFFFF", - color for burned forest on minimap
+  "MinimapTerrainColors": {                 - colors for cells of different types on minimap
+    "Water": "#24D3D6FF",
+    "DeepWater": "#2475d6FF",
+    "Forest": "#73a573FF",
+    "Road": "#636363FF",
+    "Rough": "#da8923FF",
+    "Custom": "#6b06a5FF",
+    "Impassable": "#920000FF",
+    "DropshipLandingZone": "#920000FF",
+    "DangerousLocation": "#920000FF",
+    "DropPodLandingZone": "#920000FF",
+    "None": "#877931FF",
+    "DestroyedBuilding": "#877931FF",
+    "UseTerrain": "#877931FF"
+  }
 
 NOTE! on AI minefields behavior. If on move calculation AI detect all possible positions could inflict unacceptable damage, 
 it will gain minefield immunity for next move invocation, max move distance decrease to 1 hex. 

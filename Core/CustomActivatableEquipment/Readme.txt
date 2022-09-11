@@ -317,9 +317,12 @@ AI related mod settings
 			"InjuryOnFail": false - if true pilot will be injured BEFORE damage appliance on fail activation roll
 			"InjuryOnSuccess": false - if true pilot will be injured BEFORE effects appliance on success activation roll (use with caution)
 			"InjuryOnActivationTry": false - if true pilot will be injured before roll check  (use with caution)
+			"InjuryReason": "ComponentExplosion" - injury reason. Possible values NotSet, ActorDestroyed, HeadHit, AmmoExplosion, Knockdown, SideTorsoDestroyed, ComponentExplosion
 			"KillPilotOnFail": false - if true pilot will be killed BEFORE damage appliance on fail activation roll
 			"KillPilotOnSuccess": false - if true pilot will be killed BEFORE effects appliance on success activation roll (use with caution)
 			"KillPilotOnActivationTry": false - if true pilot will be killed before roll check  (use with caution)
+			"KillPilotDamageType": "ComponentExplosion" - kill pilot damage type. Possible values NOT_SET, Unknown, HeadShot, HeadShotMelee, Melee, DFA, DFASelf, Overheat, OverheatSelf, KnockdownSelf, Knockdown, AmmoExplosion, Weapon, Enemy, Combat, Artillery, SideTorso, DropShip, OverrideString, DropPod, ComponentExplosion
+			"CheckPilotStatusFromAttack_reason": "Component fail" - string for CheckPilotStatusFromAttack invocation
 								NOTE: Please keep in mind that all status effects will be canceled on unit destruction. Ejection counts as destruction too.
 								If you want to keep unit statistic after component/mech destruction you have to set "effectsPersistAfterDestruction" : true
 								It is really needed by components altering explosion stats cause do mech destruction they returned to default state which is usually unwanted
