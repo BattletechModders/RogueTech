@@ -43,6 +43,13 @@ AI related mod settings
   "unaffectedByHeadHitStatName": "unaffectedByHeadHit" - unit statistic names if this value is set true at runtime mech will be unaffected by head hits
   "equipmentFlashFailChance": 0.1 if component is active currently and its fail chance more than this value its slot will flash red.
   "C3NetworkEncounterTags": [ "C3_network" ] - if any of this tags exists in unit's encounter tags it will be target of C3 calculations. See C3 implementation section
+  "AdditionalInjuryReasonsTable": { <int>:"<string>" } - you can use this table to override InjuryReason to string evaluation. 
+                                  example: 
+								    settings:
+								      "AdditionalInjuryReasonsTable": { 10: "Component Fail" }
+								    component:
+									  "InjuryReasonInt": 10
+									on fail in floatie message will be "Component Fail" instead of "Error NotSet"
 -----------------------------------------------------------------------------------------------------------------------                              
   NOT NEEDED ANY MORE. KEEPED FOR HISTORICAL REASONS.
   "auraUpdateFix": "Position" - type of fixing updating aura while unit movement.
@@ -318,6 +325,7 @@ AI related mod settings
 			"InjuryOnSuccess": false - if true pilot will be injured BEFORE effects appliance on success activation roll (use with caution)
 			"InjuryOnActivationTry": false - if true pilot will be injured before roll check  (use with caution)
 			"InjuryReason": "ComponentExplosion" - injury reason. Possible values NotSet, ActorDestroyed, HeadHit, AmmoExplosion, Knockdown, SideTorsoDestroyed, ComponentExplosion
+			"InjuryReasonInt": -1, - you can use this value instead of InjuryReason. If greater than 0 this value is used instead.  
 			"KillPilotOnFail": false - if true pilot will be killed BEFORE damage appliance on fail activation roll
 			"KillPilotOnSuccess": false - if true pilot will be killed BEFORE effects appliance on success activation roll (use with caution)
 			"KillPilotOnActivationTry": false - if true pilot will be killed before roll check  (use with caution)
