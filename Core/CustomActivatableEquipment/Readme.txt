@@ -302,7 +302,7 @@ AI related mod settings
         "statusEffectsCollectionActorStat": "EngineExplodeStatusEffects", - unit's statistic name to control from other components
         "statusEffectsCollectionName": "NuclearExplosion", - name for status effect list in statusEffects list
          "statusEffects" : [] - status effect on component explosion
-        NOTE! look in Gear_EngineCore, Gear_EngineType example to realise how component's AoE explosion status effects can be controlled 
+        NOTE! look in Gear_EngineCore, Gear_EngineType example to get an inspiration how component's AoE explosion status effects can be controlled 
          
 			}, 			
 							NOTE: parent unit owner of component is not affected. Only other combatants. So component owner is not have to be destroyed or damaged at all. On other modders concern.
@@ -311,12 +311,22 @@ AI related mod settings
 			"ExplodeOnDamage": false - if true Explode will be activated on component destruction
 			"ActiveByDefault": false - if true component will be activated on combat start with no fail roll
 			"ExplodeOnSuccess": false - if true component will explode on success activation
-			"EjectOnFail": false - if true pilot will eject BEFORE damage applience on fail activation roll
-			"EjectOnSuccess": false - if true pilot will eject BEFORE effects applience on success activation roll
+			"EjectOnFail": false - if true pilot will be ejected BEFORE damage appliance on fail activation roll
+			"EjectOnSuccess": false - if true pilot will be ejected BEFORE effects appliance on success activation roll
 			"EjectOnActivationTry": false - if true pilot will be ejected before roll check
-								NOTE: Please keep in mind that all status efeects will be canseled on unit destruction. Ejection counts as destruction too.
+			"InjuryOnFail": false - if true pilot will be injured BEFORE damage appliance on fail activation roll
+			"InjuryOnSuccess": false - if true pilot will be injured BEFORE effects appliance on success activation roll (use with caution)
+			"InjuryOnActivationTry": false - if true pilot will be injured before roll check  (use with caution)
+			"InjuryReason": "ComponentExplosion" - injury reason. Possible values NotSet, ActorDestroyed, HeadHit, AmmoExplosion, Knockdown, SideTorsoDestroyed, ComponentExplosion
+			"KillPilotOnFail": false - if true pilot will be killed BEFORE damage appliance on fail activation roll
+			"KillPilotOnSuccess": false - if true pilot will be killed BEFORE effects appliance on success activation roll (use with caution)
+			"KillPilotOnActivationTry": false - if true pilot will be killed before roll check  (use with caution)
+			"KillPilotDamageType": "ComponentExplosion" - kill pilot damage type. Possible values NOT_SET, Unknown, HeadShot, HeadShotMelee, Melee, DFA, DFASelf, Overheat, OverheatSelf, KnockdownSelf, Knockdown, AmmoExplosion, Weapon, Enemy, Combat, Artillery, SideTorso, DropShip, OverrideString, DropPod, ComponentExplosion
+			"CheckPilotStatusFromAttack_reason": "Component fail" - string for CheckPilotStatusFromAttack invocation
+								NOTE: Please keep in mind that all status effects will be canceled on unit destruction. Ejection counts as destruction too.
 								If you want to keep unit statistic after component/mech destruction you have to set "effectsPersistAfterDestruction" : true
-								It is really neaded by components altering explosion stats cause do mech destruction they returned to default state which is usualy unwanted
+								It is really needed by components altering explosion stats cause do mech destruction they returned to default state which is usually unwanted
+								NOTE: Injury<..> and KillPilot<..> settings are not applied to squads
       "offlineStatusEffects": [], - effects applying on component switch off. They removed if component will be switched on. If component have no ActiveByDefault - applying on combat start
 			"AutoActivateOnIncomingHeat":0, - if > 0 component will be activated on incoming heat
 			"incomingHeatActivationType": "Threshhold", - type of activation, controls how AutoActivateOnIncomingHeat will be processed 
