@@ -103,6 +103,8 @@ AI related mod settings
 										  will be targeted. Eg. if FailDamageLocations array contains three locations three crit roll will be preformed
 										  But if FailCritComponents is true, fail results only one crit roll. It will list all components from FailCritLocations
 										  and than choose one to crit.
+			"FailDamageToInstalledLocation": false - if true location component is installed will be added to FailDamageLocations/FailDamageVehicleLocations
+			"FailCritToInstalledLocation": false - if true location component is installed will be added to FailCritLocations/FailCritVehicleLocations
 			"FailCritExcludeComponentsTags" : [], - if component have one of tag from this list it will be excluded from fail damage crit roll both (FailCrit and FailCritComponents) methods
 			"FailCritOnlyComponentsTags" : [], - if not empty only component having at least one tag from this list will be used to drit roll crit roll both (FailCrit and FailCritComponents) methods
 			"MechTonnageWeightMult" : 20 - installed chassis tonnage restriction multiplier. Tonnage restriction from (Component.Tonnage-1)*(MechTonnageWeightMult)+1 to (Component.Tonnage)*(MechTonnageWeightMult)
