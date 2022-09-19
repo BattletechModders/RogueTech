@@ -37,6 +37,8 @@ CAC_FlatCritChance - float - multipicator for any crit roll, default 1.0
 CAC_BaseCritChance - float - multipicator for crit roll if armor exposed, default 1.0
 CAC_APCritChance - float - multipicator for through armor crit roll, default 1.0
 CACMinefieldMult - float - multipicator for minefield triggering chance, default 1.0
+MINIMAP_JAMMED - float if greater than 0 minimap for this unit will be random gray pixels instead of real minimap
+MINIMAP_UNITS_JAMMED - float if greater than 0 enemy units will not be shown on minimap while this unit is selected
 
 {
 "debugLog":true, - enable debug log 
@@ -365,6 +367,12 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
     "DestroyedBuilding": "#877931FF",
     "UseTerrain": "#877931FF"
   }
+ "PlayerAlwaysHit": false - if true player units always hit
+ "StatisticOnResultScreenEnabled":true - added some additional statistic to result screen. Hover mouse over KILLS text under unit
+ "StatisticOnResultScreenRealIcons": false - replace icons for killed units on units results screen to their real icons if any 
+ "StatisticOnResultScreenRealIconsScale": 1.5 - scale for real icons
+ "StatisticOnResultScreenTurretSprite": "turret_unit_result_stat" - default icon for turret in killed statistic
+ "StatisticOnResultScreenBattleArmorSprite": "battle_armor_unit_result_stat" - default icon for squads in killed statistic
 
 NOTE! on AI minefields behavior. If on move calculation AI detect all possible positions could inflict unacceptable damage, 
 it will gain minefield immunity for next move invocation, max move distance decrease to 1 hex. 
