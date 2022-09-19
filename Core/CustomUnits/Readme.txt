@@ -19,6 +19,14 @@ main settings in mod.json
 	"ConvoyRouteBeaconVFX":"vfxPrfPrtl_artillerySmokeSignal_loop", - VFX for convoy route points
 	"ConvoyRouteBeaconVFXScale":{"x":1,"y":1,"z":1}, - VFX scale for convoy route points
 	"DeployManual": true, - allowing manual deploy in random contract.
+	"DeployManualSpawnProtection": true - if true spawn protection will be used on manual deploy. How is it working:
+	                                      on player deploy all units on battle fields gain spawn protection flag
+										  this flag is been removed on unit activation end (reserve does not affects this flag).
+										  if either attacker either target have this flag attack is always miss
+										  So you have deployed your units, AI takes turn - they can't hit you cause both you and AI have flag
+										  AI got its turn - yours turn now. Even if AI units choose to act (not reserve) and loose protection flag,
+										  you can hit cause your units have flag but you can move. When you've done AI units chooses to reserve act 
+										  and still can't hit cause they have flag. Next round both yours and AI units loose protection flag and can shoot normally
 	"AskForDeployManual": true - if true and manual deployment is allowed will ask if player wants to set deploy position. 
 	                             if false and manual deployment is allowed - deploy will be manual. 
 	"ManualDeployForbidContractTypes": [] - list of contract types names, for listed contract types manual deploy will be forbidden
