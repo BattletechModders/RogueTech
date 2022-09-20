@@ -90,6 +90,7 @@ AI related mod settings
 			"FailISDamage":10,  - Damage to inner structure on fail
 			"FailCrit":true, - if true fail inflicts critical rolls.
 			"SelfCrit": false - if true make crit hit to self.
+			"FailCheckOnActivationEnd": false - if true fail check will be performed on activation end instead of move end
 			"FailDamageLocations":["LeftLeg","RightLeg"], - list of locations to damage. 
 			                              Available values Head,LeftArm, LeftTorso, CenterTorso, RightTorso,RightArm,LeftLeg,RightLeg. ONLY this values.
 			"FailDamageVehicleLocations":["Front","Left"], - list of locations to damage. Used if component installed on vehicle

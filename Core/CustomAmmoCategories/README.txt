@@ -42,6 +42,7 @@ MINIMAP_UNITS_JAMMED - float if greater than 0 enemy units will not be shown on 
 
 {
 "debugLog":true, - enable debug log 
+"SpawnProtectionAffectsAOE": true, - if true spawn protection also prevent AoE weapon damage.
 "ImprovedBallisticByDefault": true - Default value for ImprovedBallistic flag if not set explicitly in weapon definition. Default true.
 "ShowEvasiveAsNumber": true, - if true near evasive pips bar its amount will be showed as number
 "EvasiveNumberFontSize" : 24 - font size for evasive pips count
