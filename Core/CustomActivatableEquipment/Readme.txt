@@ -90,6 +90,7 @@ AI related mod settings
 			"FailISDamage":10,  - Damage to inner structure on fail
 			"FailCrit":true, - if true fail inflicts critical rolls.
 			"SelfCrit": false - if true make crit hit to self.
+			"FailCheckOnActivationEnd": false - if true fail check will be performed on activation end instead of move end
 			"FailDamageLocations":["LeftLeg","RightLeg"], - list of locations to damage. 
 			                              Available values Head,LeftArm, LeftTorso, CenterTorso, RightTorso,RightArm,LeftLeg,RightLeg. ONLY this values.
 			"FailDamageVehicleLocations":["Front","Left"], - list of locations to damage. Used if component installed on vehicle
@@ -103,6 +104,8 @@ AI related mod settings
 										  will be targeted. Eg. if FailDamageLocations array contains three locations three crit roll will be preformed
 										  But if FailCritComponents is true, fail results only one crit roll. It will list all components from FailCritLocations
 										  and than choose one to crit.
+			"FailDamageToInstalledLocation": false - if true location component is installed will be added to FailDamageLocations/FailDamageVehicleLocations
+			"FailCritToInstalledLocation": false - if true location component is installed will be added to FailCritLocations/FailCritVehicleLocations
 			"FailCritExcludeComponentsTags" : [], - if component have one of tag from this list it will be excluded from fail damage crit roll both (FailCrit and FailCritComponents) methods
 			"FailCritOnlyComponentsTags" : [], - if not empty only component having at least one tag from this list will be used to drit roll crit roll both (FailCrit and FailCritComponents) methods
 			"MechTonnageWeightMult" : 20 - installed chassis tonnage restriction multiplier. Tonnage restriction from (Component.Tonnage-1)*(MechTonnageWeightMult)+1 to (Component.Tonnage)*(MechTonnageWeightMult)
