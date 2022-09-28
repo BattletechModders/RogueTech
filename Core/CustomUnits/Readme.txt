@@ -25,6 +25,12 @@ main settings in mod.json
 	"IntelCompanyStatShowMood": "Intel_Show_Mood" - if this boolean company stat is true contract details accessible from 
 	                                                      lance configuration screen will show contract mood even if IntelShowMood is false
 	"IntelShowMood": false - if true contract details accessible from lance configuration screen will show contract mood
+	"timerObjectiveChange": {  - for certain contract types game logic timers can be altered. Timers eg. reinforcements arrival etc.
+		"DefendBase":{         - contract type name
+			"autoDeployAdvice":1,   - timer change for auto deploy
+			"manualDeployAdvice":2  - timer change for manual deploy
+		}
+	}
 	"DeployManual": true, - allowing manual deploy in random contract.
 	"DeployManualSpawnProtection": true - if true spawn protection will be used on manual deploy. How is it working:
 	                                      on player deploy all units on battle fields gain spawn protection flag
