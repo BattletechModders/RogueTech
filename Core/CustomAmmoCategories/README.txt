@@ -12,9 +12,6 @@ AIM_settings.json (for description look at the AIM-README)
 WARNING! Shipped versions of AIM can't be loaded by ModTek and can't be used standalone.
 WARNING! This version of CAC can be used only with ModTek 0.7.6.5+ cause it utilizes dynamic enums for subsystem for AmmoCategory 
 
-click on right side of HUD weapon slot to switch mode (near hit chance)
-click on center of HUD weapon slot to switch ammo (near ammo count)
-ctrl+left click on weapon slot will eject current ammo 
 ctrl+T will toggle attack direction marks visibility (circles under mechs feets)
 NOTE: ammo can't be ejected if mech moved this round
      after ejection mech can't jump and sprint until end of round
@@ -36,9 +33,16 @@ CACIncomingHeatMult - float - multipicator for all incoming heat (weapon attacks
 CACIncomingStabilityMult - float - multipicator for all incoming stability (weapon attacks, landmines, burning terrain, AoE damage)
 CACAPShardsMult - float - multipicator for weapon shards TAC modifier (shardsMod = weapon.APArmorShardsMod() * unit.{CACAPShardsMult}) default 1.0
 CACAPMaxThiknessMult - float - multipicator for weapon max armor thikness TAC modifier (maxThickness = weapon.APMaxArmorThickness() * unit.{CACAPMaxThiknessMult}) default 1.0
+CAC_FlatCritChance - float - multipicator for any crit roll, default 1.0
+CAC_BaseCritChance - float - multipicator for crit roll if armor exposed, default 1.0
+CAC_APCritChance - float - multipicator for through armor crit roll, default 1.0
+CACMinefieldMult - float - multipicator for minefield triggering chance, default 1.0
+MINIMAP_JAMMED - float if greater than 0 minimap for this unit will be random gray pixels instead of real minimap
+MINIMAP_UNITS_JAMMED - float if greater than 0 enemy units will not be shown on minimap while this unit is selected
 
 {
 "debugLog":true, - enable debug log 
+"SpawnProtectionAffectsAOE": true, - if true spawn protection also prevent AoE weapon damage.
 "ImprovedBallisticByDefault": true - Default value for ImprovedBallistic flag if not set explicitly in weapon definition. Default true.
 "ShowEvasiveAsNumber": true, - if true near evasive pips bar its amount will be showed as number
 "EvasiveNumberFontSize" : 24 - font size for evasive pips count
@@ -334,9 +338,48 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
 									"MELEE TARGET MOVED"
 
 }
-	"AIPathingOptimization": true - enable/disable AI pathing optimization
-	"AIPathingSamplesLimit": 120 - amount of AI move destination positions AI can have if AIPathingOptimization enabled
-	"AIPathingMultithread": true - enable/disable AI pathing multithread (code by Ashakar)
+
+"AIPathingOptimization": true - enable/disable AI pathing optimization
+"AIPathingSamplesLimit": 120 - amount of AI move destination positions AI can have if AIPathingOptimization enabled
+"AIPathingMultithread": false - enable/disable AI pathing multithread (code by Ashakar) assumed to be off cause does not do anything good
+
+"AIMinefieldAware": true - if true AI will try to avoid significant direct minefield damage
+"AIMinefieldAwareAllMines": false - if true AI will be aware of all minefields not only visible ones
+"AIMinefieldAwareAllMinesCritical": true - if true AI eventually becomes aware of all minefields in critical situation (one of locations can be damaged by mine exposed)
+"AIMinefieldDamageTreshold": 0.1 - greater value makes AI less care about minefields direct damage
+"AIMinefieldIgnoreMoveDistance": 36 - better to leave as is
+"AIMinefieldIgnorePosDelta": 5 - better to leave as is
+  "ObjectiveBlackBackgroundOnEnter": true, - if true objective background becomes black on mouse enter
+  "EnableMinimap": true,                   - if true minimap is enabled
+  "MinimapBurnigTerrainColor": "#FF9700FF", - color for burning terrain on minimap
+  "MinimapBurnedTerrainColor": "#FFFFFFFF", - color for burned forest on minimap
+  "MinimapTerrainColors": {                 - colors for cells of different types on minimap
+    "Water": "#24D3D6FF",
+    "DeepWater": "#2475d6FF",
+    "Forest": "#73a573FF",
+    "Road": "#636363FF",
+    "Rough": "#da8923FF",
+    "Custom": "#6b06a5FF",
+    "Impassable": "#920000FF",
+    "DropshipLandingZone": "#920000FF",
+    "DangerousLocation": "#920000FF",
+    "DropPodLandingZone": "#920000FF",
+    "None": "#877931FF",
+    "DestroyedBuilding": "#877931FF",
+    "UseTerrain": "#877931FF"
+  }
+ "PlayerAlwaysHit": false - if true player units always hit
+ "StatisticOnResultScreenEnabled":true - added some additional statistic to result screen. Hover mouse over KILLS text under unit
+ "StatisticOnResultScreenRealIcons": false - replace icons for killed units on units results screen to their real icons if any 
+ "StatisticOnResultScreenRealIconsScale": 1.5 - scale for real icons
+ "StatisticOnResultScreenTurretSprite": "turret_unit_result_stat" - default icon for turret in killed statistic
+ "StatisticOnResultScreenBattleArmorSprite": "battle_armor_unit_result_stat" - default icon for squads in killed statistic
+
+NOTE! on AI minefields behavior. If on move calculation AI detect all possible positions could inflict unacceptable damage, 
+it will gain minefield immunity for next move invocation, max move distance decrease to 1 hex. 
+
+"ObjectiveBlackBackgroundOnEnter": true - if true objective will gain black non-transparent background on mouse hover
+
 Weapon definition
 new fields
   "BuildingsDamageModifier":1,    - weapon damage modifier if target is building

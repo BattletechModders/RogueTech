@@ -18,7 +18,29 @@ main settings in mod.json
 												or Unaffected.AllowRotateWhileJump
 	"ConvoyRouteBeaconVFX":"vfxPrfPrtl_artillerySmokeSignal_loop", - VFX for convoy route points
 	"ConvoyRouteBeaconVFXScale":{"x":1,"y":1,"z":1}, - VFX scale for convoy route points
+	"IntelShowMiniMap": false - if true contract details accessible from lance configuration screen will show minimap
+	"IntelShowMood": false - if true contract details accessible from lance configuration screen will show contract mood
+	"IntelCompanyStatShowMiniMap": "Intel_Show_Minimap" - if this boolean company stat is true contract details accessible from 
+	                                                      lance configuration screen will show minimap even if IntelShowMiniMap is false
+	"IntelCompanyStatShowMood": "Intel_Show_Mood" - if this boolean company stat is true contract details accessible from 
+	                                                      lance configuration screen will show contract mood even if IntelShowMood is false
+	"IntelShowMood": false - if true contract details accessible from lance configuration screen will show contract mood
+	"timerObjectiveChange": {  - for certain contract types game logic timers can be altered. Timers eg. reinforcements arrival etc.
+		"DefendBase":{         - contract type name
+			"autoDeployAdvice":1,   - timer change for auto deploy
+			"manualDeployAdvice":2  - timer change for manual deploy
+		}
+	}
 	"DeployManual": true, - allowing manual deploy in random contract.
+	"DeployManualSpawnProtection": true - if true spawn protection will be used on manual deploy. How is it working:
+	                                      on player deploy all units on battle fields gain spawn protection flag
+										  this flag is been removed on unit activation end (reserve does not affects this flag).
+										  if either attacker either target have this flag attack is always miss
+										  So you have deployed your units, AI takes turn - they can't hit you cause both you and AI have flag
+										  AI got its turn - yours turn now. Even if AI units choose to act (not reserve) and loose protection flag,
+										  you can't hit cause your units have flag but you can move. When you've done AI units chooses to reserve act 
+										  and still can't hit cause they have flag. Next round both yours and AI units loose protection flag and can shoot normally
+	"DeployAutoSpawnProtection": true - if true on first round begin all units gain spawn protection 
 	"AskForDeployManual": true - if true and manual deployment is allowed will ask if player wants to set deploy position. 
 	                             if false and manual deployment is allowed - deploy will be manual. 
 	"ManualDeployForbidContractTypes": [] - list of contract types names, for listed contract types manual deploy will be forbidden
@@ -248,7 +270,11 @@ VehicleChassis/Chassis
 	  "MoveClamp": 0.3,       - this value controls inertia of unit. Unit move distance can't be greater [move distance prev. round] + MoveClamp*Speed 
                                 and less [move distance prev. round] - MoveClamp*Speed. Only for AI. For Pathing: true value should be between 0.2 and 0.5. 
                                 For Pathing: true default value 0.2. For others  default 0 (mean not apply at all).
-      "DesignMasks":"true",   - if true chassis will be unaffected to all terrain design masks effects except move cost. Can be altered runtime via CUDesignMasksUnaffected actor's statistic value (boolean)
+      "DesignMasks":"true",   - if true chassis will be unaffected to all terrain design masks effects except move cost. 
+								Can be altered runtime via CUDesignMasksUnaffected actor's statistic value (boolean)
+								Note! when CUDesignMasksUnaffected becomes true unit looses all design mask sticky effects previously applied
+								and its current occupied design mask counted as empty, that is why changing CUDesignMasksUnaffected in design mask is very foolish move
+								CUDesignMasksUnaffected becomes false only design mask effects from current position is applied. 
       "Pathing":"true",       - if true chassis will be unaffected by pathing limitations 
 							(eg can climb vertical surface, other actors collisions, not cause filmsy objects destruction on impact). 
 							If choosed as melee target attacker melee (NOT AP) weapon always miss. Ignore terrain move cost.
