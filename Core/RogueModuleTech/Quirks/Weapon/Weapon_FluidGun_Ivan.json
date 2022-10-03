@@ -11,8 +11,7 @@
         "WordsWords: Fires All The Debuffs - Acid; Inferno; Oil; Paint",
         "WpnAccuracy: +1",
         "PipsIgnored: 1",
-        "AccuracyUnit: Battle Armor",
-        "AccuracyUnit2: +10",
+        "AccuracyUnitBoth: +5, Battle Armor & Protomech",
         "NoAA"
       ]
     },
@@ -49,15 +48,16 @@
   "AmmoCategory": "ChemMediumInternal",
   "StartingAmmoCapacity": 20,
   "HeatGenerated": 0,
-  "Damage": 20,
+  "Damage": 15,
   "OverheatedDamageMultiplier": 0,
   "EvasiveDamageMultiplier": 0,
   "EvasivePipsIgnored": 1,
   "DamageVariance": 0,
-  "HeatDamage": 10,
+  "HeatDamage": 5,
   "AccuracyModifier": -1,
   "ChassisTagsAccuracyModifiers": {
-    "unit_powerarmor": -10
+    "unit_powerarmor": -5,
+    "unit_protomech": -5
   },
   "CriticalChanceMultiplier": 1,
   "APArmorShardsMod": 0,
@@ -69,10 +69,10 @@
   "ShotsWhenFired": 1,
   "ProjectilesPerShot": 1,
   "AttackRecoil": 0,
-  "Instability": 10,
+  "Instability": 5,
   "FireTerrainChance": 1,
-  "ArmorDamageModifier": 1.5,
-  "ISDamageModifier": 0.5,
+  "ArmorDamageModifier": 1.25,
+  "ISDamageModifier": 0.75,
   "CantHitUnaffecedByPathing": true,
   "WeaponEffectID": "WeaponEffect-Weapon_Flamer",
   "Description": {
@@ -101,185 +101,42 @@
   "statusEffects": [
     {
       "durationData": {
-        "duration": 1,
+        "duration": 3,
         "ticksOnActivations": true,
         "useActivationsOfTarget": true,
-        "stackLimit": 45
-      },
-      "targetingData": {
-        "effectTriggerType": "OnHit",
-        "triggerLimit": 0,
-        "extendDurationOnTrigger": 0,
-        "specialRules": "NotSet",
-        "effectTargetType": "NotSet",
-        "range": 0,
-        "forcePathRebuild": false,
-        "forceVisRebuild": false,
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "HeatDamageTakenSoftCapMultiplier",
-        "Name": "Heat SoftCap 3%",
-        "Details": "Reduce Heat Damage by 1%",
-        "Icon": "uixSvgIcon_equipment_ThermalExchanger"
-      },
-      "nature": "Buff",
-      "statisticData": {
-        "statName": "CACIncomingHeatMult",
-        "operation": "Float_Multiply",
-        "modValue": "1.22",
-        "modType": "System.Single"
-      }
-    },
-    {
-      "durationData": {
-        "duration": 2,
-        "ticksOnActivations": true,
-        "useActivationsOfTarget": true,
-        "ticksOnEndOfRound": false,
-        "ticksOnMovements": false,
-        "stackLimit": -1,
-        "clearedWhenAttacked": false
+        "stackLimit": 3
       },
       "targetingData": {
         "effectTriggerType": "OnHit",
         "triggerLimit": 0,
         "extendDurationOnTrigger": 2,
-        "specialRules": "NotSet",
-        "effectTargetType": "NotSet",
         "range": 0,
-        "forcePathRebuild": false,
-        "forceVisRebuild": false,
         "showInTargetPreview": true,
         "showInStatusPanel": true
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "AbilityDef_PaintSensorImpair",
-        "Name": "OBSCURING PAINT",
-        "Details": "This unit's vision is obscured by paint. Its base vision range is reduced by 50% and it suffers +2 Difficulty to all attacks until its next activation.",
-        "Icon": "uixSvgIcon_status_sensorsImpaired"
-      },
-      "nature": "Debuff",
-      "statisticData": {
-        "appliesEachTick": false,
-        "effectsPersistAfterDestruction": false,
-        "statName": "AccuracyModifier",
-        "operation": "Float_Add",
-        "modValue": "2.0",
-        "modType": "System.Single",
-        "additionalRules": "NotSet",
-        "targetCollection": "Weapon",
-        "targetWeaponCategory": "NotSet",
-        "targetWeaponType": "NotSet",
-        "targetAmmoCategory": "NotSet",
-        "targetWeaponSubType": "NotSet"
-      },
-      "tagData": null,
-      "floatieData": null,
-      "actorBurningData": null,
-      "vfxData": null,
-      "instantModData": null,
-      "poorlyMaintainedEffectData": null
-    },
-    {
-      "durationData": {
-        "duration": 2,
-        "ticksOnActivations": true,
-        "useActivationsOfTarget": true,
-        "ticksOnEndOfRound": false,
-        "ticksOnMovements": false,
-        "stackLimit": -1,
-        "clearedWhenAttacked": false
-      },
-      "targetingData": {
-        "effectTriggerType": "OnHit",
-        "triggerLimit": 0,
-        "extendDurationOnTrigger": 0,
-        "specialRules": "NotSet",
-        "effectTargetType": "NotSet",
-        "range": 0,
-        "forcePathRebuild": false,
-        "forceVisRebuild": false,
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "Effect_PaintVisionReduced",
-        "Name": "BLINDED",
-        "Details": "Reduces spotting distance by 250m",
-        "Icon": "uixSvgIcon_status_sensorsImpaired"
-      },
-      "nature": "Debuff",
-      "statisticData": {
-        "appliesEachTick": false,
-        "effectsPersistAfterDestruction": false,
-        "statName": "SpotterDistanceAbsolute",
-        "operation": "Float_Multiply",
-        "modValue": "0.5",
-        "modType": "System.Single",
-        "additionalRules": "NotSet",
-        "targetCollection": "NotSet",
-        "targetWeaponCategory": "NotSet",
-        "targetWeaponType": "NotSet",
-        "targetAmmoCategory": "NotSet",
-        "targetWeaponSubType": "NotSet"
-      },
-      "tagData": null,
-      "floatieData": null,
-      "actorBurningData": null,
-      "vfxData": null,
-      "instantModData": null,
-      "poorlyMaintainedEffectData": null
-    },
-    {
-      "durationData": {
-        "duration": 2,
-        "ticksOnActivations": true,
-        "useActivationsOfTarget": true,
-        "ticksOnEndOfRound": false,
-        "ticksOnMovements": false,
-        "stackLimit": 1,
-        "clearedWhenAttacked": false
-      },
-      "targetingData": {
-        "effectTriggerType": "OnHit",
-        "triggerLimit": 0,
-        "extendDurationOnTrigger": 2,
-        "specialRules": "NotSet",
-        "effectTargetType": "NotSet",
-        "range": 0,
-        "forcePathRebuild": false,
-        "forceVisRebuild": false,
-        "showInTargetPreview": true,
-        "showInStatusPanel": true
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "Effect_AcidDMG",
+        "Id": "Effect_IvanFluid1",
         "Name": "Acid",
-        "Details": "This unit is coated with corrosive Acid. It will take 30% increased Damage.",
+        "Details": "This unit is coated with corrosive Acid. It will take 10% increased Damage.",
         "Icon": "uixSvgIcon_biome_Heated"
       },
       "statisticData": {
         "statName": "DamageReductionMultiplierAll",
         "operation": "Float_Add",
-        "modValue": "0.3",
+        "modValue": "0.1",
         "modType": "System.Single"
       },
       "nature": "Debuff"
     },
     {
       "durationData": {
-        "duration": 2,
+        "duration": 3,
         "ticksOnActivations": true,
         "useActivationsOfTarget": true,
         "ticksOnEndOfRound": false,
         "ticksOnMovements": false,
-        "stackLimit": -1,
+        "stackLimit": 3,
         "clearedWhenAttacked": false
       },
       "targetingData": {
@@ -289,14 +146,12 @@
         "specialRules": "NotSet",
         "effectTargetType": "NotSet",
         "range": 0,
-        "forcePathRebuild": false,
-        "forceVisRebuild": false,
         "showInTargetPreview": true,
         "showInStatusPanel": true
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "Effect_InfernoHeat",
+        "Id": "Effect_IvanFluid2",
         "Name": "INFERNO",
         "Details": "This unit is coated with burning chemicals. It will gain 15 heat on its next activation.",
         "Icon": "uixSvgIcon_biome_Heated"
@@ -304,75 +159,85 @@
       "statisticData": {
         "statName": "HeatSinkCapacity",
         "operation": "Int_Add",
-        "modValue": "-15",
+        "modValue": "-10",
         "modType": "System.Int32"
       },
       "nature": "Debuff"
     },
     {
       "durationData": {
-        "duration": 2,
+        "duration": 3,
         "ticksOnActivations": true,
         "useActivationsOfTarget": true,
-        "ticksOnEndOfRound": false,
-        "ticksOnMovements": false,
-        "stackLimit": -1,
-        "clearedWhenAttacked": false
+        "stackLimit": 3
       },
       "targetingData": {
         "effectTriggerType": "OnHit",
-        "triggerLimit": 0,
         "extendDurationOnTrigger": 2,
-        "specialRules": "NotSet",
-        "effectTargetType": "NotSet",
-        "range": 0,
-        "forcePathRebuild": false,
-        "forceVisRebuild": false,
-        "showInTargetPreview": false,
+        "showInTargetPreview": true,
         "showInStatusPanel": true
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "Effect_OilInstability",
+        "Id": "Effect_IvanFluid3",
+        "Name": "Flammable Oil",
+        "Details": "Flammable Oil increases Incoming Heat Damage +12.5%.",
+        "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "CACIncomingHeatMult",
+        "operation": "Float_Multiply",
+        "modValue": "1.125",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": 3,
+        "ticksOnActivations": true,
+        "useActivationsOfTarget": true,
+        "stackLimit": 3
+      },
+      "targetingData": {
+        "effectTriggerType": "OnHit",
+        "extendDurationOnTrigger": 2,
+        "showInTargetPreview": true,
+        "showInStatusPanel": true
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Effect_IvanFluid4",
         "Name": "OILSLICK",
-        "Details": "This unit is coated with oil. It will take 200% stability damage from all attacks until its next activation.",
+        "Details": "This unit is coated with oil. It will take +25% stability damage from all attacks until its next activation.",
         "Icon": "uixSvgIcon_designMask_rough"
       },
       "statisticData": {
         "statName": "ReceivedInstabilityMultiplier",
         "operation": "Float_Multiply",
-        "modValue": "1.5",
+        "modValue": "1.25",
         "modType": "System.Single"
       },
       "nature": "Debuff"
     },
     {
       "durationData": {
-        "duration": 2,
+        "duration": 3,
         "ticksOnActivations": true,
         "useActivationsOfTarget": true,
-        "ticksOnEndOfRound": false,
-        "ticksOnMovements": false,
-        "stackLimit": 1,
-        "clearedWhenAttacked": false
+        "stackLimit": 3
       },
       "targetingData": {
         "effectTriggerType": "OnHit",
-        "triggerLimit": 0,
         "extendDurationOnTrigger": 2,
-        "specialRules": "NotSet",
-        "effectTargetType": "NotSet",
-        "range": 0,
-        "forcePathRebuild": false,
-        "forceVisRebuild": false,
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
+        "showInTargetPreview": true,
+        "showInStatusPanel": true
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "OilMove-Effect2",
+        "Id": "Effect_IvanFluid5",
         "Name": "Walk Impaired",
-        "Details": "The Mech's Walkspeed is impaired by 50%.",
+        "Details": "The Mech's Walkspeed is impaired by 25%.",
         "Icon": "uixSvgIcon_status_sensorsImpaired"
       },
       "nature": "Debuff",
@@ -381,21 +246,98 @@
         "effectsPersistAfterDestruction": false,
         "statName": "WalkSpeed",
         "operation": "Float_Multiply",
-        "modValue": "0.5",
-        "modType": "System.Single",
-        "additionalRules": "NotSet",
-        "targetCollection": "NotSet",
-        "targetWeaponCategory": "NotSet",
-        "targetWeaponType": "NotSet",
-        "targetAmmoCategory": "NotSet",
-        "targetWeaponSubType": "NotSet"
+        "modValue": "0.75",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": 3,
+        "ticksOnActivations": true,
+        "useActivationsOfTarget": true,
+        "stackLimit": 3
       },
-      "tagData": null,
-      "floatieData": null,
-      "actorBurningData": null,
-      "vfxData": null,
-      "instantModData": null,
-      "poorlyMaintainedEffectData": null
+      "targetingData": {
+        "effectTriggerType": "OnHit",
+        "extendDurationOnTrigger": 2,
+        "showInTargetPreview": true,
+        "showInStatusPanel": true
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Effect_IvanFluid6",
+        "Name": "OBSCURING PAINT",
+        "Details": "This is covered with fluorescent paint! Its vision range is -80%, it has -2 Accuracy and is +20% more visible. 3 Turn duration.",
+        "Icon": "uixSvgIcon_status_sensorsImpaired"
+      },
+      "nature": "Debuff",
+      "statisticData": {
+        "appliesEachTick": false,
+        "effectsPersistAfterDestruction": false,
+        "statName": "AccuracyModifier",
+        "operation": "Float_Add",
+        "modValue": "1.0",
+        "modType": "System.Single",
+        "targetCollection": "Weapon"
+      }
+    },
+    {
+      "durationData": {
+        "duration": 3,
+        "ticksOnActivations": true,
+        "useActivationsOfTarget": true,
+        "stackLimit": 3
+      },
+      "targetingData": {
+        "effectTriggerType": "OnHit",
+        "extendDurationOnTrigger": 2,
+        "showInTargetPreview": true,
+        "showInStatusPanel": true
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Effect_IvanFluid7",
+        "Name": "BLINDED",
+        "Details": "Reduces spotting distance by 40%",
+        "Icon": "uixSvgIcon_status_sensorsImpaired"
+      },
+      "nature": "Debuff",
+      "statisticData": {
+        "appliesEachTick": false,
+        "effectsPersistAfterDestruction": false,
+        "statName": "SpotterDistanceAbsolute",
+        "operation": "Float_Multiply",
+        "modValue": "0.6",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": 3,
+        "ticksOnActivations": true,
+        "useActivationsOfTarget": true,
+        "stackLimit": 3
+      },
+      "targetingData": {
+        "effectTriggerType": "OnHit",
+        "extendDurationOnTrigger": 2,
+        "showInTargetPreview": true,
+        "showInStatusPanel": true
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Effect_IvanFluid8",
+        "Name": "Florescent Paint",
+        "Details": "This unit is covered in high visibility paint",
+        "Icon": "uixSvgIcon_artillery"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "SpottingVisibilityMultiplier",
+        "operation": "Float_Multiply",
+        "modValue": "1.25",
+        "modType": "System.Single"
+      }
     }
   ],
   "ComponentTags": {
