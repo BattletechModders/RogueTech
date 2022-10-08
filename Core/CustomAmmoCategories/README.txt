@@ -42,6 +42,7 @@ MINIMAP_UNITS_JAMMED - float if greater than 0 enemy units will not be shown on 
 
 {
 "debugLog":true, - enable debug log 
+"SpawnProtectionAffectsCanFire": true - if true weapon can't fire if its owner under spawn protection
 "SpawnProtectionAffectsBurningTerrain": true, - if true spawn protection also prevent burning terrain of any kind.
 "SpawnProtectionAffectsDesignMasks": true, - if true spawn protection also prevent weapon from changing terrain.
 "SpawnProtectionAffectsAOE": true, - if true spawn protection also prevent AoE weapon damage.
