@@ -6,13 +6,13 @@ Since BattleTech 1.7, HBS introduced their own mod-loader based on an older ModT
 
 # Installing ModTek 3.0.0 or later
 
-Installation of ModTek is straightforward for windows. You download the `ModTek.zip` file and extract it.
+Installation of ModTek is straightforward for Windows. You download the `ModTek.zip` file and extract it to the directory of the game.
 
 1. Download the [latest stable release from github](https://github.com/BattletechModders/ModTek/releases).
-1. Extract the contents of the zip to `BATTLETECH\` so that the `Mods\` folder in the zip appears as `BATTLETECH\Mods\` and the [UnityDoorstop](https://github.com/NeighTools/UnityDoorstop) files (winhttp.dll etc..) appear directly under `BATTLETECH\`.
+1. Extract the contents of the zip to `BATTLETECH/` so that the `Mods/` folder in the zip appears as `BATTLETECH/Mods/` and the [UnityDoorstop](https://github.com/NeighTools/UnityDoorstop) files (winhttp.dll etc..) appear directly under `BATTLETECH/`.
 
 > **Note**
-> `BATTLETECH\` refers to the installation folder where `BattleTech.exe` can be found.
+> `BATTLETECH/` refers to the installation folder where `BattleTech.exe` can be found.
 
 On game startup, ModTek decorates the version number found in the bottom left corner of the main menu with `/W MODTEK`. If you don't see this something has gone wrong.
 
@@ -20,35 +20,41 @@ On game startup, ModTek decorates the version number found in the bottom left co
 
 The zip contains the UnityDoorstop script `run.sh` and libraries to run the game with.
 
-### Wine
+### Steam on Linux
 
-Using wine is also supported, make sure to let wine load up `winhttp.dll` by setting override to `native, builtin`.
+> **Note**
+> These instructions are based on the [Steam Guide for BepInEx](https://docs.bepinex.dev/master/articles/advanced/steam_interop.html).
+
+Instead of running the `run.sh` script directly, you need to ask Steam to run it for you.
+
+Right mouse click on the game in the Steam library -> `Properties...` -> `SET LAUNCH OPTIONS`.
+
+Launch options for Linux:
+> `./run.sh %command%`
+
+Use printed line as launch options.
+
+### Proton/Wine on Linux
+
+Using Proton or Wine is also supported, make sure the `winhttp.dll` from UnityDoorstop is loaded by setting the override to `native, builtin`.
 
 ## macOS
 
-> **Warning**
-> UnityDoorstop should work on macOS but it wasn't yet tested in combination with ModTek.
-
 > **Note**
-> Use the following directory instead of the BATTLETECH directory for the installation instructions:
-> `~/Library/Application\ Support/Steam/steamapps/common/BATTLETECH/BattleTech.app/Contents/Resources/`
+> The installation instructions for macOS are similar to Linux, only differences are listed here.
 
-The zip contains the UnityDoorstop script `run.sh` and libraries to run the game with.
+The base installation folder is the `Contents/Resources` directory within the .app Application packages.
+For a standard Steam installation that means the following path:
+> `~/"Library/Application Support/Steam/steamapps/common/BATTLETECH/BattleTech.app/Contents/Resources/"`
 
-### Obsolete
+### Steam on macOS
 
-> **Warning**
-> Obsolete! These installation instructions are for ModTek 2.0 and older.
+Launch options for macOS need to contain the absolute path to the run script.
+In a terminal, run this from the same location where the run script is:
+> `echo "\"$(pwd)/run.sh\" %command%"`
 
-1. Use the following directory instead of the BATTLETECH directory: ~/Library/Application\ Support/Steam/steamapps/common/BATTLETECH/BattleTech.app/Contents/Resources/
-2. If the Mods directory doesn't exist, create it here: ~/Library/Application\ Support/Steam/steamapps/common/BATTLETECH/BattleTech.app/Contents/Resources/Mods/
-3. Move the entire ModTek folder from the release download into the /Mods/ folder created above.
-4. You should now have a ~/Library/Application\ Support/Steam/steamapps/common/BATTLETECH/BattleTech.app/Contents/Resources/Mods/ModTek/ folder
-5. Run the injector program (ModTekInjector.exe) in that folder. To do this:
-   a. Open a Terminal window.
-   b. At the command line, type "cd ~/Library/Application\ Support/Steam/steamapps/common/BATTLETECH/BattleTech.app/Contents/Resources/Mods/ModTek" and press Return.
-   c. At the command line, type "mono ModTekInjector.exe" then press Return to run the injector.
-6. DO NOT move anything from the /Mods/ModTek/ folder, it is self-contained.
+The launch options should then look something like this:
+> `"/Users/ReplaceThisByYourUsername/Library/Application Support/Steam/steamapps/common/BATTLETECH/BattleTech.app/Contents/Resources/run.sh" %command%`
 
 # Further Documentation
 
