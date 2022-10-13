@@ -355,6 +355,8 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
 "AIMinefieldIgnorePosDelta": 5 - better to leave as is
   "ObjectiveBlackBackgroundOnEnter": true, - if true objective background becomes black on mouse enter
   "EnableMinimap": true,                   - if true minimap is enabled
+  "MinimapShowObjectives": true,           - if true contract objectives will be shown on minimap (if objective have position)
+  "MinimapShowRegions": true,              - if true regions contours (places on map triggering events) will be shown on minimap
   "MinimapBurnigTerrainColor": "#FF9700FF", - color for burning terrain on minimap
   "MinimapBurnedTerrainColor": "#FFFFFFFF", - color for burned forest on minimap
   "MinimapTerrainColors": {                 - colors for cells of different types on minimap
