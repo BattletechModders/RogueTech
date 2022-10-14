@@ -470,7 +470,10 @@ new fields
     "Ammunition_intLRM":20,                    StartingAmmoCapacity is counted as default ammo for base category
     "Ammunition_intSRM":15
   },
-  "preFireSFX":"Play_PPC3",       - sound played on weapon's fire !!!CAN!!! be set per mode, ammo, weapon. Mode have priority than ammo and than weapon.
+  "preFireSFX":"Play_PPC3",       - sound played when weapon state becomes "PreFiring", can be set per mode, ammo, weapon. Mode have priority than ammo and than weapon.
+                                    vanilla weapons use this to add firing sfx
+  "fireSFX": ""                   - sound played when weapon state becomes "Firing", can be set per mode, ammo, weapon. Mode have priority than ammo and than weapon.
+                                    vanilla weapon does not use this at all
   "blockWeaponsInMechLocations": [], - list of mech locations. all weapons installed in this locations can't fire if this weapon is functional.
                                        NOTE: weapon can block itself.
   "CanBeBlocked": true               - if false weapon can't be blocked by other weapons presents (default is true).
