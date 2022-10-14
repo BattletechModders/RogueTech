@@ -697,11 +697,7 @@ new fields
 	"statusEffects" : [] - list of status effects applying on hit. Can be set for weapon, ammo, mode. 
 	                       Effective list is result of merging all three lists.
 	"StatusEffectsPerHit":false - if true OnHit status effects applying on each hit instead on once. 
-	"AdditionalAudioEffect": "enum:AudioEventList_explosion.explosion_propane_tank", - additional sound effect on projectile impact. Value format "<type>:<name>".
-							 type values: "enum" - building in-game enum value
-							              "id" - unsigned integer (if you know value)
-								   		  "name" - audio event name 
-										  "none" - none additional sound for this type name doesn't matter
+	"AdditionalAudioEffect": "AudioEventList_explosion_explosion_propane_tank", - additional sound effect on projectile impact.".
 							 may be set per ammo, mode and weapon. Mode have priority than ammo than weapon
    "Modes": array of modes for weapon
 	[{
