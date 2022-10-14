@@ -849,11 +849,7 @@ new fields
 						      but some effects is more suitable.
   "BallisticDamagePerPallet": true - if true damage inflicted per pallet instead of per shot. Only working with ImprovedBallistic true, ballistic weapon effect and HasShels false
                                      Damage will be divided by ProjectilesPerShot value, heat damage and stable damage too. 
-	"AdditionalAudioEffect": "enum:AudioEventList_explosion.explosion_propane_tank", - additional sound effect on projectile impact. Value format "<type>:<name>".
-							 type values: "enum" - building in-game enum value
-							              "id" - unsigned integer (if you know value)
-								   		  "name" - audio event name 
-										  "none" - none additional sound for this type name doesn't matter
+	"AdditionalAudioEffect": "AudioEventList_explosion_explosion_propane_tank", - additional sound effect on projectile impact".
 							 may be set per ammo, mode and weapon. Mode have priority than ammo than weapon
   "Lock":{ - setting to lock using of this mode. 
     "HeatLevel":{"Low":40,"High":60}, - lock by absolute heat. If current heat is less Low or greater High, mode using will be forbidden.
@@ -1195,11 +1191,7 @@ Ammo definition
                                 Clearing on success hit controled by FireOnSuccessHit flag.
   "BallisticDamagePerPallet": true - if true damage inflicted per pallet instead of per shot. Only working with ImprovedBallistic true, ballistic weapon effect and HasShels false
                                      Damage will be divided by ProjectilesPerShot value, heat damage and stable damage too. 
-	"AdditionalAudioEffect": "enum:AudioEventList_explosion.explosion_propane_tank", - additional sound effect on projectile impact. Value format "<type>:<name>".
-							 type values: "enum" - building in-game enum value
-							              "id" - unsigned integer (if you know value)
-								   		  "name" - audio event name 
-										  "none" - none additional sound for this type name doesn't matter
+	"AdditionalAudioEffect": "enum:AudioEventList_explosion_explosion_propane_tank", - additional sound effect on projectile impact.".
 							 may be set per ammo, mode and weapon. Mode have priority than ammo than weapon
    "ChassisTagsAccuracyModifiers":{ - Accuracy for mods tags (mechs - MechTags and ChassisTags, Vehicles - VehicleTags, Turrets - TurretTags)
       "unit_assault":-10,
