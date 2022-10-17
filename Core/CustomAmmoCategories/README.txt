@@ -355,6 +355,8 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
 "AIMinefieldIgnorePosDelta": 5 - better to leave as is
   "ObjectiveBlackBackgroundOnEnter": true, - if true objective background becomes black on mouse enter
   "EnableMinimap": true,                   - if true minimap is enabled
+  "MinimapShowObjectives": true,           - if true contract objectives will be shown on minimap (if objective have position)
+  "MinimapShowRegions": true,              - if true regions contours (places on map triggering events) will be shown on minimap
   "MinimapBurnigTerrainColor": "#FF9700FF", - color for burning terrain on minimap
   "MinimapBurnedTerrainColor": "#FFFFFFFF", - color for burned forest on minimap
   "MinimapTerrainColors": {                 - colors for cells of different types on minimap
@@ -468,7 +470,10 @@ new fields
     "Ammunition_intLRM":20,                    StartingAmmoCapacity is counted as default ammo for base category
     "Ammunition_intSRM":15
   },
-  "preFireSFX":"Play_PPC3",       - sound played on weapon's fire !!!CAN!!! be set per mode, ammo, weapon. Mode have priority than ammo and than weapon.
+  "preFireSFX":"Play_PPC3",       - sound played when weapon state becomes "PreFiring", can be set per mode, ammo, weapon. Mode have priority than ammo and than weapon.
+                                    vanilla weapons use this to add firing sfx
+  "fireSFX": ""                   - sound played when weapon state becomes "Firing", can be set per mode, ammo, weapon. Mode have priority than ammo and than weapon.
+                                    vanilla weapon does not use this at all
   "blockWeaponsInMechLocations": [], - list of mech locations. all weapons installed in this locations can't fire if this weapon is functional.
                                        NOTE: weapon can block itself.
   "CanBeBlocked": true               - if false weapon can't be blocked by other weapons presents (default is true).
@@ -692,11 +697,7 @@ new fields
 	"statusEffects" : [] - list of status effects applying on hit. Can be set for weapon, ammo, mode. 
 	                       Effective list is result of merging all three lists.
 	"StatusEffectsPerHit":false - if true OnHit status effects applying on each hit instead on once. 
-	"AdditionalAudioEffect": "enum:AudioEventList_explosion.explosion_propane_tank", - additional sound effect on projectile impact. Value format "<type>:<name>".
-							 type values: "enum" - building in-game enum value
-							              "id" - unsigned integer (if you know value)
-								   		  "name" - audio event name 
-										  "none" - none additional sound for this type name doesn't matter
+	"AdditionalAudioEffect": "AudioEventList_explosion_explosion_propane_tank", - additional sound effect on projectile impact.".
 							 may be set per ammo, mode and weapon. Mode have priority than ammo than weapon
    "Modes": array of modes for weapon
 	[{
@@ -848,11 +849,7 @@ new fields
 						      but some effects is more suitable.
   "BallisticDamagePerPallet": true - if true damage inflicted per pallet instead of per shot. Only working with ImprovedBallistic true, ballistic weapon effect and HasShels false
                                      Damage will be divided by ProjectilesPerShot value, heat damage and stable damage too. 
-	"AdditionalAudioEffect": "enum:AudioEventList_explosion.explosion_propane_tank", - additional sound effect on projectile impact. Value format "<type>:<name>".
-							 type values: "enum" - building in-game enum value
-							              "id" - unsigned integer (if you know value)
-								   		  "name" - audio event name 
-										  "none" - none additional sound for this type name doesn't matter
+	"AdditionalAudioEffect": "AudioEventList_explosion_explosion_propane_tank", - additional sound effect on projectile impact".
 							 may be set per ammo, mode and weapon. Mode have priority than ammo than weapon
   "Lock":{ - setting to lock using of this mode. 
     "HeatLevel":{"Low":40,"High":60}, - lock by absolute heat. If current heat is less Low or greater High, mode using will be forbidden.
@@ -1194,11 +1191,7 @@ Ammo definition
                                 Clearing on success hit controled by FireOnSuccessHit flag.
   "BallisticDamagePerPallet": true - if true damage inflicted per pallet instead of per shot. Only working with ImprovedBallistic true, ballistic weapon effect and HasShels false
                                      Damage will be divided by ProjectilesPerShot value, heat damage and stable damage too. 
-	"AdditionalAudioEffect": "enum:AudioEventList_explosion.explosion_propane_tank", - additional sound effect on projectile impact. Value format "<type>:<name>".
-							 type values: "enum" - building in-game enum value
-							              "id" - unsigned integer (if you know value)
-								   		  "name" - audio event name 
-										  "none" - none additional sound for this type name doesn't matter
+	"AdditionalAudioEffect": "enum:AudioEventList_explosion_explosion_propane_tank", - additional sound effect on projectile impact.".
 							 may be set per ammo, mode and weapon. Mode have priority than ammo than weapon
    "ChassisTagsAccuracyModifiers":{ - Accuracy for mods tags (mechs - MechTags and ChassisTags, Vehicles - VehicleTags, Turrets - TurretTags)
       "unit_assault":-10,
