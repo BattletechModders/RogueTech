@@ -470,10 +470,66 @@ new fields
     "Ammunition_intLRM":20,                    StartingAmmoCapacity is counted as default ammo for base category
     "Ammunition_intSRM":15
   },
-  "preFireSFX":"Play_PPC3",       - sound played when weapon state becomes "PreFiring", can be set per mode, ammo, weapon. Mode have priority than ammo and than weapon.
-                                    vanilla weapons use this to add firing sfx
-  "fireSFX": ""                   - sound played when weapon state becomes "Firing", can be set per mode, ammo, weapon. Mode have priority than ammo and than weapon.
-                                    vanilla weapon does not use this at all
+
+  "prefireDuration": 0 - direct control of prefire duraction, applied to: mode, ammo, weapon in this order. Used first met non zero value.
+                   Used by ballistic, laser, PP, LBX and missile effects, not used by burst ballistic (machine gun) effect
+  "ProjectileSpeed":0 - direct control of projectile speed, applied to: mode, ammo, weapon in this order. Used first met non zero value.
+                   Used by ballistic, laser, PP, LBX and missile effects, not used by burst ballistic (machine gun) effect
+  "shotDelay":0  - direct control of shot delay speed, applied to: mode, ammo, weapon in this order. Used first met non zero value.
+                   Used by ballistic, laser, PPC and LBX effects, not used by missile and burst ballistic (machine gun) effects
+  
+  "firstPreFireSFX": null
+  "preFireSFX": null
+  "lastPreFireSFX": null
+
+  "firstFireSFX": null
+  "fireSFX": null
+  "lastFireSFX": null
+
+  "preFireStartSFX": null
+  "preFireStopSFX": null
+
+  "delayedSFXDelay":0
+  "delayedSFX": null
+
+  "projectileFireSFX": null
+  "projectilePreFireSFX": null
+  "projectileStopSFX": null
+
+  "firingStartSFX": null
+  "firingStopSFX": null
+  
+  firing SFX sequence 
+	First shot in volley 
+    1. firstPreFireSFX - (preFireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by ballistic and PPC.
+	2. preFireStartSFX - SFX emitter is unit. Looped. Ends with preFireStopSFX when projectile completes. In vanilla used by lasers.
+	3. projectilePreFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
+	4. firingStartSFX - SFX emitter is unit. Looped. Ends with firingStopSFX immediately after last shot. In vanilla used by missiles.
+    5. Pre-fire ends and projectile becomes active
+	6. delayedSFX - SFX emitter is unit. Single shot. In vanilla used by lasers. Repeats every delayedSFXDelay (if > 0) until projectile completes.
+	7. projectileFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
+	8. firstFireSFX - (fireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by missiles.
+	Next shot in volley
+    1. preFireSFX - SFX emitter is unit. Single shot. In vanilla used by ballistic and PPC.
+	2. preFireStartSFX - SFX emitter is unit. Looped. Ends with preFireStopSFX when projectile completes. In vanilla used by lasers.
+	3. projectilePreFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
+    4. Pre-fire ends and projectile becomes active
+	5. delayedSFX - SFX emitter is unit. Single shot. In vanilla used by lasers. Repeats every delayedSFXDelay (if > 0) until projectile completes.
+	6. projectileFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
+	7. fireSFX - (fireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by missiles.
+	Last shot in volley
+    1. lastPreFireSFX - (preFireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by ballistic and PPC.
+	2. preFireStartSFX - SFX emitter is unit. Looped. Ends with preFireStopSFX when projectile completes. In vanilla used by lasers.
+	3. projectilePreFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
+	4. firingStopSFX - In vanilla used by missiles.
+    5. Pre-fire ends and projectile becomes active
+	6. delayedSFX - SFX emitter is unit. Single shot. In vanilla used by lasers. Repeats every delayedSFXDelay (if > 0) until projectile completes.
+	7. projectileFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
+	8. lastFireSFX - (fireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by missiles.
+
+  Note! Empty SFX value (example "preFireSFX":"") means vanilla value should be cleared. If want to keep vanilla value parameter should be omitted.
+  For mentioned values mode have priority, than ammo, than weapon.
+
   "blockWeaponsInMechLocations": [], - list of mech locations. all weapons installed in this locations can't fire if this weapon is functional.
                                        NOTE: weapon can block itself.
   "CanBeBlocked": true               - if false weapon can't be blocked by other weapons presents (default is true).
@@ -545,6 +601,8 @@ new fields
                               For lasers projectileSpeed controls beam duration, so improved laser fire sequence looks like: beam (projectileSpeed duration) -> delay (projectileSpeed*FireDelayMultiplier) -> next beam
                               For PPC projectileSpeed it is projectile speed, so improved PPC fire sequence looks like: 
                                 pulse start -> pulse fly (duration distance/projectileSpeed) -> pulse hit -> delay ((distance/projectileSpeed)*FireDelayMultiplier) -> next pulse start
+  "prefireDurationMainEffect": 0 - prefire duration, if 0 original value is used, can be set for weapon, ammo, mode. Mode have priority, than ammo, than weapon.
+  "prefireDurationSubEffect": 0 - prefire duration, if 0 original value is used, can be set for weapon, ammo, mode. Mode have priority, than ammo, than weapon.
   "CantHitUnaffecedByPathing": false, - if true this weapon can't hit targets unaffected by pathing. 
                                         If user tries to perform DFA attack having this weapon enabled he/she will receive blocking popup message.
                                         can be set per weapon/ammo/mode mode have priority than ammo than weapon
