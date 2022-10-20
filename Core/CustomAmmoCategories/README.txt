@@ -42,6 +42,7 @@ MINIMAP_UNITS_JAMMED - float if greater than 0 enemy units will not be shown on 
 
 {
 "debugLog":true, - enable debug log 
+"SpawnProtectionAffectsCanFire": true - if true weapon can't fire if its owner under spawn protection
 "SpawnProtectionAffectsBurningTerrain": true, - if true spawn protection also prevent burning terrain of any kind.
 "SpawnProtectionAffectsDesignMasks": true, - if true spawn protection also prevent weapon from changing terrain.
 "SpawnProtectionAffectsAOE": true, - if true spawn protection also prevent AoE weapon damage.
@@ -354,6 +355,8 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
 "AIMinefieldIgnorePosDelta": 5 - better to leave as is
   "ObjectiveBlackBackgroundOnEnter": true, - if true objective background becomes black on mouse enter
   "EnableMinimap": true,                   - if true minimap is enabled
+  "MinimapShowObjectives": true,           - if true contract objectives will be shown on minimap (if objective have position)
+  "MinimapShowRegions": true,              - if true regions contours (places on map triggering events) will be shown on minimap
   "MinimapBurnigTerrainColor": "#FF9700FF", - color for burning terrain on minimap
   "MinimapBurnedTerrainColor": "#FFFFFFFF", - color for burned forest on minimap
   "MinimapTerrainColors": {                 - colors for cells of different types on minimap
@@ -467,7 +470,66 @@ new fields
     "Ammunition_intLRM":20,                    StartingAmmoCapacity is counted as default ammo for base category
     "Ammunition_intSRM":15
   },
-  "preFireSFX":"Play_PPC3",       - sound played on weapon's fire !!!CAN!!! be set per mode, ammo, weapon. Mode have priority than ammo and than weapon.
+
+  "prefireDuration": 0 - direct control of prefire duraction, applied to: mode, ammo, weapon in this order. Used first met non zero value.
+                   Used by ballistic, laser, PP, LBX and missile effects, not used by burst ballistic (machine gun) effect
+  "ProjectileSpeed":0 - direct control of projectile speed, applied to: mode, ammo, weapon in this order. Used first met non zero value.
+                   Used by ballistic, laser, PP, LBX and missile effects, not used by burst ballistic (machine gun) effect
+  "shotDelay":0  - direct control of shot delay speed, applied to: mode, ammo, weapon in this order. Used first met non zero value.
+                   Used by ballistic, laser, PPC and LBX effects, not used by missile and burst ballistic (machine gun) effects
+  
+  "firstPreFireSFX": null
+  "preFireSFX": null
+  "lastPreFireSFX": null
+
+  "firstFireSFX": null
+  "fireSFX": null
+  "lastFireSFX": null
+
+  "preFireStartSFX": null
+  "preFireStopSFX": null
+
+  "delayedSFXDelay":0
+  "delayedSFX": null
+
+  "projectileFireSFX": null
+  "projectilePreFireSFX": null
+  "projectileStopSFX": null
+
+  "firingStartSFX": null
+  "firingStopSFX": null
+  
+  firing SFX sequence 
+	First shot in volley 
+    1. firstPreFireSFX - (preFireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by ballistic and PPC.
+	2. preFireStartSFX - SFX emitter is unit. Looped. Ends with preFireStopSFX when projectile completes. In vanilla used by lasers.
+	3. projectilePreFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
+	4. firingStartSFX - SFX emitter is unit. Looped. Ends with firingStopSFX immediately after last shot. In vanilla used by missiles.
+    5. Pre-fire ends and projectile becomes active
+	6. delayedSFX - SFX emitter is unit. Single shot. In vanilla used by lasers. Repeats every delayedSFXDelay (if > 0) until projectile completes.
+	7. projectileFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
+	8. firstFireSFX - (fireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by missiles.
+	Next shot in volley
+    1. preFireSFX - SFX emitter is unit. Single shot. In vanilla used by ballistic and PPC.
+	2. preFireStartSFX - SFX emitter is unit. Looped. Ends with preFireStopSFX when projectile completes. In vanilla used by lasers.
+	3. projectilePreFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
+    4. Pre-fire ends and projectile becomes active
+	5. delayedSFX - SFX emitter is unit. Single shot. In vanilla used by lasers. Repeats every delayedSFXDelay (if > 0) until projectile completes.
+	6. projectileFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
+	7. fireSFX - (fireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by missiles.
+	Last shot in volley
+    1. lastPreFireSFX - (preFireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by ballistic and PPC.
+	2. preFireStartSFX - SFX emitter is unit. Looped. Ends with preFireStopSFX when projectile completes. In vanilla used by lasers.
+	3. projectilePreFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
+	4. firingStopSFX - In vanilla used by missiles.
+    5. Pre-fire ends and projectile becomes active
+	6. delayedSFX - SFX emitter is unit. Single shot. In vanilla used by lasers. Repeats every delayedSFXDelay (if > 0) until projectile completes.
+	7. projectileFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
+	8. lastFireSFX - (fireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by missiles.
+
+  Note! Empty SFX value (example "preFireSFX":"") means vanilla value should be cleared. If want to keep vanilla value parameter should be omitted.
+  For mentioned values mode have priority, than ammo, than weapon.
+
   "blockWeaponsInMechLocations": [], - list of mech locations. all weapons installed in this locations can't fire if this weapon is functional.
                                        NOTE: weapon can block itself.
   "CanBeBlocked": true               - if false weapon can't be blocked by other weapons presents (default is true).
@@ -539,6 +601,8 @@ new fields
                               For lasers projectileSpeed controls beam duration, so improved laser fire sequence looks like: beam (projectileSpeed duration) -> delay (projectileSpeed*FireDelayMultiplier) -> next beam
                               For PPC projectileSpeed it is projectile speed, so improved PPC fire sequence looks like: 
                                 pulse start -> pulse fly (duration distance/projectileSpeed) -> pulse hit -> delay ((distance/projectileSpeed)*FireDelayMultiplier) -> next pulse start
+  "prefireDurationMainEffect": 0 - prefire duration, if 0 original value is used, can be set for weapon, ammo, mode. Mode have priority, than ammo, than weapon.
+  "prefireDurationSubEffect": 0 - prefire duration, if 0 original value is used, can be set for weapon, ammo, mode. Mode have priority, than ammo, than weapon.
   "CantHitUnaffecedByPathing": false, - if true this weapon can't hit targets unaffected by pathing. 
                                         If user tries to perform DFA attack having this weapon enabled he/she will receive blocking popup message.
                                         can be set per weapon/ammo/mode mode have priority than ammo than weapon
@@ -691,11 +755,7 @@ new fields
 	"statusEffects" : [] - list of status effects applying on hit. Can be set for weapon, ammo, mode. 
 	                       Effective list is result of merging all three lists.
 	"StatusEffectsPerHit":false - if true OnHit status effects applying on each hit instead on once. 
-	"AdditionalAudioEffect": "enum:AudioEventList_explosion.explosion_propane_tank", - additional sound effect on projectile impact. Value format "<type>:<name>".
-							 type values: "enum" - building in-game enum value
-							              "id" - unsigned integer (if you know value)
-								   		  "name" - audio event name 
-										  "none" - none additional sound for this type name doesn't matter
+	"AdditionalAudioEffect": "AudioEventList_explosion_explosion_propane_tank", - additional sound effect on projectile impact.".
 							 may be set per ammo, mode and weapon. Mode have priority than ammo than weapon
    "Modes": array of modes for weapon
 	[{
@@ -847,11 +907,7 @@ new fields
 						      but some effects is more suitable.
   "BallisticDamagePerPallet": true - if true damage inflicted per pallet instead of per shot. Only working with ImprovedBallistic true, ballistic weapon effect and HasShels false
                                      Damage will be divided by ProjectilesPerShot value, heat damage and stable damage too. 
-	"AdditionalAudioEffect": "enum:AudioEventList_explosion.explosion_propane_tank", - additional sound effect on projectile impact. Value format "<type>:<name>".
-							 type values: "enum" - building in-game enum value
-							              "id" - unsigned integer (if you know value)
-								   		  "name" - audio event name 
-										  "none" - none additional sound for this type name doesn't matter
+	"AdditionalAudioEffect": "AudioEventList_explosion_explosion_propane_tank", - additional sound effect on projectile impact".
 							 may be set per ammo, mode and weapon. Mode have priority than ammo than weapon
   "Lock":{ - setting to lock using of this mode. 
     "HeatLevel":{"Low":40,"High":60}, - lock by absolute heat. If current heat is less Low or greater High, mode using will be forbidden.
@@ -1193,11 +1249,7 @@ Ammo definition
                                 Clearing on success hit controled by FireOnSuccessHit flag.
   "BallisticDamagePerPallet": true - if true damage inflicted per pallet instead of per shot. Only working with ImprovedBallistic true, ballistic weapon effect and HasShels false
                                      Damage will be divided by ProjectilesPerShot value, heat damage and stable damage too. 
-	"AdditionalAudioEffect": "enum:AudioEventList_explosion.explosion_propane_tank", - additional sound effect on projectile impact. Value format "<type>:<name>".
-							 type values: "enum" - building in-game enum value
-							              "id" - unsigned integer (if you know value)
-								   		  "name" - audio event name 
-										  "none" - none additional sound for this type name doesn't matter
+	"AdditionalAudioEffect": "enum:AudioEventList_explosion_explosion_propane_tank", - additional sound effect on projectile impact.".
 							 may be set per ammo, mode and weapon. Mode have priority than ammo than weapon
    "ChassisTagsAccuracyModifiers":{ - Accuracy for mods tags (mechs - MechTags and ChassisTags, Vehicles - VehicleTags, Turrets - TurretTags)
       "unit_assault":-10,
