@@ -6,31 +6,34 @@
       }
     ],
     "BonusDescriptions": [
-      "Melee: +10",
-      "ActuatorWeight: 10%"
+      "HandHeldQuirk: +1",
+      "CBTBEPhysicalAttackAccuracyUpgrade: +1",
+      "CarryWeight: +5%",
+      "ActuatorWeight: 5%",
+      "HandActuator"
     ],
+    "CarryCapacityFactor": 1.05,
     "Flags": [
-      "no_salvage",
       "not_broken"
     ],
     "IBLS": {
-      "StorageSize": 5
+      "StorageSize": 1
     },
     "InventorySorter": "00020",
     "Weights": {
-      "StructureFactor": 1.1
+      "StructureFactor": 1.05
     }
   },
   "StatName": null,
   "RelativeModifier": 0,
   "AbsoluteModifier": 0,
   "Description": {
-    "Cost": 480000,
+    "Cost": 15000,
     "Rarity": 99,
     "Purchasable": true,
     "Manufacturer": "Coventry",
     "Model": "Alpha",
-    "UIName": "Arm Mod + + +",
+    "UIName": "Gripy Hand",
     "Id": "Gear_Actuator_Coventry_Alpha",
     "Name": "Coventry Alpha Arm Mod",
     "Details": "Actuators control a 'Mech’s limbs and are used to perform Melee attacks at close quarters. All 'Mechs come equipped with stock Actuators, which can be upgraded for improved performance.",
@@ -42,69 +45,76 @@
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
   "BattleValue": 0,
-  "InventorySize": 5,
-  "Tonnage": 2,
+  "InventorySize": 1,
+  "Tonnage": 0,
   "AllowedLocations": "Arms",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
   "statusEffects": [
     {
+      "Description": {
+        "Details": "MeleeWeapon Accuracy Modifier",
+        "Icon": "uixSvgIcon_run_n_gun",
+        "Id": "FCS_MeleeAccuracy",
+        "Name": "MeleeWeapon Accuracy Modifier"
+      },
       "durationData": {
         "duration": -1,
-        "ticksOnActivations": false,
-        "useActivationsOfTarget": false,
-        "ticksOnEndOfRound": false,
-        "ticksOnMovements": false,
-        "stackLimit": -1,
-        "clearedWhenAttacked": false
+        "stackLimit": -1
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "statisticData": {
+        "modType": "System.Int32",
+        "modValue": "-1",
+        "operation": "Int_Add",
+        "statName": "CBTBE_Physical_Weapon_Attack_Mod"
+      },
+      "targetingData": {
+        "effectTargetType": "Creator",
+        "effectTriggerType": "Passive",
+        "showInStatusPanel": false,
+        "showInTargetPreview": false
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
       },
       "targetingData": {
         "effectTriggerType": "Passive",
-        "triggerLimit": 0,
-        "extendDurationOnTrigger": 0,
-        "specialRules": "NotSet",
         "effectTargetType": "Creator",
-        "range": 0,
-        "forcePathRebuild": false,
-        "forceVisRebuild": false,
         "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "StatusEffect-Attack_DamageMelee-T6",
-        "Name": "MELEE DAMAGE INCREASED",
-        "Details": "Melee attacks deal [AMT] more damage.",
-        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+        "Id": "FCS_MeleeAccuracy3",
+        "Name": "PPC Accuracy Quirk",
+        "Details": "+1 Acc for PPC Weapons.",
+        "Icon": "uixSvgIcon_equipment_TTS"
       },
       "nature": "Buff",
       "statisticData": {
-        "appliesEachTick": false,
-        "effectsPersistAfterDestruction": false,
-        "statName": "DamagePerShot",
+        "statName": "AccuracyModifier",
         "operation": "Float_Add",
-        "modValue": "10.0",
+        "modValue": "-1.0",
         "modType": "System.Single",
         "additionalRules": "NotSet",
         "targetCollection": "Weapon",
-        "targetWeaponCategory": "NotSet",
+        "targetWeaponCategoryId": "SpecialHandHeld",
         "targetWeaponType": "NotSet",
         "targetAmmoCategory": "NotSet",
-        "targetWeaponSubType": "Melee"
-      },
-      "tagData": null,
-      "floatieData": null,
-      "actorBurningData": null,
-      "vfxData": null,
-      "instantModData": null,
-      "poorlyMaintainedEffectData": null
+        "targetWeaponSubType": "NotSet"
+      }
     }
   ],
   "ComponentTags": {
     "items": [
       "component_type_variant",
-      "component_type_variant3",
-      "BLACKLISTED",
+      "Hand.{location}",
+      "Hand",
       "QuadIncompatible",
       "BAIncompatible",
       "ProtoIncompatible"
