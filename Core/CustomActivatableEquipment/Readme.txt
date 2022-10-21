@@ -68,7 +68,12 @@ AI related mod settings
   "auraUpdateMinPosDelta": 20 - position delta for Position aura update fix strategy
   "auraUpdateMinTimeDelta": 2 - time delta for Time aura update fix strategy
 ------------------------------------------------------------------------------------------------------------------------
-    "Custom":{
+    if StatisticEffectDataInjector is installed (ModTek 3.0+ Mods/ModTek/Injectors/StatisticEffectDataInjector.dll)
+	you can define Location field in statisticData
+	if this field is set components from other locations can't be target for this statistic effect
+	works for passive and activatable effects (not working for auras, abilities and weapon impact/on-fire effects)
+	Location:"{current}" means location where component is installed
+	"Custom":{
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
 		"ActivatableComponent":{
 			"SwitchOffOnFall": false, - if true component will be switched off on mech knockdown. You should set it to true if you want your LAM animations working properly. 
