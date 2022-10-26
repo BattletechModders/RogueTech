@@ -1,4 +1,4 @@
-﻿This mod is designed to provide the ability to create new maps
+This mod is designed to provide the ability to create new maps
 How it works:
 The mod takes an existing map and modifies it according to the instructions in the json file
 At the same time, the game cards remain completely untouched.
