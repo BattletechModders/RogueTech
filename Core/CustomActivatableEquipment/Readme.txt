@@ -75,6 +75,8 @@ AI related mod settings
 	Location:"{current}" means location where component is installed
 	Location:"{above}" means location where component is installed and only one nearest component placed in location 
 	                   above current is affected. 
+	Location:"{onlyone}" means location where component is installed and only one component placed in location current is affected.
+	                     Affection is tracked by effect id. 
 	"Custom":{
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
 		"ActivatableComponent":{
