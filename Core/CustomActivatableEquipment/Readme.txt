@@ -73,6 +73,8 @@ AI related mod settings
 	if this field is set components from other locations can't be target for this statistic effect
 	works for passive and activatable effects (not working for auras, abilities and weapon impact/on-fire effects)
 	Location:"{current}" means location where component is installed
+	Location:"{above}" means location where component is installed and only one nearest component placed in location 
+	                   above current is affected. 
 	"Custom":{
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
 		"ActivatableComponent":{
