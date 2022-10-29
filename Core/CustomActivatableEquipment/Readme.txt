@@ -77,6 +77,12 @@ AI related mod settings
 	                   above current is affected. 
 	Location:"{onlyone}" means location where component is installed and only one component placed in location current is affected.
 	                     Affection is tracked by effect id. 
+    if StatisticEffectDataInjector is installed (ModTek 3.0+ Mods/ModTek/Injectors/StatisticEffectDataInjector.dll)
+	you can define ShouldHaveTags and ShouldNotHaveTags fields in statisticData. 
+	Value for both fields is string - set of tags separated by "," ("ShouldHaveTags":"my_cool_tag1,my_cool_tag2")
+	if ShouldHaveTags field is set components do not have all mentioned tags in their definitions can't be target for this statistic effect
+	if ShouldNotHaveTags field is set components have at least one mentioned tag in their definitions can't be target for this statistic effect
+	if this field is set components does not have all mentioned tags in their definitions can't be target for this statistic effect
 	"Custom":{
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
 		"ActivatableComponent":{
