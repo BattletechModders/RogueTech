@@ -12,6 +12,9 @@
       },
       {
         "CategoryID": "LifeSupportB"
+      },
+      {
+        "CategoryID": "CockpitFCS"
       }
     ],
     "WorkOrderCosts": {
@@ -28,13 +31,20 @@
       "AllSkills: 1",
       "EvaMax: +1",
       "EvaPips: +1",
-      "NightVision",
+      "AdvancedSensors: 1",
       "SureFoot",
-      "StabDamageTaken: -20%",
-      "ReplacesGyro:: 50",
+      "StabDamageTaken: -25%",
+      "ReplacesGyro: 60",
+      "IsInterFaceCockpit",
+      "Sight: +5%",
+      "AccuracyER: +3",
+      "AccuracyLR: +2",
+      "AccuracyMR: +1",
+      "AccuracyMin: +3",
+      "NightVision",
       "FailChance: 1%",
       "FailInjury",
-      "IsInterFaceCockpit",
+      "FCS",
       "ArmorTPCost: -50%",
       "StructureTPCost: -50%",
       "ArmorCBCost: +20%",
@@ -65,7 +75,7 @@
       "autorepair"
     ],
     "IBLS": {
-      "StorageSize": 3
+      "StorageSize": 5
     },
     "InventorySorter": "00019",
     "Linked": {
@@ -92,12 +102,12 @@
     "Cost": 620000,
     "Rarity": 4,
     "Purchasable": false,
-    "Manufacturer": "Word of Blake",
+    "Manufacturer": "Solaris",
     "Model": "Interface Cockpit",
-    "UIName": "Cockpit Interface",
-    "Id": "Unique_Cockpit_Interface_Assassin",
+    "UIName": "Cockpit TM Interface",
+    "Id": "Unique_Cockpit_Interface_Desperado",
     "Name": "Interface Cockpit",
-    "Details": "Specifically Designed for OmniMechs this Interface Cockpit takes less space than the Standard Model and completely removes any need for a Gyro",
+    "Details": "A Specialized Torso Mounted Interface Cockpit commissioned on Solaris 7 with Experimental Smoke Jaguar EI Technology bought from Diamond Shark Traders with an Integrated Predator FCS",
     "Icon": "interface"
   },
   "BonusValueA": "",
@@ -106,36 +116,12 @@
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
   "BattleValue": 0,
-  "InventorySize": 1,
-  "Tonnage": 2,
+  "InventorySize": 3,
+  "Tonnage": 3,
   "AllowedLocations": "CenterTorso",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
   "statusEffects": [
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator"
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "NightVision",
-        "Name": "Night Vision Mode",
-        "Details": "PASSIVE: Enables Night Vision.",
-        "Icon": "uixSvgIcon_ability_precisionstrike"
-      },
-      "statisticData": {
-        "statName": "LV_NIGHT_VISION",
-        "operation": "Set",
-        "modValue": "true",
-        "modType": "System.Boolean"
-      },
-      "nature": "Buff"
-    },
     {
       "durationData": {
         "duration": -1,
@@ -163,7 +149,7 @@
     {
       "durationData": {
         "duration": -1,
-        "stackLimit": 1
+        "stackLimit": -1
       },
       "targetingData": {
         "effectTriggerType": "Passive",
@@ -180,7 +166,8 @@
         "statName": "GainEntrenchedOnNormalMove",
         "operation": "Set",
         "modValue": "true",
-        "modType": "System.Boolean"
+        "modType": "System.Boolean",
+        "targetCollection": "Pilot"
       },
       "nature": "Buff"
     },
@@ -206,7 +193,7 @@
       "statisticData": {
         "statName": "ReceivedInstabilityMultiplier",
         "operation": "Float_Multiply",
-        "modValue": "0.8",
+        "modValue": "0.75",
         "modType": "System.Single"
       }
     },
@@ -231,7 +218,7 @@
       "statisticData": {
         "statName": "UnsteadyThreshold",
         "operation": "Float_Add",
-        "modValue": "50.0",
+        "modValue": "60.0",
         "modType": "System.Single"
       },
       "nature": "Buff"
@@ -454,6 +441,30 @@
       },
       "targetingData": {
         "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "NightVision",
+        "Name": "Night Vision Mode",
+        "Details": "PASSIVE: Enables Night Vision.",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "statisticData": {
+        "statName": "LV_NIGHT_VISION",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
         "showInTargetPreview": false,
         "showInStatusPanel": false
@@ -472,6 +483,110 @@
         "statName": "SpotterDistanceAbsolute",
         "operation": "Float_Multiply",
         "modValue": "1.05",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "RangeBracketBonusAccER",
+        "Name": "Bonus Accuracy at range",
+        "Details": "range bracket bonus accuracy",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "CACExtraLongRangeAccuracyMod",
+        "operation": "Float_Add",
+        "modValue": "-3.0",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "RangeBracketBonusAccLR",
+        "Name": "Bonus Accuracy at range",
+        "Details": "range bracket bonus accuracy",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "CACLongRangeAccuracyMod",
+        "operation": "Float_Add",
+        "modValue": "-2.0",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "RangeBracketBonusAccMR",
+        "Name": "Bonus Accuracy at range",
+        "Details": "range bracket bonus accuracy",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "CACMediumRangeAccuracyMod",
+        "operation": "Float_Add",
+        "modValue": "-1.0",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "RangeBracketBonusAccSR",
+        "Name": "Bonus Accuracy at range",
+        "Details": "range bracket bonus accuracy",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "CACMinRangeAccuracyMod",
+        "operation": "Float_Add",
+        "modValue": "-3.0",
         "modType": "System.Single"
       }
     },
