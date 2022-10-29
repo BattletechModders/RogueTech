@@ -5,9 +5,6 @@
         "CategoryID": "Cockpit"
       },
       {
-        "CategoryID": "Gyro"
-      },
-      {
         "CategoryID": "LifeSupportA"
       },
       {
@@ -15,6 +12,12 @@
       },
       {
         "CategoryID": "CockpitFCS"
+      },
+      {
+        "CategoryID": "CockpitSensors"
+      },
+      {
+        "CategoryID": "Gyro"
       }
     ],
     "WorkOrderCosts": {
@@ -25,31 +28,20 @@
     },
     "BonusDescriptions": [
       "RequireNI",
-      "Omni",
       "AcePilot",
       "HSImmune",
       "AllSkills: 1",
       "EvaMax: +1",
       "EvaPips: +1",
-      "AdvancedSensors: 1",
+      "AdvancedSensors: 3",
       "SureFoot",
-      "StabDamageTaken: -25%",
-      "ReplacesGyro: 60",
-      "IsInterFaceCockpit",
-      "Sight: +5%",
-      "AccuracyER: +3",
-      "AccuracyLR: +2",
-      "AccuracyMR: +1",
-      "AccuracyMin: +3",
-      "NightVision",
+      "StabDamageTaken: -10%",
+      "ReplacesGyro: 40",
       "FailChance: 1%",
       "FailInjury",
-      "FCS",
-      "ArmorTPCost: -50%",
-      "StructureTPCost: -50%",
-      "ArmorCBCost: +20%",
-      "StructureCBCost: +25%",
-      "BleedReduction: 50%"
+      "Sharer",
+      "IsInterFaceCockpit",
+      "BleedReduction: 40%"
     ],
     "ActivatableComponent": {
       "ButtonName": "DNI",
@@ -69,13 +61,12 @@
       "statusEffects": []
     },
     "Flags": [
-      "not_broken",
-      "no_salvage",
       "ignore_shutdown",
-      "autorepair"
+      "not_broken",
+      "no_salvage"
     ],
     "IBLS": {
-      "StorageSize": 5
+      "StorageSize": 4
     },
     "InventorySorter": "00019",
     "Linked": {
@@ -92,22 +83,21 @@
         }
       ]
     },
-    "Lootable": "Gear_Cockpit_Interface",
     "Sorter": 6,
     "Weights": {
-      "GyroFactor": 0
+      "GyroFactor": -1
     }
   },
   "Description": {
     "Cost": 620000,
     "Rarity": 4,
     "Purchasable": false,
-    "Manufacturer": "Word of Blake",
-    "Model": "Interface Cockpit",
-    "UIName": "Cockpit TM Interface",
-    "Id": "Unique_Cockpit_Interface_TorsoMounted_WoB",
-    "Name": "Interface Cockpit",
-    "Details": "A Specialized Torso Mounted Interface Cockpit commissioned on Solaris 7 with Experimental Smoke Jaguar EI Technology bought from Diamond Shark Traders with an Integrated Predator FCS",
+    "Manufacturer": "Dark Mirage",
+    "Model": "Torso Cockpit",
+    "UIName": "Torso Mount DNI Cockpit",
+    "Id": "Unique_Cockpit_Interface_TorsoMounted_Mekagojira",
+    "Name": "Torso Cockpit",
+    "Details": "A Torso Mounted version of the DNI Cockpit, designed and created by the Deadly Sins Stable on Solaris based on research from recovered ClanTech EI Systems",
     "Icon": "interface"
   },
   "BonusValueA": "",
@@ -116,8 +106,8 @@
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
   "BattleValue": 0,
-  "InventorySize": 3,
-  "Tonnage": 3,
+  "InventorySize": 2,
+  "Tonnage": 4,
   "AllowedLocations": "CenterTorso",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
@@ -153,73 +143,26 @@
       },
       "targetingData": {
         "effectTriggerType": "Passive",
-        "effectTargetType": "Creator"
+        "specialRules": "NotSet",
+        "effectTargetType": "Creator",
+        "range": 0.0,
+        "forcePathRebuild": false,
+        "forceVisRebuild": true,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "InterfaceureFoot",
-        "Name": "BULWARK",
-        "Details": "PASSIVE: This unit is GUARDED (50% damage reduction against ranged attacks to the front and side) from remaining stationary.Increases Melee Damage by 10%.",
-        "Icon": "uixSvgIcon_ability_bulwark"
+        "Id": "LV_Shares_Vision",
+        "Name": "Vision Sharing",
+        "Details": "Shows their vision when lancemates move",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
       },
       "statisticData": {
-        "statName": "GainEntrenchedOnNormalMove",
+        "statName": "LV_SHARES_VISION",
         "operation": "Set",
         "modValue": "true",
-        "modType": "System.Boolean",
-        "targetCollection": "Pilot"
-      },
-      "nature": "Buff"
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "InterfaceStabDmgReduction",
-        "Name": "INCOMING STABILITY DAMAGE DECREASED",
-        "Details": "Incoming stability damage reduced by 30%.",
-        "Icon": "uixSvgIcon_equipment_Gyro"
-      },
-      "nature": "Buff",
-      "statisticData": {
-        "statName": "ReceivedInstabilityMultiplier",
-        "operation": "Float_Multiply",
-        "modValue": "0.75",
-        "modType": "System.Single"
-      }
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "GyroGenericThreshhold",
-        "Name": "Gyroscopic Orientation",
-        "Details": "The gyro helps establish center-of-mass equilibrium for the BattleMech.",
-        "Icon": "uixSvgIcon_equipment_Gyro"
-      },
-      "statisticData": {
-        "statName": "UnsteadyThreshold",
-        "operation": "Float_Add",
-        "modValue": "60.0",
-        "modType": "System.Single"
+        "modType": "System.Boolean"
       },
       "nature": "Buff"
     },
@@ -248,7 +191,7 @@
       "statisticData": {
         "statName": "LV_ADVANCED_SENSORS",
         "operation": "Int_Add",
-        "modValue": "1",
+        "modValue": "3",
         "modType": "System.Int32"
       },
       "nature": "Buff"
@@ -413,7 +356,7 @@
     {
       "durationData": {
         "duration": -1,
-        "stackLimit": 1
+        "stackLimit": -1
       },
       "targetingData": {
         "effectTriggerType": "Passive",
@@ -445,13 +388,13 @@
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "NightVision",
-        "Name": "Night Vision Mode",
-        "Details": "PASSIVE: Enables Night Vision.",
-        "Icon": "uixSvgIcon_ability_precisionstrike"
+        "Id": "GyroSureFoot",
+        "Name": "BULWARK",
+        "Details": "PASSIVE: This unit is GUARDED (50% damage reduction against ranged attacks to the front and side) from remaining stationary.Increases Melee Damage by 10%.",
+        "Icon": "uixSvgIcon_ability_bulwark"
       },
       "statisticData": {
-        "statName": "LV_NIGHT_VISION",
+        "statName": "GainEntrenchedOnNormalMove",
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
@@ -471,123 +414,68 @@
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "HP-CockpitSensors-Spot",
-        "Name": "SPOTTING DISTANCE INCREASED",
-        "Details": "Increases spotting distance by 50m.",
+        "Id": "StatusEffect-Defense_StabilityAll-T3",
+        "Name": "INCOMING STABILITY DAMAGE DECREASED",
+        "Details": "Incoming stability damage reduced by 30%.",
+        "Icon": "uixSvgIcon_equipment_Gyro"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "ReceivedInstabilityMultiplier",
+        "operation": "Float_Multiply",
+        "modValue": "0.9",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "GyroGenericThreshhold",
+        "Name": "Gyroscopic Orientation",
+        "Details": "The gyro helps establish center-of-mass equilibrium for the BattleMech.",
+        "Icon": "uixSvgIcon_equipment_Gyro"
+      },
+      "statisticData": {
+        "statName": "UnsteadyThreshold",
+        "operation": "Float_Add",
+        "modValue": "40.0",
+        "modType": "System.Single"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTargetsCreator": true,
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "DNI-Penalty",
+        "Name": "InjureOnStructDmg",
+        "Details": "Pilot will receive injury when internal structure damage is sustained.",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
+      "nature": "Debuff",
       "statisticData": {
-        "appliesEachTick": false,
-        "effectsPersistAfterDestruction": false,
-        "statName": "SpotterDistanceAbsolute",
-        "operation": "Float_Multiply",
-        "modValue": "1.05",
-        "modType": "System.Single"
-      }
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "RangeBracketBonusAccER",
-        "Name": "Bonus Accuracy at range",
-        "Details": "range bracket bonus accuracy",
-        "Icon": "uixSvgIcon_ability_precisionstrike"
-      },
-      "nature": "Buff",
-      "statisticData": {
-        "statName": "CACExtraLongRangeAccuracyMod",
-        "operation": "Float_Add",
-        "modValue": "-3.0",
-        "modType": "System.Single"
-      }
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "RangeBracketBonusAccLR",
-        "Name": "Bonus Accuracy at range",
-        "Details": "range bracket bonus accuracy",
-        "Icon": "uixSvgIcon_ability_precisionstrike"
-      },
-      "nature": "Buff",
-      "statisticData": {
-        "statName": "CACLongRangeAccuracyMod",
-        "operation": "Float_Add",
-        "modValue": "-2.0",
-        "modType": "System.Single"
-      }
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "RangeBracketBonusAccMR",
-        "Name": "Bonus Accuracy at range",
-        "Details": "range bracket bonus accuracy",
-        "Icon": "uixSvgIcon_ability_precisionstrike"
-      },
-      "nature": "Buff",
-      "statisticData": {
-        "statName": "CACMediumRangeAccuracyMod",
-        "operation": "Float_Add",
-        "modValue": "-1.0",
-        "modType": "System.Single"
-      }
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "RangeBracketBonusAccSR",
-        "Name": "Bonus Accuracy at range",
-        "Details": "range bracket bonus accuracy",
-        "Icon": "uixSvgIcon_ability_precisionstrike"
-      },
-      "nature": "Buff",
-      "statisticData": {
-        "statName": "CACMinRangeAccuracyMod",
-        "operation": "Float_Add",
-        "modValue": "-3.0",
-        "modType": "System.Single"
+        "statName": "InjureOnStructDmg",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
       }
     },
     {
@@ -637,35 +525,9 @@
       "statisticData": {
         "statName": "BleedingRateMulti",
         "operation": "Float_Multiply",
-        "modValue": "0.5",
+        "modValue": "0.6",
         "modType": "System.Single",
         "targetCollection": "Pilot"
-      }
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "StatusEffect-getHasBattleArmorMounts",
-        "Name": "getHasBattleArmorMounts",
-        "Details": "getHasBattleArmorMounts",
-        "Icon": "uixSvgIcon_ability_precisionstrike"
-      },
-      "nature": "Buff",
-      "statisticData": {
-        "statName": "HasBattleArmorMounts",
-        "operation": "Set",
-        "modValue": "true",
-        "modType": "System.Boolean"
       }
     }
   ],
@@ -679,7 +541,7 @@
       "RequireNI",
       "BAIncompatible",
       "ProtoIncompatible",
-      "SuperheavyIncompatible"
+      "SuperheavyEquipment"
     ],
     "tagSetSourceFile": ""
   }
