@@ -8,25 +8,20 @@
         "CategoryID": "CritsSRM2"
       }
     ],
-    "BonusDescriptions": {
-      "Bonuses": [
-        "MML",
-        "IndirectMML",
-        "DoesCluster",
-        "AAFactor: 4%"
-      ]
-    },
-    "Flags": {
-      "flags": [
-        "not_broken"
-      ]
-    },
-    "InventorySorter": {
-      "SortKey": "03024"
-    },
+    "BonusDescriptions": [
+      "MML",
+      "IndirectMML",
+      "DoesCluster",
+      "WeaponAttachmentCompatible: Artemis IV or V",
+      "AAFactor: 4%"
+    ],
+    "Flags": [
+      "not_broken"
+    ],
     "IBLS": {
       "StorageSize": 2
-    }
+    },
+    "InventorySorter": "03024"
   },
   "Category": "Missile",
   "Type": "LRM",
@@ -49,9 +44,9 @@
   "HeatDamage": 0,
   "AccuracyModifier": 0,
   "CriticalChanceMultiplier": 1,
-  "APArmorShardsMod": 0.35,
-  "APMaxArmorThickness": 50,
-  "APCriticalChanceMultiplier": 0.038,
+  "APArmorShardsMod": 0.25,
+  "APMaxArmorThickness": 25,
+  "APCriticalChanceMultiplier": 0.025,
   "AOECapable": false,
   "IndirectFireCapable": true,
   "RefireModifier": 0,
@@ -69,9 +64,9 @@
     "Purchasable": true,
     "Manufacturer": "Jackson",
     "Model": "Multi Missile Launcher",
-    "UIName": "MML5",
+    "UIName": "MML-5",
     "Id": "Weapon_MML_5",
-    "Name": "MML5",
+    "Name": "MML-5",
     "Details": "Multi-Missile Launchers can fire both LRM and SRM, including any special warhead types, and are compatible with the Artemis IV fire control system. \n\n <b><color=#ffcc00>Uses SRM/LRM Ammo.</color></b> \n\n <b><color=#00ffff>Left Click on Chance to hit during battle to toggle between LRM or SRM.</color> </b>",
     "Icon": "uixSvgIcon_weapon_Missile"
   },
@@ -87,6 +82,88 @@
   "DisallowedLocations": "All",
   "CriticalComponent": false,
   "Modes": [
+    {
+      "Id": "LRMAIV",
+      "UIName": "LRMARTIV",
+      "Name": "LRM Artemis IV",
+      "Description": "Weapon fires in LRM Artemis IV mode",
+      "isBaseMode": true,
+      "EvasivePipsIgnored": 2,
+      "AccuracyModifier": 2.0,
+      "DirectFireModifier": -3.0,
+      "ClusteringModifier": 2,
+      "Lock": {
+        "StatValueLevel": {
+          "Low": 0.9,
+          "High": 999,
+          "Stat": "ArtemisIVUnlock"
+        }
+      },
+      "AmmoCategory": "ARTLRM",
+      "AIHitChanceCap": 0.99
+    },
+    {
+      "Id": "LRMAV",
+      "UIName": "LRMARTV",
+      "Name": "LRM Artemis V",
+      "Description": "Weapon fires in LRM Artemis V mode",
+      "isBaseMode": true,
+      "EvasivePipsIgnored": 3,
+      "AccuracyModifier": 2.0,
+      "DirectFireModifier": -3.0,
+      "ClusteringModifier": 2.5,
+      "CriticalChanceMultiplier": 1.25,
+      "Lock": {
+        "StatValueLevel": {
+          "Low": 0.9,
+          "High": 999,
+          "Stat": "ArtemisVUnlock"
+        }
+      },
+      "AmmoCategory": "ARTLRM",
+      "AIHitChanceCap": 0.99
+    },
+    {
+      "Id": "SRMAIV",
+      "UIName": "SRMARTIV",
+      "Name": "SRM Artemis IV",
+      "Description": "Weapon fires in SRM Artemis IV mode",
+      "isBaseMode": true,
+      "EvasivePipsIgnored": 2,
+      "AccuracyModifier": -1.0,
+      "ClusteringModifier": 2,
+      "HitGenerator": "Cluster",
+      "Lock": {
+        "StatValueLevel": {
+          "Low": 0.9,
+          "High": 999,
+          "Stat": "ArtemisIVUnlock"
+        }
+      },
+      "AmmoCategory": "ARTSRM",
+      "AIHitChanceCap": 0.99
+    },
+    {
+      "Id": "SRMAV",
+      "UIName": "SRMARTV",
+      "Name": "SRM Artemis V",
+      "Description": "Weapon fires in SRM Artemis V mode",
+      "isBaseMode": true,
+      "EvasivePipsIgnored": 3,
+      "AccuracyModifier": -1.0,
+      "ClusteringModifier": 2.5,
+      "CriticalChanceMultiplier": 1.25,
+      "HitGenerator": "Cluster",
+      "Lock": {
+        "StatValueLevel": {
+          "Low": 0.9,
+          "High": 999,
+          "Stat": "ArtemisVUnlock"
+        }
+      },
+      "AmmoCategory": "ARTSRM",
+      "AIHitChanceCap": 0.99
+    },
     {
       "Id": "LRM",
       "UIName": "LRM",
@@ -114,7 +191,10 @@
       "AmmoCategory": "SRM",
       "WeaponEffectID": "WeaponEffect-Weapon_SRM2",
       "Instability": 1,
-      "FireTerrainChance": 0.005
+      "FireTerrainChance": 0.005,
+      "APArmorShardsMod": 0.1,
+      "APMaxArmorThickness": 25,
+      "APCriticalChanceMultiplier": 0.015
     }
   ],
   "statusEffects": [
@@ -149,7 +229,10 @@
     "items": [
       "component_type_stock",
       "range_very-long",
-      "BAIncompatible"
+      "BAIncompatible",
+      "ArtemisIVUnlockable",
+      "ArtemisVUnlockable",
+      "MML.{location}"
     ],
     "tagSetSourceFile": ""
   }

@@ -68,7 +68,22 @@ AI related mod settings
   "auraUpdateMinPosDelta": 20 - position delta for Position aura update fix strategy
   "auraUpdateMinTimeDelta": 2 - time delta for Time aura update fix strategy
 ------------------------------------------------------------------------------------------------------------------------
-    "Custom":{
+    if StatisticEffectDataInjector is installed (ModTek 3.0+ Mods/ModTek/Injectors/StatisticEffectDataInjector.dll)
+	you can define Location field in statisticData
+	if this field is set components from other locations can't be target for this statistic effect
+	works for passive and activatable effects (not working for auras, abilities and weapon impact/on-fire effects)
+	Location:"{current}" means location where component is installed
+	Location:"{above}" means location where component is installed and only one nearest component placed in location 
+	                   above current is affected. 
+	Location:"{onlyone}" means location where component is installed and only one component placed in location current is affected.
+	                     Affection is tracked by effect id. 
+    if StatisticEffectDataInjector is installed (ModTek 3.0+ Mods/ModTek/Injectors/StatisticEffectDataInjector.dll)
+	you can define ShouldHaveTags and ShouldNotHaveTags fields in statisticData. 
+	Value for both fields is string - set of tags separated by "," ("ShouldHaveTags":"my_cool_tag1,my_cool_tag2")
+	if ShouldHaveTags field is set components do not have all mentioned tags in their definitions can't be target for this statistic effect
+	if ShouldNotHaveTags field is set components have at least one mentioned tag in their definitions can't be target for this statistic effect
+	if this field is set components does not have all mentioned tags in their definitions can't be target for this statistic effect
+	"Custom":{
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
 		"ActivatableComponent":{
 			"SwitchOffOnFall": false, - if true component will be switched off on mech knockdown. You should set it to true if you want your LAM animations working properly. 
