@@ -12,7 +12,8 @@
       "PPCDEBUFF: 3",
       "WpnRecoil: 2",
       "MineClearanceBoom: 2",
-      "MisfireChanceMode1: 50%, FIOFF"
+      "MisfireChanceMode1: 50%, FIOFF",
+      "WeaponAttachmentCompatible: PPC Capacitor"
     ],
     "Flags": [
       "not_broken"
@@ -88,8 +89,12 @@
       "Id": "PPCCAP",
       "UIName": "PPC Capacitor",
       "Name": "PPC Capacitor",
-      "Description": "PPC fires with charged Capacitor",
+      "Description": "Weapon fires with charged PPC Capacitor",
       "isBaseMode": true,
+      "FlatJammingChance": 0.15,
+      "GunneryJammingMult": 0.01,
+      "GunneryJammingBase": 1,
+      "DamageOnJamming": true,
       "Lock": {
         "StatValueLevel": {
           "Low": 0.9,
@@ -97,6 +102,62 @@
           "Stat": "PPCCapacitorUnlock"
         }
       },
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "nature": "Buff",
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "Status-PPCCAP-Damage",
+            "Name": "PPCCAP-Damage",
+            "Details": "PPCCAP Damage",
+            "Icon": "uixSvgIcon_ability_precisionstrike"
+          },
+          "statisticData": {
+            "statName": "DamagePerShot",
+            "operation": "Float_Multiply",
+            "modValue": "1.2",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "nature": "Buff",
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "Status-PPCCAP-Heat",
+            "Name": "PPCCAP-Heat",
+            "Details": "PPCCAP Heat",
+            "Icon": "uixSvgIcon_ability_precisionstrike"
+          },
+          "statisticData": {
+            "statName": "HeatGenerated",
+            "operation": "Float_Multiply",
+            "modValue": "1.1",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
+          }
+        }
+      ],
       "AIHitChanceCap": 0.99
     },
     {
