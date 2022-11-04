@@ -68,6 +68,88 @@ AI related mod settings
   "auraUpdateMinPosDelta": 20 - position delta for Position aura update fix strategy
   "auraUpdateMinTimeDelta": 2 - time delta for Time aura update fix strategy
 ------------------------------------------------------------------------------------------------------------------------
+    if ComponentRefInjector is installed (ModTek 3.0+ Mods/ModTek/Injectors/ComponentRefInjector.dll)
+	you can create weapon addon component. Weapon addon can have target component - weapon it is attached to. 
+	inside MechDef in inventory list two optional fields was added. "LocalGUID" and "TargetComponentGUID"
+	non empty "TargetComponentGUID" means this component have dedicated target inside this MechDef.
+	Relevant UI in mech lab been added to give user ability to select addon target. 
+  "inventory": [
+    {
+      "MountedLocation": "RightTorso",
+      "ComponentDefID": "Weapon_PPC_LPPCER_3",
+      "SimGameUID": "",
+      "ComponentDefType": "Weapon",
+      "HardpointSlot": 0,
+      "GUID": null,
+      "DamageLevel": "Functional",
+      "prefabName": null,
+      "hasPrefabName": false
+    },
+    {
+      "MountedLocation": "RightTorso",
+      "ComponentDefID": "Weapon_PPC_LPPCER_3",
+      "SimGameUID": "",
+      "ComponentDefType": "Weapon",
+      "HardpointSlot": 1,
+      "GUID": null,
+      "DamageLevel": "Functional",
+      "prefabName": null,
+      "hasPrefabName": false,
+	  "LocalGUID":"some_guid_0"
+    },
+    {
+      "MountedLocation": "RightTorso",
+      "ComponentDefID": "Gear_C3_slave_debug",
+      "SimGameUID": "",
+      "ComponentDefType": "Upgrade",
+      "HardpointSlot": -1,
+      "GUID": null,
+      "DamageLevel": "Functional",
+      "prefabName": null,
+      "hasPrefabName": false,
+	  "TargetComponentGUID":"some_guid_0"
+    }
+],
+    to make UpgradeDef a weapon addon you need to make two things.
+	1. Create WeaponAddonDef json file and add it to any mod manifest
+	2. Add AddonReference to UpgradeDef custom section
+
+	"Custom": {
+		"AddonReference":{ "WeaponAddonId":"ppc_capacitor" },
+
+WeaponAddonDef example
+
+{
+	"Id":"ppc_capacitor",  - ID should same as file name
+	"autoTarget":true,     - target for this component will be selected automatically on component add to mech configuration. 
+	                         If false addon will be have no target unless user set it implicitly 
+	"addonType":"ppc_capacitor_type", - string used to track addons of the same type. If ommited Id is used. 
+	                                    Only one addon of certain type can be attached to weapon
+	"installedLocationOnly":true,     - if true user can only select weapons from same location as target for this addon
+	"targetComponentTags":["overload_mode_unlockable"], - set of tags weapon should have to be able to be target for an addon
+	"modes":[                                           - list of modes this addon adding to weapon. 
+	                                                      If isBaseMode is true this mode will be forced to be default for this weapon
+														  If weapon been damaged due to jamming crit goes to addon first. 
+														  If addon been destroyed mode it added been disabled
+    {
+      "Id": "overload",
+      "UIName": "purple",
+      "isBaseMode": true,
+      "DamagePerShot": 10,
+      "FireDelayMultiplier": 1,
+      "WeaponEffectID": "WeaponEffect-Weapon_PPC",
+      "ProjectileScale": { "x": 3, "y": 3, "z": 3 },
+      "preFireSFX": "Play_PPC3",
+      "ColorChangeRule": "Linear",
+      "ProjectileSpeedMultiplier": 0.5,
+      "ShotsWhenFired": 1,
+      "ColorSpeedChange": 7,
+      "HeatGenerated": 50,
+      "HeatDamagePerShot": 50
+    }
+	]
+}
+
     if StatisticEffectDataInjector is installed (ModTek 3.0+ Mods/ModTek/Injectors/StatisticEffectDataInjector.dll)
 	you can define Location field in statisticData
 	if this field is set components from other locations can't be target for this statistic effect
@@ -77,6 +159,9 @@ AI related mod settings
 	                   above current is affected. 
 	Location:"{onlyone}" means location where component is installed and only one component placed in location current is affected.
 	                     Affection is tracked by effect id. 
+    if ComponentRefInjector is installed (ModTek 3.0+ Mods/ModTek/Injectors/ComponentRefInjector.dll)
+	Location:"{target}" means effect will be applied only component been selected as target for this weapon addon. Refer WeaponAddonDef section. 
+
     if StatisticEffectDataInjector is installed (ModTek 3.0+ Mods/ModTek/Injectors/StatisticEffectDataInjector.dll)
 	you can define ShouldHaveTags and ShouldNotHaveTags fields in statisticData. 
 	Value for both fields is string - set of tags separated by "," ("ShouldHaveTags":"my_cool_tag1,my_cool_tag2")
