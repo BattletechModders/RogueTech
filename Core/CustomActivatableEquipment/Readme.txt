@@ -115,17 +115,20 @@ AI related mod settings
 	2. Add AddonReference to UpgradeDef custom section
 
 	"Custom": {
-		"AddonReference":{ "WeaponAddonId":"ppc_capacitor" },
+		"AddonReference":{ 
+			"installedLocationOnly":true,     - if true user can only select weapons from same location as target for this addon
+			"autoTarget":true,     - target for this component will be selected automatically on component add to mech configuration. 
+				                     If false addon will be have no target unless user set it implicitly 
+			"WeaponAddonIds": [ "ppc_capacitor", "ppc_capacitor2" ] - list of addons. If component have multiply addons 
+			                                                          only suitable (detected by targetComponentTags) will be actually applied
+		},
 
 WeaponAddonDef example
 
 {
 	"Id":"ppc_capacitor",  - ID should same as file name
-	"autoTarget":true,     - target for this component will be selected automatically on component add to mech configuration. 
-	                         If false addon will be have no target unless user set it implicitly 
 	"addonType":"ppc_capacitor_type", - string used to track addons of the same type. If ommited Id is used. 
 	                                    Only one addon of certain type can be attached to weapon
-	"installedLocationOnly":true,     - if true user can only select weapons from same location as target for this addon
 	"targetComponentTags":["overload_mode_unlockable"], - set of tags weapon should have to be able to be target for an addon
 	"modes":[                                           - list of modes this addon adding to weapon. 
 	                                                      If isBaseMode is true this mode will be forced to be default for this weapon
