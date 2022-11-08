@@ -165,6 +165,10 @@ WeaponAddonDef example
     if ComponentRefInjector is installed (ModTek 3.0+ Mods/ModTek/Injectors/ComponentRefInjector.dll)
 	Location:"{target}" means effect will be applied only component been selected as target for this weapon addon. Refer WeaponAddonDef section. 
 
+	also Location is processed if target is not only component but unit. If unit is target for the effect, effect becomes location specific
+	!NOTE! not all unit statistic effects can be specific for location. Even more you should count every effect to be not location specific unless 
+	its locational nature mentioned explicitly. If you set non statistic value not processed by location - effect changes nothing.
+
     if StatisticEffectDataInjector is installed (ModTek 3.0+ Mods/ModTek/Injectors/StatisticEffectDataInjector.dll)
 	you can define ShouldHaveTags and ShouldNotHaveTags fields in statisticData. 
 	Value for both fields is string - set of tags separated by "," ("ShouldHaveTags":"my_cool_tag1,my_cool_tag2")
