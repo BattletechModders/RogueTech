@@ -470,7 +470,11 @@ new fields
     "Ammunition_intLRM":20,                    StartingAmmoCapacity is counted as default ammo for base category
     "Ammunition_intSRM":15
   },
-
+  "IgnoreCover": false - if true weapon will ignore target cover state. Eg. each hit have solid blow quality regardless target guard level. 
+                         mode have priority, than ammo, than weapon
+  "BreachingShot": false - if true weapon damage will be calculated as if breaching shot triggered. 
+                           Note! this setting makes sense only for damage calculation, eg. no floatie messages etc, only damage multiplier
+                           mode have priority, than ammo, than weapon
   "prefireDuration": 0 - direct control of prefire duraction, applied to: mode, ammo, weapon in this order. Used first met non zero value.
                    Used by ballistic, laser, PP, LBX and missile effects, not used by burst ballistic (machine gun) effect
   "ProjectileSpeed":0 - direct control of projectile speed, applied to: mode, ammo, weapon in this order. Used first met non zero value.
