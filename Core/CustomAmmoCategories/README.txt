@@ -26,19 +26,23 @@ CACExtraLongRangeAccuracyMod - LongRange <= X < MaxRange
 
 
 Additional unit statistic
-CACAPProtection - boolean - if true unit is protected from all AP damage including AP crits. If armor is absent crits will be rolled anyway
+CACAPProtection - boolean - if true unit is protected from all AP damage including AP crits. If armor is absent crits will be rolled anyway. Can be locational
 CACAoEDamageMult - float - multipicator for all AoE damage to unit including AoE heat and stability if applicable. (Working for weapon attacks, landmines and component explosions)
-CACAPDamageMult - float - multipicator for all AP damage to unit (only pierce through part of damage)
+CACAPDamageMult - float - multipicator for all AP damage to unit (only pierce through part of damage). Can be locational
 CACIncomingHeatMult - float - multipicator for all incoming heat (weapon attacks, landmines, burning terrain, AoE damage)
 CACIncomingStabilityMult - float - multipicator for all incoming stability (weapon attacks, landmines, burning terrain, AoE damage)
-CACAPShardsMult - float - multipicator for weapon shards TAC modifier (shardsMod = weapon.APArmorShardsMod() * unit.{CACAPShardsMult}) default 1.0
-CACAPMaxThiknessMult - float - multipicator for weapon max armor thikness TAC modifier (maxThickness = weapon.APMaxArmorThickness() * unit.{CACAPMaxThiknessMult}) default 1.0
-CAC_FlatCritChance - float - multipicator for any crit roll, default 1.0
-CAC_BaseCritChance - float - multipicator for crit roll if armor exposed, default 1.0
-CAC_APCritChance - float - multipicator for through armor crit roll, default 1.0
+CACAPShardsMult - float - multipicator for weapon shards TAC modifier (shardsMod = weapon.APArmorShardsMod() * unit.{CACAPShardsMult}) default 1.0. Can be locational
+CACAPMaxThiknessMult - float - multipicator for weapon max armor thikness TAC modifier (maxThickness = weapon.APMaxArmorThickness() * unit.{CACAPMaxThiknessMult}) default 1.0. Can be locational
+CAC_FlatCritChance - float - multipicator for any crit roll, default 1.0. Can be locational
+CAC_BaseCritChance - float - multipicator for crit roll if armor exposed, default 1.0. Can be locational
+CAC_APCritChance - float - multipicator for through armor crit roll, default 1.0. Can be locational
 CACMinefieldMult - float - multipicator for minefield triggering chance, default 1.0
 MINIMAP_JAMMED - float if greater than 0 minimap for this unit will be random gray pixels instead of real minimap
 MINIMAP_UNITS_JAMMED - float if greater than 0 enemy units will not be shown on minimap while this unit is selected
+
+DamageReductionMultiplierAll can be locational
+DamageReductionMultipliers for weapon categories can be locational
+CriticalHitChanceReceivedMultiplier can be locational
 
 {
 "debugLog":true, - enable debug log 
