@@ -177,6 +177,10 @@ WeaponAddonDef example
 	if this field is set components does not have all mentioned tags in their definitions can't be target for this statistic effect
 	"Custom":{
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
+		"AutoReplentish":{
+			"ReplentishAmount": 10 - if component is ammo box, its current ammo value will increase by this value each round (at end of round)
+			                         up to maximum capacity 
+		},
 		"ActivatableComponent":{
 			"SwitchOffOnFall": false, - if true component will be switched off on mech knockdown. You should set it to true if you want your LAM animations working properly. 
 			"ActivateOncePerRound": false, - if true component set up for auto activation on heat can be activated only once per round
