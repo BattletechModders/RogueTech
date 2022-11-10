@@ -119,6 +119,9 @@ AI related mod settings
 			"installedLocationOnly":true,     - if true user can only select weapons from same location as target for this addon
 			"autoTarget":true,     - target for this component will be selected automatically on component add to mech configuration. 
 				                     If false addon will be have no target unless user set it implicitly 
+			"notTargetable":false,  - if true instead of targeting addons will be added to all suitable weapons. 
+			                          !NOTE! "notTargetable" component will not share crits with weapon it adds modes
+									  cause they are not counted as attached. "Location":"{target}" is not resolved also
 			"WeaponAddonIds": [ "ppc_capacitor", "ppc_capacitor2" ] - list of addons. If component have multiply addons 
 			                                                          only suitable (detected by targetComponentTags) will be actually applied
 		},
