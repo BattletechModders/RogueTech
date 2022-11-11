@@ -119,6 +119,9 @@ AI related mod settings
 			"installedLocationOnly":true,     - if true user can only select weapons from same location as target for this addon
 			"autoTarget":true,     - target for this component will be selected automatically on component add to mech configuration. 
 				                     If false addon will be have no target unless user set it implicitly 
+			"notTargetable":false,  - if true instead of targeting addons will be added to all suitable weapons. 
+			                          !NOTE! "notTargetable" component will not share crits with weapon it adds modes
+									  cause they are not counted as attached. "Location":"{target}" is not resolved also
 			"WeaponAddonIds": [ "ppc_capacitor", "ppc_capacitor2" ] - list of addons. If component have multiply addons 
 			                                                          only suitable (detected by targetComponentTags) will be actually applied
 		},
@@ -177,6 +180,10 @@ WeaponAddonDef example
 	if this field is set components does not have all mentioned tags in their definitions can't be target for this statistic effect
 	"Custom":{
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
+		"AutoReplentish":{
+			"ReplentishAmount": 10 - if component is ammo box, its current ammo value will increase by this value each round (at end of round)
+			                         up to maximum capacity 
+		},
 		"ActivatableComponent":{
 			"SwitchOffOnFall": false, - if true component will be switched off on mech knockdown. You should set it to true if you want your LAM animations working properly. 
 			"ActivateOncePerRound": false, - if true component set up for auto activation on heat can be activated only once per round
