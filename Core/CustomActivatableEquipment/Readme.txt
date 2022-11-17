@@ -68,6 +68,29 @@ AI related mod settings
   "auraUpdateMinPosDelta": 20 - position delta for Position aura update fix strategy
   "auraUpdateMinTimeDelta": 2 - time delta for Time aura update fix strategy
 ------------------------------------------------------------------------------------------------------------------------
+you can make active probe ability directional (in arc) instead of range
+{
+  "Description": {
+    "Id": "AbilityDef_EWS_Ping",
+    "Name": "EWS PING",
+    "Details": "ACTION: Perform a Sensor Lock on enemies within [IntParam1] meters in 60 degrees arc, and generates [FloatParam2] Heat for the user. There is a [ActivationCooldown] round cooldown.",
+    "Icon": "uixSvgIcon_action_sensorlock"
+  },
+  "ActivationTime": "ConsumedByFiring",
+  "Targeting": "ActiveProbe",
+  "ActivationCooldown": 4,
+  "FloatParam1": 250.0,
+  "StringParam2": "arc60",   - if StringParam2 is omitted normal 360 deg. ActiveProbe will be performed. Two possible values
+                               arc60 for 60 deg. arc and arc90 for 90 deg. arc. If parameter is set for range IntParam1 will be used
+							   instead of normal FloatParam1. !Note! AI still using 360 deg. ActiveProbe with FloatParam1 range
+							   Limited arc is for player only. 
+							   !NOTE! ensure you have "targeting_arc_60" and "targeting_arc_90" PNG 2d textures in your manifest. 
+							   Directional active probe will not work if absent. 
+  "IntParam1": 350,          - range for directional active probe ping
+  "FloatParam2": 50.0,
+  "StringParam1": "Active Probe is unavailable."
+}
+------------------------------------------------------------------------------------------------------------------------
     if ComponentRefInjector is installed (ModTek 3.0+ Mods/ModTek/Injectors/ComponentRefInjector.dll)
 	you can create weapon addon component. Weapon addon can have target component - weapon it is attached to. 
 	inside MechDef in inventory list two optional fields was added. "LocalGUID" and "TargetComponentGUID"
