@@ -188,6 +188,12 @@ WeaponAddonDef example
 	                   above current is affected. 
 	Location:"{onlyone}" means location where component is installed and only one component placed in location current is affected.
 	                     Affection is tracked by effect id. 
+	Location:"{adjacent}" means ONE, just ONE location toward center from current (where component is installed). 
+	                      for normal mechs and quads, LL->LT, RL->RT, LA->LT, RA->RT, H->CT, RT->CT, LT->CT, CT->None
+						  for vehicles Rear->None, Front->None, Right->Front, Left->Front, Turret->Front
+						  for turrets, squads always None
+						  "None" no components and locations will be affected. 
+
     if ComponentRefInjector is installed (ModTek 3.0+ Mods/ModTek/Injectors/ComponentRefInjector.dll)
 	Location:"{target}" means effect will be applied only component been selected as target for this weapon addon. Refer WeaponAddonDef section. 
 
