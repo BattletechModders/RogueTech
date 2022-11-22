@@ -39,6 +39,9 @@ CAC_APCritChance - float - multipicator for through armor crit roll, default 1.0
 CACMinefieldMult - float - multipicator for minefield triggering chance, default 1.0
 MINIMAP_JAMMED - float if greater than 0 minimap for this unit will be random gray pixels instead of real minimap
 MINIMAP_UNITS_JAMMED - float if greater than 0 enemy units will not be shown on minimap while this unit is selected
+CACWeaponBlocked - bool is true weapon is counted as blocked. Note you can't unblock weapon blocked by 
+                   another weapon (blockWeaponsInMechLocations, blockWeaponsInInstalledLocation). 
+				   But you can block weapon by stat effect.
 
 DamageReductionMultiplierAll can be locational
 DamageReductionMultipliers for weapon categories can be locational
