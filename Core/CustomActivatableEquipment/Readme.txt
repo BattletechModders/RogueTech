@@ -165,6 +165,10 @@ WeaponAddonDef example
 														  dictionaries and lists fields will be concatenated all other values (strings, enums etc)
 														  replaced (if set in new mode)
 														  Note! if overriden mode becomes locked (source component damage etc) original mode become available
+														  Note! if you have two or more components overriding same original mode this will NOT create one mode
+														  result of merge of all modes, instead you will gain two or more additional modes
+														  "new mode 1" = "original mode" + "override mode A"(addon 1)
+														  "new mode 2" = "original mode" + "override mode B"(addon 2)
     {
       "Id": "overload",
       "UIName": "purple",
