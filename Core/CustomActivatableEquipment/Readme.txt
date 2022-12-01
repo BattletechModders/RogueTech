@@ -160,6 +160,11 @@ WeaponAddonDef example
 	                                                      If isBaseMode is true this mode will be forced to be default for this weapon
 														  If weapon been damaged due to jamming crit goes to addon first. 
 														  If addon been destroyed mode it added been disabled
+														  If mode with same name exists already it will be merged with original mode
+														  merge means resulting mode will have float and integer values as sum of original and new values
+														  dictionaries and lists fields will be concatenated all other values (strings, enums etc)
+														  replaced (if set in new mode)
+														  Note! if overriden mode becomes locked (source component damage etc) original mode become available
     {
       "Id": "overload",
       "UIName": "purple",
