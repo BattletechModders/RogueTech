@@ -11,16 +11,20 @@
         "CategoryID": "MaulerLaser"
       },
       {
-        "CategoryID": "CritsLaser8"
+        "CategoryID": "CritsLaser6"
       }
     ],
     "BonusDescriptions": [
-      "VariableDmg: 100",
+      "VariableDmg: 75",
       "WpnCrits: +50%",
-      "MisfireChancePerShot: 25%",
+      "WeaponJAMFlat: 30%",
+      "WpnAccuracy: 4",
+      "WpnCooldown: 1",
       "MaulerLaser",
       "LegReserved: 4",
-      "SuperheavyOnly"
+      "AAFactor: 5%",
+      "SuperheavyOnly",
+      "WeaponAttachmentCompatible: Laser Insulator"
     ],
     "ComponentExplosion": {
       "ExplosionDamage": 200,
@@ -56,36 +60,37 @@
   "Category": "Energy",
   "Type": "Laser",
   "WeaponSubType": "LargeLaser",
-  "MinRange": 0,
-  "MaxRange": 320,
+  "ForbiddenRange": 80,
+  "MinRange": 80,
+  "MaxRange": 400,
   "RangeSplit": [
-    80,
     160,
-    240
+    240,
+    320
   ],
   "AmmoCategory": "NotSet",
   "StartingAmmoCapacity": 0,
-  "HeatGenerated": 140,
-  "Damage": 500,
+  "HeatGenerated": 120,
+  "Damage": 400,
   "OverheatedDamageMultiplier": 0,
   "EvasiveDamageMultiplier": 0,
   "EvasivePipsIgnored": 15,
-  "DamageVariance": 100,
+  "DamageVariance": 75,
   "HeatDamage": 0,
   "AccuracyModifier": -4,
   "CriticalChanceMultiplier": 1.5,
-  "APArmorShardsMod": 0.1,
-  "APMaxArmorThickness": 300,
-  "APCriticalChanceMultiplier": 0.25,
+  "APArmorShardsMod": 0.15,
+  "APMaxArmorThickness": 600,
+  "APCriticalChanceMultiplier": 1,
   "AOECapable": false,
   "IndirectFireCapable": false,
   "RefireModifier": 0,
   "ShotsWhenFired": 1,
   "ProjectilesPerShot": 1,
   "AttackRecoil": 1,
-  "Instability": 25.0,
-  "Cooldown": 2,
-  "FlatJammingChance": 0.33,
+  "Instability": 20.0,
+  "Cooldown": 1,
+  "FlatJammingChance": 0.3,
   "GunneryJammingMult": 0.02,
   "GunneryJammingBase": 1,
   "FireTerrainChance": 0.8,
@@ -109,7 +114,7 @@
     "UIName": "Mauler Laser",
     "Id": "Weapon_Laser_Mauler",
     "Name": "Mauler Laser",
-    "Details": "A highly experimental super-heavy laser, developed by a black ops skunkworks division of Kali Yama. The Mauler is a brute-force energy projector that fires a massive bolt of unrestrained destruction with a wide area of effect. The Mauler almost always strikes its target, but has very limited range and needs a long time to cool down between shots. Its very high power usage and heavy strain on hardware when firing makes the Mauler practically have a custom built chassis for mounting. \n\n<b><color=#099ff2>VERY UNSTABLE AND VOLATILE!</color></b>",
+    "Details": "A highly experimental super-heavy laser, developed by a black ops skunkworks division of Kali Yama. The Mauler is a brute-force energy projector that fires a massive bolt of unrestrained destruction with a wide area of effect. The Mauler almost always strikes its target, but has very limited range and needs a long time to cool down between shots. Its very high power usage and heavy strain on hardware when firing makes the Mauler practically need a custom built chassis for mounting. \n\n<b><color=#099ff2>VERY UNSTABLE AND VOLATILE!</color></b>",
     "Icon": "uixSvgIcon_weapon_Energy"
   },
   "BonusValueA": "",
@@ -123,6 +128,34 @@
   "AllowedLocations": "CenterTorso",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
+  "statusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "AAAFactor",
+        "Name": "AA Factor",
+        "Details": "AA Factor",
+        "Icon": "uixSvgIcon_equipment_Gyro"
+      },
+      "statisticData": {
+        "statName": "AAAFactor",
+        "operation": "Float_Add",
+        "modValue": "0.05",
+        "modType": "System.Single"
+      },
+      "nature": "Buff"
+    }
+  ],
   "ComponentTags": {
     "items": [
       "MaulerLaser",
@@ -131,7 +164,9 @@
       "range_standard",
       "SuperheavyEquipment",
       "BLACKLISTED",
-      "WikiBL"
+      "WikiBL",
+      "LaserInsulatorAttachable.{location}",
+      "LaserInsulatorSupported-SingleShot"
     ],
     "tagSetSourceFile": ""
   }
