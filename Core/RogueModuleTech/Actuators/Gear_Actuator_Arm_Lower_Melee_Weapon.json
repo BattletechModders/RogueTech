@@ -7,9 +7,9 @@
     ],
     "BonusDescriptions": [
       "CBTBEPhysicalAttackAccuracyUpgrade: +1",
-      "CBTBEPhysicalDamageMulti: +10%",
+      "CBTBEPhysicalBaseModifier: +0.2, +0.1",
       "CarryWeight: +10%",
-      "ActuatorWeight: 15%"
+      "ChassisBasedWeight: 1.5%"
     ],
     "CarryCapacityFactor": 1.1,
     "Flags": [
@@ -18,9 +18,8 @@
     "IBLS": {
       "StorageSize": 1
     },
-    "InventorySorter": "00020",
     "Weights": {
-      "StructureFactor": 1.15
+      "ComponentByChassisFactor": 0.015
     }
   },
   "StatName": null,
@@ -98,7 +97,7 @@
       "statisticData": {
         "statName": "CBTBE_Punch_Target_Instability_Per_Attacker_Ton",
         "operation": "Float_Add",
-        "modValue": "0.5",
+        "modValue": "0.25",
         "modType": "System.Single"
       }
     },
@@ -167,22 +166,49 @@
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "Lower_Damage_Weapon",
+        "Id": "MeleeWeaponMechTonScaleDmg",
         "Name": "Melee Weapon Damage Mod",
         "Details": "Damage Modifier",
         "Icon": "uixSvgIcon_equipment_ActuatorArm"
       },
       "nature": "Buff",
       "statisticData": {
-        "statName": "CBTBE_Physical_Weapon_Target_Damage_Multi",
-        "operation": "Float_Multiply",
-        "modValue": "1.1",
+        "statName": "CBTBE_Physical_Weapon_Target_Damage_Per_Attacker_Ton",
+        "operation": "Float_Add",
+        "modValue": "0.2",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "MeleeWeaponMechTonScaleStability",
+        "Name": "Melee Weapon Damage Mod",
+        "Details": "Damage Modifier",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "CBTBE_Physical_Weapon_Target_Instability_Per_Attacker_Ton",
+        "operation": "Float_Add",
+        "modValue": "0.1",
         "modType": "System.Single"
       }
     }
   ],
   "ComponentTags": {
     "items": [
+      "LowerArm.{location}",
       "component_type_variant",
       "component_type_variant3",
       "QuadIncompatible",
