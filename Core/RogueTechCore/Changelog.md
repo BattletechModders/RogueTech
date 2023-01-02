@@ -1,4 +1,4 @@
-﻿## Changelog for *Roguetech - Mechattan Project 1.0*
+## Changelog for *Roguetech - Mechattan Project 1.0*
 
 #### IMPORTANT: THIS RELEASE IS SAVE BREAKING - YOUR OLD SAVES WILL *NOT* WORK WITH IT
 
