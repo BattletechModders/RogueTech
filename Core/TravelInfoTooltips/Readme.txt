@@ -1,1 +1,1 @@
-﻿adds info tooltips to travel time
+adds info tooltips to travel time
