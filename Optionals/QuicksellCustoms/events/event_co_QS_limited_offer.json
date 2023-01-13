@@ -15,7 +15,8 @@
     },
     "ExclusionTags": {
       "items": [
-        "QSofferDeclined"
+        "QSofferDeclined",
+        "QSofferUsedLow"
       ],
       "tagSetSourceFile": "Tags/CompanyTags"
     },
@@ -23,62 +24,39 @@
       {
         "obj": "Funds",
         "op": "GreaterThan",
-        "val": 5000000,
-        "valueConstant": "5000000",
-
-        "obj": "Travel",
-        "op": "Equal",
-        "val": 0,
-        "valueConstant": "0",
-
-    
-        "obj": "Reputation.MercenaryReviewBoard",
-        "op": "GreaterThanOrEqual",
-        "val": 100,
-        "valueConstant": "100"
-      
+        "val": 7000000,
+        "valueConstant": "7000000"      
       }
+
+
     ]
   },
   "AdditionalRequirements": [
     {
-      "Scope": "StarSystem",
+      "Scope": "Company",
       "RequirementTags": {
-        "items": [],
-        "tagSetSourceFile": "Tags/PlanetTags"
+      "items": [],
+      "tagSetSourceFile": ""
       },
       "ExclusionTags": {
-        "items": ["planet_pop_none"],
-        "tagSetSourceFile": "Tags/PlanetTags"
+      "items": [],
+      "tagSetSourceFile": ""
       },
-      "RequirementComparisons": []
-    },
-    {
-        "Scope": "SecondaryMechWarrior",
-        "Requirements": {
-          "Scope": "SecondaryMechWarrior",
-          "RequirementTags": {
-            "items": [
-                "pilot_merchant"
-            ],
-            "tagSetSourceFile": "Tags/PilotTags"
-          },
-          "ExclusionTags": {
-            "items": [
-              "pilot_morale_low"
-            ],
-            "tagSetSourceFile": "Tags/PilotTags"
-          },
-          "RequirementComparisons": [
-            {
-              "obj": "Injuries",
-              "op": "Equal",
-              "val": 0,
-              "valueConstant": "0"
-            }
-          ]
-        }
+      "RequirementComparisons": [
+      {
+        "obj": "Travel",
+        "op": "Equal",
+        "val": 0,
+        "valueConstant": "0"
+      },
+      {
+        "obj": "Reputation.MercenaryReviewBoard",
+        "op": "GreaterThanOrEqual",
+        "val": 1,
+        "valueConstant": "1"    
       }
+    ]
+  }
   ],
   "AdditionalObjects": [],
   "Options": [
@@ -116,8 +94,8 @@
               "Stats": null,
               "Actions": null,
               "ForceEvents": null,
-              "TemporaryResult": true,
-              "ResultDuration": 90
+              "TemporaryResult": false,
+              "ResultDuration": null
             }
           ]
         }
@@ -157,7 +135,9 @@
                 "Scope": "Company",
                 "Requirements": null,
                 "AddedTags": {
-                  "items":[],
+                  "items":[
+                    "QSofferUsedLow"
+                  ],
                   "tagSetSourceFile": "Tags/CompanyTags"
                 },
                 "RemovedTags": {
@@ -199,7 +179,9 @@
                 "Scope": "Company",
                 "Requirements": null,
                 "AddedTags": {
-                  "items":[],
+                  "items":[
+                    "QSofferUsedLow"
+                  ],
                   "tagSetSourceFile": "Tags/CompanyTags"
                 },
                 "RemovedTags": {
@@ -230,7 +212,7 @@
           },
           {
             "Description": {
-              "Id": "outcome_1_3",
+              "Id": "outcome_1_2",
               "Name": "Roll Low",
               "Details": "You Got A Low Roll!",
               "Icon": ""
@@ -241,7 +223,9 @@
                 "Scope": "Company",
                 "Requirements": null,
                 "AddedTags": {
-                  "items":[],
+                  "items":[
+                    "QSofferUsedLow"
+                  ],
                   "tagSetSourceFile": "Tags/CompanyTags"
                 },
                 "RemovedTags": {
@@ -249,13 +233,13 @@
                   "tagSetSourceFile": ""
                 },
                 "Stats": 
-                  {
+                    {
                     "typeString": "System.Int32",
                     "name": "Funds",
                     "value": "-7000000",
                     "set": false,
                     "valueConstant": null
-                  },
+                    },
                 "Actions": [
                     {
                       "Type": "System_ShowRewards",
