@@ -1,0 +1,1206 @@
+{
+  "Description" : {
+      "Id" : "event_co_QS_limited_offer",
+      "Name" : "Limited Time Offer!",
+      "Details" : "[[TGT_MW,{TGT_MW.Callsign}]] knocks on your door, catching your attention. \"Hey commander, I was going through routine business correspondence when I got a message. It looks kind of dodgy, but, well... See for yourself \" \r\n\r\nYou take a look at the message, which reads: \"Dear Sir/Madam, are you in the market for a reliable used mech, but don't have time to come and put it through it's paces? Let me tell you about this gem that fell off the back of a dropship. It's a later model Quicsell mech of high tonnage and low mileage, and I can assure you it's in excellent condition. It's a steal at the price I'm offering, and it won't be available for long. I can even have it delivered right to your dropship, and will include some extra spare parts and assorted Quicsell merchandise free of charge. So what do you say, are you ready to start tuning your new ride?\" \r\n\r\nYou turn a skeptical eye towards [[TGT_MW,{TGT_MW.Callsign}]], trying to convey your thoughts, but they continue on. \"Look, I know, alright? But I ran the numbers, and if there really is a mech in there, we'll nearly break even just by selling the thing if we don't like the look of it. I figured I'd bring it to your attention at least.\"",
+      "Icon" : "discountdanQSFP.png"
+  },
+  "Scope" : "Company",
+  "Weight" : 100000,
+  "Requirements" : {
+      "Scope" : "Company",
+      "RequirementTags" : {
+          "items" : [
+            "QSofferUsedLite"
+          ],
+          "tagSetSourceFile" : ""
+      },
+      "ExclusionTags" : {
+          "items" : [
+              "QSofferDeclined",
+              "QSofferUsedHigh"
+          ],
+          "tagSetSourceFile" : "Tags/CompanyTags"
+      },
+      "RequirementComparisons" : [
+          {
+              "obj" : "Travel",
+              "op" : "Equal",
+              "val" : 0,
+              "valueConstant" : "0"
+          },
+          {
+              "obj" : "Reputation.MercenaryReviewBoard",
+              "op" : "GreaterThanOrEqual",
+              "val" : 1,
+              "valueConstant" : "1"
+          }
+         
+      ]
+  },
+  "AdditionalRequirements" : [],
+  "AdditionalObjects" : [],
+  "Options" : [
+      {
+          "Description" : {
+              "Id" : "outcome_0",
+              "Name" : "Block that number, please. I don't want to get any more spam like this. [Disable Event]",
+              "Details" : "Non-participation Option",
+              "Icon" : ""
+          },
+          "RequirementList" : [],
+          "ResultSets" : [
+              {
+                  "Description" : {
+                      "Id" : "outcome_0_0",
+                      "Name" : "He Leaves",
+                      "Details" : "\"No problem, Commander. I won't bother you with things like this again.\"",
+                      "Icon" : ""
+                  },
+                  "Weight" : 100,
+                  "Results" : [
+                      {
+                          "Scope" : "Company",
+                          "Requirements" : null,
+                          "AddedTags" : {
+                              "items" : [
+                                  "QSofferDeclined"
+                              ],
+                              "tagSetSourceFile" : "Tags/CompanyTags"
+                          },
+                          "RemovedTags" : {
+                              "items" : [],
+                              "tagSetSourceFile" : ""
+                          },
+                          "Stats" : null,
+                          "Actions" : null,
+                          "ForceEvents" : null,
+                          "TemporaryResult" : false,
+                          "ResultDuration" : 0
+                      }
+                  ]
+              }
+          ],
+          "Requirements" : {
+              "Scope" : "Company",
+              "RequirementTags" : {
+                  "items" : [],
+                  "tagSetSourceFile" : ""
+              },
+              "ExclusionTags" : {
+                  "items" : [],
+                  "tagSetSourceFile" : ""
+              },
+              "RequirementComparisons" : []
+          }
+      },
+      {
+          "Description" : {
+              "Id" : "outcome_1",
+              "Name" : "\"Low Tier\" (\u00A21million)",
+              "Details" : "Low Tier",
+              "Icon" : null
+          },
+          "RequirementList" : [
+            {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : "Tags/CompanyTags"
+                },
+                "RequirementComparisons" : [
+                    {
+                        "obj" : "Funds",
+                        "op" : "GreaterThan",
+                        "val" : 1000000,
+                        "valueConstant" : "1000000"
+                    }
+                   
+                ]
+            }
+          ],
+          "ResultSets" : [
+              {
+                  "Description" : {
+                      "Id" : "outcome_1_0",
+                      "Name" : "Roll Low",
+                      "Details" : "Debug: Low Roll  Yang is scowling slightly as he gestures to the sorted bins of parts. \"Knew it was too good to be true. We wired the money when the weight was a rough match and the scanners showed the shape of a mech stripped down for storage, but it was actually just crates of Quicsell parts packed into the tie-down configuration for an actual mech. You aren't totally hosed, but those parts aren't worth what you paid for them unless you bought them all brand new from the factory.\"",
+                      "Icon" : null
+                  },
+                  "Weight" : 30,
+                  "Results" : [
+                      {
+                          "Scope" : "Company",
+                          "Requirements" : null,
+                          "AddedTags" : {
+                              "items" : [],
+                              "tagSetSourceFile" : "Tags/CompanyTags"
+                          },
+                          "RemovedTags" : {
+                              "items" : [],
+                              "tagSetSourceFile" : ""
+                          },
+                          "Stats" : null,
+                          "Actions" : [
+                              {
+                                  "Type" : "System_ShowRewards",
+                                  "value" : "itemCollection_LimitedTimeOffer1_Low",
+                                  "valueConstant" : null,
+                                  "additionalValues" : null
+                              }
+                          ],
+                          "ForceEvents" : null,
+                          "TemporaryResult" : false,
+                          "ResultDuration" : 0
+                      },
+                      {
+                          "Scope" : "Company",
+                          "Requirements" : null,
+                          "AddedTags" : {
+                              "items" : [
+                                  "QSofferUsedHigh"
+                              ],
+                              "tagSetSourceFile" : ""
+                          },
+                          "RemovedTags" : {
+                              "items" : [],
+                              "tagSetSourceFile" : ""
+                          },
+                          "Stats" : null,
+                          "Actions" : null,
+                          "ForceEvents" : null,
+                          "TemporaryResult" : true,
+                          "ResultDuration" : 1
+                      },
+                      {
+                        "Scope": "Company",
+                        "Requirements": null,
+                        "AddedTags": {
+                          "items": [],
+                          "tagSetSourceFile": ""
+                        },
+                        "RemovedTags": {
+                          "items": [],
+                          "tagSetSourceFile": ""
+                        },
+                        "Stats": [
+                          {
+                            "typeString": "System.Int32",
+                            "name": "Funds",
+                            "value": "-1000000",
+                            "set": false,
+                            "valueConstant": null
+                          }
+                        ],
+                        "Actions": null,
+                        "ForceEvents": null,
+                        "TemporaryResult": false,
+                        "ResultDuration": 0
+                      }
+                  ]
+              },
+              {
+                  "Description" : {
+                      "Id" : "outcome_1_1",
+                      "Name" : "Roll Medium",
+                      "Details" : "Debug: Med Roll  You and Yang walk down the hall, having just inspected your new mech, Yang gesturing wildly with his robotic hand. \"I mean, if we decide to scrap the thing, we still lost some money, but I'm just amazed we ended up with a mech at all. They even included those extra parts they said they would.\"",
+                      "Icon" : null
+                  },
+                  "Weight" : 30,
+                  "Results" : [
+                      {
+                          "Scope" : "Company",
+                          "Requirements" : null,
+                          "AddedTags" : {
+                              "items" : [
+                                  "QSofferUsedHigh"
+                              ],
+                              "tagSetSourceFile" : "Tags/CompanyTags"
+                          },
+                          "RemovedTags" : {
+                              "items" : [],
+                              "tagSetSourceFile" : ""
+                          },
+                          "Stats" :null,
+                          "Actions" : [
+                              {
+                                  "Type" : "System_ShowRewards",
+                                  "value" : "itemCollection_LimitedTimeOffer1_Medium",
+                                  "valueConstant" : null,
+                                  "additionalValues" : null
+                              }
+                          ],
+                          "ForceEvents" : null,
+                          "TemporaryResult" : false,
+                          "ResultDuration" : null
+                      },
+                      {
+                        "Scope" : "Company",
+                        "Requirements" : null,
+                        "AddedTags" : {
+                            "items" : [
+                                "QSofferUsedHigh"
+                            ],
+                            "tagSetSourceFile" : ""
+                        },
+                        "RemovedTags" : {
+                            "items" : [],
+                            "tagSetSourceFile" : ""
+                        },
+                        "Stats" : null,
+                        "Actions" : null,
+                        "ForceEvents" : null,
+                        "TemporaryResult" : true,
+                        "ResultDuration" : 1
+                    },
+                    {
+                      "Scope": "Company",
+                      "Requirements": null,
+                      "AddedTags": {
+                        "items": [],
+                        "tagSetSourceFile": ""
+                      },
+                      "RemovedTags": {
+                        "items": [],
+                        "tagSetSourceFile": ""
+                      },
+                      "Stats": [
+                        {
+                          "typeString": "System.Int32",
+                          "name": "Funds",
+                          "value": "-2000000",
+                          "set": false,
+                          "valueConstant": null
+                        }
+                      ],
+                      "Actions": null,
+                      "ForceEvents": null,
+                      "TemporaryResult": false,
+                      "ResultDuration": 0
+                    }
+                  ]
+              },
+              {
+                "Description" : {
+                    "Id" : "outcome_1_2",
+                    "Name" : "Roll High",
+                    "Details" : "Debug: High Roll  You and Yang walk down the hall, having just inspected your new mech, Yang gesturing wildly with his robotic hand. \"I mean, if we decide to scrap the thing, we still lost some money, but I'm just amazed we ended up with a mech at all. They even included those extra parts they said they would.\"",
+                    "Icon" : null
+                },
+                "Weight" : 20,
+                "Results" : [
+                    {
+                        "Scope" : "Company",
+                        "Requirements" : null,
+                        "AddedTags" : {
+                            "items" : [
+                                "QSofferUsedHigh"
+                            ],
+                            "tagSetSourceFile" : "Tags/CompanyTags"
+                        },
+                        "RemovedTags" : {
+                            "items" : [],
+                            "tagSetSourceFile" : ""
+                        },
+                        "Stats" :null,
+                        "Actions" : [
+                            {
+                                "Type" : "System_ShowRewards",
+                                "value" : "itemCollection_LimitedTimeOffer1_High",
+                                "valueConstant" : null,
+                                "additionalValues" : null
+                            }
+                        ],
+                        "ForceEvents" : null,
+                        "TemporaryResult" : false,
+                        "ResultDuration" : null
+                    },
+                    {
+                      "Scope" : "Company",
+                      "Requirements" : null,
+                      "AddedTags" : {
+                          "items" : [
+                              "QSofferUsedHigh"
+                          ],
+                          "tagSetSourceFile" : ""
+                      },
+                      "RemovedTags" : {
+                          "items" : [],
+                          "tagSetSourceFile" : ""
+                      },
+                      "Stats" : null,
+                      "Actions" : null,
+                      "ForceEvents" : null,
+                      "TemporaryResult" : true,
+                      "ResultDuration" : 1
+                  },
+                  {
+                    "Scope": "Company",
+                    "Requirements": null,
+                    "AddedTags": {
+                      "items": [],
+                      "tagSetSourceFile": ""
+                    },
+                    "RemovedTags": {
+                      "items": [],
+                      "tagSetSourceFile": ""
+                    },
+                    "Stats": [
+                      {
+                        "typeString": "System.Int32",
+                        "name": "Funds",
+                        "value": "-2000000",
+                        "set": false,
+                        "valueConstant": null
+                      }
+                    ],
+                    "Actions": null,
+                    "ForceEvents": null,
+                    "TemporaryResult": false,
+                    "ResultDuration": 0
+                  }
+                ]
+            },
+              {
+                "Description" : {
+                    "Id" : "outcome_1_3",
+                    "Name" : "Roll Scam",
+                    "Details" : "Debug: Scam Roll  Were we just scammed?",
+                    "Icon" : null
+                },
+                "Weight" : 20,
+                "Results" : [
+                    {
+                        "Scope" : "Company",
+                        "Requirements" : null,
+                        "AddedTags" : {
+                            "items" : [
+                                "QSofferUsedHigh"
+                            ],
+                            "tagSetSourceFile" : "Tags/CompanyTags"
+                        },
+                        "RemovedTags" : {
+                            "items" : [],
+                            "tagSetSourceFile" : ""
+                        },
+                        "Stats" :null,
+                        "Actions" : [
+                            {
+                                "Type" : "System_ShowRewards",
+                                "value" : "itemCollection_LimitedTimeOffer1_Scam",
+                                "valueConstant" : null,
+                                "additionalValues" : null
+                            }
+                        ],
+                        "ForceEvents" : null,
+                        "TemporaryResult" : false,
+                        "ResultDuration" : null
+                    },
+                    {
+                      "Scope" : "Company",
+                      "Requirements" : null,
+                      "AddedTags" : {
+                          "items" : [
+                              "QSofferUsedHigh"
+                          ],
+                          "tagSetSourceFile" : ""
+                      },
+                      "RemovedTags" : {
+                          "items" : [],
+                          "tagSetSourceFile" : ""
+                      },
+                      "Stats" : null,
+                      "Actions" : null,
+                      "ForceEvents" : null,
+                      "TemporaryResult" : true,
+                      "ResultDuration" : 1
+                  },
+                  {
+                    "Scope": "Company",
+                    "Requirements": null,
+                    "AddedTags": {
+                      "items": [],
+                      "tagSetSourceFile": ""
+                    },
+                    "RemovedTags": {
+                      "items": [],
+                      "tagSetSourceFile": ""
+                    },
+                    "Stats": [
+                      {
+                        "typeString": "System.Int32",
+                        "name": "Funds",
+                        "value": "-500000",
+                        "set": false,
+                        "valueConstant": null
+                      }
+                    ],
+                    "Actions": null,
+                    "ForceEvents": null,
+                    "TemporaryResult": false,
+                    "ResultDuration": 0
+                  }
+                ]
+            }
+            
+          ],
+          "Requirements" : {
+              "Scope" : "Company",
+              "RequirementTags" : {
+                  "items" : [],
+                  "tagSetSourceFile" : ""
+              },
+              "ExclusionTags" : {
+                  "items" : [],
+                  "tagSetSourceFile" : ""
+              },
+              "RequirementComparisons" : []
+          }
+      },
+
+      {
+        "Description" : {
+            "Id" : "outcome_2",
+            "Name" : "\"Mid Tier\" (\u00A22million)",
+            "Details" : "Mid Tier",
+            "Icon" : null
+        },
+        "RequirementList" : [
+            {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : "Tags/CompanyTags"
+                },
+                "RequirementComparisons" : [
+                    {
+                        "obj" : "Funds",
+                        "op" : "GreaterThan",
+                        "val" : 2000000,
+                        "valueConstant" : "2000000"
+                    }
+                   
+                ]
+            }
+        ],
+        "ResultSets" : [
+            {
+                "Description" : {
+                    "Id" : "outcome_2_0",
+                    "Name" : "Roll Low",
+                    "Details" : "Debug: Low Roll  Yang is scowling slightly as he gestures to the sorted bins of parts. \"Knew it was too good to be true. We wired the money when the weight was a rough match and the scanners showed the shape of a mech stripped down for storage, but it was actually just crates of Quicsell parts packed into the tie-down configuration for an actual mech. You aren't totally hosed, but those parts aren't worth what you paid for them unless you bought them all brand new from the factory.\"",
+                    "Icon" : null
+                },
+                "Weight" : 30,
+                "Results" : [
+                    {
+                        "Scope" : "Company",
+                        "Requirements" : null,
+                        "AddedTags" : {
+                            "items" : [],
+                            "tagSetSourceFile" : "Tags/CompanyTags"
+                        },
+                        "RemovedTags" : {
+                            "items" : [],
+                            "tagSetSourceFile" : ""
+                        },
+                        "Stats" : null,
+                        "Actions" : [
+                            {
+                                "Type" : "System_ShowRewards",
+                                "value" : "itemCollection_LimitedTimeOffer2_Low",
+                                "valueConstant" : null,
+                                "additionalValues" : null
+                            }
+                        ],
+                        "ForceEvents" : null,
+                        "TemporaryResult" : false,
+                        "ResultDuration" : 0
+                    },
+                    {
+                        "Scope" : "Company",
+                        "Requirements" : null,
+                        "AddedTags" : {
+                            "items" : [
+                                "QSofferUsedHigh"
+                            ],
+                            "tagSetSourceFile" : ""
+                        },
+                        "RemovedTags" : {
+                            "items" : [],
+                            "tagSetSourceFile" : ""
+                        },
+                        "Stats" : null,
+                        "Actions" : null,
+                        "ForceEvents" : null,
+                        "TemporaryResult" : true,
+                        "ResultDuration" : 1
+                    },
+                    {
+                      "Scope": "Company",
+                      "Requirements": null,
+                      "AddedTags": {
+                        "items": [],
+                        "tagSetSourceFile": ""
+                      },
+                      "RemovedTags": {
+                        "items": [],
+                        "tagSetSourceFile": ""
+                      },
+                      "Stats": [
+                        {
+                          "typeString": "System.Int32",
+                          "name": "Funds",
+                          "value": "-2000000",
+                          "set": false,
+                          "valueConstant": null
+                        }
+                      ],
+                      "Actions": null,
+                      "ForceEvents": null,
+                      "TemporaryResult": false,
+                      "ResultDuration": 0
+                    }
+                ]
+            },
+            {
+                "Description" : {
+                    "Id" : "outcome_2_1",
+                    "Name" : "Roll Medium",
+                    "Details" : "Debug: Med Roll  You and Yang walk down the hall, having just inspected your new mech, Yang gesturing wildly with his robotic hand. \"I mean, if we decide to scrap the thing, we still lost some money, but I'm just amazed we ended up with a mech at all. They even included those extra parts they said they would.\"",
+                    "Icon" : null
+                },
+                "Weight" : 40,
+                "Results" : [
+                    {
+                        "Scope" : "Company",
+                        "Requirements" : null,
+                        "AddedTags" : {
+                            "items" : [
+                                "QSofferUsedHigh"
+                            ],
+                            "tagSetSourceFile" : "Tags/CompanyTags"
+                        },
+                        "RemovedTags" : {
+                            "items" : [],
+                            "tagSetSourceFile" : ""
+                        },
+                        "Stats" :null,
+                        "Actions" : [
+                            {
+                                "Type" : "System_ShowRewards",
+                                "value" : "itemCollection_LimitedTimeOffer2_Medium",
+                                "valueConstant" : null,
+                                "additionalValues" : null
+                            }
+                        ],
+                        "ForceEvents" : null,
+                        "TemporaryResult" : false,
+                        "ResultDuration" : null
+                    },
+                    {
+                      "Scope" : "Company",
+                      "Requirements" : null,
+                      "AddedTags" : {
+                          "items" : [
+                              "QSofferUsedHigh"
+                          ],
+                          "tagSetSourceFile" : ""
+                      },
+                      "RemovedTags" : {
+                          "items" : [],
+                          "tagSetSourceFile" : ""
+                      },
+                      "Stats" : null,
+                      "Actions" : null,
+                      "ForceEvents" : null,
+                      "TemporaryResult" : true,
+                      "ResultDuration" : 1
+                  },
+                  {
+                    "Scope": "Company",
+                    "Requirements": null,
+                    "AddedTags": {
+                      "items": [],
+                      "tagSetSourceFile": ""
+                    },
+                    "RemovedTags": {
+                      "items": [],
+                      "tagSetSourceFile": ""
+                    },
+                    "Stats": [
+                      {
+                        "typeString": "System.Int32",
+                        "name": "Funds",
+                        "value": "-2000000",
+                        "set": false,
+                        "valueConstant": null
+                      }
+                    ],
+                    "Actions": null,
+                    "ForceEvents": null,
+                    "TemporaryResult": false,
+                    "ResultDuration": 0
+                  }
+                ]
+            },
+            {
+                "Description" : {
+                    "Id" : "outcome_2_2",
+                    "Name" : "Roll High",
+                    "Details" : "Debug: High Roll  You and Yang walk down the hall, having just inspected your new mech, Yang gesturing wildly with his robotic hand. \"I mean, if we decide to scrap the thing, we still lost some money, but I'm just amazed we ended up with a mech at all. They even included those extra parts they said they would.\"",
+                    "Icon" : null
+                },
+                "Weight" : 20,
+                "Results" : [
+                    {
+                        "Scope" : "Company",
+                        "Requirements" : null,
+                        "AddedTags" : {
+                            "items" : [
+                                "QSofferUsedHigh"
+                            ],
+                            "tagSetSourceFile" : "Tags/CompanyTags"
+                        },
+                        "RemovedTags" : {
+                            "items" : [],
+                            "tagSetSourceFile" : ""
+                        },
+                        "Stats" :null,
+                        "Actions" : [
+                            {
+                                "Type" : "System_ShowRewards",
+                                "value" : "itemCollection_LimitedTimeOffer2_High",
+                                "valueConstant" : null,
+                                "additionalValues" : null
+                            }
+                        ],
+                        "ForceEvents" : null,
+                        "TemporaryResult" : false,
+                        "ResultDuration" : null
+                    },
+                    {
+                      "Scope" : "Company",
+                      "Requirements" : null,
+                      "AddedTags" : {
+                          "items" : [
+                              "QSofferUsedHigh"
+                          ],
+                          "tagSetSourceFile" : ""
+                      },
+                      "RemovedTags" : {
+                          "items" : [],
+                          "tagSetSourceFile" : ""
+                      },
+                      "Stats" : null,
+                      "Actions" : null,
+                      "ForceEvents" : null,
+                      "TemporaryResult" : true,
+                      "ResultDuration" : 1
+                  },
+                  {
+                    "Scope": "Company",
+                    "Requirements": null,
+                    "AddedTags": {
+                      "items": [],
+                      "tagSetSourceFile": ""
+                    },
+                    "RemovedTags": {
+                      "items": [],
+                      "tagSetSourceFile": ""
+                    },
+                    "Stats": [
+                      {
+                        "typeString": "System.Int32",
+                        "name": "Funds",
+                        "value": "-2000000",
+                        "set": false,
+                        "valueConstant": null
+                      }
+                    ],
+                    "Actions": null,
+                    "ForceEvents": null,
+                    "TemporaryResult": false,
+                    "ResultDuration": 0
+                  }
+                ]
+            },
+            {
+              "Description" : {
+                  "Id" : "outcome_2_3",
+                  "Name" : "Roll Scam",
+                  "Details" : "Were we just scammed?",
+                  "Icon" : null
+              },
+              "Weight" : 10,
+              "Results" : [
+                  {
+                      "Scope" : "Company",
+                      "Requirements" : null,
+                      "AddedTags" : {
+                          "items" : [
+                              "QSofferUsedHigh"
+                          ],
+                          "tagSetSourceFile" : "Tags/CompanyTags"
+                      },
+                      "RemovedTags" : {
+                          "items" : [],
+                          "tagSetSourceFile" : ""
+                      },
+                      "Stats" :null,
+                      "Actions" : [
+                          {
+                              "Type" : "System_ShowRewards",
+                              "value" : "itemCollection_LimitedTimeOffer2_Scam",
+                              "valueConstant" : null,
+                              "additionalValues" : null
+                          }
+                      ],
+                      "ForceEvents" : null,
+                      "TemporaryResult" : false,
+                      "ResultDuration" : null
+                  },
+                  {
+                    "Scope" : "Company",
+                    "Requirements" : null,
+                    "AddedTags" : {
+                        "items" : [
+                            "QSofferUsedHigh"
+                        ],
+                        "tagSetSourceFile" : ""
+                    },
+                    "RemovedTags" : {
+                        "items" : [],
+                        "tagSetSourceFile" : ""
+                    },
+                    "Stats" : null,
+                    "Actions" : null,
+                    "ForceEvents" : null,
+                    "TemporaryResult" : true,
+                    "ResultDuration" : 1
+                },
+                {
+                  "Scope": "Company",
+                  "Requirements": null,
+                  "AddedTags": {
+                    "items": [],
+                    "tagSetSourceFile": ""
+                  },
+                  "RemovedTags": {
+                    "items": [],
+                    "tagSetSourceFile": ""
+                  },
+                  "Stats": [
+                    {
+                      "typeString": "System.Int32",
+                      "name": "Funds",
+                      "value": "-1000000",
+                      "set": false,
+                      "valueConstant": null
+                    }
+                  ],
+                  "Actions": null,
+                  "ForceEvents": null,
+                  "TemporaryResult": false,
+                  "ResultDuration": 0
+                }
+              ]
+          }
+        ],
+        "Requirements" : {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "items" : [],
+                "tagSetSourceFile" : ""
+            },
+            "ExclusionTags" : {
+                "items" : [],
+                "tagSetSourceFile" : ""
+            },
+            "RequirementComparisons" : []
+        }
+    },
+
+    {
+        "Description" : {
+            "Id" : "outcome_3",
+            "Name" : "\"HighTier\" (\u00A23million)",
+            "Details" : "High Tier",
+            "Icon" : null
+        },
+        "RequirementList" : [
+            {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : "Tags/CompanyTags"
+                },
+                "RequirementComparisons" : [
+                    {
+                        "obj" : "Funds",
+                        "op" : "GreaterThan",
+                        "val" : 3000000,
+                        "valueConstant" : "3000000"
+                    }
+                   
+                ]
+            }
+        ],
+        "ResultSets" : [
+            {
+                "Description" : {
+                    "Id" : "outcome_3_0",
+                    "Name" : "Roll Low",
+                    "Details" : "Debug: Low Roll  Yang is scowling slightly as he gestures to the sorted bins of parts. \"Knew it was too good to be true. We wired the money when the weight was a rough match and the scanners showed the shape of a mech stripped down for storage, but it was actually just crates of Quicsell parts packed into the tie-down configuration for an actual mech. You aren't totally hosed, but those parts aren't worth what you paid for them unless you bought them all brand new from the factory.\"",
+                    "Icon" : null
+                },
+                "Weight" : 30,
+                "Results" : [
+                    {
+                        "Scope" : "Company",
+                        "Requirements" : null,
+                        "AddedTags" : {
+                            "items" : [],
+                            "tagSetSourceFile" : "Tags/CompanyTags"
+                        },
+                        "RemovedTags" : {
+                            "items" : [],
+                            "tagSetSourceFile" : ""
+                        },
+                        "Stats" : null,
+                        "Actions" : [
+                            {
+                                "Type" : "System_ShowRewards",
+                                "value" : "itemCollection_LimitedTimeOffer2_Medium",
+                                "valueConstant" : null,
+                                "additionalValues" : null
+                            }
+                        ],
+                        "ForceEvents" : null,
+                        "TemporaryResult" : false,
+                        "ResultDuration" : 0
+                    },
+                    {
+                        "Scope" : "Company",
+                        "Requirements" : null,
+                        "AddedTags" : {
+                            "items" : [
+                                "QSofferUsedHigh"
+                            ],
+                            "tagSetSourceFile" : ""
+                        },
+                        "RemovedTags" : {
+                            "items" : [],
+                            "tagSetSourceFile" : ""
+                        },
+                        "Stats" : null,
+                        "Actions" : null,
+                        "ForceEvents" : null,
+                        "TemporaryResult" : true,
+                        "ResultDuration" : 1
+                    },
+                    {
+                      "Scope": "Company",
+                      "Requirements": null,
+                      "AddedTags": {
+                        "items": [],
+                        "tagSetSourceFile": ""
+                      },
+                      "RemovedTags": {
+                        "items": [],
+                        "tagSetSourceFile": ""
+                      },
+                      "Stats": [
+                        {
+                          "typeString": "System.Int32",
+                          "name": "Funds",
+                          "value": "-3000000",
+                          "set": false,
+                          "valueConstant": null
+                        }
+                      ],
+                      "Actions": null,
+                      "ForceEvents": null,
+                      "TemporaryResult": false,
+                      "ResultDuration": 0
+                    }
+                ]
+            },
+            {
+                "Description" : {
+                    "Id" : "outcome_3_1",
+                    "Name" : "Roll Medium",
+                    "Details" : "Debug: Med Roll  You and Yang walk down the hall, having just inspected your new mech, Yang gesturing wildly with his robotic hand. \"I mean, if we decide to scrap the thing, we still lost some money, but I'm just amazed we ended up with a mech at all. They even included those extra parts they said they would.\"",
+                    "Icon" : null
+                },
+                "Weight" : 40,
+                "Results" : [
+                    {
+                        "Scope" : "Company",
+                        "Requirements" : null,
+                        "AddedTags" : {
+                            "items" : [
+                                "QSofferUsedHigh"
+                            ],
+                            "tagSetSourceFile" : "Tags/CompanyTags"
+                        },
+                        "RemovedTags" : {
+                            "items" : [],
+                            "tagSetSourceFile" : ""
+                        },
+                        "Stats" :null,
+                        "Actions" : [
+                            {
+                                "Type" : "System_ShowRewards",
+                                "value" : "itemCollection_LimitedTimeOffer2_High",
+                                "valueConstant" : null,
+                                "additionalValues" : null
+                            }
+                        ],
+                        "ForceEvents" : null,
+                        "TemporaryResult" : false,
+                        "ResultDuration" : null
+                    },
+                    {
+                      "Scope" : "Company",
+                      "Requirements" : null,
+                      "AddedTags" : {
+                          "items" : [
+                              "QSofferUsedHigh"
+                          ],
+                          "tagSetSourceFile" : ""
+                      },
+                      "RemovedTags" : {
+                          "items" : [],
+                          "tagSetSourceFile" : ""
+                      },
+                      "Stats" : null,
+                      "Actions" : null,
+                      "ForceEvents" : null,
+                      "TemporaryResult" : true,
+                      "ResultDuration" : 1
+                  },
+                  {
+                    "Scope": "Company",
+                    "Requirements": null,
+                    "AddedTags": {
+                      "items": [],
+                      "tagSetSourceFile": ""
+                    },
+                    "RemovedTags": {
+                      "items": [],
+                      "tagSetSourceFile": ""
+                    },
+                    "Stats": [
+                      {
+                        "typeString": "System.Int32",
+                        "name": "Funds",
+                        "value": "-3000000",
+                        "set": false,
+                        "valueConstant": null
+                      }
+                    ],
+                    "Actions": null,
+                    "ForceEvents": null,
+                    "TemporaryResult": false,
+                    "ResultDuration": 0
+                  }
+                ]
+            },
+            {
+                "Description" : {
+                    "Id" : "outcome_3_2",
+                    "Name" : "Roll High",
+                    "Details" : "Debug: High Roll  You and Yang walk down the hall, having just inspected your new mech, Yang gesturing wildly with his robotic hand. \"I mean, if we decide to scrap the thing, we still lost some money, but I'm just amazed we ended up with a mech at all. They even included those extra parts they said they would.\"",
+                    "Icon" : null
+                },
+                "Weight" : 20,
+                "Results" : [
+                    {
+                        "Scope" : "Company",
+                        "Requirements" : null,
+                        "AddedTags" : {
+                            "items" : [
+                                "QSofferUsedHigh"
+                            ],
+                            "tagSetSourceFile" : "Tags/CompanyTags"
+                        },
+                        "RemovedTags" : {
+                            "items" : [],
+                            "tagSetSourceFile" : ""
+                        },
+                        "Stats" :null,
+                        "Actions" : [
+                            {
+                                "Type" : "System_ShowRewards",
+                                "value" : "itemCollection_LimitedTimeOffer2_High_Plus",
+                                "valueConstant" : null,
+                                "additionalValues" : null
+                            }
+                        ],
+                        "ForceEvents" : null,
+                        "TemporaryResult" : false,
+                        "ResultDuration" : null
+                    },
+                    {
+                      "Scope" : "Company",
+                      "Requirements" : null,
+                      "AddedTags" : {
+                          "items" : [
+                              "QSofferUsedHigh"
+                          ],
+                          "tagSetSourceFile" : ""
+                      },
+                      "RemovedTags" : {
+                          "items" : [],
+                          "tagSetSourceFile" : ""
+                      },
+                      "Stats" : null,
+                      "Actions" : null,
+                      "ForceEvents" : null,
+                      "TemporaryResult" : true,
+                      "ResultDuration" : 1
+                  },
+                  {
+                    "Scope": "Company",
+                    "Requirements": null,
+                    "AddedTags": {
+                      "items": [],
+                      "tagSetSourceFile": ""
+                    },
+                    "RemovedTags": {
+                      "items": [],
+                      "tagSetSourceFile": ""
+                    },
+                    "Stats": [
+                      {
+                        "typeString": "System.Int32",
+                        "name": "Funds",
+                        "value": "-3000000",
+                        "set": false,
+                        "valueConstant": null
+                      }
+                    ],
+                    "Actions": null,
+                    "ForceEvents": null,
+                    "TemporaryResult": false,
+                    "ResultDuration": 0
+                  }
+                ]
+            },
+            {
+              "Description" : {
+                  "Id" : "outcome_3_3",
+                  "Name" : "Roll Scam",
+                  "Details" : "Were we just scammed?",
+                  "Icon" : null
+              },
+              "Weight" : 10,
+              "Results" : [
+                  {
+                      "Scope" : "Company",
+                      "Requirements" : null,
+                      "AddedTags" : {
+                          "items" : [
+                              "QSofferUsedHigh"
+                          ],
+                          "tagSetSourceFile" : "Tags/CompanyTags"
+                      },
+                      "RemovedTags" : {
+                          "items" : [],
+                          "tagSetSourceFile" : ""
+                      },
+                      "Stats" :null,
+                      "Actions" : [
+                          {
+                              "Type" : "System_ShowRewards",
+                              "value" : "itemCollection_LimitedTimeOffer1_Low",
+                              "valueConstant" : null,
+                              "additionalValues" : null
+                          }
+                      ],
+                      "ForceEvents" : null,
+                      "TemporaryResult" : false,
+                      "ResultDuration" : null
+                  },
+                  {
+                    "Scope" : "Company",
+                    "Requirements" : null,
+                    "AddedTags" : {
+                        "items" : [
+                            "QSofferUsedHigh"
+                        ],
+                        "tagSetSourceFile" : ""
+                    },
+                    "RemovedTags" : {
+                        "items" : [],
+                        "tagSetSourceFile" : ""
+                    },
+                    "Stats" : null,
+                    "Actions" : null,
+                    "ForceEvents" : null,
+                    "TemporaryResult" : true,
+                    "ResultDuration" : 1
+                },
+                {
+                  "Scope": "Company",
+                  "Requirements": null,
+                  "AddedTags": {
+                    "items": [],
+                    "tagSetSourceFile": ""
+                  },
+                  "RemovedTags": {
+                    "items": [],
+                    "tagSetSourceFile": ""
+                  },
+                  "Stats": [
+                    {
+                      "typeString": "System.Int32",
+                      "name": "Funds",
+                      "value": "-1500000",
+                      "set": false,
+                      "valueConstant": null
+                    }
+                  ],
+                  "Actions": null,
+                  "ForceEvents": null,
+                  "TemporaryResult": false,
+                  "ResultDuration": 0
+                }
+              ]
+          }
+        ],
+        "Requirements" : {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "items" : [],
+                "tagSetSourceFile" : ""
+            },
+            "ExclusionTags" : {
+                "items" : [],
+                "tagSetSourceFile" : ""
+            },
+            "RequirementComparisons" : []
+        }
+    }
+  ],
+  "PublishState" : "PUBLISHED",
+  "ValidationState" : "UNTESTED",
+  "EventType" : "NORMAL",
+  "Tags" : {
+      "items" : [],
+      "tagSetSourceFile" : "tags/EventTags"
+  }
+}
