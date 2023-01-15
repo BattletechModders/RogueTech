@@ -6,35 +6,40 @@
       },
       {
         "CategoryID": "EnginePart"
-      },
-      {
-        "CategoryID": "Cooling"
-      },
-      {
-        "CategoryID": "EngineHeatBlock"
       }
     ],
     "WorkOrderCosts": {
       "Install": {
         "TechCost": "0.5 * [[Chassis.Tonnage]]",
-        "CBillCost": "125 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+        "CBillCost": "100 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
       }
     },
     "BonusDescriptions": [
-      "EngineWeight: X1.6",
-      "HeatGenerated: -60%",
-      "ArmorTPCost: -10%",
-      "ArmorCBCost: -10%",
+      "EngineWeight: X2",
+      "WalkSpeed: -20%",
+      "Visibility: +25%",
+      "Signature: +25%",
+      "PingSelf: +2",
+      "HeatGenerated: -40%",
+      "ArmorTPCost: -20%",
+      "ArmorCBCost: -30%",
       "CoolantCost: 4",
-      "CoolantCostMulti: -40%"
+      "CoolantCostMulti: -50%"
     ],
     "ActivatableComponent": {
       "ExplodeOnDamage": true,
       "CanNotBeActivatedManualy": true,
       "NoUniqueCheck": true,
+      "presistantVFXOutOfLOSHide": true,
+      "presistantVFX": {
+        "VFXPrefab": "vfxPrfPrtl_smokeStackPlume_sm_loop",
+        "VFXScaleX": 0.5,
+        "VFXScaleY": 0.5,
+        "VFXScaleZ": 0.5
+      },
       "Explosion": {
         "Chance": 0.01,
-        "ExplosionMessage": "Core Meltdown!",
+        "ExplosionMessage": "Engine Explosion!",
         "VFX": "vfxPrfPrtl_artilleryImpact_single",
         "TempDesignMask": "DesignMaskSmoke",
         "VFXActorStat": "EngineExplodeVFX",
@@ -54,37 +59,33 @@
       "statusEffects": []
     },
     "ArmorRepair": {
-      "ArmorTPCost": 0.9,
-      "ArmorCBCost": 0.9
+      "ArmorTPCost": 0.8,
+      "ArmorCBCost": 0.7
     },
-    "Cooling": {
-      "HeatSinkDefId": "Gear_HeatSink_Single"
-    },
-    "EngineHeatBlock": 0,
     "Flags": [
       "vital"
     ],
     "HeatSinkingCost": {
       "HeatUpkeepCost": 4,
-      "HeatUpkeepMult": 0.6
+      "HeatUpkeepMult": 0.5
     },
     "IBLS": {
-      "StorageSize": 3
+      "StorageSize": 2
     },
     "Weights": {
-      "EngineFactor": 1.6
+      "EngineFactor": 2
     }
   },
   "Description": {
-    "Cost": 550000,
-    "Rarity": 1,
+    "Cost": 250000,
+    "Rarity": 2,
     "Purchasable": false,
     "Manufacturer": "Vlar",
-    "Model": "Fuel Cell",
-    "UIName": "Engine Fuel Cell",
-    "Id": "Lootable_Gear_Engine_FuelCell",
-    "Name": "Fuel Cell Engine",
-    "Details": "Fuel Cell engines are primarily used in civilian applications like rail systems, personal transport, and IndustrialMechs. Fuel Cell engines generate electrical power that is then used by the vehicle to operate its propulsion system. A Fuel Cell engine has several advantages over the typical Internal Combustion Engine. While they require an oxidizer to operate, they are readily able to accept a stored oxidizer along with their fuel, making it a good choice for submarines, satellites, and naval applications. As most fuel cells run on hydrogen and oxygen, they have no exhaust other than water vapor so Fuel Cells are also used as generators for buildings and other large structures. Cannot use Additional Cooling Kits, Exchanger or Banks.",
+    "Model": "I.C.E.",
+    "UIName": "Engine I.C.",
+    "Id": "Lootable_Engine_ICE",
+    "Name": "I.C. Engine",
+    "Details": "For all intents and purposes identical to a modern internal combustion engine, the I.C.E. in BattleTech is used mainly for conventional vehicles and IndustrialMechs. Its power output is less than a fusion engine of similar mass, meaning an I.C.E. needs to be heavier in order to have the same engine rating of a fusion engine.",
     "Icon": "power-generator"
   },
   "BonusValueA": "",
@@ -93,12 +94,127 @@
   "ComponentSubType": "Heatsink",
   "PrefabIdentifier": "",
   "BattleValue": 0,
-  "InventorySize": 3,
+  "InventorySize": 2,
   "Tonnage": 0,
   "AllowedLocations": "CenterTorso",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
   "statusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Obviously",
+        "Name": "Obvious Target",
+        "Details": "Easy to Spot",
+        "Icon": "uixSvgIcon_equipment_Gyro"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "LV_PROBE_PING",
+        "operation": "Int_Add",
+        "modValue": "2",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Stealth_Signature_Decrease_Stealth",
+        "Name": "Stealth Signature Decrease",
+        "Details": "Signature Statuseffect.",
+        "Icon": "uixSvgIcon_equipment_TTS"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "SensorSignatureModifier",
+        "operation": "Float_Multiply",
+        "modValue": "1.25",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Stealth_Visibility_Decrease_Stealth",
+        "Name": "Stealth Visibility Decrease",
+        "Details": "Visibility Statuseffect.",
+        "Icon": "uixSvgIcon_equipment_TTS"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "SpottingVisibilityMultiplier",
+        "operation": "Float_Multiply",
+        "modValue": "1.25",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "ticksOnActivations": false,
+        "useActivationsOfTarget": false,
+        "ticksOnEndOfRound": false,
+        "ticksOnMovements": false,
+        "stackLimit": 1,
+        "clearedWhenAttacked": false
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "triggerLimit": 0,
+        "extendDurationOnTrigger": 0,
+        "specialRules": "NotSet",
+        "effectTargetType": "Creator",
+        "range": 0,
+        "forcePathRebuild": false,
+        "forceVisRebuild": false,
+        "showInTargetPreview": true,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "ICE Walk",
+        "Name": "Internal Combustion Engine",
+        "Details": "ICE has reduced speed but grants reduced Heat Generated",
+        "Icon": "uixSvgIcon_action_evasivemove"
+      },
+      "statisticData": {
+        "statName": "WalkSpeed",
+        "operation": "Float_Multiply",
+        "modValue": "0.8",
+        "modType": "System.Single"
+      },
+      "nature": "Buff"
+    },
     {
       "durationData": {
         "duration": -1,
@@ -127,7 +243,7 @@
       "statisticData": {
         "statName": "HeatGenerated",
         "operation": "Float_Multiply",
-        "modValue": "0.4",
+        "modValue": "0.6",
         "modType": "System.Single",
         "targetCollection": "Weapon"
       }
@@ -145,8 +261,8 @@
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "FuelCellExplosionRange",
-        "Name": "FuelCell EXTRA CRITICAL",
+        "Id": "ICEExplosionRange",
+        "Name": "ICE EXTRA CRITICAL",
         "Details": "Engine very boom",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
@@ -172,8 +288,8 @@
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "FuelCellExplosionDamage",
-        "Name": "FuelCell EXTRA CRITICAL",
+        "Id": "ICEExplosionDamage",
+        "Name": "ICE EXTRA CRITICAL",
         "Details": "Engine very boom",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
@@ -199,8 +315,8 @@
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "FuelCellExplosionHeat",
-        "Name": "FuelCell EXTRA CRITICAL",
+        "Id": "ICEExplosionHeat",
+        "Name": "ICE EXTRA CRITICAL",
         "Details": "Engine very boom",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
@@ -226,8 +342,8 @@
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "FuelCellExplosionStability",
-        "Name": "FuelCell EXTRA CRITICAL",
+        "Id": "ICEExplosionStability",
+        "Name": "ICE EXTRA CRITICAL",
         "Details": "Engine very boom",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
@@ -253,8 +369,8 @@
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "FuelCellExplosionFireStrength",
-        "Name": "FuelCell EXTRA CRITICAL",
+        "Id": "ICEExplosionFireStrength",
+        "Name": "ICE EXTRA CRITICAL",
         "Details": "Engine very boom",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
@@ -280,8 +396,8 @@
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "FuelCellExplosionFireRadius",
-        "Name": "FuelCell EXTRA CRITICAL",
+        "Id": "ICEExplosionFireRadius",
+        "Name": "ICE EXTRA CRITICAL",
         "Details": "Engine very boom",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
@@ -307,8 +423,8 @@
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "FuelCellExplosionMaskRadius",
-        "Name": "FuelCell EXTRA CRITICAL",
+        "Id": "ICEExplosionMaskRadius",
+        "Name": "ICE EXTRA CRITICAL",
         "Details": "Engine very boom",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
@@ -326,11 +442,12 @@
     "items": [
       "EnginePart.{location}",
       "component_type_stock",
-      "FuelCell",
+      "NoBiome_lunarVacuum",
+      "NoBiome_martianVacuum",
       "BAIncompatible",
       "ProtoIncompatible",
       "EnginePart",
-      "HeatSinkKit_Gear_HeatSink_Single"
+      "ICE"
     ],
     "tagSetSourceFile": ""
   }
