@@ -695,13 +695,13 @@ new fields
 						NOTE! Every weapon effect can be used as visuals for AMS fire (missile, machine gun, ballistic, laser, gauss) you can experiment,
 						      but some effects is more suitable.
   "AMSShootsEveryAttack": false, - if true AMS will not share AMS.ShootsWhenFired between all missile attacks this round. 
-                                       Every missile attack will cause AMS.ShootsWhenFired shoots. 
+                                       Every missile attack will cause AMS.ShotsWhenFired shoots. 
 								   if false AMS will shoot AMS.ShootsWhenFired per round
-  "AMSActivationsPerTurn": 0, - if VALUE > 0 AMS will not share AMS.ShootsWhenFired between all missile attacks this round.
-									First VALUE missile attacks will cause up to AMS.ShootsWhenFired shoots.
+  "AMSActivationsPerTurn": 0, - if VALUE > 0 AMS will not share AMS.ShotsWhenFired between all missile attacks this round.
+									First VALUE missile attacks will cause up to AMS.ShotsWhenFired shoots.
 									All next attacks AMS will not fire. 
 									If AMS had not shoot during attack, attack counter will not be increased
-									if VALUE > 0 - AMSShootsEveryAttack is ignored.
+									if VALUE > 0 - AMSShotsEveryAttack is ignored.
 									Can be set for weapon and mode (additive).
   "AMSImmune": false - if true, weapon missiles is immune to AMS and none AMS will try to intercept them. Can be set for mode ammo and weapon
   "MissileHealth": 1, - health of missile. Used while AMS working. If missile health become 0 missile counted as intercepted. Additive for ammo, mode, weapon.
