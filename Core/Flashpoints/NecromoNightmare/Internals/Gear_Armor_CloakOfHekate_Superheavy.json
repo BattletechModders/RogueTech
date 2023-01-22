@@ -1,0 +1,310 @@
+{
+  "Custom": {
+    "Category": [
+      {
+        "CategoryID": "Armor"
+      },
+      {
+        "CategoryID": "StealthSystem"
+      }
+    ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.1 * [[Chassis.Tonnage]]",
+        "CBillCost": "50 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
+    "BonusDescriptions": [
+      "Stealth",
+      "StealthSensors: 30%, 3, 2, 1, 2",
+      "ActiveVisibility: -20%",
+      "ActiveSignature: -20%",
+      "ActiveHeatGenerated: +20%",
+      "ArmorProtection: +40%",
+      "ArmorFactor: -30%",
+      "TACImmune",
+      "StealthReserved: 1",
+      "BreachImmunity",
+      "ArmorTPCost: x2.2",
+      "ArmorCBCost: x2.5",
+      "CASEII",
+      "SuperheavyOnly"
+    ],
+    "ActivatableComponent": {
+      "CanActivateAfterMove": true,
+      "CanActivateAfterFire": false,
+      "SafeActivation": true,
+      "ButtonName": "Bless",
+      "ActiveByDefault": true,
+      "ActivationIsBuff": true,
+      "CanNotBeActivatedManualy": false,
+      "NoUniqueCheck": true,
+      "ActivationMessage": "Blessing Activated",
+      "DeactivationMessage": "Blessing Deactivated",
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [
+            "Camouflage"
+          ],
+          "Deactivate": []
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": [
+            "Camouflage"
+          ]
+        }
+      },
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": 1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "specialRules": "NotSet",
+            "effectTargetType": "Creator",
+            "range": 0.0,
+            "forcePathRebuild": false,
+            "forceVisRebuild": true,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "StatusEffect-Hekate-Stealth",
+            "Name": "STEALTH",
+            "Details": "Makes the carrier much harder to detect with stealth",
+            "Icon": "uixSvgIcon_status_ECM-ghost"
+          },
+          "statisticData": {
+            "statName": "LV_STEALTH",
+            "operation": "Set",
+            "modValue": "0.7_3_2_1_2",
+            "modType": "System.String"
+          },
+          "nature": "Buff"
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "StatusEffect-Hekate-Sensors",
+            "Name": "Stealth Signature Decrease",
+            "Details": "Signature Statuseffect.",
+            "Icon": "uixSvgIcon_equipment_TTS"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "SensorSignatureModifier",
+            "operation": "Float_Multiply",
+            "modValue": "0.8",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "StatusEffect-Hekate-Visibility",
+            "Name": "Stealth Visibility Decrease",
+            "Details": "Visibility Statuseffect.",
+            "Icon": "uixSvgIcon_equipment_TTS"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "SpottingVisibilityMultiplier",
+            "operation": "Float_Multiply",
+            "modValue": "0.8",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "StatusEffect-Hekate-HeatGenerated",
+            "Name": "Increased Heat",
+            "Details": "Heat generation",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "HeatGenerated",
+            "operation": "Float_Multiply",
+            "modValue": "1.2",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
+          }
+        }
+      ],
+      "offlineStatusEffects": []
+    },
+    "ArmorRepair": {
+      "ArmorTPCost": 2.2,
+      "ArmorCBCost": 2.5
+    },
+    "ArmorStructureChanges": {
+      "ArmorFactor": 1.4
+    },
+    "CASE": {
+      "AllLocations": true,
+      "MaximumDamage": 5
+    },
+    "Color": "Gold",
+    "CriticalEffects": {
+      "LinkedStatisticName": "Stealth System"
+    },
+    "ErrorMessage": "Stealth Armor requires a ECM!",
+    "Flags": [
+      "not_broken",
+      "no_salvage"
+    ],
+    "IBLS": {
+      "StorageSize": 7
+    },
+    "Linked": {
+      "Links": [
+        {
+          "ComponentDefId": "Linked_Armor_CloakOfHekate_Superheavy",
+          "Location": "LeftTorso"
+        },
+        {
+          "ComponentDefId": "Linked_Armor_CloakOfHekate_Superheavy",
+          "Location": "RightTorso"
+        },
+        {
+          "ComponentDefId": "Linked_Armor_CloakOfHekate_Superheavy",
+          "Location": "LeftArm"
+        },
+        {
+          "ComponentDefId": "Linked_Armor_CloakOfHekate_Superheavy",
+          "Location": "RightArm"
+        },
+        {
+          "ComponentDefId": "Linked_Armor_CloakOfHekate_Superheavy",
+          "Location": "LeftLeg"
+        },
+        {
+          "ComponentDefId": "Linked_Armor_CloakOfHekate_Superheavy",
+          "Location": "RightLeg"
+        }
+      ]
+    },
+    "Weights": {
+      "ArmorFactor": 0.7
+    }
+  },
+  "Description": {
+    "Cost": 0,
+    "Rarity": 30,
+    "Purchasable": false,
+    "Manufacturer": "Queen of the Night",
+    "Model": "Protection of the Faithful",
+    "UIName": "Cloak of Hekate",
+    "Id": "Gear_Armor_CloakOfHekate_Superheavy",
+    "Name": "Cloak of Hekate",
+    "Details": "'Hail Hekate Chthonia, Queen of the Underworld! Hear my humble gratitude for your protection during my darkest times. Accept my heartfelt praise for your gifts of Underworld energy.' - Unknown Source, Prayer to Hekate, Queen of the Underworld and Witches",
+    "Icon": "CloakHekate"
+  },
+  "BonusValueA": "",
+  "BonusValueB": "",
+  "ComponentType": "Upgrade",
+  "ComponentSubType": "NotSet",
+  "PrefabIdentifier": "",
+  "BattleValue": 0,
+  "InventorySize": 1,
+  "Tonnage": 0,
+  "AllowedLocations": "CenterTorso",
+  "DisallowedLocations": "All",
+  "CriticalComponent": false,
+  "statusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": 1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "StatusEffect-Hekate-APProtection",
+        "Name": "APProtection",
+        "Details": "AP Protection",
+        "Icon": "uixSvgIcon_run_n_gun"
+      },
+      "statisticData": {
+        "statName": "CACAPProtection",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "StatusEffect-Hekate-BreachImmunity",
+        "Name": "BreachImmunity",
+        "Details": "Immune to Hull Breach",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "statisticData": {
+        "statName": "CBTBE_HullBreachImmunity",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
+      },
+      "nature": "Buff"
+    }
+  ],
+  "ComponentTags": {
+    "items": [
+      "BLACKLISTED",
+      "WikiBL",
+      "component_type_stock",
+      "StealthArmor",
+      "CasedArmor",
+      "SuperheavyEquipment"
+    ],
+    "tagSetSourceFile": ""
+  }
+}

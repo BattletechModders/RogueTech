@@ -227,6 +227,9 @@ VehicleChassis/Chassis
 	"SquadInfo": {            - ONLY for mech's chassis 
       "Troopers":5,           - units count in trooper squad, up to 8. If set as 1 no logic changing performed 
       "UnitSize": 0.2,        - unit scale
+	  "armorIcon":"VehicleSwarm_Solid",  - custom squad unit icons
+	  "outlineIcon":"VehicleSwarm_Outline",
+	  "structureIcon":"VehicleSwarm_Lined",
       "DeadUnitToHitMod": 9,  - to-hit mod when last trooper squad remain. Example squad - 4 units, DeadUnitToHitMod - 9. When all 4 units operational modifier = 0
 	                            one unit dead modifier = 3, two units dead, modifier = 6, three units dead, modifier = 9. Formula: modifier = <DeadUnitToHitMod> * <dead units> / (<Troopers> - 1)
       "Hardpoints":{          - visual hardpoints mapping. Internally squad it is one mech, each trooper is its location. MechDef reflects this fact.

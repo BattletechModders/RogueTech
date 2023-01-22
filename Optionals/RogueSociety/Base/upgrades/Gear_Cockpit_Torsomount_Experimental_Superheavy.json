@@ -1,0 +1,403 @@
+{
+  "Custom": {
+    "Category": [
+      {
+        "CategoryID": "TargetingComputer"
+      },
+      {
+        "CategoryID": "Cockpit"
+      },
+      {
+        "CategoryID": "CockpitFCS"
+      },
+      {
+        "CategoryID": "LifeSupportA"
+      },
+      {
+        "CategoryID": "LifeSupportB"
+      },
+      {
+        "CategoryID": "Gyro"
+      }
+    ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.2 * [[Chassis.Tonnage]]",
+        "CBillCost": "2 * [[Chassis.Tonnage]]"
+      }
+    },
+    "BonusDescriptions": [
+      "TorsoMount",
+      "Initiative: +1",
+      "Breaching",
+      "OffensivePushAcc: +2",
+      "Recoil: -1",
+      "HSImmune",
+      "SureFoot",
+      "StabDamageTaken: -40%",
+      "ReplacesGyro: 90",
+      "TCFCS",
+      "IsCockpit",
+      "NoEject",
+      "BleedReduction: 75%"
+    ],
+    "Flags": [
+      "ignore_shutdown",
+      "not_broken",
+      "no_salvage"
+    ],
+    "IBLS": {
+      "StorageSize": 5
+    },
+    "Linked": {
+      "Links": [
+        {
+          "ComponentDefId": "Default_Cockpit_LifeSupportA_Torso",
+          "Location": "LeftTorso",
+          "ComponentDefType": "Upgrade"
+        },
+        {
+          "ComponentDefId": "Default_Cockpit_LifeSupportB_Torso",
+          "Location": "RightTorso",
+          "ComponentDefType": "Upgrade"
+        }
+      ]
+    },
+    "Sorter": 6,
+    "Weights": {
+      "GyroFactor": -1
+    }
+  },
+  "Description": {
+    "Cost": 2000000,
+    "Rarity": 4,
+    "Purchasable": false,
+    "Manufacturer": "Society",
+    "Model": "Adv. Torso Cockpit",
+    "UIName": "Exp. Imp. SH Torso Cockpit",
+    "Id": "Gear_Cockpit_Torsomount_Experimental_Superheavy",
+    "Name": "Experimental Superheavy Torso Cockpit",
+    "Details": "Experimental version of an Improved Superheavy Torso-mounted Cockpit combined with a defensive gyro. Only the latest experimental Superheavy from the Society can mount it, due to the massive modifications needed to the chassis layout.",
+    "Icon": "uixSvgIcon_equipment_Cockpit"
+  },
+  "BonusValueA": "",
+  "BonusValueB": "",
+  "ComponentType": "Upgrade",
+  "ComponentSubType": "NotSet",
+  "PrefabIdentifier": "",
+  "BattleValue": 0,
+  "InventorySize": 3,
+  "Tonnage": 10,
+  "AllowedLocations": "CenterTorso",
+  "DisallowedLocations": "All",
+  "CriticalComponent": false,
+  "statusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "CockpitInitativeEffect",
+        "Name": "CockpitTechBonus",
+        "Details": "Provides + 1 Initiative and several buffs.",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "SBI_MOD_MISC",
+        "operation": "Int_Add",
+        "modValue": "1",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": 1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "HeadShotDamageImmunity",
+        "Name": "HSIMMUNITY",
+        "Details": "Take no Headshot pilot Damage",
+        "Icon": "uixSvgIcon_ability_bulwark"
+      },
+      "statisticData": {
+        "statName": "IRIgnoreHeadInjuries",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "TC-CalledShotAcc",
+        "Name": "BREACHING SHOT",
+        "Details": "PASSIVE: Attacking with a single weapon ignores COVER and GUARDED on the target.",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "statisticData": {
+        "statName": "IRTCalledShotMod",
+        "operation": "Int_Add",
+        "modValue": "-2",
+        "modType": "System.Int32"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "TC-Breaching",
+        "Name": "BREACHING SHOT",
+        "Details": "PASSIVE: Attacking with a single weapon ignores COVER and GUARDED on the target.",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "statisticData": {
+        "statName": "PrecisionStrike",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "TCRecoil",
+        "Name": "Improved Called Shot",
+        "Details": "Called Shots twice as reliable",
+        "Icon": "uixSvgIcon_ability_mastertactician"
+      },
+      "statisticData": {
+        "statName": "RefireModifier",
+        "operation": "Int_Add",
+        "modValue": "-1",
+        "modType": "System.Int32",
+        "targetCollection": "Weapon"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTargetsCreator": true,
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Torso-Mounted",
+        "Name": "isTorsoMount",
+        "Details": "Torso mounted cockpit, no injuries on head hits.",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
+      },
+      "nature": "Debuff",
+      "statisticData": {
+        "statName": "isTorsoMount",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "InterfaceureFoot",
+        "Name": "BULWARK",
+        "Details": "PASSIVE: This unit is GUARDED (50% damage reduction against ranged attacks to the front and side) from remaining stationary.Increases Melee Damage by 10%.",
+        "Icon": "uixSvgIcon_ability_bulwark"
+      },
+      "statisticData": {
+        "statName": "GainEntrenchedOnNormalMove",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "InterfaceStabDmgReduction",
+        "Name": "INCOMING STABILITY DAMAGE DECREASED",
+        "Details": "Incoming stability damage reduced by 30%.",
+        "Icon": "uixSvgIcon_equipment_Gyro"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "ReceivedInstabilityMultiplier",
+        "operation": "Float_Multiply",
+        "modValue": "0.6",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "GyroGenericThreshhold",
+        "Name": "Gyroscopic Orientation",
+        "Details": "The gyro helps establish center-of-mass equilibrium for the BattleMech.",
+        "Icon": "uixSvgIcon_equipment_Gyro"
+      },
+      "statisticData": {
+        "statName": "UnsteadyThreshold",
+        "operation": "Float_Add",
+        "modValue": "90.0",
+        "modType": "System.Single"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "CockpitBleed",
+        "Name": "Bleed reduction",
+        "Details": "Bleed Rate x 0.75",
+        "Icon": "blood"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "BleedingRateMulti",
+        "operation": "Float_Multiply",
+        "modValue": "0.75",
+        "modType": "System.Single",
+        "targetCollection": "Pilot"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "PrimitiveCockpitEject",
+        "Name": "No Ejection",
+        "Details": "PASSIVE: Attacking with a single weapon ignores COVER and GUARDED on the target.",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "statisticData": {
+        "statName": "CanEject",
+        "operation": "Set",
+        "modValue": "false",
+        "modType": "System.Boolean",
+        "targetCollection": "Pilot"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "PrimitiveCockpitEject",
+        "Name": "No Ejection",
+        "Details": "PASSIVE: Attacking with a single weapon ignores COVER and GUARDED on the target.",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "statisticData": {
+        "statName": "CanEject",
+        "operation": "Set",
+        "modValue": "false",
+        "modType": "System.Boolean",
+        "targetCollection": "Pilot"
+      },
+      "nature": "Buff"
+    }
+  ],
+  "ComponentTags": {
+    "items": [
+      "BLACKLISTED",
+      "WikiBL",
+      "ignore_shutdown",
+      "component_type_stock",
+      "ClanFCS",
+      "TargetingComputer",
+      "SuperheavyEquipment"
+    ],
+    "tagSetSourceFile": ""
+  }
+}

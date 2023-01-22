@@ -68,6 +68,126 @@ AI related mod settings
   "auraUpdateMinPosDelta": 20 - position delta for Position aura update fix strategy
   "auraUpdateMinTimeDelta": 2 - time delta for Time aura update fix strategy
 ------------------------------------------------------------------------------------------------------------------------
+you can make active probe ability directional (in arc) instead of range
+{
+  "Description": {
+    "Id": "AbilityDef_EWS_Ping",
+    "Name": "EWS PING",
+    "Details": "ACTION: Perform a Sensor Lock on enemies within [IntParam1] meters in 60 degrees arc, and generates [FloatParam2] Heat for the user. There is a [ActivationCooldown] round cooldown.",
+    "Icon": "uixSvgIcon_action_sensorlock"
+  },
+  "ActivationTime": "ConsumedByFiring",
+  "Targeting": "ActiveProbe",
+  "ActivationCooldown": 4,
+  "FloatParam1": 250.0,
+  "StringParam2": "arc60",   - if StringParam2 is omitted normal 360 deg. ActiveProbe will be performed. Two possible values
+                               arc60 for 60 deg. arc and arc90 for 90 deg. arc. If parameter is set for range IntParam1 will be used
+							   instead of normal FloatParam1. !Note! AI still using 360 deg. ActiveProbe with FloatParam1 range
+							   Limited arc is for player only. 
+							   !NOTE! ensure you have "targeting_arc_60" and "targeting_arc_90" PNG 2d textures in your manifest. 
+							   Directional active probe will not work if absent. 
+  "IntParam1": 350,          - range for directional active probe ping
+  "FloatParam2": 50.0,
+  "StringParam1": "Active Probe is unavailable."
+}
+------------------------------------------------------------------------------------------------------------------------
+    if ComponentRefInjector is installed (ModTek 3.0+ Mods/ModTek/Injectors/ComponentRefInjector.dll)
+	you can create weapon addon component. Weapon addon can have target component - weapon it is attached to. 
+	inside MechDef in inventory list two optional fields was added. "LocalGUID" and "TargetComponentGUID"
+	non empty "TargetComponentGUID" means this component have dedicated target inside this MechDef.
+	Relevant UI in mech lab been added to give user ability to select addon target. 
+  "inventory": [
+    {
+      "MountedLocation": "RightTorso",
+      "ComponentDefID": "Weapon_PPC_LPPCER_3",
+      "SimGameUID": "",
+      "ComponentDefType": "Weapon",
+      "HardpointSlot": 0,
+      "GUID": null,
+      "DamageLevel": "Functional",
+      "prefabName": null,
+      "hasPrefabName": false
+    },
+    {
+      "MountedLocation": "RightTorso",
+      "ComponentDefID": "Weapon_PPC_LPPCER_3",
+      "SimGameUID": "",
+      "ComponentDefType": "Weapon",
+      "HardpointSlot": 1,
+      "GUID": null,
+      "DamageLevel": "Functional",
+      "prefabName": null,
+      "hasPrefabName": false,
+	  "LocalGUID":"some_guid_0"
+    },
+    {
+      "MountedLocation": "RightTorso",
+      "ComponentDefID": "Gear_C3_slave_debug",
+      "SimGameUID": "",
+      "ComponentDefType": "Upgrade",
+      "HardpointSlot": -1,
+      "GUID": null,
+      "DamageLevel": "Functional",
+      "prefabName": null,
+      "hasPrefabName": false,
+	  "TargetComponentGUID":"some_guid_0"
+    }
+],
+    to make UpgradeDef a weapon addon you need to make two things.
+	1. Create WeaponAddonDef json file and add it to any mod manifest
+	2. Add AddonReference to UpgradeDef custom section
+
+	"Custom": {
+		"AddonReference":{ 
+			"installedLocationOnly":true,     - if true user can only select weapons from same location as target for this addon
+			"autoTarget":true,     - target for this component will be selected automatically on component add to mech configuration. 
+				                     If false addon will be have no target unless user set it implicitly 
+			"notTargetable":false,  - if true instead of targeting addons will be added to all suitable weapons. 
+			                          !NOTE! "notTargetable" component will not share crits with weapon it adds modes
+									  cause they are not counted as attached. "Location":"{target}" is not resolved also
+			"WeaponAddonIds": [ "ppc_capacitor", "ppc_capacitor2" ] - list of addons. If component have multiply addons 
+			                                                          only suitable (detected by targetComponentTags) will be actually applied
+		},
+
+WeaponAddonDef example
+
+{
+	"Id":"ppc_capacitor",  - ID should same as file name
+	"addonType":"ppc_capacitor_type", - string used to track addons of the same type. If ommited Id is used. 
+	                                    Only one addon of certain type can be attached to weapon
+	"targetComponentTags":["overload_mode_unlockable"], - set of tags weapon should have to be able to be target for an addon
+	"modes":[                                           - list of modes this addon adding to weapon. 
+	                                                      If isBaseMode is true this mode will be forced to be default for this weapon
+														  If weapon been damaged due to jamming crit goes to addon first. 
+														  If addon been destroyed mode it added been disabled
+														  If mode with same name exists already it will be merged with original mode
+														  merge means resulting mode will have float and integer values as sum of original and new values
+														  dictionaries and lists fields will be concatenated all other values (strings, enums etc)
+														  replaced (if set in new mode)
+														  Note! if overriden mode becomes locked (source component damage etc) original mode become available
+														  Note! if you have two or more components overriding same original mode this will NOT create one mode
+														  result of merge of all modes, instead you will gain two or more additional modes
+														  "new mode 1" = "original mode" + "override mode A"(addon 1)
+														  "new mode 2" = "original mode" + "override mode B"(addon 2)
+    {
+      "Id": "overload",
+      "UIName": "purple",
+      "isBaseMode": true,
+      "DamagePerShot": 10,
+      "FireDelayMultiplier": 1,
+      "WeaponEffectID": "WeaponEffect-Weapon_PPC",
+      "ProjectileScale": { "x": 3, "y": 3, "z": 3 },
+      "preFireSFX": "Play_PPC3",
+      "ColorChangeRule": "Linear",
+      "ProjectileSpeedMultiplier": 0.5,
+      "ShotsWhenFired": 1,
+      "ColorSpeedChange": 7,
+      "HeatGenerated": 50,
+      "HeatDamagePerShot": 50
+    }
+	]
+}
+
     if StatisticEffectDataInjector is installed (ModTek 3.0+ Mods/ModTek/Injectors/StatisticEffectDataInjector.dll)
 	you can define Location field in statisticData
 	if this field is set components from other locations can't be target for this statistic effect
@@ -77,6 +197,19 @@ AI related mod settings
 	                   above current is affected. 
 	Location:"{onlyone}" means location where component is installed and only one component placed in location current is affected.
 	                     Affection is tracked by effect id. 
+	Location:"{adjacent}" means ONE, just ONE location toward center from current (where component is installed). 
+	                      for normal mechs and quads, LL->LT, RL->RT, LA->LT, RA->RT, H->CT, RT->CT, LT->CT, CT->None
+						  for vehicles Rear->None, Front->None, Right->Front, Left->Front, Turret->Front
+						  for turrets, squads always None
+						  "None" no components and locations will be affected. 
+
+    if ComponentRefInjector is installed (ModTek 3.0+ Mods/ModTek/Injectors/ComponentRefInjector.dll)
+	Location:"{target}" means effect will be applied only component been selected as target for this weapon addon. Refer WeaponAddonDef section. 
+
+	also Location is processed if target is not only component but unit. If unit is target for the effect, effect becomes location specific
+	!NOTE! not all unit statistic effects can be specific for location. Even more you should count every effect to be not location specific unless 
+	its locational nature mentioned explicitly. If you set non statistic value not processed by location - effect changes nothing.
+
     if StatisticEffectDataInjector is installed (ModTek 3.0+ Mods/ModTek/Injectors/StatisticEffectDataInjector.dll)
 	you can define ShouldHaveTags and ShouldNotHaveTags fields in statisticData. 
 	Value for both fields is string - set of tags separated by "," ("ShouldHaveTags":"my_cool_tag1,my_cool_tag2")
@@ -85,6 +218,10 @@ AI related mod settings
 	if this field is set components does not have all mentioned tags in their definitions can't be target for this statistic effect
 	"Custom":{
 		"Category" : [ {"CategoryID" : "Activatable"}, {"CategoryID" : "MASC"}], 
+		"AutoReplentish":{
+			"ReplentishAmount": 10 - if component is ammo box, its current ammo value will increase by this value each round (at end of round)
+			                         up to maximum capacity 
+		},
 		"ActivatableComponent":{
 			"SwitchOffOnFall": false, - if true component will be switched off on mech knockdown. You should set it to true if you want your LAM animations working properly. 
 			"ActivateOncePerRound": false, - if true component set up for auto activation on heat can be activated only once per round

@@ -2,7 +2,7 @@
 # Doorstop start script (heavily modified and cleaned up for ModTek use case)
 
 export DOORSTOP_MONO_DEBUG_ENABLED="0"
-export DOORSTOP_MONO_DEBUG_ADDRESS="127.0.0.1:10000"
+export DOORSTOP_MONO_DEBUG_ADDRESS="127.0.0.1:55555"
 export DOORSTOP_MONO_DEBUG_SUSPEND="0"
 
 ################################################################################
@@ -11,9 +11,16 @@ export DOORSTOP_MONO_DEBUG_SUSPEND="0"
 # Special case: program is launched via Steam
 # In that case rerun the script via their bootstrapper to ensure Steam overlay works
 if [ "$2" = "SteamLaunch" ]; then
-    steam="$1 $2 $3 $4 $0 $5"
-    shift 5
-    $steam "$@"
+    script_path="$0"
+    # code found here: https://stackoverflow.com/questions/63864755/remove-last-argument-in-shell-script-posix/69952637#69952637
+    i=0
+    while [ $((i+=1)) -lt $# ]; do
+        set -- "$@" "$1"
+        shift
+    done # 1 2 3 -> 3 1 2
+    game_path="$1" # last argument
+    shift # $@ is now without last argument
+    "$@" "$script_path" "$game_path"
     exit
 fi
 
@@ -39,6 +46,11 @@ case ${os_type} in
         else
             export LD_PRELOAD="libdoorstop.so:${LD_PRELOAD}"
         fi
+        
+        #Fix for Mono error On Ubuntu 22.04 LTS and probably others 'System.ConsoleDriver' threw an exception. ---> System.Exception: Magic number is wrong: 542
+        #Fix discussion at https://stackoverflow.com/questions/49242075/mono-bug-magic-number-is-wrong-542
+        #Work around used as it is a bug that is patched out in newer versions of mono.
+        export TERM=xterm
     ;;
     Darwin*)
         # BASEDIR should be the Resources directory
