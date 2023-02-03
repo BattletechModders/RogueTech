@@ -661,7 +661,7 @@ new fields
   "DamageVariance": 20, - Simple damage variance as implemented in WeaponRealizer
   "DamageFalloffStartDistance": 0, - distance where damage starts to change, additive per ammo/mode/weapon.
   "DamageFalloffEndDistance": 0, - distance where damage stops to change, additive per ammo/mode/weapon.
-  "DistantVariance": 0.3, - Distance damage variance addiditve per ammo/mode/weapon
+  "DistantVariance": 0.3, - Distance damage variance additive per ammo/mode/weapon
   "DistantVarianceReversed": false, - Set is distance damage variance is reversed (mode have priority, than ammo, than weapon)
 	Distance variance logic:
 	1. If DistantVarianceReversed false
