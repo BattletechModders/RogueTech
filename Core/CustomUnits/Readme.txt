@@ -313,7 +313,7 @@ VehicleChassis/Chassis
 									 6. Destruction one leg not force mech to fall. To fall on limb destruction two limbs should be destroyed.
 	"FrontLegsDestructedOnSideTorso": false - working only is ArmsCountedAsLegs is true. If set to true it overrides "Side torso crush not lead to attached arm destroy" 
 											  to original behavior eg. on side torso nuke, relevant front leg will be nuked too
-	"CustomHitTalbe": "custhittable_experimental" - id of custom hit table. See "custom hit table" section for more info.
+	"CustomHitTable": "custhittable_experimental" - id of custom hit table. See "custom hit table" section for more info.
 													Note! squads are not reacting this setting. They have own hit tables math.
 	"LegDestroyedMovePenalty": -1f - move speed penalty on leg destroy. if < 0 or omitted Constants.MoveConstants.LegDestroyedPenalty used
 	"LegDamageRedMovePenalty": -1f - move speed penalty on leg penalized. if < 0 or omitted Constants.MoveConstants.LegDamageRedPenalty used
