@@ -311,6 +311,10 @@ VehicleChassis/Chassis
 									 4. Arm destruction leads to increase minimum instability even with OnlyPermanentLossFromLegs: true in constants.
 									 5. Destruction of arm counts as leg destruction in terms of added instability after attack
 									 6. Destruction one leg not force mech to fall. To fall on limb destruction two limbs should be destroyed.
+	"FrontLegsDestructedOnSideTorso": false - working only is ArmsCountedAsLegs is true. If set to true it overrides "Side torso crush not lead to attached arm destroy" 
+											  to original behavior eg. on side torso nuke, relevant front leg will be nuked too
+	"CustomHitTalbe": "custhittable_experimental" - id of custom hit table. See "custom hit table" section for more info.
+													Note! squads are not reacting this setting. They have own hit tables math.
 	"LegDestroyedMovePenalty": -1f - move speed penalty on leg destroy. if < 0 or omitted Constants.MoveConstants.LegDestroyedPenalty used
 	"LegDamageRedMovePenalty": -1f - move speed penalty on leg penalized. if < 0 or omitted Constants.MoveConstants.LegDamageRedPenalty used
 	"LegDamageYellowMovePenalty": -1f - move speed penalty on leg damages. if < 0 or omitted Constants.MoveConstants.LegDamageYellowPenalty used
@@ -586,6 +590,126 @@ CustomHardpoints section
   }, 
   
 !NOTE! With current version even if game can't find prefab for weapon - empty object will be spawned and default weapon representation will be setup. It will have wrong fire position an no mesh but no circle of death. 
+
+Custom hit tables
+
+{
+	"Id": "custhittable_experimental", - id for this table, must be same as file name
+	"hitTable": {                      - hit table
+		"FromFront": {                 - attack direction
+			"Head": 10,                - <Armor location name>:<weight>. Armor location can be either mech-style (CenterTorso, LeftTorso etc) 
+			                             either vehicle-style (Front, Rear etc). <weight> is integer.
+			"CenterTorso": 1,
+			"LeftTorso": 1,
+			"RightTorso": 1,
+			"LeftArm": 1,
+			"RightArm": 1,
+			"LeftLeg": 1,
+			"RightLeg": 1,
+			"CenterTorsoRear": 1,
+			"LeftTorsoRear": 1,
+			"RightTorsoRear": 1
+		},
+		"FromLeft": {
+			"Head": 10,
+			"CenterTorso": 1,
+			"LeftTorso": 1,
+			"RightTorso": 1,
+			"LeftArm": 1,
+			"RightArm": 1,
+			"LeftLeg": 1,
+			"RightLeg": 1,
+			"CenterTorsoRear": 1,
+			"LeftTorsoRear": 1,
+			"RightTorsoRear": 1
+		},
+		"FromRight": {
+			"Head": 10,
+			"CenterTorso": 1,
+			"LeftTorso": 1,
+			"RightTorso": 1,
+			"LeftArm": 1,
+			"RightArm": 1,
+			"LeftLeg": 1,
+			"RightLeg": 1,
+			"CenterTorsoRear": 1,
+			"LeftTorsoRear": 1,
+			"RightTorsoRear": 1
+		},
+		"FromBack": {
+			"Head": 10,
+			"CenterTorso": 1,
+			"LeftTorso": 1,
+			"RightTorso": 1,
+			"LeftArm": 1,
+			"RightArm": 1,
+			"LeftLeg": 1,
+			"RightLeg": 1,
+			"CenterTorsoRear": 1,
+			"LeftTorsoRear": 1,
+			"RightTorsoRear": 1
+		},
+		"FromTop": {
+			"Head": 10,
+			"CenterTorso": 1,
+			"LeftTorso": 1,
+			"RightTorso": 1,
+			"LeftArm": 1,
+			"RightArm": 1,
+			"LeftLeg": 1,
+			"RightLeg": 1,
+			"CenterTorsoRear": 1,
+			"LeftTorsoRear": 1,
+			"RightTorsoRear": 1
+		},
+		"ToProne": {
+			"Head": 10,
+			"CenterTorso": 1,
+			"LeftTorso": 1,
+			"RightTorso": 1,
+			"LeftArm": 1,
+			"RightArm": 1,
+			"LeftLeg": 1,
+			"RightLeg": 1,
+			"CenterTorsoRear": 1,
+			"LeftTorsoRear": 1,
+			"RightTorsoRear": 1
+		},
+		"FromArtillery": {
+			"Head": 10,
+			"CenterTorso": 1,
+			"LeftTorso": 1,
+			"RightTorso": 1,
+			"LeftArm": 1,
+			"RightArm": 1,
+			"LeftLeg": 1,
+			"RightLeg": 1,
+			"CenterTorsoRear": 1,
+			"LeftTorsoRear": 1,
+			"RightTorsoRear": 1
+		}
+	},
+	"adjacentLocations": {                                         - setting for adjacent locations
+		"Head": [ "CenterTorso", "LeftTorso", "RightTorso" ],      - <armor location>: <list of nearby locations>. location can be either mech-style (CenterTorso, LeftTorso etc) 
+			                                                         either vehicle-style (Front, Rear etc)
+		"CenterTorso": [ "LeftTorso", "RightTorso", "Head" ],
+		"LeftTorso": [ "CenterTorso", "LeftArm" ],
+		"RightTorso": [ "CenterTorso", "RightArm" ],
+		"LeftArm": [ "LeftTorso" ],
+		"RightArm": [ "RightTorso" ],
+		"LeftLeg": [ "LeftTorso" ],
+		"RightLeg": [ "RightTorso" ],
+		"CenterTorsoRear": [ "LeftTorsoRear", "RightTorsoRear" ],
+		"LeftTorsoRear": [ "RightTorsoRear", "CenterTorsoRear" ],
+		"RightTorsoRear": [ "LeftTorsoRear", "CenterTorsoRear" ]
+	},
+	"clusterSpecialLocation": "None"              - special location for cluster hit table generation. 
+	                                                for mechs by default it is Head, for vehicles None
+													this location. This location is reacting on
+													ClusterChanceNeverClusterHead and ClusterChanceNeverMultiplyHead 
+													Combat constants
+}
+
   
 appendix A. Game's build-in audio events names in format '<name>':<id>
 id - just for info purposes
