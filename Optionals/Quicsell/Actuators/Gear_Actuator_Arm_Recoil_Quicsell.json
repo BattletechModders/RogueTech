@@ -10,7 +10,9 @@
     ],
     "BonusDescriptions": [
       "ChassisBasedWeight: 1%",
-      "Recoil: -1"
+      "RecoilLocation: -3",
+      "ArmAccuracy: -1",
+      "JamChanceModifier: +2%"
     ],
     "Flags": [
       "not_broken"
@@ -34,7 +36,7 @@
     "UIName": "Upper Recoil QS",
     "Id": "Gear_Actuator_Arm_Recoil_Quicsell",
     "Name": "Upper Recoil QS",
-    "Details": "Sometimes when you buy Quicsell, you get too <b>much</b> bang for your buck! We're talking about recoil of course. If so, the Upper Recoil mount is for you. 'Don't get the best, 'till you've seen the rest!'",
+    "Details": "Sometimes when you buy Quicsell, you get too <b>much</b> bang for your buck! We're talking about recoil of course. If so, the Upper Recoil mount is for you. We guarantee that our patented recoil-compensation technologies will reduce recoil by more than any other actuator on the market!",
     "Icon": "dorsal-scales"
   },
   "BonusValueA": "",
@@ -56,6 +58,32 @@
       },
       "targetingData": {
         "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Status-LowerAccuracy-{location}",
+        "Name": "Lower Arm Accuracy",
+        "Details": "-1 Arm mounted accuracy.",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "{location}.Accuracy",
+        "operation": "Float_Add",
+        "modValue": "+1",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
@@ -70,8 +98,34 @@
         "targetCollection": "Weapon",
         "statName": "RefireModifier",
         "operation": "Int_Add",
-        "modValue": "-1",
-        "modType": "System.Int32"
+        "modValue": "-3",
+        "modType": "System.Int32",
+        "Location": "{current}"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "ARMJam",
+        "Name": "Improved Called Shot",
+        "Details": "Called Shots twice as reliable",
+        "Icon": "uixSvgIcon_ability_mastertactician"
+      },
+      "statisticData": {
+        "statName": "CACFlatJammingChance",
+        "operation": "Float_Add",
+        "modValue": "0.02",
+        "modType": "System.Single",
+        "targetCollection": "Weapon",
+        "Location": "{current}"
       }
     }
   ],
