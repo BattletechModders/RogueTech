@@ -50,6 +50,7 @@ CriticalHitChanceReceivedMultiplier can be locational
 
 {
 "debugLog":true, - enable debug log 
+"MapOnlineClientLink":"http://www.roguewar.org/playerlut?cId={0}" - link for an online client
 "RestoreEjectedWeapons": true, - ejected weapon will not be counted as destroyed at the end of the battle
 "HexSizeForMods": 30 - hex size used for moved hexes modifiers calculations
 "SpawnProtectionAffectsCanFire": true - if true weapon can't fire if its owner under spawn protection
