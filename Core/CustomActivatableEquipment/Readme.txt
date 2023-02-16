@@ -202,6 +202,8 @@ WeaponAddonDef example
 						  for vehicles Rear->None, Front->None, Right->Front, Left->Front, Turret->Front
 						  for turrets, squads always None
 						  "None" no components and locations will be affected. 
+	Location:"{damaged}" if effect is been created due to mech component damage processing, (for example MechEngineer critical processing)
+	                     only component THIS damaged component been affected
 
     if ComponentRefInjector is installed (ModTek 3.0+ Mods/ModTek/Injectors/ComponentRefInjector.dll)
 	Location:"{target}" means effect will be applied only component been selected as target for this weapon addon. Refer WeaponAddonDef section. 
