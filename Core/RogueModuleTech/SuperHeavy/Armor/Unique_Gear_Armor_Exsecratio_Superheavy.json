@@ -1,0 +1,348 @@
+{
+  "Custom": {
+    "Category": [
+      {
+        "CategoryID": "Armor"
+      },
+      {
+        "CategoryID": "StealthSystem"
+      }
+    ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.7 * [[Chassis.Tonnage]]",
+        "CBillCost": "600 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
+    "BonusDescriptions": [
+      "Stealth",
+      "StealthSensors: 25%, 3, 2, 1, 3",
+      "ActiveVisibility: -15%",
+      "ActiveSignature: -15%",
+      "ActiveHeatGenerated: +10%",
+      "ActiveHeatPerTurn: +9",
+      "TACImmune",
+      "BreachImmunity",
+      "Reserved: 7",
+      "ArmorTPCost: x2.5",
+      "ArmorCBCost: x2.9",
+      "CASEII",
+	  "CASEVENT: 50, 100",
+      "ReqECM",
+      "SuperheavyOnly"
+    ],
+    "ActivatableComponent": {
+      "CanActivateAfterMove": true,
+      "CanActivateAfterFire": false,
+      "SafeActivation": true,
+      "ButtonName": "Stealth",
+      "ActiveByDefault": true,
+      "ActivationIsBuff": true,
+      "CanNotBeActivatedManualy": false,
+      "NoUniqueCheck": true,
+      "ActivationMessage": "Stealth Activated",
+      "DeactivationMessage": "Stealth Deactivated",
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [
+            "Camouflage"
+          ],
+          "Deactivate": []
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": [
+            "Camouflage"
+          ]
+        }
+      },
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": 1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "specialRules": "NotSet",
+            "effectTargetType": "Creator",
+            "range": 0.0,
+            "forcePathRebuild": false,
+            "forceVisRebuild": true,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "LV_Stealth_Effect",
+            "Name": "STEALTH",
+            "Details": "Makes the carrier much harder to detect with stealth",
+            "Icon": "uixSvgIcon_status_ECM-ghost"
+          },
+          "statisticData": {
+            "statName": "LV_STEALTH",
+            "operation": "Set",
+            "modValue": "0.75_3_2_1_2",
+            "modType": "System.String"
+          },
+          "nature": "Buff"
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "Stealth_Signature_Decrease_Stealth",
+            "Name": "Stealth Signature Decrease",
+            "Details": "Signature Statuseffect.",
+            "Icon": "uixSvgIcon_equipment_TTS"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "SensorSignatureModifier",
+            "operation": "Float_Multiply",
+            "modValue": "0.85",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "Stealth_Visibility_Decrease_Stealth",
+            "Name": "Stealth Visibility Decrease",
+            "Details": "Visibility Statuseffect.",
+            "Icon": "uixSvgIcon_equipment_TTS"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "SpottingVisibilityMultiplier",
+            "operation": "Float_Multiply",
+            "modValue": "0.85",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "Stealth_Heat_Generation_Stealth",
+            "Name": "Increased Heat",
+            "Details": "Heat generation",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "HeatGenerated",
+            "operation": "Float_Multiply",
+            "modValue": "1.1",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "Stealth_Heat_Capacity_Stealth",
+            "Name": "Decreased Heat Capacity",
+            "Details": "Heat Capacity Penalty",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "nature": "Debuff",
+          "statisticData": {
+            "statName": "HeatSinkCapacity",
+            "operation": "Int_Add",
+            "modValue": "-9",
+            "modType": "System.Int32"
+          }
+        }
+      ],
+      "offlineStatusEffects": []
+    },
+    "ArmorRepair": {
+      "ArmorTPCost": 2.5,
+      "ArmorCBCost": 2.9
+    },
+    "CASE": {
+      "MaximumDamage": 5
+    },
+	"ExplosionProtectionHeat": {
+		"AllLocations": true,
+      "MaximumDamage": 50
+    },
+	"ExplosionProtectionStability": {
+		"AllLocations": true,
+      "MaximumDamage": 100
+    },
+    "Color": "Gold",
+    "ComponentExplosion": {
+      "ExplosionDamage": 30
+    },
+    "CriticalEffects": {
+      "LinkedStatisticName": "Exsecratio Armor"
+    },
+    "ErrorMessage": "Exsecratio Armor requires a ECM!",
+    "Flags": [
+      "not_broken",
+      "no_salvage"
+    ],
+    "IBLS": {
+      "StorageSize": 8
+    },
+    "Linked": {
+      "Links": [
+        {
+          "ComponentDefId": "Linked_Unique_Gear_Armor_Exsecratio_Superheavy",
+          "Location": "CenterTorso"
+        },
+        {
+          "ComponentDefId": "Linked_Unique_Gear_Armor_Exsecratio_Superheavy",
+          "Location": "LeftTorso"
+        },
+        {
+          "ComponentDefId": "Linked_Unique_Gear_Armor_Exsecratio_Superheavy",
+          "Location": "RightTorso"
+        },
+        {
+          "ComponentDefId": "Linked_Unique_Gear_Armor_Exsecratio_Superheavy",
+          "Location": "LeftArm"
+        },
+        {
+          "ComponentDefId": "Linked_Unique_Gear_Armor_Exsecratio_Superheavy",
+          "Location": "RightArm"
+        },
+        {
+          "ComponentDefId": "Linked_Unique_Gear_Armor_Exsecratio_Superheavy",
+          "Location": "LeftLeg"
+        },
+        {
+          "ComponentDefId": "Linked_Unique_Gear_Armor_Exsecratio_Superheavy",
+          "Location": "RightLeg"
+        }
+      ]
+    },
+    "Weights": {
+      "ArmorFactor": 1
+    }
+  },
+  "Description": {
+    "Cost": 0,
+    "Rarity": 50,
+    "Purchasable": false,
+    "Manufacturer": "Word of Blake",
+    "Model": "",
+    "UIName": "Exsecratio Armor",
+    "Id": "Unique_Gear_Armor_Exsecratio_Superheavy",
+    "Name": "Exsecratio Armor",
+    "Details": "A further development of the Sanctus armor, the Exsecratio has supposedly been bathed in the blood of enemies of the Word, giving the 'Mech the power to hide from foes. However, it is more realistic to think that the armor uses some kind of advanced Stealth technology, and the rest is just one of the Word of Blake's typical rituals to instill more zeal into its members.",
+    "Icon": "shieldcomb"
+  },
+  "BonusValueA": "",
+  "BonusValueB": "",
+  "ComponentType": "Upgrade",
+  "ComponentSubType": "NotSet",
+  "PrefabIdentifier": "",
+  "BattleValue": 0,
+  "InventorySize": 1,
+  "Tonnage": 0,
+  "AllowedLocations": "CenterTorso",
+  "DisallowedLocations": "All",
+  "CriticalComponent": false,
+  "statusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": 1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "HardenedCritImmune",
+        "Name": "ChargerSprint",
+        "Details": "MORE SPEED.",
+        "Icon": "uixSvgIcon_run_n_gun"
+      },
+      "statisticData": {
+        "statName": "CACAPProtection",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "BreachImmunity",
+        "Name": "BreachImmunity",
+        "Details": "Immune to Hull Breach",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "statisticData": {
+        "statName": "CBTBE_HullBreachImmunity",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
+      },
+      "nature": "Buff"
+    }
+  ],
+  "ComponentTags": {
+    "items": [
+      "component_type_stock",
+      "CasedArmor",
+      "StealthArmor",
+      "SuperheavyEquipment",
+      "BLACKLISTED",
+      "LootMagnetBlacklist"
+    ],
+    "tagSetSourceFile": ""
+  }
+}

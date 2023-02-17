@@ -27,7 +27,8 @@ CACExtraLongRangeAccuracyMod - LongRange <= X < MaxRange
 
 Additional unit statistic
 CACAPProtection - boolean - if true unit is protected from all AP damage including AP crits. If armor is absent crits will be rolled anyway. Can be locational
-CACAoEDamageMult - float - multipicator for all AoE damage to unit including AoE heat and stability if applicable. (Working for weapon attacks, landmines and component explosions)
+CACAoEDamageMult - float - multipicator for all AoE damage to unit including AoE heat and stability if applicable. (Working for weapon attacks, landmines and component explosions).
+						   Can be locational
 CACAPDamageMult - float - multipicator for all AP damage to unit (only pierce through part of damage). Can be locational
 CACIncomingHeatMult - float - multipicator for all incoming heat (weapon attacks, landmines, burning terrain, AoE damage)
 CACIncomingStabilityMult - float - multipicator for all incoming stability (weapon attacks, landmines, burning terrain, AoE damage)
@@ -39,6 +40,9 @@ CAC_APCritChance - float - multipicator for through armor crit roll, default 1.0
 CACMinefieldMult - float - multipicator for minefield triggering chance, default 1.0
 MINIMAP_JAMMED - float if greater than 0 minimap for this unit will be random gray pixels instead of real minimap
 MINIMAP_UNITS_JAMMED - float if greater than 0 enemy units will not be shown on minimap while this unit is selected
+CACWeaponBlocked - bool is true weapon is counted as blocked. Note you can't unblock weapon blocked by 
+                   another weapon (blockWeaponsInMechLocations, blockWeaponsInInstalledLocation). 
+				   But you can block weapon by stat effect.
 
 DamageReductionMultiplierAll can be locational
 DamageReductionMultipliers for weapon categories can be locational
@@ -46,6 +50,9 @@ CriticalHitChanceReceivedMultiplier can be locational
 
 {
 "debugLog":true, - enable debug log 
+"MapOnlineClientLink":"http://www.roguewar.org/playerlut?cId={0}" - link for an online client
+"RestoreEjectedWeapons": true, - ejected weapon will not be counted as destroyed at the end of the battle
+"HexSizeForMods": 30 - hex size used for moved hexes modifiers calculations
 "SpawnProtectionAffectsCanFire": true - if true weapon can't fire if its owner under spawn protection
 "SpawnProtectionAffectsBurningTerrain": true, - if true spawn protection also prevent burning terrain of any kind.
 "SpawnProtectionAffectsDesignMasks": true, - if true spawn protection also prevent weapon from changing terrain.
@@ -436,6 +443,33 @@ new fields
       "DamageVariance":0,
       "CriticalChanceMultiplier":0
   },
+  "hexesMovedMod": {  - list of modifiers for values by moved hexes.
+						  moved hexes = (<DistMovedThisRound>/<HexSizeForMods>) rounded to lower integer
+						  Additive per weapon/ammo/mode. 
+                          Overall formula value = [base value] * ([moved hexes]^[mod value]). Example base damage = 35, moved hexes = 7, mod value = -1
+                          damage = 35 * (7^-1) = 35 * 0.142857(142857) = 5.
+                          NOTE: if DistMovedThisRound < HexSizeForMods, value will not been altered. If mod value = 0 same behavior.
+      "Damage":0,
+      "APDamage":0,
+      "Heat":0,
+      "Instablility":0,
+      "GeneratedHeat":0,
+      "FlatJammingChance":0,
+      "MinRange":0,
+      "ShortRange":0,
+      "MediumRange":0,
+      "LongRange":0,
+      "MaxRange":0,
+      "AOERange":0,
+      "AOEDamage":0,
+      "AOEHeatDamage":0,
+      "AOEInstability":0,
+      "RefireModifier":0,
+      "APCriticalChanceMultiplier":0,
+      "AccuracyModifier":0,
+      "DamageVariance":0,
+      "CriticalChanceMultiplier":0
+  },
   "deferredEffect":{                                   - deferred effect !!!CAN!!! be set per mode, ammo, weapon. Mode have priority than ammo and than weapon.
     "id":"LOIC",                                       - id used in logs 
     "rounds":2,                                        - rounds to effects apply
@@ -628,7 +662,7 @@ new fields
   "DamageVariance": 20, - Simple damage variance as implemented in WeaponRealizer
   "DamageFalloffStartDistance": 0, - distance where damage starts to change, additive per ammo/mode/weapon.
   "DamageFalloffEndDistance": 0, - distance where damage stops to change, additive per ammo/mode/weapon.
-  "DistantVariance": 0.3, - Distance damage variance addiditve per ammo/mode/weapon
+  "DistantVariance": 0.3, - Distance damage variance additive per ammo/mode/weapon
   "DistantVarianceReversed": false, - Set is distance damage variance is reversed (mode have priority, than ammo, than weapon)
 	Distance variance logic:
 	1. If DistantVarianceReversed false
@@ -661,6 +695,9 @@ new fields
   "DestroyOnJamming": true/false, - if true on jamming weapon will be destroyed (need DamageOnJamming to be set true also)
   "FlatJammingChance": 1.0, - Chance of jamming weapon after fire. 1.0 is jamm always. Unjamming logic implemented as in WeaponRealizer
                               NOTE! There FlatJammingChance can be altered via CACFlatJammingChance statistic value per actor's and/or per weapon's statistic collections
+  "RecoilJammingChance": 0.0, - addition to  FlatJammingChance based on recoil. Adds RecoilJammingChance * <RefireModifier> to FlatJammingChance
+                                <RefireModifier> is effective weapon's RefireModifier if roundsSinceLastFire < 2 and 0 otherwise. 
+								Can be set for weapon, ammo and mode. Additive.
   "GunneryJammingBase": 5, - 
   "GunneryJammingMult": 0.05, - this values uses to alter flat jamming chance by pilot skills 
                                   formula effective jamming chance = FlatJammingChance + (GunneryJammingBase - Pilot Gunnery)* GunneryJammingMult
@@ -692,17 +729,45 @@ new fields
 						NOTE! Every weapon effect can be used as visuals for AMS fire (missile, machine gun, ballistic, laser, gauss) you can experiment,
 						      but some effects is more suitable.
   "AMSShootsEveryAttack": false, - if true AMS will not share AMS.ShootsWhenFired between all missile attacks this round. 
-                                       Every missile attack will cause AMS.ShootsWhenFired shoots. 
+                                       Every missile attack will cause AMS.ShotsWhenFired shoots. 
 								   if false AMS will shoot AMS.ShootsWhenFired per round
+  "AMSActivationsPerTurn": 0, - if VALUE > 0 AMS will not share AMS.ShotsWhenFired between all missile attacks this round.
+									First VALUE missile attacks will cause up to AMS.ShotsWhenFired shoots.
+									All next attacks AMS will not fire. 
+									If AMS had not shoot during attack, attack counter will not be increased
+									if VALUE > 0 - AMSShotsEveryAttack is ignored.
+									Can be set for weapon and mode (additive).
   "AMSImmune": false - if true, weapon missiles is immune to AMS and none AMS will try to intercept them. Can be set for mode ammo and weapon
   "MissileHealth": 1, - health of missile. Used while AMS working. If missile health become 0 missile counted as intercepted. Additive for ammo, mode, weapon.
   "AMSDamage": 1, - damage AMS inflicting to missiles subtracting from missile health on success hit. Used while AMS working. If missile health become 0 missile counted as intercepted. Additive for ammo, mode, weapon.
-  "AOECapable" : false, - if true weapon will included in AOE damage calculations. If true set in weapon definition 
-                            all shoots will have AoE effect (even for energy weapon). If true, it can't be overridden by ammo.
-  "AOERange": 100, - Area of effect range. If AOECapable in weapon is set to true this value will be used. If AOECapable is true, it can't be overridden by ammo.
-  "AOEDamage": 0 - AoE damage. Same rules as for AOERange
-  "AOEHeatDamage": 0 - AoE heat. Same rules as for AOERange 
-  "AOEInstability": 0 - instability AoE damage. Same rules as for AOERange 
+  "AOECapable" : false, - if true shoots will be included in AOE damage calculations. Can be set for mode, ammo and weapon. 
+                          Mode have priority, than ammo, than weapon. Once set true it can't be set to false. 
+						  Eg. if set true in weapon definition, shoots will have AoE effect regardless mode and ammo settings
+						  if set true in ammo, shoots will have AoE effect regardless mode and weapon settings, etc.
+  "AOERange": 0, - Area of effect range. Can be set for mode, ammo and weapon. Setting nor additive not multiplicative. 
+                          Effective value get from entity which set AOECapable - true first. Mode have priority, than ammo, than weapon
+						  Eg. if you set AOECapable - true in mode, mode value will be used, but if you set AOECapable in weapon
+						  and mode have AOECapable - false (or not set) it will use weapon's value, even if 0 or not set. 
+						  
+						  AOE shots can inflict heat damage. It value based on weapon heat damage per shot and decreasing by distance between target and impact base point.
+						  Projectiles intercepted by AMS will not cause AOE damage.
+						  AOE to hit effect will be implemented to all targets in AoE range. 
+						  On fire weapon effects will be implemented to real target only
+						  Base point of AoE range calculations will be point where first projectile,
+						            (if weapon have ShotsWhenFired > 1) not intercepted by AMS, hits ground.
+						  It is recommended to use LRM5, LRM10, LRM15 or LRM20 as weapon subtype cause other subtypes have too huge spread when misses
+						  It is good idea to set ForbiddenRage for AoE weapon
+						  AOE weapon can't hit mech head, cause every headshot inflicts pilot injury. With fact AoE always dealt damage it will be imbalance. 
+						  Damage variations are not applying to AoE damage
+  "AOEDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
+                            one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
+							can be set for mode, ammo, weapon - set logic as for AOERange
+  "AOEHeatDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
+                            one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
+							can be set for mode, ammo, weapon - set logic as for AOERange
+  "AOEInstability": 0 - instability AoE damage 
+							can be set for mode, ammo, weapon - set logic as for AOERange
+
   "SpreadRange": 0, - Area of projectiles spread effect. If > 0 projectiles will include in spread calculations. Per weapon, ammo, mode values are additive.
                          if used for missiles, and target have AMS it will fire no matter if it is not advanced and target is not primary.
   "IFFDef" : "IFFComponentDefId", if not empty and target have component with such defId it will exclude form AoE and spread targets list. 
@@ -1029,23 +1094,6 @@ Ammo definition
    "ArmorDamageModifier" : 1,
    "ISDamageModifier" : 1,
    "CriticalDamageModifier" : 1,
-   "AOECapable" : false, - if true shoots will be included in AOE damage calculations 
-   "AOERange": 100, - Area of effect range
-						  AOE shots can inflict heat damage. It value based on weapon heat damage per shot and decreasing linear by distance between target and impact base point.
-						  Projectiles intercepted by AMS will not cause AOE damage.
-						  AOE to hit effect will be implemented to all targets in AoE range. 
-						  On fire weapon effects will be implemented to real target only
-						  Base point of AoE range calculations will be point where first projectile,
-						            (if weapon have ShotsWhenFired > 1) not intercepted by AMS, hits ground.
-						  It is recommended to use LRM5, LRM10, LRM15 or LRM20 as weapon subtype cause other subtypes have too huge spread when misses
-						  It is good idea to set ForbiddenRage for AoE weapon
-						  AOE weapon can't hit mech head, cause every headshot inflicts pilot injury. With fact AoE always dealt damage it will be imbalance. 
-						  Damage variations are not applying to AoE damage
-  "AOEDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
-                            one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
-  "AOEHeatDamage": 0 - if > 0 alternative AoE damage algorithm will be used. Main projectile will not always miss. Instead it will inflict damage twice 
-                            one for main target - direct hit (this damage can be have variance) and second for all targets in AoE range including main. 
-  "AOEInstability": 0 - instability AoE damage 
   "SpreadRange": 0, - Area of projectiles spread effect. If > 0 projectiles will include in spread calculations. Per weapon, ammo, mode values are additive.
                          if used for missiles, and target have AMS it will fire no matter if it is not advanced and target is not primary.
   "IFFDef" : "IFFComponentDefId", if not empty and target have component with such defId it will exclude form AoE and spread targets list. 

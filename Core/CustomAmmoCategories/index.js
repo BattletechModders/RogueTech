@@ -62,7 +62,7 @@ function updateItemsList(){
 	});
 }
 
-function updateItemsList(){
+function updatePilotsList(){
 	$.ajax({
 	  dataType: "json",
 	  url: "/listpilots",

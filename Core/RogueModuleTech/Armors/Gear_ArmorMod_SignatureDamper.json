@@ -1,0 +1,240 @@
+{
+  "Custom": {
+    "Category": [
+      {
+        "CategoryID": "StealthSystemAdd"
+      },
+      {
+        "CategoryID": "ArmorMod"
+      }
+    ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.115 * [[Chassis.Tonnage]]",
+        "CBillCost": "22.22222 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
+    "BonusDescriptions": [
+      "StealthEnhance",
+      "StealthSensors: 40%, 2, 1, 2, 3",
+      "ActiveSignature: -35%",
+      "StealthReserved: 1",
+      "ActiveHeatGenerated: +5%",
+      "ActiveHeatPerTurn: +3",
+      "ReqECM",
+      "ArmorTPCost: 10%",
+      "ArmorCBCost: 15%"
+    ],
+    "ActivatableComponent": {
+      "CanActivateAfterMove": true,
+      "CanActivateAfterFire": false,
+      "SafeActivation": true,
+      "ButtonName": "Damper",
+      "ActiveByDefault": true,
+      "ActivationIsBuff": true,
+      "CanNotBeActivatedManualy": false,
+      "NoUniqueCheck": true,
+      "ActivationMessage": "Damper On",
+      "DeactivationMessage": "Damper Off",
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [],
+          "Deactivate": [
+            "ECCM"
+          ]
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": []
+        }
+      },
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": 1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "specialRules": "NotSet",
+            "effectTargetType": "Creator",
+            "range": 0.0,
+            "forcePathRebuild": false,
+            "forceVisRebuild": true,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "LV_Stealth_Effect",
+            "Name": "STEALTH",
+            "Details": "Makes the carrier much harder to detect with stealth",
+            "Icon": "uixSvgIcon_status_ECM-ghost"
+          },
+          "statisticData": {
+            "statName": "LV_STEALTH",
+            "operation": "Set",
+            "modValue": "0.6_2_1_2_3",
+            "modType": "System.String"
+          },
+          "nature": "Buff"
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "Stealth_Signature_Decrease_Stealth",
+            "Name": "Stealth Signature Decrease",
+            "Details": "Signature Statuseffect.",
+            "Icon": "uixSvgIcon_equipment_TTS"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "SensorSignatureModifier",
+            "operation": "Float_Multiply",
+            "modValue": "0.65",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "Stealth_Heat_Generation_Stealth",
+            "Name": "Increased Heat",
+            "Details": "Heat generation",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "HeatGenerated",
+            "operation": "Float_Multiply",
+            "modValue": "1.05",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "Stealth_Heat_Capacity_Stealth",
+            "Name": "Decreased Heat Capacity",
+            "Details": "Heat Capacity Penalty",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "nature": "Debuff",
+          "statisticData": {
+            "statName": "HeatSinkCapacity",
+            "operation": "Int_Add",
+            "modValue": "-3",
+            "modType": "System.Int32"
+          }
+        }
+      ],
+      "offlineStatusEffects": []
+    },
+    "ArmorRepair": {
+      "ArmorTPCost": 1.1,
+      "ArmorCBCost": 1.15
+    },
+    "Color": "Gold",
+    "CriticalEffects": {
+      "LinkedStatisticName": "Signature Damper"
+    },
+    "Flags": [
+      "not_broken"
+    ],
+    "IBLS": {
+      "StorageSize": 7
+    },
+    "Linked": {
+      "Links": [
+        {
+          "ComponentDefId": "Linked_ArmorMod_SignatureDamper",
+          "Location": "LeftTorso"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_SignatureDamper",
+          "Location": "RightTorso"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_SignatureDamper",
+          "Location": "LeftArm"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_SignatureDamper",
+          "Location": "RightArm"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_SignatureDamper",
+          "Location": "LeftLeg"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_SignatureDamper",
+          "Location": "RightLeg"
+        }
+      ]
+    }
+  },
+  "Description": {
+    "Cost": 500000,
+    "Rarity": 5,
+    "Purchasable": true,
+    "Manufacturer": "Shengli Arms",
+    "Model": "Signature Damper",
+    "UIName": "Signature Damper",
+    "Id": "Gear_ArmorMod_SignatureDamper",
+    "Name": "Signature Damper",
+    "Details": "Developed alongside the Stealth Armor do allow these Systems to be added to Mimetic Armors granting them Defense against being Detected by most Sensors. Reserves 1 slot in every Location except the Head and requires a Mimetic Armor.",
+    "Icon": "StealthArmor"
+  },
+  "BonusValueA": "",
+  "BonusValueB": "",
+  "ComponentType": "Upgrade",
+  "ComponentSubType": "NotSet",
+  "PrefabIdentifier": "",
+  "BattleValue": 0,
+  "InventorySize": 1,
+  "Tonnage": 0,
+  "AllowedLocations": "CenterTorso",
+  "DisallowedLocations": "All",
+  "CriticalComponent": false,
+  "statusEffects": [],
+  "ComponentTags": {
+    "items": [
+      "component_type_stock",
+      "StealthArmor",
+      "BAIncompatible",
+      "ProtoIncompatible"
+    ],
+    "tagSetSourceFile": ""
+  }
+}

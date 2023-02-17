@@ -4,7 +4,7 @@ CustomComponents(cc) - is a library that allows you to to add custom data on Com
 ## How it works
 It use postfix patch to JSONSerializationUtility.RehydrateObjectFromDictionary method. After object loaded cc get control, search for "Custom" section on JSon and load custom data and store it in database 
 
-*note: at first i want to store it in object using inheritance, but in many places game check exact type of ComponentDef and dont work with childs. [CptMoore](https://github.com/CptMoore) suggest to use external storage(Dictionary) which keep list of cc for each component Testing shows that C# Dictionary incredebly fast so it used now*
+*Note: At first I wanted to store it in the object using inheritance, but in many places the game checks the *exact* type of ComponentDef and won't work with children. [CptMoore](https://github.com/CptMoore) suggested to use external storage (a dictionary) which keeps a list of cc for each component. Testing has shown that C# dictionaries are incredebly fast, so that's how it is currently implemented.
 
 ## How to use it
 

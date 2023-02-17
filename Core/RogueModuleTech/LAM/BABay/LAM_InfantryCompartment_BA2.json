@@ -11,12 +11,11 @@
         "CBillCost": "35 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
       }
     },
-    "BonusDescriptions": {
-      "Bonuses": [
-        "BACarrier: 2",
-        "BAWingMountWeight: 8"
-      ]
-    },
+    "BonusDescriptions": [
+      "BACarrier: 2",
+      "BAWingMountWeight: 4",
+      "WingMountDrag"
+    ],
     "ActivatableComponent": {
       "HideInUI": true,
       "ButtonName": "Load 'em Up",
@@ -52,23 +51,14 @@
         }
       ]
     },
-    "Flags": {
-      "flags": [
-        "not_broken"
-      ]
-    },
-    "InventorySorter": {
-      "SortKey": "00012"
-    },
-    "RGBColor": {
-      "Color": "#b30000"
-    },
-    "UseCarryWeight": {
-      "Tonnage": 8
-    },
+    "CarryLeftOverUsage": 4,
+    "Flags": [
+      "not_broken"
+    ],
     "IBLS": {
-      "StorageSize": 3
-    }
+      "StorageSize": 2
+    },
+    "RGBColor": "#b30000"
   },
   "Description": {
     "Cost": 4000000,
@@ -76,10 +66,10 @@
     "Purchasable": true,
     "Manufacturer": "Generic",
     "Model": "LAM Infantry Bay",
-    "UIName": "LAM Infantry Bay (2 BA)",
+    "UIName": "LAM Infantry Bay (2 BA)[WM]",
     "Id": "LAM_InfantryCompartment_BA2",
-    "Name": "LAM Infantry Bay (2 BA)",
-    "Details": "This is a specially designed compartment designed to allow a LAM to carry Battle Armor squads into the fray quickly and efficiently. \n\n <b><color=#ffcc00>Can carry 2 Battle Armor Squad</color>",
+    "Name": "LAM Infantry Bay (2 BA)[WM]",
+    "Details": "This is a special compartment designed to allow a LAM to carry Battle Armor squads into the fray quickly and efficiently. \n\n <b><color=#ffcc00>Can carry 2 Battle Armor Squad</color>",
     "Icon": "uixSvgIcon_equipment_HeatBank"
   },
   "BonusValueA": "",
@@ -88,7 +78,7 @@
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
   "BattleValue": 0,
-  "InventorySize": 3,
+  "InventorySize": 2,
   "Tonnage": 0,
   "AllowedLocations": "All",
   "DisallowedLocations": "All",
@@ -114,9 +104,142 @@
       "nature": "Buff",
       "statisticData": {
         "statName": "InternalBattleArmorSquadCap",
-        "operation": "Set",
+        "operation": "Int_Add",
         "modValue": "2",
         "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "WingMountDragCruise",
+        "Name": "Bomb Drag",
+        "Details": "Things on Wings slow you down",
+        "Icon": "uixSvgIcon_action_evasivemove"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "effectsPersistAfterDestruction": false,
+        "statName": "CruiseSpeed",
+        "operation": "Float_Multiply",
+        "modValue": "0.84",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "WingMountDragFlank",
+        "Name": "Bomb Drag",
+        "Details": "Things on Wings slow you down",
+        "Icon": "uixSvgIcon_action_evasivemove"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "effectsPersistAfterDestruction": false,
+        "statName": "FlankSpeed",
+        "operation": "Float_Multiply",
+        "modValue": "0.84",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "WingMountDragWalk",
+        "Name": "Bomb Drag",
+        "Details": "Things on Wings slow you down",
+        "Icon": "uixSvgIcon_action_evasivemove"
+      },
+      "statisticData": {
+        "effectsPersistAfterDestruction": false,
+        "statName": "WalkSpeed",
+        "operation": "Float_Multiply",
+        "modValue": "0.84",
+        "modType": "System.Single"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "WingMountDragJump",
+        "Name": "Bomb Drag",
+        "Details": "Things on Wings slow you down",
+        "Icon": "uixSvgIcon_action_evasivemove"
+      },
+      "statisticData": {
+        "statName": "JumpDistanceMultiplier",
+        "operation": "Float_Multiply",
+        "modValue": "0.84",
+        "modType": "System.Single"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "BoltOnPenaltySensor",
+        "Name": "BoltOn Sensor Penalty",
+        "Details": "Signature Statuseffect.",
+        "Icon": "uixSvgIcon_equipment_TTS"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "SensorSignatureModifier",
+        "operation": "Float_Multiply",
+        "modValue": "1.08",
+        "modType": "System.Single"
       }
     }
   ],

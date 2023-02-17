@@ -61,15 +61,15 @@ Not covered? Check examples, read the detailed explanations or ask Redbat.
 
 | MechDef ID | Offical Name (if applicable)  | ChassisDef Name/UIName   | VariantName   | MechDef Name  | MechDef UIName   | Comment |
 |---|---|---|---|---|---|---|
-|mechdef_atlas_AS7-D_Danielle| Atlas AS7-D *Danielle*   | Atlas  | AS7-DD  | Atlas AS7-D  | Atlas AS7-D Danielle  | HeroMech, older VariantName style |
-|mechdef_ostroc_OSR-2C-Michi| Ostroc OSR-2C *Michi*   | Ostroc  | OSR-2C-M  | Ostroc OSR-2C  | Ostroc OSR-2C Michi  | HeroMech, new VariantName style |
+|mechdef_atlas_AS7-D_Danielle| Atlas AS7-D *Danielle*   | Atlas  | AS7-DD  | Atlas AS7-D  | Atlas AS7-D 'Danielle'  | HeroMech, older VariantName style |
+|mechdef_ostroc_OSR-2C-Michi| Ostroc OSR-2C *Michi*   | Ostroc  | OSR-2C-M  | Ostroc OSR-2C  | Ostroc OSR-2C 'Michi'  | HeroMech, new VariantName style |
 
 ### Elite/Legendary Mechs
 
 | MechDef ID | Offical Name (if applicable)  | ChassisDef Name/UIName   | VariantName   | MechDef Name  | MechDef UIName   | Comment |
 |---|---|---|---|---|---|---|
-|mechdef_rifleman_ii_RFL-3N-2_LK2|  Rifleman II RFL-3N-2 *Legend Killer*   | Rifleman II  | RFL-3N-2-LK2  | Rifleman II RFL-3N-2  | Legend Killer  | Elite mech based on a base model |
-|mechdef_rifleman_RFL-DB|  *Dao Breaker*  | Rifleman  | RFL-DB  | Rifleman RFL-DB  | Dao Breaker  | Elite mech **not** based on a base model |
+|mechdef_rifleman_ii_RFL-3N-2_LK2|  Rifleman II RFL-3N-2 *Legend Killer*   | Rifleman II  | RFL-3N-2-LK2  | Rifleman II RFL-3N-2  | Rifleman II 'Legend Killer'  | Elite mech based on a base model |
+|mechdef_rifleman_RFL-DB|  *Dao Breaker*  | Rifleman  | RFL-DB  | Rifleman RFL-DB  | Rifleman 'Dao Breaker'  | Elite mech **not** based on a base model |
 |mechdef_blood_asp_BAS-Z|    | Blood Asp  | BAS-Z  | Blood Asp BAS-Z  | Blood Asp BAS-Z  | Society Mech |
 
 ### Power Armor / ProtoMech

@@ -68,6 +68,29 @@ AI related mod settings
   "auraUpdateMinPosDelta": 20 - position delta for Position aura update fix strategy
   "auraUpdateMinTimeDelta": 2 - time delta for Time aura update fix strategy
 ------------------------------------------------------------------------------------------------------------------------
+you can make active probe ability directional (in arc) instead of range
+{
+  "Description": {
+    "Id": "AbilityDef_EWS_Ping",
+    "Name": "EWS PING",
+    "Details": "ACTION: Perform a Sensor Lock on enemies within [IntParam1] meters in 60 degrees arc, and generates [FloatParam2] Heat for the user. There is a [ActivationCooldown] round cooldown.",
+    "Icon": "uixSvgIcon_action_sensorlock"
+  },
+  "ActivationTime": "ConsumedByFiring",
+  "Targeting": "ActiveProbe",
+  "ActivationCooldown": 4,
+  "FloatParam1": 250.0,
+  "StringParam2": "arc60",   - if StringParam2 is omitted normal 360 deg. ActiveProbe will be performed. Two possible values
+                               arc60 for 60 deg. arc and arc90 for 90 deg. arc. If parameter is set for range IntParam1 will be used
+							   instead of normal FloatParam1. !Note! AI still using 360 deg. ActiveProbe with FloatParam1 range
+							   Limited arc is for player only. 
+							   !NOTE! ensure you have "targeting_arc_60" and "targeting_arc_90" PNG 2d textures in your manifest. 
+							   Directional active probe will not work if absent. 
+  "IntParam1": 350,          - range for directional active probe ping
+  "FloatParam2": 50.0,
+  "StringParam1": "Active Probe is unavailable."
+}
+------------------------------------------------------------------------------------------------------------------------
     if ComponentRefInjector is installed (ModTek 3.0+ Mods/ModTek/Injectors/ComponentRefInjector.dll)
 	you can create weapon addon component. Weapon addon can have target component - weapon it is attached to. 
 	inside MechDef in inventory list two optional fields was added. "LocalGUID" and "TargetComponentGUID"
@@ -137,6 +160,15 @@ WeaponAddonDef example
 	                                                      If isBaseMode is true this mode will be forced to be default for this weapon
 														  If weapon been damaged due to jamming crit goes to addon first. 
 														  If addon been destroyed mode it added been disabled
+														  If mode with same name exists already it will be merged with original mode
+														  merge means resulting mode will have float and integer values as sum of original and new values
+														  dictionaries and lists fields will be concatenated all other values (strings, enums etc)
+														  replaced (if set in new mode)
+														  Note! if overriden mode becomes locked (source component damage etc) original mode become available
+														  Note! if you have two or more components overriding same original mode this will NOT create one mode
+														  result of merge of all modes, instead you will gain two or more additional modes
+														  "new mode 1" = "original mode" + "override mode A"(addon 1)
+														  "new mode 2" = "original mode" + "override mode B"(addon 2)
     {
       "Id": "overload",
       "UIName": "purple",
@@ -165,6 +197,14 @@ WeaponAddonDef example
 	                   above current is affected. 
 	Location:"{onlyone}" means location where component is installed and only one component placed in location current is affected.
 	                     Affection is tracked by effect id. 
+	Location:"{adjacent}" means ONE, just ONE location toward center from current (where component is installed). 
+	                      for normal mechs and quads, LL->LT, RL->RT, LA->LT, RA->RT, H->CT, RT->CT, LT->CT, CT->None
+						  for vehicles Rear->None, Front->None, Right->Front, Left->Front, Turret->Front
+						  for turrets, squads always None
+						  "None" no components and locations will be affected. 
+	Location:"{damaged}" if effect is been created due to mech component damage processing, (for example MechEngineer critical processing)
+	                     only component THIS damaged component been affected
+
     if ComponentRefInjector is installed (ModTek 3.0+ Mods/ModTek/Injectors/ComponentRefInjector.dll)
 	Location:"{target}" means effect will be applied only component been selected as target for this weapon addon. Refer WeaponAddonDef section. 
 

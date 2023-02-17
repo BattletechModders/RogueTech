@@ -2,7 +2,7 @@
   "Description": {
     "Id": "AbilityGu8HullAngle",
     "Name": "HULL DOWN",
-    "Details": "ACTION: Cannot be used if you have moved this turn. Set movement to 0 this turn. Reduce all incoming damage by 75% for 1 turn and 25% on the second turn.",
+    "Details": "ACTION: Cannot be used if you have moved this turn. Set movement to 0 this turn. Reduce all incoming damage by 75% for 1 turn and 25% on the second turn.\n<b><color=#8080ff>Resolve Cost: {10}</color></b>",
     "Icon": "shield-reflect"
   },
   "DisplayParams": "ShowInMWTRay",
@@ -11,6 +11,7 @@
   "ActivationTime": "ConsumedByMovement",
   "ActivationCooldown": 3,
   "Targeting": "ActorSelf",
+  "ResolveCost": 35,
   "EffectData": [
     {
       "durationData": {
@@ -116,6 +117,60 @@
       },
       "statisticData": {
         "statName": "DamageReductionMultiplierAll",
+        "operation": "Float_Multiply",
+        "modValue": "0.25",
+        "modType": "System.Single"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": 1,
+        "ticksOnActivations": true,
+        "useActivationsOfTarget": true,
+        "stackLimit": 1
+      },
+      "targetingData": {
+        "effectTriggerType": "OnActivation",
+        "effectTargetType": "Creator",
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "StatusEffect-HullDownDmgReduce",
+        "Name": "Hull Down",
+        "Details": "",
+        "Icon": "shield-reflect"
+      },
+      "statisticData": {
+        "statName": "CACAoEDamageMult",
+        "operation": "Float_Multiply",
+        "modValue": "0.50",
+        "modType": "System.Single"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": 2,
+        "ticksOnActivations": true,
+        "useActivationsOfTarget": true,
+        "stackLimit": 1
+      },
+      "targetingData": {
+        "effectTriggerType": "OnActivation",
+        "effectTargetType": "Creator",
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "StatusEffect-HullDownDmgReduce",
+        "Name": "Hull Down",
+        "Details": "",
+        "Icon": "shield-reflect"
+      },
+      "statisticData": {
+        "statName": "CACAoEDamageMult",
         "operation": "Float_Multiply",
         "modValue": "0.25",
         "modType": "System.Single"
