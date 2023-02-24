@@ -1,4 +1,4 @@
-this simple mod allowing you to add some decoration to pilot's slots in roster
+﻿this simple mod allowing you to add some decoration to pilot's slots in roster
 1. it allows to display more than 3 abilities
 2. it allows allow to add icons and descriptions to abilities list and after name
 to add icon you should create PilotDecorationDef entry to manifest 
