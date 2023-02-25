@@ -186,6 +186,8 @@ VehicleChassis/Chassis
         "Type": "AirMech",                                              - type (available values: Normal, AirMech)
         "HoveringSoundStart": "jet_start",                              - hover sound start event. Default jet_start
         "HoveringSoundEnd": "jet_end",									- hover sound start event. Default jet_end
+		"SwitchOutAudio":"",                                            - sound event will be pushed when this representation switched to another alternative
+		"SwitchInAudio":"",                                             - sound event will be pushed when this representation becomes active
 		"additionalEncounterTags": [ "unit_vtol" ],                     - encounter tags list will be applied to actor. Note: you should be careful with this option, 
 																		  tags in this list should not be equal to tags in contracts definitions otherwise you can break 
 																		  objectives logic. 
