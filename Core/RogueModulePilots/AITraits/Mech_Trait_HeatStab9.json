@@ -1,18 +1,19 @@
 {
   "Description": {
-    "Id": "TraitAID10",
-    "Name": "AI d10 buff",
-    "Details": "PASSIVE: Reduces Heat generation by 10%.",
+    "Id": "Mech_Trait_HeatStab9",
+    "Name": "AI d9 buff",
+    "Details": "PASSIVE: -5% Heat Generation, Heat Taken, STAB Taken",
     "Icon": "uixSvgIcon_ability_mastertactician"
   },
   "Type": "HeatReduction",
-  "ShortDesc": "-10% Heat Generation",
+  "ShortDesc": "-5% Heat Generation, Heat Taken, STAB Taken",
   "DisplayParams": "ShowInPilotToolTip",
   "ActivationTime": "Passive",
   "EffectData": [
     {
       "durationData": {
-        "duration": -1
+        "duration": -1,
+        "stackLimit": -1
       },
       "targetingData": {
         "effectTriggerType": "Passive",
@@ -20,16 +21,16 @@
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "NightVision",
-        "Name": "Night Vision Mode",
-        "Details": "PASSIVE: Enables Night Vision.",
-        "Icon": "uixSvgIcon_ability_precisionstrike"
+        "Id": "TraitaidSTAB",
+        "Name": "Decreases STAB",
+        "Details": "STAB reduced by 5%",
+        "Icon": "uixSvgIcon_ability_mastertactician"
       },
       "statisticData": {
-        "statName": "LV_NIGHT_VISION",
-        "operation": "Set",
-        "modValue": "true",
-        "modType": "System.Boolean"
+        "statName": "ReceivedInstabilityMultiplier",
+        "operation": "Float_Multiply",
+        "modValue": "0.95",
+        "modType": "System.Single"
       },
       "nature": "Buff"
     },
@@ -44,15 +45,15 @@
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "Traitaid102",
+        "Id": "TraitaidHeatGen",
         "Name": "Decreases Heat Generation",
-        "Details": "Heat generation reduced by 10%",
+        "Details": "Heat generation reduced by 5%",
         "Icon": "uixSvgIcon_ability_mastertactician"
       },
       "statisticData": {
-        "statName": "AccuracyModifier",
-        "operation": "Float_Add",
-        "modValue": "-1.0",
+        "statName": "HeatGenerated",
+        "operation": "Float_Multiply",
+        "modValue": "0.95",
         "modType": "System.Single",
         "targetCollection": "Weapon"
       },
@@ -65,22 +66,24 @@
       },
       "targetingData": {
         "effectTriggerType": "Passive",
-        "effectTargetType": "Creator"
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "Tankeraid7",
-        "Name": "Decreases Heat Generation",
-        "Details": "Heat generation reduced by 10%",
-        "Icon": "uixSvgIcon_ability_mastertactician"
+        "Id": "TraitaidHeatTaken",
+        "Name": "Decreases Heat Taken",
+        "Details": "Heat damage reduced by 5%.",
+        "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
+      "nature": "Buff",
       "statisticData": {
-        "statName": "ToHitIndirectModifier",
-        "operation": "Float_Add",
-        "modValue": "-1.0",
+        "statName": "CACIncomingHeatMult",
+        "operation": "Float_Multiply",
+        "modValue": "0.95",
         "modType": "System.Single"
-      },
-      "nature": "Buff"
+      }
     }
   ]
 }
