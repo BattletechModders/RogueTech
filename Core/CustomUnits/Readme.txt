@@ -186,6 +186,8 @@ VehicleChassis/Chassis
         "Type": "AirMech",                                              - type (available values: Normal, AirMech)
         "HoveringSoundStart": "jet_start",                              - hover sound start event. Default jet_start
         "HoveringSoundEnd": "jet_end",									- hover sound start event. Default jet_end
+		"SwitchOutAudio":"",                                            - sound event will be pushed when this representation switched to another alternative
+		"SwitchInAudio":"",                                             - sound event will be pushed when this representation becomes active
 		"additionalEncounterTags": [ "unit_vtol" ],                     - encounter tags list will be applied to actor. Note: you should be careful with this option, 
 																		  tags in this list should not be equal to tags in contracts definitions otherwise you can break 
 																		  objectives logic. 
@@ -313,8 +315,8 @@ VehicleChassis/Chassis
 									 6. Destruction one leg not force mech to fall. To fall on limb destruction two limbs should be destroyed.
 	"FrontLegsDestructedOnSideTorso": false - working only is ArmsCountedAsLegs is true. If set to true it overrides "Side torso crush not lead to attached arm destroy" 
 											  to original behavior eg. on side torso nuke, relevant front leg will be nuked too
-	"CustomHitTable": "custhittable_experimental" - id of custom hit table. See "custom hit table" section for more info.
-													Note! squads are not reacting this setting. They have own hit tables math.
+	"CustomStructure": "customstruct_experimental" - id of custom structure table. See "custom hit tables" section for more info.
+													Note! squads are not reacting this setting. They have own structure rules.
 	"LegDestroyedMovePenalty": -1f - move speed penalty on leg destroy. if < 0 or omitted Constants.MoveConstants.LegDestroyedPenalty used
 	"LegDamageRedMovePenalty": -1f - move speed penalty on leg penalized. if < 0 or omitted Constants.MoveConstants.LegDamageRedPenalty used
 	"LegDamageYellowMovePenalty": -1f - move speed penalty on leg damages. if < 0 or omitted Constants.MoveConstants.LegDamageYellowPenalty used
@@ -593,8 +595,38 @@ CustomHardpoints section
 
 Custom hit tables
 
+Custom structure rules
+
 {
-	"Id": "custhittable_experimental", - id for this table, must be same as file name
+	"Id": "customstruct_experimental", - id for this table, must be same as file name
+	"adjacentLocations": {                                         - setting for adjacent locations
+		"Head": [ "CenterTorso", "LeftTorso", "RightTorso" ],      - <armor location>: <list of nearby locations>. location can be either mech-style (CenterTorso, LeftTorso etc) 
+			                                                         either vehicle-style (Front, Rear etc)
+		"CenterTorso": [ "LeftTorso", "RightTorso", "Head" ],
+		"LeftTorso": [ "CenterTorso", "LeftArm" ],
+		"RightTorso": [ "CenterTorso", "RightArm" ],
+		"LeftArm": [ "LeftTorso" ],
+		"RightArm": [ "RightTorso" ],
+		"LeftLeg": [ "LeftTorso" ],
+		"RightLeg": [ "RightTorso" ],
+		"CenterTorsoRear": [ "LeftTorsoRear", "RightTorsoRear" ],
+		"LeftTorsoRear": [ "RightTorsoRear", "CenterTorsoRear" ],
+		"RightTorsoRear": [ "LeftTorsoRear", "CenterTorsoRear" ]
+	},
+	"clusterSpecialLocation": "None"              - special location for cluster hit table generation. 
+	                                                for mechs by default it is Head, for vehicles None
+													this location. This location is reacting on
+													ClusterChanceNeverClusterHead and ClusterChanceNeverMultiplyHead 
+													Combat constants
+}
+
+Custom hit table
+{
+	"ParentStructureId":"customstruct_experimental", - id of parent custom structure rules definition
+	"Id": "default",                                 - key this hit table will be references. 
+	                                                   Hit table loaded later overrides loaded earlier. 
+													   "default" - is hardcoded id for an default hit table for this units type
+
 	"hitTable": {                      - hit table
 		"FromFront": {                 - attack direction
 			"Head": 10,                - <Armor location name>:<weight>. Armor location can be either mech-style (CenterTorso, LeftTorso etc) 
@@ -689,28 +721,8 @@ Custom hit tables
 			"RightTorsoRear": 1
 		}
 	},
-	"adjacentLocations": {                                         - setting for adjacent locations
-		"Head": [ "CenterTorso", "LeftTorso", "RightTorso" ],      - <armor location>: <list of nearby locations>. location can be either mech-style (CenterTorso, LeftTorso etc) 
-			                                                         either vehicle-style (Front, Rear etc)
-		"CenterTorso": [ "LeftTorso", "RightTorso", "Head" ],
-		"LeftTorso": [ "CenterTorso", "LeftArm" ],
-		"RightTorso": [ "CenterTorso", "RightArm" ],
-		"LeftArm": [ "LeftTorso" ],
-		"RightArm": [ "RightTorso" ],
-		"LeftLeg": [ "LeftTorso" ],
-		"RightLeg": [ "RightTorso" ],
-		"CenterTorsoRear": [ "LeftTorsoRear", "RightTorsoRear" ],
-		"LeftTorsoRear": [ "RightTorsoRear", "CenterTorsoRear" ],
-		"RightTorsoRear": [ "LeftTorsoRear", "CenterTorsoRear" ]
-	},
-	"clusterSpecialLocation": "None"              - special location for cluster hit table generation. 
-	                                                for mechs by default it is Head, for vehicles None
-													this location. This location is reacting on
-													ClusterChanceNeverClusterHead and ClusterChanceNeverMultiplyHead 
-													Combat constants
 }
 
-  
 appendix A. Game's build-in audio events names in format '<name>':<id>
 id - just for info purposes
  'AudioEventList_aircraft_aircraft_dropship_gencon_landing':3307102648
