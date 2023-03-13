@@ -1,13 +1,15 @@
 ﻿this mod makes units selecting by tags little bit more fuzzy
   "Settings": {
-    "tags_weights": {
+    "required_tags_weights": {
       "test_unit_mech": { "weight": 100, "replace": [ "unit_mech1", "unit_mech2", "" ] },
       "test_unit_legendary":  { "weight": 10, "replace": [ "unit_legendary1", "unit_legendary2", "" ] },
       "test_terranhegemony":  { "weight": 5, "replace": [ "terranhegemony1", "terranhegemony2", "" ] },
       "test_unit_bracket_high":  { "weight": 1, "replace": [ "unit_bracket_high1", "unit_bracket_high2", "" ] },
       "test_unit_noncombatant":  { "weight": 1000, "replace": [ "unit_noncombatant1", "unit_noncombatant2", "" ] },
-      "test_unit_generic": { "weight": 1000, "replace": [ "unit_generic1", "unit_generic2", "" ] },
+    }
+    "excluded_tags_weights": {
       "test_unit_light": { "weight": 20, "replace": [ "unit_light1", "unit_light2", "" ] },
+      "test_unit_generic": { "weight": 1000, "replace": [ "unit_generic1", "unit_generic2", "" ] },
       "test_NoBiome_highlandsSpring":  { "weight": 50, "replace": [ "" ] }
     }
   },
