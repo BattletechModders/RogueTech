@@ -1,0 +1,182 @@
+{
+  "Description": {
+    "Id": "event_sh_gate2",
+    "Name": "MRB Authorization Upgrade Available",
+    "Details": "<color=#A8A8A8>As you are on the way from your personal quarters towards the bridge, Darius catches up to you from a side corridor. After a brief salute he shows you his techpad without comment, once again displaying a message from the MRB.\n\n\"<i>Dear Commander {COMMANDER.Name} of {COMPANY.CompanyName},\n\nIt is with great pleasure the MRB can inform You that Your company is now able to request an increased contract classification authorization within the MRB contract bidding system.\n\nFor a small nominal fee, the MRB will provide one of its most experienced assessors; who after a routine assessment of your company's capabilities will allow the requisition of an upgraded official <b>MRB Omega Authorization Console</b>.\n\nThis upgrade will allow Your company to take on the hardest of contracts, opening the path to ultimate glory and fortunes!\n\nWe hope to hear from you shortly, [TEMPLATE_Generic_Insert Name of Friendly Local MRB Representative].</i>\"\n\n<color=#A8A8A8>You look up at Darius after you finished reading the message.</color>\"Darius, I am not sure I want to suffer through that horrible experience again, I am still having nightmares of the last assessment...\"<color=#A8A8A8>Darius nods in reply.</color>\"I figured as much, Commander. I will leave the decision up to you\"\n\n\n<b><color=#35dde0>Information:</b> The access to Superheavy Hunt contracts can now be unlocked. These missions are amongst the <b>hardest</b>, as they will include <b>several</b> Superheavy 'Mechs or vehicles, which each can weigh up to 200 tons.</color>",
+    "Icon": "uixTxrSpot_OmegaAccess"
+  },
+  "Scope": "Company",
+  "Weight": 100000,
+  "Requirements": {
+    "Scope": "Company",
+    "RequirementTags": {
+      "items": [
+        "mrb_authorization_epsilon"
+      ],
+      "tagSetSourceFile": ""
+    },
+    "ExclusionTags": {
+      "items": [
+        "mrb_authorization_omega_wait",
+        "mrb_authorization_omega_decision_made"
+      ],
+      "tagSetSourceFile": ""
+    },
+    "RequirementComparisons": [
+      {
+        "obj": "SuperheavyMissions",
+        "op": "GreaterThan",
+        "val": 10,
+        "valueConstant": "10"
+      }
+    ]
+  },
+  "AdditionalRequirements": [],
+  "AdditionalObjects": [],
+  "Options": [
+    {
+      "Description": {
+        "Id": "outcome_0",
+        "Name": "<color=#A8A8A8>[Delay 180 days]</color> Pass on the opportunity for now.",
+        "Details": "",
+        "Icon": null
+      },
+      "RequirementList": [],
+      "ResultSets": [
+        {
+          "Description": {
+            "Id": "outcome_0_0",
+            "Name": "Nothing happens, temporary delay the decision for 6 months.",
+            "Details": "<color=#A8A8A8>You decide you are not ready to suffer through the assessment again, passing on the opportunity for now.</color>\n\n<color=#35dde0>[Event has been paused for 180 days]</color>",
+            "Icon": null
+          },
+          "Weight": 100,
+          "Results": [
+            {
+              "Scope": "Company",
+              "Requirements": null,
+              "AddedTags": {
+                "tagSetSourceFile": "Tags/CompanyTags",
+                "items": [
+                  "mrb_authorization_omega_wait"
+                ]
+              },
+              "RemovedTags": {
+                "tagSetSourceFile": "",
+                "items": []
+              },
+              "Stats": null,
+              "Actions": null,
+              "ForceEvents": null,
+              "TemporaryResult": true,
+              "ResultDuration": 180
+            }
+          ]
+        }
+      ],
+      "Requirements": {
+        "Scope": "Company",
+        "RequirementTags": {
+          "tagSetSourceFile": "",
+          "items": []
+        },
+        "ExclusionTags": {
+          "tagSetSourceFile": "",
+          "items": []
+        },
+        "RequirementComparisons": []
+      }
+    },
+    {
+      "Description": {
+        "Id": "outcome_1",
+        "Name": "Send a request for a MRB Assessor",
+        "Details": "[¢250,000]",
+        "Icon": null
+      },
+      "RequirementList": [
+        {
+          "Scope": "Company",
+          "RequirementTags": {
+            "tagSetSourceFile": "",
+            "items": []
+          },
+          "ExclusionTags": {
+            "tagSetSourceFile": "",
+            "items": []
+          },
+          "RequirementComparisons": [
+            {
+              "obj": "Funds",
+              "op": "GreaterThan",
+              "val": 250000,
+              "valueConstant": "250000"
+            }
+          ]
+        }
+      ],
+      "ResultSets": [
+        {
+          "Description": {
+            "Id": "outcome_1_0",
+            "Name": "Assessment",
+            "Details": "<color=#A8A8A8>You sigh heavily before deciding the suffering will still be worth it in the end. Time to call for that MRB Assessor again.</color>",
+            "Icon": null
+          },
+          "Weight": 100,
+          "Results": [
+            {
+              "Scope": "Company",
+              "Requirements": null,
+              "AddedTags": {
+                "tagSetSourceFile": "Tags/CompanyTags",
+                "items": [
+                  "mrb_authorization_omega_assessment"
+                ]
+              },
+              "RemovedTags": {
+                "tagSetSourceFile": "",
+                "items": []
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-250000",
+                  "set": false,
+                  "valueConstant": null
+                }
+              ],
+              "Actions": null,
+              "ForceEvents": null,
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            },
+            {
+              "Scope": "Company",
+              "Requirements": null,
+              "AddedTags": {
+                "tagSetSourceFile": "Tags/CompanyTags",
+                "items": [
+                  "mrb_authorization_omega_decision_made"
+                ]
+              },
+              "RemovedTags": {
+                "tagSetSourceFile": "",
+                "items": []
+              },
+              "Stats": null,
+              "Actions": null,
+              "ForceEvents": null,
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "PublishState": "PUBLISHED",
+  "ValidationState": "UNTESTED",
+  "EventType": "NORMAL"
+}
