@@ -1,0 +1,193 @@
+{
+  "Description": {
+    "Id": "event_sh_gate1",
+    "Name": "MRB Authorization Upgrade Available",
+    "Details": "<color=#A8A8A8>Darius approaches you during your lunch break with an excited look.</color> \"Commander! It has finally happened, we got an offer for upgraded authorization from the MRB.\"<color=#A8A8A8>He hands his techpad over, an incoming message already open.</color>\n\n\"<i>Dear Commander {COMMANDER.Name} of {COMPANY.CompanyName},\n\nIt is with great pleasure the MRB can inform You that Your company is now able to request an increased contract classification authorization within the MRB contract bidding system.\n\nFor a small nominal fee, the MRB will provide one of its most experienced assessors; who after a routine assessment of your company's capabilities will allow the requisition of an upgraded official <b>MRB Epsilon Authorization Console</b>.\n\nThis upgrade will allow Your company to take on even harder contracts, opening the path to even more glory and fortunes!\n\nWe hope to hear from you shortly, [TEMPLATE_Generic_Insert Name of Friendly Local MRB Representative].</i>\"\n\n<color=#A8A8A8>Darius waits impatiently until you finish reading the message.</color> \"What are we waiting for, let's request the assessment at once. Imagine the increased amount of fame I..*cough* we will achieve once it is known we can handle Epsilon-level contracts!\" <color=#A8A8A8>You shake your head at the almost-bouncing Darius, but decided to look into the matter later in the day.</color>\n\n\n<b><color=#35dde0>Information:</b> The access to Superheavy Mission contracts can now be unlocked.  These missions are <b>considerably</b> harder as they will include one or more Superheavy 'Mechs or vehicles, which each can weigh up to 200 tons, depending on your current difficulty rating.</color>",
+    "Icon": "uixTxrSpot_EpsilonAccess"
+  },
+  "Scope": "Company",
+  "Weight": 100000,
+  "Requirements": {
+    "Scope": "Company",
+    "RequirementTags": {
+      "items": [],
+      "tagSetSourceFile": ""
+    },
+    "ExclusionTags": {
+      "items": [],
+      "tagSetSourceFile": ""
+    },
+    "RequirementComparisons": [
+      {
+        "obj": "MissionsComplete",
+        "op": "GreaterThan",
+        "val": 50,
+        "valueConstant": "50"
+      }
+    ]
+  },
+  "AdditionalRequirements": [
+    {
+      "Scope": "Company",
+      "RequirementTags": {
+        "items": [],
+        "tagSetSourceFile": ""
+      },
+      "ExclusionTags": {
+        "items": [
+          "mrb_authorization_epilson_wait",
+          "mrb_authorization_epilson_decision_made"
+        ],
+        "tagSetSourceFile": ""
+      },
+      "RequirementComparisons": []
+    }
+  ],
+  "AdditionalObjects": [],
+  "Options": [
+    {
+      "Description": {
+        "Id": "outcome_0",
+        "Name": "<color=#A8A8A8>[Delay 180 days]</color> Pass on the opportunity for now.",
+        "Details": "",
+        "Icon": null
+      },
+      "RequirementList": [],
+      "ResultSets": [
+        {
+          "Description": {
+            "Id": "outcome_0_0",
+            "Name": "Nothing happens, temporary delay the decision for 6 months.",
+            "Details": "<color=#A8A8A8>Shaking your head, you deliver your decision.</color> \"We'll wait for now. Perhaps we will consider it again once we are more prepared.\"\n\n<color=#A8A8A8>Though disappointed, Darius goes to fetch some food before sitting down next to you.</color>\n\n<color=#35dde0>[Event has been paused for 180 days]</color>",
+            "Icon": null
+          },
+          "Weight": 100,
+          "Results": [
+            {
+              "Scope": "Company",
+              "Requirements": null,
+              "AddedTags": {
+                "tagSetSourceFile": "Tags/CompanyTags",
+                "items": [
+                  "mrb_authorization_epilson_wait"
+                ]
+              },
+              "RemovedTags": {
+                "tagSetSourceFile": "",
+                "items": []
+              },
+              "Stats": null,
+              "Actions": null,
+              "ForceEvents": null,
+              "TemporaryResult": true,
+              "ResultDuration": 180
+            }
+          ]
+        }
+      ],
+      "Requirements": {
+        "Scope": "Company",
+        "RequirementTags": {
+          "tagSetSourceFile": "",
+          "items": []
+        },
+        "ExclusionTags": {
+          "tagSetSourceFile": "",
+          "items": []
+        },
+        "RequirementComparisons": []
+      }
+    },
+    {
+      "Description": {
+        "Id": "outcome_1",
+        "Name": "Send a request for a MRB Assessor",
+        "Details": "[¢50,000]",
+        "Icon": null
+      },
+      "RequirementList": [
+        {
+          "Scope": "Company",
+          "RequirementTags": {
+            "tagSetSourceFile": "",
+            "items": []
+          },
+          "ExclusionTags": {
+            "tagSetSourceFile": "",
+            "items": []
+          },
+          "RequirementComparisons": [
+            {
+              "obj": "Funds",
+              "op": "GreaterThan",
+              "val": 50000,
+              "valueConstant": "50000"
+            }
+          ]
+        }
+      ],
+      "ResultSets": [
+        {
+          "Description": {
+            "Id": "outcome_1_0",
+            "Name": "Assessment",
+            "Details": "<color=#A8A8A8>You smile at Darius before replying.</color> \"You know, Darius, why not? I am always ready for more challenges. Let's get the Assessor over here as soon as we can.",
+            "Icon": null
+          },
+          "Weight": 100,
+          "Results": [
+            {
+              "Scope": "Company",
+              "Requirements": null,
+              "AddedTags": {
+                "tagSetSourceFile": "Tags/CompanyTags",
+                "items": [
+                  "mrb_authorization_epilson_assessment"
+                ]
+              },
+              "RemovedTags": {
+                "tagSetSourceFile": "",
+                "items": []
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-50000",
+                  "set": false,
+                  "valueConstant": null
+                }
+              ],
+              "Actions": null,
+              "ForceEvents": null,
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            },
+            {
+              "Scope": "Company",
+              "Requirements": null,
+              "AddedTags": {
+                "tagSetSourceFile": "Tags/CompanyTags",
+                "items": [
+                  "mrb_authorization_epilson_decision_made"
+                ]
+              },
+              "RemovedTags": {
+                "tagSetSourceFile": "",
+                "items": []
+              },
+              "Stats": null,
+              "Actions": null,
+              "ForceEvents": null,
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "PublishState": "PUBLISHED",
+  "ValidationState": "UNTESTED",
+  "EventType": "NORMAL"
+}
