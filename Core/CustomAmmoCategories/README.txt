@@ -570,6 +570,7 @@ new fields
 	8. lastFireSFX - (fireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by missiles.
 
   Note! Empty SFX value (example "preFireSFX":"") means vanilla value should be cleared. If want to keep vanilla value parameter should be omitted.
+  Note! both AudioKenetik and CustomVoices audio samples string ids can be used, if used CustomVoices ones <stop> events have no meaning and should be omitted
   For mentioned values mode have priority, than ammo, than weapon.
 
   "blockWeaponsInMechLocations": [], - list of mech locations. all weapons installed in this locations can't fire if this weapon is functional.

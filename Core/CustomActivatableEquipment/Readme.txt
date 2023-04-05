@@ -264,6 +264,16 @@ WeaponAddonDef example
 			"FailCritToInstalledLocation": false - if true location component is installed will be added to FailCritLocations/FailCritVehicleLocations
 			"FailCritExcludeComponentsTags" : [], - if component have one of tag from this list it will be excluded from fail damage crit roll both (FailCrit and FailCritComponents) methods
 			"FailCritOnlyComponentsTags" : [], - if not empty only component having at least one tag from this list will be used to drit roll crit roll both (FailCrit and FailCritComponents) methods
+			"UnsafeFailChance":1.0 - chance component explode (fail effects application mentioned above) on fail. 
+			                         If component fail and win(win have negative effect) this roll,
+			                         all fail effects will be applied (if setup). Otherwise (failing this roll have positive 
+									 effect) component just been deactivated without any side effect. 
+									 By default UnsafeFailChance have value - 1.0 eg. all fails are dangerous.
+									 In runtime value can be controlled by component statistic value "CAEUnsafeFailChance" 
+									 (default value for this statistic is <UnsafeFailChance>)
+									 Also there is per unit statistic "CAEUnsafeFailChanceMod" (default value is 1.0) multiplicative
+									 and "CAEAIUnsafeFailChanceMod" (applied only is unit under AI control, default value is 
+									 DefaultAIUnsafeFailChanceMod in mod settings)
 			"MechTonnageWeightMult" : 20 - installed chassis tonnage restriction multiplier. Tonnage restriction from (Component.Tonnage-1)*(MechTonnageWeightMult)+1 to (Component.Tonnage)*(MechTonnageWeightMult)
 			                                with component tonnage - 5 and MechTonnageWeightMult - 20 chassis tonnage restriction will be from (5-1)*20 + 1 = 81 to 5*20 = 100
 			"MechTonnageSlotsMult" : 20  - installed chassis tonnage restriction multiplier.
@@ -559,6 +569,7 @@ WeaponAddonDef example
       },
       NOTE! Components activated by link counts as auto-activated and not suffer activation fail roll/
       NOTE! You can create link structure as complicated as you want, but if you create cycle you encounter stack overflow exception. Use this feature wisely.
+	
 			"statusEffects": [  - status effect applied on activation. Same rules as for other component's passive effects. 
 				{
 					"durationData" : {
