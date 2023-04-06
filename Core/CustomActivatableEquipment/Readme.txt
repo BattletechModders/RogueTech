@@ -687,7 +687,11 @@ COMPOPNENT
       "Id": "Gear_Sensor_Prototype_EWE_Aura_ECM", - Id should be unique per component definition. 
                                                     If Id set as "AMS" and component is weapon than Range is tied to weapon MaxRange and reticle is only shown if weapon is enabled and in AMS mode. 
                                                     Look at CustomAmmoCategories/weapon/Weapon_MachineGun_AMS_3-Hydra.json it defines empty aura not applying any effects just for colored circle showing range. 
-      "MinefieldDetector": false                  - if true aura is used as minefield detector. Basic sensors have this forced true other auras default false. 
+      "TrackAcivation":false,                     - if true aura is active only if aura carrier is active.
+	                                                unit counted as active when
+													 1. Player can control unit current phase and selected this unit in HUD
+													 2. Unit started to execute orders (player's or AI's) and not done yet
+	  "MinefieldDetector": false                  - if true aura is used as minefield detector. Basic sensors have this forced true other auras default false. 
 	  "LineType": "Dashes"                        - Line type of range circle. Possible values
                                                           Dashes - default. Looks as previous
                                                           Dots - looks like active probe range indicator

@@ -659,6 +659,19 @@ new fields
 								  if not set weapon hit generator will be used.
 								  if not set hit generator will be choosed by weapon type.
 								  if weapon define has tag "wr-clustered_shots", "Cluster" hit generator will be forced. 
+  "RangeBonusDistance": 0, - if distance to target less than RangeBonusDistance - RangeBonusAccuracyMod is applied
+                             additive for weapon, mode and ammo. Can be altered runtime via component statistic values
+							 "CAC_RangeBonusDistance" and "CAC_RangeBonusDistance_Mod".
+							 "CAC_RangeBonusDistance" has default value from WeaponDef.RangeBonusDistance
+							 "CAC_RangeBonusDistance_Mod" has default value 1.0
+							 effective formula 
+							 (<weapon statistic CAC_RangeBonusDistance> + <ammo RangeBonusDistance> + <mode RangeBonusDistance>) * <weapon statistic CAC_RangeBonusDistance_Mod>
+  "RangeBonusAccuracyMod": 0, - additive for weapon, mode and ammo. Can be altered runtime via component statistic values
+							 "CAC_RangeBonusAccuracyMod" and "CAC_RangeBonusAccuracyMod_Mod".
+							 "CAC_RangeBonusAccuracyMod" has default value from WeaponDef.RangeBonusAccuracyMod
+							 "CAC_RangeBonusAccuracyMod_Mod" has default value 1.0
+							 effective formula 
+							 (<weapon statistic CAC_RangeBonusAccuracyMod> + <ammo RangeBonusAccuracyMod> + <mode RangeBonusAccuracyMod>) * <weapon statistic CAC_RangeBonusAccuracyMod_Mod>
   "DirectFireModifier" : -10.0, Accuracy modifier if weapon can strike directly
   "DamageVariance": 20, - Simple damage variance as implemented in WeaponRealizer
   "DamageFalloffStartDistance": 0, - distance where damage starts to change, additive per ammo/mode/weapon.
