@@ -570,6 +570,7 @@ new fields
 	8. lastFireSFX - (fireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by missiles.
 
   Note! Empty SFX value (example "preFireSFX":"") means vanilla value should be cleared. If want to keep vanilla value parameter should be omitted.
+  Note! both AudioKenetik and CustomVoices audio samples string ids can be used, if used CustomVoices ones <stop> events have no meaning and should be omitted
   For mentioned values mode have priority, than ammo, than weapon.
 
   "blockWeaponsInMechLocations": [], - list of mech locations. all weapons installed in this locations can't fire if this weapon is functional.
@@ -658,6 +659,19 @@ new fields
 								  if not set weapon hit generator will be used.
 								  if not set hit generator will be choosed by weapon type.
 								  if weapon define has tag "wr-clustered_shots", "Cluster" hit generator will be forced. 
+  "RangeBonusDistance": 0, - if distance to target less than RangeBonusDistance - RangeBonusAccuracyMod is applied
+                             additive for weapon, mode and ammo. Can be altered runtime via component statistic values
+							 "CAC_RangeBonusDistance" and "CAC_RangeBonusDistance_Mod".
+							 "CAC_RangeBonusDistance" has default value from WeaponDef.RangeBonusDistance
+							 "CAC_RangeBonusDistance_Mod" has default value 1.0
+							 effective formula 
+							 (<weapon statistic CAC_RangeBonusDistance> + <ammo RangeBonusDistance> + <mode RangeBonusDistance>) * <weapon statistic CAC_RangeBonusDistance_Mod>
+  "RangeBonusAccuracyMod": 0, - additive for weapon, mode and ammo. Can be altered runtime via component statistic values
+							 "CAC_RangeBonusAccuracyMod" and "CAC_RangeBonusAccuracyMod_Mod".
+							 "CAC_RangeBonusAccuracyMod" has default value from WeaponDef.RangeBonusAccuracyMod
+							 "CAC_RangeBonusAccuracyMod_Mod" has default value 1.0
+							 effective formula 
+							 (<weapon statistic CAC_RangeBonusAccuracyMod> + <ammo RangeBonusAccuracyMod> + <mode RangeBonusAccuracyMod>) * <weapon statistic CAC_RangeBonusAccuracyMod_Mod>
   "DirectFireModifier" : -10.0, Accuracy modifier if weapon can strike directly
   "DamageVariance": 20, - Simple damage variance as implemented in WeaponRealizer
   "DamageFalloffStartDistance": 0, - distance where damage starts to change, additive per ammo/mode/weapon.
@@ -698,6 +712,21 @@ new fields
   "RecoilJammingChance": 0.0, - addition to  FlatJammingChance based on recoil. Adds RecoilJammingChance * <RefireModifier> to FlatJammingChance
                                 <RefireModifier> is effective weapon's RefireModifier if roundsSinceLastFire < 2 and 0 otherwise. 
 								Can be set for weapon, ammo and mode. Additive.
+  "UnsafeJamChance": 1.0, - if DamageOnJamming or DestroyOnJamming is true, performed random roll to unsafe jamm. If roll wins (bad)
+                            damage or destroying applied. If roll fail (good) weapon will be only jammed instead without damage or destruction
+							Additive per weapon, ammo, mode
+							Default value for weapondef - 1.0, for ammo and mode - 0
+							Can be controlled in runtime by weapon statistic values "CAC_UnsafeJamChance" and "CAC_UnsafeJamChance_Mod"
+							Effective formula (<weapon statistic.CAC_UnsafeJamChance> + <ammo.UnsafeJamChance> + <mode.UnsafeJamChance>) * <weapon statistic.CAC_UnsafeJamChance_Mod>
+							statistic CAC_UnsafeJamChance have default value from weapon definition
+							CAC_UnsafeJamChance_Mod default value 1.0f
+  "AIUnsafeJamChanceMod": 1.0 - if unit is under AI control additional modifier to UnsafeJamChance applied
+								Additive per weapon, ammo, mode
+								Default value for weapondef - 1.0, for ammo and mode - 0
+                                Modifier formula (<weapon statistic.CAC_AIUnsafeJamChanceMod> + <ammo.AIUnsafeJamChanceMod> + <mode.AIUnsafeJamChanceMod>) * <weapon statistic.CAC_AIUnsafeJamChanceMod_Mod> * <CAC setting AIUnsafeJamChance>
+								CAC setting AIUnsafeJamChance have default value 1.0
+								statistic CAC_AIUnsafeJamChance have default value from weapon definition
+							    CAC_AIUnsafeJamChance_Mod default value 1.0f
   "GunneryJammingBase": 5, - 
   "GunneryJammingMult": 0.05, - this values uses to alter flat jamming chance by pilot skills 
                                   formula effective jamming chance = FlatJammingChance + (GunneryJammingBase - Pilot Gunnery)* GunneryJammingMult
