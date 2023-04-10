@@ -681,10 +681,14 @@ WeaponAddonDef example
   AURAS RELATED SETTINGS
   Hotkey - you can use LCtrl + A to switch auras circles visibility. By default only auras with HideOnNotSelected: false is show. Default -> LCtrl+A -> Hide all auras -> LCtrl+A -> Show all auras (even with HideOnNotSelected: true) 
 COMPOPNENT 
-
+  Auras array can be defined in components (allowed component types Update, Weapon) and abilities
+  for auras defined in ability "State" have no meaning - aura acts same way if "State" is "Persistent"
   "Auras": [
     {
-      "Id": "Gear_Sensor_Prototype_EWE_Aura_ECM", - Id should be unique per component definition. 
+      Note! Aura can be defined in separate json. AuraDef in manifest. To point parsing engine Aura content should be loaded from
+	  external json left only Id in component/ability you want to use 
+
+	  "Id": "Gear_Sensor_Prototype_EWE_Aura_ECM", - Id should be unique per component definition. 
                                                     If Id set as "AMS" and component is weapon than Range is tied to weapon MaxRange and reticle is only shown if weapon is enabled and in AMS mode. 
                                                     Look at CustomAmmoCategories/weapon/Weapon_MachineGun_AMS_3-Hydra.json it defines empty aura not applying any effects just for colored circle showing range. 
       "TrackAcivation":false,                     - if true aura is active only if aura carrier is active.
