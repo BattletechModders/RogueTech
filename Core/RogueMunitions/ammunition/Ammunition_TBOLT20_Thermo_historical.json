@@ -1,7 +1,7 @@
 {
   "Description": {
-    "Id": "Ammunition_TBOLT10_Thermo",
-    "Name": "Inferno Thunderbolt 10 Ammo",
+    "Id": "Ammunition_TBOLT20_Thermo_historical",
+    "Name": "Inferno Thunderbolt 20 Ammo",
     "UIName": "Thermo",
     "Details": "Long range missiles, capable of dealing moderate damage at long range. Each missile lacks punch, but in a group they can deal significant damage.",
     "Icon": null,
@@ -10,7 +10,7 @@
     "Purchasable": false
   },
   "Type": "Normal",
-  "Category": "TBOLT10",
+  "Category": "TBOLT20",
   "HeatGenerated": 0,
   "HeatGeneratedModifier": 1,
   "ArmorDamageModifier": 1,
@@ -19,14 +19,15 @@
   "AccuracyModifier": -1,
   "AIBattleValue": 90,
   "AOECapable": true,
-  "AOERange": 50,
-  "AOEDamage": 15,
-  "AOEHeatDamage": 35,
-  "AOEInstability": 7.5,
-  "DamageMultiplier": 0.16667,
-  "HeatDamagePerShot": 0.0,
+  "AOERange": 60,
+  "AOEDamage": 24,
+  "AOEHeatDamage": 72,
+  "AOEInstability": 12,
+  "DamageMultiplier": 0.1,
+  "HeatDamagePerShot": 12,
   "FireTerrainChance": 0.5,
-  "MissileHealth": 20,
+  "MissileHealth": 40,
+  "ProjectileSpeedMultiplier": 0.9,
   "ColorsTable": [
     {
       "C": "#DE6437",
@@ -36,9 +37,9 @@
   "ColorSpeedChange": 5,
   "ColorChangeRule": "t0",
   "AdditionalImpactVFX": "WFX_ExplosiveSmokeL",
-  "AdditionalImpactVFXScaleX": 2,
-  "AdditionalImpactVFXScaleY": 2,
-  "AdditionalImpactVFXScaleZ": 2,
+  "AdditionalImpactVFXScaleX": 4,
+  "AdditionalImpactVFXScaleY": 4,
+  "AdditionalImpactVFXScaleZ": 4,
   "statusEffects": [
     {
       "durationData": {
@@ -49,13 +50,14 @@
       },
       "targetingData": {
         "effectTriggerType": "OnHit",
+        "effectTargetType": "NotSet",
         "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
       "Description": {
         "Id": "HeatDamageTakenSoftCapMultiplier",
-        "Name": "Heat SoftCap 4%",
+        "Name": "Heat SoftCap 5%",
         "Details": "Reduce Heat Damage by 1%",
         "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
@@ -63,9 +65,38 @@
       "statisticData": {
         "statName": "CACIncomingHeatMult",
         "operation": "Float_Multiply",
-        "modValue": "0.8",
+        "modValue": "0.6",
         "modType": "System.Single"
       }
+    },
+    {
+      "durationData": {
+        "duration": 2,
+        "ticksOnActivations": true,
+        "useActivationsOfTarget": true,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "OnHit",
+        "extendDurationOnTrigger": 2,
+        "effectTargetType": "NotSet",
+        "showInTargetPreview": true,
+        "showInStatusPanel": true
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Effect_Thermobolt",
+        "Name": "Thermobaric Explosion",
+        "Details": "This unit is coated with burning chemicals. Heatsink efficiency reduced by 20.",
+        "Icon": "uixSvgIcon_biome_Heated"
+      },
+      "statisticData": {
+        "statName": "HeatSinkCapacity",
+        "operation": "Int_Subtract",
+        "modValue": "24",
+        "modType": "System.Int32"
+      },
+      "nature": "Debuff"
     }
   ]
 }
