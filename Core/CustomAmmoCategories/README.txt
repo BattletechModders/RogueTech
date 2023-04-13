@@ -712,6 +712,21 @@ new fields
   "RecoilJammingChance": 0.0, - addition to  FlatJammingChance based on recoil. Adds RecoilJammingChance * <RefireModifier> to FlatJammingChance
                                 <RefireModifier> is effective weapon's RefireModifier if roundsSinceLastFire < 2 and 0 otherwise. 
 								Can be set for weapon, ammo and mode. Additive.
+  "UnsafeJamChance": 1.0, - if DamageOnJamming or DestroyOnJamming is true, performed random roll to unsafe jamm. If roll wins (bad)
+                            damage or destroying applied. If roll fail (good) weapon will be only jammed instead without damage or destruction
+							Additive per weapon, ammo, mode
+							Default value for weapondef - 1.0, for ammo and mode - 0
+							Can be controlled in runtime by weapon statistic values "CAC_UnsafeJamChance" and "CAC_UnsafeJamChance_Mod"
+							Effective formula (<weapon statistic.CAC_UnsafeJamChance> + <ammo.UnsafeJamChance> + <mode.UnsafeJamChance>) * <weapon statistic.CAC_UnsafeJamChance_Mod>
+							statistic CAC_UnsafeJamChance have default value from weapon definition
+							CAC_UnsafeJamChance_Mod default value 1.0f
+  "AIUnsafeJamChanceMod": 1.0 - if unit is under AI control additional modifier to UnsafeJamChance applied
+								Additive per weapon, ammo, mode
+								Default value for weapondef - 1.0, for ammo and mode - 0
+                                Modifier formula (<weapon statistic.CAC_AIUnsafeJamChanceMod> + <ammo.AIUnsafeJamChanceMod> + <mode.AIUnsafeJamChanceMod>) * <weapon statistic.CAC_AIUnsafeJamChanceMod_Mod> * <CAC setting AIUnsafeJamChance>
+								CAC setting AIUnsafeJamChance have default value 1.0
+								statistic CAC_AIUnsafeJamChance have default value from weapon definition
+							    CAC_AIUnsafeJamChance_Mod default value 1.0f
   "GunneryJammingBase": 5, - 
   "GunneryJammingMult": 0.05, - this values uses to alter flat jamming chance by pilot skills 
                                   formula effective jamming chance = FlatJammingChance + (GunneryJammingBase - Pilot Gunnery)* GunneryJammingMult
