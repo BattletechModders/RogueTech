@@ -3,17 +3,17 @@
   "contractName": "Hunting Junk",
   "contractDisplayStyle": "BaseCampaignNormal",
   "difficulty": 8,
-  "difficultyUIModifier": 5,
-  "weight": 1,
+  "difficultyUIModifier": 7,
+  "weight": 10,
   "scope": "STANDARD",
   "finalDifficulty": 0,
   "representativeCastDefIDOverride": null,
   "missionSuccessStatementOverride": null,
   "badFaithStatementOverride": null,
   "goodFaithStatementOverride": null,
-  "shortDescription": "Intelligence sources indicate that a top secret {TEAM_TAR.FactionDef.Name} prototype super heavy mech is undergoing field trials on {TGT_SYSTEM.Name}. We'd like you to ensure that these trials go poorly.  <b><color=#e20000>[WARNING: DANGEROUS TRASH]</color></b>",
+  "shortDescription": "Intelligence sources indicate that a top secret {TEAM_TAR.FactionDef.Demonym} prototype super heavy mech is undergoing field trials on {TGT_SYSTEM.Name}. We'd like you to ensure that these trials go poorly.",
   "longDescription": "They say that copying is the most sincere form of flattery, however I would have just buried this thing forever.",
-  "salvagePotential": 12,
+  "salvagePotential": 8,
   "requirementList": [
     {
       "Scope": "StarSystem",
@@ -44,6 +44,12 @@
           "valueConstant": null
         },
         {
+          "obj": "Target.Locals",
+          "op": "Equal",
+          "val": 0,
+          "valueConstant": null
+        },
+        {
           "obj": "Employer.Solaris7",
           "op": "Equal",
           "val": 0,
@@ -58,7 +64,9 @@
         "tagSetSourceFile": ""
       },
       "ExclusionTags": {
-        "items": [],
+        "items": [
+          "contract_junkyard_cooldown"
+        ],
         "tagSetSourceFile": ""
       },
       "RequirementComparisons": []
@@ -67,7 +75,8 @@
       "Scope": "Company",
       "RequirementTags": {
         "items": [
-          "flashpoint_JunkYard_complete"
+          "flashpoint_JunkYard_complete",
+          "argo_mrb_console2"
         ],
         "tagSetSourceFile": ""
       },
@@ -81,16 +90,22 @@
   "OnContractSuccessResults": [
     {
       "Scope": "Company",
-      "Requirements": { },
+      "Requirements": {},
       "AddedTags": {
-        "items": [],
+        "items": [
+          "contract_junkyard_cooldown"
+        ],
         "tagSetSourceFile": ""
       },
       "RemovedTags": {
         "items": [],
         "tagSetSourceFile": ""
       },
-      "Stats": []
+      "Stats": [],
+      "Actions": null,
+      "ForceEvents": null,
+      "TemporaryResult": true,
+      "ResultDuration": 90
     },
     {
       "Scope": "Company",
@@ -103,18 +118,26 @@
         "items": [],
         "tagSetSourceFile": ""
       },
-      "Stats": [],
+      "Stats": [
+        {
+          "typeString": "System.Int32",
+          "name": "SuperheavyMissions",
+          "value": 1,
+          "set": false,
+          "valueConstant": "1"
+        }
+      ],
       "Actions": null,
       "ForceEvents": null,
-      "TemporaryResult": true,
-      "ResultDuration": 60
+      "TemporaryResult": false,
+      "ResultDuration": 0
     }
   ],
   "OnContractFailureResults": [],
   "encounterPlayStyle": "SinglePlayer",
   "maxNumberOfPlayerUnits": 16,
   "lanceMinTonnage": -1,
-  "lanceMaxTonnage": -1,
+  "lanceMaxTonnage": 1020,
   "mechMinTonnages": [
     -1,
     -1,
@@ -171,7 +194,7 @@
             {
               "typeString": "System.Single",
               "name": "ContractBonusRewardFlat",
-              "value": "50000",
+              "value": "250000",
               "set": false,
               "valueConstant": null
             }
@@ -611,7 +634,7 @@
       "overrideDialogueBucketId": "DialogBucketDef_Assassinate_TargetFleeing",
       "dialogueContent": [
         {
-          "words": "Commander, the target is bugging out! Destroy it before it escape.",
+          "words": "Commander, the target is bugging out! Destroy it before it escapes.",
           "wordsColor": {
             "r": 1,
             "g": 1,
@@ -848,7 +871,8 @@
         "lanceDefId": "Tagged",
         "lanceTagSet": {
           "items": [
-            "lance_type_notallvehicles"
+            "lance_type_notallvehicles",
+            "lance_type_battle"
           ],
           "tagSetSourceFile": "Tags/LanceTags"
         },
@@ -869,7 +893,7 @@
           "items": [],
           "tagSetSourceFile": "tags/SpawnEffectTags"
         },
-        "lanceDifficultyAdjustment": 5,
+        "lanceDifficultyAdjustment": 8,
         "selectedLanceDefId": "",
         "selectedLanceDifficulty": 0,
         "unitSpawnPointOverrideList": [
@@ -1015,18 +1039,12 @@
         "lanceDefId": "Tagged",
         "lanceTagSet": {
           "items": [
-            "lance_type_notallvehicles"
+            "lance_type_superheavy_dynamic_support"
           ],
           "tagSetSourceFile": "tags/LanceTags"
         },
         "lanceExcludedTagSet": {
-          "items": [
-            "lance_type_recon",
-            "lance_type_battle",
-            "lance_type_fire",
-            "lance_bracket_low",
-            "lance_type_turret"
-          ],
+          "items": [],
           "tagSetSourceFile": "Tags/LanceTags"
         },
         "spawnEffectTags": {
@@ -1176,9 +1194,11 @@
           "EncounterObjectGuid": "9d973fb5-9b7e-4c49-969a-6bb3e60caa64"
         },
         "name": "Lance_Enemy_AssassinationTarget",
-        "lanceDefId": "lancedef_mech_d10_Superheavy",
+        "lanceDefId": "Tagged",
         "lanceTagSet": {
-          "items": [],
+          "items": [
+            "lance_type_superheavy_dynamic_mixed"
+          ],
           "tagSetSourceFile": "tags/LanceTags"
         },
         "lanceExcludedTagSet": {
@@ -1189,7 +1209,7 @@
           "items": [],
           "tagSetSourceFile": "tags/SpawnEffectTags"
         },
-        "lanceDifficultyAdjustment": 10,
+        "lanceDifficultyAdjustment": 3,
         "selectedLanceDefId": "",
         "selectedLanceDifficulty": 0,
         "unitSpawnPointOverrideList": [
@@ -1213,9 +1233,11 @@
               "items": [],
               "tagSetSourceFile": "tags/SpawnEffectTags"
             },
-            "pilotDefId": "pilotDef_InheritLance",
+            "pilotDefId": "Tagged",
             "pilotTagSet": {
-              "items": [],
+              "items": [
+                "pilot_npc_superheavy_elite"
+              ],
               "tagSetSourceFile": "tags/PilotTags"
             },
             "pilotExcludedTagSet": {
