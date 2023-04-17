@@ -7,6 +7,10 @@
     ],
     "BonusDescriptions": [
       "BAWEAPON",
+      "AlwaysStartsFireAnywhere",
+      "FireTerrainStrength: 2",
+      "FireTerrainDuration: 1",
+      "Inferno: 1",
       "MissileHP: 4",
       "AMSChance: -50%",
       "AmmoCost: 80"
@@ -28,13 +32,13 @@
   "Type": "SRM",
   "WeaponSubType": "SRM2",
   "MinRange": 0,
-  "MaxRange": 240,
+  "MaxRange": 360,
   "RangeSplit": [
-    60,
-    120,
-    180
+    90,
+    180,
+    270
   ],
-  "AmmoCategory": "Flamer",
+  "AmmoCategory": "SRMInternal",
   "StartingAmmoCapacity": 4,
   "HeatGenerated": 0,
   "Damage": 3,
@@ -58,10 +62,12 @@
   "AMSHitChance": -0.5,
   "MissileHealth": 4,
   "FireOnSuccessHit": true,
-  "FireTerrainChance": 0.1,
+  "FireTerrainStrength": 2,
+  "FireTerrainChance": 1,
+  "FireDurationWithoutForest": 1,
   "WeaponEffectID": "WeaponEffect-Weapon_SRM2",
   "Description": {
-    "Cost": 16500,
+    "Cost": 11080,
     "Rarity": 20,
     "Purchasable": true,
     "Manufacturer": "Holly",
@@ -69,7 +75,7 @@
     "UIName": "BA Inferno SRM-2",
     "Id": "Weapon_PowerArmor_SRM_Inferno",
     "Name": "BA SRM-2",
-    "Details": "A 2 Tubed SRM Launcher with a single reload. This variant Carries Inferno gel. \n\n<b><color=#ffcc00>Battle Armor Weapons can only be mounted on Powered Armor Units.</color></b>",
+    "Details": "A 2-Tubed SRM Launcher, carrying 2 volleys. This variant Carries Inferno gel. \n\n<b><color=#ffcc00>Battle Armor Weapons can only be mounted on Powered Armor Units.</color></b>",
     "Icon": "uixSvgIcon_weapon_Missile"
   },
   "BonusValueA": "",
@@ -93,20 +99,13 @@
       },
       "targetingData": {
         "effectTriggerType": "OnHit",
-        "triggerLimit": 0,
-        "extendDurationOnTrigger": 0,
-        "specialRules": "NotSet",
-        "effectTargetType": "NotSet",
-        "range": 0,
-        "forcePathRebuild": false,
-        "forceVisRebuild": false,
         "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
       "Description": {
         "Id": "HeatDamageTakenSoftCapMultiplier",
-        "Name": "Heat SoftCap 3%",
+        "Name": "BA Inferno SRM-2: Decreased Target Heat Damage Taken",
         "Details": "Reduce Heat Damage by 1%",
         "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
@@ -117,6 +116,33 @@
         "modValue": "0.97",
         "modType": "System.Single"
       }
+    },
+    {
+      "durationData": {
+        "duration": 2,
+        "ticksOnActivations": true,
+        "useActivationsOfTarget": true,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "OnHit",
+        "showInTargetPreview": true,
+        "showInStatusPanel": true
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Effect_InfernoSRMHeat",
+        "Name": "BA Inferno SRM-2: Increased Target Cooling",
+        "Details": "This unit is coated with burning chemicals.",
+        "Icon": "uixSvgIcon_biome_Heated"
+      },
+      "statisticData": {
+        "statName": "HeatSinkCapacity",
+        "operation": "Int_Subtract",
+        "modValue": "1",
+        "modType": "System.Int32"
+      },
+      "nature": "Debuff"
     }
   ],
   "ComponentTags": {

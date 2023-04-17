@@ -264,6 +264,16 @@ WeaponAddonDef example
 			"FailCritToInstalledLocation": false - if true location component is installed will be added to FailCritLocations/FailCritVehicleLocations
 			"FailCritExcludeComponentsTags" : [], - if component have one of tag from this list it will be excluded from fail damage crit roll both (FailCrit and FailCritComponents) methods
 			"FailCritOnlyComponentsTags" : [], - if not empty only component having at least one tag from this list will be used to drit roll crit roll both (FailCrit and FailCritComponents) methods
+			"UnsafeFailChance":1.0 - chance component explode (fail effects application mentioned above) on fail. 
+			                         If component fail and win(win have negative effect) this roll,
+			                         all fail effects will be applied (if setup). Otherwise (failing this roll have positive 
+									 effect) component just been deactivated without any side effect. 
+									 By default UnsafeFailChance have value - 1.0 eg. all fails are dangerous.
+									 In runtime value can be controlled by component statistic value "CAEUnsafeFailChance" 
+									 (default value for this statistic is <UnsafeFailChance>)
+									 Also there is per unit statistic "CAEUnsafeFailChanceMod" (default value is 1.0) multiplicative
+									 and "CAEAIUnsafeFailChanceMod" (applied only is unit under AI control, default value is 
+									 DefaultAIUnsafeFailChanceMod in mod settings)
 			"MechTonnageWeightMult" : 20 - installed chassis tonnage restriction multiplier. Tonnage restriction from (Component.Tonnage-1)*(MechTonnageWeightMult)+1 to (Component.Tonnage)*(MechTonnageWeightMult)
 			                                with component tonnage - 5 and MechTonnageWeightMult - 20 chassis tonnage restriction will be from (5-1)*20 + 1 = 81 to 5*20 = 100
 			"MechTonnageSlotsMult" : 20  - installed chassis tonnage restriction multiplier.
@@ -559,6 +569,7 @@ WeaponAddonDef example
       },
       NOTE! Components activated by link counts as auto-activated and not suffer activation fail roll/
       NOTE! You can create link structure as complicated as you want, but if you create cycle you encounter stack overflow exception. Use this feature wisely.
+	
 			"statusEffects": [  - status effect applied on activation. Same rules as for other component's passive effects. 
 				{
 					"durationData" : {
@@ -670,13 +681,21 @@ WeaponAddonDef example
   AURAS RELATED SETTINGS
   Hotkey - you can use LCtrl + A to switch auras circles visibility. By default only auras with HideOnNotSelected: false is show. Default -> LCtrl+A -> Hide all auras -> LCtrl+A -> Show all auras (even with HideOnNotSelected: true) 
 COMPOPNENT 
-
+  Auras array can be defined in components (allowed component types Update, Weapon) and abilities
+  for auras defined in ability "State" have no meaning - aura acts same way if "State" is "Persistent"
   "Auras": [
     {
-      "Id": "Gear_Sensor_Prototype_EWE_Aura_ECM", - Id should be unique per component definition. 
+      Note! Aura can be defined in separate json. AuraDef in manifest. To point parsing engine Aura content should be loaded from
+	  external json left only Id in component/ability you want to use 
+
+	  "Id": "Gear_Sensor_Prototype_EWE_Aura_ECM", - Id should be unique per component definition. 
                                                     If Id set as "AMS" and component is weapon than Range is tied to weapon MaxRange and reticle is only shown if weapon is enabled and in AMS mode. 
                                                     Look at CustomAmmoCategories/weapon/Weapon_MachineGun_AMS_3-Hydra.json it defines empty aura not applying any effects just for colored circle showing range. 
-      "MinefieldDetector": false                  - if true aura is used as minefield detector. Basic sensors have this forced true other auras default false. 
+      "TrackAcivation":false,                     - if true aura is active only if aura carrier is active.
+	                                                unit counted as active when
+													 1. Player can control unit current phase and selected this unit in HUD
+													 2. Unit started to execute orders (player's or AI's) and not done yet
+	  "MinefieldDetector": false                  - if true aura is used as minefield detector. Basic sensors have this forced true other auras default false. 
 	  "LineType": "Dashes"                        - Line type of range circle. Possible values
                                                           Dashes - default. Looks as previous
                                                           Dots - looks like active probe range indicator

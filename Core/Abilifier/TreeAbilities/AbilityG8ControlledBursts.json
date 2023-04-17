@@ -1,0 +1,97 @@
+{
+  "Description": {
+    "Id": "AbilityG8ControlledBursts",
+    "Name": "CONTROLLED BURSTS",
+    "Details": "ACTION: Gain -10% Heat Generated, -1 Recoil, -20% Jam Chance Multiplier for 2 Turns. 3 Turn Cooldown.\n<b><color=#8080ff>Resolve Cost: {10}</color></b>",
+    "Icon": "controlledbursts"
+  },
+  "DisplayParams": "ShowInMWTRay",
+  "ReqSkill": "Gunnery",
+  "ReqSkillLevel": 8,
+  "ActivationTime": "ConsumedByFiring",
+  "ActivationCooldown": 3,
+  "Targeting": "ActorSelf",
+  "ResolveCost": 40,
+  "EffectData": [
+    {
+      "durationData": {
+        "duration": 2,
+        "ticksOnActivations": true,
+        "useActivationsOfTarget": true,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "OnActivation",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "ControlledBurstJamMitigation",
+        "Name": "Ability Controlled Bursts: Decreased Jam Chance",
+        "Details": "Called Shots twice as reliable",
+        "Icon": "uixSvgIcon_ability_mastertactician"
+      },
+      "statisticData": {
+        "statName": "CACModJammingChance",
+        "operation": "Float_Multiply",
+        "modValue": "0.8",
+        "modType": "System.Single",
+        "targetCollection": "Weapon"
+      }
+    },
+    {
+      "durationData": {
+        "duration": 2,
+        "ticksOnActivations": true,
+        "useActivationsOfTarget": true,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "OnActivation",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "FocusFireRecoil",
+        "Name": "Ability Controlled Bursts: Decreased Recoil",
+        "Details": "Ballistic recoil penalties reduced by 1",
+        "Icon": "uixSvgIcon_ability_mastertactician"
+      },
+      "statisticData": {
+        "statName": "RefireModifier",
+        "operation": "Int_Add",
+        "modValue": "-1",
+        "modType": "System.Int32",
+        "targetCollection": "Weapon"
+      }
+    },
+    {
+      "durationData": {
+        "duration": 2,
+        "ticksOnActivations": true,
+        "useActivationsOfTarget": true,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "OnActivation",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Warlord-Heat2",
+        "Name": "Ability Controlled Bursts: Decreased Heat Generated",
+        "Details": "-50 Heat",
+        "Icon": "uixSvgIcon_skullAtlas"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "HeatGenerated",
+        "operation": "Float_Multiply",
+        "modValue": "0.9",
+        "modType": "System.Single",
+        "targetCollection": "Weapon"
+      }
+    }
+  ],
+  "IsPrimaryAbility": true
+}

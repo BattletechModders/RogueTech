@@ -22,7 +22,9 @@
       "WpnAccuracy: -1",
       "PipsIgnored: 1",
       "WpnRecoil: 3",
-      "BracetoFireMode: 40%, Boosted",
+      "BracetoFireMode: 15%, FION",
+      "BracetoFireMode: 25%, FIOFF",
+      "BracetoFireMode: 50%, Boosted",
       "MisfireChanceMode1: 50%, FIOFF",
       "MineClearanceBoom: 3",
       "WeaponExplosionNoAmmo: 255, 105, 100"
@@ -114,7 +116,34 @@
       "Name": "Field Inhibitor ON",
       "Description": "PPC operates normally.",
       "isBaseMode": true,
-      "DamageOnJamming": false
+      "DamageOnJamming": false,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": 1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "OnWeaponFire",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
+            "Name": "Unique Ultra-Light Naval PPC / FION: Increased Self Knockdown on Fire",
+            "Details": "Tubthumping",
+            "Icon": "uixSvgIcon_run_n_gun"
+          },
+          "statisticData": {
+            "statName": "SelfknockdownCheck_OnFire",
+            "operation": "Float_Add",
+            "modValue": "0.15",
+            "modType": "System.Single"
+          },
+          "nature": "Buff"
+        }
+      ]
     },
     {
       "Id": "FIOFF",
@@ -145,7 +174,34 @@
         "x": 1.5,
         "y": 1.5,
         "z": 1.5
-      }
+      },
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": 1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "OnWeaponFire",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
+            "Name": "Unique Ultra-Light Naval PPC / FIOFF: Increased Self Knockdown on Fire",
+            "Details": "Tubthumping",
+            "Icon": "uixSvgIcon_run_n_gun"
+          },
+          "statisticData": {
+            "statName": "SelfknockdownCheck_OnFire",
+            "operation": "Float_Add",
+            "modValue": "0.3",
+            "modType": "System.Single"
+          },
+          "nature": "Buff"
+        }
+      ]
     },
     {
       "Id": "Boosted",
@@ -168,7 +224,7 @@
         {
           "durationData": {
             "duration": 1,
-            "stackLimit": 5
+            "stackLimit": -1
           },
           "targetingData": {
             "effectTriggerType": "OnWeaponFire",
@@ -178,14 +234,14 @@
           "effectType": "StatisticEffect",
           "Description": {
             "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
-            "Name": "Tubthumping",
+            "Name": "Unique Ultra-Light Naval PPC / Boosted: Increased Self Knockdown on Fire",
             "Details": "Tubthumping",
             "Icon": "uixSvgIcon_run_n_gun"
           },
           "statisticData": {
             "statName": "SelfknockdownCheck_OnFire",
             "operation": "Float_Add",
-            "modValue": "0.4",
+            "modValue": "0.5",
             "modType": "System.Single"
           },
           "nature": "Buff"
@@ -199,25 +255,17 @@
         "duration": 2,
         "ticksOnActivations": true,
         "useActivationsOfTarget": true,
-        "ticksOnEndOfRound": false,
-        "ticksOnMovements": false,
-        "stackLimit": -1,
-        "clearedWhenAttacked": false
+        "stackLimit": -1
       },
       "targetingData": {
         "effectTriggerType": "OnHit",
-        "triggerLimit": 0,
-        "extendDurationOnTrigger": 0,
-        "range": 0,
-        "forcePathRebuild": false,
-        "forceVisRebuild": false,
         "showInTargetPreview": true,
         "showInStatusPanel": true
       },
       "effectType": "StatisticEffect",
       "Description": {
         "Id": "AbilityDefPPC",
-        "Name": "SENSORS IMPAIRED",
+        "Name": "Unique Ultra-Light Naval PPC: Increased Target ECM Jamming",
         "Details": "EM Interference reduces sensor efficiency.",
         "Icon": "uixSvgIcon_status_sensorsImpaired"
       },
@@ -234,42 +282,26 @@
         "duration": 2,
         "ticksOnActivations": true,
         "useActivationsOfTarget": true,
-        "ticksOnEndOfRound": false,
-        "ticksOnMovements": false,
-        "stackLimit": -1,
-        "clearedWhenAttacked": false
+        "stackLimit": -1
       },
       "targetingData": {
         "effectTriggerType": "OnHit",
-        "triggerLimit": 0,
-        "extendDurationOnTrigger": 0,
-        "range": 0,
-        "forcePathRebuild": false,
-        "forceVisRebuild": false,
         "showInTargetPreview": true,
         "showInStatusPanel": true
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "HAYWIRE-Effect1",
-        "Name": "HAYWIRED",
+        "Id": "UNPPC-WalkSpeed",
+        "Name": "Unique Ultra-Light Naval PPC: Decreased Target Walk Speed",
         "Details": "The Mech's Movement is reduced.",
         "Icon": "uixSvgIcon_status_sensorsImpaired"
       },
       "nature": "Debuff",
       "statisticData": {
-        "appliesEachTick": false,
-        "effectsPersistAfterDestruction": false,
         "statName": "WalkSpeed",
         "operation": "Float_Multiply",
         "modValue": "0.9",
-        "modType": "System.Single",
-        "additionalRules": "NotSet",
-        "targetCollection": "NotSet",
-        "targetWeaponCategory": "NotSet",
-        "targetWeaponType": "NotSet",
-        "targetAmmoCategory": "NotSet",
-        "targetWeaponSubType": "NotSet"
+        "modType": "System.Single"
       }
     },
     {
@@ -277,25 +309,17 @@
         "duration": 2,
         "ticksOnActivations": true,
         "useActivationsOfTarget": true,
-        "ticksOnEndOfRound": false,
-        "ticksOnMovements": false,
-        "stackLimit": -1,
-        "clearedWhenAttacked": false
+        "stackLimit": -1
       },
       "targetingData": {
         "effectTriggerType": "OnHit",
-        "triggerLimit": 0,
-        "extendDurationOnTrigger": 0,
-        "range": 0,
-        "forcePathRebuild": false,
-        "forceVisRebuild": false,
         "showInTargetPreview": true,
         "showInStatusPanel": true
       },
       "effectType": "StatisticEffect",
       "Description": {
         "Id": "StatusEffect-Attack_PPCSILLY_Recoil",
-        "Name": "TWITCHING MYOMER",
+        "Name": "Unique Ultra-Light Naval PPC: Increased Target Recoil",
         "Details": "All weapons +5 Recoil.",
         "Icon": "uixSvgIcon_equipment_TTS"
       },
