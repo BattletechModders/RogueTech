@@ -683,6 +683,7 @@ WeaponAddonDef example
 COMPOPNENT 
   Auras array can be defined in components (allowed component types Update, Weapon) and abilities
   for auras defined in ability "State" have no meaning - aura acts same way if "State" is "Persistent"
+  Note! only pilot's abilities processing during auras setup. If ability have component source its(ability's) auras will not be set up. 
   "Auras": [
     {
       Note! Aura can be defined in separate json. AuraDef in manifest. To point parsing engine Aura content should be loaded from
