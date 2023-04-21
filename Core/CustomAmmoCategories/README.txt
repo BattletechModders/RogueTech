@@ -51,6 +51,9 @@ CriticalHitChanceReceivedMultiplier can be locational
 {
 "debugLog":true, - enable debug log 
 "MapOnlineClientLink":"http://www.roguewar.org/playerlut?cId={0}" - link for an online client
+"ScaleIncomingHeat": 150, - if > 0 incoming heat from next sources (AoE, weapon hits, landmines, landmines AoE) is scaled
+                            scale modifier = 1 - (<target heat>/<ScaleIncomingHeat>)
+							Note! scale modifier for weapon damage calculates before attack. 
 "RestoreEjectedWeapons": true, - ejected weapon will not be counted as destroyed at the end of the battle
 "HexSizeForMods": 30 - hex size used for moved hexes modifiers calculations
 "SpawnProtectionAffectsCanFire": true - if true weapon can't fire if its owner under spawn protection
@@ -414,10 +417,12 @@ new fields
 						         VTOL is still vehicle, mech in air mech mode is still mech.
   "MinMissRadius": 5,
   "MaxMissRadius": 15,
-                        - min and max radius. Used only in ground attack and indirect attack. Additive for ammo/mode/weapon
+                        - min and max radius. Used ground attack, indirect attack and if weapon have effective MissInCircle true. Additive for ammo/mode/weapon
 						  If MinMissRadius less than target radius (for mechs in chassis definition, for vehicles and turrets 5) radius value will be used.
 						  If MaxMissRadius less or equal than MinMissRadius value MinMissRadius * 3 will be used.
 						  actual scatter radius = ((MaxMissRadius - MinMissRadius) * (hitRoll - toHitChance) / (1 - toHitChance) + MinMissRadius)
+  "MissInCircle": false, - explicitly force MinMissRadius/MaxMissRadius miss position calculation regardless weapon type and indirect status
+						   can be set for weapon, mode and ammo. Mode have priority, than ammo, than weapon. Default NotSet
   "evasivePipsMods": {  - list of modifiers for values by current evasive pips count. Additive per weapon/ammo/mode. 
                           Overall formula value = [base value] * ([evasive pips count]^[mod value]). Example base damage = 35, evasive pips count = 7, mod value = -1
                           damage = 35 * (7^-1) = 35 * 0.142857(142857) = 5.
