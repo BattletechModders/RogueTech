@@ -22,7 +22,7 @@ For each AI tag determine a value between [0-1] . Each AI tag, is grouped into l
 
 *1. Heat: how it handles heat
 RTDumper understands CASE , AmmoExplosions , Volatile AmmoExplosions , AMS Heat , heat damage injury, heat activated components, heat efficency.
-Heat Efficency is just spare heat dissipation after alpha strike expressed as % of dissipation capacity
+Heat Efficency is just spare heat dissipation after alpha strike expressed as % (+/-) over overheat level
 
 tag based on:
 {R Max Ammo Explosion damage}  {R Max Volatile Ammo Explosion damage}  {R "AMS Single Heat"}  {R "AMS Multi Heat" }  {R Heat Damage Injury} {R Heat Efficency } {R Auto Activation Heat}

@@ -1,6 +1,7 @@
 <?php
 class Config{
    public static $RT_Mods_dir="C:\games\steam\steamapps\common\BATTLETECH\Mods";
+   public static $ignore_mechs_with_tags=array('no_rp_tool');
 
    #These are meant for developers
    public static $debug=FALSE;
