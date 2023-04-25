@@ -38,16 +38,23 @@ class WriteTag extends Config{
 					}
 				}
 
-				$should_write=count(array_diff ( $newtags , $oldtags ))+count(array_diff ( $oldtags,$newtags ));
+				$ignore_mech=(count(array_intersect( $tag_items,WriteTag::$ignore_mechs_with_tags )));
+				$should_write=count(array_diff ( $newtags , $oldtags ))+count(array_diff ( $oldtags,$newtags ))+$no_tag;
 				$write_tags=array_merge($tag_items, $newtags);
+				$should_write=$should_write && !$ignore_mech;
 				if(WriteTag::$debug_single_mech && WriteTag::$debug_single_mech==$mech)
 				{
 					echo "$mech =>".PHP_EOL."New Tags:".json_encode($newtags,JSON_PRETTY_PRINT).PHP_EOL."Old Tags:".json_encode($oldtags,JSON_PRETTY_PRINT).PHP_EOL;
-					echo $should_write ? "Writing".PHP_EOL : "Skipped (Up to date)".PHP_EOL;
-					echo $should_write ? "Cleaned Tags:".json_encode($tag_items,JSON_PRETTY_PRINT).PHP_EOL:"";
-					echo $should_write ? "Generated Tags:".json_encode($write_tags,JSON_PRETTY_PRINT).PHP_EOL:"";
+					if($ignore_mech){
+						echo "Mech ignored ( NO RP TAG )".json_encode(array_intersect( $tag_items,WriteTag::$ignore_mechs_with_tags ),JSON_PRETTY_PRINT).PHP_EOL;
+					}else{
+						echo $should_write ? "Writing".PHP_EOL : "Skipped (Up to date)".PHP_EOL;
+						echo $should_write ? "Cleaned Tags:".json_encode($tag_items,JSON_PRETTY_PRINT).PHP_EOL:"";
+						echo $should_write ? "Generated Tags:".json_encode($write_tags,JSON_PRETTY_PRINT).PHP_EOL:"";
+					}
 				}
 				if($should_write){
+					if(WriteTag::$debug_single_mech && WriteTag::$debug_single_mech==$mech){echo "WRITING".PHP_EOL;}
 					$mechjd["MechTags"]["items"]=$write_tags;
 					$json=json_encode_rt($mechjd);
 					if(endswith(file_get_contents($path),PHP_EOL)){

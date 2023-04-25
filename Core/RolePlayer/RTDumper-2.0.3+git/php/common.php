@@ -159,7 +159,7 @@ $csv_header=array("#MECH Id","Tons","Engine Rating",//x,1,2
 $csv_min_stat=1;
 $csv_max_stat=110;
 
-//Heat Efficency is just spare heat dissipation after alpha strike expressed as % of dissipation capacity
+//Heat Efficency is just spare heat dissipation after alpha strike expressed as % (+/-) over overheat level
 //DFA Self Damage Efficency is how many a DFAs a mech can perform before both its legs break
 //DFA Damage Efficency is DFA damage per mech tonnage
 //DFA Self Instability Efficency is Self UnsteadyThreshold remaining after DFA expressed as % of UnsteadyThreshold
@@ -361,7 +361,7 @@ $ai_tags_calc=array(
 //we flag this by using a negative weight
 $ai_tags_weights=array(
 //ai_heat={R Max Ammo Explosion damage}  {R Max Volatile Ammo Explosion damage}  {R "AMS Single Heat"}  {R "AMS Multi Heat" }  {R Heat Damage Injury}  {R Heat Efficency } {R Auto Activation Heat}
-    array(2.5,2.5,1,1,0.5,4,2.5),
+    array(2.5,2.5,1,1,0.75,4,2.5),
 //ai_dfa={R DFA Self Damage Efficency}  {R DFA Damage Efficency} {R DFA Self Instability Efficency} {R DFA Target Damage} {R DFA Target Instability}
     array(15,7,20,5,3),
 //ai_melee {R KickDamage}{R PhysicalWeaponDamage}{R PunchDamage} {R Melee Damage Efficency}

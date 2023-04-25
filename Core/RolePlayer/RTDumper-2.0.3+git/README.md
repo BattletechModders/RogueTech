@@ -24,6 +24,8 @@ Here's a sample output [spreadsheet](https://docs.google.com/spreadsheets/d/14D3
 
     `public static $RT_Mods_dir="C:\games\steam\steamapps\common\BATTLETECH\Mods";`
 
+   You may also set mech tag(s) that will cause the tag tool to ignore a mech. In the default config it's set to 'no_rp_tool'. Multiple values may be set.
+
 4. Run (double click) TagTool.bat . Wait for it to complete. 
 
 5. Spreadsheet(s) are generated in \Output folder. Open them with you favorite spreadsheet program (rather than a text editor) .
