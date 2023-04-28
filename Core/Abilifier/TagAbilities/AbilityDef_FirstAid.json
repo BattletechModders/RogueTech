@@ -1,0 +1,67 @@
+{
+  "Description": {
+    "Id": "AbilityDef_FirstAid",
+    "Name": "FIRST AID",
+    "Details": "Use this Ability to recover 2 points of lost blood and improve panic rolls for 1 turn.",
+    "Icon": "blood"
+  },
+  "ActivationTime": "ConsumedByMovement",
+  "Resource": "ConsumesActivation",
+  "ActivationCooldown": 0,
+  "Targeting": "ActorSelf",
+  "EffectData": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "OnActivation",
+        "effectTargetType": "Creator",
+        "showInStatusPanel": false,
+        "showInTargetPreview": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "FirstAid",
+        "Name": "Ability First Aid: Bloodbank Increase",
+        "Details": "+ 2 points to BloodBank",
+        "Icon": "blood"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "BloodBank",
+        "operation": "Float_Add",
+        "modValue": "2",
+        "modType": "System.Single",
+        "targetCollection": "Pilot"
+      }
+    },
+    {
+      "durationData": {
+        "duration": 2,
+        "stackLimit": -1,
+        "ticksOnActivations": true
+      },
+      "targetingData": {
+        "effectTriggerType": "OnActivation",
+        "effectTargetType": "Creator",
+        "showInStatusPanel": true
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "FirstAidCalm",
+        "Name": "Ability First Aid: Decreased Panic Chance",
+        "Details": "Pilot has administered First Aid and is feeling warm and fuzzy. (+50% to panic saves)",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "statName": "PanicStatMultiplier",
+        "operation": "Float_Multiply",
+        "modValue": "0.5",
+        "modType": "System.Single"
+      }
+    }
+  ]
+}

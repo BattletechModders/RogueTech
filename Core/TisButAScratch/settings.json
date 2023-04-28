@@ -1,1123 +1,1170 @@
 {
-	"enableLogging": true,
-	"debugPatchEnabled": true,
-	"enableLethalTorsoHead": false,
-	"debilIncapacitates": true,
-	"BleedingOutLethal": true,
-	"BleedingOutSuffix": "_bleedout",
-	"BleedingOutTimerString": "activations",
-	"enableInternalDmgInjuries": true,
-	"pilotPainShunt": "pilot_painshunt",
-	"pilotingReqs": [
-		{
-			"ComponentTag": "RequireNI",
-			"PilotTag": "pilot_NeuralImplants",
-			"PilotTagDisplay": "Requires Neural Implants"
-		}
-	],
-	"internalDmgStatName": "InjureOnStructDmg",
-	"internalDmgInjuryLimit": 1,
-	"internalDmgLvlReq": 5,
-	"timeHealsAllWounds": true,
-	"missionKillSeverityThreshold": 3,
-	"reInjureWeightAppliesCurrentContract": false,
-	"reInjureLocWeight": 11,
-	"debilSeverityThreshold": 4,
-	"severityCost": 50,
-	"debilitatedCost": 2000,
-	"medtechDebilMultiplier": 0.5,
-	"injuryHealTimeMultiplier": 1.0,
-	"injureVehiclePilotOnDestroy": "SINGLE",
-	"crewOrCockpitCustomID": [
-		"CrewCompartment",
-		"Cockpit"
-	],
-	"lifeSupportCustomID": [
-		"LifeSupportA",
-		"LifeSupportB"
-	],
-	"disableTBASTag": "TBAS_Disabled",
-	"OverheatInjuryStat": "InjureOnOverheat",
-	"isTorsoMountStatName": "isTorsoMount",
-	"lifeSupportSupportsLifeTM": true,
-	"internalDmgInjuryLocs": [
-		"Head",
-		"CenterTorso",
-		"LeftTorso",
-		"RightTorso",
-		"LeftArm",
-		"RightArm",
-		"LeftLeg",
-		"RightLeg"
-	],
-	"InjuryEffectsList": [
-		{
-			"injuryID": "HeadConcussion",
-			"injuryName": "Concussion",
-			"injuryLoc": "Head",
-			"couldBeThermal": false,
-			"severity": 1,
-			"description": "This pilot is concussed. Things are spinny.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "Concussed",
-						"Name": "Concussed",
-						"Details": "This pilot is concussed. Things are spinny. Initiative Decreased",
-						"Icon": "seeingstars"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "SBI_MOD_INJURY",
-						"operation": "Int_Add",
-						"modValue": "-3",
-						"modType": "System.Int32"
-					}
-				}
-			]
-		},
-		{
-			"injuryID": "HeadJaw",
-			"injuryName": "Broken Jaw",
-			"injuryLoc": "Head",
-			"couldBeThermal": false,
-			"severity": 1,
-			"description": "This pilot has a broken jaw, and generates less resolve due to hampered communications.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "BrokenJaw",
-						"Name": "Broken Jaw",
-						"Details": "This pilot has a broken jaw, and generates 20% less resolve due to hampered communications.",
-						"Icon": "seeingstars"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"appliesEachTick": false,
-						"effectsPersistAfterDestruction": false,
-						"statName": "resolveGenBaseMult",
-						"operation": "Float_Add",
-						"modValue": "-0.2",
-						"modType": "System.Single",
-						"additionalRules": "NotSet",
-						"targetCollection": "NotSet",
-						"targetWeaponCategory": "NotSet",
-						"targetWeaponType": "NotSet",
-						"targetAmmoCategory": "NotSet",
-						"targetWeaponSubType": "NotSet"
-					}
-				}
-			]
-		},
-		{
-			"injuryID": "HeadBurns",
-			"injuryName": "Severe Burns - Head",
-			"injuryLoc": "Head",
-			"couldBeThermal": true,
-			"severity": 1,
-			"description": "This pilot has severe burns to the head. Sight distance is impaired.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "EyesBurnSpotter",
-						"Name": "Head Burned",
-						"Details": "This pilot has severe burns to the head. Sight distance is impaired.",
-						"Icon": "seeingstars"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "SpotterDistanceMultiplier",
-						"operation": "Float_Multiply",
-						"modValue": "0.75",
-						"modType": "System.Single"
-					}
-				}
-			]
-		},
-		{
-			"injuryID": "HeadBarotrauma",
-			"injuryName": "Barotrauma - Head",
-			"injuryLoc": "Head",
-			"couldBeThermal": false,
-			"severity": 2,
-			"description": "This pilot has suffered barotrauma to the head. Initiative decreased.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "EyesBaroUnsteady",
-						"Name": "Barotrauma",
-						"Details": "This pilot has suffered barotrauma to the head. Initiative decreased.",
-						"Icon": "seeingstars"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "SBI_MOD_INJURY",
-						"operation": "Int_Add",
-						"modValue": "-5",
-						"modType": "System.Int32"
-					}
-				}
-			]
-		},
-		{
-			"injuryID": "ArmLBurns",
-			"injuryName": "Severe Burns - Left Arm",
-			"injuryLoc": "ArmL",
-			"couldBeThermal": true,
-			"severity": 1,
-			"description": "This pilot has been severely burned, and is suffering an accuracy penalty.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "ArmLBurned",
-						"Name": "Severe Burns - Left Arm",
-						"Details": "This pilot has been severely burned, and is suffering an accuracy penalty.",
-						"Icon": "flamingskull"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"modType": "System.Single",
-						"modValue": "2.0",
-						"operation": "Float_Add",
-						"statName": "AccuracyModifier",
-						"targetAmmoCategory": "NotSet",
-						"targetCollection": "Weapon",
-						"targetWeaponCategory": "NotSet",
-						"targetWeaponSubType": "NotSet",
-						"targetWeaponType": "NotSet"
-					}
-				}
-			]
-		},
-		{
-			"injuryID": "ArmRBurns",
-			"injuryName": "Severe Burns - Right Arm",
-			"injuryLoc": "ArmR",
-			"couldBeThermal": true,
-			"severity": 1,
-			"description": "This pilot has been severely burned, and is suffering an accuracy penalty.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "ArmRBurned",
-						"Name": "Severe Burns - Right Arm",
-						"Details": "This pilot has been severely burned, and is suffering an accuracy penalty.",
-						"Icon": "flamingskull"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"modType": "System.Single",
-						"modValue": "2.0",
-						"operation": "Float_Add",
-						"statName": "AccuracyModifier",
-						"targetAmmoCategory": "NotSet",
-						"targetCollection": "Weapon",
-						"targetWeaponCategory": "NotSet",
-						"targetWeaponSubType": "NotSet",
-						"targetWeaponType": "NotSet"
-					}
-				}
-			]
-		},
-		{
-			"injuryID": "ArmLBroken",
-			"injuryName": "Simple Fracture - Left Arm",
-			"injuryLoc": "ArmL",
-			"couldBeThermal": false,
-			"severity": 1,
-			"description": "This pilot has a broken arm, and is suffering an accuracy penalty.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "ArmLBroken",
-						"Name": "Broken Arm - Left",
-						"Details": "This pilot has a broken arm, and is suffering an accuracy penalty.",
-						"Icon": "brokenarm"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"modType": "System.Single",
-						"modValue": "3.0",
-						"operation": "Float_Add",
-						"statName": "AccuracyModifier",
-						"targetAmmoCategory": "NotSet",
-						"targetCollection": "Weapon",
-						"targetWeaponCategory": "NotSet",
-						"targetWeaponSubType": "NotSet",
-						"targetWeaponType": "NotSet"
-					}
-				}
-			]
-		},
-		{
-			"injuryID": "ArmRBroken",
-			"injuryName": "Simple Fracture - Right Arm",
-			"injuryLoc": "ArmR",
-			"couldBeThermal": false,
-			"severity": 1,
-			"description": "This pilot has a broken arm, and is suffering an accuracy penalty.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "ArmRBroken",
-						"Name": "Broken Arm - Right",
-						"Details": "This pilot has a broken arm, and is suffering an accuracy penalty.",
-						"Icon": "brokenarm"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"modType": "System.Single",
-						"modValue": "3.0",
-						"operation": "Float_Add",
-						"statName": "AccuracyModifier",
-						"targetAmmoCategory": "NotSet",
-						"targetCollection": "Weapon",
-						"targetWeaponCategory": "NotSet",
-						"targetWeaponSubType": "NotSet",
-						"targetWeaponType": "NotSet"
-					}
-				}
-			]
-		},
-		{
-			"injuryID": "ArmLBrokenCompound",
-			"injuryID_Post": "ArmLBroken",
-			"injuryName": "Compound Fracture - Left Arm",
-			"injuryLoc": "ArmL",
-			"couldBeThermal": false,
-			"severity": 1,
-			"description": "This pilot has a compound fracture in their arm, and is suffering an accuracy penalty.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "ArmLCmpdBroken_bleedout",
-						"Name": "Broken Arm, Compound - Left",
-						"Details": "This pilot has a compound fracture in their arm, and is suffering an accuracy penalty.",
-						"Icon": "brokenarm"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"modType": "System.Single",
-						"modValue": "4.0",
-						"operation": "Float_Add",
-						"statName": "AccuracyModifier",
-						"targetAmmoCategory": "NotSet",
-						"targetCollection": "Weapon",
-						"targetWeaponCategory": "NotSet",
-						"targetWeaponSubType": "NotSet",
-						"targetWeaponType": "NotSet"
-					}
-				}
-			]
-		},
-		{
-			"injuryID": "ArmRBrokenCompound",
-			"injuryID_Post": "ArmRBroken",
-			"injuryName": "Compound Fracture - Right Arm",
-			"injuryLoc": "ArmR",
-			"couldBeThermal": false,
-			"severity": 1,
-			"description": "This pilot has a compound fracture in their arm, and is suffering an accuracy penalty.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "ArmRCmpdBroken_bleedout",
-						"Name": "Broken Arm, Compound - Right",
-						"Details": "This pilot has a compound fracture in their arm, and is suffering an accuracy penalty.",
-						"Icon": "brokenarm"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"modType": "System.Single",
-						"modValue": "4.0",
-						"operation": "Float_Add",
-						"statName": "AccuracyModifier",
-						"targetAmmoCategory": "NotSet",
-						"targetCollection": "Weapon",
-						"targetWeaponCategory": "NotSet",
-						"targetWeaponSubType": "NotSet",
-						"targetWeaponType": "NotSet"
-					}
-				}
-			]
-		},
-		{
-			"injuryID": "LegLBurns",
-			"injuryName": "Severe Burns - Left Leg",
-			"injuryLoc": "LegL",
-			"couldBeThermal": true,
-			"severity": 1,
-			"description": "This pilot has been severely burned and is suffering a Piloting Skill penalty.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "LegLBurnedWalk",
-						"Name": "Severe Burns - Left Leg",
-						"Details": "This pilot has been severely burned and is suffering a Piloting Skill penalty.",
-						"Icon": "flamingskull"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "Piloting",
-						"operation": "Int_Add",
-						"modValue": "-2",
-						"modType": "System.Int32",
-						"targetCollection": "Pilot"
-					}
-				}
-			]
-		},
-		{
-			"injuryID": "LegRBurns",
-			"injuryName": "Severe Burns - Right Leg",
-			"injuryLoc": "LegR",
-			"couldBeThermal": true,
-			"severity": 1,
-			"description": "This pilot has been severely burned and is suffering a Piloting Skill penalty.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "LegRBurnedWalk",
-						"Name": "Severe Burns - Right Leg",
-						"Details": "This pilot has been severely burned and is suffering a Piloting Skill penalty.",
-						"Icon": "flamingskull"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "Piloting",
-						"operation": "Int_Add",
-						"modValue": "-2",
-						"modType": "System.Int32",
-						"targetCollection": "Pilot"
-					}
-				}
-			]
-		},
-		{
-			"injuryID": "LegLBroken",
-			"injuryName": "Simple Fracture - Left Leg",
-			"injuryLoc": "LegL",
-			"couldBeThermal": false,
-			"severity": 1,
-			"description": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "LegLBrokeWalk",
-						"Name": "Simple Fracture - Left Leg",
-						"Details": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
-						"Icon": "footcast"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "Piloting",
-						"operation": "Int_Add",
-						"modValue": "-3",
-						"modType": "System.Int32",
-						"targetCollection": "Pilot"
-					}
-				}
-			]
-		},
-		{
-			"injuryID": "LegLBrokenCompound",
-			"injuryID_Post": "LegLBroken",
-			"injuryName": "Compound Fracture - Left Leg",
-			"injuryLoc": "LegL",
-			"couldBeThermal": false,
-			"severity": 1,
-			"description": "This pilot has a compound fracture to their leg and is suffering a severe Piloting Skill penalty.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "LegLBrokeCmpndWalk_bleedout",
-						"Name": "Compound Fracture - Left Leg",
-						"Details": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
-						"Icon": "footcast"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "Piloting",
-						"operation": "Int_Add",
-						"modValue": "-5",
-						"modType": "System.Int32",
-						"targetCollection": "Pilot"
-					}
-				}
-			]
-		},
-		{
-			"injuryID": "LegRBroken",
-			"injuryName": "Simple Fracture - Right Leg",
-			"injuryLoc": "LegR",
-			"couldBeThermal": false,
-			"severity": 1,
-			"description": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "LegRBrokeWalk",
-						"Name": "Simple Fracture - Right Leg",
-						"Details": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
-						"Icon": "footcast"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "Piloting",
-						"operation": "Int_Add",
-						"modValue": "-3",
-						"modType": "System.Int32",
-						"targetCollection": "Pilot"
-					}
-				}
-			]
-		},
-		{
-			"injuryID": "LegRBrokenCompound",
-			"injuryID_Post": "LegRBroken",
-			"injuryName": "Compound Fracture - Right Leg",
-			"injuryLoc": "LegR",
-			"couldBeThermal": false,
-			"severity": 1,
-			"description": "This pilot has a compound fracture to their leg and is suffering a severe Piloting Skill penalty.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "LegRBrokeCmpndWalk_bleedout",
-						"Name": "Compound Fracture - Right Leg",
-						"Details": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
-						"Icon": "footcast"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "Piloting",
-						"operation": "Int_Add",
-						"modValue": "-5",
-						"modType": "System.Int32",
-						"targetCollection": "Pilot"
-					}
-				}
-			]
-		},
-		{
-			"injuryID": "TorsoInternalBleeding",
-			"injuryID_Post": "TorsoRibs",
-			"injuryName": "Internal Bleeding - Torso",
-			"injuryLoc": "Torso",
-			"couldBeThermal": false,
-			"severity": 2,
-			"description": "This pilot is suffering from internal bleeding and receives a debuff to Evasion.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "TorsoHemEvasion_bleedout",
-						"Name": "Internal Bleeding",
-						"Details": "This pilot is suffering from internal bleeding and receives a debuff to Evasion.",
-						"Icon": "bandaged"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "MaxEvasivePips",
-						"operation": "Int_Add",
-						"modValue": "-3",
-						"modType": "System.Int32"
-					}
-				}
-			]
-		},
-		{
-			"injuryID": "TorsoRibs",
-			"injuryName": "Broken Ribs",
-			"injuryLoc": "Torso",
-			"couldBeThermal": false,
-			"severity": 1,
-			"description": "This pilot has broken ribs and receives a debuff to Evasion.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "TorsoRibsEvasion",
-						"Name": "Broken Ribs",
-						"Details": "This pilot has broken ribs and receives a debuff to Evasion.",
-						"Icon": "bandaged"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "MaxEvasivePips",
-						"operation": "Int_Add",
-						"modValue": "-2",
-						"modType": "System.Int32"
-					}
-				}
-			]
-		},
-		{
-			"injuryID": "TorsoLungs",
-			"injuryName": "Punctured Lung",
-			"injuryLoc": "Torso",
-			"couldBeThermal": false,
-			"severity": 1,
-			"description": "This pilot has a punctured lung and has a penalty to Guts.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "TorsoLungsGuts",
-						"Name": "Punctured Lung",
-						"Details": "This pilot has a punctured lung and has a penalty to Guts.",
-						"Icon": "lungs"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "Guts",
-						"operation": "Int_Add",
-						"modValue": "-3",
-						"modType": "System.Int32",
-						"targetCollection": "Pilot"
-					}
-				}
-			]
-		},
-		{
-			"injuryID": "TorsoLungsBleedout",
-			"injuryID_Post": "TorsoLungs",
-			"injuryName": "Collapsed Lung",
-			"injuryLoc": "Torso",
-			"couldBeThermal": false,
-			"severity": 1,
-			"description": "This pilot has a collapsed lung and has a penalty to Guts.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "TorsoLungsGuts_bleedout",
-						"Name": "Collapsed Lung",
-						"Details": "This pilot has a collapsed lung and has a penalty to Guts.",
-						"Icon": "lungs"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "Guts",
-						"operation": "Int_Add",
-						"modValue": "-5",
-						"modType": "System.Int32",
-						"targetCollection": "Pilot"
-					}
-				}
-			]
-		},
-		{
-			"injuryID": "TorsoBurned",
-			"injuryName": "Severe Burns - Torso",
-			"injuryLoc": "Torso",
-			"couldBeThermal": true,
-			"severity": 2,
-			"description": "This pilot has been severely burned and receives a debuff to Evasion.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "TorsoBurnEvasion",
-						"Name": "Severe Burns - Torso",
-						"Details": "This pilot has been severely burned and is suffering a penalty to Evasion.",
-						"Icon": "bandaged"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"modType": "System.Int32",
-						"modValue": "-3",
-						"operation": "Int_Add",
-						"statName": "MaxEvasivePips"
-					}
-				}
-			]
-		}
-	],
-	"InternalDmgInjuries": [
-		{
-			"injuryID": "HeadNeuralFeedback",
-			"injuryName": "Neural Feedback",
-			"injuryLoc": "Head",
-			"couldBeThermal": false,
-			"severity": 2,
-			"description": "This pilot has suffered from neural feedback from a DNI or EI interface, and has drastically reduced accuracy.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "HeadNeural",
-						"Name": "Neural Feedback",
-						"Details": "This pilot has suffered from neural feedback from a DNI or EI interface, and has drastically reduced accuracy.",
-						"Icon": "crackedskull"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"modType": "System.Single",
-						"modValue": "5.0",
-						"operation": "Float_Add",
-						"statName": "AccuracyModifier",
-						"targetAmmoCategory": "NotSet",
-						"targetCollection": "Weapon",
-						"targetWeaponCategory": "NotSet",
-						"targetWeaponSubType": "NotSet",
-						"targetWeaponType": "NotSet"
-					}
-				}
-			]
-		}
-	],
-	"additiveBleedingFactor": 0.75,
-	"minBloodBank": 2,
-	"baseBloodBankAdd": 1,
-	"UseGutsForBloodBank": true,
-	"factorBloodBankMult": 1,
-	"UseBleedingEffects": true,
-	"BleedingEffects": [
-		{
-			"bleedingEffectID": "BleedingShock",
-			"bleedingName": "Shock",
-			"bleedingEffectLvl": 1,
-			"description": "This pilot has suffered minor blood loss and has reduced accuracy.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "BleedShock",
-						"Name": "Blood Loss: Shock",
-						"Details": "This pilot has suffered minor blood loss and has gone into minor shock, reducing accuracy.",
-						"Icon": "blood"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"modType": "System.Single",
-						"modValue": "1.0",
-						"operation": "Float_Add",
-						"statName": "AccuracyModifier",
-						"targetAmmoCategory": "NotSet",
-						"targetCollection": "Weapon",
-						"targetWeaponCategory": "NotSet",
-						"targetWeaponSubType": "NotSet",
-						"targetWeaponType": "NotSet"
-					}
-				}
-			]
-		},
-		{
-			"bleedingEffectID": "BleedingDizzy",
-			"bleedingName": "Dizzy",
-			"bleedingEffectLvl": 2,
-			"description": "This pilot has suffered significant blood loss and is suffering an Initiative Penalty.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "BleedDizzy",
-						"Name": "Blood Loss: Dizzy",
-						"Details": "This pilot has lost a lot of blood. Things are spinny. Initiative Decreased.",
-						"Icon": "seeingstars"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "SBI_MOD_INJURY",
-						"operation": "Int_Add",
-						"modValue": "-7",
-						"modType": "System.Int32"
-					}
-				}
-			]
-		},
-		{
-			"bleedingEffectID": "BleedingRun",
-			"bleedingName": "Groggy",
-			"bleedingEffectLvl": 3,
-			"description": "This pilot has suffered major blood loss and has a Piloting Skill penalty.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "BleedingRun_Walk",
-						"Name": "Blood Loss: Piloting Penalty",
-						"Details": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
-						"Icon": "footcast"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "Piloting",
-						"operation": "Int_Add",
-						"modValue": "-5",
-						"modType": "System.Int32",
-						"targetCollection": "Pilot"
-					}
-				}
-			]
-		}
-	],
-	"UseSimBleedingEffects": false,
-	"SimBleedingEffects": [
-		{
-			"simBleedingEffectID": "BleedGutsLvl1",
-			"bleedingEffectLvl": 1,
-			"simResultJO": [
-				{
-					"Scope": "MechWarrior",
-					"Requirements": null,
-					"AddedTags": {
-						"tagSetSourceFile": "",
-						"items": [
-							"TBAS_SimBleed__Guts__-1"
-						]
-					},
-					"RemovedTags": {
-						"tagSetSourceFile": "",
-						"items": []
-					},
-					"Stats": [],
-					"Actions": [],
-					"ForceEvents": null,
-					"TemporaryResult": true,
-					"ResultDuration": 10
-				}
-			]
-		},
-		{
-			"simBleedingEffectID": "BleedGutsLvl2",
-			"bleedingEffectLvl": 2,
-			"simResultJO": [
-				{
-					"Scope": "MechWarrior",
-					"Requirements": null,
-					"AddedTags": {
-						"tagSetSourceFile": "",
-						"items": [
-							"TBAS_SimBleed__Guts__-3"
-						]
-					},
-					"RemovedTags": {
-						"tagSetSourceFile": "",
-						"items": []
-					},
-					"Stats": [],
-					"Actions": [],
-					"ForceEvents": null,
-					"TemporaryResult": true,
-					"ResultDuration": 20
-				}
-			]
-		},
-		{
-			"simBleedingEffectID": "BleedGutsLvl3",
-			"bleedingEffectLvl": 3,
-			"simResultJO": [
-				{
-					"Scope": "MechWarrior",
-					"Requirements": null,
-					"AddedTags": {
-						"tagSetSourceFile": "",
-						"items": [
-							"TBAS_SimBleed__Guts__-5"
-						]
-					},
-					"RemovedTags": {
-						"tagSetSourceFile": "",
-						"items": []
-					},
-					"Stats": [],
-					"Actions": [],
-					"ForceEvents": null,
-					"TemporaryResult": true,
-					"ResultDuration": 30
-				}
-			]
-		}
-	],
-	"CanIntentionallyHotBunk": false,
-	"OvercrowdingEffects": [
-		{
-			"ID": "StinkySheets",
-			"Threshold": 1,
-			"Name": "Stinky Sheets",
-			"description": "This pilot is tired from sleeping in stank ass sheets someone else used. Hotbunking sucks.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "StinkySheets_Effect",
-						"Name": "Stinky Sheets",
-						"Details": "This pilot is tired from sleeping in stank ass sheets someone else used. Hotbunking sucks.",
-						"Icon": "seeingstars"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "ToHitThisActor",
-						"operation": "Float_Add",
-						"modValue": "2.0",
-						"modType": "System.Single"
-					}
-				}
-			]
-		},
-		{
-			"ID": "SleepingOnTheFloor1",
-			"Threshold": 1,
-			"Name": "Sleeping on the Floor",
-			"description": "This pilot is annoyed from sleeping on the floor. Hotbunking sucks.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "SleepingFloor_Effect",
-						"Name": "Sleeping on the Floor",
-						"Details": "This pilot is annoyed from sleeping on the floor. Hotbunking sucks.",
-						"Icon": "seeingstars"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "resolveCostBaseMult",
-						"operation": "Float_Multiply",
-						"modValue": "1.5",
-						"modType": "System.Single"
-					}
-				}
-			]
-		},
-		{
-			"ID": "NoPersonalSpace",
-			"Threshold": 1,
-			"Name": "No Personal Space",
-			"description": "This pilot is depressed from having no personal space in the barracks. Hotbunking sucks.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "NoPersonalSpace_Effect",
-						"Name": "No Personal Space",
-						"Details": "This pilot is depressed from having no personal space in the barracks. Hotbunking sucks.",
-						"Icon": "seeingstars"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "resolveGenBaseMult",
-						"operation": "Float_Multiply",
-						"modValue": "0.5",
-						"modType": "System.Single"
-					}
-				}
-			]
-		},
-		{
-			"ID": "Unappreciated",
-			"Threshold": 1,
-			"Name": "Feels Unappreciated",
-			"description": "This pilot feels unappreciated from having to sleep in shifts. Hotbunking sucks.",
-			"effectDataJO": [
-				{
-					"durationData": {},
-					"targetingData": {
-						"effectTriggerType": "Passive",
-						"effectTargetType": "Creator",
-						"showInStatusPanel": true
-					},
-					"effectType": "StatisticEffect",
-					"Description": {
-						"Id": "Unappreciated_Effect",
-						"Name": "Feels Unappreciated",
-						"Details": "This pilot feels unappreciated from having to sleep in shifts. Hotbunking sucks.",
-						"Icon": "seeingstars"
-					},
-					"nature": "Buff",
-					"statisticData": {
-						"statName": "Accuracy",
-						"operation": "Float_Add",
-						"modValue": "2",
-						"modType": "System.Single"
-					}
-				}
-			]
-		}
-	]
+  "enableLogging": true,
+  "debugPatchEnabled": true,
+  "enableLethalTorsoHead": false,
+  "debilIncapacitates": true,
+  "BleedingOutLethal": true,
+  "BleedingOutSuffix": "_bleedout",
+  "BleedingOutTimerString": "activations",
+  "enableInternalDmgInjuries": true,
+  "pilotPainShunt": "pilot_painshunt",
+  "pilotingReqs": [
+    {
+      "ComponentTag": "RequireNI",
+      "PilotTag": "pilot_NeuralImplants",
+      "PilotTagDisplay": "Requires Neural Implants"
+    }
+  ],
+  "internalDmgStatName": "InjureOnStructDmg",
+  "internalDmgInjuryLimit": 1,
+  "internalDmgLvlReq": 5,
+  "timeHealsAllWounds": true,
+  "missionKillSeverityThreshold": 3,
+  "reInjureWeightAppliesCurrentContract": false,
+  "reInjureLocWeight": 11,
+  "debilSeverityThreshold": 4,
+  "severityCost": 50,
+  "debilitatedCost": 2000,
+  "medtechDebilMultiplier": 0.5,
+  "injuryHealTimeMultiplier": 1.0,
+  "injureVehiclePilotOnDestroy": "SINGLE",
+  "crewOrCockpitCustomID": [
+    "CrewCompartment",
+    "Cockpit"
+  ],
+  "lifeSupportCustomID": [
+    "LifeSupportA",
+    "LifeSupportB"
+  ],
+  "disableTBASTag": "TBAS_Disabled",
+  "OverheatInjuryStat": "InjureOnOverheat",
+  "isTorsoMountStatName": "isTorsoMount",
+  "lifeSupportSupportsLifeTM": true,
+  "internalDmgInjuryLocs": [
+    "Head",
+    "CenterTorso",
+    "LeftTorso",
+    "RightTorso",
+    "LeftArm",
+    "RightArm",
+    "LeftLeg",
+    "RightLeg"
+  ],
+  "InjuryEffectsList": [
+    {
+      "injuryID": "HeadConcussion",
+      "injuryName": "Concussion",
+      "injuryLoc": "Head",
+      "couldBeThermal": false,
+      "severity": 1,
+      "description": "This pilot is concussed. Things are spinny.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "Concussed",
+            "Name": "Concussed",
+            "Details": "This pilot is concussed. Things are spinny. Initiative Decreased",
+            "Icon": "seeingstars"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "SBI_MOD_INJURY",
+            "operation": "Int_Add",
+            "modValue": "-3",
+            "modType": "System.Int32"
+          }
+        }
+      ]
+    },
+    {
+      "injuryID": "HeadJaw",
+      "injuryName": "Broken Jaw",
+      "injuryLoc": "Head",
+      "couldBeThermal": false,
+      "severity": 1,
+      "description": "This pilot has a broken jaw, and generates less resolve due to hampered communications.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "BrokenJaw",
+            "Name": "Broken Jaw",
+            "Details": "This pilot has a broken jaw, and generates 20% less resolve due to hampered communications.",
+            "Icon": "seeingstars"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "resolveGenBaseMult",
+            "operation": "Float_Add",
+            "modValue": "-0.2",
+            "modType": "System.Single"
+          }
+        }
+      ]
+    },
+    {
+      "injuryID": "HeadBurns",
+      "injuryName": "Severe Burns - Head",
+      "injuryLoc": "Head",
+      "couldBeThermal": true,
+      "severity": 1,
+      "description": "This pilot has severe burns to the head. Sight distance is impaired.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "EyesBurnSpotter",
+            "Name": "Head Burned",
+            "Details": "This pilot has severe burns to the head. Sight distance is impaired.",
+            "Icon": "seeingstars"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "SpotterDistanceMultiplier",
+            "operation": "Float_Multiply",
+            "modValue": "0.75",
+            "modType": "System.Single"
+          }
+        }
+      ]
+    },
+    {
+      "injuryID": "HeadBarotrauma",
+      "injuryName": "Barotrauma - Head",
+      "injuryLoc": "Head",
+      "couldBeThermal": false,
+      "severity": 2,
+      "description": "This pilot has suffered barotrauma to the head. Initiative decreased.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "EyesBaroUnsteady",
+            "Name": "Barotrauma",
+            "Details": "This pilot has suffered barotrauma to the head. Initiative decreased.",
+            "Icon": "seeingstars"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "SBI_MOD_INJURY",
+            "operation": "Int_Add",
+            "modValue": "-5",
+            "modType": "System.Int32"
+          }
+        }
+      ]
+    },
+    {
+      "injuryID": "ArmLBurns",
+      "injuryName": "Severe Burns - Left Arm",
+      "injuryLoc": "ArmL",
+      "couldBeThermal": true,
+      "severity": 1,
+      "description": "This pilot has been severely burned, and is suffering an accuracy penalty.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "ArmLBurned",
+            "Name": "Severe Burns - Left Arm",
+            "Details": "This pilot has been severely burned, and is suffering an accuracy penalty.",
+            "Icon": "flamingskull"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "modType": "System.Single",
+            "modValue": "2.0",
+            "operation": "Float_Add",
+            "statName": "AccuracyModifier",
+            "targetCollection": "Weapon"
+          }
+        }
+      ]
+    },
+    {
+      "injuryID": "ArmRBurns",
+      "injuryName": "Severe Burns - Right Arm",
+      "injuryLoc": "ArmR",
+      "couldBeThermal": true,
+      "severity": 1,
+      "description": "This pilot has been severely burned, and is suffering an accuracy penalty.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "ArmRBurned",
+            "Name": "Severe Burns - Right Arm",
+            "Details": "This pilot has been severely burned, and is suffering an accuracy penalty.",
+            "Icon": "flamingskull"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "modType": "System.Single",
+            "modValue": "2.0",
+            "operation": "Float_Add",
+            "statName": "AccuracyModifier",
+            "targetCollection": "Weapon"
+          }
+        }
+      ]
+    },
+    {
+      "injuryID": "ArmLBroken",
+      "injuryName": "Simple Fracture - Left Arm",
+      "injuryLoc": "ArmL",
+      "couldBeThermal": false,
+      "severity": 1,
+      "description": "This pilot has a broken arm, and is suffering an accuracy penalty.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "ArmLBroken",
+            "Name": "Broken Arm - Left",
+            "Details": "This pilot has a broken arm, and is suffering an accuracy penalty.",
+            "Icon": "brokenarm"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "modType": "System.Single",
+            "modValue": "3.0",
+            "operation": "Float_Add",
+            "statName": "AccuracyModifier",
+            "targetCollection": "Weapon"
+          }
+        }
+      ]
+    },
+    {
+      "injuryID": "ArmRBroken",
+      "injuryName": "Simple Fracture - Right Arm",
+      "injuryLoc": "ArmR",
+      "couldBeThermal": false,
+      "severity": 1,
+      "description": "This pilot has a broken arm, and is suffering an accuracy penalty.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "ArmRBroken",
+            "Name": "Broken Arm - Right",
+            "Details": "This pilot has a broken arm, and is suffering an accuracy penalty.",
+            "Icon": "brokenarm"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "modType": "System.Single",
+            "modValue": "3.0",
+            "operation": "Float_Add",
+            "statName": "AccuracyModifier",
+            "targetCollection": "Weapon"
+          }
+        }
+      ]
+    },
+    {
+      "injuryID": "ArmLBrokenCompound",
+      "injuryID_Post": "ArmLBroken",
+      "injuryName": "Compound Fracture - Left Arm",
+      "injuryLoc": "ArmL",
+      "couldBeThermal": false,
+      "severity": 1,
+      "description": "This pilot has a compound fracture in their arm, and is suffering an accuracy penalty.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "ArmLCmpdBroken_bleedout",
+            "Name": "Broken Arm, Compound - Left",
+            "Details": "This pilot has a compound fracture in their arm, and is suffering an accuracy penalty.",
+            "Icon": "brokenarm"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "modType": "System.Single",
+            "modValue": "4.0",
+            "operation": "Float_Add",
+            "statName": "AccuracyModifier",
+            "targetCollection": "Weapon"
+          }
+        }
+      ]
+    },
+    {
+      "injuryID": "ArmRBrokenCompound",
+      "injuryID_Post": "ArmRBroken",
+      "injuryName": "Compound Fracture - Right Arm",
+      "injuryLoc": "ArmR",
+      "couldBeThermal": false,
+      "severity": 1,
+      "description": "This pilot has a compound fracture in their arm, and is suffering an accuracy penalty.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "ArmRCmpdBroken_bleedout",
+            "Name": "Broken Arm, Compound - Right",
+            "Details": "This pilot has a compound fracture in their arm, and is suffering an accuracy penalty.",
+            "Icon": "brokenarm"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "modType": "System.Single",
+            "modValue": "4.0",
+            "operation": "Float_Add",
+            "statName": "AccuracyModifier",
+            "targetCollection": "Weapon"
+          }
+        }
+      ]
+    },
+    {
+      "injuryID": "LegLBurns",
+      "injuryName": "Severe Burns - Left Leg",
+      "injuryLoc": "LegL",
+      "couldBeThermal": true,
+      "severity": 1,
+      "description": "This pilot has been severely burned and is suffering a Piloting Skill penalty.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "LegLBurnedWalk",
+            "Name": "Severe Burns - Left Leg",
+            "Details": "This pilot has been severely burned and is suffering a Piloting Skill penalty.",
+            "Icon": "flamingskull"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "Piloting",
+            "operation": "Int_Add",
+            "modValue": "-2",
+            "modType": "System.Int32",
+            "targetCollection": "Pilot"
+          }
+        }
+      ]
+    },
+    {
+      "injuryID": "LegRBurns",
+      "injuryName": "Severe Burns - Right Leg",
+      "injuryLoc": "LegR",
+      "couldBeThermal": true,
+      "severity": 1,
+      "description": "This pilot has been severely burned and is suffering a Piloting Skill penalty.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "LegRBurnedWalk",
+            "Name": "Severe Burns - Right Leg",
+            "Details": "This pilot has been severely burned and is suffering a Piloting Skill penalty.",
+            "Icon": "flamingskull"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "Piloting",
+            "operation": "Int_Add",
+            "modValue": "-2",
+            "modType": "System.Int32",
+            "targetCollection": "Pilot"
+          }
+        }
+      ]
+    },
+    {
+      "injuryID": "LegLBroken",
+      "injuryName": "Simple Fracture - Left Leg",
+      "injuryLoc": "LegL",
+      "couldBeThermal": false,
+      "severity": 1,
+      "description": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "LegLBrokeWalk",
+            "Name": "Simple Fracture - Left Leg",
+            "Details": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
+            "Icon": "footcast"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "Piloting",
+            "operation": "Int_Add",
+            "modValue": "-3",
+            "modType": "System.Int32",
+            "targetCollection": "Pilot"
+          }
+        }
+      ]
+    },
+    {
+      "injuryID": "LegLBrokenCompound",
+      "injuryID_Post": "LegLBroken",
+      "injuryName": "Compound Fracture - Left Leg",
+      "injuryLoc": "LegL",
+      "couldBeThermal": false,
+      "severity": 1,
+      "description": "This pilot has a compound fracture to their leg and is suffering a severe Piloting Skill penalty.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "LegLBrokeCmpndWalk_bleedout",
+            "Name": "Compound Fracture - Left Leg",
+            "Details": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
+            "Icon": "footcast"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "Piloting",
+            "operation": "Int_Add",
+            "modValue": "-5",
+            "modType": "System.Int32",
+            "targetCollection": "Pilot"
+          }
+        }
+      ]
+    },
+    {
+      "injuryID": "LegRBroken",
+      "injuryName": "Simple Fracture - Right Leg",
+      "injuryLoc": "LegR",
+      "couldBeThermal": false,
+      "severity": 1,
+      "description": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "LegRBrokeWalk",
+            "Name": "Simple Fracture - Right Leg",
+            "Details": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
+            "Icon": "footcast"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "Piloting",
+            "operation": "Int_Add",
+            "modValue": "-3",
+            "modType": "System.Int32",
+            "targetCollection": "Pilot"
+          }
+        }
+      ]
+    },
+    {
+      "injuryID": "LegRBrokenCompound",
+      "injuryID_Post": "LegRBroken",
+      "injuryName": "Compound Fracture - Right Leg",
+      "injuryLoc": "LegR",
+      "couldBeThermal": false,
+      "severity": 1,
+      "description": "This pilot has a compound fracture to their leg and is suffering a severe Piloting Skill penalty.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "LegRBrokeCmpndWalk_bleedout",
+            "Name": "Compound Fracture - Right Leg",
+            "Details": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
+            "Icon": "footcast"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "Piloting",
+            "operation": "Int_Add",
+            "modValue": "-5",
+            "modType": "System.Int32",
+            "targetCollection": "Pilot"
+          }
+        }
+      ]
+    },
+    {
+      "injuryID": "TorsoInternalBleeding",
+      "injuryID_Post": "TorsoRibs",
+      "injuryName": "Internal Bleeding - Torso",
+      "injuryLoc": "Torso",
+      "couldBeThermal": false,
+      "severity": 2,
+      "description": "This pilot is suffering from internal bleeding and receives a debuff to Evasion.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "TorsoHemEvasion_bleedout",
+            "Name": "Internal Bleeding",
+            "Details": "This pilot is suffering from internal bleeding and receives a debuff to Evasion.",
+            "Icon": "bandaged"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "MaxEvasivePips",
+            "operation": "Int_Add",
+            "modValue": "-3",
+            "modType": "System.Int32"
+          }
+        }
+      ]
+    },
+    {
+      "injuryID": "TorsoRibs",
+      "injuryName": "Broken Ribs",
+      "injuryLoc": "Torso",
+      "couldBeThermal": false,
+      "severity": 1,
+      "description": "This pilot has broken ribs and receives a debuff to Evasion.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "TorsoRibsEvasion",
+            "Name": "Broken Ribs",
+            "Details": "This pilot has broken ribs and receives a debuff to Evasion.",
+            "Icon": "bandaged"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "MaxEvasivePips",
+            "operation": "Int_Add",
+            "modValue": "-2",
+            "modType": "System.Int32"
+          }
+        }
+      ]
+    },
+    {
+      "injuryID": "TorsoLungs",
+      "injuryName": "Punctured Lung",
+      "injuryLoc": "Torso",
+      "couldBeThermal": false,
+      "severity": 1,
+      "description": "This pilot has a punctured lung and has a penalty to Guts.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "TorsoLungsGuts",
+            "Name": "Punctured Lung",
+            "Details": "This pilot has a punctured lung and has a penalty to Guts.",
+            "Icon": "lungs"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "Guts",
+            "operation": "Int_Add",
+            "modValue": "-3",
+            "modType": "System.Int32",
+            "targetCollection": "Pilot"
+          }
+        }
+      ]
+    },
+    {
+      "injuryID": "TorsoLungsBleedout",
+      "injuryID_Post": "TorsoLungs",
+      "injuryName": "Collapsed Lung",
+      "injuryLoc": "Torso",
+      "couldBeThermal": false,
+      "severity": 1,
+      "description": "This pilot has a collapsed lung and has a penalty to Guts.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "TorsoLungsGuts_bleedout",
+            "Name": "Collapsed Lung",
+            "Details": "This pilot has a collapsed lung and has a penalty to Guts.",
+            "Icon": "lungs"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "Guts",
+            "operation": "Int_Add",
+            "modValue": "-5",
+            "modType": "System.Int32",
+            "targetCollection": "Pilot"
+          }
+        }
+      ]
+    },
+    {
+      "injuryID": "TorsoBurned",
+      "injuryName": "Severe Burns - Torso",
+      "injuryLoc": "Torso",
+      "couldBeThermal": true,
+      "severity": 2,
+      "description": "This pilot has been severely burned and receives a debuff to Evasion.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "TorsoBurnEvasion",
+            "Name": "Severe Burns - Torso",
+            "Details": "This pilot has been severely burned and is suffering a penalty to Evasion.",
+            "Icon": "bandaged"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "modType": "System.Int32",
+            "modValue": "-3",
+            "operation": "Int_Add",
+            "statName": "MaxEvasivePips"
+          }
+        }
+      ]
+    }
+  ],
+  "InternalDmgInjuries": [
+    {
+      "injuryID": "HeadNeuralFeedback",
+      "injuryName": "Neural Feedback",
+      "injuryLoc": "Head",
+      "couldBeThermal": false,
+      "severity": 2,
+      "description": "This pilot has suffered from neural feedback from a DNI or EI interface, and has drastically reduced accuracy.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "HeadNeural",
+            "Name": "Neural Feedback",
+            "Details": "This pilot has suffered from neural feedback from a DNI or EI interface, and has drastically reduced accuracy.",
+            "Icon": "crackedskull"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "modType": "System.Single",
+            "modValue": "5.0",
+            "operation": "Float_Add",
+            "statName": "AccuracyModifier",
+            "targetCollection": "Weapon"
+          }
+        }
+      ]
+    }
+  ],
+  "additiveBleedingFactor": 0.75,
+  "minBloodBank": 2,
+  "baseBloodBankAdd": 1,
+  "UseGutsForBloodBank": true,
+  "factorBloodBankMult": 1,
+  "UseBleedingEffects": true,
+  "BleedingEffects": [
+    {
+      "bleedingEffectID": "BleedingShock",
+      "bleedingName": "Shock",
+      "bleedingEffectLvl": 1,
+      "description": "This pilot has suffered minor blood loss and has reduced accuracy.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "BleedShock",
+            "Name": "Blood Loss: Shock",
+            "Details": "This pilot has suffered minor blood loss and has gone into minor shock, reducing accuracy.",
+            "Icon": "blood"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "modType": "System.Single",
+            "modValue": "1.0",
+            "operation": "Float_Add",
+            "statName": "AccuracyModifier",
+            "targetCollection": "Weapon"
+          }
+        }
+      ]
+    },
+    {
+      "bleedingEffectID": "BleedingDizzy",
+      "bleedingName": "Dizzy",
+      "bleedingEffectLvl": 2,
+      "description": "This pilot has suffered significant blood loss and is suffering an Initiative Penalty.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "BleedDizzy",
+            "Name": "Blood Loss: Dizzy",
+            "Details": "This pilot has lost a lot of blood. Things are spinny. Initiative Decreased.",
+            "Icon": "seeingstars"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "SBI_MOD_INJURY",
+            "operation": "Int_Add",
+            "modValue": "-7",
+            "modType": "System.Int32"
+          }
+        }
+      ]
+    },
+    {
+      "bleedingEffectID": "BleedingRun",
+      "bleedingName": "Groggy",
+      "bleedingEffectLvl": 3,
+      "description": "This pilot has suffered major blood loss and has a Piloting Skill penalty.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "BleedingRun_Walk",
+            "Name": "Blood Loss: Piloting Penalty",
+            "Details": "This pilot has a broken leg and is suffering a Piloting Skill penalty.",
+            "Icon": "footcast"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "Piloting",
+            "operation": "Int_Add",
+            "modValue": "-5",
+            "modType": "System.Int32",
+            "targetCollection": "Pilot"
+          }
+        }
+      ]
+    }
+  ],
+  "UseSimBleedingEffects": false,
+  "SimBleedingEffects": [
+    {
+      "simBleedingEffectID": "BleedGutsLvl1",
+      "bleedingEffectLvl": 1,
+      "simResultJO": [
+        {
+          "Scope": "MechWarrior",
+          "Requirements": null,
+          "AddedTags": {
+            "tagSetSourceFile": "",
+            "items": [
+              "TBAS_SimBleed__Guts__-1"
+            ]
+          },
+          "RemovedTags": {
+            "tagSetSourceFile": "",
+            "items": []
+          },
+          "Stats": [],
+          "Actions": [],
+          "ForceEvents": null,
+          "TemporaryResult": true,
+          "ResultDuration": 10
+        }
+      ]
+    },
+    {
+      "simBleedingEffectID": "BleedGutsLvl2",
+      "bleedingEffectLvl": 2,
+      "simResultJO": [
+        {
+          "Scope": "MechWarrior",
+          "Requirements": null,
+          "AddedTags": {
+            "tagSetSourceFile": "",
+            "items": [
+              "TBAS_SimBleed__Guts__-3"
+            ]
+          },
+          "RemovedTags": {
+            "tagSetSourceFile": "",
+            "items": []
+          },
+          "Stats": [],
+          "Actions": [],
+          "ForceEvents": null,
+          "TemporaryResult": true,
+          "ResultDuration": 20
+        }
+      ]
+    },
+    {
+      "simBleedingEffectID": "BleedGutsLvl3",
+      "bleedingEffectLvl": 3,
+      "simResultJO": [
+        {
+          "Scope": "MechWarrior",
+          "Requirements": null,
+          "AddedTags": {
+            "tagSetSourceFile": "",
+            "items": [
+              "TBAS_SimBleed__Guts__-5"
+            ]
+          },
+          "RemovedTags": {
+            "tagSetSourceFile": "",
+            "items": []
+          },
+          "Stats": [],
+          "Actions": [],
+          "ForceEvents": null,
+          "TemporaryResult": true,
+          "ResultDuration": 30
+        }
+      ]
+    }
+  ],
+  "CanIntentionallyHotBunk": false,
+  "OvercrowdingEffects": [
+    {
+      "ID": "StinkySheets",
+      "Threshold": 1,
+      "Name": "Stinky Sheets",
+      "description": "This pilot is tired from sleeping in stank ass sheets someone else used. Hotbunking sucks.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "StinkySheets_Effect",
+            "Name": "Stinky Sheets",
+            "Details": "This pilot is tired from sleeping in stank ass sheets someone else used. Hotbunking sucks.",
+            "Icon": "seeingstars"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "ToHitThisActor",
+            "operation": "Float_Add",
+            "modValue": "2.0",
+            "modType": "System.Single"
+          }
+        }
+      ]
+    },
+    {
+      "ID": "SleepingOnTheFloor1",
+      "Threshold": 1,
+      "Name": "Sleeping on the Floor",
+      "description": "This pilot is annoyed from sleeping on the floor. Hotbunking sucks.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "SleepingFloor_Effect",
+            "Name": "Sleeping on the Floor",
+            "Details": "This pilot is annoyed from sleeping on the floor. Hotbunking sucks.",
+            "Icon": "seeingstars"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "resolveCostBaseMult",
+            "operation": "Float_Multiply",
+            "modValue": "1.5",
+            "modType": "System.Single"
+          }
+        }
+      ]
+    },
+    {
+      "ID": "NoPersonalSpace",
+      "Threshold": 1,
+      "Name": "No Personal Space",
+      "description": "This pilot is depressed from having no personal space in the barracks. Hotbunking sucks.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "NoPersonalSpace_Effect",
+            "Name": "No Personal Space",
+            "Details": "This pilot is depressed from having no personal space in the barracks. Hotbunking sucks.",
+            "Icon": "seeingstars"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "resolveGenBaseMult",
+            "operation": "Float_Multiply",
+            "modValue": "0.5",
+            "modType": "System.Single"
+          }
+        }
+      ]
+    },
+    {
+      "ID": "Unappreciated",
+      "Threshold": 1,
+      "Name": "Feels Unappreciated",
+      "description": "This pilot feels unappreciated from having to sleep in shifts. Hotbunking sucks.",
+      "effectDataJO": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "Unappreciated_Effect",
+            "Name": "Feels Unappreciated",
+            "Details": "This pilot feels unappreciated from having to sleep in shifts. Hotbunking sucks.",
+            "Icon": "seeingstars"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "AccuracyModifier",
+            "operation": "Float_Add",
+            "modValue": "2",
+            "modType": "System.Single"
+          }
+        }
+      ]
+    }
+  ]
 }

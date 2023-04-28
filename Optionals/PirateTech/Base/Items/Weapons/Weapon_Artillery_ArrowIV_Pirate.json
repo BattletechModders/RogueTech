@@ -20,6 +20,8 @@
       "ModesCanMisfire",
       "RecoilExponent: 0.2",
       "AccuracyExponent: -0.2",
+      "BracetoFireMode: 9%, Direct",
+      "BracetoFireMode: 18%, Artillery",
       "WeaponExplosionPerLoadedShot: 335, 222.5, 75"
     ],
     "ComponentExplosion": {
@@ -67,6 +69,8 @@
   "AOEEffectsFalloff": true,
   "AMSHitChance": -0.3,
   "ProjectileSpeedMultiplier": 1,
+  "GunneryJammingMult": 0.01,
+  "GunneryJammingBase": 1,
   "WeaponEffectID": "WeaponEffect-Weapon_LRM20",
   "Description": {
     "Cost": 450000,
@@ -107,8 +111,6 @@
       "DirectFireModifier": 0,
       "AccuracyModifier": 0,
       "FlatJammingChance": 0.2,
-      "GunneryJammingMult": 0.01,
-      "GunneryJammingBase": 1,
       "DamageOnJamming": true,
       "IndirectFireCapable": false,
       "AlwaysIndirectVisuals": false,
@@ -119,7 +121,34 @@
       "MediumRange": -260.0,
       "LongRange": -260.0,
       "MaxRange": -260.0,
-      "ForbiddenRange": 0
+      "ForbiddenRange": 0,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": 1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "OnWeaponFire",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
+            "Name": "Arrow IV (P) / Direct: Increased Self Knockdown on Fire",
+            "Details": "Tubthumping",
+            "Icon": "uixSvgIcon_run_n_gun"
+          },
+          "statisticData": {
+            "statName": "SelfknockdownCheck_OnFire",
+            "operation": "Float_Add",
+            "modValue": "0.09",
+            "modType": "System.Single"
+          },
+          "nature": "Buff"
+        }
+      ]
     },
     {
       "Id": "indirectfire",
@@ -129,8 +158,6 @@
       "isBaseMode": false,
       "CantHitUnaffecedByPathing": true,
       "FlatJammingChance": 0.1,
-      "GunneryJammingMult": 0.01,
-      "GunneryJammingBase": 1,
       "DirectFireModifier": 2,
       "AccuracyModifier": 5,
       "EvasivePipsIgnored": 3,
@@ -138,7 +165,34 @@
       "MaxMissRadius": 300,
       "AlwaysIndirectVisuals": true,
       "IndirectFireCapable": true,
-      "ForbiddenRange": 260
+      "ForbiddenRange": 260,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": 1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "OnWeaponFire",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
+            "Name": "Arrow IV (P) / Artillery: Increased Self Knockdown on Fire",
+            "Details": "Tubthumping",
+            "Icon": "uixSvgIcon_run_n_gun"
+          },
+          "statisticData": {
+            "statName": "SelfknockdownCheck_OnFire",
+            "operation": "Float_Add",
+            "modValue": "0.18",
+            "modType": "System.Single"
+          },
+          "nature": "Buff"
+        }
+      ]
     }
   ],
   "statusEffects": [],

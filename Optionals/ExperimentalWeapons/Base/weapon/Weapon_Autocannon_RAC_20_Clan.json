@@ -11,7 +11,7 @@
     "BonusDescriptions": [
       "WpnRecoilShot: 2",
       "WeaponJAMFlatShot: 5.5%",
-      "BracetoFirePerShot: 10%, 3, 6%",
+      "BracetoFirePerShot: 5%, 1, 5%",
       "Rotary",
       "WeaponAttachmentCompatible: Recoil Damper"
     ],
@@ -44,8 +44,8 @@
   "AccuracyModifier": 0,
   "CriticalChanceMultiplier": 0,
   "APArmorShardsMod": 1,
-  "APMaxArmorThickness": 160,
-  "APCriticalChanceMultiplier": 0.4,
+  "APMaxArmorThickness": 180,
+  "APCriticalChanceMultiplier": 0.45,
   "AOECapable": false,
   "IndirectFireCapable": false,
   "RefireModifier": 3,
@@ -55,6 +55,8 @@
   "Instability": 25,
   "ImprovedBallistic": true,
   "FireTerrainChance": 0.08,
+  "GunneryJammingMult": 0.01,
+  "GunneryJammingBase": 1,
   "WeaponEffectID": "WeaponEffect-Weapon_AC20_Single",
   "Description": {
     "Cost": 1720000,
@@ -89,8 +91,33 @@
       "HeatGenerated": -30,
       "AIHitChanceCap": 0.1,
       "FlatJammingChance": 0.055,
-      "GunneryJammingMult": 0.01,
-      "GunneryJammingBase": 1
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": 1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "OnWeaponFire",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
+            "Name": "Rotary AC/20 (C) / x1: Increased Self Knockdown on Fire",
+            "Details": "Tubthumping",
+            "Icon": "uixSvgIcon_run_n_gun"
+          },
+          "statisticData": {
+            "statName": "SelfknockdownCheck_OnFire",
+            "operation": "Float_Add",
+            "modValue": "0.05",
+            "modType": "System.Single"
+          },
+          "nature": "Buff"
+        }
+      ]
     },
     {
       "Id": "x2",
@@ -101,22 +128,11 @@
       "HeatGenerated": -15,
       "AIHitChanceCap": 0.15,
       "FlatJammingChance": 0.11,
-      "GunneryJammingMult": 0.01,
-      "GunneryJammingBase": 1
-    },
-    {
-      "Id": "x3",
-      "UIName": "x3",
-      "isBaseMode": true,
-      "AIHitChanceCap": 0.2,
-      "FlatJammingChance": 0.165,
-      "GunneryJammingMult": 0.01,
-      "GunneryJammingBase": 1,
       "statusEffects": [
         {
           "durationData": {
             "duration": 1,
-            "stackLimit": 5
+            "stackLimit": -1
           },
           "targetingData": {
             "effectTriggerType": "OnWeaponFire",
@@ -126,7 +142,7 @@
           "effectType": "StatisticEffect",
           "Description": {
             "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
-            "Name": "Tubthumping",
+            "Name": "Rotary AC/20 (C) / x2: Increased Self Knockdown on Fire",
             "Details": "Tubthumping",
             "Icon": "uixSvgIcon_run_n_gun"
           },
@@ -141,21 +157,16 @@
       ]
     },
     {
-      "Id": "x4",
-      "UIName": "x4",
-      "isBaseMode": false,
-      "ShotsWhenFired": 1,
-      "RefireModifier": 2,
-      "AIHitChanceCap": 0.25,
-      "FlatJammingChance": 0.22,
-      "GunneryJammingMult": 0.01,
-      "GunneryJammingBase": 1,
-      "HeatGenerated": 15,
+      "Id": "x3",
+      "UIName": "x3",
+      "isBaseMode": true,
+      "AIHitChanceCap": 0.2,
+      "FlatJammingChance": 0.165,
       "statusEffects": [
         {
           "durationData": {
             "duration": 1,
-            "stackLimit": 5
+            "stackLimit": -1
           },
           "targetingData": {
             "effectTriggerType": "OnWeaponFire",
@@ -165,14 +176,51 @@
           "effectType": "StatisticEffect",
           "Description": {
             "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
-            "Name": "Tubthumping",
+            "Name": "Rotary AC/20 (C) / x3: Increased Self Knockdown on Fire",
             "Details": "Tubthumping",
             "Icon": "uixSvgIcon_run_n_gun"
           },
           "statisticData": {
             "statName": "SelfknockdownCheck_OnFire",
             "operation": "Float_Add",
-            "modValue": "0.16",
+            "modValue": "0.15",
+            "modType": "System.Single"
+          },
+          "nature": "Buff"
+        }
+      ]
+    },
+    {
+      "Id": "x4",
+      "UIName": "x4",
+      "isBaseMode": false,
+      "ShotsWhenFired": 1,
+      "RefireModifier": 2,
+      "AIHitChanceCap": 0.25,
+      "FlatJammingChance": 0.22,
+      "HeatGenerated": 15,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": 1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "OnWeaponFire",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
+            "Name": "Rotary AC/20 (C) / x4: Increased Self Knockdown on Fire",
+            "Details": "Tubthumping",
+            "Icon": "uixSvgIcon_run_n_gun"
+          },
+          "statisticData": {
+            "statName": "SelfknockdownCheck_OnFire",
+            "operation": "Float_Add",
+            "modValue": "0.2",
             "modType": "System.Single"
           },
           "nature": "Buff"
@@ -187,14 +235,12 @@
       "RefireModifier": 4,
       "AIHitChanceCap": 0.3,
       "FlatJammingChance": 0.275,
-      "GunneryJammingMult": 0.01,
-      "GunneryJammingBase": 1,
       "HeatGenerated": 30,
       "statusEffects": [
         {
           "durationData": {
             "duration": 1,
-            "stackLimit": 5
+            "stackLimit": -1
           },
           "targetingData": {
             "effectTriggerType": "OnWeaponFire",
@@ -204,14 +250,14 @@
           "effectType": "StatisticEffect",
           "Description": {
             "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
-            "Name": "Tubthumping",
+            "Name": "Rotary AC/20 (C) / x5: Increased Self Knockdown on Fire",
             "Details": "Tubthumping",
             "Icon": "uixSvgIcon_run_n_gun"
           },
           "statisticData": {
             "statName": "SelfknockdownCheck_OnFire",
             "operation": "Float_Add",
-            "modValue": "0.22",
+            "modValue": "0.25",
             "modType": "System.Single"
           },
           "nature": "Buff"
@@ -226,14 +272,12 @@
       "RefireModifier": 6,
       "AIHitChanceCap": 0.4,
       "FlatJammingChance": 0.33,
-      "GunneryJammingMult": 0.01,
-      "GunneryJammingBase": 1,
       "HeatGenerated": 45,
       "statusEffects": [
         {
           "durationData": {
             "duration": 1,
-            "stackLimit": 5
+            "stackLimit": -1
           },
           "targetingData": {
             "effectTriggerType": "OnWeaponFire",
@@ -243,14 +287,14 @@
           "effectType": "StatisticEffect",
           "Description": {
             "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
-            "Name": "Tubthumping",
+            "Name": "Rotary AC/20 (C) / x6: Increased Self Knockdown on Fire",
             "Details": "Tubthumping",
             "Icon": "uixSvgIcon_run_n_gun"
           },
           "statisticData": {
             "statName": "SelfknockdownCheck_OnFire",
             "operation": "Float_Add",
-            "modValue": "0.28",
+            "modValue": "0.3",
             "modType": "System.Single"
           },
           "nature": "Buff"
