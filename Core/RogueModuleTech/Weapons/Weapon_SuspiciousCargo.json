@@ -17,12 +17,18 @@
       "NoAA",
       "AmmoCost: 100"
     ],
+    "Flags": [
+      "not_broken"
+    ],
     "ActivatableComponent": {
-      "ExplodeOnDamage": true,
       "CanNotBeActivatedManualy": true,
       "NoUniqueCheck": true,
+      "FailDamageLocations": [],
+      "FailCritLocations": [],
+      "FailCritVehicleLocations": [],
+      "FailCritOnlyComponentsTags": [],
+      "ExplodeOnDamage": true,
       "Explosion": {
-        "VFXActorStat": "EngineExplodeVFX",
         "RangeActorStat": "EngineExplodeRange",
         "DamageActorStat": "EngineExplodeDamage",
         "HeatActorStat": "EngineExplodeHeat",
@@ -32,20 +38,29 @@
         "FireTerrainStrengthActorStat": "EngineExplodeFireStrength",
         "FireDurationWithoutForestActorStat": "EngineExplodeTerrainDuration",
         "FireTerrainCellRadiusActorStat": "EngineExplodeFireRadius",
+        "VFXActorStat": "EngineExplodeVFX",
         "TempDesignMaskActorStat": "EngineExplodeDesignMask",
         "TempDesignMaskTurnsActorStat": "EngineExplodeDesignMaskDuration",
         "TempDesignMaskCellRadiusActorStat": "EngineExplodeDesignMaskRadius"
       },
-      "statusEffects": []
+      "statusEffects": [],
+      "offlineStatusEffects": []
     },
     "ComponentExplosion": {
-      "ExplosionDamagePerAmmo": 300.0,
-      "HeatDamagePerAmmo": 50.0,
-      "StabilityDamagePerAmmo": 200.0
+      "ExplosionDamagePerAmmo": 300,
+      "StabilityDamagePerAmmo": 200,
+      "HeatDamagePerAmmo": 50
+    },
+    "InternalAmmoTonnage": {
+      "InternalAmmoTons": 0
+    },
+    "IBLS": {
+      "StorageSize": 3
     },
     "MechCriticalEffects": [
       {
         "LinkedStatisticName": "EngineCrits",
+        "PenalizedEffectIDs": [],
         "DeathMethod": "EngineDestroyed",
         "UnitTypes": [
           "Mech"
@@ -53,21 +68,13 @@
       },
       {
         "LinkedStatisticName": "VehicleEngineCrits",
+        "PenalizedEffectIDs": [],
         "DeathMethod": "EngineDestroyed",
         "UnitTypes": [
           "Vehicle"
         ]
       }
-    ],
-    "Flags": [
-      "not_broken"
-    ],
-    "IBLS": {
-      "StorageSize": 3
-    },
-    "InternalAmmoTonnage": {
-      "InternalAmmoTons": 0.0
-    }
+    ]
   },
   "Category": "AntiPersonnel",
   "Type": "Autocannon",
@@ -83,52 +90,52 @@
   "StartingAmmoCapacity": 1,
   "HeatGenerated": 25,
   "Damage": 50,
+  "HeatDamage": 0,
+  "Instability": 25,
+  "DamageVariance": 0,
+  "AccuracyModifier": -10,
+  "EvasivePipsIgnored": 5,
+  "RefireModifier": 0,
   "OverheatedDamageMultiplier": 0,
   "EvasiveDamageMultiplier": 0,
-  "EvasivePipsIgnored": 5,
-  "DamageVariance": 0,
-  "HeatDamage": 0,
-  "AccuracyModifier": -10,
   "CriticalChanceMultiplier": 1,
   "APArmorShardsMod": 0,
   "APMaxArmorThickness": 1,
   "APCriticalChanceMultiplier": 0.1,
   "AOECapable": true,
-  "AOEDamage": 120,
-  "AOEHeatDamage": 0,
-  "AOEInstability": 60,
   "AOERange": 100,
-  "IndirectFireCapable": false,
-  "RefireModifier": 0,
+  "AOEDamage": 120,
+  "AOEInstability": 60,
+  "AOEHeatDamage": 0,
   "ShotsWhenFired": 1,
   "ProjectilesPerShot": 1,
-  "AttackRecoil": 0,
-  "Instability": 25,
+  "AMSImmune": true,
+  "CantHitUnaffecedByPathing": true,
+  "IndirectFireCapable": false,
+  "AlwaysIndirectVisuals": true,
+  "ClearMineFieldRadius": 24,
+  "GunneryJammingMult": 0.01,
+  "GunneryJammingBase": 1,
+  "FlatJammingChance": 3,
   "DamageOnJamming": true,
   "DestroyOnJamming": true,
-  "UnsafeJamChance": 100.0,
-  "FlatJammingChance": 3.0,
+  "UnsafeJamChance": 100,
   "FireTerrainChance": 0.1,
   "FireTerrainStrength": 4,
   "FireTerrainCellRadius": 4,
   "FireOnSuccessHit": true,
-  "AlwaysIndirectVisuals": true,
-  "AMSImmune": true,
-  "ClearMineFieldRadius": 24,
-  "CantHitUnaffecedByPathing": true,
-  "ProjectileSpeedMultiplier": 5,
+  "AttackRecoil": 0,
   "ProjectileScale": {
     "x": 0.1,
     "y": 0.1,
     "z": 0.1
   },
-  "GunneryJammingMult": 0.01,
-  "GunneryJammingBase": 1,
-  "WeaponEffectID": "WeaponEffect-Weapon_MachineGun",
+  "ProjectileSpeedMultiplier": 5,
   "AdditionalImpactVFX": "WFX_ExplosiveSmokeM",
   "AdditionalImpactVFXScaleX": 2,
   "AdditionalImpactVFXScaleY": 2,
   "AdditionalImpactVFXScaleZ": 2,
+  "WeaponEffectID": "WeaponEffect-Weapon_MachineGun",
   "Description": {
     "Cost": 10000,
     "Rarity": 7,
@@ -165,19 +172,19 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "CargExplodeChance",
         "Name": "Suspicious Cargo: Increased Engine Explode Chance",
         "Details": "Engine very boom",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
-        "effectsPersistAfterDestruction": true,
         "statName": "EngineExplodeChance",
         "operation": "Float_Add",
         "modValue": "1",
-        "modType": "System.Single"
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     },
     {
@@ -192,19 +199,19 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "CargExplodeDmg",
         "Name": "Suspicious Cargo: Increased Engine Explode Damage",
         "Details": "Engine very boom",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
-        "effectsPersistAfterDestruction": true,
         "statName": "EngineExplodeDamage",
         "operation": "Float_Add",
         "modValue": "100",
-        "modType": "System.Single"
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     },
     {
@@ -219,19 +226,19 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "CargExplodeRange",
         "Name": "Suspicious Cargo: Increased Engine Explosion Range",
         "Details": "Engine very boom",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
-        "effectsPersistAfterDestruction": true,
         "statName": "EngineExplodeRange",
         "operation": "Float_Multiply",
         "modValue": "1.15",
-        "modType": "System.Single"
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     },
     {
@@ -246,19 +253,19 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "CargExplodeDmg",
         "Name": "Suspicious Cargo: Increased Engine Explosion Stability Damage",
         "Details": "Engine very boom",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
-        "effectsPersistAfterDestruction": true,
         "statName": "EngineExplodeStability",
         "operation": "Float_Add",
         "modValue": "20",
-        "modType": "System.Single"
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     }
   ],

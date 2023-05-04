@@ -40,33 +40,35 @@
   "StartingAmmoCapacity": 0,
   "HeatGenerated": 60,
   "Damage": 60,
+  "HeatDamage": 0,
+  "Instability": 10,
+  "DamageVariance": 0,
+  "AccuracyModifier": 0,
+  "EvasivePipsIgnored": 0,
+  "RefireModifier": 2,
   "OverheatedDamageMultiplier": 0,
   "EvasiveDamageMultiplier": 0,
-  "EvasivePipsIgnored": 0,
-  "DamageVariance": 0,
-  "HeatDamage": 0,
-  "AccuracyModifier": 0,
+  "CriticalChanceMultiplier": 1,
   "DistantVariance": 0.35,
   "DistantVarianceReversed": false,
   "isHeatVariation": true,
   "isStabilityVariation": true,
   "isDamageVariation": true,
-  "CriticalChanceMultiplier": 1,
   "APArmorShardsMod": 0.25,
   "APMaxArmorThickness": 90,
   "APCriticalChanceMultiplier": 0.15,
   "AOECapable": false,
-  "IndirectFireCapable": false,
-  "RefireModifier": 2,
   "ShotsWhenFired": 2,
   "ProjectilesPerShot": 1,
-  "AttackRecoil": 3,
-  "Instability": 10,
-  "FlatJammingChance": 0.15,
+  "ImprovedBallistic": true,
+  "IndirectFireCapable": false,
+  "ClearMineFieldRadius": 16,
   "GunneryJammingMult": 0.01,
   "GunneryJammingBase": 1,
+  "FlatJammingChance": 0.15,
   "FireTerrainChance": 0.175,
-  "ImprovedBallistic": true,
+  "AttackRecoil": 3,
+  "FireDelayMultiplier": 0.1,
   "ColorsTable": [
     {
       "C": "#E1E16A",
@@ -74,7 +76,6 @@
     }
   ],
   "ColorChangeRule": "t0",
-  "FireDelayMultiplier": 0.1,
   "WeaponEffectID": "WeaponEffect-Weapon_PPCSnub",
   "Description": {
     "Cost": 900000,
@@ -99,7 +100,6 @@
   "AllowedLocations": "All",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "ClearMineFieldRadius": 16,
   "Modes": [
     {
       "Id": "x1",
@@ -107,12 +107,12 @@
       "Name": "Accuracy",
       "Description": "Capacitor improves PPC Accuracy",
       "isBaseMode": false,
-      "ShotsWhenFired": -1,
       "HeatGenerated": -25,
-      "AIHitChanceCap": 0.1,
+      "AccuracyModifier": -1,
+      "ShotsWhenFired": -1,
+      "RefireModifier": -1,
       "EvasivePipsIgnored": 1,
-      "AccuracyModifier": -1.0,
-      "RefireModifier": -1
+      "AIHitChanceCap": 0.1
     },
     {
       "Id": "x2",
@@ -128,9 +128,9 @@
     {
       "durationData": {
         "duration": 2,
+        "stackLimit": -1,
         "ticksOnActivations": true,
-        "useActivationsOfTarget": true,
-        "stackLimit": -1
+        "useActivationsOfTarget": true
       },
       "targetingData": {
         "effectTriggerType": "OnHit",
@@ -138,13 +138,13 @@
         "showInStatusPanel": true
       },
       "effectType": "StatisticEffect",
+      "nature": "Debuff",
       "Description": {
         "Id": "AbilityDefPPC",
         "Name": "SN PPC+TLCAP: Increased Target ECM Jamming",
         "Details": "EM Interference reduces sensor efficiency.",
         "Icon": "uixSvgIcon_status_sensorsImpaired"
       },
-      "nature": "Debuff",
       "statisticData": {
         "statName": "LV_ECM_JAMMED",
         "operation": "Int_Add",
@@ -164,6 +164,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "AAAFactor",
         "Name": "SN PPC+TLCAP: Anti Air Factor",
@@ -175,8 +176,7 @@
         "operation": "Float_Add",
         "modValue": "0.15",
         "modType": "System.Single"
-      },
-      "nature": "Buff"
+      }
     }
   ],
   "ComponentTags": {
