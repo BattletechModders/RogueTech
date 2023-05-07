@@ -35,31 +35,31 @@
   "StartingAmmoCapacity": 0,
   "HeatGenerated": 12,
   "Damage": 4,
+  "HeatDamage": 0,
+  "Instability": 0.8,
+  "DamageVariance": 0,
+  "AccuracyModifier": 0,
+  "EvasivePipsIgnored": 0,
+  "RefireModifier": 0,
   "OverheatedDamageMultiplier": 0,
   "EvasiveDamageMultiplier": 0,
-  "EvasivePipsIgnored": 0,
-  "DamageVariance": 0,
-  "HeatDamage": 0,
-  "AccuracyModifier": 0,
   "CriticalChanceMultiplier": 1,
   "APArmorShardsMod": 0.25,
   "APMaxArmorThickness": 20,
   "APCriticalChanceMultiplier": 0.02,
-  "IndirectFireCapable": true,
-  "RefireModifier": 0,
   "ShotsWhenFired": 20,
   "ProjectilesPerShot": 1,
-  "AttackRecoil": 1,
-  "Instability": 0.8,
-  "FireTerrainChance": 0.005,
-  "StatusEffectsPerHit": true,
-  "MissileVolleySize": 1,
   "ImprovedBallistic": true,
-  "MissileVolleyIntervalMultiplier": 1.1,
-  "FireDelayMultiplier": 0.1,
-  "ProjectileSpeedMultiplier": 1.6,
+  "IndirectFireCapable": true,
+  "StatusEffectsPerHit": true,
   "GunneryJammingMult": 0.01,
   "GunneryJammingBase": 1,
+  "MissileVolleySize": 1,
+  "MissileVolleyIntervalMultiplier": 1.1,
+  "FireTerrainChance": 0.005,
+  "AttackRecoil": 1,
+  "FireDelayMultiplier": 0.1,
+  "ProjectileSpeedMultiplier": 1.6,
   "WeaponEffectID": "WeaponEffect-Weapon_LRM20",
   "Description": {
     "Cost": 522000,
@@ -84,6 +84,33 @@
   "AllowedLocations": "All",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
+  "Modes": [
+    {
+      "Id": "Direct",
+      "UIName": "DF",
+      "Name": "Direct Fire",
+      "Description": "LRM Fires at shorter ranges without Minimum Range Penaltys",
+      "isBaseMode": false,
+      "MinRange": -180,
+      "ShortRange": -90,
+      "MediumRange": -220,
+      "LongRange": -380,
+      "MaxRange": -400,
+      "IndirectFireCapable": false,
+      "AIHitChanceCap": 0.1
+    },
+    {
+      "Id": "Indirect",
+      "UIName": "IDF",
+      "Name": "Indirect Fire",
+      "Description": "LRM Fires a Ballistic Trajectory at Longer Ranges with -3 Accuracy Direct Fire Penalty",
+      "isBaseMode": true,
+      "DirectFireModifier": 3,
+      "IndirectFireCapable": true,
+      "AlwaysIndirectVisuals": true,
+      "AIHitChanceCap": 0.4
+    }
+  ],
   "statusEffects": [
     {
       "durationData": {
@@ -97,6 +124,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "AAAFactor",
         "Name": "i-LRM20 (CE): Anti Air Factor",
@@ -108,35 +136,7 @@
         "operation": "Float_Add",
         "modValue": "0.16",
         "modType": "System.Single"
-      },
-      "nature": "Buff"
-    }
-  ],
-  "Modes": [
-    {
-      "Id": "Direct",
-      "UIName": "DF",
-      "Name": "Direct Fire",
-      "Description": "LRM Fires at shorter ranges without Minimum Range Penaltys",
-      "isBaseMode": false,
-      "IndirectFireCapable": false,
-      "AIHitChanceCap": 0.1,
-      "MinRange": -180.0,
-      "ShortRange": -90.0,
-      "MediumRange": -220.0,
-      "LongRange": -380.0,
-      "MaxRange": -400.0
-    },
-    {
-      "Id": "Indirect",
-      "UIName": "IDF",
-      "Name": "Indirect Fire",
-      "Description": "LRM Fires a Ballistic Trajectory at Longer Ranges with -3 Accuracy Direct Fire Penalty",
-      "isBaseMode": true,
-      "IndirectFireCapable": true,
-      "AlwaysIndirectVisuals": true,
-      "DirectFireModifier": 3.0,
-      "AIHitChanceCap": 0.4
+      }
     }
   ],
   "ComponentTags": {
