@@ -51,9 +51,19 @@ CriticalHitChanceReceivedMultiplier can be locational
 {
 "debugLog":true, - enable debug log 
 "MapOnlineClientLink":"http://www.roguewar.org/playerlut?cId={0}" - link for an online client
-"ScaleIncomingHeat": 150, - if > 0 incoming heat from next sources (AoE, weapon hits, landmines, landmines AoE) is scaled
-                            scale modifier = 1 - (<target heat>/<ScaleIncomingHeat>)
+"ScaleWeaponHeat": 150, - if > 0 incoming heat from next sources (AoE, weapon hits, landmines, landmines AoE) is scaled
+                            scale modifier = 1 - (<target heat>/<ScaleWeaponHeat>)
 							Note! scale modifier for weapon damage calculates before attack. 
+"ExternalHeatLimit":149, - if > 0 all incoming heat from external sources (weapon hits, AoE, walk burning terrain, landmines,landmines AoE )
+                           can't make unit heat level exceed this value. Example 
+						   your attack inflicted 250 heat damage, 
+						   target have 50 unused heat sink capacity
+						   target have 75 current heat level
+						   on heat dissipation sequence your attack heat will be limited to 129 heat, 
+						   all heat sinks capacity will counted as used, target heat level will be 149
+						   Note! value is integer
+						   Note! overheat from internal sources (moving, jumping, weapon fire) 
+						   still can make heat level pass this value
 "RestoreEjectedWeapons": true, - ejected weapon will not be counted as destroyed at the end of the battle
 "HexSizeForMods": 30 - hex size used for moved hexes modifiers calculations
 "SpawnProtectionAffectsCanFire": true - if true weapon can't fire if its owner under spawn protection
