@@ -24,14 +24,14 @@
       "BracetoFireMode: 18%, Artillery",
       "WeaponExplosionPerLoadedShot: 335, 222.5, 75"
     ],
+    "Flags": [
+      "not_broken"
+    ],
     "ComponentExplosion": {
       "ExplosionDamagePerAmmo": 335.0,
       "HeatDamagePerAmmo": 222.5,
       "StabilityDamagePerAmmo": 75.0
     },
-    "Flags": [
-      "not_broken"
-    ],
     "IBLS": {
       "StorageSize": 6
     }
@@ -50,27 +50,31 @@
   "StartingAmmoCapacity": 0,
   "HeatGenerated": 60,
   "Damage": 100,
+  "HeatDamage": 0,
+  "Instability": 25,
+  "DamageVariance": 10,
+  "AccuracyModifier": 0,
+  "EvasivePipsIgnored": 0,
+  "evasivePipsMods": {
+    "RefireModifier": 0.2,
+    "AccuracyModifier": -0.2
+  },
+  "RefireModifier": 1,
   "OverheatedDamageMultiplier": 0,
   "EvasiveDamageMultiplier": 0,
-  "EvasivePipsIgnored": 0,
-  "DamageVariance": 10,
-  "HeatDamage": 0,
-  "AccuracyModifier": 0,
   "CriticalChanceMultiplier": 1,
   "APArmorShardsMod": 1,
   "APMaxArmorThickness": 500,
   "APCriticalChanceMultiplier": 0.5,
-  "RefireModifier": 1,
-  "ShotsWhenFired": 1,
-  "ProjectilesPerShot": 1,
-  "AttackRecoil": 1,
-  "Instability": 25,
-  "FireTerrainChance": 0.075,
   "AOEEffectsFalloff": true,
   "AMSHitChance": -0.3,
-  "ProjectileSpeedMultiplier": 1,
+  "ShotsWhenFired": 1,
+  "ProjectilesPerShot": 1,
   "GunneryJammingMult": 0.01,
   "GunneryJammingBase": 1,
+  "FireTerrainChance": 0.075,
+  "AttackRecoil": 1,
+  "ProjectileSpeedMultiplier": 1,
   "WeaponEffectID": "WeaponEffect-Weapon_LRM20",
   "Description": {
     "Cost": 450000,
@@ -95,10 +99,6 @@
   "AllowedLocations": "All",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "evasivePipsMods": {
-    "RefireModifier": 0.2,
-    "AccuracyModifier": -0.2
-  },
   "Modes": [
     {
       "Id": "directfire",
@@ -106,22 +106,22 @@
       "Name": "Direct",
       "Description": "Launch a Missile Directly at Short ranges. Removes Minimum Range.  Miss Scatter Radius 60 to 300. 20% Chance to Misfire. Mitigated by Jam Reduction",
       "isBaseMode": true,
-      "CantHitUnaffecedByPathing": true,
-      "EvasivePipsIgnored": 0,
-      "DirectFireModifier": 0,
       "AccuracyModifier": 0,
-      "FlatJammingChance": 0.2,
-      "DamageOnJamming": true,
-      "IndirectFireCapable": false,
-      "AlwaysIndirectVisuals": false,
+      "DirectFireModifier": 0,
+      "EvasivePipsIgnored": 0,
+      "ForbiddenRange": 0,
+      "MinRange": -260,
+      "ShortRange": -260,
+      "MediumRange": -260,
+      "LongRange": -260,
+      "MaxRange": -260,
       "MinMissRadius": 60,
       "MaxMissRadius": 300,
-      "MinRange": -260.0,
-      "ShortRange": -260.0,
-      "MediumRange": -260.0,
-      "LongRange": -260.0,
-      "MaxRange": -260.0,
-      "ForbiddenRange": 0,
+      "IndirectFireCapable": false,
+      "CantHitUnaffecedByPathing": true,
+      "AlwaysIndirectVisuals": false,
+      "DamageOnJamming": true,
+      "FlatJammingChance": 0.2,
       "statusEffects": [
         {
           "durationData": {
@@ -134,6 +134,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
             "Name": "Arrow IV (P) / Direct: Increased Self Knockdown on Fire",
@@ -145,8 +146,7 @@
             "operation": "Float_Add",
             "modValue": "0.09",
             "modType": "System.Single"
-          },
-          "nature": "Buff"
+          }
         }
       ]
     },
@@ -156,16 +156,16 @@
       "Name": "Artillery Mode",
       "Description": "Launch a Missile Indirectly. Miss Scatter Radius 15 to 300. 10% Chance to Jam. Mitigated by Jam Reduction",
       "isBaseMode": false,
-      "CantHitUnaffecedByPathing": true,
-      "FlatJammingChance": 0.1,
-      "DirectFireModifier": 2,
       "AccuracyModifier": 5,
+      "DirectFireModifier": 2,
       "EvasivePipsIgnored": 3,
+      "ForbiddenRange": 260,
       "MinMissRadius": 15,
       "MaxMissRadius": 300,
-      "AlwaysIndirectVisuals": true,
       "IndirectFireCapable": true,
-      "ForbiddenRange": 260,
+      "CantHitUnaffecedByPathing": true,
+      "AlwaysIndirectVisuals": true,
+      "FlatJammingChance": 0.1,
       "statusEffects": [
         {
           "durationData": {
@@ -178,6 +178,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
             "Name": "Arrow IV (P) / Artillery: Increased Self Knockdown on Fire",
@@ -189,8 +190,7 @@
             "operation": "Float_Add",
             "modValue": "0.18",
             "modType": "System.Single"
-          },
-          "nature": "Buff"
+          }
         }
       ]
     }

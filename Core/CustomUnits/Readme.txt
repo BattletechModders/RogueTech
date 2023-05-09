@@ -41,6 +41,8 @@ main settings in mod.json
 										  you can't hit cause your units have flag but you can move. When you've done AI units chooses to reserve act 
 										  and still can't hit cause they have flag. Next round both yours and AI units loose protection flag and can shoot normally
 	"DeployAutoSpawnProtection": true - if true on first round begin all units gain spawn protection 
+	"OnUnitSpawnProtection": true - if true AI units will gain spawn protection after they spawn in a middle of battle
+	                                Note! this spawn protection will NOT stop objectives timers (if any) from count
 	"AskForDeployManual": true - if true and manual deployment is allowed will ask if player wants to set deploy position. 
 	                             if false and manual deployment is allowed - deploy will be manual. 
 	"ManualDeployForbidContractTypes": [] - list of contract types names, for listed contract types manual deploy will be forbidden
