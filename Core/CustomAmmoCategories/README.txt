@@ -761,6 +761,8 @@ new fields
                          if this weapon is missile launcher this value shows how difficult to intercept missile with AMS. Negative value - is harder, 
 						 positive is easer. Additive per mode, ammo, weapon
 						 can be altered on runtime via CAC_AMSHitChance and CAC_AMSHitChance_Mod
+  "AMSHitChanceMod": 1.0 - modifier for an AMSHitChance can be set for ONLY for mode and ammo
+                           multiplicative per ammo and mode, default 1.0
   "IsAMS": false, - if true this weapon acts as AMS. It will not fire during normal attack. But tries to intercept incomming missiles.
                     rude model: every 10 meters of missile fly path there is check, if it in range of any AMS. 
 					If so, AMS have AMS.AMSHitChance + missile.AMSHitChance chance to shoot missile down. Avaible shoots count of AMS is decrementing.
