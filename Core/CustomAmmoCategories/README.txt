@@ -759,7 +759,8 @@ new fields
                              can be altered runtime using statistic CAC_AMSAttractiveness and CAC_AMSAttractiveness_Mod
   "AMSHitChance": 0.0, - if this weapon is AMS, this value is AMS efficiency, 
                          if this weapon is missile launcher this value shows how difficult to intercept missile with AMS. Negative value - is harder, 
-						 positive is easer.
+						 positive is easer. Additive per mode, ammo, weapon
+						 can be altered on runtime via CAC_AMSHitChance and CAC_AMSHitChance_Mod
   "IsAMS": false, - if true this weapon acts as AMS. It will not fire during normal attack. But tries to intercept incomming missiles.
                     rude model: every 10 meters of missile fly path there is check, if it in range of any AMS. 
 					If so, AMS have AMS.AMSHitChance + missile.AMSHitChance chance to shoot missile down. Avaible shoots count of AMS is decrementing.
