@@ -64,6 +64,7 @@ CriticalHitChanceReceivedMultiplier can be locational
 						   Note! value is integer
 						   Note! overheat from internal sources (moving, jumping, weapon fire) 
 						   still can make heat level pass this value
+"AMSUseAttractiveness": true, - if true AMS calculation will try to shoot down missiles with higher attractiveness first
 "RestoreEjectedWeapons": true, - ejected weapon will not be counted as destroyed at the end of the battle
 "HexSizeForMods": 30 - hex size used for moved hexes modifiers calculations
 "SpawnProtectionAffectsCanFire": true - if true weapon can't fire if its owner under spawn protection
@@ -747,13 +748,15 @@ new fields
                                   formula effective jamming chance = FlatJammingChance + (GunneryJammingBase - Pilot Gunnery)* GunneryJammingMult
 								  if FlatJammingChance = 1.0, GunneryJammingBase = 6, GunneryJammingMult = 0.1, GunnerySkill = 10
 								  result = 1.0 + (6-10)*0.1 = 0.6
-								  GunneryJammingBase if ommited in weapon def., ammo def. and mode def. assumed as 5. 
+								  GunneryJammingBase if omitted in weapon def., ammo def. and mode def. assumed as 5. 
   "DisableClustering": true/false - if true ProjectilesPerShot > 1 will affect only visual nor damage. If omitted consider as true.
   (not used any more)"NotUseInMelee": true, - if true even AntiPersonel weapon type will not fire on melee attack, AI aware. 
   "AlternateDamageCalc": false, - if true alternate damage calc formula will be implemented 
                               DamagePerShot = (damage from weaponDef + (damage from ammo) + (damage from mode)*(damage multiplayer from ammo)*(damage multiplayer from mode)*(damage with effects)/(damage from weaponDef)
   "AlternateHeatDamageCalc": false, - same as  AlternateDamageCalc but for heat 
   "AlternateInstabilityCalc": false, - same as  AlternateDamageCalc but for instability 
+  "AMSAttractiveness": 0.0 - attractiveness of this particular missile for AMS, additive for weapon, ammo, mode
+                             can be altered runtime using statistic CAC_AMSAttractiveness and CAC_AMSAttractiveness_Mod
   "AMSHitChance": 0.0, - if this weapon is AMS, this value is AMS efficiency, 
                          if this weapon is missile launcher this value shows how difficult to intercept missile with AMS. Negative value - is harder, 
 						 positive is easer.
