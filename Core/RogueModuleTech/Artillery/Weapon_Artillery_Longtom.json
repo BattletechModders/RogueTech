@@ -18,7 +18,7 @@
       "PipsIgnored: 15",
       "WpnRecoil: 4",
       "ForbiddenRange: 180",
-      "BracetoFireMode: 20%, Direct / FLAK",
+      "BracetoFireMode: 20%, Direct mode & Flak",
       "BracetoFireMode: 40%, Artillery"
     ],
     "Flags": [
@@ -42,26 +42,27 @@
   "StartingAmmoCapacity": 0,
   "HeatGenerated": 60,
   "Damage": 150,
+  "HeatDamage": 0,
+  "Instability": 35,
+  "DamageVariance": 0,
+  "AccuracyModifier": 0,
+  "EvasivePipsIgnored": 0,
+  "RefireModifier": 4,
   "OverheatedDamageMultiplier": 0,
   "EvasiveDamageMultiplier": 0,
-  "EvasivePipsIgnored": 0,
-  "DamageVariance": 0,
-  "HeatDamage": 0,
-  "AccuracyModifier": 0,
   "CriticalChanceMultiplier": 1,
   "APArmorShardsMod": 1,
   "APMaxArmorThickness": 300,
   "APCriticalChanceMultiplier": 0.5,
-  "RefireModifier": 4,
+  "AOEEffectsFalloff": true,
   "ShotsWhenFired": 1,
   "ProjectilesPerShot": 1,
-  "AttackRecoil": 6,
-  "Instability": 35,
   "AMSImmune": true,
-  "FireTerrainChance": 0.085,
-  "AOEEffectsFalloff": true,
+  "ImprovedBallistic": true,
   "GunneryJammingMult": 0.01,
   "GunneryJammingBase": 1,
+  "FireTerrainChance": 0.085,
+  "AttackRecoil": 6,
   "WeaponEffectID": "WeaponEffect-Weapon_AC20_Single",
   "Description": {
     "Cost": 450000,
@@ -86,24 +87,23 @@
   "AllowedLocations": "All",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "ImprovedBallistic": true,
   "Modes": [
     {
       "Id": "directfire",
       "UIName": "Direct",
       "Description": "Fire Directly at line of sight targets at short range. -4 Accuracy",
       "isBaseMode": false,
-      "CantHitUnaffecedByPathing": true,
-      "EvasivePipsIgnored": 15,
-      "DirectFireModifier": 0,
       "AccuracyModifier": 4,
-      "IndirectFireCapable": false,
-      "AlwaysIndirectVisuals": false,
-      "ShortRange": -2400.0,
-      "MediumRange": -2400.0,
-      "LongRange": -2400.0,
-      "MaxRange": -2400.0,
+      "DirectFireModifier": 0,
+      "EvasivePipsIgnored": 15,
       "ForbiddenRange": 180,
+      "ShortRange": -2400,
+      "MediumRange": -2400,
+      "LongRange": -2400,
+      "MaxRange": -2400,
+      "IndirectFireCapable": false,
+      "CantHitUnaffecedByPathing": true,
+      "AlwaysIndirectVisuals": false,
       "statusEffects": [
         {
           "durationData": {
@@ -116,6 +116,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
             "Name": "Long Tom Artillery / Direct: Increased Self Knockdown on Fire",
@@ -127,22 +128,21 @@
             "operation": "Float_Add",
             "modValue": "0.2",
             "modType": "System.Single"
-          },
-          "nature": "Buff"
+          }
         }
       ]
     },
     {
       "Id": "flak",
-      "UIName": "FLAK",
+      "UIName": "Flak",
       "Description": "Fire Directly at flying targets in line of sight. -3 Accuracy",
       "isBaseMode": false,
-      "CantHitUnaffecedByPathing": false,
+      "AccuracyModifier": 53,
       "EvasivePipsIgnored": 15,
-      "AccuracyModifier": 53.0,
-      "IndirectFireCapable": false,
-      "AlwaysIndirectVisuals": false,
       "MinRange": -180,
+      "IndirectFireCapable": false,
+      "CantHitUnaffecedByPathing": false,
+      "AlwaysIndirectVisuals": false,
       "statusEffects": [
         {
           "durationData": {
@@ -155,9 +155,10 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
-            "Name": "Long Tom Artillery / FLAK: Increased Self Knockdown on Fire",
+            "Name": "Long Tom Artillery / Flak: Increased Self Knockdown on Fire",
             "Details": "Tubthumping",
             "Icon": "uixSvgIcon_run_n_gun"
           },
@@ -166,8 +167,7 @@
             "operation": "Float_Add",
             "modValue": "0.2",
             "modType": "System.Single"
-          },
-          "nature": "Buff"
+          }
         }
       ]
     },
@@ -176,15 +176,15 @@
       "UIName": "Artillery",
       "Description": "Fire in a high arc at ground targets. -5 Accuracy",
       "isBaseMode": true,
-      "CantHitUnaffecedByPathing": true,
-      "DirectFireModifier": 2,
       "AccuracyModifier": 5,
+      "DirectFireModifier": 2,
       "EvasivePipsIgnored": 15,
+      "ForbiddenRange": 180,
       "MinMissRadius": 5,
       "MaxMissRadius": 100,
-      "AlwaysIndirectVisuals": true,
       "IndirectFireCapable": true,
-      "ForbiddenRange": 180,
+      "CantHitUnaffecedByPathing": true,
+      "AlwaysIndirectVisuals": true,
       "statusEffects": [
         {
           "durationData": {
@@ -197,6 +197,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
             "Name": "Long Tom Artillery / Artillery: Increased Self Knockdown on Fire",
@@ -208,8 +209,7 @@
             "operation": "Float_Add",
             "modValue": "0.4",
             "modType": "System.Single"
-          },
-          "nature": "Buff"
+          }
         }
       ]
     }

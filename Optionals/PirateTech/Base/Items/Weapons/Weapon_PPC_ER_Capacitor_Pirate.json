@@ -19,15 +19,15 @@
       "AAFactor: 13%",
       "WeaponExplosionNoAmmo: 62.5, 25, 25"
     ],
+    "Flags": [
+      "not_broken",
+      "not_destroyed"
+    ],
     "ComponentExplosion": {
       "ExplosionDamage": 62.5,
       "HeatDamage": 25.0,
       "StabilityDamage": 25.0
     },
-    "Flags": [
-      "not_broken",
-      "not_destroyed"
-    ],
     "IBLS": {
       "StorageSize": 4
     }
@@ -46,27 +46,28 @@
   "StartingAmmoCapacity": 0,
   "HeatGenerated": 50,
   "Damage": 50,
+  "HeatDamage": 0,
+  "Instability": 10,
+  "DamageVariance": 10,
+  "AccuracyModifier": 0,
+  "EvasivePipsIgnored": 0,
+  "RefireModifier": 1,
   "OverheatedDamageMultiplier": 0,
   "EvasiveDamageMultiplier": 0,
-  "EvasivePipsIgnored": 0,
-  "DamageVariance": 10,
-  "HeatDamage": 0,
-  "AccuracyModifier": 0,
   "CriticalChanceMultiplier": 1,
   "APArmorShardsMod": 0.25,
-  "APMaxArmorThickness": 75.0,
+  "APMaxArmorThickness": 75,
   "APCriticalChanceMultiplier": 0.125,
   "AOECapable": false,
-  "IndirectFireCapable": false,
-  "RefireModifier": 1,
   "ShotsWhenFired": 1,
   "ProjectilesPerShot": 1,
-  "AttackRecoil": 3,
-  "Instability": 10,
-  "FireTerrainChance": 0.175,
   "ImprovedBallistic": true,
+  "IndirectFireCapable": false,
+  "ClearMineFieldRadius": 16,
   "GunneryJammingMult": 0.01,
   "GunneryJammingBase": 1,
+  "FireTerrainChance": 0.175,
+  "AttackRecoil": 3,
   "ColorsTable": [
     {
       "C": "#008B8B",
@@ -98,7 +99,6 @@
   "AllowedLocations": "All",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "ClearMineFieldRadius": 16,
   "Modes": [
     {
       "Id": "Std",
@@ -114,16 +114,16 @@
       "Description": "Set Capacitor to Improve Range and Accuracy with a 20% Misfire Chance. Mitigated by Jam Reduction.",
       "isBaseMode": false,
       "HeatGenerated": 12,
-      "AccuracyModifier": -1.0,
-      "EvasivePipsIgnored": 1,
+      "AccuracyModifier": -1,
       "RefireModifier": 1,
+      "EvasivePipsIgnored": 1,
+      "MinRange": 0,
+      "ShortRange": 130,
+      "MediumRange": 110,
+      "LongRange": 100,
+      "MaxRange": 250,
       "DamageOnJamming": true,
-      "FlatJammingChance": 0.2,
-      "MinRange": 0.0,
-      "MaxRange": 250.0,
-      "ShortRange": 130.0,
-      "MediumRange": 110.0,
-      "LongRange": 100.0
+      "FlatJammingChance": 0.2
     },
     {
       "Id": "OverCharge",
@@ -131,26 +131,26 @@
       "Name": "Capacitor Over Charge",
       "Description": "Overcharge the Capacitor for increased Damage at reduced Range with a 20% Misfire Chance. Mitigated by Jam Reduction.",
       "isBaseMode": false,
-      "HeatGenerated": 20,
       "DamagePerShot": 25,
       "Instability": 5,
+      "HeatGenerated": 20,
+      "MinRange": 0,
+      "ShortRange": -120,
+      "MediumRange": -110,
+      "LongRange": -100,
+      "MaxRange": -150,
       "DamageOnJamming": true,
       "FlatJammingChance": 0.2,
-      "FireTerrainChance": 0.0875,
-      "MinRange": 0.0,
-      "MaxRange": -150.0,
-      "ShortRange": -120.0,
-      "MediumRange": -110.0,
-      "LongRange": -100.0
+      "FireTerrainChance": 0.0875
     }
   ],
   "statusEffects": [
     {
       "durationData": {
         "duration": 2,
+        "stackLimit": -1,
         "ticksOnActivations": true,
-        "useActivationsOfTarget": true,
-        "stackLimit": -1
+        "useActivationsOfTarget": true
       },
       "targetingData": {
         "effectTriggerType": "OnHit",
@@ -158,13 +158,13 @@
         "showInStatusPanel": true
       },
       "effectType": "StatisticEffect",
+      "nature": "Debuff",
       "Description": {
         "Id": "AbilityDefPPC",
         "Name": "ER PPC+CAP (P): Increased Target ECM Jamming",
         "Details": "EM Interference reduces sensor efficiency.",
         "Icon": "uixSvgIcon_status_sensorsImpaired"
       },
-      "nature": "Debuff",
       "statisticData": {
         "statName": "LV_ECM_JAMMED",
         "operation": "Int_Add",
@@ -184,6 +184,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "AAAFactor",
         "Name": "ER PPC+CAP (P): Anti Air Factor",
@@ -195,8 +196,7 @@
         "operation": "Float_Add",
         "modValue": "0.13",
         "modType": "System.Single"
-      },
-      "nature": "Buff"
+      }
     }
   ],
   "ComponentTags": {

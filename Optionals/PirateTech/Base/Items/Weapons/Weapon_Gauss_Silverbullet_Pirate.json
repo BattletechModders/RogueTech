@@ -19,15 +19,15 @@
       "AAFactor: 25%",
       "WeaponExplosionInertAmmo: 40, 20, 10"
     ],
+    "Flags": [
+      "not_broken",
+      "not_destroyed"
+    ],
     "ComponentExplosion": {
       "ExplosionDamagePerAmmo": 40.0,
       "HeatDamagePerAmmo": 20.0,
       "StabilityDamagePerAmmo": 10.0
     },
-    "Flags": [
-      "not_broken",
-      "not_destroyed"
-    ],
     "IBLS": {
       "StorageSize": 6
     }
@@ -46,26 +46,29 @@
   "StartingAmmoCapacity": 0,
   "HeatGenerated": 6,
   "Damage": 80,
+  "HeatDamage": 0,
+  "Instability": 20,
+  "DamageVariance": 5,
+  "AccuracyModifier": 0,
+  "EvasivePipsIgnored": 0,
+  "RefireModifier": 1,
   "OverheatedDamageMultiplier": 0,
   "EvasiveDamageMultiplier": 0,
-  "EvasivePipsIgnored": 0,
-  "DamageVariance": 5,
-  "HeatDamage": 0,
-  "AccuracyModifier": 0,
   "CriticalChanceMultiplier": 2,
-  "APCriticalChanceMultiplier": 1.2,
-  "APMaxArmorThickness": 240,
   "APArmorShardsMod": 0.5,
+  "APMaxArmorThickness": 240,
+  "APCriticalChanceMultiplier": 1.2,
   "AOECapable": false,
-  "IndirectFireCapable": false,
-  "RefireModifier": 1,
   "ShotsWhenFired": 1,
   "ProjectilesPerShot": 1,
-  "AttackRecoil": 4,
-  "Instability": 20,
+  "BallisticDamagePerPallet": true,
+  "DamageNotDivided": true,
   "AlternateHeatDamageCalc": true,
+  "ImprovedBallistic": true,
+  "IndirectFireCapable": false,
   "GunneryJammingMult": 0.01,
   "GunneryJammingBase": 1,
+  "AttackRecoil": 4,
   "WeaponEffectID": "WeaponEffect-Weapon_GaussRifle",
   "Description": {
     "Cost": 350000,
@@ -89,52 +92,49 @@
   "Tonnage": 14,
   "AllowedLocations": "All",
   "DisallowedLocations": "All",
-  "ImprovedBallistic": true,
-  "BallisticDamagePerPallet": true,
-  "DamageNotDivided": true,
   "CriticalComponent": false,
   "Modes": [
     {
       "Id": "Std",
       "UIName": "STD",
       "isBaseMode": true,
-      "CriticalChanceMultiplier": 2.0,
+      "CriticalChanceMultiplier": 2,
       "AIHitChanceCap": 0.3
     },
     {
       "Id": "Cluster",
       "UIName": "Cluster",
       "isBaseMode": false,
+      "HeatMultiplier": 0.2,
+      "DamageMultiplier": 0.2,
+      "InstabilityMultiplier": 0.2,
+      "APDamageMultiplier": 0.2,
       "HeatGenerated": 2,
-      "AccuracyModifier": -1.0,
+      "AccuracyModifier": -1,
+      "ProjectilesPerShot": 6,
       "EvasivePipsIgnored": 1,
-      "DamageOnJamming": true,
-      "FlatJammingChance": 0.2,
-      "AIHitChanceCap": 0.1,
-      "AttackRecoil": 1,
       "CriticalChanceMultiplier": 0.5,
       "APArmorShardsMod": 0,
       "APMaxArmorThickness": 1,
-      "ProjectilesPerShot": 6,
-      "DamageMultiplier": 0.2,
-      "HeatMultiplier": 0.2,
-      "APDamageMultiplier": 0.2,
-      "InstabilityMultiplier": 0.2
+      "DamageOnJamming": true,
+      "FlatJammingChance": 0.2,
+      "AttackRecoil": 1,
+      "AIHitChanceCap": 0.1
     },
     {
       "Id": "Scrap",
       "UIName": "Scrap",
       "isBaseMode": false,
-      "AIHitChanceCap": 0.4,
-      "AmmoCategory": "NotSet",
-      "AttackRecoil": 2,
+      "HeatMultiplier": 0.2,
+      "DamageMultiplier": 0.2,
+      "InstabilityMultiplier": 0.2,
+      "APDamageMultiplier": 0.2,
+      "ProjectilesPerShot": 4,
       "DamageOnJamming": true,
       "FlatJammingChance": 0.35,
-      "ProjectilesPerShot": 4,
-      "DamageMultiplier": 0.2,
-      "HeatMultiplier": 0.2,
-      "APDamageMultiplier": 0.2,
-      "InstabilityMultiplier": 0.2
+      "AttackRecoil": 2,
+      "AmmoCategory": "NotSet",
+      "AIHitChanceCap": 0.4
     }
   ],
   "statusEffects": [
@@ -150,6 +150,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "AAAFactor",
         "Name": "SB Gauss (P): Anti Air Factor",
@@ -161,8 +162,7 @@
         "operation": "Float_Add",
         "modValue": "0.25",
         "modType": "System.Single"
-      },
-      "nature": "Buff"
+      }
     }
   ],
   "ComponentTags": {
