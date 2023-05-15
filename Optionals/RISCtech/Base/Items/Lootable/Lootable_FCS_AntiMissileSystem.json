@@ -15,6 +15,7 @@
       "AMSJam: -15%",
       "AMSHeat: -10%",
       "AMSDmg: +1",
+      "AMSChance: -25%",
       "FCS"
     ],
     "Flags": [
@@ -36,7 +37,7 @@
     "UIName": "FCS AMS",
     "Id": "Lootable_FCS_AntiMissileSystem",
     "Name": "Iron Dome",
-    "Details": "A FCS that reduces Jamming Chance, Heat Output, and increases Damage of AntiMissile Systems.",
+    "Details": "A FCS that reduces Jamming Chance, Heat Output, and increases Damage of AntiMissile Systems, but reduces AMS Hit Chance.",
     "Icon": "targeting"
   },
   "BonusValueA": "",
@@ -46,11 +47,40 @@
   "PrefabIdentifier": "",
   "BattleValue": 0,
   "InventorySize": 1,
-  "Tonnage": 1,
+  "Tonnage": 2,
   "AllowedLocations": "Head",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
   "statusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "StatusEffect_FCSAMSReducedHitChance",
+        "Name": "Lootable FCS AMS: Decreased NotSet AMSHitChance",
+        "Details": "Reduced Hit Chance",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "abilifierId": "AMS_Filter",
+        "statName": "CAC_AMSHitChanceMult",
+        "operation": "Float_Multiply",
+        "modValue": "-0.25",
+        "modType": "System.Single",
+        "targetCollection": "Weapon",
+        "targetWeaponCategoryID": "NotSet"
+      }
+    },
     {
       "durationData": {
         "duration": -1,
