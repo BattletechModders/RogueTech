@@ -2,7 +2,7 @@
   "id": "pilotQuirkDef_pilot_disgraced",
   "tag": "pilot_disgraced",
   "quirkName": "Disgraced",
-  "description": "+1 ECM Shield and Probe. -1 Morale.",
+  "description": "+1 ECM Shield. +1 Guts. -5% Sensor&Visual Signature. -1 Morale.",
   "effectData": [
     {
       "durationData": {
@@ -43,17 +43,18 @@
       },
       "effectType": "StatisticEffect",
       "Description": {
-        "Id": "DisgracedPROBE",
-        "Name": "Pilot Quirk Disgraced: Active Probe",
-        "Details": "Incoming stability damage reduced by 10%.",
-        "Icon": "uixSvgIcon_equipment_Gyro"
+        "Id": "DisgracedGuts",
+        "Name": "Pilot Quirk Disgraced: Increased Guts",
+        "Details": "Buffs Guts Skill",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
       },
       "nature": "Buff",
       "statisticData": {
-        "statName": "LV_PROBE_CARRIER",
+        "statName": "Guts",
         "operation": "Int_Add",
         "modValue": "1",
-        "modType": "System.Int32"
+        "modType": "System.Int32",
+        "targetCollection": "Pilot"
       }
     },
     {
@@ -68,19 +69,45 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "DisgracedAS",
-        "Name": "Pilot Quirk Disgraced: Increased Advanced Sensor Strength",
-        "Details": "Incoming stability damage reduced by 10%.",
-        "Icon": "uixSvgIcon_equipment_Gyro"
+          "Description": {
+            "Id": "DisgracedSignature",
+            "Name": "Pilot Quirk Disgraced: Decreased Sensor Signature",
+            "Details": "Signature Statuseffect.",
+            "Icon": "uixSvgIcon_equipment_TTS"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "SensorSignatureModifier",
+            "operation": "Float_Multiply",
+            "modValue": "0.95",
+            "modType": "System.Single"
+          }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
       },
-      "nature": "Buff",
-      "statisticData": {
-        "statName": "LV_ADVANCED_SENSORS",
-        "operation": "Int_Add",
-        "modValue": "1",
-        "modType": "System.Int32"
-      }
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+          "Description": {
+            "Id": "DisgracedVisibility",
+            "Name": "Pilot Quirk Disgraced: Decreased Sensor Signature",
+            "Details": "Signature Statuseffect.",
+            "Icon": "uixSvgIcon_equipment_TTS"
+          },
+          "nature": "Buff",
+          "statisticData": {
+            "statName": "SpottingVisibilityMultiplier",
+            "operation": "Float_Multiply",
+            "modValue": "0.95",
+            "modType": "System.Single"
+          }
     }
   ],
   "quirkEffects": [
@@ -91,4 +118,4 @@
       "affectedIds": []
     }
   ]
-}
+} 
