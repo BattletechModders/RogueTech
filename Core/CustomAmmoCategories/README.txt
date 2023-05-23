@@ -65,6 +65,7 @@ CriticalHitChanceReceivedMultiplier can be locational
 						   Note! overheat from internal sources (moving, jumping, weapon fire) 
 						   still can make heat level pass this value
 "AMSUseAttractiveness": true, - if true AMS calculation will try to shoot down missiles with higher attractiveness first
+"AMSDefaultInterceptedTrace": 2, - default value for weapon AMSInterceptedTrace
 "RestoreEjectedWeapons": true, - ejected weapon will not be counted as destroyed at the end of the battle
 "HexSizeForMods": 30 - hex size used for moved hexes modifiers calculations
 "SpawnProtectionAffectsCanFire": true - if true weapon can't fire if its owner under spawn protection
@@ -767,6 +768,10 @@ new fields
   "AMSHitChanceMult": 1.0 - modifier for effective AMS hit chance (sum of missile.AMSHitChance and AMS.AMSHitChance)
                            additive per weapon, ammo and mode, for weapon default 1.0, for mode and ammo 0.0
 						   can be altered on runtime via CAC_AMSHitChanceMult and CAC_AMSHitChanceMult_Mod statistic values
+  "AMSInterceptedTrace": -1, - if above 0 AMS will shoot missile after missile intercepted, for AMSInterceptedTrace shots
+							   additive per weapon, ammo and mode. For weapon have special processing - if AMSInterceptedTrace
+							   for weapon is less than 0 - AMSDefaultInterceptedTrace will be used instead.
+							   Note! only used if AMSUseAttractiveness enabled
   "IsAMS": false, - if true this weapon acts as AMS. It will not fire during normal attack. But tries to intercept incomming missiles.
                     rude model: every 10 meters of missile fly path there is check, if it in range of any AMS. 
 					If so, AMS have AMS.AMSHitChance + missile.AMSHitChance chance to shoot missile down. Avaible shoots count of AMS is decrementing.
