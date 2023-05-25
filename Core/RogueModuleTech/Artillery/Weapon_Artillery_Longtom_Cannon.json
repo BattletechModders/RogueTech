@@ -15,7 +15,7 @@
       "Indirect",
       "FLAKmode",
       "WpnRecoil: 4",
-      "BracetoFireMode: 30%, Direct / FLAK",
+      "BracetoFireMode: 30%, Direct mode & Flak",
       "BracetoFireMode: 50%, Indirect"
     ],
     "Flags": [
@@ -39,26 +39,27 @@
   "StartingAmmoCapacity": 0,
   "HeatGenerated": 60,
   "Damage": 150,
+  "HeatDamage": 0,
+  "Instability": 35,
+  "DamageVariance": 0,
+  "AccuracyModifier": 0,
+  "EvasivePipsIgnored": 0,
+  "RefireModifier": 4,
   "OverheatedDamageMultiplier": 0,
   "EvasiveDamageMultiplier": 0,
-  "EvasivePipsIgnored": 0,
-  "DamageVariance": 0,
-  "HeatDamage": 0,
-  "AccuracyModifier": 0,
   "CriticalChanceMultiplier": 1,
   "APArmorShardsMod": 1,
   "APMaxArmorThickness": 300,
   "APCriticalChanceMultiplier": 0.5,
-  "RefireModifier": 4,
+  "AOEEffectsFalloff": true,
   "ShotsWhenFired": 1,
   "ProjectilesPerShot": 1,
-  "AttackRecoil": 6,
-  "Instability": 35,
   "AMSImmune": true,
-  "FireTerrainChance": 0.085,
-  "AOEEffectsFalloff": true,
+  "ImprovedBallistic": true,
   "GunneryJammingMult": 0.01,
   "GunneryJammingBase": 1,
+  "FireTerrainChance": 0.085,
+  "AttackRecoil": 6,
   "WeaponEffectID": "WeaponEffect-Weapon_AC20_Single",
   "Description": {
     "Cost": 650000,
@@ -83,15 +84,14 @@
   "AllowedLocations": "All",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "ImprovedBallistic": true,
   "Modes": [
     {
       "Id": "directfire",
       "UIName": "Direct",
       "isBaseMode": false,
       "IndirectFireCapable": false,
-      "AlwaysIndirectVisuals": false,
       "CantHitUnaffecedByPathing": true,
+      "AlwaysIndirectVisuals": false,
       "statusEffects": [
         {
           "durationData": {
@@ -104,6 +104,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
             "Name": "Long Tom Cannon / Direct: Increased Self Knockdown on Fire",
@@ -115,21 +116,20 @@
             "operation": "Float_Add",
             "modValue": "0.3",
             "modType": "System.Single"
-          },
-          "nature": "Buff"
+          }
         }
       ]
     },
     {
       "Id": "flak",
-      "UIName": "FLAK",
+      "UIName": "Flak",
       "isBaseMode": false,
-      "CantHitUnaffecedByPathing": false,
+      "AccuracyModifier": 53,
       "EvasivePipsIgnored": 15,
-      "AccuracyModifier": 53.0,
-      "IndirectFireCapable": false,
-      "AlwaysIndirectVisuals": false,
       "MinRange": -120,
+      "IndirectFireCapable": false,
+      "CantHitUnaffecedByPathing": false,
+      "AlwaysIndirectVisuals": false,
       "statusEffects": [
         {
           "durationData": {
@@ -142,9 +142,10 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
-            "Name": "Long Tom Cannon / FLAK: Increased Self Knockdown on Fire",
+            "Name": "Long Tom Cannon / Flak: Increased Self Knockdown on Fire",
             "Details": "Tubthumping",
             "Icon": "uixSvgIcon_run_n_gun"
           },
@@ -153,8 +154,7 @@
             "operation": "Float_Add",
             "modValue": "0.3",
             "modType": "System.Single"
-          },
-          "nature": "Buff"
+          }
         }
       ]
     },
@@ -162,13 +162,13 @@
       "Id": "indirectfire",
       "UIName": "Indirect",
       "isBaseMode": true,
-      "DirectFireModifier": 1.0,
-      "AlwaysIndirectVisuals": true,
-      "IndirectFireCapable": true,
+      "DirectFireModifier": 1,
+      "ForbiddenRange": 120,
       "MinMissRadius": 5,
       "MaxMissRadius": 105,
-      "ForbiddenRange": 120,
+      "IndirectFireCapable": true,
       "CantHitUnaffecedByPathing": true,
+      "AlwaysIndirectVisuals": true,
       "statusEffects": [
         {
           "durationData": {
@@ -181,6 +181,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
             "Name": "Long Tom Cannon / Indirect: Increased Self Knockdown on Fire",
@@ -192,8 +193,7 @@
             "operation": "Float_Add",
             "modValue": "0.5",
             "modType": "System.Single"
-          },
-          "nature": "Buff"
+          }
         }
       ]
     }

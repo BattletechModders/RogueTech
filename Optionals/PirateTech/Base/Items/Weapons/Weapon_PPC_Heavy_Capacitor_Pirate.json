@@ -19,15 +19,15 @@
       "MineClearanceBoom: 2",
       "WeaponExplosionNoAmmo: 100, 40, 40"
     ],
+    "Flags": [
+      "not_broken",
+      "not_destroyed"
+    ],
     "ComponentExplosion": {
       "ExplosionDamage": 100.0,
       "HeatDamage": 40.0,
       "StabilityDamage": 40.0
     },
-    "Flags": [
-      "not_broken",
-      "not_destroyed"
-    ],
     "IBLS": {
       "StorageSize": 5
     }
@@ -46,35 +46,37 @@
   "StartingAmmoCapacity": 0,
   "HeatGenerated": 50,
   "Damage": 80,
+  "HeatDamage": 0,
+  "Instability": 16,
+  "DamageVariance": 20,
+  "AccuracyModifier": 0,
+  "EvasivePipsIgnored": 0,
+  "RefireModifier": 2,
   "OverheatedDamageMultiplier": 0,
   "EvasiveDamageMultiplier": 0,
-  "EvasivePipsIgnored": 0,
-  "DamageVariance": 20,
-  "HeatDamage": 0,
-  "AccuracyModifier": 0,
+  "CriticalChanceMultiplier": 1,
   "DistantVariance": 0.55,
   "DistantVarianceReversed": false,
   "isHeatVariation": true,
   "isStabilityVariation": true,
   "isDamageVariation": true,
-  "CriticalChanceMultiplier": 1,
   "APArmorShardsMod": 0.25,
-  "APMaxArmorThickness": 120.0,
+  "APMaxArmorThickness": 120,
   "APCriticalChanceMultiplier": 0.2,
   "AOECapable": false,
-  "IndirectFireCapable": false,
-  "RefireModifier": 2,
   "ShotsWhenFired": 1,
   "ProjectilesPerShot": 1,
-  "AttackRecoil": 3,
-  "Instability": 16,
-  "FireTerrainChance": 0.225,
-  "AlternateDamageCalc": true,
-  "ImprovedBallistic": true,
   "BallisticDamagePerPallet": true,
   "DamageNotDivided": true,
+  "AlternateDamageCalc": true,
+  "ImprovedBallistic": true,
+  "IndirectFireCapable": false,
+  "ClearMineFieldRadius": 15,
   "GunneryJammingMult": 0.01,
   "GunneryJammingBase": 1,
+  "FireTerrainChance": 0.225,
+  "AttackRecoil": 3,
+  "FireDelayMultiplier": 0.1,
   "ColorsTable": [
     {
       "C": "#4B0082",
@@ -82,7 +84,6 @@
     }
   ],
   "ColorChangeRule": "t0",
-  "FireDelayMultiplier": 0.1,
   "WeaponEffectID": "WeaponEffect-Weapon_PPC",
   "Description": {
     "Cost": 200000,
@@ -107,7 +108,6 @@
   "AllowedLocations": "All",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "ClearMineFieldRadius": 15,
   "Modes": [
     {
       "Id": "Std",
@@ -123,15 +123,15 @@
       "Name": "Capacitor Fast Charge",
       "Description": "Capacitor is used to fast charge the PPC, improving Accuracy and Recoil with a 20% Misfire Chance. Mitigated by Jam Reduction.",
       "isBaseMode": false,
-      "HeatGenerated": 10,
       "DamagePerShot": -10,
-      "AccuracyModifier": -2.0,
-      "EvasivePipsIgnored": 2,
+      "HeatGenerated": 10,
+      "AccuracyModifier": -2,
       "RefireModifier": -1,
+      "EvasivePipsIgnored": 2,
       "DamageOnJamming": true,
       "FlatJammingChance": 0.2,
-      "AIHitChanceCap": 0.1,
-      "FireTerrainChance": -0.025
+      "FireTerrainChance": -0.025,
+      "AIHitChanceCap": 0.1
     },
     {
       "Id": "Shotgun",
@@ -139,27 +139,27 @@
       "Name": "Scatterblast",
       "Description": "Overload the Capacitor to fire an Accurate blast of 9 Projectiles with a 20% Misfire Chance. Mitigated by Jam Reduction.",
       "isBaseMode": false,
-      "FireDelayMultiplier": 0.1,
+      "DamagePerShot": -76,
       "Instability": -15,
       "HeatGenerated": 20,
-      "AccuracyModifier": -2.0,
-      "EvasivePipsIgnored": 2,
-      "DamagePerShot": -76,
+      "AccuracyModifier": -2,
       "ProjectilesPerShot": 9,
-      "DamageOnJamming": true,
       "RefireModifier": 2,
+      "EvasivePipsIgnored": 2,
+      "DamageOnJamming": true,
       "FlatJammingChance": 0.2,
-      "AIHitChanceCap": 0.5,
-      "FireTerrainChance": 0.1
+      "FireDelayMultiplier": 0.1,
+      "FireTerrainChance": 0.1,
+      "AIHitChanceCap": 0.5
     }
   ],
   "statusEffects": [
     {
       "durationData": {
         "duration": 2,
+        "stackLimit": -1,
         "ticksOnActivations": true,
-        "useActivationsOfTarget": true,
-        "stackLimit": -1
+        "useActivationsOfTarget": true
       },
       "targetingData": {
         "effectTriggerType": "OnHit",
@@ -167,13 +167,13 @@
         "showInStatusPanel": true
       },
       "effectType": "StatisticEffect",
+      "nature": "Debuff",
       "Description": {
         "Id": "AbilityDefPPC",
         "Name": "Heavy PPC+CAP (P): Increased Target ECM Jamming",
         "Details": "EM Interference reduces sensor efficiency.",
         "Icon": "uixSvgIcon_status_sensorsImpaired"
       },
-      "nature": "Debuff",
       "statisticData": {
         "statName": "LV_ECM_JAMMED",
         "operation": "Int_Add",

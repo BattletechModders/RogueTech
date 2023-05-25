@@ -28,21 +28,21 @@
       "SuperheavyOnly",
       "WeaponExplosionNoAmmo: 243.8, 75, 37.5"
     ],
-    "ComponentExplosion": {
-      "ExplosionDamage": 243.75,
-      "HeatDamage": 75.0,
-      "StabilityDamage": 37.5
-    },
-    "CriticalEffects": {
-      "LinkedStatisticName": "Ion Cannon"
-    },
     "Flags": [
       "not_broken",
       "no_salvage",
       "autorepair"
     ],
+    "ComponentExplosion": {
+      "ExplosionDamage": 243.75,
+      "HeatDamage": 75.0,
+      "StabilityDamage": 37.5
+    },
     "IBLS": {
       "StorageSize": 15
+    },
+    "CriticalEffects": {
+      "LinkedStatisticName": "Ion Cannon"
     },
     "Linked": {
       "Links": [
@@ -75,39 +75,39 @@
   "StartingAmmoCapacity": 0,
   "HeatGenerated": 60,
   "Damage": 75,
+  "Instability": 10,
   "DamageVariance": 0,
+  "AccuracyModifier": 1,
+  "EvasivePipsIgnored": 3,
+  "RefireModifier": 3,
   "OverheatedDamageMultiplier": 0,
   "EvasiveDamageMultiplier": 0,
-  "EvasivePipsIgnored": 3,
-  "AccuracyModifier": 1,
   "CriticalChanceMultiplier": 1,
   "APArmorShardsMod": 0.3,
-  "APMaxArmorThickness": 320.0,
+  "APMaxArmorThickness": 320,
   "APCriticalChanceMultiplier": 0.5,
   "AOECapable": true,
   "AOERange": 90,
   "AOEDamage": 300,
-  "AOEHeatDamage": 75,
   "AOEInstability": 10,
-  "IndirectFireCapable": false,
-  "RefireModifier": 3,
-  "FlatJammingChance": 0.1,
-  "GunneryJammingMult": 0.01,
-  "GunneryJammingBase": 1,
+  "AOEHeatDamage": 75,
+  "AOEEffectsFalloff": true,
   "ShotsWhenFired": 1,
   "ProjectilesPerShot": 1,
-  "AttackRecoil": 5,
-  "Instability": 10,
-  "FireTerrainChance": 0.3,
-  "ClearMineFieldRadius": 50,
-  "AOEEffectsFalloff": true,
   "ImprovedBallistic": true,
-  "WeaponEffectID": "WeaponEffect-Weapon_PPC",
+  "IndirectFireCapable": false,
+  "ClearMineFieldRadius": 50,
+  "GunneryJammingMult": 0.01,
+  "GunneryJammingBase": 1,
+  "FlatJammingChance": 0.1,
+  "FireTerrainChance": 0.3,
+  "AttackRecoil": 5,
   "ProjectileScale": {
     "x": 1.5,
     "y": 1.5,
     "z": 1.5
   },
+  "WeaponEffectID": "WeaponEffect-Weapon_PPC",
   "Description": {
     "Cost": 0,
     "Rarity": 99,
@@ -145,21 +145,20 @@
       "Name": "STUN Mode",
       "Description": "Ion cannon operates in Stun Mode.",
       "isBaseMode": false,
+      "HeatDamagePerShot": 100,
       "AOECapable": true,
       "AOERange": 90,
       "AOEDamage": 50,
       "AOEHeatDamage": 20,
       "AOEInstability": 10,
-      "HeatDamagePerShot": 100,
       "FlatJammingChance": 0.1,
-      "WeaponEffectID": "WeaponEffect-Weapon_PPCSnub",
       "statusEffects": [
         {
           "durationData": {
             "duration": 5,
+            "stackLimit": -1,
             "ticksOnActivations": true,
-            "useActivationsOfTarget": true,
-            "stackLimit": -1
+            "useActivationsOfTarget": true
           },
           "targetingData": {
             "effectTriggerType": "OnHit",
@@ -167,13 +166,13 @@
             "showInStatusPanel": true
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "StatusEffect-IonCannon-SensorsImpaired",
             "Name": "Experimental Ion Cannon / STUN: Increased Target ECM Jamming",
             "Details": "EM Interference reduces sensor efficiency.",
             "Icon": "uixSvgIcon_status_sensorsImpaired"
           },
-          "nature": "Debuff",
           "statisticData": {
             "statName": "LV_ECM_JAMMED",
             "operation": "Int_Add",
@@ -184,9 +183,9 @@
         {
           "durationData": {
             "duration": 5,
+            "stackLimit": 1,
             "ticksOnActivations": true,
-            "useActivationsOfTarget": true,
-            "stackLimit": 1
+            "useActivationsOfTarget": true
           },
           "targetingData": {
             "effectTriggerType": "OnHit",
@@ -194,27 +193,27 @@
             "showInStatusPanel": true
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "StatusEffect-StatusEffect-IonCannon-Recoil",
             "Name": "Experimental Ion Cannon / STUN: Increased Target Recoil",
             "Details": "All weapons +5 Recoil for 5 turns. Does not stack.",
             "Icon": "uixSvgIcon_equipment_TTS"
           },
-          "nature": "Buff",
           "statisticData": {
-            "targetCollection": "Weapon",
             "statName": "RefireModifier",
             "operation": "Int_Add",
             "modValue": "5",
-            "modType": "System.Int32"
+            "modType": "System.Int32",
+            "targetCollection": "Weapon"
           }
         },
         {
           "durationData": {
             "duration": 5,
+            "stackLimit": 1,
             "ticksOnActivations": true,
-            "useActivationsOfTarget": true,
-            "stackLimit": 1
+            "useActivationsOfTarget": true
           },
           "targetingData": {
             "effectTriggerType": "OnHit",
@@ -222,26 +221,27 @@
             "showInStatusPanel": true
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "StatusEffect-IonCannon-HaywireAccuracy",
             "Name": "Experimental Ion Cannon / STUN: Reduced Target Accuracy",
             "Details": "The mech's systems have been scrambled. Accuracy reduced by 3 for 5 turns. Does not stack.",
             "Icon": "uixSvgIcon_shipUpgrade_power2"
           },
-          "nature": "Debuff",
           "statisticData": {
             "statName": "AccuracyModifier",
             "operation": "Float_Add",
             "modValue": "3.0",
-            "modType": "System.Single"
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
           }
         },
         {
           "durationData": {
             "duration": 3,
+            "stackLimit": 1,
             "ticksOnActivations": true,
-            "useActivationsOfTarget": true,
-            "stackLimit": 1
+            "useActivationsOfTarget": true
           },
           "targetingData": {
             "effectTriggerType": "OnHit",
@@ -249,13 +249,13 @@
             "showInStatusPanel": true
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "StatusEffect-IonCannon-HaywireCooling",
             "Name": "Experimental Ion Cannon / STUN: Increased Target Heat Generated",
             "Details": "The mech's systems have been scrambled. Heat Generated increased by 20% for 3 turns. Does not stack.",
             "Icon": "uixSvgIcon_status_sensorsImpaired"
           },
-          "nature": "Debuff",
           "statisticData": {
             "statName": "HeatGenerated",
             "operation": "Float_Multiply",
@@ -273,6 +273,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "WeaponEffect-IonCannon-ShutdownChance",
             "Name": "Experimental Ion Cannon / STUN: Increased Target Shutdown Chance",
@@ -284,24 +285,24 @@
             "operation": "Float_Add",
             "modValue": "0.5",
             "modType": "System.Single"
-          },
-          "nature": "Buff"
+          }
         }
       ],
       "ProjectileScale": {
         "x": 2,
         "y": 2,
         "z": 2
-      }
+      },
+      "WeaponEffectID": "WeaponEffect-Weapon_PPCSnub"
     }
   ],
   "statusEffects": [
     {
       "durationData": {
         "duration": 2,
+        "stackLimit": -1,
         "ticksOnActivations": true,
-        "useActivationsOfTarget": true,
-        "stackLimit": -1
+        "useActivationsOfTarget": true
       },
       "targetingData": {
         "effectTriggerType": "OnHit",
@@ -309,13 +310,13 @@
         "showInStatusPanel": true
       },
       "effectType": "StatisticEffect",
+      "nature": "Debuff",
       "Description": {
         "Id": "StatusEffect-IonCannon-MovementSpeed",
         "Name": "Experimental Ion Cannon: Decreased Target Walk Speed",
         "Details": "The Mech's Movement is reduced by 20% for 2 rounds.",
         "Icon": "uixSvgIcon_status_sensorsImpaired"
       },
-      "nature": "Debuff",
       "statisticData": {
         "statName": "WalkSpeed",
         "operation": "Float_Multiply",
@@ -334,6 +335,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
         "Name": "Experimental Ion Cannon: Increased Self Knockdown on Fire",
@@ -345,8 +347,7 @@
         "operation": "Float_Add",
         "modValue": "0.4",
         "modType": "System.Single"
-      },
-      "nature": "Buff"
+      }
     }
   ],
   "ComponentTags": {

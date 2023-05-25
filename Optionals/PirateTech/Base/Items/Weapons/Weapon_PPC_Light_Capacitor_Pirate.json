@@ -18,15 +18,15 @@
       "AAFactor: 9%",
       "WeaponExplosionNoAmmo: 37.5, 15, 15"
     ],
+    "Flags": [
+      "not_broken",
+      "not_destroyed"
+    ],
     "ComponentExplosion": {
       "ExplosionDamage": 37.5,
       "HeatDamage": 15.0,
       "StabilityDamage": 15.0
     },
-    "Flags": [
-      "not_broken",
-      "not_destroyed"
-    ],
     "IBLS": {
       "StorageSize": 2
     }
@@ -45,28 +45,30 @@
   "StartingAmmoCapacity": 0,
   "HeatGenerated": 22,
   "Damage": 30,
+  "HeatDamage": 0,
+  "Instability": 6,
+  "DamageVariance": 10,
+  "AccuracyModifier": 0,
+  "EvasivePipsIgnored": 0,
+  "RefireModifier": 0,
   "OverheatedDamageMultiplier": 0,
   "EvasiveDamageMultiplier": 0,
-  "EvasivePipsIgnored": 0,
-  "DamageVariance": 10,
-  "HeatDamage": 0,
-  "AccuracyModifier": 0,
   "CriticalChanceMultiplier": 1,
   "APArmorShardsMod": 0.25,
-  "APMaxArmorThickness": 45.0,
+  "APMaxArmorThickness": 45,
   "APCriticalChanceMultiplier": 0.075,
   "AOECapable": false,
-  "IndirectFireCapable": false,
-  "RefireModifier": 0,
   "ShotsWhenFired": 1,
   "ProjectilesPerShot": 1,
-  "AttackRecoil": 3,
-  "Instability": 6,
   "AlternateDamageCalc": true,
-  "FireTerrainChance": 0.0875,
   "ImprovedBallistic": true,
+  "IndirectFireCapable": false,
+  "ClearMineFieldRadius": 8,
   "GunneryJammingMult": 0.01,
   "GunneryJammingBase": 1,
+  "FireTerrainChance": 0.0875,
+  "AttackRecoil": 3,
+  "FireDelayMultiplier": 0.1,
   "ColorsTable": [
     {
       "C": "#8A2BE2",
@@ -74,7 +76,6 @@
     }
   ],
   "ColorChangeRule": "t0",
-  "FireDelayMultiplier": 0.1,
   "WeaponEffectID": "WeaponEffect-Weapon_PPC",
   "Description": {
     "Cost": 150000,
@@ -99,7 +100,6 @@
   "AllowedLocations": "All",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "ClearMineFieldRadius": 8,
   "Modes": [
     {
       "Id": "Std",
@@ -115,20 +115,20 @@
       "UIName": "RF",
       "Name": "Rapid Fire",
       "Description": "Capacitor double PPC Rate of Fire with a 20% Misfire Chance. Mitigated by Jam Reduction.",
-      "FireDelayMultiplier": 0.1,
       "isBaseMode": false,
-      "HeatGenerated": 10,
-      "AccuracyModifier": -1.0,
-      "EvasivePipsIgnored": 1,
       "DamagePerShot": -14,
+      "HeatGenerated": 10,
+      "AccuracyModifier": -1,
       "ShotsWhenFired": 2,
+      "EvasivePipsIgnored": 1,
+      "MinRange": -90,
+      "ShortRange": -30,
+      "MediumRange": -80,
+      "LongRange": -140,
+      "MaxRange": -260,
       "DamageOnJamming": true,
       "FlatJammingChance": 0.2,
-      "MinRange": -90.0,
-      "MaxRange": -260.0,
-      "ShortRange": -30.0,
-      "MediumRange": -80.0,
-      "LongRange": -140.0
+      "FireDelayMultiplier": 0.1
     },
     {
       "Id": "OverCharge",
@@ -136,26 +136,26 @@
       "Name": "Capacitor Over Charge",
       "Description": "Overcharge the Capacitor for increased Damage with a 20% Misfire Chance. Mitigated by Jam Reduction.",
       "isBaseMode": false,
-      "HeatGenerated": 8,
       "DamagePerShot": 15,
       "Instability": 4,
+      "HeatGenerated": 8,
+      "DistantVariance": 0.75,
+      "ShortRange": 30,
+      "MediumRange": 30,
+      "LongRange": 30,
+      "MaxRange": 30,
       "DamageOnJamming": true,
       "FlatJammingChance": 0.2,
-      "FireTerrainChance": 0.0875,
-      "DistantVariance": 0.75,
-      "MaxRange": 30.0,
-      "ShortRange": 30.0,
-      "MediumRange": 30.0,
-      "LongRange": 30.0
+      "FireTerrainChance": 0.0875
     }
   ],
   "statusEffects": [
     {
       "durationData": {
         "duration": 2,
+        "stackLimit": -1,
         "ticksOnActivations": true,
-        "useActivationsOfTarget": true,
-        "stackLimit": -1
+        "useActivationsOfTarget": true
       },
       "targetingData": {
         "effectTriggerType": "OnHit",
@@ -163,13 +163,13 @@
         "showInStatusPanel": true
       },
       "effectType": "StatisticEffect",
+      "nature": "Debuff",
       "Description": {
         "Id": "AbilityDefPPC",
         "Name": "Light PPC+CAP (P): Increased Target ECM Jamming",
         "Details": "EM Interference reduces sensor efficiency.",
         "Icon": "uixSvgIcon_status_sensorsImpaired"
       },
-      "nature": "Debuff",
       "statisticData": {
         "statName": "LV_ECM_JAMMED",
         "operation": "Int_Add",
@@ -189,6 +189,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "AAAFactor",
         "Name": "Light PPC+CAP (P): Anti Air Factor",
@@ -200,8 +201,7 @@
         "operation": "Float_Add",
         "modValue": "0.09",
         "modType": "System.Single"
-      },
-      "nature": "Buff"
+      }
     }
   ],
   "ComponentTags": {

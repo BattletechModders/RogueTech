@@ -15,7 +15,7 @@
       "Indirect",
       "FLAKmode",
       "WpnRecoil: 2",
-      "BracetoFireMode: 14%, Direct / FLAK",
+      "BracetoFireMode: 14%, Direct mode & Flak",
       "BracetoFireMode: 28%, Indirect"
     ],
     "Flags": [
@@ -39,27 +39,28 @@
   "StartingAmmoCapacity": 0,
   "HeatGenerated": 18,
   "Damage": 75,
+  "HeatDamage": 0,
+  "Instability": 20,
+  "DamageVariance": 0,
+  "AccuracyModifier": 0,
+  "EvasivePipsIgnored": 0,
+  "RefireModifier": 2,
   "OverheatedDamageMultiplier": 0,
   "EvasiveDamageMultiplier": 0,
-  "EvasivePipsIgnored": 0,
-  "DamageVariance": 0,
-  "HeatDamage": 0,
-  "AccuracyModifier": 0,
   "CriticalChanceMultiplier": 1,
   "APArmorShardsMod": 1,
   "APMaxArmorThickness": 150,
   "APCriticalChanceMultiplier": 0.5,
-  "IndirectFireCapable": true,
-  "RefireModifier": 2,
+  "AOEEffectsFalloff": true,
   "ShotsWhenFired": 1,
   "ProjectilesPerShot": 1,
-  "AttackRecoil": 4,
-  "Instability": 20,
   "AMSImmune": true,
-  "FireTerrainChance": 0.042,
-  "AOEEffectsFalloff": true,
+  "ImprovedBallistic": true,
+  "IndirectFireCapable": true,
   "GunneryJammingMult": 0.01,
   "GunneryJammingBase": 1,
+  "FireTerrainChance": 0.042,
+  "AttackRecoil": 4,
   "WeaponEffectID": "WeaponEffect-Weapon_AC20_Single",
   "Description": {
     "Cost": 200000,
@@ -84,15 +85,14 @@
   "AllowedLocations": "All",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "ImprovedBallistic": true,
   "Modes": [
     {
       "Id": "directfire",
       "UIName": "Direct",
       "isBaseMode": false,
       "IndirectFireCapable": false,
-      "AlwaysIndirectVisuals": false,
       "CantHitUnaffecedByPathing": true,
+      "AlwaysIndirectVisuals": false,
       "statusEffects": [
         {
           "durationData": {
@@ -105,6 +105,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
             "Name": "Thumper Cannon / Direct: Increased Self Knockdown on Fire",
@@ -116,21 +117,20 @@
             "operation": "Float_Add",
             "modValue": "0.14",
             "modType": "System.Single"
-          },
-          "nature": "Buff"
+          }
         }
       ]
     },
     {
       "Id": "flak",
-      "UIName": "FLAK",
+      "UIName": "Flak",
       "isBaseMode": false,
-      "CantHitUnaffecedByPathing": false,
+      "AccuracyModifier": 53,
       "EvasivePipsIgnored": 15,
-      "AccuracyModifier": 53.0,
-      "IndirectFireCapable": false,
-      "AlwaysIndirectVisuals": false,
       "MinRange": -90,
+      "IndirectFireCapable": false,
+      "CantHitUnaffecedByPathing": false,
+      "AlwaysIndirectVisuals": false,
       "statusEffects": [
         {
           "durationData": {
@@ -143,9 +143,10 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
-            "Name": "Thumper Cannon / FLAK: Increased Self Knockdown on Fire",
+            "Name": "Thumper Cannon / Flak: Increased Self Knockdown on Fire",
             "Details": "Tubthumping",
             "Icon": "uixSvgIcon_run_n_gun"
           },
@@ -154,8 +155,7 @@
             "operation": "Float_Add",
             "modValue": "0.14",
             "modType": "System.Single"
-          },
-          "nature": "Buff"
+          }
         }
       ]
     },
@@ -163,13 +163,13 @@
       "Id": "indirectfire",
       "UIName": "Indirect",
       "isBaseMode": true,
-      "DirectFireModifier": 1.0,
-      "AlwaysIndirectVisuals": true,
-      "IndirectFireCapable": true,
+      "DirectFireModifier": 1,
+      "ForbiddenRange": 120,
       "MinMissRadius": 5,
       "MaxMissRadius": 60,
-      "ForbiddenRange": 120,
+      "IndirectFireCapable": true,
       "CantHitUnaffecedByPathing": true,
+      "AlwaysIndirectVisuals": true,
       "statusEffects": [
         {
           "durationData": {
@@ -182,6 +182,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
             "Name": "Thumper Cannon / Indirect: Increased Self Knockdown on Fire",
@@ -193,8 +194,7 @@
             "operation": "Float_Add",
             "modValue": "0.28",
             "modType": "System.Single"
-          },
-          "nature": "Buff"
+          }
         }
       ]
     }
