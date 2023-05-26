@@ -8,12 +8,6 @@
         "CategoryID": "w/e/p/flamer"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.1 * [[Chassis.Tonnage]]",
-        "CBillCost": "1.15 * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "PIRATEFLAMERDEBUFF: 25%",
       "VariableDmg: 10",
@@ -30,6 +24,12 @@
       "no_salvage",
       "autorepair"
     ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.1 * [[Chassis.Tonnage]]",
+        "CBillCost": "1.15 * [[Chassis.Tonnage]]"
+      }
+    },
     "IBLS": {
       "StorageSize": 1
     }
@@ -48,12 +48,15 @@
   "StartingAmmoCapacity": 0,
   "HeatGenerated": 5,
   "Damage": 15,
+  "HeatDamage": 30,
+  "Instability": 0,
+  "DamageVariance": 10,
+  "AccuracyModifier": 0,
+  "EvasivePipsIgnored": 1,
+  "RefireModifier": 2,
   "OverheatedDamageMultiplier": 1.4,
   "EvasiveDamageMultiplier": 0,
-  "EvasivePipsIgnored": 1,
-  "DamageVariance": 10,
-  "HeatDamage": 30,
-  "AccuracyModifier": 0,
+  "CriticalChanceMultiplier": 0.1,
   "ChassisTagsAccuracyModifiers": {
     "unit_powerarmor": -5,
     "unit_protomech": -5
@@ -63,20 +66,17 @@
   "isHeatVariation": true,
   "isStabilityVariation": true,
   "isDamageVariation": true,
-  "CriticalChanceMultiplier": 0.1,
   "APArmorShardsMod": 0.1,
   "APMaxArmorThickness": 1,
   "APCriticalChanceMultiplier": 0.01,
   "AOECapable": false,
-  "IndirectFireCapable": false,
-  "RefireModifier": 2,
   "ShotsWhenFired": 1,
   "ProjectilesPerShot": 1,
-  "AttackRecoil": 0,
-  "Instability": 0,
   "CantHitUnaffecedByPathing": true,
+  "IndirectFireCapable": false,
   "GunneryJammingMult": 0.01,
   "GunneryJammingBase": 1,
+  "AttackRecoil": 0,
   "WeaponEffectID": "WeaponEffect-Weapon_Flamer",
   "Description": {
     "Cost": 180000,
@@ -114,13 +114,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "CockpitInitativeEffect",
         "Name": "Dragon Breath: Increased Initiative",
         "Details": "Provides + 1 Initiative and several buffs.",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "SBI_MOD_MISC",
         "operation": "Int_Add",
@@ -131,9 +131,9 @@
     {
       "durationData": {
         "duration": 2,
+        "stackLimit": -1,
         "ticksOnActivations": true,
-        "useActivationsOfTarget": true,
-        "stackLimit": -1
+        "useActivationsOfTarget": true
       },
       "targetingData": {
         "effectTriggerType": "OnHit",
@@ -141,6 +141,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Debuff",
       "Description": {
         "Id": "Effect_DragonBreath",
         "Name": "Dragon Breath: Increased Target Heat Generated",
@@ -153,8 +154,7 @@
         "modValue": "1.25",
         "modType": "System.Single",
         "targetCollection": "Weapon"
-      },
-      "nature": "Debuff"
+      }
     },
     {
       "durationData": {
@@ -168,13 +168,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-Heat_Max-FB",
         "Name": "Dragon Breath: Increased Cooling",
         "Details": "Has a Flame Breath.",
         "Icon": "uixSvgIcon_equipment_HeatBank"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "HeatSinkCapacity",
         "operation": "Int_Add",
