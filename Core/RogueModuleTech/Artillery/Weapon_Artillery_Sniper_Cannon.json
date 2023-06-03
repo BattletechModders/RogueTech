@@ -15,7 +15,7 @@
       "Indirect",
       "FLAKmode",
       "WpnRecoil: 3",
-      "BracetoFireMode: 25%, Direct / FLAK",
+      "BracetoFireMode: 25%, Direct mode & Flak",
       "BracetoFireMode: 40%, Indirect"
     ],
     "Flags": [
@@ -39,26 +39,27 @@
   "StartingAmmoCapacity": 0,
   "HeatGenerated": 30,
   "Damage": 100,
+  "HeatDamage": 0,
+  "Instability": 25,
+  "DamageVariance": 0,
+  "AccuracyModifier": 0,
+  "EvasivePipsIgnored": 0,
+  "RefireModifier": 3,
   "OverheatedDamageMultiplier": 0,
   "EvasiveDamageMultiplier": 0,
-  "EvasivePipsIgnored": 0,
-  "DamageVariance": 0,
-  "HeatDamage": 0,
-  "AccuracyModifier": 0,
   "CriticalChanceMultiplier": 1,
   "APArmorShardsMod": 1,
   "APMaxArmorThickness": 200,
   "APCriticalChanceMultiplier": 0.5,
-  "RefireModifier": 3,
+  "AOEEffectsFalloff": true,
   "ShotsWhenFired": 1,
   "ProjectilesPerShot": 1,
-  "AttackRecoil": 5,
-  "Instability": 25,
   "AMSImmune": true,
-  "FireTerrainChance": 0.0585,
-  "AOEEffectsFalloff": true,
+  "ImprovedBallistic": true,
   "GunneryJammingMult": 0.01,
   "GunneryJammingBase": 1,
+  "FireTerrainChance": 0.0585,
+  "AttackRecoil": 5,
   "WeaponEffectID": "WeaponEffect-Weapon_AC20_Single",
   "Description": {
     "Cost": 475000,
@@ -83,38 +84,14 @@
   "AllowedLocations": "All",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "ImprovedBallistic": true,
   "Modes": [
     {
       "Id": "directfire",
       "UIName": "Direct",
       "isBaseMode": false,
       "IndirectFireCapable": false,
-      "AlwaysIndirectVisuals": false,
-      "CantHitUnaffecedByPathing": true
-    },
-    {
-      "Id": "flak",
-      "UIName": "FLAK",
-      "isBaseMode": false,
-      "CantHitUnaffecedByPathing": false,
-      "EvasivePipsIgnored": 15,
-      "AccuracyModifier": 53.0,
-      "IndirectFireCapable": false,
-      "AlwaysIndirectVisuals": false,
-      "MinRange": -90
-    },
-    {
-      "Id": "indirectfire",
-      "UIName": "Indirect",
-      "isBaseMode": true,
-      "DirectFireModifier": 1.0,
-      "AlwaysIndirectVisuals": true,
-      "IndirectFireCapable": true,
-      "MinMissRadius": 5,
-      "MaxMissRadius": 75,
-      "ForbiddenRange": 120,
       "CantHitUnaffecedByPathing": true,
+      "AlwaysIndirectVisuals": false,
       "statusEffects": [
         {
           "durationData": {
@@ -127,6 +104,84 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
+            "Name": "Sniper Artillery Cannon / Direct: Increased Self Knockdown on Fire",
+            "Details": "Tubthumping",
+            "Icon": "uixSvgIcon_run_n_gun"
+          },
+          "statisticData": {
+            "statName": "SelfknockdownCheck_OnFire",
+            "operation": "Float_Add",
+            "modValue": "0.25",
+            "modType": "System.Single"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "flak",
+      "UIName": "Flak",
+      "isBaseMode": false,
+      "AccuracyModifier": 53,
+      "EvasivePipsIgnored": 15,
+      "MinRange": -90,
+      "IndirectFireCapable": false,
+      "CantHitUnaffecedByPathing": false,
+      "AlwaysIndirectVisuals": false,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": 1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "OnWeaponFire",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
+            "Name": "Sniper Artillery Cannon / Flak: Increased Self Knockdown on Fire",
+            "Details": "Tubthumping",
+            "Icon": "uixSvgIcon_run_n_gun"
+          },
+          "statisticData": {
+            "statName": "SelfknockdownCheck_OnFire",
+            "operation": "Float_Add",
+            "modValue": "0.25",
+            "modType": "System.Single"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "indirectfire",
+      "UIName": "Indirect",
+      "isBaseMode": true,
+      "DirectFireModifier": 1,
+      "ForbiddenRange": 120,
+      "MinMissRadius": 5,
+      "MaxMissRadius": 75,
+      "IndirectFireCapable": true,
+      "CantHitUnaffecedByPathing": true,
+      "AlwaysIndirectVisuals": true,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": 1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "OnWeaponFire",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
             "Name": "Sniper Artillery Cannon / Indirect: Increased Self Knockdown on Fire",
@@ -138,12 +193,12 @@
             "operation": "Float_Add",
             "modValue": "0.3",
             "modType": "System.Single"
-          },
-          "nature": "Buff"
+          }
         }
       ]
     }
   ],
+  "statusEffects": [],
   "ComponentTags": {
     "items": [
       "LootMagnetBlacklist",

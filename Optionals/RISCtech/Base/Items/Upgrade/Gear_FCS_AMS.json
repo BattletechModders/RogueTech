@@ -14,6 +14,7 @@
     "BonusDescriptions": [
       "AMSJam: -30%",
       "AMSDmg: +1",
+      "AMSChance: -15%",
       "FCS"
     ],
     "Flags": [
@@ -39,7 +40,7 @@
     "UIName": "FCS AMS",
     "Id": "Gear_FCS_AMS",
     "Name": "Iron Dome",
-    "Details": "A FCS that reduces Jamming Chance and increases Damage of AntiMissile Systems.",
+    "Details": "A FCS that reduces Jamming Chance and increases Damage of AntiMissile Systems, but reduces AMS Hit Chance.",
     "Icon": "targeting"
   },
   "BonusValueA": "",
@@ -67,6 +68,35 @@
       },
       "effectType": "StatisticEffect",
       "Description": {
+        "Id": "StatusEffect_FCSAMSReducedHitChance",
+        "Name": "FCS AMS: Decreased NotSet AMS Hit Chance Modifier",
+        "Details": "Reduced Hit Chance",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "nature": "Buff",
+      "statisticData": {
+        "abilifierId": "AMS_Filter",
+        "statName": "CAC_AMSHitChance_Mod",
+        "operation": "Float_Multiply",
+        "modValue": "0.85",
+        "modType": "System.Single",
+        "targetCollection": "Weapon",
+        "targetWeaponCategoryID": "NotSet"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
         "Id": "StatusEffect_FCSAMSJam",
         "Name": "FCS AMS: Decreased Jam Chance",
         "Details": "Reduced Jam Chance",
@@ -74,6 +104,7 @@
       },
       "nature": "Buff",
       "statisticData": {
+        "abilifierId": "AMS_Filter",
         "statName": "CACModJammingChance",
         "operation": "Float_Multiply",
         "modValue": "0.7",
@@ -101,6 +132,7 @@
       },
       "nature": "Buff",
       "statisticData": {
+        "abilifierId": "AMS_Filter",
         "statName": "CAC_AMSDamage",
         "operation": "Float_Add",
         "modValue": "1.0",
