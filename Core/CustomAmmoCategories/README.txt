@@ -590,6 +590,8 @@ new fields
   Note! both AudioKenetik and CustomVoices audio samples string ids can be used, if used CustomVoices ones <stop> events have no meaning and should be omitted
   For mentioned values mode have priority, than ammo, than weapon.
 
+  "RestrictedAmmo": [],  - list of ammunition ids restricted for this weapon/mode. List is concatenated for weapon and mode. 
+                           Note! restriction check is performed only in battle
   "blockWeaponsInMechLocations": [], - list of mech locations. all weapons installed in this locations can't fire if this weapon is functional.
                                        NOTE: weapon can block itself.
   "CanBeBlocked": true               - if false weapon can't be blocked by other weapons presents (default is true).
