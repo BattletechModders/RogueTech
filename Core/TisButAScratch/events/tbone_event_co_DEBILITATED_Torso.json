@@ -1,0 +1,194 @@
+{
+	"Description": {
+		"Id": "tbone_event_co_DEBILITATED_Torso",
+		"Name": "Advanced Prosthetics",
+		"Details": "[[DM.BaseDescriptionDefs[TBoneLoreDoc],Doc Cobble]] summons you to the medbay, where [[SCN_MW,{SCN_MW.Callsign}]] is laying on a bed.\r\n\r\n\n\"Commander, {SCN_MW.Callsign}'s rehabilitation is coming along, but with the advanced facilities aboard the <i>Argo</i>, we can certainly speed things up, <i>if</i> we want to pay the price. The newer prosthetics have almost no acclimatization time but we'll need a hefty chunk of change to get those pukes at [[DM.BaseDescriptionDefs[LoreNAIS],New Avalon]] to send us the specs.\"\r\n\r\n\n\"What do you think?\"",
+		"Icon": "uixTxrSpot_MedBayDoc.png"
+	},
+	"Scope": "Company",
+	"Weight": 10000,
+	"Requirements": {
+		"Scope": "Company",
+		"RequirementTags": {
+			"tagSetSourceFile": "Tags/CompanyTags",
+			"items": [
+				"argo_medBay2"
+			]
+		},
+		"ExclusionTags": {
+			"tagSetSourceFile": "",
+			"items": []
+		},
+		"RequirementComparisons": []
+	},
+	"AdditionalRequirements": [],
+	"AdditionalObjects": [
+		{
+			"Scope": "SecondaryMechWarrior",
+			"Requirements": {
+				"Scope": "SecondaryMechWarrior",
+				"RequirementTags": {
+					"tagSetSourceFile": "",
+					"items": [
+						"DEBILITATED_Torso"
+					]
+				},
+				"ExclusionTags": {
+					"tagSetSourceFile": "",
+					"items": [
+						"disable_debilHeal"
+					]
+				},
+				"RequirementComparisons": [
+					{
+						"obj": "Injuries",
+						"op": "GreaterThan",
+						"val": 0,
+						"valueConstant": "0"
+					}
+				]
+			}
+		}
+	],
+	"Options": [
+		{
+			"Description": {
+				"Id": "outcome_0",
+				"Name": "Refuse",
+				"Details": "Refused.",
+				"Icon": null
+			},
+			"RequirementList": [],
+			"ResultSets": [
+				{
+					"Description": {
+						"Id": "outcome_0_0",
+						"Name": "Refused",
+						"Details": "\"Sorry Doc, we just can't spare the cash for it right now. Carry on with your normal rehabilitation.\"",
+						"Icon": null
+					},
+					"Weight": 100,
+					"Results": [
+						{
+							"Scope": "SecondaryMechWarrior",
+							"Requirements": null,
+							"AddedTags": {
+								"tagSetSourceFile": "Tags/PilotTags",
+								"items": [
+									"pilot_morale_low"
+								]
+							},
+							"RemovedTags": {
+								"tagSetSourceFile": "",
+								"items": []
+							},
+							"Stats": null,
+							"Actions": null,
+							"ForceEvents": null,
+							"TemporaryResult": true,
+							"ResultDuration": 30
+						}
+					]
+				}
+			],
+			"Requirements": {
+				"Scope": "Company",
+				"RequirementTags": {
+					"tagSetSourceFile": "",
+					"items": []
+				},
+				"ExclusionTags": {
+					"tagSetSourceFile": "",
+					"items": []
+				},
+				"RequirementComparisons": []
+			}
+		},
+		{
+			"Description": {
+				"Id": "outcome_1",
+				"Name": "Buy the prosthetic [¢1000000]",
+				"Details": "Buy the replacement.",
+				"Icon": null
+			},
+			"RequirementList": [],
+			"ResultSets": [
+				{
+					"Description": {
+						"Id": "outcome_1_0",
+						"Name": "Buy prosthetic",
+						"Details": "\"This company is a family. Whatever we need to do to keep us going, we'll do it. Transfer payment to [[DM.BaseDescriptionDefs[LoreNAIS],NAIS]] immediately.\"\r\n\r\n\n[[SCN_MW,{SCN_MW.Callsign}]] is no longer debilitated and may be deployed.",
+						"Icon": null
+					},
+					"Weight": 100,
+					"Results": [
+						{
+							"Scope": "SecondaryMechWarrior",
+							"Requirements": null,
+							"AddedTags": {
+								"tagSetSourceFile": "",
+								"items": []
+							},
+							"RemovedTags": {
+								"tagSetSourceFile": "",
+								"items": [
+									"DEBILITATED_Torso"
+								]
+							},
+							"Stats": null,
+							"Actions": null,
+							"ForceEvents": null,
+							"TemporaryResult": false,
+							"ResultDuration": 0
+						},
+						{
+							"Scope": "Company",
+							"Requirements": null,
+							"AddedTags": {
+								"tagSetSourceFile": "",
+								"items": []
+							},
+							"RemovedTags": {
+								"tagSetSourceFile": "",
+								"items": []
+							},
+							"Stats": [
+								{
+									"typeString": "System.Int32",
+									"name": "Funds",
+									"value": "-1000000",
+									"set": false,
+									"valueConstant": null
+								}
+							],
+							"Actions": null,
+							"ForceEvents": null,
+							"TemporaryResult": false,
+							"ResultDuration": 0
+						}
+					]
+				}
+			],
+			"Requirements": {
+				"Scope": "Company",
+				"RequirementTags": {
+					"tagSetSourceFile": "",
+					"items": []
+				},
+				"ExclusionTags": {
+					"tagSetSourceFile": "",
+					"items": []
+				},
+				"RequirementComparisons": []
+			}
+		}
+	],
+	"PublishState": "PUBLISHED",
+	"ValidationState": "UNTESTED",
+	"EventType": "NORMAL",
+	"OneTimeEvent": false,
+	"Tags": {
+		"tagSetSourceFile": "tags/EventTags",
+		"items": []
+	}
+}
