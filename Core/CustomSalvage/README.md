@@ -75,9 +75,11 @@ Defines what to do with your lost mech
 - `string FullUnitInfoIcon = "icons8-info"` - if FullEnemyUnitSalvage enabled, you can see actual unit state by clicking its icon in salvage slot. While cursor is hover over unit's icon its actual icon is replaced to this to point active cotrol.
 - `float FullUnitRandomSalvageSlotUsingMod = 1f` - if full unit is selected for priority salvage random salvage amount is redused to (DefaultMechPartMax \* FullUnitRandomSalvageSlotUsingMod - 1).
 - `bool FullUnitUsedAllRandomSalvageSlots = true` - if enabled any full unit added to priority salvage reduce random salvage amount to 0. Eg. you will only able to get priority salvage. 
-- `bool SquadDisassembleComponents = false` - by current rules BA squads are always dissassembled to parts in salvage. If this option enabled its components goes to possible salvage.
-- `bool VehicleDisassembleComponents = false` - If this option enabled vehicle components goes to possible salvage if dissasembled to parts. If disabled only vehicle parts will be result of dissassemling.
+- `bool SquadDisassembleComponents = false` - by current rules BA squads are always dissassembled to parts in salvage. If this option enabled its components goes to possible salvage. Option working regardless FullEnemyUnitSalvage state.
+- `bool VehicleDisassembleComponents = false` - If this option enabled vehicle components goes to possible salvage if dissasembled to parts. If disabled only vehicle parts will be result of dissassemling. Option working regardless FullEnemyUnitSalvage state.
 - `bool VehicleAlwaysDisassembled = false` - If this option enabled vehicles goes to salvage in dissasembled state, otherwise they always go in full state (vehciles have no CT).
+- `bool FullUnitUsedAmountOfLootableComponents = true` - If true amount of not destroyed salvagable componetns will be added to required random salvage slots to be able to get full unit as salvage. Needed random salvage slots formula will be (DefaultMechPartMax + <amount of components>) \* FullUnitRandomSalvageSlotUsingMod - 1
+- `float FullUnitStructurePersentage = 0.5f` - if above 0f (and FullEnemyUnitSalvage is true) additional rule to detect if unit goes to salvage in disassembled state will be used (regardless type) - percentage of rest structure - if unit have less than FullUnitStructurePersentage of overall structure it goes in disassembled state.
 
 ## Assembly options
 

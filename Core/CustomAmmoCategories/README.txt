@@ -678,6 +678,46 @@ new fields
 								  if not set weapon hit generator will be used.
 								  if not set hit generator will be choosed by weapon type.
 								  if weapon define has tag "wr-clustered_shots", "Cluster" hit generator will be forced. 
+								  Can be altered at runtime using weapon's statistic "HitGenerator" (string).
+								  Statistic have higher priority than mode, ammo, weapon but lower than tags.
+  "MinRangeClusterMod": 0, - Cluster modifier added to weapon's effective "ClusteringModifier" if distance to target < MinRange
+							 Additive per weapon, ammo, mode. Can be altered at runtime  via component statistic values
+							 "CAC_MinRangeClusterMod" and "CAC_MinRangeClusterMod_Mod".
+							 "CAC_MinRangeClusterMod" has default value from WeaponDef.MinRangeClusterMod
+							 "CAC_MinRangeClusterMod_Mod" has default value 1.0
+							 effective formula 
+							 (<weapon statistic CAC_MinRangeClusterMod> + <ammo MinRangeClusterMod> + <mode MinRangeClusterMod>) * <weapon statistic CAC_MinRangeClusterMod_Mod>
+  "ShortRangeClusterMod": 0, - Cluster modifier added to weapon's effective "ClusteringModifier" if distance MinRange < target < ShortRange
+							 Additive per weapon, ammo, mode. Can be altered at runtime  via component statistic values
+							 "CAC_ShortRangeClusterMod" and "CAC_ShortRangeClusterMod_Mod".
+							 "CAC_ShortRangeClusterMod" has default value from WeaponDef.ShortRangeClusterMod
+							 "CAC_ShortRangeClusterMod_Mod" has default value 1.0
+							 effective formula 
+							 (<weapon statistic CAC_ShortRangeClusterMod> + <ammo ShortRangeClusterMod> + <mode ShortRangeClusterMod>) * <weapon statistic CAC_ShortRangeClusterMod_Mod>
+  "MediumRangeClusterMod": 0, - Cluster modifier added to weapon's effective "ClusteringModifier" if distance ShortRange < target < MediumRange
+							 Additive per weapon, ammo, mode. Can be altered at runtime  via component statistic values
+							 "CAC_MediumRangeClusterMod" and "CAC_MediumRangeClusterMod_Mod".
+							 "CAC_MediumRangeClusterMod" has default value from WeaponDef.MediumRangeClusterMod
+							 "CAC_MediumRangeClusterMod_Mod" has default value 1.0
+							 effective formula 
+							 (<weapon statistic CAC_MediumRangeClusterMod> + <ammo MediumRangeClusterMod> + <mode MediumRangeClusterMod>) * <weapon statistic CAC_MediumRangeClusterMod_Mod>
+  "LongRangeClusterMod": 0, - Cluster modifier added to weapon's effective "ClusteringModifier" if distance MediumRange < target < LongRange
+							 Additive per weapon, ammo, mode. Can be altered at runtime  via component statistic values
+							 "CAC_LongRangeClusterMod" and "CAC_LongRangeClusterMod_Mod".
+							 "CAC_LongRangeClusterMod" has default value from WeaponDef.LongRangeClusterMod
+							 "CAC_LongRangeClusterMod_Mod" has default value 1.0
+							 effective formula 
+							 (<weapon statistic CAC_LongRangeClusterMod> + <ammo LongRangeClusterMod> + <mode LongRangeClusterMod>) * <weapon statistic CAC_LongRangeClusterMod_Mod>
+  "MaxRangeClusterMod": 0, - Cluster modifier added to weapon's effective "ClusteringModifier" if distance LongRange < target < MaxRange
+							 Additive per weapon, ammo, mode. Can be altered at runtime  via component statistic values
+							 "CAC_MaxRangeClusterMod" and "CAC_MaxRangeClusterMod_Mod".
+							 "CAC_MaxRangeClusterMod" has default value from WeaponDef.MaxRangeClusterMod
+							 "CAC_MaxRangeClusterMod_Mod" has default value 1.0
+							 effective formula 
+							 (<weapon statistic CAC_MaxRangeClusterMod> + <ammo MaxRangeClusterMod> + <mode MaxRangeClusterMod>) * <weapon statistic CAC_MaxRangeClusterMod_Mod>
+
+							 NOTE! ClusteringModifier and <..>RangeClusterMod have only meaning with hit generators "Cluster" and "Streak"
+
   "RangeBonusDistance": 0, - if distance to target less than RangeBonusDistance - RangeBonusAccuracyMod is applied
                              additive for weapon, mode and ammo. Can be altered runtime via component statistic values
 							 "CAC_RangeBonusDistance" and "CAC_RangeBonusDistance_Mod".
@@ -726,6 +766,7 @@ new fields
 						   mode have priority, than ammo, than weapon. Default value Linear
   "DamageOnJamming": true/false, - if true on jamming weapon will be damaged
   "DestroyOnJamming": true/false, - if true on jamming weapon will be destroyed (need DamageOnJamming to be set true also)
+  "PersistentJamming": true/false, - if true weapon will be jammed until end of combat. No attemts of jamming will be done at all
   "FlatJammingChance": 1.0, - Chance of jamming weapon after fire. 1.0 is jamm always. Unjamming logic implemented as in WeaponRealizer
                               NOTE! There FlatJammingChance can be altered via CACFlatJammingChance statistic value per actor's and/or per weapon's statistic collections
   "RecoilJammingChance": 0.0, - addition to  FlatJammingChance based on recoil. Adds RecoilJammingChance * <RefireModifier> to FlatJammingChance
