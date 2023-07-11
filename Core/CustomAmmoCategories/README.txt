@@ -65,6 +65,7 @@ CriticalHitChanceReceivedMultiplier can be locational
 						   Note! overheat from internal sources (moving, jumping, weapon fire) 
 						   still can make heat level pass this value
 "AMSUseAttractiveness": true, - if true AMS calculation will try to shoot down missiles with higher attractiveness first
+"AMSDefaultInterceptedTrace": 2, - default value for weapon AMSInterceptedTrace
 "RestoreEjectedWeapons": true, - ejected weapon will not be counted as destroyed at the end of the battle
 "HexSizeForMods": 30 - hex size used for moved hexes modifiers calculations
 "SpawnProtectionAffectsCanFire": true - if true weapon can't fire if its owner under spawn protection
@@ -538,6 +539,7 @@ new fields
   
   "firstPreFireSFX": null
   "preFireSFX": null
+  "parentPreFireSFX": null
   "lastPreFireSFX": null
 
   "firstFireSFX": null
@@ -559,36 +561,41 @@ new fields
   
   firing SFX sequence 
 	First shot in volley 
-    1. firstPreFireSFX - (preFireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by ballistic and PPC.
-	2. preFireStartSFX - SFX emitter is unit. Looped. Ends with preFireStopSFX when projectile completes. In vanilla used by lasers.
-	3. projectilePreFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
-	4. firingStartSFX - SFX emitter is unit. Looped. Ends with firingStopSFX immediately after last shot. In vanilla used by missiles.
-    5. Pre-fire ends and projectile becomes active
-	6. delayedSFX - SFX emitter is unit. Single shot. In vanilla used by lasers. Repeats every delayedSFXDelay (if > 0) until projectile completes.
-	7. projectileFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
-	8. firstFireSFX - (fireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by missiles.
+	1. parentPreFireSFX - SFX emitter is unit. Single shot. In vanilla used by gauss rifles to play charge-up SFX.
+    2. firstPreFireSFX - (preFireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by ballistic and PPC.
+	3. preFireStartSFX - SFX emitter is unit. Looped. Ends with preFireStopSFX when projectile completes. In vanilla used by lasers.
+	4. projectilePreFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
+	5. firingStartSFX - SFX emitter is unit. Looped. Ends with firingStopSFX immediately after last shot. In vanilla used by missiles.
+    6. Pre-fire ends and projectile becomes active
+	7. delayedSFX - SFX emitter is unit. Single shot. In vanilla used by lasers. Repeats every delayedSFXDelay (if > 0) until projectile completes.
+	8. projectileFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
+	9. firstFireSFX - (fireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by missiles.
 	Next shot in volley
-    1. preFireSFX - SFX emitter is unit. Single shot. In vanilla used by ballistic and PPC.
-	2. preFireStartSFX - SFX emitter is unit. Looped. Ends with preFireStopSFX when projectile completes. In vanilla used by lasers.
-	3. projectilePreFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
-    4. Pre-fire ends and projectile becomes active
-	5. delayedSFX - SFX emitter is unit. Single shot. In vanilla used by lasers. Repeats every delayedSFXDelay (if > 0) until projectile completes.
-	6. projectileFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
-	7. fireSFX - (fireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by missiles.
-	Last shot in volley
-    1. lastPreFireSFX - (preFireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by ballistic and PPC.
-	2. preFireStartSFX - SFX emitter is unit. Looped. Ends with preFireStopSFX when projectile completes. In vanilla used by lasers.
-	3. projectilePreFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
-	4. firingStopSFX - In vanilla used by missiles.
+	1. parentPreFireSFX - SFX emitter is unit. Single shot. In vanilla used by gauss rifles to play charge-up SFX.
+    2. preFireSFX - SFX emitter is unit. Single shot. In vanilla used by ballistic and PPC.
+	3. preFireStartSFX - SFX emitter is unit. Looped. Ends with preFireStopSFX when projectile completes. In vanilla used by lasers.
+	4. projectilePreFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
     5. Pre-fire ends and projectile becomes active
 	6. delayedSFX - SFX emitter is unit. Single shot. In vanilla used by lasers. Repeats every delayedSFXDelay (if > 0) until projectile completes.
 	7. projectileFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
-	8. lastFireSFX - (fireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by missiles.
+	8. fireSFX - (fireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by missiles.
+	Last shot in volley
+	1. parentPreFireSFX - SFX emitter is unit. Single shot. In vanilla used by gauss rifles to play charge-up SFX.
+    2. lastPreFireSFX - (preFireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by ballistic and PPC.
+	3. preFireStartSFX - SFX emitter is unit. Looped. Ends with preFireStopSFX when projectile completes. In vanilla used by lasers.
+	4. projectilePreFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
+	5. firingStopSFX - In vanilla used by missiles.
+    6. Pre-fire ends and projectile becomes active
+	7. delayedSFX - SFX emitter is unit. Single shot. In vanilla used by lasers. Repeats every delayedSFXDelay (if > 0) until projectile completes.
+	8. projectileFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
+	9. lastFireSFX - (fireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by missiles.
 
   Note! Empty SFX value (example "preFireSFX":"") means vanilla value should be cleared. If want to keep vanilla value parameter should be omitted.
   Note! both AudioKenetik and CustomVoices audio samples string ids can be used, if used CustomVoices ones <stop> events have no meaning and should be omitted
   For mentioned values mode have priority, than ammo, than weapon.
 
+  "RestrictedAmmo": [],  - list of ammunition ids restricted for this weapon/mode. List is concatenated for weapon and mode. 
+                           Note! restriction check is performed only in battle
   "blockWeaponsInMechLocations": [], - list of mech locations. all weapons installed in this locations can't fire if this weapon is functional.
                                        NOTE: weapon can block itself.
   "CanBeBlocked": true               - if false weapon can't be blocked by other weapons presents (default is true).
@@ -675,6 +682,46 @@ new fields
 								  if not set weapon hit generator will be used.
 								  if not set hit generator will be choosed by weapon type.
 								  if weapon define has tag "wr-clustered_shots", "Cluster" hit generator will be forced. 
+								  Can be altered at runtime using weapon's statistic "HitGenerator" (string).
+								  Statistic have higher priority than mode, ammo, weapon but lower than tags.
+  "MinRangeClusterMod": 0, - Cluster modifier added to weapon's effective "ClusteringModifier" if distance to target < MinRange
+							 Additive per weapon, ammo, mode. Can be altered at runtime  via component statistic values
+							 "CAC_MinRangeClusterMod" and "CAC_MinRangeClusterMod_Mod".
+							 "CAC_MinRangeClusterMod" has default value from WeaponDef.MinRangeClusterMod
+							 "CAC_MinRangeClusterMod_Mod" has default value 1.0
+							 effective formula 
+							 (<weapon statistic CAC_MinRangeClusterMod> + <ammo MinRangeClusterMod> + <mode MinRangeClusterMod>) * <weapon statistic CAC_MinRangeClusterMod_Mod>
+  "ShortRangeClusterMod": 0, - Cluster modifier added to weapon's effective "ClusteringModifier" if distance MinRange < target < ShortRange
+							 Additive per weapon, ammo, mode. Can be altered at runtime  via component statistic values
+							 "CAC_ShortRangeClusterMod" and "CAC_ShortRangeClusterMod_Mod".
+							 "CAC_ShortRangeClusterMod" has default value from WeaponDef.ShortRangeClusterMod
+							 "CAC_ShortRangeClusterMod_Mod" has default value 1.0
+							 effective formula 
+							 (<weapon statistic CAC_ShortRangeClusterMod> + <ammo ShortRangeClusterMod> + <mode ShortRangeClusterMod>) * <weapon statistic CAC_ShortRangeClusterMod_Mod>
+  "MediumRangeClusterMod": 0, - Cluster modifier added to weapon's effective "ClusteringModifier" if distance ShortRange < target < MediumRange
+							 Additive per weapon, ammo, mode. Can be altered at runtime  via component statistic values
+							 "CAC_MediumRangeClusterMod" and "CAC_MediumRangeClusterMod_Mod".
+							 "CAC_MediumRangeClusterMod" has default value from WeaponDef.MediumRangeClusterMod
+							 "CAC_MediumRangeClusterMod_Mod" has default value 1.0
+							 effective formula 
+							 (<weapon statistic CAC_MediumRangeClusterMod> + <ammo MediumRangeClusterMod> + <mode MediumRangeClusterMod>) * <weapon statistic CAC_MediumRangeClusterMod_Mod>
+  "LongRangeClusterMod": 0, - Cluster modifier added to weapon's effective "ClusteringModifier" if distance MediumRange < target < LongRange
+							 Additive per weapon, ammo, mode. Can be altered at runtime  via component statistic values
+							 "CAC_LongRangeClusterMod" and "CAC_LongRangeClusterMod_Mod".
+							 "CAC_LongRangeClusterMod" has default value from WeaponDef.LongRangeClusterMod
+							 "CAC_LongRangeClusterMod_Mod" has default value 1.0
+							 effective formula 
+							 (<weapon statistic CAC_LongRangeClusterMod> + <ammo LongRangeClusterMod> + <mode LongRangeClusterMod>) * <weapon statistic CAC_LongRangeClusterMod_Mod>
+  "MaxRangeClusterMod": 0, - Cluster modifier added to weapon's effective "ClusteringModifier" if distance LongRange < target < MaxRange
+							 Additive per weapon, ammo, mode. Can be altered at runtime  via component statistic values
+							 "CAC_MaxRangeClusterMod" and "CAC_MaxRangeClusterMod_Mod".
+							 "CAC_MaxRangeClusterMod" has default value from WeaponDef.MaxRangeClusterMod
+							 "CAC_MaxRangeClusterMod_Mod" has default value 1.0
+							 effective formula 
+							 (<weapon statistic CAC_MaxRangeClusterMod> + <ammo MaxRangeClusterMod> + <mode MaxRangeClusterMod>) * <weapon statistic CAC_MaxRangeClusterMod_Mod>
+
+							 NOTE! ClusteringModifier and <..>RangeClusterMod have only meaning with hit generators "Cluster" and "Streak"
+
   "RangeBonusDistance": 0, - if distance to target less than RangeBonusDistance - RangeBonusAccuracyMod is applied
                              additive for weapon, mode and ammo. Can be altered runtime via component statistic values
 							 "CAC_RangeBonusDistance" and "CAC_RangeBonusDistance_Mod".
@@ -723,6 +770,7 @@ new fields
 						   mode have priority, than ammo, than weapon. Default value Linear
   "DamageOnJamming": true/false, - if true on jamming weapon will be damaged
   "DestroyOnJamming": true/false, - if true on jamming weapon will be destroyed (need DamageOnJamming to be set true also)
+  "PersistentJamming": true/false, - if true weapon will be jammed until end of combat. No attemts of jamming will be done at all
   "FlatJammingChance": 1.0, - Chance of jamming weapon after fire. 1.0 is jamm always. Unjamming logic implemented as in WeaponRealizer
                               NOTE! There FlatJammingChance can be altered via CACFlatJammingChance statistic value per actor's and/or per weapon's statistic collections
   "RecoilJammingChance": 0.0, - addition to  FlatJammingChance based on recoil. Adds RecoilJammingChance * <RefireModifier> to FlatJammingChance
@@ -767,6 +815,10 @@ new fields
   "AMSHitChanceMult": 1.0 - modifier for effective AMS hit chance (sum of missile.AMSHitChance and AMS.AMSHitChance)
                            additive per weapon, ammo and mode, for weapon default 1.0, for mode and ammo 0.0
 						   can be altered on runtime via CAC_AMSHitChanceMult and CAC_AMSHitChanceMult_Mod statistic values
+  "AMSInterceptedTrace": -1, - if above 0 AMS will shoot missile after missile intercepted, for AMSInterceptedTrace shots
+							   additive per weapon, ammo and mode. For weapon have special processing - if AMSInterceptedTrace
+							   for weapon is less than 0 - AMSDefaultInterceptedTrace will be used instead.
+							   Note! only used if AMSUseAttractiveness enabled
   "IsAMS": false, - if true this weapon acts as AMS. It will not fire during normal attack. But tries to intercept incomming missiles.
                     rude model: every 10 meters of missile fly path there is check, if it in range of any AMS. 
 					If so, AMS have AMS.AMSHitChance + missile.AMSHitChance chance to shoot missile down. Avaible shoots count of AMS is decrementing.
