@@ -539,6 +539,7 @@ new fields
   
   "firstPreFireSFX": null
   "preFireSFX": null
+  "parentPreFireSFX": null
   "lastPreFireSFX": null
 
   "firstFireSFX": null
@@ -560,31 +561,34 @@ new fields
   
   firing SFX sequence 
 	First shot in volley 
-    1. firstPreFireSFX - (preFireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by ballistic and PPC.
-	2. preFireStartSFX - SFX emitter is unit. Looped. Ends with preFireStopSFX when projectile completes. In vanilla used by lasers.
-	3. projectilePreFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
-	4. firingStartSFX - SFX emitter is unit. Looped. Ends with firingStopSFX immediately after last shot. In vanilla used by missiles.
-    5. Pre-fire ends and projectile becomes active
-	6. delayedSFX - SFX emitter is unit. Single shot. In vanilla used by lasers. Repeats every delayedSFXDelay (if > 0) until projectile completes.
-	7. projectileFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
-	8. firstFireSFX - (fireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by missiles.
+	1. parentPreFireSFX - SFX emitter is unit. Single shot. In vanilla used by gauss rifles to play charge-up SFX.
+    2. firstPreFireSFX - (preFireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by ballistic and PPC.
+	3. preFireStartSFX - SFX emitter is unit. Looped. Ends with preFireStopSFX when projectile completes. In vanilla used by lasers.
+	4. projectilePreFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
+	5. firingStartSFX - SFX emitter is unit. Looped. Ends with firingStopSFX immediately after last shot. In vanilla used by missiles.
+    6. Pre-fire ends and projectile becomes active
+	7. delayedSFX - SFX emitter is unit. Single shot. In vanilla used by lasers. Repeats every delayedSFXDelay (if > 0) until projectile completes.
+	8. projectileFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
+	9. firstFireSFX - (fireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by missiles.
 	Next shot in volley
-    1. preFireSFX - SFX emitter is unit. Single shot. In vanilla used by ballistic and PPC.
-	2. preFireStartSFX - SFX emitter is unit. Looped. Ends with preFireStopSFX when projectile completes. In vanilla used by lasers.
-	3. projectilePreFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
-    4. Pre-fire ends and projectile becomes active
-	5. delayedSFX - SFX emitter is unit. Single shot. In vanilla used by lasers. Repeats every delayedSFXDelay (if > 0) until projectile completes.
-	6. projectileFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
-	7. fireSFX - (fireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by missiles.
-	Last shot in volley
-    1. lastPreFireSFX - (preFireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by ballistic and PPC.
-	2. preFireStartSFX - SFX emitter is unit. Looped. Ends with preFireStopSFX when projectile completes. In vanilla used by lasers.
-	3. projectilePreFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
-	4. firingStopSFX - In vanilla used by missiles.
+	1. parentPreFireSFX - SFX emitter is unit. Single shot. In vanilla used by gauss rifles to play charge-up SFX.
+    2. preFireSFX - SFX emitter is unit. Single shot. In vanilla used by ballistic and PPC.
+	3. preFireStartSFX - SFX emitter is unit. Looped. Ends with preFireStopSFX when projectile completes. In vanilla used by lasers.
+	4. projectilePreFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
     5. Pre-fire ends and projectile becomes active
 	6. delayedSFX - SFX emitter is unit. Single shot. In vanilla used by lasers. Repeats every delayedSFXDelay (if > 0) until projectile completes.
 	7. projectileFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
-	8. lastFireSFX - (fireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by missiles.
+	8. fireSFX - (fireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by missiles.
+	Last shot in volley
+	1. parentPreFireSFX - SFX emitter is unit. Single shot. In vanilla used by gauss rifles to play charge-up SFX.
+    2. lastPreFireSFX - (preFireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by ballistic and PPC.
+	3. preFireStartSFX - SFX emitter is unit. Looped. Ends with preFireStopSFX when projectile completes. In vanilla used by lasers.
+	4. projectilePreFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
+	5. firingStopSFX - In vanilla used by missiles.
+    6. Pre-fire ends and projectile becomes active
+	7. delayedSFX - SFX emitter is unit. Single shot. In vanilla used by lasers. Repeats every delayedSFXDelay (if > 0) until projectile completes.
+	8. projectileFireSFX - SFX emitter is projectile. Looped. Ends with projectileStopSFX when projectile hits ground. In vanilla used by LBX.
+	9. lastFireSFX - (fireSFX if not set) SFX emitter is unit. Single shot. In vanilla used by missiles.
 
   Note! Empty SFX value (example "preFireSFX":"") means vanilla value should be cleared. If want to keep vanilla value parameter should be omitted.
   Note! both AudioKenetik and CustomVoices audio samples string ids can be used, if used CustomVoices ones <stop> events have no meaning and should be omitted
@@ -766,6 +770,7 @@ new fields
 						   mode have priority, than ammo, than weapon. Default value Linear
   "DamageOnJamming": true/false, - if true on jamming weapon will be damaged
   "DestroyOnJamming": true/false, - if true on jamming weapon will be destroyed (need DamageOnJamming to be set true also)
+  "PersistentJamming": true/false, - if true weapon will be jammed until end of combat. No attemts of jamming will be done at all
   "FlatJammingChance": 1.0, - Chance of jamming weapon after fire. 1.0 is jamm always. Unjamming logic implemented as in WeaponRealizer
                               NOTE! There FlatJammingChance can be altered via CACFlatJammingChance statistic value per actor's and/or per weapon's statistic collections
   "RecoilJammingChance": 0.0, - addition to  FlatJammingChance based on recoil. Adds RecoilJammingChance * <RefireModifier> to FlatJammingChance
