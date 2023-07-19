@@ -60,7 +60,7 @@
 - [ ] **Rename** `phoenix_hawk_IIC` -> `phoenixhawkiic`
 - [ ] **Rename** `phoenix_hawk` -> `phoenixhawk`
 #### Base Urban Warfare
-- [ ] **Rename** `Dagger_RVN-LR` -> `raven_RVN-LR-D`
+- [ ] **Rename** `Dagger_RVN-LR` -> `raven_RVN-LR`
 #### Uniques
 - [ ] **Rename** `arctic_wolf_ACW-BK` -> `arcticwolf_ACW-BK`
 - [ ] **Rename** `banshee_BNC-5S-VDG_vandergriff` -> `banshee_BNC-5S-Vandergriff`
@@ -83,3 +83,17 @@
 - [ ] **Rename** `annihilator_ANH-1E_mean_baby` -> `annihilator_ANH-1E-MB`
 - [ ] **Rename** `assassin_ASN-30_alice` -> `assassin_ASN-30-Alice`
 - [ ] **Rename** `stealth_STH-1D_anna` -> `stealth_STH-1D-Anna`
+### Clan Invasion
+#### Uniques
+- [ ] **Delete** `marauder_ii_MAD-AL`
+### Dark Age
+### Jihad
+#### Base
+- [ ] **Rename** `albatross_ALB-5W_real` -> `albatross_ALB-5W`
+#### Uniques
+- [ ] **Rename** `albatross_ALB-5W` -> `albatross_ALB-5W-Dantalion`
+### Republic
+## Optionals
+### PirateTech
+#### Base
+- [ ] **Rename** `pyromaniac_BNC-PM` -> `banshee_BNC-PM`
