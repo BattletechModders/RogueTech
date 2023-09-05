@@ -85,9 +85,20 @@ weight_map = [
 def grab_diff_weight_excludes(diff, index):
     return weight_excludes[weight_map[diff-1][index]]
 
-def grab_unit_include_exclude(index, diff, category, composition, variant):
+def grab_reduced_tonnage_tags(diff):
+    if diff < 8:
+        return weight_excludes["light"]
+    elif diff < 16:
+        return weight_excludes["med/light"]
+    else:
+        return weight_excludes["hvy/med/light"]
+
+def grab_unit_include_exclude(index, diff, category, composition, variant, extra):
     include_tags = ["{CUR_TEAM.faction}"]
     exclude_tags = ["unit_noncombatant"] + grab_diff_weight_excludes(diff, index)
+
+    if category == "solo" and index > 0:
+        exclude_tags = ["unit_noncombatant"] + grab_reduced_tonnage_tags(diff)
 
     match(variant):
         case "low":
@@ -124,7 +135,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant):
             include_tags.append("unit_mech")
 
         case "mixed":
-            if index == 1 or index == 2:
+            if index in [1,2]:
                 include_tags.append("unit_vehicle")
             else:
                 include_tags.append("unit_mech")
@@ -189,13 +200,29 @@ def grab_unit_include_exclude(index, diff, category, composition, variant):
         case "support":
             if index == 0:
                 include_tags.append("unit_lance_tank")
-            elif index == 1 or index == 2:
+            elif index in [1,2]:
                 include_tags.append("unit_lance_support")
             exclude_tags.append("unit_lance_assassin")
 
         case "convoy":
             pass
-        
+
+        case "solo":
+            if index == 0:
+                exclude_tags.append("unit_protomech")
+                exclude_tags.append("unit_powerarmor")
+                include_tags.append("unit_legendary")
+
+            match (extra):
+                case "littlefriend":
+                    if index > 0:
+                        include_tags.append("unit_littlefriend")
+                        if "unit_bracket_high" in include_tags:
+                            include_tags.remove("unit_bracket_high")                        
+                case "advanced":
+                    if index == 1:
+                        include_tags.append("unit_advanced")
+
         case _:
             print("bad category: " + str(category))
             traceback.print_stack()
@@ -266,7 +293,7 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
         lance_tags = []
 
         slots = 4
-        if extra == "small":
+        if extra == "small" or category == "solo":
             slots = 3
             lance_tags.append("lance_type_notfull")
 
@@ -292,6 +319,10 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 
             case "convoy":
                 pass # tagged based on composition
+
+            case "solo":
+                lance_tags.append("lance_type_solo")
+
 
             case _:
                 print("bad category: " + str(category))
@@ -355,7 +386,6 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
                 print("bad variant: " + str(variant))
                 traceback.print_stack()
                 print("bad variant: " + str(variant))
-                exit()
 
         lancedef["LanceTags"]["items"] = lancedef["LanceTags"]["items"] + lance_tags
             
@@ -365,7 +395,7 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 
             slot = copy.deepcopy(slot_template)
 
-            unit_tags = grab_unit_include_exclude(index, diff+diff_delta, category, composition, variant)
+            unit_tags = grab_unit_include_exclude(index, diff+diff_delta, category, composition, variant, extra)
 
             slot["unitTagSet"]["items"] = unit_tags[0]
             slot["excludedUnitTagSet"]["items"] = unit_tags[1]
@@ -522,8 +552,6 @@ build_lances("convoy", "mechconvoy", "med", 5, 16)
 build_lances("convoy", "mechconvoy", "high", 13, 20)
 
 
-exit()
-
 # lance_type_solo, assassination, high prio target + light support
 build_lances("solo", "mech", "low", 1, 8, "littlefriend")
 build_lances("solo", "mech", "med", 5, 16, "littlefriend")
@@ -531,10 +559,11 @@ build_lances("solo", "mech", "high", 13, 20, "littlefriend")
 build_lances("solo", "mech", "low", 1, 8, "advanced")
 build_lances("solo", "mech", "med", 5, 16, "advanced")
 build_lances("solo", "mech", "high", 13, 20, "advanced")
-build_lances("solo", "mech", "low", 1, 8, "prototype")
-build_lances("solo", "mech", "med", 5, 16, "prototype")
-build_lances("solo", "mech", "high", 13, 20, "prototype")
+build_lances("solo", "mixed", "low", 1, 8, "advanced")
+build_lances("solo", "mixed", "med", 5, 16, "advanced")
+build_lances("solo", "mixed", "high", 13, 20, "advanced")
 
+exit()
 
 # lance_type_gladiator, limited drop and other fp
 build_lances("gladiator", "mech", "low", 1, 8, "littlefriend")
