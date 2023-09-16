@@ -234,6 +234,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             exclude_tags.append("unit_powerarmor")
 
             if index == 0:
+                include_tags.remove("{CUR_TEAM.faction}")
                 include_tags.append("unit_elite")
             elif index == 1:
                 include_tags.append("unit_legendary")
@@ -258,47 +259,42 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
 
     return (include_tags, exclude_tags)
 
-def grab_pilot_include_exclude(index, diff, composition):
+def grab_pilot_include_exclude(index, diff, category, composition):
     include_tags = []
     exclude_tags = []
 
     pilot_diff = math.ceil(diff/2.0)
 
-    match(composition):
-        case "mech":
+    if category == "duel":
+        include_tags.append("pilot_elite_d"+str(pilot_diff))
+
+    elif composition == "mech":
+        include_tags.append("pilot_npc_d"+str(pilot_diff))
+        if index == 0 or (index == 1 and diff%2 == 0):
+            include_tags.append("pilot_npc_high")
+
+    elif composition in ["vehicle", "allied", "opfor"]:
+        include_tags.append("pilot_npc_tanker_d"+str(pilot_diff))
+        include_tags.append("{CUR_TEAM.faction}")
+
+    elif composition == "mixed":
+        if index == 1 or index == 2:
+            include_tags.append("pilot_npc_tanker_d"+str(pilot_diff))
+            include_tags.append("{CUR_TEAM.faction}")
+        else:
             include_tags.append("pilot_npc_d"+str(pilot_diff))
-            if index == 0 or (index == 1 and diff%2 == 0):
+            if index == 0:
                 include_tags.append("pilot_npc_high")
 
-        case "mixed":
-            if index == 1 or index == 2:
-                include_tags.append("pilot_npc_tanker_d"+str(pilot_diff))
-                include_tags.append("{CUR_TEAM.faction}")
-            else:
-                include_tags.append("pilot_npc_d"+str(pilot_diff))
-                if index == 0:
-                    include_tags.append("pilot_npc_high")
+    elif composition ==  "mechconvoy":
+        include_tags.append("pilot_npc_d"+str(pilot_diff))
+        include_tags.append("pilot_npc_low")
 
-        case "vehicle":
-            include_tags.append("pilot_npc_tanker_d"+str(pilot_diff))
-            include_tags.append("{CUR_TEAM.faction}")
-
-        #convoy
-        case "allied":
-            include_tags.append("pilot_npc_tanker_d"+str(pilot_diff))
-            include_tags.append("{CUR_TEAM.faction}")
-        case "opfor":
-            include_tags.append("pilot_npc_tanker_d"+str(pilot_diff))
-            include_tags.append("{CUR_TEAM.faction}")
-        case "mechconvoy":
-            include_tags.append("pilot_npc_d"+str(pilot_diff))
-            include_tags.append("pilot_npc_low")
-
-        case _:
-            print("bad composition: " + str(composition))
-            traceback.print_stack()
-            print("bad composition: " + str(composition))
-            exit()
+    else:
+        print("unhandled pilots: " + " ".join([category,composition]))
+        traceback.print_stack()
+        print("unhandled pilots: " + " ".join([category,composition]))
+        exit()
 
     return (include_tags, exclude_tags)
 
@@ -431,7 +427,7 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
             slot["unitTagSet"]["items"] = unit_tags[0]
             slot["excludedUnitTagSet"]["items"] = unit_tags[1]
 
-            pilot_tags = grab_pilot_include_exclude(index, diff, composition)
+            pilot_tags = grab_pilot_include_exclude(index, diff, category, composition)
 
             slot["pilotTagSet"]["items"] = pilot_tags[0]
             slot["excludedPilotTagSet"]["items"] = pilot_tags[1]
