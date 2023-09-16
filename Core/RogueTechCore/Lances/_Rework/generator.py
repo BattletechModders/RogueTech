@@ -162,6 +162,8 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             exclude_tags.append("unit_hover")
         case "mechconvoy":
             include_tags.append("unit_mech")
+            exclude_tags.append("unit_urbie")
+            exclude_tags.append("unit_noconvoy")
 
         case _:
             print("bad composition: " + str(composition))
