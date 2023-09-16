@@ -118,7 +118,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
 #                include_tags.append("unit_bracket_med")
 #            else:
 #                include_tags.append("unit_bracket_high")
-        case "common":
+        case "varied":
             if diff <= 10:
                 exclude_tags.append("unit_bracket_high")
             else:
@@ -190,6 +190,16 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
                 include_tags.append("unit_lance_assassin")
             exclude_tags.append("unit_lance_vanguard")
             
+            if extra == "elite":
+                if  index == 0:
+                    include_tags.remove("unit_lance_assassin")
+                    include_tags.remove("{CUR_TEAM.faction}")
+                    include_tags.append("unit_elite")
+                elif index == 1:
+                    include_tags.remove("unit_lance_assassin")
+                    include_tags.remove("{CUR_TEAM.faction}")
+                    include_tags.append("unit_stealth")
+            
         case "recon":
             if index == 0:
                 include_tags.append("unit_predator")
@@ -200,11 +210,16 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             exclude_tags.append("unit_lance_assassin")
             
         case "support":
-            if index == 0:
-                include_tags.append("unit_lance_tank")
-            elif index in [1,2]:
-                include_tags.append("unit_lance_support")
-            exclude_tags.append("unit_lance_assassin")
+            if extra == "stealth":
+                include_tags.append("unit_stealth")
+                if index < 2: # attempt faction specific stealth units for half the slots
+                    include_tags.remove("{CUR_TEAM.faction}")
+            else:
+                if index == 0:
+                    include_tags.append("unit_lance_tank")
+                elif index in [1,2]:
+                    include_tags.append("unit_lance_support")
+                exclude_tags.append("unit_lance_assassin")
 
         case "convoy":
             pass
@@ -261,13 +276,13 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
 
     return (include_tags, exclude_tags)
 
-def grab_pilot_include_exclude(index, diff, category, composition):
+def grab_pilot_include_exclude(index, diff, category, composition, variant, extra):
     include_tags = []
     exclude_tags = []
 
     pilot_diff = math.ceil(diff/2.0)
 
-    if category == "duel":
+    if category == "duel" or extra == "elite":
         include_tags.append("pilot_elite_d"+str(pilot_diff))
 
     elif composition == "mech":
@@ -408,7 +423,7 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 #                else:
 #                    lance_tags.append("lance_bracket_high")
 
-            case "common":
+            case "varied":
                 pass
 
             case _:
@@ -429,7 +444,7 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
             slot["unitTagSet"]["items"] = unit_tags[0]
             slot["excludedUnitTagSet"]["items"] = unit_tags[1]
 
-            pilot_tags = grab_pilot_include_exclude(index, diff, category, composition)
+            pilot_tags = grab_pilot_include_exclude(index, diff, category, composition, variant, extra)
 
             slot["pilotTagSet"]["items"] = pilot_tags[0]
             slot["excludedPilotTagSet"]["items"] = pilot_tags[1]
@@ -568,7 +583,7 @@ build_lances("support", "vehicle", "vtol", 1, 20)
 
 
 # lance_type_convoy, allied side convoy
-build_lances("convoy", "allied", "common", 1, 20)
+build_lances("convoy", "allied", "varied", 1, 20)
 
 # lance_type_OpForConvoy, ambush convoy target
 build_lances("convoy", "opfor", "low", 1, 8)
@@ -606,5 +621,14 @@ build_lances("gladiator", "mixed", "high", 13, 20)
 build_lances("duel", "mech", "low", 1, 8)
 build_lances("duel", "mech", "med", 5, 16)
 build_lances("duel", "mech", "high", 13, 20)
+
+build_lances("support", "mech", "varied", 5, 20, "stealth")
+# build_lances("support", "mixed", "varied", 5, 20, "stealth") bad idea, practically only risc stealth vees
+
+build_lances("solo", "mech", "med", 5, 16, "elite")
+build_lances("solo", "mech", "high", 13, 20, "elite")
+
+build_lances("fire", "mech", "med", 5, 16, "elite")
+build_lances("fire", "mech", "high", 13, 20, "elite")
 
 exit()
