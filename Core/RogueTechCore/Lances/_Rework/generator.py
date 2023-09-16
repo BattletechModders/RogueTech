@@ -97,7 +97,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
     include_tags = ["{CUR_TEAM.faction}"]
     exclude_tags = ["unit_noncombatant"] + grab_diff_weight_excludes(diff, index)
 
-    if category == "solo" and index > 0:
+    if category in ["solo","gladiator"] and index > 0:
         exclude_tags = ["unit_noncombatant"] + grab_reduced_tonnage_tags(diff)
 
     match(variant):
@@ -223,6 +223,23 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
                     if index == 1:
                         include_tags.append("unit_advanced")
 
+        case "gladiator":
+            if index == 0:
+                exclude_tags.append("unit_protomech")
+                exclude_tags.append("unit_powerarmor")
+                include_tags.append("unit_legendary")
+
+        case "duel":
+            exclude_tags.append("unit_protomech")
+            exclude_tags.append("unit_powerarmor")
+
+            if index == 0:
+                include_tags.append("unit_elite")
+            elif index == 1:
+                include_tags.append("unit_legendary")
+            else:
+                include_tags.append("unit_advanced")
+
         case _:
             print("bad category: " + str(category))
             traceback.print_stack()
@@ -297,6 +314,14 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
             slots = 3
             lance_tags.append("lance_type_notfull")
 
+        if category == "gladiator":
+            if diff < 8:
+                slots = 2
+                lance_tags.append("lance_type_notfull")
+            elif diff < 16:
+                slots = 3
+                lance_tags.append("lance_type_notfull")
+
         diff_delta = 0
         if variant == "primitive":
             diff_delta = 3
@@ -322,6 +347,12 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 
             case "solo":
                 lance_tags.append("lance_type_solo")
+
+            case "gladiator":
+                lance_tags.append("lance_type_gladiator")
+
+            case "duel":
+                lance_tags.append("lance_type_duel")
 
 
             case _:
@@ -563,24 +594,19 @@ build_lances("solo", "mixed", "low", 1, 8, "advanced")
 build_lances("solo", "mixed", "med", 5, 16, "advanced")
 build_lances("solo", "mixed", "high", 13, 20, "advanced")
 
-exit()
 
-# lance_type_gladiator, limited drop and other fp
-build_lances("gladiator", "mech", "low", 1, 8, "littlefriend")
-build_lances("gladiator", "mech", "med", 5, 16, "littlefriend")
-build_lances("gladiator", "mech", "high", 13, 20, "littlefriend")
-build_lances("gladiator", "mixed", "low", 1, 8, "small")
-build_lances("gladiator", "mixed", "med", 5, 16, "small")
-build_lances("gladiator", "mixed", "high", 13, 20, "small")
+# lance_type_gladiator, limited drop and other fp, solo but less units
+build_lances("gladiator", "mech", "low", 1, 8)
+build_lances("gladiator", "mech", "med", 5, 16)
+build_lances("gladiator", "mech", "high", 13, 20)
+build_lances("gladiator", "mixed", "low", 1, 8)
+build_lances("gladiator", "mixed", "med", 5, 16)
+build_lances("gladiator", "mixed", "high", 13, 20)
 
 
-# lance_type_duel, coupe & friends, mech kitted to gills
+# lance_type_duel, coupe & friends, mechs kitted to gills, elite + legendary + 2 advanced
 build_lances("duel", "mech", "low", 1, 8)
 build_lances("duel", "mech", "med", 5, 16)
 build_lances("duel", "mech", "high", 13, 20)
-build_lances("duel", "mech", "low", 1, 8, "advanced")
-build_lances("duel", "mech", "med", 5, 16, "advanced")
-build_lances("duel", "mech", "high", 13, 20, "advanced")
 
-
-
+exit()
