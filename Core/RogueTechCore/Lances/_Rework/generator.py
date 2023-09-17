@@ -315,7 +315,7 @@ def grab_pilot_include_exclude(index, diff, category, composition, variant, extr
 
     return (include_tags, exclude_tags)
 
-def build_lances(category, composition, variant, start_diff, stop_diff, extra = ""):
+def build_lances(category, composition, variant, start_diff, stop_diff, extra = "", subfolder = ""):
 
     for diff in range(start_diff, stop_diff+1):
 
@@ -469,7 +469,12 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 
         lancedef["Description"]["Name"] = " ".join(["Dynamic", "D"+str(diff), composition.capitalize(), category.capitalize()])
 
-        save_path = path + "/".join([category.capitalize(), composition.capitalize(), variant.upper() if variant == "vtol" else variant.capitalize()])
+        if subfolder != "":
+            save_path = path + subfolder + "/"
+        else:
+            save_path = path
+        
+        save_path += "/".join([category.capitalize(), composition.capitalize(), variant.upper() if variant == "vtol" else variant.capitalize()])
 
         if not os.path.exists(save_path):
             os.makedirs(save_path)
@@ -618,17 +623,17 @@ build_lances("gladiator", "mixed", "high", 13, 20)
 
 
 # lance_type_duel, coupe & friends, mechs kitted to gills, elite + legendary + 2 advanced
-build_lances("duel", "mech", "low", 1, 8)
-build_lances("duel", "mech", "med", 5, 16)
-build_lances("duel", "mech", "high", 13, 20)
+build_lances("duel", "mech", "low", 1, 8, subfolder="Elite")
+build_lances("duel", "mech", "med", 5, 16, subfolder="Elite")
+build_lances("duel", "mech", "high", 13, 20, subfolder="Elite")
 
-build_lances("support", "mech", "varied", 5, 20, "stealth")
+build_lances("support", "mech", "varied", 5, 20, "stealth", subfolder="Elite")
 # build_lances("support", "mixed", "varied", 5, 20, "stealth") bad idea, practically only risc stealth vees
 
-build_lances("solo", "mech", "med", 5, 16, "elite")
-build_lances("solo", "mech", "high", 13, 20, "elite")
+build_lances("solo", "mech", "med", 5, 16, "elite", subfolder="Elite")
+build_lances("solo", "mech", "high", 13, 20, "elite", subfolder="Elite")
 
-build_lances("fire", "mech", "med", 5, 16, "elite")
-build_lances("fire", "mech", "high", 13, 20, "elite")
+build_lances("fire", "mech", "med", 5, 16, "elite", subfolder="Elite")
+build_lances("fire", "mech", "high", 13, 20, "elite", subfolder="Elite")
 
 exit()
