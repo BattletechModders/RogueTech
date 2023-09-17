@@ -178,7 +178,10 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
 
     match(category):
         case "battle":
-            pass
+            if extra == "risc":
+                if  index in [0,1,2]:
+                    include_tags.remove("{CUR_TEAM.faction}")
+                    include_tags.append("unit_risc")
 
         case "cavalry":
             if index in [0,1,2]:
@@ -264,7 +267,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             print("bad category: " + str(category))
             exit()
 
-    if "unit_mech" in include_tags:
+    if "unit_mech" in include_tags and "unit_risc" not in include_tags:
         if index == 3 and diff > 14:
             include_tags.append("unit_legendary")
         elif index == 2 and diff > 17:
@@ -284,6 +287,10 @@ def grab_pilot_include_exclude(index, diff, category, composition, variant, extr
 
     if category == "duel" or extra == "elite":
         include_tags.append("pilot_elite_d"+str(pilot_diff))
+
+    elif extra == "risc":
+        include_tags.append("pilot_npc_d"+str(pilot_diff))
+        include_tags.append("pilot_risc")
 
     elif composition == "mech":
         include_tags.append("pilot_npc_d"+str(pilot_diff))
@@ -338,6 +345,8 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
         diff_delta = 0
         if variant == "primitive":
             diff_delta = 3
+        elif extra == "risc":
+            diff_delta = -2
 
         match(category):
             case "battle":
@@ -613,7 +622,7 @@ build_lances("solo", "mixed", "med", 5, 16, "advanced")
 build_lances("solo", "mixed", "high", 13, 20, "advanced")
 
 
-# lance_type_gladiator, limited drop and other fp, solo but less units
+# lance_type_gladiator, limited drop and other fp, like solo but less units total
 build_lances("gladiator", "mech", "low", 1, 8)
 build_lances("gladiator", "mech", "med", 5, 16)
 build_lances("gladiator", "mech", "high", 13, 20)
@@ -622,18 +631,27 @@ build_lances("gladiator", "mixed", "med", 5, 16)
 build_lances("gladiator", "mixed", "high", 13, 20)
 
 
+# Elites submod
+
 # lance_type_duel, coupe & friends, mechs kitted to gills, elite + legendary + 2 advanced
 build_lances("duel", "mech", "low", 1, 8, subfolder="Elite")
 build_lances("duel", "mech", "med", 5, 16, subfolder="Elite")
 build_lances("duel", "mech", "high", 13, 20, subfolder="Elite")
 
 build_lances("support", "mech", "varied", 5, 20, "stealth", subfolder="Elite")
-# build_lances("support", "mixed", "varied", 5, 20, "stealth") bad idea, practically only risc stealth vees
+# build_lances("support", "mixed", "varied", 5, 20, "stealth") bad idea, practically only risc has stealth vees
 
 build_lances("solo", "mech", "med", 5, 16, "elite", subfolder="Elite")
 build_lances("solo", "mech", "high", 13, 20, "elite", subfolder="Elite")
 
 build_lances("fire", "mech", "med", 5, 16, "elite", subfolder="Elite")
 build_lances("fire", "mech", "high", 13, 20, "elite", subfolder="Elite")
+
+# Risc submod
+
+build_lances("battle", "mech", "varied", 5, 20, "risc", subfolder="RISC")
+build_lances("battle", "mixed", "varied", 5, 20, "risc", subfolder="RISC")
+build_lances("battle", "vehicle", "varied", 5, 20, "risc", subfolder="RISC")
+build_lances("battle", "mixed", "vtol", 5, 20, "risc", subfolder="RISC")
 
 exit()
