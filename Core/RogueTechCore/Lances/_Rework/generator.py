@@ -396,7 +396,7 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
                 lance_tags.append("lance_type_duel")
 
             case "MCSupport":
-                lance_tags.append("lance_type_MCSupport")
+                pass
 
 
             case _:
@@ -463,6 +463,9 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
                 print("bad variant: " + str(variant))
 
         lancedef["LanceTags"]["items"] = lancedef["LanceTags"]["items"] + lance_tags
+
+        if category == "MCSupport":
+            lancedef["LanceTags"]["items"] = ["lance_type_MCSupport"]
             
         lancedef["LanceUnits"] = []
 
