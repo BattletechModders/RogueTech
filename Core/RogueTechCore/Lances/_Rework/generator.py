@@ -215,7 +215,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
         case "support":
             if extra == "stealth":
                 include_tags.append("unit_stealth")
-                if index < 2: # attempt faction specific stealth units for half the slots
+                if index < 2: # loosen faction requirement for half the slots
                     include_tags.remove("{CUR_TEAM.faction}")
             else:
                 if index == 0:
@@ -261,13 +261,28 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             else:
                 include_tags.append("unit_advanced")
 
+        case "MCSupport":
+            if index in [0,1]:
+                if extra == "indirect":
+                    include_tags.append("unit_indirectFire")
+                else:
+                    include_tags.append("unit_lance_support")
+
+            if diff < 10:
+                exclude_tags.append("unit_sniper")
+                exclude_tags.append("unit_arrow")
+            if diff < 15:
+                exclude_tags.append("unit_longtom")
+                exclude_tags.append("unit_nuke")
+                exclude_tags.append("unit_legendary")
+
         case _:
             print("bad category: " + str(category))
             traceback.print_stack()
             print("bad category: " + str(category))
             exit()
 
-    if "unit_mech" in include_tags and "unit_risc" not in include_tags:
+    if "unit_mech" in include_tags and "unit_risc" not in include_tags and "unit_legendary" not in exclude_tags:
         if index == 3 and diff > 14:
             include_tags.append("unit_legendary")
         elif index == 2 and diff > 17:
@@ -342,6 +357,10 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
                 slots = 3
                 lance_tags.append("lance_type_notfull")
 
+        if category == "MCSupport":
+            if diff < 5:
+                slots = 3
+
         diff_delta = 0
         if variant == "primitive":
             diff_delta = 3
@@ -375,6 +394,9 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 
             case "duel":
                 lance_tags.append("lance_type_duel")
+
+            case "MCSupport":
+                lance_tags.append("lance_type_MCSupport")
 
 
             case _:
@@ -483,7 +505,7 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
         else:
             save_path = path
         
-        save_path += "/".join([category.capitalize(), composition.capitalize(), variant.upper() if variant == "vtol" else variant.capitalize()])
+        save_path += "/".join([category if category in ["MCSupport", "MCDuel"] else category.capitalize(), composition.capitalize(), variant.upper() if variant == "vtol" else variant.capitalize()])
 
         if not os.path.exists(save_path):
             os.makedirs(save_path)
@@ -653,5 +675,34 @@ build_lances("battle", "mech", "varied", 5, 20, "risc", subfolder="RISC")
 build_lances("battle", "mixed", "varied", 5, 20, "risc", subfolder="RISC")
 build_lances("battle", "vehicle", "varied", 5, 20, "risc", subfolder="RISC")
 build_lances("battle", "mixed", "vtol", 5, 20, "risc", subfolder="RISC")
+
+# Mission control
+# duels and support lances
+
+build_lances("MCSupport", "mech", "low", 1, 8, subfolder="MC")
+build_lances("MCSupport", "mech", "med", 5, 16, subfolder="MC")
+build_lances("MCSupport", "mech", "high", 13, 20, subfolder="MC")
+build_lances("MCSupport", "mixed", "low", 1, 8, subfolder="MC")
+build_lances("MCSupport", "mixed", "med", 5, 16, subfolder="MC")
+build_lances("MCSupport", "mixed", "high", 13, 20, subfolder="MC")
+build_lances("MCSupport", "vehicle", "low", 1, 8, subfolder="MC")
+build_lances("MCSupport", "vehicle", "med", 5, 16, subfolder="MC")
+build_lances("MCSupport", "vehicle", "high", 13, 20, subfolder="MC")
+
+build_lances("MCSupport", "mech", "low", 1, 8, "indirect", subfolder="MC")
+build_lances("MCSupport", "mech", "med", 5, 16, "indirect", subfolder="MC")
+build_lances("MCSupport", "mech", "high", 13, 20, "indirect", subfolder="MC")
+build_lances("MCSupport", "mixed", "low", 1, 8, "indirect", subfolder="MC")
+build_lances("MCSupport", "mixed", "med", 5, 16, "indirect", subfolder="MC")
+build_lances("MCSupport", "mixed", "high", 13, 20, "indirect", subfolder="MC")
+build_lances("MCSupport", "vehicle", "low", 1, 8, "indirect", subfolder="MC")
+build_lances("MCSupport", "vehicle", "med", 5, 16, "indirect", subfolder="MC")
+build_lances("MCSupport", "vehicle", "high", 13, 20, "indirect", subfolder="MC")
+
+exit()
+
+build_lances("MCDuel", "mech", "low", 1, 8, subfolder="MC")
+build_lances("MCDuel", "mech", "med", 5, 16, subfolder="MC")
+build_lances("MCDuel", "mech", "high", 13, 20, subfolder="MC")
 
 exit()
