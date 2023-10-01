@@ -262,10 +262,12 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
                 include_tags.append("unit_advanced")
 
         case "MCSupport":
-            if index in [0,1]:
-                if extra == "indirect":
-                    include_tags.append("unit_indirectFire")
-                else:
+            if extra == "indirect":
+                include_tags.append("unit_indirectFire")
+            else:
+                if index == 0:
+                    include_tags.append("unit_lance_tank")
+                elif index == 1:
                     include_tags.append("unit_lance_support")
 
             if diff < 10:
@@ -275,6 +277,16 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
                 exclude_tags.append("unit_longtom")
                 exclude_tags.append("unit_nuke")
                 exclude_tags.append("unit_legendary")
+
+        case "MCDuel":
+            exclude_tags.append("unit_nuke")
+            exclude_tags.append("unit_powerarmor")
+            exclude_tags.append("unit_protomech")
+
+            if extra == "advanced":
+                include_tags.append("unit_advanced")
+            else:
+                include_tags.append("unit_legendary")
 
         case _:
             print("bad category: " + str(category))
@@ -347,19 +359,21 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
         slots = 4
         if extra == "small" or category == "solo":
             slots = 3
-            lance_tags.append("lance_type_notfull")
 
         if category == "gladiator":
             if diff < 8:
                 slots = 2
-                lance_tags.append("lance_type_notfull")
             elif diff < 16:
                 slots = 3
-                lance_tags.append("lance_type_notfull")
 
         if category == "MCSupport":
             if diff < 5:
                 slots = 3
+        elif category == "MCDuel":
+            slots = 2
+
+        if slots < 4:
+            lance_tags.append("lance_type_notfull")
 
         diff_delta = 0
         if variant == "primitive":
@@ -396,6 +410,8 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
                 lance_tags.append("lance_type_duel")
 
             case "MCSupport":
+                pass
+            case "MCDuel":
                 pass
 
 
@@ -466,6 +482,8 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 
         if category == "MCSupport":
             lancedef["LanceTags"]["items"] = ["lance_type_MCSupport"]
+        elif category == "MCDuel":
+            lancedef["LanceTags"]["items"] = ["lance_type_MCDuel"]
             
         lancedef["LanceUnits"] = []
 
@@ -680,7 +698,7 @@ build_lances("battle", "vehicle", "varied", 5, 20, "risc", subfolder="RISC")
 build_lances("battle", "mixed", "vtol", 5, 20, "risc", subfolder="RISC")
 
 # Mission control
-# duels and support lances
+# support lances & duels
 
 build_lances("MCSupport", "mech", "low", 1, 8, subfolder="MC")
 build_lances("MCSupport", "mech", "med", 5, 16, subfolder="MC")
@@ -702,10 +720,11 @@ build_lances("MCSupport", "vehicle", "low", 1, 8, "indirect", subfolder="MC")
 build_lances("MCSupport", "vehicle", "med", 5, 16, "indirect", subfolder="MC")
 build_lances("MCSupport", "vehicle", "high", 13, 20, "indirect", subfolder="MC")
 
-exit()
-
 build_lances("MCDuel", "mech", "low", 1, 8, subfolder="MC")
 build_lances("MCDuel", "mech", "med", 5, 16, subfolder="MC")
 build_lances("MCDuel", "mech", "high", 13, 20, subfolder="MC")
+build_lances("MCDuel", "mech", "low", 1, 8, "advanced", subfolder="MC")
+build_lances("MCDuel", "mech", "med", 5, 16, "advanced", subfolder="MC")
+build_lances("MCDuel", "mech", "high", 13, 20, "advanced", subfolder="MC")
 
 exit()
