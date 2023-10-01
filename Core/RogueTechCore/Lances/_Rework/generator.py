@@ -427,7 +427,7 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
                 lance_tags.append("lance_type_solo")
 
             case "gladiator":
-                lance_tags.append("lance_type_gladiator")
+                pass
 
             case "duel":
                 lance_tags.append("lance_type_duel")
@@ -507,7 +507,9 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 
         lancedef["LanceTags"]["items"] = lancedef["LanceTags"]["items"] + lance_tags
 
-        if category == "MCSupport":
+        if category == "gladiator":
+            lancedef["LanceTags"]["items"] = ["lance_type_gladiator"]
+        elif category == "MCSupport":
             lancedef["LanceTags"]["items"] = ["lance_type_MCSupport"]
         elif category == "MCDuel":
             lancedef["LanceTags"]["items"] = ["lance_type_MCDuel"]
