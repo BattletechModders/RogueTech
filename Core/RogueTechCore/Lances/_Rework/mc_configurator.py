@@ -27,6 +27,7 @@ for diff in range(1, 50+1):
         opfor_lances = ["Standard_MCSupport", "Standard_Support", "Standard_Fire"]
 
     diff_config["LancePool"] = {}
+    diff_config["LancePool"]["ALL"] = []
     diff_config["Enemy"]["LancePool"] = {}
     diff_config["Enemy"]["LancePool"]["ALL"] = opfor_lances
     diff_config["Allies"]["LancePool"] = {}

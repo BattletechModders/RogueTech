@@ -400,7 +400,7 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 
         diff_delta = 0
         if variant == "primitive":
-            diff_delta = 3
+            diff_delta = 2
         elif extra == "risc":
             diff_delta = -2
 
@@ -716,6 +716,8 @@ build_lances("solo", "mech", "high", 13, 20, "elite", subfolder="Elite")
 
 build_lances("fire", "mech", "med", 5, 16, "elite", subfolder="Elite")
 build_lances("fire", "mech", "high", 13, 20, "elite", subfolder="Elite")
+
+# I initially missed MC elite indirect? added fire as option for late stage support lances already
 
 # Risc submod
 
