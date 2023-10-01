@@ -165,6 +165,12 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             exclude_tags.append("unit_urbie")
             exclude_tags.append("unit_noconvoy")
 
+        case "carrier":
+            if index in [0,1,2]:
+                include_tags.append("unit_vehicle")
+            else:
+                include_tags.append("unit_mech")
+
         case _:
             print("bad composition: " + str(composition))
             traceback.print_stack()
@@ -182,6 +188,10 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
                 if  index in [0,1,2]:
                     include_tags.remove("{CUR_TEAM.faction}")
                     include_tags.append("unit_risc")
+            elif extra == "MBT":
+                include_tags.append("unit_lance_tank")
+            elif extra == "demolisher":
+                include_tags.append("unit_demolisher")
 
         case "cavalry":
             if index in [0,1,2]:
@@ -217,6 +227,11 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
                 include_tags.append("unit_stealth")
                 if index < 2: # loosen faction requirement for half the slots
                     include_tags.remove("{CUR_TEAM.faction}")
+            elif composition == "carrier":
+                if index == 3:
+                    include_tags.append("unit_predator")
+                else:
+                    include_tags.append("unit_carrier")
             else:
                 if index == 0:
                     include_tags.append("unit_lance_tank")
@@ -337,9 +352,17 @@ def grab_pilot_include_exclude(index, diff, category, composition, variant, extr
             if index == 0:
                 include_tags.append("pilot_npc_high")
 
-    elif composition ==  "mechconvoy":
+    elif composition == "mechconvoy":
         include_tags.append("pilot_npc_d"+str(pilot_diff))
         include_tags.append("pilot_npc_low")
+
+    elif composition == "carrier":
+        if index == 3:
+            include_tags.append("pilot_npc_d"+str(pilot_diff))
+            include_tags.append("pilot_npc_high")
+        else:
+            include_tags.append("pilot_npc_tanker_d"+str(pilot_diff))
+            include_tags.append("{CUR_TEAM.faction}")
 
     else:
         print("unhandled pilots: " + " ".join([category,composition]))
@@ -440,6 +463,10 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
                 lance_tags.append("lance_type_OpForConvoy")
             case "mechconvoy":
                 lance_tags.append("lance_type_mechconvoy")
+
+            case "carrier":
+                lance_tags.append("lance_type_mixed")
+                lance_tags.append("lance_type_notallvehicles")
 
             case _:
                 print("bad composition: " + str(composition))
@@ -726,5 +753,14 @@ build_lances("MCDuel", "mech", "high", 13, 20, subfolder="MC")
 build_lances("MCDuel", "mech", "low", 1, 8, "advanced", subfolder="MC")
 build_lances("MCDuel", "mech", "med", 5, 16, "advanced", subfolder="MC")
 build_lances("MCDuel", "mech", "high", 13, 20, "advanced", subfolder="MC")
+
+
+# special themed / variety lances
+
+# get demolished
+build_lances("battle", "vehicle", "varied", 15, 20, "demolisher")
+build_lances("battle", "vehicle", "varied", 8, 20, "MBT")
+# spotter 3 carriers
+build_lances("support", "carrier", "varied", 10, 20)
 
 exit()
