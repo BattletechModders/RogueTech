@@ -152,6 +152,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             exclude_tags.append("unit_vtol")
             exclude_tags.append("unit_airship")
             exclude_tags.append("unit_hover")
+            exclude_tags.append("unit_vbied")
         case "opfor":
             include_tags.append("unit_vehicle")
 
@@ -160,6 +161,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             exclude_tags.append("unit_vtol")
             exclude_tags.append("unit_airship")
             exclude_tags.append("unit_hover")
+            exclude_tags.append("unit_vbied")
         case "mechconvoy":
             include_tags.append("unit_mech")
             exclude_tags.append("unit_urbie")
@@ -512,13 +514,18 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
         elif category == "MCSupport":
             lancedef["LanceTags"]["items"] = ["lance_type_MCSupport"]
         elif category == "MCDuel":
-            lancedef["LanceTags"]["items"] = ["lance_type_MCDuel"]
+            lancedef["LanceTags"]["items"] = ["lance_type_dynamic", "lance_type_MCduel"]
             
         lancedef["LanceUnits"] = []
 
-        for index in range(0, slots):
+        for index in range(0, 4):
 
             slot = copy.deepcopy(slot_template)
+
+            if index >= slots:
+                slot["unitId"] = "mechDef_None"
+                lancedef["LanceUnits"].append(slot)
+                continue
 
             unit_tags = grab_unit_include_exclude(index, diff+diff_delta, category, composition, variant, extra)
 
