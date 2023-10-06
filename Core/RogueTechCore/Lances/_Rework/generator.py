@@ -95,6 +95,7 @@ def grab_reduced_tonnage_tags(diff):
 
 def grab_unit_include_exclude(index, diff, category, composition, variant, extra):
     include_tags = ["{CUR_TEAM.faction}"]
+
     exclude_tags = ["unit_noncombatant"] + grab_diff_weight_excludes(diff, index)
 
     if category in ["solo","gladiator"] and index > 0:
@@ -123,6 +124,9 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
                 exclude_tags.append("unit_bracket_high")
             else:
                 exclude_tags.append("unit_bracket_low")
+
+        case "":
+            pass
     
         case _:
             print("bad variant: " + str(variant))
@@ -135,16 +139,22 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             include_tags.append("unit_mech")
 
         case "mixed":
-            if index in [1,2]:
-                include_tags.append("unit_vehicle")
+            if category != "turret":
+                if index in [1,2]:
+                    include_tags.append("unit_vehicle")
+                else:
+                    include_tags.append("unit_mech")
             else:
-                include_tags.append("unit_mech")
+                include_tags.append("unit_turret")
+                if index > 1:
+                    include_tags.append("unit_aaa")
 
         case "vehicle":
             include_tags.append("unit_vehicle")
 
         # convoys
         case "allied":
+            include_tags.append("unit_vehicle")
             include_tags.append("unit_vehicle_apc")
 
             exclude_tags.remove("unit_noncombatant")
@@ -173,6 +183,15 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             else:
                 include_tags.append("unit_mech")
 
+        # turrets
+        case "standard":
+            include_tags.append("unit_turret")
+        case "AAA":
+            include_tags.append("unit_turret")
+            include_tags.append("unit_aaa")
+        case "artillery":
+            include_tags.append("unit_artilleryturret")
+
         case _:
             print("bad composition: " + str(composition))
             traceback.print_stack()
@@ -187,7 +206,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
     match(category):
         case "battle":
             if extra == "risc":
-                if  index in [0,1,2]:
+                if  index in [0,1] or diff > 10 and index == 2:
                     include_tags.remove("{CUR_TEAM.faction}")
                     include_tags.append("unit_risc")
             elif extra == "MBT":
@@ -305,6 +324,9 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             else:
                 include_tags.append("unit_legendary")
 
+        case "turret":
+            pass
+
         case _:
             print("bad category: " + str(category))
             traceback.print_stack()
@@ -335,6 +357,9 @@ def grab_pilot_include_exclude(index, diff, category, composition, variant, extr
     elif extra == "risc":
         include_tags.append("pilot_npc_d"+str(pilot_diff))
         include_tags.append("pilot_risc")
+        
+    elif category == "turret":
+        include_tags.append("pilot_turret_d"+str(pilot_diff))
 
     elif composition == "mech":
         include_tags.append("pilot_npc_d"+str(pilot_diff))
@@ -438,7 +463,8 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
                 pass
             case "MCDuel":
                 pass
-
+            case "turret":
+                lance_tags.append("lance_type_turret")
 
             case _:
                 print("bad category: " + str(category))
@@ -452,8 +478,9 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
                 lance_tags.append("lance_type_notallvehicles")
 
             case "mixed":
-                lance_tags.append("lance_type_mixed")
-                lance_tags.append("lance_type_notallvehicles")
+                if category != "turret":
+                    lance_tags.append("lance_type_mixed")
+                    lance_tags.append("lance_type_notallvehicles")
 
             case "vehicle":
                 lance_tags.append("lance_type_vehicle")
@@ -469,6 +496,17 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
             case "carrier":
                 lance_tags.append("lance_type_mixed")
                 lance_tags.append("lance_type_notallvehicles")
+            
+            # turrets
+            case "standard":
+                pass
+            case "mixed":
+                pass
+            case "AAA":
+                lance_tags.append("lance_type_AAA_turret")
+            case "artillery":
+                lance_tags.append("lance_type_arty_turret")
+                pass
 
             case _:
                 print("bad composition: " + str(composition))
@@ -500,6 +538,8 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 #                    lance_tags.append("lance_bracket_high")
 
             case "varied":
+                pass
+            case "":
                 pass
 
             case _:
@@ -539,8 +579,10 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 
             if "unit_mech" in unit_tags[0]:
                 slot["unitType"] = "Mech"
-            elif any(tag in ["unit_vehicle", "unit_vtol", "unit_vehicle_apc"] for tag in unit_tags[0]):
+            elif any(tag in ["unit_vehicle", "unit_vtol"] for tag in unit_tags[0]):
                 slot["unitType"] = "Vehicle"
+            elif any(tag in ["unit_turret", "unit_artilleryturret"] for tag in unit_tags[0]):
+                slot["unitType"] = "Turret"
             else:
                 print("unhandled slot type")
                 print(" ".join([composition, category, variant]))
@@ -550,7 +592,13 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
             lancedef["LanceUnits"].append(slot)
 
         lancedef["Difficulty"] = diff
-        lancedef["Description"]["Id"] = "_".join(["lancedef", composition, category, variant, "d"+str(diff)])
+        lance_id = "lancedef"
+        lance_id += "_" + composition
+        lance_id += "_" + category
+        if variant != "":
+            lance_id += "_" + variant
+        lance_id += "_" +  "d"+str(diff)
+        lancedef["Description"]["Id"] = lance_id
 
         if extra != "":
             lancedef["Description"]["Id"] = lancedef["Description"]["Id"] + "_" + extra
@@ -771,7 +819,13 @@ build_lances("MCDuel", "mech", "high", 13, 20, "advanced", subfolder="MC")
 # get demolished
 build_lances("battle", "vehicle", "varied", 15, 20, "demolisher")
 build_lances("battle", "vehicle", "varied", 8, 20, "MBT")
+
 # spotter 3 carriers
 build_lances("support", "carrier", "varied", 10, 20)
+
+build_lances("turret", "standard", "", 1, 20)
+build_lances("turret", "mixed", "", 1, 20)
+build_lances("turret", "AAA", "", 1, 20)
+# build_lances("turret", "artillery", "", 60, 60) hand made
 
 exit()
