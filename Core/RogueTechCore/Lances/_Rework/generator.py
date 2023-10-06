@@ -474,8 +474,9 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 
         match(composition):
             case "mech":
-                lance_tags.append("lance_type_mech")
-                lance_tags.append("lance_type_notallvehicles")
+                if category != "duel":
+                    lance_tags.append("lance_type_mech")
+                    lance_tags.append("lance_type_notallvehicles")
 
             case "mixed":
                 if category != "turret":
