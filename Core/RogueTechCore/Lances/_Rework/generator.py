@@ -527,6 +527,7 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 
             case "primitive":
                 lance_tags.append("lance_bracket_low")
+                lance_tags.append("lance_type_primitive")
 
             case "vtol":
                 if composition == "vehicle":
@@ -621,6 +622,14 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
         with open(save_path, 'w', newline='\r\n') as new_file:
             json.dump(lancedef, new_file, indent=2)
 
+
+# play test notes
+# low brackets too high to 8, "past it" at d5 already
+#
+#
+#
+#
+#
 
 # lance_type_battle
 
