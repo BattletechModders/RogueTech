@@ -89,23 +89,21 @@
   "CriticalComponent": false,
   "Modes": [
     {
-      "Id": "short",
-      "UIName": "Short",
-      "Description": "Short Range Artillery",
+      "Id": "directfire",
+      "UIName": "Direct",
+      "Description": "Fire Directly at line of sight targets at short range. -4 Accuracy",
       "isBaseMode": false,
       "AccuracyModifier": 4,
-      "DirectFireModifier": 2,
+      "DirectFireModifier": 0,
       "EvasivePipsIgnored": 15,
       "ForbiddenRange": 180,
       "ShortRange": -2400,
       "MediumRange": -2400,
       "LongRange": -2400,
       "MaxRange": -2400,
-      "IndirectFireCapable": true,
+      "IndirectFireCapable": false,
       "CantHitUnaffecedByPathing": true,
-      "AlwaysIndirectVisuals": true,
-      "MinMissRadius": 5,
-      "MaxMissRadius": 100,
+      "AlwaysIndirectVisuals": false,
       "statusEffects": [
         {
           "durationData": {
@@ -128,81 +126,7 @@
           "statisticData": {
             "statName": "SelfknockdownCheck_OnFire",
             "operation": "Float_Add",
-            "modValue": "0.4",
-            "modType": "System.Single"
-          }
-        }
-      ]
-    },
-    {
-      "Id": "long",
-      "UIName": "Long Range Artillery",
-      "Description": "Fire in an indirect high arc at targeted ground location. One round travel time.",
-      "isBaseMode": true,
-      "DamagePerShot": -149,
-      "Instability": -35,
-      "AccuracyModifier": 5,
-      "DirectFireModifier": 2,
-      "EvasivePipsIgnored": 15,
-      "ForbiddenRange": 180,
-      "IndirectFireCapable": true,
-      "CantHitUnaffecedByPathing": true,
-      "AlwaysIndirectVisuals": true,
-      "deferredEffect": {
-        "id": "LongTomArtillery",
-        "rounds": 1,
-        "text": "Artillery",
-        "MinMissRadius": 5,
-        "MaxMissRadius": 100,
-        "damageApplyTime": 4,
-        "FireTerrainChance": 0.9,
-        "FireDurationWithoutForest": 2,
-        "FireTerrainStrength": 15,
-        "FireTerrainCellRadius": 15,
-        "statusEffectsRangeFalloff": true,
-        "statusEffects": [],
-        "sticky": true,
-        "TerrainVFX": "vfxPrfPrtl_terrainLavaCracks_loop",
-        "TerrainVFXScale": {
-          "x": 1,
-          "y": 1,
-          "z": 1
-        },
-        "RangeColor": {
-          "C": "#00FF00",
-          "I": 1.5
-        },
-        "VFX": "vfxPrfPrtl_artilleryImpact_barrage",
-        "waitVFX": "vfxPrfPrtl_artillerySmokeSignal_loop",
-        "VFXtime": 5,
-        "SFX": "big_explosion",
-        "tempDesignMask": "DesignMaskRough",
-        "tempDesignMaskTurns": 3,
-        "tempDesignMaskCellRadius": 8
-      },
-      "statusEffects": [
-        {
-          "durationData": {
-            "duration": 1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "OnWeaponFire",
-            "effectTargetType": "Creator",
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Buff",
-          "Description": {
-            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
-            "Name": "Long Tom Artillery / Artillery: Increased Self Knockdown on Fire",
-            "Details": "Tubthumping",
-            "Icon": "uixSvgIcon_run_n_gun"
-          },
-          "statisticData": {
-            "statName": "SelfknockdownCheck_OnFire",
-            "operation": "Float_Add",
-            "modValue": "0.4",
+            "modValue": "0.2",
             "modType": "System.Single"
           }
         }
@@ -242,6 +166,48 @@
             "statName": "SelfknockdownCheck_OnFire",
             "operation": "Float_Add",
             "modValue": "0.2",
+            "modType": "System.Single"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "indirectfire",
+      "UIName": "Artillery",
+      "Description": "Fire in a high arc at ground targets. -5 Accuracy",
+      "isBaseMode": true,
+      "AccuracyModifier": 5,
+      "DirectFireModifier": 2,
+      "EvasivePipsIgnored": 15,
+      "ForbiddenRange": 180,
+      "MinMissRadius": 5,
+      "MaxMissRadius": 100,
+      "IndirectFireCapable": true,
+      "CantHitUnaffecedByPathing": true,
+      "AlwaysIndirectVisuals": true,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": 1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "OnWeaponFire",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
+            "Name": "Long Tom Artillery / Artillery: Increased Self Knockdown on Fire",
+            "Details": "Tubthumping",
+            "Icon": "uixSvgIcon_run_n_gun"
+          },
+          "statisticData": {
+            "statName": "SelfknockdownCheck_OnFire",
+            "operation": "Float_Add",
+            "modValue": "0.4",
             "modType": "System.Single"
           }
         }
