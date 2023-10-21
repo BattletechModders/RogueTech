@@ -300,6 +300,10 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
         case "MCSupport":
             if extra == "indirect":
                 include_tags.append("unit_indirectFire")
+            elif extra == "elite":
+                if  index in [1,2]:
+                    include_tags.remove("{CUR_TEAM.faction}")
+                    include_tags.append("unit_elite")
             else:
                 if index == 0:
                     include_tags.append("unit_lance_tank")
@@ -333,11 +337,18 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             print("bad category: " + str(category))
             exit()
 
-    if "unit_mech" in include_tags and "unit_risc" not in include_tags and "unit_legendary" not in exclude_tags:
-        if index == 3 and diff > 14:
-            include_tags.append("unit_legendary")
-        elif index == 2 and diff > 17:
-            include_tags.append("unit_legendary")
+    if "unit_mech" in include_tags:
+        if "unit_legendary" not in include_tags and category not in ["solo","duel","MCDuel","gladiator"]:
+            if diff < 6 and index > 0:
+                exclude_tags.append("unit_legendary")
+            elif diff < 12 and index > 1:
+                exclude_tags.append("unit_legendary")
+
+        if "unit_legendary" not in exclude_tags and "unit_risc" not in include_tags:
+            if index == 3 and diff > 14:
+                include_tags.append("unit_legendary")
+            elif index == 2 and diff > 17:
+                include_tags.append("unit_legendary")
 
     # not many assault convoy vehicles, always allow heavies for variety in those lances
     if composition in ["allied", "opfor"] and "unit_assault" not in exclude_tags and "unit_heavy" in exclude_tags:
@@ -837,5 +848,8 @@ build_lances("turret", "standard", "", 1, 20)
 build_lances("turret", "mixed", "", 1, 20)
 build_lances("turret", "AAA", "", 1, 20)
 # build_lances("turret", "artillery", "", 60, 60) hand made
+
+# elite support
+build_lances("MCSupport", "mech", "high", 13, 20, "elite", subfolder="Elite")
 
 exit()
