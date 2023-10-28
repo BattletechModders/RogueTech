@@ -16,9 +16,10 @@
     },
     "BonusDescriptions": [
       "RequireNI",
-      "Omni",
+      "TorsoMount",
       "ReplacesGyro: 60",
       "AcePilot",
+      "HSImmune",
       "AllSkills: 1",
       "EvaMax: +1",
       "EvaPips: +1",
@@ -28,26 +29,25 @@
       "StabDamageTaken: -25%",
       "FailChance: 1%",
       "FailInjury",
-      "ArmorTPCost: -50%",
-      "StructureTPCost: -50%",
-      "ArmorCBCost: +20%",
-      "StructureCBCost: +25%",
+      "NoEject",
       "BleedReduction: 50%"
     ],
-        "CriticalEffects": {
-          "PenalizedEffectIDs": [
-            [
-              "CriticalEffect-GyroCrit",
-              "CriticalEffect-GyroStandupFail"
-            ]
-          ],
-          "DeathMethod": "PilotKilled"
-        },
+    "CriticalEffects": {
+      "PenalizedEffectIDs": [
+        [
+          "CriticalEffect-Sensors1",
+          "CriticalEffect-SensorsCheck1",
+          "CriticalEffect-GyroCrit",
+          "CriticalEffect-GyroStandupFail"
+        ]
+      ],
+      "DeathMethod": "PilotKilled"
+    },
     "ActivatableComponent": {
       "ButtonName": "DNI",
       "FailFlatChance": 0.01,
       "FailRoundsStart": 1,
-      "FailChancePerTurn": 0,
+      "FailChancePerTurn": 0.0,
       "FailCheckOnActivationEnd": true,
       "ShutdownOnFail": false,
       "InjuryOnFail": true,
@@ -61,15 +61,26 @@
       "statusEffects": []
     },
     "Flags": [
-      "not_broken",
-      "no_salvage",
       "ignore_shutdown",
-      "autorepair"
+      "not_broken"
     ],
     "IBLS": {
       "StorageSize": 2
     },
-    "Lootable": "Gear_Cockpit_Interface",
+    "Linked": {
+      "Links": [
+        {
+          "ComponentDefId": "Default_Cockpit_LifeSupportA_Torso",
+          "Location": "LeftTorso",
+          "ComponentDefType": "Upgrade"
+        },
+        {
+          "ComponentDefId": "Default_Cockpit_LifeSupportB_Torso",
+          "Location": "RightTorso",
+          "ComponentDefType": "Upgrade"
+        }
+      ]
+    },
     "Sorter": 6,
     "Weights": {
       "GyroFactor": 0
@@ -79,12 +90,12 @@
     "Cost": 620000,
     "Rarity": 4,
     "Purchasable": false,
-    "Manufacturer": "WolfClan",
+    "Manufacturer": "Word of Blake",
     "Model": "Interface Cockpit",
-    "UIName": "Skinwalker Cockpit Interface",
-    "Id": "Unique_Cockpit_Interface_Skinwalker",
+    "UIName": "Cockpit Interface (Torso Mounted)",
+    "Id": "Gear_Cockpit_Interface_TorsoMounted",
     "Name": "Interface Cockpit",
-    "Details": "Designed to make use of the experimental Interface System developed by the Word of Blake based on Clan Protomech designs, this cockpit completely removes the need for a BattleMech Gyro and is a custom fit for the Skinwalker.",
+    "Details": "Designed to make use of the experimental Interface System developed by the Word of Blake based on Clan Protomech designs, does this cockpit completely remove the need for a BattleMech Gyro",
     "Icon": "interface"
   },
   "BonusValueA": "",
@@ -95,7 +106,7 @@
   "BattleValue": 0,
   "InventorySize": 2,
   "Tonnage": 2,
-  "AllowedLocations": "Head",
+  "AllowedLocations": "CenterTorso",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
   "statusEffects": [
@@ -111,7 +122,7 @@
       "effectType": "StatisticEffect",
       "Description": {
         "Id": "NightVision",
-        "Name": "Skinwalker Cockpit Interface: Night Vision",
+        "Name": "Cockpit Interface: Night Vision",
         "Details": "PASSIVE: Enables Night Vision.",
         "Icon": "uixSvgIcon_ability_precisionstrike"
       },
@@ -135,7 +146,7 @@
       "effectType": "StatisticEffect",
       "Description": {
         "Id": "InterFaceMoveAfterShoot",
-        "Name": "Skinwalker Cockpit Interface: Allow Move After Shooting",
+        "Name": "Cockpit Interface: Allow Move After Shooting",
         "Details": "This unit can use its movement before or after shooting.",
         "Icon": "uixSvgIcon_run_n_gun"
       },
@@ -158,8 +169,57 @@
       },
       "effectType": "StatisticEffect",
       "Description": {
+        "Id": "HeadShotDamageImmunity",
+        "Name": "Cockpit Interface: Set Ignore Head Injuries",
+        "Details": "Take no Headshot pilot Damage",
+        "Icon": "uixSvgIcon_ability_bulwark"
+      },
+      "statisticData": {
+        "statName": "IRIgnoreHeadInjuries",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
+      },
+      "nature": "Buff"
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTargetsCreator": true,
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Torso-Mounted",
+        "Name": "Cockpit Interface: Is Torso Mount",
+        "Details": "Torso mounted cockpit, no injuries on head hits.",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
+      },
+      "nature": "Debuff",
+      "statisticData": {
+        "statName": "isTorsoMount",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
         "Id": "InterfaceureFoot",
-        "Name": "Skinwalker Cockpit Interface: Enable Guarded After Move",
+        "Name": "Cockpit Interface: Enable Guarded After Move",
         "Details": "PASSIVE: This unit is GUARDED (50% damage reduction against ranged attacks to the front and side) from remaining stationary.Increases Melee Damage by 10%.",
         "Icon": "uixSvgIcon_ability_bulwark"
       },
@@ -185,7 +245,7 @@
       "effectType": "StatisticEffect",
       "Description": {
         "Id": "InterfaceStabDmgReduction",
-        "Name": "Skinwalker Cockpit Interface: Decreased Stability Damage Taken",
+        "Name": "Cockpit Interface: Decreased Stability Damage Taken",
         "Details": "Incoming stability damage reduced by 30%.",
         "Icon": "uixSvgIcon_equipment_Gyro"
       },
@@ -211,7 +271,7 @@
       "effectType": "StatisticEffect",
       "Description": {
         "Id": "GyroGenericThreshhold",
-        "Name": "Skinwalker Cockpit Interface: Increased Unsteady Threshold",
+        "Name": "Cockpit Interface: Increased Unsteady Threshold",
         "Details": "The gyro helps establish center-of-mass equilibrium for the BattleMech.",
         "Icon": "uixSvgIcon_equipment_Gyro"
       },
@@ -238,7 +298,7 @@
       "effectType": "StatisticEffect",
       "Description": {
         "Id": "LV_ADVANCED_SENSORS",
-        "Name": "Skinwalker Cockpit Interface: Increased Advanced Sensor Strength",
+        "Name": "Cockpit Interface: Increased Advanced Sensor Strength",
         "Details": "Provides detailed information on enemy units",
         "Icon": "uixSvgIcon_status_ECM-ghost"
       },
@@ -262,7 +322,7 @@
       "effectType": "StatisticEffect",
       "Description": {
         "Id": "MaxEvasion",
-        "Name": "Skinwalker Cockpit Interface: Increased Max Evasive Pips",
+        "Name": "Cockpit Interface: Increased Max Evasive Pips",
         "Details": "This unit generates an extra EVASIVE charge from movement actions (up to its maximum).",
         "Icon": "uixSvgIcon_action_evasivemove"
       },
@@ -287,7 +347,7 @@
       "effectType": "StatisticEffect",
       "Description": {
         "Id": "GainEvasion",
-        "Name": "Skinwalker Cockpit Interface: Increased Evasive Pips Gain",
+        "Name": "Cockpit Interface: Increased Evasive Pips Gain",
         "Details": "This unit generates an extra EVASIVE charge from movement actions (up to its maximum).",
         "Icon": "uixSvgIcon_action_evasivemove"
       },
@@ -313,7 +373,7 @@
       "effectType": "StatisticEffect",
       "Description": {
         "Id": "StatusEffect_Cockpit_Skill_Gunnery",
-        "Name": "Skinwalker Cockpit Interface: Increased Gunnery",
+        "Name": "Cockpit Interface: Increased Gunnery",
         "Details": "Buffs Gunnery Skill",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
@@ -340,7 +400,7 @@
       "effectType": "StatisticEffect",
       "Description": {
         "Id": "StatusEffect_Cockpit_Skill_Piloting",
-        "Name": "Skinwalker Cockpit Interface: Increased Piloting",
+        "Name": "Cockpit Interface: Increased Piloting",
         "Details": "Buffs Piloting Skill",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
@@ -367,7 +427,7 @@
       "effectType": "StatisticEffect",
       "Description": {
         "Id": "StatusEffect_Cockpit_Skill_Guts",
-        "Name": "Skinwalker Cockpit Interface: Increased Guts",
+        "Name": "Cockpit Interface: Increased Guts",
         "Details": "Buffs Guts Skill",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
@@ -394,7 +454,7 @@
       "effectType": "StatisticEffect",
       "Description": {
         "Id": "StatusEffect_Cockpit_Skill_Tactics",
-        "Name": "Skinwalker Cockpit Interface: Increased Tactics",
+        "Name": "Cockpit Interface: Increased Tactics",
         "Details": "Buffs Tactics Skill",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
@@ -413,6 +473,31 @@
         "stackLimit": -1
       },
       "targetingData": {
+        "effectTargetsCreator": true,
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "Torso-Mounted",
+        "Name": "Cockpit Interface: Is Torso Mount 2",
+        "Details": "Torso mounted cockpit, no injuries on head hits.",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
+      },
+      "nature": "Debuff",
+      "statisticData": {
+        "statName": "isTorsoMount",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
         "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
         "showInTargetPreview": false,
@@ -421,7 +506,7 @@
       "effectType": "StatisticEffect",
       "Description": {
         "Id": "CockpitBleed",
-        "Name": "Skinwalker Cockpit Interface: Decreased Bleeding Rate",
+        "Name": "Cockpit Interface: Decreased Bleeding Rate",
         "Details": "Bleed Rate x 0.6",
         "Icon": "blood"
       },
@@ -433,19 +518,43 @@
         "modType": "System.Single",
         "targetCollection": "Pilot"
       }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "PrimitiveCockpitEject",
+        "Name": "Cockpit Interface: Disallow Ejection",
+        "Details": "PASSIVE: Attacking with a single weapon ignores COVER and GUARDED on the target.",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "statisticData": {
+        "statName": "CanEject",
+        "operation": "Set",
+        "modValue": "false",
+        "modType": "System.Boolean",
+        "targetCollection": "Pilot"
+      },
+      "nature": "Buff"
     }
   ],
   "ComponentTags": {
     "items": [
+      "LootMagnetBlacklist",
       "ignore_shutdown",
       "component_type_stock",
-      "BLACKLISTED",
       "DirectNeuralInterface",
       "RequireNI",
       "BAIncompatible",
       "ProtoIncompatible",
-      "SuperheavyIncompatible",
-      "LootMagnetBlacklist"
+      "SuperheavyIncompatible"
     ],
     "tagSetSourceFile": ""
   }
