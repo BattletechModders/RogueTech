@@ -123,6 +123,8 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             pass
         case "risc":
             pass
+        case "command":
+            pass
 
         case "":
             pass
@@ -251,6 +253,15 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
                     include_tags.append("unit_predator")
                 else:
                     include_tags.append("unit_carrier")
+            elif variant == "command":
+                if index == 0:
+                    include_tags.append("unit_lance_tank")
+                elif index in [1,2]:
+                    include_tags.append("unit_indirectFire")
+                else:
+                    exclude_tags.remove("unit_noncombatant")
+                    include_tags.append("unit_command")
+                    include_tags.append("unit_advanced")
             else:
                 if index == 0:
                     include_tags.append("unit_lance_tank")
@@ -551,7 +562,7 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
                 pass
             case "risc":
                 pass
-            case "risc_vtol":
+            case "command":
                 pass
             case "":
                 pass
@@ -669,7 +680,7 @@ build_lances("battle", "mixed", "med", 4, 16, "vtol")
 build_lances("battle", "mixed", "high", 10, 20, "vtol")
 
 
-# lance_type_cavalry - 3 vanguard, no support
+# lance_type_cavalry - 2 vanguard, no support
 
 build_lances("cavalry", "mech", "low", 1, 3, "small")
 build_lances("cavalry", "mech", "low", 1, 6)
@@ -687,7 +698,7 @@ build_lances("cavalry", "vehicle", "med", 4, 16)
 build_lances("cavalry", "vehicle", "high", 10, 20)
 
 
-# lance_type_fire - 3 assassin, no vanguard
+# lance_type_fire - 2 assassin, no vanguard
 
 build_lances("fire", "mech", "low", 1, 3, "small")
 build_lances("fire", "mech", "low", 1, 6)
@@ -842,6 +853,11 @@ build_lances("MCDuel", "mech", "med", 4, 16, "advanced", subfolder="MC")
 build_lances("MCDuel", "mech", "high", 10, 20, "advanced", subfolder="MC")
 
 
+build_lances("turret", "standard", "", 1, 20)
+build_lances("turret", "mixed", "", 1, 20)
+build_lances("turret", "AAA", "", 1, 20)
+build_lances("turret", "artillery", "", 60, 60)
+
 # special themed / variety lances
 
 # get demolished
@@ -851,10 +867,11 @@ build_lances("battle", "vehicle", "", 8, 20, "MBT")
 # spotter 3 carriers
 build_lances("support", "carrier", "", 10, 20)
 
-build_lances("turret", "standard", "", 1, 20)
-build_lances("turret", "mixed", "", 1, 20)
-build_lances("turret", "AAA", "", 1, 20)
-build_lances("turret", "artillery", "", 60, 60)
+
+# tank + indirect + command
+build_lances("support", "mech", "command", 8, 20)
+build_lances("support", "mixed", "command", 8, 20)
+build_lances("support", "vehicle", "command", 8, 20)
 
 
 exit()

@@ -19,7 +19,7 @@ for diff in range(1, 50+1):
     elif diff < 8:
         ally_lances = ["Standard_MCSupport", "Damaged_Lightly_MCSupport"]
         opfor_lances = ["Standard_MCSupport", "Damaged_Lightly_MCSupport"]
-    elif diff < 12:
+    elif diff < 14:
         ally_lances = ["Standard_MCSupport"]
         opfor_lances = ["Standard_MCSupport", "Standard_Support"]
     else:
@@ -38,7 +38,7 @@ for diff in range(1, 50+1):
     diff_config["Allies"]["Max"] = 1
     diff_config["Enemy"]["Max"] = 1 if diff < 10 else 2 
 
-    # .5 .45 .4 .3 ... .05 .01 .01 .01
+    # .5 .45 .4 .35 ... .05 .01 .01 .01
     diff_config["Allies"]["ChanceToSpawn"] = round(max(0.01, 0.5 - 0.05*(diff-1)), ndigits=3)
 
     if diff < 10:
