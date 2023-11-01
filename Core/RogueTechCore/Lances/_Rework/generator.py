@@ -95,11 +95,14 @@ def grab_reduced_tonnage_tags(diff):
 
 def grab_unit_include_exclude(index, diff, category, composition, variant, extra):
     include_tags = ["{CUR_TEAM.faction}"]
+    exclude_tags = []
 
-    exclude_tags = ["unit_noncombatant"] + grab_diff_weight_excludes(diff, index)
-
-    if category in ["solo","gladiator"] and index > 0:
+    if category == "turret" and composition == "artillery" or extra == "demolisher":
+        exclude_tags = ["unit_noncombatant"]
+    elif category in ["solo","gladiator"] and index > 0:
         exclude_tags = ["unit_noncombatant"] + grab_reduced_tonnage_tags(diff)
+    else:
+        exclude_tags = ["unit_noncombatant"] + grab_diff_weight_excludes(diff, index)
 
     match(variant):
         case "low":
@@ -109,21 +112,17 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
         case "high":
             include_tags.append("unit_bracket_high")
         case "primitive":
-            include_tags.remove("{CUR_TEAM.faction}")
-            include_tags.append("unit_primitive")
-        case "vtol":
+            # mix low and primitive on "high" diff
+            if diff > 5 and index == 1 or diff > 8 and index == 3:
+                include_tags.append("unit_bracket_low")
+            else: 
+                include_tags.append("unit_primitive")
+                include_tags.remove("{CUR_TEAM.faction}")
+
+        case "stealth":
             pass
-#            if diff < 6:
-#                include_tags.append("unit_bracket_low")
-#            elif diff < 16:
-#                include_tags.append("unit_bracket_med")
-#            else:
-#                include_tags.append("unit_bracket_high")
-        case "varied":
-            if diff <= 10:
-                exclude_tags.append("unit_bracket_high")
-            else:
-                exclude_tags.append("unit_bracket_low")
+        case "risc":
+            pass
 
         case "":
             pass
@@ -198,14 +197,13 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             print("bad composition: " + str(composition))
             exit()
 
-    if variant == "vtol":
+    if extra == "vtol":
         if "unit_vehicle" in include_tags:
-            include_tags.remove("unit_vehicle")
             include_tags.append("unit_vtol")
 
     match(category):
         case "battle":
-            if extra == "risc":
+            if variant == "risc":
                 if  index in [0,1] or diff > 10 and index == 2:
                     include_tags.remove("{CUR_TEAM.faction}")
                     include_tags.append("unit_risc")
@@ -215,12 +213,12 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
                 include_tags.append("unit_demolisher")
 
         case "cavalry":
-            if index in [0,1,2]:
+            if index in [0,1]:
                 include_tags.append("unit_lance_vanguard")
             exclude_tags.append("unit_lance_support")
 
         case "fire":
-            if index in [0,1,2]:
+            if index in [0,1]:
                 include_tags.append("unit_lance_assassin")
             exclude_tags.append("unit_lance_vanguard")
             
@@ -244,9 +242,9 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             exclude_tags.append("unit_lance_assassin")
             
         case "support":
-            if extra == "stealth":
+            if variant == "stealth":
                 include_tags.append("unit_stealth")
-                if index < 2: # loosen faction requirement for half the slots
+                if index > 1: # loosen faction requirement for half the slots
                     include_tags.remove("{CUR_TEAM.faction}")
             elif composition == "carrier":
                 if index == 3:
@@ -310,10 +308,10 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
                 elif index == 1:
                     include_tags.append("unit_lance_support")
 
-            if diff < 10:
+            if diff < 5:
                 exclude_tags.append("unit_sniper")
                 exclude_tags.append("unit_arrow")
-            if diff < 15:
+            if diff < 10:
                 exclude_tags.append("unit_longtom")
                 exclude_tags.append("unit_nuke")
                 exclude_tags.append("unit_legendary")
@@ -365,7 +363,7 @@ def grab_pilot_include_exclude(index, diff, category, composition, variant, extr
     if category == "duel" or extra == "elite":
         include_tags.append("pilot_elite_d"+str(pilot_diff))
 
-    elif extra == "risc":
+    elif variant == "risc":
         include_tags.append("pilot_npc_d"+str(pilot_diff))
         include_tags.append("pilot_risc")
         
@@ -438,7 +436,7 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 
         diff_delta = 0
         if variant == "primitive":
-            diff_delta = 2
+            diff_delta = 3
         elif extra == "risc":
             diff_delta = -2
 
@@ -537,8 +535,8 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
                 lance_tags.append("lance_bracket_high")
 
             case "primitive":
-                lance_tags.append("lance_bracket_low")
                 lance_tags.append("lance_type_primitive")
+                lance_tags.append("lance_bracket_low")
 
             case "vtol":
                 if composition == "vehicle":
@@ -549,8 +547,11 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 #                    lance_tags.append("lance_bracket_med")
 #                else:
 #                    lance_tags.append("lance_bracket_high")
-
-            case "varied":
+            case "stealth":
+                pass
+            case "risc":
+                pass
+            case "risc_vtol":
                 pass
             case "":
                 pass
@@ -623,7 +624,7 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
         else:
             save_path = path
         
-        save_path += "/".join([category if category in ["MCSupport", "MCDuel"] else category.capitalize(), composition.capitalize(), variant.upper() if variant == "vtol" else variant.capitalize()])
+        save_path += "/".join([category if category in ["MCSupport", "MCDuel"] else category.capitalize(), composition.capitalize(), variant.capitalize()])
 
         if not os.path.exists(save_path):
             os.makedirs(save_path)
@@ -645,211 +646,215 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 # lance_type_battle
 
 build_lances("battle", "mech", "low", 1, 3, "small")
-build_lances("battle", "mech", "low", 1, 8)
-build_lances("battle", "mech", "med", 5, 16)
-build_lances("battle", "mech", "high", 13, 20)
+build_lances("battle", "mech", "low", 1, 6)
+build_lances("battle", "mech", "med", 4, 16)
+build_lances("battle", "mech", "high", 10, 20)
 build_lances("battle", "mech", "primitive", 1, 3, "small")
-build_lances("battle", "mech", "primitive", 1, 10)
+build_lances("battle", "mech", "primitive", 1, 11)
 
 build_lances("battle", "mixed", "low", 1, 3, "small")
-build_lances("battle", "mixed", "low", 1, 8)
-build_lances("battle", "mixed", "med", 5, 16)
-build_lances("battle", "mixed", "high", 13, 20)
+build_lances("battle", "mixed", "low", 1, 6)
+build_lances("battle", "mixed", "med", 4, 16)
+build_lances("battle", "mixed", "high", 10, 20)
 build_lances("battle", "mixed", "primitive", 1, 3, "small")
-build_lances("battle", "mixed", "primitive", 1, 10)
+build_lances("battle", "mixed", "primitive", 1, 11)
 
 build_lances("battle", "vehicle", "low", 1, 3, "small")
-build_lances("battle", "vehicle", "low", 1, 8)
-build_lances("battle", "vehicle", "med", 5, 16)
-build_lances("battle", "vehicle", "high", 13, 20)
-build_lances("battle", "vehicle", "primitive", 1, 10)
+build_lances("battle", "vehicle", "low", 1, 6)
+build_lances("battle", "vehicle", "med", 4, 16)
+build_lances("battle", "vehicle", "high", 10, 20)
+build_lances("battle", "vehicle", "primitive", 1, 11)
 
-build_lances("battle", "mixed", "vtol", 1, 20)
+build_lances("battle", "mixed", "med", 4, 16, "vtol")
+build_lances("battle", "mixed", "high", 10, 20, "vtol")
 
 
 # lance_type_cavalry - 3 vanguard, no support
 
 build_lances("cavalry", "mech", "low", 1, 3, "small")
-build_lances("cavalry", "mech", "low", 1, 8)
-build_lances("cavalry", "mech", "med", 5, 16)
-build_lances("cavalry", "mech", "high", 13, 20)
+build_lances("cavalry", "mech", "low", 1, 6)
+build_lances("cavalry", "mech", "med", 4, 16)
+build_lances("cavalry", "mech", "high", 10, 20)
 
 build_lances("cavalry", "mixed", "low", 1, 3, "small")
-build_lances("cavalry", "mixed", "low", 1, 8)
-build_lances("cavalry", "mixed", "med", 5, 16)
-build_lances("cavalry", "mixed", "high", 13, 20)
+build_lances("cavalry", "mixed", "low", 1, 6)
+build_lances("cavalry", "mixed", "med", 4, 16)
+build_lances("cavalry", "mixed", "high", 10, 20)
 
 build_lances("cavalry", "vehicle", "low", 1, 3, "small")
-build_lances("cavalry", "vehicle", "low", 1, 8)
-build_lances("cavalry", "vehicle", "med", 5, 16)
-build_lances("cavalry", "vehicle", "high", 13, 20)
+build_lances("cavalry", "vehicle", "low", 1, 6)
+build_lances("cavalry", "vehicle", "med", 4, 16)
+build_lances("cavalry", "vehicle", "high", 10, 20)
 
 
 # lance_type_fire - 3 assassin, no vanguard
 
 build_lances("fire", "mech", "low", 1, 3, "small")
-build_lances("fire", "mech", "low", 1, 8)
-build_lances("fire", "mech", "med", 5, 16)
-build_lances("fire", "mech", "high", 13, 20)
+build_lances("fire", "mech", "low", 1, 6)
+build_lances("fire", "mech", "med", 4, 16)
+build_lances("fire", "mech", "high", 10, 20)
 
 build_lances("fire", "mixed", "low", 1, 3, "small")
-build_lances("fire", "mixed", "low", 1, 8)
-build_lances("fire", "mixed", "med", 5, 16)
-build_lances("fire", "mixed", "high", 13, 20)
+build_lances("fire", "mixed", "low", 1, 6)
+build_lances("fire", "mixed", "med", 4, 16)
+build_lances("fire", "mixed", "high", 10, 20)
 
 build_lances("fire", "vehicle", "low", 1, 3, "small")
-build_lances("fire", "vehicle", "low", 1, 8)
-build_lances("fire", "vehicle", "med", 5, 16)
-build_lances("fire", "vehicle", "high", 13, 20)
+build_lances("fire", "vehicle", "low", 1, 6)
+build_lances("fire", "vehicle", "med", 4, 16)
+build_lances("fire", "vehicle", "high", 10, 20)
 
 
 # lance_type_recon - 1 predator 1 support 1 vanguard, no assassin
 
 build_lances("recon", "mech", "low", 1, 3, "small")
-build_lances("recon", "mech", "low", 1, 8)
-build_lances("recon", "mech", "med", 5, 16)
-build_lances("recon", "mech", "high", 13, 20)
+build_lances("recon", "mech", "low", 1, 6)
+build_lances("recon", "mech", "med", 4, 16)
+build_lances("recon", "mech", "high", 10, 20)
 
 build_lances("recon", "mixed", "low", 1, 3, "small")
-build_lances("recon", "mixed", "low", 1, 8)
-build_lances("recon", "mixed", "med", 5, 16)
-build_lances("recon", "mixed", "high", 13, 20)
+build_lances("recon", "mixed", "low", 1, 6)
+build_lances("recon", "mixed", "med", 4, 16)
+build_lances("recon", "mixed", "high", 10, 20)
 
 build_lances("recon", "vehicle", "low", 1, 3, "small")
-build_lances("recon", "vehicle", "low", 1, 8)
-build_lances("recon", "vehicle", "med", 5, 16)
-build_lances("recon", "vehicle", "high", 13, 20)
+build_lances("recon", "vehicle", "low", 1, 6)
+build_lances("recon", "vehicle", "med", 4, 16)
+build_lances("recon", "vehicle", "high", 10, 20)
 
-build_lances("recon", "mixed", "vtol", 1, 20)
-build_lances("recon", "vehicle", "vtol", 1, 20)
+build_lances("recon", "mixed", "med", 4, 16, "vtol")
+build_lances("recon", "mixed", "high", 10, 20, "vtol")
+build_lances("recon", "vehicle", "med", 4, 16, "vtol")
+build_lances("recon", "vehicle", "high", 10, 20, "vtol")
 
 # lance_type_support - 1 tank 2 support, no assassin
 
 build_lances("support", "mech", "low", 1, 3, "small")
-build_lances("support", "mech", "low", 1, 8)
-build_lances("support", "mech", "med", 5, 16)
-build_lances("support", "mech", "high", 13, 20)
+build_lances("support", "mech", "low", 1, 6)
+build_lances("support", "mech", "med", 4, 16)
+build_lances("support", "mech", "high", 10, 20)
 
 build_lances("support", "mixed", "low", 1, 3, "small")
-build_lances("support", "mixed", "low", 1, 8)
-build_lances("support", "mixed", "med", 5, 16)
-build_lances("support", "mixed", "high", 13, 20)
+build_lances("support", "mixed", "low", 1, 6)
+build_lances("support", "mixed", "med", 4, 16)
+build_lances("support", "mixed", "high", 10, 20)
 
 build_lances("support", "vehicle", "low", 1, 3, "small")
-build_lances("support", "vehicle", "low", 1, 8)
-build_lances("support", "vehicle", "med", 5, 16)
-build_lances("support", "vehicle", "high", 13, 20)
+build_lances("support", "vehicle", "low", 1, 6)
+build_lances("support", "vehicle", "med", 4, 16)
+build_lances("support", "vehicle", "high", 10, 20)
 
-build_lances("support", "mixed", "vtol", 1, 20)
-build_lances("support", "vehicle", "vtol", 1, 20)
+build_lances("support", "mixed", "med", 4, 16, "vtol")
+build_lances("support", "mixed", "high", 10, 20, "vtol")
+build_lances("support", "vehicle", "med", 4, 16, "vtol")
+build_lances("support", "vehicle", "high", 10, 20, "vtol")
 
 
 # lance_type_convoy, allied side convoy
-build_lances("convoy", "allied", "varied", 1, 20)
+build_lances("convoy", "allied", "", 1, 20)
 
 # lance_type_OpForConvoy, ambush convoy target
-build_lances("convoy", "opfor", "low", 1, 8)
-build_lances("convoy", "opfor", "med", 5, 16)
-build_lances("convoy", "opfor", "high", 13, 20)
+build_lances("convoy", "opfor", "low", 1, 6)
+build_lances("convoy", "opfor", "med", 4, 16)
+build_lances("convoy", "opfor", "high", 10, 20)
 
 # lance_type_mechconvoy, both sides, bad pilots
-build_lances("convoy", "mechconvoy", "low", 1, 8)
-build_lances("convoy", "mechconvoy", "med", 5, 16)
-build_lances("convoy", "mechconvoy", "high", 13, 20)
+build_lances("convoy", "mechconvoy", "low", 1, 6)
+build_lances("convoy", "mechconvoy", "med", 4, 16)
+build_lances("convoy", "mechconvoy", "high", 10, 20)
 
 
 # lance_type_solo, assassination, high prio target + light support
-build_lances("solo", "mech", "low", 1, 8, "littlefriend")
-build_lances("solo", "mech", "med", 5, 16, "littlefriend")
-build_lances("solo", "mech", "high", 13, 20, "littlefriend")
-build_lances("solo", "mech", "low", 1, 8, "advanced")
-build_lances("solo", "mech", "med", 5, 16, "advanced")
-build_lances("solo", "mech", "high", 13, 20, "advanced")
-build_lances("solo", "mixed", "low", 1, 8, "advanced")
-build_lances("solo", "mixed", "med", 5, 16, "advanced")
-build_lances("solo", "mixed", "high", 13, 20, "advanced")
+build_lances("solo", "mech", "low", 1, 6, "littlefriend")
+build_lances("solo", "mech", "med", 4, 16, "littlefriend")
+build_lances("solo", "mech", "high", 10, 20, "littlefriend")
+build_lances("solo", "mech", "low", 1, 6, "advanced")
+build_lances("solo", "mech", "med", 4, 16, "advanced")
+build_lances("solo", "mech", "high", 10, 20, "advanced")
+build_lances("solo", "mixed", "low", 1, 6, "advanced")
+build_lances("solo", "mixed", "med", 4, 16, "advanced")
+build_lances("solo", "mixed", "high", 10, 20, "advanced")
 
 
 # lance_type_gladiator, limited drop and other fp, like solo but less units total
-build_lances("gladiator", "mech", "low", 1, 8)
-build_lances("gladiator", "mech", "med", 5, 16)
-build_lances("gladiator", "mech", "high", 13, 20)
-build_lances("gladiator", "mixed", "low", 1, 8)
-build_lances("gladiator", "mixed", "med", 5, 16)
-build_lances("gladiator", "mixed", "high", 13, 20)
+build_lances("gladiator", "mech", "low", 1, 6)
+build_lances("gladiator", "mech", "med", 4, 16)
+build_lances("gladiator", "mech", "high", 10, 20)
+build_lances("gladiator", "mixed", "low", 1, 6)
+build_lances("gladiator", "mixed", "med", 4, 16)
+build_lances("gladiator", "mixed", "high", 10, 20)
 
 
 # Elites submod
 
 # lance_type_duel, coupe & friends, mechs kitted to gills, elite + legendary + 2 advanced
-build_lances("duel", "mech", "low", 1, 8, subfolder="Elite")
-build_lances("duel", "mech", "med", 5, 16, subfolder="Elite")
-build_lances("duel", "mech", "high", 13, 20, subfolder="Elite")
+build_lances("duel", "mech", "low", 1, 6, subfolder="Elite")
+build_lances("duel", "mech", "med", 4, 16, subfolder="Elite")
+build_lances("duel", "mech", "high", 10, 20, subfolder="Elite")
 
-build_lances("support", "mech", "varied", 5, 20, "stealth", subfolder="Elite")
-# build_lances("support", "mixed", "varied", 5, 20, "stealth") bad idea, practically only risc has stealth vees
+build_lances("support", "mech", "stealth", 6, 20, "elite", subfolder="Elite")
+# no stealth mixed/vee as practically only risc has stealth vees
 
-build_lances("solo", "mech", "med", 5, 16, "elite", subfolder="Elite")
-build_lances("solo", "mech", "high", 13, 20, "elite", subfolder="Elite")
+build_lances("solo", "mech", "med", 4, 16, "elite", subfolder="Elite")
+build_lances("solo", "mech", "high", 10, 20, "elite", subfolder="Elite")
 
-build_lances("fire", "mech", "med", 5, 16, "elite", subfolder="Elite")
-build_lances("fire", "mech", "high", 13, 20, "elite", subfolder="Elite")
+build_lances("fire", "mech", "med", 4, 16, "elite", subfolder="Elite")
+build_lances("fire", "mech", "high", 10, 20, "elite", subfolder="Elite")
 
-# I initially missed MC elite indirect? added fire as option for late stage support lances already
+# elite support
+build_lances("MCSupport", "mech", "high", 10, 20, "elite", subfolder="Elite")
 
 # Risc submod
 
-build_lances("battle", "mech", "varied", 5, 20, "risc", subfolder="RISC")
-build_lances("battle", "mixed", "varied", 5, 20, "risc", subfolder="RISC")
-build_lances("battle", "vehicle", "varied", 5, 20, "risc", subfolder="RISC")
-build_lances("battle", "mixed", "vtol", 5, 20, "risc", subfolder="RISC")
+build_lances("battle", "mech", "risc", 6, 20, subfolder="RISC")
+build_lances("battle", "mixed", "risc", 6, 20, subfolder="RISC")
+build_lances("battle", "vehicle", "risc", 6, 20, subfolder="RISC")
+build_lances("battle", "mixed", "risc", 6, 20, "vtol", subfolder="RISC")
 
 # Mission control
 # support lances & duels
 
-build_lances("MCSupport", "mech", "low", 1, 8, subfolder="MC")
-build_lances("MCSupport", "mech", "med", 5, 16, subfolder="MC")
-build_lances("MCSupport", "mech", "high", 13, 20, subfolder="MC")
-build_lances("MCSupport", "mixed", "low", 1, 8, subfolder="MC")
-build_lances("MCSupport", "mixed", "med", 5, 16, subfolder="MC")
-build_lances("MCSupport", "mixed", "high", 13, 20, subfolder="MC")
-build_lances("MCSupport", "vehicle", "low", 1, 8, subfolder="MC")
-build_lances("MCSupport", "vehicle", "med", 5, 16, subfolder="MC")
-build_lances("MCSupport", "vehicle", "high", 13, 20, subfolder="MC")
+build_lances("MCSupport", "mech", "low", 1, 6, subfolder="MC")
+build_lances("MCSupport", "mech", "med", 4, 16, subfolder="MC")
+build_lances("MCSupport", "mech", "high", 10, 20, subfolder="MC")
+build_lances("MCSupport", "mixed", "low", 1, 6, subfolder="MC")
+build_lances("MCSupport", "mixed", "med", 4, 16, subfolder="MC")
+build_lances("MCSupport", "mixed", "high", 10, 20, subfolder="MC")
+build_lances("MCSupport", "vehicle", "low", 1, 6, subfolder="MC")
+build_lances("MCSupport", "vehicle", "med", 4, 16, subfolder="MC")
+build_lances("MCSupport", "vehicle", "high", 10, 20, subfolder="MC")
 
-build_lances("MCSupport", "mech", "low", 1, 8, "indirect", subfolder="MC")
-build_lances("MCSupport", "mech", "med", 5, 16, "indirect", subfolder="MC")
-build_lances("MCSupport", "mech", "high", 13, 20, "indirect", subfolder="MC")
-build_lances("MCSupport", "mixed", "low", 1, 8, "indirect", subfolder="MC")
-build_lances("MCSupport", "mixed", "med", 5, 16, "indirect", subfolder="MC")
-build_lances("MCSupport", "mixed", "high", 13, 20, "indirect", subfolder="MC")
-build_lances("MCSupport", "vehicle", "low", 1, 8, "indirect", subfolder="MC")
-build_lances("MCSupport", "vehicle", "med", 5, 16, "indirect", subfolder="MC")
-build_lances("MCSupport", "vehicle", "high", 13, 20, "indirect", subfolder="MC")
+build_lances("MCSupport", "mech", "low", 1, 6, "indirect", subfolder="MC")
+build_lances("MCSupport", "mech", "med", 4, 16, "indirect", subfolder="MC")
+build_lances("MCSupport", "mech", "high", 10, 20, "indirect", subfolder="MC")
+build_lances("MCSupport", "mixed", "low", 1, 6, "indirect", subfolder="MC")
+build_lances("MCSupport", "mixed", "med", 4, 16, "indirect", subfolder="MC")
+build_lances("MCSupport", "mixed", "high", 10, 20, "indirect", subfolder="MC")
+build_lances("MCSupport", "vehicle", "low", 1, 6, "indirect", subfolder="MC")
+build_lances("MCSupport", "vehicle", "med", 4, 16, "indirect", subfolder="MC")
+build_lances("MCSupport", "vehicle", "high", 10, 20, "indirect", subfolder="MC")
 
-build_lances("MCDuel", "mech", "low", 1, 8, subfolder="MC")
-build_lances("MCDuel", "mech", "med", 5, 16, subfolder="MC")
-build_lances("MCDuel", "mech", "high", 13, 20, subfolder="MC")
-build_lances("MCDuel", "mech", "low", 1, 8, "advanced", subfolder="MC")
-build_lances("MCDuel", "mech", "med", 5, 16, "advanced", subfolder="MC")
-build_lances("MCDuel", "mech", "high", 13, 20, "advanced", subfolder="MC")
+build_lances("MCDuel", "mech", "low", 1, 6, subfolder="MC")
+build_lances("MCDuel", "mech", "med", 4, 16, subfolder="MC")
+build_lances("MCDuel", "mech", "high", 10, 20, subfolder="MC")
+build_lances("MCDuel", "mech", "low", 1, 6, "advanced", subfolder="MC")
+build_lances("MCDuel", "mech", "med", 4, 16, "advanced", subfolder="MC")
+build_lances("MCDuel", "mech", "high", 10, 20, "advanced", subfolder="MC")
 
 
 # special themed / variety lances
 
 # get demolished
-build_lances("battle", "vehicle", "varied", 15, 20, "demolisher")
-build_lances("battle", "vehicle", "varied", 8, 20, "MBT")
+build_lances("battle", "vehicle", "", 14, 20, "demolisher")
+build_lances("battle", "vehicle", "", 8, 20, "MBT")
 
 # spotter 3 carriers
-build_lances("support", "carrier", "varied", 10, 20)
+build_lances("support", "carrier", "", 10, 20)
 
 build_lances("turret", "standard", "", 1, 20)
 build_lances("turret", "mixed", "", 1, 20)
 build_lances("turret", "AAA", "", 1, 20)
-# build_lances("turret", "artillery", "", 60, 60) hand made
+build_lances("turret", "artillery", "", 60, 60)
 
-# elite support
-build_lances("MCSupport", "mech", "high", 13, 20, "elite", subfolder="Elite")
 
 exit()
