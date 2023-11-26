@@ -1,0 +1,258 @@
+{
+    "Description" : {
+        "Id" : "event_mw_KhaosTheory_Mech",
+        "Name" : "Good as new...",
+        "Details" : "A knock on the door to your office doorway alerts you to look up and you see Darius waiting to enter, \"Come in, Darius, have a seat.\"\r\n\r\nDarius smiles as he enters and sits down, \"Commander, we have word from the search party currently on [[TGT_SYSTEM,{TGT_SYSTEM.Name}]].  It was as we suspected, the bandits had hidden chambers and hallways in that base.\"\r\n\r\n\"Good, good.  Give me the full brief,\" you respond.\r\n\r\nDarius relates the efforts to clear the rubble after the assault, helping with the wounded, searching for any evidence of where the convoy had hidden itself and so forth.  After nearly half an hour, he finally winds up the briefing, \"So, in the end, some girders being shifted slipped, and crashed through a damaged wall revealing a repair bay hidden on the other side.  Once we got in there, it was only a matter of time before we found the missing convoy.  Fortunately, the bandits hiding in there gave up without a fight.  They were desperately trying to bring [[TGT_MW,{TGT_MW.Callsign}]]' <i>Kodiak</i> online when we arrived.\"\r\n\r\nYou whistle slowly, \"Hell, that could've gone very badly if they had gotten that mech activated!\"\r\n\r\nDarius continues, \"It appears that the modifications that [[TGT_MW,{TGT_MW.Callsign}]] had done to his mech meant that without him piloting it, it was more useful as a decoration than a combat machine.\"\r\n\r\nConfusion lights your face, \"What? Their techs couldn't bypass the bootup and even put it into maintenance mode?  Even without guns, a 100 ton assault mech can wreck havoc on unarmed workers.\"\r\n\r\nDarius shakes his head, \"[[TGT_MW,{TGT_MW.Callsign}]] has some sort of biometric passlock on that <i>Kodiak</i>.  It can only walk for a limited distance before it shuts down completely, which is the state it is currently in.  If we want to get it back to the <i>Argo</i>, we either have to load it on the <i>Leopard</i> with a <i>Battlemech Recovery Vehicle</i> or we send [[TGT_MW,{TGT_MW.Callsign}]] down to retrieve his mech himself.",
+        "Icon" : "uixTxrSpot_KDKMech.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 10000,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "items" : [
+                "name_DarkKhaos"
+            ],
+            "tagSetSourceFile" : ""
+        },
+        "ExclusionTags" : {
+            "items" : [],
+            "tagSetSourceFile" : ""
+        },
+        "RequirementComparisons" : []
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "items" : [
+                    "Contract_KhaosTheory_Complete",
+                    "event_KhaosTheory_Search"
+                ],
+                "tagSetSourceFile" : ""
+            },
+            "ExclusionTags" : {
+                "items" : [
+                    "event_KhaosTheory_complete"
+                ],
+                "tagSetSourceFile" : "Tags/CompanyTags"
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "Item.MechDef.chassisdef_kodiak_KDK-DK",
+                    "op" : "LessThanOrEqual",
+                    "val" : 0,
+                    "valueConstant" : "0"
+                },
+                {
+                    "obj" : "Item.MechDef.chassisdef_kodiak_KDK-DK_U",
+                    "op" : "LessThanOrEqual",
+                    "val" : 0,
+                    "valueConstant" : "0"
+                }
+            ]
+        }
+    ],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Use the Recovery Vehicle",
+                "Details" : "Let's get that mech aboard",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Mech Unlocked",
+                        "Details" : "You grab your datapad and scroll through various budgets and other data related to the <i>Argo</i> and it's operating costs and timelines.  After a few minutes, you back to Darius, \"Have the crews load the <i>Kodiak</i> onto a Recovery Vehicle and bring everyone back to the <i>Argo</i>.  We've got bills to pay and contracts to fulfill.\"\r\n\r\nDarius gets up and moves to leave, \"As you wish Commander.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "event_KhaosTheory_complete"
+                                ],
+                                "tagSetSourceFile" : "Tags/CompanyTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "Mech_AddRoster",
+                                    "value" : "mechdef_kodiak_KDK-DK",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "-5",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 5
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Send [[TGT_MW,{TGT_MW.Callsign}]]",
+                "Details" : "Let's get that mech aboard",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "MechWarrior",
+                    "RequirementTags" : {
+                        "items" : [
+                            "name_DarkKhaos"
+                        ],
+                        "tagSetSourceFile" : ""
+                    },
+                    "ExclusionTags" : {
+                        "items" : [],
+                        "tagSetSourceFile" : ""
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Injuries",
+                            "op" : "Equal",
+                            "val" : 0,
+                            "valueConstant" : "0"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Mech Unlocked",
+                        "Details" : "You lean back in your chair, \"So pretty much we should just let [[TGT_MW,{TGT_MW.Callsign}]] go get his mech.  Less hassle, less fuss and we can move on to our next contract.\"\r\n\r\nDarius nods, \"Pretty much sums it up, Commander.\"\r\n\r\nYou smile at Darius, \"Ok then, make it happen.  Let's get this show back on the road.  We've got bills to pay and contracts to fulfill.\"\r\n\r\nDarius gets up and moves to leave, \"I'm on it, Commander.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "event_KhaosTheory_complete"
+                                ],
+                                "tagSetSourceFile" : "Tags/CompanyTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "Mech_AddRoster",
+                                    "value" : "mechdef_kodiak_KDK-DK",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "5",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL",
+    "OneTimeEvent" : false,
+    "Tags" : {
+        "items" : [],
+        "tagSetSourceFile" : "tags/EventTags"
+    }
+}
