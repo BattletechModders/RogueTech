@@ -1,0 +1,300 @@
+{
+    "Description" : {
+        "Id" : "event_DeadMW_DKDeath",
+        "Name" : "Until Death Do Us Part...",
+        "Details" : "You're sitting at your desk going over various reports and inventories when you come across the datafile submitted to the MRBC regarding the death of [[DEAD_MW,{DEAD_MW.Callsign}]].  {DEAD_MW.Subj_C} {DEAD_MW.Gender?NonBinary:were|Default:was} a valued asset to {COMPANY.CompanyName}.  You reach over and press a button activating your comms: \"Yang, please report to my office.\"\r\n\r\nAbout 10 minutes later, Yang announces himself at your door, \"Boss, you wanted to see me?\"\r\n\r\nYou wave to the vacant chair, \"Come in, come in.  I know you are busy down in the mechbay, but what is the status of that <i>Kodiak</i> that belonged to [[DEAD_MW,{DEAD_MW.Callsign}]]?\"\r\n\r\nYang thinks for a moment, \"Well Boss, we tried nearly everything we could to get that mech combat ready, but there are too many components requiring a biometric access code that the chassis itself is currently one big doorstop.\"\r\n\r\nYou nod, \"You tried swapping out the cockpit and control systems I suppose?\"\r\n\r\nYang huffed, \"If you can think of it, know that my team and I gave it a darn good nudge.  Perhaps the only thing we didn't try was employing a cybernetic hacker.\"\r\n\r\nYou look confused, \"A what now?\"\r\n\r\nYang laughs, \"Hey, it's just a rumour bantered around the tech circuits.  You hear a whisper on one system or a rumour on another, but the gist of it is that somewhere out there are a crew that specialise in removing bio-locks.\"\r\n\r\n\"Seriously?\" you ask.  \"And you think these people can remove the lock on the <i>Kodiak</i>?\"\r\n\r\nYang rubs his chin with his mechanical arm before stretching it out and examining it, \"Honestly Boss, I have no idea if it can be done.  It sounds possible.  I mean, my arm is bio-linked to me but I have no doubts that if I die, someone out there, if possible, will find a way to use it on someone else.\"\r\n\r\nYou lean back in your chair, \"So, we do not have the ability to unlock the <i>Kodiak</i> ourselves, and we do not know who can, other than unsubstantiated rumours.  What's your gut tell you?\"\r\n\r\nYang thinks for a bit, then responds, \"The way I see it Boss, we can sell the mech to a collector, we can just scrap it or we can do some poking around when we arrive at a system that has a known <i>Black Market</i> presence.\"",
+        "Icon" : "uixTxrSpot_KDKDead.png"
+    },
+    "Scope" : "DeadMechWarrior",
+    "Weight" : 100,
+    "Requirements" : {
+        "Scope" : "DeadMechWarrior",
+        "RequirementTags" : {
+            "items" : [
+                "name_DarkKhaos"
+            ],
+            "tagSetSourceFile" : ""
+        },
+        "ExclusionTags" : {
+            "items" : [],
+            "tagSetSourceFile" : ""
+        },
+        "RequirementComparisons" : []
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+            "RequirementTags" : {
+                "items" : [
+                    "event_KhaosTheory_complete"
+                ],
+                "tagSetSourceFile" : ""
+            },
+            "ExclusionTags" : {
+                "items" : [
+                    "event_DeadMW_DKDeath",
+                    "event_DKDeath_Complete",
+                    "event_KDK_Collector",
+                    "event_KDK_Hacker",
+                    "event_KDK_Scrapped",
+                    "event_KDK_Completed"
+                ],
+                "tagSetSourceFile" : "Tags/CompanyTags"
+            },
+            "RequirementComparisons" : []
+        },
+        {
+            "Scope" : "Commander",
+            "RequirementTags" : {
+                "items" : [],
+                "tagSetSourceFile" : ""
+            },
+            "ExclusionTags" : {
+                "items" : [],
+                "tagSetSourceFile" : ""
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "Injuries",
+                    "op" : "Equal",
+                    "val" : 0,
+                    "valueConstant" : "0"
+                }
+            ]
+        }
+    ],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Find a Collector",
+                "Details" : "Search Recreation Star Systems",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Commander",
+                    "RequirementTags" : {
+                        "items" : [],
+                        "tagSetSourceFile" : ""
+                    },
+                    "ExclusionTags" : {
+                        "items" : [],
+                        "tagSetSourceFile" : ""
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Injuries",
+                            "op" : "Equal",
+                            "val" : 0,
+                            "valueConstant" : "0"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "The collector",
+                        "Details" : "You interest is peaked, \"A collector you say?  Someone out there would buy an unusable <i>Kodiak</i> off us for a premium?\"\r\n\r\nYang nods, \"You bet your ass Boss!  Rich people can be exen, excent... bah, I forget the word, but they're weird.  Most of em just want bragging rights and will have it on display just to show off something no one else can have.\"\r\n\r\nYou mull this over, \"Any idea how to find a collector or buyer or whatever?\"\r\n\r\nWithout hesitation Yang responds, \"Recreation planets.  Them rich folk are always on vacation.  You want to find someone to buy that <i>Kodiak</i>, we need to hit up some of the star systems that they frolic on.\"\r\n\r\n<color=#E62E00>Spend time in Star Systems that have RECREATION tags to see if you are approached by a collector</color>",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "event_DeadMW_DKDeath",
+                                    "event_KDK_Collector"
+                                ],
+                                "tagSetSourceFile" : "Tags/CompanyTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Find a Hacker",
+                "Details" : "Search Black Market Star Systems",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Commander",
+                    "RequirementTags" : {
+                        "items" : [],
+                        "tagSetSourceFile" : ""
+                    },
+                    "ExclusionTags" : {
+                        "items" : [],
+                        "tagSetSourceFile" : ""
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Injuries",
+                            "op" : "Equal",
+                            "val" : 0,
+                            "valueConstant" : "0"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Black Market",
+                        "Details" : "You interest is peaked, \"A hacker?  We need to find someone who <i>might</i> be able to remove the bio-lock on [[DEAD_MW,{DEAD_MW.Callsign}]]'s <i>Kodiak</i>?\"\r\n\r\nYang nods, \"Essentially, that's it in a toolbox.\"\r\n\r\nYou mull this over, \"Just how do you propose we find a hacker capable of pulling this off?\"\r\n\r\nWithout hesitation Yang responds, \"Any of the star systems out there that have a known <i>Black Market</i> presence should suffice.  We fly there, ask around and hope one of them gets in touch.\"\r\n\r\nYou pause in reflection, \"I guess that'll work.  Hell, we can probably run some contracts while we wait around so we're not sitting idle twiddling our thumbs.\"\r\n\r\n<color=#E62E00>Spend time in Star Systems that have BLACK MARKET tags to see if you are approached by a <i>Representative</i></color>",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "event_DeadMW_DKDeath",
+                                    "event_KDK_Hacker"
+                                ],
+                                "tagSetSourceFile" : "Tags/CompanyTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_2",
+                "Name" : "Scrap Mech",
+                "Details" : "Dispose of Mech",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Commander",
+                    "RequirementTags" : {
+                        "items" : [],
+                        "tagSetSourceFile" : ""
+                    },
+                    "ExclusionTags" : {
+                        "items" : [],
+                        "tagSetSourceFile" : ""
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Injuries",
+                            "op" : "Equal",
+                            "val" : 0,
+                            "valueConstant" : "0"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_0",
+                        "Name" : "Scrapyard",
+                        "Details" : "Ultimately you shake your head, \"You know what Yang? We don't have the time to spend on this, not to mention the C-Bills spent travelling to out of the way systems.  Go ahead and just scrap the <i>Kodiak</i> when you have spare time.  Storing it is a waste of C-Bills.\"\r\n\r\nYang stands up, \"Consider it done Boss.\"\r\n\r\n<color=#E62E00>EVENT COMPLETED:  STORE OR SCRAP <i>KHAOS THEORY KODIAK</i> AS YOU SEE FIT</color>",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "event_DKDeath_Complete",
+                                    "event_KDK_Scrapped",
+                                    "event_KDK_Completed"
+                                ],
+                                "tagSetSourceFile" : "Tags/CompanyTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "FUNERAL",
+    "OneTimeEvent" : false,
+    "Tags" : {
+        "items" : [],
+        "tagSetSourceFile" : "tags/EventTags"
+    }
+}
