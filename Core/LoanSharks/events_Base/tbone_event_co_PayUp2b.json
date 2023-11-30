@@ -1,0 +1,232 @@
+{
+	"Description": {
+		"Id": "tbone_event_co_PayUp2b",
+		"Name": "Collections: Past Due",
+		"Details": "[[DM.BaseDescriptionDefs[TooltipSimGameCharacterDARIUS],Darius]] pings you with an urgent message from planetside. Apparently the entire resupply shipment has gone \"missing,\" and every local retailer is claiming to be completely out of stock.\r\n\r\nCoincidentally, you also have a message from [[DM.BaseDescriptionDefs[TBoneLoreDDSL],Discount Dan's Savings and Loan LLC]]:\r\n\r\n<b><i>Greetings Commander,\r\n\r\nA little bird told me you seem to have misplaced your resupply shipments. While your loan is now past due, I have been authorized to offer you the option of purchasing Discount Dan's Logistics Insurance Plan, which guarantees against any further loss of resupply for a period of 60 days. Certainly we wouldn't want degraded combat readiness affecting your ability to repay your loans, would we?\r\n\r\nSincerely,\r\n\r\nNicia Andretta\r\nDept. Cash and Collections\r\nDDS&L LLC</i></b>",
+		"Icon": "uixTxrSpot_wulf_DiscountDan_Text.png"
+	},
+	"Scope": "Company",
+	"Weight": 10000,
+	"Requirements": {
+		"Scope": "Company",
+		"RequirementTags": {
+			"tagSetSourceFile": "",
+			"items": []
+		},
+		"ExclusionTags": {
+			"tagSetSourceFile": "",
+			"items": [
+				"debt_visit_cooldown"
+			]
+		},
+		"RequirementComparisons": [
+			{
+				"obj": "DaysInDebt",
+				"op": "GreaterThanOrEqual",
+				"val": 60,
+				"valueConstant": "60"
+			},
+			{
+				"obj": "Travel",
+				"op": "Equal",
+				"val": 0,
+				"valueConstant": "0"
+			}
+		]
+	},
+	"AdditionalRequirements": [],
+	"AdditionalObjects": [],
+	"Options": [
+		{
+			"Description": {
+				"Id": "outcome_0",
+				"Name": "Purchase logistics insurance.",
+				"Details": "[\u00a2500,000]",
+				"Icon": null
+			},
+			"RequirementList": [
+				{
+					"Scope": "Company",
+					"RequirementTags": {
+						"tagSetSourceFile": "",
+						"items": []
+					},
+					"ExclusionTags": {
+						"tagSetSourceFile": "",
+						"items": []
+					},
+					"RequirementComparisons": [
+						{
+							"obj": "Funds",
+							"op": "GreaterThanOrEqual",
+							"val": 500000,
+							"valueConstant": "500000"
+						}
+					]
+				}
+			],
+			"ResultSets": [
+				{
+					"Description": {
+						"Id": "outcome_0_0",
+						"Name": "Purchase \"Logistics Insurance.\"",
+						"Details": "It's hard to make money when you can't repair your BattleMechs between contracts. Hopefully this \"Logistics Insurance\" is worth the money and you can get the company back in the black before the coverage expires again.\r\n\r\nIn the meantime, Darius has returned with the \"missing\" supplies.",
+						"Icon": null
+					},
+					"Weight": 100,
+					"Results": [
+						{
+							"Scope": "Company",
+							"Requirements": null,
+							"AddedTags": {
+								"tagSetSourceFile": "",
+								"items": []
+							},
+							"RemovedTags": {
+								"tagSetSourceFile": "",
+								"items": []
+							},
+							"Stats": [
+								{
+									"typeString": "System.Int32",
+									"name": "Funds",
+									"value": "-500000",
+									"set": false,
+									"valueConstant": null
+								}
+							],
+							"Actions": null,
+							"ForceEvents": null,
+							"TemporaryResult": false,
+							"ResultDuration": 0
+						},
+						{
+							"Scope": "Company",
+							"Requirements": null,
+							"AddedTags": {
+								"tagSetSourceFile": "",
+								"items": [
+									"debt_visit_cooldown"
+								]
+							},
+							"RemovedTags": {
+								"tagSetSourceFile": "",
+								"items": []
+							},
+							"Stats": null,
+							"Actions": null,
+							"ForceEvents": null,
+							"TemporaryResult": true,
+							"ResultDuration": 60
+						}
+					]
+				}
+			],
+			"Requirements": {
+				"Scope": "Company",
+				"RequirementTags": {
+					"tagSetSourceFile": "",
+					"items": []
+				},
+				"ExclusionTags": {
+					"tagSetSourceFile": "",
+					"items": []
+				},
+				"RequirementComparisons": []
+			}
+		},
+		{
+			"Description": {
+				"Id": "outcome_1",
+				"Name": "Pass on the logistics insurance.",
+				"Details": "Pass on the logistics insurance.",
+				"Icon": null
+			},
+			"RequirementList": [],
+			"ResultSets": [
+				{
+					"Description": {
+						"Id": "outcome_1_0",
+						"Name": "Pass on the logistics insurance.",
+						"Details": "You know a hustle when you see one. The only way out of this is to pay off that loan as soon as possible, not give Dan's goons <i>more</i> of your hard-earned money.\r\n\r\nUnfortunately, [[DM.BaseDescriptionDefs[TooltipSimGameCharacterYang],Yang]] and [[DM.BaseDescriptionDefs[TBoneLoreDoc],Doc]] both report that supplies are critically low, and MedBay and MechBay performance will be seriously degraded for a while.",
+						"Icon": null
+					},
+					"Weight": 100,
+					"Results": [
+						{
+							"Scope": "Company",
+							"Requirements": null,
+							"AddedTags": {
+								"tagSetSourceFile": "",
+								"items": [
+									"debt_visit_cooldown"
+								]
+							},
+							"RemovedTags": {
+								"tagSetSourceFile": "",
+								"items": []
+							},
+							"Stats": null,
+							"Actions": null,
+							"ForceEvents": null,
+							"TemporaryResult": true,
+							"ResultDuration": 30
+						},
+						{
+							"Scope": "Company",
+							"Requirements": null,
+							"AddedTags": {
+								"tagSetSourceFile": "",
+								"items": []
+							},
+							"RemovedTags": {
+								"tagSetSourceFile": "",
+								"items": []
+							},
+							"Stats": [
+								{
+									"typeString": "System.Int32",
+									"name": "MedTechSkill",
+									"value": "-5",
+									"set": false,
+									"valueConstant": null
+								},
+								{
+									"typeString": "System.Int32",
+									"name": "MechTechSkill",
+									"value": "-10",
+									"set": false,
+									"valueConstant": null
+								}
+							],
+							"Actions": null,
+							"ForceEvents": null,
+							"TemporaryResult": true,
+							"ResultDuration": 60
+						}
+					]
+				}
+			],
+			"Requirements": {
+				"Scope": "Company",
+				"RequirementTags": {
+					"tagSetSourceFile": "",
+					"items": []
+				},
+				"ExclusionTags": {
+					"tagSetSourceFile": "",
+					"items": []
+				},
+				"RequirementComparisons": []
+			}
+		}
+	],
+	"PublishState": "PUBLISHED",
+	"ValidationState": "UNTESTED",
+	"EventType": "NORMAL",
+	"OneTimeEvent": false,
+	"Tags": {
+		"tagSetSourceFile": "tags/EventTags",
+		"items": []
+	}
+}
