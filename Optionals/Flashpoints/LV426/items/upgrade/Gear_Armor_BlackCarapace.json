@@ -14,12 +14,6 @@
         "CategoryID": "MimeticSystem"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.25 * [[Chassis.Tonnage]]",
-        "CBillCost": "200 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "Carapace",
       "HaarJel",
@@ -42,18 +36,15 @@
       "PersistentECMAura: 3, 2, 150",
       "PersistentECMSelf: 1, 2"
     ],
+    "Flags": [
+      "not_broken"
+    ],
     "ActivatableComponent": {
       "ButtonName": "Black Carapace",
       "CanNotBeActivatedManualy": true,
-      "NoUniqueCheck": true,
       "ActivationMessage": "Healing",
       "DeactivationMessage": "Healthy",
-      "presistantVFX": {
-        "VFXPrefab": "vfxprfprtl_heatventsm_loop",
-        "VFXScaleX": 1,
-        "VFXScaleY": 1,
-        "VFXScaleZ": 1
-      },
+      "NoUniqueCheck": true,
       "Repair": {
         "InnerStructure": 4,
         "Armor": 12,
@@ -62,44 +53,41 @@
         "VehicleLocations": [],
         "BuildingLocations": [],
         "AffectInstalledLocation": true,
-        "TurnsSinceDamage": 4,
         "repairTrigger": {
           "OnActivation": false,
           "OnDamage": "None",
           "AtEndOfTurn": true
-        }
+        },
+        "TurnsSinceDamage": 4
+      },
+      "presistantVFX": {
+        "VFXPrefab": "vfxprfprtl_heatventsm_loop",
+        "VFXScaleX": 1,
+        "VFXScaleY": 1,
+        "VFXScaleZ": 1
       }
+    },
+    "ComponentExplosion": {
+      "ExplosionDamage": 30.0
+    },
+    "Weights": {
+      "ArmorFactor": 1.15
     },
     "ArmorRepair": {
       "ArmorTPCost": 1.9,
       "ArmorCBCost": 2.2
     },
-    "Color": "Gold",
-    "ComponentExplosion": {
-      "ExplosionDamage": 30
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.25 * [[Chassis.Tonnage]]",
+        "CBillCost": "200 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
+    "IBLS": {
+      "StorageSize": 8
     },
     "CriticalEffects": {
       "LinkedStatisticName": "Black Carapace"
-    },
-    "DecoratorComponent": [
-      {
-        "Text": "R",
-        "Color": "#5F24AC",
-        "Icon": "ComponentGearIcons_STEALTH",
-        "Importance": 40
-      },
-      {
-        "Text": "P",
-        "Color": "#248000",
-        "Icon": "ComponentGearIcons_ECM",
-        "Importance": 30
-      }
-    ],
-    "Flags": [
-      "not_broken"
-    ],
-    "IBLS": {
-      "StorageSize": 8
     },
     "Linked": {
       "Links": [
@@ -133,13 +121,22 @@
         }
       ]
     },
-    "Weights": {
-      "ArmorFactor": 1.15
-    }
+    "Color": "Gold",
+    "DecoratorComponent": [
+      {
+        "Text": "R",
+        "Color": "#5F24AC",
+        "Icon": "ComponentGearIcons_STEALTH",
+        "Importance": 40
+      },
+      {
+        "Text": "P",
+        "Color": "#248000",
+        "Icon": "ComponentGearIcons_ECM",
+        "Importance": 30
+      }
+    ]
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 2500000,
     "Rarity": 18,
@@ -157,6 +154,8 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "Prototype_ElectronicWarfare",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 0,
   "InventorySize": 1,
   "Tonnage": 1,
@@ -169,22 +168,14 @@
       "Name": "JAMMED",
       "ReticleColor": "#00f2ff",
       "Range": 150,
-      "HideOnNotSelected": false,
       "RemoveOnSensorLock": false,
       "State": "Online",
       "ApplySelf": false,
+      "HideOnNotSelected": false,
       "AllyStealthAffection": "None",
       "EnemyStealthAffection": "NegativeOne",
-      "IsPositiveToAlly": false,
       "IsNegativeToEnemy": true,
-      "ownerVFX": [],
-      "targetVFX": [],
-      "removeOwnerVFX": [],
-      "removeTargetVFX": [],
-      "ownerSFX": [],
-      "targetSFX": [],
-      "removeOwnerSFX": [],
-      "removeTargetSFX": [],
+      "IsPositiveToAlly": false,
       "statusEffects": [
         {
           "durationData": {
@@ -200,6 +191,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "LV_ECM_JAM",
             "Name": "Black Carapace / Aura JAMMED: Increased Enemies ECM Jamming",
@@ -211,8 +203,7 @@
             "operation": "Int_Add",
             "modValue": "3",
             "modType": "System.Int32"
-          },
-          "nature": "Debuff"
+          }
         },
         {
           "durationData": {
@@ -225,6 +216,8 @@
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "ECM_disrupt_C3",
             "Name": "Black Carapace / Aura JAMMED: ECM Disrupts C3",
@@ -236,9 +229,7 @@
             "operation": "Float_Add",
             "modValue": "-2",
             "modType": "System.Single"
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Debuff"
+          }
         },
         {
           "durationData": {
@@ -251,6 +242,8 @@
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "ECM_disrupt_C3i",
             "Name": "Black Carapace / Aura JAMMED: ECM Disrupts C3i",
@@ -262,9 +255,7 @@
             "operation": "Float_Add",
             "modValue": "-2",
             "modType": "System.Single"
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Debuff"
+          }
         },
         {
           "durationData": {
@@ -277,6 +268,8 @@
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "ECM_disrupt_C3n",
             "Name": "Black Carapace / Aura JAMMED: ECM Disrupts C3 Nova",
@@ -288,9 +281,7 @@
             "operation": "Float_Add",
             "modValue": "-2",
             "modType": "System.Single"
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Debuff"
+          }
         },
         {
           "durationData": {
@@ -303,6 +294,8 @@
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "ECM_disrupt_C3AI",
             "Name": "Black Carapace / Aura JAMMED: ECM Disrupts C3 AI",
@@ -314,9 +307,7 @@
             "operation": "Float_Add",
             "modValue": "-2",
             "modType": "System.Single"
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Debuff"
+          }
         }
       ]
     },
@@ -325,22 +316,14 @@
       "Name": "CounterJamming",
       "ReticleColor": "#00f2ff",
       "Range": 150,
-      "HideOnNotSelected": false,
       "RemoveOnSensorLock": false,
       "State": "Online",
       "ApplySelf": false,
+      "HideOnNotSelected": false,
       "AllyStealthAffection": "PositiveTwo",
       "EnemyStealthAffection": "None",
-      "IsPositiveToAlly": true,
       "IsNegativeToEnemy": false,
-      "ownerVFX": [],
-      "targetVFX": [],
-      "removeOwnerVFX": [],
-      "removeTargetVFX": [],
-      "ownerSFX": [],
-      "targetSFX": [],
-      "removeOwnerSFX": [],
-      "removeTargetSFX": [],
+      "IsPositiveToAlly": true,
       "statusEffects": [
         {
           "durationData": {
@@ -356,6 +339,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "UNJAM",
             "Name": "Black Carapace / Aura CounterJamming: Decreased Allies ECM Jamming",
@@ -367,8 +351,7 @@
             "operation": "Int_Add",
             "modValue": "-2",
             "modType": "System.Int32"
-          },
-          "nature": "Buff"
+          }
         }
       ]
     }
@@ -386,13 +369,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "ECMPassiveShield",
         "Name": "Black Carapace: Increased ECM Shield",
         "Details": "Passive ECM Protection",
         "Icon": "uixSvgIcon_equipment_Gyro"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "LV_ECM_SHIELD",
         "operation": "Int_Add",
@@ -412,13 +395,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "ECMPassiveJam",
         "Name": "Black Carapace: Decreased ECM Jamming",
         "Details": "Passive Jamming Protection",
         "Icon": "uixSvgIcon_equipment_Gyro"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "LV_ECM_JAMMED",
         "operation": "Int_Add",
@@ -439,6 +422,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "LV_Stealth_Effect",
         "Name": "Black Carapace: Stealth",
@@ -450,8 +434,7 @@
         "operation": "Set",
         "modValue": "0.7_3_2_3_4",
         "modType": "System.String"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -466,6 +449,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "LV_MIMETIC",
         "Name": "Black Carapace: Mimetic Armor",
@@ -477,8 +461,7 @@
         "operation": "Set",
         "modValue": "3_0.23_1_4",
         "modType": "System.String"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -492,13 +475,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "Stealth_Signature_Decrease_Stealth",
         "Name": "Black Carapace: Decreased Sensor Signature",
         "Details": "Signature Statuseffect.",
         "Icon": "uixSvgIcon_equipment_TTS"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "SensorSignatureModifier",
         "operation": "Float_Multiply",
@@ -518,13 +501,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "Stealth_Visibility_Decrease_Stealth",
         "Name": "Black Carapace: Decreased Visual Signature",
         "Details": "Visibility Statuseffect.",
         "Icon": "uixSvgIcon_equipment_TTS"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "SpottingVisibilityMultiplier",
         "operation": "Float_Multiply",
@@ -544,13 +527,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "Stealth_Heat_Generation_Stealth",
         "Name": "Black Carapace: Increased Heat Generated",
         "Details": "Heat generation",
         "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "HeatGenerated",
         "operation": "Float_Multiply",
@@ -571,13 +554,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Debuff",
       "Description": {
         "Id": "Stealth_Heat_Capacity_Stealth",
         "Name": "Black Carapace: Decreased Cooling",
         "Details": "Heat Capacity Penalty",
         "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
-      "nature": "Debuff",
       "statisticData": {
         "statName": "HeatSinkCapacity",
         "operation": "Int_Add",
@@ -595,6 +578,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "BreachImmunity",
         "Name": "Black Carapace: Immune to Hull Breaches",
@@ -606,8 +590,7 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     }
   ],
   "ComponentTags": {
@@ -616,9 +599,8 @@
       "component_type_stock",
       "StealthArmor",
       "ElectronicCounterMeasures",
-      "BAIncompatible",
-      "ProtoIncompatible",
-      "SuperheavyIncompatible"
+      "SuperheavyIncompatible",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

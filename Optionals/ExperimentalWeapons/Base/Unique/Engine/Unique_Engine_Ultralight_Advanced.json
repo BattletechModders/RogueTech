@@ -8,12 +8,6 @@
         "CategoryID": "EnginePart"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "1 * [[Chassis.Tonnage]]",
-        "CBillCost": "800 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "EngineWeight: -75%",
       "EngineReserved: 10",
@@ -24,16 +18,17 @@
       "CoolantCostMulti: 8%",
       "SuperheavyOnly"
     ],
+    "Flags": [
+      "vital",
+      "not_broken"
+    ],
     "ActivatableComponent": {
-      "ExplodeOnDamage": true,
       "CanNotBeActivatedManualy": true,
       "NoUniqueCheck": true,
+      "ExplodeOnDamage": true,
       "Explosion": {
         "Chance": 0.15,
         "ExplosionMessage": "Core Meltdown!",
-        "VFX": "WFX_Nuke",
-        "TempDesignMask": "DesignMaskRadiation",
-        "VFXActorStat": "EngineExplodeVFX",
         "RangeActorStat": "EngineExplodeRange",
         "DamageActorStat": "EngineExplodeDamage",
         "HeatActorStat": "EngineExplodeHeat",
@@ -43,22 +38,30 @@
         "FireTerrainStrengthActorStat": "EngineExplodeFireStrength",
         "FireDurationWithoutForestActorStat": "EngineExplodeTerrainDuration",
         "FireTerrainCellRadiusActorStat": "EngineExplodeFireRadius",
+        "VFXActorStat": "EngineExplodeVFX",
+        "TempDesignMask": "DesignMaskRadiation",
         "TempDesignMaskActorStat": "EngineExplodeDesignMask",
         "TempDesignMaskTurnsActorStat": "EngineExplodeDesignMaskDuration",
-        "TempDesignMaskCellRadiusActorStat": "EngineExplodeDesignMaskRadius"
-      },
-      "statusEffects": []
+        "TempDesignMaskCellRadiusActorStat": "EngineExplodeDesignMaskRadius",
+        "VFX": "WFX_Nuke"
+      }
     },
-    "Flags": [
-      "vital",
-      "not_broken"
-    ],
-    "HeatSinkingCost": {
-      "HeatUpkeepCost": 8,
-      "HeatUpkeepMult": 1.08
+    "Weights": {
+      "ReservedSlots": 10,
+      "EngineFactor": 0.25
+    },
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "1 * [[Chassis.Tonnage]]",
+        "CBillCost": "800 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
     },
     "IBLS": {
       "StorageSize": 12
+    },
+    "HeatSinkingCost": {
+      "HeatUpkeepCost": 8,
+      "HeatUpkeepMult": 1.08
     },
     "Linked": {
       "Links": [
@@ -79,10 +82,6 @@
           "Location": "RightArm"
         }
       ]
-    },
-    "Weights": {
-      "ReservedSlots": 10,
-      "EngineFactor": 0.25
     }
   },
   "Description": {
@@ -121,13 +120,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-Heat_UL",
         "Name": "Engine Ultralight Advanced: Increased Heat Generated",
         "Details": "Heat generation increased by 40%.",
         "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "HeatGenerated",
         "operation": "Float_Multiply",
@@ -148,13 +147,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Debuff",
       "Description": {
         "Id": "XXL_Heat_Move",
         "Name": "Engine Ultralight Advanced: Increased Heat Generated from Walking",
         "Details": "Heat Capacity Penalty",
         "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
-      "nature": "Debuff",
       "statisticData": {
         "statName": "WalkHeatMod",
         "operation": "Float_Add",
@@ -174,13 +173,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Debuff",
       "Description": {
         "Id": "XXL_Heat_Sprint",
         "Name": "Engine Ultralight Advanced: Increased Heat Generated from Sprinting",
         "Details": "Heat Capacity Penalty",
         "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
-      "nature": "Debuff",
       "statisticData": {
         "statName": "SprintHeatMod",
         "operation": "Float_Add",
@@ -200,13 +199,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-JumpHeat",
         "Name": "Engine Ultralight Advanced: Increased Jump Heat Generated",
         "Details": "Jump Jets Generate Increased Heat",
         "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "JumpHeat",
         "operation": "Float_Multiply",
@@ -220,8 +219,6 @@
       "EnginePart.{location}",
       "component_type_stock",
       "SuperheavyEquipment",
-      "BAIncompatible",
-      "ProtoIncompatible",
       "RISCSuperheavyEquipment",
       "EnginePart",
       "Fusion",

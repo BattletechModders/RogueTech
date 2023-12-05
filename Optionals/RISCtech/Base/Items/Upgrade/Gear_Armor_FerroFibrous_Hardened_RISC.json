@@ -5,12 +5,6 @@
         "CategoryID": "Armor"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.10833 * [[Chassis.Tonnage]]",
-        "CBillCost": "125 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "ArmorProtection: +50%",
       "ArmorFactor: +40%",
@@ -27,12 +21,15 @@
       "CASEII",
       "CASEVENT: 50, 100"
     ],
+    "Flags": [
+      "not_broken"
+    ],
     "ActivatableComponent": {
       "ButtonName": "Repair Systems",
       "CanNotBeActivatedManualy": true,
-      "NoUniqueCheck": true,
       "ActivationMessage": "Repairing",
       "DeactivationMessage": "System OK",
+      "NoUniqueCheck": true,
       "Repair": {
         "InnerStructure": 10,
         "Armor": 20,
@@ -41,30 +38,38 @@
         "VehicleLocations": [],
         "BuildingLocations": [],
         "AffectInstalledLocation": true,
-        "TurnsSinceDamage": 2,
         "repairTrigger": {
           "OnActivation": false,
           "OnDamage": "None",
           "AtEndOfTurn": true
-        }
+        },
+        "TurnsSinceDamage": 2
       }
+    },
+    "ComponentExplosion": {
+      "ExplosionDamage": 30.0
+    },
+    "Weights": {
+      "ArmorFactor": 1.4
+    },
+    "ArmorStructureChanges": {
+      "ArmorFactor": 1.5
     },
     "ArmorRepair": {
       "ArmorTPCost": 2.2,
       "ArmorCBCost": 1.5
     },
-    "ArmorStructureChanges": {
-      "ArmorFactor": 1.5
-    },
     "CASE": {
       "MaximumDamage": 5
     },
-    "Color": "Gold",
-    "ComponentExplosion": {
-      "ExplosionDamage": 30
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.10833 * [[Chassis.Tonnage]]",
+        "CBillCost": "125 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
     },
-    "CriticalEffects": {
-      "LinkedStatisticName": "RISC Armor"
+    "IBLS": {
+      "StorageSize": 15
     },
     "ExplosionProtectionHeat": {
       "MaximumDamage": 50
@@ -72,11 +77,8 @@
     "ExplosionProtectionStability": {
       "MaximumDamage": 100
     },
-    "Flags": [
-      "not_broken"
-    ],
-    "IBLS": {
-      "StorageSize": 15
+    "CriticalEffects": {
+      "LinkedStatisticName": "RISC Armor"
     },
     "Linked": {
       "Links": [
@@ -110,13 +112,11 @@
         }
       ]
     },
-    "Weights": {
-      "ArmorFactor": 1.4
+    "Color": "Gold",
+    "case": {
+      "MaximumDamage": 5
     }
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 20000000,
     "Rarity": 20,
@@ -134,6 +134,8 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 0,
   "InventorySize": 1,
   "Tonnage": 7,
@@ -152,6 +154,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "HardenedCritImmune",
         "Name": "Hardened Ferro-Fibrous: TAC Immune",
@@ -163,8 +166,7 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -176,6 +178,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "BreachImmunity",
         "Name": "Hardened Ferro-Fibrous: Immune to Hull Breaches",
@@ -187,17 +190,15 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     }
   ],
   "ComponentTags": {
     "items": [
       "component_type_stock",
       "CasedArmor",
-      "BAIncompatible",
-      "ProtoIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

@@ -8,12 +8,6 @@
         "CategoryID": "StealthSystem"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.13333 * [[Chassis.Tonnage]]",
-        "CBillCost": "93.33333 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "CASE",
       "CASEVENT: 100, 200",
@@ -28,31 +22,20 @@
       "ArmorTPCost: x2.1",
       "ArmorCBCost: x2.2"
     ],
+    "Flags": [
+      "not_broken"
+    ],
     "ActivatableComponent": {
+      "ButtonName": "Stealth",
+      "CanNotBeActivatedManualy": false,
       "CanActivateAfterMove": true,
       "CanActivateAfterFire": false,
-      "SafeActivation": true,
-      "ButtonName": "Stealth",
       "ActiveByDefault": true,
-      "ActivationIsBuff": true,
-      "CanNotBeActivatedManualy": false,
-      "NoUniqueCheck": true,
+      "SafeActivation": true,
       "ActivationMessage": "NSS On",
       "DeactivationMessage": "NSS Off",
-      "Linkage": {
-        "OnActivate": {
-          "Activate": [
-            "Camouflage"
-          ],
-          "Deactivate": []
-        },
-        "OnDeactivate": {
-          "Activate": [],
-          "Deactivate": [
-            "Camouflage"
-          ]
-        }
-      },
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
       "statusEffects": [
         {
           "durationData": {
@@ -67,6 +50,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "LV_Stealth_Effect",
             "Name": "NSS (C) Activatable: Stealth",
@@ -78,8 +62,7 @@
             "operation": "Set",
             "modValue": "0.3_5_2_4_6",
             "modType": "System.String"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -93,13 +76,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Signature_Decrease_CNSS",
             "Name": "NSS (C) Activatable: Decreased Sensor Signature",
             "Details": "Signature Statuseffect.",
             "Icon": "uixSvgIcon_equipment_TTS"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "SensorSignatureModifier",
             "operation": "Float_Multiply",
@@ -119,13 +102,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Visibility_Decrease_CNSS",
             "Name": "NSS (C) Activatable: Decreased Visual Signature",
             "Details": "Visibility Statuseffect.",
             "Icon": "uixSvgIcon_equipment_TTS"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "SpottingVisibilityMultiplier",
             "operation": "Float_Multiply",
@@ -145,13 +128,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Heat_Generation_CNSS",
             "Name": "NSS (C) Activatable: Increased Heat Generated",
             "Details": "Heat generation",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "HeatGenerated",
             "operation": "Float_Multiply",
@@ -172,13 +155,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "Stealth_Heat_Capacity_CNSS",
             "Name": "NSS (C) Activatable: Decreased Cooling",
             "Details": "Heat Capacity Penalty",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Debuff",
           "statisticData": {
             "statName": "HeatSinkCapacity",
             "operation": "Int_Add",
@@ -187,7 +170,20 @@
           }
         }
       ],
-      "offlineStatusEffects": []
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [
+            "Camouflage"
+          ],
+          "Deactivate": []
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": [
+            "Camouflage"
+          ]
+        }
+      }
     },
     "ArmorRepair": {
       "ArmorTPCost": 2.1,
@@ -196,24 +192,25 @@
     "CASE": {
       "AllLocations": true
     },
-    "Color": "Gold",
-    "CriticalEffects": {
-      "LinkedStatisticName": "Null Signature System"
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.13333 * [[Chassis.Tonnage]]",
+        "CBillCost": "93.33333 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
     },
-    "ErrorMessage": "Null Signature System requires a ECM!",
-    "ExplosionProtectionHeat": {
-      "AllLocations": true,
-      "MaximumDamage": 100
-    },
-    "ExplosionProtectionStability": {
-      "AllLocations": true,
-      "MaximumDamage": 200
-    },
-    "Flags": [
-      "not_broken"
-    ],
     "IBLS": {
       "StorageSize": 7
+    },
+    "ExplosionProtectionHeat": {
+      "MaximumDamage": 100,
+      "AllLocations": true
+    },
+    "ExplosionProtectionStability": {
+      "MaximumDamage": 200,
+      "AllLocations": true
+    },
+    "CriticalEffects": {
+      "LinkedStatisticName": "Null Signature System"
     },
     "Linked": {
       "Links": [
@@ -242,6 +239,11 @@
           "Location": "RightLeg"
         }
       ]
+    },
+    "Color": "Gold",
+    "ErrorMessage": "Null Signature System requires a ECM!",
+    "case": {
+      "AllLocations": true
     },
     "DecoratorComponent": [
       {
@@ -275,16 +277,14 @@
   "AllowedLocations": "CenterTorso",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "statusEffects": [],
   "ComponentTags": {
     "items": [
       "component_type_stock",
       "ClanArmor",
       "StealthArmor",
-      "BAIncompatible",
-      "ProtoIncompatible",
       "SuperheavyIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

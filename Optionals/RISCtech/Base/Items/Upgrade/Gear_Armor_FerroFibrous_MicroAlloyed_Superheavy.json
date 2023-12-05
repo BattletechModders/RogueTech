@@ -8,12 +8,6 @@
         "CategoryID": "StealthSystem"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.5 * [[Chassis.Tonnage]]",
-        "CBillCost": "230 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "Stealth",
       "StealthSensors: 20%, 2, 1, 1, 2",
@@ -29,31 +23,20 @@
       "ReqECM",
       "SuperheavyOnly"
     ],
+    "Flags": [
+      "not_broken"
+    ],
     "ActivatableComponent": {
+      "ButtonName": "Stealth",
+      "CanNotBeActivatedManualy": false,
       "CanActivateAfterMove": true,
       "CanActivateAfterFire": false,
-      "SafeActivation": true,
-      "ButtonName": "Stealth",
       "ActiveByDefault": true,
-      "ActivationIsBuff": true,
-      "CanNotBeActivatedManualy": false,
-      "NoUniqueCheck": true,
+      "SafeActivation": true,
       "ActivationMessage": "Stealth Activated",
       "DeactivationMessage": "Stealth Deactivated",
-      "Linkage": {
-        "OnActivate": {
-          "Activate": [
-            "Camouflage"
-          ],
-          "Deactivate": []
-        },
-        "OnDeactivate": {
-          "Activate": [],
-          "Deactivate": [
-            "Camouflage"
-          ]
-        }
-      },
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
       "statusEffects": [
         {
           "durationData": {
@@ -68,6 +51,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "LV_Stealth_Effect",
             "Name": "Micro-Alloyed Ferro-Fibrous Armor Activatable: Stealth",
@@ -79,8 +63,7 @@
             "operation": "Set",
             "modValue": "0.8_2_1_1_2",
             "modType": "System.String"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -94,13 +77,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Signature_Decrease_Stealth",
             "Name": "Micro-Alloyed Ferro-Fibrous Armor Activatable: Decreased Sensor Signature",
             "Details": "Signature Statuseffect.",
             "Icon": "uixSvgIcon_equipment_TTS"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "SensorSignatureModifier",
             "operation": "Float_Multiply",
@@ -120,13 +103,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Visibility_Decrease_Stealth",
             "Name": "Micro-Alloyed Ferro-Fibrous Armor Activatable: Decreased Visual Signature",
             "Details": "Visibility Statuseffect.",
             "Icon": "uixSvgIcon_equipment_TTS"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "SpottingVisibilityMultiplier",
             "operation": "Float_Multiply",
@@ -146,13 +129,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Heat_Generation_Stealth",
             "Name": "Micro-Alloyed Ferro-Fibrous Armor Activatable: Increased Heat Generated",
             "Details": "Heat generation",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "HeatGenerated",
             "operation": "Float_Multiply",
@@ -162,7 +145,26 @@
           }
         }
       ],
-      "offlineStatusEffects": []
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [
+            "Camouflage"
+          ],
+          "Deactivate": []
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": [
+            "Camouflage"
+          ]
+        }
+      }
+    },
+    "ComponentExplosion": {
+      "ExplosionDamage": 30.0
+    },
+    "Weights": {
+      "ArmorFactor": 0.7
     },
     "ArmorRepair": {
       "ArmorTPCost": 2.7,
@@ -171,25 +173,23 @@
     "CASE": {
       "MaximumDamage": 5
     },
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.5 * [[Chassis.Tonnage]]",
+        "CBillCost": "230 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
+    "IBLS": {
+      "StorageSize": 21
+    },
     "ExplosionProtectionHeat": {
       "MaximumDamage": 50
     },
     "ExplosionProtectionStability": {
       "MaximumDamage": 100
     },
-    "Color": "Gold",
-    "ComponentExplosion": {
-      "ExplosionDamage": 30
-    },
     "CriticalEffects": {
       "LinkedStatisticName": "Stealth System"
-    },
-    "ErrorMessage": "Stealth Armor requires a ECM!",
-    "Flags": [
-      "not_broken"
-    ],
-    "IBLS": {
-      "StorageSize": 21
     },
     "Linked": {
       "Links": [
@@ -227,8 +227,10 @@
         }
       ]
     },
-    "Weights": {
-      "ArmorFactor": 0.7
+    "Color": "Gold",
+    "ErrorMessage": "Stealth Armor requires a ECM!",
+    "case": {
+      "MaximumDamage": 5
     },
     "DecoratorComponent": [
       {
