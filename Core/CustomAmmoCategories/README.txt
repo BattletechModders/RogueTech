@@ -518,6 +518,16 @@ new fields
 	                                                     chance is based on distance from center of effect. 
 	  "sticky": true                                     - it true on success hit deferred effect position links to target. Does not matter if it moves or become dead.
   },
+  "IsArtillery": NotSet,                                 - if True delayed attack logic will be used for this weapon. Can be set for mode, ammo and weapon.
+  "ArtilleryReticleColor": { "C":"#FF0000", "I": 1.5 },  - Color for reticle. Will be used value for instance (mode, ammo, weapon) which has IsArtillery: True
+  "ArtilleryReticleRadius" : 120,                        - Color radius for reticle. Will be used value for instance (mode, ammo, weapon) which has IsArtillery: True
+  "ArtilleryReticleText": "Text",                        - Text for reticle. Will be used value for instance (mode, ammo, weapon) which has IsArtillery: True
+                           Artillery logic explanation: if while attack request in weapons list there are any weapons with effective IsArtillery: True
+						   no weapon will fire, unit braces and goes to the artillery mode. Reticle indicator created. 
+						   Next round this unit will be only able to fire or brace. If player chooses to fire - weapon with IsArtillery will fire position selected prev. round
+						   If player chooses brace - unit braces and goes out from artillery mode without attack performing.
+						   AI can fire artillery same rules. AI knows about incoming artillery strikes and will try to get out from danger area if can.
+
   "ShotsPerAmmo": 1,              - shots per ammo. Example: you have effective shots count = 4 and ShotsPerAmmo = 0.5. After fire ammo will be decremented by 2 (4 * 0.5)
                                     Mutiplicative per weapon, ammo, mode. Default value 1. NOTE: Ammo decrement value rounded to nearest integer. 
                                     If it will be less than 0.5 - it will be your own problem - no ammo will be used.
