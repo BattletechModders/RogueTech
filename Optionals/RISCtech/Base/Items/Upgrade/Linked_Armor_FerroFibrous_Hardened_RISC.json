@@ -8,12 +8,6 @@
         "CategoryID": "LinkedArmor"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.0525 * [[Chassis.Tonnage]]",
-        "CBillCost": "16.66667 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "ArmorProtection: 50%",
       "ArmorFactor: 40%",
@@ -30,12 +24,18 @@
       "CASEII",
       "CASEVENT: 50, 100"
     ],
+    "Flags": [
+      "default",
+      "not_broken",
+      "no_salvage",
+      "autorepair"
+    ],
     "ActivatableComponent": {
       "ButtonName": "Repair Systems",
       "CanNotBeActivatedManualy": true,
-      "NoUniqueCheck": true,
       "ActivationMessage": "Repairing",
       "DeactivationMessage": "System OK",
+      "NoUniqueCheck": true,
       "Repair": {
         "InnerStructure": 10,
         "Armor": 20,
@@ -44,16 +44,25 @@
         "VehicleLocations": [],
         "BuildingLocations": [],
         "AffectInstalledLocation": true,
-        "TurnsSinceDamage": 2,
         "repairTrigger": {
           "OnActivation": false,
           "OnDamage": "None",
           "AtEndOfTurn": true
-        }
+        },
+        "TurnsSinceDamage": 2
       }
+    },
+    "ComponentExplosion": {
+      "ExplosionDamage": 30.0
     },
     "CASE": {
       "MaximumDamage": 3
+    },
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.0525 * [[Chassis.Tonnage]]",
+        "CBillCost": "16.66667 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
     },
     "ExplosionProtectionHeat": {
       "MaximumDamage": 50
@@ -61,23 +70,14 @@
     "ExplosionProtectionStability": {
       "MaximumDamage": 100
     },
-    "Color": "Gold",
-    "ComponentExplosion": {
-      "ExplosionDamage": 30
-    },
     "CriticalEffects": {
       "LinkedStatisticName": "RISC Armor"
     },
-    "Flags": [
-      "default",
-      "not_broken",
-      "no_salvage",
-      "autorepair"
-    ]
+    "Color": "Gold",
+    "case": {
+      "MaximumDamage": 3
+    }
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 0,
     "Rarity": 99,
@@ -95,6 +95,8 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 0,
   "InventorySize": 2,
   "Tonnage": 0,
@@ -112,6 +114,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "BreachImmunity",
         "Name": "Linked Hardened Ferro-Fibrous: Immune to Hull Breaches",
@@ -123,17 +126,15 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     }
   ],
   "ComponentTags": {
     "items": [
       "component_type_stock",
       "BLACKLISTED",
-      "BAIncompatible",
-      "ProtoIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

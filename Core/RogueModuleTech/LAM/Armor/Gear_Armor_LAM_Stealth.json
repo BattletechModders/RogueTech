@@ -11,12 +11,6 @@
         "CategoryID": "StealthSystem"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.115 * [[Chassis.Tonnage]]",
-        "CBillCost": "22.22222 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "Stealth",
       "StealthSensors: 50%, 4, 2, 3, 4",
@@ -32,31 +26,20 @@
       "ArmorTPCost: x1.5",
       "ArmorCBCost: x2.1"
     ],
+    "Flags": [
+      "not_broken"
+    ],
     "ActivatableComponent": {
+      "ButtonName": "Stealth",
+      "CanNotBeActivatedManualy": false,
       "CanActivateAfterMove": true,
       "CanActivateAfterFire": false,
-      "SafeActivation": true,
-      "ButtonName": "Stealth",
       "ActiveByDefault": true,
-      "ActivationIsBuff": true,
-      "CanNotBeActivatedManualy": false,
-      "NoUniqueCheck": true,
+      "SafeActivation": true,
       "ActivationMessage": "Stealth On",
       "DeactivationMessage": "Stealth Off",
-      "Linkage": {
-        "OnActivate": {
-          "Activate": [
-            "Camouflage"
-          ],
-          "Deactivate": []
-        },
-        "OnDeactivate": {
-          "Activate": [],
-          "Deactivate": [
-            "Camouflage"
-          ]
-        }
-      },
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
       "statusEffects": [
         {
           "durationData": {
@@ -71,6 +54,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "LV_Stealth_Effect",
             "Name": "Stealth LAM Activatable: Stealth",
@@ -82,8 +66,7 @@
             "operation": "Set",
             "modValue": "0.5_4_2_3_4",
             "modType": "System.String"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -97,13 +80,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Signature_Decrease_Stealth",
             "Name": "Stealth LAM Activatable: Decreased Sensor Signature",
             "Details": "Signature Statuseffect.",
             "Icon": "uixSvgIcon_equipment_TTS"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "SensorSignatureModifier",
             "operation": "Float_Multiply",
@@ -123,13 +106,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Visibility_Decrease_Stealth",
             "Name": "Stealth LAM Activatable: Decreased Visual Signature",
             "Details": "Visibility Statuseffect.",
             "Icon": "uixSvgIcon_equipment_TTS"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "SpottingVisibilityMultiplier",
             "operation": "Float_Multiply",
@@ -149,13 +132,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Heat_Generation_Stealth",
             "Name": "Stealth LAM Activatable: Increased Heat Generated",
             "Details": "Heat generation",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "HeatGenerated",
             "operation": "Float_Multiply",
@@ -176,13 +159,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "Stealth_Heat_Capacity_Stealth",
             "Name": "Stealth LAM Activatable: Decreased Cooling",
             "Details": "Heat Capacity Penalty",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Debuff",
           "statisticData": {
             "statName": "HeatSinkCapacity",
             "operation": "Int_Add",
@@ -191,22 +174,39 @@
           }
         }
       ],
-      "offlineStatusEffects": []
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [
+            "Camouflage"
+          ],
+          "Deactivate": []
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": [
+            "Camouflage"
+          ]
+        }
+      }
+    },
+    "Weights": {
+      "ArmorFactor": 1.1
     },
     "ArmorRepair": {
       "ArmorTPCost": 1.5,
       "ArmorCBCost": 2.1
     },
-    "Color": "Gold",
-    "CriticalEffects": {
-      "LinkedStatisticName": "LAM Stealth System"
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.115 * [[Chassis.Tonnage]]",
+        "CBillCost": "22.22222 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
     },
-    "ErrorMessage": "Stealth Armor requires a ECM!",
-    "Flags": [
-      "not_broken"
-    ],
     "IBLS": {
       "StorageSize": 7
+    },
+    "CriticalEffects": {
+      "LinkedStatisticName": "LAM Stealth System"
     },
     "Linked": {
       "Links": [
@@ -236,9 +236,8 @@
         }
       ]
     },
-    "Weights": {
-      "ArmorFactor": 1.1
-    },
+    "Color": "Gold",
+    "ErrorMessage": "Stealth Armor requires a ECM!",
     "DecoratorComponent": [
       {
         "Text": "S",
@@ -271,14 +270,12 @@
   "AllowedLocations": "CenterTorso",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "statusEffects": [],
   "ComponentTags": {
     "items": [
       "component_type_stock",
       "StealthArmor",
-      "BAIncompatible",
-      "ProtoIncompatible",
-      "SuperheavyIncompatible"
+      "SuperheavyIncompatible",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }
