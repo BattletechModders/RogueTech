@@ -1,0 +1,266 @@
+{
+    "Description" : {
+        "Id" : "event_co_LRMech_ArrivalCollect",
+        "Name" : "Let there be light...",
+        "Details" : "A knock on your door sounds, \"Come in.\"\r\n\r\nThe door slides open allowing Darius to enter, \"Greetings Commander.  We have received word from <i>Bergan Industries</i> and we have clearance to land at their private landing pad.\"\r\n\r\nYou smile, \"Thank you, Darius.  Time for us to collect [[SCN_MW,{SCN_MW.Callsign}]] and {SCN_MW.Det} mech and get back to work.\"\r\n\r\n\"So we are opting to not take them up on thier offer of a live fire exercise?\" Darius asks.\r\n\r\nYou raise your eyebrows, \"You think we should run a field test under controlled parameters?  You know as well as I that even with live fire, it is not the same as a proper battlefield test.\"\r\n\r\nDarius nods, \"Aye Commander, it is not the same, but it could allow us to be sure nothing is wrong with the mech in a situation where there is significantly less that can go wrong not only for [[SCN_MW,{SCN_MW.Callsign}]] and <i>Last Rites</i> but for the Company as well.  Still, the decision is yours to make, Commander.\"",
+        "Icon" : "uixTxrSpot_LRTransmission.png"
+    },
+    "Scope" : "Company",
+    "Weight" : 10000,
+    "Requirements" : {
+        "Scope" : "Company",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "",
+            "items" : [
+                "event_LRTravelCollect"
+            ]
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "",
+            "items" : []
+        },
+        "RequirementComparisons" : []
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "StarSystem",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "Tags/CompanyTags",
+                "items" : [
+                    "planet_name_rasalhague"
+                ]
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "",
+                "items" : []
+            },
+            "RequirementComparisons" : []
+        }
+    ],
+    "AdditionalObjects" : [
+        {
+            "Scope" : "SecondaryMechWarrior",
+            "Requirements" : {
+                "Scope" : "SecondaryMechWarrior",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "Tags/CompanyTags",
+                    "items" : [
+                        "name_Burtonias"
+                    ]
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "Tags/CompanyTags",
+                    "items" : []
+                },
+                "RequirementComparisons" : [
+                    {
+                        "obj" : "Injuries",
+                        "op" : "Equal",
+                        "val" : 0,
+                        "valueConstant" : "0"
+                    }
+                ]
+            }
+        }
+    ],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Send the Leopard",
+                "Details" : "Collect [[SCN_MW,{SCN_MW.Callsign}]] and <i>Last Rites</i>",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "StarSystem",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "Tags/CompanyTags",
+                        "items" : [
+                            "planet_name_rasalhague"
+                        ]
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : []
+                },
+                {
+                    "Scope" : "SecondaryMechWarrior",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : [
+                            "name_Burtonias"
+                        ]
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Collect pilot and Mech",
+                        "Details" : "You stand up, moving around your desk towards the door, \"Darius, you have valid points, but I'm going to stick to my gut here.  We will go down to [[TGT_SYSTEM,{TGT_SYSTEM.Name}]] and pickup our Mechwarrior and the mech and then we will get this company back on track.\r\n\r\nDarius walks with you as you both leave the office, \"Understood Commander.  I'll instruct Sumire to be ready to launch within the hour.\"\r\n\r\n<color=#ff0000><i>Advance a day to launch the Leopard</i></color>",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : [
+                                    "event_LRCollection"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_MinskLR",
+                                    "event_LastRites_InProgress",
+                                    "event_LRTravelCollect"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : [
+                                {
+                                    "Scope" : "Company",
+                                    "EventID" : "forceevent_co_LRMech_Collection",
+                                    "MinDaysWait" : 1,
+                                    "MaxDaysWait" : 1,
+                                    "Probability" : 100,
+                                    "RetainPilot" : false
+                                }
+                            ],
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Send the Leopard",
+                "Details" : "Participate in Live Fire Exercise",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "StarSystem",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "Tags/CompanyTags",
+                        "items" : [
+                            "planet_name_rasalhague"
+                        ]
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : []
+                },
+                {
+                    "Scope" : "SecondaryMechWarrior",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : [
+                            "name_Burtonias"
+                        ]
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Live Fire Exercise",
+                        "Details" : "You stand up, moving around your desk towards the door, \"Darius, you have some valid points there.  Ok, let's test the mech while we are here on [[TGT_SYSTEM,{TGT_SYSTEM.Name}]].\r\n\r\nDarius walks with you as you both leave the office, \"Understood Commander.  I'll instruct Sumire to be ready to launch within the hour.\"\r\n\r\n<color=#ff0000><i>Advance a day to launch the Leopard</i></color>",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : [
+                                    "event_LRLiveFire"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_MinskLR",
+                                    "event_LastRites_InProgress",
+                                    "event_LRTravelCollect"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : [
+                                {
+                                    "Scope" : "Company",
+                                    "EventID" : "forceevent_co_LRMech_LiveFire",
+                                    "MinDaysWait" : 1,
+                                    "MaxDaysWait" : 1,
+                                    "Probability" : 100,
+                                    "RetainPilot" : false
+                                }
+                            ],
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL",
+    "OneTimeEvent" : false,
+    "Tags" : {
+        "tagSetSourceFile" : "tags/EventTags",
+        "items" : []
+    }
+}
