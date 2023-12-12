@@ -1,0 +1,47 @@
+Notes for building a Mech Squad - Kagorus / Redbat
+
+    /core/RogueModuleTech/MechSquad/
+
+    Basic Notes:
+    * Mech Squads can use any standard weapons that are not too large normally.
+    * Mech Squads use the right widget in the Mech Lab to show the internals shared between all members of the squad. 
+        This Widget is either 4 or 5 slots depending on if a Squad Specialist item is used. 
+        The size of the Widget has to be configured in each units ChassisDef with the Custom.CustomWidgetChassis property.
+    * All items that every member of the squad share should be put in the Center Torso, and any such item must have the flags "not_broken, not_destroyed, ignore_damage, no_salvage"
+     
+    Engine Cores:
+        Mech Squads need a specific version of engine cores based on how many units the squad has, see any file name Gear_MechSquad_EngineCore_<Rating>_x<SquadSize>.
+        If a new rating and/or squad size is needed, take a base engine core, remove the explosion ActivatableComponent and make its weight and cost according to the formula below. Do NOT multiply the engine rating by squad size.
+           The gyro weight included in the core total tonnage MUST be for just one gyro, not for each squad member. This is due to a work around how MechEngineer calculates Gyro weights in engines. The Gyro weight is instead manipulated through GyroFactor in the Systems item of the corresponding squad size.
+           Don't forget to add the new Category, Flags and Tags needed, see existing ones for examples.
+
+        Engine Weight Calculation (Tonnage)
+            (Core Weight) * Squad Size + Gyro
+            Example: Squad of 4, Core Rating 100 -> Core Weight is 3 tons, Gyro weight is 1 ton. 
+                     Formula then gives 3 * 4 + 1 = 13 tons.
+        Engine Cost: 
+            (Base Core Cost) * Squad Size
+
+    Engine Types:
+        Mech Squads support having different types of engines, such as Clan, XL, XXL, etc. To create a new one take a standard Engine type, remove the explosion ActivatableComponent, Linked and any heating related bonus descriptions or stats.
+            Don't forget to add the new Category, Flags and Tags needed, see existing ones for examples.
+
+    Structure / Armor:
+        Mech Squads use their own Structure and Armor items to remove the need for dynamic or fixed slots. See one of the existing ones for how to create them. Since they are not based on squad size, the cost of the item is arbitrary to try and balance for both 2 and 4 unit squads.        
+    
+    Cockpit / Sensor / FCS:
+        Mech Squads combine all cockpit items to a single item to show in the right widget, this item should be the weight and cost of all the standard items combined multiplied by squad size.
+
+    System / Gyro:
+        Mech squads have a system item that represents the tooltip / description of the squad size (and type if ultralight) as well as holds the gyro stats.
+        This item holds the GyroFactor weights modifier for the amount of squad size.
+            This item does NOT allow modifying the weight of Gyros outside the squad size, this instead has to be done through a Squad Specialist item.
+
+    Jump Jets:
+        Mech Squads, like other squad based units, only count the jumping stats from first JumpJet item found on the whole unit, but all members should have such an item to handle weight distribution properly. See the existing Gear_MechSquad_JumpJet items for an example.
+
+    Other Equipment:
+        Normal equipment or specialist items CAN NOT be used with mech squads.
+        Instead Mech Squads have an (optional) specialist item slot where items that provides some extra capabilities, such as Advanced Sensors, ECM, Gyro XL, MASC and so on, can be mounted.
+        If creating a Gyro weight modifying specialist item, remember that the actual GyroFactor modifier is calculated as 1 + each (<Specified value> - 1). 
+            This means to create an Gyro XL for a 4 unit squad the GyroFactor should be -1 since the System items Gyrofactor is 4. The final modifier will then be 1 [base] + (4 -1) [Systems item] + (-1 - 1) [Specialist item] = 1 + 3 - 2 = 2, so 50% of a 4 unit gyro weight.
