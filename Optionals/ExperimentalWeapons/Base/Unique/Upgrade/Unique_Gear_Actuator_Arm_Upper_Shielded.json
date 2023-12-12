@@ -22,12 +22,18 @@
       "CASEVENT: 60, 80",
       "FluidBoom: 20"
     ],
+    "Flags": [
+      "not_broken",
+      "no_salvage",
+      "ignore_shutdown",
+      "autorepair"
+    ],
     "ActivatableComponent": {
       "ButtonName": "HarJel",
       "CanNotBeActivatedManualy": true,
-      "NoUniqueCheck": true,
       "ActivationMessage": "Repairs Initiated",
       "DeactivationMessage": "Repairs Complete",
+      "NoUniqueCheck": true,
       "Repair": {
         "InnerStructure": 1,
         "Armor": 5,
@@ -43,22 +49,14 @@
         }
       }
     },
-        "CriticalEffects": {
-          "PenalizedEffectIDs": [
-            [
-              "CriticalEffect-ArmUpperActuatorDestroyed-{location}"
-            ]
-          ],
-          "OnDestroyedEffectIDs": [
-            "CriticalEffect-ShoulderDestroyed-{location}"
-          ],
-          "OnDestroyedDisableEffectIds": [
-            "CriticalEffect-ArmLowerActuatorDestroyed-{location}",
-            "CriticalEffect-ArmHandActuatorDestroyed-{location}"
-          ]
-        },
+    "Weights": {
+      "ComponentByChassisFactor": 0.03
+    },
     "CASE": {
       "MaximumDamage": 10
+    },
+    "IBLS": {
+      "StorageSize": 2
     },
     "ExplosionProtectionHeat": {
       "MaximumDamage": 60
@@ -66,22 +64,24 @@
     "ExplosionProtectionStability": {
       "MaximumDamage": 80
     },
-    "Flags": [
-      "not_broken",
-      "no_salvage",
-      "ignore_shutdown",
-      "autorepair"
-    ],
-    "IBLS": {
-      "StorageSize": 2
+    "CriticalEffects": {
+      "OnDestroyedEffectIDs": [
+        "CriticalEffect-ShoulderDestroyed-{location}"
+      ],
+      "OnDestroyedDisableEffectIds": [
+        "CriticalEffect-ArmLowerActuatorDestroyed-{location}",
+        "CriticalEffect-ArmHandActuatorDestroyed-{location}"
+      ],
+      "PenalizedEffectIDs": [
+        [
+          "CriticalEffect-ArmUpperActuatorDestroyed-{location}"
+        ]
+      ]
     },
-    "Weights": {
-      "ComponentByChassisFactor": 0.03
+    "case": {
+      "MaximumDamage": 10
     }
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 5000000,
     "Rarity": 99,
@@ -99,6 +99,8 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 0,
   "InventorySize": 2,
   "Tonnage": 0,
@@ -118,19 +120,19 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "Status-ReinforcedArmor-{location}",
         "Name": "Upper Shielded: Increased {location} Structure",
         "Details": "Reinforced Leg Armor",
         "Icon": "uixSvgIcon_equipment_ActuatorArm"
       },
-      "nature": "Buff",
       "statisticData": {
-        "effectsPersistAfterDestruction": true,
         "statName": "{location}.Structure",
         "operation": "Float_Multiply",
         "modValue": "1.1",
-        "modType": "System.Single"
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     },
     {
@@ -139,20 +141,20 @@
         "stackLimit": -1
       },
       "targetingData": {
-        "effectTargetsCreator": true,
         "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
+        "effectTargetsCreator": true,
         "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-CombatShield",
         "Name": "Upper Shielded: Decreased Damage Taken",
         "Details": "All incoming damage reduced by 10%.",
         "Icon": "uixSvgIcon_ability_angelofdeath"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "DamageReductionMultiplierAll",
         "operation": "Float_Multiply",
@@ -172,13 +174,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "Status-ReinforcedArmor-{location}",
         "Name": "Unique Upper Shielded: Increased {location} Armor",
         "Details": "Reinforced Leg Armor",
         "Icon": "uixSvgIcon_equipment_ActuatorArm"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "{location}.Armor",
         "operation": "Float_Multiply",
@@ -198,19 +200,19 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "Status-ModularArmor-{location}",
         "Name": "Upper Shielded: Increased {location} Armor",
         "Details": "Reinforced Armor",
         "Icon": "uixSvgIcon_equipment_ActuatorArm"
       },
-      "nature": "Buff",
       "statisticData": {
-        "effectsPersistAfterDestruction": true,
         "statName": "{location}.Armor",
         "operation": "Float_Add",
         "modValue": "25",
-        "modType": "System.Single"
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     },
     {
@@ -219,20 +221,20 @@
         "stackLimit": -1
       },
       "targetingData": {
-        "effectTargetsCreator": true,
         "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
+        "effectTargetsCreator": true,
         "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-CombatShield",
         "Name": "Upper Shielded: Decreased AoE Damage Taken",
         "Details": "All incoming damage reduced by 10%.",
         "Icon": "uixSvgIcon_ability_angelofdeath"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "CACAoEDamageMult",
         "operation": "Float_Multiply",
@@ -246,9 +248,8 @@
       "ignore_shutdown",
       "BLACKLISTED",
       "QuadIncompatible",
-      "BAIncompatible",
-      "ProtoIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

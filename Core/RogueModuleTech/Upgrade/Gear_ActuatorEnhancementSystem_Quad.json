@@ -17,14 +17,21 @@
       "AllowedWeightClass: Light & Medium",
       "QuadOnly"
     ],
-    "CriticalEffects": {
-      "LinkedStatisticName": "AES-Legs"
-    },
     "Flags": [
       "not_broken"
     ],
+    "Weights": {
+      "ComponentByChassisFactor": 0.08
+    },
+    "TonnageLimit": {
+      "Min": 15,
+      "Max": 55
+    },
     "IBLS": {
       "StorageSize": 8
+    },
+    "CriticalEffects": {
+      "LinkedStatisticName": "AES-Legs"
     },
     "Linked": {
       "Links": [
@@ -41,13 +48,6 @@
           "Location": "LeftArm"
         }
       ]
-    },
-    "TonnageLimit": {
-      "Min": 15,
-      "Max": 55
-    },
-    "Weights": {
-      "ComponentByChassisFactor": 0.08
     }
   },
   "Description": {
@@ -84,13 +84,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-AES-Legs-Piloting",
         "Name": "Actuator Enhancement System (Quad): Increased Piloting",
         "Details": "Buffs Piloting Skill",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "Piloting",
         "operation": "Int_Add",
@@ -105,50 +105,24 @@
         "stackLimit": -1
       },
       "targetingData": {
-        "effectTargetType": "Creator",
         "effectTriggerType": "Passive",
-        "showInStatusPanel": false,
-        "showInTargetPreview": false
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-AES-Legs-Charge-Accuracy",
+        "Name": "Actuator Enhancement System (Quad): Improved Charge Hit Chance",
         "Details": "Charge Accuracy Modifier",
-        "Icon": "uixSvgIcon_run_n_gun",
-        "Name": "Actuator Enhancement System (Quad): Improved Charge Hit Chance"
+        "Icon": "uixSvgIcon_run_n_gun"
       },
-      "nature": "Buff",
       "statisticData": {
-        "modType": "System.Int32",
-        "modValue": "-1",
+        "statName": "CBTBE_Charge_Attack_Mod",
         "operation": "Int_Add",
-        "statName": "CBTBE_Charge_Attack_Mod"
-      }
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTargetType": "Creator",
-        "effectTriggerType": "Passive",
-        "showInStatusPanel": false,
-        "showInTargetPreview": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "StatusEffect-AES-Legs-Kick-Accuracy",
-        "Details": "Charge Accuracy Modifier",
-        "Icon": "uixSvgIcon_run_n_gun",
-        "Name": "Actuator Enhancement System (Quad): Improved Kick Hit Chance"
-      },
-      "nature": "Buff",
-      "statisticData": {
-        "modType": "System.Int32",
         "modValue": "-1",
-        "operation": "Int_Add",
-        "statName": "CBTBE_Kick_Attack_Mod"
+        "modType": "System.Int32"
       }
     },
     {
@@ -163,13 +137,39 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "StatusEffect-AES-Legs-Kick-Accuracy",
+        "Name": "Actuator Enhancement System (Quad): Improved Kick Hit Chance",
+        "Details": "Charge Accuracy Modifier",
+        "Icon": "uixSvgIcon_run_n_gun"
+      },
+      "statisticData": {
+        "statName": "CBTBE_Kick_Attack_Mod",
+        "operation": "Int_Add",
+        "modValue": "-1",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-AES-Legs-Stability",
         "Name": "Actuator Enhancement System (Quad): Decreased Stability Damage Taken",
         "Details": "Incoming stability damage reduced by 10%.",
         "Icon": "uixSvgIcon_equipment_Gyro"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "ReceivedInstabilityMultiplier",
         "operation": "Float_Multiply",
@@ -189,13 +189,13 @@
         "showInStatusPanel": true
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-AES-BtF-Reduction",
         "Name": "Actuator Enhancement System (Quad): Increased Walk Speed",
         "Details": "Leg actuators +20% speed",
         "Icon": "mechanicaljump"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "WalkSpeed",
         "operation": "Float_Multiply",
@@ -215,6 +215,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-AES-BtF-Reduction",
         "Name": "Actuator Enhancement System (Quad): Decreased Self Knockdown on Fire",
@@ -226,16 +227,14 @@
         "operation": "Float_Add",
         "modValue": "-0.05",
         "modType": "System.Single"
-      },
-      "nature": "Buff"
+      }
     }
   ],
   "ComponentTags": {
     "items": [
       "LootMagnetBlacklist",
       "ActuatorEnhancementSystemQuad.{location}",
-      "BAIncompatible",
-      "ProtoIncompatible"
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

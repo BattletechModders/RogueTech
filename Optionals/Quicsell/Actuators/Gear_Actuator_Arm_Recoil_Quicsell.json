@@ -14,33 +14,30 @@
       "AccuracyLocation: -1",
       "JamChanceMultiplierLocation: +2%"
     ],
-        "CriticalEffects": {
-          "PenalizedEffectIDs": [
-            [
-              "CriticalEffect-ArmUpperActuatorDestroyed-{location}"
-            ] 
-          ],
-          "OnDestroyedEffectIDs": [
-              "CriticalEffect-ShoulderDestroyed-{location}"
-          ],
-          "OnDestroyedDisableEffectIds": [
-            "CriticalEffect-ArmLowerActuatorDestroyed-{location}",
-            "CriticalEffect-ArmHandActuatorDestroyed-{location}"
-          ]
-        },
     "Flags": [
       "not_broken"
     ],
+    "Weights": {
+      "ComponentByChassisFactor": 0.01
+    },
     "IBLS": {
       "StorageSize": 3
     },
-    "Weights": {
-      "ComponentByChassisFactor": 0.01
+    "CriticalEffects": {
+      "OnDestroyedEffectIDs": [
+        "CriticalEffect-ShoulderDestroyed-{location}"
+      ],
+      "OnDestroyedDisableEffectIds": [
+        "CriticalEffect-ArmLowerActuatorDestroyed-{location}",
+        "CriticalEffect-ArmHandActuatorDestroyed-{location}"
+      ],
+      "PenalizedEffectIDs": [
+        [
+          "CriticalEffect-ArmUpperActuatorDestroyed-{location}"
+        ]
+      ]
     }
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 99999,
     "Rarity": 3,
@@ -58,6 +55,8 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 0,
   "InventorySize": 3,
   "Tonnage": 0,
@@ -77,13 +76,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "Status-LowerAccuracy-{location}",
         "Name": "Upper Recoil QS: Reduced {location} Accuracy",
         "Details": "-1 Arm mounted accuracy.",
         "Icon": "uixSvgIcon_equipment_ActuatorArm"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "{location}.Accuracy",
         "operation": "Float_Add",
@@ -101,20 +100,20 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-Attack_ToHitBallistic-Shoulder",
         "Name": "Upper Recoil QS: Decreased Recoil - {current}",
         "Details": "Ballistic weapon attacks have their hit improved by 1.",
         "Icon": "uixSvgIcon_equipment_TTS"
       },
-      "nature": "Buff",
       "statisticData": {
-        "targetCollection": "Weapon",
         "statName": "RefireModifier",
         "operation": "Int_Add",
         "modValue": "-3",
         "modType": "System.Int32",
-        "Location": "{current}"
+        "Location": "{current}",
+        "targetCollection": "Weapon"
       }
     },
     {
@@ -138,8 +137,8 @@
         "operation": "Float_Add",
         "modValue": "0.02",
         "modType": "System.Single",
-        "targetCollection": "Weapon",
-        "Location": "{current}"
+        "Location": "{current}",
+        "targetCollection": "Weapon"
       }
     }
   ],
@@ -147,9 +146,8 @@
     "items": [
       "component_type_stock",
       "QuadIncompatible",
-      "BAIncompatible",
-      "ProtoIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

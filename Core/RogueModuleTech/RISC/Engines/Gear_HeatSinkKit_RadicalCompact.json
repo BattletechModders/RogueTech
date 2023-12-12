@@ -14,16 +14,6 @@
         "CategoryID": "EmergencyCoolant"
       }
     ],
-    "WorkOrderCosts": {
-      "Default": {
-        "TechCost": "0.2 * [[Chassis.Tonnage]]",
-        "CBillCost": "[[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      },
-      "Install": {
-        "TechCost": "0.2 * [[Chassis.Tonnage]]",
-        "CBillCost": "[[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "CoolingSystemCHS",
       "ActivateHeatLevel: 90%",
@@ -38,19 +28,19 @@
     ],
     "ActivatableComponent": {
       "ButtonName": "Radical Heatsink",
+      "CanNotBeActivatedManualy": true,
+      "ActivationMessage": "ACTIVE",
+      "DeactivationMessage": "Nominal",
       "AutoActivateOnOverheatLevel": 0.9,
       "AutoDeactivateOverheatLevel": 0.5,
+      "NoUniqueCheck": true,
       "FailFlatChance": 0.1,
       "FailRoundsStart": 2,
       "FailChancePerTurn": 0.25,
-      "SelfCrit": true,
       "FailCheckOnActivationEnd": true,
       "FailPilotingBase": 10,
       "FailPilotingMult": 0.0001,
-      "ActivationMessage": "ACTIVE",
-      "DeactivationMessage": "Nominal",
-      "CanNotBeActivatedManualy": true,
-      "NoUniqueCheck": true,
+      "SelfCrit": true,
       "statusEffects": [
         {
           "durationData": {
@@ -64,6 +54,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "RadicalCooling",
             "Name": "Radical Compact HS Kit Activatable: Increased Cooling",
@@ -75,29 +66,37 @@
             "operation": "Int_Add",
             "modValue": "20",
             "modType": "System.Int32"
-          },
-          "nature": "Buff"
+          }
         }
       ]
     },
     "ComponentExplosion": {
-      "HeatDamage": 20,
-      "ExplosionDamage": 10,
-      "StabilityDamage": 10
+      "ExplosionDamage": 10.0,
+      "HeatDamage": 20.0,
+      "StabilityDamage": 10.0
     },
+    "EngineHeatBlock": 0,
     "Cooling": {
       "HeatSinkDefId": "Gear_HeatSink_Compact"
     },
-    "EngineHeatBlock": 0,
-    "HeatSinkingCost": {
-      "HeatUpkeepCost": 13,
-      "HeatUpkeepMult": 1.02
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.2 * [[Chassis.Tonnage]]",
+        "CBillCost": "[[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      },
+      "Default": {
+        "TechCost": "0.2 * [[Chassis.Tonnage]]",
+        "CBillCost": "[[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
     },
     "IBLS": {
       "StorageSize": 1
+    },
+    "HeatSinkingCost": {
+      "HeatUpkeepCost": 13,
+      "HeatUpkeepMult": 1.02
     }
   },
-  "DissipationCapacity": 0,
   "Description": {
     "Cost": 3000000,
     "Rarity": 8,
@@ -110,6 +109,7 @@
     "Details": "Converts an SHS engine to Radical CHS. A Mech' <b>Cooling System</b> provides heat dissipation for components inside the mech and compatible extension points for additional heat sinks throughout the mech. It differs from the closed cooling system of the engine.",
     "Icon": "thermometer-cold"
   },
+  "DissipationCapacity": 0,
   "BonusValueA": "",
   "BonusValueB": "",
   "ComponentType": "HeatSink",
@@ -121,15 +121,13 @@
   "AllowedLocations": "CenterTorso",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "statusEffects": null,
   "ComponentTags": {
     "items": [
       "LootMagnetBlacklist",
       "component_type_stock",
-      "BAIncompatible",
-      "ProtoIncompatible",
       "EnginePart",
-      "HeatSinkKit_Gear_HeatSink_Compact"
+      "HeatSinkKit_Gear_HeatSink_Compact",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

@@ -11,12 +11,6 @@
         "CategoryID": "MimeticSystem"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.08667 * [[Chassis.Tonnage]]",
-        "CBillCost": "33.33333 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "Stealth",
       "StealthSensors: 35%, 3, 1, 2, 3",
@@ -30,31 +24,23 @@
       "ArmorTPCost: x1.7",
       "ArmorCBCost: x1.9"
     ],
+    "Flags": [
+      "default",
+      "not_broken",
+      "no_salvage",
+      "autorepair"
+    ],
     "ActivatableComponent": {
+      "ButtonName": "Stealth",
+      "CanNotBeActivatedManualy": false,
       "CanActivateAfterMove": true,
       "CanActivateAfterFire": false,
-      "SafeActivation": true,
-      "ButtonName": "Stealth",
       "ActiveByDefault": true,
-      "ActivationIsBuff": true,
-      "CanNotBeActivatedManualy": false,
-      "NoUniqueCheck": true,
+      "SafeActivation": true,
       "ActivationMessage": "Stealth On",
       "DeactivationMessage": "Stealth Off",
-      "Linkage": {
-        "OnActivate": {
-          "Activate": [
-            "Camouflage"
-          ],
-          "Deactivate": []
-        },
-        "OnDeactivate": {
-          "Activate": [],
-          "Deactivate": [
-            "Camouflage"
-          ]
-        }
-      },
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
       "statusEffects": [
         {
           "durationData": {
@@ -69,6 +55,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "LV_Stealth_Effect",
             "Name": "Mistwalker Activatable: Stealth",
@@ -80,8 +67,7 @@
             "operation": "Set",
             "modValue": "0.65_3_1_2_3",
             "modType": "System.String"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -96,6 +82,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "LV_MIMETIC",
             "Name": "Mistwalker Activatable: Mimetic Armor",
@@ -107,8 +94,7 @@
             "operation": "Set",
             "modValue": "2_0.42_1_4",
             "modType": "System.String"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -122,13 +108,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Signature_Decrease_Stealth",
             "Name": "Mistwalker Activatable: Decreased Sensor Signature",
             "Details": "Signature Statuseffect.",
             "Icon": "uixSvgIcon_equipment_TTS"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "SensorSignatureModifier",
             "operation": "Float_Multiply",
@@ -148,13 +134,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Visibility_Decrease_Stealth",
             "Name": "Mistwalker Activatable: Decreased Visual Signature",
             "Details": "Visibility Statuseffect.",
             "Icon": "uixSvgIcon_equipment_TTS"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "SpottingVisibilityMultiplier",
             "operation": "Float_Multiply",
@@ -174,13 +160,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Heat_Generation_Stealth",
             "Name": "Mistwalker Activatable: Increased Heat Generated",
             "Details": "Heat generation",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "HeatGenerated",
             "operation": "Float_Multiply",
@@ -201,13 +187,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "Stealth_Heat_Capacity_Stealth",
             "Name": "Mistwalker Activatable: Decreased Cooling",
             "Details": "Heat Capacity Penalty",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Debuff",
           "statisticData": {
             "statName": "HeatSinkCapacity",
             "operation": "Int_Add",
@@ -216,21 +202,21 @@
           }
         }
       ],
-      "offlineStatusEffects": []
-    },
-    "ArmorRepair": {
-      "ArmorTPCost": 1.7,
-      "ArmorCBCost": 1.9
-    },
-    "Color": "Gold",
-    "DecoratorComponent": [
-      {
-        "Text": "MS",
-        "Color": "#5F24AC",
-        "Icon": "ComponentGearIcons_STEALTH",
-        "Importance": 40
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [
+            "Camouflage"
+          ],
+          "Deactivate": []
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": [
+            "Camouflage"
+          ]
+        }
       }
-    ],
+    },
     "DynamicSlots": {
       "ReservedSlots": 6,
       "BackgroundColor": "GoldHalf",
@@ -239,20 +225,30 @@
       "BonusAText": "Dynamic Slot",
       "BonusBText": " "
     },
-    "Flags": [
-      "default",
-      "not_broken",
-      "no_salvage",
-      "autorepair"
-    ],
+    "ArmorRepair": {
+      "ArmorTPCost": 1.7,
+      "ArmorCBCost": 1.9
+    },
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.08667 * [[Chassis.Tonnage]]",
+        "CBillCost": "33.33333 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
     "IBLS": {
       "StorageSize": 7
     },
-    "Lootable": "Lootable_Armor_ChameleonLightPolarizationShield"
+    "Color": "Gold",
+    "Lootable": "Lootable_Armor_ChameleonLightPolarizationShield",
+    "DecoratorComponent": [
+      {
+        "Text": "MS",
+        "Color": "#5F24AC",
+        "Icon": "ComponentGearIcons_STEALTH",
+        "Importance": 40
+      }
+    ]
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 700000,
     "Rarity": 5,
@@ -270,23 +266,23 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 0,
   "InventorySize": 1,
   "Tonnage": 0,
   "AllowedLocations": "CenterTorso",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "statusEffects": [],
   "ComponentTags": {
     "items": [
       "component_type_stock",
       "StealthArmor",
       "BLACKLISTED",
       "WikiWL",
-      "BAIncompatible",
-      "ProtoIncompatible",
       "SuperheavyIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

@@ -8,12 +8,6 @@
         "CategoryID": "ArmorMod"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.115 * [[Chassis.Tonnage]]",
-        "CBillCost": "22.22222 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "IsArmorMod",
       "StealthEnhance",
@@ -26,29 +20,20 @@
       "ArmorTPCost: 10%",
       "ArmorCBCost: 15%"
     ],
+    "Flags": [
+      "not_broken"
+    ],
     "ActivatableComponent": {
+      "ButtonName": "Damper",
+      "CanNotBeActivatedManualy": false,
       "CanActivateAfterMove": true,
       "CanActivateAfterFire": false,
-      "SafeActivation": true,
-      "ButtonName": "Damper",
       "ActiveByDefault": true,
-      "ActivationIsBuff": true,
-      "CanNotBeActivatedManualy": false,
-      "NoUniqueCheck": true,
+      "SafeActivation": true,
       "ActivationMessage": "Damper On",
       "DeactivationMessage": "Damper Off",
-      "Linkage": {
-        "OnActivate": {
-          "Activate": [],
-          "Deactivate": [
-            "ECCM"
-          ]
-        },
-        "OnDeactivate": {
-          "Activate": [],
-          "Deactivate": []
-        }
-      },
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
       "statusEffects": [
         {
           "durationData": {
@@ -63,6 +48,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "LV_Stealth_Effect",
             "Name": "Signature Damper Activatable: Stealth",
@@ -74,8 +60,7 @@
             "operation": "Set",
             "modValue": "0.6_2_1_2_3",
             "modType": "System.String"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -89,13 +74,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Signature_Decrease_Stealth",
             "Name": "Signature Damper Activatable: Decreased Sensor Signature",
             "Details": "Signature Statuseffect.",
             "Icon": "uixSvgIcon_equipment_TTS"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "SensorSignatureModifier",
             "operation": "Float_Multiply",
@@ -115,13 +100,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Heat_Generation_Stealth",
             "Name": "Signature Damper Activatable: Increased Heat Generated",
             "Details": "Heat generation",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "HeatGenerated",
             "operation": "Float_Multiply",
@@ -142,13 +127,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "Stealth_Heat_Capacity_Stealth",
             "Name": "Signature Damper Activatable: Decreased Cooling",
             "Details": "Heat Capacity Penalty",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Debuff",
           "statisticData": {
             "statName": "HeatSinkCapacity",
             "operation": "Int_Add",
@@ -157,21 +142,34 @@
           }
         }
       ],
-      "offlineStatusEffects": []
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [],
+          "Deactivate": [
+            "ECCM"
+          ]
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": []
+        }
+      }
     },
     "ArmorRepair": {
       "ArmorTPCost": 1.1,
       "ArmorCBCost": 1.15
     },
-    "Color": "Gold",
-    "CriticalEffects": {
-      "LinkedStatisticName": "Signature Damper"
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.115 * [[Chassis.Tonnage]]",
+        "CBillCost": "22.22222 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
     },
-    "Flags": [
-      "not_broken"
-    ],
     "IBLS": {
       "StorageSize": 7
+    },
+    "CriticalEffects": {
+      "LinkedStatisticName": "Signature Damper"
     },
     "Linked": {
       "Links": [
@@ -201,6 +199,7 @@
         }
       ]
     },
+    "Color": "Gold",
     "DecoratorComponent": [
       {
         "Text": "S",
@@ -233,13 +232,11 @@
   "AllowedLocations": "CenterTorso",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "statusEffects": [],
   "ComponentTags": {
     "items": [
       "component_type_stock",
       "StealthArmor",
-      "BAIncompatible",
-      "ProtoIncompatible"
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

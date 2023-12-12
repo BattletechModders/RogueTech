@@ -8,12 +8,6 @@
         "CategoryID": "StealthSystem"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.08667 * [[Chassis.Tonnage]]",
-        "CBillCost": "33.33333 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "Stealth",
       "StealthSensors: 70%, 5, 2, 4, 6",
@@ -25,31 +19,20 @@
       "ArmorTPCost: x1.6",
       "ArmorCBCost: x1.8"
     ],
+    "Flags": [
+      "not_broken"
+    ],
     "ActivatableComponent": {
+      "ButtonName": "Stealth",
+      "CanNotBeActivatedManualy": false,
       "CanActivateAfterMove": true,
       "CanActivateAfterFire": false,
-      "SafeActivation": true,
-      "ButtonName": "Stealth",
       "ActiveByDefault": true,
-      "ActivationIsBuff": true,
-      "CanNotBeActivatedManualy": false,
-      "NoUniqueCheck": true,
+      "SafeActivation": true,
       "ActivationMessage": "NSS On",
       "DeactivationMessage": "NSS Off",
-      "Linkage": {
-        "OnActivate": {
-          "Activate": [
-            "Camouflage"
-          ],
-          "Deactivate": []
-        },
-        "OnDeactivate": {
-          "Activate": [],
-          "Deactivate": [
-            "Camouflage"
-          ]
-        }
-      },
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
       "statusEffects": [
         {
           "durationData": {
@@ -64,6 +47,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "LV_Stealth_Effect",
             "Name": "NSS Activatable: Stealth",
@@ -75,8 +59,7 @@
             "operation": "Set",
             "modValue": "0.3_5_2_4_6",
             "modType": "System.String"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -90,13 +73,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Signature_Decrease_Stealth",
             "Name": "NSS Activatable: Decreased Sensor Signature",
             "Details": "Signature Statuseffect.",
             "Icon": "uixSvgIcon_equipment_TTS"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "SensorSignatureModifier",
             "operation": "Float_Multiply",
@@ -116,13 +99,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Heat_Generation_Stealth",
             "Name": "NSS Activatable: Increased Heat Generated",
             "Details": "Heat generation",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "HeatGenerated",
             "operation": "Float_Multiply",
@@ -143,13 +126,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "Stealth_Heat_Capacity_Stealth",
             "Name": "NSS Activatable: Decreased Cooling",
             "Details": "Heat Capacity Penalty",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Debuff",
           "statisticData": {
             "statName": "HeatSinkCapacity",
             "operation": "Int_Add",
@@ -158,22 +141,36 @@
           }
         }
       ],
-      "offlineStatusEffects": []
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [
+            "Camouflage"
+          ],
+          "Deactivate": []
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": [
+            "Camouflage"
+          ]
+        }
+      }
     },
     "ArmorRepair": {
       "ArmorTPCost": 1.6,
       "ArmorCBCost": 1.8
     },
-    "Color": "Gold",
-    "CriticalEffects": {
-      "LinkedStatisticName": "Null Signature System"
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.08667 * [[Chassis.Tonnage]]",
+        "CBillCost": "33.33333 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
     },
-    "ErrorMessage": "Stealth Armor requires a ECM!",
-    "Flags": [
-      "not_broken"
-    ],
     "IBLS": {
       "StorageSize": 7
+    },
+    "CriticalEffects": {
+      "LinkedStatisticName": "Null Signature System"
     },
     "Linked": {
       "Links": [
@@ -203,6 +200,8 @@
         }
       ]
     },
+    "Color": "Gold",
+    "ErrorMessage": "Stealth Armor requires a ECM!",
     "DecoratorComponent": [
       {
         "Text": "S",
@@ -212,9 +211,6 @@
       }
     ]
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 785000,
     "Rarity": 5,
@@ -232,21 +228,21 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 0,
   "InventorySize": 1,
   "Tonnage": 0,
   "AllowedLocations": "CenterTorso",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "statusEffects": [],
   "ComponentTags": {
     "items": [
       "component_type_stock",
       "LootMagnetBlacklist",
       "StealthArmor",
-      "BAIncompatible",
-      "ProtoIncompatible",
-      "SuperheavyIncompatible"
+      "SuperheavyIncompatible",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }
