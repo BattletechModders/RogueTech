@@ -5,12 +5,6 @@
         "CategoryID": "Cockpit"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.125 * [[Chassis.Tonnage]]",
-        "CBillCost": "1.35 * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "AcePilotNI",
       "AllSkills: +1",
@@ -25,20 +19,23 @@
       "FailInjury",
       "BleedReduction: 40%"
     ],
+    "Flags": [
+      "not_broken"
+    ],
     "ActivatableComponent": {
       "ButtonName": "Enhanced Imaging",
-      "CanActivateAfterFire": false,
+      "CanNotBeActivatedManualy": false,
       "CanActivateAfterMove": true,
+      "CanActivateAfterFire": false,
+      "NoUniqueCheck": true,
       "FailFlatChance": 0.01,
       "FailRoundsStart": 1,
-      "FailChancePerTurn": 0.0,
+      "FailChancePerTurn": 0,
       "FailCheckOnActivationEnd": true,
       "InjuryOnFail": true,
-      "InjuryReasonInt": 20,
       "FailPilotingBase": 10,
       "FailPilotingMult": 0.0001,
-      "CanNotBeActivatedManualy": false,
-      "NoUniqueCheck": true,
+      "InjuryReasonInt": 20,
       "statusEffects": [
         {
           "durationData": {
@@ -46,18 +43,18 @@
             "stackLimit": -1
           },
           "targetingData": {
-            "effectTargetsCreator": true,
             "effectTriggerType": "Passive",
-            "effectTargetType": "Creator"
+            "effectTargetType": "Creator",
+            "effectTargetsCreator": true
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "StatusEffect-RequireNI",
             "Name": "Improved CEI (RTO) Activatable: Enable Injuries on Structure Damage",
             "Details": "Pilot will receive injury when internal structure damage is sustained.",
             "Icon": "uixSvgIcon_equipment_Cockpit"
           },
-          "nature": "Debuff",
           "statisticData": {
             "statName": "InjureOnStructDmg",
             "operation": "Set",
@@ -75,13 +72,13 @@
             "effectTargetType": "Creator"
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "StatusEffect-RequireNI",
             "Name": "Improved CEI (RTO) Activatable: Increased Initiative",
             "Details": "Provides + 1 Initiative and several buffs.",
             "Icon": "uixSvgIcon_equipment_Cockpit"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "SBI_MOD_MISC",
             "operation": "Int_Add",
@@ -99,6 +96,7 @@
             "effectTargetType": "Creator"
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "StatusEffect-RequireNI",
             "Name": "Improved CEI (RTO) Activatable: Increased Max Evasive Pips",
@@ -110,8 +108,7 @@
             "operation": "Int_Add",
             "modValue": "1",
             "modType": "System.Int32"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -148,13 +145,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "StatusEffect-RequireNI",
             "Name": "Improved CEI (RTO) Activatable: Improved Accuracy",
             "Details": "Breaching Shot, Improved Accuracy/Recoil.",
             "Icon": "uixSvgIcon_ability_precisionstrike"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "AccuracyModifier",
             "operation": "Float_Add",
@@ -165,16 +162,16 @@
         }
       ]
     },
-    "Flags": [
-      "not_broken"
-    ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.125 * [[Chassis.Tonnage]]",
+        "CBillCost": "1.35 * [[Chassis.Tonnage]]"
+      }
+    },
     "IBLS": {
       "StorageSize": 1
     }
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 830000,
     "Rarity": 10,
@@ -192,6 +189,8 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 0,
   "InventorySize": 1,
   "Tonnage": 2,
@@ -209,6 +208,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "NightVision",
         "Name": "Improved CEI (RTO): Night Vision",
@@ -220,8 +220,7 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -233,6 +232,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-RequireNI",
         "Name": "Improved CEI (RTO): Allow Move After Shooting",
@@ -244,8 +244,7 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -259,13 +258,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect_Cockpit_Skill_Gunnery",
         "Name": "Improved CEI (RTO): Increased Gunnery",
         "Details": "Buffs Gunnery Skill",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "Gunnery",
         "operation": "Int_Add",
@@ -286,13 +285,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect_Cockpit_Skill_Piloting",
         "Name": "Improved CEI (RTO): Increased Piloting",
         "Details": "Buffs Piloting Skill",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "Piloting",
         "operation": "Int_Add",
@@ -313,13 +312,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect_Cockpit_Skill_Guts",
         "Name": "Improved CEI (RTO): Increased Guts",
         "Details": "Buffs Guts Skill",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "Guts",
         "operation": "Int_Add",
@@ -340,13 +339,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect_Cockpit_Skill_Tactics",
         "Name": "Improved CEI (RTO): Increased Tactics",
         "Details": "Buffs Tactics Skill",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "Tactics",
         "operation": "Int_Add",
@@ -367,13 +366,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "CockpitBleed",
         "Name": "Improved CEI (RTO): Decreased Bleeding Rate",
         "Details": "Bleed Rate x 0.6",
         "Icon": "blood"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "BleedingRateMulti",
         "operation": "Float_Multiply",
@@ -392,9 +391,8 @@
       "cae_ai_offence",
       "cae_ai_defence",
       "cae_ai_heat",
-      "BAIncompatible",
-      "ProtoIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

@@ -11,12 +11,6 @@
         "CategoryID": "LAM-Engine"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "1.2 * [[Chassis.Tonnage]]",
-        "CBillCost": "1000 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "EngineWeight: -50%",
       "EngineReserved: 6",
@@ -27,16 +21,19 @@
       "CoolantCostMulti: 10%",
       "ReqLandAirMech"
     ],
+    "Flags": [
+      "vital",
+      "engine_part",
+      "not_broken",
+      "not_destroyed"
+    ],
     "ActivatableComponent": {
-      "ExplodeOnDamage": true,
       "CanNotBeActivatedManualy": true,
       "NoUniqueCheck": true,
+      "ExplodeOnDamage": true,
       "Explosion": {
         "Chance": 0.04,
         "ExplosionMessage": "Core Meltdown!",
-        "VFX": "WFX_Nuke",
-        "TempDesignMask": "DesignMaskRadiation",
-        "VFXActorStat": "EngineExplodeVFX",
         "RangeActorStat": "EngineExplodeRange",
         "DamageActorStat": "EngineExplodeDamage",
         "HeatActorStat": "EngineExplodeHeat",
@@ -46,24 +43,30 @@
         "FireTerrainStrengthActorStat": "EngineExplodeFireStrength",
         "FireDurationWithoutForestActorStat": "EngineExplodeTerrainDuration",
         "FireTerrainCellRadiusActorStat": "EngineExplodeFireRadius",
+        "VFXActorStat": "EngineExplodeVFX",
+        "TempDesignMask": "DesignMaskRadiation",
         "TempDesignMaskActorStat": "EngineExplodeDesignMask",
         "TempDesignMaskTurnsActorStat": "EngineExplodeDesignMaskDuration",
-        "TempDesignMaskCellRadiusActorStat": "EngineExplodeDesignMaskRadius"
-      },
-      "statusEffects": []
+        "TempDesignMaskCellRadiusActorStat": "EngineExplodeDesignMaskRadius",
+        "VFX": "WFX_Nuke"
+      }
     },
-    "Flags": [
-      "vital",
-      "engine_part",
-      "not_broken",
-      "not_destroyed"
-    ],
-    "HeatSinkingCost": {
-      "HeatUpkeepCost": 7,
-      "HeatUpkeepMult": 1.1
+    "Weights": {
+      "ReservedSlots": 6,
+      "EngineFactor": 0.5
+    },
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "1.2 * [[Chassis.Tonnage]]",
+        "CBillCost": "1000 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
     },
     "IBLS": {
       "StorageSize": 8
+    },
+    "HeatSinkingCost": {
+      "HeatUpkeepCost": 7,
+      "HeatUpkeepMult": 1.1
     },
     "Linked": {
       "Links": [
@@ -76,13 +79,8 @@
           "Location": "RightTorso"
         }
       ]
-    },
-    "Weights": {
-      "ReservedSlots": 6,
-      "EngineFactor": 0.5
     }
   },
-  "DissipationCapacity": 0,
   "Description": {
     "Cost": 14000000,
     "Rarity": 10,
@@ -95,6 +93,7 @@
     "Details": "The Land Air Mech (LAM) Engine provides a specialized energy concept that allows the Mech to Change into a Wing in Ground Effect (WiGE) Unit. \n\n <b><color=#ff0066>Unit can Change between LAM and 'Mech Mode.</color></b> \n\n <b><color=#ff0066>Land Air Mech (LAM) Mode: Mech will Hover above the Battlefield. Mech Walk Speeds Translate into Flight Speed.</color></b> \n\n <b><color=#ff0066>LAM Turbines provide additional 'Walk' Speed in Flight.</color></b> \n\n <b><color=#ff0066>When in LAM Mode, Unit can perform Extremely Long Jumps at increased Heat('Afterburner')</color></b> \n\n <b><color=#ff0066>When in LAM Mode, Unit will not be affected by Terrain/Ground</color></b>",
     "Icon": "power-generator"
   },
+  "DissipationCapacity": 0,
   "BonusValueA": "",
   "BonusValueB": "",
   "ComponentType": "HeatSink",
@@ -119,13 +118,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Debuff",
       "Description": {
         "Id": "Stealth_Heat_Capacity_Stealth",
         "Name": "LAM XXL (C) Engine: Decreased Cooling",
         "Details": "Heat Capacity Penalty",
         "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
-      "nature": "Debuff",
       "statisticData": {
         "statName": "HeatSinkCapacity",
         "operation": "Int_Add",
@@ -145,13 +144,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Debuff",
       "Description": {
         "Id": "XXL_Heat_Move",
         "Name": "LAM XXL (C) Engine: Increased Heat Generated from Walking",
         "Details": "Heat Capacity Penalty",
         "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
-      "nature": "Debuff",
       "statisticData": {
         "statName": "WalkHeatMod",
         "operation": "Float_Add",
@@ -171,13 +170,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Debuff",
       "Description": {
         "Id": "XXL_Heat_Sprint",
         "Name": "LAM XXL (C) Engine: Increased Heat Generated from Sprinting",
         "Details": "Heat Capacity Penalty",
         "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
-      "nature": "Debuff",
       "statisticData": {
         "statName": "SprintHeatMod",
         "operation": "Float_Add",
@@ -197,13 +196,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-JumpHeat",
         "Name": "LAM XXL (C) Engine: Increased Jump Heat Generated",
         "Details": "Jump Jets Generate Increased Heat",
         "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "JumpHeat",
         "operation": "Float_Multiply",
@@ -264,10 +263,9 @@
     "items": [
       "EnginePart.{location}",
       "component_type_stock",
-      "BAIncompatible",
-      "ProtoIncompatible",
       "EnginePart",
-      "Fusion"
+      "Fusion",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

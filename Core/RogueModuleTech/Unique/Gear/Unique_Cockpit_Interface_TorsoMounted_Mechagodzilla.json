@@ -14,12 +14,6 @@
         "CategoryID": "Gyro"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.125 * [[Chassis.Tonnage]]",
-        "CBillCost": "1.3 * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "RequireNI",
       "TorsoMount",
@@ -38,41 +32,49 @@
       "NoEject",
       "BleedReduction: 40%"
     ],
-        "CriticalEffects": {
-          "PenalizedEffectIDs": [
-            [
-              "CriticalEffect-Sensors1",
-              "CriticalEffect-SensorsCheck1",
-              "CriticalEffect-GyroCrit",
-              "CriticalEffect-GyroStandupFail"
-            ]
-          ],
-          "DeathMethod": "PilotKilled"
-        },
-    "ActivatableComponent": {
-      "ButtonName": "DNI",
-      "FailFlatChance": 0.01,
-      "FailRoundsStart": 1,
-      "FailChancePerTurn": 0.0,
-      "FailCheckOnActivationEnd": true,
-      "ShutdownOnFail": false,
-      "InjuryOnFail": true,
-      "InjuryReasonInt": 20,
-      "FailPilotingBase": 10,
-      "FailPilotingMult": 0.0001,
-      "CanNotBeActivatedManualy": true,
-      "ActiveByDefault": true,
-      "SwitchOffOnFall": false,
-      "NoUniqueCheck": true,
-      "statusEffects": []
-    },
     "Flags": [
       "ignore_shutdown",
       "not_broken",
       "no_salvage"
     ],
+    "ActivatableComponent": {
+      "ButtonName": "DNI",
+      "CanNotBeActivatedManualy": true,
+      "ActiveByDefault": true,
+      "SwitchOffOnFall": false,
+      "NoUniqueCheck": true,
+      "FailFlatChance": 0.01,
+      "FailRoundsStart": 1,
+      "FailChancePerTurn": 0,
+      "FailCheckOnActivationEnd": true,
+      "InjuryOnFail": true,
+      "ShutdownOnFail": false,
+      "FailPilotingBase": 10,
+      "FailPilotingMult": 0.0001,
+      "InjuryReasonInt": 20
+    },
+    "Weights": {
+      "GyroFactor": 0
+    },
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.125 * [[Chassis.Tonnage]]",
+        "CBillCost": "1.3 * [[Chassis.Tonnage]]"
+      }
+    },
     "IBLS": {
       "StorageSize": 4
+    },
+    "CriticalEffects": {
+      "PenalizedEffectIDs": [
+        [
+          "CriticalEffect-Sensors1",
+          "CriticalEffect-SensorsCheck1",
+          "CriticalEffect-GyroCrit",
+          "CriticalEffect-GyroStandupFail"
+        ]
+      ],
+      "DeathMethod": "PilotKilled"
     },
     "Linked": {
       "Links": [
@@ -88,11 +90,8 @@
         }
       ]
     },
-    "Lootable": "Gear_Cockpit_Interface_TorsoMounted",
     "Sorter": 6,
-    "Weights": {
-      "GyroFactor": 0
-    }
+    "Lootable": "Gear_Cockpit_Interface_TorsoMounted"
   },
   "Description": {
     "Cost": 620000,
@@ -128,6 +127,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "InterFaceMoveAfterShoot",
         "Name": "Torso Mount DNI Cockpit: Allow Move After Shooting",
@@ -139,8 +139,7 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -155,6 +154,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "LV_Shares_Vision",
         "Name": "Torso Mount DNI Cockpit: Shared Vision",
@@ -166,8 +166,7 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -182,6 +181,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "LV_ADVANCED_SENSORS",
         "Name": "Torso Mount DNI Cockpit: Increased Advanced Sensor Strength",
@@ -193,8 +193,7 @@
         "operation": "Int_Add",
         "modValue": "3",
         "modType": "System.Int32"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -206,6 +205,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "MaxEvasion",
         "Name": "Torso Mount DNI Cockpit: Increased Max Evasive Pips",
@@ -217,8 +217,7 @@
         "operation": "Int_Add",
         "modValue": "1",
         "modType": "System.Int32"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -231,6 +230,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "GainEvasion",
         "Name": "Torso Mount DNI Cockpit: Increased Evasive Pips Gain",
@@ -242,8 +242,7 @@
         "operation": "Int_Add",
         "modValue": "1",
         "modType": "System.Int32"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -257,13 +256,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect_Cockpit_Skill_Gunnery",
         "Name": "Torso Mount DNI Cockpit: Increased Gunnery",
         "Details": "Buffs Gunnery Skill",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "Gunnery",
         "operation": "Int_Add",
@@ -284,13 +283,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect_Cockpit_Skill_Piloting",
         "Name": "Torso Mount DNI Cockpit: Increased Piloting",
         "Details": "Buffs Piloting Skill",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "Piloting",
         "operation": "Int_Add",
@@ -311,13 +310,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect_Cockpit_Skill_Guts",
         "Name": "Torso Mount DNI Cockpit: Increased Guts",
         "Details": "Buffs Guts Skill",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "Guts",
         "operation": "Int_Add",
@@ -338,13 +337,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect_Cockpit_Skill_Tactics",
         "Name": "Torso Mount DNI Cockpit: Increased Tactics",
         "Details": "Buffs Tactics Skill",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "Tactics",
         "operation": "Int_Add",
@@ -363,6 +362,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "HeadShotDamageImmunity",
         "Name": "Torso Mount DNI Cockpit: Set Ignore Head Injuries",
@@ -374,8 +374,7 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -387,6 +386,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "GyroSureFoot",
         "Name": "Torso Mount DNI Cockpit: Enable Guarded After Move",
@@ -398,8 +398,7 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -413,13 +412,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-Defense_StabilityAll-T3",
         "Name": "Torso Mount DNI Cockpit: Decreased Stability Damage Taken",
         "Details": "Incoming stability damage reduced by 30%.",
         "Icon": "uixSvgIcon_equipment_Gyro"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "ReceivedInstabilityMultiplier",
         "operation": "Float_Multiply",
@@ -439,6 +438,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "GyroGenericThreshhold",
         "Name": "Torso Mount DNI Cockpit: Increased Unsteady Threshold",
@@ -450,8 +450,7 @@
         "operation": "Float_Add",
         "modValue": "40.0",
         "modType": "System.Single"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -459,18 +458,18 @@
         "stackLimit": -1
       },
       "targetingData": {
-        "effectTargetsCreator": true,
         "effectTriggerType": "Passive",
-        "effectTargetType": "Creator"
+        "effectTargetType": "Creator",
+        "effectTargetsCreator": true
       },
       "effectType": "StatisticEffect",
+      "nature": "Debuff",
       "Description": {
         "Id": "DNI-Penalty",
         "Name": "Torso Mount DNI Cockpit: Enable Injuries on Structure Damage",
         "Details": "Pilot will receive injury when internal structure damage is sustained.",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Debuff",
       "statisticData": {
         "statName": "InjureOnStructDmg",
         "operation": "Set",
@@ -484,18 +483,18 @@
         "stackLimit": -1
       },
       "targetingData": {
-        "effectTargetsCreator": true,
         "effectTriggerType": "Passive",
-        "effectTargetType": "Creator"
+        "effectTargetType": "Creator",
+        "effectTargetsCreator": true
       },
       "effectType": "StatisticEffect",
+      "nature": "Debuff",
       "Description": {
         "Id": "Torso-Mounted",
         "Name": "Torso Mount DNI Cockpit: Is Torso Mount",
         "Details": "Torso mounted cockpit, no injuries on head hits.",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Debuff",
       "statisticData": {
         "statName": "isTorsoMount",
         "operation": "Set",
@@ -515,13 +514,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "CockpitBleed",
         "Name": "Torso Mount DNI Cockpit: Decreased Bleeding Rate",
         "Details": "Bleed Rate x 0.6",
         "Icon": "blood"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "BleedingRateMulti",
         "operation": "Float_Multiply",
@@ -540,6 +539,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "PrimitiveCockpitEject",
         "Name": "Torso Mount DNI Cockpit: Disallow Ejection",
@@ -552,8 +552,7 @@
         "modValue": "false",
         "modType": "System.Boolean",
         "targetCollection": "Pilot"
-      },
-      "nature": "Buff"
+      }
     }
   ],
   "ComponentTags": {
@@ -564,10 +563,9 @@
       "WikiWL",
       "DirectNeuralInterface",
       "RequireNI",
-      "BAIncompatible",
-      "ProtoIncompatible",
       "SuperheavyIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

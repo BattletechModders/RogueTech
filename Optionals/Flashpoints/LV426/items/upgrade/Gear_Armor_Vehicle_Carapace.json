@@ -14,12 +14,6 @@
         "CategoryID": "StealthSystem"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.25 * [[Chassis.Tonnage]]",
-        "CBillCost": "200 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "Carapace",
       "HaarJel",
@@ -40,18 +34,16 @@
       "PersistentECMAura: 3, 2, 150",
       "PersistentECMSelf: 1, 2"
     ],
+    "Flags": [
+      "not_broken",
+      "no_salvage"
+    ],
     "ActivatableComponent": {
       "ButtonName": "Black Carapace",
       "CanNotBeActivatedManualy": true,
-      "NoUniqueCheck": true,
       "ActivationMessage": "Repairs Initiated",
       "DeactivationMessage": "Repairs Complete",
-      "presistantVFX": {
-        "VFXPrefab": "vfxprfprtl_heatventsm_loop",
-        "VFXScaleX": 1,
-        "VFXScaleY": 1,
-        "VFXScaleZ": 1
-      },
+      "NoUniqueCheck": true,
       "Repair": {
         "InnerStructure": 4,
         "Armor": 12,
@@ -60,25 +52,44 @@
         "VehicleLocations": [],
         "BuildingLocations": [],
         "AffectInstalledLocation": true,
-        "TurnsSinceDamage": 3,
         "repairTrigger": {
           "OnActivation": false,
           "OnDamage": "None",
           "AtEndOfTurn": true
-        }
+        },
+        "TurnsSinceDamage": 3
+      },
+      "presistantVFX": {
+        "VFXPrefab": "vfxprfprtl_heatventsm_loop",
+        "VFXScaleX": 1,
+        "VFXScaleY": 1,
+        "VFXScaleZ": 1
       }
+    },
+    "ComponentExplosion": {
+      "ExplosionDamage": 30.0
+    },
+    "Weights": {
+      "ArmorFactor": 1.15
     },
     "ArmorRepair": {
       "ArmorTPCost": 1.9,
       "ArmorCBCost": 2.2
     },
-    "Color": "Gold",
-    "ComponentExplosion": {
-      "ExplosionDamage": 30
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.25 * [[Chassis.Tonnage]]",
+        "CBillCost": "200 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
+    "IBLS": {
+      "StorageSize": 1
     },
     "CriticalEffects": {
       "LinkedStatisticName": "Black Carapace"
     },
+    "Color": "Gold",
+    "Lootable": "Gear_Armor_BlackCarapace",
     "DecoratorComponent": [
       {
         "Text": "R",
@@ -92,22 +103,8 @@
         "Icon": "ComponentGearIcons_ECM",
         "Importance": 30
       }
-    ],
-    "Flags": [
-      "not_broken",
-      "no_salvage"
-    ],
-    "IBLS": {
-      "StorageSize": 1
-    },
-    "Lootable": "Gear_Armor_BlackCarapace",
-    "Weights": {
-      "ArmorFactor": 1.15
-    }
+    ]
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 2500000,
     "Rarity": 99,
@@ -125,6 +122,8 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 0,
   "InventorySize": 1,
   "Tonnage": 0,
@@ -137,22 +136,14 @@
       "Name": "JAMMED",
       "ReticleColor": "#00f2ff",
       "Range": 150,
-      "HideOnNotSelected": false,
       "RemoveOnSensorLock": false,
       "State": "Online",
       "ApplySelf": false,
+      "HideOnNotSelected": false,
       "AllyStealthAffection": "None",
       "EnemyStealthAffection": "NegativeOne",
-      "IsPositiveToAlly": false,
       "IsNegativeToEnemy": true,
-      "ownerVFX": [],
-      "targetVFX": [],
-      "removeOwnerVFX": [],
-      "removeTargetVFX": [],
-      "ownerSFX": [],
-      "targetSFX": [],
-      "removeOwnerSFX": [],
-      "removeTargetSFX": [],
+      "IsPositiveToAlly": false,
       "statusEffects": [
         {
           "durationData": {
@@ -168,6 +159,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "LV_ECM_JAM",
             "Name": "Vehicle Black Carapace / Aura JAMMED: Increased Enemies ECM Jamming",
@@ -179,8 +171,7 @@
             "operation": "Int_Add",
             "modValue": "3",
             "modType": "System.Int32"
-          },
-          "nature": "Debuff"
+          }
         },
         {
           "durationData": {
@@ -193,6 +184,8 @@
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "ECM_disrupt_C3",
             "Name": "Vehicle Black Carapace / Aura JAMMED: ECM Disrupts C3",
@@ -204,9 +197,7 @@
             "operation": "Float_Add",
             "modValue": "-2",
             "modType": "System.Single"
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Debuff"
+          }
         },
         {
           "durationData": {
@@ -219,6 +210,8 @@
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "ECM_disrupt_C3i",
             "Name": "Vehicle Black Carapace / Aura JAMMED: ECM Disrupts C3i",
@@ -230,9 +223,7 @@
             "operation": "Float_Add",
             "modValue": "-2",
             "modType": "System.Single"
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Debuff"
+          }
         },
         {
           "durationData": {
@@ -245,6 +236,8 @@
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "ECM_disrupt_C3n",
             "Name": "Vehicle Black Carapace / Aura JAMMED: ECM Disrupts C3 Nova",
@@ -256,9 +249,7 @@
             "operation": "Float_Add",
             "modValue": "-2",
             "modType": "System.Single"
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Debuff"
+          }
         },
         {
           "durationData": {
@@ -271,6 +262,8 @@
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "ECM_disrupt_C3AI",
             "Name": "Vehicle Black Carapace / Aura JAMMED: ECM Disrupts C3 AI",
@@ -282,9 +275,7 @@
             "operation": "Float_Add",
             "modValue": "-2",
             "modType": "System.Single"
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Debuff"
+          }
         }
       ]
     },
@@ -293,22 +284,14 @@
       "Name": "CounterJamming",
       "ReticleColor": "#00f2ff",
       "Range": 150,
-      "HideOnNotSelected": true,
       "RemoveOnSensorLock": false,
       "State": "Online",
       "ApplySelf": false,
+      "HideOnNotSelected": true,
       "AllyStealthAffection": "PositiveTwo",
       "EnemyStealthAffection": "None",
-      "IsPositiveToAlly": true,
       "IsNegativeToEnemy": false,
-      "ownerVFX": [],
-      "targetVFX": [],
-      "removeOwnerVFX": [],
-      "removeTargetVFX": [],
-      "ownerSFX": [],
-      "targetSFX": [],
-      "removeOwnerSFX": [],
-      "removeTargetSFX": [],
+      "IsPositiveToAlly": true,
       "statusEffects": [
         {
           "durationData": {
@@ -324,6 +307,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "UNJAM",
             "Name": "Vehicle Black Carapace / Aura CounterJamming: Decreased Allies ECM Jamming",
@@ -335,8 +319,7 @@
             "operation": "Int_Add",
             "modValue": "-2",
             "modType": "System.Int32"
-          },
-          "nature": "Buff"
+          }
         }
       ]
     }
@@ -354,13 +337,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "ECMPassiveShield",
         "Name": "Vehicle Black Carapace: Increased ECM Shield",
         "Details": "Passive ECM Protection",
         "Icon": "uixSvgIcon_equipment_Gyro"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "LV_ECM_SHIELD",
         "operation": "Int_Add",
@@ -380,13 +363,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "ECMPassiveJam",
         "Name": "Vehicle Black Carapace: Decreased ECM Jamming",
         "Details": "Passive Jamming Protection",
         "Icon": "uixSvgIcon_equipment_Gyro"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "LV_ECM_JAMMED",
         "operation": "Int_Add",
@@ -407,6 +390,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "LV_Stealth_Effect",
         "Name": "Vehicle Black Carapace: Stealth",
@@ -418,8 +402,7 @@
         "operation": "Set",
         "modValue": "0.7_3_2_3_4",
         "modType": "System.String"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -434,6 +417,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "LV_MIMETIC",
         "Name": "Vehicle Black Carapace: Mimetic Armor",
@@ -445,8 +429,7 @@
         "operation": "Set",
         "modValue": "3_0.23_1_4",
         "modType": "System.String"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -460,13 +443,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "Stealth_Signature_Decrease_Stealth",
         "Name": "Vehicle Black Carapace: Decreased Sensor Signature",
         "Details": "Signature Statuseffect.",
         "Icon": "uixSvgIcon_equipment_TTS"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "SensorSignatureModifier",
         "operation": "Float_Multiply",
@@ -486,13 +469,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "Stealth_Visibility_Decrease_Stealth",
         "Name": "Vehicle Black Carapace: Decreased Visual Signature",
         "Details": "Visibility Statuseffect.",
         "Icon": "uixSvgIcon_equipment_TTS"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "SpottingVisibilityMultiplier",
         "operation": "Float_Multiply",
@@ -510,6 +493,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "BreachImmunity",
         "Name": "Vehicle Black Carapace: Immune to Hull Breaches",
@@ -521,8 +505,7 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     }
   ],
   "ComponentTags": {
@@ -532,10 +515,9 @@
       "BLACKLISTED",
       "component_type_stock",
       "StealthArmor",
-      "BAIncompatible",
-      "ProtoIncompatible",
       "SuperheavyIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

@@ -8,16 +8,6 @@
         "CategoryID": "EnginePart"
       }
     ],
-    "WorkOrderCosts": {
-      "Default": {
-        "TechCost": "0.2 * [[Chassis.Tonnage]]",
-        "CBillCost": "[[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      },
-      "Install": {
-        "TechCost": "0.2 * [[Chassis.Tonnage]]",
-        "CBillCost": "[[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "CoolingSystemProtoDHS",
       "HeatGenerated: -20%",
@@ -31,38 +21,46 @@
     ],
     "ActivatableComponent": {
       "ButtonName": "PDHSBOOM",
+      "CanNotBeActivatedManualy": true,
+      "ActivationMessage": "WARNING!",
+      "DeactivationMessage": "Nominal",
       "AutoActivateOnOverheatLevel": 1.42,
       "AutoDeactivateOverheatLevel": 0.48,
+      "NoUniqueCheck": true,
       "FailFlatChance": 0.01,
       "FailRoundsStart": 1,
       "FailChancePerTurn": 0.05,
-      "SelfCrit": true,
       "FailCheckOnActivationEnd": true,
       "FailPilotingBase": 10,
       "FailPilotingMult": 0.0001,
-      "ActivationMessage": "WARNING!",
-      "DeactivationMessage": "Nominal",
-      "CanNotBeActivatedManualy": true,
-      "NoUniqueCheck": true,
-      "statusEffects": []
+      "SelfCrit": true
     },
     "ComponentExplosion": {
-      "HeatDamage": 50,
-      "ExplosionDamage": 50,
-      "StabilityDamage": 50
+      "ExplosionDamage": 50.0,
+      "HeatDamage": 50.0,
+      "StabilityDamage": 50.0
     },
     "Cooling": {
       "HeatSinkDefId": "Gear_HeatSink_Prototype"
     },
-    "HeatSinkingCost": {
-      "HeatUpkeepCost": 15,
-      "HeatUpkeepMult": 1.5
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.2 * [[Chassis.Tonnage]]",
+        "CBillCost": "[[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      },
+      "Default": {
+        "TechCost": "0.2 * [[Chassis.Tonnage]]",
+        "CBillCost": "[[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
     },
     "IBLS": {
       "StorageSize": 1
+    },
+    "HeatSinkingCost": {
+      "HeatUpkeepCost": 15,
+      "HeatUpkeepMult": 1.5
     }
   },
-  "DissipationCapacity": 0,
   "Description": {
     "Cost": 4600000,
     "Rarity": 7,
@@ -75,6 +73,7 @@
     "Details": "Converts an SHS engine to use Prototype Double Heatsinks. Treating the Engines <b>Cooling System</b> with this experimental system improves the general performance at risk of a Fatal Explosion. <b><color=#099ff2>VOLATILE!</color></b>",
     "Icon": "thermometer-cold"
   },
+  "DissipationCapacity": 0,
   "BonusValueA": "",
   "BonusValueB": "",
   "ComponentType": "HeatSink",
@@ -99,13 +98,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "PDHSKitHeatGen",
         "Name": "Heat Sink Kit (Prototype): Decreased Heat Generated",
         "Details": "Heat generation reduced by 10%.",
         "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "HeatGenerated",
         "operation": "Float_Multiply",
@@ -118,10 +117,9 @@
   "ComponentTags": {
     "items": [
       "component_type_stock",
-      "BAIncompatible",
-      "ProtoIncompatible",
       "EnginePart",
-      "HeatSinkKit_Gear_HeatSink_Prototype"
+      "HeatSinkKit_Gear_HeatSink_Prototype",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

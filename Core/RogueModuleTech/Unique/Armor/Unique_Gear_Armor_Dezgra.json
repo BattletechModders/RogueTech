@@ -8,12 +8,6 @@
         "CategoryID": "NCFF"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.15 * [[Chassis.Tonnage]]",
-        "CBillCost": "50 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "ArmorFactor: -17%",
       "Stealth",
@@ -32,17 +26,22 @@
       "CASE",
       "CASEVENT: 100, 200"
     ],
+    "Flags": [
+      "not_broken",
+      "no_salvage",
+      "autorepair"
+    ],
     "ActivatableComponent": {
+      "ButtonName": "CLPS/NSS",
+      "CanNotBeActivatedManualy": false,
       "CanActivateAfterMove": true,
       "CanActivateAfterFire": false,
-      "SafeActivation": true,
-      "ButtonName": "CLPS/NSS",
       "ActiveByDefault": true,
-      "ActivationIsBuff": true,
-      "CanNotBeActivatedManualy": false,
-      "NoUniqueCheck": true,
+      "SafeActivation": true,
       "ActivationMessage": "CLPS/NSS On",
       "DeactivationMessage": "CLPS/NSS Off",
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
       "statusEffects": [
         {
           "durationData": {
@@ -57,6 +56,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "LV_Stealth_Effect",
             "Name": "N/C-FF Armor (C) Activatable: Stealth",
@@ -68,8 +68,7 @@
             "operation": "Set",
             "modValue": "0.8_5_2_4_6",
             "modType": "System.String"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -84,6 +83,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "LV_MIMETIC",
             "Name": "N/C-FF Armor (C) Activatable: Mimetic Armor",
@@ -95,8 +95,7 @@
             "operation": "Set",
             "modValue": "4_0.125_1_5",
             "modType": "System.String"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -110,13 +109,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Signature_Decrease_Stealth",
             "Name": "N/C-FF Armor (C) Activatable: Decreased Sensor Signature",
             "Details": "Signature Statuseffect.",
             "Icon": "uixSvgIcon_equipment_TTS"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "SensorSignatureModifier",
             "operation": "Float_Multiply",
@@ -136,13 +135,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Visibility_Decrease_Stealth",
             "Name": "N/C-FF Armor (C) Activatable: Decreased Visual Signature",
             "Details": "Visibility Statuseffect.",
             "Icon": "uixSvgIcon_equipment_TTS"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "SpottingVisibilityMultiplier",
             "operation": "Float_Multiply",
@@ -162,13 +161,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Heat_Generation_Stealth",
             "Name": "N/C-FF Armor (C) Activatable: Increased Heat Generated",
             "Details": "Heat generation",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "HeatGenerated",
             "operation": "Float_Multiply",
@@ -189,13 +188,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "Stealth_Heat_Capacity_Stealth",
             "Name": "N/C-FF Armor (C) Activatable: Decreased Cooling",
             "Details": "Heat Capacity Penalty",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Debuff",
           "statisticData": {
             "statName": "HeatSinkCapacity",
             "operation": "Int_Add",
@@ -203,28 +202,8 @@
             "modType": "System.Int32"
           }
         }
-      ],
-      "offlineStatusEffects": []
+      ]
     },
-    "ArmorRepair": {
-      "ArmorTPCost": 2,
-      "ArmorCBCost": 2
-    },
-    "CASE": {
-      "AllLocations": true
-    },
-    "Color": "Gold",
-    "CriticalEffects": {
-      "LinkedStatisticName": "N/C-FF Armor"
-    },
-    "DecoratorComponent": [
-      {
-        "Text": "C",
-        "Color": "#5F24AC",
-        "Icon": "ComponentGearIcons_STEALTH",
-        "Importance": 40
-      }
-    ],
     "DynamicSlots": {
       "ReservedSlots": 7,
       "BackgroundColor": "GoldHalf",
@@ -233,22 +212,35 @@
       "BonusAText": "Dynamic Slot",
       "BonusBText": " "
     },
-    "ErrorMessage": "Stealth Armor requires a ECM!",
-    "ExplosionProtectionHeat": {
-      "AllLocations": true,
-      "MaximumDamage": 100
+    "Weights": {
+      "ArmorFactor": 0.83333
     },
-    "ExplosionProtectionStability": {
-      "AllLocations": true,
-      "MaximumDamage": 200
+    "ArmorRepair": {
+      "ArmorTPCost": 2,
+      "ArmorCBCost": 2
     },
-    "Flags": [
-      "not_broken",
-      "no_salvage",
-      "autorepair"
-    ],
+    "CASE": {
+      "AllLocations": true
+    },
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.15 * [[Chassis.Tonnage]]",
+        "CBillCost": "50 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
     "IBLS": {
       "StorageSize": 21
+    },
+    "ExplosionProtectionHeat": {
+      "MaximumDamage": 100,
+      "AllLocations": true
+    },
+    "ExplosionProtectionStability": {
+      "MaximumDamage": 200,
+      "AllLocations": true
+    },
+    "CriticalEffects": {
+      "LinkedStatisticName": "N/C-FF Armor"
     },
     "Linked": {
       "Links": [
@@ -282,13 +274,20 @@
         }
       ]
     },
-    "Weights": {
-      "ArmorFactor": 0.83333
-    }
+    "Color": "Gold",
+    "ErrorMessage": "Stealth Armor requires a ECM!",
+    "case": {
+      "AllLocations": true
+    },
+    "DecoratorComponent": [
+      {
+        "Text": "C",
+        "Color": "#5F24AC",
+        "Icon": "ComponentGearIcons_STEALTH",
+        "Importance": 40
+      }
+    ]
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 1500000,
     "Rarity": 99,
@@ -306,13 +305,14 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 0,
   "InventorySize": 1,
   "Tonnage": 0,
   "AllowedLocations": "All",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "statusEffects": [],
   "ComponentTags": {
     "items": [
       "BLACKLISTED",
@@ -321,10 +321,9 @@
       "Chameleon",
       "ClanArmor",
       "CasedArmor",
-      "BAIncompatible",
-      "ProtoIncompatible",
       "SuperheavyIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

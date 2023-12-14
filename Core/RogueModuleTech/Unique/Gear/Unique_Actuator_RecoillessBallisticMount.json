@@ -12,20 +12,6 @@
       "AccuracyLocation: +2",
       "RecoilLocation: -1"
     ],
-        "CriticalEffects": {
-          "PenalizedEffectIDs": [
-            [
-              "CriticalEffect-ArmUpperActuatorDestroyed-{location}"
-            ]
-          ],
-          "OnDestroyedEffectIDs": [
-            "CriticalEffect-ShoulderDestroyed-{location}"
-          ],
-          "OnDestroyedDisableEffectIds": [
-            "CriticalEffect-ArmLowerActuatorDestroyed-{location}",
-            "CriticalEffect-ArmHandActuatorDestroyed-{location}"
-          ]
-        },
     "Flags": [
       "default",
       "not_broken",
@@ -35,11 +21,22 @@
     "IBLS": {
       "StorageSize": 2
     },
+    "CriticalEffects": {
+      "OnDestroyedEffectIDs": [
+        "CriticalEffect-ShoulderDestroyed-{location}"
+      ],
+      "OnDestroyedDisableEffectIds": [
+        "CriticalEffect-ArmLowerActuatorDestroyed-{location}",
+        "CriticalEffect-ArmHandActuatorDestroyed-{location}"
+      ],
+      "PenalizedEffectIDs": [
+        [
+          "CriticalEffect-ArmUpperActuatorDestroyed-{location}"
+        ]
+      ]
+    },
     "Lootable": "Gear_Actuator_Upper_Recoil_Plus"
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 350000,
     "Rarity": 5,
@@ -57,6 +54,8 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 0,
   "InventorySize": 2,
   "Tonnage": 0,
@@ -76,13 +75,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "Status-LowerAccuracy-{location}",
         "Name": "Recoilless Ballistic Mount: Improved {location} Accuracy",
         "Details": "+2 Arm mounted accuracy.",
         "Icon": "uixSvgIcon_equipment_ActuatorArm"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "{location}.Accuracy",
         "operation": "Float_Add",
@@ -100,20 +99,20 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-Attack_ToHitBallistic-Shoulder",
         "Name": "Recoilless Ballistic Mount: Decreased Recoil - {current}",
         "Details": "Ballistic weapon attacks have their hit improved by 1.",
         "Icon": "uixSvgIcon_equipment_TTS"
       },
-      "nature": "Buff",
       "statisticData": {
-        "targetCollection": "Weapon",
         "statName": "RefireModifier",
         "operation": "Int_Add",
         "modValue": "-1",
         "modType": "System.Int32",
-        "Location": "{current}"
+        "Location": "{current}",
+        "targetCollection": "Weapon"
       }
     }
   ],
@@ -124,9 +123,8 @@
       "BLACKLISTED",
       "WikiWL",
       "QuadIncompatible",
-      "BAIncompatible",
-      "ProtoIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

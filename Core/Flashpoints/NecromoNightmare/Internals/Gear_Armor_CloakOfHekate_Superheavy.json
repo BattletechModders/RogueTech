@@ -8,12 +8,6 @@
         "CategoryID": "StealthSystem"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.1 * [[Chassis.Tonnage]]",
-        "CBillCost": "50 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "Stealth",
       "StealthSensors: 30%, 3, 2, 1, 2",
@@ -31,31 +25,21 @@
       "CASEVENT: 50, 100",
       "SuperheavyOnly"
     ],
+    "Flags": [
+      "not_broken",
+      "no_salvage"
+    ],
     "ActivatableComponent": {
+      "ButtonName": "Bless",
+      "CanNotBeActivatedManualy": false,
       "CanActivateAfterMove": true,
       "CanActivateAfterFire": false,
-      "SafeActivation": true,
-      "ButtonName": "Bless",
       "ActiveByDefault": true,
-      "ActivationIsBuff": true,
-      "CanNotBeActivatedManualy": false,
-      "NoUniqueCheck": true,
+      "SafeActivation": true,
       "ActivationMessage": "Blessing Activated",
       "DeactivationMessage": "Blessing Deactivated",
-      "Linkage": {
-        "OnActivate": {
-          "Activate": [
-            "Camouflage"
-          ],
-          "Deactivate": []
-        },
-        "OnDeactivate": {
-          "Activate": [],
-          "Deactivate": [
-            "Camouflage"
-          ]
-        }
-      },
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
       "statusEffects": [
         {
           "durationData": {
@@ -70,6 +54,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "StatusEffect-Hekate-Stealth",
             "Name": "Cloak of Hekate Activatable: Stealth",
@@ -81,8 +66,7 @@
             "operation": "Set",
             "modValue": "0.7_3_2_1_2",
             "modType": "System.String"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -96,13 +80,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "StatusEffect-Hekate-Sensors",
             "Name": "Cloak of Hekate Activatable: Decreased Sensor Signature",
             "Details": "Signature Statuseffect.",
             "Icon": "uixSvgIcon_equipment_TTS"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "SensorSignatureModifier",
             "operation": "Float_Multiply",
@@ -122,13 +106,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "StatusEffect-Hekate-Visibility",
             "Name": "Cloak of Hekate Activatable: Decreased Visual Signature",
             "Details": "Visibility Statuseffect.",
             "Icon": "uixSvgIcon_equipment_TTS"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "SpottingVisibilityMultiplier",
             "operation": "Float_Multiply",
@@ -148,13 +132,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "StatusEffect-Hekate-HeatGenerated",
             "Name": "Cloak of Hekate Activatable: Increased Heat Generated",
             "Details": "Heat generation",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "HeatGenerated",
             "operation": "Float_Multiply",
@@ -164,38 +148,54 @@
           }
         }
       ],
-      "offlineStatusEffects": []
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [
+            "Camouflage"
+          ],
+          "Deactivate": []
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": [
+            "Camouflage"
+          ]
+        }
+      }
+    },
+    "Weights": {
+      "ArmorFactor": 0.7
+    },
+    "ArmorStructureChanges": {
+      "ArmorFactor": 1.4
     },
     "ArmorRepair": {
       "ArmorTPCost": 2.2,
       "ArmorCBCost": 2.5
     },
-    "ArmorStructureChanges": {
-      "ArmorFactor": 1.4
-    },
     "CASE": {
-      "AllLocations": true,
-      "MaximumDamage": 5
+      "MaximumDamage": 5,
+      "AllLocations": true
     },
-    "ExplosionProtectionHeat": {
-      "AllLocations": true,
-      "MaximumDamage": 50
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.1 * [[Chassis.Tonnage]]",
+        "CBillCost": "50 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
     },
-    "ExplosionProtectionStability": {
-      "AllLocations": true,
-      "MaximumDamage": 100
-    },
-    "Color": "Gold",
-    "CriticalEffects": {
-      "LinkedStatisticName": "Stealth System"
-    },
-    "ErrorMessage": "Stealth Armor requires a ECM!",
-    "Flags": [
-      "not_broken",
-      "no_salvage"
-    ],
     "IBLS": {
       "StorageSize": 7
+    },
+    "ExplosionProtectionHeat": {
+      "MaximumDamage": 50,
+      "AllLocations": true
+    },
+    "ExplosionProtectionStability": {
+      "MaximumDamage": 100,
+      "AllLocations": true
+    },
+    "CriticalEffects": {
+      "LinkedStatisticName": "Stealth System"
     },
     "Linked": {
       "Links": [
@@ -225,8 +225,11 @@
         }
       ]
     },
-    "Weights": {
-      "ArmorFactor": 0.7
+    "Color": "Gold",
+    "ErrorMessage": "Stealth Armor requires a ECM!",
+    "case": {
+      "MaximumDamage": 5,
+      "AllLocations": true
     },
     "DecoratorComponent": [
       {
@@ -272,6 +275,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-Hekate-APProtection",
         "Name": "Cloak of Hekate: TAC Immune",
@@ -283,8 +287,7 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -296,6 +299,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-Hekate-BreachImmunity",
         "Name": "Cloak of Hekate: Immune to Hull Breaches",
@@ -307,8 +311,7 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     }
   ],
   "ComponentTags": {
