@@ -8,20 +8,13 @@
         "CategoryID": "AdvZoom"
       },
       {
-        "CategoryID": "ThermalVision"
-      },
-      {
-        "CategoryID": "NightVision"
-      },
-      {
         "CategoryID": "AddOn"
       }
     ],
     "BonusDescriptions": [
       "Special: 0.7T",
-      "NewAdvancedZoom: 810",
-      "ThermalVision: 2, 60, 220",
-      "NightVision"
+      "NewAdvancedZoom: 270",
+      "DetectMine: 90"
     ],
     "Flags": [
       "not_broken"
@@ -32,7 +25,7 @@
     "CarryLeftOverUsage": 0.7
   },
   "Description": {
-    "Cost": 1200000,
+    "Cost": 800000,
     "Rarity": 3,
     "Purchasable": true,
     "Manufacturer": "Mitchell",
@@ -40,7 +33,7 @@
     "UIName": "Advanced Optics MK2",
     "Id": "Special_AddOn_AdvancedOptics_Mk2",
     "Name": "Advanced Optics",
-    "Details": "This Module allows any Mech to employ Advanced Optics, including a Zoom, Thermal and Night Vision Mode",
+    "Details": "This module includes both optical zoom and minefield detection.",
     "Icon": "circuitry"
   },
   "BonusValueA": "",
@@ -64,30 +57,6 @@
       },
       "targetingData": {
         "effectTriggerType": "Passive",
-        "effectTargetType": "Creator"
-      },
-      "effectType": "StatisticEffect",
-      "nature": "Buff",
-      "Description": {
-        "Id": "NightVision",
-        "Name": "Add On Advanced Optics MK2: Night Vision",
-        "Details": "PASSIVE: Enables Night Vision.",
-        "Icon": "uixSvgIcon_ability_precisionstrike"
-      },
-      "statisticData": {
-        "statName": "LV_NIGHT_VISION",
-        "operation": "Set",
-        "modValue": "true",
-        "modType": "System.Boolean"
-      }
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
         "showInTargetPreview": false,
         "showInStatusPanel": false
@@ -103,7 +72,7 @@
       "statisticData": {
         "statName": "LV_ZOOM_VISION",
         "operation": "Set",
-        "modValue": "-1_0_27",
+        "modValue": "-1_0_9",
         "modType": "System.String"
       }
     },
@@ -115,23 +84,43 @@
       "targetingData": {
         "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
+        "forceVisRebuild": true,
         "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "Heat Vision Effect",
-        "Name": "Add On Advanced Optics MK2: Heat Vision",
-        "Details": "heat bonus accuracy",
-        "Icon": "uixSvgIcon_ability_precisionstrike"
+        "Id": "MineFieldDetection",
+        "Name": "Advanced Optics MK2: Minefield Detection",
+        "Details": "Detects Minefields",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
       },
       "statisticData": {
-        "statName": "LV_HEAT_VISION",
-        "operation": "Set",
-        "modValue": "-2_60_220",
-        "modType": "System.String"
+        "statName": "MinefieldDetection",
+        "operation": "Float_Add",
+        "modValue": "1",
+        "modType": "System.Single"
       }
+    }
+  ],
+  "Auras": [
+    {
+      "Id": "MINEDETECTIONAURA",
+      "Name": "Minesweeper",
+      "ReticleColor": "white",
+      "Range": 90,
+      "RemoveOnSensorLock": false,
+      "State": "Persistent",
+      "ApplySelf": true,
+      "HideOnNotSelected": true,
+      "AllyStealthAffection": "None",
+      "EnemyStealthAffection": "None",
+      "IsNegativeToEnemy": false,
+      "IsPositiveToAlly": false,
+      "MinefieldDetector": true,
+      "LineType": "Dots",
+      "isSpining": false
     }
   ],
   "ComponentTags": {
