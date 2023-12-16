@@ -8,20 +8,14 @@
         "CategoryID": "AdvZoom"
       },
       {
-        "CategoryID": "ThermalVision"
-      },
-      {
-        "CategoryID": "NightVision"
-      },
-      {
         "CategoryID": "AddOn"
       }
     ],
     "BonusDescriptions": [
       "Special: 1T",
-      "NewAdvancedZoom: 1080",
-      "ThermalVision: 1, 25, 240",
-      "NightVision"
+      "NewAdvancedZoom: 390",
+      "VisionGranted: 195",
+      "DetectMine: 120"
     ],
     "Flags": [
       "not_broken"
@@ -32,7 +26,7 @@
     "CarryLeftOverUsage": 1
   },
   "Description": {
-    "Cost": 1500000,
+    "Cost": 600000,
     "Rarity": 3,
     "Purchasable": true,
     "Manufacturer": "Mitchell",
@@ -40,7 +34,7 @@
     "UIName": "Advanced Optics MK3",
     "Id": "Special_AddOn_AdvancedOptics_Mk3",
     "Name": "Advanced Optics",
-    "Details": "This Module allows any Mech to employ Advanced Optics, including a Zoom, Thermal and Night Vision Mode",
+    "Details": "This module includes a high-powered optical zoom and enhanced minefield detection capabilities.",
     "Icon": "circuitry"
   },
   "BonusValueA": "",
@@ -64,21 +58,23 @@
       },
       "targetingData": {
         "effectTriggerType": "Passive",
-        "effectTargetType": "Creator"
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "NightVision",
-        "Name": "Add On Advanced Optics MK3: Night Vision",
-        "Details": "PASSIVE: Enables Night Vision.",
+        "Id": "Zoom Attack Effect",
+        "Name": "Add On Advanced Optics MK3: Zoom Attack",
+        "Details": "range bracket bonus accuracy",
         "Icon": "uixSvgIcon_ability_precisionstrike"
       },
       "statisticData": {
-        "statName": "LV_NIGHT_VISION",
+        "statName": "LV_ZOOM_ATTACK",
         "operation": "Set",
-        "modValue": "true",
-        "modType": "System.Boolean"
+        "modValue": "-1_0_13",
+        "modType": "System.String"
       }
     },
     {
@@ -97,13 +93,13 @@
       "Description": {
         "Id": "Zoom Vision Effect",
         "Name": "Add On Advanced Optics MK3: Zoom Vision",
-        "Details": "range bracket bonus accuracy",
+        "Details": "Grant vision within range",
         "Icon": "uixSvgIcon_ability_precisionstrike"
       },
       "statisticData": {
         "statName": "LV_ZOOM_VISION",
         "operation": "Set",
-        "modValue": "-1_0_36",
+        "modValue": "195",
         "modType": "System.String"
       }
     },
@@ -115,23 +111,43 @@
       "targetingData": {
         "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
+        "forceVisRebuild": true,
         "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "Heat Vision Effect",
-        "Name": "Add On Advanced Optics MK3: Heat Vision",
-        "Details": "heat bonus accuracy",
-        "Icon": "uixSvgIcon_ability_precisionstrike"
+        "Id": "MineFieldDetection",
+        "Name": "Advanced Optics MK3: Minefield Detection",
+        "Details": "Detects Minefields",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
       },
       "statisticData": {
-        "statName": "LV_HEAT_VISION",
-        "operation": "Set",
-        "modValue": "-1_25_240",
-        "modType": "System.String"
+        "statName": "MinefieldDetection",
+        "operation": "Float_Add",
+        "modValue": "1",
+        "modType": "System.Single"
       }
+    }
+  ],
+  "Auras": [
+    {
+      "Id": "MINEDETECTIONAURA",
+      "Name": "Minesweeper",
+      "ReticleColor": "white",
+      "Range": 120,
+      "RemoveOnSensorLock": false,
+      "State": "Persistent",
+      "ApplySelf": true,
+      "HideOnNotSelected": true,
+      "AllyStealthAffection": "None",
+      "EnemyStealthAffection": "None",
+      "IsNegativeToEnemy": false,
+      "IsPositiveToAlly": false,
+      "MinefieldDetector": true,
+      "LineType": "Dots",
+      "isSpining": false
     }
   ],
   "ComponentTags": {
