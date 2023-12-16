@@ -76,6 +76,8 @@ main settings in mod.json
     "ShowPassiveAbilitiesIcon": "ram",
     "HideActiveAbilitiesIcon": "futuristic",
     "HidePassiveAbilitiesIcon": "ram",
+	"globalGameRepresenationAudioEventsSupress": [], - list of audio events names to suppress. I'm using value [ "hatchet_latch" ] 
+	                                                   to suppress annoying hatchetman's clicking sound
 	"PlayerControlConvoyTag": "convoy_player_control" - tag added to lance's spawnEffects to turn on player controllable convoy to mechanic
 example from contract override definition:
 .............
@@ -743,6 +745,21 @@ Custom hit table
 		}
 	},
 }
+
+Animator Replacer
+you can create component can be used to replace animation from one mech model to another
+for example you can create component which gives hatchetman style melee animation to any other mech you want
+to do it you should add AnimatorReplacer custom component to Custom section of component you want
+"Custom": {
+	"AnimatorReplacer":{
+		"AnimationSource":"chrPrfMech_hatchetmanBase-001" - prefab used as source of animation clips
+	}
+},
+in example - if chrPrfMech_hatchetmanBase-001 is exists in player manifest (eg. DLC bought) 
+any mech having this component get hatchetman animation
+if AnimationSource prefab is absent is manifest - animations remains intact
+NOTE! this only works for "normal" mechs, trying to use this mechanic for vehicles, quads, troopers 
+can lead to unpredictable behavior.
 
 appendix A. Game's build-in audio events names in format '<name>':<id>
 id - just for info purposes
