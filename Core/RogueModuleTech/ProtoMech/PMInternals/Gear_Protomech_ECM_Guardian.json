@@ -19,26 +19,22 @@
       "PassiveECM: 3, 4",
       "StartsPassive"
     ],
+    "Flags": [
+      "not_broken",
+      "no_salvage",
+      "not_destroyed",
+      "ignore_damage"
+    ],
     "ActivatableComponent": {
-      "CanActivateAfterMove": true,
-      "CanActivateAfterFire": true,
-      "SafeActivation": true,
       "ButtonName": "ECM Mode",
       "CanNotBeActivatedManualy": false,
-      "NoUniqueCheck": true,
+      "CanActivateAfterMove": true,
+      "CanActivateAfterFire": true,
       "ActiveByDefault": false,
+      "SafeActivation": true,
       "ActivationMessage": "Active",
       "DeactivationMessage": "Passive",
-      "Linkage": {
-        "OnActivate": {
-          "Activate": [],
-          "Deactivate": []
-        },
-        "OnDeactivate": {
-          "Activate": [],
-          "Deactivate": []
-        }
-      },
+      "NoUniqueCheck": true,
       "statusEffects": [
         {
           "durationData": {
@@ -52,13 +48,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "ECMPassiveShield",
             "Name": "Guardian ECM (Proto) Activatable: Increased ECM Shield",
             "Details": "Passive ECM Protection",
             "Icon": "uixSvgIcon_equipment_Gyro"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "LV_ECM_SHIELD",
             "operation": "Int_Add",
@@ -78,13 +74,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "ECMPassiveJam",
             "Name": "Guardian ECM (Proto) Activatable: Decreased ECM Jamming",
             "Details": "Passive Jamming Protection",
             "Icon": "uixSvgIcon_equipment_Gyro"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "LV_ECM_JAMMED",
             "operation": "Int_Add",
@@ -106,13 +102,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "ECMPassiveShield",
             "Name": "Guardian ECM (Proto) Offline Activatable: Increased ECM Shield",
             "Details": "Passive ECM Protection",
             "Icon": "uixSvgIcon_equipment_Gyro"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "LV_ECM_SHIELD",
             "operation": "Int_Add",
@@ -132,13 +128,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "ECMPassiveJam",
             "Name": "Guardian ECM (Proto) Offline Activatable: Decreased ECM Jamming",
             "Details": "Passive Jamming Protection",
             "Icon": "uixSvgIcon_equipment_Gyro"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "LV_ECM_JAMMED",
             "operation": "Int_Add",
@@ -146,7 +142,20 @@
             "modType": "System.Int32"
           }
         }
-      ]
+      ],
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [],
+          "Deactivate": []
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": []
+        }
+      }
+    },
+    "IBLS": {
+      "StorageSize": 1
     },
     "DecoratorComponent": [
       {
@@ -155,20 +164,8 @@
         "Icon": "ComponentGearIcons_ECM",
         "Importance": 30
       }
-    ],
-    "Flags": [
-      "not_broken",
-      "no_salvage",
-      "not_destroyed",
-      "ignore_damage"
-    ],
-    "IBLS": {
-      "StorageSize": 1
-    }
+    ]
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 2000000,
     "Rarity": 3,
@@ -186,6 +183,8 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "Prototype_ElectronicWarfare",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 65,
   "InventorySize": 1,
   "Tonnage": 5,
@@ -198,22 +197,14 @@
       "Name": "JAMMED",
       "ReticleColor": "#00f2ff",
       "Range": 180,
-      "HideOnNotSelected": false,
       "RemoveOnSensorLock": false,
       "State": "Online",
       "ApplySelf": false,
+      "HideOnNotSelected": false,
       "AllyStealthAffection": "None",
       "EnemyStealthAffection": "NegativeOne",
-      "IsPositiveToAlly": false,
       "IsNegativeToEnemy": true,
-      "ownerVFX": [],
-      "targetVFX": [],
-      "removeOwnerVFX": [],
-      "removeTargetVFX": [],
-      "ownerSFX": [],
-      "targetSFX": [],
-      "removeOwnerSFX": [],
-      "removeTargetSFX": [],
+      "IsPositiveToAlly": false,
       "statusEffects": [
         {
           "durationData": {
@@ -229,6 +220,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "LV_ECM_JAM",
             "Name": "Guardian ECM (Proto) / Aura JAMMED: Increased Enemies ECM Jamming",
@@ -240,8 +232,7 @@
             "operation": "Int_Add",
             "modValue": "2",
             "modType": "System.Int32"
-          },
-          "nature": "Debuff"
+          }
         },
         {
           "durationData": {
@@ -254,6 +245,8 @@
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "ECM_disrupt_C3",
             "Name": "Guardian ECM (Proto) / Aura JAMMED: ECM Disrupts C3",
@@ -265,9 +258,7 @@
             "operation": "Float_Add",
             "modValue": "-2",
             "modType": "System.Single"
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Debuff"
+          }
         },
         {
           "durationData": {
@@ -280,6 +271,8 @@
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "ECM_disrupt_C3i",
             "Name": "Guardian ECM (Proto) / Aura JAMMED: ECM Disrupts C3i",
@@ -291,9 +284,7 @@
             "operation": "Float_Add",
             "modValue": "-2",
             "modType": "System.Single"
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Debuff"
+          }
         },
         {
           "durationData": {
@@ -306,6 +297,8 @@
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "ECM_disrupt_C3n",
             "Name": "Guardian ECM (Proto) / Aura JAMMED: ECM Disrupts C3 Nova",
@@ -317,9 +310,7 @@
             "operation": "Float_Add",
             "modValue": "-2",
             "modType": "System.Single"
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Debuff"
+          }
         },
         {
           "durationData": {
@@ -332,6 +323,8 @@
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "ECM_disrupt_C3AI",
             "Name": "Guardian ECM (Proto) / Aura JAMMED: ECM Disrupts C3 AI",
@@ -343,9 +336,7 @@
             "operation": "Float_Add",
             "modValue": "-2",
             "modType": "System.Single"
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Debuff"
+          }
         }
       ]
     },
@@ -354,22 +345,14 @@
       "Name": "CounterJamming",
       "ReticleColor": "#00f2ff",
       "Range": 180,
-      "HideOnNotSelected": false,
       "RemoveOnSensorLock": false,
       "State": "Online",
       "ApplySelf": false,
+      "HideOnNotSelected": false,
       "AllyStealthAffection": "PositiveTwo",
       "EnemyStealthAffection": "None",
-      "IsPositiveToAlly": true,
       "IsNegativeToEnemy": false,
-      "ownerVFX": [],
-      "targetVFX": [],
-      "removeOwnerVFX": [],
-      "removeTargetVFX": [],
-      "ownerSFX": [],
-      "targetSFX": [],
-      "removeOwnerSFX": [],
-      "removeTargetSFX": [],
+      "IsPositiveToAlly": true,
       "statusEffects": [
         {
           "durationData": {
@@ -385,6 +368,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "UNJAM",
             "Name": "Guardian ECM (Proto) / Aura CounterJamming: Decreased Allies ECM Jamming",
@@ -396,13 +380,11 @@
             "operation": "Int_Add",
             "modValue": "-1",
             "modType": "System.Int32"
-          },
-          "nature": "Buff"
+          }
         }
       ]
     }
   ],
-  "statusEffects": [],
   "ComponentTags": {
     "items": [
       "ProtoGear",
@@ -410,7 +392,6 @@
       "ElectronicCounterMeasures",
       "BLACKLISTED",
       "WikiWL",
-      "BAIncompatible",
       "LootMagnetBlacklist"
     ],
     "tagSetSourceFile": ""

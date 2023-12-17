@@ -8,12 +8,6 @@
         "CategoryID": "ArmorMod"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.10667 * [[Chassis.Tonnage]]",
-        "CBillCost": "55 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "IsArmorMod",
       "MimeticEnhance",
@@ -26,29 +20,20 @@
       "ArmorTPCost: 15%",
       "ArmorCBCost: 20%"
     ],
+    "Flags": [
+      "not_broken"
+    ],
     "ActivatableComponent": {
+      "ButtonName": "Camouflage",
+      "CanNotBeActivatedManualy": false,
       "CanActivateAfterMove": true,
       "CanActivateAfterFire": false,
-      "SafeActivation": true,
-      "ButtonName": "Camouflage",
       "ActiveByDefault": true,
-      "ActivationIsBuff": true,
-      "CanNotBeActivatedManualy": false,
-      "NoUniqueCheck": true,
+      "SafeActivation": true,
       "ActivationMessage": "Camouflaged",
       "DeactivationMessage": "Camouflage Off",
-      "Linkage": {
-        "OnActivate": {
-          "Activate": [],
-          "Deactivate": [
-            "ECCM"
-          ]
-        },
-        "OnDeactivate": {
-          "Activate": [],
-          "Deactivate": []
-        }
-      },
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
       "statusEffects": [
         {
           "durationData": {
@@ -63,6 +48,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "LV_MIMETIC",
             "Name": "Active Camouflage Activatable: Mimetic Armor",
@@ -74,8 +60,7 @@
             "operation": "Set",
             "modValue": "4_0.16_1_3",
             "modType": "System.String"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -89,13 +74,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Visibility_Decrease_Stealth",
             "Name": "Active Camouflage Activatable: Decreased Visual Signature",
             "Details": "Visibility Statuseffect.",
             "Icon": "uixSvgIcon_equipment_TTS"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "SpottingVisibilityMultiplier",
             "operation": "Float_Multiply",
@@ -115,13 +100,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "Stealth_Heat_Generation_Stealth",
             "Name": "Active Camouflage Activatable: Increased Heat Generated",
             "Details": "Heat generation",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "HeatGenerated",
             "operation": "Float_Multiply",
@@ -142,13 +127,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "Stealth_Heat_Capacity_Stealth",
             "Name": "Active Camouflage Activatable: Decreased Cooling",
             "Details": "Heat Capacity Penalty",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Debuff",
           "statisticData": {
             "statName": "HeatSinkCapacity",
             "operation": "Int_Add",
@@ -157,21 +142,34 @@
           }
         }
       ],
-      "offlineStatusEffects": []
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [],
+          "Deactivate": [
+            "ECCM"
+          ]
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": []
+        }
+      }
     },
     "ArmorRepair": {
       "ArmorTPCost": 1.15,
       "ArmorCBCost": 1.2
     },
-    "Color": "Gold",
-    "CriticalEffects": {
-      "LinkedStatisticName": "Active Camouflage"
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.10667 * [[Chassis.Tonnage]]",
+        "CBillCost": "55 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
     },
-    "Flags": [
-      "not_broken"
-    ],
     "IBLS": {
       "StorageSize": 7
+    },
+    "CriticalEffects": {
+      "LinkedStatisticName": "Active Camouflage"
     },
     "Linked": {
       "Links": [
@@ -201,6 +199,7 @@
         }
       ]
     },
+    "Color": "Gold",
     "DecoratorComponent": [
       {
         "Text": "M",
@@ -210,9 +209,6 @@
       }
     ]
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 500000,
     "Rarity": 8,
@@ -230,19 +226,19 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 0,
   "InventorySize": 1,
   "Tonnage": 0,
   "AllowedLocations": "CenterTorso",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "statusEffects": [],
   "ComponentTags": {
     "items": [
       "component_type_stock",
       "StealthArmor",
-      "BAIncompatible",
-      "ProtoIncompatible"
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

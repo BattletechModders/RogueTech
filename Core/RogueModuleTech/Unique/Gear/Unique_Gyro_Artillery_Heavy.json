@@ -5,12 +5,6 @@
         "CategoryID": "Gyro"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.1 * [[Chassis.Tonnage]]",
-        "CBillCost": "1.15 * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "SureFoot",
       "Recoil: -3",
@@ -19,9 +13,6 @@
       "GyroStab: 50",
       "GyroWeight: 20%"
     ],
-    "ComponentExplosion": {
-      "StabilityDamage": 100
-    },
     "Flags": [
       "default",
       "ignore_damage",
@@ -29,17 +20,23 @@
       "no_salvage",
       "not_broken"
     ],
-    "IBLS": {
-      "StorageSize": 3
+    "ComponentExplosion": {
+      "StabilityDamage": 100.0
     },
     "Weights": {
       "GyroFactor": 1.2
     },
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.1 * [[Chassis.Tonnage]]",
+        "CBillCost": "1.15 * [[Chassis.Tonnage]]"
+      }
+    },
+    "IBLS": {
+      "StorageSize": 3
+    },
     "Lootable": "Gear_Gyro_Artillery"
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 800000,
     "Rarity": 4,
@@ -57,6 +54,8 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 500,
   "InventorySize": 3,
   "Tonnage": 0,
@@ -74,6 +73,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "GyroSureFoot",
         "Name": "Artillery Heavy Gyro: Enable Guarded After Move",
@@ -85,8 +85,7 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -100,13 +99,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "SamuraiStabDamageBuff",
         "Name": "Artillery Heavy Gyro: Decreased Stability Damage Taken",
         "Details": "Incoming stability damage reduced by [AMT].",
         "Icon": "uixSvgIcon_equipment_Gyro"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "ReceivedInstabilityMultiplier",
         "operation": "Float_Multiply",
@@ -126,6 +125,7 @@
         "showInStatusPanel": true
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "Art. Gyro",
         "Name": "Artillery Heavy Gyro: Increased Unsteady Threshold",
@@ -137,34 +137,6 @@
         "operation": "Float_Add",
         "modValue": "50.0",
         "modType": "System.Single"
-      },
-      "nature": "Buff"
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "StatusEffect_BCBallistic",
-        "Name": "Artillery Heavy Gyro: Decreased Recoil",
-        "Details": "Ballistic weapon attacks have their recoil reduced by [AMT].",
-        "Icon": "uixSvgIcon_equipment_TTS"
-      },
-      "nature": "Buff",
-      "statisticData": {
-        "targetCollection": "Weapon",
-        "statName": "RefireModifier",
-        "operation": "Int_Add",
-        "modValue": "-3",
-        "modType": "System.Int32"
       }
     },
     {
@@ -179,6 +151,34 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "StatusEffect_BCBallistic",
+        "Name": "Artillery Heavy Gyro: Decreased Recoil",
+        "Details": "Ballistic weapon attacks have their recoil reduced by [AMT].",
+        "Icon": "uixSvgIcon_equipment_TTS"
+      },
+      "statisticData": {
+        "statName": "RefireModifier",
+        "operation": "Int_Add",
+        "modValue": "-3",
+        "modType": "System.Int32",
+        "targetCollection": "Weapon"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "BracetoFire Reduction Special Stable",
         "Name": "Artillery Heavy Gyro: Decreased Self Knockdown on Fire",
@@ -190,8 +190,7 @@
         "operation": "Float_Add",
         "modValue": "-0.2",
         "modType": "System.Single"
-      },
-      "nature": "Buff"
+      }
     }
   ],
   "ComponentTags": {
@@ -199,10 +198,9 @@
       "component_type_stock",
       "BLACKLISTED",
       "WikiWL",
-      "BAIncompatible",
-      "ProtoIncompatible",
       "SuperheavyIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }
