@@ -371,7 +371,15 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
 
 "AIPathingOptimization": true - enable/disable AI pathing optimization
 "AIPathingSamplesLimit": 120 - amount of AI move destination positions AI can have if AIPathingOptimization enabled
+
 "AIPathingMultithread": false - enable/disable AI pathing multithread (code by Ashakar) assumed to be off cause does not do anything good
+
+ "PhysicsAoE_Weapons": true - if true weapons AoE process will use raycasting to limit affected targets rather than just range
+ "PhysicsAoE_Deffered": true - if true deffered effects AoE process will use raycasting to limit affected targets rather than just range
+ "PhysicsAoE_Minefield": true - if true minefields explosion effects AoE process will use raycasting to limit affected targets rather than just range
+ "PhysicsAoE_API": true        - if true explosion API (mostly used by engine explosions) will use raycasting to limit affected targets rather than just range
+ "PhysicsAoE_API_Height" : 10f - default height of AoE explosions for an API use
+ "AIAwareArtillery":true - if true AI will try to avoid artillery strikes (not vanilla artillery but CAC ones, look "IsArtillery" weapon's param)
 
 "AIMinefieldAware": true - if true AI will try to avoid significant direct minefield damage
 "AIMinefieldAwareAllMines": false - if true AI will be aware of all minefields not only visible ones
