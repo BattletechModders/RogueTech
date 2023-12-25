@@ -761,6 +761,31 @@ if AnimationSource prefab is absent is manifest - animations remains intact
 NOTE! this only works for "normal" mechs, trying to use this mechanic for vehicles, quads, troopers 
 can lead to unpredictable behavior.
 
+PilotingClassDef
+{
+  "Description": {
+    "Id": "QuadVeeClass",                         - unique id
+    "Name": "Mechs and Vehicles",                 - name
+    "Details": "Mechs and Vehicles"               - description
+  },
+  "UnitTags": [                                   - list of tags chassis should have to require this expertise from pilot
+    "QuadVee"
+  ],
+  "PilotTags": [                                  - list of tags pilot should have to be able to pilot this unit class
+    "can_pilot_generic_mech",
+    "can_pilot_generic_vehicle"
+  ],
+  "ExcludeClasses": [],                           - used in expertises auto-generation process. If this expertise generated for this pilot, 
+                                                    expertises from this list will not be generated for this pilot further
+  "expertiseGenerationChance": 0,                 - raw chance to generate this expertise 
+  "expertiseGenerationMinCount": 0,               - after 1-stage random expertises generation, on 2-stage algorithm ensures there are 
+                                                    at least <expertiseGenerationMinCount> pilots with this expertise in list
+  "additionalExpertisesCount": 0,                 - if this expertise been rolled for this pilot, algorithm will try to add up to <additionalExpertisesCount>
+													form <AdditionalClasses> list. 
+  "AdditionalClasses": [],                        - list of additional expertises fro this class
+}
+
+
 appendix A. Game's build-in audio events names in format '<name>':<id>
 id - just for info purposes
  'AudioEventList_aircraft_aircraft_dropship_gencon_landing':3307102648
