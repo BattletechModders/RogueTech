@@ -2,46 +2,63 @@
   "Custom": {
     "Category": [
       {
-        "CategoryID": "ProtoSupportGear"
-      },
-      {
         "CategoryID": "EngineCore"
       },
       {
+        "CategoryID": "EngineShield"
+      },
+      {
         "CategoryID": "EnginePart"
+      },
+      {
+        "CategoryID": "Cooling"
+      },
+      {
+        "CategoryID": "EngineHeatBlock"
+      },
+      {
+        "CategoryID": "SquadEngineCore"
+      },
+      {
+        "CategoryID": "SquadEngine"
       }
     ],
-    "BonusDescriptions": [
-      "ProtoMechEngine"
-    ],
-    "Flags": [
-      "vital",
-      "not_broken",
-      "not_destroyed",
-      "default",
-      "ignore_damage",
-      "no_salvage"
-    ],
-    "EngineCore": "250",
     "WorkOrderCosts": {
       "Install": {
         "TechCost": "0.0375 * [[Chassis.Tonnage]]",
         "CBillCost": "7.5 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
       }
     },
+    "BonusDescriptions": [
+      "ProtoMechEngine"
+    ],
+    "Cooling": {
+      "HeatSinkDefId": "Gear_HeatSink_Single"
+    },
+    "EngineCore": "250",
+    "EngineHeatBlock": 0,
+    "Flags": [
+      "vital",
+      "engine_part",
+      "not_broken",
+      "not_destroyed",
+      "default",
+      "ignore_damage",
+      "no_salvage"
+    ],
     "IBLS": {
       "StorageSize": 1
     }
   },
   "Description": {
-    "Cost": 375000,
+    "Cost": 1250000,
     "Rarity": 4,
     "Purchasable": true,
-    "Manufacturer": "GM",
+    "Manufacturer": "Generic",
     "Model": "Engine Core",
-    "UIName": "ProtoMech Core 075 x5",
+    "UIName": "ProtoMech Core 075",
     "Id": "Gear_Protomech_EngineCore_075",
-    "Name": "Engine Core 075 x5",
+    "Name": "Engine Core 075",
     "Details": "Fusion engines function by harnessing the power of a fusion reaction, running on light hydrogen and protium.\r\nFusion engines are defined by their <b>engine rating</b>. For 'Mechs, the engine rating is the mathematical product of the mass of the vehicle and its desired maximum walking or cruising velocity.",
     "Icon": "enginecore"
   },
@@ -54,7 +71,7 @@
   "BattleValue": 0,
   "InventorySize": 1,
   "Tonnage": 10,
-  "AllowedLocations": "All",
+  "AllowedLocations": "CenterTorso",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
   "statusEffects": [
@@ -71,7 +88,7 @@
       "nature": "Buff",
       "Description": {
         "Id": "MaxEvasionBase",
-        "Name": "ProtoMech Core 075 x5: Increased Max Evasive Pips",
+        "Name": "ProtoMech Core 075: Increased Max Evasive Pips",
         "Details": "This unit generates an extra EVASIVE charge from movement actions (up to its maximum).",
         "Icon": "uixSvgIcon_action_evasivemove"
       },
@@ -81,16 +98,48 @@
         "modValue": "2",
         "modType": "System.Int32"
       }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": 1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "ProtoMech-Cooling-Buff",
+        "Name": "ProtoMech Core 075: Increased Cooling",
+        "Details": "",
+        "Icon": ""
+      },
+      "statisticData": {
+        "statName": "HeatSinkCapacity",
+        "operation": "Int_Add",
+        "modValue": "1000",
+        "modType": "System.Int32"
+      }
     }
   ],
   "ComponentTags": {
     "items": [
-      "ProtoGear",
+      "ProtoMechEquipment",
       "component_type_stock",
       "BLACKLISTED",
+      "EnginePart.{location}",
       "ProtoEngine",
       "EnginePart",
-      "LootMagnetBlacklist"
+      "Fusion",
+      "HeatSinkKit_Gear_HeatSink_Single",
+      "LootMagnetBlacklist",
+      "move_to_none_location",
+      "BAIncompatible",
+      "MechSquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }
