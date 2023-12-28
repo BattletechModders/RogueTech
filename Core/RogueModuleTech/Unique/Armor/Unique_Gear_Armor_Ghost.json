@@ -8,6 +8,12 @@
         "CategoryID": "Chameleon"
       }
     ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.10667 * [[Chassis.Tonnage]]",
+        "CBillCost": "55 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
     "BonusDescriptions": [
       "ArmorFactor: -11%",
       "CLPS",
@@ -24,12 +30,6 @@
       "ArmorCBCost: x2.8",
       "CASE",
       "CASEVENT: 100, 200"
-    ],
-    "Flags": [
-      "default",
-      "not_broken",
-      "no_salvage",
-      "autorepair"
     ],
     "ActivatableComponent": {
       "ButtonName": "Stealth",
@@ -162,9 +162,6 @@
         }
       }
     },
-    "Weights": {
-      "ArmorFactor": 0.89285
-    },
     "ArmorRepair": {
       "ArmorTPCost": 1.9,
       "ArmorCBCost": 2.8
@@ -172,15 +169,19 @@
     "CASE": {
       "AllLocations": true
     },
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.10667 * [[Chassis.Tonnage]]",
-        "CBillCost": "55 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+    "Color": "Gold",
+    "CriticalEffects": {
+      "LinkedStatisticName": "Void Ferro-Fibrous"
+    },
+    "DecoratorComponent": [
+      {
+        "Text": "C",
+        "Color": "#5F24AC",
+        "Icon": "ComponentGearIcons_STEALTH",
+        "Importance": 40
       }
-    },
-    "IBLS": {
-      "StorageSize": 7
-    },
+    ],
+    "ErrorMessage": "Stealth Armor requires a ECM!",
     "ExplosionProtectionHeat": {
       "MaximumDamage": 100,
       "AllLocations": true
@@ -189,8 +190,14 @@
       "MaximumDamage": 200,
       "AllLocations": true
     },
-    "CriticalEffects": {
-      "LinkedStatisticName": "Void Ferro-Fibrous"
+    "Flags": [
+      "default",
+      "not_broken",
+      "no_salvage",
+      "autorepair"
+    ],
+    "IBLS": {
+      "StorageSize": 7
     },
     "Linked": {
       "Links": [
@@ -220,20 +227,13 @@
         }
       ]
     },
-    "Color": "Gold",
     "Lootable": "Lootable_Armor_ChameleonLightPolarizationShield",
-    "ErrorMessage": "Stealth Armor requires a ECM!",
+    "Weights": {
+      "ArmorFactor": 0.89285
+    },
     "case": {
       "AllLocations": true
-    },
-    "DecoratorComponent": [
-      {
-        "Text": "C",
-        "Color": "#5F24AC",
-        "Icon": "ComponentGearIcons_STEALTH",
-        "Importance": 40
-      }
-    ]
+    }
   },
   "Description": {
     "Cost": 1000000,
@@ -261,58 +261,58 @@
   "DisallowedLocations": "All",
   "CriticalComponent": false,
   "statusEffects": [
-        {
-          "durationData": {
-            "duration": -1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "Passive",
-            "effectTargetType": "Creator",
-            "showInTargetPreview": false,
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Buff",
-          "Description": {
-            "Id": "Stealth_Signature_Decrease_Stealth",
-            "Name": "Void Ferro-Fibrous (C) Activatable: Decreased Sensor Signature",
-            "Details": "Signature Statuseffect.",
-            "Icon": "uixSvgIcon_equipment_TTS"
-          },
-          "statisticData": {
-            "statName": "SensorSignatureModifier",
-            "operation": "Float_Multiply",
-            "modValue": "0.85",
-            "modType": "System.Single"
-          }
-        },
-        {
-          "durationData": {
-            "duration": -1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "Passive",
-            "effectTargetType": "Creator",
-            "showInTargetPreview": false,
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Buff",
-          "Description": {
-            "Id": "Stealth_Visibility_Decrease_Stealth",
-            "Name": "Void Ferro-Fibrous (C) Activatable: Decreased Visual Signature",
-            "Details": "Visibility Statuseffect.",
-            "Icon": "uixSvgIcon_equipment_TTS"
-          },
-          "statisticData": {
-            "statName": "SpottingVisibilityMultiplier",
-            "operation": "Float_Multiply",
-            "modValue": "0.65",
-            "modType": "System.Single"
-          }
-        }
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "Stealth_Signature_Decrease_Stealth",
+        "Name": "Void Ferro-Fibrous (C): Decreased Sensor Signature",
+        "Details": "Signature Statuseffect.",
+        "Icon": "uixSvgIcon_equipment_TTS"
+      },
+      "statisticData": {
+        "statName": "SensorSignatureModifier",
+        "operation": "Float_Multiply",
+        "modValue": "0.85",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "Stealth_Visibility_Decrease_Stealth",
+        "Name": "Void Ferro-Fibrous (C): Decreased Visual Signature",
+        "Details": "Visibility Statuseffect.",
+        "Icon": "uixSvgIcon_equipment_TTS"
+      },
+      "statisticData": {
+        "statName": "SpottingVisibilityMultiplier",
+        "operation": "Float_Multiply",
+        "modValue": "0.65",
+        "modType": "System.Single"
+      }
+    }
   ],
   "ComponentTags": {
     "items": [
