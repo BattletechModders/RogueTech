@@ -155,6 +155,7 @@ WeaponAddonDef example
 	"Id":"ppc_capacitor",  - ID should same as file name
 	"addonType":"ppc_capacitor_type", - string used to track addons of the same type. If ommited Id is used. 
 	                                    Only one addon of certain type can be attached to weapon
+	"TonnageMod": 1.0, - allows to modify equipment tonnage it attached to. Float - multiplicative. Default 1.0;
 	"targetComponentTags":["overload_mode_unlockable"], - set of tags weapon should have to be able to be target for an addon
 	"modes":[                                           - list of modes this addon adding to weapon. 
 	                                                      If isBaseMode is true this mode will be forced to be default for this weapon
