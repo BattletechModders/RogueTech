@@ -14,23 +14,29 @@
         "CategoryID": "EmergencyCoolant"
       }
     ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.2 * [[Chassis.Tonnage]]",
+        "CBillCost": "[[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      },
+      "Default": {
+        "TechCost": "0.2 * [[Chassis.Tonnage]]",
+        "CBillCost": "[[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
     "BonusDescriptions": [
       "CoolingSystemProtoDHS",
       "HeatGenerated: -15%",
-      "HeatPerTurn: -10",
       "ActivateHeatLevel: 80%",
       "DeActivateHeatLevel: 20%",
-      "ActiveHeatPerTurn: -30",
+      "ActiveHeatPerTurn: -20",
       "ActiveHeatGenerated: -15%",
-      "FailChance: 10%",
+      "FailChanceN: 40%, 2",
       "FailChanceTurn: 50%",
       "FailCritSelf",
       "CPBoom: 100",
       "CoolantCost: 18",
-      "CoolantCostMulti: 50%"
-    ],
-    "Flags": [
-      "not_broken"
+      "CoolantCostMulti: +50%"
     ],
     "ActivatableComponent": {
       "ButtonName": "Radical Heatsink",
@@ -40,7 +46,7 @@
       "AutoActivateOnOverheatLevel": 0.8,
       "AutoDeactivateOverheatLevel": 0.2,
       "NoUniqueCheck": true,
-      "FailFlatChance": 0.1,
+      "FailFlatChance": -0.6,
       "FailRoundsStart": 2,
       "FailChancePerTurn": 0.5,
       "FailCheckOnActivationEnd": true,
@@ -87,7 +93,7 @@
           "statisticData": {
             "statName": "HeatSinkCapacity",
             "operation": "Int_Add",
-            "modValue": "30",
+            "modValue": "20",
             "modType": "System.Int32"
           }
         },
@@ -107,7 +113,7 @@
           "Description": {
             "Id": "StatusEffect-Heat_GenReduction-PDHSKIT",
             "Name": "Radical PDHS Kit (P) Activatable: Decreased Heat Generated",
-            "Details": "Heat generation reduced by 10%.",
+            "Details": "Heat generation reduced by 15%.",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
           "statisticData": {
@@ -368,26 +374,19 @@
       "HeatDamage": 100.0,
       "StabilityDamage": 50.0
     },
-    "EngineHeatBlock": 0,
     "Cooling": {
       "HeatSinkDefId": "Gear_HeatSink_Prototype"
     },
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.2 * [[Chassis.Tonnage]]",
-        "CBillCost": "[[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      },
-      "Default": {
-        "TechCost": "0.2 * [[Chassis.Tonnage]]",
-        "CBillCost": "[[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
-    "IBLS": {
-      "StorageSize": 2
-    },
+    "EngineHeatBlock": 0,
+    "Flags": [
+      "not_broken"
+    ],
     "HeatSinkingCost": {
       "HeatUpkeepCost": 18,
       "HeatUpkeepMult": 1.5
+    },
+    "IBLS": {
+      "StorageSize": 2
     }
   },
   "Description": {
@@ -399,10 +398,10 @@
     "UIName": "Radical PDHS Kit (P)",
     "Id": "Gear_HeatSinkKit_Prototype_Pirate",
     "Name": "PDHS Engine Kit",
-    "Details": "Converts an SHS engine to PDHS. <b>PDHS Cooling System</b>.  The Radical Heat Sink System, increases the ability of the heat sink to flush excess heat much like Coolant Pods. Radical Heat Sinks, however, can fail through repeated use, especially if used continuously.",
+    "Details": "Some pirate got their hands on a Davion Prototype Double Heatsink Kit and decided it wasn't \"cool\" enough. They wired it up to what looks like scraps of an experimental emergency cooling rig, which injects a crystalizing catalyst to pull heat out of the system in an emergency. It took us three days just to scrape out all the buildup in there. Oh, and like any real prototype <i>or</i> experimental cooling system, it'll fail catastrophically with continuous use.",
     "Icon": "thermometer-cold"
   },
-  "DissipationCapacity": 10,
+  "DissipationCapacity": 0,
   "BonusValueA": "",
   "BonusValueB": "",
   "ComponentType": "HeatSink",
