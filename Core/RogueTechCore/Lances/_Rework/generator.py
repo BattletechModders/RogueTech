@@ -95,7 +95,7 @@ def grab_reduced_tonnage_tags(diff):
 
 def grab_unit_include_exclude(index, diff, category, composition, variant, extra):
     include_tags = ["{CUR_TEAM.faction}"]
-    exclude_tags = []
+    exclude_tags = ["unit_killteam"]
 
     if category == "turret" and composition == "artillery" or extra == "demolisher":
         exclude_tags = ["unit_noncombatant"]
@@ -122,6 +122,8 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
         case "stealth":
             pass
         case "risc":
+            pass
+        case "urbie":
             pass
         case "command":
             pass
@@ -209,6 +211,9 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
                 if  index in [0,1] or diff > 10 and index == 2:
                     include_tags.remove("{CUR_TEAM.faction}")
                     include_tags.append("unit_risc")
+            elif variant == "urbie":
+                    include_tags.remove("{CUR_TEAM.faction}")
+                    include_tags.append("unit_urbie")
             elif extra == "MBT":
                 include_tags.append("unit_lance_tank")
             elif extra == "demolisher":
@@ -562,6 +567,8 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
                 pass
             case "risc":
                 pass
+            case "urbie":
+                pass
             case "command":
                 pass
             case "":
@@ -735,6 +742,7 @@ build_lances("recon", "vehicle", "high", 10, 20)
 
 build_lances("recon", "mixed", "med", 4, 16, "vtol")
 build_lances("recon", "mixed", "high", 10, 20, "vtol")
+build_lances("recon", "vehicle", "low", 1, 6, "vtol")
 build_lances("recon", "vehicle", "med", 4, 16, "vtol")
 build_lances("recon", "vehicle", "high", 10, 20, "vtol")
 
@@ -757,6 +765,7 @@ build_lances("support", "vehicle", "high", 10, 20)
 
 build_lances("support", "mixed", "med", 4, 16, "vtol")
 build_lances("support", "mixed", "high", 10, 20, "vtol")
+build_lances("support", "vehicle", "low", 1, 6, "vtol")
 build_lances("support", "vehicle", "med", 4, 16, "vtol")
 build_lances("support", "vehicle", "high", 10, 20, "vtol")
 
@@ -821,6 +830,10 @@ build_lances("battle", "mech", "risc", 6, 20, subfolder="RISC")
 build_lances("battle", "mixed", "risc", 6, 20, subfolder="RISC")
 build_lances("battle", "vehicle", "risc", 6, 20, subfolder="RISC")
 build_lances("battle", "mixed", "risc", 6, 20, "vtol", subfolder="RISC")
+
+# urbie submod
+build_lances("battle", "mech", "urbie", 1, 8, subfolder="Urbie")
+build_lances("battle", "mixed", "urbie", 4, 8, subfolder="Urbie")
 
 # Mission control
 # support lances & duels
