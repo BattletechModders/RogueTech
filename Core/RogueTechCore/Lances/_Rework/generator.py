@@ -510,6 +510,8 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 
             case "vehicle":
                 lance_tags.append("lance_type_vehicle")
+                if extra == "vtol":
+                    lance_tags.append("lance_type_vtol")
 
             # convoys
             case "allied":
@@ -554,15 +556,6 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
                 lance_tags.append("lance_type_primitive")
                 lance_tags.append("lance_bracket_low")
 
-            case "vtol":
-                if composition == "vehicle":
-                    lance_tags.append("lance_type_vtol")
-#                if diff < 6:
-#                    lance_tags.append("lance_bracket_low")
-#                elif diff < 16:
-#                    lance_tags.append("lance_bracket_med")
-#                else:
-#                    lance_tags.append("lance_bracket_high")
             case "stealth":
                 pass
             case "risc":
