@@ -12,6 +12,7 @@
       }
     ],
     "BonusDescriptions": [
+      "IsArtillery",
       "ARTILLERYMode",
       "WpnRecoil: 1",
       "VariableDmg: 10",
@@ -20,8 +21,7 @@
       "ModesCanMisfire",
       "RecoilExponent: 0.2",
       "AccuracyExponent: -0.2",
-      "BracetoFireMode: 9%, Direct",
-      "BracetoFireMode: 18%, Artillery",
+      "BracetoFireMode: 18%, Direct",
       "WeaponExplosionPerLoadedShot: 335, 222.5, 75"
     ],
     "Flags": [
@@ -106,15 +106,14 @@
       "Name": "Direct",
       "Description": "Launch a Missile Directly at Short ranges. Removes Minimum Range.  Miss Scatter Radius 60 to 300. 20% Chance to Misfire. Mitigated by Jam Reduction",
       "isBaseMode": true,
-      "AccuracyModifier": 0,
+      "AccuracyModifier": 4,
       "DirectFireModifier": 0,
-      "EvasivePipsIgnored": 0,
+      "EvasivePipsIgnored": 12,
       "ForbiddenRange": 0,
-      "MinRange": -260,
-      "ShortRange": -260,
-      "MediumRange": -260,
-      "LongRange": -260,
-      "MaxRange": -260,
+      "ShortRange": -275,
+      "MediumRange": -485,
+      "LongRange": -695,
+      "MaxRange": -1195,
       "MinMissRadius": 60,
       "MaxMissRadius": 300,
       "IndirectFireCapable": false,
@@ -144,7 +143,7 @@
           "statisticData": {
             "statName": "SelfknockdownCheck_OnFire",
             "operation": "Float_Add",
-            "modValue": "0.09",
+            "modValue": "0.18",
             "modType": "System.Single"
           }
         }
@@ -154,45 +153,25 @@
       "Id": "indirectfire",
       "UIName": "Artillery",
       "Name": "Artillery Mode",
-      "Description": "Launch a Missile Indirectly. Miss Scatter Radius 15 to 300. 10% Chance to Jam. Mitigated by Jam Reduction",
+      "Description": "Launch a Missile Indirectly. Miss Scatter Radius 15 to 180. 10% Chance to Jam. Mitigated by Jam Reduction",
       "isBaseMode": false,
       "AccuracyModifier": 5,
       "DirectFireModifier": 2,
-      "EvasivePipsIgnored": 3,
+      "EvasivePipsIgnored": 12,
       "ForbiddenRange": 260,
       "MinMissRadius": 15,
-      "MaxMissRadius": 300,
+      "MaxMissRadius": 180,
       "IndirectFireCapable": true,
       "CantHitUnaffecedByPathing": true,
       "AlwaysIndirectVisuals": true,
-      "FlatJammingChance": 0.1,
-      "statusEffects": [
-        {
-          "durationData": {
-            "duration": 1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "OnWeaponFire",
-            "effectTargetType": "Creator",
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Buff",
-          "Description": {
-            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
-            "Name": "Arrow IV (P) / Artillery: Increased Self Knockdown on Fire",
-            "Details": "Tubthumping",
-            "Icon": "uixSvgIcon_run_n_gun"
-          },
-          "statisticData": {
-            "statName": "SelfknockdownCheck_OnFire",
-            "operation": "Float_Add",
-            "modValue": "0.18",
-            "modType": "System.Single"
-          }
-        }
-      ]
+      "IsArtillery": true,
+      "ArtilleryReticleColor": {
+        "C": "#FF0000",
+        "I": 1.5
+      },
+      "ArtilleryReticleRadius": 90,
+      "ArtilleryReticleText": "Arrow IV Artillery",
+      "FlatJammingChance": 0.1
     }
   ],
   "ComponentTags": {
@@ -202,7 +181,8 @@
       "TurretRestriction.{location}",
       "range_extreme",
       "BAIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "IgnoreSizeMatters"
     ],
     "tagSetSourceFile": ""
   }

@@ -13,6 +13,7 @@
     ],
     "BonusDescriptions": [
       "1shot",
+      "IsArtillery",
       "AreaOfEffect: 75",
       "AreaOfEffectConversion: 80%",
       "ARTILLERYMode",
@@ -25,8 +26,7 @@
       "AmmoCost: 2000",
       "RecoilExponent: 0.1",
       "AccuracyExponent: -0.067",
-      "BracetoFireMode: 5%, Direct mode & Flak",
-      "BracetoFireMode: 10%, Artillery",
+      "BracetoFireMode: 10%, Direct mode & Flak",
       "WeaponExplosionInternalAmmo: 100, 25, 12.5"
     ],
     "Flags": [
@@ -120,10 +120,10 @@
       "DirectFireModifier": 0,
       "EvasivePipsIgnored": 15,
       "ForbiddenRange": 180,
-      "ShortRange": -2400,
-      "MediumRange": -2400,
-      "LongRange": -2400,
-      "MaxRange": -2400,
+      "ShortRange": -2575,
+      "MediumRange": -2575,
+      "LongRange": -2575,
+      "MaxRange": -2575,
       "IndirectFireCapable": false,
       "CantHitUnaffecedByPathing": true,
       "AlwaysIndirectVisuals": false,
@@ -149,7 +149,7 @@
           "statisticData": {
             "statName": "SelfknockdownCheck_OnFire",
             "operation": "Float_Add",
-            "modValue": "0.05",
+            "modValue": "0.1",
             "modType": "System.Single"
           }
         }
@@ -188,7 +188,7 @@
           "statisticData": {
             "statName": "SelfknockdownCheck_OnFire",
             "operation": "Float_Add",
-            "modValue": "0.05",
+            "modValue": "0.1",
             "modType": "System.Single"
           }
         }
@@ -197,44 +197,24 @@
     {
       "Id": "indirectfire",
       "UIName": "Artillery",
-      "Description": "Fire in a high arc at ground targets. -7 Accuracy",
+      "Description": "Fire in a high arc at ground targets. -5 Accuracy",
       "isBaseMode": true,
       "AccuracyModifier": 5,
       "DirectFireModifier": 2,
       "EvasivePipsIgnored": 15,
       "ForbiddenRange": 180,
       "MinMissRadius": 5,
-      "MaxMissRadius": 100,
+      "MaxMissRadius": 50,
       "IndirectFireCapable": true,
       "CantHitUnaffecedByPathing": true,
       "AlwaysIndirectVisuals": true,
-      "statusEffects": [
-        {
-          "durationData": {
-            "duration": 1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "OnWeaponFire",
-            "effectTargetType": "Creator",
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Buff",
-          "Description": {
-            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
-            "Name": "Arrow IV OS / Artillery: Increased Self Knockdown on Fire",
-            "Details": "Tubthumping",
-            "Icon": "uixSvgIcon_run_n_gun"
-          },
-          "statisticData": {
-            "statName": "SelfknockdownCheck_OnFire",
-            "operation": "Float_Add",
-            "modValue": "0.1",
-            "modType": "System.Single"
-          }
-        }
-      ]
+      "IsArtillery": true,
+      "ArtilleryReticleColor": {
+        "C": "#730073",
+        "I": 1.5
+      },
+      "ArtilleryReticleRadius": 90,
+      "ArtilleryReticleText": "Arrow IV Artillery"
     }
   ],
   "ComponentTags": {
@@ -244,7 +224,8 @@
       "component_type_stock",
       "TurretRestriction.{location}",
       "range_extreme",
-      "BAIncompatible"
+      "BAIncompatible",
+      "IgnoreSizeMatters"
     ],
     "tagSetSourceFile": ""
   }
