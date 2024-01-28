@@ -218,6 +218,16 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
                 include_tags.append("unit_lance_tank")
             elif extra == "demolisher":
                 include_tags.append("unit_demolisher")
+            elif extra == "tank" and index == 0:
+                include_tags.append("unit_lance_tank")
+            elif extra == "vanguard" and index == 0:
+                include_tags.append("unit_lance_vanguard")
+            elif extra == "cheap" and index == 3:
+                if "unit_bracket_high" in include_tags:
+                    include_tags.remove("unit_bracket_high")
+                if "unit_bracket_med" in include_tags:
+                    include_tags.remove("unit_bracket_med")
+                include_tags.append("unit_bracket_low")
 
         case "cavalry":
             if index in [0,1]:
@@ -358,7 +368,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             elif diff < 12 and index > 1:
                 exclude_tags.append("unit_legendary")
 
-        if "unit_legendary" not in exclude_tags and "unit_risc" not in include_tags:
+        if "unit_legendary" not in exclude_tags and "unit_risc" not in include_tags and "unit_bracket_low" not in include_tags:
             if index == 3 and diff > 14:
                 include_tags.append("unit_legendary")
             elif index == 2 and diff > 17:
@@ -878,6 +888,34 @@ build_lances("support", "carrier", "", 10, 20)
 build_lances("support", "mech", "command", 8, 20)
 build_lances("support", "mixed", "command", 8, 20)
 build_lances("support", "vehicle", "command", 8, 20)
+
+
+# more battle variety to make risc and urbie battles rarer
+
+# first slot tanky
+build_lances("battle", "mech", "low", 1, 6, "tank")
+build_lances("battle", "mech", "med", 4, 16, "tank")
+build_lances("battle", "mech", "high", 10, 20, "tank")
+
+build_lances("battle", "mixed", "low", 1, 6, "tank")
+build_lances("battle", "mixed", "med", 4, 16, "tank")
+build_lances("battle", "mixed", "high", 10, 20, "tank")
+
+# first slot vanguard
+build_lances("battle", "mech", "low", 1, 6, "vanguard")
+build_lances("battle", "mech", "med", 4, 16, "vanguard")
+build_lances("battle", "mech", "high", 10, 20, "vanguard")
+
+build_lances("battle", "mixed", "low", 1, 6, "vanguard")
+build_lances("battle", "mixed", "med", 4, 16, "vanguard")
+build_lances("battle", "mixed", "high", 10, 20, "vanguard")
+
+# last slot bracket low
+build_lances("battle", "mech", "med", 4, 16, "cheap")
+build_lances("battle", "mech", "high", 10, 20, "cheap")
+
+build_lances("battle", "mixed", "med", 4, 16, "cheap")
+build_lances("battle", "mixed", "high", 10, 20, "cheap")
 
 
 exit()
