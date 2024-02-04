@@ -65,6 +65,7 @@ CriticalHitChanceReceivedMultiplier can be locational
 						   Note! overheat from internal sources (moving, jumping, weapon fire) 
 						   still can make heat level pass this value
 "AMSUseAttractiveness": true, - if true AMS calculation will try to shoot down missiles with higher attractiveness first
+"WeaponUseAmmoInstalledLocationTag": "ammo_installed_location_only" - if weapon or chassis have this flag this weapon (or all weapons of this unit if tag is in chassis) can only use ammo installed same location
 "AMSDefaultInterceptedTrace": 2, - default value for weapon AMSInterceptedTrace
 "RestoreEjectedWeapons": true, - ejected weapon will not be counted as destroyed at the end of the battle
 "HexSizeForMods": 30 - hex size used for moved hexes modifiers calculations

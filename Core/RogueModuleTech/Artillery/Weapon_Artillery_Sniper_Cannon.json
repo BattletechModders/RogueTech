@@ -12,11 +12,13 @@
       }
     ],
     "BonusDescriptions": [
+      "IsArtillery",
       "Indirect",
-      "FLAKmode",
+      "ArtilleryMode",
+      "FlakMode",
+      "DirectMode: -4",
       "WpnRecoil: 3",
-      "BracetoFireMode: 25%, Direct mode & Flak",
-      "BracetoFireMode: 40%, Indirect"
+      "BracetoFireMode: 40%, Direct mode & Flak"
     ],
     "Flags": [
       "not_broken"
@@ -89,6 +91,10 @@
       "Id": "directfire",
       "UIName": "Direct",
       "isBaseMode": false,
+      "ShortRange": -25,
+      "MediumRange": -95,
+      "LongRange": -170,
+      "MaxRange": -235,
       "IndirectFireCapable": false,
       "CantHitUnaffecedByPathing": true,
       "AlwaysIndirectVisuals": false,
@@ -114,7 +120,7 @@
           "statisticData": {
             "statName": "SelfknockdownCheck_OnFire",
             "operation": "Float_Add",
-            "modValue": "0.25",
+            "modValue": "0.4",
             "modType": "System.Single"
           }
         }
@@ -152,10 +158,16 @@
           "statisticData": {
             "statName": "SelfknockdownCheck_OnFire",
             "operation": "Float_Add",
-            "modValue": "0.25",
+            "modValue": "0.4",
             "modType": "System.Single"
           }
         }
+      ],
+      "RestrictedAmmo": [
+        "Ammunition_Sniper_Inferno",
+        "Ammunition_Sniper_Nuke",
+        "Ammunition_Sniper_SolidSlug",
+        "Ammunition_Sniper_Shaped"
       ]
     },
     {
@@ -165,40 +177,23 @@
       "DirectFireModifier": 1,
       "ForbiddenRange": 120,
       "MinMissRadius": 5,
-      "MaxMissRadius": 75,
+      "MaxMissRadius": 60,
       "IndirectFireCapable": true,
       "CantHitUnaffecedByPathing": true,
       "AlwaysIndirectVisuals": true,
-      "statusEffects": [
-        {
-          "durationData": {
-            "duration": 1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "OnWeaponFire",
-            "effectTargetType": "Creator",
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Buff",
-          "Description": {
-            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
-            "Name": "Sniper Artillery Cannon / Indirect: Increased Self Knockdown on Fire",
-            "Details": "Tubthumping",
-            "Icon": "uixSvgIcon_run_n_gun"
-          },
-          "statisticData": {
-            "statName": "SelfknockdownCheck_OnFire",
-            "operation": "Float_Add",
-            "modValue": "0.3",
-            "modType": "System.Single"
-          }
-        }
+      "IsArtillery": true,
+      "ArtilleryReticleColor": {
+        "C": "#FF0000",
+        "I": 1.5
+      },
+      "ArtilleryReticleRadius": 120,
+      "ArtilleryReticleText": "Sniper Artillery",
+      "RestrictedAmmo": [
+        "Ammunition_Sniper_SolidSlug",
+        "Ammunition_Sniper_Shaped"
       ]
     }
   ],
-  "statusEffects": [],
   "ComponentTags": {
     "items": [
       "LootMagnetBlacklist",
@@ -207,7 +202,8 @@
       "TurretRestriction.{location}",
       "component_type_stock",
       "range_long",
-      "BAIncompatible"
+      "BAIncompatible",
+      "IgnoreSizeMatters"
     ],
     "tagSetSourceFile": ""
   }
