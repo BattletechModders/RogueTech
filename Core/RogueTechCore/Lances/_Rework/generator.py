@@ -923,7 +923,6 @@ build_lances("battle", "mech", "high", 10, 20, "cheap")
 build_lances("battle", "mixed", "med", 4, 16, "cheap")
 build_lances("battle", "mixed", "high", 10, 20, "cheap")
 
-exit()
 # mono weight class lance
 build_lances("battle", "mech", "med", 5, 10, "medium")
 build_lances("battle", "mech", "high", 10, 15, "medium")
@@ -946,4 +945,5 @@ build_lances("battle", "vehicle", "high", 15, 20, "heavy")
 build_lances("battle", "vehicle", "med", 15, 17, "assault")
 build_lances("battle", "vehicle", "high", 17, 20, "assault")
 
+exit()
 
