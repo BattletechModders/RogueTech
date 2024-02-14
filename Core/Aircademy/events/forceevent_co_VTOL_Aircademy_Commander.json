@@ -1,0 +1,637 @@
+{
+    "Description" : {
+        "Id" : "forceevent_co_VTOL_Aircademy_Commander",
+        "Name" : "Highway to the Danger Zone!",
+        "Details" : "A knock sounds on your office door and you call out, \"Come in...\"\r\n\r\nThe door opens and Darius strides and hands you a datapad, \"Commander, you asked me to get you the information about attending <i>Air Today, Gone Tomorrow</i>'s Aircademy [[DM.BaseDescriptionDefs[LoreRipperVTOL],VTOL]] training school.  Pretty much anyone can apply, provided they have proper ground vehicle experience beforehand.  You just need to fill out and sign that form on the screen and we can submit the application.  Their response time is pretty quick.\"",
+        "Icon" : "uixTxrSpot_DangerZone.png"
+    },
+    "Scope" : "Company",
+    "Weight" : 10,
+    "Requirements" : {
+        "Scope" : "Company",
+        "RequirementTags" : {
+            "items" : [
+                "Do_not_fire"
+            ],
+            "tagSetSourceFile" : ""
+        },
+        "ExclusionTags" : {
+            "items" : [],
+            "tagSetSourceFile" : "Tags/CompanyTags"
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Funds",
+                "op" : "GreaterThanOrEqual",
+                "val" : 500000,
+                "valueConstant" : "500000"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Commander",
+            "RequirementTags" : {
+                "items" : [
+                    "can_pilot_generic_vehicle"
+                ],
+                "tagSetSourceFile" : ""
+            },
+            "ExclusionTags" : {
+                "items" : [
+                    "can_pilot_vtol",
+                    "pilot_rejected",
+                    "pilot_novtol"
+                ],
+                "tagSetSourceFile" : ""
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "Injuries",
+                    "op" : "Equal",
+                    "val" : 0,
+                    "valueConstant" : "0"
+                }
+            ]
+        }
+    ],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Back to School",
+                "Details" : "[Tuition costs up to \u00A2500,000]",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Commander",
+                    "RequirementTags" : {
+                        "items" : [],
+                        "tagSetSourceFile" : ""
+                    },
+                    "ExclusionTags" : {
+                        "items" : [
+                            "can_pilot_vtol",
+                            "pilot_rejected",
+                            "pilot_novtol"
+                        ],
+                        "tagSetSourceFile" : ""
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Injuries",
+                            "op" : "Equal",
+                            "val" : 0,
+                            "valueConstant" : "0"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "All Systems Go",
+                        "Details" : "You fill out all the information required in the form, check it twice, then hit the submit link.  You hand the datapad back to Darius, \"There, all done.  Now we wait and see what...\"\r\n\r\nA <i>DING</i> alert sounds on the datapad.  Darius opens it up, \"Well, Commander, looks like you are going back to school to learn how to fly VTOLs!\"\r\n\r\nYou smile, \"I guess I better start packing.  And Darius, don't bankrupt the company while I'm away!\"\r\n\r\nDarius looks shocked, placing a hand on his chest, \"Commander!  I'm more than capable of running things while you are away.\"\r\n\r\nYou shake your head as you head to your quarters to pack hoping that this course only takes the minimum 6 months to complete.",
+                        "Icon" : null
+                    },
+                    "Weight" : 25,
+                    "Results" : [
+                        {
+                            "Scope" : "Commander",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_VTOLSchool"
+                                ],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "188",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-500000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : [
+                                {
+                                    "Scope" : "Company",
+                                    "EventID" : "forceevent_co_VTOL_Passed_Commander",
+                                    "MinDaysWait" : 189,
+                                    "MaxDaysWait" : 189,
+                                    "Probability" : 100,
+                                    "RetainPilot" : false
+                                }
+                            ],
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_1",
+                        "Name" : "All Systems Go - Injury",
+                        "Details" : "You fill out all the information required in the form, check it twice, then hit the submit link.  You hand the datapad back to Darius, \"There, all done.  Now we wait and see what...\"\r\n\r\nA <i>DING</i> alert sounds on the datapad.  Darius opens it up, \"Well, Commander, looks like you are going back to school to learn how to fly VTOLs!\"\r\n\r\nYou smile, \"I guess I better start packing.  And Darius, don't bankrupt the company while I'm away!\"\r\n\r\nDarius looks shocked, placing a hand on his chest, \"Commander!  I'm more than capable of running things while you are away.\"\r\n\r\nYou shake your head as you head to your quarters to pack hoping that this course only takes the minimum 6 months to complete.",
+                        "Icon" : null
+                    },
+                    "Weight" : 9,
+                    "Results" : [
+                        {
+                            "Scope" : "Commander",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_VTOLSchool"
+                                ],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "188",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-500000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : [
+                                {
+                                    "Scope" : "Company",
+                                    "EventID" : "forceevent_co_VTOL_Injured_Commander",
+                                    "MinDaysWait" : 189,
+                                    "MaxDaysWait" : 189,
+                                    "Probability" : 100,
+                                    "RetainPilot" : false
+                                }
+                            ],
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_2",
+                        "Name" : "Harder than it seems",
+                        "Details" : "You fill out all the information required in the form, check it twice, then hit the submit link.  You hand the datapad back to Darius, \"There, all done.  Now we wait and see what...\"\r\n\r\nA <i>DING</i> alert sounds on the datapad.  Darius opens it up, \"Well, Commander, looks like you are going back to school to learn how to fly VTOLs!\"\r\n\r\nYou smile, \"I guess I better start packing.  And Darius, don't bankrupt the company while I'm away!\"\r\n\r\nDarius looks shocked, placing a hand on his chest, \"Commander!  I'm more than capable of running things while you are away.\"\r\n\r\nYou shake your head as you head to your quarters to pack hoping that this course only takes the minimum 6 months to complete.",
+                        "Icon" : null
+                    },
+                    "Weight" : 24,
+                    "Results" : [
+                        {
+                            "Scope" : "Commander",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_VTOLSchool"
+                                ],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "215",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-500000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : [
+                                {
+                                    "Scope" : "Company",
+                                    "EventID" : "forceevent_co_VTOL_Passed_Commander",
+                                    "MinDaysWait" : 216,
+                                    "MaxDaysWait" : 216,
+                                    "Probability" : 100,
+                                    "RetainPilot" : false
+                                }
+                            ],
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_3",
+                        "Name" : "Harder than it seems - Injury",
+                        "Details" : "You fill out all the information required in the form, check it twice, then hit the submit link.  You hand the datapad back to Darius, \"There, all done.  Now we wait and see what...\"\r\n\r\nA <i>DING</i> alert sounds on the datapad.  Darius opens it up, \"Well, Commander, looks like you are going back to school to learn how to fly VTOLs!\"\r\n\r\nYou smile, \"I guess I better start packing.  And Darius, don't bankrupt the company while I'm away!\"\r\n\r\nDarius looks shocked, placing a hand on his chest, \"Commander!  I'm more than capable of running things while you are away.\"\r\n\r\nYou shake your head as you head to your quarters to pack hoping that this course only takes the minimum 6 months to complete.",
+                        "Icon" : null
+                    },
+                    "Weight" : 9,
+                    "Results" : [
+                        {
+                            "Scope" : "Commander",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_VTOLSchool"
+                                ],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "215",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-500000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : [
+                                {
+                                    "Scope" : "Company",
+                                    "EventID" : "forceevent_co_VTOL_Injured_Commander",
+                                    "MinDaysWait" : 216,
+                                    "MaxDaysWait" : 216,
+                                    "Probability" : 100,
+                                    "RetainPilot" : false
+                                }
+                            ],
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_4",
+                        "Name" : "I passed?",
+                        "Details" : "You fill out all the information required in the form, check it twice, then hit the submit link.  You hand the datapad back to Darius, \"There, all done.  Now we wait and see what...\"\r\n\r\nA <i>DING</i> alert sounds on the datapad.  Darius opens it up, \"Well, Commander, looks like you are going back to school to learn how to fly VTOLs!\"\r\n\r\nYou smile, \"I guess I better start packing.  And Darius, don't bankrupt the company while I'm away!\"\r\n\r\nDarius looks shocked, placing a hand on his chest, \"Commander!  I'm more than capable of running things while you are away.\"\r\n\r\nYou shake your head as you head to your quarters to pack hoping that this course only takes the minimum 6 months to complete.",
+                        "Icon" : null
+                    },
+                    "Weight" : 24,
+                    "Results" : [
+                        {
+                            "Scope" : "Commander",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_VTOLSchool"
+                                ],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "323",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-500000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : [
+                                {
+                                    "Scope" : "Company",
+                                    "EventID" : "forceevent_co_VTOL_Passed_Commander",
+                                    "MinDaysWait" : 324,
+                                    "MaxDaysWait" : 324,
+                                    "Probability" : 100,
+                                    "RetainPilot" : false
+                                }
+                            ],
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_5",
+                        "Name" : "I passed? - Injury",
+                        "Details" : "You fill out all the information required in the form, check it twice, then hit the submit link.  You hand the datapad back to Darius, \"There, all done.  Now we wait and see what...\"\r\n\r\nA <i>DING</i> alert sounds on the datapad.  Darius opens it up, \"Well, Commander, looks like you are going back to school to learn how to fly VTOLs!\"\r\n\r\nYou smile, \"I guess I better start packing.  And Darius, don't bankrupt the company while I'm away!\"\r\n\r\nDarius looks shocked, placing a hand on his chest, \"Commander!  I'm more than capable of running things while you are away.\"\r\n\r\nYou shake your head as you head to your quarters to pack hoping that this course only takes the minimum 6 months to complete.",
+                        "Icon" : null
+                    },
+                    "Weight" : 9,
+                    "Results" : [
+                        {
+                            "Scope" : "Commander",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_VTOLSchool"
+                                ],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_SetTimeout",
+                                    "value" : "323",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-500000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : [
+                                {
+                                    "Scope" : "Company",
+                                    "EventID" : "forceevent_co_VTOL_Injured_Commander",
+                                    "MinDaysWait" : 324,
+                                    "MaxDaysWait" : 324,
+                                    "Probability" : 100,
+                                    "RetainPilot" : false
+                                }
+                            ],
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Not Interested at this time",
+                "Details" : "Non-Participation Option",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Abort! Abort!",
+                        "Details" : "You look over the information required, thumbing back and forth numerous times, before letting out a long sigh and closing the datapad.\r\n\r\nYou hand the pad back to Darius, \"Thanks Darius, but I do not think I need to be away from the company for 6-12 months.  I'll look into it again at a later date.\"\r\n\r\nDarius takes the datapad, \"As you wish, Commander.  The Aircademy also states the you must wait 90 days before you can reapply.\"\r\n\r\n<color=#E62E00>Commander {COMMANDER.FirstName} {COMMANDER.LastName} is not eligible to reapply for 90 days\r\n</color>",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Commander",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "pilot_rejected"
+                                ],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 90
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "UNSELECTABLE",
+    "OneTimeEvent" : false,
+    "Tags" : {
+        "items" : [],
+        "tagSetSourceFile" : "tags/EventTags"
+    }
+}
