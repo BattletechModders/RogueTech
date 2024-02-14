@@ -93,16 +93,31 @@ def grab_reduced_tonnage_tags(diff):
     else:
         return weight_excludes["hvy/med/light"]
 
+def grab_tonnage_tags_for_weight(weight):
+    match weight:
+        case "medium":
+            return weight_excludes["med"]
+        case "heavy":
+            return weight_excludes["hvy"]
+        case "assault":
+            return weight_excludes["ass"]
+
 def grab_unit_include_exclude(index, diff, category, composition, variant, extra):
     include_tags = ["{CUR_TEAM.faction}"]
-    exclude_tags = ["unit_killteam"]
+    exclude_tags = ["unit_noncombatant", "unit_killteam"]
 
-    if category == "turret" and composition == "artillery" or extra == "demolisher":
-        exclude_tags = ["unit_noncombatant"]
-    elif category in ["solo","gladiator"] and index > 0:
-        exclude_tags = ["unit_noncombatant"] + grab_reduced_tonnage_tags(diff)
+    if category in ["solo","gladiator"] and index > 0:
+        exclude_tags += grab_reduced_tonnage_tags(diff)
+    elif extra in ["demolisher"]:
+        # no excludes for these special lances
+        pass
+    elif extra in ["medium", "heavy", "assault"]:
+        exclude_tags += grab_tonnage_tags_for_weight(extra)
+    elif diff > 20:
+        # only special lances live here, like d60 arty turret
+        pass
     else:
-        exclude_tags = ["unit_noncombatant"] + grab_diff_weight_excludes(diff, index)
+        exclude_tags += grab_diff_weight_excludes(diff, index)
 
     match(variant):
         case "low":
@@ -656,14 +671,6 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
             json.dump(lancedef, new_file, indent=2)
 
 
-# play test notes
-# low brackets too high to 8, "past it" at d5 already
-#
-#
-#
-#
-#
-
 # lance_type_battle
 
 build_lances("battle", "mech", "low", 1, 3, "small")
@@ -786,7 +793,6 @@ build_lances("convoy", "mechconvoy", "low", 1, 6)
 build_lances("convoy", "mechconvoy", "med", 4, 16)
 build_lances("convoy", "mechconvoy", "high", 10, 20)
 
-
 # lance_type_solo, assassination, high prio target + light support
 build_lances("solo", "mech", "low", 1, 6, "littlefriend")
 build_lances("solo", "mech", "med", 4, 16, "littlefriend")
@@ -799,7 +805,7 @@ build_lances("solo", "mixed", "med", 4, 16, "advanced")
 build_lances("solo", "mixed", "high", 10, 20, "advanced")
 
 
-# lance_type_gladiator, limited drop and other fp, like solo but less units total
+# lance_type_gladiator, limited drop and some other fp, like solo but less units total
 build_lances("gladiator", "mech", "low", 1, 6)
 build_lances("gladiator", "mech", "med", 4, 16)
 build_lances("gladiator", "mech", "high", 10, 20)
@@ -917,5 +923,27 @@ build_lances("battle", "mech", "high", 10, 20, "cheap")
 build_lances("battle", "mixed", "med", 4, 16, "cheap")
 build_lances("battle", "mixed", "high", 10, 20, "cheap")
 
-
 exit()
+# mono weight class lance
+build_lances("battle", "mech", "med", 5, 10, "medium")
+build_lances("battle", "mech", "high", 10, 15, "medium")
+build_lances("battle", "mech", "med", 10, 15, "heavy")
+build_lances("battle", "mech", "high", 15, 20, "heavy")
+build_lances("battle", "mech", "med", 15, 17, "assault")
+build_lances("battle", "mech", "high", 17, 20, "assault")
+
+build_lances("battle", "mixed", "med", 5, 10, "medium")
+build_lances("battle", "mixed", "high", 10, 15, "medium")
+build_lances("battle", "mixed", "med", 10, 15, "heavy")
+build_lances("battle", "mixed", "high", 15, 20, "heavy")
+build_lances("battle", "mixed", "med", 15, 17, "assault")
+build_lances("battle", "mixed", "high", 17, 20, "assault")
+
+build_lances("battle", "vehicle", "med", 5, 10, "medium")
+build_lances("battle", "vehicle", "high", 10, 15, "medium")
+build_lances("battle", "vehicle", "med", 10, 15, "heavy")
+build_lances("battle", "vehicle", "high", 15, 20, "heavy")
+build_lances("battle", "vehicle", "med", 15, 17, "assault")
+build_lances("battle", "vehicle", "high", 17, 20, "assault")
+
+
