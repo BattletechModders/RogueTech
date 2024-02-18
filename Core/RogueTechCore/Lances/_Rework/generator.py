@@ -270,7 +270,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             elif index == 1:
                 include_tags.append("unit_lance_support")
             elif index == 2:
-                if variant != "high" and diff < 15
+                if variant != "high" and diff < 15 and "unit_mech" in include_tags:
                     include_tags.append("unit_role_scout")
                 else:
                     include_tags.append("unit_lance_vanguard")
@@ -307,8 +307,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
 
         case "solo":
             if index == 0:
-                exclude_tags.append("unit_protomech")
-                exclude_tags.append("unit_powerarmor")
+                exclude_tags.append("unit_squad")
                 include_tags.append("unit_legendary")
 
             match (extra):
@@ -323,13 +322,11 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
 
         case "gladiator":
             if index == 0:
-                exclude_tags.append("unit_protomech")
-                exclude_tags.append("unit_powerarmor")
+                exclude_tags.append("unit_squad")
                 include_tags.append("unit_legendary")
 
         case "duel":
-            exclude_tags.append("unit_protomech")
-            exclude_tags.append("unit_powerarmor")
+            exclude_tags.append("unit_squad")
 
             if index == 0:
                 include_tags.remove("{CUR_TEAM.faction}")
@@ -362,8 +359,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
 
         case "MCDuel":
             exclude_tags.append("unit_nuke")
-            exclude_tags.append("unit_powerarmor")
-            exclude_tags.append("unit_protomech")
+            exclude_tags.append("unit_squad")
 
             if extra == "advanced":
                 include_tags.append("unit_advanced")
@@ -388,8 +384,6 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
 
         if "unit_legendary" not in exclude_tags and "unit_risc" not in include_tags and "unit_bracket_low" not in include_tags:
             if index == 3 and diff > 14:
-                include_tags.append("unit_legendary")
-            elif index == 2 and diff > 17:
                 include_tags.append("unit_legendary")
 
     # not many assault convoy vehicles, always allow heavies for variety in those lances
