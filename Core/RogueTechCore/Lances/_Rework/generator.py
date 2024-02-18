@@ -270,7 +270,10 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             elif index == 1:
                 include_tags.append("unit_lance_support")
             elif index == 2:
-                include_tags.append("unit_lance_vanguard")
+                if variant != "high" and diff < 15
+                    include_tags.append("unit_role_scout")
+                else:
+                    include_tags.append("unit_lance_vanguard")
             exclude_tags.append("unit_lance_assassin")
             
         case "support":
