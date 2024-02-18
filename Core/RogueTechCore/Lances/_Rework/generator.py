@@ -109,7 +109,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
     if category in ["solo","gladiator"] and index > 0:
         exclude_tags += grab_reduced_tonnage_tags(diff)
     elif extra in ["demolisher"]:
-        # no excludes for these special lances
+        # no weight excludes for these special lances
         pass
     elif extra in ["medium", "heavy", "assault"]:
         exclude_tags += grab_tonnage_tags_for_weight(extra)
