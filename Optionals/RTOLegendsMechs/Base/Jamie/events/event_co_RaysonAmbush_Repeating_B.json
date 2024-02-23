@@ -1,0 +1,287 @@
+{
+    "Description" : {
+        "Id" : "event_co_RaysonAmbush_Repeating_B",
+        "Name" : "Ambush: Rayson Menace",
+        "Details" : "On the bridge of the Argo, alarms blare as the bandit aerospace fighters approach.  \r\n\r\nYou turn to Darius, \"Looks like they are never going to leave us alone, Hail them first before they can hail us.  Let's get this over with.\"\r\n\r\nDarius nods, \"Affirmative, Commander.  Patching them through now.\"\r\n\r\nThe holocam display flickers to life, showing the menacing visage of the bandit leader, obscured by a shimmering mask, \"Well, well, Commander {COMMANDER.LastName}. If I didn't know any better I'd think you were stalking me.  You want another skirmish or are you ready to pay up this time?\"\r\n\r\nYou can barely keep the anger from your voice, \"We fought you off last time and we will do it again.  Stand down and leave us and our ship alone.\"\r\n\r\nThe \nBandit Leader chuckles, \"My, my... aren't you the stubborn one, {COMMANDER.LastName}.  Whether you pay me, or pay the repair crews when we're done, it's going to cost you.\"\r\n\r\nYou smile back at the visage, \"How about this then... what if I have something that you need, like say, one of your valued <i>compatriots</i> here, onboard the <i>Argo</i>?\"\r\n\r\nThe image in the hologram is silent for what seems like a very long time before they answer, \"You have piqued my interest, Commander, so here's how this is going to go.  I think you're bluffing, but I'll give you a choice, put this <i>\"compatriot\"</i> into a sealed cargo pod and eject it for us to collect.  Once we verify their identity as someone of value, we will be on our way.  Or, just give us the \u00A2300,000 and stop wasting my time with your shenanigans.  Oh, and {COMMANDER.LastName} trickery and I will order MY dropship to open fire on yours.\"\r\n\r\nDarius calls out, \"Commander, a heavily modified Buccaneer Class dropship has just shown up on scanners heading our way!... it massively outguns us!\"\r\n\r\n\"We'll send the cargo pod over as soon as it's loaded,\" you say as you cut the feed.  \r\n\r\nAt that moment [[SCN_MW,{SCN_MW.Callsign}]] arrives on the bridge, \"Commander, forgive the intrusion, but I think I know that bandit.\"\r\n\r\nYou smile at [[SCN_MW,{SCN_MW.Callsign}]], \"You're timing is impecable.  Seeing as there isn't much about this bandit, whom we are pretty sure is Jamie Rayson, what we can find mentions you as a comrade.  So my question is this, <i>'Are you loyal to {COMPANY.CompanyName} or are you loyal to Rayson?'</i>\"\r\n\r\n[[SCN_MW,{SCN_MW.Callsign}]] repsonds, \"I haven't given you any reason to distrust me or my intentions in my time here.  I propose the following, if you trust me, I will talk him down and get him to join us.  I will need the \u00A2300,000 to convince him though.\"",
+        "Icon" : "uixTxrSpot_RaysonBubble.png"
+    },
+    "Scope" : "Company",
+    "Weight" : 25,
+    "Requirements" : {
+        "Scope" : "Company",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "",
+            "items" : [
+                "RaysonAmbush_Start",
+                "RaysonAmbush_Repeat",
+                "hasPilot_pilot_Bubbles"
+            ]
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "Tags/CompanyTags",
+            "items" : [
+                "RaysonAmbush_Payoff",
+                "RaysonComplete"
+            ]
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Funds",
+                "op" : "GreaterThan",
+                "val" : 400000,
+                "valueConstant" : "400000"
+            },
+            {
+                "obj" : "RosterCapacityRemaining",
+                "op" : "GreaterThan",
+                "val" : 0,
+                "valueConstant" : "0"
+            }
+        ]
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Commander",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "",
+                "items" : []
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "",
+                "items" : []
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "Injuries",
+                    "op" : "Equal",
+                    "val" : 0,
+                    "valueConstant" : "0"
+                }
+            ]
+        },
+        {
+            "Scope" : "StarSystem",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "Tags/PlanetTags",
+                "items" : [
+                    "planet_JumpPoint"
+                ]
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/PlanetTags",
+                "items" : []
+            },
+            "RequirementComparisons" : []
+        }
+    ],
+    "AdditionalObjects" : [
+        {
+            "Scope" : "SecondaryMechWarrior",
+            "Requirements" : {
+                "Scope" : "SecondaryMechWarrior",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : [
+                        "name_Bubbles"
+                    ]
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "Tags/PilotTags",
+                    "items" : []
+                },
+                "RequirementComparisons" : [
+                    {
+                        "obj" : "Injuries",
+                        "op" : "Equal",
+                        "val" : 0,
+                        "valueConstant" : "0"
+                    }
+                ]
+            }
+        }
+    ],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Send {SCN_MW.Callsign} with the",
+                "Details" : "[\u00A2300,000]",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "SecondaryMechWarrior",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : [
+                            "name_Bubbles"
+                        ]
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Box of Bubbles",
+                        "Details" : "You watch as [[SCN_MW,{SCN_MW.Callsign}]] climbs into the cargo pod carrying the datastick with a cool \u00A2300k on it, \"I am trusting that you are not going to just take the money and run off with Rayson.\"\r\n\r\nThere's no response as the hatch is closed and sealed.  The pod is loaded and then ejected from the <i>Argo</i>.  You and Darius watch from the viewport as it slowly spins away and is soon collected by one of the aerospace fighters.\r\n\r\nTime seems to crawl and it feels like it's been an eternity since the pod was ejected, you begin to wonder if you have been scammed this whole time when Darius calls out, \"Commander, the pirate fighters are peeling off and docking with the Buccaneer dropship.\"\r\n\r\nYou look to where he is pointing and watch as the last fighter disappears into the cargo bay of the Buccaneer, \"God damnit! We've been screwed!\" you exclaim.\r\n\r\nDarius contradicts you, \"Wait Commander, the Buccaneer is heading towards us.\" Darius quickly dons a headset and patches into Communications, \"Commander, they are requesting permission to dock.  They say there are two passengers wishing to come aboard.\"\r\n\r\nYou signal for a full security detail to flank the docking hatch as a precaution.  When the hatch slides open, two figures step through into the bay, [[SCN_MW,{SCN_MW.Callsign}]] and a mysterious looking figure you recognise from the holocam, \"Greetings Commander {COMMANDER.LastName}.  I am Jamie, Jamie Rayson.  Thank you for  the hiring bonus!\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "RaysonComplete"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "RaysonAmbush_Payoff",
+                                    "RaysonAmbush_Repeat",
+                                    "RaysonAmbush_Start"
+                                ]
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-300000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_AddRoster",
+                                    "value" : "pilot_crew_jamie",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Only send",
+                "Details" : "{SCN_MW.Callsign}",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "SecondaryMechWarrior",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : [
+                            "name_Bubbles"
+                        ]
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : []
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Cost of Doing Business",
+                        "Details" : "You turn to [[SCN_MW,{SCN_MW.Callsign}]], \"I'm sorry, but I cannot risk sending you out there.  What if that bandit is NOT Rayson?  We could end up putting you in a hostage situation or worse, losing you altogether.  I hope you understand.\"\r\n\r\n[[SCN_MW,{SCN_MW.Callsign}]] holds out a notecard, \"I suspected you would say no from the start, so I've recorded a message for Jamie on this notecard.  Send it with the datastick and I am confident Jamie will join us.\"\r\n\r\nYou take the notecard, \"Fair enough.  Darius, send this with the money.  Let's get this show on the road.\"\r\n\r\nThe pod is loaded and then ejected from the <i>Argo</i>.  You and Darius watch from the viewport as it slowly spins away and is soon collected by one of the aerospace fighters.\r\n\r\nTime seems to crawl and it feels like it's been an eternity since the pod was ejected, you begin to wonder if you have been scammed this whole time when Darius calls out, \"Commander, the pirate fighters are peeling off and docking with the Buccaneer dropship.\"\r\n\r\nYou look to where he is pointing and watch as the last fighter disappears into the cargo bay of the Buccaneer, \"God damnit! We've been screwed!\" you exclaim.\r\n\r\nDarius contradicts you, \"Wait Commander, the Buccaneer is heading towards us.\" Darius quickly dons a headset and patches into Communications, \"Commander, they are requesting permission to dock.  They say there are two passengers wishing to come aboard.\"\r\n\r\nYou signal for a full security detail to flank the docking hatch as a precaution.  When the hatch slides open, two figures step through into the bay, [[SCN_MW,{SCN_MW.Callsign}]] and a mysterious looking figure you recognise from the holocam, \"Greetings Commander {COMMANDER.LastName}.  I am Jamie, Jamie Rayson.  Thank you for  the hiring bonus!\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "RaysonComplete"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "RaysonAmbush_Payoff",
+                                    "RaysonAmbush_Repeat",
+                                    "RaysonAmbush_Start"
+                                ]
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-300000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : [
+                                {
+                                    "Type" : "MechWarrior_AddRoster",
+                                    "value" : "pilot_crew_jamie",
+                                    "valueConstant" : null,
+                                    "additionalValues" : null
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL",
+    "OneTimeEvent" : false,
+    "Tags" : {
+        "tagSetSourceFile" : "tags/EventTags",
+        "items" : []
+    }
+}
