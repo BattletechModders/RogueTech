@@ -383,7 +383,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             elif diff < 12 and index > 1:
                 exclude_tags.append("unit_legendary")
 
-        if "unit_legendary" not in exclude_tags and "unit_risc" not in include_tags and "unit_bracket_low" not in include_tags:
+        if "unit_legendary" not in exclude_tags and not any(tag in include_tags for tag in ["unit_risc", "unit_bracket_low", "unit_command"]):
             if index == 3 and diff > 14:
                 include_tags.append("unit_legendary")
 
