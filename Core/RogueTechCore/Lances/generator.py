@@ -866,12 +866,12 @@ build_lances("MCSupport", "vehicle", "low", 1, 6, extra="indirect", location="..
 build_lances("MCSupport", "vehicle", "med", 4, 16, extra="indirect", location="../../MissionControl/")
 build_lances("MCSupport", "vehicle", "high", 10, 20, extra="indirect", location="../../MissionControl/")
 
-build_lances("MCDuel", "mech", "low", 1, 6, location="../../MissionControl/MCDuel/")
-build_lances("MCDuel", "mech", "med", 4, 16, location="../../MissionControl/MCDuel/")
-build_lances("MCDuel", "mech", "high", 10, 20, location="../../MissionControl/MCDuel/")
-build_lances("MCDuel", "mech", "low", 1, 6, extra="advanced", location="../../MissionControl/MCDuel/")
-build_lances("MCDuel", "mech", "med", 4, 16, extra="advanced", location="../../MissionControl/MCDuel/")
-build_lances("MCDuel", "mech", "high", 10, 20, extra="advanced", location="../../MissionControl/MCDuel/")
+build_lances("MCDuel", "mech", "low", 1, 6, location="../../MissionControl/")
+build_lances("MCDuel", "mech", "med", 4, 16, location="../../MissionControl/")
+build_lances("MCDuel", "mech", "high", 10, 20, location="../../MissionControl/")
+build_lances("MCDuel", "mech", "low", 1, 6, extra="advanced", location="../../MissionControl/")
+build_lances("MCDuel", "mech", "med", 4, 16, extra="advanced", location="../../MissionControl/")
+build_lances("MCDuel", "mech", "high", 10, 20, extra="advanced", location="../../MissionControl/")
 
 
 build_lances("turret", "standard", "", 1, 20)
