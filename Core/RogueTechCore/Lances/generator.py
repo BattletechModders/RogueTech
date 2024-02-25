@@ -104,7 +104,7 @@ def grab_tonnage_tags_for_weight(weight):
 
 def grab_unit_include_exclude(index, diff, category, composition, variant, extra):
     include_tags = ["{CUR_TEAM.faction}"]
-    exclude_tags = ["unit_noncombatant", "unit_killteam"]
+    exclude_tags = ["unit_noncombatant"]
 
     if category in ["solo","gladiator"] and index > 0:
         exclude_tags += grab_reduced_tonnage_tags(diff)
@@ -230,6 +230,9 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             elif variant == "urbie":
                     include_tags.remove("{CUR_TEAM.faction}")
                     include_tags.append("unit_urbie")
+
+                    if "unit_light" in exclude_tags:
+                        exclude_tags.remove("unit_light")
             elif extra == "MBT":
                 include_tags.append("unit_lance_tank")
             elif extra == "demolisher":
@@ -375,6 +378,12 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             traceback.print_stack()
             print("bad category: " + str(category))
             exit()
+            
+    if "unit_vtol" in include_tags:
+        if "unit_lance_tank" in include_tags:
+            include_tags.remove("unit_lance_tank")
+        if "unit_lance_vanguard" in include_tags:
+            include_tags.remove("unit_lance_vanguard")
 
     if "unit_mech" in include_tags:
         if "unit_legendary" not in include_tags and category not in ["solo","duel","MCDuel","gladiator"]:
@@ -390,6 +399,8 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
     # not many assault convoy vehicles, always allow heavies for variety in those lances
     if composition in ["allied", "opfor"] and "unit_assault" not in exclude_tags and "unit_heavy" in exclude_tags:
         exclude_tags.remove("unit_heavy")
+
+    exclude_tags.append("unit_killteam")
 
     return (include_tags, exclude_tags)
 
@@ -666,6 +677,7 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 
         with open(save_path, 'w', newline='\r\n') as new_file:
             json.dump(lancedef, new_file, indent=2)
+            new_file.write("\n")
 
         global number
         number += 1
