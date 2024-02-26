@@ -425,8 +425,9 @@ def grab_pilot_include_exclude(index, diff, category, composition, variant, extr
 
     elif composition == "mech":
         include_tags.append("pilot_npc_d"+str(pilot_diff))
-        if index == 0 or (index == 1 and diff%2 == 0):
-            include_tags.append("pilot_npc_high")
+        if (index == 0 or (index == 1 and diff%2 == 0)):
+            if diff > 4 or category in ["solo", "gladiator", "MCDuel"]: 
+                include_tags.append("pilot_npc_high")   
 
     elif composition in ["vehicle", "allied", "opfor"]:
         include_tags.append("pilot_npc_tanker_d"+str(pilot_diff))
