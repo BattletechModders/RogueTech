@@ -378,12 +378,27 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             traceback.print_stack()
             print("bad category: " + str(category))
             exit()
-            
+    
+    # loosen tags for vtol lances
     if "unit_vtol" in include_tags:
-        if "unit_lance_tank" in include_tags:
-            include_tags.remove("unit_lance_tank")
         if "unit_lance_vanguard" in include_tags:
             include_tags.remove("unit_lance_vanguard")
+        if "unit_lance_assassin" in include_tags:
+            include_tags.remove("unit_lance_assassin")
+        if "unit_lance_tank" in include_tags:
+            include_tags.remove("unit_lance_tank")
+            
+        if "unit_lance_support" in exclude_tags:
+            exclude_tags.remove("unit_lance_support")
+        if "unit_lance_vanguard" in exclude_tags:
+            exclude_tags.remove("unit_lance_vanguard")
+        if "unit_lance_assassin" in exclude_tags:
+            exclude_tags.remove("unit_lance_assassin")
+        if "unit_lance_tank" in exclude_tags:
+            exclude_tags.remove("unit_lance_tank")
+
+        if "unit_assault" not in exclude_tags and "unit_heavy" in exclude_tags:
+            exclude_tags.remove("unit_heavy")
 
     if "unit_mech" in include_tags:
         if "unit_legendary" not in include_tags and category not in ["solo","duel","MCDuel","gladiator"]:
@@ -890,7 +905,7 @@ build_lances("MCDuel", "mech", "high", 10, 20, extra="advanced", location="../..
 build_lances("turret", "standard", "", 1, 20)
 build_lances("turret", "mixed", "", 1, 20)
 build_lances("turret", "AAA", "", 1, 20)
-build_lances("turret", "artillery", "", 60, 60)
+build_lances("turret", "artillery", "", 20, 20)
 
 # special themed / variety lances
 
@@ -908,14 +923,12 @@ build_lances("support", "mixed", "command", 8, 20)
 build_lances("support", "vehicle", "command", 8, 20)
 
 
-# more battle variety to make risc and urbie battles rarer
+# more battle variety
 
 # first slot tanky
-build_lances("battle", "mech", "low", 1, 6, extra="tank")
 build_lances("battle", "mech", "med", 4, 16, extra="tank")
 build_lances("battle", "mech", "high", 10, 20, extra="tank")
 
-build_lances("battle", "mixed", "low", 1, 6, extra="tank")
 build_lances("battle", "mixed", "med", 4, 16, extra="tank")
 build_lances("battle", "mixed", "high", 10, 20, extra="tank")
 
