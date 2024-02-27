@@ -1,0 +1,576 @@
+{
+    "Description" : {
+        "Id" : "event_co_RaysonAmbush_Payoff",
+        "Name" : "Ambush: Rayson Returns",
+        "Details" : "You're having a quiet morning going over various reports when once again you hear the klaxons going off throughout the <i>Argo</i>.  You rush to the bridge to see several fast-moving ships buzz past the bridge viewports. \r\nDarius looks at you, \"Commader, they are hailing us.  It's the same bandits we encountered awhile back.\"\r\n\r\n\"Open comms, Darius.\" you respond.\r\n\r\nThe shimmering cloaked figure once again addresses you through the holocom, \"Ah, Commander {COMMANDER.LastName}.  Welcome back again to my territory.  It is so very kind of you to come out this way again.  We do appreciate repeat customers, although I do need to inform you, the price for safe passage has doubled.\"\r\n\r\nYou stand your ground this time, \"What makes you think we will just give you our hard earned C-Bills this time?\"\r\n\r\nThe shimmering figure chuckles, \"Well, you paid before, so my money is on you paying again, Commander {COMMANDER.LastName}.  Just transfer the funds and you can go about your merry way.  Don't make me <i>touch up the paint</i> of that ancient shipwreck you're flying around in.\"",
+        "Icon" : "uixTxrSpot_RaysonTransimission.png"
+    },
+    "Scope" : "Company",
+    "Weight" : 25,
+    "Requirements" : {
+        "Scope" : "Company",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "",
+            "items" : [
+                "RaysonAmbush_Start",
+                "RaysonAmbush_Payoff"
+            ]
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "Tags/CompanyTags",
+            "items" : [
+                "RaysonComplete",
+                "hasPilot_pilot_Bubbles"
+            ]
+        },
+        "RequirementComparisons" : []
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Commander",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "",
+                "items" : []
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "",
+                "items" : []
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "Injuries",
+                    "op" : "Equal",
+                    "val" : 0,
+                    "valueConstant" : "0"
+                }
+            ]
+        },
+        {
+            "Scope" : "StarSystem",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "Tags/PlanetTags",
+                "items" : [
+                    "planet_JumpPoint"
+                ]
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "Tags/PlanetTags",
+                "items" : []
+            },
+            "RequirementComparisons" : []
+        }
+    ],
+    "AdditionalObjects" : [
+        {
+            "Scope" : "SecondaryMechWarrior",
+            "Requirements" : {
+                "Scope" : "SecondaryMechWarrior",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "Tags/PilotTags",
+                    "items" : [
+                        "pilot_lucky"
+                    ]
+                },
+                "RequirementComparisons" : [
+                    {
+                        "obj" : "Injuries",
+                        "op" : "Equal",
+                        "val" : 0,
+                        "valueConstant" : "0"
+                    }
+                ]
+            }
+        }
+    ],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Pay them off.",
+                "Details" : "[\u00A2200,000]",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "Tags/CompanyTags",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Funds",
+                            "op" : "GreaterThan",
+                            "val" : 100000,
+                            "valueConstant" : "100000"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Lose C-Bills & Morale",
+                        "Details" : "As much as it pains you, you approve the payment, \"Very well, we will pay your fee.\" The look of disappointment on Sumire's face echoes that of the rest of the bridge crew.\r\n\r\nThe shimmering figures claps their hands, \"Excellent!  You are wise beyond your years, Commander {COMMANDER.LastName}.  Feel free to pop by anytime.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "RaysonAmbush_Payoff",
+                                    "RaysonAmbush_Repeat"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-200000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-15",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Stall until the Leopard is ready.",
+                "Details" : "Risky option",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "The pirates flee",
+                        "Details" : "You stare at the pirate on the viewscreen, his visage obfuscated by an obvious cloaking filter, feeling like your stuck in an endless cycle of doing this over and over, before answering, \"This ends now...  Sumire, LAUNCH!\"\r\n\r\nThe figure smiles, \"Let's dance, Commander!\"\r\n\r\nThe Leopard disengages gracefully from the <i>Argo</i>, unleashing a salvo of LRMs that streak through the void toward the marauding pirate ships. Agile as shadows, the bandit vessels elegantly sidestep the incoming missiles, retaliating with a fusillade aimed at both the Leopard and the <i>Argo</i>. \r\n\r\nA cosmic ballet unfolds, the interplay of lasers and missiles illuminating the darkness of space. A precise volley from the Leopard finds its mark, mercilessly crippling one of the bandit ships. The wounded vessel limps, its companions rallying around it in a defensive formation. In a strategic retreat, they veer away from the <i>Argo</i>, the enigmatic leader transmitting a final defiant message, \"You won this round, Commander {COMMANDER.LastName}.  Be seeing you soon.\"\r\n\r\nAs the pirate ships disappear into the starry distance, you turn to Darius, \"Still no updates as to who they are?\"\r\n\r\nDarius looks up from his panel and shrugs, \"Same as before Commander, Jamie Rayson and Mr Bubbles are a formidable team.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 10,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "RaysonAmbush_Repeat"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "RaysonAmbush_Payoff"
+                                ]
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "5",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "The pirates flee but a MechWarrior is injured",
+                        "Details" : "You stare at the pirate on the viewscreen, his visage obfuscated by an obvious cloaking filter, feeling like your stuck in an endless cycle of doing this over and over, before answering, \"This ends now...  Sumire, LAUNCH!\"\r\n\r\nThe figure smiles, \"Let's dance, Commander!\"\r\n\r\nThe Leopard gracefully disengages from the <i>Argo</i>, unleashing a barrage of SRMs that streak through the cosmic expanse toward the marauding pirate ships. The agile bandit vessels elegantly dodge the incoming missiles while responding with a relentless onslaught, targeting both the Leopard and the <i>Argo</i>.\r\n\r\nThe relentless clash unfolds \u2013 lasers and SRMs painting a vivid spectacle against the backdrop of space. Amidst the chaos, a well-aimed volley from the Leopard finds its mark, brutally incapacitating one of the bandit ships. However, the <i>Argo</i> doesn't emerge unscathed.\r\n\r\nThe remaining assailants disengage. As they retreat, the mysterious leader transmits his parting message, \"You've wounded us, as we have wounded you, Commander {COMMANDER.LastName}.  Be seeing you soon...\"\r\n\r\nDarius calls out, \"Commander, we have sustained minor damage and reports of injured personel throughout the ship, including [[SCN_MW,{SCN_MW.Callsign}]], who was caught in one of the blasts.  {SCN_MW.Subj_C} {SCN_MW.Gender?NonBinary:have been|Default:has been} taken to MedBay.\"\r\n\r\nYou acknowledge Darius' report as the pirate ships disappear into the starry distance, \"Any more updates as to who they are?\"\r\n\r\nDarius looks up from his panel and shrugs, \"Same as before Commander, Jamie Rayson and Mr Bubbles are a formidable team.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 50,
+                    "Results" : [
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Injuries",
+                                    "value" : "2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "RaysonAmbush_Repeat"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "RaysonAmbush_Payoff"
+                                ]
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-50000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_2",
+                        "Name" : "The pirates flee but <i>Argo</i> Damaged",
+                        "Details" : "You stare at the pirate on the viewscreen, his visage obfuscated by an obvious cloaking filter, feeling like your stuck in an endless cycle of doing this over and over, before answering, \"This ends now...  Sumire, LAUNCH!\"\r\n\r\nThe figure smiles, \"Let's dance, Commander!\"\r\n\r\nThe Leopard gracefully disengages from the <i>Argo</i>, unleashing a barrage of SRMs that streak through the cosmic expanse toward the marauding pirate ships. The agile bandit vessels elegantly dodge the incoming missiles while responding with a relentless onslaught, targeting both the Leopard and the <i>Argo</i>.\r\n\r\nThe relentless clash unfolds \u2013 lasers and SRMs painting a vivid spectacle against the backdrop of space. Amidst the chaos, a well-aimed volley from the Leopard finds its mark, brutally incapacitating one of the bandit ships. However, the <i>Argo</i> doesn't emerge unscathed.\r\n\r\nThe remaining assailants disengage. As they retreat, the mysterious leader transmits his parting message, \"You've wounded us, as we have wounded you, Commander {COMMANDER.LastName}.  Be seeing you soon...\"\r\n\r\nDarius calls out, \"Commander, we have sustained external damage to the <i>Argo</i>.\"\r\n\r\nYou acknowledge Darius' report as the pirate ships disappear into the starry distance, \"Any more updates as to who they are?\"\r\n\r\nDarius looks up from his panel and shrugs, \"Same as before Commander, Jamie Rayson and Mr Bubbles are a formidable team.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 10,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "RaysonAmbush_Repeat"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "RaysonAmbush_Payoff"
+                                ]
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-175000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "-5",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_3",
+                        "Name" : "The pirates flee but <i>Argo</i> Damaged",
+                        "Details" : "You stare at the pirate on the viewscreen, his visage obfuscated by an obvious cloaking filter, feeling like your stuck in an endless cycle of doing this over and over, before answering, \"This ends now...  Sumire, LAUNCH!\"\r\n\r\nThe figure smiles, \"Let's dance, Commander!\"\r\n\r\nThe Leopard gracefully disengages from the <i>Argo</i>, unleashing a barrage of SRMs that streak through the cosmic expanse toward the marauding pirate ships. The agile bandit vessels elegantly dodge the incoming missiles while responding with a relentless onslaught, targeting both the Leopard and the <i>Argo</i>.\r\n\r\nThe relentless clash unfolds \u2013 lasers and SRMs painting a vivid spectacle against the backdrop of space. Amidst the chaos, a well-aimed volley from the Leopard finds its mark, brutally incapacitating one of the bandit ships. However, the <i>Argo</i> doesn't emerge unscathed.\r\n\r\nThe remaining assailants disengage. As they retreat, the mysterious leader transmits his parting message, \"You've wounded us, as we have wounded you, Commander {COMMANDER.LastName}.  Be seeing you soon...\"\r\n\r\nDarius calls out, \"Commander, we have sustained external damage to the <i>Argo</i>.\"\r\n\r\nYou acknowledge Darius' report as the pirate ships disappear into the starry distance, \"Any more updates as to who they are?\"\r\n\r\nDarius looks up from his panel and shrugs, \"Same as before Commander, Jamie Rayson and Mr Bubbles are a formidable team.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 10,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "RaysonAmbush_Repeat"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "RaysonAmbush_Payoff"
+                                ]
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-175000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "-5",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 21
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_4",
+                        "Name" : "The pirates flee but <i>Argo</i> Damaged",
+                        "Details" : "You stare at the pirate on the viewscreen, his visage obfuscated by an obvious cloaking filter, feeling like your stuck in an endless cycle of doing this over and over, before answering, \"This ends now...  Sumire, LAUNCH!\"\r\n\r\nThe figure smiles, \"Let's dance, Commander!\"\r\n\r\nThe Leopard gracefully disengages from the <i>Argo</i>, unleashing a barrage of SRMs that streak through the cosmic expanse toward the marauding pirate ships. The agile bandit vessels elegantly dodge the incoming missiles while responding with a relentless onslaught, targeting both the Leopard and the <i>Argo</i>.\r\n\r\nThe relentless clash unfolds \u2013 lasers and SRMs painting a vivid spectacle against the backdrop of space. Amidst the chaos, a well-aimed volley from the Leopard finds its mark, brutally incapacitating one of the bandit ships. However, the <i>Argo</i> doesn't emerge unscathed.\r\n\r\nThe remaining assailants disengage. As they retreat, the mysterious leader transmits his parting message, \"You've wounded us, as we have wounded you, Commander {COMMANDER.LastName}.  Be seeing you soon...\"\r\n\r\nDarius calls out, \"Commander, we have sustained external damage to the <i>Argo</i>.\"\r\n\r\nYou acknowledge Darius' report as the pirate ships disappear into the starry distance, \"Any more updates as to who they are?\"\r\n\r\nDarius looks up from his panel and shrugs, \"Same as before Commander, Jamie Rayson and Mr Bubbles are a formidable team.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 10,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "RaysonAmbush_Repeat"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "RaysonAmbush_Payoff"
+                                ]
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-175000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "-5",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 16
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_5",
+                        "Name" : "The pirates flee but <i>Argo</i> Damaged",
+                        "Details" : "You stare at the pirate on the viewscreen, his visage obfuscated by an obvious cloaking filter, feeling like your stuck in an endless cycle of doing this over and over, before answering, \"This ends now...  Sumire, LAUNCH!\"\r\n\r\nThe figure smiles, \"Let's dance, Commander!\"\r\n\r\nThe Leopard gracefully disengages from the <i>Argo</i>, unleashing a barrage of SRMs that streak through the cosmic expanse toward the marauding pirate ships. The agile bandit vessels elegantly dodge the incoming missiles while responding with a relentless onslaught, targeting both the Leopard and the <i>Argo</i>.\r\n\r\nThe relentless clash unfolds \u2013 lasers and SRMs painting a vivid spectacle against the backdrop of space. Amidst the chaos, a well-aimed volley from the Leopard finds its mark, brutally incapacitating one of the bandit ships. However, the <i>Argo</i> doesn't emerge unscathed.\r\n\r\nThe remaining assailants disengage. As they retreat, the mysterious leader transmits his parting message, \"You've wounded us, as we have wounded you, Commander {COMMANDER.LastName}.  Be seeing you soon...\"\r\n\r\nDarius calls out, \"Commander, we have sustained external damage to the <i>Argo</i>.\"\r\n\r\nYou acknowledge Darius' report as the pirate ships disappear into the starry distance, \"Any more updates as to who they are?\"\r\n\r\nDarius looks up from his panel and shrugs, \"Same as before Commander, Jamie Rayson and Mr Bubbles are a formidable team.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 10,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "RaysonAmbush_Repeat"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "RaysonAmbush_Payoff"
+                                ]
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-175000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "-5",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 19
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL",
+    "OneTimeEvent" : false,
+    "Tags" : {
+        "tagSetSourceFile" : "tags/EventTags",
+        "items" : []
+    }
+}

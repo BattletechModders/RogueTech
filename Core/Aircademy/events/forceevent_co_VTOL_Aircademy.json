@@ -2,7 +2,7 @@
     "Description" : {
         "Id" : "forceevent_co_VTOL_Aircademy",
         "Name" : "Highway to the Danger Zone!",
-        "Details" : "A knock sounds on your office door and you call out, \"Come in...\"\r\n\r\nThe door opens and Darius strides in with a datapad, \"Commander, the aptitude tests for candidates to attend <i>Air Today, Gone Tomorrow</i>'s Aircademy [[DM.BaseDescriptionDefs[LoreRipperVTOL],VTOL]] training school have come back.  There are two pilots who have completed the assessment and should meet the requirements:\r\n\r\n[[SCN_MW,{SCN_MW.Callsign}]]\r\n[[TRT_MW,{TRT_MW.Callsign}]]\r\n\r\nYou just need to sign that form on the screen and we can proceed from there.\"",
+        "Details" : "A knock sounds on your office door and you call out, \"Come in...\"\r\n\r\nThe door opens and Darius strides in with a datapad, \"Commander, the aptitude tests for candidates to attend <i>Air Today, Gone Tomorrow</i>'s Aircademy [[DM.BaseDescriptionDefs[LoreVTOL],VTOL]] training school have come back.  There are two pilots who have completed the assessment and should meet the requirements:\r\n\r\n[[SCN_MW,{SCN_MW.Callsign}]]\r\n[[TRT_MW,{TRT_MW.Callsign}]]\r\n\r\nYou just need to select the pilot you wish to attend and sign the form on the screen and I'll take it from there.\"",
         "Icon" : "uixTxrSpot_DangerZone.png"
     },
     "Scope" : "Company",
@@ -10,23 +10,16 @@
     "Requirements" : {
         "Scope" : "Company",
         "RequirementTags" : {
+            "tagSetSourceFile" : "",
             "items" : [
                 "Do_not_fire"
-            ],
-            "tagSetSourceFile" : ""
+            ]
         },
         "ExclusionTags" : {
-            "items" : [],
-            "tagSetSourceFile" : "Tags/CompanyTags"
+            "tagSetSourceFile" : "Tags/CompanyTags",
+            "items" : []
         },
-        "RequirementComparisons" : [
-            {
-                "obj" : "Funds",
-                "op" : "GreaterThanOrEqual",
-                "val" : 500000,
-                "valueConstant" : "500000"
-            }
-        ]
+        "RequirementComparisons" : []
     },
     "AdditionalRequirements" : [],
     "AdditionalObjects" : [
@@ -35,18 +28,20 @@
             "Requirements" : {
                 "Scope" : "SecondaryMechWarrior",
                 "RequirementTags" : {
+                    "tagSetSourceFile" : "",
                     "items" : [
                         "can_pilot_generic_vehicle"
-                    ],
-                    "tagSetSourceFile" : ""
+                    ]
                 },
                 "ExclusionTags" : {
+                    "tagSetSourceFile" : "Tags/PilotTags",
                     "items" : [
                         "can_pilot_vtol",
                         "pilot_rejected",
-                        "pilot_novtol"
-                    ],
-                    "tagSetSourceFile" : "Tags/PilotTags"
+                        "pilot_novtol",
+                        "pilot_VTOLSchool",
+                        "pilot_LAMSchool"
+                    ]
                 },
                 "RequirementComparisons" : [
                     {
@@ -63,18 +58,20 @@
             "Requirements" : {
                 "Scope" : "TertiaryMechWarrior",
                 "RequirementTags" : {
+                    "tagSetSourceFile" : "",
                     "items" : [
                         "can_pilot_generic_vehicle"
-                    ],
-                    "tagSetSourceFile" : ""
+                    ]
                 },
                 "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
                     "items" : [
                         "can_pilot_vtol",
                         "pilot_rejected",
-                        "pilot_novtol"
-                    ],
-                    "tagSetSourceFile" : ""
+                        "pilot_novtol",
+                        "pilot_VTOLSchool",
+                        "pilot_LAMSchool"
+                    ]
                 },
                 "RequirementComparisons" : [
                     {
@@ -92,23 +89,25 @@
             "Description" : {
                 "Id" : "outcome_0",
                 "Name" : "Select {SCN_MW.Callsign}",
-                "Details" : "[Tuition costs up to \u00A2500,000]",
+                "Details" : "[Tuition costs \u00A2500,000]",
                 "Icon" : null
             },
             "RequirementList" : [
                 {
                     "Scope" : "SecondaryMechWarrior",
                     "RequirementTags" : {
-                        "items" : [],
-                        "tagSetSourceFile" : ""
+                        "tagSetSourceFile" : "",
+                        "items" : []
                     },
                     "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
                         "items" : [
                             "can_pilot_vtol",
                             "pilot_rejected",
-                            "pilot_novtol"
-                        ],
-                        "tagSetSourceFile" : ""
+                            "pilot_novtol",
+                            "pilot_VTOLSchool",
+                            "pilot_LAMSchool"
+                        ]
                     },
                     "RequirementComparisons" : [
                         {
@@ -134,14 +133,14 @@
                             "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
+                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_VTOLSchool"
-                                ],
-                                "tagSetSourceFile" : ""
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : null,
                             "Actions" : [
@@ -160,25 +159,20 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "VTOL_PilotEnrolled"
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
                                     "value" : "-500000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "PilotEnrolled",
-                                    "value" : "1",
                                     "set" : false,
                                     "valueConstant" : null
                                 }
@@ -212,14 +206,14 @@
                             "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
+                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_VTOLSchool"
-                                ],
-                                "tagSetSourceFile" : ""
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : null,
                             "Actions" : [
@@ -238,25 +232,20 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "VTOL_PilotEnrolled"
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
                                     "value" : "-500000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "PilotEnrolled",
-                                    "value" : "1",
                                     "set" : false,
                                     "valueConstant" : null
                                 }
@@ -290,14 +279,14 @@
                             "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
+                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_VTOLSchool"
-                                ],
-                                "tagSetSourceFile" : ""
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : null,
                             "Actions" : [
@@ -316,25 +305,20 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "VTOL_PilotEnrolled"
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
                                     "value" : "-500000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "PilotEnrolled",
-                                    "value" : "1",
                                     "set" : false,
                                     "valueConstant" : null
                                 }
@@ -368,14 +352,14 @@
                             "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
+                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_VTOLSchool"
-                                ],
-                                "tagSetSourceFile" : ""
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : null,
                             "Actions" : [
@@ -394,25 +378,20 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "VTOL_PilotEnrolled"
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
                                     "value" : "-500000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "PilotEnrolled",
-                                    "value" : "1",
                                     "set" : false,
                                     "valueConstant" : null
                                 }
@@ -446,14 +425,14 @@
                             "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
+                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_VTOLSchool"
-                                ],
-                                "tagSetSourceFile" : ""
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : null,
                             "Actions" : [
@@ -472,25 +451,20 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "VTOL_PilotEnrolled"
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
                                     "value" : "-500000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "PilotEnrolled",
-                                    "value" : "1",
                                     "set" : false,
                                     "valueConstant" : null
                                 }
@@ -524,14 +498,14 @@
                             "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
+                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_VTOLSchool"
-                                ],
-                                "tagSetSourceFile" : ""
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : null,
                             "Actions" : [
@@ -550,25 +524,20 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "VTOL_PilotEnrolled"
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
                                     "value" : "-500000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "PilotEnrolled",
-                                    "value" : "1",
                                     "set" : false,
                                     "valueConstant" : null
                                 }
@@ -602,14 +571,14 @@
                             "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
+                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_VTOLSchool"
-                                ],
-                                "tagSetSourceFile" : ""
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : null,
                             "Actions" : [
@@ -628,25 +597,20 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "VTOL_PilotEnrolled"
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
                                     "value" : "-500000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "PilotEnrolled",
-                                    "value" : "1",
                                     "set" : false,
                                     "valueConstant" : null
                                 }
@@ -680,14 +644,14 @@
                             "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
+                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_VTOLSchool"
-                                ],
-                                "tagSetSourceFile" : ""
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : null,
                             "Actions" : [
@@ -706,25 +670,20 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "VTOL_PilotEnrolled"
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
                                     "value" : "-500000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "PilotEnrolled",
-                                    "value" : "1",
                                     "set" : false,
                                     "valueConstant" : null
                                 }
@@ -758,14 +717,14 @@
                             "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
+                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_VTOLSchool"
-                                ],
-                                "tagSetSourceFile" : ""
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : null,
                             "Actions" : [
@@ -784,25 +743,20 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "VTOL_PilotEnrolled"
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
                                     "value" : "-500000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "PilotEnrolled",
-                                    "value" : "1",
                                     "set" : false,
                                     "valueConstant" : null
                                 }
@@ -827,12 +781,12 @@
             "Requirements" : {
                 "Scope" : "Company",
                 "RequirementTags" : {
-                    "items" : [],
-                    "tagSetSourceFile" : ""
+                    "tagSetSourceFile" : "",
+                    "items" : []
                 },
                 "ExclusionTags" : {
-                    "items" : [],
-                    "tagSetSourceFile" : ""
+                    "tagSetSourceFile" : "",
+                    "items" : []
                 },
                 "RequirementComparisons" : []
             }
@@ -841,23 +795,25 @@
             "Description" : {
                 "Id" : "outcome_1",
                 "Name" : "Select {TRT_MW.Callsign}",
-                "Details" : "[Tuition costs up to \u00A2500,000]",
+                "Details" : "[Tuition costs \u00A2500,000]",
                 "Icon" : null
             },
             "RequirementList" : [
                 {
-                    "Scope" : "SecondaryMechWarrior",
+                    "Scope" : "TertiaryMechWarrior",
                     "RequirementTags" : {
-                        "items" : [],
-                        "tagSetSourceFile" : ""
+                        "tagSetSourceFile" : "",
+                        "items" : []
                     },
                     "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
                         "items" : [
                             "can_pilot_vtol",
                             "pilot_rejected",
-                            "pilot_novtol"
-                        ],
-                        "tagSetSourceFile" : ""
+                            "pilot_novtol",
+                            "pilot_VTOLSchool",
+                            "pilot_LAMSchool"
+                        ]
                     },
                     "RequirementComparisons" : [
                         {
@@ -883,14 +839,14 @@
                             "Scope" : "TertiaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
+                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_VTOLSchool"
-                                ],
-                                "tagSetSourceFile" : ""
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : null,
                             "Actions" : [
@@ -909,25 +865,20 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "VTOL_PilotEnrolled"
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
                                     "value" : "-500000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "PilotEnrolled",
-                                    "value" : "1",
                                     "set" : false,
                                     "valueConstant" : null
                                 }
@@ -961,14 +912,14 @@
                             "Scope" : "TertiaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
+                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_VTOLSchool"
-                                ],
-                                "tagSetSourceFile" : ""
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : null,
                             "Actions" : [
@@ -987,25 +938,20 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "VTOL_PilotEnrolled"
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
                                     "value" : "-500000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "PilotEnrolled",
-                                    "value" : "1",
                                     "set" : false,
                                     "valueConstant" : null
                                 }
@@ -1039,14 +985,14 @@
                             "Scope" : "TertiaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
+                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_VTOLSchool"
-                                ],
-                                "tagSetSourceFile" : ""
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : null,
                             "Actions" : [
@@ -1065,25 +1011,20 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "VTOL_PilotEnrolled"
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
                                     "value" : "-500000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "PilotEnrolled",
-                                    "value" : "1",
                                     "set" : false,
                                     "valueConstant" : null
                                 }
@@ -1117,14 +1058,14 @@
                             "Scope" : "TertiaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
+                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_VTOLSchool"
-                                ],
-                                "tagSetSourceFile" : ""
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : null,
                             "Actions" : [
@@ -1143,25 +1084,20 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "VTOL_PilotEnrolled"
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
                                     "value" : "-500000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "PilotEnrolled",
-                                    "value" : "1",
                                     "set" : false,
                                     "valueConstant" : null
                                 }
@@ -1195,14 +1131,14 @@
                             "Scope" : "TertiaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
+                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_VTOLSchool"
-                                ],
-                                "tagSetSourceFile" : ""
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : null,
                             "Actions" : [
@@ -1221,25 +1157,20 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "VTOL_PilotEnrolled"
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
                                     "value" : "-500000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "PilotEnrolled",
-                                    "value" : "1",
                                     "set" : false,
                                     "valueConstant" : null
                                 }
@@ -1273,14 +1204,14 @@
                             "Scope" : "TertiaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
+                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_VTOLSchool"
-                                ],
-                                "tagSetSourceFile" : ""
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : null,
                             "Actions" : [
@@ -1299,25 +1230,20 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "VTOL_PilotEnrolled"
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
                                     "value" : "-500000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "PilotEnrolled",
-                                    "value" : "1",
                                     "set" : false,
                                     "valueConstant" : null
                                 }
@@ -1351,14 +1277,14 @@
                             "Scope" : "TertiaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
+                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_VTOLSchool"
-                                ],
-                                "tagSetSourceFile" : ""
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : null,
                             "Actions" : [
@@ -1377,25 +1303,20 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "VTOL_PilotEnrolled"
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
                                     "value" : "-500000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "PilotEnrolled",
-                                    "value" : "1",
                                     "set" : false,
                                     "valueConstant" : null
                                 }
@@ -1429,14 +1350,14 @@
                             "Scope" : "TertiaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
+                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_VTOLSchool"
-                                ],
-                                "tagSetSourceFile" : ""
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : null,
                             "Actions" : [
@@ -1455,25 +1376,20 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "VTOL_PilotEnrolled"
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
                                     "value" : "-500000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "PilotEnrolled",
-                                    "value" : "1",
                                     "set" : false,
                                     "valueConstant" : null
                                 }
@@ -1507,14 +1423,14 @@
                             "Scope" : "TertiaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
+                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_VTOLSchool"
-                                ],
-                                "tagSetSourceFile" : ""
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : null,
                             "Actions" : [
@@ -1533,25 +1449,20 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "VTOL_PilotEnrolled"
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
                                     "value" : "-500000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "PilotEnrolled",
-                                    "value" : "1",
                                     "set" : false,
                                     "valueConstant" : null
                                 }
@@ -1576,12 +1487,12 @@
             "Requirements" : {
                 "Scope" : "Company",
                 "RequirementTags" : {
-                    "items" : [],
-                    "tagSetSourceFile" : ""
+                    "tagSetSourceFile" : "",
+                    "items" : []
                 },
                 "ExclusionTags" : {
-                    "items" : [],
-                    "tagSetSourceFile" : ""
+                    "tagSetSourceFile" : "",
+                    "items" : []
                 },
                 "RequirementComparisons" : []
             }
@@ -1599,23 +1510,50 @@
                     "Description" : {
                         "Id" : "outcome_2_0",
                         "Name" : "Abort! Abort!",
-                        "Details" : "You look over the names and records of the two candidates.  You thumb back through their files numerous times, before letting out a long sigh and closed the datapad.\r\n\r\nYou hand the pad back to Darius, \"Thanks Darius, but I do not think any of those two pilots understand our needs here.  See if there are any other suitable candidates.  We do not need to rush into this blindly.\"\r\n\r\nDarius takes the datapad, \"As you wish, Commander.  The Aircademy also states the applicants must wait 90 days before they can reapply should you change your mind later.\"\r\n\r\n<color=#E62E00>The following pilots are not eligible again for 90 days: \r\n[[SCN_MW,{SCN_MW.Callsign}]]\r\n[[TRT_MW,{TRT_MW.Callsign}]]\r\n</color>",
+                        "Details" : "You look over the names and records of the two candidates.  You thumb back through their files numerous times, before letting out a long sigh and closed the datapad.\r\n\r\nYou hand the pad back to Darius, \"Thanks Darius, but I do not think any of those two pilots understand our needs here.  See if there are any other suitable candidates.  We do not need to rush into this blindly.\"\r\n\r\nDarius takes the datapad, \"As you wish, Commander.  <i>Air Today, Gone Tomorrow</i> will still bill us the cost of the assessments.  The Aircademy also states the applicants must wait 90 days before they can be reassessed should you change your mind later.\"\r\n\r\n<color=#E62E00>The following pilots are not eligible again for 90 days: \r\n[[SCN_MW,{SCN_MW.Callsign}]]\r\n[[TRT_MW,{TRT_MW.Callsign}]]\r\n</color>",
                         "Icon" : null
                     },
                     "Weight" : 100,
                     "Results" : [
                         {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "VTOL_PilotEnrolled"
+                                ]
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-50000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
                             "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
+                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_rejected"
-                                ],
-                                "tagSetSourceFile" : ""
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : null,
                             "Actions" : null,
@@ -1627,14 +1565,14 @@
                             "Scope" : "TertiaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
+                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_rejected"
-                                ],
-                                "tagSetSourceFile" : ""
+                                ]
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : null,
                             "Actions" : null,
@@ -1648,12 +1586,12 @@
             "Requirements" : {
                 "Scope" : "Company",
                 "RequirementTags" : {
-                    "items" : [],
-                    "tagSetSourceFile" : ""
+                    "tagSetSourceFile" : "",
+                    "items" : []
                 },
                 "ExclusionTags" : {
-                    "items" : [],
-                    "tagSetSourceFile" : ""
+                    "tagSetSourceFile" : "",
+                    "items" : []
                 },
                 "RequirementComparisons" : []
             }
@@ -1664,7 +1602,7 @@
     "EventType" : "UNSELECTABLE",
     "OneTimeEvent" : false,
     "Tags" : {
-        "items" : [],
-        "tagSetSourceFile" : "tags/EventTags"
+        "tagSetSourceFile" : "tags/EventTags",
+        "items" : []
     }
 }

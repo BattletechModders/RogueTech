@@ -2,11 +2,11 @@
     "Description" : {
         "Id" : "event_co_KFCBootup",
         "Name" : "Boot up the Kerby-Fucheatah Console",
-        "Details" : "As you enter the bridge you see a pair of astechs leaving a newly installed console over in Navigation.\r\n\r\nYou walk over to where Sumire is standing next to the console, \"So, how is the install going?\"\r\n\r\nSumire turns to you, \"Well, it is the moment of truth Commander.  The console has power and is ready to be turned on.\"\r\n\r\nYou motion to the power switch, \"It's your project.  The honours are yours.\"\r\n\r\nSumire reaches out and pushes the button on the console.  An audible click sounds, along with a number of whirring fans.  The console's screen flickers before focusing and revealing the display where a large blinking <color=#FF0000>ACTIVATE?</color> pulses.\r\n\r\nSumire looks at you, \"It appears to be working so far, Commander.  You should be the one to activate it.\"",
+        "Details" : "As you enter the bridge you see a pair of astechs leaving after installing the console over in Navigation.\r\n\r\nYou walk over to where Sumire is standing next to the console, \"So, is it ready?\"\r\n\r\nSumire turns to you, \"Well, it is the moment of truth Commander.  The console has power and is ready to be turned on.\"\r\n\r\nYou motion to the power switch, \"It's your project.  The honours are yours.\"\r\n\r\nSumire reaches out and pushes the button on the console.  An audible click sounds, along with a number of whirring fans.  The console's screen flickers before focusing and revealing the display where a large blinking <color=#FF0000>ACTIVATE?</color> pulses.\r\n\r\nSumire looks at you, \"It appears to be working so far, Commander.  You should be the one to activate it.\"",
         "Icon" : "uixTxrSpot_KFCBoot.png"
     },
     "Scope" : "Company",
-    "Weight" : 5,
+    "Weight" : 10000,
     "Requirements" : {
         "Scope" : "Company",
         "RequirementTags" : {
@@ -55,7 +55,14 @@
                             "KFC_Active"
                         ]
                     },
-                    "RequirementComparisons" : []
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "ConsoleInstalled",
+                            "op" : "Equal",
+                            "val" : 1,
+                            "valueConstant" : "1"
+                        }
+                    ]
                 }
             ],
             "ResultSets" : [
@@ -113,11 +120,98 @@
                 },
                 "RequirementComparisons" : []
             }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Activate KF Console",
+                "Details" : "Set KF Console to Active",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : [
+                            "KFC_Active"
+                        ]
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "ConsoleInstalled",
+                            "op" : "Equal",
+                            "val" : 0,
+                            "valueConstant" : "0"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "KF Console Not Active",
+                        "Details" : "You stare at the pulsing <color=#FF0000>ACTIVATE?</color> image on the screen for a few minutes before reaching out and pressing the image.  The text disappears and is replaced by a blank screen.\r\n\r\nYou look at Sumire, \"Now what?\"\r\n\r\nSumire frowns, \"Umm... it's not supposed to do that.\"\r\n\r\nAs she calls the astechs back you cross your arms in front of you, \"Definitely a good use of company C-Bills, don't you think?\"\r\n\r\nThe astechs arrive and begin checking out what went wrong with the install.\r\n\r\n<color=#FFA500>You need to purchase the Pirate Kerby-Fu-Cheatah Console upgrade in ENGINEERING.</color>",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "Tags/CompanyTags",
+                                "items" : [
+                                    "KFC_Inactive"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "KFC_Active",
+                                    "KFCBootup"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : [
+                                {
+                                    "Scope" : "Company",
+                                    "EventID" : "event_co_KFCBootup",
+                                    "MinDaysWait" : 1,
+                                    "MaxDaysWait" : 1,
+                                    "Probability" : 100,
+                                    "RetainPilot" : false
+                                }
+                            ],
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
         }
     ],
     "PublishState" : "PUBLISHED",
     "ValidationState" : "UNTESTED",
-    "EventType" : "UNSELECTABLE",
+    "EventType" : "NORMAL",
     "OneTimeEvent" : false,
     "Tags" : {
         "tagSetSourceFile" : "tags/EventTags",
