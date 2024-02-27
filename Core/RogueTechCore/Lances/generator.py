@@ -124,9 +124,9 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
         case "high":
             include_tags.append("unit_bracket_high")
         case "primitive":
-            # mix low and primitive on "high" diff
-            if diff > 5 and index == 1 or diff > 8 and index == 3:
-                include_tags.append("unit_bracket_low")
+            # allow low&med with primitive on "high" diff
+            if (diff > 6 and index == 3) or (diff > 9 and index == 1):
+                exclude_tags.append("unit_bracket_high")
             else: 
                 include_tags.append("unit_primitive")
                 include_tags.remove("{CUR_TEAM.faction}")
@@ -243,7 +243,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
                     include_tags.remove("unit_bracket_high")
                 if "unit_bracket_med" in include_tags:
                     include_tags.remove("unit_bracket_med")
-                include_tags.append("unit_bracket_low")
+                exclude_tags.append("unit_bracket_high")
 
         case "cavalry":
             if index in [0,1]:
@@ -345,9 +345,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
                     include_tags.remove("{CUR_TEAM.faction}")
                     include_tags.append("unit_elite")
             else:
-                if index == 0:
-                    include_tags.append("unit_lance_tank")
-                elif index == 1:
+                if index in [1, 2]:
                     include_tags.append("unit_lance_support")
 
             if diff < 5:
@@ -376,8 +374,10 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             print("bad category: " + str(category))
             exit()
     
-    # loosen tags for vtol lances
+    # loosen tags for vtols
     if "unit_vtol" in include_tags:
+        if "unit_lance_support" in include_tags:
+            include_tags.remove("unit_lance_support")
         if "unit_lance_vanguard" in include_tags:
             include_tags.remove("unit_lance_vanguard")
         if "unit_lance_assassin" in include_tags:
@@ -394,8 +394,17 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
         if "unit_lance_tank" in exclude_tags:
             exclude_tags.remove("unit_lance_tank")
 
+        if "unit_bracket_low" in include_tags:
+            include_tags.remove("unit_bracket_low")
+        if "unit_bracket_med" in include_tags:
+            include_tags.remove("unit_bracket_med")
+        if "unit_bracket_high" in include_tags:
+            include_tags.remove("unit_bracket_high")
+
         if "unit_assault" not in exclude_tags and "unit_heavy" in exclude_tags:
             exclude_tags.remove("unit_heavy")
+        elif "unit_heavy" not in exclude_tags and "unit_medium" in exclude_tags:
+            exclude_tags.remove("unit_medium")
 
     if "unit_mech" in include_tags:
         if "unit_legendary" not in include_tags and category not in ["solo","duel","MCDuel","gladiator"]:
@@ -404,7 +413,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             elif diff < 12 and index > 1:
                 exclude_tags.append("unit_legendary")
 
-        if "unit_legendary" not in exclude_tags and not any(tag in include_tags for tag in ["unit_risc", "unit_bracket_low", "unit_command"]):
+        if "unit_legendary" not in exclude_tags and not any(tag in include_tags for tag in ["unit_risc", "unit_bracket_low", "unit_command"]) and extra != "cheap":
             if index == 3 and diff > 14:
                 include_tags.append("unit_legendary")
 
@@ -482,7 +491,7 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
         lance_tags = []
 
         slots = 4
-        if extra == "small" or category == "solo":
+        if extra == "small" or category == "solo" or (diff < 4 and extra == "vtol"):
             slots = 3
 
         if category == "gladiator":
@@ -777,9 +786,7 @@ build_lances("recon", "vehicle", "high", 10, 20)
 
 build_lances("recon", "mixed", "med", 4, 16, extra="vtol")
 build_lances("recon", "mixed", "high", 10, 20, extra="vtol")
-build_lances("recon", "vehicle", "low", 1, 6, extra="vtol")
-build_lances("recon", "vehicle", "med", 4, 16, extra="vtol")
-build_lances("recon", "vehicle", "high", 10, 20, extra="vtol")
+build_lances("recon", "vehicle", "", 1, 20, extra="vtol")
 
 # lance_type_support - 1 tank 2 support, no assassin
 
@@ -800,10 +807,7 @@ build_lances("support", "vehicle", "high", 10, 20)
 
 build_lances("support", "mixed", "med", 4, 16, extra="vtol")
 build_lances("support", "mixed", "high", 10, 20, extra="vtol")
-build_lances("support", "vehicle", "low", 1, 6, extra="vtol")
-build_lances("support", "vehicle", "med", 4, 16, extra="vtol")
-build_lances("support", "vehicle", "high", 10, 20, extra="vtol")
-
+build_lances("support", "vehicle", "", 1, 20, extra="vtol")
 
 # lance_type_convoy, allied side convoy
 build_lances("convoy", "allied", "", 1, 20)
