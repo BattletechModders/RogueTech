@@ -431,6 +431,10 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
     if composition in ["allied", "opfor"] and "unit_assault" not in exclude_tags and "unit_heavy" in exclude_tags:
         exclude_tags.remove("unit_heavy")
 
+    # allow heavies in bracket med assault slots to plug some holes
+    if "unit_bracket_med" in include_tags and "unit_assault" not in exclude_tags and "unit_heavy" in exclude_tags:
+        exclude_tags.remove("unit_heavy")
+
     exclude_tags.append("unit_killteam")
 
     return (include_tags, exclude_tags)
