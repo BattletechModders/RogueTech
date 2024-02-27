@@ -345,9 +345,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
                     include_tags.remove("{CUR_TEAM.faction}")
                     include_tags.append("unit_elite")
             else:
-                if index == 0:
-                    include_tags.append("unit_lance_tank")
-                elif index == 1:
+                if index in [1, 2]:
                     include_tags.append("unit_lance_support")
 
             if diff < 5:
@@ -493,7 +491,7 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
         lance_tags = []
 
         slots = 4
-        if extra == "small" or category == "solo":
+        if extra == "small" or category == "solo" or (diff < 4 and extra == "vtol"):
             slots = 3
 
         if category == "gladiator":
