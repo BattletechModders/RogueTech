@@ -113,9 +113,6 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
         pass
     elif extra in ["medium", "heavy", "assault"]:
         exclude_tags += grab_tonnage_tags_for_weight(extra)
-    elif diff > 20:
-        # only special lances live here, like d60 arty turret
-        pass
     else:
         exclude_tags += grab_diff_weight_excludes(diff, index)
 
