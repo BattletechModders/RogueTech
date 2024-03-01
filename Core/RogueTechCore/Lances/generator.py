@@ -271,7 +271,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             elif index == 1:
                 include_tags.append("unit_lance_support")
             elif index == 2:
-                if variant != "high" and diff < 15 and "unit_mech" in include_tags:
+                if variant != "high" and diff < 10 and "unit_mech" in include_tags:
                     include_tags.append("unit_role_scout")
                 else:
                     include_tags.append("unit_lance_vanguard")
@@ -405,6 +405,16 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             exclude_tags.remove("unit_heavy")
         elif "unit_heavy" not in exclude_tags and "unit_medium" in exclude_tags:
             exclude_tags.remove("unit_medium")
+    # loosen tags for vehicles
+    elif "unit_vehicle" in include_tags:
+        if "unit_lance_support" in exclude_tags:
+            exclude_tags.remove("unit_lance_support")
+        if "unit_lance_vanguard" in exclude_tags:
+            exclude_tags.remove("unit_lance_vanguard")
+        if "unit_lance_assassin" in exclude_tags:
+            exclude_tags.remove("unit_lance_assassin")
+        if "unit_lance_tank" in exclude_tags:
+            exclude_tags.remove("unit_lance_tank")
 
     if "unit_mech" in include_tags:
         if "unit_legendary" not in include_tags and category not in ["solo","duel","MCDuel","gladiator"]:
@@ -419,6 +429,10 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
 
     # not many assault convoy vehicles, always allow heavies for variety in those lances
     if composition in ["allied", "opfor"] and "unit_assault" not in exclude_tags and "unit_heavy" in exclude_tags:
+        exclude_tags.remove("unit_heavy")
+
+    # allow heavies in bracket med assault slots to plug some holes
+    if "unit_bracket_med" in include_tags and "unit_assault" not in exclude_tags and "unit_heavy" in exclude_tags:
         exclude_tags.remove("unit_heavy")
 
     exclude_tags.append("unit_killteam")
