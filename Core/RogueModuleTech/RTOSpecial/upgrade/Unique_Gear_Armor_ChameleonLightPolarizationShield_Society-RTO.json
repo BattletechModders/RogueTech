@@ -3,20 +3,18 @@
     "Category": [
       {
         "CategoryID": "Armor"
+      },
+      {
+        "CategoryID": "StealthSystem"
+      },
+      {
+        "CategoryID": "MimeticSystem"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.4 * [[Chassis.Tonnage]]",
-        "CBillCost": "190 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "CLPS",
-      "StealthSensors: 50%, 4, 2, 4, 6",
-      "MimeticStealth: 50%, 4, 5",
-      "ActiveVisibility: -50%",
-      "ActiveSignature: -50%",
+      "StealthSensors: -55%, 3, 3, 5, 7",
+      "MimeticStealth: -9%, 6, 2",
       "HeatGenerated: +15%",
       "HeatPerTurn: +15",
       "DamageTaken: -10%",
@@ -27,17 +25,20 @@
       "ArmorTPCost: x2.8",
       "ArmorCBCost: x2.5"
     ],
+    "Flags": [
+      "not_broken"
+    ],
     "ActivatableComponent": {
+      "ButtonName": "CLPS",
+      "CanNotBeActivatedManualy": false,
       "CanActivateAfterMove": true,
       "CanActivateAfterFire": false,
-      "SafeActivation": true,
-      "ButtonName": "CLPS",
       "ActiveByDefault": true,
-      "ActivationIsBuff": true,
-      "CanNotBeActivatedManualy": false,
-      "NoUniqueCheck": true,
+      "SafeActivation": true,
       "ActivationMessage": "CLPS On",
       "DeactivationMessage": "CLPS Off",
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
       "statusEffects": [
         {
           "durationData": {
@@ -52,6 +53,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "CLPSSocietyRTO-Stealth",
             "Name": "Chameleon LPS (C) RTO Activatable: Stealth",
@@ -61,10 +63,9 @@
           "statisticData": {
             "statName": "LV_STEALTH",
             "operation": "Set",
-            "modValue": "0.5_4_2_4_6",
+            "modValue": "0.55_3_3_5_7",
             "modType": "System.String"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -79,6 +80,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "CLPSSocietyRTO-Mimetic",
             "Name": "Chameleon LPS (C) RTO Activatable: Mimetic Armor",
@@ -88,35 +90,8 @@
           "statisticData": {
             "statName": "LV_MIMETIC",
             "operation": "Set",
-            "modValue": "4_0.125_1_5",
+            "modValue": "6_0.09_1_2",
             "modType": "System.String"
-          },
-          "nature": "Buff"
-        },
-        {
-          "durationData": {
-            "duration": -1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "Passive",
-            "effectTargetType": "Creator",
-            "showInTargetPreview": false,
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
-          "Description": {
-            "Id": "CLPSSocietyRTO-Signature",
-            "Name": "Chameleon LPS (C) RTO Activatable: Decreased Sensor Signature",
-            "Details": "Signature Statuseffect.",
-            "Icon": "uixSvgIcon_equipment_TTS"
-          },
-          "nature": "Buff",
-          "statisticData": {
-            "statName": "SensorSignatureModifier",
-            "operation": "Float_Multiply",
-            "modValue": "0.5",
-            "modType": "System.Single"
           }
         },
         {
@@ -131,39 +106,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
-          "Description": {
-            "Id": "CLPSSocietyRTO-Visibility",
-            "Name": "Chameleon LPS (C) RTO Activatable: Decreased Visual Signature",
-            "Details": "Visibility Statuseffect.",
-            "Icon": "uixSvgIcon_equipment_TTS"
-          },
           "nature": "Buff",
-          "statisticData": {
-            "statName": "SpottingVisibilityMultiplier",
-            "operation": "Float_Multiply",
-            "modValue": "0.5",
-            "modType": "System.Single"
-          }
-        },
-        {
-          "durationData": {
-            "duration": -1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "Passive",
-            "effectTargetType": "Creator",
-            "showInTargetPreview": false,
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
           "Description": {
             "Id": "CLPSSocietyRTO-HeatGenerated",
             "Name": "Chameleon LPS (C) RTO Activatable: Increased Heat Generated",
             "Details": "Heat generation",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "HeatGenerated",
             "operation": "Float_Multiply",
@@ -184,13 +133,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "CLPSSocietyRTO-CoolingReduction",
             "Name": "Chameleon LPS (C) RTO Activatable: Decreased Cooling",
             "Details": "Heat Capacity Penalty",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Debuff",
           "statisticData": {
             "statName": "HeatSinkCapacity",
             "operation": "Int_Add",
@@ -198,8 +147,7 @@
             "modType": "System.Int32"
           }
         }
-      ],
-      "offlineStatusEffects": []
+      ]
     },
     "ArmorRepair": {
       "ArmorTPCost": 2.8,
@@ -208,7 +156,27 @@
     "CASE": {
       "AllLocations": true
     },
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.4 * [[Chassis.Tonnage]]",
+        "CBillCost": "190 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
+    "IBLS": {
+      "StorageSize": 1
+    },
+    "ExplosionProtectionHeat": {
+      "MaximumDamage": 100,
+      "AllLocations": true
+    },
+    "ExplosionProtectionStability": {
+      "MaximumDamage": 200,
+      "AllLocations": true
+    },
     "Color": "Gold",
+    "case": {
+      "AllLocations": true
+    },
     "DecoratorComponent": [
       {
         "Text": "C",
@@ -216,25 +184,8 @@
         "Icon": "ComponentGearIcons_STEALTH",
         "Importance": 40
       }
-    ],
-    "ExplosionProtectionHeat": {
-      "AllLocations": true,
-      "MaximumDamage": 100
-    },
-    "ExplosionProtectionStability": {
-      "AllLocations": true,
-      "MaximumDamage": 200
-    },
-    "Flags": [
-      "not_broken"
-    ],
-    "IBLS": {
-      "StorageSize": 1
-    }
+    ]
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 3500000,
     "Rarity": 99,
@@ -252,6 +203,8 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 0,
   "InventorySize": 1,
   "Tonnage": 0,
@@ -265,20 +218,20 @@
         "stackLimit": -1
       },
       "targetingData": {
-        "effectTargetsCreator": true,
         "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
+        "effectTargetsCreator": true,
         "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "CLPSSocietyRTO-DamageReduction",
         "Name": "Chameleon LPS (C) RTO: Decreased Damage Taken",
         "Details": "All incoming damage reduced by 20%.",
         "Icon": "uixSvgIcon_action_end"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "DamageReductionMultiplierAll",
         "operation": "Float_Multiply",
@@ -297,6 +250,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "CLPSSocietyRTO-TACImmune",
         "Name": "Chameleon LPS (C) RTO: TAC Immune",
@@ -308,8 +262,7 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -317,20 +270,20 @@
         "stackLimit": -1
       },
       "targetingData": {
-        "effectTargetsCreator": true,
         "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
+        "effectTargetsCreator": true,
         "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "CLPSSocietyRTO-AoEDamageReduction",
         "Name": "Chameleon LPS (C) RTO: Decreased AoE Damage Taken",
         "Details": "All incoming damage reduced by 20%.",
         "Icon": "uixSvgIcon_action_end"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "CACAoEDamageMult",
         "operation": "Float_Multiply",
@@ -345,10 +298,10 @@
       "component_type_stock",
       "ClanArmor",
       "CasedArmor",
-      "BAIncompatible",
-      "ProtoIncompatible",
+      "StealthArmor",
       "SuperheavyIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

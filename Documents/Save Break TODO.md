@@ -57,8 +57,8 @@
 - [ ] **Rename** `yu_huang` -> `yuhuang`
 #### Base Heavy Metal
 - [ ] **Rename** `fire_ant_FLE-FA` -> `flea_FLE-FA`
-- [ ] **Rename** `phoenix_hawk_IIC` -> `phoenixhawkiic`
-- [ ] **Rename** `phoenix_hawk` -> `phoenixhawk`
+- [ ] **Rename** `phoenixhawk_IIC` -> `phoenixhawkiic`
+- [ ] **Rename** `phoenixhawk` -> `phoenixhawk`
 #### Base Urban Warfare
 - [ ] **Rename** `Dagger_RVN-LR` -> `raven_RVN-LR`
 #### Uniques

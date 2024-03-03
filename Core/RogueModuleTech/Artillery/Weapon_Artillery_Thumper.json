@@ -12,14 +12,15 @@
       }
     ],
     "BonusDescriptions": [
-      "ARTILLERYMode",
-      "FLAKmode",
-      "DIRECTmode: -4",
-      "PipsIgnored: 15",
+      "IsArtillery",
+      "NoBonusesArtillery",
+      "ArtilleryMode",
+      "FlakMode",
+      "DirectMode: -4",
       "WpnRecoil: 2",
-      "ForbiddenRange: 180",
-      "BracetoFireMode: 11%, Direct mode & Flak",
-      "BracetoFireMode: 22%, Artillery"
+      "ForbiddenRangeMode: 180, Indirect",
+      "ForbiddenRangeMode: 90, Direct",
+      "BraceToFireMode: 32, Direct & Flak"
     ],
     "Flags": [
       "not_broken"
@@ -91,16 +92,15 @@
     {
       "Id": "directfire",
       "UIName": "Direct",
-      "Description": "Fire Directly at line of sight targets at short range. -4 Accuracy",
+      "Description": "Fire Directly at line of sight targets at short range, minimum range 90. -4 Accuracy",
       "isBaseMode": false,
       "AccuracyModifier": 4,
       "DirectFireModifier": 0,
-      "EvasivePipsIgnored": 15,
-      "ForbiddenRange": 180,
-      "ShortRange": -2400,
-      "MediumRange": -2400,
-      "LongRange": -2400,
-      "MaxRange": -2400,
+      "ForbiddenRange": 90,
+      "ShortRange": -2575,
+      "MediumRange": -2575,
+      "LongRange": -2575,
+      "MaxRange": -2575,
       "IndirectFireCapable": false,
       "CantHitUnaffecedByPathing": true,
       "AlwaysIndirectVisuals": false,
@@ -118,18 +118,21 @@
           "effectType": "StatisticEffect",
           "nature": "Buff",
           "Description": {
-            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
-            "Name": "Thumper Artillery / Direct: Increased Self Knockdown on Fire",
+            "Id": "WeaponEffect-SelfInstability_OnFire",
+            "Name": "Thumper Artillery / Direct: Increased Self Instability on Fire",
             "Details": "Tubthumping",
             "Icon": "uixSvgIcon_run_n_gun"
           },
           "statisticData": {
-            "statName": "SelfknockdownCheck_OnFire",
+            "statName": "SelfInstability_OnFire",
             "operation": "Float_Add",
-            "modValue": "0.11",
+            "modValue": "32",
             "modType": "System.Single"
           }
         }
+      ],
+      "RestrictedAmmo": [
+        "Ammunition_Thumper_Fascam"
       ]
     },
     {
@@ -138,7 +141,6 @@
       "Description": "Fire Directly at flying targets in line of sight. -3 Accuracy",
       "isBaseMode": false,
       "AccuracyModifier": 53,
-      "EvasivePipsIgnored": 15,
       "MinRange": -180,
       "IndirectFireCapable": false,
       "CantHitUnaffecedByPathing": false,
@@ -157,64 +159,52 @@
           "effectType": "StatisticEffect",
           "nature": "Buff",
           "Description": {
-            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
-            "Name": "Thumper Artillery / Flak: Increased Self Knockdown on Fire",
+            "Id": "WeaponEffect-SelfInstability_OnFire",
+            "Name": "Thumper Artillery / Flak: Increased Self Instability on Fire",
             "Details": "Tubthumping",
             "Icon": "uixSvgIcon_run_n_gun"
           },
           "statisticData": {
-            "statName": "SelfknockdownCheck_OnFire",
+            "statName": "SelfInstability_OnFire",
             "operation": "Float_Add",
-            "modValue": "0.11",
+            "modValue": "32",
             "modType": "System.Single"
           }
         }
+      ],
+      "RestrictedAmmo": [
+        "Ammunition_Thumper_Fascam",
+        "Ammunition_Thumper_Inferno",
+        "Ammunition_Thumper_Nuke",
+        "Ammunition_Thumper_Shaped",
+        "Ammunition_Thumper_SolidSlug"
       ]
     },
     {
       "Id": "indirectfire",
       "UIName": "Artillery",
-      "Description": "Fire in a high arc at ground targets. -7 Accuracy",
+      "Description": "Fire in a high arc at ground targets. -5 Accuracy",
       "isBaseMode": true,
       "AccuracyModifier": 5,
-      "DirectFireModifier": 2,
-      "EvasivePipsIgnored": 15,
       "ForbiddenRange": 180,
       "MinMissRadius": 5,
-      "MaxMissRadius": 100,
+      "MaxMissRadius": 40,
       "IndirectFireCapable": true,
       "CantHitUnaffecedByPathing": true,
       "AlwaysIndirectVisuals": true,
-      "statusEffects": [
-        {
-          "durationData": {
-            "duration": 1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "OnWeaponFire",
-            "effectTargetType": "Creator",
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Buff",
-          "Description": {
-            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
-            "Name": "Thumper Artillery / Artillery: Increased Self Knockdown on Fire",
-            "Details": "Tubthumping",
-            "Icon": "uixSvgIcon_run_n_gun"
-          },
-          "statisticData": {
-            "statName": "SelfknockdownCheck_OnFire",
-            "operation": "Float_Add",
-            "modValue": "0.22",
-            "modType": "System.Single"
-          }
-        }
+      "IsArtillery": true,
+      "ArtilleryReticleColor": {
+        "C": "#FF0000",
+        "I": 1.5
+      },
+      "ArtilleryReticleRadius": 90,
+      "ArtilleryReticleText": "Thumper Artillery",
+      "RestrictedAmmo": [
+        "Ammunition_Thumper_Shaped",
+        "Ammunition_Thumper_SolidSlug"
       ]
     }
   ],
-  "statusEffects": [],
   "ComponentTags": {
     "items": [
       "LootMagnetBlacklist",
@@ -223,7 +213,8 @@
       "OmniRestriction.{location}",
       "TurretRestriction.{location}",
       "range_extreme",
-      "BAIncompatible"
+      "BAIncompatible",
+      "IgnoreSizeMatters"
     ],
     "tagSetSourceFile": ""
   }

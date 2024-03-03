@@ -11,15 +11,11 @@
         "CategoryID": "CockpitFCS"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.125 * [[Chassis.Tonnage]]",
-        "CBillCost": "1.3 * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "RequireNI",
       "Omni",
+      "TorsoMount",
+      "ReplacesGyro: 60",
       "AcePilot",
       "HSImmune",
       "AllSkills: 1",
@@ -28,8 +24,6 @@
       "AdvancedSensors: 1",
       "SureFoot",
       "StabDamageTaken: -25%",
-      "ReplacesGyro: 60",
-      "IsInterFaceCockpit",
       "NoEject",
       "Sight: +5%",
       "AccuracyER: +3",
@@ -39,6 +33,7 @@
       "NightVision",
       "FailChance: 1%",
       "FailInjury",
+      "AlwaysActive",
       "FCS",
       "ArmorTPCost: -50%",
       "StructureTPCost: -50%",
@@ -46,46 +41,54 @@
       "StructureCBCost: +25%",
       "BleedReduction: 50%"
     ],
-        "CriticalEffects": {
-          "PenalizedEffectIDs": [
-            [
-              "CriticalEffect-Sensors1",
-              "CriticalEffect-SensorsCheck1"
-            ],
-            [
-              "CriticalEffect-Sensors1",
-              "CriticalEffect-SensorsCheck1",
-              "CriticalEffect-GyroCrit",
-              "CriticalEffect-GyroStandupFail"
-            ]
-          ],
-          "DeathMethod": "PilotKilled"
-        },
-    "ActivatableComponent": {
-      "ButtonName": "DNI",
-      "FailFlatChance": 0.01,
-      "FailRoundsStart": 1,
-      "FailChancePerTurn": 0.0,
-      "FailCheckOnActivationEnd": true,
-      "ShutdownOnFail": false,
-      "InjuryOnFail": true,
-      "InjuryReasonInt": 20,
-      "FailPilotingBase": 10,
-      "FailPilotingMult": 0.0001,
-      "CanNotBeActivatedManualy": true,
-      "ActiveByDefault": true,
-      "SwitchOffOnFall": false,
-      "NoUniqueCheck": true,
-      "statusEffects": []
-    },
     "Flags": [
       "not_broken",
       "no_salvage",
       "ignore_shutdown",
       "autorepair"
     ],
+    "ActivatableComponent": {
+      "ButtonName": "DNI",
+      "CanNotBeActivatedManualy": true,
+      "ActiveByDefault": true,
+      "SwitchOffOnFall": false,
+      "NoUniqueCheck": true,
+      "FailFlatChance": 0.01,
+      "FailRoundsStart": 1,
+      "FailChancePerTurn": 0,
+      "FailCheckOnActivationEnd": true,
+      "InjuryOnFail": true,
+      "ShutdownOnFail": false,
+      "FailPilotingBase": 10,
+      "FailPilotingMult": 0.0001,
+      "InjuryReasonInt": 20
+    },
+    "Weights": {
+      "GyroFactor": 0
+    },
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.125 * [[Chassis.Tonnage]]",
+        "CBillCost": "1.3 * [[Chassis.Tonnage]]"
+      }
+    },
     "IBLS": {
       "StorageSize": 5
+    },
+    "CriticalEffects": {
+      "PenalizedEffectIDs": [
+        [
+          "CriticalEffect-Sensors1",
+          "CriticalEffect-SensorsCheck1"
+        ],
+        [
+          "CriticalEffect-Sensors1",
+          "CriticalEffect-SensorsCheck1",
+          "CriticalEffect-GyroCrit",
+          "CriticalEffect-GyroStandupFail"
+        ]
+      ],
+      "DeathMethod": "PilotKilled"
     },
     "Linked": {
       "Links": [
@@ -101,11 +104,8 @@
         }
       ]
     },
-    "Lootable": "Gear_Cockpit_Interface",
     "Sorter": 6,
-    "Weights": {
-      "GyroFactor": 0
-    }
+    "Lootable": "Gear_Cockpit_Interface_TorsoMounted"
   },
   "Description": {
     "Cost": 620000,
@@ -141,6 +141,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "InterFaceMoveAfterShoot",
         "Name": "Cockpit TM Interface: Allow Move After Shooting",
@@ -152,8 +153,7 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -165,6 +165,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "InterfaceureFoot",
         "Name": "Cockpit TM Interface: Enable Guarded After Move",
@@ -177,8 +178,7 @@
         "modValue": "true",
         "modType": "System.Boolean",
         "targetCollection": "Pilot"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -192,13 +192,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "InterfaceStabDmgReduction",
         "Name": "Cockpit TM Interface: Decreased Stability Damage Taken",
         "Details": "Incoming stability damage reduced by 30%.",
         "Icon": "uixSvgIcon_equipment_Gyro"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "ReceivedInstabilityMultiplier",
         "operation": "Float_Multiply",
@@ -218,6 +218,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "GyroGenericThreshhold",
         "Name": "Cockpit TM Interface: Increased Unsteady Threshold",
@@ -229,8 +230,7 @@
         "operation": "Float_Add",
         "modValue": "60.0",
         "modType": "System.Single"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -245,6 +245,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "LV_ADVANCED_SENSORS",
         "Name": "Cockpit TM Interface: Increased Advanced Sensor Strength",
@@ -256,8 +257,7 @@
         "operation": "Int_Add",
         "modValue": "1",
         "modType": "System.Int32"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -269,6 +269,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "MaxEvasion",
         "Name": "Cockpit TM Interface: Increased Max Evasive Pips",
@@ -280,8 +281,7 @@
         "operation": "Int_Add",
         "modValue": "1",
         "modType": "System.Int32"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -294,6 +294,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "GainEvasion",
         "Name": "Cockpit TM Interface: Increased Evasive Pips Gain",
@@ -305,8 +306,7 @@
         "operation": "Int_Add",
         "modValue": "1",
         "modType": "System.Int32"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -320,13 +320,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect_Cockpit_Skill_Gunnery",
         "Name": "Cockpit TM Interface: Increased Gunnery",
         "Details": "Buffs Gunnery Skill",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "Gunnery",
         "operation": "Int_Add",
@@ -347,13 +347,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect_Cockpit_Skill_Piloting",
         "Name": "Cockpit TM Interface: Increased Piloting",
         "Details": "Buffs Piloting Skill",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "Piloting",
         "operation": "Int_Add",
@@ -374,13 +374,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect_Cockpit_Skill_Guts",
         "Name": "Cockpit TM Interface: Increased Guts",
         "Details": "Buffs Guts Skill",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "Guts",
         "operation": "Int_Add",
@@ -401,13 +401,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect_Cockpit_Skill_Tactics",
         "Name": "Cockpit TM Interface: Increased Tactics",
         "Details": "Buffs Tactics Skill",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "Tactics",
         "operation": "Int_Add",
@@ -426,6 +426,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "HeadShotDamageImmunity",
         "Name": "Cockpit TM Interface: Set Ignore Head Injuries",
@@ -437,8 +438,7 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -450,6 +450,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "NightVision",
         "Name": "Cockpit TM Interface: Night Vision",
@@ -461,8 +462,7 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -476,15 +476,15 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "HP-CockpitSensors-Spot",
-        "Name": "Cockpit TM Interface: Increased Vision Range",
+        "Name": "Cockpit TM Interface: Increased Vision Range Multiplier",
         "Details": "Increases spotting distance by 50m.",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
-        "statName": "SpotterDistanceAbsolute",
+        "statName": "SpotterDistanceMultiplier",
         "operation": "Float_Multiply",
         "modValue": "1.05",
         "modType": "System.Single"
@@ -502,14 +502,15 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "RangeBracketBonusAccER",
         "Name": "Cockpit TM Interface: Improved Extra Long Range Accuracy",
         "Details": "range bracket bonus accuracy",
         "Icon": "uixSvgIcon_ability_precisionstrike"
       },
-      "nature": "Buff",
       "statisticData": {
+        "abilifierId": "AccuracyModifierFilter",
         "statName": "CACExtraLongRangeAccuracyMod",
         "operation": "Float_Add",
         "modValue": "-3.0",
@@ -528,14 +529,15 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "RangeBracketBonusAccLR",
         "Name": "Cockpit TM Interface: Improved Long Range Accuracy",
         "Details": "range bracket bonus accuracy",
         "Icon": "uixSvgIcon_ability_precisionstrike"
       },
-      "nature": "Buff",
       "statisticData": {
+        "abilifierId": "AccuracyModifierFilter",
         "statName": "CACLongRangeAccuracyMod",
         "operation": "Float_Add",
         "modValue": "-2.0",
@@ -554,14 +556,15 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "RangeBracketBonusAccMR",
         "Name": "Cockpit TM Interface: Improved Medium Range Accuracy",
         "Details": "range bracket bonus accuracy",
         "Icon": "uixSvgIcon_ability_precisionstrike"
       },
-      "nature": "Buff",
       "statisticData": {
+        "abilifierId": "AccuracyModifierFilter",
         "statName": "CACMediumRangeAccuracyMod",
         "operation": "Float_Add",
         "modValue": "-1.0",
@@ -580,14 +583,15 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "RangeBracketBonusAccSR",
         "Name": "Cockpit TM Interface: Improved Minimum Range Accuracy",
         "Details": "range bracket bonus accuracy",
         "Icon": "uixSvgIcon_ability_precisionstrike"
       },
-      "nature": "Buff",
       "statisticData": {
+        "abilifierId": "AccuracyModifierFilter",
         "statName": "CACMinRangeAccuracyMod",
         "operation": "Float_Add",
         "modValue": "-3.0",
@@ -600,18 +604,18 @@
         "stackLimit": -1
       },
       "targetingData": {
-        "effectTargetsCreator": true,
         "effectTriggerType": "Passive",
-        "effectTargetType": "Creator"
+        "effectTargetType": "Creator",
+        "effectTargetsCreator": true
       },
       "effectType": "StatisticEffect",
+      "nature": "Debuff",
       "Description": {
         "Id": "Torso-Mounted",
         "Name": "Cockpit TM Interface: Is Torso Mount",
         "Details": "Torso mounted cockpit, no injuries on head hits.",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Debuff",
       "statisticData": {
         "statName": "isTorsoMount",
         "operation": "Set",
@@ -631,13 +635,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "CockpitBleed",
         "Name": "Cockpit TM Interface: Decreased Bleeding Rate",
         "Details": "Bleed Rate x 0.6",
         "Icon": "blood"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "BleedingRateMulti",
         "operation": "Float_Multiply",
@@ -658,13 +662,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-getHasBattleArmorMounts",
         "Name": "Cockpit TM Interface: Enable Battle Armor Mounts",
         "Details": "getHasBattleArmorMounts",
         "Icon": "uixSvgIcon_ability_precisionstrike"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "HasBattleArmorMounts",
         "operation": "Set",
@@ -682,6 +686,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "PrimitiveCockpitEject",
         "Name": "Cockpit TM Interface: Disallow Ejection",
@@ -694,8 +699,7 @@
         "modValue": "false",
         "modType": "System.Boolean",
         "targetCollection": "Pilot"
-      },
-      "nature": "Buff"
+      }
     }
   ],
   "ComponentTags": {
@@ -706,10 +710,10 @@
       "WikiWL",
       "DirectNeuralInterface",
       "RequireNI",
-      "BAIncompatible",
-      "ProtoIncompatible",
       "SuperheavyIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "OmniGyro",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

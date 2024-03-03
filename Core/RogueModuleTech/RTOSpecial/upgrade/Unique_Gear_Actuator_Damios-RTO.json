@@ -22,12 +22,16 @@
       "CASEVENT: 100, 200",
       "FluidBoom: 20"
     ],
+    "Flags": [
+      "not_broken",
+      "ignore_shutdown"
+    ],
     "ActivatableComponent": {
       "ButtonName": "HarJel",
       "CanNotBeActivatedManualy": true,
-      "NoUniqueCheck": true,
       "ActivationMessage": "Repairs Initiated",
       "DeactivationMessage": "Repairs Complete",
+      "NoUniqueCheck": true,
       "Repair": {
         "InnerStructure": 1,
         "Armor": 5,
@@ -43,22 +47,14 @@
         }
       }
     },
-        "CriticalEffects": {
-          "PenalizedEffectIDs": [
-            [
-              "CriticalEffect-ArmUpperActuatorDestroyed-{location}"
-            ]
-          ],
-          "OnDestroyedEffectIDs": [
-            "CriticalEffect-ShoulderDestroyed-{location}"
-          ],
-          "OnDestroyedDisableEffectIds": [
-            "CriticalEffect-ArmLowerActuatorDestroyed-{location}",
-            "CriticalEffect-ArmHandActuatorDestroyed-{location}"
-          ]
-        },
+    "Weights": {
+      "ComponentByChassisFactor": 0.03
+    },
     "CASE": {
       "MaximumDamage": 10
+    },
+    "IBLS": {
+      "StorageSize": 2
     },
     "ExplosionProtectionHeat": {
       "MaximumDamage": 100
@@ -66,20 +62,24 @@
     "ExplosionProtectionStability": {
       "MaximumDamage": 200
     },
-    "Flags": [
-      "not_broken",
-      "ignore_shutdown"
-    ],
-    "IBLS": {
-      "StorageSize": 2
+    "CriticalEffects": {
+      "OnDestroyedEffectIDs": [
+        "CriticalEffect-ShoulderDestroyed-{location}"
+      ],
+      "OnDestroyedDisableEffectIds": [
+        "CriticalEffect-ArmLowerActuatorDestroyed-{location}",
+        "CriticalEffect-ArmHandActuatorDestroyed-{location}"
+      ],
+      "PenalizedEffectIDs": [
+        [
+          "CriticalEffect-ArmUpperActuatorDestroyed-{location}"
+        ]
+      ]
     },
-    "Weights": {
-      "ComponentByChassisFactor": 0.03
+    "case": {
+      "MaximumDamage": 10
     }
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 5000000,
     "Rarity": 99,
@@ -97,6 +97,8 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 0,
   "InventorySize": 2,
   "Tonnage": 0,
@@ -116,19 +118,19 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "Status-ReinforcedArmor-{location}",
         "Name": "Upper Shielded RTO: Increased {location} Structure",
         "Details": "Reinforced Leg Armor",
         "Icon": "uixSvgIcon_equipment_ActuatorArm"
       },
-      "nature": "Buff",
       "statisticData": {
-        "effectsPersistAfterDestruction": true,
         "statName": "{location}.Structure",
         "operation": "Float_Multiply",
         "modValue": "1.1",
-        "modType": "System.Single"
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     },
     {
@@ -137,20 +139,20 @@
         "stackLimit": -1
       },
       "targetingData": {
-        "effectTargetsCreator": true,
         "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
+        "effectTargetsCreator": true,
         "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-CombatShield",
         "Name": "Upper Shielded RTO: Decreased {location} Damage Taken Reduction",
         "Details": "All incoming damage reduced by 10%.",
         "Icon": "uixSvgIcon_ability_angelofdeath"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "{location}.DamageReductionMultiplierAll",
         "operation": "Float_Multiply",
@@ -170,13 +172,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "Status-ReinforcedArmor-{location}",
         "Name": "Unique Upper Shielded RTO: Increased {location} Armor",
         "Details": "Reinforced Leg Armor",
         "Icon": "uixSvgIcon_equipment_ActuatorArm"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "{location}.Armor",
         "operation": "Float_Multiply",
@@ -196,19 +198,19 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "Status-ModularArmor-{location}",
         "Name": "Upper Shielded RTO: Increased {location} Armor",
         "Details": "Reinforced Armor",
         "Icon": "uixSvgIcon_equipment_ActuatorArm"
       },
-      "nature": "Buff",
       "statisticData": {
-        "effectsPersistAfterDestruction": true,
         "statName": "{location}.Armor",
         "operation": "Float_Add",
         "modValue": "25",
-        "modType": "System.Single"
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     }
   ],
@@ -216,9 +218,8 @@
     "items": [
       "ignore_shutdown",
       "BLACKLISTED",
-      "BAIncompatible",
-      "ProtoIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

@@ -14,44 +14,6 @@
         "CategoryID": "LegFootActuator"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "1",
-        "CBillCost": "[[Chassis.Tonnage]]"
-      }
-    },
-        "CriticalEffects": {
-          "PenalizedEffectIDs": [
-            [
-              "CriticalEffect-LegFootActuatorDestroyed-{location}",
-              "CriticalEffect-LegFootActuatorDestroyed-{location}-pilot-pen",
-              "CriticalEffect-LegFootActuatorDestroyed-{location}-BtF"
-            ],
-            [
-              "CriticalEffect-LegFootActuatorDestroyed-{location}",
-              "CriticalEffect-LegFootActuatorDestroyed-{location}-pilot-pen",
-              "CriticalEffect-LegFootActuatorDestroyed-{location}-BtF",
-              "CriticalEffect-LegLowerActuatorDestroyed-{location}",
-              "CriticalEffect-LegLowerActuatorDestroyed-{location}-BtF"
-            ],
-            [
-              "CriticalEffect-LegFootActuatorDestroyed-{location}",
-              "CriticalEffect-LegFootActuatorDestroyed-{location}-pilot-pen",
-              "CriticalEffect-LegFootActuatorDestroyed-{location}-BtF",
-              "CriticalEffect-LegLowerActuatorDestroyed-{location}",
-              "CriticalEffect-LegLowerActuatorDestroyed-{location}-BtF",
-              "CriticalEffect-LegUpperActuatorDestroyed-{location}",
-              "CriticalEffect-LegUpperActuatorDestroyed-{location}-BtF"
-            ]
-          ],
-          "OnDestroyedEffectIDs": [
-            "CriticalEffect-HipDestroyed-{location}",
-            "CriticalEffect-HipDestroyed-{location}-pilot-pen",
-            "CriticalEffect-HipDestroyed-{location}-BtF"
-          ],
-          "OnDestroyedDisableEffectIds": [
-          ]
-        },
     "BonusDescriptions": [
       "ChassisBasedWeight: 1%",
       "WalkSpeed: +10%",
@@ -59,26 +21,60 @@
       "CASE",
       "CASEVENT: 150, 300"
     ],
+    "Flags": [
+      "not_broken"
+    ],
+    "Weights": {
+      "ComponentByChassisFactor": 0.01
+    },
     "CASE": { },
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "1",
+        "CBillCost": "[[Chassis.Tonnage]]"
+      }
+    },
+    "IBLS": {
+      "StorageSize": 4
+    },
     "ExplosionProtectionHeat": {
       "MaximumDamage": 150
     },
     "ExplosionProtectionStability": {
       "MaximumDamage": 300
     },
-    "Flags": [
-      "not_broken"
-    ],
-    "IBLS": {
-      "StorageSize": 4
+    "CriticalEffects": {
+      "OnDestroyedEffectIDs": [
+        "CriticalEffect-HipDestroyed-{location}",
+        "CriticalEffect-HipDestroyed-{location}-pilot-pen",
+        "CriticalEffect-HipDestroyed-{location}-BtF"
+      ],
+      "PenalizedEffectIDs": [
+        [
+          "CriticalEffect-LegFootActuatorDestroyed-{location}",
+          "CriticalEffect-LegFootActuatorDestroyed-{location}-pilot-pen",
+          "CriticalEffect-LegFootActuatorDestroyed-{location}-BtF"
+        ],
+        [
+          "CriticalEffect-LegFootActuatorDestroyed-{location}",
+          "CriticalEffect-LegFootActuatorDestroyed-{location}-pilot-pen",
+          "CriticalEffect-LegFootActuatorDestroyed-{location}-BtF",
+          "CriticalEffect-LegLowerActuatorDestroyed-{location}",
+          "CriticalEffect-LegLowerActuatorDestroyed-{location}-BtF"
+        ],
+        [
+          "CriticalEffect-LegFootActuatorDestroyed-{location}",
+          "CriticalEffect-LegFootActuatorDestroyed-{location}-pilot-pen",
+          "CriticalEffect-LegFootActuatorDestroyed-{location}-BtF",
+          "CriticalEffect-LegLowerActuatorDestroyed-{location}",
+          "CriticalEffect-LegLowerActuatorDestroyed-{location}-BtF",
+          "CriticalEffect-LegUpperActuatorDestroyed-{location}",
+          "CriticalEffect-LegUpperActuatorDestroyed-{location}-BtF"
+        ]
+      ]
     },
-    "Weights": {
-      "ComponentByChassisFactor": 0.01
-    }
+    "case": { }
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 349999,
     "Rarity": 1,
@@ -96,6 +92,8 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 0,
   "InventorySize": 4,
   "Tonnage": 0,
@@ -115,6 +113,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "SpeedyLegInstability",
         "Name": "Speedy Leg Actuator Replacement QS: Decreased Unsteady Threshold",
@@ -126,8 +125,7 @@
         "operation": "Float_Add",
         "modValue": "-8",
         "modType": "System.Single"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -141,13 +139,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "SpeedyLegWalk",
         "Name": "Speedy Leg Actuator Replacement QS: Increased Walk Speed",
         "Details": "Leg actuators +10% speed",
         "Icon": "mechanicaljump"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "WalkSpeed",
         "operation": "Float_Multiply",
@@ -159,9 +157,8 @@
   "ComponentTags": {
     "items": [
       "component_type_stock",
-      "BAIncompatible",
-      "ProtoIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

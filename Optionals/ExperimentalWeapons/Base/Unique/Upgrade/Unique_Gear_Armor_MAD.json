@@ -5,12 +5,6 @@
         "CategoryID": "Armor"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.1 * [[Chassis.Tonnage]]",
-        "CBillCost": "1.2 * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "JumpDistance: 20%",
       "HeatGenerated: -10%",
@@ -19,11 +13,12 @@
       "ArmorTPCost: x1.2",
       "ArmorCBCost: x1.4"
     ],
-    "ArmorRepair": {
-      "ArmorTPCost": 1.2,
-      "ArmorCBCost": 1.4
-    },
-    "Color": "Gold",
+    "Flags": [
+      "default",
+      "not_broken",
+      "no_salvage",
+      "autorepair"
+    ],
     "DynamicSlots": {
       "ReservedSlots": 2,
       "BackgroundColor": "GoldHalf",
@@ -32,15 +27,20 @@
       "BonusAText": "Dynamic Slot",
       "BonusBText": " "
     },
-    "Flags": [
-      "default",
-      "not_broken",
-      "no_salvage",
-      "autorepair"
-    ],
+    "ArmorRepair": {
+      "ArmorTPCost": 1.2,
+      "ArmorCBCost": 1.4
+    },
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.1 * [[Chassis.Tonnage]]",
+        "CBillCost": "1.2 * [[Chassis.Tonnage]]"
+      }
+    },
     "IBLS": {
       "StorageSize": 3
-    }
+    },
+    "Color": "Gold"
   },
   "Description": {
     "Cost": 800000,
@@ -78,13 +78,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-LAMHeatGen",
         "Name": "LAM Aluminium Armor: Decreased Heat Generated",
         "Details": "Heat generation reduced by 20%.",
         "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "HeatGenerated",
         "operation": "Float_Multiply",
@@ -105,6 +105,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "LAMArmorSink",
         "Name": "LAM Aluminium Armor: Increased Cooling",
@@ -116,8 +117,7 @@
         "operation": "Int_Add",
         "modValue": "9",
         "modType": "System.Int32"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -131,13 +131,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-Jump_Distance-T3",
         "Name": "LAM Aluminium Armor: Increased Jump Distance",
         "Details": "Conversion Gear increase Jump Distance by 10%",
         "Icon": "uixSvgIcon_equipment_Gyro"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "JumpDistanceMultiplier",
         "operation": "Float_Multiply",
@@ -150,9 +150,8 @@
     "items": [
       "BLACKLISTED",
       "component_type_stock",
-      "BAIncompatible",
-      "ProtoIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

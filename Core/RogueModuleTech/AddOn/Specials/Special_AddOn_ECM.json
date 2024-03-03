@@ -19,26 +19,19 @@
       "PassiveECM: 2, 3",
       "StartsPassive"
     ],
+    "Flags": [
+      "not_broken"
+    ],
     "ActivatableComponent": {
-      "CanActivateAfterMove": true,
-      "CanActivateAfterFire": true,
-      "SafeActivation": true,
       "ButtonName": "ECM Mode",
       "CanNotBeActivatedManualy": false,
-      "NoUniqueCheck": true,
+      "CanActivateAfterMove": true,
+      "CanActivateAfterFire": true,
       "ActiveByDefault": false,
+      "SafeActivation": true,
       "ActivationMessage": "Active",
       "DeactivationMessage": "Passive",
-      "Linkage": {
-        "OnActivate": {
-          "Activate": [],
-          "Deactivate": []
-        },
-        "OnDeactivate": {
-          "Activate": [],
-          "Deactivate": []
-        }
-      },
+      "NoUniqueCheck": true,
       "statusEffects": [
         {
           "durationData": {
@@ -52,13 +45,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "ECMPassiveShield",
             "Name": "Add On ECM Extended Activatable: Increased ECM Shield",
             "Details": "Passive ECM Protection",
             "Icon": "uixSvgIcon_equipment_Gyro"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "LV_ECM_SHIELD",
             "operation": "Int_Add",
@@ -78,13 +71,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "ECMPassiveJam",
             "Name": "Add On ECM Extended Activatable: Decreased ECM Jamming",
             "Details": "Passive Jamming Protection",
             "Icon": "uixSvgIcon_equipment_Gyro"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "LV_ECM_JAMMED",
             "operation": "Int_Add",
@@ -106,13 +99,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "ECMPassiveShield",
             "Name": "Add On ECM Extended Offline Activatable: Increased ECM Shield",
             "Details": "Passive ECM Protection",
             "Icon": "uixSvgIcon_equipment_Gyro"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "LV_ECM_SHIELD",
             "operation": "Int_Add",
@@ -132,13 +125,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "ECMPassiveJam",
             "Name": "Add On ECM Extended Offline Activatable: Decreased ECM Jamming",
             "Details": "Passive Jamming Protection",
             "Icon": "uixSvgIcon_equipment_Gyro"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "LV_ECM_JAMMED",
             "operation": "Int_Add",
@@ -146,7 +139,20 @@
             "modType": "System.Int32"
           }
         }
-      ]
+      ],
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [],
+          "Deactivate": []
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": []
+        }
+      }
+    },
+    "IBLS": {
+      "StorageSize": 1
     },
     "CarryLeftOverUsage": 2,
     "DecoratorComponent": [
@@ -156,17 +162,8 @@
         "Icon": "ComponentGearIcons_ECM",
         "Importance": 30
       }
-    ],
-    "Flags": [
-      "not_broken"
-    ],
-    "IBLS": {
-      "StorageSize": 1
-    }
+    ]
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 300000,
     "Rarity": 1,
@@ -184,6 +181,8 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "Prototype_ElectronicWarfare",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 40,
   "InventorySize": 1,
   "Tonnage": 0,
@@ -196,22 +195,14 @@
       "Name": "JAMMED",
       "ReticleColor": "#00f2ff",
       "Range": 210,
-      "HideOnNotSelected": false,
       "RemoveOnSensorLock": false,
       "State": "Online",
       "ApplySelf": false,
+      "HideOnNotSelected": false,
       "AllyStealthAffection": "None",
       "EnemyStealthAffection": "NegativeOne",
-      "IsPositiveToAlly": false,
       "IsNegativeToEnemy": true,
-      "ownerVFX": [],
-      "targetVFX": [],
-      "removeOwnerVFX": [],
-      "removeTargetVFX": [],
-      "ownerSFX": [],
-      "targetSFX": [],
-      "removeOwnerSFX": [],
-      "removeTargetSFX": [],
+      "IsPositiveToAlly": false,
       "statusEffects": [
         {
           "durationData": {
@@ -227,6 +218,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "LV_ECM_JAM",
             "Name": "Add On ECM Extended / Aura JAMMED: Increased Enemies ECM Jamming",
@@ -238,8 +230,7 @@
             "operation": "Int_Add",
             "modValue": "1",
             "modType": "System.Int32"
-          },
-          "nature": "Debuff"
+          }
         },
         {
           "durationData": {
@@ -252,6 +243,8 @@
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "ECM_disrupt_C3",
             "Name": "Add On ECM Extended / Aura JAMMED: ECM Disrupts C3",
@@ -263,9 +256,7 @@
             "operation": "Float_Add",
             "modValue": "-2",
             "modType": "System.Single"
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Debuff"
+          }
         },
         {
           "durationData": {
@@ -278,6 +269,8 @@
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "ECM_disrupt_C3i",
             "Name": "Add On ECM Extended / Aura JAMMED: ECM Disrupts C3i",
@@ -289,9 +282,7 @@
             "operation": "Float_Add",
             "modValue": "-2",
             "modType": "System.Single"
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Debuff"
+          }
         },
         {
           "durationData": {
@@ -304,6 +295,8 @@
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "ECM_disrupt_C3n",
             "Name": "Add On ECM Extended / Aura JAMMED: ECM Disrupts C3 Nova",
@@ -315,9 +308,7 @@
             "operation": "Float_Add",
             "modValue": "-2",
             "modType": "System.Single"
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Debuff"
+          }
         },
         {
           "durationData": {
@@ -330,6 +321,8 @@
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "ECM_disrupt_C3AI",
             "Name": "Add On ECM Extended / Aura JAMMED: ECM Disrupts C3 AI",
@@ -341,9 +334,7 @@
             "operation": "Float_Add",
             "modValue": "-2",
             "modType": "System.Single"
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Debuff"
+          }
         }
       ]
     },
@@ -352,22 +343,14 @@
       "Name": "CounterJamming",
       "ReticleColor": "#00f2ff",
       "Range": 210,
-      "HideOnNotSelected": true,
       "RemoveOnSensorLock": false,
       "State": "Online",
       "ApplySelf": false,
+      "HideOnNotSelected": true,
       "AllyStealthAffection": "PositiveTwo",
       "EnemyStealthAffection": "None",
-      "IsPositiveToAlly": true,
       "IsNegativeToEnemy": false,
-      "ownerVFX": [],
-      "targetVFX": [],
-      "removeOwnerVFX": [],
-      "removeTargetVFX": [],
-      "ownerSFX": [],
-      "targetSFX": [],
-      "removeOwnerSFX": [],
-      "removeTargetSFX": [],
+      "IsPositiveToAlly": true,
       "statusEffects": [
         {
           "durationData": {
@@ -383,6 +366,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "UNJAM",
             "Name": "Add On ECM Extended / Aura CounterJamming: Decreased Allies ECM Jamming",
@@ -394,19 +378,16 @@
             "operation": "Int_Add",
             "modValue": "-1",
             "modType": "System.Int32"
-          },
-          "nature": "Buff"
+          }
         }
       ]
     }
   ],
-  "statusEffects": [],
   "ComponentTags": {
     "items": [
       "component_type_stock",
       "ElectronicCounterMeasures",
-      "BAIncompatible",
-      "ProtoIncompatible"
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

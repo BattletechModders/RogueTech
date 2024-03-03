@@ -20,11 +20,11 @@
     "BonusDescriptions": [
       "ArmorFactor: -11%",
       "CLPS",
-      "StealthSensors: 20%, 2, 1, 2, 3",
-      "MimeticStealth: 25%, 3, 4",
+      "StealthSensors: -80%, 2, 1, 2, 3",
+      "MimeticStealth: -30%, 3, 4",
       "StealthReserved: 1",
-      "ActiveVisibility: -70%",
-      "ActiveSignature: -15%",
+      "Visibility: -35%",
+      "Signature: -15%",
       "HeatGenerated: +10%",
       "HeatPerTurn: +10",
       "StealthReserved: 1",
@@ -35,26 +35,16 @@
       "CASEVENT: 100, 200"
     ],
     "ActivatableComponent": {
+      "ButtonName": "Stealth",
+      "CanNotBeActivatedManualy": false,
       "CanActivateAfterMove": true,
       "CanActivateAfterFire": false,
-      "SafeActivation": true,
-      "ButtonName": "Stealth",
       "ActiveByDefault": true,
-      "ActivationIsBuff": true,
-      "CanNotBeActivatedManualy": false,
-      "NoUniqueCheck": true,
+      "SafeActivation": true,
       "ActivationMessage": "CLPS On",
       "DeactivationMessage": "CLPS Off",
-      "Linkage": {
-        "OnActivate": {
-          "Activate": [],
-          "Deactivate": []
-        },
-        "OnDeactivate": {
-          "Activate": [],
-          "Deactivate": []
-        }
-      },
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
       "statusEffects": [
         {
           "durationData": {
@@ -69,6 +59,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "LV_Stealth_Effect",
             "Name": "Void Ferro-Fibrous (C) RTO  Activatable: Stealth",
@@ -80,8 +71,7 @@
             "operation": "Set",
             "modValue": "0.8_2_1_2_3",
             "modType": "System.String"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -96,6 +86,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "LV_MIMETIC",
             "Name": "Void Ferro-Fibrous (C) RTO  Activatable: Mimetic Armor",
@@ -105,35 +96,8 @@
           "statisticData": {
             "statName": "LV_MIMETIC",
             "operation": "Set",
-            "modValue": "3_0.25_1_4",
+            "modValue": "3_0.3_1_4",
             "modType": "System.String"
-          },
-          "nature": "Buff"
-        },
-        {
-          "durationData": {
-            "duration": -1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "Passive",
-            "effectTargetType": "Creator",
-            "showInTargetPreview": false,
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
-          "Description": {
-            "Id": "Stealth_Signature_Decrease_Stealth",
-            "Name": "Void Ferro-Fibrous (C) RTO  Activatable: Decreased Sensor Signature",
-            "Details": "Signature Statuseffect.",
-            "Icon": "uixSvgIcon_equipment_TTS"
-          },
-          "nature": "Buff",
-          "statisticData": {
-            "statName": "SensorSignatureModifier",
-            "operation": "Float_Multiply",
-            "modValue": "0.85",
-            "modType": "System.Single"
           }
         },
         {
@@ -148,39 +112,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
-          "Description": {
-            "Id": "Stealth_Visibility_Decrease_Stealth",
-            "Name": "Void Ferro-Fibrous (C) RTO  Activatable: Decreased Visual Signature",
-            "Details": "Visibility Statuseffect.",
-            "Icon": "uixSvgIcon_equipment_TTS"
-          },
           "nature": "Buff",
-          "statisticData": {
-            "statName": "SpottingVisibilityMultiplier",
-            "operation": "Float_Multiply",
-            "modValue": "0.3",
-            "modType": "System.Single"
-          }
-        },
-        {
-          "durationData": {
-            "duration": -1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "Passive",
-            "effectTargetType": "Creator",
-            "showInTargetPreview": false,
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
           "Description": {
             "Id": "Stealth_Heat_Generation_Stealth",
             "Name": "Void Ferro-Fibrous (C) RTO  Activatable: Increased Heat Generated",
             "Details": "Heat generation",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "HeatGenerated",
             "operation": "Float_Multiply",
@@ -201,13 +139,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "Stealth_Heat_Capacity_Stealth",
             "Name": "Void Ferro-Fibrous (C) RTO  Activatable: Decreased Cooling",
             "Details": "Heat Capacity Penalty",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Debuff",
           "statisticData": {
             "statName": "HeatSinkCapacity",
             "operation": "Int_Add",
@@ -216,7 +154,16 @@
           }
         }
       ],
-      "offlineStatusEffects": []
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [],
+          "Deactivate": []
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": []
+        }
+      }
     },
     "ArmorRepair": {
       "ArmorTPCost": 2.2,
@@ -239,12 +186,12 @@
     ],
     "ErrorMessage": "Stealth Armor requires a ECM!",
     "ExplosionProtectionHeat": {
-      "AllLocations": true,
-      "MaximumDamage": 100
+      "MaximumDamage": 100,
+      "AllLocations": true
     },
     "ExplosionProtectionStability": {
-      "AllLocations": true,
-      "MaximumDamage": 200
+      "MaximumDamage": 200,
+      "AllLocations": true
     },
     "Flags": [
       "not_broken"
@@ -282,11 +229,11 @@
     },
     "Weights": {
       "ArmorFactor": 0.89285
+    },
+    "case": {
+      "AllLocations": true
     }
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 3000000,
     "Rarity": 99,
@@ -304,27 +251,78 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 0,
   "InventorySize": 1,
   "Tonnage": 0,
   "AllowedLocations": "CenterTorso",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "statusEffects": [],
+  "statusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "Stealth_Signature_Decrease_Stealth",
+        "Name": "Void Ferro-Fibrous (C) RTO: Decreased Sensor Signature",
+        "Details": "Signature Statuseffect.",
+        "Icon": "uixSvgIcon_equipment_TTS"
+      },
+      "statisticData": {
+        "statName": "SensorSignatureModifier",
+        "operation": "Float_Multiply",
+        "modValue": "0.85",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "Stealth_Visibility_Decrease_Stealth",
+        "Name": "Void Ferro-Fibrous (C) RTO: Decreased Visual Signature",
+        "Details": "Visibility Statuseffect.",
+        "Icon": "uixSvgIcon_equipment_TTS"
+      },
+      "statisticData": {
+        "statName": "SpottingVisibilityMultiplier",
+        "operation": "Float_Multiply",
+        "modValue": "0.65",
+        "modType": "System.Single"
+      }
+    }
+  ],
   "ComponentTags": {
     "items": [
       "BLACKLISTED",
       "component_type_stock",
-      "lv-stealth_t3",
-      "lv-stealth-range-mod_s1_m2_l4_e6",
-      "lv-stealth-move-mod_m8_s5",
       "StealthArmor",
       "ClanArmor",
       "CasedArmor",
-      "BAIncompatible",
-      "ProtoIncompatible",
       "SuperheavyIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

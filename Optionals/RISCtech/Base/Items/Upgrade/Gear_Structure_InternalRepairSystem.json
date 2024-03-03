@@ -8,12 +8,6 @@
         "CategoryID": "Structure"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.4 * [[Chassis.Tonnage]]",
-        "CBillCost": "100 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "StructureFactor: +20%",
       "StructureTPCost: x1.6",
@@ -25,12 +19,18 @@
       "BreachImmunity",
       "Reserved: 6"
     ],
+    "Flags": [
+      "default",
+      "not_broken",
+      "no_salvage",
+      "autorepair"
+    ],
     "ActivatableComponent": {
       "ButtonName": "Repair Systems",
       "CanNotBeActivatedManualy": true,
-      "NoUniqueCheck": true,
       "ActivationMessage": "Repairing",
       "DeactivationMessage": "System OK",
+      "NoUniqueCheck": true,
       "Repair": {
         "InnerStructure": 10,
         "Armor": 15,
@@ -39,29 +39,35 @@
         "VehicleLocations": [],
         "BuildingLocations": [],
         "AffectInstalledLocation": true,
-        "TurnsSinceDamage": 3,
         "repairTrigger": {
           "OnActivation": false,
           "OnDamage": "None",
           "AtEndOfTurn": true
-        }
+        },
+        "TurnsSinceDamage": 3
       }
     },
-    "Color": "Orange",
     "ComponentExplosion": {
-      "ExplosionDamage": 30
+      "ExplosionDamage": 30.0
+    },
+    "Weights": {
+      "StructureFactor": 1.2
+    },
+    "StructureRepair": {
+      "StructureTPCost": 1.6,
+      "StructureCBCost": 1.8
+    },
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.4 * [[Chassis.Tonnage]]",
+        "CBillCost": "100 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
+    "IBLS": {
+      "StorageSize": 7
     },
     "CriticalEffects": {
       "LinkedStatisticName": "Internal Repair System"
-    },
-    "Flags": [
-      "default",
-      "not_broken",
-      "no_salvage",
-      "autorepair"
-    ],
-    "IBLS": {
-      "StorageSize": 7
     },
     "Linked": {
       "Links": [
@@ -91,13 +97,7 @@
         }
       ]
     },
-    "StructureRepair": {
-      "StructureTPCost": 1.6,
-      "StructureCBCost": 1.8
-    },
-    "Weights": {
-      "StructureFactor": 1.2
-    }
+    "Color": "Orange"
   },
   "Description": {
     "Cost": 2880000,
@@ -133,6 +133,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "BreachImmunity",
         "Name": "Internal Repair Systems: Immune to Hull Breaches",
@@ -144,17 +145,15 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     }
   ],
   "ComponentTags": {
     "items": [
       "component_type_stock",
-      "BAIncompatible",
-      "ProtoIncompatible",
       "SuperheavyIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

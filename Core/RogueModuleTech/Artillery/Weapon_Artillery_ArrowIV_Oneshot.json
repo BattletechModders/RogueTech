@@ -13,20 +13,21 @@
     ],
     "BonusDescriptions": [
       "1shot",
-      "AreaOfEffect: 75",
+      "IsArtillery",
+      "NoBonusesArtillery",
+      "AreaOfEffect: 120",
       "AreaOfEffectConversion: 80%",
-      "ARTILLERYMode",
-      "FLAKmode",
-      "DIRECTmode",
-      "PipsIgnored: 15",
-      "ForbiddenRange: 180",
+      "ArtilleryMode",
+      "FlakMode",
+      "DirectMode",
+      "ForbiddenRangeMode: 180, Indirect",
+      "ForbiddenRangeMode: 90, Direct",
       "AMSChance: -30%",
       "MissileHP: 30",
       "AmmoCost: 2000",
       "RecoilExponent: 0.1",
       "AccuracyExponent: -0.067",
-      "BracetoFireMode: 5%, Direct mode & Flak",
-      "BracetoFireMode: 10%, Artillery",
+      "BraceToFireMode: 25, Direct & Flak",
       "WeaponExplosionInternalAmmo: 100, 25, 12.5"
     ],
     "Flags": [
@@ -114,16 +115,15 @@
     {
       "Id": "directfire",
       "UIName": "Direct",
-      "Description": "Fire Directly at line of sight targets at short range. -4 Accuracy",
+      "Description": "Fire Directly at line of sight targets at short range, minimum range 90. -4 Accuracy",
       "isBaseMode": false,
       "AccuracyModifier": 4,
       "DirectFireModifier": 0,
-      "EvasivePipsIgnored": 15,
-      "ForbiddenRange": 180,
-      "ShortRange": -2400,
-      "MediumRange": -2400,
-      "LongRange": -2400,
-      "MaxRange": -2400,
+      "ForbiddenRange": 90,
+      "ShortRange": -2575,
+      "MediumRange": -2575,
+      "LongRange": -2575,
+      "MaxRange": -2575,
       "IndirectFireCapable": false,
       "CantHitUnaffecedByPathing": true,
       "AlwaysIndirectVisuals": false,
@@ -141,15 +141,15 @@
           "effectType": "StatisticEffect",
           "nature": "Buff",
           "Description": {
-            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
-            "Name": "Arrow IV OS / Direct: Increased Self Knockdown on Fire",
+            "Id": "WeaponEffect-SelfInstability_OnFire",
+            "Name": "Arrow IV OS / Direct: Increased Self Instability on Fire",
             "Details": "Tubthumping",
             "Icon": "uixSvgIcon_run_n_gun"
           },
           "statisticData": {
-            "statName": "SelfknockdownCheck_OnFire",
+            "statName": "SelfInstability_OnFire",
             "operation": "Float_Add",
-            "modValue": "0.05",
+            "modValue": "25",
             "modType": "System.Single"
           }
         }
@@ -161,7 +161,6 @@
       "Description": "Fire Directly at flying targets in line of sight. -3 Accuracy",
       "isBaseMode": false,
       "AccuracyModifier": 53,
-      "EvasivePipsIgnored": 15,
       "MinRange": -180,
       "IndirectFireCapable": false,
       "CantHitUnaffecedByPathing": false,
@@ -180,15 +179,15 @@
           "effectType": "StatisticEffect",
           "nature": "Buff",
           "Description": {
-            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
-            "Name": "Arrow IV OS / Flak: Increased Self Knockdown on Fire",
+            "Id": "WeaponEffect-SelfInstability_OnFire",
+            "Name": "Arrow IV OS / Flak: Increased Self Instability on Fire",
             "Details": "Tubthumping",
             "Icon": "uixSvgIcon_run_n_gun"
           },
           "statisticData": {
-            "statName": "SelfknockdownCheck_OnFire",
+            "statName": "SelfInstability_OnFire",
             "operation": "Float_Add",
-            "modValue": "0.05",
+            "modValue": "25",
             "modType": "System.Single"
           }
         }
@@ -197,47 +196,24 @@
     {
       "Id": "indirectfire",
       "UIName": "Artillery",
-      "Description": "Fire in a high arc at ground targets. -7 Accuracy",
+      "Description": "Fire in a high arc at ground targets. -5 Accuracy",
       "isBaseMode": true,
       "AccuracyModifier": 5,
-      "DirectFireModifier": 2,
-      "EvasivePipsIgnored": 15,
       "ForbiddenRange": 180,
       "MinMissRadius": 5,
-      "MaxMissRadius": 100,
+      "MaxMissRadius": 50,
       "IndirectFireCapable": true,
       "CantHitUnaffecedByPathing": true,
       "AlwaysIndirectVisuals": true,
-      "statusEffects": [
-        {
-          "durationData": {
-            "duration": 1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "OnWeaponFire",
-            "effectTargetType": "Creator",
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Buff",
-          "Description": {
-            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
-            "Name": "Arrow IV OS / Artillery: Increased Self Knockdown on Fire",
-            "Details": "Tubthumping",
-            "Icon": "uixSvgIcon_run_n_gun"
-          },
-          "statisticData": {
-            "statName": "SelfknockdownCheck_OnFire",
-            "operation": "Float_Add",
-            "modValue": "0.1",
-            "modType": "System.Single"
-          }
-        }
-      ]
+      "IsArtillery": true,
+      "ArtilleryReticleColor": {
+        "C": "#730073",
+        "I": 1.5
+      },
+      "ArtilleryReticleRadius": 120,
+      "ArtilleryReticleText": "Arrow IV Artillery"
     }
   ],
-  "statusEffects": [],
   "ComponentTags": {
     "items": [
       "LootMagnetBlacklist",
@@ -245,7 +221,8 @@
       "component_type_stock",
       "TurretRestriction.{location}",
       "range_extreme",
-      "BAIncompatible"
+      "BAIncompatible",
+      "IgnoreSizeMatters"
     ],
     "tagSetSourceFile": ""
   }

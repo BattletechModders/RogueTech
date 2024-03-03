@@ -2,7 +2,7 @@
     "Description" : {
         "Id" : "event_co_letsTacoboutThis",
         "Name" : "Tacos! Tacos! Tacos!",
-        "Details" : "Darius stolls in to begin the morning briefing with a less than happy look on his face, \"Does anyone want to take a wild guess as  to what we found opening our latest shipment of machine tools?  Anyone?  Well, let me tell you what we found...\"\r\n\r\nYang, trying hard to keep a straight face, blurts out, 'frozen [[DM.BaseDescriptionDefs[LoreTacoTruck],Taco Truck Mince]]'...\"\r\n\r\nDarius looks straight at Yang, \"You arranged this, didn't you!?\"\r\n\r\nYang is now grinning like a Canopian Cat Girl, \"That stuff is more <i>gold</i> than even [[DM.BaseDescriptionDefs[LoreTripleFBurger],Triple-F Burger]] meat!  Do you know how rare this stuff is to acquire?\"\r\n\r\nDr. Murad sits up, an interested look on her face, \"Please tell me that you know what to do with this stuff.  We do not need another MedBay incident.\"\r\n\r\n\"Shouldn't be a problem Doc.  Taco Truck franchises are all mobile, so their mince is designed to be moved about all the time.  As long as the galley has all the spices, we will be in Taco Heaven! \u2014 my team will take care of the goods.\" Yang flashes you a winning smile. \"In fact, I know someone who's family actually started Taco Truck.  If we can convice him to help in the galley, we'll have the best tacos you have ever tasted!  What do you say, Commander? You want some tacos on the menu?\"",
+        "Details" : "Darius stolls in to begin the morning briefing with a less than happy look on his face, \"Does anyone want to take a wild guess as  to what we found opening our latest shipment of machine tools?  Anyone?  Well, let me tell you what we found...\"\r\n\r\nYang, trying hard to keep a straight face, blurts out, 'frozen [[DM.BaseDescriptionDefs[LoreTacoTruck],Taco Truck Mince]]'...\"\r\n\r\nDarius looks straight at Yang, \"You arranged this, didn't you!?\"\r\n\r\nYang is now grinning like a Canopian Cat Girl, \"That stuff is more <i>gold</i> than even [[DM.BaseDescriptionDefs[LoreTripleFBurger],Triple-F Burger]] meat!  Do you know how rare this stuff is to acquire?\"\r\n\r\nDr. Murad sits up, an interested look on her face, \"Please tell me that you know what to do with this stuff.  We do not need another MedBay incident.\"\r\n\r\n\"Shouldn't be a problem Doc.  Taco Truck franchises are all mobile, so their mince is designed to be moved about all the time.  As long as the galley has all the spices, we will be in Taco Heaven! \u2014 my team will take care of the goods and [[TRT_MW,{TRT_MW.Callsign}]] wants to help me.\" Yang flashes you a winning smile. \"In fact, I know someone else who's family actually started Taco Truck.  If we can convice him to help in the galley, we'll have the best tacos you have ever tasted!  What do you say, Commander? You want some tacos on the menu?\"",
         "Icon" : "uixTxrSpot_tacos.png"
     },
     "Scope" : "Company",
@@ -10,14 +10,16 @@
     "Requirements" : {
         "Scope" : "Company",
         "RequirementTags" : {
-            "items" : [],
-            "tagSetSourceFile" : ""
+            "tagSetSourceFile" : "",
+            "items" : [
+                "argo_rec_hydroponics"
+            ]
         },
         "ExclusionTags" : {
+            "tagSetSourceFile" : "Tags/CompanyTags",
             "items" : [
                 "MODIFIED_STAT_MechTechSkill"
-            ],
-            "tagSetSourceFile" : "Tags/CompanyTags"
+            ]
         },
         "RequirementComparisons" : [
             {
@@ -28,19 +30,66 @@
             }
         ]
     },
-    "AdditionalRequirements" : [],
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "MechWarrior",
+            "RequirementTags" : {
+                "tagSetSourceFile" : "",
+                "items" : []
+            },
+            "ExclusionTags" : {
+                "tagSetSourceFile" : "",
+                "items" : []
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "Injuries",
+                    "op" : "Equal",
+                    "val" : 0,
+                    "valueConstant" : "0"
+                }
+            ]
+        }
+    ],
     "AdditionalObjects" : [
         {
             "Scope" : "SecondaryMechWarrior",
             "Requirements" : {
                 "Scope" : "SecondaryMechWarrior",
                 "RequirementTags" : {
-                    "items" : [],
-                    "tagSetSourceFile" : ""
+                    "tagSetSourceFile" : "",
+                    "items" : []
                 },
                 "ExclusionTags" : {
-                    "items" : [],
-                    "tagSetSourceFile" : ""
+                    "tagSetSourceFile" : "",
+                    "items" : [
+                        "NoTaco4u"
+                    ]
+                },
+                "RequirementComparisons" : [
+                    {
+                        "obj" : "Injuries",
+                        "op" : "Equal",
+                        "val" : 0,
+                        "valueConstant" : "0"
+                    }
+                ]
+            }
+        },
+        {
+            "Scope" : "TertiaryMechWarrior",
+            "Requirements" : {
+                "Scope" : "TertiaryMechWarrior",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : [
+                        "NoTaco4u",
+                        "name_JellyRoll"
+                    ]
                 },
                 "RequirementComparisons" : [
                     {
@@ -66,23 +115,171 @@
                 {
                     "Description" : {
                         "Id" : "outcome_0_0",
-                        "Name" : "no Morale penalty",
+                        "Name" : "no Morale penalty (2MW_add, MW_minus)",
                         "Details" : "You shake your head at Yang. \"I told you last time no more surprises in our supply crates. Chief, I can't afford to have half of your technicians in the MedBay with a bad case of the [[DM.BaseDescriptionDefs[LoreSHITS],S.H.I.T.S.]] Not like last time.\"\r\n\r\nYang visibly sags in his chair as you turn to your XO. \"Darius, put those crates in the incinerator before anyone gets any bright ideas.\"",
                         "Icon" : null
                     },
-                    "Weight" : 100,
-                    "Results" : []
+                    "Weight" : 30,
+                    "Results" : [
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_1",
+                        "Name" : "no Morale penalty (3MW_add, MW_minus)",
+                        "Details" : "You shake your head at Yang. \"I told you last time no more surprises in our supply crates. Chief, I can't afford to have half of your technicians in the MedBay with a bad case of the [[DM.BaseDescriptionDefs[LoreSHITS],S.H.I.T.S.]] Not like last time.\"\r\n\r\nYang visibly sags in his chair as you turn to your XO. \"Darius, put those crates in the incinerator before anyone gets any bright ideas.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 30,
+                    "Results" : [
+                        {
+                            "Scope" : "TertiaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_2",
+                        "Name" : "no Morale penalty (3MW_add only)",
+                        "Details" : "You shake your head at Yang. \"I told you last time no more surprises in our supply crates. Chief, I can't afford to have half of your technicians in the MedBay with a bad case of the [[DM.BaseDescriptionDefs[LoreSHITS],S.H.I.T.S.]] Not like last time.\"\r\n\r\nYang visibly sags in his chair as you turn to your XO. \"Darius, put those crates in the incinerator before anyone gets any bright ideas.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 15,
+                    "Results" : [
+                        {
+                            "Scope" : "TertiaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_3",
+                        "Name" : "no Morale penalty (2MW_add only)",
+                        "Details" : "You shake your head at Yang. \"I told you last time no more surprises in our supply crates. Chief, I can't afford to have half of your technicians in the MedBay with a bad case of the [[DM.BaseDescriptionDefs[LoreSHITS],S.H.I.T.S.]] Not like last time.\"\r\n\r\nYang visibly sags in his chair as you turn to your XO. \"Darius, put those crates in the incinerator before anyone gets any bright ideas.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 15,
+                    "Results" : [
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
                 }
             ],
             "Requirements" : {
                 "Scope" : "Company",
                 "RequirementTags" : {
-                    "items" : [],
-                    "tagSetSourceFile" : ""
+                    "tagSetSourceFile" : "",
+                    "items" : []
                 },
                 "ExclusionTags" : {
-                    "items" : [],
-                    "tagSetSourceFile" : ""
+                    "tagSetSourceFile" : "",
+                    "items" : []
                 },
                 "RequirementComparisons" : []
             }
@@ -99,22 +296,22 @@
                 {
                     "Description" : {
                         "Id" : "outcome_1_0",
-                        "Name" : "Morale & MechTech boost",
+                        "Name" : "Morale & MechTech boost (2MW_add, MW_minus)",
                         "Details" : "Yang's eager face makes it a little harder to strike a stern tone. \"Chief, I'm going to give you this shipment. But,\" you add forcefully, \"this time, I don't want to find half of your technicians in the MedBay. I want those tacos properly prepared and spiced.\"\r\n\r\nLater in the week, word spreads of the dinner that Yang threw for his MechTechs, complete with a fresh batch of Engine Room Rustgut.\r\n\r\nWhile not everyone got a chance to partake, the persistent aroma of freshly prepared tacos has somehow increased refit productivity, and your MechWarriors are happy with the results.",
                         "Icon" : null
                     },
-                    "Weight" : 50,
+                    "Weight" : 15,
                     "Results" : [
                         {
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
@@ -134,12 +331,12 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
@@ -154,28 +351,146 @@
                             "ForceEvents" : null,
                             "TemporaryResult" : true,
                             "ResultDuration" : 7
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
                         }
                     ]
                 },
                 {
                     "Description" : {
                         "Id" : "outcome_1_1",
-                        "Name" : "MechTech loss",
-                        "Details" : "Yang's eager face makes it a little harder to strike a stern tone. \"Chief, I'm going to give you this shipment. But,\" you add forcefully, \"this time, I don't want to find half of your technicians in the MedBay. I mean it.\"\r\n\r\nTwo days later, Yang shows up unannounced in your quarters. There's sweat on his brow, and his mechanical hand fiddles with an oil-soaked rag. \"Boss\u2026 I swear we prepared them properly and with so much spice you'd think we were making an episode of <i>DUNE</i>!\"\r\n\r\nYou unconsciously try to rub the stress out of your forehead. \"What's the bottom line?\"\r\n\r\nYang considers for a moment. \"Well, most of the techs have come down with the [[DM.BaseDescriptionDefs[LoreSHITS],S.H.I.T.S]] so I've scheduled shorter and more frequent shifts, and I've set up a couple rows of emergency latrines. Our efficiency should only be negatively impacted for a week, Boss. Tops.\"",
+                        "Name" : "Morale & MechTech boost (2MW_add)",
+                        "Details" : "Yang's eager face makes it a little harder to strike a stern tone. \"Chief, I'm going to give you this shipment. But,\" you add forcefully, \"this time, I don't want to find half of your technicians in the MedBay. I want those tacos properly prepared and spiced.\"\r\n\r\nLater in the week, word spreads of the dinner that Yang threw for his MechTechs, complete with a fresh batch of Engine Room Rustgut.\r\n\r\nWhile not everyone got a chance to partake, the persistent aroma of freshly prepared tacos has somehow increased refit productivity, and your MechWarriors are happy with the results.",
                         "Icon" : null
                     },
-                    "Weight" : 50,
+                    "Weight" : 10,
                     "Results" : [
                         {
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "5",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 7
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_2",
+                        "Name" : "MechTech loss (3MW_add, MW_minus)",
+                        "Details" : "Yang's eager face makes it a little harder to strike a stern tone. \"Chief, I'm going to give you this shipment. But,\" you add forcefully, \"this time, I don't want to find half of your technicians in the MedBay. I mean it.\"\r\n\r\nTwo days later, Yang shows up unannounced in your quarters. There's sweat on his brow, and his mechanical hand fiddles with an oil-soaked rag. \"Boss\u2026 I swear we prepared them properly and with so much spice you'd think we were making an episode of <i>DUNE</i>!\"\r\n\r\nYou unconsciously try to rub the stress out of your forehead. \"What's the bottom line?\"\r\n\r\nYang considers for a moment. \"Well, most of the techs have come down with the [[DM.BaseDescriptionDefs[LoreSHITS],S.H.I.T.S]] so I've scheduled shorter and more frequent shifts, and I've set up a couple rows of emergency latrines. Our efficiency should only be negatively impacted for a week, Boss. Tops.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 15,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
@@ -190,6 +505,407 @@
                             "ForceEvents" : null,
                             "TemporaryResult" : true,
                             "ResultDuration" : 7
+                        },
+                        {
+                            "Scope" : "TertiaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_3",
+                        "Name" : "Morale & MechTech boost (3MW_add)",
+                        "Details" : "Yang's eager face makes it a little harder to strike a stern tone. \"Chief, I'm going to give you this shipment. But,\" you add forcefully, \"this time, I don't want to find half of your technicians in the MedBay. I want those tacos properly prepared and spiced.\"\r\n\r\nLater in the week, word spreads of the dinner that Yang threw for his MechTechs, complete with a fresh batch of Engine Room Rustgut.\r\n\r\nWhile not everyone got a chance to partake, the persistent aroma of freshly prepared tacos has somehow increased refit productivity, and your MechWarriors are happy with the results.",
+                        "Icon" : null
+                    },
+                    "Weight" : 10,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "5",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 7
+                        },
+                        {
+                            "Scope" : "TertiaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_4",
+                        "Name" : "Morale & MechTech boost (3MW_add, MW_minus)",
+                        "Details" : "Yang's eager face makes it a little harder to strike a stern tone. \"Chief, I'm going to give you this shipment. But,\" you add forcefully, \"this time, I don't want to find half of your technicians in the MedBay. I want those tacos properly prepared and spiced.\"\r\n\r\nLater in the week, word spreads of the dinner that Yang threw for his MechTechs, complete with a fresh batch of Engine Room Rustgut.\r\n\r\nWhile not everyone got a chance to partake, the persistent aroma of freshly prepared tacos has somehow increased refit productivity, and your MechWarriors are happy with the results.",
+                        "Icon" : null
+                    },
+                    "Weight" : 15,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "5",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 7
+                        },
+                        {
+                            "Scope" : "TertiaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_5",
+                        "Name" : "MechTech loss (2MW_add)",
+                        "Details" : "Yang's eager face makes it a little harder to strike a stern tone. \"Chief, I'm going to give you this shipment. But,\" you add forcefully, \"this time, I don't want to find half of your technicians in the MedBay. I mean it.\"\r\n\r\nTwo days later, Yang shows up unannounced in your quarters. There's sweat on his brow, and his mechanical hand fiddles with an oil-soaked rag. \"Boss\u2026 I swear we prepared them properly and with so much spice you'd think we were making an episode of <i>DUNE</i>!\"\r\n\r\nYou unconsciously try to rub the stress out of your forehead. \"What's the bottom line?\"\r\n\r\nYang considers for a moment. \"Well, most of the techs have come down with the [[DM.BaseDescriptionDefs[LoreSHITS],S.H.I.T.S]] so I've scheduled shorter and more frequent shifts, and I've set up a couple rows of emergency latrines. Our efficiency should only be negatively impacted for a week, Boss. Tops.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 10,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 7
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_6",
+                        "Name" : "MechTech loss (2MW_add, MW_minus)",
+                        "Details" : "Yang's eager face makes it a little harder to strike a stern tone. \"Chief, I'm going to give you this shipment. But,\" you add forcefully, \"this time, I don't want to find half of your technicians in the MedBay. I mean it.\"\r\n\r\nTwo days later, Yang shows up unannounced in your quarters. There's sweat on his brow, and his mechanical hand fiddles with an oil-soaked rag. \"Boss\u2026 I swear we prepared them properly and with so much spice you'd think we were making an episode of <i>DUNE</i>!\"\r\n\r\nYou unconsciously try to rub the stress out of your forehead. \"What's the bottom line?\"\r\n\r\nYang considers for a moment. \"Well, most of the techs have come down with the [[DM.BaseDescriptionDefs[LoreSHITS],S.H.I.T.S]] so I've scheduled shorter and more frequent shifts, and I've set up a couple rows of emergency latrines. Our efficiency should only be negatively impacted for a week, Boss. Tops.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 15,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 7
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_7",
+                        "Name" : "MechTech loss (3MW_add)",
+                        "Details" : "Yang's eager face makes it a little harder to strike a stern tone. \"Chief, I'm going to give you this shipment. But,\" you add forcefully, \"this time, I don't want to find half of your technicians in the MedBay. I mean it.\"\r\n\r\nTwo days later, Yang shows up unannounced in your quarters. There's sweat on his brow, and his mechanical hand fiddles with an oil-soaked rag. \"Boss\u2026 I swear we prepared them properly and with so much spice you'd think we were making an episode of <i>DUNE</i>!\"\r\n\r\nYou unconsciously try to rub the stress out of your forehead. \"What's the bottom line?\"\r\n\r\nYang considers for a moment. \"Well, most of the techs have come down with the [[DM.BaseDescriptionDefs[LoreSHITS],S.H.I.T.S]] so I've scheduled shorter and more frequent shifts, and I've set up a couple rows of emergency latrines. Our efficiency should only be negatively impacted for a week, Boss. Tops.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 10,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MechTechSkill",
+                                    "value" : "-2",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 7
+                        },
+                        {
+                            "Scope" : "TertiaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
                         }
                     ]
                 }
@@ -197,12 +913,12 @@
             "Requirements" : {
                 "Scope" : "Company",
                 "RequirementTags" : {
-                    "items" : [],
-                    "tagSetSourceFile" : ""
+                    "tagSetSourceFile" : "",
+                    "items" : []
                 },
                 "ExclusionTags" : {
-                    "items" : [],
-                    "tagSetSourceFile" : ""
+                    "tagSetSourceFile" : "",
+                    "items" : []
                 },
                 "RequirementComparisons" : []
             }
@@ -219,22 +935,22 @@
                 {
                     "Description" : {
                         "Id" : "outcome_2_0",
-                        "Name" : "morale loss",
+                        "Name" : "morale loss (3MW_add, MW_minus)",
                         "Details" : "Shaking your head, you say, \"Chief, I can't afford to have half of your technicians in the MedBay. You do remember last time don't you?\" Turning to your XO, \"Darius, spread the word and see what you can sell them for.\"\r\n\r\nDarius checks in a few days later. \"Sorry, Commander. I haven't gotten any bites yet. Honestly, though, I don't think we can sell them now. Not in good conscience anyway.\"\r\n\r\nLater that week in the mess hall, disgruntlement ripples through the room. Rumors about the lost shipment have apparently begun to spread.",
                         "Icon" : null
                     },
-                    "Weight" : 50,
+                    "Weight" : 15,
                     "Results" : [
                         {
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
@@ -249,28 +965,250 @@
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "TertiaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
                         }
                     ]
                 },
                 {
                     "Description" : {
                         "Id" : "outcome_2_1",
-                        "Name" : "sold for a lot",
-                        "Details" : "Shaking your head, you say, \"Chief, I can't afford to have half of your technicians in the MedBay. Rember last time?\" Turning to your XO, \"Darius, spread the word and see what you can sell them for.\"\r\n\r\nLater that week, Darius delivers unexpectedly good news. \"You won't believe this, Commander. A mercenary company from Liao space had a clause in their contract that their monthly pay would include meals at a Taco Truck. Their XO was <i>desperate</i> to take the mince off our hands, to stave off a mutiny because the closest one was outside of their contract zone.\"\r\n\r\nYang slams his fist on the table. \"See!  Maybe next we will get to enjoy those tacos!\"",
+                        "Name" : "morale loss (3MW_add)",
+                        "Details" : "Shaking your head, you say, \"Chief, I can't afford to have half of your technicians in the MedBay. You do remember last time don't you?\" Turning to your XO, \"Darius, spread the word and see what you can sell them for.\"\r\n\r\nDarius checks in a few days later. \"Sorry, Commander. I haven't gotten any bites yet. Honestly, though, I don't think we can sell them now. Not in good conscience anyway.\"\r\n\r\nLater that week in the mess hall, disgruntlement ripples through the room. Rumors about the lost shipment have apparently begun to spread.",
                         "Icon" : null
                     },
-                    "Weight" : 50,
+                    "Weight" : 10,
                     "Results" : [
                         {
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-5",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "TertiaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_2",
+                        "Name" : "morale loss (2MW_add, MW_minus)",
+                        "Details" : "Shaking your head, you say, \"Chief, I can't afford to have half of your technicians in the MedBay. You do remember last time don't you?\" Turning to your XO, \"Darius, spread the word and see what you can sell them for.\"\r\n\r\nDarius checks in a few days later. \"Sorry, Commander. I haven't gotten any bites yet. Honestly, though, I don't think we can sell them now. Not in good conscience anyway.\"\r\n\r\nLater that week in the mess hall, disgruntlement ripples through the room. Rumors about the lost shipment have apparently begun to spread.",
+                        "Icon" : null
+                    },
+                    "Weight" : 15,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-5",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_3",
+                        "Name" : "morale loss (2MW_add)",
+                        "Details" : "Shaking your head, you say, \"Chief, I can't afford to have half of your technicians in the MedBay. You do remember last time don't you?\" Turning to your XO, \"Darius, spread the word and see what you can sell them for.\"\r\n\r\nDarius checks in a few days later. \"Sorry, Commander. I haven't gotten any bites yet. Honestly, though, I don't think we can sell them now. Not in good conscience anyway.\"\r\n\r\nLater that week in the mess hall, disgruntlement ripples through the room. Rumors about the lost shipment have apparently begun to spread.",
+                        "Icon" : null
+                    },
+                    "Weight" : 10,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-5",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_4",
+                        "Name" : "sold for a lot (3MW_add, MW_minus)",
+                        "Details" : "Shaking your head, you say, \"Chief, I can't afford to have half of your technicians in the MedBay. Rember last time?\" Turning to your XO, \"Darius, spread the word and see what you can sell them for.\"\r\n\r\nLater that week, Darius delivers unexpectedly good news. \"You won't believe this, Commander. A mercenary company from Liao space had a clause in their contract that their monthly pay would include meals at a Taco Truck. Their XO was <i>desperate</i> to take the mince off our hands, to stave off a mutiny because the closest one was outside of their contract zone.\"\r\n\r\nYang slams his fist on the table. \"See!  Maybe next we will get to enjoy those tacos!\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 15,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
@@ -285,6 +1223,228 @@
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "TertiaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_5",
+                        "Name" : "sold for a lot (3MW_add)",
+                        "Details" : "Shaking your head, you say, \"Chief, I can't afford to have half of your technicians in the MedBay. Rember last time?\" Turning to your XO, \"Darius, spread the word and see what you can sell them for.\"\r\n\r\nLater that week, Darius delivers unexpectedly good news. \"You won't believe this, Commander. A mercenary company from Liao space had a clause in their contract that their monthly pay would include meals at a Taco Truck. Their XO was <i>desperate</i> to take the mince off our hands, to stave off a mutiny because the closest one was outside of their contract zone.\"\r\n\r\nYang slams his fist on the table. \"See!  Maybe next we will get to enjoy those tacos!\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 10,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "50000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "TertiaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_6",
+                        "Name" : "sold for a lot (2MW_add, MW_minus)",
+                        "Details" : "Shaking your head, you say, \"Chief, I can't afford to have half of your technicians in the MedBay. Rember last time?\" Turning to your XO, \"Darius, spread the word and see what you can sell them for.\"\r\n\r\nLater that week, Darius delivers unexpectedly good news. \"You won't believe this, Commander. A mercenary company from Liao space had a clause in their contract that their monthly pay would include meals at a Taco Truck. Their XO was <i>desperate</i> to take the mince off our hands, to stave off a mutiny because the closest one was outside of their contract zone.\"\r\n\r\nYang slams his fist on the table. \"See!  Maybe next we will get to enjoy those tacos!\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 15,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "50000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_2_7",
+                        "Name" : "sold for a lot (2MW_add)",
+                        "Details" : "Shaking your head, you say, \"Chief, I can't afford to have half of your technicians in the MedBay. Rember last time?\" Turning to your XO, \"Darius, spread the word and see what you can sell them for.\"\r\n\r\nLater that week, Darius delivers unexpectedly good news. \"You won't believe this, Commander. A mercenary company from Liao space had a clause in their contract that their monthly pay would include meals at a Taco Truck. Their XO was <i>desperate</i> to take the mince off our hands, to stave off a mutiny because the closest one was outside of their contract zone.\"\r\n\r\nYang slams his fist on the table. \"See!  Maybe next we will get to enjoy those tacos!\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 10,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "50000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
                         }
                     ]
                 }
@@ -292,12 +1452,12 @@
             "Requirements" : {
                 "Scope" : "Company",
                 "RequirementTags" : {
-                    "items" : [],
-                    "tagSetSourceFile" : ""
+                    "tagSetSourceFile" : "",
+                    "items" : []
                 },
                 "ExclusionTags" : {
-                    "items" : [],
-                    "tagSetSourceFile" : ""
+                    "tagSetSourceFile" : "",
+                    "items" : []
                 },
                 "RequirementComparisons" : []
             }
@@ -313,28 +1473,26 @@
                 {
                     "Scope" : "Company",
                     "RequirementTags" : {
-                        "items" : [
-                            "argo_rec_hydroponics"
-                        ],
-                        "tagSetSourceFile" : "Tags/CompanyTags"
+                        "tagSetSourceFile" : "Tags/CompanyTags",
+                        "items" : []
                     },
                     "ExclusionTags" : {
-                        "items" : [],
-                        "tagSetSourceFile" : ""
+                        "tagSetSourceFile" : "",
+                        "items" : []
                     },
                     "RequirementComparisons" : []
                 },
                 {
                     "Scope" : "SecondaryMechWarrior",
                     "RequirementTags" : {
+                        "tagSetSourceFile" : "",
                         "items" : [
                             "name_JellyRoll"
-                        ],
-                        "tagSetSourceFile" : ""
+                        ]
                     },
                     "ExclusionTags" : {
-                        "items" : [],
-                        "tagSetSourceFile" : ""
+                        "tagSetSourceFile" : "",
+                        "items" : []
                     },
                     "RequirementComparisons" : []
                 }
@@ -353,12 +1511,12 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
@@ -378,12 +1536,12 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
+                                "tagSetSourceFile" : "",
+                                "items" : []
                             },
                             "Stats" : [
                                 {
@@ -398,6 +1556,63 @@
                             "ForceEvents" : null,
                             "TemporaryResult" : true,
                             "ResultDuration" : 7
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "TertiaryMechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "NoTaco4u"
+                                ]
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
                         }
                     ]
                 }
@@ -405,12 +1620,12 @@
             "Requirements" : {
                 "Scope" : "Company",
                 "RequirementTags" : {
-                    "items" : [],
-                    "tagSetSourceFile" : ""
+                    "tagSetSourceFile" : "",
+                    "items" : []
                 },
                 "ExclusionTags" : {
-                    "items" : [],
-                    "tagSetSourceFile" : ""
+                    "tagSetSourceFile" : "",
+                    "items" : []
                 },
                 "RequirementComparisons" : []
             }
@@ -421,7 +1636,7 @@
     "EventType" : "NORMAL",
     "OneTimeEvent" : false,
     "Tags" : {
-        "items" : [],
-        "tagSetSourceFile" : "tags/EventTags"
+        "tagSetSourceFile" : "tags/EventTags",
+        "items" : []
     }
 }
