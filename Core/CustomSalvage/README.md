@@ -197,6 +197,25 @@ Allow override assembly settings by chassis
 - PriceMult - price multiplier for aseembly this mech
 - PartsMin - if greater or equal 0 - replace min parts multiplier( = maxparts * this rounded up)
 
+## LootableUniqueMech
+```
+    "LootableUniqueMech": {
+      "ReplaceID": "mechdef_annihilator_ANH-2A",
+	  "randomSearchTags":{
+		"ShouldHaveTags":[],
+		"ShouldNotHaveTags":[],
+		"ExcludeSelfTags":[]
+	  }
+    }
+```
+
+Logic:
+if player have unit with this chassiss it will try to replace it.
+if ReplaceID is not empty - it will just replace current unit to this one.
+if ReplaceID is empty it will try to find unit by tags (method is the same as for contract opfor generation, which means CustomUnitsSpawn behavior applied)
+if ShouldHaveTags is empty list - it will fill ShouldHaveTags using MechTags, remove ShouldNotHaveTags (from current custom), remove ExcludeSelfTags (from current custom) 
+and remove UniqieReplaceSearchExcludeTags (got from mod settings, default "unit_rarity_chassis_unique", "unit_unique")
+
 ----------------
 ## Thanks:
 
