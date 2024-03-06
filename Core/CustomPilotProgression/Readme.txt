@@ -1,4 +1,4 @@
-The mod is designed to expand the mechanics of pilot upgrades. Pilot can receive abstract experience, but also specific experience associated with specific actions.
+The mod is created to expand the mechanics of pilot upgrades. Pilot can receive abstract experience, but also specific experience associated with specific actions.
 Particularly by shooting weapons.
 It is possible to define "expertises" - entities in which a pilot gains experience
 
