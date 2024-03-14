@@ -14,12 +14,6 @@
         "CategoryID": "StealthSystem"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.25 * [[Chassis.Tonnage]]",
-        "CBillCost": "200 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "Carapace",
       "HaarJel",
@@ -28,13 +22,12 @@
       "HaarJelDuration: 4",
       "FluidBoom: 30",
       "ArmorFactor: -10%",
-      "StealthSensors: 30%, 3, 2, 3, 4",
-      "MimeticStealth: 30%, 3, 4",
+      "StealthSensors: -80%, 3, 2, 3, 4",
+      "MimeticStealth: -25%, 3, 4",
+      "StealthReservedCT: 1",
+      "Visibility: -25%",
       "HeatGenerated: +5%",
       "HeatPerTurn: +5",
-      "StealthReservedCT: 1",
-      "Visibility: -30%",
-      "Signature: -30%",
       "ArmorTPCost: x1.9",
       "ArmorCBCost: x2.2",
       "EWSystem",
@@ -43,18 +36,17 @@
       "EWSProbe: 10%, 1, 1, 180",
       "XenoLink"
     ],
+    "Flags": [
+      "not_broken",
+      "no_salvage",
+      "autorepair"
+    ],
     "ActivatableComponent": {
       "ButtonName": "Black Carapace",
       "CanNotBeActivatedManualy": true,
-      "NoUniqueCheck": true,
       "ActivationMessage": "Healing",
       "DeactivationMessage": "Healthy",
-      "presistantVFX": {
-        "VFXPrefab": "vfxprfprtl_heatventsm_loop",
-        "VFXScaleX": 1,
-        "VFXScaleY": 1,
-        "VFXScaleZ": 1
-      },
+      "NoUniqueCheck": true,
       "Repair": {
         "InnerStructure": 6,
         "Armor": 16,
@@ -63,58 +55,41 @@
         "VehicleLocations": [],
         "BuildingLocations": [],
         "AffectInstalledLocation": true,
-        "TurnsSinceDamage": 4,
         "repairTrigger": {
           "OnActivation": false,
           "OnDamage": "None",
           "AtEndOfTurn": true
-        }
+        },
+        "TurnsSinceDamage": 4
+      },
+      "presistantVFX": {
+        "VFXPrefab": "vfxprfprtl_heatventsm_loop",
+        "VFXScaleX": 1,
+        "VFXScaleY": 1,
+        "VFXScaleZ": 1
       }
+    },
+    "ComponentExplosion": {
+      "ExplosionDamage": 30.0
+    },
+    "Weights": {
+      "ArmorFactor": 0.9
     },
     "ArmorRepair": {
       "ArmorTPCost": 1.9,
       "ArmorCBCost": 2.2
     },
-    "Color": "Gold",
-    "ComponentExplosion": {
-      "ExplosionDamage": 30
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.25 * [[Chassis.Tonnage]]",
+        "CBillCost": "200 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
+    "IBLS": {
+      "StorageSize": 8
     },
     "CriticalEffects": {
       "LinkedStatisticName": "Black Carapace"
-    },
-    "DecoratorComponent": [
-      {
-        "Text": "X",
-        "Color": "#FF9901",
-        "Icon": "ComponentGearIcons_HEXAGON",
-        "Importance": 50
-      },
-      {
-        "Text": "R",
-        "Color": "#5F24AC",
-        "Icon": "ComponentGearIcons_STEALTH",
-        "Importance": 40
-      },
-      {
-        "Text": "W",
-        "Color": "#248000",
-        "Icon": "ComponentGearIcons_ECM",
-        "Importance": 30
-      },
-      {
-        "Text": "E",
-        "Color": "#FF0E07",
-        "Icon": "ComponentGearIcons_PROBE",
-        "Importance": 20
-      }
-    ],
-    "Flags": [
-      "not_broken",
-      "no_salvage",
-      "autorepair"
-    ],
-    "IBLS": {
-      "StorageSize": 8
     },
     "Linked": {
       "Links": [
@@ -148,14 +123,35 @@
         }
       ]
     },
+    "Color": "Gold",
     "Lootable": "Gear_Armor_BlackCarapace",
-    "Weights": {
-      "ArmorFactor": 0.9
-    }
+    "DecoratorComponent": [
+      {
+        "Text": "X",
+        "Color": "#FF9901",
+        "Icon": "ComponentGearIcons_HEXAGON",
+        "Importance": 50
+      },
+      {
+        "Text": "R",
+        "Color": "#5F24AC",
+        "Icon": "ComponentGearIcons_STEALTH",
+        "Importance": 40
+      },
+      {
+        "Text": "W",
+        "Color": "#248000",
+        "Icon": "ComponentGearIcons_ECM",
+        "Importance": 30
+      },
+      {
+        "Text": "E",
+        "Color": "#FF0E07",
+        "Icon": "ComponentGearIcons_PROBE",
+        "Importance": 20
+      }
+    ]
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 3000000,
     "Rarity": 24,
@@ -173,6 +169,8 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "Prototype_ElectronicWarfare",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 0,
   "InventorySize": 1,
   "Tonnage": 1,
@@ -193,13 +191,6 @@
       "AllyStealthAffection": "None",
       "EnemyStealthAffection": "None",
       "IsPositiveToAlly": true,
-      "onlineVFX": [],
-      "targetVFX": [],
-      "removeTargetVFX": [],
-      "ownerSFX": [],
-      "targetSFX": [],
-      "removeOwnerSFX": [],
-      "removeTargetSFX": [],
       "statusEffects": [
         {
           "durationData": {
@@ -213,6 +204,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "XenoLink_network_grant",
             "Name": "Queen's Carapace / Aura XenoLink: XenoLink Network",
@@ -225,8 +217,7 @@
             "operation": "Float_Add",
             "modValue": "1",
             "modType": "System.Single"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -240,20 +231,20 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "XenoLink_bonus_sensors",
-            "Name": "Queen's Carapace / Aura XenoLink: Increased Allies Sensor Range",
+            "Name": "Queen's Carapace / Aura XenoLink: Increased Allies Sensor Range Multiplier",
             "Details": "C3 network",
             "Icon": "uixSvgIcon_status_ECM-missileDef"
           },
           "statisticData": {
             "abilifierId": "XenoLink_network",
-            "statName": "SensorDistanceAbsolute",
+            "statName": "SensorDistanceMultiplier",
             "operation": "Float_Multiply",
             "modValue": "1.2",
             "modType": "System.Single"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -267,20 +258,20 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "XenoLink_bonus_vision",
-            "Name": "Queen's Carapace / Aura XenoLink: Increased Allies Vision Range",
+            "Name": "Queen's Carapace / Aura XenoLink: Increased Allies Vision Range Multiplier",
             "Details": "C3 network",
             "Icon": "uixSvgIcon_status_ECM-missileDef"
           },
           "statisticData": {
             "abilifierId": "XenoLink_network",
-            "statName": "SpotterDistanceAbsolute",
+            "statName": "SpotterDistanceMultiplier",
             "operation": "Float_Multiply",
             "modValue": "1.05",
             "modType": "System.Single"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -294,6 +285,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "XenoLink_bonus_sensorcheck",
             "Name": "Queen's Carapace / Aura XenoLink: Increased Allies Advanced Sensor Strength",
@@ -306,8 +298,7 @@
             "operation": "Int_Add",
             "modValue": "5",
             "modType": "System.Int32"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -321,6 +312,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "XenoLink_bonus_accuracy",
             "Name": "Queen's Carapace / Aura XenoLink: Improved Allies Accuracy",
@@ -334,8 +326,7 @@
             "modValue": "-1.0",
             "modType": "System.Single",
             "targetCollection": "Weapon"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -349,6 +340,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "XenoLink_bonus_evaignore",
             "Name": "Queen's Carapace / Aura XenoLink: Increased Allies Evasive Pips Ignore",
@@ -362,8 +354,7 @@
             "modValue": "1.0",
             "modType": "System.Single",
             "targetCollection": "Weapon"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -377,6 +368,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "XenoLink_bonus_probe",
             "Name": "Queen's Carapace / Aura XenoLink: Active Probe",
@@ -389,8 +381,7 @@
             "operation": "Int_Add",
             "modValue": "1",
             "modType": "System.Int32"
-          },
-          "nature": "Buff"
+          }
         }
       ]
     },
@@ -398,49 +389,32 @@
       "Id": "MINEDETECTIONAURA",
       "Name": "Minesweeper",
       "ReticleColor": "white",
-      "LineType": "Dots",
-      "isSpining": false,
-      "MinefieldDetector": true,
-      "HideOnNotSelected": true,
       "Range": 180,
       "RemoveOnSensorLock": false,
       "State": "Persistent",
       "ApplySelf": true,
+      "HideOnNotSelected": true,
       "AllyStealthAffection": "None",
       "EnemyStealthAffection": "None",
-      "IsPositiveToAlly": false,
       "IsNegativeToEnemy": false,
-      "ownerVFX": [],
-      "targetVFX": [],
-      "removeOwnerVFX": [],
-      "removeTargetVFX": [],
-      "ownerSFX": [],
-      "targetSFX": [],
-      "removeOwnerSFX": [],
-      "removeTargetSFX": [],
-      "statusEffects": []
+      "IsPositiveToAlly": false,
+      "MinefieldDetector": true,
+      "LineType": "Dots",
+      "isSpining": false
     },
     {
       "Id": "ECM_Aura",
       "Name": "ECM",
       "ReticleColor": "#a31aff",
       "Range": 180,
-      "HideOnNotSelected": false,
       "RemoveOnSensorLock": false,
       "State": "Persistent",
       "ApplySelf": false,
+      "HideOnNotSelected": false,
       "AllyStealthAffection": "PositiveOne",
       "EnemyStealthAffection": "None",
-      "IsPositiveToAlly": true,
       "IsNegativeToEnemy": false,
-      "ownerVFX": [],
-      "targetVFX": [],
-      "removeOwnerVFX": [],
-      "removeTargetVFX": [],
-      "ownerSFX": [],
-      "targetSFX": [],
-      "removeOwnerSFX": [],
-      "removeTargetSFX": [],
+      "IsPositiveToAlly": true,
       "statusEffects": [
         {
           "durationData": {
@@ -455,6 +429,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "LV_ECM_SHIELD",
             "Name": "Queen's Carapace / Aura ECM: Increased Allies ECM Shield",
@@ -466,8 +441,7 @@
             "operation": "Int_Add",
             "modValue": "3",
             "modType": "System.Int32"
-          },
-          "nature": "Buff"
+          }
         }
       ]
     },
@@ -476,22 +450,14 @@
       "Name": "ECCM",
       "ReticleColor": "#a31aff",
       "Range": 180,
-      "HideOnNotSelected": true,
       "RemoveOnSensorLock": false,
       "State": "Persistent",
       "ApplySelf": false,
+      "HideOnNotSelected": true,
       "AllyStealthAffection": "None",
       "EnemyStealthAffection": "Nullify",
-      "IsPositiveToAlly": false,
       "IsNegativeToEnemy": true,
-      "ownerVFX": [],
-      "targetVFX": [],
-      "removeOwnerVFX": [],
-      "removeTargetVFX": [],
-      "ownerSFX": [],
-      "targetSFX": [],
-      "removeOwnerSFX": [],
-      "removeTargetSFX": [],
+      "IsPositiveToAlly": false,
       "statusEffects": [
         {
           "durationData": {
@@ -506,6 +472,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "LV_ECCM_SHIELD",
             "Name": "Queen's Carapace / Aura ECCM: Decreased Enemies ECM Shield",
@@ -517,8 +484,7 @@
             "operation": "Int_Add",
             "modValue": "-2",
             "modType": "System.Int32"
-          },
-          "nature": "Debuff"
+          }
         },
         {
           "durationData": {
@@ -531,6 +497,8 @@
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "ECM_disrupt_C3",
             "Name": "Queen's Carapace / Aura ECCM: ECM Disrupts C3",
@@ -542,9 +510,7 @@
             "operation": "Float_Add",
             "modValue": "-2",
             "modType": "System.Single"
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Debuff"
+          }
         },
         {
           "durationData": {
@@ -557,6 +523,8 @@
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "ECM_disrupt_C3i",
             "Name": "Queen's Carapace / Aura ECCM: ECM Disrupts C3i",
@@ -568,9 +536,7 @@
             "operation": "Float_Add",
             "modValue": "-2",
             "modType": "System.Single"
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Debuff"
+          }
         },
         {
           "durationData": {
@@ -583,6 +549,8 @@
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "ECM_disrupt_C3n",
             "Name": "Queen's Carapace / Aura ECCM: ECM Disrupts C3 Nova",
@@ -594,9 +562,7 @@
             "operation": "Float_Add",
             "modValue": "-2",
             "modType": "System.Single"
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Debuff"
+          }
         },
         {
           "durationData": {
@@ -609,6 +575,8 @@
             "showInTargetPreview": false,
             "showInStatusPanel": false
           },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "ECM_disrupt_C3AI",
             "Name": "Queen's Carapace / Aura ECCM: ECM Disrupts C3 AI",
@@ -620,9 +588,7 @@
             "operation": "Float_Add",
             "modValue": "-2",
             "modType": "System.Single"
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Debuff"
+          }
         }
       ]
     }
@@ -640,6 +606,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "XenoLink_Queen",
         "Name": "Queen's Carapace: XenoLink Queen",
@@ -651,8 +618,7 @@
         "operation": "Float_Add",
         "modValue": "1",
         "modType": "System.Single"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -666,13 +632,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "ECMPassiveShield",
         "Name": "Queen's Carapace: Increased ECM Shield",
         "Details": "Passive ECM Protection",
         "Icon": "uixSvgIcon_equipment_Gyro"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "LV_ECM_SHIELD",
         "operation": "Int_Add",
@@ -692,13 +658,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "ECMPassiveJam",
         "Name": "Queen's Carapace: Decreased ECM Jamming",
         "Details": "Passive Jamming Protection",
         "Icon": "uixSvgIcon_equipment_Gyro"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "LV_ECM_JAMMED",
         "operation": "Int_Add",
@@ -718,6 +684,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "MineFieldDetection",
         "Name": "Queen's Carapace: Increased Minefield Detection",
@@ -729,8 +696,7 @@
         "operation": "Float_Add",
         "modValue": "1",
         "modType": "System.Single"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -744,6 +710,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "LV_PROBE_CARRIER",
         "Name": "Queen's Carapace: Active Probe",
@@ -755,8 +722,7 @@
         "operation": "Int_Add",
         "modValue": "1",
         "modType": "System.Int32"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -770,6 +736,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "LV_ADVANCED_SENSORS",
         "Name": "Queen's Carapace: Increased Advanced Sensor Strength",
@@ -781,8 +748,7 @@
         "operation": "Int_Add",
         "modValue": "1",
         "modType": "System.Int32"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -796,15 +762,15 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "AdvancedProbeSensor",
-        "Name": "Queen's Carapace: Increased Sensor Range",
+        "Name": "Queen's Carapace: Increased Sensor Range Multiplier",
         "Details": "Increased Sight/Sensors/Health.",
         "Icon": "uixSvgIcon_equipment_Comms"
       },
-      "nature": "Buff",
       "statisticData": {
-        "statName": "SensorDistanceAbsolute",
+        "statName": "SensorDistanceMultiplier",
         "operation": "Float_Multiply",
         "modValue": "1.1",
         "modType": "System.Single"
@@ -822,15 +788,15 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "AdvancedProbeSight",
-        "Name": "Queen's Carapace: Increased Vision Range",
+        "Name": "Queen's Carapace: Increased Vision Range Multiplier",
         "Details": "Increases spotting distance by 50m.",
         "Icon": "uixSvgIcon_equipment_Comms"
       },
-      "nature": "Buff",
       "statisticData": {
-        "statName": "SpotterDistanceAbsolute",
+        "statName": "SpotterDistanceMultiplier",
         "operation": "Float_Multiply",
         "modValue": "1.1",
         "modType": "System.Single"
@@ -849,6 +815,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "LV_Stealth_Effect",
         "Name": "Queen's Carapace: Stealth",
@@ -858,10 +825,9 @@
       "statisticData": {
         "statName": "LV_STEALTH",
         "operation": "Set",
-        "modValue": "0.7_3_2_3_4",
+        "modValue": "0.8_3_2_3_4",
         "modType": "System.String"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -876,6 +842,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "LV_MIMETIC",
         "Name": "Queen's Carapace: Mimetic Armor",
@@ -885,35 +852,8 @@
       "statisticData": {
         "statName": "LV_MIMETIC",
         "operation": "Set",
-        "modValue": "3_0.23_1_4",
+        "modValue": "3_0.25_1_4",
         "modType": "System.String"
-      },
-      "nature": "Buff"
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "Stealth_Signature_Decrease_Stealth",
-        "Name": "Queen's Carapace: Decreased Sensor Signature",
-        "Details": "Signature Statuseffect.",
-        "Icon": "uixSvgIcon_equipment_TTS"
-      },
-      "nature": "Buff",
-      "statisticData": {
-        "statName": "SensorSignatureModifier",
-        "operation": "Float_Multiply",
-        "modValue": "0.7",
-        "modType": "System.Single"
       }
     },
     {
@@ -928,17 +868,17 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "Stealth_Visibility_Decrease_Stealth",
         "Name": "Queen's Carapace: Decreased Visual Signature",
         "Details": "Visibility Statuseffect.",
         "Icon": "uixSvgIcon_equipment_TTS"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "SpottingVisibilityMultiplier",
         "operation": "Float_Multiply",
-        "modValue": "0.7",
+        "modValue": "0.75",
         "modType": "System.Single"
       }
     },
@@ -954,13 +894,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "Stealth_Heat_Generation_Stealth",
         "Name": "Queen's Carapace: Increased Heat Generated",
         "Details": "Heat generation",
         "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "HeatGenerated",
         "operation": "Float_Multiply",
@@ -981,13 +921,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Debuff",
       "Description": {
         "Id": "Stealth_Heat_Capacity_Stealth",
         "Name": "Queen's Carapace: Decreased Cooling",
         "Details": "Heat Capacity Penalty",
         "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
-      "nature": "Debuff",
       "statisticData": {
         "statName": "HeatSinkCapacity",
         "operation": "Int_Add",
@@ -1008,6 +948,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "LV_Shares_Vision",
         "Name": "Queen's Carapace: Shared Vision",
@@ -1019,8 +960,7 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     }
   ],
   "ComponentTags": {

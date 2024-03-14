@@ -65,6 +65,7 @@ CriticalHitChanceReceivedMultiplier can be locational
 						   Note! overheat from internal sources (moving, jumping, weapon fire) 
 						   still can make heat level pass this value
 "AMSUseAttractiveness": true, - if true AMS calculation will try to shoot down missiles with higher attractiveness first
+"WeaponUseAmmoInstalledLocationTag": "ammo_installed_location_only" - if weapon or chassis have this flag this weapon (or all weapons of this unit if tag is in chassis) can only use ammo installed same location
 "AMSDefaultInterceptedTrace": 2, - default value for weapon AMSInterceptedTrace
 "RestoreEjectedWeapons": true, - ejected weapon will not be counted as destroyed at the end of the battle
 "HexSizeForMods": 30 - hex size used for moved hexes modifiers calculations
@@ -371,7 +372,15 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
 
 "AIPathingOptimization": true - enable/disable AI pathing optimization
 "AIPathingSamplesLimit": 120 - amount of AI move destination positions AI can have if AIPathingOptimization enabled
+
 "AIPathingMultithread": false - enable/disable AI pathing multithread (code by Ashakar) assumed to be off cause does not do anything good
+
+ "PhysicsAoE_Weapons": true - if true weapons AoE process will use raycasting to limit affected targets rather than just range
+ "PhysicsAoE_Deffered": true - if true deffered effects AoE process will use raycasting to limit affected targets rather than just range
+ "PhysicsAoE_Minefield": true - if true minefields explosion effects AoE process will use raycasting to limit affected targets rather than just range
+ "PhysicsAoE_API": true        - if true explosion API (mostly used by engine explosions) will use raycasting to limit affected targets rather than just range
+ "PhysicsAoE_API_Height" : 10f - default height of AoE explosions for an API use
+ "AIAwareArtillery":true - if true AI will try to avoid artillery strikes (not vanilla artillery but CAC ones, look "IsArtillery" weapon param)
 
 "AIMinefieldAware": true - if true AI will try to avoid significant direct minefield damage
 "AIMinefieldAwareAllMines": false - if true AI will be aware of all minefields not only visible ones
@@ -518,6 +527,16 @@ new fields
 	                                                     chance is based on distance from center of effect. 
 	  "sticky": true                                     - it true on success hit deferred effect position links to target. Does not matter if it moves or become dead.
   },
+  "IsArtillery": NotSet,                                 - if True delayed attack logic will be used for this weapon. Can be set for mode, ammo and weapon.
+  "ArtilleryReticleColor": { "C":"#FF0000", "I": 1.5 },  - Color for reticle. Will be used value for instance (mode, ammo, weapon) which has IsArtillery: True
+  "ArtilleryReticleRadius" : 120,                        - Color radius for reticle. Will be used value for instance (mode, ammo, weapon) which has IsArtillery: True
+  "ArtilleryReticleText": "Text",                        - Text for reticle. Will be used value for instance (mode, ammo, weapon) which has IsArtillery: True
+                           Artillery logic explanation: if while attack request in weapons list there are any weapons with effective IsArtillery: True
+						   no weapon will fire, unit braces and goes to the artillery mode. Reticle indicator created. 
+						   Next round this unit will be only able to fire or brace. If player chooses to fire - weapon with IsArtillery will fire position selected prev. round
+						   If player chooses brace - unit braces and goes out from artillery mode without attack performing.
+						   AI can fire artillery same rules. AI knows about incoming artillery strikes and will try to get out from danger area if can.
+
   "ShotsPerAmmo": 1,              - shots per ammo. Example: you have effective shots count = 4 and ShotsPerAmmo = 0.5. After fire ammo will be decremented by 2 (4 * 0.5)
                                     Mutiplicative per weapon, ammo, mode. Default value 1. NOTE: Ammo decrement value rounded to nearest integer. 
                                     If it will be less than 0.5 - it will be your own problem - no ammo will be used.

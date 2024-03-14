@@ -8,12 +8,6 @@
         "CategoryID": "EnginePart"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.55 * [[Chassis.Tonnage]]",
-        "CBillCost": "150 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "EngineWeight: +20%",
       "ArmorTPCost: -10%",
@@ -24,16 +18,20 @@
       "CoolantCost: 10",
       "CoolantCostMulti: -10%"
     ],
+    "Flags": [
+      "vital",
+      "default",
+      "not_broken",
+      "no_salvage",
+      "autorepair"
+    ],
     "ActivatableComponent": {
-      "ExplodeOnDamage": true,
       "CanNotBeActivatedManualy": true,
       "NoUniqueCheck": true,
+      "ExplodeOnDamage": true,
       "Explosion": {
         "Chance": 0.2,
         "ExplosionMessage": "Core Meltdown!",
-        "VFX": "WFX_Nuke",
-        "TempDesignMask": "DesignMaskRadiation",
-        "VFXActorStat": "EngineExplodeVFX",
         "RangeActorStat": "EngineExplodeRange",
         "DamageActorStat": "EngineExplodeDamage",
         "HeatActorStat": "EngineExplodeHeat",
@@ -43,32 +41,33 @@
         "FireTerrainStrengthActorStat": "EngineExplodeFireStrength",
         "FireDurationWithoutForestActorStat": "EngineExplodeTerrainDuration",
         "FireTerrainCellRadiusActorStat": "EngineExplodeFireRadius",
+        "VFXActorStat": "EngineExplodeVFX",
+        "TempDesignMask": "DesignMaskRadiation",
         "TempDesignMaskActorStat": "EngineExplodeDesignMask",
         "TempDesignMaskTurnsActorStat": "EngineExplodeDesignMaskDuration",
-        "TempDesignMaskCellRadiusActorStat": "EngineExplodeDesignMaskRadius"
-      },
-      "statusEffects": []
+        "TempDesignMaskCellRadiusActorStat": "EngineExplodeDesignMaskRadius",
+        "VFX": "WFX_Nuke"
+      }
+    },
+    "Weights": {
+      "EngineFactor": 1.2
     },
     "ArmorRepair": {
       "ArmorTPCost": 0.9,
       "ArmorCBCost": 0.9
     },
-    "Flags": [
-      "vital",
-      "default",
-      "not_broken",
-      "no_salvage",
-      "autorepair"
-    ],
-    "HeatSinkingCost": {
-      "HeatUpkeepCost": 10,
-      "HeatUpkeepMult": 0.9
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.55 * [[Chassis.Tonnage]]",
+        "CBillCost": "150 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
     },
     "IBLS": {
       "StorageSize": 4
     },
-    "Weights": {
-      "EngineFactor": 1.2
+    "HeatSinkingCost": {
+      "HeatUpkeepCost": 10,
+      "HeatUpkeepMult": 0.9
     }
   },
   "Description": {
@@ -107,13 +106,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "Stealth_Signature_Decrease_Stealth",
         "Name": "Engine Primitive: Increased Sensor Signature",
         "Details": "Signature Statuseffect.",
         "Icon": "uixSvgIcon_equipment_TTS"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "SensorSignatureModifier",
         "operation": "Float_Multiply",
@@ -133,13 +132,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "Stealth_Visibility_Decrease_Stealth",
         "Name": "Engine Primitive: Increased Visual Signature",
         "Details": "Visibility Statuseffect.",
         "Icon": "uixSvgIcon_equipment_TTS"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "SpottingVisibilityMultiplier",
         "operation": "Float_Multiply",
@@ -159,13 +158,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "Obviously",
         "Name": "Engine Primitive: Probe Ping",
         "Details": "Easy to Spot",
         "Icon": "uixSvgIcon_equipment_Gyro"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "LV_PROBE_PING",
         "operation": "Int_Add",
@@ -185,19 +184,19 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "PrimitiveExplosionRange",
         "Name": "Engine Primitive: Increased Engine Explosion Range",
         "Details": "Engine very boom",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
-        "effectsPersistAfterDestruction": true,
         "statName": "EngineExplodeRange",
         "operation": "Float_Multiply",
         "modValue": "2",
-        "modType": "System.Single"
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     },
     {
@@ -212,19 +211,19 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "PrimitiveExplosionDamage",
         "Name": "Engine Primitive: Increased Engine Explode Damage",
         "Details": "Engine very boom",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
-        "effectsPersistAfterDestruction": true,
         "statName": "EngineExplodeDamage",
         "operation": "Float_Multiply",
         "modValue": "2",
-        "modType": "System.Single"
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     },
     {
@@ -239,19 +238,19 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "PrimitiveExplosionHeat",
         "Name": "Engine Primitive: Increased Engine Explosion Heat",
         "Details": "Engine very boom",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
-        "effectsPersistAfterDestruction": true,
         "statName": "EngineExplodeHeat",
         "operation": "Float_Multiply",
         "modValue": "2",
-        "modType": "System.Single"
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     },
     {
@@ -266,19 +265,19 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "PrimitiveExplosionStability",
         "Name": "Engine Primitive: Increased Engine Explosion Stability Damage",
         "Details": "Engine very boom",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
-        "effectsPersistAfterDestruction": true,
         "statName": "EngineExplodeStability",
         "operation": "Float_Multiply",
         "modValue": "2",
-        "modType": "System.Single"
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     },
     {
@@ -293,19 +292,19 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "PrimitiveExplosionFireStrength",
         "Name": "Engine Primitive: Increased Engine Explosion Fire Strength",
         "Details": "Engine very boom",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
-        "effectsPersistAfterDestruction": true,
         "statName": "EngineExplodeFireStrength",
         "operation": "Float_Multiply",
         "modValue": "2",
-        "modType": "System.Single"
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     },
     {
@@ -320,19 +319,19 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "PrimitiveExplosionFireRadius",
         "Name": "Engine Primitive: Increased Engine Explosion Fire Size",
         "Details": "Engine very boom",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
-        "effectsPersistAfterDestruction": true,
         "statName": "EngineExplodeFireRadius",
         "operation": "Float_Multiply",
         "modValue": "2",
-        "modType": "System.Single"
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     },
     {
@@ -347,19 +346,19 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "PrimitiveExplosionFireMaskDuration",
         "Name": "Engine Primitive: Increased Engine Explosion Effect Duration",
         "Details": "Engine very boom",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
-        "effectsPersistAfterDestruction": true,
         "statName": "EngineExplodeDesignMaskDuration",
         "operation": "Float_Multiply",
         "modValue": "2",
-        "modType": "System.Single"
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     },
     {
@@ -374,19 +373,19 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "PrimitiveExplosionMaskRadius",
         "Name": "Engine Primitive: Increased Engine Explosion Effect Size",
         "Details": "Engine very boom",
         "Icon": "uixSvgIcon_equipment_Cockpit"
       },
-      "nature": "Buff",
       "statisticData": {
-        "effectsPersistAfterDestruction": true,
         "statName": "EngineExplodeDesignMaskRadius",
         "operation": "Float_Multiply",
         "modValue": "2",
-        "modType": "System.Single"
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     }
   ],
@@ -394,11 +393,10 @@
     "items": [
       "EnginePart.{location}",
       "component_type_stock",
-      "BAIncompatible",
-      "ProtoIncompatible",
       "EnginePart",
       "Primitive",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

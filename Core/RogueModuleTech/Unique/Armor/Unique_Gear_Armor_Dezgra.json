@@ -16,14 +16,11 @@
     },
     "BonusDescriptions": [
       "ArmorFactor: -17%",
-      "Stealth",
       "CLPS",
       "Reserved: 7",
       "StealthReservedCT: 2",
-      "StealthSensors: 80%, 5, 2, 4, 6",
-      "MimeticStealth: 50%, 4, 5",
-      "ActiveVisibility: -50%",
-      "ActiveSignature: -70%",
+      "StealthSensors: -80%, 5, 2, 4, 6",
+      "MimeticStealth: -10%, 8, 2",
       "HeatGenerated: +30%",
       "HeatPerTurn: +25",
       "ReqECM",
@@ -33,16 +30,16 @@
       "CASEVENT: 100, 200"
     ],
     "ActivatableComponent": {
+      "ButtonName": "CLPS/NSS",
+      "CanNotBeActivatedManualy": false,
       "CanActivateAfterMove": true,
       "CanActivateAfterFire": false,
-      "SafeActivation": true,
-      "ButtonName": "CLPS/NSS",
       "ActiveByDefault": true,
-      "ActivationIsBuff": true,
-      "CanNotBeActivatedManualy": false,
-      "NoUniqueCheck": true,
+      "SafeActivation": true,
       "ActivationMessage": "CLPS/NSS On",
       "DeactivationMessage": "CLPS/NSS Off",
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
       "statusEffects": [
         {
           "durationData": {
@@ -57,6 +54,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "LV_Stealth_Effect",
             "Name": "N/C-FF Armor (C) Activatable: Stealth",
@@ -68,8 +66,7 @@
             "operation": "Set",
             "modValue": "0.8_5_2_4_6",
             "modType": "System.String"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -84,6 +81,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "LV_MIMETIC",
             "Name": "N/C-FF Armor (C) Activatable: Mimetic Armor",
@@ -93,35 +91,8 @@
           "statisticData": {
             "statName": "LV_MIMETIC",
             "operation": "Set",
-            "modValue": "4_0.125_1_5",
+            "modValue": "8_0.1_1_2",
             "modType": "System.String"
-          },
-          "nature": "Buff"
-        },
-        {
-          "durationData": {
-            "duration": -1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "Passive",
-            "effectTargetType": "Creator",
-            "showInTargetPreview": false,
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
-          "Description": {
-            "Id": "Stealth_Signature_Decrease_Stealth",
-            "Name": "N/C-FF Armor (C) Activatable: Decreased Sensor Signature",
-            "Details": "Signature Statuseffect.",
-            "Icon": "uixSvgIcon_equipment_TTS"
-          },
-          "nature": "Buff",
-          "statisticData": {
-            "statName": "SensorSignatureModifier",
-            "operation": "Float_Multiply",
-            "modValue": "0.3",
-            "modType": "System.Single"
           }
         },
         {
@@ -136,39 +107,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
-          "Description": {
-            "Id": "Stealth_Visibility_Decrease_Stealth",
-            "Name": "N/C-FF Armor (C) Activatable: Decreased Visual Signature",
-            "Details": "Visibility Statuseffect.",
-            "Icon": "uixSvgIcon_equipment_TTS"
-          },
           "nature": "Buff",
-          "statisticData": {
-            "statName": "SpottingVisibilityMultiplier",
-            "operation": "Float_Multiply",
-            "modValue": "0.5",
-            "modType": "System.Single"
-          }
-        },
-        {
-          "durationData": {
-            "duration": -1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "Passive",
-            "effectTargetType": "Creator",
-            "showInTargetPreview": false,
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
           "Description": {
             "Id": "Stealth_Heat_Generation_Stealth",
             "Name": "N/C-FF Armor (C) Activatable: Increased Heat Generated",
             "Details": "Heat generation",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "HeatGenerated",
             "operation": "Float_Multiply",
@@ -189,13 +134,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "Stealth_Heat_Capacity_Stealth",
             "Name": "N/C-FF Armor (C) Activatable: Decreased Cooling",
             "Details": "Heat Capacity Penalty",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Debuff",
           "statisticData": {
             "statName": "HeatSinkCapacity",
             "operation": "Int_Add",
@@ -203,12 +148,11 @@
             "modType": "System.Int32"
           }
         }
-      ],
-      "offlineStatusEffects": []
+      ]
     },
     "ArmorRepair": {
-      "ArmorTPCost": 2,
-      "ArmorCBCost": 2
+      "ArmorTPCost": 2.0,
+      "ArmorCBCost": 2.0
     },
     "CASE": {
       "AllLocations": true
@@ -235,12 +179,12 @@
     },
     "ErrorMessage": "Stealth Armor requires a ECM!",
     "ExplosionProtectionHeat": {
-      "AllLocations": true,
-      "MaximumDamage": 100
+      "MaximumDamage": 100,
+      "AllLocations": true
     },
     "ExplosionProtectionStability": {
-      "AllLocations": true,
-      "MaximumDamage": 200
+      "MaximumDamage": 200,
+      "AllLocations": true
     },
     "Flags": [
       "not_broken",
@@ -284,11 +228,11 @@
     },
     "Weights": {
       "ArmorFactor": 0.83333
+    },
+    "case": {
+      "AllLocations": true
     }
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 1500000,
     "Rarity": 99,
@@ -306,13 +250,14 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 0,
   "InventorySize": 1,
   "Tonnage": 0,
   "AllowedLocations": "All",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "statusEffects": [],
   "ComponentTags": {
     "items": [
       "BLACKLISTED",
@@ -321,10 +266,9 @@
       "Chameleon",
       "ClanArmor",
       "CasedArmor",
-      "BAIncompatible",
-      "ProtoIncompatible",
       "SuperheavyIncompatible",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

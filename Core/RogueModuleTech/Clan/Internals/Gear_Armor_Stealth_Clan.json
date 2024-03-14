@@ -19,8 +19,8 @@
       "CASEVENT: 100, 200",
       "Stealth",
       "StealthSensors: 70%, 3, 2, 2, 3",
-      "Visibility: -20%",
-      "Signature: -20%",
+      "Visibility: -15%",
+      "Signature: -15%",
       "StealthReserved: 1",
       "ActiveHeatGenerated: +10%",
       "ActiveHeatPerTurn: +6",
@@ -29,30 +29,16 @@
       "ArmorCBCost: x1.8"
     ],
     "ActivatableComponent": {
+      "ButtonName": "Stealth",
+      "CanNotBeActivatedManualy": false,
       "CanActivateAfterMove": true,
       "CanActivateAfterFire": false,
-      "SafeActivation": true,
-      "ButtonName": "Stealth",
       "ActiveByDefault": true,
-      "ActivationIsBuff": true,
-      "CanNotBeActivatedManualy": false,
-      "NoUniqueCheck": true,
+      "SafeActivation": true,
       "ActivationMessage": "Stealth Activated",
       "DeactivationMessage": "Stealth Deactivated",
-      "Linkage": {
-        "OnActivate": {
-          "Activate": [
-            "Camouflage"
-          ],
-          "Deactivate": []
-        },
-        "OnDeactivate": {
-          "Activate": [],
-          "Deactivate": [
-            "Camouflage"
-          ]
-        }
-      },
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
       "statusEffects": [
         {
           "durationData": {
@@ -67,6 +53,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "LV_Stealth_Effect",
             "Name": "Stealth (C) Activatable: Stealth",
@@ -78,33 +65,6 @@
             "operation": "Set",
             "modValue": "0.7_3_2_2_3",
             "modType": "System.String"
-          },
-          "nature": "Buff"
-        },
-        {
-          "durationData": {
-            "duration": -1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "Passive",
-            "effectTargetType": "Creator",
-            "showInTargetPreview": false,
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
-          "Description": {
-            "Id": "Stealth_Signature_Decrease_CSTEALTH",
-            "Name": "Stealth (C) Activatable: Decreased Sensor Signature",
-            "Details": "Signature Statuseffect.",
-            "Icon": "uixSvgIcon_equipment_TTS"
-          },
-          "nature": "Buff",
-          "statisticData": {
-            "statName": "SensorSignatureModifier",
-            "operation": "Float_Multiply",
-            "modValue": "0.80",
-            "modType": "System.Single"
           }
         },
         {
@@ -119,39 +79,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
-          "Description": {
-            "Id": "Stealth_Visibility_Decrease_CSTEALTH",
-            "Name": "Stealth (C) Activatable: Decreased Visual Signature",
-            "Details": "Visibility Statuseffect.",
-            "Icon": "uixSvgIcon_equipment_TTS"
-          },
           "nature": "Buff",
-          "statisticData": {
-            "statName": "SpottingVisibilityMultiplier",
-            "operation": "Float_Multiply",
-            "modValue": "0.80",
-            "modType": "System.Single"
-          }
-        },
-        {
-          "durationData": {
-            "duration": -1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "Passive",
-            "effectTargetType": "Creator",
-            "showInTargetPreview": false,
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
           "Description": {
             "Id": "Stealth_Heat_Generation_CSTEALTH",
             "Name": "Stealth (C) Activatable: Increased Heat Generated",
             "Details": "Heat generation",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "HeatGenerated",
             "operation": "Float_Multiply",
@@ -172,13 +106,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "Stealth_Heat_Capacity_CSTEALTH",
             "Name": "Stealth (C) Activatable: Decreased Cooling",
             "Details": "Heat Capacity Penalty",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Debuff",
           "statisticData": {
             "statName": "HeatSinkCapacity",
             "operation": "Int_Add",
@@ -187,7 +121,20 @@
           }
         }
       ],
-      "offlineStatusEffects": []
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [
+            "Camouflage"
+          ],
+          "Deactivate": []
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": [
+            "Camouflage"
+          ]
+        }
+      }
     },
     "ArmorRepair": {
       "ArmorTPCost": 1.5,
@@ -196,19 +143,27 @@
     "CASE": {
       "AllLocations": true
     },
-    "ExplosionProtectionHeat": {
-      "AllLocations": true,
-      "MaximumDamage": 100
-    },
-    "ExplosionProtectionStability": {
-      "AllLocations": true,
-      "MaximumDamage": 200
-    },
     "Color": "Gold",
     "CriticalEffects": {
       "LinkedStatisticName": "Stealth System"
     },
+    "DecoratorComponent": [
+      {
+        "Text": "S",
+        "Color": "#5F24AC",
+        "Icon": "ComponentGearIcons_STEALTH",
+        "Importance": 40
+      }
+    ],
     "ErrorMessage": "Stealth Armor requires a ECM!",
+    "ExplosionProtectionHeat": {
+      "MaximumDamage": 100,
+      "AllLocations": true
+    },
+    "ExplosionProtectionStability": {
+      "MaximumDamage": 200,
+      "AllLocations": true
+    },
     "Flags": [
       "not_broken"
     ],
@@ -243,14 +198,9 @@
         }
       ]
     },
-    "DecoratorComponent": [
-      {
-        "Text": "S",
-        "Color": "#5F24AC",
-        "Icon": "ComponentGearIcons_STEALTH",
-        "Importance": 40
-      }
-    ]
+    "case": {
+      "AllLocations": true
+    }
   },
   "Description": {
     "Cost": 1200000,
@@ -275,15 +225,67 @@
   "AllowedLocations": "CenterTorso",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "statusEffects": [],
+  "statusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "Stealth_Signature_Decrease_CSTEALTH",
+        "Name": "Stealth (C): Decreased Sensor Signature",
+        "Details": "Signature Statuseffect.",
+        "Icon": "uixSvgIcon_equipment_TTS"
+      },
+      "statisticData": {
+        "statName": "SensorSignatureModifier",
+        "operation": "Float_Multiply",
+        "modValue": "0.85",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "Stealth_Visibility_Decrease_CSTEALTH",
+        "Name": "Stealth (C): Decreased Visual Signature",
+        "Details": "Visibility Statuseffect.",
+        "Icon": "uixSvgIcon_equipment_TTS"
+      },
+      "statisticData": {
+        "statName": "SpottingVisibilityMultiplier",
+        "operation": "Float_Multiply",
+        "modValue": "0.85",
+        "modType": "System.Single"
+      }
+    }
+  ],
   "ComponentTags": {
     "items": [
       "component_type_stock",
       "ClanArmor",
       "StealthArmor",
-      "BAIncompatible",
-      "ProtoIncompatible",
-      "SuperheavyIncompatible"
+      "SuperheavyIncompatible",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

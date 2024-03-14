@@ -11,12 +11,6 @@
         "CategoryID": "Supercharger"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.6 * [[Chassis.Tonnage]]",
-        "CBillCost": "400 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "Activatable",
       "OnlyBeforeMove",
@@ -30,11 +24,18 @@
       "CoolantCost: 3",
       "CoolantCostMulti: 1%"
     ],
+    "Flags": [
+      "vital",
+      "engine_part",
+      "not_broken",
+      "no_salvage"
+    ],
     "ActivatableComponent": {
       "ButtonName": "SuperCharger",
       "CanNotBeActivatedManualy": false,
       "CanActivateAfterMove": false,
       "CanActivateAfterFire": true,
+      "NoUniqueCheck": true,
       "FailFlatChance": 0.3,
       "FailRoundsStart": 1,
       "FailChancePerTurn": 0.15,
@@ -45,15 +46,11 @@
       "FailCritOnlyComponentsTags": [
         "EnginePart"
       ],
+      "ExplodeOnDamage": true,
       "FailPilotingBase": 1,
       "FailPilotingMult": 0.02,
-      "ExplodeOnDamage": true,
-      "NoUniqueCheck": true,
       "Explosion": {
         "Chance": 0.05,
-        "VFX": "WFX_Nuke",
-        "TempDesignMask": "DesignMaskRadiation",
-        "VFXActorStat": "EngineExplodeVFX",
         "RangeActorStat": "EngineExplodeRange",
         "DamageActorStat": "EngineExplodeDamage",
         "HeatActorStat": "EngineExplodeHeat",
@@ -63,9 +60,12 @@
         "FireTerrainStrengthActorStat": "EngineExplodeFireStrength",
         "FireDurationWithoutForestActorStat": "EngineExplodeTerrainDuration",
         "FireTerrainCellRadiusActorStat": "EngineExplodeFireRadius",
+        "VFXActorStat": "EngineExplodeVFX",
+        "TempDesignMask": "DesignMaskRadiation",
         "TempDesignMaskActorStat": "EngineExplodeDesignMask",
         "TempDesignMaskTurnsActorStat": "EngineExplodeDesignMaskDuration",
-        "TempDesignMaskCellRadiusActorStat": "EngineExplodeDesignMaskRadius"
+        "TempDesignMaskCellRadiusActorStat": "EngineExplodeDesignMaskRadius",
+        "VFX": "WFX_Nuke"
       },
       "statusEffects": [
         {
@@ -81,13 +81,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "MASCWalk",
             "Name": "Supercharged Engine XL Activatable: Increased Run Speed",
             "Details": "Myomer Accelerator Signal Circuitry",
             "Icon": "uixSvgIcon_action_evasivemove"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "CBTBE_RunMultiMod",
             "operation": "Float_Add",
@@ -97,18 +97,22 @@
         }
       ]
     },
-    "Flags": [
-      "vital",
-      "engine_part",
-      "not_broken",
-      "no_salvage"
-    ],
-    "HeatSinkingCost": {
-      "HeatUpkeepCost": 3,
-      "HeatUpkeepMult": 1.01
+    "Weights": {
+      "ReservedSlots": 6,
+      "EngineFactor": 0.6
+    },
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.6 * [[Chassis.Tonnage]]",
+        "CBillCost": "400 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
     },
     "IBLS": {
       "StorageSize": 8
+    },
+    "HeatSinkingCost": {
+      "HeatUpkeepCost": 3,
+      "HeatUpkeepMult": 1.01
     },
     "Linked": {
       "Links": [
@@ -121,10 +125,6 @@
           "Location": "RightTorso"
         }
       ]
-    },
-    "Weights": {
-      "ReservedSlots": 6,
-      "EngineFactor": 0.6
     }
   },
   "Description": {
@@ -150,7 +150,6 @@
   "AllowedLocations": "CenterTorso",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "statusEffects": null,
   "ComponentTags": {
     "items": [
       "EnginePart.{location}",
@@ -160,12 +159,11 @@
       "cae_ai_explode",
       "cae_ai_heat",
       "cae_ai_speed",
-      "BAIncompatible",
-      "ProtoIncompatible",
       "EnginePart",
       "Fusion",
       "LootMagnetBlacklist",
-      "Supercharger"
+      "Supercharger",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

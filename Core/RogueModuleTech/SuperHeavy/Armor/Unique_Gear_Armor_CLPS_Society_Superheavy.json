@@ -11,10 +11,8 @@
     "BonusDescriptions": [
       "CLPS",
       "ArmorFactor: +25%",
-      "StealthSensors: 25%, 3, 1, 3, 5",
-      "MimeticStealth: 25%, 3, 4",
-      "ActiveVisibility: -25%",
-      "ActiveSignature: -25%",
+      "StealthSensors: -35%, 3, 1, 3, 5",
+      "MimeticStealth: -12%, 3, 2",
       "HeatGenerated: +15%",
       "HeatPerTurn: +15",
       "DamageTaken: -10%",
@@ -25,17 +23,22 @@
       "ArmorTPCost: x2.8",
       "ArmorCBCost: x3.1"
     ],
+    "Flags": [
+      "not_broken",
+      "no_salvage",
+      "autorepair"
+    ],
     "ActivatableComponent": {
+      "ButtonName": "CLPS",
+      "CanNotBeActivatedManualy": false,
       "CanActivateAfterMove": true,
       "CanActivateAfterFire": false,
-      "SafeActivation": true,
-      "ButtonName": "CLPS",
       "ActiveByDefault": true,
-      "ActivationIsBuff": true,
-      "CanNotBeActivatedManualy": false,
-      "NoUniqueCheck": true,
+      "SafeActivation": true,
       "ActivationMessage": "CLPS On",
       "DeactivationMessage": "CLPS Off",
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
       "statusEffects": [
         {
           "durationData": {
@@ -50,6 +53,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "CLPSSocietySuperheavy-Stealth",
             "Name": "Superheavy Chameleon LPS (C) Activatable: Stealth",
@@ -59,10 +63,9 @@
           "statisticData": {
             "statName": "LV_STEALTH",
             "operation": "Set",
-            "modValue": "0.25_3_1_3_5",
+            "modValue": "0.35_3_1_3_5",
             "modType": "System.String"
-          },
-          "nature": "Buff"
+          }
         },
         {
           "durationData": {
@@ -77,6 +80,7 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Buff",
           "Description": {
             "Id": "CLPSSocietySuperheavy-Mimetic",
             "Name": "Superheavy Chameleon LPS (C) Activatable: Mimetic Armor",
@@ -86,35 +90,8 @@
           "statisticData": {
             "statName": "LV_MIMETIC",
             "operation": "Set",
-            "modValue": "3_0.25_1_4",
+            "modValue": "3_0.12_1_2",
             "modType": "System.String"
-          },
-          "nature": "Buff"
-        },
-        {
-          "durationData": {
-            "duration": -1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "Passive",
-            "effectTargetType": "Creator",
-            "showInTargetPreview": false,
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
-          "Description": {
-            "Id": "CLPSSocietySuperheavy-Signature",
-            "Name": "Superheavy Chameleon LPS (C) Activatable: Decreased Sensor Signature",
-            "Details": "Signature Statuseffect.",
-            "Icon": "uixSvgIcon_equipment_TTS"
-          },
-          "nature": "Buff",
-          "statisticData": {
-            "statName": "SensorSignatureModifier",
-            "operation": "Float_Multiply",
-            "modValue": "0.75",
-            "modType": "System.Single"
           }
         },
         {
@@ -129,39 +106,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
-          "Description": {
-            "Id": "CLPSSocietySuperheavy-Visibility",
-            "Name": "Superheavy Chameleon LPS (C) Activatable: Decreased Visual Signature",
-            "Details": "Visibility Statuseffect.",
-            "Icon": "uixSvgIcon_equipment_TTS"
-          },
           "nature": "Buff",
-          "statisticData": {
-            "statName": "SpottingVisibilityMultiplier",
-            "operation": "Float_Multiply",
-            "modValue": "0.75",
-            "modType": "System.Single"
-          }
-        },
-        {
-          "durationData": {
-            "duration": -1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "Passive",
-            "effectTargetType": "Creator",
-            "showInTargetPreview": false,
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
           "Description": {
             "Id": "CLPSSocietySuperheavy-HeatGenerated",
             "Name": "Superheavy Chameleon LPS (C) Activatable: Increased Heat Generated",
             "Details": "Heat generation",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Buff",
           "statisticData": {
             "statName": "HeatGenerated",
             "operation": "Float_Multiply",
@@ -182,13 +133,13 @@
             "showInStatusPanel": false
           },
           "effectType": "StatisticEffect",
+          "nature": "Debuff",
           "Description": {
             "Id": "CLPSSocietySuperheavy-CoolingReduction",
             "Name": "Superheavy Chameleon LPS (C) Activatable: Decreased Cooling",
             "Details": "Heat Capacity Penalty",
             "Icon": "uixSvgIcon_equipment_ThermalExchanger"
           },
-          "nature": "Debuff",
           "statisticData": {
             "statName": "HeatSinkCapacity",
             "operation": "Int_Add",
@@ -196,8 +147,10 @@
             "modType": "System.Int32"
           }
         }
-      ],
-      "offlineStatusEffects": []
+      ]
+    },
+    "Weights": {
+      "ArmorFactor": 1.25
     },
     "ArmorRepair": {
       "ArmorTPCost": 2.8,
@@ -206,7 +159,22 @@
     "CASE": {
       "AllLocations": true
     },
+    "IBLS": {
+      "StorageSize": 1
+    },
+    "ExplosionProtectionHeat": {
+      "MaximumDamage": 100,
+      "AllLocations": true
+    },
+    "ExplosionProtectionStability": {
+      "MaximumDamage": 200,
+      "AllLocations": true
+    },
     "Color": "Gold",
+    "Lootable": "Lootable_Armor_ChameleonLightPolarizationShield_Superheavy",
+    "case": {
+      "AllLocations": true
+    },
     "DecoratorComponent": [
       {
         "Text": "C",
@@ -214,31 +182,8 @@
         "Icon": "ComponentGearIcons_STEALTH",
         "Importance": 40
       }
-    ],
-    "ExplosionProtectionHeat": {
-      "AllLocations": true,
-      "MaximumDamage": 100
-    },
-    "ExplosionProtectionStability": {
-      "AllLocations": true,
-      "MaximumDamage": 200
-    },
-    "Flags": [
-      "not_broken",
-      "no_salvage",
-      "autorepair"
-    ],
-    "IBLS": {
-      "StorageSize": 1
-    },
-    "Lootable": "Lootable_Armor_ChameleonLightPolarizationShield_Superheavy",
-    "Weights": {
-      "ArmorFactor": 1.25
-    }
+    ]
   },
-  "StatName": null,
-  "RelativeModifier": 0,
-  "AbsoluteModifier": 0,
   "Description": {
     "Cost": 9000000,
     "Rarity": 99,
@@ -256,6 +201,8 @@
   "ComponentType": "Upgrade",
   "ComponentSubType": "NotSet",
   "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
   "BattleValue": 0,
   "InventorySize": 1,
   "Tonnage": 0,
@@ -269,20 +216,20 @@
         "stackLimit": -1
       },
       "targetingData": {
-        "effectTargetsCreator": true,
         "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
+        "effectTargetsCreator": true,
         "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "CLPSSocietySuperheavy-DamageReduction",
         "Name": "Superheavy Chameleon LPS (C): Decreased Damage Taken",
         "Details": "All incoming damage reduced by 20%.",
         "Icon": "uixSvgIcon_action_end"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "DamageReductionMultiplierAll",
         "operation": "Float_Multiply",
@@ -301,6 +248,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "CLPSSocietySuperheavy-TACImmune",
         "Name": "Superheavy Chameleon LPS (C): TAC Immune",
@@ -312,8 +260,7 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -321,20 +268,20 @@
         "stackLimit": -1
       },
       "targetingData": {
-        "effectTargetsCreator": true,
         "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
+        "effectTargetsCreator": true,
         "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "CLPSSocietySuperheavy-AoEDamageReduction",
         "Name": "Superheavy Chameleon LPS (C): Decreased AoE Damage Taken",
         "Details": "All incoming damage reduced by 20%.",
         "Icon": "uixSvgIcon_action_end"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "CACAoEDamageMult",
         "operation": "Float_Multiply",

@@ -7,11 +7,12 @@
     ],
     "BonusDescriptions": [
       "Recoil: -1",
-      "BracetoFireReduction: 10%",
+      "BraceToFireReductionWeaponType: -20, Artillery",
+      "ArtilleryMaxMissRadius: -50%",
       "GyroStab: 40"
     ],
     "ComponentExplosion": {
-      "StabilityDamage": 100
+      "StabilityDamage": 100.0
     },
     "Flags": [
       "not_broken"
@@ -56,6 +57,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "GyroGenericThreshhold",
         "Name": "Gyro Artillery: Increased Unsteady Threshold",
@@ -67,34 +69,6 @@
         "operation": "Float_Add",
         "modValue": "40.0",
         "modType": "System.Single"
-      },
-      "nature": "Buff"
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "StatusEffect_ArtyGyro",
-        "Name": "Gyro Artillery: Decreased Recoil",
-        "Details": "Artillery Gyro.",
-        "Icon": "uixSvgIcon_equipment_TTS"
-      },
-      "nature": "Buff",
-      "statisticData": {
-        "targetCollection": "Weapon",
-        "statName": "RefireModifier",
-        "operation": "Int_Add",
-        "modValue": "-1",
-        "modType": "System.Int32"
       }
     },
     {
@@ -109,28 +83,80 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
-        "Id": "BracetoFire Reduction Special Stable",
-        "Name": "Gyro Artillery: Decreased Self Knockdown on Fire",
+        "Id": "StatusEffect_ArtyGyro",
+        "Name": "Gyro Artillery: Decreased Recoil",
+        "Details": "Artillery Gyro.",
+        "Icon": "uixSvgIcon_equipment_TTS"
+      },
+      "statisticData": {
+        "statName": "RefireModifier",
+        "operation": "Int_Add",
+        "modValue": "-1",
+        "modType": "System.Int32",
+        "targetCollection": "Weapon"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "Description": {
+        "Id": "MaxMissRadiusMod",
+        "Name": "Gyro Artillery: Decreased Max Miss Radius",
+        "Details": "Reduce Max Miss Radius by 50%",
+        "Icon": "uixSvgIcon_ability_mastertactician"
+      },
+      "statisticData": {
+        "abilifierId": "ArtilleryFilter",
+        "statName": "CAC_MaxMissRadius_Mod",
+        "operation": "Float_Multiply",
+        "modValue": "0.5",
+        "modType": "System.Single",
+        "targetCollection": "Weapon"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "BraceToFire Reduction Special Stable",
+        "Name": "Gyro Artillery: Decreased Self Instability on Fire",
         "Details": "Tubthumping",
         "Icon": "uixSvgIcon_run_n_gun"
       },
       "statisticData": {
-        "statName": "SelfknockdownCheck_OnFire",
+        "abilifierId": "ArtilleryFilter",
+        "statName": "SelfInstability_OnFire",
         "operation": "Float_Add",
-        "modValue": "-0.1",
+        "modValue": "-20",
         "modType": "System.Single"
-      },
-      "nature": "Buff"
+      }
     }
   ],
   "ComponentTags": {
     "items": [
       "LootMagnetBlacklist",
       "component_type_stock",
-      "BAIncompatible",
-      "ProtoIncompatible",
-      "SuperheavyIncompatible"
+      "SuperheavyIncompatible",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

@@ -1,0 +1,58 @@
+Notes for building a Mech Squad - Kagorus / Redbat
+
+    /core/RogueModuleTech/MechSquad/
+
+    Basic Notes:
+    * Mech Squads can use any standard weapons that are not too large normally.
+    * Mech Squads use the right widget in the Mech Lab to show the internals shared between all members of the squad. 
+        This Widget is between 4 and 6 slots depending on if Squad Specialist items are used. 
+        The size of the Widget has to be configured in each units ChassisDef with the Custom.CustomWidgetChassis property.
+    * All items that every member of the squad share should be put in the Center Torso, and any such item must have the flags "not_broken, not_destroyed, ignore_damage, no_salvage"
+     
+    Engine Cores:
+        Mech Squads need a specific version of engine cores based on how many units the squad has, see any file name Gear_MechSquad_EngineCore_<Rating>_x<SquadSize>.
+        If a new rating and/or squad size is needed, take a base engine core, remove the explosion ActivatableComponent and make its weight and cost according to the formula below. 
+            Multiply base Core rating by squad size, and put this value in the Custom.EngineCore field. Do NOT multiply the engine rating in the name/id by squad size.
+            The gyro weight included in the core total tonnage should be for the EngineCore specified above, i.e. EngineCore / 10, rounded up. 
+                However, due to how Gyro weights work with MechEngineer this will not always be the correct value and might have to be modified using GyroFactor to achieve the desired value for the total weight of all gyros of all units in the Mech squad.
+                If a weight saving gyro is desired, the GyroFactor has to be modified further, meaning each combination of Engine core rating, Gyro Factor and Squad size results in an unique item. This ensures that weights look correct in the Mech Lab and different engine types (XL, etc) will calculate the correct weight reductions.
+                    Example 1: 
+                        1. If creating a 135 rated engine core for a 2 squad unit, start by finding the base weight of such a rated core, i.e. 4.5 tons.
+                        2. Then multiply the weight by squad size, resulting in 9 tons.
+                        3. Calculate the weight of a gyro for a 270 rated core (135 rating x 2 unit members), and then divide it by 10 and round up, receiving the gyro weight of 3.
+                        4. Add this to the previous 9 ton base weight, resulting in the Engine cores total weight of 12 tons. Set this as the Tonnage value of the item.
+                        5. However, since the gyro for 2 units using a 135 core each should actually be 4 tons (135 / 10 => 1.35 => round up => 2 => multiply by 2 members => 4), divide the needed gyro weight by the weight calculated previously in step 3. This gives 4/3, with the results of 1.333 (round to 3 decimal precision). Now set this as the GyroFactor.
+                        6. The resulting engine will now weigh the desired 2 x 4.5 (core weight) + 2 x 2 (gyro) => 13 tons in the mech lab, since 9 + 3 x 1.33 = 13.
+                    Example 2: 
+                        1. If a XL gyro version is desired for the engine core created in the previous example, the desired values are core weight of 9 and gyro weight of 2, since XL Gyro reduces the gyro weight by 50%.
+                        2. Starting with the previous engine core as the base, the Tonnage value of the item should not  be modified, instead a new GyroFactor has to be calculated. 
+                        3. The new desired total gyro weight is 2, while the gyro part of the item weight is 3 tons. Therefore calculate 2 / 3 = 0.667 (three decimals precision).
+                        4. The value calculated in step 2 is the new desired GyroFactor.
+            
+            Note: Don't forget to add the new Category, Flags and Tags needed, see existing ones for examples.
+
+        Engine Cost: 
+            Multiply the base cost for the Engine Core with the rating of a single member of the unit by the Squad size
+
+    Engine Types:
+        Mech Squads support having different types of engines, such as Clan, XL, XXL, etc. To create a new one take a standard Engine type, remove the explosion ActivatableComponent, Linked and any heating related bonus descriptions or stats.
+            Don't forget to add the new Category, Flags and Tags needed, see existing ones for examples.
+
+    Structure / Armor:
+        Mech Squads use their own Structure and Armor items to remove the need for dynamic or fixed slots. See one of the existing ones for how to create them. Since they are not based on squad size, the cost of the item is arbitrary to try and balance for both 2 and 4 unit squads.        
+    
+    Cockpit / Sensor / FCS:
+        Mech Squads combine all cockpit items to a single item to show in the right widget, this item should be the weight and cost of all the standard items combined multiplied by squad size.
+
+    System / Gyro:
+        Mech squads have a system item that represents the tooltip / description of the squad size (and type if ultralight) as well as holds the gyro stats.
+        This item holds the GyroFactor weights modifier for the amount of squad size.
+            This item does NOT allow modifying the weight of Gyros outside the squad size, this instead has to be done through a Squad Specialist item.
+
+    Jump Jets:
+        Mech Squads, like other squad based units, only count the jumping stats from first JumpJet item found on the whole unit, but all members should have such an item to handle weight distribution properly. See the existing Gear_MechSquad_JumpJet items for an example.
+
+    Other Equipment:
+        Normal equipment or specialist items CAN NOT be used with mech squads.
+        Instead Mech Squads have two (optional) specialist item slots where items that provides some extra capabilities, such as Advanced Sensors, ECM, Gyro XL, MASC and so on, can be mounted.
+

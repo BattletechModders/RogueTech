@@ -13,13 +13,19 @@
     ],
     "BonusDescriptions": [
       "IsRifle",
+      "IsArtillery",
+      "NoBonusesArtillery",
+      "AmmoSameLocation",
       "Indirect",
       "NoAA",
       "AreaOfEffect: 60",
       "AreaOfEffectDmg: 50",
+      "ArtilleryMode",
+      "DirectMode: -1",
       "WpnRecoil: 3",
       "ScatterRadius: 20, 80",
-      "ForbiddenRange: 150"
+      "ForbiddenRangeMode: 150, Indirect",
+      "ForbiddenRangeMode: 75, Direct"
     ],
     "Flags": [
       "not_broken",
@@ -46,7 +52,7 @@
   "HeatDamage": 0,
   "Instability": 3,
   "DamageVariance": 0,
-  "AccuracyModifier": 0,
+  "AccuracyModifier": 1,
   "EvasivePipsIgnored": 0,
   "RefireModifier": 3,
   "OverheatedDamageMultiplier": 0,
@@ -70,11 +76,11 @@
   "GunneryJammingBase": 1,
   "FireTerrainChance": 0.05,
   "AttackRecoil": 4,
-  "WeaponEffectID": "WeaponEffect-Weapon_AC10_Single",
   "AdditionalImpactVFX": "WFX_BELarger",
   "AdditionalImpactVFXScaleX": 0.75,
   "AdditionalImpactVFXScaleY": 0.75,
   "AdditionalImpactVFXScaleZ": 0.75,
+  "WeaponEffectID": "WeaponEffect-Weapon_AC10_Single",
   "Description": {
     "Cost": 157500,
     "Rarity": 0,
@@ -102,30 +108,67 @@
     {
       "Id": "directfire",
       "UIName": "Direct",
-      "Description": "Fire Directly at line of sight targets at short range.",
+      "Description": "Fire Directly at line of sight targets at short range, minimum range 75.",
       "isBaseMode": false,
-      "ForbiddenRange": 150,
-      "MinRange": -100,
-      "ShortRange": -150,
-      "MediumRange": -300,
-      "LongRange": -450,
-      "MaxRange": -600,
+      "ForbiddenRange": 75,
+      "ShortRange": -330,
+      "MediumRange": -775,
+      "LongRange": -1160,
+      "MaxRange": -1575,
       "IndirectFireCapable": false,
-      "AlwaysIndirectVisuals": false
+      "AlwaysIndirectVisuals": false,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": 1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "OnWeaponFire",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "WeaponEffect-SelfInstability_OnFire",
+            "Name": "Howitzer 2000 / Direct: Increased Self Instability on Fire",
+            "Details": "Tubthumping",
+            "Icon": "uixSvgIcon_run_n_gun"
+          },
+          "statisticData": {
+            "statName": "SelfInstability_OnFire",
+            "operation": "Float_Add",
+            "modValue": "12",
+            "modType": "System.Single"
+          }
+        }
+      ]
     },
     {
       "Id": "indirectfire",
       "UIName": "Indirect",
       "Description": "Fire in a high arc at ground targets.",
       "isBaseMode": true,
+      "AccuracyModifier": 4,
       "ForbiddenRange": 150,
-      "MinMissRadius": 15,
-      "MaxMissRadius": 60,
+      "MinMissRadius": 10,
+      "MaxMissRadius": 30,
       "IndirectFireCapable": true,
-      "AlwaysIndirectVisuals": true
+      "AlwaysIndirectVisuals": true,
+      "IsArtillery": true,
+      "ArtilleryReticleColor": {
+        "C": "#FF0000",
+        "I": 1.5
+      },
+      "ArtilleryReticleRadius": 60,
+      "ArtilleryReticleText": "Howitzer Artillery",
+      "RestrictedAmmo": [
+        "Ammunition_Rifle_Medium_SolidSlug",
+        "Ammunition_Rifle_Medium_APFSDS"
+      ]
     }
   ],
-  "statusEffects": [],
   "ComponentTags": {
     "items": [
       "LootMagnetBlacklist",
@@ -135,7 +178,9 @@
       "MRifle.{location}",
       "component_type_stock",
       "range_extreme",
-      "BAIncompatible"
+      "BAIncompatible",
+      "UsesAmmoSameLocationOnly",
+      "IgnoreSizeMatters"
     ],
     "tagSetSourceFile": ""
   }

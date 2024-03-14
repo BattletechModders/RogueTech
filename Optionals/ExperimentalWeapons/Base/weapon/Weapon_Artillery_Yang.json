@@ -12,13 +12,13 @@
       }
     ],
     "BonusDescriptions": [
-      "ARTILLERYMode",
-      "DIRECTmode: -5",
-      "PipsIgnored: 20",
+      "IsArtillery",
+      "ArtilleryMode",
+      "DirectMode: -4",
       "WpnRecoil: 6",
-      "ForbiddenRange: 280",
-      "BracetoFireMode: 22.5%, Direct",
-      "BracetoFireMode: 45%, Artillery",
+      "ForbiddenRangeMode: 280, Indirect",
+      "ForbiddenRangeMode: 70, Direct",
+      "BraceToFireMode: 75, Direct",
       "SuperheavyOnly"
     ],
     "Flags": [
@@ -63,6 +63,7 @@
   "GunneryJammingBase": 1,
   "FireTerrainChance": 0.25,
   "AttackRecoil": 6,
+  "lastPreFireSFX": "yang",
   "WeaponEffectID": "WeaponEffect-Weapon_AC20_Single",
   "Description": {
     "Cost": 1900000,
@@ -91,16 +92,15 @@
     {
       "Id": "directfire",
       "UIName": "Direct",
-      "Description": "Fire Directly at line of sight targets at short range. -5 Accuracy",
+      "Description": "Fire Directly at line of sight targets at short range, minimum range 70. -4 Accuracy",
       "isBaseMode": false,
-      "AccuracyModifier": 5,
+      "AccuracyModifier": 4,
       "DirectFireModifier": 0,
-      "EvasivePipsIgnored": 20,
-      "ForbiddenRange": 280,
-      "ShortRange": -3000,
-      "MediumRange": -3000,
-      "LongRange": -3000,
-      "MaxRange": -3000,
+      "ForbiddenRange": 70,
+      "ShortRange": -3175,
+      "MediumRange": -3175,
+      "LongRange": -3175,
+      "MaxRange": -3175,
       "IndirectFireCapable": false,
       "CantHitUnaffecedByPathing": true,
       "AlwaysIndirectVisuals": false,
@@ -118,15 +118,15 @@
           "effectType": "StatisticEffect",
           "nature": "Buff",
           "Description": {
-            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
-            "Name": "Yang Artillery / Direct: Increased Self Knockdown on Fire",
+            "Id": "WeaponEffect-SelfInstability_OnFire",
+            "Name": "Yang Artillery / Direct: Increased Self Instability on Fire",
             "Details": "Tubthumping",
             "Icon": "uixSvgIcon_run_n_gun"
           },
           "statisticData": {
-            "statName": "SelfknockdownCheck_OnFire",
+            "statName": "SelfInstability_OnFire",
             "operation": "Float_Add",
-            "modValue": "0.225",
+            "modValue": "75",
             "modType": "System.Single"
           }
         }
@@ -138,45 +138,21 @@
       "Description": "Fire in a high arc at ground targets. -5 Accuracy",
       "isBaseMode": true,
       "AccuracyModifier": 5,
-      "DirectFireModifier": 2,
-      "EvasivePipsIgnored": 20,
       "ForbiddenRange": 280,
       "MinMissRadius": 5,
-      "MaxMissRadius": 160,
+      "MaxMissRadius": 80,
       "IndirectFireCapable": true,
       "CantHitUnaffecedByPathing": true,
       "AlwaysIndirectVisuals": true,
-      "statusEffects": [
-        {
-          "durationData": {
-            "duration": 1,
-            "stackLimit": -1
-          },
-          "targetingData": {
-            "effectTriggerType": "OnWeaponFire",
-            "effectTargetType": "Creator",
-            "showInStatusPanel": false
-          },
-          "effectType": "StatisticEffect",
-          "nature": "Buff",
-          "Description": {
-            "Id": "WeaponEffect-SelfknockdownCheck_OnFire",
-            "Name": "Yang Artillery / Artillery: Increased Self Knockdown on Fire",
-            "Details": "Tubthumping",
-            "Icon": "uixSvgIcon_run_n_gun"
-          },
-          "statisticData": {
-            "statName": "SelfknockdownCheck_OnFire",
-            "operation": "Float_Add",
-            "modValue": "0.45",
-            "modType": "System.Single"
-          }
-        }
-      ]
+      "IsArtillery": true,
+      "ArtilleryReticleColor": {
+        "C": "#FF0000",
+        "I": 1.5
+      },
+      "ArtilleryReticleRadius": 210,
+      "ArtilleryReticleText": "Yang Artillery"
     }
   ],
-  "statusEffects": [],  
-  "lastPreFireSFX":"yang",
   "ComponentTags": {
     "items": [
       "Artillery",
@@ -185,7 +161,8 @@
       "component_type_stock",
       "range_extreme",
       "SuperheavyEquipment",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "IgnoreSizeMatters"
     ],
     "tagSetSourceFile": ""
   }

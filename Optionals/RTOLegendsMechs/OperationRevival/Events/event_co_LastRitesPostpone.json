@@ -1,0 +1,244 @@
+{
+    "Description" : {
+        "Id" : "event_co_LastRitesPostpone",
+        "Name" : "If you build it...",
+        "Details" : "As you enter the Mess Hall, you nearly collide with [[SCN_MW,{SCN_MW.Callsign}]] as {SCN_MW.SUBJ} {SCN_MW.Gender?NonBinary:are|Default:is} leaving, \"Commander! This is fortuitous indeed.  you have had a chance to peruse the information I gave you on the datapad about obtaining the parts to build <i>Last Rites</i>, quiaff?\"\r\n\r\nYou move out of the doorway, stalling for time as you haven't even opened the datapad {SCN_MW.Subj} gave you, \"Ah, well, no.  No I haven't.  It is on my list of things to do, I assure you.\"\r\n\r\n[[SCN_MW,{SCN_MW.Callsign}]] just smiles at you, patiently waiting for you to continue and after what feels like an eternity of silence you respond with your answer.",
+        "Icon" : "uixTxrSpot_MessDeckFull.png"
+    },
+    "Scope" : "Company",
+    "Weight" : 10000,
+    "Requirements" : {
+        "Scope" : "Company",
+        "RequirementTags" : {
+            "items" : [
+                "event_LastRites_Postpone"
+            ],
+            "tagSetSourceFile" : "Tags/CompanyTags"
+        },
+        "ExclusionTags" : {
+            "items" : [
+                "event_LRMech_Postpone"
+            ],
+            "tagSetSourceFile" : "Tags/CompanyTags"
+        },
+        "RequirementComparisons" : []
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Commander",
+            "RequirementTags" : {
+                "items" : [],
+                "tagSetSourceFile" : ""
+            },
+            "ExclusionTags" : {
+                "items" : [],
+                "tagSetSourceFile" : ""
+            },
+            "RequirementComparisons" : [
+                {
+                    "obj" : "Injuries",
+                    "op" : "Equal",
+                    "val" : 0,
+                    "valueConstant" : "0"
+                }
+            ]
+        }
+    ],
+    "AdditionalObjects" : [
+        {
+            "Scope" : "SecondaryMechWarrior",
+            "Requirements" : {
+                "Scope" : "SecondaryMechWarrior",
+                "RequirementTags" : {
+                    "items" : [
+                        "name_Burtonias"
+                    ],
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : [
+                    {
+                        "obj" : "Injuries",
+                        "op" : "Equal",
+                        "val" : 0,
+                        "valueConstant" : "0"
+                    },
+                    {
+                        "obj" : "Piloting",
+                        "op" : "GreaterThan",
+                        "val" : 4,
+                        "valueConstant" : "4"
+                    },
+                    {
+                        "obj" : "Gunnery",
+                        "op" : "GreaterThan",
+                        "val" : 4,
+                        "valueConstant" : "4"
+                    },
+                    {
+                        "obj" : "Tactics",
+                        "op" : "GreaterThan",
+                        "val" : 4,
+                        "valueConstant" : "4"
+                    },
+                    {
+                        "obj" : "Guts",
+                        "op" : "GreaterThan",
+                        "val" : 4,
+                        "valueConstant" : "4"
+                    }
+                ]
+            }
+        }
+    ],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Perhaps another time",
+                "Details" : "Non-participation option",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Postponed",
+                        "Details" : "You return the smile, \"I will look over the data you provided.  You will just need to be patient as there are other duties I need to attend to first.\"\r\n\r\n\"Aff, Commander.  I understand that things must proceed in an orderly fashion and you will examine the data I provided when the time is right,\" [[SCN_MW,{SCN_MW.Callsign}]] says, still with that disarming smile on his face.",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "event_LastRites_Postpone"
+                                ],
+                                "tagSetSourceFile" : "Tags/CompanyTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "event_LRMech_Postpone"
+                                ],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 90
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "Aff, Let's see what you got",
+                "Details" : "Listen to the plan",
+                "Icon" : null
+            },
+            "RequirementList" : [],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Give it to me baby!",
+                        "Details" : "\"Tell you what, join me while I get some chow and you can give me the short version of what's on this datapad so that when I go over later it makes sense to me.\"\r\n\r\n[[SCN_MW,{SCN_MW.Callsign}]] smiles and nods, \"Aff, Commander.  The <i>short</i> story, as you have put it, is the easiest way to rebuild my <i>Minsk</i> is to obtain the OEM parts from their respective factories.  The time spent travelling to these systems will be offset by the time saved in assembling everything on a <i>Minsk MNK-102</i> donor chassis.\"\r\n\r\nYou nod, easily following along so far, \"Please continue.\"\r\n\r\n[[SCN_MW,{SCN_MW.Callsign}]] resumes {SCN_MW.Det} narrative, \"We will need to travel to the following systems:\r\n\r\n<color=#FFBF00><i>Novaya Zemlya for three components;\r\n\r\nGalatea for three components;\r\n\r\nVipaava for two components;\r\n\r\nRadstadt for one component;\r\n\r\nGibbs for one component;\r\n\r\nFletcher for one component</i></color>\r\n\r\nThe rest of the components needed are default systems on the <i>Minsk MNK-102</i>.\"\r\n\r\nYou mull over all of this info, \"You mentioned seven star systems.  By my count, that is only six?\"\r\n\r\n[[SCN_MW,{SCN_MW.Callsign}]] nods again, \"Aff, Commander.  The final destination is Rasalhague.  There we will find the facilty where we can assemble all the parts to create <i>Last Rites</i>.\"\r\n\r\nYou pat the datapad you are holding, \"All of the pertinent details are in here then?  The items you are looking for, how we are supposed to get them and what not?  I do not want to find we are stealing or raiding a facility and starting something we cannot finish here.\"\r\n\r\n[[SCN_MW,{SCN_MW.Callsign}]] stands up proudly in front of you, \"Commander, on my honour as a clansman of the <i>Ghost Bear Dominion</i>, you can rest assured that everything I have outlined is above board.\"\r\n\r\nYou smile, \"Thank you, MechWarrior.  I'll go over this with the rest of the Command Staff and see how best to approach your request.  I suspect this will be a very interesting series of events, and given your recorded exploits in, what was your mech called again... ah yes, <i>Last Rites</i>, {COMPANY.CompanyName} will garner even more lucrative contracts!\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 100,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "event_LastRites",
+                                    "event_MinskLR"
+                                ],
+                                "tagSetSourceFile" : "Tags/CompanyTags"
+                            },
+                            "RemovedTags" : {
+                                "items" : [
+                                    "event_LastRites_Postpone"
+                                ],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : [
+                                {
+                                    "Scope" : "Company",
+                                    "EventID" : "forceevent_co_LRMech",
+                                    "MinDaysWait" : 0,
+                                    "MaxDaysWait" : 0,
+                                    "Probability" : 100,
+                                    "RetainPilot" : false
+                                }
+                            ],
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : ""
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL",
+    "OneTimeEvent" : false,
+    "Tags" : {
+        "items" : [],
+        "tagSetSourceFile" : "tags/EventTags"
+    }
+}

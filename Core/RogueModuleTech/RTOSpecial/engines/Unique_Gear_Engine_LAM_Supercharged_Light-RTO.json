@@ -8,12 +8,6 @@
         "CategoryID": "EnginePart"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.775 * [[Chassis.Tonnage]]",
-        "CBillCost": "550 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "JumpDistance: 35%",
       "EvaMax: +1",
@@ -27,16 +21,18 @@
       "CoolantCost: 7",
       "CoolantCostMulti: 10%"
     ],
+    "Flags": [
+      "engine_part",
+      "vital",
+      "not_broken"
+    ],
     "ActivatableComponent": {
-      "ExplodeOnDamage": true,
       "CanNotBeActivatedManualy": true,
       "NoUniqueCheck": true,
+      "ExplodeOnDamage": true,
       "Explosion": {
         "Chance": 0.03,
         "ExplosionMessage": "Core Meltdown!",
-        "VFX": "WFX_Nuke",
-        "TempDesignMask": "DesignMaskRadiation",
-        "VFXActorStat": "EngineExplodeVFX",
         "RangeActorStat": "EngineExplodeRange",
         "DamageActorStat": "EngineExplodeDamage",
         "HeatActorStat": "EngineExplodeHeat",
@@ -46,23 +42,30 @@
         "FireTerrainStrengthActorStat": "EngineExplodeFireStrength",
         "FireDurationWithoutForestActorStat": "EngineExplodeTerrainDuration",
         "FireTerrainCellRadiusActorStat": "EngineExplodeFireRadius",
+        "VFXActorStat": "EngineExplodeVFX",
+        "TempDesignMask": "DesignMaskRadiation",
         "TempDesignMaskActorStat": "EngineExplodeDesignMask",
         "TempDesignMaskTurnsActorStat": "EngineExplodeDesignMaskDuration",
-        "TempDesignMaskCellRadiusActorStat": "EngineExplodeDesignMaskRadius"
-      },
-      "statusEffects": []
+        "TempDesignMaskCellRadiusActorStat": "EngineExplodeDesignMaskRadius",
+        "VFX": "WFX_Nuke"
+      }
     },
-    "Flags": [
-      "engine_part",
-      "vital",
-      "not_broken"
-    ],
-    "HeatSinkingCost": {
-      "HeatUpkeepCost": 7,
-      "HeatUpkeepMult": 1.1
+    "Weights": {
+      "ReservedSlots": 4,
+      "EngineFactor": 0.75
+    },
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.775 * [[Chassis.Tonnage]]",
+        "CBillCost": "550 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
     },
     "IBLS": {
       "StorageSize": 6
+    },
+    "HeatSinkingCost": {
+      "HeatUpkeepCost": 7,
+      "HeatUpkeepMult": 1.1
     },
     "Linked": {
       "Links": [
@@ -75,10 +78,6 @@
           "Location": "RightTorso"
         }
       ]
-    },
-    "Weights": {
-      "ReservedSlots": 4,
-      "EngineFactor": 0.75
     }
   },
   "Description": {
@@ -115,6 +114,7 @@
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "MaxEvasion",
         "Name": "Engine Light S-LAM RTO: Increased Max Evasive Pips",
@@ -126,8 +126,7 @@
         "operation": "Int_Add",
         "modValue": "1",
         "modType": "System.Int32"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -140,6 +139,7 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "GainEvasion",
         "Name": "Engine Light S-LAM RTO: Increased Evasive Pips Gain",
@@ -151,8 +151,7 @@
         "operation": "Int_Add",
         "modValue": "1",
         "modType": "System.Int32"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -166,13 +165,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-Jump_Distance-T3",
         "Name": "Engine Light S-LAM RTO: Increased Jump Distance",
         "Details": "Conversion Gear increase Jump Distance by 10%",
         "Icon": "uixSvgIcon_equipment_Gyro"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "JumpDistanceMultiplier",
         "operation": "Float_Multiply",
@@ -192,6 +191,7 @@
         "showInStatusPanel": true
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "Supercharged_Walk_S_LAM_Light",
         "Name": "Engine Light S-LAM RTO: Increased Walk Speed",
@@ -203,8 +203,7 @@
         "operation": "Float_Multiply",
         "modValue": "1.10",
         "modType": "System.Single"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
@@ -219,13 +218,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "MASCWalk",
         "Name": "Engine Light S-LAM RTO: Increased Run Speed",
         "Details": "Myomer Accelerator Signal Circuitry",
         "Icon": "uixSvgIcon_action_evasivemove"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "CBTBE_RunMultiMod",
         "operation": "Float_Add",
@@ -245,13 +244,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-Heat_Supercharger_LAM_Light",
         "Name": "Engine Light S-LAM RTO: Increased Heat Generated",
         "Details": "Heat generation increased by 10%.",
         "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "HeatGenerated",
         "operation": "Float_Multiply",
@@ -266,11 +265,10 @@
       "EnginePart.{location}",
       "component_type_stock",
       "BLACKLISTED",
-      "BAIncompatible",
-      "ProtoIncompatible",
       "EnginePart",
       "Fusion",
-      "LootMagnetBlacklist"
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }

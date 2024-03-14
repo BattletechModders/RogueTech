@@ -8,12 +8,6 @@
         "CategoryID": "EnginePart"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.8 * [[Chassis.Tonnage]]",
-        "CBillCost": "800 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
       "EngineWeight: -75%",
       "EngineReserved: 8",
@@ -22,16 +16,18 @@
       "CoolantCostMulti: 5%",
       "SuperheavyOnly"
     ],
+    "Flags": [
+      "vital",
+      "engine_part",
+      "not_broken"
+    ],
     "ActivatableComponent": {
-      "ExplodeOnDamage": true,
       "CanNotBeActivatedManualy": true,
       "NoUniqueCheck": true,
+      "ExplodeOnDamage": true,
       "Explosion": {
         "Chance": 0.05,
         "ExplosionMessage": "Core Meltdown!",
-        "VFX": "WFX_Nuke",
-        "TempDesignMask": "DesignMaskRadiation",
-        "VFXActorStat": "EngineExplodeVFX",
         "RangeActorStat": "EngineExplodeRange",
         "DamageActorStat": "EngineExplodeDamage",
         "HeatActorStat": "EngineExplodeHeat",
@@ -41,23 +37,30 @@
         "FireTerrainStrengthActorStat": "EngineExplodeFireStrength",
         "FireDurationWithoutForestActorStat": "EngineExplodeTerrainDuration",
         "FireTerrainCellRadiusActorStat": "EngineExplodeFireRadius",
+        "VFXActorStat": "EngineExplodeVFX",
+        "TempDesignMask": "DesignMaskRadiation",
         "TempDesignMaskActorStat": "EngineExplodeDesignMask",
         "TempDesignMaskTurnsActorStat": "EngineExplodeDesignMaskDuration",
-        "TempDesignMaskCellRadiusActorStat": "EngineExplodeDesignMaskRadius"
-      },
-      "statusEffects": []
+        "TempDesignMaskCellRadiusActorStat": "EngineExplodeDesignMaskRadius",
+        "VFX": "WFX_Nuke"
+      }
     },
-    "Flags": [
-      "vital",
-      "engine_part",
-      "not_broken"
-    ],
-    "HeatSinkingCost": {
-      "HeatUpkeepCost": 5,
-      "HeatUpkeepMult": 1.05
+    "Weights": {
+      "ReservedSlots": 8,
+      "EngineFactor": 0.25
+    },
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.8 * [[Chassis.Tonnage]]",
+        "CBillCost": "800 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
     },
     "IBLS": {
       "StorageSize": 10
+    },
+    "HeatSinkingCost": {
+      "HeatUpkeepCost": 5,
+      "HeatUpkeepMult": 1.05
     },
     "Linked": {
       "Links": [
@@ -70,10 +73,6 @@
           "Location": "RightTorso"
         }
       ]
-    },
-    "Weights": {
-      "ReservedSlots": 8,
-      "EngineFactor": 0.25
     }
   },
   "Description": {
@@ -112,13 +111,13 @@
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-Heat_UL",
         "Name": "Improved Ultralight Engine (RTO): Increased Heat Generated",
         "Details": "Heat generation increased by 10%.",
         "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
-      "nature": "Buff",
       "statisticData": {
         "statName": "HeatGenerated",
         "operation": "Float_Multiply",
