@@ -417,7 +417,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             exclude_tags.remove("unit_lance_tank")
 
     if "unit_mech" in include_tags:
-        if "unit_legendary" not in include_tags and category not in ["solo","duel","MCDuel","gladiator"]:
+        if not any(tag in include_tags for tag in ["unit_legendary", "unit_elite"]) and category not in ["solo","duel","MCDuel","gladiator"]:
             if diff < 6 and index > 0:
                 exclude_tags.append("unit_legendary")
             elif diff < 12 and index > 1:
