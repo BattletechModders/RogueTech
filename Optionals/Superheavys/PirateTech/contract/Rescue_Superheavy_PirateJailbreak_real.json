@@ -1,15 +1,15 @@
 {
-  "ID": "Rescue_Superheavy_PirateJailbreak",
-  "contractName": "The Missing VIP",
+  "ID": "Rescue_Superheavy_PirateJailbreak_real",
+  "contractName": "A Damp Cell",
   "contractDisplayStyle": "BaseCampaignNormal",
   "difficulty": 8,
-  "difficultyUIModifier": 8,
+  "difficultyUIModifier": 6,
   "weight": 1,
   "scope": "STANDARD",
   "finalDifficulty": 0,
-  "shortDescription": "<b>Sender:</b> <i>MRB Representative of {TEAM_EMP.FactionDef.Name}</i><br><b>Recipient</b>: <i>Commander {COMMANDER.LastName} of Mercenary Outfit {COMPANY.CompanyName}</i><br><b>Subject</b>: <i>Available Contract</i><br><br><br><b>Primary Objective</b>: The primary objective of this contract is to undertake a rescue operation to retrieve a high-value target (VIP) who has been unlawfully detained as a hostage by {TEAM_TAR.FactionDef.Demonym} forces.<br><br><b>Secondary Objective</b>: The secondary objective entails the retrieval of a briefcase known to have be in the possession of the VIP, which contains highly classified information crucial to our client's interests.<br><br><b>Mission Details</b>: The Mercenary Outfit is to deploy a specialized team comprising of skilled MechWarriors, tacticians, and support personnel for the execution of the rescue mission. The team must infiltrate the enemy-held territory, locate the VIP's whereabouts, and execute a swift and decisive extraction, prioritizing the safety and survival of the VIP over the retrieval of the briefcase.<br><br><b>Threat Assessment</b>: The target location is anticipated to be heavily fortified, requiring the deployment of advanced combat strategies and tactics. Intelligence suggests the presence of active enemy patrols and potentially several superheavy units. The Mercenary Outfit must be prepared for both conventional and asymmetrical threats.<br><br><b>Rules of Engagement</b>: The Mercenary Outfit is authorized to utilize all necessary means to achieve the mission objectives, including but not limited to, armed engagement, stealth tactics, and diplomatic negotiations where applicable. Preservation of the VIP's life is of utmost priority, with the retrieval of the briefcase considered a secondary objective.<br><br><b>Timeline</b>: The contract specifies a strict timeline for the completion of the rescue operation. The Mercenary Outfit must execute the mission within the designated timeframe to ensure the safety and timely extraction of the VIP, with efforts made to retrieve the briefcase only if feasible within the operational parameters.<br><br><b>Compensation</b>: Upon successful completion of the main objective, the Mercenary Outfit will be entitled to a pre-negotiated financial and salvage share compensation, including bonuses for exceptional performance and adherence to mission parameters. Additional compensation may be provided for the fulfillment of the secondary objective, subject to the discretion of the client.<br><br><b>Confidentiality</b>: All aspects of this contract, including mission details, client identity, and operational information, are classified as confidential. The Mercenary Outfit must exercise discretion and maintain strict confidentiality throughout the duration of the contract.<br><br><b>Contract Terms</b>: The terms of this contract are legally binding and are subject to negotiation and agreement between the client and the Mercenary Outfit. Any deviations from the agreed-upon terms must be documented and mutually approved in writing by both parties.<br><br><br><b>Client Authorization Code</b>: [MRB-SC-4876-936-5618-D]",
-  "longDescription": "What do you think, Commander? Looks like a pretty standard rescue contract to me. Well, besides the mention of superheavy units.",
-  "salvagePotential": 12,
+  "shortDescription": "A while back one of our convoys on {TGT_SYSTEM.Name} was brutally assaulted by a large force including superheavy units. During the attack one of our top scientists went missing and we have tried to locate them ever since. It turns out a local pirate gang has built a hidden base on the planet, and are forcing our scientist to improve their technology. We need to to quickly strike their base and rescue the scientist, and make sure to not leave a single one of those scums alive.",
+  "longDescription": "Why do pirates always think they won't be discovered? Let's save that poor man, Commander.",
+  "salvagePotential": 16,
   "requirementList": [
     {
       "Scope": "StarSystem",
@@ -25,22 +25,17 @@
       },
       "RequirementComparisons": [
         {
-          "obj": "Employer.AuriganPirates",
+          "obj": "Target.AuriganPirates",
           "op": "Equal",
-          "val": 0
+          "val": 1
+        },
+        {
+          "obj": "Employer.IsOwner",
+          "op": "Equal",
+          "val": 1
         },
         {
           "obj": "Employer.Solaris7",
-          "op": "Equal",
-          "val": 0
-        },
-        {
-          "obj": "Target.AuriganPirates",
-          "op": "Equal",
-          "val": 0
-        },
-        {
-          "obj": "Target.Solaris7",
           "op": "Equal",
           "val": 0
         }
@@ -118,8 +113,8 @@
       "contractObjective": {
         "EncounterObjectGuid": "dee3ebc7-d9df-4e5f-bfbb-0fb7dff587f8"
       },
-      "title": "Rescue the VIP and extract safely",
-      "description": "Rescue the VIP and extract safely",
+      "title": "Rescue the scientist and extract safely",
+      "description": "Rescue the scientist and extract safely",
       "isPrimary": true,
       "forPlayer": "Player1",
       "objectiveGuids": [
@@ -134,7 +129,7 @@
       "objective": {
         "EncounterObjectGuid": "3a4192be-2a53-4383-94ac-19c08883ea5f"
       },
-      "title": "Rescue the VIP from the {TEAM_TAR.FactionDef.Demonym} base.",
+      "title": "Rescue the scientist from the prison cell.",
       "description": "The objective for the player to retrieve the primary rescue target.",
       "isPrimary": true,
       "OnSuccessResults": [
@@ -209,7 +204,7 @@
             {
               "typeString": "System.Single",
               "name": "ContractBonusRewardFlat",
-              "value": "150000",
+              "value": "50000",
               "set": false
             }
           ],
@@ -258,7 +253,7 @@
       "objective": {
         "EncounterObjectGuid": "ff3cb25c-4bd9-4343-be9a-be14fa22718c"
       },
-      "title": "Ensure VIP survives",
+      "title": "Ensure Scientist survives",
       "description": "The objective to keep the unit which is carrying the primary target alive. Player will fail if it is destroyed.",
       "isPrimary": true,
       "OnSuccessResults": [],
@@ -292,7 +287,7 @@
       "objective": {
         "EncounterObjectGuid": "b8e94728-f1b4-4c2b-a4b3-6716dd48e721"
       },
-      "title": "Recover the VIP's briefcase.",
+      "title": "Recover the pirate technology improved by the scientist.",
       "description": "The secondary and optional objective to secure the second target.",
       "isPrimary": false,
       "OnSuccessResults": [],
@@ -359,7 +354,7 @@
       "objective": {
         "EncounterObjectGuid": "a9f1746b-e990-4c8f-90be-3c4f229da58f"
       },
-      "title": "Ensure unit with the briefcase survives",
+      "title": "Ensure unit with the recovered tech survives",
       "description": "The objective to keep the unit which is carrying the secondary target alive. The player can fail this objective.",
       "isPrimary": false,
       "OnSuccessResults": [
@@ -455,7 +450,7 @@
       "overrideDialogueBucketId": "",
       "dialogueContent": [
         {
-          "words": "We found the location of the hostage, Commander. Prepare to move in closer and initiate the rescue mission.",
+          "words": "We found the pirate prison, Commander. Prepare to move in closer and initiate the rescue mission.",
           "wordsColor": {
             "r": 1,
             "g": 1,
@@ -471,7 +466,7 @@
           "revealRadius": -1
         },
         {
-          "words": "The VIP will board the closest unit once our forces get close enough; keep them safe as we extract.",
+          "words": "The scientist will board the closest unit once their cell is opened; keep them safe as we extract.",
           "wordsColor": {
             "r": 1,
             "g": 1,
@@ -487,7 +482,7 @@
           "revealRadius": -1
         },
         {
-          "words": "And remember to watch out for those superheavy units, Commander!",
+          "words": "Let's do this, Commander!",
           "wordsColor": {
             "r": 1,
             "g": 1,
@@ -512,7 +507,7 @@
       "overrideDialogueBucketId": "",
       "dialogueContent": [
         {
-          "words": "VIP has been recovered to a safe location, Commander. Mission completed.",
+          "words": "Scientist has been recovered to a safe location, Commander. Mission completed.",
           "wordsColor": {
             "r": 1,
             "g": 1,
@@ -562,7 +557,7 @@
       "overrideDialogueBucketId": "",
       "dialogueContent": [
         {
-          "words": "Hold position, Commander. The VIP is approaching our unit now.",
+          "words": "Hold position, Commander. The scientist is approaching our unit now.",
           "wordsColor": {
             "r": 1,
             "g": 1,
@@ -587,7 +582,7 @@
       "overrideDialogueBucketId": "DialogBucketDef_Rescue_AssetUnderFire",
       "dialogueContent": [
         {
-          "words": "Careful, Commander, the unit carrying the VIP is taking damage!",
+          "words": "Careful, Commander, the unit carrying the scientist is taking damage!",
           "wordsColor": {
             "r": 1,
             "g": 1,
@@ -612,7 +607,7 @@
       "overrideDialogueBucketId": "DialogBucketDef_Rescue_AssetUnderFire-Sec",
       "dialogueContent": [
         {
-          "words": "Unit carrying the briefcase is being attacked, Commander!",
+          "words": "Unit carrying the recovered tech is being attacked, Commander!",
           "wordsColor": {
             "r": 1,
             "g": 1,
@@ -637,7 +632,7 @@
       "overrideDialogueBucketId": "DialogBucketDef_Rescue_AssetInHand",
       "dialogueContent": [
         {
-          "words": "The VIP has been rescued, Commander. Good work. ",
+          "words": "The scientists has been rescued, Commander. Good work. ",
           "wordsColor": {
             "r": 1,
             "g": 1,
@@ -662,7 +657,7 @@
       "overrideDialogueBucketId": "DialogBucketDef_Rescue_AssetInHand-Sec",
       "dialogueContent": [
         {
-          "words": "The briefcase has been recovered, Commander.",
+          "words": "The modified tech has been recovered, Commander.",
           "wordsColor": {
             "r": 1,
             "g": 1,
@@ -687,7 +682,7 @@
       "overrideDialogueBucketId": "",
       "dialogueContent": [
         {
-          "words": "That's it, unit carrying the briefcase is down. The Search & Rescue team will look for what's left. That secondary objective is failed. Focus on the Primary.",
+          "words": "That's it, unit carrying the recovered tech is down. The Search & Rescue team will look for what's left. That secondary objective is failed. Focus on the Primary.",
           "wordsColor": {
             "r": 1,
             "g": 1,
@@ -910,7 +905,7 @@
         "lanceDefId": "Tagged",
         "lanceTagSet": {
           "items": [
-            "lance_type_superheavy_dynamic_mixed"
+            "lance_type_superheavy_dynamic_pirates"
           ],
           "tagSetSourceFile": "tags/LanceTags"
         },
@@ -1055,7 +1050,7 @@
         "lanceDefId": "Tagged",
         "lanceTagSet": {
           "items": [
-            "lance_type_superheavy_dynamic_support"
+            "lance_type_superheavy_dynamic_pirates"
           ],
           "tagSetSourceFile": "tags/LanceTags"
         },
@@ -1067,7 +1062,7 @@
           "items": [],
           "tagSetSourceFile": "tags/SpawnEffectTags"
         },
-        "lanceDifficultyAdjustment": -2,
+        "lanceDifficultyAdjustment": -6,
         "selectedLanceDifficulty": 0,
         "unitSpawnPointOverrideList": [
           {
