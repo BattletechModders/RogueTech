@@ -178,6 +178,10 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             exclude_tags.append("unit_airship")
             exclude_tags.append("unit_hover")
             exclude_tags.append("unit_vbied")
+            exclude_tags.append("unit_thumper")
+            exclude_tags.append("unit_sniper")
+            exclude_tags.append("unit_longtom")
+            exclude_tags.append("unit_arrow")
         case "opfor":
             include_tags.append("unit_vehicle")
 
@@ -187,10 +191,18 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             exclude_tags.append("unit_airship")
             exclude_tags.append("unit_hover")
             exclude_tags.append("unit_vbied")
+            exclude_tags.append("unit_thumper")
+            exclude_tags.append("unit_sniper")
+            exclude_tags.append("unit_longtom")
+            exclude_tags.append("unit_arrow")
         case "mechconvoy":
             include_tags.append("unit_mech")
             exclude_tags.append("unit_urbie")
             exclude_tags.append("unit_noconvoy")
+            exclude_tags.append("unit_thumper")
+            exclude_tags.append("unit_sniper")
+            exclude_tags.append("unit_longtom")
+            exclude_tags.append("unit_arrow")
 
         case "carrier":
             if index in [0,1,2]:
