@@ -161,7 +161,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
                     include_tags.append("unit_mech")
             else:
                 include_tags.append("unit_turret")
-                if index > 1:
+                if index > 2:
                     include_tags.append("unit_aaa")
 
         case "vehicle":
@@ -203,10 +203,14 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             include_tags.append("unit_turret")
         case "AAA":
             include_tags.append("unit_turret")
-            include_tags.append("unit_aaa")
+            if index < 3:
+                include_tags.append("unit_aaa")
         case "artillery":
-            include_tags.append("unit_artilleryturret")
-            include_tags.remove("{CUR_TEAM.faction}")
+            if index < 2:
+                include_tags.append("unit_artilleryturret")
+                include_tags.remove("{CUR_TEAM.faction}")
+            else:
+                include_tags.append("unit_turret")
 
         case _:
             print("bad composition: " + str(composition))
@@ -366,7 +370,8 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
                 include_tags.append("unit_legendary")
 
         case "turret":
-            pass
+            if diff < 5:
+                exclude_tags.append("unit_artilleryturret")
 
         case _:
             print("bad category: " + str(category))
@@ -453,10 +458,7 @@ def grab_pilot_include_exclude(index, diff, category, composition, variant, extr
         include_tags.append("pilot_risc")
         
     elif category == "turret":
-        if composition != "artillery":
-            include_tags.append("pilot_turret_d"+str(pilot_diff))
-        else:
-            include_tags.append("pilot_turret_d10")
+        include_tags.append("pilot_turret_d"+str(pilot_diff))
 
     elif composition == "mech":
         include_tags.append("pilot_npc_d"+str(pilot_diff))
