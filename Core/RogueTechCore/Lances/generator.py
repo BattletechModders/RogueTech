@@ -721,21 +721,21 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 
 # lance_type_battle
 
-build_lances("battle", "mech", "low", 1, 3, extra="small")
+build_lances("battle", "mech", "low", 1, 2, extra="small")
 build_lances("battle", "mech", "low", 1, 6)
 build_lances("battle", "mech", "med", 4, 16)
 build_lances("battle", "mech", "high", 10, 20)
-build_lances("battle", "mech", "primitive", 1, 3, extra="small")
+build_lances("battle", "mech", "primitive", 1, 2, extra="small")
 build_lances("battle", "mech", "primitive", 1, 11)
 
-build_lances("battle", "mixed", "low", 1, 3, extra="small")
+build_lances("battle", "mixed", "low", 1, 2, extra="small")
 build_lances("battle", "mixed", "low", 1, 6)
 build_lances("battle", "mixed", "med", 4, 16)
 build_lances("battle", "mixed", "high", 10, 20)
-build_lances("battle", "mixed", "primitive", 1, 3, extra="small")
+build_lances("battle", "mixed", "primitive", 1, 2, extra="small")
 build_lances("battle", "mixed", "primitive", 1, 11)
 
-build_lances("battle", "vehicle", "low", 1, 3, extra="small")
+build_lances("battle", "vehicle", "low", 1, 2, extra="small")
 build_lances("battle", "vehicle", "low", 1, 6)
 build_lances("battle", "vehicle", "med", 4, 16)
 build_lances("battle", "vehicle", "high", 10, 20)
@@ -747,17 +747,17 @@ build_lances("battle", "mixed", "high", 10, 20, extra="vtol")
 
 # lance_type_cavalry - 2 vanguard, no support
 
-build_lances("cavalry", "mech", "low", 1, 3, extra="small")
+build_lances("cavalry", "mech", "low", 1, 2, extra="small")
 build_lances("cavalry", "mech", "low", 1, 6)
 build_lances("cavalry", "mech", "med", 4, 16)
 build_lances("cavalry", "mech", "high", 10, 20)
 
-build_lances("cavalry", "mixed", "low", 1, 3, extra="small")
+build_lances("cavalry", "mixed", "low", 1, 2, extra="small")
 build_lances("cavalry", "mixed", "low", 1, 6)
 build_lances("cavalry", "mixed", "med", 4, 16)
 build_lances("cavalry", "mixed", "high", 10, 20)
 
-build_lances("cavalry", "vehicle", "low", 1, 3, extra="small")
+build_lances("cavalry", "vehicle", "low", 1, 2, extra="small")
 build_lances("cavalry", "vehicle", "low", 1, 6)
 build_lances("cavalry", "vehicle", "med", 4, 16)
 build_lances("cavalry", "vehicle", "high", 10, 20)
@@ -765,17 +765,17 @@ build_lances("cavalry", "vehicle", "high", 10, 20)
 
 # lance_type_fire - 2 assassin, no vanguard
 
-build_lances("fire", "mech", "low", 1, 3, extra="small")
+build_lances("fire", "mech", "low", 1, 2, extra="small")
 build_lances("fire", "mech", "low", 1, 6)
 build_lances("fire", "mech", "med", 4, 16)
 build_lances("fire", "mech", "high", 10, 20)
 
-build_lances("fire", "mixed", "low", 1, 3, extra="small")
+build_lances("fire", "mixed", "low", 1, 2, extra="small")
 build_lances("fire", "mixed", "low", 1, 6)
 build_lances("fire", "mixed", "med", 4, 16)
 build_lances("fire", "mixed", "high", 10, 20)
 
-build_lances("fire", "vehicle", "low", 1, 3, extra="small")
+build_lances("fire", "vehicle", "low", 1, 2, extra="small")
 build_lances("fire", "vehicle", "low", 1, 6)
 build_lances("fire", "vehicle", "med", 4, 16)
 build_lances("fire", "vehicle", "high", 10, 20)
@@ -783,17 +783,17 @@ build_lances("fire", "vehicle", "high", 10, 20)
 
 # lance_type_recon - 1 predator 1 support 1 vanguard, no assassin
 
-build_lances("recon", "mech", "low", 1, 3, extra="small")
+build_lances("recon", "mech", "low", 1, 2, extra="small")
 build_lances("recon", "mech", "low", 1, 6)
 build_lances("recon", "mech", "med", 4, 16)
 build_lances("recon", "mech", "high", 10, 20)
 
-build_lances("recon", "mixed", "low", 1, 3, extra="small")
+build_lances("recon", "mixed", "low", 1, 2, extra="small")
 build_lances("recon", "mixed", "low", 1, 6)
 build_lances("recon", "mixed", "med", 4, 16)
 build_lances("recon", "mixed", "high", 10, 20)
 
-build_lances("recon", "vehicle", "low", 1, 3, extra="small")
+build_lances("recon", "vehicle", "low", 1, 2, extra="small")
 build_lances("recon", "vehicle", "low", 1, 6)
 build_lances("recon", "vehicle", "med", 4, 16)
 build_lances("recon", "vehicle", "high", 10, 20)
@@ -804,17 +804,17 @@ build_lances("recon", "vehicle", "", 1, 20, extra="vtol")
 
 # lance_type_support - 1 tank 2 support, no assassin
 
-build_lances("support", "mech", "low", 1, 3, extra="small")
+build_lances("support", "mech", "low", 1, 2, extra="small")
 build_lances("support", "mech", "low", 1, 6)
 build_lances("support", "mech", "med", 4, 16)
 build_lances("support", "mech", "high", 10, 20)
 
-build_lances("support", "mixed", "low", 1, 3, extra="small")
+build_lances("support", "mixed", "low", 1, 2, extra="small")
 build_lances("support", "mixed", "low", 1, 6)
 build_lances("support", "mixed", "med", 4, 16)
 build_lances("support", "mixed", "high", 10, 20)
 
-build_lances("support", "vehicle", "low", 1, 3, extra="small")
+build_lances("support", "vehicle", "low", 1, 2, extra="small")
 build_lances("support", "vehicle", "low", 1, 6)
 build_lances("support", "vehicle", "med", 4, 16)
 build_lances("support", "vehicle", "high", 10, 20)
