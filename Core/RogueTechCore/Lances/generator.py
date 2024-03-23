@@ -881,7 +881,6 @@ build_lances("MCSupport", "mech", "high", 10, 20, extra="elite", location="../..
 # Risc submod
 build_lances("battle", "mech", "risc", 6, 20, location="../../../Optionals/RISCtech/Base/Lances/")
 build_lances("battle", "mixed", "risc", 6, 20, location="../../../Optionals/RISCtech/Base/Lances/")
-build_lances("battle", "vehicle", "risc", 6, 20, location="../../../Optionals/RISCtech/Base/Lances/")
 build_lances("battle", "mixed", "risc", 6, 20, extra="vtol", location="../../../Optionals/RISCtech/Base/Lances/")
 
 # urbie submod
