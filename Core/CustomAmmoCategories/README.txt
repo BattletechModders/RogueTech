@@ -423,6 +423,19 @@ it will gain minefield immunity for next move invocation, max move distance decr
 
 Weapon definition
 new fields
+  "PhysicsAoE": true,             - enables or disables per weapon AoE physics implementation. If not set - global value will be used. 
+                                    can be set for weapon, ammo and mode. Mode have priority, than ammo, than weapon. 
+  "PhysicsAoE_Height": 10.0,      - additional height for physics AoE. If physics for AoE enabled - each AoE explosion position y position altered 
+                                    by PhysicsAoE_Height value, but ONLY for raycasting purposes, for damage range falloff calculation position remains intact
+  "MissBehavior": "NotSet",       - Possible values "NotSet", "Guided", "Unguided". Set projectile behavior if miss. 
+                                    if MissBehavior is Guided projectile acts like it proximity fuze. Either words if miss projectile end its way somewhere near target
+									(exact distance depends on weapon min/max miss radius and target chassis radius)
+									Stray shots in this case, also possible if stray target between attacker and target
+									if MissBehavior is Unguided projectiles will continue to fly until reach terrain, edge of map or other combatant
+									If projectile ended in other combatant damage inflicted only if max weapon range is not reached
+									if MissBehavior is not set effective behavior will be calculated depend on weapon category. if weapon category isMissile true
+									behavior will be counted as Guided, otherwise as Unguided.
+									MissBehavior can be set for mode, ammo and weapon. Mode have priority, than ammo and than weapon def. 
   "BuildingsDamageModifier":1,    - weapon damage modifier if target is building
   "TurretDamageModifier":1,       - weapon damage modifier if target is turret
   "VehicleDamageModifier":1,      - weapon damage modifier if target is vehicle
