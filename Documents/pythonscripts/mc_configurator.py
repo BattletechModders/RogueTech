@@ -1,5 +1,11 @@
 import json, copy
 
+# writes additional lances configs for Mission Control support lances & launcher option patchdefs
+# run with python3 mc_configurator
+# adjust script, run script, inspect git diff for changes
+
+path_to_missioncontrol = "../../Core/MissionControl/config/AdditionalLances/"
+
 patchdef_template = json.loads("""{
     "version" : 1,
     "patches" : []
@@ -63,7 +69,8 @@ patchdef_kt = copy.deepcopy(patchdef_template_kt)
 
 for diff in range(1, 50+1):
 
-    filepath = "Difficulty" + str(diff) + ".json"
+    filename = "Difficulty" + str(diff) + ".json"
+    filepath = path_to_missioncontrol + filename
     diff_config = {}
 
     with open(filepath) as json_file:
@@ -114,12 +121,12 @@ for diff in range(1, 50+1):
 
     # no support
     patch_hugs = copy.deepcopy(patch_base)
-    patch_hugs["targetFile"] = "Core/MissionControl/config/AdditionalLances/" + filepath
+    patch_hugs["targetFile"] = "Core/MissionControl/config/AdditionalLances/" + filename
     patchdef_hugs["patches"].append(patch_hugs)
     
     # max 1 + lower chances 
     patch_easy = copy.deepcopy(patch_base)
-    patch_easy["targetFile"] = "Core/MissionControl/config/AdditionalLances/" + filepath
+    patch_easy["targetFile"] = "Core/MissionControl/config/AdditionalLances/" + filename
     patch_easy["patch"]["Enemy"]["Max"] = 1
     patch_easy["patch"]["Enemy"]["ChanceToSpawn"] = round(max(0.0, 0.1 + 0.05*(diff-4)), ndigits=2)
     patchdef_easy["patches"].append(patch_easy)
@@ -128,10 +135,10 @@ for diff in range(1, 50+1):
     if diff > 9:
         if diff > 15:
             patch_kt = copy.deepcopy(patch_base_kt)
-            patch_kt["targetFile"] = "Core/MissionControl/config/AdditionalLances/" + filepath
+            patch_kt["targetFile"] = "Core/MissionControl/config/AdditionalLances/" + filename
         else:
             patch_kt = copy.deepcopy(patch_base)
-            patch_kt["targetFile"] = "Core/MissionControl/config/AdditionalLances/" + filepath
+            patch_kt["targetFile"] = "Core/MissionControl/config/AdditionalLances/" + filename
             patch_kt["patch"]["Enemy"]["Max"] = 1
             patch_kt["patch"]["Enemy"]["ChanceToSpawn"] = round(0.1 + 0.05*(diff+3), ndigits=2)
         patchdef_kt["patches"].append(patch_kt)
