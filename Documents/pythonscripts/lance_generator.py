@@ -1,5 +1,11 @@
 import json, math, copy, traceback, os
 
+# writes standard dynamic lances for RT Core and Optionals
+# run with python3 lance_generator.py
+# adjust script, run script, inspect git diff for changes
+
+path_to_lances = "../../Core/RogueTechCore/Lances/"
+
 template = json.loads("""{
   "Description": {
     "Id": "",
@@ -717,7 +723,7 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 
         lancedef["Description"]["Name"] = " ".join(["Dynamic", "D"+str(diff), composition.capitalize(), category.capitalize()])
 
-        save_path = location
+        save_path = path_to_lances + location
         save_path += "/".join([category if category in ["MCSupport", "MCDuel"] else category.capitalize(), composition.capitalize(), variant.capitalize()])
 
         if not os.path.exists(save_path):
