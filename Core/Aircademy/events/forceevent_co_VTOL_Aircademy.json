@@ -2,7 +2,7 @@
     "Description" : {
         "Id" : "forceevent_co_VTOL_Aircademy",
         "Name" : "Highway to the Danger Zone!",
-        "Details" : "A knock sounds on your office door and you call out, \"Come in...\"\r\n\r\nThe door opens and Darius strides in with a datapad, \"Commander, the aptitude tests for candidates to attend <i>Air Today, Gone Tomorrow</i>'s Aircademy [[DM.BaseDescriptionDefs[LoreVTOL],VTOL]] training school have come back.  There are two pilots who have completed the assessment and should meet the requirements:\r\n\r\n[[SCN_MW,{SCN_MW.Callsign}]]\r\n[[TRT_MW,{TRT_MW.Callsign}]]\r\n\r\nYou just need to select the pilot you wish to attend and sign the form on the screen and I'll take it from there.\"",
+        "Details" : "A knock sounds on your office door and you call out, \"Come in...\"\r\n\r\nThe door opens and Darius strides in with a datapad, \"Commander, the aptitude tests for candidates to attend <i>Air Today, Gone Tomorrow</i>'s Aircademy [[DM.BaseDescriptionDefs[LoreVTOL],VTOL]] training school have come back.  There are two pilots who have completed the assessment and should meet the requirements:\r\n\r\n[[SCN_MW,{SCN_MW.Callsign}]]\r\n[[TRT_MW,{TRT_MW.Callsign}]]\r\n\r\nYou just need to sign that form on the screen and we can proceed from there.\"",
         "Icon" : "uixTxrSpot_DangerZone.png"
     },
     "Scope" : "Company",
@@ -10,16 +10,21 @@
     "Requirements" : {
         "Scope" : "Company",
         "RequirementTags" : {
-            "tagSetSourceFile" : "",
-            "items" : [
-                "Do_not_fire"
-            ]
+            "items" : [],
+            "tagSetSourceFile" : ""
         },
         "ExclusionTags" : {
-            "tagSetSourceFile" : "Tags/CompanyTags",
-            "items" : []
+            "items" : [],
+            "tagSetSourceFile" : "Tags/CompanyTags"
         },
-        "RequirementComparisons" : []
+        "RequirementComparisons" : [
+            {
+                "obj" : "Funds",
+                "op" : "GreaterThanOrEqual",
+                "val" : 750000,
+                "valueConstant" : "750000"
+            }
+        ]
     },
     "AdditionalRequirements" : [],
     "AdditionalObjects" : [
@@ -28,20 +33,20 @@
             "Requirements" : {
                 "Scope" : "SecondaryMechWarrior",
                 "RequirementTags" : {
-                    "tagSetSourceFile" : "",
                     "items" : [
                         "can_pilot_generic_vehicle"
-                    ]
+                    ],
+                    "tagSetSourceFile" : ""
                 },
                 "ExclusionTags" : {
-                    "tagSetSourceFile" : "Tags/PilotTags",
                     "items" : [
                         "can_pilot_vtol",
                         "pilot_rejected",
                         "pilot_novtol",
-                        "pilot_VTOLSchool",
-                        "pilot_LAMSchool"
-                    ]
+                        "pilot_VTOL_School",
+                        "pilot_LAM_School"
+                    ],
+                    "tagSetSourceFile" : "Tags/PilotTags"
                 },
                 "RequirementComparisons" : [
                     {
@@ -58,20 +63,20 @@
             "Requirements" : {
                 "Scope" : "TertiaryMechWarrior",
                 "RequirementTags" : {
-                    "tagSetSourceFile" : "",
                     "items" : [
                         "can_pilot_generic_vehicle"
-                    ]
+                    ],
+                    "tagSetSourceFile" : ""
                 },
                 "ExclusionTags" : {
-                    "tagSetSourceFile" : "",
                     "items" : [
                         "can_pilot_vtol",
                         "pilot_rejected",
                         "pilot_novtol",
-                        "pilot_VTOLSchool",
-                        "pilot_LAMSchool"
-                    ]
+                        "pilot_VTOL_School",
+                        "pilot_LAM_School"
+                    ],
+                    "tagSetSourceFile" : ""
                 },
                 "RequirementComparisons" : [
                     {
@@ -89,25 +94,25 @@
             "Description" : {
                 "Id" : "outcome_0",
                 "Name" : "Select {SCN_MW.Callsign}",
-                "Details" : "[Tuition costs \u00A2500,000]",
+                "Details" : "[Tuition costs \u00A2750,000]",
                 "Icon" : null
             },
             "RequirementList" : [
                 {
                     "Scope" : "SecondaryMechWarrior",
                     "RequirementTags" : {
-                        "tagSetSourceFile" : "",
-                        "items" : []
+                        "items" : [],
+                        "tagSetSourceFile" : ""
                     },
                     "ExclusionTags" : {
-                        "tagSetSourceFile" : "",
                         "items" : [
                             "can_pilot_vtol",
                             "pilot_rejected",
                             "pilot_novtol",
-                            "pilot_VTOLSchool",
-                            "pilot_LAMSchool"
-                        ]
+                            "pilot_VTOL_School",
+                            "pilot_LAM_School"
+                        ],
+                        "tagSetSourceFile" : ""
                     },
                     "RequirementComparisons" : [
                         {
@@ -133,20 +138,20 @@
                             "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : null,
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "188",
+                                    "value" : "120",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -159,21 +164,26 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -182,8 +192,8 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_VTOL_Passed",
-                                    "MinDaysWait" : 189,
-                                    "MaxDaysWait" : 189,
+                                    "MinDaysWait" : 120,
+                                    "MaxDaysWait" : 120,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
@@ -206,20 +216,20 @@
                             "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : null,
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "188",
+                                    "value" : "120",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -232,21 +242,26 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -255,8 +270,8 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_VTOL_Injured",
-                                    "MinDaysWait" : 189,
-                                    "MaxDaysWait" : 189,
+                                    "MinDaysWait" : 120,
+                                    "MaxDaysWait" : 120,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
@@ -279,20 +294,20 @@
                             "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : null,
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "188",
+                                    "value" : "120",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -305,21 +320,26 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -328,8 +348,8 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_VTOL_Death",
-                                    "MinDaysWait" : 189,
-                                    "MaxDaysWait" : 189,
+                                    "MinDaysWait" : 120,
+                                    "MaxDaysWait" : 120,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
@@ -352,20 +372,20 @@
                             "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : null,
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "215",
+                                    "value" : "150",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -378,21 +398,26 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -401,8 +426,8 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_VTOL_Passed",
-                                    "MinDaysWait" : 216,
-                                    "MaxDaysWait" : 216,
+                                    "MinDaysWait" : 150,
+                                    "MaxDaysWait" : 150,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
@@ -425,20 +450,20 @@
                             "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : null,
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "215",
+                                    "value" : "150",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -451,21 +476,26 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -474,8 +504,8 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_VTOL_Injured",
-                                    "MinDaysWait" : 216,
-                                    "MaxDaysWait" : 216,
+                                    "MinDaysWait" : 150,
+                                    "MaxDaysWait" : 150,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
@@ -498,20 +528,20 @@
                             "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : null,
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "215",
+                                    "value" : "150",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -524,21 +554,26 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -547,8 +582,8 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_VTOL_Death",
-                                    "MinDaysWait" : 216,
-                                    "MaxDaysWait" : 216,
+                                    "MinDaysWait" : 150,
+                                    "MaxDaysWait" : 150,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
@@ -571,20 +606,20 @@
                             "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : null,
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "323",
+                                    "value" : "180",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -597,21 +632,26 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -620,8 +660,8 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_VTOL_Passed",
-                                    "MinDaysWait" : 324,
-                                    "MaxDaysWait" : 324,
+                                    "MinDaysWait" : 180,
+                                    "MaxDaysWait" : 180,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
@@ -644,20 +684,20 @@
                             "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : null,
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "323",
+                                    "value" : "180",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -670,21 +710,26 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -693,8 +738,8 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_VTOL_Injured",
-                                    "MinDaysWait" : 324,
-                                    "MaxDaysWait" : 324,
+                                    "MinDaysWait" : 180,
+                                    "MaxDaysWait" : 180,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
@@ -717,20 +762,20 @@
                             "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : null,
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "323",
+                                    "value" : "180",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -743,21 +788,26 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -766,8 +816,8 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_VTOL_Death",
-                                    "MinDaysWait" : 324,
-                                    "MaxDaysWait" : 324,
+                                    "MinDaysWait" : 180,
+                                    "MaxDaysWait" : 180,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
@@ -781,12 +831,12 @@
             "Requirements" : {
                 "Scope" : "Company",
                 "RequirementTags" : {
-                    "tagSetSourceFile" : "",
-                    "items" : []
+                    "items" : [],
+                    "tagSetSourceFile" : ""
                 },
                 "ExclusionTags" : {
-                    "tagSetSourceFile" : "",
-                    "items" : []
+                    "items" : [],
+                    "tagSetSourceFile" : ""
                 },
                 "RequirementComparisons" : []
             }
@@ -795,25 +845,25 @@
             "Description" : {
                 "Id" : "outcome_1",
                 "Name" : "Select {TRT_MW.Callsign}",
-                "Details" : "[Tuition costs \u00A2500,000]",
+                "Details" : "[Tuition costs \u00A2750,000]",
                 "Icon" : null
             },
             "RequirementList" : [
                 {
                     "Scope" : "TertiaryMechWarrior",
                     "RequirementTags" : {
-                        "tagSetSourceFile" : "",
-                        "items" : []
+                        "items" : [],
+                        "tagSetSourceFile" : ""
                     },
                     "ExclusionTags" : {
-                        "tagSetSourceFile" : "",
                         "items" : [
                             "can_pilot_vtol",
                             "pilot_rejected",
                             "pilot_novtol",
-                            "pilot_VTOLSchool",
-                            "pilot_LAMSchool"
-                        ]
+                            "pilot_VTOL_School",
+                            "pilot_LAM_School"
+                        ],
+                        "tagSetSourceFile" : ""
                     },
                     "RequirementComparisons" : [
                         {
@@ -839,20 +889,20 @@
                             "Scope" : "TertiaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : null,
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "188",
+                                    "value" : "120",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -865,21 +915,26 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -888,8 +943,8 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_VTOL_Passed",
-                                    "MinDaysWait" : 189,
-                                    "MaxDaysWait" : 189,
+                                    "MinDaysWait" : 120,
+                                    "MaxDaysWait" : 120,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
@@ -912,20 +967,20 @@
                             "Scope" : "TertiaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : null,
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "188",
+                                    "value" : "120",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -938,21 +993,26 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -961,8 +1021,8 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_VTOL_Injured",
-                                    "MinDaysWait" : 189,
-                                    "MaxDaysWait" : 189,
+                                    "MinDaysWait" : 120,
+                                    "MaxDaysWait" : 120,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
@@ -985,20 +1045,20 @@
                             "Scope" : "TertiaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : null,
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "188",
+                                    "value" : "120",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -1011,21 +1071,26 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -1034,8 +1099,8 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_VTOL_Death",
-                                    "MinDaysWait" : 189,
-                                    "MaxDaysWait" : 189,
+                                    "MinDaysWait" : 120,
+                                    "MaxDaysWait" : 120,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
@@ -1058,20 +1123,20 @@
                             "Scope" : "TertiaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : null,
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "215",
+                                    "value" : "150",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -1084,21 +1149,26 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -1107,8 +1177,8 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_VTOL_Passed",
-                                    "MinDaysWait" : 216,
-                                    "MaxDaysWait" : 216,
+                                    "MinDaysWait" : 150,
+                                    "MaxDaysWait" : 150,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
@@ -1131,20 +1201,20 @@
                             "Scope" : "TertiaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : null,
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "215",
+                                    "value" : "150",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -1157,21 +1227,26 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -1180,8 +1255,8 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_VTOL_Injured",
-                                    "MinDaysWait" : 216,
-                                    "MaxDaysWait" : 216,
+                                    "MinDaysWait" : 150,
+                                    "MaxDaysWait" : 150,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
@@ -1204,20 +1279,20 @@
                             "Scope" : "TertiaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : null,
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "215",
+                                    "value" : "150",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -1230,21 +1305,26 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -1253,8 +1333,8 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_VTOL_Death",
-                                    "MinDaysWait" : 216,
-                                    "MaxDaysWait" : 216,
+                                    "MinDaysWait" : 150,
+                                    "MaxDaysWait" : 150,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
@@ -1277,20 +1357,20 @@
                             "Scope" : "TertiaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : null,
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "323",
+                                    "value" : "180",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -1303,21 +1383,26 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -1326,8 +1411,8 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_VTOL_Passed",
-                                    "MinDaysWait" : 324,
-                                    "MaxDaysWait" : 324,
+                                    "MinDaysWait" : 180,
+                                    "MaxDaysWait" : 180,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
@@ -1350,20 +1435,20 @@
                             "Scope" : "TertiaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : null,
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "323",
+                                    "value" : "180",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -1376,21 +1461,26 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -1399,8 +1489,8 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_VTOL_Injured",
-                                    "MinDaysWait" : 324,
-                                    "MaxDaysWait" : 324,
+                                    "MinDaysWait" : 180,
+                                    "MaxDaysWait" : 180,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
@@ -1423,20 +1513,20 @@
                             "Scope" : "TertiaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : null,
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "323",
+                                    "value" : "180",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -1449,21 +1539,26 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -1472,8 +1567,8 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_VTOL_Death",
-                                    "MinDaysWait" : 324,
-                                    "MaxDaysWait" : 324,
+                                    "MinDaysWait" : 180,
+                                    "MaxDaysWait" : 180,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
@@ -1487,12 +1582,12 @@
             "Requirements" : {
                 "Scope" : "Company",
                 "RequirementTags" : {
-                    "tagSetSourceFile" : "",
-                    "items" : []
+                    "items" : [],
+                    "tagSetSourceFile" : ""
                 },
                 "ExclusionTags" : {
-                    "tagSetSourceFile" : "",
-                    "items" : []
+                    "items" : [],
+                    "tagSetSourceFile" : ""
                 },
                 "RequirementComparisons" : []
             }
@@ -1524,9 +1619,7 @@
                             },
                             "RemovedTags" : {
                                 "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ]
+                                "items" : []
                             },
                             "Stats" : [
                                 {
@@ -1546,14 +1639,14 @@
                             "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_rejected"
-                                ]
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : null,
                             "Actions" : null,
@@ -1565,14 +1658,14 @@
                             "Scope" : "TertiaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "pilot_rejected"
-                                ]
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : null,
                             "Actions" : null,
@@ -1586,12 +1679,12 @@
             "Requirements" : {
                 "Scope" : "Company",
                 "RequirementTags" : {
-                    "tagSetSourceFile" : "",
-                    "items" : []
+                    "items" : [],
+                    "tagSetSourceFile" : ""
                 },
                 "ExclusionTags" : {
-                    "tagSetSourceFile" : "",
-                    "items" : []
+                    "items" : [],
+                    "tagSetSourceFile" : ""
                 },
                 "RequirementComparisons" : []
             }
@@ -1602,7 +1695,7 @@
     "EventType" : "UNSELECTABLE",
     "OneTimeEvent" : false,
     "Tags" : {
-        "tagSetSourceFile" : "tags/EventTags",
-        "items" : []
+        "items" : [],
+        "tagSetSourceFile" : "tags/EventTags"
     }
 }
