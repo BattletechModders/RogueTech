@@ -213,6 +213,9 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
         case "carrier":
             if index in [0,1,2]:
                 include_tags.append("unit_vehicle")
+            elif extra == "vtol":
+                include_tags.append("unit_vehicle")
+                include_tags.append("unit_vtol")
             else:
                 include_tags.append("unit_mech")
 
@@ -236,7 +239,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             print("bad composition: " + str(composition))
             exit()
 
-    if extra == "vtol":
+    if extra == "vtol" and composition != "carrier":
         if "unit_vehicle" in include_tags:
             include_tags.append("unit_vtol")
 
@@ -428,6 +431,7 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             exclude_tags.remove("unit_heavy")
         elif "unit_heavy" not in exclude_tags and "unit_medium" in exclude_tags:
             exclude_tags.remove("unit_medium")
+
     # loosen tags for vehicles
     elif "unit_vehicle" in include_tags:
         if "unit_lance_support" in exclude_tags:
@@ -502,7 +506,7 @@ def grab_pilot_include_exclude(index, diff, category, composition, variant, extr
         include_tags.append("pilot_npc_low")
 
     elif composition == "carrier":
-        if index == 3:
+        if index == 3 and extra != "vtol":
             include_tags.append("pilot_npc_d"+str(pilot_diff))
             include_tags.append("pilot_npc_high")
         else:
@@ -525,17 +529,15 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
         lance_tags = []
 
         slots = 4
-        if extra == "small" or category == "solo" or (diff < 4 and extra == "vtol"):
+        if extra == "small" or category == "solo" or (diff < 3 and extra == "vtol"):
             slots = 3
 
         if category == "gladiator":
-            if diff < 8:
-                slots = 2
-            elif diff < 16:
+            if diff < 10:
                 slots = 3
 
         if category == "MCSupport":
-            if diff < 5:
+            if diff < 3:
                 slots = 3
         elif category == "MCDuel":
             slots = 2
@@ -615,8 +617,11 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
                 lance_tags.append("lance_type_mechconvoy")
 
             case "carrier":
-                lance_tags.append("lance_type_mixed")
-                lance_tags.append("lance_type_notallvehicles")
+                if extra == "vtol":
+                    lance_tags.append("lance_type_vehicle")
+                else:
+                    lance_tags.append("lance_type_mixed")
+                    lance_tags.append("lance_type_notallvehicles")
             
             # turrets
             case "standard":
@@ -822,6 +827,10 @@ build_lances("recon", "mixed", "med", 4, 16, extra="vtol")
 build_lances("recon", "mixed", "high", 10, 20, extra="vtol")
 build_lances("recon", "vehicle", "", 1, 20, extra="vtol")
 
+#build_lances("recon", "mixed", "med", 4, 16, extra="hover")
+#build_lances("recon", "mixed", "high", 10, 20, extra="hover")
+#build_lances("recon", "vehicle", "", 1, 20, extra="hover")
+
 # lance_type_support - 1 tank 2 support, no assassin
 
 build_lances("support", "mech", "low", 1, 2, extra="small")
@@ -842,6 +851,10 @@ build_lances("support", "vehicle", "high", 10, 20)
 build_lances("support", "mixed", "med", 4, 16, extra="vtol")
 build_lances("support", "mixed", "high", 10, 20, extra="vtol")
 build_lances("support", "vehicle", "", 1, 20, extra="vtol")
+
+#build_lances("support", "mixed", "med", 4, 16, extra="hover")
+#build_lances("support", "mixed", "high", 10, 20, extra="hover")
+#build_lances("support", "vehicle", "", 1, 20, extra="hover")
 
 # lance_type_convoy, allied side convoy
 build_lances("convoy", "allied", "", 1, 20)
@@ -949,6 +962,7 @@ build_lances("battle", "vehicle", "", 8, 20, extra="MBT")
 
 # spotter 3 carriers
 build_lances("support", "carrier", "", 10, 20)
+#build_lances("support", "carrier", "", 10, 20, extra="vtol")
 
 
 # tank + indirect + command
