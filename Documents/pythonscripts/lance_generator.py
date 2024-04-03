@@ -61,6 +61,7 @@ weight_excludes["hvy"] = ["unit_assault","unit_medium","unit_light"]
 weight_excludes["ass/hvy"] = ["unit_medium","unit_light"]
 weight_excludes["ass"] = ["unit_heavy","unit_medium","unit_light"]
 weight_excludes["hvy/med/light"] = ["unit_assault"]
+weight_excludes["ass/hvy/med"] = ["unit_light"]
 weight_excludes["ass/hvy/med/light"] = []
 
 weight_map = [
@@ -78,12 +79,12 @@ weight_map = [
     ["ass/hvy","hvy","hvy/med","hvy/med/light"],
     ["ass/hvy","ass/hvy","hvy","hvy/med/light"],
     ["ass/hvy","ass/hvy","hvy","hvy/med/light"],
-    ["ass","ass/hvy","hvy","hvy/med/light"], #15
-    ["ass","ass","ass/hvy","ass/hvy/med/light"],
-    ["ass","ass","ass/hvy","ass/hvy/med/light"],
-    ["ass","ass","ass/hvy","ass/hvy/med/light"],
-    ["ass","ass","ass/hvy","ass/hvy/med/light"],
-    ["ass","ass","ass/hvy","ass/hvy/med/light"] #20
+    ["ass/hvy","ass/hvy","hvy","hvy/med/light"], #15
+    ["ass","ass/hvy","ass/hvy","ass/hvy/med"],
+    ["ass","ass/hvy","ass/hvy","ass/hvy/med"],
+    ["ass","ass","ass/hvy","ass/hvy/med"],
+    ["ass","ass","ass/hvy","ass/hvy/med"],
+    ["ass","ass","ass/hvy","ass/hvy"] #20
 ]
 
 number = 0
@@ -487,8 +488,10 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
                 exclude_tags.append("unit_legendary")
             elif diff < 12 and index > 1:
                 exclude_tags.append("unit_legendary")
+            elif diff < 16 and index > 2:
+                exclude_tags.append("unit_legendary")
 
-        if "unit_legendary" not in exclude_tags and not any(tag in include_tags for tag in ["unit_risc", "unit_bracket_low", "unit_command"]) and extra != "cheap":
+        if "unit_legendary" not in exclude_tags and not any(tag in include_tags for tag in ["unit_risc", "unit_bracket_low", "unit_command", "unit_indirectFire"]) and extra != "cheap":
             if index == 3 and diff > 14:
                 include_tags.append("unit_legendary")
 
