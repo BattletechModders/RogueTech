@@ -273,12 +273,14 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
         case "cavalry":
             if index in [0,1]:
                 include_tags.append("unit_lance_vanguard")
-            exclude_tags.append("unit_lance_support")
+            else:
+                exclude_tags.append("unit_lance_support")
 
         case "fire":
             if index in [0,1]:
                 include_tags.append("unit_lance_assassin")
-            exclude_tags.append("unit_lance_vanguard")
+            else:
+                exclude_tags.append("unit_lance_vanguard")
             
             if extra == "elite":
                 if  index == 0:
@@ -298,9 +300,8 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             elif index == 2:
                 if variant != "high" and diff < 10 and "unit_mech" in include_tags:
                     include_tags.append("unit_role_scout")
-                else:
-                    include_tags.append("unit_lance_vanguard")
-            exclude_tags.append("unit_lance_assassin")
+            else:
+                exclude_tags.append("unit_lance_assassin")
             
         case "support":
             if variant == "stealth":
@@ -326,7 +327,8 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
                     include_tags.append("unit_lance_tank")
                 elif index in [1,2]:
                     include_tags.append("unit_lance_support")
-                exclude_tags.append("unit_lance_assassin")
+                else:
+                    exclude_tags.append("unit_lance_assassin")
 
         case "convoy":
             pass
@@ -962,7 +964,6 @@ build_lances("battle", "vehicle", "", 8, 20, extra="MBT")
 
 # spotter 3 carriers
 build_lances("support", "carrier", "", 10, 20)
-#build_lances("support", "carrier", "", 10, 20, extra="vtol")
 
 
 # tank + indirect + command
