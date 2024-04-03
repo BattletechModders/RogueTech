@@ -213,9 +213,9 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
         case "carrier":
             if index in [0,1,2]:
                 include_tags.append("unit_vehicle")
-            elif extra == "vtol":
+            elif extra == "hover":
                 include_tags.append("unit_vehicle")
-                include_tags.append("unit_vtol")
+                include_tags.append("unit_hover")
             else:
                 include_tags.append("unit_mech")
 
@@ -242,6 +242,10 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
     if extra == "vtol" and composition != "carrier":
         if "unit_vehicle" in include_tags:
             include_tags.append("unit_vtol")
+            
+    if extra == "hover" and composition != "carrier":
+        if "unit_vehicle" in include_tags:
+            include_tags.append("unit_hover")
 
     match(category):
         case "battle":
@@ -309,8 +313,10 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
                 if index > 1: # loosen faction requirement for half the slots
                     include_tags.remove("{CUR_TEAM.faction}")
             elif composition == "carrier":
-                if index == 3:
+                if index == 3 and extra != "hover":
                     include_tags.append("unit_predator")
+                elif extra == "hover":
+                    pass
                 else:
                     include_tags.append("unit_carrier")
             elif variant == "command":
@@ -436,6 +442,33 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
 
         if "unit_predator" in include_tags:
             include_tags.remove("unit_predator")
+
+    if "unit_hover" in include_tags:
+        if "unit_medium" in exclude_tags:
+            if "unit_heavy" not in exclude_tags or "unit_assault" not in exclude_tags:
+                exclude_tags.remove("unit_medium")
+            if "unit_heavy" in exclude_tags and "unit_assault" not in exclude_tags:
+                exclude_tags.remove("unit_heavy")
+    
+        if "unit_lance_support" in include_tags:
+            include_tags.remove("unit_lance_support")
+        if "unit_lance_vanguard" in include_tags:
+            include_tags.remove("unit_lance_vanguard")
+        if "unit_lance_assassin" in include_tags:
+            include_tags.remove("unit_lance_assassin")
+        if "unit_lance_tank" in include_tags:
+            include_tags.remove("unit_lance_tank")
+            
+        if "unit_lance_support" in exclude_tags:
+            exclude_tags.remove("unit_lance_support")
+        if "unit_lance_vanguard" in exclude_tags:
+            exclude_tags.remove("unit_lance_vanguard")
+        if "unit_lance_assassin" in exclude_tags:
+            exclude_tags.remove("unit_lance_assassin")
+        if "unit_lance_tank" in exclude_tags:
+            exclude_tags.remove("unit_lance_tank")
+
+
 
     # loosen tags for vehicles
     elif "unit_vehicle" in include_tags:
@@ -832,9 +865,8 @@ build_lances("recon", "mixed", "med", 4, 16, extra="vtol")
 build_lances("recon", "mixed", "high", 10, 20, extra="vtol")
 build_lances("recon", "vehicle", "", 1, 20, extra="vtol")
 
-#build_lances("recon", "mixed", "med", 4, 16, extra="hover")
-#build_lances("recon", "mixed", "high", 10, 20, extra="hover")
-#build_lances("recon", "vehicle", "", 1, 20, extra="hover")
+build_lances("recon", "mixed", "med", 4, 16, extra="hover")
+build_lances("recon", "mixed", "high", 10, 20, extra="hover")
 
 # lance_type_support - 1 tank 2 support, no assassin
 
@@ -857,9 +889,8 @@ build_lances("support", "mixed", "med", 4, 16, extra="vtol")
 build_lances("support", "mixed", "high", 10, 20, extra="vtol")
 build_lances("support", "vehicle", "", 1, 20, extra="vtol")
 
-#build_lances("support", "mixed", "med", 4, 16, extra="hover")
-#build_lances("support", "mixed", "high", 10, 20, extra="hover")
-#build_lances("support", "vehicle", "", 1, 20, extra="hover")
+build_lances("support", "mixed", "med", 4, 16, extra="hover")
+build_lances("support", "mixed", "high", 10, 20, extra="hover")
 
 # lance_type_convoy, allied side convoy
 build_lances("convoy", "allied", "", 1, 20)
@@ -967,6 +998,7 @@ build_lances("battle", "vehicle", "", 8, 20, extra="MBT")
 
 # spotter 3 carriers
 build_lances("support", "carrier", "", 10, 20)
+build_lances("support", "carrier", "", 10, 20, extra="hover")
 
 
 # tank + indirect + command
