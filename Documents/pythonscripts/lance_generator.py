@@ -1035,6 +1035,7 @@ build_lances("battle", "mech", "high", 10, 20, extra="cheap")
 build_lances("battle", "mixed", "med", 4, 16, extra="cheap")
 build_lances("battle", "mixed", "high", 10, 20, extra="cheap")
 
+
 # mono weight class lance
 build_lances("battle", "mech", "med", 5, 10, extra="medium")
 build_lances("battle", "mech", "high", 10, 15, extra="medium")
@@ -1056,6 +1057,62 @@ build_lances("battle", "vehicle", "med", 10, 15, extra="heavy")
 build_lances("battle", "vehicle", "high", 15, 20, extra="heavy")
 build_lances("battle", "vehicle", "med", 15, 17, extra="assault")
 build_lances("battle", "vehicle", "high", 17, 20, extra="assault")
+
+# mono weight class cavalry lance
+build_lances("cavalry", "mech", "med", 5, 10, extra="medium")
+build_lances("cavalry", "mech", "high", 10, 15, extra="medium")
+build_lances("cavalry", "mech", "med", 10, 15, extra="heavy")
+build_lances("cavalry", "mech", "high", 15, 20, extra="heavy")
+build_lances("cavalry", "mech", "med", 15, 17, extra="assault")
+build_lances("cavalry", "mech", "high", 17, 20, extra="assault")
+
+build_lances("cavalry", "mixed", "med", 5, 10, extra="medium")
+build_lances("cavalry", "mixed", "high", 10, 15, extra="medium")
+build_lances("cavalry", "mixed", "med", 10, 15, extra="heavy")
+build_lances("cavalry", "mixed", "high", 15, 20, extra="heavy")
+build_lances("cavalry", "mixed", "med", 15, 17, extra="assault")
+build_lances("cavalry", "mixed", "high", 17, 20, extra="assault")
+
+# mono weight class fire lance
+build_lances("fire", "mech", "med", 5, 10, extra="medium")
+build_lances("fire", "mech", "high", 10, 15, extra="medium")
+build_lances("fire", "mech", "med", 10, 15, extra="heavy")
+build_lances("fire", "mech", "high", 15, 20, extra="heavy")
+build_lances("fire", "mech", "med", 15, 17, extra="assault")
+build_lances("fire", "mech", "high", 17, 20, extra="assault")
+
+build_lances("fire", "mixed", "med", 5, 10, extra="medium")
+build_lances("fire", "mixed", "high", 10, 15, extra="medium")
+build_lances("fire", "mixed", "med", 10, 15, extra="heavy")
+build_lances("fire", "mixed", "high", 15, 20, extra="heavy")
+build_lances("fire", "mixed", "med", 15, 17, extra="assault")
+build_lances("fire", "mixed", "high", 17, 20, extra="assault")
+
+# mono weight class recon lance
+build_lances("recon", "mech", "med", 5, 10, extra="medium")
+build_lances("recon", "mech", "high", 10, 15, extra="medium")
+build_lances("recon", "mech", "med", 10, 15, extra="heavy")
+build_lances("recon", "mech", "high", 15, 20, extra="heavy")
+
+build_lances("recon", "mixed", "med", 5, 10, extra="medium")
+build_lances("recon", "mixed", "high", 10, 15, extra="medium")
+build_lances("recon", "mixed", "med", 10, 15, extra="heavy")
+build_lances("recon", "mixed", "high", 15, 20, extra="heavy")
+
+# mono weight class support lance
+build_lances("support", "mech", "med", 5, 10, extra="medium")
+build_lances("support", "mech", "high", 10, 15, extra="medium")
+build_lances("support", "mech", "med", 10, 15, extra="heavy")
+build_lances("support", "mech", "high", 15, 20, extra="heavy")
+build_lances("support", "mech", "med", 15, 17, extra="assault")
+build_lances("support", "mech", "high", 17, 20, extra="assault")
+
+build_lances("support", "mixed", "med", 5, 10, extra="medium")
+build_lances("support", "mixed", "high", 10, 15, extra="medium")
+build_lances("support", "mixed", "med", 10, 15, extra="heavy")
+build_lances("support", "mixed", "high", 15, 20, extra="heavy")
+build_lances("support", "mixed", "med", 15, 17, extra="assault")
+build_lances("support", "mixed", "high", 17, 20, extra="assault")
 
 
 
