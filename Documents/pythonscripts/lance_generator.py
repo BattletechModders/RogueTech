@@ -434,6 +434,9 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
         elif "unit_heavy" not in exclude_tags and "unit_medium" in exclude_tags:
             exclude_tags.remove("unit_medium")
 
+        if "unit_predator" in include_tags:
+            include_tags.remove("unit_predator")
+
     # loosen tags for vehicles
     elif "unit_vehicle" in include_tags:
         if "unit_lance_support" in exclude_tags:
