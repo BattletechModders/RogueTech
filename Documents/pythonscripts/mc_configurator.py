@@ -90,10 +90,10 @@ for diff in range(1, 50+1):
         opfor_lances = ["Standard_MCSupport", "Standard_MCSupport_Easy", "Standard_MCSupport_Hard", "Standard_Support_NoVTOL"]
     elif diff < 18:
         ally_lances = ["Standard_MCSupport"]
-        opfor_lances = ["Standard_MCSupport", "Standard_MCSupport_Easy", "Standard_MCSupport_Hard", "Standard_Support_NoVTOL", "Standard_Battle", "Standard_MechBattle"]
+        opfor_lances = ["Standard_MCSupport", "Standard_MCSupport_Easy", "Standard_MCSupport_Hard", "Standard_Support_NoVTOL", "Standard_Battle", "Standard_Battle_Mech"]
     else:
         ally_lances = ["Standard_MCSupport"]
-        opfor_lances = ["Standard_MCSupport", "Standard_Support", "Standard_Battle", "Standard_MechBattle", "Standard_Fire"]
+        opfor_lances = ["Standard_MCSupport", "Standard_Support", "Standard_Battle", "Standard_Battle_Mech", "Standard_Fire"]
 
     diff_config["LancePool"] = {}
     diff_config["LancePool"]["ALL"] = []
