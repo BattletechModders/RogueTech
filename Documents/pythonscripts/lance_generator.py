@@ -577,10 +577,7 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
             if diff < 10:
                 slots = 3
 
-        if category == "MCSupport":
-            if diff < 3:
-                slots = 3
-        elif category == "MCDuel":
+        if category == "MCDuel":
             slots = 2
 
         if slots < 4:
@@ -960,13 +957,18 @@ build_lances("battle", "mixed", "urbie", 4, 8, location="../../../Optionals/Urbo
 # Mission control
 # support lances & duels
 
-build_lances("MCSupport", "mech", "low", 1, 6, location="../../MissionControl/")
+build_lances("MCSupport", "mech", "low", 1, 2, extra="small", location="../../MissionControl/")
+build_lances("MCSupport", "mech", "low", 2, 6, location="../../MissionControl/")
 build_lances("MCSupport", "mech", "med", 4, 16, location="../../MissionControl/")
 build_lances("MCSupport", "mech", "high", 10, 20, location="../../MissionControl/")
-build_lances("MCSupport", "mixed", "low", 1, 6, location="../../MissionControl/")
+
+build_lances("MCSupport", "mixed", "low", 1, 2, extra="small", location="../../MissionControl/")
+build_lances("MCSupport", "mixed", "low", 2, 6, location="../../MissionControl/")
 build_lances("MCSupport", "mixed", "med", 4, 16, location="../../MissionControl/")
 build_lances("MCSupport", "mixed", "high", 10, 20, location="../../MissionControl/")
-build_lances("MCSupport", "vehicle", "low", 1, 6, location="../../MissionControl/")
+
+build_lances("MCSupport", "vehicle", "low", 1, 2, extra="small", location="../../MissionControl/")
+build_lances("MCSupport", "vehicle", "low", 2, 6, location="../../MissionControl/")
 build_lances("MCSupport", "vehicle", "med", 4, 16, location="../../MissionControl/")
 build_lances("MCSupport", "vehicle", "high", 10, 20, location="../../MissionControl/")
 
