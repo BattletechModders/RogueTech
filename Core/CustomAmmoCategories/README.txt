@@ -1277,6 +1277,7 @@ Ammo definition
 								(CanBeExhaustedAt - (ammo level)) / (ammo level) chance to be exhausted. Which means component become destroyed without explosion.	
 								Example: ammo box has capacity 10, ammo has CanBeExhaustedAt - 0.5, current ammo upon check - 4. Exhaustion chance = (0.5 - 0.4)/0.5 = 0.2
 								Note: if current ammo is 0, Exhaustion chance become 1. One ammo box checked once per attack. Ammo ejections initiates exhaustion check too. 
+    "DelayedExposion": false - if true instead of immediate destruction exhausted ammo box will be destroyed at end of combat. At Contract.CompleteContract prefix
     "Unguided": false, for missiles effect only. If true missile trajectory will be strait line instead of curvy. Like it is unguided as old WW2 rockets. 
           Have no influence to indirect fire curvy
 					logic: if ammo unguided is true - launch will be unguided no matter mode and weapon settings, 
