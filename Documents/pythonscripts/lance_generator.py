@@ -78,8 +78,8 @@ weight_map = [
     ["hvy","hvy","hvy/med","hvy/med/light"],
     ["ass/hvy","hvy","hvy/med","hvy/med/light"],
     ["ass/hvy","ass/hvy","hvy","hvy/med/light"],
-    ["ass/hvy","ass/hvy","hvy","hvy/med/light"],
-    ["ass/hvy","ass/hvy","hvy","hvy/med/light"], #15
+    ["ass/hvy","ass/hvy","hvy","hvy/med"],
+    ["ass/hvy","ass/hvy","hvy","hvy/med"], #15
     ["ass","ass/hvy","ass/hvy","ass/hvy/med"],
     ["ass","ass/hvy","ass/hvy","ass/hvy/med"],
     ["ass","ass","ass/hvy","ass/hvy/med"],
