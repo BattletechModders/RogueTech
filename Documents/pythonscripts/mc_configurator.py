@@ -79,21 +79,21 @@ for diff in range(1, 50+1):
     ally_lances = []
     opfor_lances = []
 
-    if diff < 4:
+    if diff < 3:
         ally_lances = ["Standard_MCSupport", "Damaged_Lightly_MCSupport", "Damaged_Heavily_MCSupport"]
         opfor_lances = ["Standard_MCSupport", "Damaged_Lightly_MCSupport", "Damaged_Heavily_MCSupport"]
-    elif diff < 8:
+    elif diff < 6:
         ally_lances = ["Standard_MCSupport", "Damaged_Lightly_MCSupport"]
         opfor_lances = ["Standard_MCSupport", "Damaged_Lightly_MCSupport"]
     elif diff < 12:
         ally_lances = ["Standard_MCSupport"]
-        opfor_lances = ["Standard_MCSupport", "Standard_Support"]
-    elif diff < 16:
+        opfor_lances = ["Standard_MCSupport", "Standard_MCSupport_Easy", "Standard_MCSupport_Hard", "Standard_Support_NoVTOL"]
+    elif diff < 18:
         ally_lances = ["Standard_MCSupport"]
-        opfor_lances = ["Standard_MCSupport", "Standard_Support", "Standard_Battle", "Standard_MechBattle"]
+        opfor_lances = ["Standard_MCSupport", "Standard_MCSupport_Easy", "Standard_MCSupport_Hard", "Standard_Support_NoVTOL", "Standard_Battle", "Standard_Battle_Mech"]
     else:
         ally_lances = ["Standard_MCSupport"]
-        opfor_lances = ["Standard_MCSupport", "Standard_Support", "Standard_Battle", "Standard_MechBattle", "Standard_Fire"]
+        opfor_lances = ["Standard_MCSupport", "Standard_Support", "Standard_Battle", "Standard_Battle_Mech", "Standard_Fire"]
 
     diff_config["LancePool"] = {}
     diff_config["LancePool"]["ALL"] = []
@@ -143,11 +143,11 @@ for diff in range(1, 50+1):
             patch_kt["patch"]["Enemy"]["ChanceToSpawn"] = round(0.1 + 0.05*(diff+3), ndigits=2)
         patchdef_kt["patches"].append(patch_kt)
 
-with open("patchdef_hugs.json", 'w', newline='\r\n') as new_file:
+with open("../../InstallOptions/SupportLances/MC-Hugs/patchdef.json", 'w', newline='\r\n') as new_file:
         json.dump(patchdef_hugs, new_file, indent=2)
 
-with open("patchdef_easy.json", 'w', newline='\r\n') as new_file:
+with open("../../InstallOptions/SupportLances/MC-Easy/patchdef.json", 'w', newline='\r\n') as new_file:
         json.dump(patchdef_easy, new_file, indent=2)
 
-with open("patchdef_kt.json", 'w', newline='\r\n') as new_file:
+with open("../../InstallOptions/SupportLances/MC-KillTeams/patchdef.json", 'w', newline='\r\n') as new_file:
         json.dump(patchdef_kt, new_file, indent=2)

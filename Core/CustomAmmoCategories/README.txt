@@ -1272,11 +1272,18 @@ Ammo definition
 						example target have 10 armor, ArmorDamageModifier - 2, ISDamageModifier - 0.2, damage 10.
 						5 points of raw damage will remove 10 armor. Rest 5 points of raw damage will inflict 1 = (5*0.2) damage to IS
 						consolidated damage will be 5+1 = 6. 
+	"ExposionModifier" : 1.0 - modifier used to calculate exact chance to be exhausted
 	"CanBeExhaustedAt": 0.5 - if greater than 0 enables per ammo exhaustion mechanic. At end of attack sequence each uses in this attack ammo box is checked.
 	                           if it has (ammo level) = (current ammo/ammo capacity) LESS than CanBeExhaustedAt for this ammo it has 
-								(CanBeExhaustedAt - (ammo level)) / (ammo level) chance to be exhausted. Which means component become destroyed without explosion.	
-								Example: ammo box has capacity 10, ammo has CanBeExhaustedAt - 0.5, current ammo upon check - 4. Exhaustion chance = (0.5 - 0.4)/0.5 = 0.2
-								Note: if current ammo is 0, Exhaustion chance become 1. One ammo box checked once per attack. Ammo ejections initiates exhaustion check too. 
+								((CanBeExhaustedAt - (ammo level)) / (CanBeExhaustedAt)) * ExposionModifier chance to be exhausted. 
+								Which means component become destroyed without explosion.	
+								Example: ammo box has capacity 10, ammo has CanBeExhaustedAt = 0.5, ExposionModifier = 1, current ammo upon check = 4. 
+								Exhaustion chance = (0.5 - 0.4)/0.5 = 0.2
+								Example2: ammo box has capacity 1, ammo has CanBeExhaustedAt = 0.01, ExposionModifier = 0.3, current ammo upon check = 0
+								Exhaustion chance = ((0.01 - 0.0)/0.01) * 0.3 = 0.3
+								Note: if current ammo is 0, Exhaustion chance become ExposionModifier. One ammo box checked once per attack.
+								Ammo ejections initiates exhaustion check too. 
+    "DelayedExposion": false - if true instead of immediate destruction exhausted ammo box will be destroyed at end of combat. At Contract.CompleteContract prefix
     "Unguided": false, for missiles effect only. If true missile trajectory will be strait line instead of curvy. Like it is unguided as old WW2 rockets. 
           Have no influence to indirect fire curvy
 					logic: if ammo unguided is true - launch will be unguided no matter mode and weapon settings, 
