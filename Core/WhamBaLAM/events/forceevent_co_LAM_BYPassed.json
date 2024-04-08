@@ -1,50 +1,41 @@
 {
     "Description" : {
-        "Id" : "forceevent_co_VTOL_Passed",
+        "Id" : "forceevent_co_LAM_BYPassed",
         "Name" : "That's What I'm Talkin' 'Bout!",
-        "Details" : "A knock sounds on your office door and you call out, \"Come in...\"\r\n\r\nThe door opens and Darius strides in with a datapad and a smile, \"Commander, [[SCN_MW,{SCN_MW.Callsign}]] has returned and they passed their training with <i>Flying</i> colours!\"\r\n\r\nThe pun makes you smile, but not as much as the memory of a friend who would have turned green hearing it.  Still smiling, you ask Darius, \"Very good news indeed.  What's on the datapad then?\"\r\n\r\nDarius hands it over to you, \"Well, because [[SCN_MW,{SCN_MW.Callsign}]] did so well, the <i>Air Today, Gone Tomorrow</i> has offered to sell us a [[DM.BaseDescriptionDefs[LoreRipperVTOL],Ripper VTOL]] that they did their training in.  The details are all there.\"",
-        "Icon" : "uixTxrSpot_VTOLGrad.png"
+        "Details" : "A knock sounds on your office door and you call out, \"Come in...\"\r\n\r\nThe door opens and Darius strides in with a datapad and a smile, \"Commander, you know how [[SCN_MW,{SCN_MW.Callsign}]] returned without being given any credentials stating to that they had actually passed LAM training?\"\r\n\r\nYou look up from your monitor, \"Yeah, I was actually in the process of writing to <i>Wham-Ba-Lam</i> to ask for a refund on that waste of a training course.\"\r\n\r\nDarius hands a datapad over to you, \"No need, Commander.  All the paperwork certifying that [[SCN_MW,{SCN_MW.Callsign}]] is fully qualified to pilot a LAM has come in.  Apparently a misrouted HPG message caused the delay in notifying us.  The details are all there.\"",
+        "Icon" : "uixTxrSpot_LAMGrad.png"
     },
-    "Scope" : "Company",
-    "Weight" : 10,
+    "Scope" : "SecondaryMechWarrior",
+    "Weight" : 10000,
     "Requirements" : {
-        "Scope" : "Company",
+        "Scope" : "SecondaryMechWarrior",
         "RequirementTags" : {
-            "items" : [],
+            "items" : [
+                "pilot_LAM_School"
+            ],
             "tagSetSourceFile" : ""
         },
         "ExclusionTags" : {
             "items" : [],
-            "tagSetSourceFile" : "Tags/CompanyTags"
+            "tagSetSourceFile" : "Tags/PilotTags"
         },
-        "RequirementComparisons" : []
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : "0"
+            }
+        ]
     },
     "AdditionalRequirements" : [],
-    "AdditionalObjects" : [
-        {
-            "Scope" : "SecondaryMechWarrior",
-            "Requirements" : {
-                "Scope" : "SecondaryMechWarrior",
-                "RequirementTags" : {
-                    "items" : [
-                        "pilot_VTOL_School"
-                    ],
-                    "tagSetSourceFile" : ""
-                },
-                "ExclusionTags" : {
-                    "items" : [],
-                    "tagSetSourceFile" : "Tags/PilotTags"
-                },
-                "RequirementComparisons" : []
-            }
-        }
-    ],
+    "AdditionalObjects" : [],
     "Options" : [
         {
             "Description" : {
                 "Id" : "outcome_0",
-                "Name" : "But, No Thanks",
-                "Details" : "Thanks",
+                "Name" : "the letter to <i>Wham-Ba-Lam</i>",
+                "Details" : "DELETE ",
                 "Icon" : null
             },
             "RequirementList" : [
@@ -52,7 +43,7 @@
                     "Scope" : "SecondaryMechWarrior",
                     "RequirementTags" : {
                         "items" : [
-                            "pilot_VTOL_School"
+                            "pilot_LAM_School"
                         ],
                         "tagSetSourceFile" : ""
                     },
@@ -74,8 +65,8 @@
                 {
                     "Description" : {
                         "Id" : "outcome_0_0",
-                        "Name" : "No Thanks",
-                        "Details" : "You read through the information on the datapad, \"You know it's tempting, but at that price, we're paying nearly full market value for a used VTOL.  We will allocate [[SCN_MW,{SCN_MW.Callsign}]] an appropriate ride to utilitise thier new skill.\"\r\n\r\nDaruis takes back the datapad, \"Understood, Commander.\"",
+                        "Name" : "Finally",
+                        "Details" : "You read through the information on the datapad, \"Well, at least we can rest assured that we don't have to worry about the MRBC fining us for any breach of contract due to improperly training pilots.\"\r\n\r\nDaruis takes back the datapad, \"Are you still going to contact <i>Wham-Ba-Lam</i>?\"\r\n\r\nYou shake your head no as you hit the delete button.",
                         "Icon" : null
                     },
                     "Weight" : 100,
@@ -85,13 +76,13 @@
                             "Requirements" : null,
                             "AddedTags" : {
                                 "items" : [
-                                    "can_pilot_vtol"
+                                    "can_pilot_landairmech"
                                 ],
                                 "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
                                 "items" : [
-                                    "pilot_VTOL_School"
+                                    "pilot_LAM_School"
                                 ],
                                 "tagSetSourceFile" : ""
                             },
@@ -115,7 +106,7 @@
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
-                                    "name" : "PilotEnrolled",
+                                    "name" : "LAMPilotEnrolled",
                                     "value" : "0",
                                     "set" : true,
                                     "valueConstant" : null
@@ -145,8 +136,8 @@
         {
             "Description" : {
                 "Id" : "outcome_1",
-                "Name" : "Buy Ripper VTOL",
-                "Details" : "[\u00A2750,000]",
+                "Name" : "the letter to <i>Wham-Ba-Lam</i>",
+                "Details" : "SEND ",
                 "Icon" : null
             },
             "RequirementList" : [
@@ -154,7 +145,7 @@
                     "Scope" : "SecondaryMechWarrior",
                     "RequirementTags" : {
                         "items" : [
-                            "pilot_VTOL_School"
+                            "pilot_LAM_School"
                         ],
                         "tagSetSourceFile" : ""
                     },
@@ -181,22 +172,15 @@
                         "items" : [],
                         "tagSetSourceFile" : ""
                     },
-                    "RequirementComparisons" : [
-                        {
-                            "obj" : "Funds",
-                            "op" : "GreaterThanOrEqual",
-                            "val" : 750000,
-                            "valueConstant" : "750000"
-                        }
-                    ]
+                    "RequirementComparisons" : []
                 }
             ],
             "ResultSets" : [
                 {
                     "Description" : {
                         "Id" : "outcome_1_0",
-                        "Name" : "I'll buy that for a...",
-                        "Details" : "You read through the information on the datapad, \"You know what, Darius, let's go ahead and take them up on their offer.  May as well give [[SCN_MW,{SCN_MW.Callsign}]] the same ride they had in training to gain more experience in until we can find a better upgrade.\"\r\n\r\nDaruis takes back the datapad, \"I will make the payment now, Commander.  We should have the delivery by the end of the day.\"",
+                        "Name" : "Piece of Mind",
+                        "Details" : "You read through the information on the datapad, \"Well, at least we can rest assured that [[SCN_MW,{SCN_MW.Callsign}]] knows what they are doing if we decide to put them in the cockpit now.\"\r\n\r\nDaruis takes back the datapad, \"Are you still going to contact <i>Wham-Ba-Lam</i>?\"\r\n\r\nYou look back at the letter composed on your monitor:\r\n\r\n<color=#0DA2FF><i>Subject: Disappointing Experience with Wham-Ba-Lam LAMCademy Pilot Training\r\n\r\nDear Mac Ross of Wham-Ba-Lam,\r\n\r\nI am writing to express my extreme disappointment with the subpar service provided by your company, Wham-Ba-Lam LAMCademy Pilot Training. As a paying customer, I expected a level of professionalism and competence that was sorely lacking in my recent experience.\r\n\r\nMy frustration stems from the fact that the LAM pilot training program [[SCN_MW,{SCN_MW.Callsign}]] was enrolled in failed to deliver on its promises. My company invested significant resources into sending them to your facility with the expectation that they would return with the necessary certification to operate Land-Air-Mechs proficiently. However, much to my dismay, they were not provided with a training certificate upon completion of the program.\r\n\r\nThis oversight is not only inconvenient but also potentially damaging to their career and the reputation of my company. Without the proper certification, they are unable to prove any competence as a LAM pilot, which could hinder my company's ability to secure future contracts. Furthermore, it reflects poorly on your company's credibility and integrity.\r\n\r\nI find it unacceptable that Wham-Ba-Lam, a purported leader in LAM training, would fail to fulfill such a basic aspect of its service. It is evident that there was a significant lapse in communication and oversight within your organization, and I expect prompt action to rectify this situation.\r\n\r\nI expect a formal apology for the inconvenience and frustration caused by this egregious error. Furthermore, I urge you to review and improve your internal processes to ensure that such mistakes are not repeated in the future.\r\n\r\nFailure to address this matter satisfactorily will force me to escalate my concerns through other channels, including legal action with the MRBC if necessary. I trust that you will take this matter seriously and prioritize resolving it expediently.\r\n\r\nSincerely,\r\n\r\n\r\n\r\n{COMMANDER.Commander.LastName}\r\n\r\n{COMPANY.CompanyName}\r\n\r\nHPG ROUTING NUMBER: 000000 FF0000 000080</i></color>\r\n\r\nA broad smile crosses your face as you hit SEND",
                         "Icon" : null
                     },
                     "Weight" : 100,
@@ -206,14 +190,13 @@
                             "Requirements" : null,
                             "AddedTags" : {
                                 "items" : [
-                                    "can_pilot_vtol",
-                                    "MaPermAffinity_10=RipperVTOL_10"
+                                    "can_pilot_landairmech"
                                 ],
                                 "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
                                 "items" : [
-                                    "pilot_VTOL_School"
+                                    "pilot_LAM_School"
                                 ],
                                 "tagSetSourceFile" : ""
                             },
@@ -237,27 +220,13 @@
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
-                                    "name" : "Funds",
-                                    "value" : "-7500000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "PilotEnrolled",
+                                    "name" : "LAMPilotEnrolled",
                                     "value" : "0",
                                     "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
-                            "Actions" : [
-                                {
-                                    "Type" : "System_ShowRewards",
-                                    "value" : "EventVTOLAcademy_Loot",
-                                    "valueConstant" : null,
-                                    "additionalValues" : null
-                                }
-                            ],
+                            "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
@@ -281,7 +250,7 @@
     ],
     "PublishState" : "PUBLISHED",
     "ValidationState" : "UNTESTED",
-    "EventType" : "UNSELECTABLE",
+    "EventType" : "NORMAL",
     "OneTimeEvent" : false,
     "Tags" : {
         "items" : [],
