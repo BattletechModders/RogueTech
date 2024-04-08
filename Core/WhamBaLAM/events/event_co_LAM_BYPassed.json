@@ -1,12 +1,12 @@
 {
     "Description" : {
-        "Id" : "forceevent_co_LAM_Passed_Commander",
+        "Id" : "event_co_LAM_BYPassed",
         "Name" : "That's What I'm Talkin' 'Bout!",
-        "Details" : "As the shuttle docks with the <i>Argo</i>, you wait impatiently for the techs to lower the disembarkation ramp.  The moment it is safe, you leap from your seat and head onto the deck of the <i>Argo</i>.  You see Darius waiting for you off to the side and head over towards him with a big smile on your face.\r\n. \r\nAs you approach, Darius pipes up, \"I take it you passed, Commander?\"\r\n\r\nYou grin widely, \"No, I'm just happy to see your ugly face,\"  You slap Darius on the shoulder as you continue, \"You bet your ass i did, Darius!  Wow! What a blast that was!  I never knew how exhilarating flying could be.\"\r\n\r\nDarius smiles and hands you a datapad, \"Well, it appears that <i>Wham Ba-LAM</i> has offered to sell you one of the [[DM.BaseDescriptionDefs[LoreLAM],LAMs]] that you flew your training in.  The details are all there in this datafile they sent over.  And good to have you back, Commander.\"",
+        "Details" : "A knock sounds on your office door and you call out, \"Come in...\"\r\n\r\nThe door opens and Darius strides in with a datapad and a smile, \"Commander, you know how [[SCN_MW,{SCN_MW.Callsign}]] returned without being given any credentials stating to that they had actually passed LAM training?\"\r\n\r\nYou look up from your monitor, \"Yeah, I was actually in the process of writing to <i>Wham-Ba-Lam</i> to ask for a refund on that waste of a training course.\"\r\n\r\nDarius hands a datapad over to you, \"No need, Commander.  All the paperwork certifying that [[SCN_MW,{SCN_MW.Callsign}]] is fully qualified to pilot a LAM has come in.  Apparently a misrouted HPG message caused the delay in notifying us.  The details are all there.\"",
         "Icon" : "uixTxrSpot_LAMGrad.png"
     },
     "Scope" : "Company",
-    "Weight" : 10,
+    "Weight" : 10000,
     "Requirements" : {
         "Scope" : "Company",
         "RequirementTags" : {
@@ -20,18 +20,43 @@
         "RequirementComparisons" : []
     },
     "AdditionalRequirements" : [],
-    "AdditionalObjects" : [],
+    "AdditionalObjects" : [
+        {
+            "Scope" : "SecondaryMechWarrior",
+            "Requirements" : {
+                "Scope" : "SecondaryMechWarrior",
+                "RequirementTags" : {
+                    "items" : [
+                        "pilot_LAM_School"
+                    ],
+                    "tagSetSourceFile" : ""
+                },
+                "ExclusionTags" : {
+                    "items" : [],
+                    "tagSetSourceFile" : "Tags/PilotTags"
+                },
+                "RequirementComparisons" : [
+                    {
+                        "obj" : "Injuries",
+                        "op" : "Equal",
+                        "val" : 0,
+                        "valueConstant" : "0"
+                    }
+                ]
+            }
+        }
+    ],
     "Options" : [
         {
             "Description" : {
                 "Id" : "outcome_0",
-                "Name" : "But, No Thanks",
-                "Details" : "Thanks",
+                "Name" : "the letter to <i>Wham-Ba-Lam</i>",
+                "Details" : "DELETE ",
                 "Icon" : null
             },
             "RequirementList" : [
                 {
-                    "Scope" : "Commander",
+                    "Scope" : "SecondaryMechWarrior",
                     "RequirementTags" : {
                         "items" : [
                             "pilot_LAM_School"
@@ -42,21 +67,28 @@
                         "items" : [],
                         "tagSetSourceFile" : ""
                     },
-                    "RequirementComparisons" : []
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Injuries",
+                            "op" : "Equal",
+                            "val" : 0,
+                            "valueConstant" : "0"
+                        }
+                    ]
                 }
             ],
             "ResultSets" : [
                 {
                     "Description" : {
                         "Id" : "outcome_0_0",
-                        "Name" : "No Thanks",
-                        "Details" : "You read through the information on the datapad, \"You know it's tempting, but at that price, we're paying nearly full market value for a used LAM and it wasn't all that either.  We'll find a ride I <i>want</i> to fly soon enough.\"\r\n\r\nDaruis takes back the datapad, \"Understood, Commander.\"",
+                        "Name" : "Finally",
+                        "Details" : "You read through the information on the datapad, \"Well, at least we can rest assured that we don't have to worry about the MRBC fining us for any breach of contract due to improperly training pilots.\"\r\n\r\nDaruis takes back the datapad, \"Are you still going to contact <i>Wham-Ba-Lam</i>?\"\r\n\r\nYou shake your head no as you hit the delete button.\r\n\r\n[[SCN_MW,{SCN_MW.Callsign}]] can pilot Land Air Mechs",
                         "Icon" : null
                     },
                     "Weight" : 100,
                     "Results" : [
                         {
-                            "Scope" : "Commander",
+                            "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
                                 "items" : [
@@ -120,13 +152,13 @@
         {
             "Description" : {
                 "Id" : "outcome_1",
-                "Name" : "Buy LAM",
-                "Details" : "[\u00A25,000,000]",
+                "Name" : "the letter to <i>Wham-Ba-Lam</i>",
+                "Details" : "SEND ",
                 "Icon" : null
             },
             "RequirementList" : [
                 {
-                    "Scope" : "Commander",
+                    "Scope" : "SecondaryMechWarrior",
                     "RequirementTags" : {
                         "items" : [
                             "pilot_LAM_School"
@@ -137,7 +169,14 @@
                         "items" : [],
                         "tagSetSourceFile" : ""
                     },
-                    "RequirementComparisons" : []
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Injuries",
+                            "op" : "Equal",
+                            "val" : 0,
+                            "valueConstant" : "0"
+                        }
+                    ]
                 },
                 {
                     "Scope" : "Company",
@@ -149,33 +188,25 @@
                         "items" : [],
                         "tagSetSourceFile" : ""
                     },
-                    "RequirementComparisons" : [
-                        {
-                            "obj" : "Funds",
-                            "op" : "GreaterThanOrEqual",
-                            "val" : 5000000,
-                            "valueConstant" : "5000000"
-                        }
-                    ]
+                    "RequirementComparisons" : []
                 }
             ],
             "ResultSets" : [
                 {
                     "Description" : {
                         "Id" : "outcome_1_0",
-                        "Name" : "I'll buy that for a...",
-                        "Details" : "You read through the information on the datapad, \"You know what, Darius, let's go ahead and take them up on their offer.  It's a LAM I'm particularly familiar with and it'll suffice while I clock up some hours in the cockpit.\"\r\n\r\nDaruis takes back the datapad, \"I will make the payment now, Commander.  We should have the delivery by the end of the day.\"",
+                        "Name" : "Piece of Mind",
+                        "Details" : "You read through the information on the datapad, \"Well, at least we can rest assured that [[SCN_MW,{SCN_MW.Callsign}]] knows what they are doing if we decide to put them in the cockpit now.\"\r\n\r\nDaruis takes back the datapad, \"Are you still going to contact <i>Wham-Ba-Lam</i>?\"\r\n\r\nYou look back at the letter composed on your monitor:\r\n\r\n<color=#0DA2FF><i>Subject: Disappointing Experience with Wham-Ba-Lam LAMCademy Pilot Training\r\n\r\nDear Mac Ross of Wham-Ba-Lam,\r\n\r\nI am writing to express my extreme disappointment with the subpar service provided by your company, Wham-Ba-Lam LAMCademy Pilot Training. As a paying customer, I expected a level of professionalism and competence that was sorely lacking in my recent experience.\r\n\r\nMy frustration stems from the fact that the LAM pilot training program [[SCN_MW,{SCN_MW.Callsign}]] was enrolled in failed to deliver on its promises. My company invested significant resources into sending them to your facility with the expectation that they would return with the necessary certification to operate Land-Air-Mechs proficiently. However, much to my dismay, they were not provided with a training certificate upon completion of the program.\r\n\r\nThis oversight is not only inconvenient but also potentially damaging to their career and the reputation of my company. Without the proper certification, they are unable to prove any competence as a LAM pilot, which could hinder my company's ability to secure future contracts. Furthermore, it reflects poorly on your company's credibility and integrity.\r\n\r\nI find it unacceptable that Wham-Ba-Lam, a purported leader in LAM training, would fail to fulfill such a basic aspect of its service. It is evident that there was a significant lapse in communication and oversight within your organization, and I expect prompt action to rectify this situation.\r\n\r\nI expect a formal apology for the inconvenience and frustration caused by this egregious error. Furthermore, I urge you to review and improve your internal processes to ensure that such mistakes are not repeated in the future.\r\n\r\nFailure to address this matter satisfactorily will force me to escalate my concerns through other channels, including legal action with the MRBC if necessary. I trust that you will take this matter seriously and prioritize resolving it expediently.\r\n\r\nSincerely,\r\n\r\n\r\n\r\n{COMMANDER.Commander.LastName}\r\n\r\n{COMPANY.CompanyName}\r\n\r\nHPG ROUTING NUMBER: 000000 FF0000 000080</i></color>\r\n\r\nA broad smile crosses your face as you hit SEND.\r\n\r\n[[SCN_MW,{SCN_MW.Callsign}]] can pilot Land Air Mechs",
                         "Icon" : null
                     },
-                    "Weight" : 50,
+                    "Weight" : 100,
                     "Results" : [
                         {
-                            "Scope" : "Commander",
+                            "Scope" : "SecondaryMechWarrior",
                             "Requirements" : null,
                             "AddedTags" : {
                                 "items" : [
-                                    "can_pilot_landairmech",
-                                    "MaPermAffinity_10=stingerlam_30"
+                                    "can_pilot_landairmech"
                                 ],
                                 "tagSetSourceFile" : ""
                             },
@@ -205,99 +236,13 @@
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
-                                    "name" : "Funds",
-                                    "value" : "-5000000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
                                     "name" : "LAMPilotEnrolled",
                                     "value" : "0",
                                     "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
-                            "Actions" : [
-                                {
-                                    "Type" : "System_ShowRewards",
-                                    "value" : "EventLAMcademy_Loot_S",
-                                    "valueConstant" : null,
-                                    "additionalValues" : null
-                                }
-                            ],
-                            "ForceEvents" : null,
-                            "TemporaryResult" : false,
-                            "ResultDuration" : 0
-                        }
-                    ]
-                },
-                {
-                    "Description" : {
-                        "Id" : "outcome_1_1",
-                        "Name" : "I'll buy that for a...",
-                        "Details" : "You read through the information on the datapad, \"You know what, Darius, let's go ahead and take them up on their offer.  It's a LAM I'm particularly familiar with and it'll suffice while I clock up some hours in the cockpit.\"\r\n\r\nDaruis takes back the datapad, \"I will make the payment now, Commander.  We should have the delivery by the end of the day.\"",
-                        "Icon" : null
-                    },
-                    "Weight" : 50,
-                    "Results" : [
-                        {
-                            "Scope" : "Commander",
-                            "Requirements" : null,
-                            "AddedTags" : {
-                                "items" : [
-                                    "can_pilot_landairmech",
-                                    "MaPermAffinity_10=waspLAM_30"
-                                ],
-                                "tagSetSourceFile" : ""
-                            },
-                            "RemovedTags" : {
-                                "items" : [
-                                    "pilot_LAM_School"
-                                ],
-                                "tagSetSourceFile" : ""
-                            },
-                            "Stats" : null,
                             "Actions" : null,
-                            "ForceEvents" : null,
-                            "TemporaryResult" : false,
-                            "ResultDuration" : 0
-                        },
-                        {
-                            "Scope" : "Company",
-                            "Requirements" : null,
-                            "AddedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
-                            },
-                            "RemovedTags" : {
-                                "items" : [],
-                                "tagSetSourceFile" : ""
-                            },
-                            "Stats" : [
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Funds",
-                                    "value" : "-5000000",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "LAMPilotEnrolled",
-                                    "value" : "0",
-                                    "set" : true,
-                                    "valueConstant" : null
-                                }
-                            ],
-                            "Actions" : [
-                                {
-                                    "Type" : "System_ShowRewards",
-                                    "value" : "EventLAMcademy_Loot_W",
-                                    "valueConstant" : null,
-                                    "additionalValues" : null
-                                }
-                            ],
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
@@ -321,7 +266,7 @@
     ],
     "PublishState" : "PUBLISHED",
     "ValidationState" : "UNTESTED",
-    "EventType" : "UNSELECTABLE",
+    "EventType" : "NORMAL",
     "OneTimeEvent" : false,
     "Tags" : {
         "items" : [],
