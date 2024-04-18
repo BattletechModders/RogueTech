@@ -80,6 +80,9 @@ Defines what to do with your lost mech
 - `bool VehicleAlwaysDisassembled = false` - If this option enabled vehicles goes to salvage in dissasembled state, otherwise they always go in full state (vehciles have no CT).
 - `bool FullUnitUsedAmountOfLootableComponents = true` - If true amount of not destroyed salvagable componetns will be added to required random salvage slots to be able to get full unit as salvage. Needed random salvage slots formula will be (DefaultMechPartMax + <amount of components>) \* FullUnitRandomSalvageSlotUsingMod - 1
 - `float FullUnitStructurePersentage = 0.5f` - if above 0f (and FullEnemyUnitSalvage is true) additional rule to detect if unit goes to salvage in disassembled state will be used (regardless type) - percentage of rest structure - if unit have less than FullUnitStructurePersentage of overall structure it goes in disassembled state.
+- `float FullMechStructurePersentage = 0f` - if above 0f (and FullEnemyUnitSalvage is true) and unit is not vehicle and not squad this value used istead of FullUnitStructurePersentage
+- `float FullVehicleStructurePersentage = 0f` - if above 0f (and FullEnemyUnitSalvage is true) and unit is vehicle this value used istead of FullUnitStructurePersentage
+- `float AdditionalStructurePercentagePerPart = 0f` - AdditionalStructurePercentagePerPart * DefaultMechPartMax will be added to effective needed rest structure pecentage. Can be negative. 
 
 ## Assembly options
 
