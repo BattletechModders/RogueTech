@@ -84,6 +84,9 @@ Defines what to do with your lost mech
 - `float FullMechStructurePersentage = 0f` - if above 0f (and FullEnemyUnitSalvage is true) and unit is not vehicle and not squad this value used istead of FullUnitStructurePersentage
 - `float FullVehicleStructurePersentage = 0f` - if above 0f (and FullEnemyUnitSalvage is true) and unit is vehicle this value used istead of FullUnitStructurePersentage
 - `float AdditionalStructurePercentagePerPart = 0f` - AdditionalStructurePercentagePerPart * DefaultMechPartMax will be added to effective needed rest structure pecentage. Can be negative. 
+- `float FullUnitRecoveryChance = 0.9f` - if above 0f and unit can be looted in full state and pass other checks it will suffer this check on random roll, on fail goes to loot in disassembled state
+- `float FullMechRecoveryChance = 0.95f` - if above 0f and unit can be looted in full state and not vehicle and not squad and pass other checks it will suffer this check on random roll, on fail goes to loot in disassembled state
+- `float FullVehicleRecoveryChance = 0.3f` - if above 0f and unit can be looted in full state and is vehicle and pass other checks it will suffer this check on random roll, on fail goes to loot in disassembled state
 
 ## Assembly options
 
