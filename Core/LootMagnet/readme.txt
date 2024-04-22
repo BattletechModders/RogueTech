@@ -11,3 +11,5 @@ RollupComponentsInsideMechStrategy: "UpToThreshold" - stragegy for calculation f
 	"FlatModifier" - result = <amount of components> * <RollupFullUnitComponent for current reputation> rounded up. If <RollupFullUnitComponent for current reputation> is 0 than <amount of components>
 	
 <reputation threshold value> for full unit components slot cost calculation is <RollupMRBValue for current MRB> * <RollupFullUnitComponent for current reputation>
+
+UseImprovedSellUI: false  - if true, new fancy UI is used to sell items from salvage screen and from mechlab

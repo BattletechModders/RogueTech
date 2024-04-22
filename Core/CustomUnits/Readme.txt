@@ -5,6 +5,9 @@ this mod allows you next things
 4. Add custom animated hardpoints
 
 main settings in mod.json
+	"VehcilesPartialEditable": false - if true vehicles are allowed to be edited partially, 
+	"CloseRangeFiringArc": 90.0
+	"CloseRangeFiringArcDistance": 40.0 - if distance form attacker to target is less than CloseRangeFiringArcDistance, its firing arc will be expanded to CloseRangeFiringArc
 	"SortBy": {
 		"orderByCbillValue":false,
 		"orderByNickname":false,

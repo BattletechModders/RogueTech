@@ -50,7 +50,6 @@ CriticalHitChanceReceivedMultiplier can be locational
 
 {
 "debugLog":true, - enable debug log 
-"MapOnlineClientLink":"http://www.roguewar.org/playerlut?cId={0}" - link for an online client
 "ScaleWeaponHeat": 150, - if > 0 incoming heat from next sources (AoE, weapon hits, landmines, landmines AoE) is scaled
                             scale modifier = 1 - (<target heat>/<ScaleWeaponHeat>)
 							Note! scale modifier for weapon damage calculates before attack. 
@@ -380,6 +379,8 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
  "PhysicsAoE_Minefield": true - if true minefields explosion effects AoE process will use raycasting to limit affected targets rather than just range
  "PhysicsAoE_API": true        - if true explosion API (mostly used by engine explosions) will use raycasting to limit affected targets rather than just range
  "PhysicsAoE_API_Height" : 10f - default height of AoE explosions for an API use
+ "PhysicsAoE_MinDist": 40f - targets which is close to AoE inital point than this distance does not check on having LoS to calculate damage
+
  "AIAwareArtillery":true - if true AI will try to avoid artillery strikes (not vanilla artillery but CAC ones, look "IsArtillery" weapon param)
 
 "AIMinefieldAware": true - if true AI will try to avoid significant direct minefield damage

@@ -87,7 +87,7 @@ Defines what to do with your lost mech
 - `float FullUnitRecoveryChance = 0.9f` - if above 0f and unit can be looted in full state and pass other checks it will suffer this check on random roll, on fail goes to loot in disassembled state
 - `float FullMechRecoveryChance = 0.95f` - if above 0f and unit can be looted in full state and not vehicle and not squad and pass other checks it will suffer this check on random roll, on fail goes to loot in disassembled state
 - `float FullVehicleRecoveryChance = 0.3f` - if above 0f and unit can be looted in full state and is vehicle and pass other checks it will suffer this check on random roll, on fail goes to loot in disassembled state
-
+- `float SquadAdditionalPartChance = 0f` - if destroyed unit is squad instead of normal logic to calculate unit parts goes to salvage it will perform (DefaultMechPartMax - 1) rolls from 0 to 1, for every roll less than SquadAdditionalPartChance it will add additional unit part to salvage. One part is always guaranteed.
 ## Assembly options
 
 ### recoloring mech icons in storage
