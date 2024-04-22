@@ -2,8 +2,8 @@
 	"ID": "Assassinate_UnionFight",
 	"contractName": "Union Busting",
 	"contractDisplayStyle": "BaseCampaignNormal",
-	"difficulty": 7,
-	"difficultyUIModifier": 0,
+	"difficulty": 8,
+	"difficultyUIModifier": 4,
 	"weight": 1,
 	"scope": "STANDARD",
 	"finalDifficulty": 0,
@@ -11,20 +11,74 @@
 	"missionSuccessStatementOverride": null,
 	"badFaithStatementOverride": null,
 	"goodFaithStatementOverride": null,
-	"shortDescription": "SPECIAL BTA CONTRACT: A {TEAM_EMP.FactionDef.Demonym} surveillance team picked up {TEAM_TAR.FactionDef.Demonym} signals from the surface of {TGT_SYSTEM.Name} that correspond to an Union-class DropShip having recently landed and beginning to deploy its cargo. We need someone to go in and destroy the entire operation including the Union itself. Bring your A-Game, Commander, Unions aren't easy targets.\n\n <b><color=#f44336>THIS CONTRACT IS QUITE DIFFICULT, UNIONS ARE NOT EASY TARGETS. YOU HAVE BEEN WARNED.</color></b>\n\n <b><color=#ffcc00>DO NOT BRING TANKS TO THIS MISSION, TANKS CAN BUG OUT ON CONTRACT COMPLETION AND YOU CAN LOSE THEM PERMANENTLY. YOU HAVE BEEN WARNED.</color></b>",
+	"shortDescription": "<b><color=#1F51FF>EMERGENCY CONTRACT</b></color>: A {TEAM_EMP.FactionDef.Demonym} surveillance team picked up {TEAM_TAR.FactionDef.Demonym} signals from the surface of {TGT_SYSTEM.Name} that correspond to an Union-class DropShip having recently landed and beginning to deploy its cargo. We need someone to go in and destroy the entire operation including the Union itself. Bring your A-Game, Commander, Unions aren't easy targets.\n\n <b><color=#f44336>THIS CONTRACT IS QUITE DIFFICULT, UNIONS ARE NOT EASY TARGETS. YOU HAVE BEEN WARNED.</color></b>",
 	"longDescription": "Holy hell, they want us to fight a DropShip with our mechs? They have got to be kidding, but that's why they're paying us the big bucks.",
-	"salvagePotential": 24,
+	"salvagePotential": 12,
 	"requirementList": [
 		{
 			"Scope": "Company",
 			"RequirementTags": {
+				"items": [],
+				"tagSetSourceFile": ""
+			},
+			"ExclusionTags": {
 				"items": [
-					"disabled_contract"
+					"planet_other_empty",
+					"planet_other_gamesworld",
+					"planet_other_megacity"
 				],
+				"tagSetSourceFile": ""
+			},
+			"RequirementComparisons": [
+				{
+					"obj": "Employer.IsOwner",
+					"op": "Equal",
+					"val": 1,
+					"valueConstant": null
+				},
+				{
+					"obj": "Employer.Locals",
+					"op": "Equal",
+					"val": 0,
+					"valueConstant": null
+				},
+				{
+					"obj": "Employer.Solaris7",
+					"op": "Equal",
+					"val": 0,
+					"valueConstant": null
+				}
+			]
+		},
+		{
+			"Scope": "Company",
+			"RequirementTags": {
+				"items": [],
 				"tagSetSourceFile": ""
 			},
 			"ExclusionTags": {
 				"items": [],
+				"tagSetSourceFile": ""
+			},
+			"RequirementComparisons": [
+				{
+					"obj": "MissionsComplete",
+					"op": "GreaterThan",
+					"val": 60,
+					"valueConstant": "60"
+				}
+			]
+		},
+		{
+			"Scope": "Company",
+			"RequirementTags": {
+				"items": [],
+				"tagSetSourceFile": ""
+			},
+			"ExclusionTags": {
+				"items": [
+					"assassinate_unionfight_cooldown"
+				],
 				"tagSetSourceFile": ""
 			},
 			"RequirementComparisons": []
@@ -36,7 +90,9 @@
 			"Requirements": null,
 			"AddedTags": {
 				"tagSetSourceFile": "",
-				"items": []
+				"items": [
+					"assassinate_unionfight_cooldown"
+				]
 			},
 			"RemovedTags": {
 				"tagSetSourceFile": "",
@@ -45,8 +101,8 @@
 			"Stats": null,
 			"Actions": [],
 			"ForceEvents": null,
-			"TemporaryResult": false,
-			"ResultDuration": 0
+			"TemporaryResult": true,
+			"ResultDuration": 120
 		},
 		{
 			"Scope": "Company",
@@ -65,7 +121,7 @@
 			"Actions": [
 				{
 					"Type": "System_ShowRewards",
-					"value": "BTA_OverlordVictory",
+					"value": "itemCollection_MonsterMash_Union",
 					"valueConstant": null,
 					"additionalValues": null
 				}
@@ -77,7 +133,7 @@
 	],
 	"OnContractFailureResults": [],
 	"encounterPlayStyle": "SinglePlayer",
-	"maxNumberOfPlayerUnits": 4,
+	"maxNumberOfPlayerUnits": 16,
 	"lanceMinTonnage": -1,
 	"lanceMaxTonnage": -1,
 	"mechMinTonnages": [
@@ -112,7 +168,7 @@
 			]
 		}
 	],
-	"objectiveList": [		
+	"objectiveList": [
 		{
 			"objective": {
 				"EncounterObjectGuid": "504a1169-8858-4f3d-be89-48eb39f54e4d"
@@ -475,7 +531,7 @@
 	"disableLanceConfiguration": false,
 	"disableCancelButton": false,
 	"disableAfterAction": false,
-	"contractRewardOverride": -1,
+	"contractRewardOverride": 1000000,
 	"travelOnly": false,
 	"useTravelCostPenalty": false,
 	"usesExpiration": false,
@@ -688,22 +744,21 @@
 				"lanceTagSet": {
 					"items": [
 						"lance_type_battle",
-						"lance_type_assault",
+						"lance_type_dynamic",
+						"lance_type_mech",
 						"lance_type_notallvehicles"
 					],
 					"tagSetSourceFile": "tags/LanceTags"
 				},
 				"lanceExcludedTagSet": {
-					"items": [
-						"lance_type_gladiator"
-					],
+					"items": [],
 					"tagSetSourceFile": "tags/LanceTags"
 				},
 				"spawnEffectTags": {
 					"items": [],
 					"tagSetSourceFile": "tags/SpawnEffectTags"
 				},
-				"lanceDifficultyAdjustment": 1,
+				"lanceDifficultyAdjustment": -1,
 				"selectedLanceDefId": "",
 				"selectedLanceDifficulty": 0,
 				"unitSpawnPointOverrideList": [
@@ -849,22 +904,22 @@
 				"lanceDefId": "Tagged",
 				"lanceTagSet": {
 					"items": [
-						"lance_type_cavalry",
+						"lance_type_battle",
+						"lance_type_dynamic",
+						"lance_type_mech",
 						"lance_type_notallvehicles"
 					],
 					"tagSetSourceFile": "tags/LanceTags"
 				},
 				"lanceExcludedTagSet": {
-					"items": [
-						"lance_type_gladiator"
-					],
+					"items": [],
 					"tagSetSourceFile": "tags/LanceTags"
 				},
 				"spawnEffectTags": {
 					"items": [],
 					"tagSetSourceFile": "tags/SpawnEffectTags"
 				},
-				"lanceDifficultyAdjustment": 0,
+				"lanceDifficultyAdjustment": -1,
 				"selectedLanceDefId": "",
 				"selectedLanceDifficulty": 0,
 				"unitSpawnPointOverrideList": [
@@ -1007,17 +1062,16 @@
 					"EncounterObjectGuid": "9d973fb5-9b7e-4c49-969a-6bb3e60caa64"
 				},
 				"name": "Lance_Enemy_AssassinationTarget",
-				"lanceDefId": "Manual",
+				"lanceDefId": "Tagged",
 				"lanceTagSet": {
 					"items": [
-						"lance_type_battle"
+						"lance_type_dynamic"
 					],
 					"tagSetSourceFile": "tags/LanceTags"
 				},
 				"lanceExcludedTagSet": {
 					"items": [
-						"no_extended_lance",
-						"lance_type_gladiator"
+						"no_extended_lance"
 					],
 					"tagSetSourceFile": "tags/LanceTags"
 				},
@@ -1033,12 +1087,14 @@
 						"unitSpawnPoint": {
 							"EncounterObjectGuid": "6cd3107e-0f9d-4809-ab8c-fb30faf4cd80"
 						},
-						"customUnitName": "Target",
+						"customUnitName": "Union",
 						"customHeraldryDefId": "",
 						"unitType": "Vehicle",
-						"unitDefId": "vehicledef_UNION_DROPSHIP",
+						"unitDefId": "Tagged",
 						"unitTagSet": {
-							"items": [],
+							"items": [
+								"unit_union_dropship"
+							],
 							"tagSetSourceFile": "tags/UnitTags"
 						},
 						"unitExcludedTagSet": {
@@ -1049,7 +1105,7 @@
 							"items": [],
 							"tagSetSourceFile": "tags/SpawnEffectTags"
 						},
-						"pilotDefId": "pilot_d10_lancer",
+						"pilotDefId": "pilot_dropshipd12_turret",
 						"pilotTagSet": {
 							"items": [],
 							"tagSetSourceFile": "tags/PilotTags"
