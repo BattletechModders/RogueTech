@@ -424,6 +424,9 @@ it will gain minefield immunity for next move invocation, max move distance decr
 
 Weapon definition
 new fields
+  "TagAoEDamageMult": {}          - same purpose and logic as "TagAoEDamageMult" in settings but per weapon. Multiplicative to "TagAoEDamageMult" from settings. 
+									Can be set for mode, ammo and weapon. Multiplicative for mode, ammo and weapon. Either words if same tag modifer exists 
+									in mode, ammo and weapon dictionaries overall result will be multiplicative
   "PhysicsAoE": true,             - enables or disables per weapon AoE physics implementation. If not set - global value will be used. 
                                     can be set for weapon, ammo and mode. Mode have priority, than ammo, than weapon. 
   "PhysicsAoE_Height": 10.0,      - additional height for physics AoE. If physics for AoE enabled - each AoE explosion position y position altered 
