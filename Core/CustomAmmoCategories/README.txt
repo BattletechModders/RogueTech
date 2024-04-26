@@ -645,8 +645,16 @@ new fields
   "isDamageVariation": true, - if true normal damage will be altered using DamageVariance/DistantVariance/DistantVarianceReversed values. Per mode/ammo/weapon.
   "DamageNotDivided": false, - if true and ImprovedBallistic and BallisticDamagePerPallet are true also damage(heat and stability) will not be divided by ProjectilesPerShot.
   "APDamage": 10, - damage amount always inflicted to inner structure trough armor. If armor breached this damage will be added to normal damage. Additive per mode/ammo/weapon, default 0.
-  "APCriticalChanceMultiplier": 0.5, - armor pierce crit chance multiplier. Additive per mode/ammo/weapon, default 0.
-                                  NOTE: if effective APDamage > 0 crit roll is placed anyway. But if even if APDamage = 0 and APCriticalChanceMultiplier is set per mode ammo or weapon crit will be placed on each hit without damage to inner structure (like AP autocannon ammo). So weapon can inflict AP damage + AP crit or AP crit alone.
+  "APCriticalChanceMultiplier": 0.5, - armor pierce crit chance multiplier. Can be set mode/ammo/weapon, default is NaN. If set for mode, ammo or weapon effective value will be additive
+								  if value is NaN for weapon, mode and ammo and hit does not have AP damage - no AP crit will be rolled.
+                                  NOTE: if effective APDamage > 0 crit roll is placed anyway. But if even if APDamage = 0 and APCriticalChanceMultiplier is set per mode ammo 
+								  or weapon crit will be placed on each hit without damage to inner structure (like AP autocannon ammo). 
+								  So weapon can inflict AP damage + AP crit or AP crit alone.
+								  Never the less APCriticalChanceMultiplier is set for weapon or mode or ammo and effective value is 0 - AP crit rolls will always fail (no componets damage)
+								  If APCriticalChanceMultiplier is set for weapon or mode or ammo - effective value can be altered via CAC_APCriticalChanceModifier weapon statistic (float).
+								  Statistic value has multiplicative effect - default 1.0;
+								  If APCriticalChanceMultiplier is not set at all, CAC_APCriticalChanceModifier has no effect. 
+								  You can't add AP crit ability to a weapon via statistic effect.
                                   To have APCriticalChanceMultiplier apply normally AdvancedCirtProcessing should be true.
                                   On crit resolve if there is still armor > 0 in location crit chance will be multiplied to APCriticalChanceMultiplier (if set). 
                                   Consider to be used to lower crit chance if trough armor. If there no armor in location crit chance will not be altered.
