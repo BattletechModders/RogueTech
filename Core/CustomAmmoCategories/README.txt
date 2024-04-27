@@ -50,7 +50,6 @@ CriticalHitChanceReceivedMultiplier can be locational
 
 {
 "debugLog":true, - enable debug log 
-"MapOnlineClientLink":"http://www.roguewar.org/playerlut?cId={0}" - link for an online client
 "ScaleWeaponHeat": 150, - if > 0 incoming heat from next sources (AoE, weapon hits, landmines, landmines AoE) is scaled
                             scale modifier = 1 - (<target heat>/<ScaleWeaponHeat>)
 							Note! scale modifier for weapon damage calculates before attack. 
@@ -380,6 +379,8 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
  "PhysicsAoE_Minefield": true - if true minefields explosion effects AoE process will use raycasting to limit affected targets rather than just range
  "PhysicsAoE_API": true        - if true explosion API (mostly used by engine explosions) will use raycasting to limit affected targets rather than just range
  "PhysicsAoE_API_Height" : 10f - default height of AoE explosions for an API use
+ "PhysicsAoE_MinDist": 40f - targets which is close to AoE inital point than this distance does not check on having LoS to calculate damage
+
  "AIAwareArtillery":true - if true AI will try to avoid artillery strikes (not vanilla artillery but CAC ones, look "IsArtillery" weapon param)
 
 "AIMinefieldAware": true - if true AI will try to avoid significant direct minefield damage
@@ -423,6 +424,9 @@ it will gain minefield immunity for next move invocation, max move distance decr
 
 Weapon definition
 new fields
+  "TagAoEDamageMult": {}          - same purpose and logic as "TagAoEDamageMult" in settings but per weapon. Multiplicative to "TagAoEDamageMult" from settings. 
+									Can be set for mode, ammo and weapon. Multiplicative for mode, ammo and weapon. Either words if same tag modifer exists 
+									in mode, ammo and weapon dictionaries overall result will be multiplicative
   "PhysicsAoE": true,             - enables or disables per weapon AoE physics implementation. If not set - global value will be used. 
                                     can be set for weapon, ammo and mode. Mode have priority, than ammo, than weapon. 
   "PhysicsAoE_Height": 10.0,      - additional height for physics AoE. If physics for AoE enabled - each AoE explosion position y position altered 
@@ -641,8 +645,16 @@ new fields
   "isDamageVariation": true, - if true normal damage will be altered using DamageVariance/DistantVariance/DistantVarianceReversed values. Per mode/ammo/weapon.
   "DamageNotDivided": false, - if true and ImprovedBallistic and BallisticDamagePerPallet are true also damage(heat and stability) will not be divided by ProjectilesPerShot.
   "APDamage": 10, - damage amount always inflicted to inner structure trough armor. If armor breached this damage will be added to normal damage. Additive per mode/ammo/weapon, default 0.
-  "APCriticalChanceMultiplier": 0.5, - armor pierce crit chance multiplier. Additive per mode/ammo/weapon, default 0.
-                                  NOTE: if effective APDamage > 0 crit roll is placed anyway. But if even if APDamage = 0 and APCriticalChanceMultiplier is set per mode ammo or weapon crit will be placed on each hit without damage to inner structure (like AP autocannon ammo). So weapon can inflict AP damage + AP crit or AP crit alone.
+  "APCriticalChanceMultiplier": 0.5, - armor pierce crit chance multiplier. Can be set mode/ammo/weapon, default is NaN. If set for mode, ammo or weapon effective value will be additive
+								  if value is NaN for weapon, mode and ammo and hit does not have AP damage - no AP crit will be rolled.
+                                  NOTE: if effective APDamage > 0 crit roll is placed anyway. But if even if APDamage = 0 and APCriticalChanceMultiplier is set per mode ammo 
+								  or weapon crit will be placed on each hit without damage to inner structure (like AP autocannon ammo). 
+								  So weapon can inflict AP damage + AP crit or AP crit alone.
+								  Never the less APCriticalChanceMultiplier is set for weapon or mode or ammo and effective value is 0 - AP crit rolls will always fail (no componets damage)
+								  If APCriticalChanceMultiplier is set for weapon or mode or ammo - effective value can be altered via CAC_APCriticalChanceModifier weapon statistic (float).
+								  Statistic value has multiplicative effect - default 1.0;
+								  If APCriticalChanceMultiplier is not set at all, CAC_APCriticalChanceModifier has no effect. 
+								  You can't add AP crit ability to a weapon via statistic effect.
                                   To have APCriticalChanceMultiplier apply normally AdvancedCirtProcessing should be true.
                                   On crit resolve if there is still armor > 0 in location crit chance will be multiplied to APCriticalChanceMultiplier (if set). 
                                   Consider to be used to lower crit chance if trough armor. If there no armor in location crit chance will not be altered.
