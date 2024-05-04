@@ -1152,6 +1152,7 @@ new fields
   
 Ammo definition
 {
+   "SkipUnusedAmmoCheck": false, - ammo only field. If true this ammo will not trigger unused ammo warning even if not used by any weapon. 
    "Custom" : {} - custom section on ammunition will be merged to all boxes definitions using this ammo. 
    "AutoRefill": "Automatic" - how this ammunition will be refilled after battle. Available values
 							  "Automatic" - same behavior as before. Default
