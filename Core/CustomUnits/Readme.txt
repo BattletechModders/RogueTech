@@ -5,9 +5,16 @@ this mod allows you next things
 4. Add custom animated hardpoints
 
 main settings in mod.json
+	"PreserveJsonUnitCost": true - if true unit's Description.Cost for units from DataManager will not be recalculated and preserve same as it is set in json
 	"VehcilesPartialEditable": false - if true vehicles are allowed to be edited partially, 
 	"CloseRangeFiringArc": 90.0
 	"CloseRangeFiringArcDistance": 40.0 - if distance form attacker to target is less than CloseRangeFiringArcDistance, its firing arc will be expanded to CloseRangeFiringArc
+	"VehicleComponentOneAllowed": "vehicle_one_allowed" - if component have this tag only one instance in not destroyed state allowed to be installed on vehicle in limited refit mode
+	"VehicleComponentForbiddenTag": "vehicle_forbidden" - if component have this tag can't be installed on vehicle in limited refit mode
+	"VehicleComponentCategoryTagPrefix": "vehicle_component_category_" - if component have this tags with this prefix it can only be replaced with component having at least one equal tag
+	                                                                   example: weapon having tags "vehicle_component_category_cat1" and "vehicle_component_category_cat2"
+																	            can only be replaced by weapon having either "vehicle_component_category_cat1" either "vehicle_component_category_cat2"
+																				tag
 	"SortBy": {
 		"orderByCbillValue":false,
 		"orderByNickname":false,

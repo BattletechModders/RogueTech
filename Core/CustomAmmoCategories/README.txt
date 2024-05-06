@@ -424,10 +424,17 @@ it will gain minefield immunity for next move invocation, max move distance decr
 
 Weapon definition
 new fields
+  "TagAoEDamageMult": {}          - same purpose and logic as "TagAoEDamageMult" in settings but per weapon. Multiplicative to "TagAoEDamageMult" from settings. 
+									Can be set for mode, ammo and weapon. Multiplicative for mode, ammo and weapon. Either words if same tag modifer exists 
+									in mode, ammo and weapon dictionaries overall result will be multiplicative
   "PhysicsAoE": true,             - enables or disables per weapon AoE physics implementation. If not set - global value will be used. 
                                     can be set for weapon, ammo and mode. Mode have priority, than ammo, than weapon. 
   "PhysicsAoE_Height": 10.0,      - additional height for physics AoE. If physics for AoE enabled - each AoE explosion position y position altered 
                                     by PhysicsAoE_Height value, but ONLY for raycasting purposes, for damage range falloff calculation position remains intact
+  "PhysicsAoE_MinDist": 0.0,      - same behavior as PhysicsAoE_MinDist from settings but per weapon. Can be set for mode, ammo and weapon. Mode have priority, 
+									than ammo, than weapon. Value is from entity having PhysicsAoE - true. Either words if (for example) weapon have PhysicsAoE 
+									but mode does not - value from weapon will be used mode's one will be ignored. If both (for example) weapon and mode have 
+									PhysicsAoE true, mode will have priority. If effective value is less or equal than 0 - value from global settings will be applied. 
   "MissBehavior": "NotSet",       - Possible values "NotSet", "Guided", "Unguided". Set projectile behavior if miss. 
                                     if MissBehavior is Guided projectile acts like it proximity fuze. Either words if miss projectile end its way somewhere near target
 									(exact distance depends on weapon min/max miss radius and target chassis radius)
@@ -642,8 +649,16 @@ new fields
   "isDamageVariation": true, - if true normal damage will be altered using DamageVariance/DistantVariance/DistantVarianceReversed values. Per mode/ammo/weapon.
   "DamageNotDivided": false, - if true and ImprovedBallistic and BallisticDamagePerPallet are true also damage(heat and stability) will not be divided by ProjectilesPerShot.
   "APDamage": 10, - damage amount always inflicted to inner structure trough armor. If armor breached this damage will be added to normal damage. Additive per mode/ammo/weapon, default 0.
-  "APCriticalChanceMultiplier": 0.5, - armor pierce crit chance multiplier. Additive per mode/ammo/weapon, default 0.
-                                  NOTE: if effective APDamage > 0 crit roll is placed anyway. But if even if APDamage = 0 and APCriticalChanceMultiplier is set per mode ammo or weapon crit will be placed on each hit without damage to inner structure (like AP autocannon ammo). So weapon can inflict AP damage + AP crit or AP crit alone.
+  "APCriticalChanceMultiplier": 0.5, - armor pierce crit chance multiplier. Can be set mode/ammo/weapon, default is NaN. If set for mode, ammo or weapon effective value will be additive
+								  if value is NaN for weapon, mode and ammo and hit does not have AP damage - no AP crit will be rolled.
+                                  NOTE: if effective APDamage > 0 crit roll is placed anyway. But if even if APDamage = 0 and APCriticalChanceMultiplier is set per mode ammo 
+								  or weapon crit will be placed on each hit without damage to inner structure (like AP autocannon ammo). 
+								  So weapon can inflict AP damage + AP crit or AP crit alone.
+								  Never the less APCriticalChanceMultiplier is set for weapon or mode or ammo and effective value is 0 - AP crit rolls will always fail (no componets damage)
+								  If APCriticalChanceMultiplier is set for weapon or mode or ammo - effective value can be altered via CAC_APCriticalChanceModifier weapon statistic (float).
+								  Statistic value has multiplicative effect - default 1.0;
+								  If APCriticalChanceMultiplier is not set at all, CAC_APCriticalChanceModifier has no effect. 
+								  You can't add AP crit ability to a weapon via statistic effect.
                                   To have APCriticalChanceMultiplier apply normally AdvancedCirtProcessing should be true.
                                   On crit resolve if there is still armor > 0 in location crit chance will be multiplied to APCriticalChanceMultiplier (if set). 
                                   Consider to be used to lower crit chance if trough armor. If there no armor in location crit chance will not be altered.
@@ -1137,6 +1152,7 @@ new fields
   
 Ammo definition
 {
+   "SkipUnusedAmmoCheck": false, - ammo only field. If true this ammo will not trigger unused ammo warning even if not used by any weapon. 
    "Custom" : {} - custom section on ammunition will be merged to all boxes definitions using this ammo. 
    "AutoRefill": "Automatic" - how this ammunition will be refilled after battle. Available values
 							  "Automatic" - same behavior as before. Default
