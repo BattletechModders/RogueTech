@@ -5,21 +5,36 @@
         "Details" : "As the shuttle docks with the <i>Argo</i>, you wait impatiently for the techs to lower the disembarkation ramp.  The moment it is safe, you leap from your seat and head onto the deck of the <i>Argo</i>.  You see Darius waiting for you off to the side and head over towards him with a big smile on your face.\r\n. \r\nAs you approach, Darius pipes up, \"I take it you passed, Commander?\"\r\n\r\nYou grin widely, \"No, I'm just happy to see your ugly face,\"  You slap Darius on the shoulder as you continue, \"You bet your ass i did, Darius!  Wow! What a blast that was!  I never knew how exhilarating flying could be.\"\r\n\r\nDarius smiles and hands you a datapad, \"Well, it appears that <i>Wham Ba-LAM</i> has offered to sell you one of the [[DM.BaseDescriptionDefs[LoreLAM],LAMs]] that you flew your training in.  The details are all there in this datafile they sent over.  And good to have you back, Commander.\"",
         "Icon" : "uixTxrSpot_LAMGrad.png"
     },
-    "Scope" : "Company",
+    "Scope" : "Commander",
     "Weight" : 10,
     "Requirements" : {
-        "Scope" : "Company",
+        "Scope" : "Commander",
         "RequirementTags" : {
             "items" : [
-                "Do_not_fire"
+                "pilot_LAM_School"
             ],
             "tagSetSourceFile" : ""
         },
         "ExclusionTags" : {
-            "items" : [],
+            "items" : [
+                "can_pilot_landairmech"
+            ],
             "tagSetSourceFile" : "Tags/CompanyTags"
         },
-        "RequirementComparisons" : []
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : "0"
+            },
+            {
+                "obj" : "CommanderLAM",
+                "op" : "LessThanOrEqual",
+                "val" : 0,
+                "valueConstant" : "0"
+            }
+        ]
     },
     "AdditionalRequirements" : [],
     "AdditionalObjects" : [],
@@ -27,31 +42,22 @@
         {
             "Description" : {
                 "Id" : "outcome_0",
-                "Name" : "But, No Thanks",
-                "Details" : "Thanks",
+                "Name" : "thanks",
+                "Details" : "Thanks, but no",
                 "Icon" : null
             },
             "RequirementList" : [
                 {
                     "Scope" : "Commander",
                     "RequirementTags" : {
-                        "items" : [
-                            "pilot_LAMSchool"
-                        ],
+                        "items" : [],
                         "tagSetSourceFile" : ""
                     },
                     "ExclusionTags" : {
                         "items" : [],
                         "tagSetSourceFile" : ""
                     },
-                    "RequirementComparisons" : [
-                        {
-                            "obj" : "Injuries",
-                            "op" : "Equal",
-                            "val" : 0,
-                            "valueConstant" : "0"
-                        }
-                    ]
+                    "RequirementComparisons" : []
                 }
             ],
             "ResultSets" : [
@@ -75,11 +81,19 @@
                             },
                             "RemovedTags" : {
                                 "items" : [
-                                    "pilot_LAMSchool"
+                                    "pilot_LAM_School"
                                 ],
                                 "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "CommanderLAM",
+                                    "value" : "1",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
@@ -93,12 +107,18 @@
                                 "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "items" : [
-                                    "LAM_CommanderEnrolled"
-                                ],
+                                "items" : [],
                                 "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "LAMPilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
@@ -132,7 +152,7 @@
                     "Scope" : "Commander",
                     "RequirementTags" : {
                         "items" : [
-                            "pilot_LAMSchool"
+                            "pilot_LAM_School"
                         ],
                         "tagSetSourceFile" : ""
                     },
@@ -142,8 +162,8 @@
                     },
                     "RequirementComparisons" : [
                         {
-                            "obj" : "Injuries",
-                            "op" : "Equal",
+                            "obj" : "CommanderLAM",
+                            "op" : "LessThanOrEqual",
                             "val" : 0,
                             "valueConstant" : "0"
                         }
@@ -191,11 +211,19 @@
                             },
                             "RemovedTags" : {
                                 "items" : [
-                                    "pilot_LAMSchool"
+                                    "pilot_LAM_School"
                                 ],
                                 "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "CommanderLAM",
+                                    "value" : "1",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
@@ -209,9 +237,7 @@
                                 "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "items" : [
-                                    "LAM_CommanderEnrolled"
-                                ],
+                                "items" : [],
                                 "tagSetSourceFile" : ""
                             },
                             "Stats" : [
@@ -220,6 +246,13 @@
                                     "name" : "Funds",
                                     "value" : "-5000000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "LAMPilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -258,11 +291,19 @@
                             },
                             "RemovedTags" : {
                                 "items" : [
-                                    "pilot_LAMSchool"
+                                    "pilot_LAM_School"
                                 ],
                                 "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "CommanderLAM",
+                                    "value" : "1",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
@@ -276,9 +317,7 @@
                                 "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "items" : [
-                                    "LAM_CommanderEnrolled"
-                                ],
+                                "items" : [],
                                 "tagSetSourceFile" : ""
                             },
                             "Stats" : [
@@ -287,6 +326,13 @@
                                     "name" : "Funds",
                                     "value" : "-5000000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "LAMPilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],

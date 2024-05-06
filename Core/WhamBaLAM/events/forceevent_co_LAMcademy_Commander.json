@@ -5,43 +5,62 @@
         "Details" : "A knock sounds on your office door and you call out, \"Come in...\"\r\n\r\nThe door opens and Darius strides and hands you a datapad, \"Commander, your aptitude test to attend <i>Wham-Ba-LAM</i>'s LAMcademy [[DM.BaseDescriptionDefs[LoreLAM],LAM]] piloting school has come back.  Everything appears in order, you just need to fill out and sign that indemnity form on the screen, hit the submit button and you should get information on when you need to be at the LAMcademy.\"",
         "Icon" : "uixTxrSpot_LAMDangerZone.png"
     },
-    "Scope" : "Company",
+    "Scope" : "Commander",
     "Weight" : 10,
     "Requirements" : {
-        "Scope" : "Company",
+        "Scope" : "Commander",
         "RequirementTags" : {
             "items" : [
-                "Do_not_fire"
+                "can_pilot_generic_mech"
             ],
             "tagSetSourceFile" : ""
         },
         "ExclusionTags" : {
-            "items" : [],
-            "tagSetSourceFile" : "Tags/CompanyTags"
+            "items" : [
+                "can_pilot_landairmech",
+                "pilot_rejected",
+                "pilot_noLAM",
+                "pilot_LAM_School",
+                "pilot_VTOL_School"
+            ],
+            "tagSetSourceFile" : ""
         },
-        "RequirementComparisons" : []
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : "0"
+            },
+            {
+                "obj" : "CommanderLAM",
+                "op" : "LessThanOrEqual",
+                "val" : 0,
+                "valueConstant" : "0"
+            }
+        ]
     },
     "AdditionalRequirements" : [
         {
-            "Scope" : "Commander",
+            "Scope" : "Company",
             "RequirementTags" : {
-                "items" : [
-                    "can_pilot_generic_mech"
-                ],
+                "items" : [],
                 "tagSetSourceFile" : ""
             },
             "ExclusionTags" : {
-                "items" : [
-                    "can_pilot_landairmech",
-                    "pilot_rejected",
-                    "pilot_noLAM"
-                ],
-                "tagSetSourceFile" : ""
+                "items" : [],
+                "tagSetSourceFile" : "Tags/CompanyTags"
             },
             "RequirementComparisons" : [
                 {
-                    "obj" : "Injuries",
-                    "op" : "Equal",
+                    "obj" : "Funds",
+                    "op" : "GreaterThanOrEqual",
+                    "val" : 750000,
+                    "valueConstant" : "750000"
+                },
+                {
+                    "obj" : "LAMPilotEnrolled",
+                    "op" : "LessThanOrEqual",
                     "val" : 0,
                     "valueConstant" : "0"
                 }
@@ -54,7 +73,7 @@
             "Description" : {
                 "Id" : "outcome_0",
                 "Name" : "Back to School",
-                "Details" : "[Tuition costs up to \u00A2500,000]",
+                "Details" : "[Tuition costs \u00A2750,000]",
                 "Icon" : null
             },
             "RequirementList" : [
@@ -68,7 +87,8 @@
                         "items" : [
                             "can_pilot_landairmech",
                             "pilot_rejected",
-                            "pilot_noLAM"
+                            "pilot_noLAM",
+                            "pilot_LAM_School"
                         ],
                         "tagSetSourceFile" : ""
                     },
@@ -97,7 +117,7 @@
                             "Requirements" : null,
                             "AddedTags" : {
                                 "items" : [
-                                    "pilot_LAMSchool"
+                                    "pilot_LAM_School"
                                 ],
                                 "tagSetSourceFile" : ""
                             },
@@ -109,7 +129,7 @@
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "188",
+                                    "value" : "120",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -122,9 +142,7 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [
-                                    "LAM_CommanderEnrolled"
-                                ],
+                                "items" : [],
                                 "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
@@ -135,8 +153,15 @@
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "LAMPilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -145,14 +170,33 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_LAM_Passed_Commander",
-                                    "MinDaysWait" : 189,
-                                    "MaxDaysWait" : 189,
+                                    "MinDaysWait" : 120,
+                                    "MaxDaysWait" : 120,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
                             ],
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Commander",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "LAM_Training_Bypass_Delay_CMDR"
+                                ],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 140
                         }
                     ]
                 },
@@ -170,7 +214,7 @@
                             "Requirements" : null,
                             "AddedTags" : {
                                 "items" : [
-                                    "pilot_LAMSchool"
+                                    "pilot_LAM_School"
                                 ],
                                 "tagSetSourceFile" : ""
                             },
@@ -182,7 +226,7 @@
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "188",
+                                    "value" : "120",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -195,9 +239,7 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [
-                                    "LAM_CommanderEnrolled"
-                                ],
+                                "items" : [],
                                 "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
@@ -208,8 +250,15 @@
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "LAMPilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -218,14 +267,33 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_LAM_Injured_Commander",
-                                    "MinDaysWait" : 189,
-                                    "MaxDaysWait" : 189,
+                                    "MinDaysWait" : 120,
+                                    "MaxDaysWait" : 120,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
                             ],
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Commander",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "LAM_Training_Bypass_Delay_CMDR"
+                                ],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 140
                         }
                     ]
                 },
@@ -243,7 +311,7 @@
                             "Requirements" : null,
                             "AddedTags" : {
                                 "items" : [
-                                    "pilot_LAMSchool"
+                                    "pilot_LAM_School"
                                 ],
                                 "tagSetSourceFile" : ""
                             },
@@ -255,7 +323,7 @@
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "215",
+                                    "value" : "150",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -268,9 +336,7 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [
-                                    "LAM_CommanderEnrolled"
-                                ],
+                                "items" : [],
                                 "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
@@ -281,8 +347,15 @@
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "LAMPilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -291,14 +364,33 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_LAM_Passed_Commander",
-                                    "MinDaysWait" : 216,
-                                    "MaxDaysWait" : 216,
+                                    "MinDaysWait" : 150,
+                                    "MaxDaysWait" : 150,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
                             ],
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Commander",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "LAM_Training_Bypass_Delay_CMDR"
+                                ],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 170
                         }
                     ]
                 },
@@ -316,7 +408,7 @@
                             "Requirements" : null,
                             "AddedTags" : {
                                 "items" : [
-                                    "pilot_LAMSchool"
+                                    "pilot_LAM_School"
                                 ],
                                 "tagSetSourceFile" : ""
                             },
@@ -328,7 +420,7 @@
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "215",
+                                    "value" : "150",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -341,9 +433,7 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [
-                                    "LAM_CommanderEnrolled"
-                                ],
+                                "items" : [],
                                 "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
@@ -354,8 +444,15 @@
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "LAMPilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -364,14 +461,33 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_LAM_Injured_Commander",
-                                    "MinDaysWait" : 216,
-                                    "MaxDaysWait" : 216,
+                                    "MinDaysWait" : 150,
+                                    "MaxDaysWait" : 150,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
                             ],
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Commander",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "LAM_Training_Bypass_Delay_CMDR"
+                                ],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 170
                         }
                     ]
                 },
@@ -389,7 +505,7 @@
                             "Requirements" : null,
                             "AddedTags" : {
                                 "items" : [
-                                    "pilot_LAMSchool"
+                                    "pilot_LAM_School"
                                 ],
                                 "tagSetSourceFile" : ""
                             },
@@ -401,7 +517,7 @@
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "323",
+                                    "value" : "180",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -414,9 +530,7 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [
-                                    "LAM_CommanderEnrolled"
-                                ],
+                                "items" : [],
                                 "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
@@ -427,8 +541,15 @@
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "LAMPilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -437,14 +558,33 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_LAM_Passed_Commander",
-                                    "MinDaysWait" : 324,
-                                    "MaxDaysWait" : 324,
+                                    "MinDaysWait" : 180,
+                                    "MaxDaysWait" : 180,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
                             ],
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Commander",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "LAM_Training_Bypass_Delay_CMDR"
+                                ],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 200
                         }
                     ]
                 },
@@ -462,7 +602,7 @@
                             "Requirements" : null,
                             "AddedTags" : {
                                 "items" : [
-                                    "pilot_LAMSchool"
+                                    "pilot_LAM_School"
                                 ],
                                 "tagSetSourceFile" : ""
                             },
@@ -474,7 +614,7 @@
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
-                                    "value" : "323",
+                                    "value" : "180",
                                     "valueConstant" : null,
                                     "additionalValues" : null
                                 }
@@ -487,9 +627,7 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "items" : [
-                                    "LAM_CommanderEnrolled"
-                                ],
+                                "items" : [],
                                 "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
@@ -500,8 +638,15 @@
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-750000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "LAMPilotEnrolled",
+                                    "value" : "1",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],
@@ -510,14 +655,33 @@
                                 {
                                     "Scope" : "Company",
                                     "EventID" : "forceevent_co_LAM_Injured_Commander",
-                                    "MinDaysWait" : 324,
-                                    "MaxDaysWait" : 324,
+                                    "MinDaysWait" : 180,
+                                    "MaxDaysWait" : 180,
                                     "Probability" : 100,
                                     "RetainPilot" : false
                                 }
                             ],
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Commander",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [
+                                    "LAM_Training_Bypass_Delay_CMDR"
+                                ],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 200
                         }
                     ]
                 }
@@ -561,9 +725,7 @@
                                 "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "items" : [
-                                    "LAM_CommanderEnrolled"
-                                ],
+                                "items" : [],
                                 "tagSetSourceFile" : ""
                             },
                             "Stats" : [
@@ -593,7 +755,15 @@
                                 "items" : [],
                                 "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "CommanderLAM",
+                                    "value" : "1",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : true,

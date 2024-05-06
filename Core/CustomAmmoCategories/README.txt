@@ -50,7 +50,6 @@ CriticalHitChanceReceivedMultiplier can be locational
 
 {
 "debugLog":true, - enable debug log 
-"MapOnlineClientLink":"http://www.roguewar.org/playerlut?cId={0}" - link for an online client
 "ScaleWeaponHeat": 150, - if > 0 incoming heat from next sources (AoE, weapon hits, landmines, landmines AoE) is scaled
                             scale modifier = 1 - (<target heat>/<ScaleWeaponHeat>)
 							Note! scale modifier for weapon damage calculates before attack. 
@@ -380,6 +379,8 @@ NOTE: Current values is my own vision of flame mechanics process, adjust them fo
  "PhysicsAoE_Minefield": true - if true minefields explosion effects AoE process will use raycasting to limit affected targets rather than just range
  "PhysicsAoE_API": true        - if true explosion API (mostly used by engine explosions) will use raycasting to limit affected targets rather than just range
  "PhysicsAoE_API_Height" : 10f - default height of AoE explosions for an API use
+ "PhysicsAoE_MinDist": 40f - targets which is close to AoE inital point than this distance does not check on having LoS to calculate damage
+
  "AIAwareArtillery":true - if true AI will try to avoid artillery strikes (not vanilla artillery but CAC ones, look "IsArtillery" weapon param)
 
 "AIMinefieldAware": true - if true AI will try to avoid significant direct minefield damage
@@ -423,6 +424,26 @@ it will gain minefield immunity for next move invocation, max move distance decr
 
 Weapon definition
 new fields
+  "TagAoEDamageMult": {}          - same purpose and logic as "TagAoEDamageMult" in settings but per weapon. Multiplicative to "TagAoEDamageMult" from settings. 
+									Can be set for mode, ammo and weapon. Multiplicative for mode, ammo and weapon. Either words if same tag modifer exists 
+									in mode, ammo and weapon dictionaries overall result will be multiplicative
+  "PhysicsAoE": true,             - enables or disables per weapon AoE physics implementation. If not set - global value will be used. 
+                                    can be set for weapon, ammo and mode. Mode have priority, than ammo, than weapon. 
+  "PhysicsAoE_Height": 10.0,      - additional height for physics AoE. If physics for AoE enabled - each AoE explosion position y position altered 
+                                    by PhysicsAoE_Height value, but ONLY for raycasting purposes, for damage range falloff calculation position remains intact
+  "PhysicsAoE_MinDist": 0.0,      - same behavior as PhysicsAoE_MinDist from settings but per weapon. Can be set for mode, ammo and weapon. Mode have priority, 
+									than ammo, than weapon. Value is from entity having PhysicsAoE - true. Either words if (for example) weapon have PhysicsAoE 
+									but mode does not - value from weapon will be used mode's one will be ignored. If both (for example) weapon and mode have 
+									PhysicsAoE true, mode will have priority. If effective value is less or equal than 0 - value from global settings will be applied. 
+  "MissBehavior": "NotSet",       - Possible values "NotSet", "Guided", "Unguided". Set projectile behavior if miss. 
+                                    if MissBehavior is Guided projectile acts like it proximity fuze. Either words if miss projectile end its way somewhere near target
+									(exact distance depends on weapon min/max miss radius and target chassis radius)
+									Stray shots in this case, also possible if stray target between attacker and target
+									if MissBehavior is Unguided projectiles will continue to fly until reach terrain, edge of map or other combatant
+									If projectile ended in other combatant damage inflicted only if max weapon range is not reached
+									if MissBehavior is not set effective behavior will be calculated depend on weapon category. if weapon category isMissile true
+									behavior will be counted as Guided, otherwise as Unguided.
+									MissBehavior can be set for mode, ammo and weapon. Mode have priority, than ammo and than weapon def. 
   "BuildingsDamageModifier":1,    - weapon damage modifier if target is building
   "TurretDamageModifier":1,       - weapon damage modifier if target is turret
   "VehicleDamageModifier":1,      - weapon damage modifier if target is vehicle
@@ -628,8 +649,16 @@ new fields
   "isDamageVariation": true, - if true normal damage will be altered using DamageVariance/DistantVariance/DistantVarianceReversed values. Per mode/ammo/weapon.
   "DamageNotDivided": false, - if true and ImprovedBallistic and BallisticDamagePerPallet are true also damage(heat and stability) will not be divided by ProjectilesPerShot.
   "APDamage": 10, - damage amount always inflicted to inner structure trough armor. If armor breached this damage will be added to normal damage. Additive per mode/ammo/weapon, default 0.
-  "APCriticalChanceMultiplier": 0.5, - armor pierce crit chance multiplier. Additive per mode/ammo/weapon, default 0.
-                                  NOTE: if effective APDamage > 0 crit roll is placed anyway. But if even if APDamage = 0 and APCriticalChanceMultiplier is set per mode ammo or weapon crit will be placed on each hit without damage to inner structure (like AP autocannon ammo). So weapon can inflict AP damage + AP crit or AP crit alone.
+  "APCriticalChanceMultiplier": 0.5, - armor pierce crit chance multiplier. Can be set mode/ammo/weapon, default is NaN. If set for mode, ammo or weapon effective value will be additive
+								  if value is NaN for weapon, mode and ammo and hit does not have AP damage - no AP crit will be rolled.
+                                  NOTE: if effective APDamage > 0 crit roll is placed anyway. But if even if APDamage = 0 and APCriticalChanceMultiplier is set per mode ammo 
+								  or weapon crit will be placed on each hit without damage to inner structure (like AP autocannon ammo). 
+								  So weapon can inflict AP damage + AP crit or AP crit alone.
+								  Never the less APCriticalChanceMultiplier is set for weapon or mode or ammo and effective value is 0 - AP crit rolls will always fail (no componets damage)
+								  If APCriticalChanceMultiplier is set for weapon or mode or ammo - effective value can be altered via CAC_APCriticalChanceModifier weapon statistic (float).
+								  Statistic value has multiplicative effect - default 1.0;
+								  If APCriticalChanceMultiplier is not set at all, CAC_APCriticalChanceModifier has no effect. 
+								  You can't add AP crit ability to a weapon via statistic effect.
                                   To have APCriticalChanceMultiplier apply normally AdvancedCirtProcessing should be true.
                                   On crit resolve if there is still armor > 0 in location crit chance will be multiplied to APCriticalChanceMultiplier (if set). 
                                   Consider to be used to lower crit chance if trough armor. If there no armor in location crit chance will not be altered.
@@ -1123,6 +1152,7 @@ new fields
   
 Ammo definition
 {
+   "SkipUnusedAmmoCheck": false, - ammo only field. If true this ammo will not trigger unused ammo warning even if not used by any weapon. 
    "Custom" : {} - custom section on ammunition will be merged to all boxes definitions using this ammo. 
    "AutoRefill": "Automatic" - how this ammunition will be refilled after battle. Available values
 							  "Automatic" - same behavior as before. Default
@@ -1259,11 +1289,18 @@ Ammo definition
 						example target have 10 armor, ArmorDamageModifier - 2, ISDamageModifier - 0.2, damage 10.
 						5 points of raw damage will remove 10 armor. Rest 5 points of raw damage will inflict 1 = (5*0.2) damage to IS
 						consolidated damage will be 5+1 = 6. 
+	"ExposionModifier" : 1.0 - modifier used to calculate exact chance to be exhausted
 	"CanBeExhaustedAt": 0.5 - if greater than 0 enables per ammo exhaustion mechanic. At end of attack sequence each uses in this attack ammo box is checked.
 	                           if it has (ammo level) = (current ammo/ammo capacity) LESS than CanBeExhaustedAt for this ammo it has 
-								(CanBeExhaustedAt - (ammo level)) / (ammo level) chance to be exhausted. Which means component become destroyed without explosion.	
-								Example: ammo box has capacity 10, ammo has CanBeExhaustedAt - 0.5, current ammo upon check - 4. Exhaustion chance = (0.5 - 0.4)/0.5 = 0.2
-								Note: if current ammo is 0, Exhaustion chance become 1. One ammo box checked once per attack. Ammo ejections initiates exhaustion check too. 
+								((CanBeExhaustedAt - (ammo level)) / (CanBeExhaustedAt)) * ExposionModifier chance to be exhausted. 
+								Which means component become destroyed without explosion.	
+								Example: ammo box has capacity 10, ammo has CanBeExhaustedAt = 0.5, ExposionModifier = 1, current ammo upon check = 4. 
+								Exhaustion chance = (0.5 - 0.4)/0.5 = 0.2
+								Example2: ammo box has capacity 1, ammo has CanBeExhaustedAt = 0.01, ExposionModifier = 0.3, current ammo upon check = 0
+								Exhaustion chance = ((0.01 - 0.0)/0.01) * 0.3 = 0.3
+								Note: if current ammo is 0, Exhaustion chance become ExposionModifier. One ammo box checked once per attack.
+								Ammo ejections initiates exhaustion check too. 
+    "DelayedExposion": false - if true instead of immediate destruction exhausted ammo box will be destroyed at end of combat. At Contract.CompleteContract prefix
     "Unguided": false, for missiles effect only. If true missile trajectory will be strait line instead of curvy. Like it is unguided as old WW2 rockets. 
           Have no influence to indirect fire curvy
 					logic: if ammo unguided is true - launch will be unguided no matter mode and weapon settings, 

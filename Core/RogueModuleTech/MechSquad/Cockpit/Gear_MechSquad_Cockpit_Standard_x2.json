@@ -20,9 +20,15 @@
         "CategoryID": "LifeSupportB"
       }
     ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.1 * [[Chassis.Tonnage]]",
+        "CBillCost": "0.9 * [[Chassis.Tonnage]]"
+      }
+    },
     "BonusDescriptions": [
       "IsCockpit",
-      "BleedReduction: 20%"
+      "NoEject"
     ],
     "Flags": [
       "no_salvage",
@@ -30,12 +36,6 @@
       "ignore_damage",
       "not_broken"
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.1 * [[Chassis.Tonnage]]",
-        "CBillCost": "0.9 * [[Chassis.Tonnage]]"
-      }
-    },
     "IBLS": {
       "StorageSize": 1
     }
@@ -95,23 +95,21 @@
       },
       "targetingData": {
         "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
+        "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "CockpitBleed",
-        "Name": "Cockpit: Decreased Bleeding Rate",
-        "Details": "Bleed Rate x 0.6",
-        "Icon": "blood"
+        "Id": "PowerArmorEject",
+        "Name": "Cockpit: Disallow Ejection",
+        "Details": "PASSIVE: Attacking with a single weapon ignores COVER and GUARDED on the target.",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
       },
       "statisticData": {
-        "statName": "BleedingRateMulti",
-        "operation": "Float_Multiply",
-        "modValue": "0.8",
-        "modType": "System.Single",
+        "statName": "CanEject",
+        "operation": "Set",
+        "modValue": "false",
+        "modType": "System.Boolean",
         "targetCollection": "Pilot"
       }
     }

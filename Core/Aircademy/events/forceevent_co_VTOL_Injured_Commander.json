@@ -5,21 +5,36 @@
         "Details" : "Darius watches as the shuttle docks with the <i>Argo</i>.  It's been a long haul with the Commander away at VTOL training, so hopefully with their arrival back on board things can get back to normal.\r\n\r\nA MedTech disembarks the shuttle and heads over to Darius, \"Are you Darius, XO of the <i>Argo</i>?\"\r\n\r\nDarius nods, \"Affirmative.  How can I help you?\"\r\n\r\nThe MedTech shoves a datapad at Darius, \"Sign here, please.  He's all yours now.\"\r\n\r\nDarius looks down at the datapad and sees a release form for a wounded passenger being transported to the <i>Argo</i>: Commander {COMMANDER.FirstName} {COMMANDER.LastName}, wounded during VTOL Flight Training; Current Status: Stable, \"What the hell happened?\"\r\n\r\nThe MedTech shrugs, \"Can't really say, sir.  Scuttlebutt has it that your commander tried to outmanuever one of the other cadets in an attempt at top marks or something, and there was a mid-air collision.  Pretty lucky to be alive if you ask me.  In any event, I was instructed to get them safely here, and I have done that.  Now it's up to you to nurse them back to full health.\"\r\n\r\nDarius signs the release form as a hover-gurney floats over with the Commander strapped in, obviously drugged to the max,  Darius pulls a paper free that was clutched in their hand.  Reading it, it would appear the Commander at least passed their training, just not in one piece.\r\n\r\nAn <i>Argo</i> MedTech handling the hover-gurney speaks up, \"Uh, sir... where shall I take the Commander?\"",
         "Icon" : "uixTxrSpot_VTOLGrad.png"
     },
-    "Scope" : "Company",
+    "Scope" : "Commander",
     "Weight" : 10,
     "Requirements" : {
-        "Scope" : "Company",
+        "Scope" : "Commander",
         "RequirementTags" : {
-            "tagSetSourceFile" : "",
             "items" : [
-                "Do_not_fire"
-            ]
+                "pilot_VTOL_School"
+            ],
+            "tagSetSourceFile" : ""
         },
         "ExclusionTags" : {
-            "tagSetSourceFile" : "Tags/CompanyTags",
-            "items" : []
+            "items" : [
+                "can_pilot_vtol"
+            ],
+            "tagSetSourceFile" : "Tags/CompanyTags"
         },
-        "RequirementComparisons" : []
+        "RequirementComparisons" : [
+            {
+                "obj" : "Injuries",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : "0"
+            },
+            {
+                "obj" : "CommanderVTOL",
+                "op" : "LessThanOrEqual",
+                "val" : 0,
+                "valueConstant" : "0"
+            }
+        ]
     },
     "AdditionalRequirements" : [],
     "AdditionalObjects" : [],
@@ -35,14 +50,12 @@
                 {
                     "Scope" : "Commander",
                     "RequirementTags" : {
-                        "tagSetSourceFile" : "",
-                        "items" : [
-                            "pilot_VTOLSchool"
-                        ]
+                        "items" : [],
+                        "tagSetSourceFile" : ""
                     },
                     "ExclusionTags" : {
-                        "tagSetSourceFile" : "",
-                        "items" : []
+                        "items" : [],
+                        "tagSetSourceFile" : ""
                     },
                     "RequirementComparisons" : []
                 }
@@ -61,18 +74,26 @@
                             "Scope" : "Commander",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "can_pilot_vtol"
-                                ]
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "CommanderVTOL",
+                                    "value" : "1",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
@@ -89,16 +110,22 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_CommanderEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
@@ -119,18 +146,26 @@
                             "Scope" : "Commander",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "can_pilot_vtol"
-                                ]
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "CommanderVTOL",
+                                    "value" : "1",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
@@ -147,16 +182,22 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_CommanderEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
@@ -177,18 +218,26 @@
                             "Scope" : "Commander",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "can_pilot_vtol"
-                                ]
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "CommanderVTOL",
+                                    "value" : "1",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
@@ -205,16 +254,22 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_CommanderEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
@@ -235,18 +290,26 @@
                             "Scope" : "Commander",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "can_pilot_vtol"
-                                ]
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "CommanderVTOL",
+                                    "value" : "1",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
@@ -263,16 +326,22 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_CommanderEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
@@ -284,12 +353,12 @@
             "Requirements" : {
                 "Scope" : "Company",
                 "RequirementTags" : {
-                    "tagSetSourceFile" : "",
-                    "items" : []
+                    "items" : [],
+                    "tagSetSourceFile" : ""
                 },
                 "ExclusionTags" : {
-                    "tagSetSourceFile" : "",
-                    "items" : []
+                    "items" : [],
+                    "tagSetSourceFile" : ""
                 },
                 "RequirementComparisons" : []
             }
@@ -305,28 +374,41 @@
                 {
                     "Scope" : "Commander",
                     "RequirementTags" : {
-                        "tagSetSourceFile" : "Tags/PilotTags",
                         "items" : [
-                            "pilot_VTOLSchool"
-                        ]
+                            "pilot_VTOL_School"
+                        ],
+                        "tagSetSourceFile" : "Tags/PilotTags"
                     },
                     "ExclusionTags" : {
-                        "tagSetSourceFile" : "",
-                        "items" : []
+                        "items" : [],
+                        "tagSetSourceFile" : ""
                     },
-                    "RequirementComparisons" : []
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Injuries",
+                            "op" : "Equal",
+                            "val" : 0,
+                            "valueConstant" : "0"
+                        },
+                        {
+                            "obj" : "CommanderVTOL",
+                            "op" : "LessThanOrEqual",
+                            "val" : 0,
+                            "valueConstant" : "0"
+                        }
+                    ]
                 },
                 {
                     "Scope" : "Company",
                     "RequirementTags" : {
-                        "tagSetSourceFile" : "Tags/CompanyTags",
                         "items" : [
                             "argo_medBay2"
-                        ]
+                        ],
+                        "tagSetSourceFile" : "Tags/CompanyTags"
                     },
                     "ExclusionTags" : {
-                        "tagSetSourceFile" : "",
-                        "items" : []
+                        "items" : [],
+                        "tagSetSourceFile" : ""
                     },
                     "RequirementComparisons" : []
                 }
@@ -345,18 +427,26 @@
                             "Scope" : "Commander",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "can_pilot_vtol"
-                                ]
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "CommanderVTOL",
+                                    "value" : "1",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
@@ -373,14 +463,12 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_CommanderEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
@@ -389,12 +477,44 @@
                                     "value" : "-258000",
                                     "set" : false,
                                     "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
+                                    "valueConstant" : null
                                 }
                             ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-5",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 24
                         }
                     ]
                 },
@@ -411,18 +531,26 @@
                             "Scope" : "Commander",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "can_pilot_vtol"
-                                ]
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "CommanderVTOL",
+                                    "value" : "1",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
@@ -439,14 +567,12 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_CommanderEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
@@ -455,12 +581,44 @@
                                     "value" : "-231000",
                                     "set" : false,
                                     "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
+                                    "valueConstant" : null
                                 }
                             ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-5",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 22
                         }
                     ]
                 },
@@ -477,18 +635,26 @@
                             "Scope" : "Commander",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "can_pilot_vtol"
-                                ]
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "CommanderVTOL",
+                                    "value" : "1",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
@@ -505,14 +671,12 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_CommanderEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
@@ -521,12 +685,44 @@
                                     "value" : "-156000",
                                     "set" : false,
                                     "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
+                                    "valueConstant" : null
                                 }
                             ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-5",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 27
                         }
                     ]
                 },
@@ -543,18 +739,26 @@
                             "Scope" : "Commander",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "can_pilot_vtol"
-                                ]
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "CommanderVTOL",
+                                    "value" : "1",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
@@ -571,14 +775,12 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_CommanderEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
@@ -587,12 +789,44 @@
                                     "value" : "-216000",
                                     "set" : false,
                                     "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
+                                    "valueConstant" : null
                                 }
                             ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-5",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 15
                         }
                     ]
                 }
@@ -600,12 +834,12 @@
             "Requirements" : {
                 "Scope" : "Company",
                 "RequirementTags" : {
-                    "tagSetSourceFile" : "",
-                    "items" : []
+                    "items" : [],
+                    "tagSetSourceFile" : ""
                 },
                 "ExclusionTags" : {
-                    "tagSetSourceFile" : "",
-                    "items" : []
+                    "items" : [],
+                    "tagSetSourceFile" : ""
                 },
                 "RequirementComparisons" : []
             }
@@ -621,28 +855,41 @@
                 {
                     "Scope" : "Commander",
                     "RequirementTags" : {
-                        "tagSetSourceFile" : "",
                         "items" : [
-                            "pilot_VTOLSchool"
-                        ]
+                            "pilot_VTOL_School"
+                        ],
+                        "tagSetSourceFile" : ""
                     },
                     "ExclusionTags" : {
-                        "tagSetSourceFile" : "",
-                        "items" : []
+                        "items" : [],
+                        "tagSetSourceFile" : ""
                     },
-                    "RequirementComparisons" : []
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Injuries",
+                            "op" : "Equal",
+                            "val" : 0,
+                            "valueConstant" : "0"
+                        },
+                        {
+                            "obj" : "CommanderVTOL",
+                            "op" : "LessThanOrEqual",
+                            "val" : 0,
+                            "valueConstant" : "0"
+                        }
+                    ]
                 },
                 {
                     "Scope" : "Company",
                     "RequirementTags" : {
-                        "tagSetSourceFile" : "Tags/CompanyTags",
                         "items" : [
                             "argo_medBay3"
-                        ]
+                        ],
+                        "tagSetSourceFile" : "Tags/CompanyTags"
                     },
                     "ExclusionTags" : {
-                        "tagSetSourceFile" : "",
-                        "items" : []
+                        "items" : [],
+                        "tagSetSourceFile" : ""
                     },
                     "RequirementComparisons" : []
                 }
@@ -661,18 +908,26 @@
                             "Scope" : "Commander",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "can_pilot_vtol"
-                                ]
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "CommanderVTOL",
+                                    "value" : "1",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
@@ -689,14 +944,12 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_CommanderEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
@@ -705,12 +958,44 @@
                                     "value" : "-316000",
                                     "set" : false,
                                     "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
+                                    "valueConstant" : null
                                 }
                             ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-10",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 11
                         }
                     ]
                 },
@@ -727,18 +1012,26 @@
                             "Scope" : "Commander",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "can_pilot_vtol"
-                                ]
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "CommanderVTOL",
+                                    "value" : "1",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
@@ -755,14 +1048,12 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_CommanderEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
@@ -771,12 +1062,44 @@
                                     "value" : "-414000",
                                     "set" : false,
                                     "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
+                                    "valueConstant" : null
                                 }
                             ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-10",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 12
                         }
                     ]
                 },
@@ -793,18 +1116,26 @@
                             "Scope" : "Commander",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "can_pilot_vtol"
-                                ]
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "CommanderVTOL",
+                                    "value" : "1",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
@@ -821,14 +1152,12 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_CommanderEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
@@ -837,12 +1166,44 @@
                                     "value" : "-309000",
                                     "set" : false,
                                     "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
+                                    "valueConstant" : null
                                 }
                             ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-10",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 14
                         }
                     ]
                 },
@@ -859,18 +1220,26 @@
                             "Scope" : "Commander",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "can_pilot_vtol"
-                                ]
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "CommanderVTOL",
+                                    "value" : "1",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
@@ -887,14 +1256,12 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_CommanderEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
@@ -903,12 +1270,44 @@
                                     "value" : "-366000",
                                     "set" : false,
                                     "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
+                                    "valueConstant" : null
                                 }
                             ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-10",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 8
                         }
                     ]
                 }
@@ -916,12 +1315,12 @@
             "Requirements" : {
                 "Scope" : "Company",
                 "RequirementTags" : {
-                    "tagSetSourceFile" : "",
-                    "items" : []
+                    "items" : [],
+                    "tagSetSourceFile" : ""
                 },
                 "ExclusionTags" : {
-                    "tagSetSourceFile" : "",
-                    "items" : []
+                    "items" : [],
+                    "tagSetSourceFile" : ""
                 },
                 "RequirementComparisons" : []
             }
@@ -937,28 +1336,41 @@
                 {
                     "Scope" : "Commander",
                     "RequirementTags" : {
-                        "tagSetSourceFile" : "",
                         "items" : [
-                            "pilot_VTOLSchool"
-                        ]
+                            "pilot_VTOL_School"
+                        ],
+                        "tagSetSourceFile" : ""
                     },
                     "ExclusionTags" : {
-                        "tagSetSourceFile" : "",
-                        "items" : []
+                        "items" : [],
+                        "tagSetSourceFile" : ""
                     },
-                    "RequirementComparisons" : []
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Injuries",
+                            "op" : "Equal",
+                            "val" : 0,
+                            "valueConstant" : "0"
+                        },
+                        {
+                            "obj" : "CommanderVTOL",
+                            "op" : "LessThanOrEqual",
+                            "val" : 0,
+                            "valueConstant" : "0"
+                        }
+                    ]
                 },
                 {
                     "Scope" : "Company",
                     "RequirementTags" : {
-                        "tagSetSourceFile" : "Tags/CompanyTags",
                         "items" : [
                             "argo_medbay_hospital"
-                        ]
+                        ],
+                        "tagSetSourceFile" : "Tags/CompanyTags"
                     },
                     "ExclusionTags" : {
-                        "tagSetSourceFile" : "",
-                        "items" : []
+                        "items" : [],
+                        "tagSetSourceFile" : ""
                     },
                     "RequirementComparisons" : []
                 }
@@ -977,18 +1389,26 @@
                             "Scope" : "Commander",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "can_pilot_vtol"
-                                ]
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "CommanderVTOL",
+                                    "value" : "1",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
@@ -1005,14 +1425,12 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_CommanderEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
@@ -1021,12 +1439,44 @@
                                     "value" : "-428000",
                                     "set" : false,
                                     "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
+                                    "valueConstant" : null
                                 }
                             ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-20",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 6
                         }
                     ]
                 },
@@ -1043,18 +1493,26 @@
                             "Scope" : "Commander",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "can_pilot_vtol"
-                                ]
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "CommanderVTOL",
+                                    "value" : "1",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
@@ -1071,14 +1529,12 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_CommanderEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
@@ -1087,12 +1543,44 @@
                                     "value" : "-445000",
                                     "set" : false,
                                     "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
+                                    "valueConstant" : null
                                 }
                             ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-20",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 4
                         }
                     ]
                 },
@@ -1109,18 +1597,26 @@
                             "Scope" : "Commander",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "can_pilot_vtol"
-                                ]
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "CommanderVTOL",
+                                    "value" : "1",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
@@ -1137,14 +1633,12 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_CommanderEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
@@ -1153,12 +1647,44 @@
                                     "value" : "-448000",
                                     "set" : false,
                                     "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
+                                    "valueConstant" : null
                                 }
                             ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-20",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 11
                         }
                     ]
                 },
@@ -1175,18 +1701,26 @@
                             "Scope" : "Commander",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
                                     "can_pilot_vtol"
-                                ]
+                                ],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
                                 "items" : [
-                                    "pilot_VTOLSchool"
-                                ]
+                                    "pilot_VTOL_School"
+                                ],
+                                "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "CommanderVTOL",
+                                    "value" : "1",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : [
                                 {
                                     "Type" : "MechWarrior_SetTimeout",
@@ -1203,14 +1737,12 @@
                             "Scope" : "Company",
                             "Requirements" : null,
                             "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "VTOL_CommanderEnrolled"
-                                ]
+                                "items" : [],
+                                "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
@@ -1219,12 +1751,44 @@
                                     "value" : "-433000",
                                     "set" : false,
                                     "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
+                                    "valueConstant" : null
                                 }
                             ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
                             "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "RemovedTags" : {
+                                "items" : [],
+                                "tagSetSourceFile" : ""
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "MedTechSkill",
+                                    "value" : "-20",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 9
                         }
                     ]
                 }
@@ -1232,12 +1796,12 @@
             "Requirements" : {
                 "Scope" : "Company",
                 "RequirementTags" : {
-                    "tagSetSourceFile" : "",
-                    "items" : []
+                    "items" : [],
+                    "tagSetSourceFile" : ""
                 },
                 "ExclusionTags" : {
-                    "tagSetSourceFile" : "",
-                    "items" : []
+                    "items" : [],
+                    "tagSetSourceFile" : ""
                 },
                 "RequirementComparisons" : []
             }
@@ -1248,7 +1812,7 @@
     "EventType" : "UNSELECTABLE",
     "OneTimeEvent" : false,
     "Tags" : {
-        "tagSetSourceFile" : "tags/EventTags",
-        "items" : []
+        "items" : [],
+        "tagSetSourceFile" : "tags/EventTags"
     }
 }

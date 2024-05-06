@@ -10,14 +10,12 @@
     "Requirements" : {
         "Scope" : "Company",
         "RequirementTags" : {
-            "items" : [
-                "Do_not_fire"
-            ],
+            "items" : [],
             "tagSetSourceFile" : ""
         },
         "ExclusionTags" : {
             "items" : [],
-            "tagSetSourceFile" : "Tags/CompanyTags"
+            "tagSetSourceFile" : ""
         },
         "RequirementComparisons" : []
     },
@@ -29,15 +27,30 @@
                 "Scope" : "SecondaryMechWarrior",
                 "RequirementTags" : {
                     "items" : [
-                        "pilot_VTOLSchool"
+                        "pilot_VTOL_School"
                     ],
                     "tagSetSourceFile" : ""
                 },
                 "ExclusionTags" : {
-                    "items" : [],
+                    "items" : [
+                        "can_pilot_vtol"
+                    ],
                     "tagSetSourceFile" : "Tags/PilotTags"
                 },
-                "RequirementComparisons" : []
+                "RequirementComparisons" : [
+                    {
+                        "obj" : "Injuries",
+                        "op" : "Equal",
+                        "val" : 0,
+                        "valueConstant" : "0"
+                    },
+                    {
+                        "obj" : "PilotVTOL",
+                        "op" : "Equal",
+                        "val" : 1,
+                        "valueConstant" : "1"
+                    }
+                ]
             }
         }
     ],
@@ -45,31 +58,22 @@
         {
             "Description" : {
                 "Id" : "outcome_0",
-                "Name" : "But, No Thanks",
-                "Details" : "Thanks",
+                "Name" : "thanks",
+                "Details" : "Thanks, but no",
                 "Icon" : null
             },
             "RequirementList" : [
                 {
                     "Scope" : "SecondaryMechWarrior",
                     "RequirementTags" : {
-                        "items" : [
-                            "pilot_VTOLSchool"
-                        ],
+                        "items" : [],
                         "tagSetSourceFile" : ""
                     },
                     "ExclusionTags" : {
                         "items" : [],
                         "tagSetSourceFile" : ""
                     },
-                    "RequirementComparisons" : [
-                        {
-                            "obj" : "Injuries",
-                            "op" : "Equal",
-                            "val" : 0,
-                            "valueConstant" : "0"
-                        }
-                    ]
+                    "RequirementComparisons" : []
                 }
             ],
             "ResultSets" : [
@@ -93,11 +97,19 @@
                             },
                             "RemovedTags" : {
                                 "items" : [
-                                    "pilot_VTOLSchool"
+                                    "pilot_VTOL_School"
                                 ],
                                 "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotVTOL",
+                                    "value" : "2",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
@@ -111,12 +123,18 @@
                                 "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ],
+                                "items" : [],
                                 "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
@@ -142,7 +160,7 @@
             "Description" : {
                 "Id" : "outcome_1",
                 "Name" : "Buy Ripper VTOL",
-                "Details" : "[\u00A2500,000]",
+                "Details" : "[\u00A2750,000]",
                 "Icon" : null
             },
             "RequirementList" : [
@@ -150,7 +168,7 @@
                     "Scope" : "SecondaryMechWarrior",
                     "RequirementTags" : {
                         "items" : [
-                            "pilot_VTOLSchool"
+                            "pilot_VTOL_School"
                         ],
                         "tagSetSourceFile" : ""
                     },
@@ -164,6 +182,12 @@
                             "op" : "Equal",
                             "val" : 0,
                             "valueConstant" : "0"
+                        },
+                        {
+                            "obj" : "PilotVTOL",
+                            "op" : "GreaterThanOrEqual",
+                            "val" : 1,
+                            "valueConstant" : "1"
                         }
                     ]
                 },
@@ -181,8 +205,8 @@
                         {
                             "obj" : "Funds",
                             "op" : "GreaterThanOrEqual",
-                            "val" : 500000,
-                            "valueConstant" : "500000"
+                            "val" : 750000,
+                            "valueConstant" : "750000"
                         }
                     ]
                 }
@@ -203,18 +227,25 @@
                             "AddedTags" : {
                                 "items" : [
                                     "can_pilot_vtol",
-                                    "can_pilot_generic_vehicle",
                                     "MaPermAffinity_10=RipperVTOL_10"
                                 ],
                                 "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
                                 "items" : [
-                                    "pilot_VTOLSchool"
+                                    "pilot_VTOL_School"
                                 ],
                                 "tagSetSourceFile" : ""
                             },
-                            "Stats" : null,
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotVTOL",
+                                    "value" : "2",
+                                    "set" : true,
+                                    "valueConstant" : null
+                                }
+                            ],
                             "Actions" : null,
                             "ForceEvents" : null,
                             "TemporaryResult" : false,
@@ -228,17 +259,22 @@
                                 "tagSetSourceFile" : ""
                             },
                             "RemovedTags" : {
-                                "items" : [
-                                    "VTOL_PilotEnrolled"
-                                ],
+                                "items" : [],
                                 "tagSetSourceFile" : ""
                             },
                             "Stats" : [
                                 {
                                     "typeString" : "System.Int32",
                                     "name" : "Funds",
-                                    "value" : "-500000",
+                                    "value" : "-7500000",
                                     "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "PilotEnrolled",
+                                    "value" : "0",
+                                    "set" : true,
                                     "valueConstant" : null
                                 }
                             ],

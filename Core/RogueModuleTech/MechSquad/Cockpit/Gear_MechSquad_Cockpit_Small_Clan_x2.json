@@ -20,14 +20,20 @@
         "CategoryID": "LifeSupportB"
       }
     ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.1 * [[Chassis.Tonnage]]",
+        "CBillCost": "0.9 * [[Chassis.Tonnage]]"
+      }
+    },
     "BonusDescriptions": [
       "SkillGunnery: +1",
       "SkillPiloting: -1",
-      "EjectionInjuryChance: +35%",
       "Sensors: +5%",
       "Sight: +5%",
       "AdvancedSensors: 1",
-      "IsCockpit"
+      "IsCockpit",
+      "NoEject"
     ],
     "Flags": [
       "no_salvage",
@@ -35,12 +41,6 @@
       "ignore_damage",
       "not_broken"
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.1 * [[Chassis.Tonnage]]",
-        "CBillCost": "0.9 * [[Chassis.Tonnage]]"
-      }
-    },
     "IBLS": {
       "StorageSize": 1
     }
@@ -91,6 +91,31 @@
         "operation": "Set",
         "modValue": "true",
         "modType": "System.Boolean"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "PowerArmorEject",
+        "Name": "Small Cockpit (C): Disallow Ejection",
+        "Details": "PASSIVE: Attacking with a single weapon ignores COVER and GUARDED on the target.",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "statisticData": {
+        "statName": "CanEject",
+        "operation": "Set",
+        "modValue": "false",
+        "modType": "System.Boolean",
+        "targetCollection": "Pilot"
       }
     },
     {
@@ -223,30 +248,6 @@
         "statName": "SpotterDistanceMultiplier",
         "operation": "Float_Multiply",
         "modValue": "1.05",
-        "modType": "System.Single"
-      }
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator"
-      },
-      "effectType": "StatisticEffect",
-      "nature": "Debuff",
-      "Description": {
-        "Id": "Effect-PrimitiveCockpit-EjectInjuryChance",
-        "Name": "Small Cockpit (C): Increased Injury on Ejection Chance",
-        "Details": "Increased chance of injury on ejection",
-        "Icon": "uixSvgIcon_equipment_Cockpit"
-      },
-      "statisticData": {
-        "statName": "SAR_InjuryChanceMult",
-        "operation": "Float_Add",
-        "modValue": "0.35",
         "modType": "System.Single"
       }
     }
