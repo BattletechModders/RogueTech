@@ -431,6 +431,10 @@ new fields
                                     can be set for weapon, ammo and mode. Mode have priority, than ammo, than weapon. 
   "PhysicsAoE_Height": 10.0,      - additional height for physics AoE. If physics for AoE enabled - each AoE explosion position y position altered 
                                     by PhysicsAoE_Height value, but ONLY for raycasting purposes, for damage range falloff calculation position remains intact
+  "PhysicsAoE_MinDist": 0.0,      - same behavior as PhysicsAoE_MinDist from settings but per weapon. Can be set for mode, ammo and weapon. Mode have priority, 
+									than ammo, than weapon. Value is from entity having PhysicsAoE - true. Either words if (for example) weapon have PhysicsAoE 
+									but mode does not - value from weapon will be used mode's one will be ignored. If both (for example) weapon and mode have 
+									PhysicsAoE true, mode will have priority. If effective value is less or equal than 0 - value from global settings will be applied. 
   "MissBehavior": "NotSet",       - Possible values "NotSet", "Guided", "Unguided". Set projectile behavior if miss. 
                                     if MissBehavior is Guided projectile acts like it proximity fuze. Either words if miss projectile end its way somewhere near target
 									(exact distance depends on weapon min/max miss radius and target chassis radius)
@@ -1148,6 +1152,7 @@ new fields
   
 Ammo definition
 {
+   "SkipUnusedAmmoCheck": false, - ammo only field. If true this ammo will not trigger unused ammo warning even if not used by any weapon. 
    "Custom" : {} - custom section on ammunition will be merged to all boxes definitions using this ammo. 
    "AutoRefill": "Automatic" - how this ammunition will be refilled after battle. Available values
 							  "Automatic" - same behavior as before. Default
