@@ -6,6 +6,8 @@ this mod allows you next things
 
 main settings in mod.json
 	"PreserveJsonUnitCost": true - if true unit's Description.Cost for units from DataManager will not be recalculated and preserve same as it is set in json
+	"RecalcUnitPartCost": true - if true unit's simGameMechPartCost will be scaled according DefaultMechPartMax difficult setting
+	"RecalcUnitPartCostBase": 5.0 - base value for simGameMechPartCost scaling. Used only if RecalcUnitPartCost enabled
 	"VehcilesPartialEditable": false - if true vehicles are allowed to be edited partially, 
 	"CloseRangeFiringArc": 90.0
 	"CloseRangeFiringArcDistance": 40.0 - if distance form attacker to target is less than CloseRangeFiringArcDistance, its firing arc will be expanded to CloseRangeFiringArc
