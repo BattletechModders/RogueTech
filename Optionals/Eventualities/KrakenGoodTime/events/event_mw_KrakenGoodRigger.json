@@ -1,0 +1,1427 @@
+{
+    "Description" : {
+        "Id" : "event_mw_KrakenGoodRigger",
+        "Name" : "Kraken Good Time",
+        "Details" : "You are on the bridge when Sumire calls out, \"Commander, we have an incoming holovid transmission.\"\r\n\r\nYou motion to Sumire to put the transmission on the viewer, \"Greetings, Commander {COMMANDER.LastName}.  How are you and {COMPANY.CompanyName} faring?  I trust things have been well?\"\r\n\r\nYou cross your arms in front of you, \"You just keep turning up.  Who owes you this time, <i>Front Man</i>?\"\r\n\r\n<i>Front Man</i> smiles and ignores your question, \"You are the clever one, aren't you?  Took me a while to work out your angle, but I know what you are doing.\"\r\n\r\nYou lean back in your chair, \"And what pray tell is it you think I am doing?\"\r\n\r\n<i>Front Man</i> pulls out a datapad and scrolls through it, \"You, my dear Commander, have someone on the inside allowing your <i>contestant</i> to get through all the game challenges unscathed so your company can reap the Champion's prize.\"\r\n\r\nDoning your best poker face, you contemplate this revelation before responding, \"Now how would I do that?  What resources do I have to be able to coerce someone on your payroll to look the other way?  Further more, I resent the...\"\r\n\r\n<i>Front Man</i> interrupts your tirade, \"Come now, Commander.  My records show your company, {COMPANY.CompanyName} has had more than 5 Champions.  Do you really know what the odds are of having 5 Champions?  By my calculations, the winnings from those are potentially enough to persuade one of my associates to look the other way.\"\r\n\r\nYou stare icily at <i>Front Man</i>, \"You have the gall to accuse me of manipulation when you are running a 'game' heavily weighted at getting the participants killed.  You are a hypocrit.\"\r\n\r\n<i>Front Man</i> smiles evilly at you, \"Ah, be that as it may.  The bottom line is, it is <i>my</i> game to run as I see fit.  You are under no obligation to hire criminals that have come afoul of the <i>Syndicate</i>.  Which brings me to the reason for me contacting you.  The <i>Syndicate</i> demands compensation for your deliberate efforts at ensuring your contestant wins the game.  And to show you we mean business, we have detained one of your champions, [[TGT_MW,{TGT_MW.Callsign}]], on the surface of [[TGT_SYSTEM,{TGT_SYSTEM.Name}]], <i>(an image of {TGT_MW.Callsign} shows on the holoscreen, tied and gagged)</i> and should you decide to not pay up, then who knows what will become of them?  As a gesture of good faith, we will accept a payment of only \u00A27,500,000 C-Bills.  I suggest you choose wisely, Commander.\"\r\n\r\nDarius leans over to whisper in your ear, \"Commander, I've checked the logs and [[TGT_MW,{TGT_MW.Callsign}]] did go down to the surface on shore leave.  They actually do have {TGT_MW.OBJ}.\"",
+        "Icon" : "uixTxrSpot_Kraken.png"
+    },
+    "Scope" : "MechWarrior",
+    "Weight" : 10,
+    "Requirements" : {
+        "Scope" : "MechWarrior",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "",
+            "items" : [
+                "KrakenGame_Champion"
+            ]
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "Tags/CompanyTags",
+            "items" : [
+                "pilot_player203"
+            ]
+        },
+        "RequirementComparisons" : []
+    },
+    "AdditionalRequirements" : [
+        {
+            "Scope" : "Company",
+        "RequirementTags" : {
+            "tagSetSourceFile" : "",
+            "items" : [
+                "Kraken_WinnerWinner"
+              ]
+        },
+        "ExclusionTags" : {
+            "tagSetSourceFile" : "Tags/CompanyTags",
+            "items" : [
+                "event_KrakenIgnore",
+                "event_KrakenRigger_Delay"                    
+            ]
+        },
+        "RequirementComparisons" : [
+            {
+                "obj" : "Travel",
+                "op" : "Equal",
+                "val" : 0,
+                "valueConstant" : "0"
+            },
+            {
+                "obj" : "KrakenBodyCount",
+                "op" : "LessThanOrEqual",
+                "val" : 3,
+                "valueConstant" : "3"
+            },
+            {
+                "obj" : "KrakenChampionCount",
+                "op" : "GreaterThanOrEqual",
+                "val" : 5,
+                "valueConstant" : "5"
+            },
+            {
+                "obj" : "Funds",
+                "op" : "GreaterThanOrEqual",
+                "val" : 6000000,
+                "valueConstant" : "6000000"
+            }
+        ]
+        }
+    ],
+    "AdditionalObjects" : [],
+    "Options" : [
+        {
+            "Description" : {
+                "Id" : "outcome_0",
+                "Name" : "Sacrifice [[TGT_MW,{TGT_MW.Callsign}]]",
+                "Details" : "He was dead weight anyways",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Funds",
+                            "op" : "GreaterThan",
+                            "val" : 0,
+                            "valueConstant" : "0"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_0",
+                        "Name" : "Dismiss <i>Front Man</i>",
+                        "Details" : "You mask the pain of what you are about to allow happen as you lock your gaze onto <i>Front Man</i>'s image, \"Let's get one thing straight.  It is you, not I executing an innocent member of my crew.  You are just trying to shake us down and extort more money from us.  This company will not pander to blackmail.\" \r\n\r\n<i>Front Man</i> smiles at you evilly, \"My dear Commander {COMMANDER.LastName}, you are so quick to assume we are going to kill [[TGT_MW,{TGT_MW.Callsign}]].  That would be such a waste of a valuable resource.  No, no, no... the <i>Syndicate</i> does not take kindly to being cheated and so we are going to put {TGT_MW.Callsign} to work for us to pay off <i>your</i> debt.  I do hope you will be able to sleep at night with your decision knowing their life is going to change because you did not value them.  Maybe next time, and I'm pretty sure there will be a next time, you'll decide differently.  Oh, I also forgot to mention one other thing.  I anticipated your decision and so I took the liberty of having one of my 'moles' leaving a small gift hidden in the [[SCN_UNIT,{SCN_Unit.Name}]] currently in your MechBay.\"\r\n\r\nAs the image on the holocom winks out, you hear the rumble of what can only be an explosion coming from the direction of the MechBay.\r\n\r\nAs you and Darius rush to investigate, he sees your concerned look, \"Commander, this will be very bad for morale.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 15,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_KrakenSacrifice"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-20",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : [
+                                {
+                                  "typeString": "System.Int32",
+                                  "name": "KrakenRiggerCount",
+                                  "value": "1",
+                                  "set": false,
+                                  "valueConstant": null
+                                }
+                              ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                  "Type": "MechWarrior_Fire",
+                                  "value": "1",
+                                  "valueConstant": null,
+                                  "additionalValues": null
+                                }
+                              ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMech",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "Mech_Damage_Location",
+                                    "value" : "150",
+                                    "valueConstant" : null,
+                                    "additionalValues" : [
+                                        "LeftArm"
+                                    ]
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_KrakenRigger_Delay"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 360
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_1",
+                        "Name" : "Dismiss <i>Front Man</i>",
+                        "Details" : "You mask the pain of what you are about to allow happen as you lock your gaze onto <i>Front Man</i>'s image, \"Let's get one thing straight.  It is you, not I executing an innocent member of my crew.  You are just trying to shake us down and extort more money from us.  This company will not pander to blackmail.\" \r\n\r\n<i>Front Man</i> smiles at you evilly, \"My dear Commander {COMMANDER.LastName}, you are so quick to assume we are going to kill [[TGT_MW,{TGT_MW.Callsign}]].  That would be such a waste of a valuable resource.  No, no, no... the <i>Syndicate</i> does not take kindly to being cheated and so we are going to put {TGT_MW.Callsign} to work for us to pay off <i>your</i> debt.  I do hope you will be able to sleep at night with your decision knowing their life is going to change because you did not value them.  Maybe next time, and I'm pretty sure there will be a next time, you'll decide differently.  Oh, I also forgot to mention one other thing.  I anticipated your decision and so I took the liberty of having one of my 'moles' leaving a small gift hidden in the [[SCN_UNIT,{SCN_Unit.Name}]] currently in your MechBay.\"\r\n\r\nAs the image on the holocom winks out, you hear the rumble of what can only be an explosion coming from the direction of the MechBay.\r\n\r\nAs you and Darius rush to investigate, he sees your concerned look, \"Commander, this will be very bad for morale.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 15,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_KrakenSacrifice"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-20",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : [
+                                {
+                                  "typeString": "System.Int32",
+                                  "name": "KrakenRiggerCount",
+                                  "value": "1",
+                                  "set": false,
+                                  "valueConstant": null
+                                }
+                              ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                  "Type": "MechWarrior_Fire",
+                                  "value": "1",
+                                  "valueConstant": null,
+                                  "additionalValues": null
+                                }
+                              ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMech",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "Mech_Damage_Location",
+                                    "value" : "150",
+                                    "valueConstant" : null,
+                                    "additionalValues" : [
+                                        "LeftLeg"
+                                    ]
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_KrakenRigger_Delay"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 360
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_2",
+                        "Name" : "Dismiss <i>Front Man</i>",
+                        "Details" : "You mask the pain of what you are about to allow happen as you lock your gaze onto <i>Front Man</i>'s image, \"Let's get one thing straight.  It is you, not I executing an innocent member of my crew.  You are just trying to shake us down and extort more money from us.  This company will not pander to blackmail.\" \r\n\r\n<i>Front Man</i> smiles at you evilly, \"My dear Commander {COMMANDER.LastName}, you are so quick to assume we are going to kill [[TGT_MW,{TGT_MW.Callsign}]].  That would be such a waste of a valuable resource.  No, no, no... the <i>Syndicate</i> does not take kindly to being cheated and so we are going to put {TGT_MW.Callsign} to work for us to pay off <i>your</i> debt.  I do hope you will be able to sleep at night with your decision knowing their life is going to change because you did not value them.  Maybe next time, and I'm pretty sure there will be a next time, you'll decide differently.  Oh, I also forgot to mention one other thing.  I anticipated your decision and so I took the liberty of having one of my 'moles' leaving a small gift hidden in the [[SCN_UNIT,{SCN_Unit.Name}]] currently in your MechBay.\"\r\n\r\nAs the image on the holocom winks out, you hear the rumble of what can only be an explosion coming from the direction of the MechBay.\r\n\r\nAs you and Darius rush to investigate, he sees your concerned look, \"Commander, this will be very bad for morale.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 20,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_KrakenSacrifice"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-20",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : [
+                                {
+                                  "typeString": "System.Int32",
+                                  "name": "KrakenRiggerCount",
+                                  "value": "1",
+                                  "set": false,
+                                  "valueConstant": null
+                                }
+                              ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                  "Type": "MechWarrior_Fire",
+                                  "value": "1",
+                                  "valueConstant": null,
+                                  "additionalValues": null
+                                }
+                              ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMech",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "Mech_Damage_Location",
+                                    "value" : "200",
+                                    "valueConstant" : null,
+                                    "additionalValues" : [
+                                        "LeftTorso"
+                                    ]
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_KrakenRigger_Delay"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 360
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_3",
+                        "Name" : "Dismiss <i>Front Man</i>",
+                        "Details" : "You mask the pain of what you are about to allow happen as you lock your gaze onto <i>Front Man</i>'s image, \"Let's get one thing straight.  It is you, not I executing an innocent member of my crew.  You are just trying to shake us down and extort more money from us.  This company will not pander to blackmail.\" \r\n\r\n<i>Front Man</i> smiles at you evilly, \"My dear Commander {COMMANDER.LastName}, you are so quick to assume we are going to kill [[TGT_MW,{TGT_MW.Callsign}]].  That would be such a waste of a valuable resource.  No, no, no... the <i>Syndicate</i> does not take kindly to being cheated and so we are going to put {TGT_MW.Callsign} to work for us to pay off <i>your</i> debt.  I do hope you will be able to sleep at night with your decision knowing their life is going to change because you did not value them.  Maybe next time, and I'm pretty sure there will be a next time, you'll decide differently.  Oh, I also forgot to mention one other thing.  I anticipated your decision and so I took the liberty of having one of my 'moles' leaving a small gift hidden in the [[SCN_UNIT,{SCN_Unit.Name}]] currently in your MechBay.\"\r\n\r\nAs the image on the holocom winks out, you hear the rumble of what can only be an explosion coming from the direction of the MechBay.\r\n\r\nAs you and Darius rush to investigate, he sees your concerned look, \"Commander, this will be very bad for morale.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 20,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_KrakenSacrifice"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-20",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : [
+                                {
+                                  "typeString": "System.Int32",
+                                  "name": "KrakenRiggerCount",
+                                  "value": "1",
+                                  "set": false,
+                                  "valueConstant": null
+                                }
+                              ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                  "Type": "MechWarrior_Fire",
+                                  "value": "1",
+                                  "valueConstant": null,
+                                  "additionalValues": null
+                                }
+                              ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMech",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "Mech_Damage_Location",
+                                    "value" : "250",
+                                    "valueConstant" : null,
+                                    "additionalValues" : [
+                                        "CenterTorso"
+                                    ]
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_KrakenRigger_Delay"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 360
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_4",
+                        "Name" : "Dismiss <i>Front Man</i>",
+                        "Details" : "You mask the pain of what you are about to allow happen as you lock your gaze onto <i>Front Man</i>'s image, \"Let's get one thing straight.  It is you, not I executing an innocent member of my crew.  You are just trying to shake us down and extort more money from us.  This company will not pander to blackmail.\" \r\n\r\n<i>Front Man</i> smiles at you evilly, \"My dear Commander {COMMANDER.LastName}, you are so quick to assume we are going to kill [[TGT_MW,{TGT_MW.Callsign}]].  That would be such a waste of a valuable resource.  No, no, no... the <i>Syndicate</i> does not take kindly to being cheated and so we are going to put {TGT_MW.Callsign} to work for us to pay off <i>your</i> debt.  I do hope you will be able to sleep at night with your decision knowing their life is going to change because you did not value them.  Maybe next time, and I'm pretty sure there will be a next time, you'll decide differently.  Oh, I also forgot to mention one other thing.  I anticipated your decision and so I took the liberty of having one of my 'moles' leaving a small gift hidden in the [[SCN_UNIT,{SCN_Unit.Name}]] currently in your MechBay.\"\r\n\r\nAs the image on the holocom winks out, you hear the rumble of what can only be an explosion coming from the direction of the MechBay.\r\n\r\nAs you and Darius rush to investigate, he sees your concerned look, \"Commander, this will be very bad for morale.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 20,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_KrakenSacrifice"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-20",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : [
+                                {
+                                  "typeString": "System.Int32",
+                                  "name": "KrakenRiggerCount",
+                                  "value": "1",
+                                  "set": false,
+                                  "valueConstant": null
+                                }
+                              ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                  "Type": "MechWarrior_Fire",
+                                  "value": "1",
+                                  "valueConstant": null,
+                                  "additionalValues": null
+                                }
+                              ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMech",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "Mech_Damage_Location",
+                                    "value" : "200",
+                                    "valueConstant" : null,
+                                    "additionalValues" : [
+                                        "RightTorso"
+                                    ]
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_KrakenRigger_Delay"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 360
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_5",
+                        "Name" : "Dismiss <i>Front Man</i>",
+                        "Details" : "You mask the pain of what you are about to allow happen as you lock your gaze onto <i>Front Man</i>'s image, \"Let's get one thing straight.  It is you, not I executing an innocent member of my crew.  You are just trying to shake us down and extort more money from us.  This company will not pander to blackmail.\" \r\n\r\n<i>Front Man</i> smiles at you evilly, \"My dear Commander {COMMANDER.LastName}, you are so quick to assume we are going to kill [[TGT_MW,{TGT_MW.Callsign}]].  That would be such a waste of a valuable resource.  No, no, no... the <i>Syndicate</i> does not take kindly to being cheated and so we are going to put {TGT_MW.Callsign} to work for us to pay off <i>your</i> debt.  I do hope you will be able to sleep at night with your decision knowing their life is going to change because you did not value them.  Maybe next time, and I'm pretty sure there will be a next time, you'll decide differently.  Oh, I also forgot to mention one other thing.  I anticipated your decision and so I took the liberty of having one of my 'moles' leaving a small gift hidden in the [[SCN_UNIT,{SCN_Unit.Name}]] currently in your MechBay.\"\r\n\r\nAs the image on the holocom winks out, you hear the rumble of what can only be an explosion coming from the direction of the MechBay.\r\n\r\nAs you and Darius rush to investigate, he sees your concerned look, \"Commander, this will be very bad for morale.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 15,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_KrakenSacrifice"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-20",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : [
+                                {
+                                  "typeString": "System.Int32",
+                                  "name": "KrakenRiggerCount",
+                                  "value": "1",
+                                  "set": false,
+                                  "valueConstant": null
+                                }
+                              ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                  "Type": "MechWarrior_Fire",
+                                  "value": "1",
+                                  "valueConstant": null,
+                                  "additionalValues": null
+                                }
+                              ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMech",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "Mech_Damage_Location",
+                                    "value" : "150",
+                                    "valueConstant" : null,
+                                    "additionalValues" : [
+                                        "RightArm"
+                                    ]
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_KrakenRigger_Delay"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 360
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_0_6",
+                        "Name" : "Dismiss <i>Front Man</i>",
+                        "Details" : "You mask the pain of what you are about to allow happen as you lock your gaze onto <i>Front Man</i>'s image, \"Let's get one thing straight.  It is you, not I executing an innocent member of my crew.  You are just trying to shake us down and extort more money from us.  This company will not pander to blackmail.\" \r\n\r\n<i>Front Man</i> smiles at you evilly, \"My dear Commander {COMMANDER.LastName}, you are so quick to assume we are going to kill [[TGT_MW,{TGT_MW.Callsign}]].  That would be such a waste of a valuable resource.  No, no, no... the <i>Syndicate</i> does not take kindly to being cheated and so we are going to put {TGT_MW.Callsign} to work for us to pay off <i>your</i> debt.  I do hope you will be able to sleep at night with your decision knowing their life is going to change because you did not value them.  Maybe next time, and I'm pretty sure there will be a next time, you'll decide differently.  Oh, I also forgot to mention one other thing.  I anticipated your decision and so I took the liberty of having one of my 'moles' leaving a small gift hidden in the [[SCN_UNIT,{SCN_Unit.Name}]] currently in your MechBay.\"\r\n\r\nAs the image on the holocom winks out, you hear the rumble of what can only be an explosion coming from the direction of the MechBay.\r\n\r\nAs you and Darius rush to investigate, he sees your concerned look, \"Commander, this will be very bad for morale.\"",
+                        "Icon" : null
+                    },
+                    "Weight" : 15,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_KrakenSacrifice"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Morale",
+                                    "value" : "-20",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                }
+                            ],
+                            "Actions" : [
+                                {
+                                  "typeString": "System.Int32",
+                                  "name": "KrakenRiggerCount",
+                                  "value": "1",
+                                  "set": false,
+                                  "valueConstant": null
+                                }
+                              ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "MechWarrior",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                  "Type": "MechWarrior_Fire",
+                                  "value": "1",
+                                  "valueConstant": null,
+                                  "additionalValues": null
+                                }
+                              ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "SecondaryMech",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : [
+                                {
+                                    "Type" : "Mech_Damage_Location",
+                                    "value" : "150",
+                                    "valueConstant" : null,
+                                    "additionalValues" : [
+                                        "RightLeg"
+                                    ]
+                                }
+                            ],
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : [
+                                    "event_KrakenRigger_Delay"
+                                ]
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : null,
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : true,
+                            "ResultDuration" : 360
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        },
+        {
+            "Description" : {
+                "Id" : "outcome_1",
+                "Name" : "[\u00A27,500,000]",
+                "Details" : "Pay Off <i>Front Man</i>",
+                "Icon" : null
+            },
+            "RequirementList" : [
+                {
+                    "Scope" : "Company",
+                    "RequirementTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "ExclusionTags" : {
+                        "tagSetSourceFile" : "",
+                        "items" : []
+                    },
+                    "RequirementComparisons" : [
+                        {
+                            "obj" : "Funds",
+                            "op" : "GreaterThan",
+                            "val" : 0,
+                            "valueConstant" : "0"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets" : [
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_0",
+                        "Name" : "Extortion",
+                        "Details" : "You sit in silence staring long and hard at <i>Front Man</i>, \"You seriously expect me to just pony up \u00A27,500,000 C-Bills?  That is a substantial amount to just pull out of your ass!\"\r\n\r\n<i>Front Man</i> looks away for a few seconds before turning back to you, \"Well you see, the <i>Syndicate</i> requires examples to be made, especially when someone goes to the lengths you have to avoid the true outcome of our Game.  The amount owed, is exactly that sum.\"\r\n\r\nYou visibly grimace at the amount, \"I'll give you \u00A25,000,000.  And I want assurances you will not retaliate or target {TGT_MW.Callsign} ever again.\"\r\n\r\n<i>Front Man</i> stares at you for a long while, \"I like you so much, Commander, so I tell you what.  Transfer the \u00A25,000,000 C-Bills and we will release {TGT_MW.Callsign}.  Furthermore, we will wipe their slate clean with us in full.  I'm sure we will speak again soon.\"\r\n\r\nThe image of <i>Front Man</i> winks out as the connection is severed.",
+                        "Icon" : null
+                    },
+                    "Weight" : 1,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-5000000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                  "typeString": "System.Int32",
+                                  "name": "KrakenRiggerCount",
+                                  "value": "-1",
+                                  "set": false,
+                                  "valueConstant": null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                          "Scope": "MechWarrior",
+                          "Requirements": null,
+                          "AddedTags": {
+                            "items": [
+                                "Kraken_ExChampion"
+                            ],
+                            "tagSetSourceFile": ""
+                          },
+                          "RemovedTags": {
+                            "items": [
+                              "KrakenGame_Champion",
+                              "pilot_criminal"
+                            ],
+                            "tagSetSourceFile": ""
+                          },
+                          "Stats": null,
+                          "Actions": null,
+                          "ForceEvents": null,
+                          "TemporaryResult": false,
+                          "ResultDuration": 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_1",
+                        "Name" : "Extortion",
+                        "Details" : "You sit in silence staring long and hard at <i>Front Man</i>, \"You seriously expect me to just pony up \u00A27,500,000 C-Bills?  That is a substantial amount to just pull out of your ass!\"\r\n\r\n<i>Front Man</i> looks away for a few seconds before turning back to you, \"Well you see, the <i>Syndicate</i> requires examples to be made, especially when someone goes to the lengths you have to avoid the true outcome of our Game.  The amount owed, is exactly that sum.\"\r\n\r\nYou visibly grimace at the amount, \"I'll give you \u00A25,000,000.  And I want assurances you will not retaliate or target {TGT_MW.Callsign} ever again.\"\r\n\r\n<i>Front Man</i> stares at you for a long while, \"I like you so much, Commander, so I will be candid.  It is in your best interests to transfer the \u00A27,500,000 C-Bills. And yes, we will release {TGT_MW.Callsign} will also wipe their slate clean with us in full.  I'm sure we will speak again soon.\"\r\n\r\nThe image of <i>Front Man</i> winks out as the connection is severed.",
+                        "Icon" : null
+                    },
+                    "Weight" : 32,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-7500000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                  "typeString": "System.Int32",
+                                  "name": "KrakenRiggerCount",
+                                  "value": "-1",
+                                  "set": false,
+                                  "valueConstant": null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                          "Scope": "MechWarrior",
+                          "Requirements": null,
+                          "AddedTags": {
+                            "items": [
+                                "Kraken_ExChampion"
+                            ],
+                            "tagSetSourceFile": ""
+                          },
+                          "RemovedTags": {
+                            "items": [
+                              "KrakenGame_Champion",
+                              "pilot_criminal"
+                            ],
+                            "tagSetSourceFile": ""
+                          },
+                          "Stats": null,
+                          "Actions": null,
+                          "ForceEvents": null,
+                          "TemporaryResult": false,
+                          "ResultDuration": 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_2",
+                        "Name" : "Extortion",
+                        "Details" : "You sit in silence staring long and hard at <i>Front Man</i>, \"You seriously expect me to just pony up \u00A27,500,000 C-Bills?  That is a substantial amount to just pull out of your ass!\"\r\n\r\n<i>Front Man</i> looks away for a few seconds before turning back to you, \"Well you see, the <i>Syndicate</i> requires examples to be made, especially when someone goes to the lengths you have to avoid the true outcome of our Game.  The amount owed, is exactly that sum.\"\r\n\r\nYou visibly grimace at the amount, \"I'll give you \u00A25,000,000.  And I want assurances you will not retaliate or target {TGT_MW.Callsign} ever again.\"\r\n\r\n<i>Front Man</i> stares at you for a long while, \"I like you so much, Commander, so I tell you what.  Transfer the \u00A25,500,000 C-Bills and we will release {TGT_MW.Callsign}.  Furthermore, we will wipe their slate clean with us in full.  I'm sure we will speak again soon.\"\r\n\r\nThe image of <i>Front Man</i> winks out as the connection is severed.",
+                        "Icon" : null
+                    },
+                    "Weight" : 1,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-5500000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                  "typeString": "System.Int32",
+                                  "name": "KrakenRiggerCount",
+                                  "value": "-1",
+                                  "set": false,
+                                  "valueConstant": null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                          "Scope": "MechWarrior",
+                          "Requirements": null,
+                          "AddedTags": {
+                            "items": [
+                                "Kraken_ExChampion"
+                            ],
+                            "tagSetSourceFile": ""
+                          },
+                          "RemovedTags": {
+                            "items": [
+                              "KrakenGame_Champion",
+                              "pilot_criminal"
+                            ],
+                            "tagSetSourceFile": ""
+                          },
+                          "Stats": null,
+                          "Actions": null,
+                          "ForceEvents": null,
+                          "TemporaryResult": false,
+                          "ResultDuration": 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_3",
+                        "Name" : "Extortion",
+                        "Details" : "You sit in silence staring long and hard at <i>Front Man</i>, \"You seriously expect me to just pony up \u00A27,500,000 C-Bills?  That is a substantial amount to just pull out of your ass!\"\r\n\r\n<i>Front Man</i> looks away for a few seconds before turning back to you, \"Well you see, the <i>Syndicate</i> requires examples to be made, especially when someone goes to the lengths you have to avoid the true outcome of our Game.  The amount owed, is exactly that sum.\"\r\n\r\nYou visibly grimace at the amount, \"I'll give you \u00A25,000,000.  And I want assurances you will not retaliate or target {TGT_MW.Callsign} ever again.\"\r\n\r\n<i>Front Man</i> stares at you for a long while, \"I like you so much, Commander, so I will be candid.  It is in your best interests to transfer the \u00A27,500,000 C-Bills. And yes, we will release {TGT_MW.Callsign} will also wipe their slate clean with us in full.  I'm sure we will speak again soon.\"\r\n\r\nThe image of <i>Front Man</i> winks out as the connection is severed.",
+                        "Icon" : null
+                    },
+                    "Weight" : 32,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-7500000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                  "typeString": "System.Int32",
+                                  "name": "KrakenRiggerCount",
+                                  "value": "-1",
+                                  "set": false,
+                                  "valueConstant": null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                          "Scope": "MechWarrior",
+                          "Requirements": null,
+                          "AddedTags": {
+                            "items": [
+                                "Kraken_ExChampion"
+                            ],
+                            "tagSetSourceFile": ""
+                          },
+                          "RemovedTags": {
+                            "items": [
+                              "KrakenGame_Champion",
+                              "pilot_criminal"
+                            ],
+                            "tagSetSourceFile": ""
+                          },
+                          "Stats": null,
+                          "Actions": null,
+                          "ForceEvents": null,
+                          "TemporaryResult": false,
+                          "ResultDuration": 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_4",
+                        "Name" : "Extortion",
+                        "Details" : "You sit in silence staring long and hard at <i>Front Man</i>, \"You seriously expect me to just pony up \u00A27,500,000 C-Bills?  That is a substantial amount to just pull out of your ass!\"\r\n\r\n<i>Front Man</i> looks away for a few seconds before turning back to you, \"Well you see, the <i>Syndicate</i> requires examples to be made, especially when someone goes to the lengths you have to avoid the true outcome of our Game.  The amount owed, is exactly that sum.\"\r\n\r\nYou visibly grimace at the amount, \"I'll give you \u00A25,000,000.  And I want assurances you will not retaliate or target {TGT_MW.Callsign} ever again.\"\r\n\r\n<i>Front Man</i> stares at you for a long while, \"I like you so much, Commander, so I tell you what.  Transfer the \u00A26,000,000 C-Bills and we will release {TGT_MW.Callsign}.  Furthermore, we will wipe their slate clean with us in full.  I'm sure we will speak again soon.\"\r\n\r\nThe image of <i>Front Man</i> winks out as the connection is severed.",
+                        "Icon" : null
+                    },
+                    "Weight" : 1,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-6000000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                  "typeString": "System.Int32",
+                                  "name": "KrakenRiggerCount",
+                                  "value": "-1",
+                                  "set": false,
+                                  "valueConstant": null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                          "Scope": "MechWarrior",
+                          "Requirements": null,
+                          "AddedTags": {
+                            "items": [
+                                "Kraken_ExChampion"
+                            ],
+                            "tagSetSourceFile": ""
+                          },
+                          "RemovedTags": {
+                            "items": [
+                              "KrakenGame_Champion",
+                              "pilot_criminal"
+                            ],
+                            "tagSetSourceFile": ""
+                          },
+                          "Stats": null,
+                          "Actions": null,
+                          "ForceEvents": null,
+                          "TemporaryResult": false,
+                          "ResultDuration": 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_5",
+                        "Name" : "Extortion",
+                        "Details" : "You sit in silence staring long and hard at <i>Front Man</i>, \"You seriously expect me to just pony up \u00A27,500,000 C-Bills?  That is a substantial amount to just pull out of your ass!\"\r\n\r\n<i>Front Man</i> looks away for a few seconds before turning back to you, \"Well you see, the <i>Syndicate</i> requires examples to be made, especially when someone goes to the lengths you have to avoid the true outcome of our Game.  The amount owed, is exactly that sum.\"\r\n\r\nYou visibly grimace at the amount, \"I'll give you \u00A25,000,000.  And I want assurances you will not retaliate or target {TGT_MW.Callsign} ever again.\"\r\n\r\n<i>Front Man</i> stares at you for a long while, \"I like you so much, Commander, so I will be candid.  It is in your best interests to transfer the \u00A27,500,000 C-Bills. And yes, we will release {TGT_MW.Callsign} will also wipe their slate clean with us in full.  I'm sure we will speak again soon.\"\r\n\r\nThe image of <i>Front Man</i> winks out as the connection is severed.",
+                        "Icon" : null
+                    },
+                    "Weight" : 32,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-7500000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                  "typeString": "System.Int32",
+                                  "name": "KrakenRiggerCount",
+                                  "value": "-1",
+                                  "set": false,
+                                  "valueConstant": null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                          "Scope": "MechWarrior",
+                          "Requirements": null,
+                          "AddedTags": {
+                            "items": [
+                                "Kraken_ExChampion"
+                            ],
+                            "tagSetSourceFile": ""
+                          },
+                          "RemovedTags": {
+                            "items": [
+                              "KrakenGame_Champion",
+                              "pilot_criminal"
+                            ],
+                            "tagSetSourceFile": ""
+                          },
+                          "Stats": null,
+                          "Actions": null,
+                          "ForceEvents": null,
+                          "TemporaryResult": false,
+                          "ResultDuration": 0
+                        }
+                    ]
+                },
+                {
+                    "Description" : {
+                        "Id" : "outcome_1_6",
+                        "Name" : "Extortion",
+                        "Details" : "You sit in silence staring long and hard at <i>Front Man</i>, \"You seriously expect me to just pony up \u00A27,500,000 C-Bills?  That is a substantial amount to just pull out of your ass!\"\r\n\r\n<i>Front Man</i> looks away for a few seconds before turning back to you, \"Well you see, the <i>Syndicate</i> requires examples to be made, especially when someone goes to the lengths you have to avoid the true outcome of our Game.  The amount owed, is exactly that sum.\"\r\n\r\nYou visibly grimace at the amount, \"I'll give you \u00A25,000,000.  And I want assurances you will not retaliate or target {TGT_MW.Callsign} ever again.\"\r\n\r\n<i>Front Man</i> stares at you for a long while, \"I like you so much, Commander, so I tell you what.  Transfer the \u00A26,500,000 C-Bills and we will release {TGT_MW.Callsign}.  Furthermore, we will wipe their slate clean with us in full.  I'm sure we will speak again soon.\"\r\n\r\nThe image of <i>Front Man</i> winks out as the connection is severed.",
+                        "Icon" : null
+                    },
+                    "Weight" : 1,
+                    "Results" : [
+                        {
+                            "Scope" : "Company",
+                            "Requirements" : null,
+                            "AddedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "RemovedTags" : {
+                                "tagSetSourceFile" : "",
+                                "items" : []
+                            },
+                            "Stats" : [
+                                {
+                                    "typeString" : "System.Int32",
+                                    "name" : "Funds",
+                                    "value" : "-6500000",
+                                    "set" : false,
+                                    "valueConstant" : null
+                                },
+                                {
+                                  "typeString": "System.Int32",
+                                  "name": "KrakenRiggerCount",
+                                  "value": "-1",
+                                  "set": false,
+                                  "valueConstant": null
+                                }
+                            ],
+                            "Actions" : null,
+                            "ForceEvents" : null,
+                            "TemporaryResult" : false,
+                            "ResultDuration" : 0
+                        },
+                        {
+                          "Scope": "MechWarrior",
+                          "Requirements": null,
+                          "AddedTags": {
+                            "items": [
+                                "Kraken_ExChampion"
+                            ],
+                            "tagSetSourceFile": ""
+                          },
+                          "RemovedTags": {
+                            "items": [
+                              "KrakenGame_Champion",
+                              "pilot_criminal"
+                            ],
+                            "tagSetSourceFile": ""
+                          },
+                          "Stats": null,
+                          "Actions": null,
+                          "ForceEvents": null,
+                          "TemporaryResult": false,
+                          "ResultDuration": 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements" : {
+                "Scope" : "Company",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
+    "PublishState" : "PUBLISHED",
+    "ValidationState" : "UNTESTED",
+    "EventType" : "NORMAL",
+    "OneTimeEvent" : false,
+    "Tags" : {
+        "tagSetSourceFile" : "tags/EventTags",
+        "items" : []
+    }
+}
