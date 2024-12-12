@@ -6,16 +6,14 @@
       }
     ],
     "BonusDescriptions": [
-      "AMSJam: -30%",
+      "AMSJam: -15%",
+      "AMSHeat: -10%",
       "AMSDmg: +1",
-      "AMSChance: -15%",
+      "AMSChance: -25%",
       "FCS"
     ],
     "Flags": [
-      "default",
-      "not_broken",
-      "not_destroyed",
-      "no_salvage"
+      "not_broken"
     ],
     "WorkOrderCosts": {
       "Install": {
@@ -28,15 +26,15 @@
     }
   },
   "Description": {
-    "Cost": 1500000,
-    "Rarity": 8,
+    "Cost": 3500000,
+    "Rarity": 99,
     "Purchasable": true,
     "Manufacturer": "RISC",
     "Model": "Iron Dome FCS",
-    "UIName": "FCS AMS",
-    "Id": "Gear_FCS_AMS",
-    "Name": "Iron Dome",
-    "Details": "A FCS that reduces Jamming Chance and increases Damage of AntiMissile Systems, but reduces AMS Hit Chance.",
+    "UIName": "FCS AMS RTO",
+    "Id": "Unique_Gear_FCS_AMS-RTO",
+    "Name": "Iron Dome RTO",
+    "Details": "A FCS that reduces Jamming Chance, Heat Output, and increases Damage of AntiMissile Systems, but reduces AMS Hit Chance.",
     "Icon": "targeting"
   },
   "BonusValueA": "",
@@ -48,7 +46,7 @@
   "AbsoluteModifier": 0,
   "BattleValue": 0,
   "InventorySize": 1,
-  "Tonnage": 1,
+  "Tonnage": 2,
   "AllowedLocations": "Head",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
@@ -68,13 +66,42 @@
       "nature": "Buff",
       "Description": {
         "Id": "StatusEffect_FCSAMSReducedHitChance",
-        "Name": "FCS AMS: Decreased NotSet AMS Hit Chance Modifier",
+        "Name": "FCS AMS RTO: Decreased NotSet AMS Hit Chance Modifier",
         "Details": "Reduced Hit Chance",
         "Icon": "uixSvgIcon_ability_precisionstrike"
       },
       "statisticData": {
         "abilifierId": "AMS_Filter",
         "statName": "CAC_AMSHitChance_Mod",
+        "operation": "Float_Multiply",
+        "modValue": "0.75",
+        "modType": "System.Single",
+        "targetCollection": "Weapon",
+        "targetWeaponCategoryID": "NotSet"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "StatusEffect_FCSAMSJam",
+        "Name": "FCS AMS RTO: Decreased NotSet Jam Chance",
+        "Details": "Reduced Jam Chance",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "statisticData": {
+        "abilifierId": "AMS_Filter",
+        "statName": "CACModJammingChance",
         "operation": "Float_Multiply",
         "modValue": "0.85",
         "modType": "System.Single",
@@ -96,18 +123,19 @@
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "StatusEffect_FCSAMSJam",
-        "Name": "FCS AMS: Decreased Jam Chance",
-        "Details": "Reduced Jam Chance",
-        "Icon": "uixSvgIcon_ability_precisionstrike"
+        "Id": "StatusEffect_FCSAMSHeat",
+        "Name": "FCS AMS RTO: Decreased NotSet Heat Generated",
+        "Details": "Heat generation reduced by 15%.",
+        "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
       "statisticData": {
         "abilifierId": "AMS_Filter",
-        "statName": "CACModJammingChance",
+        "statName": "HeatGenerated",
         "operation": "Float_Multiply",
-        "modValue": "0.7",
+        "modValue": "0.9",
         "modType": "System.Single",
-        "targetCollection": "Weapon"
+        "targetCollection": "Weapon",
+        "targetWeaponCategoryID": "NotSet"
       }
     },
     {
@@ -125,7 +153,7 @@
       "nature": "Buff",
       "Description": {
         "Id": "AMSDamage",
-        "Name": "FCS AMS: Increased AMS Damage",
+        "Name": "FCS AMS RTO: Increased AMS Damage",
         "Details": "Provides a penalty to all attacks against this unit.",
         "Icon": "uixSvgIcon_equipment_Gyro"
       },
@@ -141,7 +169,7 @@
   ],
   "ComponentTags": {
     "items": [
-      "component_type_stock",
+      "component_type_variant",
       "BLACKLISTED",
       "LootMagnetBlacklist",
       "SquadIncompatible"
