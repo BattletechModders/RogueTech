@@ -1,12 +1,12 @@
 {
     "Description" : {
-        "Id" : "forceevent_co_safetychecks",
-        "Name" : "Safety Checks",
-        "Details" : "You are in the cargo bay surveying the aftermath of the door failure earlier when Darius and Dr. Murad approach you, \"Commander, here is the safety audit report you ordered on the <i>Argo</i>.\"\r\n\r\nYou take the datapad from Darius and scan the data.  Your brow furrows as you hand it back to him, \"You mean to tell me this ship is riddled with potentially faulty bolts that could fail at any moment?\"\r\n\r\n  Dr. Murad clears her throat, \"Commander, do keep in mind that the <i>Argo</i> was built in 2762.  There are a <i>lot</i> of parts of her that are ancient by all counts.\"\r\n\r\nAt that moment, Yang wanders over, \"Don't go giving me that bullshit story.  This ship has been refurbished so many times it's ridiculous.  Bottom line is <i>Boeing Interstellar</i> cut corners and we're losing key personel cause of it!\"\r\n\r\nYou rub your temples to try and ward off the pending headache, \"Okay, enough.  Darius, what is it going to take to prevent this from happening again?\"\r\n\r\nDarius reads from his datapad, \"Well Commander, we have the following options:\r\n\r\n<color=#ffa200><i>Purchase replacment bolts and manually do the job ourselves.  [[SCN_MW,{SCN_MW.Callsign}]] has mentioned being willing to assist with external repair work;</color>\r\n\r\n<color=#2b93b1>Hire a repair crew from [[TGT_SYSTEM,{TGT_SYSTEM.Name}]] to expedite the repairs professionally;</color>\r\n\r\n<color=#a4a4a4>or do nothing and revisit this later hoping it doesn't happen again in the mean time.</color></i>\r\n\r\nWhat do you wish to do, Commander?\"",
+        "Id" : "forceevent_co_safetychecks_sequel_Gamma",
+        "Name" : "More Safety Checks",
+        "Details" : "You are in the cargo bay surveying the aftermath of yet another door failure when Darius approaches, \"Commander, here is the safety audit report you ordered on the <i>Argo</i>.\"\r\n\r\nYou take the datapad from Darius and scan the data.  You let out a long exhale, \"This is not good, Darius.  We need to get those bolts all replaced or one of these times the whole bloody <i>Argo</i> is going to decompress.\"\r\n\r\n  Yang wanders over at the moment, \"Boss, we need to hold <i>Boeing Interstellar</i> accountable for this!\"\r\n\r\nYou push through your pounding headache, \"Yang, I get it.  It is just not that easy to take a ship that is centuries old and hold its manufacturer liable.  Darius, remind me again waht it is going to take to fix this mess.\"\r\n\r\nDarius reads from his datapad, \"Well Commander, as before, our options are:\r\n\r\n<color=#ffa200><i>Purchase replacment bolts and manually do the job ourselves.  [[SCN_MW,{SCN_MW.Callsign}]] has mentioned being willing to assist with external repair work;</color>\r\n\r\n<color=#2b93b1>Hire a repair crew from [[TGT_SYSTEM,{TGT_SYSTEM.Name}]] to expedite the repairs professionally;</color>\r\n\r\n<color=#a4a4a4>or do nothing and revisit this later hoping it doesn't happen again in the mean time.</color></i>\r\n\r\nWhat do you wish to do, Commander?\"",
         "Icon" : "uixTxrSpot_SafetyChecks.png"
     },
     "Scope" : "Company",
-    "Weight" : 100,
+    "Weight" : 1000,
     "Requirements" : {
         "Scope" : "Company",
         "RequirementTags" : {
@@ -17,17 +17,28 @@
             "tagSetSourceFile" : "Tags/CompanyTags",
             "items" : []
         },
-        "RequirementComparisons" : [
-            {
-                "obj" : "Travel",
-                "op" : "Equal",
-                "val" : 0,
-                "valueConstant" : "0"
-            }
-        ]
+        "RequirementComparisons" : []
     },
     "AdditionalRequirements" : [],
-    "AdditionalObjects" : [],
+    "AdditionalObjects" : [
+        {
+            "Scope" : "SecondaryMechWarrior",
+            "Requirements" : {
+                "Scope" : "SecondaryMechWarrior",
+                "RequirementTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : [
+                        "pilot_dependable"
+                    ]
+                },
+                "ExclusionTags" : {
+                    "tagSetSourceFile" : "",
+                    "items" : []
+                },
+                "RequirementComparisons" : []
+            }
+        }
+    ],
     "Options" : [
         {
             "Description" : {
@@ -58,8 +69,7 @@
                     "ExclusionTags" : {
                         "tagSetSourceFile" : "",
                         "items" : [
-                            "planet_industry_manufacturing",
-                            "planet_pop_none"
+                            "planet_industry_manufacturing"
                         ]
                     },
                     "RequirementComparisons" : []
@@ -81,8 +91,9 @@
                             "AddedTags" : {
                                 "tagSetSourceFile" : "",
                                 "items" : [
-                                    "event_safteychecks",
-                                    "event_repairCrew"
+                                    "event_safteychecks_gamma",
+                                    "event_fourBoltsSequel_gamma",
+                                    "event_repairCrew_Gamma"
                                 ]
                             },
                             "RemovedTags" : {
@@ -226,13 +237,15 @@
                             "AddedTags" : {
                                 "tagSetSourceFile" : "",
                                 "items" : [
-                                    "event_fourBoltsCOMPLETE_BETA"
+                                    "event_fourBoltsCOMPLETE_GAMMA"
                                 ]
                             },
                             "RemovedTags" : {
                                 "tagSetSourceFile" : "Tags/CompanyTags",
                                 "items" : [
-                                    "event_fourBolts_beta"
+                                    "event_fourBolts_gamma",
+                                    "event_fourBoltsSequel_gamma",
+                                    "event_safteychecks_gamma"
                                 ]
                             },
                             "Stats" : [
@@ -368,12 +381,14 @@
                             "AddedTags" : {
                                 "tagSetSourceFile" : "",
                                 "items" : [
-                                    "event_safteychecks"
+                                    "event_safteychecks_gamma"
                                 ]
                             },
                             "RemovedTags" : {
                                 "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [
+                                    "event_fourBoltsSequel_gamma"
+                                ]
                             },
                             "Stats" : [
                                 {
@@ -482,13 +497,15 @@
                             "AddedTags" : {
                                 "tagSetSourceFile" : "",
                                 "items" : [
-                                    "event_fourBoltsCOMPLETE_BETA"
+                                    "event_fourBoltsCOMPLETE_GAMMA"
                                 ]
                             },
                             "RemovedTags" : {
                                 "tagSetSourceFile" : "Tags/CompanyTags",
                                 "items" : [
-                                    "event_fourBolts_beta"
+                                    "event_fourBolts_gamma",
+                                    "event_fourBoltsSequel_gamma",
+                                    "event_safteychecks_gamma"
                                 ]
                             },
                             "Stats" : null,
@@ -578,12 +595,14 @@
                             "AddedTags" : {
                                 "tagSetSourceFile" : "",
                                 "items" : [
-                                    "event_safteychecks"
+                                    "event_safteychecks_gamma"
                                 ]
                             },
                             "RemovedTags" : {
                                 "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [
+                                    "event_fourBoltsSequel_gamma"
+                                ]
                             },
                             "Stats" : [
                                 {
@@ -692,13 +711,15 @@
                             "AddedTags" : {
                                 "tagSetSourceFile" : "",
                                 "items" : [
-                                    "event_fourBoltsCOMPLETE_BETA"
+                                    "event_fourBoltsCOMPLETE_GAMMA"
                                 ]
                             },
                             "RemovedTags" : {
                                 "tagSetSourceFile" : "Tags/CompanyTags",
                                 "items" : [
-                                    "event_fourBolts_beta"
+                                    "event_fourBolts_gamma",
+                                    "event_fourBoltsSequel_gamma",
+                                    "event_safteychecks_gamma"
                                 ]
                             },
                             "Stats" : null,
@@ -788,12 +809,14 @@
                             "AddedTags" : {
                                 "tagSetSourceFile" : "",
                                 "items" : [
-                                    "event_safteychecks"
+                                    "event_safteychecks_gamma"
                                 ]
                             },
                             "RemovedTags" : {
                                 "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [
+                                    "event_fourBoltsSequel_gamma"
+                                ]
                             },
                             "Stats" : [
                                 {
@@ -902,13 +925,15 @@
                             "AddedTags" : {
                                 "tagSetSourceFile" : "",
                                 "items" : [
-                                    "event_fourBoltsCOMPLETE_BETA"
+                                    "event_fourBoltsCOMPLETE_GAMMA"
                                 ]
                             },
                             "RemovedTags" : {
                                 "tagSetSourceFile" : "Tags/CompanyTags",
                                 "items" : [
-                                    "event_fourBolts_beta"
+                                    "event_fourBolts_gamma",
+                                    "event_fourBoltsSequel_gamma",
+                                    "event_safteychecks_gamma"
                                 ]
                             },
                             "Stats" : null,
@@ -998,12 +1023,14 @@
                             "AddedTags" : {
                                 "tagSetSourceFile" : "",
                                 "items" : [
-                                    "event_safteychecks"
+                                    "event_safteychecks_gamma"
                                 ]
                             },
                             "RemovedTags" : {
                                 "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [
+                                    "event_fourBoltsSequel_gamma"
+                                ]
                             },
                             "Stats" : [
                                 {
@@ -1112,13 +1139,15 @@
                             "AddedTags" : {
                                 "tagSetSourceFile" : "",
                                 "items" : [
-                                    "event_fourBoltsCOMPLETE_BETA"
+                                    "event_fourBoltsCOMPLETE_GAMMA"
                                 ]
                             },
                             "RemovedTags" : {
                                 "tagSetSourceFile" : "Tags/CompanyTags",
                                 "items" : [
-                                    "event_fourBolts_beta"
+                                    "event_fourBolts_gamma",
+                                    "event_fourBoltsSequel_gamma",
+                                    "event_safteychecks_gamma"
                                 ]
                             },
                             "Stats" : null,
@@ -1208,12 +1237,14 @@
                             "AddedTags" : {
                                 "tagSetSourceFile" : "",
                                 "items" : [
-                                    "event_safteychecks"
+                                    "event_safteychecks_gamma"
                                 ]
                             },
                             "RemovedTags" : {
                                 "tagSetSourceFile" : "",
-                                "items" : []
+                                "items" : [
+                                    "event_fourBoltsSequel_gamma"
+                                ]
                             },
                             "Stats" : [
                                 {
@@ -1379,13 +1410,15 @@
                             "AddedTags" : {
                                 "tagSetSourceFile" : "",
                                 "items" : [
-                                    "event_fourBoltsCOMPLETE_BETA"
+                                    "event_fourBoltsCOMPLETE_GAMMA"
                                 ]
                             },
                             "RemovedTags" : {
                                 "tagSetSourceFile" : "Tags/CompanyTags",
                                 "items" : [
-                                    "event_fourBolts_beta"
+                                    "event_fourBolts_gamma",
+                                    "event_fourBoltsSequel_gamma",
+                                    "event_safteychecks_gamma"
                                 ]
                             },
                             "Stats" : [
@@ -1466,13 +1499,15 @@
                             "AddedTags" : {
                                 "tagSetSourceFile" : "",
                                 "items" : [
-                                    "event_fourBoltsCOMPLETE_BETA"
+                                    "event_fourBoltsCOMPLETE_GAMMA"
                                 ]
                             },
                             "RemovedTags" : {
                                 "tagSetSourceFile" : "Tags/CompanyTags",
                                 "items" : [
-                                    "event_fourBolts_beta"
+                                    "event_fourBolts_gamma",
+                                    "event_fourBoltsSequel_gamma",
+                                    "event_safteychecks_gamma"
                                 ]
                             },
                             "Stats" : [
