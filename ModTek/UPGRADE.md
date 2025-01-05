@@ -2,7 +2,8 @@
 
 ModTek has been updated from v4.1.0 to v4.3.6. Attached is an abbreviated Changelog for reference. 
 - Harmony12X folder has been deleted
-- Provided `*.dlls` have been moved to `ModTek/lib`. To avoid breaking projects, a copy of these `*.dll` are available at `ModTek/` 
+- Provided `*.dlls` have been moved to `ModTek/lib`.
+- Breaking change as requested by ModTek, please update `.csproj` references to new location
 
 # Abbreviated Changes
 
