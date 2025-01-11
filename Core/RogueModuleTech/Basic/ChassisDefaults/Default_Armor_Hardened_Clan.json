@@ -12,14 +12,16 @@
       }
     },
     "BonusDescriptions": [
-      "ArmorProtection: x2",
+      "ArmorProtection: +100%",
       "ArmorFactor: +100%",
-      "APImmune",
-      "WalkSpeed: -20%",
-      "ArmorTPCost: x2",
-      "ArmorCBCost: x2.4",
+      "TADImmune",
+      "TACchance: -30%",
+      "SkillPiloting: -1",
+      "RunSpeed: -20%",
       "CASE",
-      "CASEVENT: 100, 200"
+      "CASEVENT: 100, 200",
+      "ArmorTPCost: x2",
+      "ArmorCBCost: x2.4"
     ],
     "ArmorRepair": {
       "ArmorTPCost": 2.0,
@@ -88,21 +90,23 @@
       "targetingData": {
         "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
+        "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "HardenedPenaltyWalk",
-        "Name": "Default Hardened (C): Decreased Walk Speed",
-        "Details": "MORE SPEED.",
-        "Icon": "uixSvgIcon_run_n_gun"
+        "Id": "StatusEffect_Cockpit_Skill_Piloting",
+        "Name": "Piloting Support A: Increased Piloting",
+        "Details": "Buffs Piloting Skill",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
       },
       "statisticData": {
-        "statName": "WalkSpeed",
-        "operation": "Float_Multiply",
-        "modValue": "0.8",
-        "modType": "System.Single"
+        "statName": "Piloting",
+        "operation": "Int_Add",
+        "modValue": "-1",
+        "modType": "System.Int32",
+        "targetCollection": "Pilot"
       }
     },
     {
@@ -118,16 +122,68 @@
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "HardenedCritImmune",
-        "Name": "Default Hardened (C): TAC Immune",
+        "Id": "HardenedPenaltyWalk",
+        "Name": "Hardened: Decreased Walk Speed",
         "Details": "MORE SPEED.",
         "Icon": "uixSvgIcon_run_n_gun"
       },
       "statisticData": {
-        "statName": "CACAPProtection",
-        "operation": "Set",
-        "modValue": "true",
-        "modType": "System.Boolean"
+        "statName": "RunSpeed",
+        "operation": "Float_Multiply",
+        "modValue": "0.8",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "PaddingEffect_1",
+        "Name": "Spall Liner: Decreased AP Damage",
+        "Details": "This unit resists critical hits.",
+        "Icon": "UixSvgIcon_specialEquip_System"
+      },
+      "statisticData": {
+        "statName": "CACAPDamageMult",
+        "operation": "Float_Multiply",
+        "modValue": "0",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "PaddingEffect_2",
+        "Name": "Spall Liner: Decreased Receive AP Crit Chance",
+        "Details": "This unit resists through armor damage",
+        "Icon": "UixSvgIcon_specialEquip_System"
+      },
+      "statisticData": {
+        "statName": "CAC_APCritChance",
+        "operation": "Float_Multiply",
+        "modValue": "0.7",
+        "modType": "System.Single"
       }
     }
   ],
