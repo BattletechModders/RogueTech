@@ -1,0 +1,79 @@
+When an LRM20 hits on TT you're probably doing to make about 3 location rolls for damage clusters. Each of which could result in a crit.
+This is because the total damage of the volley is sorted in 5 damgage Clusters. And a location is rolled for each full or partial cluster.
+Without adjustments, if one of our new style LRM20 hits the game will make 20 tac/crit checks. 
+This is huge enough to throw things seriously out of whack if not adjusted.
+
+Notes on how Artemis works. It increase results on the cluster table in TT.
+This means that Artemis attachments should bump up average Damage, CriticalChanceMultiplier and APCriticalChanceMultiplier about 35%
+
+Ammo that alters weapon damage should idealy have mods.
+
+The goal here: Modify weapon CriticalChanceMultiplier so you only get about as much raw crit probabily as an average Cluster Table roll on TT. (60% hits)
+Streaks will come out ahead here again because they skip the cluster table and always all hit for real.
+But note that Streak LRM and similar still bundle by 5, limiting their crit potential somewhat.
+SRM, Streak SRM, and LBX emerge as premier crit hunters, as it should be.
+
+
+StandardAPCrit = whatever the desired minimum value at full armor is for a standard hit.
+
+Example:
+Desired starting TAC chance is 1%
+Global APCritMinimum chance is: 0.1
+So, StandardAPCrit for weapons is 0.1
+
+Things that do 1(5) damage per projectile and bundle by 5(25 Damage) in TT:
+
+LRM, MRM -
+CriticalChanceMultiplier = 0.12 (1/5*0.6)
+APCriticalChanceMultiplier =  CriticalChanceMultiplier*StandardAPCrit                   
+Intent: 20 probjectiles gives 2.4 'full' crit chances. It would be 4, but we're abstracting some missing.
+
+Things that do 1(5) damage per projectile and bundle by 5(25 Damage) in TT, and are Streak:
+
+Streak LRM/MRM -
+CriticalChanceMultiplier = 0.2
+APCriticalChanceMultiplier = (StandardAPCrit/5)
+Intent: 20 projectiles gives 4 'full' crit chances. Since streaks all hit for really real they get a full crit check for every 5 missiles.
+
+Things that do 1(5) damage per projectile and bundle by 5(25 Damage) in TT
+...but don't do a nominal 5 damage per hit in our implimentation 
+
+HAG -
+CriticalChanceMultiplier = 0.3
+APCriticalChanceMultiplier =  CriticalChanceMultiplier*StandardAPCrit 
+Intent: Same chance as LRM but for situation where projectiles are already merged 2/1 for other reasons.
+
+Things that do 2(10) per projectile but bundle by 5(25) damage.
+
+Mortar -
+CriticalChanceMultiplier = 0.3 
+APCriticalChanceMultiplier = CriticalChanceMultiplier*StandardAPCrit
+Intent: 8 tubes gives 2.4 'full' crit chances. It would be 4 but we're abstracting some missing.
+
+Things that does 2(10) per projectile but bundle by 5(25) damage. And have built in Artemis.
+
+ATM - Needs mods for ammo!
+CriticalChanceMultiplier = 0.32
+APCriticalChanceMultiplier = CriticalChanceMultiplier*StandardAPCrit
+Intent: 12 tubes of Standard gives 3.84 'full' crit chances. It would be 4.8 but we're abstracting some missing.
+
+Things that does 2(10) per projectile but bundle by 5(25) damage. And are Streak:
+
+iATM - Needs mods for ammo! Needs mods in Indirect mode.
+CriticalChanceMultiplier = 0.40
+APCriticalChanceMultiplier = (StandardAPCrit/5)*2
+Intent: 12 tubes of Standard gives 4.8 'full' crit chances.
+
+Things that multihit but don't bundle in TT:
+
+SRM -
+CriticalChanceMultiplier = 0.6
+APCriticalChanceMultiplier = StandardAPCrit*0.6
+Intent: Basic Pesudo Cluster Hit Table concept, we're abstracting an average number of crit checks.
+
+Things that are multi-hit but don't bundle and are Streak:
+
+Streak SRM -
+CriticalChanceMultiplier = 1
+APCriticalChanceMultiplier = StandardAPCrit
+Intent: Since streaks all hit for really real, and SRM roll for location individually, they get a full crit check each.
