@@ -14,42 +14,72 @@ But note that Streak LRM and similar still bundle by 5, limiting their crit pote
 SRM, Streak SRM, and LBX emerge as premier crit hunters, as it should be.
 
 
-"APMinCritChance": 0.1,
-StandardAPCrit = 0.05
 
-whatever the desired minimum value at full armor is for a standard hit.
+This value isn't a game stat but we'll use it in calculations:
+
+StandardAPCrit = 0.05 
 
 Example:
-Desired starting TAC chance is 1%
+Desired starting TAC chance is 0.5%
+Global APMinCritChance chance is: 0.1
+So, StandardAPCrit for weapons is 0.05
+
+We need to remove this value entirely from every weapon: APMaxArmorThickness
+
+We need to figure out what to set this value on every weapon: APCriticalChanceMultiplier
+
+APCriticalChanceMultiplier = StandardAPCrit*APCritTypeMultiplier
+
+Example:
+Desired starting TAC chance is 0.5%
 Global APCritMinimum chance is: 0.1
-So, StandardAPCrit for weapons is 0.1
+So, StandardAPCrit for weapons is 0.05
 
-We could use either one of these to increase TAC chance as armor gets damaged. 
-Just the former is flat tac mult per weapon type.
-Just the second is different tac exponents applied relative to remaining armor %
-Both is also probably managable. You get TAC ranges started at X and increasing to XY
-
-Standard AP Crit multiplier for type - effectively sets floor: 
+AP Crit Type Multiplier: 
 
 Flamer: 0.5
 Laser: 1
 Missile: 1
 AntiPersonel: 1
-PPC/Plasma: 1.2
-Ballistic: 1.4
-Gauss: 2
+PPC/Plasma: 1.5
+Ballistic: 2
+Gauss: 3
 
-ShardsMod multiplier by weapon type - this is the exponent for the above:
+We need to set this value on every weapon based on Type: APArmorShardsMod
+
+ShardsMod by weapon type:
 
 Flamer: 5
 Laser: 5
-Missile: 5
+Missile: 5*
 AntiPersonel: 5
 PPC/Plasma: 5
 Ballistic: 5
 Gauss: 6
 
-PPC = 1.2 * 5 = 6 = TAC chance from 1.2-6% as armor % of hit location decreases.
+Autocannon
+Machine Gun
+Magshot
+Gauss
+HAG
+Flamer
+Plasma
+PPC
+Laser
+SRM
+LRM
+MRM
+ATM
+TBM
+Rocket
+TAG
+NARC
+Misc/Unknown
+
+
+--------
+Pseudo Cluster Hit Table Crit Values
+-----
 
 Things that do 1(5) damage per projectile and bundle by 5(25 Damage) in TT:
 
@@ -99,7 +129,7 @@ Things that multihit but don't bundle in TT:
 SRM -
 CriticalChanceMultiplier = 0.6
 APCriticalChanceMultiplier = StandardAPCrit*0.6
-Intent: Basic Pesudo Cluster Hit Table concept, we're abstracting an average number of crit checks.
+Intent: Basic Pesudo Cluster Hit Table concept, we're abstracting an average number of crit checks, whichh is 60% of missiles.
 
 Things that are multi-hit but don't bundle and are Streak:
 
