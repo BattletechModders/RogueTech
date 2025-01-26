@@ -1,3 +1,7 @@
+Context: This file was written during the making of the currently unamed major update after Lance-A-Lot. It describes reworking TAC, and calculating crit values for weapons that use the Cluster Hit Table in TT. 
+
+APCriticalChanceMultiplier = CriticalChanceMultiplier*StandardAPCrit*
+
 When an LRM20 hits on TT you're probably doing to make about 3 location rolls for damage clusters. Each of which could result in a crit.
 This is because the total damage of the volley is sorted in 5 damgage Clusters. And a location is rolled for each full or partial cluster.
 Without adjustments, if one of our new style LRM20 hits the game will make 20 tac/crit checks. 
@@ -19,21 +23,30 @@ This value isn't a game stat but we'll use it in calculations:
 
 StandardAPCrit = 0.05 
 
-Example:
-Desired starting TAC chance is 0.5%
+Why?:
+Desired nominal starting TAC chance is 0.5%
 Global APMinCritChance chance is: 0.1
 So, StandardAPCrit for weapons is 0.05
 
+0.1*X=0.005 solve for X.
+
+
+-----------------------------
 We need to remove this value entirely from every weapon: APMaxArmorThickness
+Strike  previous sentence. We need to make sure no wweapon has both `APMaxArmorThickness` and a `APArmorShardsMod` greater than zero.
+We may want some that operate with a max thickness.
 
-We need to figure out what to set this value on every weapon: APCriticalChanceMultiplier
+Automation Ideas: treat weapon differently depending on which one of those it has. Exclude folders. Exclude by tag. So we can have weird pirate stuff etc.
+If weapon has APArmorShardsMod set it's value by Category/Type
+Set it's APCriticalChanceMultiplier by Category/Type
 
-APCriticalChanceMultiplier = StandardAPCrit*APCritTypeMultiplier
+If it has APMax...
+-----------------------------
 
-Example:
-Desired starting TAC chance is 0.5%
-Global APCritMinimum chance is: 0.1
-So, StandardAPCrit for weapons is 0.05
+
+We need to figure out what to set APCriticalChanceMultiplier, it's the product of 3 values.
+
+APCriticalChanceMultiplier = CriticalChanceMultiplier*APCritTypeMultiplier*StandardAPCrit
 
 AP Crit Type Multiplier: 
 
