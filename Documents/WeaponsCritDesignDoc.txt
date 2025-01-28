@@ -164,13 +164,6 @@ CriticalChanceMultiplier = 0.3
 APCriticalChanceMultiplier =  CriticalChanceMultiplier*StandardAPCrit 
 Intent: Same chance as LRM but for situation where projectiles are already merged 2/1 for other reasons.
 
-Things that do 2(10) per projectile but bundle by 5(25) damage.
-
-Mortar -
-CriticalChanceMultiplier = 0.3 
-APCriticalChanceMultiplier = CriticalChanceMultiplier*StandardAPCrit
-Intent: 8 tubes gives 2.4 'full' crit chances. It would be 4 but we're abstracting some missing.
-
 Things that does 2(10) per projectile but bundle by 5(25) damage. And have built in Artemis.
 
 ATM - Needs mods for ammo!
@@ -185,16 +178,74 @@ CriticalChanceMultiplier = 0.40
 APCriticalChanceMultiplier = (StandardAPCrit/5)*2
 Intent: 12 tubes of Standard gives 4.8 'full' crit chances.
 
-Things that multihit but don't bundle in TT:
+Things that do 2(10) Damage per projectile and bundle by 2 dmg TT:
 
-SRM -
+SRM/Mortar -
 CriticalChanceMultiplier = 0.6
 APCriticalChanceMultiplier = StandardAPCrit*0.6
 Intent: Basic Pesudo Cluster Hit Table concept, we're abstracting an average number of crit checks, whichh is 60% of missiles.
 
-Things that are multi-hit but don't bundle and are Streak:
+Things that do 2(10) Damage per projectile and bundle by 2 dmg TT and are Streak:
 
 Streak SRM -
 CriticalChanceMultiplier = 1
 APCriticalChanceMultiplier = StandardAPCrit
 Intent: Since streaks all hit for really real, and SRM roll for location individually, they get a full crit check each.
+
+-------------------------
+
+I want to tooling to set some values on all weapons by consistent rules. First up is...APCriticalChanceMultiplier
+
+The formula would be this:
+
+APCriticalChanceMultiplier = CriticalChanceMultiplier*APCritTypeMultiplier*StandardAPCrit
+
+CriticalChanceMultiplier is referenced from the weapon. 
+APCritTypeMultiplier references the weapon "Type" and applies a multiplier from a list.
+StandardAPCrit is a value we decide on to set the global minimum TAC chance. So it should be an easily setable variable for rebalances. Currently we're rolling with 0.05
+
+
+
+
+First run only!
+
+Delete lines about APMax from all weapons.
+
+Weapon Fix algo:
+
+Set Stability from damage, by type.
+Set APArmorShardsMod by type
+Set APcrit by formula
+
+Bonus Description Add/Update to include:
+
+"WeaponShardsModRange: X,Y",
+
+X= CritChance*StandardAPCrit*10 
+Y= X*(ShardsMod+1)
+
+Upkeep: same as above but no delete, make a list of weapons and ammo with an APMax value?
+
+Check weapons for being the APMax type or the Shards type, process seperately.
+
+
+If APMax
+Set Shards Mod to 0
+
+Bonus Description Add/Update to include:
+"WeaponAPMaxLimit: X,Y",
+
+X =  APCrit*10 (Full/max tac chance at 0 armor expressed as %)
+Y = APMax
+
+
+
+-----
+
+Goals 
+we want to first stop all our weapons from using the APMax mechanic as a baseline.
+Delete lines about APMax from all weapons.
+
+But later going forward on we want to be able to make exception weapons that use it.
+Basically have two TAC methods for weapons. It scales TAC chance using a shards mod >0, or it via an APMax
+(Mixing them is a complicated)
