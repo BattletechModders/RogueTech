@@ -1,0 +1,251 @@
+Context: This file was written during the making of the currently unamed major update after Lance-A-Lot. It describes reworking TAC, and calculating crit values for weapons that use the Cluster Hit Table in TT. 
+
+APCriticalChanceMultiplier = CriticalChanceMultiplier*StandardAPCrit*TypeMultiplier
+
+When an LRM20 hits on TT you're probably doing to make about 3 location rolls for damage clusters. Each of which could result in a crit.
+This is because the total damage of the volley is sorted in 5 damgage Clusters. And a location is rolled for each full or partial cluster.
+Without adjustments, if one of our new style LRM20 hits the game will make 20 tac/crit checks. 
+This is huge enough to throw things seriously out of whack if not adjusted.
+
+Notes on how Artemis works. It increase results on the cluster table in TT.
+This means that Artemis attachments should bump up average Damage, CriticalChanceMultiplier and APCriticalChanceMultiplier about 35%
+
+Ammo that alters weapon damage should idealy have mods.
+
+The goal here: Modify weapon CriticalChanceMultiplier so you only get about as much raw crit probabily as an average Cluster Table roll on TT. (60% hits)
+Streaks will come out ahead here again because they skip the cluster table and always all hit for real.
+But note that Streak LRM and similar still bundle by 5, limiting their crit potential somewhat.
+SRM, Streak SRM, and LBX emerge as premier crit hunters, as it should be.
+
+
+This value isn't a game stat but we'll use it in calculations:
+
+StandardAPCrit = 0.05 
+
+Why?:
+Desired nominal starting TAC chance is 0.5%
+Global APMinCritChance chance is: 0.1
+So, StandardAPCrit for weapons is 0.05
+
+0.1*X=0.005 solve for X.
+
+
+-----------------------------
+We need to remove this value entirely from every weapon: APMaxArmorThickness
+Strike  previous sentence. We need to make sure no wweapon has both `APMaxArmorThickness` and a `APArmorShardsMod` greater than zero.
+We may want some that operate with a max thickness.
+
+Automation Ideas: treat weapon differently depending on which one of those it has. Exclude folders. Exclude by tag. So we can have weird pirate stuff etc.
+If weapon has APArmorShardsMod set it's value by Category/Type
+Set it's APCriticalChanceMultiplier by Category/Type
+
+If it has APMax...
+-----------------------------
+
+
+-------------------------------
+Some types are better at TAC than others and remain in the same proportion vs wrecked and fresh armor.
+Varying Type base, same multiplier
+Ballistic 1-5%
+Laser 0.5-2.5%
+
+Type doesn't matter much vs fresh armor but matters a lot vs wrecked armor.
+Same base, varying type mult
+Ballistic 0.5-5
+Laser 0.5-2.5%
+
+Type matters a lot vs fresh armor and not much vs wrecked armor 
+Ballistic 1-5%
+Laser 0.5-5%
+(Maybe this one, since effectively capping TAC chance would help keep anything from getting out of hand)
+------------------
+
+We need to figure out what to set APCriticalChanceMultiplier, it's the product of 3 values.
+
+APCriticalChanceMultiplier = CriticalChanceMultiplier*APCritTypeMultiplier*StandardAPCrit
+
+The first is referenced from the weapon. The second from a table by Type. The third is a setting, see above.
+
+AP Crit Type Multiplier: 
+
+Flamer: 0.5
+Laser: 1
+Missile: 1
+AntiPersonel: 1
+PPC/Plasma: 1.5
+Ballistic: 2
+Gauss: 2
+
+We need to set this value on every weapon based on Type: APArmorShardsMod
+
+ShardsMod by weapon type:
+
+Flamer: 3
+Laser: 3
+Missile: 3
+AntiPersonel: 3
+PPC/Plasma: 3
+Ballistic: 3
+Gauss: 3
+
+TAG: 0
+NARC: 2
+Other/Unknown: 3
+
+-----------------
+
+Catalog of more specific types derived settings:
+
+APArmorShardsMod
+
+Autocannon 4
+Machine Gun 4
+Magshot 5
+Gauss 5
+HAG 5
+Flamer 4
+Plasma 4
+PPC 4
+Laser 4
+SRM 5
+LRM 5
+MRM 5
+ATM 5
+TBM 5
+Rocket 5
+TAG 0
+NARC 5
+Misc/Unknown 4
+
+APCriticalChanceMultiplier
+
+Autocannon 0.1
+Machine Gun 0.1
+Magshot 0.3
+Gauss 0.3
+HAG 0.015
+Flamer 0.025
+Plasma 0.075
+PPC 0.075
+Laser 0.05
+SRM 0.03
+LRM 0.006
+MRM 0.006
+ATM 0.016
+TBM 0.05
+Rocket 0.01
+TAG 0
+NARC 0.05
+Misc/Unknown 0.05
+
+--------
+Pseudo Cluster Hit Table Crit Values
+-----
+
+Things that do 1(5) damage per projectile and bundle by 5(25 Damage) in TT:
+
+LRM, MRM -
+CriticalChanceMultiplier = 0.12 (1/5*0.6)
+APCriticalChanceMultiplier =  CriticalChanceMultiplier*StandardAPCrit                   
+Intent: 20 probjectiles gives 2.4 'full' crit chances. It would be 4, but we're abstracting some missing.
+
+Things that do 1(5) damage per projectile and bundle by 5(25 Damage) in TT, and are Streak:
+
+Streak LRM/MRM -
+CriticalChanceMultiplier = 0.2
+APCriticalChanceMultiplier = (StandardAPCrit/5)
+Intent: 20 projectiles gives 4 'full' crit chances. Since streaks all hit for really real they get a full crit check for every 5 missiles.
+
+Things that do 1(5) damage per projectile and bundle by 5(25 Damage) in TT
+...but don't do a nominal 5 damage per hit in our implimentation 
+
+HAG -
+CriticalChanceMultiplier = 0.3
+APCriticalChanceMultiplier =  CriticalChanceMultiplier*StandardAPCrit 
+Intent: Same chance as LRM but for situation where projectiles are already merged 2/1 for other reasons.
+
+Things that does 2(10) per projectile but bundle by 5(25) damage. And have built in Artemis.
+
+ATM - Needs mods for ammo!
+CriticalChanceMultiplier = 0.32
+APCriticalChanceMultiplier = CriticalChanceMultiplier*StandardAPCrit
+Intent: 12 tubes of Standard gives 3.84 'full' crit chances. It would be 4.8 but we're abstracting some missing.
+
+Things that does 2(10) per projectile but bundle by 5(25) damage. And are Streak:
+
+iATM - Needs mods for ammo! Needs mods in Indirect mode.
+CriticalChanceMultiplier = 0.40
+APCriticalChanceMultiplier = (StandardAPCrit/5)*2
+Intent: 12 tubes of Standard gives 4.8 'full' crit chances.
+
+Things that do 2(10) Damage per projectile and bundle by 2 dmg TT:
+
+SRM/Mortar -
+CriticalChanceMultiplier = 0.6
+APCriticalChanceMultiplier = StandardAPCrit*0.6
+Intent: Basic Pesudo Cluster Hit Table concept, we're abstracting an average number of crit checks, whichh is 60% of missiles.
+
+Things that do 2(10) Damage per projectile and bundle by 2 dmg TT and are Streak:
+
+Streak SRM -
+CriticalChanceMultiplier = 1
+APCriticalChanceMultiplier = StandardAPCrit
+Intent: Since streaks all hit for really real, and SRM roll for location individually, they get a full crit check each.
+
+-------------------------
+
+I want to tooling to set some values on all weapons by consistent rules. First up is...APCriticalChanceMultiplier
+
+The formula would be this:
+
+APCriticalChanceMultiplier = CriticalChanceMultiplier*APCritTypeMultiplier*StandardAPCrit
+
+CriticalChanceMultiplier is referenced from the weapon. 
+APCritTypeMultiplier references the weapon "Type" and applies a multiplier from a list.
+StandardAPCrit is a value we decide on to set the global minimum TAC chance. So it should be an easily setable variable for rebalances. Currently we're rolling with 0.05
+
+
+
+
+First run only!
+
+Delete lines about APMax from all weapons.
+
+Weapon Fix algo:
+
+Set Stability from damage, by type.
+Set APArmorShardsMod by type
+Set APcrit by formula
+
+Bonus Description Add/Update to include:
+
+"WeaponShardsModRange: X,Y",
+
+X= CritChance*StandardAPCrit*10 
+Y= X*(ShardsMod+1)
+
+Upkeep: same as above but no delete, make a list of weapons and ammo with an APMax value?
+
+Check weapons for being the APMax type or the Shards type, process seperately.
+
+
+If APMax
+Set Shards Mod to 0
+
+Bonus Description Add/Update to include:
+"WeaponAPMaxLimit: X,Y",
+
+X =  APCrit*10 (Full/max tac chance at 0 armor expressed as %)
+Y = APMax
+
+
+
+-----
+
+Goals 
+we want to first stop all our weapons from using the APMax mechanic as a baseline.
+Delete lines about APMax from all weapons.
+
+But later going forward on we want to be able to make exception weapons that use it.
+Basically have two TAC methods for weapons. It scales TAC chance using a shards mod >0, or it via an APMax
+(Mixing them is a complicated)
