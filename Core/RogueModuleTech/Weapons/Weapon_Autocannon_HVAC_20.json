@@ -12,8 +12,11 @@
       "WpnCrits: +100%",
       "WeaponShardsModRange: 2,10",
       "CanJamMisfire",
-      "ExplodiumFlat: 9%",
+      "ExplodiumFlat: 8%",
       "WeaponAttachmentCompatible: Recoil Damper",
+      "WpnRecoil: 3",
+      "BraceToFirePerShot: 24",
+      "AAFactor: 20%",
       "WeaponExplosionPerLoadedShot: 60, 30, 15"
     ],
     "Flags": [
@@ -32,11 +35,11 @@
   "Type": "Autocannon",
   "WeaponSubType": "AC20",
   "MinRange": 0,
-  "MaxRange": 720,
+  "MaxRange": 600,
   "RangeSplit": [
-    180,
-    360,
-    600
+    150,
+    300,
+    450
   ],
   "AmmoCategory": "HVAC20",
   "StartingAmmoCapacity": 0,
@@ -47,7 +50,7 @@
   "DamageVariance": 0,
   "AccuracyModifier": 0,
   "EvasivePipsIgnored": 0,
-  "RefireModifier": 0,
+  "RefireModifier": 3,
   "OverheatedDamageMultiplier": 0,
   "EvasiveDamageMultiplier": 0,
   "CriticalChanceMultiplier": 2,
@@ -60,7 +63,7 @@
   "IndirectFireCapable": false,
   "GunneryJammingMult": 0.01,
   "GunneryJammingBase": 1,
-  "FlatJammingChance": 0.09,
+  "FlatJammingChance": 0.08,
   "DamageOnJamming": true,
   "FireTerrainChance": 0.08,
   "AttackRecoil": 4,
@@ -89,6 +92,59 @@
   "AllowedLocations": "All",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
+  "statusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "AAAFactor",
+        "Name": "HVAC/20: Anti Air Factor",
+        "Details": "AA Factor",
+        "Icon": "uixSvgIcon_equipment_Gyro"
+      },
+      "statisticData": {
+        "statName": "AAAFactor",
+        "operation": "Float_Add",
+        "modValue": "0.20",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": 1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "OnWeaponFire",
+        "effectTargetType": "Creator",
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "WeaponEffect-SelfInstability_OnFire",
+        "Name": "HVAC/20: Increased Self Instability on Fire",
+        "Details": "Tubthumping",
+        "Icon": "uixSvgIcon_run_n_gun"
+      },
+      "statisticData": {
+        "statName": "SelfInstability_OnFire",
+        "operation": "Float_Add",
+        "modValue": "24",
+        "modType": "System.Single"
+      }
+    }
+  ],
   "ComponentTags": {
     "items": [
       "OmniRestriction.{location}",
