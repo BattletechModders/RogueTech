@@ -5,10 +5,17 @@
         "CategoryID": "Armor"
       }
     ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.10833 * [[Chassis.Tonnage]]",
+        "CBillCost": "125 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
     "BonusDescriptions": [
       "ArmorProtection: +50%",
       "ArmorFactor: +40%",
-      "TACImmune",
+      "TADTakenmod: -50%",
+      "TACchance: -45%",
       "HaarJel",
       "HaarJelArmor: 20",
       "HaarJelStructure: 10",
@@ -20,9 +27,6 @@
       "FluidBoom: 30",
       "CASEII",
       "CASEVENT: 50, 100"
-    ],
-    "Flags": [
-      "not_broken"
     ],
     "ActivatableComponent": {
       "ButtonName": "Repair Systems",
@@ -46,30 +50,22 @@
         "TurnsSinceDamage": 2
       }
     },
-    "ComponentExplosion": {
-      "ExplosionDamage": 30.0
-    },
-    "Weights": {
-      "ArmorFactor": 1.4
-    },
-    "ArmorStructureChanges": {
-      "ArmorFactor": 1.5
-    },
     "ArmorRepair": {
       "ArmorTPCost": 2.2,
       "ArmorCBCost": 1.5
     },
+    "ArmorStructureChanges": {
+      "ArmorFactor": 1.5
+    },
     "CASE": {
       "MaximumDamage": 5
     },
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.10833 * [[Chassis.Tonnage]]",
-        "CBillCost": "125 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
+    "Color": "Gold",
+    "ComponentExplosion": {
+      "ExplosionDamage": 30.0
     },
-    "IBLS": {
-      "StorageSize": 15
+    "CriticalEffects": {
+      "LinkedStatisticName": "RISC Armor"
     },
     "ExplosionProtectionHeat": {
       "MaximumDamage": 50
@@ -77,8 +73,11 @@
     "ExplosionProtectionStability": {
       "MaximumDamage": 100
     },
-    "CriticalEffects": {
-      "LinkedStatisticName": "RISC Armor"
+    "Flags": [
+      "not_broken"
+    ],
+    "IBLS": {
+      "StorageSize": 15
     },
     "Linked": {
       "Links": [
@@ -112,7 +111,9 @@
         }
       ]
     },
-    "Color": "Gold"
+    "Weights": {
+      "ArmorFactor": 1.4
+    }
   },
   "Description": {
     "Cost": 20000000,
@@ -148,21 +149,50 @@
       "targetingData": {
         "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
+        "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "HardenedCritImmune",
-        "Name": "Hardened Ferro-Fibrous: TAC Immune",
-        "Details": "MORE SPEED.",
-        "Icon": "uixSvgIcon_run_n_gun"
+        "Id": "PaddingEffect_1",
+        "Name": "Hardened Ferro-Fibrous: Decreased AP Damage",
+        "Details": "This unit resists critical hits.",
+        "Icon": "UixSvgIcon_specialEquip_System"
       },
       "statisticData": {
-        "statName": "CACAPProtection",
-        "operation": "Set",
-        "modValue": "true",
-        "modType": "System.Boolean"
+        "effectsPersistAfterDestruction": true,
+        "statName": "CACAPDamageMult",
+        "operation": "Float_Multiply",
+        "modValue": "0.50",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "PaddingEffect_2",
+        "Name": "Hardened Ferro-Fibrous: Decreased Receive AP Crit Chance",
+        "Details": "This unit resists through armor damage",
+        "Icon": "UixSvgIcon_specialEquip_System"
+      },
+      "statisticData": {
+        "effectsPersistAfterDestruction": true,
+        "statName": "CAC_APCritChance",
+        "operation": "Float_Multiply",
+        "modValue": "0.55",
+        "modType": "System.Single"
       }
     },
     {

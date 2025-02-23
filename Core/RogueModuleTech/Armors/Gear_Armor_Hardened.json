@@ -5,37 +5,39 @@
         "CategoryID": "Armor"
       }
     ],
-    "BonusDescriptions": [
-      "ArmorProtection: x2",
-      "ArmorFactor: +100%",
-      "TACImmune",
-      "WalkSpeed: -20%",
-      "ArmorTPCost: x1.7",
-      "ArmorCBCost: x1.9"
-    ],
-    "Flags": [
-      "not_broken"
-    ],
-    "Weights": {
-      "ArmorFactor": 2
-    },
-    "ArmorStructureChanges": {
-      "ArmorFactor": 2
-    },
-    "ArmorRepair": {
-      "ArmorTPCost": 1.7,
-      "ArmorCBCost": 1.9
-    },
     "WorkOrderCosts": {
       "Install": {
         "TechCost": "0.08846 * [[Chassis.Tonnage]]",
         "CBillCost": "20 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
       }
     },
+    "BonusDescriptions": [
+      "ArmorProtection: +100%",
+      "ArmorFactor: +100%",
+      "TADImmune",
+      "TACchance: -90%",
+      "SkillPiloting: -1",
+      "RunSpeed: -20%",
+      "ArmorTPCost: x1.7",
+      "ArmorCBCost: x1.9"
+    ],
+    "ArmorRepair": {
+      "ArmorTPCost": 1.7,
+      "ArmorCBCost": 1.9
+    },
+    "ArmorStructureChanges": {
+      "ArmorFactor": 2
+    },
+    "Color": "Gold",
+    "Flags": [
+      "not_broken"
+    ],
     "IBLS": {
       "StorageSize": 1
     },
-    "Color": "Gold"
+    "Weights": {
+      "ArmorFactor": 2
+    }
   },
   "Description": {
     "Cost": 387500,
@@ -71,21 +73,24 @@
       "targetingData": {
         "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
+        "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "HardenedPenaltyWalk",
-        "Name": "Hardened: Decreased Walk Speed",
-        "Details": "MORE SPEED.",
-        "Icon": "uixSvgIcon_run_n_gun"
+        "Id": "StatusEffect_Cockpit_Skill_Piloting",
+        "Name": "Hardened: Decreased Piloting",
+        "Details": "Buffs Piloting Skill",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
       },
       "statisticData": {
-        "statName": "WalkSpeed",
-        "operation": "Float_Multiply",
-        "modValue": "0.8",
-        "modType": "System.Single"
+        "effectsPersistAfterDestruction": true,
+        "statName": "Piloting",
+        "operation": "Int_Add",
+        "modValue": "-1",
+        "modType": "System.Int32",
+        "targetCollection": "Pilot"
       }
     },
     {
@@ -101,16 +106,71 @@
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "HardenedCritImmune",
-        "Name": "Hardened: TAC Immune",
+        "Id": "HardenedPenaltyWalk",
+        "Name": "Hardened: Decreased Run Speed",
         "Details": "MORE SPEED.",
         "Icon": "uixSvgIcon_run_n_gun"
       },
       "statisticData": {
-        "statName": "CACAPProtection",
-        "operation": "Set",
-        "modValue": "true",
-        "modType": "System.Boolean"
+        "effectsPersistAfterDestruction": true,
+        "statName": "CBTBE_RunMultiMod",
+        "operation": "Float_Multiply",
+        "modValue": "0.8",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "PaddingEffect_1",
+        "Name": "Hardened: Decreased AP Damage",
+        "Details": "This unit resists critical hits.",
+        "Icon": "UixSvgIcon_specialEquip_System"
+      },
+      "statisticData": {
+        "effectsPersistAfterDestruction": true,
+        "statName": "CACAPDamageMult",
+        "operation": "Float_Multiply",
+        "modValue": "0",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "PaddingEffect_2",
+        "Name": "Hardened: Decreased Receive AP Crit Chance",
+        "Details": "This unit resists through armor damage",
+        "Icon": "UixSvgIcon_specialEquip_System"
+      },
+      "statisticData": {
+        "effectsPersistAfterDestruction": true,
+        "statName": "CAC_APCritChance",
+        "operation": "Float_Multiply",
+        "modValue": "0.1",
+        "modType": "System.Single"
       }
     }
   ],
