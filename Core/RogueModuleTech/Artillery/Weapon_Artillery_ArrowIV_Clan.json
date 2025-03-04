@@ -17,14 +17,15 @@
       "ArtilleryMode",
       "FlakMode",
       "DirectMode: -4",
+      "GuidedMode",
       "WpnRecoil: 1",
       "ForbiddenRangeMode: 180, Indirect",
-      "ForbiddenRangeMode: 90, Direct",
+      "ForbiddenRangeMode: 90, Direct & Guided",
       "AMSChance: -30%",
       "RecoilExponent: 0.2",
       "AccuracyExponent: -0.2",
-      "BraceToFireMode: 20, Direct & Flak",
-      "WeaponShardsModRange: 0.06, 0.24"
+      "BraceToFireMode: 20, Direct & Guided & Flak",
+      "WeaponShardsModRange: 0.5, 2"
     ],
     "Flags": [
       "not_broken"
@@ -48,7 +49,7 @@
   "HeatGenerated": 37,
   "Damage": 100,
   "HeatDamage": 0,
-  "Instability": 20,
+  "Instability": 25,
   "DamageVariance": 0,
   "AccuracyModifier": 0,
   "EvasivePipsIgnored": 0,
@@ -59,9 +60,9 @@
   "RefireModifier": 1,
   "OverheatedDamageMultiplier": 0,
   "EvasiveDamageMultiplier": 0,
-  "CriticalChanceMultiplier": 0.12,
+  "CriticalChanceMultiplier": 1,
   "APArmorShardsMod": 3,
-  "APCriticalChanceMultiplier": 0.006,
+  "APCriticalChanceMultiplier": 0.05,
   "AOEEffectsFalloff": true,
   "AMSHitChanceMult": 0.7,
   "ShotsWhenFired": 1,
@@ -140,7 +141,57 @@
       ],
       "RestrictedAmmo": [
         "Ammunition_ArrowIV_Fascam",
-        "Ammunition_ArrowIV_Fascam_Inferno"
+        "Ammunition_ArrowIV_Fascam_Inferno",
+        "Ammunition_ArrowIV_Homing"
+      ]
+    },
+    {
+      "Id": "guided",
+      "UIName": "Guided",
+      "Description": "Fire Guided munitions at a targets marked by a target designator, minimum range 90.",
+      "isBaseMode": false,
+      "MissBehavior": "Guided",
+      "AccuracyModifier": 100,
+      "DirectFireModifier": 0,
+      "ForbiddenRange": 90,
+      "MinMissRadius": 25,
+      "MaxMissRadius": 50,
+      "IndirectFireCapable": true,
+      "AlwaysIndirectVisuals": false,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": 1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "OnWeaponFire",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "WeaponEffect-SelfInstability_OnFire",
+            "Name": "Arrow IV (C) / Guided: Increased Self Instability on Fire",
+            "Details": "Tubthumping",
+            "Icon": "uixSvgIcon_run_n_gun"
+          },
+          "statisticData": {
+            "statName": "SelfInstability_OnFire",
+            "operation": "Float_Add",
+            "modValue": "20",
+            "modType": "System.Single"
+          }
+        }
+      ],
+      "RestrictedAmmo": [
+        "Ammunition_ArrowIV",
+        "Ammunition_ArrowIV_Fascam",
+        "Ammunition_ArrowIV_Fascam_Inferno",
+        "Ammunition_ArrowIV_HEAP",
+        "Ammunition_ArrowIV_Inferno",
+        "Ammunition_ArrowIV_Nuke"
       ]
     },
     {
@@ -195,7 +246,8 @@
       "RestrictedAmmo": [
         "Ammunition_ArrowIV_Fascam",
         "Ammunition_ArrowIV_Fascam_Inferno",
-        "Ammunition_ArrowIV_Guided",
+        "Ammunition_ArrowIV_Homing",
+        "Ammunition_ArrowIV_HEAP",
         "Ammunition_ArrowIV_Inferno",
         "Ammunition_ArrowIV_Nuke"
       ]
@@ -220,7 +272,7 @@
       "ArtilleryReticleRadius": 90,
       "ArtilleryReticleText": "Arrow IV Artillery",
       "RestrictedAmmo": [
-        "Ammunition_ArrowIV_Guided"
+        "Ammunition_ArrowIV_Homing"
       ]
     }
   ],

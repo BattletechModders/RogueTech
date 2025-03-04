@@ -17,10 +17,11 @@
       "ArtilleryMode",
       "FlakMode",
       "DirectMode: -4",
+      "GuidedMode",
       "WpnRecoil: 2",
       "ForbiddenRangeMode: 180, Indirect",
-      "ForbiddenRangeMode: 90, Direct",
-      "BraceToFireMode: 32, Direct & Flak",
+      "ForbiddenRangeMode: 90, Direct & Guided",
+      "BraceToFireMode: 32, Direct & Guided & Flak",
       "WeaponShardsModRange: 1, 4"
     ],
     "Flags": [
@@ -132,7 +133,57 @@
         }
       ],
       "RestrictedAmmo": [
+        "Ammunition_Thumper_Copperhead",
         "Ammunition_Thumper_Fascam"
+      ]
+    },
+    {
+      "Id": "guided",
+      "UIName": "Guided",
+      "Description": "Fire Guided munitions at a targets marked by a target designator, minimum range 90.",
+      "isBaseMode": false,
+      "AccuracyModifier": 100,
+      "DirectFireModifier": 0,
+      "ForbiddenRange": 90,
+      "MinMissRadius": 20,
+      "MaxMissRadius": 40,
+      "IndirectFireCapable": true,
+      "AlwaysIndirectVisuals": false,
+      "MissBehavior": "Guided",
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": 1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "OnWeaponFire",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "WeaponEffect-SelfInstability_OnFire",
+            "Name": "Thumper Artillery / Guided: Increased Self Instability on Fire",
+            "Details": "Tubthumping",
+            "Icon": "uixSvgIcon_run_n_gun"
+          },
+          "statisticData": {
+            "statName": "SelfInstability_OnFire",
+            "operation": "Float_Add",
+            "modValue": "32",
+            "modType": "System.Single"
+          }
+        }
+      ],
+      "RestrictedAmmo": [
+        "Ammunition_Thumper",
+        "Ammunition_Thumper_Fascam",
+        "Ammunition_Thumper_Inferno",
+        "Ammunition_Thumper_Nuke",
+        "Ammunition_Thumper_Shaped",
+        "Ammunition_Thumper_SolidSlug"
       ]
     },
     {
@@ -185,6 +236,7 @@
         }
       ],
       "RestrictedAmmo": [
+        "Ammunition_Thumper_Copperhead",
         "Ammunition_Thumper_Fascam",
         "Ammunition_Thumper_Inferno",
         "Ammunition_Thumper_Nuke",
@@ -212,6 +264,7 @@
       "ArtilleryReticleRadius": 90,
       "ArtilleryReticleText": "Thumper Artillery",
       "RestrictedAmmo": [
+        "Ammunition_Thumper_Copperhead",
         "Ammunition_Thumper_Shaped",
         "Ammunition_Thumper_SolidSlug"
       ]
