@@ -1,0 +1,210 @@
+{
+  "Custom": {
+    "Category": [
+      {
+        "CategoryID": "EngineShield"
+      },
+      {
+        "CategoryID": "EnginePart"
+      },
+      {
+        "CategoryID": "Supercharger"
+      },
+      {
+        "CategoryID": "StealthEngine"
+      }
+    ],
+    "BonusDescriptions": [
+      "EngineReserved: 3",
+      "Stealth",
+      "StealthSensors: -80%, 5, 2, 4, 6",
+      "StealthReserved: 1",
+      "PassiveHeatGenerated: -5%",
+      "PassiveHeatHeatPerTurn: -10"
+    ],
+    "Flags": [
+      "vital",
+      "engine_part",
+      "not_broken"
+    ],
+    "ActivatableComponent": {
+      "ButtonName": "Stealth",
+      "CanNotBeActivatedManualy": false,
+      "CanActivateAfterMove": true,
+      "CanActivateAfterFire": false,
+      "ActiveByDefault": true,
+      "SafeActivation": true,
+      "ActivationMessage": "Active",
+      "DeactivationMessage": "Passive",
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "forceVisRebuild": true,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "LV_Stealth_Effect",
+            "Name": "Engine Stealth Activatable: Stealth",
+            "Details": "Makes the carrier much harder to detect with sensors",
+            "Icon": "uixSvgIcon_status_ECM-ghost"
+          },
+          "statisticData": {
+            "statName": "LV_STEALTH",
+            "operation": "Set",
+            "modValue": "0.8_5_2_4_6",
+            "modType": "System.String"
+          }
+        }
+      ],
+      "offlineStatusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "Stealth_Heat_Generation_Stealth",
+            "Name": "Engine Stealth Offline Activatable: Decreased Heat Generated",
+            "Details": "Heat generation",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "statisticData": {
+            "statName": "HeatGenerated",
+            "operation": "Float_Multiply",
+            "modValue": "0.95",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
+          "Description": {
+            "Id": "Stealth_Heat_Capacity_Stealth",
+            "Name": "Engine Stealth Offline Activatable: Decreased Cooling",
+            "Details": "Heat Capacity Penalty",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "statisticData": {
+            "statName": "HeatSinkCapacity",
+            "operation": "Int_Add",
+            "modValue": "-10",
+            "modType": "System.Int32"
+          }
+        }
+      ],
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [
+            "Camouflage"
+          ],
+          "Deactivate": []
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": [
+            "Camouflage"
+          ]
+        }
+      }
+    },
+    "Weights": {
+      "ReservedSlots": 3,
+      "EngineFactor": 1
+    },
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.725 * [[Chassis.Tonnage]]",
+        "CBillCost": "750 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
+    "IBLS": {
+      "StorageSize": 8
+    },
+    "Linked": {
+      "Links": [
+        {
+          "ComponentDefId": "Linked_Engine_Size_3",
+          "Location": "LeftTorso"
+        },
+        {
+          "ComponentDefId": "Linked_Engine_Size_3",
+          "Location": "RightTorso"
+        }
+      ]
+    },
+    "DecoratorComponent": [
+      {
+        "Text": "S",
+        "Color": "#5F24AC",
+        "Icon": "ComponentGearIcons_STEALTH",
+        "Importance": 40
+      }
+    ]
+  },
+  "Description": {
+    "Cost": 1750000,
+    "Rarity": 5,
+    "Purchasable": true,
+    "Manufacturer": "Buckler-Gao",
+    "Model": "Vesuvius",
+    "UIName": "Engine Stealth",
+    "Id": "Gear_Engine_Stealth",
+    "Name": "Stealth Engine",
+    "Details": "A peculiar fusion of design philosophies, the Stealth Engine developed by Minnesota Tribe engineers directly ties the signature reduction properties of the Null Signature System directly into an engine core. Despite incorporating some weight saving technologies, the added sinks, baffles, and conduits make up for any savings that could be had. These engines are favored over a NSS for their ability to vent extra heat when not active.",
+    "Icon": "power-generator"
+  },
+  "BonusValueA": "",
+  "BonusValueB": "",
+  "ComponentType": "HeatSink",
+  "ComponentSubType": "Heatsink",
+  "PrefabIdentifier": "",
+  "BattleValue": 0,
+  "InventorySize": 2,
+  "Tonnage": 0,
+  "AllowedLocations": "CenterTorso",
+  "DisallowedLocations": "All",
+  "CriticalComponent": false,
+  "ComponentTags": {
+    "items": [
+      "EnginePart.{location}",
+      "component_type_stock",
+      "cae_ai_heat",
+      "SuperheavyIncompatible",
+      "EnginePart",
+      "Fusion",
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
+    ],
+    "tagSetSourceFile": ""
+  }
+}
