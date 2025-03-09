@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- Introduction
+ModTekSimpleInjector allows you to quickly add fields to existing types without having to write your own injectors.
+Start by placing a modified copy of this file next to the ModTekSimpleInjector dll. Use your mod name in the file name:
+> `ModTekSimpleInjector.YOURMOD.xml`
+
+Do not rely on fields added by other mods, unless explicitly advised to do so.
+Multiple `AddField` and `AddEnumConstant` elements (0..n each) can be specified.
+Only assemblies found in `Managed/` can be referenced.
+Assemblies already loaded can't be modified or modifications are ignored, e.g. mscorlib, System and System.Core.
+Names starting with "example" are ignored.
+-->
+<ModTekSimpleInjector>
+  <!--
+  AddField adds a new instance field to an existing type.
+  Fields can be of any types found in mscorlib, System, System.Core,
+    and from the assembly being injected into or its references.
+  Keywords (e.g. byte) are not supported, use the types full name (e.g. System.Byte).
+  -->
+  <AddField ToType="HBS.Logging.Logger" InAssembly="Assembly-CSharp"
+    Name="exampleField" OfType="System.String" />
+
+  <!--
+  For non-mscrolib types use `System.Object` in combination with
+  `Unsafe.As<object, MyType>(ref addedField)` for high performance access.
+  -->
+  <AddField ToType="HBS.Logging.Logger" InAssembly="Assembly-CSharp"
+    Name="exampleField1" OfType="System.Object" />
+
+  <!-- Generics are supported. No whitespaces allowed. -->
+  <AddField ToType="HBS.Logging.Logger" InAssembly="Assembly-CSharp"
+    Name="exampleField2" OfType="System.Nullable<System.Int32>" />
+
+  <!--
+  Attributes of a field can also be specified, however this is **strongly** discouraged.
+  Added fields are private by default, Publicizers allow to efficiently access private fields.
+  -->
+  <AddField ToType="HBS.Logging.Logger" InAssembly="Assembly-CSharp"
+    Name="exampleField3" OfType="System.Int64" Attributes="Public" />
+
+  <!-- Nested types are referenced using `/`, seems to be Mono.Cecil specific. -->
+  <AddField ToType="HBS.Logging.Logger/LogImpl" InAssembly="Assembly-CSharp"
+    Name="exampleField4" OfType="System.Boolean" />
+
+  <!-- A `[]` suffix means that the specified type should be an array. -->
+  <AddField ToType="HBS.Logging.Logger" InAssembly="Assembly-CSharp"
+    Name="exampleField5" OfType="System.Char[]" />
+
+  <!-- Comments can be added that appear via attributes to the field  -->
+  <AddField ToType="HBS.Logging.Logger" InAssembly="Assembly-CSharp"
+    Name="exampleField6" OfType="System.SByte" Attributes="Public"
+    Comment="This field is public for the json de-/serializer, do not use!" />
+
+  <!--
+  AddEnumConstant adds an enum constant to an existing enum type.
+  Multiple enum constants with the same value can be added, they should behave like aliases. This is usually unwanted.
+  Make sure to understand `[Flags]` in case it applies.
+  Enums are just ints and one can convert to and from enums using ints, other mods might already be using an int value you are targeting.
+  -->
+  <AddEnumConstant ToType="HBS.Logging.LogLevel" InAssembly="Assembly-CSharp"
+    Name="exampleEnumConstant" Value="100" />
+
+</ModTekSimpleInjector>
