@@ -1,965 +1,875 @@
 {
-    "Description" : {
-        "Id" : "event_co_KFCPartialMajor",
-        "Name" : "Misjump Partial Major Repairs Completed",
-        "Details" : "Darius approaches you on the bridge, \"Commander, I have been informed that the repairs to the damaged drives have been completed.  Aside from the Console being offline, the <i>Argo</i> itself is now back to 100% efficiency.\"\r\n\r\nYou nod, \"Thank you, Darius.  What do we need to do to bring the Console back online?\"\r\n\r\nFarah, standing over by the Kerby-Fucheatah Console with some tools looks up from the open panel, \"Well, we need the three key parts for the console:  A set of [[DM.UpgradeDefs[Gear_KerbyInjectors],Kerby Injectors]], a [[DM.UpgradeDefs[Gear_FuCapacitor],Fu Capacitor]] and a functional [[DM.UpgradeDefs[Gear_CheatahNavComputer],Cheatah Nav Computer]].\"",
-        "Icon" : "uixTxrSpot_KFCMisjump"
+  "Description": {
+    "Id": "event_co_KFCPartialMajor",
+    "Name": "Misjump Partial Major Repairs Completed",
+    "Details": "Darius approaches you on the bridge, \"Commander, I have been informed that the repairs to the damaged drives have been completed.  Aside from the Console being offline, the <i>Argo</i> itself is now back to 100% efficiency.\"\r\n\r\nYou nod, \"Thank you, Darius.  What do we need to do to bring the Console back online?\"\r\n\r\nFarah, standing over by the Kerby-Fucheatah Console with some tools looks up from the open panel, \"Well, we need the three key parts for the console:  A set of [[DM.UpgradeDefs[Gear_KerbyInjectors],Kerby Injectors]], a [[DM.UpgradeDefs[Gear_FuCapacitor],Fu Capacitor]] and a functional [[DM.UpgradeDefs[Gear_CheatahNavComputer],Cheatah Nav Computer]].\"",
+    "Icon": "uixTxrSpot_KFCMisjump"
+  },
+  "Scope": "Company",
+  "Weight": 50,
+  "Requirements": {
+    "Scope": "Company",
+    "RequirementTags": {
+      "items": [
+        "KFC_Inactive",
+        "KFC_Offline"
+      ],
+      "tagSetSourceFile": ""
     },
-    "Scope" : "Company",
-    "Weight" : 50,
-    "Requirements" : {
-        "Scope" : "Company",
-        "RequirementTags" : {
-            "tagSetSourceFile" : "",
-            "items" : [
-                "KFC_Inactive",
-                "KFC_Offline"
-            ]
-        },
-        "ExclusionTags" : {
-            "tagSetSourceFile" : "Tags/CompanyTags",
-            "items" : [
-                "KFC_Damaged"
-            ]
-        },
-        "RequirementComparisons" : [
+    "ExclusionTags": {
+      "items": [
+        "KFC_Damaged"
+      ],
+      "tagSetSourceFile": "Tags/CompanyTags"
+    },
+    "RequirementComparisons": [
+      {
+        "obj": "Travel",
+        "op": "Equal",
+        "val": 0,
+        "valueConstant": "0"
+      }
+    ]
+  },
+  "AdditionalRequirements": [],
+  "AdditionalObjects": [],
+  "Options": [
+    {
+      "Description": {
+        "Id": "outcome_0",
+        "Name": "Replace the Parts",
+        "Details": "Install New Parts to Fix Console"
+      },
+      "RequirementList": [
+        {
+          "Scope": "Company",
+          "RequirementTags": {
+            "items": [],
+            "tagSetSourceFile": ""
+          },
+          "ExclusionTags": {
+            "items": [],
+            "tagSetSourceFile": ""
+          },
+          "RequirementComparisons": [
             {
-                "obj" : "Travel",
-                "op" : "Equal",
-                "val" : 0,
-                "valueConstant" : "0"
-            }
-        ]
-    },
-    "AdditionalRequirements" : [],
-    "AdditionalObjects" : [],
-    "Options" : [
-        {
-            "Description" : {
-                "Id" : "outcome_0",
-                "Name" : "Replace the Parts",
-                "Details" : "Install New Parts to Fix Console",
-                "Icon" : null
+              "obj": "Item.UpgradeDef.Gear_KerbyInjectors",
+              "op": "GreaterThan",
+              "val": 0,
+              "valueConstant": "0"
             },
-            "RequirementList" : [
-                {
-                    "Scope" : "Company",
-                    "RequirementTags" : {
-                        "tagSetSourceFile" : "",
-                        "items" : []
-                    },
-                    "ExclusionTags" : {
-                        "tagSetSourceFile" : "",
-                        "items" : []
-                    },
-                    "RequirementComparisons" : [
-                        {
-                            "obj" : "Item.UpgradeDef.Gear_KerbyInjectors",
-                            "op" : "GreaterThan",
-                            "val" : 0,
-                            "valueConstant" : "0"
-                        },
-                        {
-                            "obj" : "Item.UpgradeDef.Gear_FuCapacitor",
-                            "op" : "GreaterThan",
-                            "val" : 0,
-                            "valueConstant" : "0"
-                        },
-                        {
-                            "obj" : "Item.UpgradeDef.Gear_CheatahNavComputer",
-                            "op" : "GreaterThan",
-                            "val" : 0,
-                            "valueConstant" : "0"
-                        },
-                        {
-                            "obj" : "Funds",
-                            "op" : "GreaterThanOrEqual",
-                            "val" : 2000000,
-                            "valueConstant" : "2000000"
-                        }
-                    ]
-                }
-            ],
-            "ResultSets" : [
-                {
-                    "Description" : {
-                        "Id" : "outcome_0_0",
-                        "Name" : "Replacement Parts",
-                        "Details" : "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later she finds what she is looking for, \"Excellent!! We're in luck Commander. We do have all the parts needed to repair the Console.  It shouldn't take the Techs and myself more than a few days to get everything up and running.\"\r\n\r\nYou smile broadly, \"Excellent news Farah! Go ahead and schedule the work order.\"\r\n\r\n<color=#FFA500> The KF Console is under repairs</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>",
-                        "Icon" : null
-                    },
-                    "Weight" : 10,
-                    "Results" : [
-                        {
-                            "Scope" : "Company",
-                            "Requirements" : null,
-                            "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Offline"
-                                ]
-                            },
-                            "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Active",
-                                    "KFC_Warmup"
-                                ]
-                            },
-                            "Stats" : [
-                                {
-                                    "typeString" : "System.Single",
-                                    "name" : "DriveTravelMultiplier",
-                                    "value" : "0.53",
-                                    "set" : true,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_KerbyInjectors",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_FuCapacitor",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_CheatahNavComputer",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Funds",
-                                    "value" : "-1433497",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                }
-                            ],
-                            "Actions" : null,
-                            "ForceEvents" : [
-                                {
-                                    "Scope" : "Company",
-                                    "EventID" : "event_co_ReplacePartsKFC",
-                                    "MinDaysWait" : 5,
-                                    "MaxDaysWait" : 100,
-                                    "Probability" : 100,
-                                    "RetainPilot" : false
-                                }
-                            ],
-                            "TemporaryResult" : false,
-                            "ResultDuration" : 0
-                        }
-                    ]
-                },
-                {
-                    "Description" : {
-                        "Id" : "outcome_0_1",
-                        "Name" : "Replacement Parts",
-                        "Details" : "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later she finds what she is looking for, \"Excellent!! We're in luck Commander. We do have all the parts needed to repair the Console.  It shouldn't take the Techs and myself more than a few days to get everything up and running.\"\r\n\r\nYou smile broadly, \"Excellent news Farah! Go ahead and schedule the work order.\"\r\n\r\n<color=#FFA500> The KF Console is under repairs</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>",
-                        "Icon" : null
-                    },
-                    "Weight" : 10,
-                    "Results" : [
-                        {
-                            "Scope" : "Company",
-                            "Requirements" : null,
-                            "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Offline"
-                                ]
-                            },
-                            "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Active",
-                                    "KFC_Warmup"
-                                ]
-                            },
-                            "Stats" : [
-                                {
-                                    "typeString" : "System.Single",
-                                    "name" : "DriveTravelMultiplier",
-                                    "value" : "0.53",
-                                    "set" : true,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_KerbyInjectors",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_FuCapacitor",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_CheatahNavComputer",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Funds",
-                                    "value" : "-1687144",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                }
-                            ],
-                            "Actions" : null,
-                            "ForceEvents" : [
-                                {
-                                    "Scope" : "Company",
-                                    "EventID" : "event_co_ReplacePartsKFC",
-                                    "MinDaysWait" : 5,
-                                    "MaxDaysWait" : 100,
-                                    "Probability" : 100,
-                                    "RetainPilot" : false
-                                }
-                            ],
-                            "TemporaryResult" : false,
-                            "ResultDuration" : 0
-                        }
-                    ]
-                },
-                {
-                    "Description" : {
-                        "Id" : "outcome_0_2",
-                        "Name" : "Replacement Parts",
-                        "Details" : "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later she finds what she is looking for, \"Excellent!! We're in luck Commander. We do have all the parts needed to repair the Console.  It shouldn't take the Techs and myself more than a few days to get everything up and running.\"\r\n\r\nYou smile broadly, \"Excellent news Farah! Go ahead and schedule the work order.\"\r\n\r\n<color=#FFA500> The KF Console is under repairs</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>",
-                        "Icon" : null
-                    },
-                    "Weight" : 10,
-                    "Results" : [
-                        {
-                            "Scope" : "Company",
-                            "Requirements" : null,
-                            "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Offline"
-                                ]
-                            },
-                            "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Active",
-                                    "KFC_Warmup"
-                                ]
-                            },
-                            "Stats" : [
-                                {
-                                    "typeString" : "System.Single",
-                                    "name" : "DriveTravelMultiplier",
-                                    "value" : "0.53",
-                                    "set" : true,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_KerbyInjectors",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_FuCapacitor",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_CheatahNavComputer",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Funds",
-                                    "value" : "-634976",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                }
-                            ],
-                            "Actions" : null,
-                            "ForceEvents" : [
-                                {
-                                    "Scope" : "Company",
-                                    "EventID" : "event_co_ReplacePartsKFC",
-                                    "MinDaysWait" : 5,
-                                    "MaxDaysWait" : 100,
-                                    "Probability" : 100,
-                                    "RetainPilot" : false
-                                }
-                            ],
-                            "TemporaryResult" : false,
-                            "ResultDuration" : 0
-                        }
-                    ]
-                },
-                {
-                    "Description" : {
-                        "Id" : "outcome_0_3",
-                        "Name" : "Replacement Parts",
-                        "Details" : "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later she finds what she is looking for, \"Excellent!! We're in luck Commander. We do have all the parts needed to repair the Console.  It shouldn't take the Techs and myself more than a few days to get everything up and running.\"\r\n\r\nYou smile broadly, \"Excellent news Farah! Go ahead and schedule the work order.\"\r\n\r\n<color=#FFA500> The KF Console is under repairs</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>",
-                        "Icon" : null
-                    },
-                    "Weight" : 10,
-                    "Results" : [
-                        {
-                            "Scope" : "Company",
-                            "Requirements" : null,
-                            "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Offline"
-                                ]
-                            },
-                            "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Active",
-                                    "KFC_Warmup"
-                                ]
-                            },
-                            "Stats" : [
-                                {
-                                    "typeString" : "System.Single",
-                                    "name" : "DriveTravelMultiplier",
-                                    "value" : "0.53",
-                                    "set" : true,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_KerbyInjectors",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_FuCapacitor",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_CheatahNavComputer",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Funds",
-                                    "value" : "-1984072",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                }
-                            ],
-                            "Actions" : null,
-                            "ForceEvents" : [
-                                {
-                                    "Scope" : "Company",
-                                    "EventID" : "event_co_ReplacePartsKFC",
-                                    "MinDaysWait" : 5,
-                                    "MaxDaysWait" : 100,
-                                    "Probability" : 100,
-                                    "RetainPilot" : false
-                                }
-                            ],
-                            "TemporaryResult" : false,
-                            "ResultDuration" : 0
-                        }
-                    ]
-                },
-                {
-                    "Description" : {
-                        "Id" : "outcome_0_4",
-                        "Name" : "Replacement Parts",
-                        "Details" : "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later she finds what she is looking for, \"Excellent!! We're in luck Commander. We do have all the parts needed to repair the Console.  It shouldn't take the Techs and myself more than a few days to get everything up and running.\"\r\n\r\nYou smile broadly, \"Excellent news Farah! Go ahead and schedule the work order.\"\r\n\r\n<color=#FFA500> The KF Console is under repairs</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>",
-                        "Icon" : null
-                    },
-                    "Weight" : 10,
-                    "Results" : [
-                        {
-                            "Scope" : "Company",
-                            "Requirements" : null,
-                            "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Offline"
-                                ]
-                            },
-                            "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Active",
-                                    "KFC_Warmup"
-                                ]
-                            },
-                            "Stats" : [
-                                {
-                                    "typeString" : "System.Single",
-                                    "name" : "DriveTravelMultiplier",
-                                    "value" : "0.53",
-                                    "set" : true,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_KerbyInjectors",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_FuCapacitor",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_CheatahNavComputer",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Funds",
-                                    "value" : "-1172228",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                }
-                            ],
-                            "Actions" : null,
-                            "ForceEvents" : [
-                                {
-                                    "Scope" : "Company",
-                                    "EventID" : "event_co_ReplacePartsKFC",
-                                    "MinDaysWait" : 5,
-                                    "MaxDaysWait" : 100,
-                                    "Probability" : 100,
-                                    "RetainPilot" : false
-                                }
-                            ],
-                            "TemporaryResult" : false,
-                            "ResultDuration" : 0
-                        }
-                    ]
-                },
-                {
-                    "Description" : {
-                        "Id" : "outcome_0_5",
-                        "Name" : "Replacement Parts",
-                        "Details" : "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later she finds what she is looking for, \"Excellent!! We're in luck Commander. We do have all the parts needed to repair the Console.  It shouldn't take the Techs and myself more than a few days to get everything up and running.\"\r\n\r\nYou smile broadly, \"Excellent news Farah! Go ahead and schedule the work order.\"\r\n\r\n<color=#FFA500> The KF Console is under repairs</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>",
-                        "Icon" : null
-                    },
-                    "Weight" : 10,
-                    "Results" : [
-                        {
-                            "Scope" : "Company",
-                            "Requirements" : null,
-                            "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Offline"
-                                ]
-                            },
-                            "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Active",
-                                    "KFC_Warmup"
-                                ]
-                            },
-                            "Stats" : [
-                                {
-                                    "typeString" : "System.Single",
-                                    "name" : "DriveTravelMultiplier",
-                                    "value" : "0.53",
-                                    "set" : true,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_KerbyInjectors",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_FuCapacitor",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_CheatahNavComputer",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Funds",
-                                    "value" : "-862432",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                }
-                            ],
-                            "Actions" : null,
-                            "ForceEvents" : [
-                                {
-                                    "Scope" : "Company",
-                                    "EventID" : "event_co_ReplacePartsKFC",
-                                    "MinDaysWait" : 5,
-                                    "MaxDaysWait" : 100,
-                                    "Probability" : 100,
-                                    "RetainPilot" : false
-                                }
-                            ],
-                            "TemporaryResult" : false,
-                            "ResultDuration" : 0
-                        }
-                    ]
-                },
-                {
-                    "Description" : {
-                        "Id" : "outcome_0_6",
-                        "Name" : "Replacement Parts",
-                        "Details" : "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later she finds what she is looking for, \"Excellent!! We're in luck Commander. We do have all the parts needed to repair the Console.  It shouldn't take the Techs and myself more than a few days to get everything up and running.\"\r\n\r\nYou smile broadly, \"Excellent news Farah! Go ahead and schedule the work order.\"\r\n\r\n<color=#FFA500> The KF Console is under repairs</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>",
-                        "Icon" : null
-                    },
-                    "Weight" : 10,
-                    "Results" : [
-                        {
-                            "Scope" : "Company",
-                            "Requirements" : null,
-                            "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Offline"
-                                ]
-                            },
-                            "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Active",
-                                    "KFC_Warmup"
-                                ]
-                            },
-                            "Stats" : [
-                                {
-                                    "typeString" : "System.Single",
-                                    "name" : "DriveTravelMultiplier",
-                                    "value" : "0.53",
-                                    "set" : true,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_KerbyInjectors",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_FuCapacitor",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_CheatahNavComputer",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Funds",
-                                    "value" : "-372576",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                }
-                            ],
-                            "Actions" : null,
-                            "ForceEvents" : [
-                                {
-                                    "Scope" : "Company",
-                                    "EventID" : "event_co_ReplacePartsKFC",
-                                    "MinDaysWait" : 5,
-                                    "MaxDaysWait" : 100,
-                                    "Probability" : 100,
-                                    "RetainPilot" : false
-                                }
-                            ],
-                            "TemporaryResult" : false,
-                            "ResultDuration" : 0
-                        }
-                    ]
-                },
-                {
-                    "Description" : {
-                        "Id" : "outcome_0_7",
-                        "Name" : "Replacement Parts",
-                        "Details" : "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later she finds what she is looking for, \"Excellent!! We're in luck Commander. We do have all the parts needed to repair the Console.  It shouldn't take the Techs and myself more than a few days to get everything up and running.\"\r\n\r\nYou smile broadly, \"Excellent news Farah! Go ahead and schedule the work order.\"\r\n\r\n<color=#FFA500> The KF Console is under repairs</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>",
-                        "Icon" : null
-                    },
-                    "Weight" : 10,
-                    "Results" : [
-                        {
-                            "Scope" : "Company",
-                            "Requirements" : null,
-                            "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Offline"
-                                ]
-                            },
-                            "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Active",
-                                    "KFC_Warmup"
-                                ]
-                            },
-                            "Stats" : [
-                                {
-                                    "typeString" : "System.Single",
-                                    "name" : "DriveTravelMultiplier",
-                                    "value" : "0.53",
-                                    "set" : true,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_KerbyInjectors",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_FuCapacitor",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_CheatahNavComputer",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Funds",
-                                    "value" : "-979826",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                }
-                            ],
-                            "Actions" : null,
-                            "ForceEvents" : [
-                                {
-                                    "Scope" : "Company",
-                                    "EventID" : "event_co_ReplacePartsKFC",
-                                    "MinDaysWait" : 5,
-                                    "MaxDaysWait" : 100,
-                                    "Probability" : 100,
-                                    "RetainPilot" : false
-                                }
-                            ],
-                            "TemporaryResult" : false,
-                            "ResultDuration" : 0
-                        }
-                    ]
-                },
-                {
-                    "Description" : {
-                        "Id" : "outcome_0_8",
-                        "Name" : "Replacement Parts",
-                        "Details" : "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later she finds what she is looking for, \"Excellent!! We're in luck Commander. We do have all the parts needed to repair the Console.  It shouldn't take the Techs and myself more than a few days to get everything up and running.\"\r\n\r\nYou smile broadly, \"Excellent news Farah! Go ahead and schedule the work order.\"\r\n\r\n<color=#FFA500> The KF Console is under repairs</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>",
-                        "Icon" : null
-                    },
-                    "Weight" : 10,
-                    "Results" : [
-                        {
-                            "Scope" : "Company",
-                            "Requirements" : null,
-                            "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Offline"
-                                ]
-                            },
-                            "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Active",
-                                    "KFC_Warmup"
-                                ]
-                            },
-                            "Stats" : [
-                                {
-                                    "typeString" : "System.Single",
-                                    "name" : "DriveTravelMultiplier",
-                                    "value" : "0.53",
-                                    "set" : true,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_KerbyInjectors",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_FuCapacitor",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_CheatahNavComputer",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Funds",
-                                    "value" : "-796590",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                }
-                            ],
-                            "Actions" : null,
-                            "ForceEvents" : [
-                                {
-                                    "Scope" : "Company",
-                                    "EventID" : "event_co_ReplacePartsKFC",
-                                    "MinDaysWait" : 5,
-                                    "MaxDaysWait" : 100,
-                                    "Probability" : 100,
-                                    "RetainPilot" : false
-                                }
-                            ],
-                            "TemporaryResult" : false,
-                            "ResultDuration" : 0
-                        }
-                    ]
-                },
-                {
-                    "Description" : {
-                        "Id" : "outcome_0_9",
-                        "Name" : "Replacement Parts",
-                        "Details" : "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later she finds what she is looking for, \"Excellent!! We're in luck Commander. We do have all the parts needed to repair the Console.  It shouldn't take the Techs and myself more than a few days to get everything up and running.\"\r\n\r\nYou smile broadly, \"Excellent news Farah! Go ahead and schedule the work order.\"\r\n\r\n<color=#FFA500> The KF Console is under repairs</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>",
-                        "Icon" : null
-                    },
-                    "Weight" : 10,
-                    "Results" : [
-                        {
-                            "Scope" : "Company",
-                            "Requirements" : null,
-                            "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Offline"
-                                ]
-                            },
-                            "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Active",
-                                    "KFC_Warmup"
-                                ]
-                            },
-                            "Stats" : [
-                                {
-                                    "typeString" : "System.Single",
-                                    "name" : "DriveTravelMultiplier",
-                                    "value" : "0.53",
-                                    "set" : true,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_KerbyInjectors",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_FuCapacitor",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Item.UpgradeDef.Gear_CheatahNavComputer",
-                                    "value" : "-1",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                },
-                                {
-                                    "typeString" : "System.Int32",
-                                    "name" : "Funds",
-                                    "value" : "-120198",
-                                    "set" : false,
-                                    "valueConstant" : null
-                                }
-                            ],
-                            "Actions" : null,
-                            "ForceEvents" : [
-                                {
-                                    "Scope" : "Company",
-                                    "EventID" : "event_co_ReplacePartsKFC",
-                                    "MinDaysWait" : 5,
-                                    "MaxDaysWait" : 100,
-                                    "Probability" : 100,
-                                    "RetainPilot" : false
-                                }
-                            ],
-                            "TemporaryResult" : false,
-                            "ResultDuration" : 0
-                        }
-                    ]
-                }
-            ],
-            "Requirements" : {
-                "Scope" : "Company",
-                "RequirementTags" : {
-                    "tagSetSourceFile" : "",
-                    "items" : []
-                },
-                "ExclusionTags" : {
-                    "tagSetSourceFile" : "",
-                    "items" : []
-                },
-                "RequirementComparisons" : []
+            {
+              "obj": "Item.UpgradeDef.Gear_FuCapacitor",
+              "op": "GreaterThan",
+              "val": 0,
+              "valueConstant": "0"
+            },
+            {
+              "obj": "Item.UpgradeDef.Gear_CheatahNavComputer",
+              "op": "GreaterThan",
+              "val": 0,
+              "valueConstant": "0"
+            },
+            {
+              "obj": "Funds",
+              "op": "GreaterThanOrEqual",
+              "val": 2000000,
+              "valueConstant": "2000000"
             }
+          ]
+        }
+      ],
+      "ResultSets": [
+        {
+          "Description": {
+            "Id": "outcome_0_0",
+            "Name": "Replacement Parts",
+            "Details": "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later she finds what she is looking for, \"Excellent!! We're in luck Commander. We do have all the parts needed to repair the Console.  It shouldn't take the Techs and myself more than a few days to get everything up and running.\"\r\n\r\nYou smile broadly, \"Excellent news Farah! Go ahead and schedule the work order.\"\r\n\r\n<color=#FFA500> The KF Console is under repairs</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>"
+          },
+          "Weight": 10,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "KFC_Offline"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [
+                  "KFC_Active",
+                  "KFC_Warmup"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Single",
+                  "name": "DriveTravelMultiplier",
+                  "value": "0.53",
+                  "set": true
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_KerbyInjectors",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_FuCapacitor",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_CheatahNavComputer",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-1433497",
+                  "set": false
+                }
+              ],
+              "ForceEvents": [
+                {
+                  "Scope": "Company",
+                  "EventID": "event_co_ReplacePartsKFC",
+                  "MinDaysWait": 5,
+                  "MaxDaysWait": 100,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
         },
         {
-            "Description" : {
-                "Id" : "outcome_1",
-                "Name" : "Missing the Parts",
-                "Details" : "Find New Parts",
-                "Icon" : null
-            },
-            "RequirementList" : [
+          "Description": {
+            "Id": "outcome_0_1",
+            "Name": "Replacement Parts",
+            "Details": "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later she finds what she is looking for, \"Excellent!! We're in luck Commander. We do have all the parts needed to repair the Console.  It shouldn't take the Techs and myself more than a few days to get everything up and running.\"\r\n\r\nYou smile broadly, \"Excellent news Farah! Go ahead and schedule the work order.\"\r\n\r\n<color=#FFA500> The KF Console is under repairs</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>"
+          },
+          "Weight": 10,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "KFC_Offline"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [
+                  "KFC_Active",
+                  "KFC_Warmup"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "Stats": [
                 {
-                    "Scope" : "Company",
-                    "RequirementTags" : {
-                        "tagSetSourceFile" : "",
-                        "items" : []
-                    },
-                    "ExclusionTags" : {
-                        "tagSetSourceFile" : "",
-                        "items" : []
-                    },
-                    "RequirementComparisons" : []
-                }
-            ],
-            "ResultSets" : [
+                  "typeString": "System.Single",
+                  "name": "DriveTravelMultiplier",
+                  "value": "0.53",
+                  "set": true
+                },
                 {
-                    "Description" : {
-                        "Id" : "outcome_1_0",
-                        "Name" : "Need Parts",
-                        "Details" : "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later, she turns to you shaking her head, \"Commander, it appears we do not have enough of the needed parts, a set of [[DM.UpgradeDefs[Gear_KerbyInjectors],Kerby Injectors]], a [[DM.UpgradeDefs[Gear_FuCapacitor],Fu Capacitor]] and a functional [[DM.UpgradeDefs[Gear_CheatahNavComputer],Cheatah Nav Computer]], in storage to repair the Console.\"\r\n\r\nYou look over at the other bridge crew, \"Well, anyone got any ideas where we can get more of these parts?\"\r\n\r\nDarius chimes in, \"We obtained the original parts from some key contracts for some of the various pirates out in the abandoned systems.   We could head out there and see if any of their command is feeling generous.\"\r\n\r\nYang clears his throat, \"We maybe don't need to go all guns blazing and what not.  I've found that certain planets, namely those that have a shadier mercantile presence, will almost always have what you need, for a price in C-Bills.\"\r\n\r\nYou sit back in your command chair, \"So now we are on a bloody treasure hunt...\"\r\n\r\n<color=#FFA500> The KF Console is still non-functional</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>",
-                        "Icon" : null
-                    },
-                    "Weight" : 100,
-                    "Results" : [
-                        {
-                            "Scope" : "Company",
-                            "Requirements" : null,
-                            "AddedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Offline",
-                                    "KFC_RepairDelay"
-                                ]
-                            },
-                            "RemovedTags" : {
-                                "tagSetSourceFile" : "",
-                                "items" : [
-                                    "KFC_Active",
-                                    "KFC_Warmup"
-                                ]
-                            },
-                            "Stats" : [
-                                {
-                                    "typeString" : "System.Single",
-                                    "name" : "DriveTravelMultiplier",
-                                    "value" : "0.53",
-                                    "set" : true,
-                                    "valueConstant" : null
-                                }
-                            ],
-                            "Actions" : null,
-                            "ForceEvents" : null,
-                            "TemporaryResult" : false,
-                            "ResultDuration" : 0
-                        }
-                    ]
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_KerbyInjectors",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_FuCapacitor",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_CheatahNavComputer",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-1687144",
+                  "set": false
                 }
-            ],
-            "Requirements" : {
-                "Scope" : "Company",
-                "RequirementTags" : {
-                    "tagSetSourceFile" : "",
-                    "items" : []
-                },
-                "ExclusionTags" : {
-                    "tagSetSourceFile" : "",
-                    "items" : []
-                },
-                "RequirementComparisons" : []
+              ],
+              "ForceEvents": [
+                {
+                  "Scope": "Company",
+                  "EventID": "event_co_ReplacePartsKFC",
+                  "MinDaysWait": 5,
+                  "MaxDaysWait": 100,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
             }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_0_2",
+            "Name": "Replacement Parts",
+            "Details": "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later she finds what she is looking for, \"Excellent!! We're in luck Commander. We do have all the parts needed to repair the Console.  It shouldn't take the Techs and myself more than a few days to get everything up and running.\"\r\n\r\nYou smile broadly, \"Excellent news Farah! Go ahead and schedule the work order.\"\r\n\r\n<color=#FFA500> The KF Console is under repairs</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>"
+          },
+          "Weight": 10,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "KFC_Offline"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [
+                  "KFC_Active",
+                  "KFC_Warmup"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Single",
+                  "name": "DriveTravelMultiplier",
+                  "value": "0.53",
+                  "set": true
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_KerbyInjectors",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_FuCapacitor",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_CheatahNavComputer",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-634976",
+                  "set": false
+                }
+              ],
+              "ForceEvents": [
+                {
+                  "Scope": "Company",
+                  "EventID": "event_co_ReplacePartsKFC",
+                  "MinDaysWait": 5,
+                  "MaxDaysWait": 100,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_0_3",
+            "Name": "Replacement Parts",
+            "Details": "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later she finds what she is looking for, \"Excellent!! We're in luck Commander. We do have all the parts needed to repair the Console.  It shouldn't take the Techs and myself more than a few days to get everything up and running.\"\r\n\r\nYou smile broadly, \"Excellent news Farah! Go ahead and schedule the work order.\"\r\n\r\n<color=#FFA500> The KF Console is under repairs</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>"
+          },
+          "Weight": 10,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "KFC_Offline"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [
+                  "KFC_Active",
+                  "KFC_Warmup"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Single",
+                  "name": "DriveTravelMultiplier",
+                  "value": "0.53",
+                  "set": true
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_KerbyInjectors",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_FuCapacitor",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_CheatahNavComputer",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-1984072",
+                  "set": false
+                }
+              ],
+              "ForceEvents": [
+                {
+                  "Scope": "Company",
+                  "EventID": "event_co_ReplacePartsKFC",
+                  "MinDaysWait": 5,
+                  "MaxDaysWait": 100,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_0_4",
+            "Name": "Replacement Parts",
+            "Details": "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later she finds what she is looking for, \"Excellent!! We're in luck Commander. We do have all the parts needed to repair the Console.  It shouldn't take the Techs and myself more than a few days to get everything up and running.\"\r\n\r\nYou smile broadly, \"Excellent news Farah! Go ahead and schedule the work order.\"\r\n\r\n<color=#FFA500> The KF Console is under repairs</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>"
+          },
+          "Weight": 10,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "KFC_Offline"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [
+                  "KFC_Active",
+                  "KFC_Warmup"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Single",
+                  "name": "DriveTravelMultiplier",
+                  "value": "0.53",
+                  "set": true
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_KerbyInjectors",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_FuCapacitor",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_CheatahNavComputer",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-1172228",
+                  "set": false
+                }
+              ],
+              "ForceEvents": [
+                {
+                  "Scope": "Company",
+                  "EventID": "event_co_ReplacePartsKFC",
+                  "MinDaysWait": 5,
+                  "MaxDaysWait": 100,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_0_5",
+            "Name": "Replacement Parts",
+            "Details": "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later she finds what she is looking for, \"Excellent!! We're in luck Commander. We do have all the parts needed to repair the Console.  It shouldn't take the Techs and myself more than a few days to get everything up and running.\"\r\n\r\nYou smile broadly, \"Excellent news Farah! Go ahead and schedule the work order.\"\r\n\r\n<color=#FFA500> The KF Console is under repairs</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>"
+          },
+          "Weight": 10,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "KFC_Offline"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [
+                  "KFC_Active",
+                  "KFC_Warmup"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Single",
+                  "name": "DriveTravelMultiplier",
+                  "value": "0.53",
+                  "set": true
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_KerbyInjectors",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_FuCapacitor",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_CheatahNavComputer",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-862432",
+                  "set": false
+                }
+              ],
+              "ForceEvents": [
+                {
+                  "Scope": "Company",
+                  "EventID": "event_co_ReplacePartsKFC",
+                  "MinDaysWait": 5,
+                  "MaxDaysWait": 100,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_0_6",
+            "Name": "Replacement Parts",
+            "Details": "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later she finds what she is looking for, \"Excellent!! We're in luck Commander. We do have all the parts needed to repair the Console.  It shouldn't take the Techs and myself more than a few days to get everything up and running.\"\r\n\r\nYou smile broadly, \"Excellent news Farah! Go ahead and schedule the work order.\"\r\n\r\n<color=#FFA500> The KF Console is under repairs</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>"
+          },
+          "Weight": 10,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "KFC_Offline"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [
+                  "KFC_Active",
+                  "KFC_Warmup"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Single",
+                  "name": "DriveTravelMultiplier",
+                  "value": "0.53",
+                  "set": true
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_KerbyInjectors",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_FuCapacitor",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_CheatahNavComputer",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-372576",
+                  "set": false
+                }
+              ],
+              "ForceEvents": [
+                {
+                  "Scope": "Company",
+                  "EventID": "event_co_ReplacePartsKFC",
+                  "MinDaysWait": 5,
+                  "MaxDaysWait": 100,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_0_7",
+            "Name": "Replacement Parts",
+            "Details": "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later she finds what she is looking for, \"Excellent!! We're in luck Commander. We do have all the parts needed to repair the Console.  It shouldn't take the Techs and myself more than a few days to get everything up and running.\"\r\n\r\nYou smile broadly, \"Excellent news Farah! Go ahead and schedule the work order.\"\r\n\r\n<color=#FFA500> The KF Console is under repairs</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>"
+          },
+          "Weight": 10,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "KFC_Offline"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [
+                  "KFC_Active",
+                  "KFC_Warmup"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Single",
+                  "name": "DriveTravelMultiplier",
+                  "value": "0.53",
+                  "set": true
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_KerbyInjectors",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_FuCapacitor",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_CheatahNavComputer",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-979826",
+                  "set": false
+                }
+              ],
+              "ForceEvents": [
+                {
+                  "Scope": "Company",
+                  "EventID": "event_co_ReplacePartsKFC",
+                  "MinDaysWait": 5,
+                  "MaxDaysWait": 100,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_0_8",
+            "Name": "Replacement Parts",
+            "Details": "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later she finds what she is looking for, \"Excellent!! We're in luck Commander. We do have all the parts needed to repair the Console.  It shouldn't take the Techs and myself more than a few days to get everything up and running.\"\r\n\r\nYou smile broadly, \"Excellent news Farah! Go ahead and schedule the work order.\"\r\n\r\n<color=#FFA500> The KF Console is under repairs</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>"
+          },
+          "Weight": 10,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "KFC_Offline"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [
+                  "KFC_Active",
+                  "KFC_Warmup"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Single",
+                  "name": "DriveTravelMultiplier",
+                  "value": "0.53",
+                  "set": true
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_KerbyInjectors",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_FuCapacitor",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_CheatahNavComputer",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-796590",
+                  "set": false
+                }
+              ],
+              "ForceEvents": [
+                {
+                  "Scope": "Company",
+                  "EventID": "event_co_ReplacePartsKFC",
+                  "MinDaysWait": 5,
+                  "MaxDaysWait": 100,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_0_9",
+            "Name": "Replacement Parts",
+            "Details": "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later she finds what she is looking for, \"Excellent!! We're in luck Commander. We do have all the parts needed to repair the Console.  It shouldn't take the Techs and myself more than a few days to get everything up and running.\"\r\n\r\nYou smile broadly, \"Excellent news Farah! Go ahead and schedule the work order.\"\r\n\r\n<color=#FFA500> The KF Console is under repairs</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>"
+          },
+          "Weight": 10,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "KFC_Offline"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [
+                  "KFC_Active",
+                  "KFC_Warmup"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Single",
+                  "name": "DriveTravelMultiplier",
+                  "value": "0.53",
+                  "set": true
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_KerbyInjectors",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_FuCapacitor",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Item.UpgradeDef.Gear_CheatahNavComputer",
+                  "value": "-1",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-120198",
+                  "set": false
+                }
+              ],
+              "ForceEvents": [
+                {
+                  "Scope": "Company",
+                  "EventID": "event_co_ReplacePartsKFC",
+                  "MinDaysWait": 5,
+                  "MaxDaysWait": 100,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
         }
-    ],
-    "PublishState" : "PUBLISHED",
-    "ValidationState" : "UNTESTED",
-    "EventType" : "UNSELECTABLE",
-    "OneTimeEvent" : false,
-    "Tags" : {
-        "tagSetSourceFile" : "tags/EventTags",
-        "items" : []
+      ],
+      "Requirements": {
+        "Scope": "Company",
+        "RequirementTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        },
+        "ExclusionTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        }
+      }
+    },
+    {
+      "Description": {
+        "Id": "outcome_1",
+        "Name": "Missing the Parts",
+        "Details": "Find New Parts"
+      },
+      "RequirementList": [
+        {
+          "Scope": "Company",
+          "RequirementTags": {
+            "items": [],
+            "tagSetSourceFile": ""
+          },
+          "ExclusionTags": {
+            "items": [],
+            "tagSetSourceFile": ""
+          }
+        }
+      ],
+      "ResultSets": [
+        {
+          "Description": {
+            "Id": "outcome_1_0",
+            "Name": "Need Parts",
+            "Details": "You frown, \"So get the parts from storage and replace them.\"\r\n\r\nFarah grabs her noteputer and scans the inventory.  A few moments later, she turns to you shaking her head, \"Commander, it appears we do not have enough of the needed parts, a set of [[DM.UpgradeDefs[Gear_KerbyInjectors],Kerby Injectors]], a [[DM.UpgradeDefs[Gear_FuCapacitor],Fu Capacitor]] and a functional [[DM.UpgradeDefs[Gear_CheatahNavComputer],Cheatah Nav Computer]], in storage to repair the Console.\"\r\n\r\nYou look over at the other bridge crew, \"Well, anyone got any ideas where we can get more of these parts?\"\r\n\r\nDarius chimes in, \"We obtained the original parts from some key contracts for some of the various pirates out in the abandoned systems.   We could head out there and see if any of their command is feeling generous.\"\r\n\r\nYang clears his throat, \"We maybe don't need to go all guns blazing and what not.  I've found that certain planets, namely those that have a shadier mercantile presence, will almost always have what you need, for a price in C-Bills.\"\r\n\r\nYou sit back in your command chair, \"So now we are on a bloody treasure hunt...\"\r\n\r\n<color=#FFA500> The KF Console is still non-functional</color><i>STATUS: </i><color=#FF0000> OFFLINE.</color>"
+          },
+          "Weight": 100,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "KFC_Offline",
+                  "KFC_RepairDelay"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [
+                  "KFC_Active",
+                  "KFC_Warmup"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Single",
+                  "name": "DriveTravelMultiplier",
+                  "value": "0.53",
+                  "set": true
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        }
+      ],
+      "Requirements": {
+        "Scope": "Company",
+        "RequirementTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        },
+        "ExclusionTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        }
+      }
     }
+  ],
+  "PublishState": "PUBLISHED",
+  "ValidationState": "UNTESTED",
+  "EventType": "UNSELECTABLE",
+  "OneTimeEvent": false,
+  "Tags": {
+    "items": [],
+    "tagSetSourceFile": "tags/EventTags"
+  }
 }

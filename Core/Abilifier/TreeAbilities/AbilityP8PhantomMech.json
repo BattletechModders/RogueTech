@@ -2,12 +2,13 @@
   "Description": {
     "Id": "AbilityP8PhantomMech",
     "Name": "PHANTOM",
-    "Details": "ACTION: Gain +2 Local ECM and -50% Visibility/SensorSignature for 2 Turns. Has a 3 turn cooldown.\n<b><color=#8080ff>Resolve Cost: {10}</color></b>",
+    "Details": "ACTION: Gain +2 Local ECM, -50% Visibility/SensorSignature and Immune to Indirect Attacks for 2 Turns. Has a 3 turn cooldown.\n<b><color=#8080ff>Resolve Cost: {10}</color></b>",
     "Icon": "phantommech"
   },
   "DisplayParams": "ShowInMWTRay",
   "ReqSkill": "Piloting",
   "ReqSkillLevel": 8,
+  "IsPrimaryAbility": true,
   "ActivationTime": "ConsumedByFiring",
   "ActivationCooldown": 3,
   "Targeting": "ActorSelf",
@@ -16,15 +17,16 @@
     {
       "durationData": {
         "duration": 3,
+        "stackLimit": -1,
         "ticksOnActivations": true,
-        "useActivationsOfTarget": true,
-        "stackLimit": -1
+        "useActivationsOfTarget": true
       },
       "targetingData": {
         "effectTriggerType": "OnActivation",
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "LV_ECM_SHIELD",
         "Name": "Ability Phantom: Increased ECM Shield",
@@ -36,21 +38,47 @@
         "operation": "Int_Add",
         "modValue": "2",
         "modType": "System.Int32"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
         "duration": 3,
+        "stackLimit": -1,
         "ticksOnActivations": true,
-        "useActivationsOfTarget": true,
-        "stackLimit": -1
+        "useActivationsOfTarget": true
       },
       "targetingData": {
         "effectTriggerType": "OnActivation",
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "TraitEliteFerret",
+        "Name": "Ability Phantom: Is Immune to Indirect Attacks",
+        "Details": "This unit can not be targeted by indirect attacks",
+        "Icon": "uixSvgIcon_action_evasivemove"
+      },
+      "statisticData": {
+        "statName": "IsIndirectImmune",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
+      }
+    },
+    {
+      "durationData": {
+        "duration": 3,
+        "stackLimit": -1,
+        "ticksOnActivations": true,
+        "useActivationsOfTarget": true
+      },
+      "targetingData": {
+        "effectTriggerType": "OnActivation",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "AbilityDefP83",
         "Name": "Ability Phantom: Decreased Sensor Signature",
@@ -62,21 +90,21 @@
         "operation": "Float_Multiply",
         "modValue": "0.5",
         "modType": "System.Single"
-      },
-      "nature": "Buff"
+      }
     },
     {
       "durationData": {
         "duration": 3,
+        "stackLimit": -1,
         "ticksOnActivations": true,
-        "useActivationsOfTarget": true,
-        "stackLimit": -1
+        "useActivationsOfTarget": true
       },
       "targetingData": {
         "effectTriggerType": "OnActivation",
         "effectTargetType": "Creator"
       },
       "effectType": "StatisticEffect",
+      "nature": "Buff",
       "Description": {
         "Id": "AbilityDefP83",
         "Name": "Ability Phantom: Decreased Visual Signature",
@@ -88,9 +116,7 @@
         "operation": "Float_Multiply",
         "modValue": "0.5",
         "modType": "System.Single"
-      },
-      "nature": "Buff"
+      }
     }
-  ],
-  "IsPrimaryAbility": true
+  ]
 }

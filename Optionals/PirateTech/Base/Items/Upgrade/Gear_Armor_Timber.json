@@ -5,37 +5,38 @@
         "CategoryID": "Armor"
       }
     ],
+    "BonusDescriptions": [
+      "ArmorProtection: x1.02",
+      "ArmorFactor: +2%",
+      "TADTakenMod: -50%",
+      "TACChance: -50%",
+      "WalkSpeed: -2%",
+      "ArmorTPCost: x1",
+      "ArmorCBCost: x1"
+    ],
+    "Flags": [
+      "not_broken"
+    ],
+    "Weights": {
+      "ArmorFactor": 1.02
+    },
+    "ArmorStructureChanges": {
+      "ArmorFactor": 1.02
+    },
+    "ArmorRepair": {
+      "ArmorTPCost": 1.0,
+      "ArmorCBCost": 1.0
+    },
     "WorkOrderCosts": {
       "Install": {
         "TechCost": "0.08846 * [[Chassis.Tonnage]]",
         "CBillCost": "20 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
       }
     },
-    "BonusDescriptions": [
-      "ArmorProtection: x1.02",
-      "ArmorFactor: +2%",
-      "TACImmune",
-      "WalkSpeed: -2%",
-      "ArmorTPCost: x1",
-      "ArmorCBCost: x1"
-    ],
-    "ArmorRepair": {
-      "ArmorTPCost": 1.0,
-      "ArmorCBCost": 1.0
-    },
-    "ArmorStructureChanges": {
-      "ArmorFactor": 1.02
-    },
-    "Color": "Gold",
-    "Flags": [
-      "not_broken"
-    ],
     "IBLS": {
       "StorageSize": 1
     },
-    "Weights": {
-      "ArmorFactor": 1.02
-    }
+    "Color": "Gold"
   },
   "Description": {
     "Cost": 387500,
@@ -85,7 +86,8 @@
         "statName": "WalkSpeed",
         "operation": "Float_Multiply",
         "modValue": "0.98",
-        "modType": "System.Single"
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     },
     {
@@ -96,21 +98,50 @@
       "targetingData": {
         "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
+        "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "HardenedCritImmune",
-        "Name": "Shiver Me Timbers: TAC Immune",
-        "Details": "MORE SPEED.",
-        "Icon": "uixSvgIcon_run_n_gun"
+        "Id": "PaddingEffect_1",
+        "Name": "Shiver Me Timbers: Decreased AP Damage",
+        "Details": "This unit resists critical hits.",
+        "Icon": "UixSvgIcon_specialEquip_System"
       },
       "statisticData": {
-        "statName": "CACAPProtection",
-        "operation": "Set",
-        "modValue": "true",
-        "modType": "System.Boolean"
+        "statName": "CACAPDamageMult",
+        "operation": "Float_Multiply",
+        "modValue": "0.50",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "PaddingEffect_2",
+        "Name": "Shiver Me Timbers: Decreased Receive AP Crit Chance",
+        "Details": "This unit resists through armor damage",
+        "Icon": "UixSvgIcon_specialEquip_System"
+      },
+      "statisticData": {
+        "statName": "CAC_APCritChance",
+        "operation": "Float_Multiply",
+        "modValue": "0.50",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     }
   ],

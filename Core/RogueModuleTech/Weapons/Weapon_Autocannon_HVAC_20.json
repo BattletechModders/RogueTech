@@ -9,20 +9,23 @@
       }
     ],
     "BonusDescriptions": [
-      "WpnRecoil: 3",
       "WpnCrits: +100%",
-      "TACchance: +100%",
-      "ExplodiumFlat: 12%",
+      "WeaponShardsModRange: 2, 8",
+      "CanJamMisfire",
+      "ExplodiumFlat: 8%",
       "WeaponAttachmentCompatible: Recoil Damper",
-      "WeaponExplosionPerLoadedShot: 50, 25, 12.5"
+      "WpnRecoil: 3",
+      "BraceToFirePerShot: 24",
+      "AAFactor: 35",
+      "WeaponExplosionPerLoadedShot: 60, 30, 15"
     ],
     "Flags": [
       "not_broken"
     ],
     "ComponentExplosion": {
-      "ExplosionDamagePerAmmo": 50.0,
-      "HeatDamagePerAmmo": 25.0,
-      "StabilityDamagePerAmmo": 12.5
+      "ExplosionDamagePerAmmo": 60.0,
+      "HeatDamagePerAmmo": 30.0,
+      "StabilityDamagePerAmmo": 15.0
     },
     "IBLS": {
       "StorageSize": 8
@@ -32,18 +35,18 @@
   "Type": "Autocannon",
   "WeaponSubType": "AC20",
   "MinRange": 0,
-  "MaxRange": 720,
+  "MaxRange": 600,
   "RangeSplit": [
-    180,
-    360,
-    600
+    150,
+    300,
+    450
   ],
   "AmmoCategory": "HVAC20",
   "StartingAmmoCapacity": 0,
-  "HeatGenerated": 16,
-  "Damage": 100,
+  "HeatGenerated": 21,
+  "Damage": 120,
   "HeatDamage": 0,
-  "Instability": 35,
+  "Instability": 30,
   "DamageVariance": 0,
   "AccuracyModifier": 0,
   "EvasivePipsIgnored": 0,
@@ -51,17 +54,16 @@
   "OverheatedDamageMultiplier": 0,
   "EvasiveDamageMultiplier": 0,
   "CriticalChanceMultiplier": 2,
-  "APArmorShardsMod": 2,
-  "APMaxArmorThickness": 400,
-  "APCriticalChanceMultiplier": 1,
+  "APArmorShardsMod": 3,
+  "APCriticalChanceMultiplier": 0.2,
   "AOECapable": false,
   "ShotsWhenFired": 1,
   "ProjectilesPerShot": 1,
   "ImprovedBallistic": true,
   "IndirectFireCapable": false,
-  "GunneryJammingMult": 0.01,
+  "GunneryJammingMult": 0.005,
   "GunneryJammingBase": 1,
-  "FlatJammingChance": 0.12,
+  "FlatJammingChance": 0.08,
   "DamageOnJamming": true,
   "FireTerrainChance": 0.08,
   "AttackRecoil": 4,
@@ -90,6 +92,59 @@
   "AllowedLocations": "All",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
+  "statusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "AAAFactor",
+        "Name": "HVAC/20: Anti Air Factor",
+        "Details": "AA Factor",
+        "Icon": "uixSvgIcon_equipment_Gyro"
+      },
+      "statisticData": {
+        "statName": "AAAFactor",
+        "operation": "Float_Add",
+        "modValue": "35",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": 1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "OnWeaponFire",
+        "effectTargetType": "Creator",
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "WeaponEffect-SelfInstability_OnFire",
+        "Name": "HVAC/20: Increased Self Instability on Fire",
+        "Details": "Tubthumping",
+        "Icon": "uixSvgIcon_run_n_gun"
+      },
+      "statisticData": {
+        "statName": "SelfInstability_OnFire",
+        "operation": "Float_Add",
+        "modValue": "24",
+        "modType": "System.Single"
+      }
+    }
+  ],
   "ComponentTags": {
     "items": [
       "OmniRestriction.{location}",

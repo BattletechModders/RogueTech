@@ -1,0 +1,863 @@
+{
+  "Description": {
+    "Id": "forceevent_co_gammapod",
+    "Name": "Habitats Galore!",
+    "Details": "A knock sounds on your door.  You look up to see Darius standing in the open doorway with a well dressed man, \"Darius, come in.  I presume this is the representative from <i>Habitats Galore</i>?\"\r\n\r\nDarius and his companinon enter your office, \"Yes it is.  Commander {COMMANDER.LastName} may please introduce you to Mr Zeng.\"\r\n\r\nYou stand up from your desk and extend your hand, \"Pleased to meet you Mr Zeng, you may call me {COMMANDER.FirstName}.\"\r\n\r\nMr Zeng shakes your hand, \"Please, call me Howe, nice to meet you as well.\"\r\n\r\nDarius hands you a noteputer, \"Here is the quote for upgrading the Gamma Pod to allow up to 8 more MechWarriors in our company.  As with the Beta Pod upgrade, we have three options to choose from and I...\"\r\n\r\nYou hold up you hand, \"Thank you Darius, but if you don't mind, we may as well let Howe do his job and see what they are offering this time.\"\r\n\r\nDarius stops talking and defers to Howe, \"Well, {COMMANDER.FirstName}, as you will see in the quote, there are three options for upgrading the <i>Argo</i>'s Gamma Pod:\r\n\r\n     <color=#1E90FF>Option 1 - Decline the offer.</color>  You will only be out of pocket ¢10,000 to cover my expenses here;\r\n\r\n     <color=#1E90FF>Option 2 - Cost Saver Package.</color>  The Habitat Galore Cost Saver package aims to work with those companies that are on a very tight budget.  As such, the cost is subtantially lower, but there could be design/install issues;\r\n\r\n     <color=#1E90FF>Option 3 - Standard Package.</color>  With the Standard Package, you get most amenities and our workmanship is reflected in the cost.  While we can't say it will be flawless, we haven't had anyone with issues to date, that we know about;\r\n\r\n     <color=#1E90FF>Option 4 - Premium Package.</color>  This is the ultimate in meticulous installation and quality control.  Everything is triple-checked in person as well as thermographic, magnetic and sonar structural integrity scans.\"\r\n\r\nDarius looks over to you, \"What is your decision, Commander?\"",
+    "Icon": "uixTxrSpot_IncomingTransimission.png"
+  },
+  "Scope": "Company",
+  "Weight": 10,
+  "Requirements": {
+    "Scope": "Company",
+    "RequirementTags": {
+      "items": [],
+      "tagSetSourceFile": "Tags/CompanyTags"
+    },
+    "ExclusionTags": {
+      "items": [],
+      "tagSetSourceFile": "Tags/CompanyTags"
+    },
+    "RequirementComparisons": [
+      {
+        "obj": "Travel",
+        "op": "Equal",
+        "val": 0,
+        "valueConstant": "0"
+      }
+    ]
+  },
+  "AdditionalRequirements": [
+    {
+      "Scope": "StarSystem",
+      "RequirementTags": {
+        "items": [],
+        "tagSetSourceFile": ""
+      },
+      "ExclusionTags": {
+        "items": [
+          "planet_pop_none",
+          "planet_pop_small"
+        ],
+        "tagSetSourceFile": "Tags/PlanetTags"
+      }
+    }
+  ],
+  "AdditionalObjects": [],
+  "Options": [
+    {
+      "Description": {
+        "Id": "outcome_0",
+        "Name": "Decline Assessment",
+        "Details": "Non-participation"
+      },
+      "RequirementList": [],
+      "ResultSets": [
+        {
+          "Description": {
+            "Id": "outcome_0_0",
+            "Name": "Maybe another day...",
+            "Details": "You mull over everything Howe Zeng has just outlined to you, while glancing through the precise data on the noteputer.  As you hand the noteputer back to Darius, you turn towards Howe, \"I do appreciate your company sending you out this way, but I think we will wait for now.  I do not want to make a hasty decision and end up regretting the choice.  I do hope you understand.\"\r\n\r\nMr Zeng smiles sweetly, \"That is an understandable choice and one that many beforey you have also made.  I will arrange the partial refund of your consultation fee and please feel free to contact us again should you wish to proceed.\""
+          },
+          "Weight": 100,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [
+                  "gammapod_upgradeStart"
+                ],
+                "tagSetSourceFile": "Tags/CompanyTags"
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "90000",
+                  "set": false
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        }
+      ],
+      "Requirements": {
+        "Scope": "Company",
+        "RequirementTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        },
+        "ExclusionTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        }
+      }
+    },
+    {
+      "Description": {
+        "Id": "outcome_1",
+        "Name": "Unlock Gamma Pod Upgrade",
+        "Details": "[Cost Saver Package: ¢750,000]"
+      },
+      "RequirementList": [
+        {
+          "Scope": "Company",
+          "RequirementTags": {
+            "items": [],
+            "tagSetSourceFile": ""
+          },
+          "ExclusionTags": {
+            "items": [
+              "argo_pod3",
+              "gammapod_upgradeApproved"
+            ],
+            "tagSetSourceFile": ""
+          },
+          "RequirementComparisons": [
+            {
+              "obj": "Funds",
+              "op": "GreaterThanOrEqual",
+              "val": 1000000,
+              "valueConstant": "1000000"
+            }
+          ]
+        }
+      ],
+      "ResultSets": [
+        {
+          "Description": {
+            "Id": "outcome_1_0",
+            "Name": "On the Cheap",
+            "Details": "You mull over everything Howe Zeng has just outlined to you, while glancing through the precise data on the noteputer.  As you hand the noteputer back to Darius, you turn towards Howe, \"Thank you for this information.  I think we will need to go with the <i>Cost Saver Package</i>.  We are on a pretty tight budget and while I realise there are potential risks and issues, the savings will go towards keeping {COMPANY.CompanyName} afloat. Darius, make the arrangements.\"\r\n\r\nDarius nods as he escorts Mr Zeng back to her DropShip, \"Understood, Commander\"\r\n\r\n<color=#FFA200>GAMMA POD UPGRADE UNLOCKED\r\n\r\nVISIT ENGINEERING TO BEGIN UPGRADE CONSTRUCTION"
+          },
+          "Weight": 24,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "gammapod_upgradeApproved"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": "Tags/CompanyTags"
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-750000",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Morale",
+                  "value": "-20",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "26_Alpha",
+                  "value": "4",
+                  "set": true
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_1_1",
+            "Name": "On the Cheap",
+            "Details": "You mull over everything Howe Zeng has just outlined to you, while glancing through the precise data on the noteputer.  As you hand the noteputer back to Darius, you turn towards Howe, \"Thank you for this information.  I think we will need to go with the <i>Cost Saver Package</i>.  We are on a pretty tight budget and while I realise there are potential risks and issues, the savings will go towards keeping {COMPANY.CompanyName} afloat. Darius, make the arrangements.\"\r\n\r\nDarius nods as he escorts Mr Zeng back to her DropShip, \"Understood, Commander\"\r\n\r\n<color=#FFA200>GAMMA POD UPGRADE UNLOCKED\r\n\r\nVISIT ENGINEERING TO BEGIN UPGRADE CONSTRUCTION"
+          },
+          "Weight": 14,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "gammapod_upgradeApproved"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": "Tags/CompanyTags"
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-750000",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Morale",
+                  "value": "-20",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "26_Alpha",
+                  "value": "0",
+                  "set": true
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_1_2",
+            "Name": "On the Cheap",
+            "Details": "You mull over everything Howe Zeng has just outlined to you, while glancing through the precise data on the noteputer.  As you hand the noteputer back to Darius, you turn towards Howe, \"Thank you for this information.  I think we will need to go with the <i>Cost Saver Package</i>.  We are on a pretty tight budget and while I realise there are potential risks and issues, the savings will go towards keeping {COMPANY.CompanyName} afloat. Darius, make the arrangements.\"\r\n\r\nDarius nods as he escorts Mr Zeng back to her DropShip, \"Understood, Commander\"\r\n\r\n<color=#FFA200>GAMMA POD UPGRADE UNLOCKED\r\n\r\nVISIT ENGINEERING TO BEGIN UPGRADE CONSTRUCTION"
+          },
+          "Weight": 24,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "gammapod_upgradeApproved"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": "Tags/CompanyTags"
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-750000",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Morale",
+                  "value": "-20",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "26_Alpha",
+                  "value": "4",
+                  "set": true
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_1_3",
+            "Name": "On the Cheap",
+            "Details": "You mull over everything Howe Zeng has just outlined to you, while glancing through the precise data on the noteputer.  As you hand the noteputer back to Darius, you turn towards Howe, \"Thank you for this information.  I think we will need to go with the <i>Cost Saver Package</i>.  We are on a pretty tight budget and while I realise there are potential risks and issues, the savings will go towards keeping {COMPANY.CompanyName} afloat. Darius, make the arrangements.\"\r\n\r\nDarius nods as he escorts Mr Zeng back to her DropShip, \"Understood, Commander\"\r\n\r\n<color=#FFA200>GAMMA POD UPGRADE UNLOCKED\r\n\r\nVISIT ENGINEERING TO BEGIN UPGRADE CONSTRUCTION"
+          },
+          "Weight": 14,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "gammapod_upgradeApproved"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": "Tags/CompanyTags"
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-750000",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Morale",
+                  "value": "-20",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "26_Alpha",
+                  "value": "0",
+                  "set": true
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_1_4",
+            "Name": "On the Cheap",
+            "Details": "You mull over everything Howe Zeng has just outlined to you, while glancing through the precise data on the noteputer.  As you hand the noteputer back to Darius, you turn towards Howe, \"Thank you for this information.  I think we will need to go with the <i>Cost Saver Package</i>.  We are on a pretty tight budget and while I realise there are potential risks and issues, the savings will go towards keeping {COMPANY.CompanyName} afloat. Darius, make the arrangements.\"\r\n\r\nDarius nods as he escorts Mr Zeng back to her DropShip, \"Understood, Commander\"\r\n\r\n<color=#FFA200>GAMMA POD UPGRADE UNLOCKED\r\n\r\nVISIT ENGINEERING TO BEGIN UPGRADE CONSTRUCTION"
+          },
+          "Weight": 24,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "gammapod_upgradeApproved"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": "Tags/CompanyTags"
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-750000",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Morale",
+                  "value": "-20",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "26_Alpha",
+                  "value": "4",
+                  "set": true
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        }
+      ],
+      "Requirements": {
+        "Scope": "Company",
+        "RequirementTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        },
+        "ExclusionTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        }
+      }
+    },
+    {
+      "Description": {
+        "Id": "outcome_2",
+        "Name": "Unlock Gamma Pod Upgrade",
+        "Details": "[Standard Package: ¢2,250,000]"
+      },
+      "RequirementList": [
+        {
+          "Scope": "Company",
+          "RequirementTags": {
+            "items": [],
+            "tagSetSourceFile": ""
+          },
+          "ExclusionTags": {
+            "items": [
+              "argo_pod3",
+              "gammapod_upgradeApproved"
+            ],
+            "tagSetSourceFile": ""
+          },
+          "RequirementComparisons": [
+            {
+              "obj": "Funds",
+              "op": "GreaterThanOrEqual",
+              "val": 3000000,
+              "valueConstant": "3000000"
+            }
+          ]
+        }
+      ],
+      "ResultSets": [
+        {
+          "Description": {
+            "Id": "outcome_2_0",
+            "Name": "Status Quo",
+            "Details": "You mull over everything Howe Zeng has just outlined to you, while glancing through the precise data on the noteputer.  As you hand the noteputer back to Darius, you turn towards Howe, \"Thank you for this information.  I think we will go with the <i>Standard Package</i>.  We are on a budget, but not one that puts higher risk at a lower cost. Darius, make the arrangements.\"\r\n\r\nDarius nods as he escorts Mr Zeng back to her DropShip, \"Understood, Commander\"\r\n\r\n<color=#FFA200>GAMMA POD UPGRADE UNLOCKED\r\n\r\nVISIT ENGINEERING TO BEGIN UPGRADE CONSTRUCTION"
+          },
+          "Weight": 16,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "gammapod_upgradeApproved"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": "Tags/CompanyTags"
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-2250000",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "26_Alpha",
+                  "value": "0",
+                  "set": true
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_2_1",
+            "Name": "Status Quo",
+            "Details": "You mull over everything Howe Zeng has just outlined to you, while glancing through the precise data on the noteputer.  As you hand the noteputer back to Darius, you turn towards Howe, \"Thank you for this information.  I think we will go with the <i>Standard Package</i>.  We are on a budget, but not one that puts higher risk at a lower cost. Darius, make the arrangements.\"\r\n\r\nDarius nods as he escorts Mr Zeng back to her DropShip, \"Understood, Commander\"\r\n\r\n<color=#FFA200>GAMMA POD UPGRADE UNLOCKED\r\n\r\nVISIT ENGINEERING TO BEGIN UPGRADE CONSTRUCTION"
+          },
+          "Weight": 5,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "gammapod_upgradeApproved"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": "Tags/CompanyTags"
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-2250000",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "26_Alpha",
+                  "value": "4",
+                  "set": true
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_2_2",
+            "Name": "Status Quo",
+            "Details": "You mull over everything Howe Zeng has just outlined to you, while glancing through the precise data on the noteputer.  As you hand the noteputer back to Darius, you turn towards Howe, \"Thank you for this information.  I think we will go with the <i>Standard Package</i>.  We are on a budget, but not one that puts higher risk at a lower cost. Darius, make the arrangements.\"\r\n\r\nDarius nods as he escorts Mr Zeng back to her DropShip, \"Understood, Commander\"\r\n\r\n<color=#FFA200>GAMMA POD UPGRADE UNLOCKED\r\n\r\nVISIT ENGINEERING TO BEGIN UPGRADE CONSTRUCTION"
+          },
+          "Weight": 16,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "gammapod_upgradeApproved"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": "Tags/CompanyTags"
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-2250000",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "26_Alpha",
+                  "value": "0",
+                  "set": true
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_2_3",
+            "Name": "Status Quo",
+            "Details": "You mull over everything Howe Zeng has just outlined to you, while glancing through the precise data on the noteputer.  As you hand the noteputer back to Darius, you turn towards Howe, \"Thank you for this information.  I think we will go with the <i>Standard Package</i>.  We are on a budget, but not one that puts higher risk at a lower cost. Darius, make the arrangements.\"\r\n\r\nDarius nods as he escorts Mr Zeng back to her DropShip, \"Understood, Commander\"\r\n\r\n<color=#FFA200>GAMMA POD UPGRADE UNLOCKED\r\n\r\nVISIT ENGINEERING TO BEGIN UPGRADE CONSTRUCTION"
+          },
+          "Weight": 5,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "gammapod_upgradeApproved"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": "Tags/CompanyTags"
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-2250000",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "26_Alpha",
+                  "value": "4",
+                  "set": true
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_2_4",
+            "Name": "Status Quo",
+            "Details": "You mull over everything Howe Zeng has just outlined to you, while glancing through the precise data on the noteputer.  As you hand the noteputer back to Darius, you turn towards Howe, \"Thank you for this information.  I think we will go with the <i>Standard Package</i>.  We are on a budget, but not one that puts higher risk at a lower cost. Darius, make the arrangements.\"\r\n\r\nDarius nods as he escorts Mr Zeng back to her DropShip, \"Understood, Commander\"\r\n\r\n<color=#FFA200>GAMMA POD UPGRADE UNLOCKED\r\n\r\nVISIT ENGINEERING TO BEGIN UPGRADE CONSTRUCTION"
+          },
+          "Weight": 16,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "gammapod_upgradeApproved"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": "Tags/CompanyTags"
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-2250000",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "26_Alpha",
+                  "value": "0",
+                  "set": true
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_2_5",
+            "Name": "Status Quo",
+            "Details": "You mull over everything Howe Zeng has just outlined to you, while glancing through the precise data on the noteputer.  As you hand the noteputer back to Darius, you turn towards Howe, \"Thank you for this information.  I think we will go with the <i>Standard Package</i>.  We are on a budget, but not one that puts higher risk at a lower cost. Darius, make the arrangements.\"\r\n\r\nDarius nods as he escorts Mr Zeng back to her DropShip, \"Understood, Commander\"\r\n\r\n<color=#FFA200>GAMMA POD UPGRADE UNLOCKED\r\n\r\nVISIT ENGINEERING TO BEGIN UPGRADE CONSTRUCTION"
+          },
+          "Weight": 5,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "gammapod_upgradeApproved"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": "Tags/CompanyTags"
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-2250000",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "26_Alpha",
+                  "value": "4",
+                  "set": true
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_2_6",
+            "Name": "Status Quo",
+            "Details": "You mull over everything Howe Zeng has just outlined to you, while glancing through the precise data on the noteputer.  As you hand the noteputer back to Darius, you turn towards Howe, \"Thank you for this information.  I think we will go with the <i>Standard Package</i>.  We are on a budget, but not one that puts higher risk at a lower cost. Darius, make the arrangements.\"\r\n\r\nDarius nods as he escorts Mr Zeng back to her DropShip, \"Understood, Commander\"\r\n\r\n<color=#FFA200>GAMMA POD UPGRADE UNLOCKED\r\n\r\nVISIT ENGINEERING TO BEGIN UPGRADE CONSTRUCTION"
+          },
+          "Weight": 16,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "gammapod_upgradeApproved"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": "Tags/CompanyTags"
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-2250000",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "26_Alpha",
+                  "value": "0",
+                  "set": true
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_2_7",
+            "Name": "Status Quo",
+            "Details": "You mull over everything Howe Zeng has just outlined to you, while glancing through the precise data on the noteputer.  As you hand the noteputer back to Darius, you turn towards Howe, \"Thank you for this information.  I think we will go with the <i>Standard Package</i>.  We are on a budget, but not one that puts higher risk at a lower cost. Darius, make the arrangements.\"\r\n\r\nDarius nods as he escorts Mr Zeng back to her DropShip, \"Understood, Commander\"\r\n\r\n<color=#FFA200>GAMMA POD UPGRADE UNLOCKED\r\n\r\nVISIT ENGINEERING TO BEGIN UPGRADE CONSTRUCTION"
+          },
+          "Weight": 5,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "gammapod_upgradeApproved"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": "Tags/CompanyTags"
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-2250000",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "26_Alpha",
+                  "value": "4",
+                  "set": true
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_2_8",
+            "Name": "Status Quo",
+            "Details": "You mull over everything Howe Zeng has just outlined to you, while glancing through the precise data on the noteputer.  As you hand the noteputer back to Darius, you turn towards Howe, \"Thank you for this information.  I think we will go with the <i>Standard Package</i>.  We are on a budget, but not one that puts higher risk at a lower cost. Darius, make the arrangements.\"\r\n\r\nDarius nods as he escorts Mr Zeng back to her DropShip, \"Understood, Commander\"\r\n\r\n<color=#FFA200>GAMMA POD UPGRADE UNLOCKED\r\n\r\nVISIT ENGINEERING TO BEGIN UPGRADE CONSTRUCTION"
+          },
+          "Weight": 16,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "gammapod_upgradeApproved"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": "Tags/CompanyTags"
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-2250000",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "26_Alpha",
+                  "value": "0",
+                  "set": true
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        }
+      ],
+      "Requirements": {
+        "Scope": "Company",
+        "RequirementTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        },
+        "ExclusionTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        }
+      }
+    },
+    {
+      "Description": {
+        "Id": "outcome_3",
+        "Name": "Unlock Gamma Pod Upgrade",
+        "Details": "[Premium Package: ¢6,750,000]"
+      },
+      "RequirementList": [
+        {
+          "Scope": "Company",
+          "RequirementTags": {
+            "items": [],
+            "tagSetSourceFile": ""
+          },
+          "ExclusionTags": {
+            "items": [
+              "argo_pod3",
+              "gammapod_upgradeApproved"
+            ],
+            "tagSetSourceFile": ""
+          },
+          "RequirementComparisons": [
+            {
+              "obj": "Funds",
+              "op": "GreaterThanOrEqual",
+              "val": 7000000,
+              "valueConstant": "7000000"
+            }
+          ]
+        }
+      ],
+      "ResultSets": [
+        {
+          "Description": {
+            "Id": "outcome_3_0",
+            "Name": "All the Frills",
+            "Details": "You mull over everything Howe Zeng has just outlined to you, while glancing through the precise data on the noteputer.  As you hand the noteputer back to Darius, you turn towards Howe, \"Thank you for this information.  I think we will going to lash out and go with the <i>Premium Package</i>.  The higher quality workmanship and zero risk will boost morale which benefit {COMPANY.CompanyName} immensely. Darius, make the arrangements.\"\r\n\r\nDarius nods as he escorts Mr Zeng back to her DropShip, \"Understood, Commander\"\r\n\r\n<color=#FFA200>GAMMA POD UPGRADE UNLOCKED\r\n\r\nVISIT ENGINEERING TO BEGIN UPGRADE CONSTRUCTION"
+          },
+          "Weight": 100,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "gammapod_upgradeApproved"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": "Tags/CompanyTags"
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Funds",
+                  "value": "-6750000",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Morale",
+                  "value": "10",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "26_Alpha",
+                  "value": "0",
+                  "set": true
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            }
+          ]
+        }
+      ],
+      "Requirements": {
+        "Scope": "Company",
+        "RequirementTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        },
+        "ExclusionTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        }
+      }
+    }
+  ],
+  "PublishState": "PUBLISHED",
+  "ValidationState": "UNTESTED",
+  "EventType": "UNSELECTABLE",
+  "OneTimeEvent": true,
+  "Tags": {
+    "items": [],
+    "tagSetSourceFile": "tags/EventTags"
+  }
+}

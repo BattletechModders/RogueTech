@@ -6,11 +6,13 @@
       }
     ],
     "BonusDescriptions": [
+      "MissileProtection: 50%",
+      "AreaOfEffectDmgTaken: -50%",
+      "TADTakenMod: -100%",
+      "TACChance: -90%",
+      "Reserved: 7",
       "CASE",
       "CASEVENT: 100, 200",
-      "KineticProtection: 20%",
-      "TACImmune",
-      "Reserved: 5",
       "ArmorTPCost: x1.3",
       "ArmorCBCost: x1.5"
     ],
@@ -18,27 +20,19 @@
       "not_broken"
     ],
     "DynamicSlots": {
-      "ReservedSlots": 5,
+      "ReservedSlots": 7,
       "BackgroundColor": "GoldHalf",
       "ShowIcon": false,
       "NameText": "Reactive Plating",
       "BonusAText": "Dynamic Slot",
       "BonusBText": " "
     },
-    "CASE": {
-      "AllLocations": true
-    },
-    "ExplosionProtectionHeat": {
-      "MaximumDamage": 100,
-      "AllLocations": true
-    },
-    "ExplosionProtectionStability": {
-      "MaximumDamage": 200,
-      "AllLocations": true
-    },
     "ArmorRepair": {
       "ArmorTPCost": 1.3,
       "ArmorCBCost": 1.5
+    },
+    "CASE": {
+      "AllLocations": true
     },
     "WorkOrderCosts": {
       "Install": {
@@ -47,7 +41,15 @@
       }
     },
     "IBLS": {
-      "StorageSize": 6
+      "StorageSize": 8
+    },
+    "ExplosionProtectionHeat": {
+      "MaximumDamage": 100,
+      "AllLocations": true
+    },
+    "ExplosionProtectionStability": {
+      "MaximumDamage": 200,
+      "AllLocations": true
     },
     "Color": "Gold"
   },
@@ -91,16 +93,17 @@
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "StatusEffect-ReactiveBonus1",
-        "Name": "Reactive Plating (C): Decreased Ballistic Damage Taken",
+        "Id": "StatusEffect-ReactiveBonus2",
+        "Name": "Reactive Plating (C): Decreased Missile Damage Taken",
         "Details": "Takes less Energy Damage.",
         "Icon": "uixSvgIcon_mwFury"
       },
       "statisticData": {
-        "statName": "DamageReductionMultiplierBallistic",
+        "statName": "DamageReductionMultiplierMissile",
         "operation": "Float_Multiply",
-        "modValue": "0.8",
-        "modType": "System.Single"
+        "modValue": "0.5",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     },
     {
@@ -117,16 +120,17 @@
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "StatusEffect-ReactiveBonus2",
-        "Name": "Reactive Plating (C): Decreased Missile Damage Taken",
-        "Details": "Takes less Energy Damage.",
-        "Icon": "uixSvgIcon_mwFury"
+        "Id": "PaddingEffect_1",
+        "Name": "Reactive Plating (C): Decreased AP Damage",
+        "Details": "This unit resists critical hits.",
+        "Icon": "UixSvgIcon_specialEquip_System"
       },
       "statisticData": {
-        "statName": "DamageReductionMultiplierMissile",
+        "statName": "CACAPDamageMult",
         "operation": "Float_Multiply",
-        "modValue": "0.8",
-        "modType": "System.Single"
+        "modValue": "0",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     },
     {
@@ -137,21 +141,23 @@
       "targetingData": {
         "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
+        "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "HardenedCritImmune",
-        "Name": "Reactive Plating (C): TAC Immune",
-        "Details": "MORE SPEED.",
-        "Icon": "uixSvgIcon_run_n_gun"
+        "Id": "PaddingEffect_2",
+        "Name": "Reactive Plating (C): Decreased Receive AP Crit Chance",
+        "Details": "This unit resists through armor damage",
+        "Icon": "UixSvgIcon_specialEquip_System"
       },
       "statisticData": {
-        "statName": "CACAPProtection",
-        "operation": "Set",
-        "modValue": "true",
-        "modType": "System.Boolean"
+        "statName": "CAC_APCritChance",
+        "operation": "Float_Multiply",
+        "modValue": "0.1",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     }
   ],

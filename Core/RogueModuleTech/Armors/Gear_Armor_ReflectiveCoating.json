@@ -6,8 +6,11 @@
       }
     ],
     "BonusDescriptions": [
-      "EnergyProtection: 30%",
-      "KineticProtection: -10%",
+      "EnergyProtection: 50%",
+      "MeleeDamageTaken: +100%",
+      "AreaOfEffectDmgTaken: +100%",
+      "TADTakenMod: +20%",
+      "TACChance: +33%",
       "Reserved: 10",
       "ArmorTPCost: x1.2",
       "ArmorCBCost: x1.4"
@@ -86,8 +89,9 @@
       "statisticData": {
         "statName": "DamageReductionMultiplierEnergy",
         "operation": "Float_Multiply",
-        "modValue": "0.7",
-        "modType": "System.Single"
+        "modValue": "0.5",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     },
     {
@@ -104,16 +108,17 @@
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "StatusEffect-Reflectivepenalty1",
-        "Name": "Reflective Coating: Increased Ballistic Damage Taken",
-        "Details": "Takes less Energy Damage.",
-        "Icon": "uixSvgIcon_mwFury"
+        "Id": "Spall_Liner_Effect2",
+        "Name": "Reflective Coating: Increased AoE Damage Taken",
+        "Details": "Chassis takes less Damage",
+        "Icon": "uixSvgIcon_roomMechBay"
       },
       "statisticData": {
-        "statName": "DamageReductionMultiplierBallistic",
-        "operation": "Float_Multiply",
-        "modValue": "1.1",
-        "modType": "System.Single"
+        "statName": "CACAoEDamageMult",
+        "operation": "Float_Add",
+        "modValue": "1",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     },
     {
@@ -130,16 +135,314 @@
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "StatusEffect-Reflectivepenalty2",
-        "Name": "Reflective Coating: Increased Missile Damage Taken",
-        "Details": "Takes less Energy Damage.",
+        "Id": "MeleeResistPunch",
+        "Name": "Reflective Coating: Increased Punch Damage Taken",
+        "Details": "All incoming Melee damage reduced, extra Melee Damage.",
         "Icon": "uixSvgIcon_mwFury"
       },
       "statisticData": {
-        "statName": "DamageReductionMultiplierMissile",
+        "statName": "CBTBE_Punch_Target_Damage_Reduction_Multi",
         "operation": "Float_Multiply",
-        "modValue": "1.1",
-        "modType": "System.Single"
+        "modValue": "2",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "MeleeResistPunchStab",
+        "Name": "Reflective Coating: Increased Punch Stability Damage Taken",
+        "Details": "All incoming Melee damage reduced, extra Melee Damage.",
+        "Icon": "uixSvgIcon_mwFury"
+      },
+      "statisticData": {
+        "statName": "CBTBE_Punch_Target_Instability_Reduction_Multi",
+        "operation": "Float_Multiply",
+        "modValue": "2",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "MeleeResistKick",
+        "Name": "Reflective Coating: Increased Kick Damage Taken",
+        "Details": "All incoming Melee damage reduced, extra Melee Damage.",
+        "Icon": "uixSvgIcon_mwFury"
+      },
+      "statisticData": {
+        "statName": "CBTBE_Kick_Target_Damage_Reduction_Multi",
+        "operation": "Float_Multiply",
+        "modValue": "2",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "MeleeResistKickStab",
+        "Name": "Reflective Coating: Increased Kick Stability Taken",
+        "Details": "All incoming Melee damage reduced, extra Melee Damage.",
+        "Icon": "uixSvgIcon_mwFury"
+      },
+      "statisticData": {
+        "statName": "CBTBE_Kick_Target_Instability_Reduction_Multi",
+        "operation": "Float_Multiply",
+        "modValue": "2",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "MeleeResistPhysDmg",
+        "Name": "Reflective Coating: Increased Physical Weapon Damage Taken",
+        "Details": "All incoming Melee damage reduced, extra Melee Damage.",
+        "Icon": "uixSvgIcon_mwFury"
+      },
+      "statisticData": {
+        "statName": "CBTBE_Physical_Weapon_Target_Damage_Reduction_Multi",
+        "operation": "Float_Multiply",
+        "modValue": "2",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "MeleeResistPhysStab",
+        "Name": "Reflective Coating: Increased Physical Weapon Stability Damage Taken",
+        "Details": "All incoming Melee damage reduced, extra Melee Damage.",
+        "Icon": "uixSvgIcon_mwFury"
+      },
+      "statisticData": {
+        "statName": "CBTBE_Physical_Weapon_Target_Instability_Reduction_Multi",
+        "operation": "Float_Multiply",
+        "modValue": "2",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "MeleeResist",
+        "Name": "Reflective Coating: Increased Charge Damage Taken",
+        "Details": "All incoming Melee damage reduced, extra Melee Damage.",
+        "Icon": "uixSvgIcon_mwFury"
+      },
+      "statisticData": {
+        "statName": "CBTBE_Charge_Target_Damage_Reduction_Multi",
+        "operation": "Float_Multiply",
+        "modValue": "2",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "MeleeResistChargeStab",
+        "Name": "Reflective Coating: Increased Charge Stability Damage Taken",
+        "Details": "All incoming Melee damage reduced, extra Melee Damage.",
+        "Icon": "uixSvgIcon_mwFury"
+      },
+      "statisticData": {
+        "statName": "CBTBE_Charge_Target_Instability_Reduction_Multi",
+        "operation": "Float_Multiply",
+        "modValue": "2",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "MeleeResistDFA",
+        "Name": "Reflective Coating: Increased DFA Damage Taken",
+        "Details": "All incoming Melee damage reduced, extra Melee Damage.",
+        "Icon": "uixSvgIcon_mwFury"
+      },
+      "statisticData": {
+        "statName": "CBTBE_DFA_Target_Damage_Reduction_Multi",
+        "operation": "Float_Multiply",
+        "modValue": "2",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "MeleeResistDFAStab",
+        "Name": "Reflective Coating: Increased DFA Stability Damage Taken",
+        "Details": "All incoming Melee damage reduced, extra Melee Damage.",
+        "Icon": "uixSvgIcon_mwFury"
+      },
+      "statisticData": {
+        "statName": "CBTBE_DFA_Target_Instability_Reduction_Multi",
+        "operation": "Float_Multiply",
+        "modValue": "2",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "PaddingEffect_1",
+        "Name": "Reflective Coating: Increased AP Damage",
+        "Details": "This unit resists critical hits.",
+        "Icon": "UixSvgIcon_specialEquip_System"
+      },
+      "statisticData": {
+        "statName": "CACAPDamageMult",
+        "operation": "Float_Multiply",
+        "modValue": "1.2",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "PaddingEffect_2",
+        "Name": "Reflective Coating: Increased Receive AP Crit Chance",
+        "Details": "This unit resists through armor damage",
+        "Icon": "UixSvgIcon_specialEquip_System"
+      },
+      "statisticData": {
+        "statName": "CAC_APCritChance",
+        "operation": "Float_Multiply",
+        "modValue": "1.33",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     }
   ],

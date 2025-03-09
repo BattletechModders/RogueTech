@@ -5,32 +5,35 @@
         "CategoryID": "Armor"
       }
     ],
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.055 * [[Chassis.Tonnage]]",
-        "CBillCost": "60 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
     "BonusDescriptions": [
-      "TACImmune",
+      "TADTakenMod: -66%",
+      "TACChance: -66%",
       "DamageTaken: -5%",
       "ArmorFactor: +20%",
       "FixedSlots: 8",
       "ArmorTPCost: x1",
       "ArmorCBCost: x1.2"
     ],
+    "Flags": [
+      "not_broken"
+    ],
+    "Weights": {
+      "ArmorFactor": 1.2
+    },
     "ArmorRepair": {
       "ArmorTPCost": 1.0,
       "ArmorCBCost": 1.2
     },
-    "Color": "Gold",
-    "CriticalEffects": { },
-    "Flags": [
-      "not_broken"
-    ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.055 * [[Chassis.Tonnage]]",
+        "CBillCost": "60 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
     "IBLS": {
       "StorageSize": 9
     },
+    "CriticalEffects": { },
     "Linked": {
       "Links": [
         {
@@ -67,9 +70,7 @@
         }
       ]
     },
-    "Weights": {
-      "ArmorFactor": 1.2
-    }
+    "Color": "Gold"
   },
   "Description": {
     "Cost": 299999,
@@ -105,21 +106,50 @@
       "targetingData": {
         "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
+        "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "HardenedCritImmune",
-        "Name": "Duralast QS: TAC Immune",
-        "Details": "MORE SPEED.",
-        "Icon": "uixSvgIcon_run_n_gun"
+        "Id": "PaddingEffect_1",
+        "Name": "Duralast QS: Decreased AP Damage",
+        "Details": "This unit resists critical hits.",
+        "Icon": "UixSvgIcon_specialEquip_System"
       },
       "statisticData": {
-        "statName": "CACAPProtection",
-        "operation": "Set",
-        "modValue": "true",
-        "modType": "System.Boolean"
+        "statName": "CACAPDamageMult",
+        "operation": "Float_Multiply",
+        "modValue": "0.33",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "PaddingEffect_2",
+        "Name": "Duralast QS: Decreased Receive AP Crit Chance",
+        "Details": "This unit resists through armor damage",
+        "Icon": "UixSvgIcon_specialEquip_System"
+      },
+      "statisticData": {
+        "statName": "CAC_APCritChance",
+        "operation": "Float_Multiply",
+        "modValue": "0.33",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     },
     {
@@ -145,7 +175,8 @@
         "statName": "DamageReductionMultiplierAll",
         "operation": "Float_Multiply",
         "modValue": "0.95",
-        "modType": "System.Single"
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     },
     {
@@ -171,7 +202,8 @@
         "statName": "CACAoEDamageMult",
         "operation": "Float_Multiply",
         "modValue": "0.95",
-        "modType": "System.Single"
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
       }
     }
   ],

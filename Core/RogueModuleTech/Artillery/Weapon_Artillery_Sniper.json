@@ -17,10 +17,12 @@
       "ArtilleryMode",
       "FlakMode",
       "DirectMode: -4",
+      "GuidedMode",
       "WpnRecoil: 3",
       "ForbiddenRangeMode: 180, Indirect",
-      "ForbiddenRangeMode: 90, Direct",
-      "BraceToFireMode: 48, Direct & Flak"
+      "ForbiddenRangeMode: 90, Direct & Guided",
+      "BraceToFireMode: 48, Direct & Guided & Flak",
+      "WeaponShardsModRange: 1, 4"
     ],
     "Flags": [
       "not_broken"
@@ -44,7 +46,7 @@
   "HeatGenerated": 30,
   "Damage": 100,
   "HeatDamage": 0,
-  "Instability": 25,
+  "Instability": 20,
   "DamageVariance": 0,
   "AccuracyModifier": 0,
   "EvasivePipsIgnored": 0,
@@ -52,15 +54,14 @@
   "OverheatedDamageMultiplier": 0,
   "EvasiveDamageMultiplier": 0,
   "CriticalChanceMultiplier": 1,
-  "APArmorShardsMod": 1,
-  "APMaxArmorThickness": 200,
-  "APCriticalChanceMultiplier": 0.5,
+  "APArmorShardsMod": 3,
+  "APCriticalChanceMultiplier": 0.1,
   "AOEEffectsFalloff": true,
   "ShotsWhenFired": 1,
   "ProjectilesPerShot": 1,
   "AMSImmune": true,
   "ImprovedBallistic": true,
-  "GunneryJammingMult": 0.01,
+  "GunneryJammingMult": 0.005,
   "GunneryJammingBase": 1,
   "FireTerrainChance": 0.0585,
   "AttackRecoil": 5,
@@ -130,6 +131,57 @@
             "modType": "System.Single"
           }
         }
+      ],
+      "RestrictedAmmo": [
+        "Ammunition_Sniper_Copperhead"
+      ]
+    },
+    {
+      "Id": "guided",
+      "UIName": "Guided",
+      "Description": "Fire Guided munitions at a targets marked by a target designator, minimum range 90.",
+      "isBaseMode": false,
+      "MissBehavior": "Guided",
+      "AccuracyModifier": 100,
+      "DirectFireModifier": 0,
+      "ForbiddenRange": 90,
+      "MinMissRadius": 25,
+      "MaxMissRadius": 50,
+      "IndirectFireCapable": true,
+      "AlwaysIndirectVisuals": false,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": 1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "OnWeaponFire",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "WeaponEffect-SelfInstability_OnFire",
+            "Name": "Sniper Artillery / Guided: Increased Self Instability on Fire",
+            "Details": "Tubthumping",
+            "Icon": "uixSvgIcon_run_n_gun"
+          },
+          "statisticData": {
+            "statName": "SelfInstability_OnFire",
+            "operation": "Float_Add",
+            "modValue": "48",
+            "modType": "System.Single"
+          }
+        }
+      ],
+      "RestrictedAmmo": [
+        "Ammunition_Sniper",
+        "Ammunition_Sniper_Inferno",
+        "Ammunition_Sniper_Nuke",
+        "Ammunition_Sniper_SolidSlug",
+        "Ammunition_Sniper_Shaped"
       ]
     },
     {
@@ -182,6 +234,7 @@
         }
       ],
       "RestrictedAmmo": [
+        "Ammunition_Sniper_Copperhead",
         "Ammunition_Sniper_Inferno",
         "Ammunition_Sniper_Nuke",
         "Ammunition_Sniper_SolidSlug",
@@ -208,6 +261,7 @@
       "ArtilleryReticleRadius": 120,
       "ArtilleryReticleText": "Sniper Artillery",
       "RestrictedAmmo": [
+        "Ammunition_Sniper_Copperhead",
         "Ammunition_Sniper_SolidSlug",
         "Ammunition_Sniper_Shaped"
       ]
