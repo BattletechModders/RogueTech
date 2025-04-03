@@ -12,21 +12,240 @@
       },
       {
         "CategoryID": "LegFootActuator"
-      },
-      {
-        "CategoryID": "TSM"
       }
     ],
     "BonusDescriptions": [
       "ChassisBasedWeight: 2%",
-      "WalkSpeed: +9m",
-      "StabThreshhold: -5",
-      "CASE",
-      "CASEVENT: 150, 300"
+      "RAAC",
+      "StabMode",
+      "StabModeWalk: -90%",
+      "StabModeInstability: +25%",
+      "StabModeInstabilityMult: -20%",
+      "StabModeInstabOnFire: -25",
+      "FastMode",
+      "FastModeInstability: -20%",
+      "FastModeSprint: +50%",
+      "FailChance: 5%",
+      "FailChanceTurn: 15%",
+      "FailCritSelf",
+      "FailReducPilot"
     ],
+    "Linked": {
+      "Links": [
+        {
+          "ComponentDefId": "Linked_Actuator_Adaptive_Actuator_Core",
+          "Location": "LeftLeg"
+        }
+      ]
+    },
     "Flags": [
       "not_broken"
     ],
+    "ActivatableComponent": {
+      "ButtonName": "Run",
+      "CanNotBeActivatedManualy": false,
+      "CanActivateAfterMove": false,
+      "CanActivateAfterFire": false,
+      "ActiveByDefault": true,
+      "SafeActivation": false,
+      "ActivationMessage": "Fast-Mode",
+      "DeactivationMessage": "Stable-Mode",
+      "NoUniqueCheck": true,
+      "FailFlatChance": 0.05,
+        "FailRoundsStart": 1,
+        "FailChancePerTurn": 0.15,
+        "FailCritComponents": true,
+        "FailCritLocations": [
+          "RightLeg","LeftLeg"
+        ],
+        "FailCritExcludeComponentsTags": [],
+        "FailPilotingBase": 1,
+        "FailPilotingMult": 0.02,
+        "SelfCrit": true,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "RAACFastModeWalk",
+            "Name": "RAAC : Negate Walk Mode",
+            "Details": "Slows mech down but makes it more stable",
+            "Icon": "mechanicaljump"
+          },
+          "statisticData": {
+            "statName": "WalkSpeed",
+            "operation": "Float_Multiply",
+            "modValue": "10",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "RAACStableModeJump",
+            "Name": "RAAC : Negate Walk Mode",
+            "Details": "Slows mech down but makes it more stable",
+            "Icon": "mechanicaljump"
+          },
+          "statisticData": {
+            "statName": "JumpDistanceMultiplier",
+            "operation": "Float_Multiply",
+            "modValue": "100",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "RAACStableModeStability",
+            "Name": "RAAC : Negate Walk Stablity",
+            "Details": "Slows mech down but makes it more stable",
+            "Icon": "mechanicaljump"
+          },
+          "statisticData": {
+            "statName": "ReceivedInstabilityMultiplier",
+            "operation": "Float_Multiply",
+            "modValue": "1.25",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "RAACStabilityThreshold",
+            "Name": "RAAC: Negate Walk Unsteady",
+            "Details": "Provides 70 stability and -20% stability damage taken.",
+            "Icon": "uixSvgIcon_equipment_Gyro"
+          },
+          "statisticData": {
+            "statName": "UnsteadyThreshold",
+            "operation": "Float_Multiply",
+            "modValue": "0.8",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": 1,
+            "stackLimit": 5
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "Reduction-SelfInstability_OnFire",
+            "Name": "RAAC: Negate Walk Mode OnFire Instabilty",
+            "Details": "Tubthumping",
+            "Icon": "uixSvgIcon_run_n_gun"
+          },
+          "statisticData": {
+            "statName": "SelfInstability_OnFire",
+            "operation": "Float_Add",
+            "modValue": "25",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "SpeedyLegInstability",
+            "Name": "Adaptive Actuator Core: Increased Unsteady Threshold",
+            "Details": "Leg actuator replacement speed",
+            "Icon": "uixSvgIcon_action_evasivemove"
+          },
+          "statisticData": {
+            "statName": "UnsteadyThreshold",
+            "operation": "Float_Add",
+            "modValue": "-10",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": true,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "SpeedyLegWalkRISC",
+            "Name": "Adaptive Actuator Core: Increased Walk Speed",
+            "Details": "Faster Walk Speed",
+            "Icon": "mechanicaljump"
+          },
+          "statisticData": {
+            "statName": "CBTBE_RunMultiMod",
+            "operation": "Float_Add",
+            "modValue": "0.50",
+            "modType": "System.Single"
+          }
+        }
+      ]
+    },
     "Weights": {
       "ComponentByChassisFactor": 0.02
     },
@@ -39,12 +258,6 @@
     },
     "IBLS": {
       "StorageSize": 4
-    },
-    "ExplosionProtectionHeat": {
-      "MaximumDamage": 150
-    },
-    "ExplosionProtectionStability": {
-      "MaximumDamage": 300
     },
     "CriticalEffects": {
       "OnDestroyedEffectIDs": [
@@ -99,10 +312,36 @@
   "BattleValue": 0,
   "InventorySize": 4,
   "Tonnage": 0,
-  "AllowedLocations": "Arms, Legs",
+  "AllowedLocations": "RightLeg",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
   "statusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": true
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "RAACStableModeWalk",
+        "Name": "RAAC : Slows mech down, More stable",
+        "Details": "Slows mech down but makes it more stable",
+        "Icon": "mechanicaljump"
+      },
+      "statisticData": {
+        "statName": "WalkSpeed",
+        "operation": "Float_Multiply",
+        "modValue": "0.10",
+        "modType": "System.Single"
+      }
+    },
     {
       "durationData": {
         "duration": -1,
@@ -117,15 +356,15 @@
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "SpeedyLegInstability",
-        "Name": "Adaptive Actuator Core: Increased Unsteady Threshold",
-        "Details": "Leg actuator replacement speed",
-        "Icon": "uixSvgIcon_action_evasivemove"
+        "Id": "RAACStableModeJump",
+        "Name": "RAAC : Slows mech down, More stable",
+        "Details": "Slows mech down but makes it more stable",
+        "Icon": "mechanicaljump"
       },
       "statisticData": {
-        "statName": "UnsteadyThreshold",
-        "operation": "Float_Add",
-        "modValue": "-5",
+        "statName": "JumpDistanceMultiplier",
+        "operation": "Float_Multiply",
+        "modValue": "0.10",
         "modType": "System.Single"
       }
     },
@@ -137,21 +376,72 @@
       "targetingData": {
         "effectTriggerType": "Passive",
         "effectTargetType": "Creator",
-        "showInTargetPreview": true,
+        "showInTargetPreview": false,
         "showInStatusPanel": false
       },
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "SpeedyLegWalkRISC",
-        "Name": "Adaptive Actuator Core: Increased Walk Speed",
-        "Details": "Faster Walk Speed",
+        "Id": "RAACStableModeStability",
+        "Name": "RAAC : Slows mech down, More stable",
+        "Details": "Slows mech down but makes it more stable",
         "Icon": "mechanicaljump"
       },
       "statisticData": {
-        "statName": "WalkSpeed",
+        "statName": "ReceivedInstabilityMultiplier",
+        "operation": "Float_Multiply",
+        "modValue": "0.8",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "RAACStabilityThreshold",
+        "Name": "RAAC: Increased Unsteady Threshold",
+        "Details": "Provides 70 stability and -25% stability damage taken.",
+        "Icon": "uixSvgIcon_equipment_Gyro"
+      },
+      "statisticData": {
+        "statName": "UnsteadyThreshold",
+        "operation": "Float_Multiply",
+        "modValue": "1.25",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": 1,
+        "stackLimit": 5
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "Reduction-SelfInstability_OnFire",
+        "Name": "RAAC: Decreased Self Instability on Fire",
+        "Details": "Tubthumping",
+        "Icon": "uixSvgIcon_run_n_gun"
+      },
+      "statisticData": {
+        "statName": "SelfInstability_OnFire",
         "operation": "Float_Add",
-        "modValue": "9",
+        "modValue": "-25",
         "modType": "System.Single"
       }
     }
@@ -160,9 +450,10 @@
     "items": [
       "component_type_stock",
       "LootMagnetBlacklist",
-      "TSM",
+      "QuadIncompatible",
       "SquadIncompatible"
     ],
     "tagSetSourceFile": ""
   }
 }
+
