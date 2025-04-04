@@ -14,9 +14,15 @@
         "CategoryID": "LegFootActuator"
       },
       {
-        "CategoryID" : "ActuatorAdaptiveActuatorCore"
+        "CategoryID": "ActuatorAdaptiveActuatorCore"
       }
     ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "1",
+        "CBillCost": "[[Chassis.Tonnage]]"
+      }
+    },
     "BonusDescriptions": [
       "ChassisBasedWeight: 5%",
       "RAAC",
@@ -33,17 +39,6 @@
       "FailCritSelf",
       "FailReducPilot"
     ],
-    "Linked": {
-      "Links": [
-        {
-          "ComponentDefId": "Linked_Actuator_Adaptive_Actuator_Core",
-          "Location": "LeftLeg"
-        }
-      ]
-    },
-    "Flags": [
-      "not_broken"
-    ],
     "ActivatableComponent": {
       "ButtonName": "Run",
       "CanNotBeActivatedManualy": false,
@@ -55,16 +50,16 @@
       "DeactivationMessage": "Stable-Mode",
       "NoUniqueCheck": true,
       "FailFlatChance": 0.05,
-        "FailRoundsStart": 1,
-        "FailChancePerTurn": 0.15,
-        "FailCritComponents": true,
-        "FailCritLocations": [
-          "RightLeg","LeftLeg"
-        ],
-        "FailCritExcludeComponentsTags": [],
-        "FailPilotingBase": 1,
-        "FailPilotingMult": 0.02,
-        "SelfCrit": true,
+      "FailRoundsStart": 1,
+      "FailChancePerTurn": 0.15,
+      "FailCritComponents": true,
+      "FailCritLocations": [
+        "RightLeg",
+        "LeftLeg"
+      ],
+      "FailPilotingBase": 1,
+      "FailPilotingMult": 0.02,
+      "SelfCrit": true,
       "statusEffects": [
         {
           "durationData": {
@@ -81,7 +76,7 @@
           "nature": "Buff",
           "Description": {
             "Id": "RAACFastModeWalk",
-            "Name": "RAAC : Negate Walk Mode",
+            "Name": "RISC Adaptive Actuator Core Activatable: Increased Walk Speed",
             "Details": "Slows mech down but makes it more stable",
             "Icon": "mechanicaljump"
           },
@@ -107,7 +102,7 @@
           "nature": "Buff",
           "Description": {
             "Id": "RAACStableModeJump",
-            "Name": "RAAC : Negate Walk Mode",
+            "Name": "RISC Adaptive Actuator Core Activatable: Increased Jump Distance",
             "Details": "Slows mech down but makes it more stable",
             "Icon": "mechanicaljump"
           },
@@ -133,7 +128,7 @@
           "nature": "Buff",
           "Description": {
             "Id": "RAACStableModeStability",
-            "Name": "RAAC : Negate Walk Stablity",
+            "Name": "RISC Adaptive Actuator Core Activatable: Increased Stability Damage Taken",
             "Details": "Slows mech down but makes it more stable",
             "Icon": "mechanicaljump"
           },
@@ -159,7 +154,7 @@
           "nature": "Buff",
           "Description": {
             "Id": "RAACStabilityThreshold",
-            "Name": "RAAC: Negate Walk Unsteady",
+            "Name": "RISC Adaptive Actuator Core Activatable: Decreased Unsteady Threshold",
             "Details": "Provides 70 stability and -20% stability damage taken.",
             "Icon": "uixSvgIcon_equipment_Gyro"
           },
@@ -184,7 +179,7 @@
           "nature": "Buff",
           "Description": {
             "Id": "Reduction-SelfInstability_OnFire",
-            "Name": "RAAC: Negate Walk Mode OnFire Instabilty",
+            "Name": "RISC Adaptive Actuator Core Activatable: Increased Self Instability on Fire",
             "Details": "Tubthumping",
             "Icon": "uixSvgIcon_run_n_gun"
           },
@@ -210,7 +205,7 @@
           "nature": "Buff",
           "Description": {
             "Id": "SpeedyLegInstability",
-            "Name": "Adaptive Actuator Core: Increased Unsteady Threshold",
+            "Name": "RISC Adaptive Actuator Core Activatable: Flat Decreased Unsteady Threshold",
             "Details": "Leg actuator replacement speed",
             "Icon": "uixSvgIcon_action_evasivemove"
           },
@@ -236,7 +231,7 @@
           "nature": "Buff",
           "Description": {
             "Id": "SpeedyLegWalkRISC",
-            "Name": "Adaptive Actuator Core: Increased Walk Speed",
+            "Name": "RISC Adaptive Actuator Core Activatable: Increased Run Speed",
             "Details": "Faster Walk Speed",
             "Icon": "mechanicaljump"
           },
@@ -248,19 +243,6 @@
           }
         }
       ]
-    },
-    "Weights": {
-      "ComponentByChassisFactor": 0.05
-    },
-    "CASE": { },
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "1",
-        "CBillCost": "[[Chassis.Tonnage]]"
-      }
-    },
-    "IBLS": {
-      "StorageSize": 4
     },
     "CriticalEffects": {
       "OnDestroyedEffectIDs": [
@@ -291,6 +273,23 @@
           "CriticalEffect-LegUpperActuatorDestroyed-{location}-BtF"
         ]
       ]
+    },
+    "Flags": [
+      "not_broken"
+    ],
+    "IBLS": {
+      "StorageSize": 8
+    },
+    "Linked": {
+      "Links": [
+        {
+          "ComponentDefId": "Linked_Actuator_AdaptiveActuatorCore",
+          "Location": "RightLeg"
+        }
+      ]
+    },
+    "Weights": {
+      "ComponentByChassisFactor": 0.05
     }
   },
   "Description": {
@@ -300,7 +299,7 @@
     "Manufacturer": "RISC",
     "Model": "RAAC",
     "UIName": "RISC Adaptive Actuator Core",
-    "Id": "Gear_Actuator_Adaptive_Actuator_Core",
+    "Id": "Gear_Actuator_AdaptiveActuatorCore",
     "Name": "Adaptive Actuator Core",
     "Details": "A Clan-developed upgrade that enhances a BattleMech's leg actuators, boosting speed and agility with advanced stride control and servo optimization. This system allows for quicker adjustments to movement, improving both speed and maneuverability across a variety of terrains.",
     "Icon": "mechanicaljump"
@@ -315,7 +314,7 @@
   "BattleValue": 0,
   "InventorySize": 4,
   "Tonnage": 0,
-  "AllowedLocations": "RightLeg",
+  "AllowedLocations": "LeftLeg",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
   "statusEffects": [
@@ -334,7 +333,7 @@
       "nature": "Buff",
       "Description": {
         "Id": "RAACStableModeWalk",
-        "Name": "RAAC : Slows mech down, More stable",
+        "Name": "RISC Adaptive Actuator Core: Decreased Walk Speed",
         "Details": "Slows mech down but makes it more stable",
         "Icon": "mechanicaljump"
       },
@@ -360,7 +359,7 @@
       "nature": "Buff",
       "Description": {
         "Id": "RAACStableModeJump",
-        "Name": "RAAC : Slows mech down, More stable",
+        "Name": "RISC Adaptive Actuator Core: Decreased Jump Distance",
         "Details": "Slows mech down but makes it more stable",
         "Icon": "mechanicaljump"
       },
@@ -386,7 +385,7 @@
       "nature": "Buff",
       "Description": {
         "Id": "RAACStableModeStability",
-        "Name": "RAAC : Slows mech down, More stable",
+        "Name": "RISC Adaptive Actuator Core: Decreased Stability Damage Taken",
         "Details": "Slows mech down but makes it more stable",
         "Icon": "mechanicaljump"
       },
@@ -412,7 +411,7 @@
       "nature": "Buff",
       "Description": {
         "Id": "RAACStabilityThreshold",
-        "Name": "RAAC: Increased Unsteady Threshold",
+        "Name": "RISC Adaptive Actuator Core: Increased Unsteady Threshold",
         "Details": "Provides 70 stability and -25% stability damage taken.",
         "Icon": "uixSvgIcon_equipment_Gyro"
       },
@@ -437,7 +436,7 @@
       "nature": "Buff",
       "Description": {
         "Id": "Reduction-SelfInstability_OnFire",
-        "Name": "RAAC: Decreased Self Instability on Fire",
+        "Name": "RISC Adaptive Actuator Core: Decreased Self Instability on Fire",
         "Details": "Tubthumping",
         "Icon": "uixSvgIcon_run_n_gun"
       },
@@ -453,7 +452,6 @@
     "items": [
       "component_type_stock",
       "LootMagnetBlacklist",
-      "ActuatorAdaptiveActuatorCore.{location}",
       "cae_ai_explode",
       "cae_ai_speed",
       "QuadIncompatible",
@@ -462,4 +460,3 @@
     "tagSetSourceFile": ""
   }
 }
-
