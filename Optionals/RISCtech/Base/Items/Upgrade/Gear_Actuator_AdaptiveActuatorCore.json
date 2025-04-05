@@ -1,0 +1,462 @@
+{
+  "Custom": {
+    "Category": [
+      {
+        "CategoryID": "LegHip"
+      },
+      {
+        "CategoryID": "LegUpperActuator"
+      },
+      {
+        "CategoryID": "LegLowerActuator"
+      },
+      {
+        "CategoryID": "LegFootActuator"
+      },
+      {
+        "CategoryID": "ActuatorAdaptiveActuatorCore"
+      }
+    ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "1",
+        "CBillCost": "[[Chassis.Tonnage]]"
+      }
+    },
+    "BonusDescriptions": [
+      "ChassisBasedWeight: 5%",
+      "RAAC",
+      "StabMode",
+      "StabModeWalk: -90%",
+      "StabModeInstability: +25%",
+      "StabModeInstabilityMult: -20%",
+      "StabModeInstabOnFire: -25",
+      "FastMode",
+      "FastModeInstability: -20%",
+      "FastModeSprint: +50%",
+      "FailChance: 5%",
+      "FailChanceTurn: 15%",
+      "FailCritSelf",
+      "FailReducPilot"
+    ],
+    "ActivatableComponent": {
+      "ButtonName": "Run",
+      "CanNotBeActivatedManualy": false,
+      "CanActivateAfterMove": false,
+      "CanActivateAfterFire": false,
+      "ActiveByDefault": true,
+      "SafeActivation": false,
+      "ActivationMessage": "Fast-Mode",
+      "DeactivationMessage": "Stable-Mode",
+      "NoUniqueCheck": true,
+      "FailFlatChance": 0.05,
+      "FailRoundsStart": 1,
+      "FailChancePerTurn": 0.15,
+      "FailCritComponents": true,
+      "FailCritLocations": [
+        "RightLeg",
+        "LeftLeg"
+      ],
+      "FailPilotingBase": 1,
+      "FailPilotingMult": 0.02,
+      "SelfCrit": true,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "RAACFastModeWalk",
+            "Name": "RISC Adaptive Actuator Core Activatable: Increased Walk Speed",
+            "Details": "Slows mech down but makes it more stable",
+            "Icon": "mechanicaljump"
+          },
+          "statisticData": {
+            "statName": "WalkSpeed",
+            "operation": "Float_Multiply",
+            "modValue": "10",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "RAACStableModeJump",
+            "Name": "RISC Adaptive Actuator Core Activatable: Increased Jump Distance",
+            "Details": "Slows mech down but makes it more stable",
+            "Icon": "mechanicaljump"
+          },
+          "statisticData": {
+            "statName": "JumpDistanceMultiplier",
+            "operation": "Float_Multiply",
+            "modValue": "10",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "RAACStableModeStability",
+            "Name": "RISC Adaptive Actuator Core Activatable: Increased Stability Damage Taken",
+            "Details": "Slows mech down but makes it more stable",
+            "Icon": "mechanicaljump"
+          },
+          "statisticData": {
+            "statName": "ReceivedInstabilityMultiplier",
+            "operation": "Float_Multiply",
+            "modValue": "1.25",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "RAACStabilityThreshold",
+            "Name": "RISC Adaptive Actuator Core Activatable: Decreased Unsteady Threshold",
+            "Details": "Provides 70 stability and -20% stability damage taken.",
+            "Icon": "uixSvgIcon_equipment_Gyro"
+          },
+          "statisticData": {
+            "statName": "UnsteadyThreshold",
+            "operation": "Float_Multiply",
+            "modValue": "0.8",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": 1,
+            "stackLimit": 5
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "Reduction-SelfInstability_OnFire",
+            "Name": "RISC Adaptive Actuator Core Activatable: Increased Self Instability on Fire",
+            "Details": "Tubthumping",
+            "Icon": "uixSvgIcon_run_n_gun"
+          },
+          "statisticData": {
+            "statName": "SelfInstability_OnFire",
+            "operation": "Float_Add",
+            "modValue": "25",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "SpeedyLegInstability",
+            "Name": "RISC Adaptive Actuator Core Activatable: Flat Decreased Unsteady Threshold",
+            "Details": "Leg actuator replacement speed",
+            "Icon": "uixSvgIcon_action_evasivemove"
+          },
+          "statisticData": {
+            "statName": "UnsteadyThreshold",
+            "operation": "Float_Add",
+            "modValue": "-20",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": true,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "SpeedyLegWalkRISC",
+            "Name": "RISC Adaptive Actuator Core Activatable: Increased Run Speed",
+            "Details": "Faster Walk Speed",
+            "Icon": "mechanicaljump"
+          },
+          "statisticData": {
+            "statName": "CBTBE_RunMultiMod",
+            "operation": "Float_Add",
+            "modValue": "0.50",
+            "modType": "System.Single"
+          }
+        }
+      ]
+    },
+    "CriticalEffects": {
+      "OnDestroyedEffectIDs": [
+        "CriticalEffect-HipDestroyed-{location}",
+        "CriticalEffect-HipDestroyed-{location}-pilot-pen",
+        "CriticalEffect-HipDestroyed-{location}-BtF"
+      ],
+      "PenalizedEffectIDs": [
+        [
+          "CriticalEffect-LegFootActuatorDestroyed-{location}",
+          "CriticalEffect-LegFootActuatorDestroyed-{location}-pilot-pen",
+          "CriticalEffect-LegFootActuatorDestroyed-{location}-BtF"
+        ],
+        [
+          "CriticalEffect-LegFootActuatorDestroyed-{location}",
+          "CriticalEffect-LegFootActuatorDestroyed-{location}-pilot-pen",
+          "CriticalEffect-LegFootActuatorDestroyed-{location}-BtF",
+          "CriticalEffect-LegLowerActuatorDestroyed-{location}",
+          "CriticalEffect-LegLowerActuatorDestroyed-{location}-BtF"
+        ],
+        [
+          "CriticalEffect-LegFootActuatorDestroyed-{location}",
+          "CriticalEffect-LegFootActuatorDestroyed-{location}-pilot-pen",
+          "CriticalEffect-LegFootActuatorDestroyed-{location}-BtF",
+          "CriticalEffect-LegLowerActuatorDestroyed-{location}",
+          "CriticalEffect-LegLowerActuatorDestroyed-{location}-BtF",
+          "CriticalEffect-LegUpperActuatorDestroyed-{location}",
+          "CriticalEffect-LegUpperActuatorDestroyed-{location}-BtF"
+        ]
+      ]
+    },
+    "Flags": [
+      "not_broken"
+    ],
+    "IBLS": {
+      "StorageSize": 8
+    },
+    "Linked": {
+      "Links": [
+        {
+          "ComponentDefId": "Linked_Actuator_AdaptiveActuatorCore",
+          "Location": "RightLeg"
+        }
+      ]
+    },
+    "Weights": {
+      "ComponentByChassisFactor": 0.05
+    }
+  },
+  "Description": {
+    "Cost": 1500000,
+    "Rarity": 1,
+    "Purchasable": true,
+    "Manufacturer": "RISC",
+    "Model": "RAAC",
+    "UIName": "RISC Adaptive Actuator Core",
+    "Id": "Gear_Actuator_AdaptiveActuatorCore",
+    "Name": "Adaptive Actuator Core",
+    "Details": "A Clan-developed upgrade that enhances a BattleMech's leg actuators, boosting speed and agility with advanced stride control and servo optimization. This system allows for quicker adjustments to movement, improving both speed and maneuverability across a variety of terrains.",
+    "Icon": "mechanicaljump"
+  },
+  "BonusValueA": "",
+  "BonusValueB": "",
+  "ComponentType": "Upgrade",
+  "ComponentSubType": "NotSet",
+  "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
+  "BattleValue": 0,
+  "InventorySize": 4,
+  "Tonnage": 0,
+  "AllowedLocations": "LeftLeg",
+  "DisallowedLocations": "All",
+  "CriticalComponent": false,
+  "statusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": true
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "RAACStableModeWalk",
+        "Name": "RISC Adaptive Actuator Core: Decreased Walk Speed",
+        "Details": "Slows mech down but makes it more stable",
+        "Icon": "mechanicaljump"
+      },
+      "statisticData": {
+        "statName": "WalkSpeed",
+        "operation": "Float_Multiply",
+        "modValue": "0.10",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "RAACStableModeJump",
+        "Name": "RISC Adaptive Actuator Core: Decreased Jump Distance",
+        "Details": "Slows mech down but makes it more stable",
+        "Icon": "mechanicaljump"
+      },
+      "statisticData": {
+        "statName": "JumpDistanceMultiplier",
+        "operation": "Float_Multiply",
+        "modValue": "0.10",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "RAACStableModeStability",
+        "Name": "RISC Adaptive Actuator Core: Decreased Stability Damage Taken",
+        "Details": "Slows mech down but makes it more stable",
+        "Icon": "mechanicaljump"
+      },
+      "statisticData": {
+        "statName": "ReceivedInstabilityMultiplier",
+        "operation": "Float_Multiply",
+        "modValue": "0.8",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "RAACStabilityThreshold",
+        "Name": "RISC Adaptive Actuator Core: Increased Unsteady Threshold",
+        "Details": "Provides 70 stability and -25% stability damage taken.",
+        "Icon": "uixSvgIcon_equipment_Gyro"
+      },
+      "statisticData": {
+        "statName": "UnsteadyThreshold",
+        "operation": "Float_Multiply",
+        "modValue": "1.25",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": 1,
+        "stackLimit": 5
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "Reduction-SelfInstability_OnFire",
+        "Name": "RISC Adaptive Actuator Core: Decreased Self Instability on Fire",
+        "Details": "Tubthumping",
+        "Icon": "uixSvgIcon_run_n_gun"
+      },
+      "statisticData": {
+        "statName": "SelfInstability_OnFire",
+        "operation": "Float_Add",
+        "modValue": "-25",
+        "modType": "System.Single"
+      }
+    }
+  ],
+  "ComponentTags": {
+    "items": [
+      "component_type_stock",
+      "LootMagnetBlacklist",
+      "cae_ai_explode",
+      "cae_ai_speed",
+      "QuadIncompatible",
+      "SquadIncompatible"
+    ],
+    "tagSetSourceFile": ""
+  }
+}
