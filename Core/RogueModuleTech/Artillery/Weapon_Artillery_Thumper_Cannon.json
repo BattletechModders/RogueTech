@@ -12,12 +12,13 @@
       }
     ],
     "BonusDescriptions": [
-      "IsArtillery",
+      "IsArtilleryCannon",
+      "IsArtilleryCannonAoE: 33%",
       "NoBonusesArtillery",
       "Indirect",
       "FlakMode",
       "WpnRecoil: 2",
-      "BraceToFireMode: 48, Direct & Flak",
+      "BraceToFire: 36",
       "WeaponShardsModRange: 1, 4"
     ],
     "Flags": [
@@ -89,17 +90,19 @@
   "CriticalComponent": false,
   "Modes": [
     {
-      "Id": "directfire",
-      "UIName": "Direct",
-      "isBaseMode": false,
-      "MinRange": -45,
-      "ShortRange": -5,
-      "MediumRange": -45,
-      "LongRange": -85,
-      "MaxRange": -115,
-      "IndirectFireCapable": false,
+      "Id": "STD",
+      "UIName": "STD",
+      "isBaseMode": true,
+      "IndirectFireCapable": true,
       "CantHitUnaffecedByPathing": true,
       "AlwaysIndirectVisuals": false,
+      "AOECapable": true,
+      "AOERange": 60,
+      "AOEDamage": 75,
+      "AOEHeatDamage": 0.01,
+      "AOEInstability": 15,
+      "MinMissRadius": 5,
+      "MaxMissRadius": 40,
       "statusEffects": [
         {
           "durationData": {
@@ -122,13 +125,18 @@
           "statisticData": {
             "statName": "SelfInstability_OnFire",
             "operation": "Float_Add",
-            "modValue": "48",
+            "modValue": "36",
             "modType": "System.Single"
           }
         }
       ],
       "RestrictedAmmo": [
-        "Ammunition_Thumper_Fascam"
+        "Ammunition_Thumper_Fascam",
+        "Ammunition_Thumper_Inferno",
+        "Ammunition_Thumper_Nuke",
+        "Ammunition_Thumper_Shaped",
+        "Ammunition_Thumper_Copperhead",
+        "Ammunition_Thumper_SolidSlug"
       ]
     },
     {
@@ -174,7 +182,7 @@
           "statisticData": {
             "statName": "SelfInstability_OnFire",
             "operation": "Float_Add",
-            "modValue": "48",
+            "modValue": "36",
             "modType": "System.Single"
           }
         }
@@ -184,28 +192,7 @@
         "Ammunition_Thumper_Inferno",
         "Ammunition_Thumper_Nuke",
         "Ammunition_Thumper_Shaped",
-        "Ammunition_Thumper_SolidSlug"
-      ]
-    },
-    {
-      "Id": "indirectfire",
-      "UIName": "Indirect",
-      "isBaseMode": true,
-      "ForbiddenRange": 120,
-      "MinMissRadius": 5,
-      "MaxMissRadius": 45,
-      "IndirectFireCapable": true,
-      "CantHitUnaffecedByPathing": true,
-      "AlwaysIndirectVisuals": true,
-      "IsArtillery": true,
-      "ArtilleryReticleColor": {
-        "C": "#FF0000",
-        "I": 1.5
-      },
-      "ArtilleryReticleRadius": 90,
-      "ArtilleryReticleText": "Thumper Artillery",
-      "RestrictedAmmo": [
-        "Ammunition_Thumper_Shaped",
+        "Ammunition_Thumper_Copperhead",
         "Ammunition_Thumper_SolidSlug"
       ]
     }
@@ -214,13 +201,11 @@
     "items": [
       "LootMagnetBlacklist",
       "Artillery",
-      "component_type_stock",
       "OmniRestriction.{location}",
       "TurretRestriction.{location}",
+      "component_type_stock",
       "range_long",
-      "BAIncompatible",
-      "IgnoreSizeMatters",
-      "VehicleComponentFamily-Artillery"
+      "BAIncompatible"
     ],
     "tagSetSourceFile": ""
   }
