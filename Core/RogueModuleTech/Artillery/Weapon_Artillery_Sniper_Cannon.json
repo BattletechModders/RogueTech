@@ -12,14 +12,13 @@
       }
     ],
     "BonusDescriptions": [
-      "IsArtillery",
+      "IsArtilleryCannon",
+      "ArtilleryCannonAoE: 33%",
       "NoBonusesArtillery",
       "Indirect",
-      "ArtilleryMode",
       "FlakMode",
-      "DirectMode: -4",
       "WpnRecoil: 3",
-      "BraceToFireMode: 64, Direct & Flak",
+      "BraceToFire: 48",
       "WeaponShardsModRange: 1, 4"
     ],
     "Flags": [
@@ -55,8 +54,8 @@
   "APArmorShardsMod": 3,
   "APCriticalChanceMultiplier": 0.1,
   "AOEEffectsFalloff": true,
-  "ShotsWhenFired": 1,
   "PhysicsAoE": true,
+  "ShotsWhenFired": 1,
   "ProjectilesPerShot": 1,
   "AMSImmune": true,
   "ImprovedBallistic": true,
@@ -90,15 +89,17 @@
   "CriticalComponent": false,
   "Modes": [
     {
-      "Id": "directfire",
-      "UIName": "Direct",
-      "isBaseMode": false,
-      "MinRange": -45,
-      "ShortRange": -25,
-      "MediumRange": -95,
-      "LongRange": -170,
-      "MaxRange": -235,
-      "IndirectFireCapable": false,
+      "Id": "STD",
+      "UIName": "STD",
+      "isBaseMode": true,
+      "AOECapable": true,
+      "AOERange": 80,
+      "AOEDamage": 100,
+      "AOEHeatDamage": 0.01,
+      "AOEInstability": 25,
+      "MinMissRadius": 5,
+      "MaxMissRadius": 50,
+      "IndirectFireCapable": true,
       "CantHitUnaffecedByPathing": true,
       "AlwaysIndirectVisuals": false,
       "statusEffects": [
@@ -116,17 +117,24 @@
           "nature": "Buff",
           "Description": {
             "Id": "WeaponEffect-SelfInstability_OnFire",
-            "Name": "Sniper Artillery Cannon / Direct: Increased Self Instability on Fire",
+            "Name": "Sniper Artillery Cannon / STD: Increased Self Instability on Fire",
             "Details": "Tubthumping",
             "Icon": "uixSvgIcon_run_n_gun"
           },
           "statisticData": {
             "statName": "SelfInstability_OnFire",
             "operation": "Float_Add",
-            "modValue": "64",
+            "modValue": "48",
             "modType": "System.Single"
           }
         }
+      ],
+      "RestrictedAmmo": [
+        "Ammunition_Sniper_Inferno",
+        "Ammunition_Sniper_Nuke",
+        "Ammunition_Sniper_SolidSlug",
+        "Ammunition_Sniper_Copperhead",
+        "Ammunition_Sniper_Shaped"
       ]
     },
     {
@@ -172,7 +180,7 @@
           "statisticData": {
             "statName": "SelfInstability_OnFire",
             "operation": "Float_Add",
-            "modValue": "64",
+            "modValue": "48",
             "modType": "System.Single"
           }
         }
@@ -181,28 +189,7 @@
         "Ammunition_Sniper_Inferno",
         "Ammunition_Sniper_Nuke",
         "Ammunition_Sniper_SolidSlug",
-        "Ammunition_Sniper_Shaped"
-      ]
-    },
-    {
-      "Id": "indirectfire",
-      "UIName": "Indirect",
-      "isBaseMode": true,
-      "ForbiddenRange": 120,
-      "MinMissRadius": 5,
-      "MaxMissRadius": 60,
-      "IndirectFireCapable": true,
-      "CantHitUnaffecedByPathing": true,
-      "AlwaysIndirectVisuals": true,
-      "IsArtillery": true,
-      "ArtilleryReticleColor": {
-        "C": "#FF0000",
-        "I": 1.5
-      },
-      "ArtilleryReticleRadius": 120,
-      "ArtilleryReticleText": "Sniper Artillery",
-      "RestrictedAmmo": [
-        "Ammunition_Sniper_SolidSlug",
+        "Ammunition_Sniper_Copperhead",
         "Ammunition_Sniper_Shaped"
       ]
     }
@@ -215,9 +202,7 @@
       "TurretRestriction.{location}",
       "component_type_stock",
       "range_long",
-      "BAIncompatible",
-      "IgnoreSizeMatters",
-      "VehicleComponentFamily-Artillery"
+      "BAIncompatible"
     ],
     "tagSetSourceFile": ""
   }
