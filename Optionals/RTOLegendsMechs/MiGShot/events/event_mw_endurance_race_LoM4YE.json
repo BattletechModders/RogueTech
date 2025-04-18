@@ -1,0 +1,458 @@
+{
+  "Description": {
+    "Id": "event_mw_endurance_race_LoM4YE",
+    "Name": "Endurance Race",
+    "Details": "The crew is bubbling with enthusiasm about a local endurance competition.\r\n\r\nIn the morning briefing, Darius says, \"[[TGT_MW,{TGT_MW.Callsign}]] has requested permission to compete. Given the general interest, I'd like you to make the call.\"\r\n\r\nSumire says, \"Let {TGT_MW.Obj} go. It'll be entertaining.\"",
+    "Icon": "uixTxrSpot_Gym.png"
+  },
+  "Scope": "MechWarrior",
+  "Weight": 100000,
+  "Requirements": {
+    "Scope": "MechWarrior",
+    "RequirementTags": {
+      "items": [],
+      "tagSetSourceFile": "Tags/PilotTags"
+    },
+    "ExclusionTags": {
+      "items": [
+        "pilot_athletic"
+      ],
+      "tagSetSourceFile": "Tags/PilotTags"
+    },
+    "RequirementComparisons": [
+      {
+        "obj": "Injuries",
+        "op": "Equal",
+        "val": 0,
+        "valueConstant": "0"
+      }
+    ]
+  },
+  "AdditionalRequirements": [
+    {
+      "Scope": "StarSystem",
+      "RequirementTags": {
+        "items": [],
+        "tagSetSourceFile": "Tags/PlanetTags"
+      },
+      "ExclusionTags": {
+        "items": [
+          "planet_pop_none"
+        ],
+        "tagSetSourceFile": "Tags/PlanetTags"
+      },
+      "RequirementComparisons": []
+    },
+    {
+      "Scope": "Company",
+      "RequirementTags": {
+        "items": [
+          "hasPilot_pilot_MiG"
+        ],
+        "tagSetSourceFile": "Tags/CompanyTags"
+      },
+      "ExclusionTags": {
+        "items": [
+          "LoM_End_Delay"
+        ],
+        "tagSetSourceFile": ""
+      },
+      "RequirementComparisons": [
+        {
+				  "obj": "Travel",
+				  "op": "Equal",
+				  "val": 0,
+				  "valueConstant": "0"
+			  },
+        {
+          "obj": "LetterofMarque_MiG4Y",
+          "op": "GreaterThanOrEqual",
+          "val": 4,
+          "valueConstant" : "4"
+        },
+        {
+          "obj": "LetterofMarque_MiG",
+          "op": "LessThanOrEqual",
+          "val": 0,
+          "valueConstant" : "0"
+        }
+      ]
+    }
+  ],
+  "AdditionalObjects": [
+    {
+      "Scope" : "SecondaryMechWarrior",
+      "Requirements" : {
+          "Scope" : "SecondaryMechWarrior",
+          "RequirementTags" : {
+              "tagSetSourceFile" : "",
+              "items" : [
+                  "name_MiG"
+              ]
+          },
+          "ExclusionTags" : {
+              "tagSetSourceFile" : "Tags/PilotTags",
+              "items" : []
+          },
+          "RequirementComparisons" : []
+      }
+    }
+  ],
+  "Options": [
+    {
+      "Description": {
+        "Id": "outcome_0",
+        "Name": "Deny the shore leave requests.",
+        "Details": "non-participation choice",
+        "Icon": ""
+      },
+      "RequirementList": [],
+      "ResultSets": [
+        {
+          "Description": {
+            "Id": "outcome_0_0",
+            "Name": "lower morale",
+            "Details": "Darius nods and the briefing continues to other topics.\r\n\r\nWhile some of the crew initially expresses discontent, the immediacy of the work at hand soon drowns out any thoughts of surface sports.\r\n\r\nExcept, that is, for [[TGT_MW,{TGT_MW.Callsign}]] who takes a few more days to shake off the thoughts of what might have been.",
+            "Icon": ""
+          },
+          "Weight": 100,
+          "Results": [
+            {
+              "Scope": "MechWarrior",
+              "Requirements": null,
+              "AddedTags": {
+                "items": [
+                  "pilot_morale_low"
+                ],
+                "tagSetSourceFile": "Tags/PilotTags"
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "Stats": null,
+              "Actions": null,
+              "ForceEvents": null,
+              "TemporaryResult": true,
+              "ResultDuration": 7
+            },
+            {
+              "Scope" : "Company",
+              "Requirements" : null,
+              "AddedTags" : {
+                  "tagSetSourceFile" : "",
+                  "items" : []
+              },
+              "RemovedTags" : {
+                  "tagSetSourceFile" : "Tags/CompanyTags",
+                  "items" : []
+              },
+              "Stats" : null,
+              "Actions" : null,
+              "ForceEvents" : [
+                {
+                  "Scope": "Company",
+                  "EventID": "forceevent_co_LetterofMarque_4YEnd",
+                  "MinDaysWait": 0,
+                  "MaxDaysWait": 0,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult" : false,
+              "ResultDuration" : 0
+            },
+            {
+               "Scope" : "Company",
+               "Requirements" : null,
+               "AddedTags" : {
+                   "tagSetSourceFile" : "",
+                   "items" : [
+                     "LoM_End_Delay"
+                   ]
+               },
+               "RemovedTags" : {
+                   "tagSetSourceFile" : "Tags/CompanyTags",
+                   "items" : []
+               },
+               "Stats" : null,
+               "Actions" : null,
+               "ForceEvents" : null,
+               "TemporaryResult" : true,
+               "ResultDuration" : 5
+             }
+          ]
+        }
+      ],
+      "Requirements": {
+        "Scope": "Company",
+        "RequirementTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        },
+        "ExclusionTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        },
+        "RequirementComparisons": []
+      }
+    },
+    {
+      "Description": {
+        "Id": "outcome_1",
+        "Name": "Grant shore leave to {TGT_MW.Callsign}.",
+        "Details": "low cost option",
+        "Icon": null
+      },
+      "RequirementList": [],
+      "ResultSets": [
+        {
+          "Description": {
+            "Id": "outcome_1_0",
+            "Name": "earns an athletic tag",
+            "Details": "[[TGT_MW,{TGT_MW.Callsign}]] returns to the <i>Argo</i> later that week. You see {TGT_MW.Obj} in the mess hall, regaling listeners with tales of the race.\r\n\r\n\"Commander, thanks for letting me participate in the endurance competition!\" {TGT_MW.Subj} {TGT_MW.Gender?NonBinary:say|Default:says} enthusiastically. \"I didn't win, but I feel like I did pretty well. Those locals, wow, they have endless stamina! I managed to keep up with them for a while, but along the way I got tired. Spending 24 hours baking in an overheating mech cockpit is probably less exhausting.\"",
+            "Icon": null
+          },
+          "Weight": 75,
+          "Results": [
+            {
+              "Scope": "MechWarrior",
+              "Requirements": null,
+              "AddedTags": {
+                "items": [
+                  "pilot_athletic"
+                ],
+                "tagSetSourceFile": "Tags/PilotTags"
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "Stats": null,
+              "Actions": null,
+              "ForceEvents": null,
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            },
+            {
+              "Scope": "MechWarrior",
+              "Requirements": null,
+              "AddedTags": {
+                "items": [
+                  "pilot_morale_high"
+                ],
+                "tagSetSourceFile": "Tags/PilotTags"
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "Stats": null,
+              "Actions": null,
+              "ForceEvents": null,
+              "TemporaryResult": true,
+              "ResultDuration": 30
+            },
+            {
+              "Scope": "MechWarrior",
+              "Requirements": null,
+              "AddedTags": {
+                "items": [
+                  "chain_shoreLeave"
+                ],
+                "tagSetSourceFile": "Tags/PilotTags"
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "Stats": null,
+              "Actions": null,
+              "ForceEvents": null,
+              "TemporaryResult": true,
+              "ResultDuration": 60
+            },
+            {
+              "Scope": "Company",
+              "Requirements": null,
+              "AddedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Morale",
+                  "value": "5",
+                  "set": false,
+                  "valueConstant": null
+                }
+              ],
+              "Actions": null,
+              "ForceEvents": [
+                {
+                  "Scope": "Company",
+                  "EventID": "forceevent_co_LetterofMarque_4YEnd",
+                  "MinDaysWait": 0,
+                  "MaxDaysWait": 0,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            },
+            {
+               "Scope" : "Company",
+               "Requirements" : null,
+               "AddedTags" : {
+                   "tagSetSourceFile" : "",
+                   "items" : [
+                     "LoM_End_Delay"
+                   ]
+               },
+               "RemovedTags" : {
+                   "tagSetSourceFile" : "Tags/CompanyTags",
+                   "items" : []
+               },
+               "Stats" : null,
+               "Actions" : null,
+               "ForceEvents" : null,
+               "TemporaryResult" : true,
+               "ResultDuration" : 5
+             }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_1_1",
+            "Name": "earns the athletic tag and injury",
+            "Details": "[[TGT_MW,{TGT_MW.Callsign}]] returns to the <i>Argo</i> later that week. You find {TGT_MW.Obj} in the mess hall, one arm in a cast, regaling listeners with tales of daring-do.\r\n\r\n\"Commander, thanks for letting me participate in the endurance competition, but I, uh, may have over-reached a little bit,\" {TGT_MW.Subj} {TGT_MW.Gender?NonBinary:say|Default:says}, holding up the broken limb.\r\n\r\n\"Those locals, wow, they have endless stamina!. I managed to keep up with them for a while, but along the way I got tired. Spending 24 hours baking in an overheating mech cockpit is probably less exhausting.\"",
+            "Icon": null
+          },
+          "Weight": 25,
+          "Results": [
+            {
+              "Scope": "MechWarrior",
+              "Requirements": null,
+              "AddedTags": {
+                "items": [
+                  "pilot_athletic"
+                ],
+                "tagSetSourceFile": "Tags/PilotTags"
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Injuries",
+                  "value": "1",
+                  "set": false,
+                  "valueConstant": null
+                }
+              ],
+              "Actions": null,
+              "ForceEvents": null,
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            },
+            {
+              "Scope": "MechWarrior",
+              "Requirements": null,
+              "AddedTags": {
+                "items": [
+                  "chain_shoreLeave"
+                ],
+                "tagSetSourceFile": "Tags/PilotTags"
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "Stats": null,
+              "Actions": null,
+              "ForceEvents": null,
+              "TemporaryResult": true,
+              "ResultDuration": 60
+            },
+            {
+              "Scope": "Company",
+              "Requirements": null,
+              "AddedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Morale",
+                  "value": "5",
+                  "set": false,
+                  "valueConstant": null
+                }
+              ],
+              "Actions": null,
+              "ForceEvents": [
+                {
+                  "Scope": "Company",
+                  "EventID": "forceevent_co_LetterofMarque_4YEnd",
+                  "MinDaysWait": 0,
+                  "MaxDaysWait": 0,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            },
+            {
+               "Scope" : "Company",
+               "Requirements" : null,
+               "AddedTags" : {
+                   "tagSetSourceFile" : "",
+                   "items" : [
+                     "LoM_End_Delay"
+                   ]
+               },
+               "RemovedTags" : {
+                   "tagSetSourceFile" : "Tags/CompanyTags",
+                   "items" : []
+               },
+               "Stats" : null,
+               "Actions" : null,
+               "ForceEvents" : null,
+               "TemporaryResult" : true,
+               "ResultDuration" : 5
+             }
+          ]
+        }
+      ],
+      "Requirements": {
+        "Scope": "Company",
+        "RequirementTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        },
+        "ExclusionTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        },
+        "RequirementComparisons": []
+      }
+    }
+  ],
+  "PublishState": "PUBLISHED",
+  "ValidationState": "UNTESTED",
+  "EventType": "NORMAL"
+}
