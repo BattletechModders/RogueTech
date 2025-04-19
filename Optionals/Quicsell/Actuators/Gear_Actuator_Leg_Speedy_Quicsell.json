@@ -14,35 +14,21 @@
         "CategoryID": "LegFootActuator"
       }
     ],
-    "BonusDescriptions": [
-      "ChassisBasedWeight: 1%",
-      "WalkSpeed: +10%",
-      "StabThreshhold: -8",
-      "CASE",
-      "CASEVENT: 150, 300"
-    ],
-    "Flags": [
-      "not_broken"
-    ],
-    "Weights": {
-      "ComponentByChassisFactor": 0.01
-    },
-    "CASE": { },
     "WorkOrderCosts": {
       "Install": {
         "TechCost": "1",
         "CBillCost": "[[Chassis.Tonnage]]"
       }
     },
-    "IBLS": {
-      "StorageSize": 4
-    },
-    "ExplosionProtectionHeat": {
-      "MaximumDamage": 150
-    },
-    "ExplosionProtectionStability": {
-      "MaximumDamage": 300
-    },
+    "BonusDescriptions": [
+      "SpeedyLegSlipQS: 10%",
+      "ChassisBasedWeight: 1%",
+      "WalkSpeed: +12m",
+      "StabThreshhold: -8",
+      "CASE",
+      "CASEVENT: 150, 300"
+    ],
+    "CASE": { },
     "CriticalEffects": {
       "OnDestroyedEffectIDs": [
         "CriticalEffect-HipDestroyed-{location}",
@@ -72,6 +58,21 @@
           "CriticalEffect-LegUpperActuatorDestroyed-{location}-BtF"
         ]
       ]
+    },
+    "ExplosionProtectionHeat": {
+      "MaximumDamage": 150
+    },
+    "ExplosionProtectionStability": {
+      "MaximumDamage": 300
+    },
+    "Flags": [
+      "not_broken"
+    ],
+    "IBLS": {
+      "StorageSize": 4
+    },
+    "Weights": {
+      "ComponentByChassisFactor": 0.01
     }
   },
   "Description": {
@@ -142,14 +143,38 @@
       "Description": {
         "Id": "SpeedyLegWalk",
         "Name": "Speedy Leg Actuator Replacement QS: Increased Walk Speed",
-        "Details": "Leg actuators +10% speed",
+        "Details": "Leg actuators +12m Walk",
         "Icon": "mechanicaljump"
       },
       "statisticData": {
         "statName": "WalkSpeed",
-        "operation": "Float_Multiply",
-        "modValue": "1.1",
+        "operation": "Float_Add",
+        "modValue": "12",
         "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "speedyLegSlip",
+        "Name": "Speedy Leg Actuator Replacement QS: Increased Fall Chance",
+        "Details": "Has a 2 Point chance to fall on sprinting",
+        "Icon": "uixSvgIcon_action_evasivemove"
+      },
+      "statisticData": {
+        "statName": "CBTBE_ActuatorDamage_Malus",
+        "operation": "Int_Add",
+        "modValue": "-1",
+        "modType": "System.Int32"
       }
     }
   ],
