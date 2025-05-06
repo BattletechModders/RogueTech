@@ -1,0 +1,713 @@
+{
+  "Description": {
+    "Id": "event_co_customs_LoM4YE",
+    "Name": "Customs Inspection of the <i>Argo</i>",
+    "Details": "Blaring klaxons interrupt an otherwise quiet morning routine as several fast-moving ships appear, pacing the <i>Argo</i>. Darius broadcasts their hail to the bridge.\r\n\r\n\"You're flying through {TGT_SYSTEM.OwnerDef.ShortName} space, travelers.  You are required to submit to boarding by Customs Officials of the [[TGT_SYSTEM,{TGT_SYSTEM.Name}]] system.  Do you comply?\"\r\n\r\nWhile you consider your options, Darius pipes up. \"Commander, do we really have to allow them to do this?\"\r\n\r\nYou open the channel to respond, \"We are an authorized mercenary company operating under the purview of the MRB.  Is there really a need for this inconvenience?\"\r\n\r\nThe Customs Official responds, \"We have had an increase in contraband entering through the local spaceport.  As such, the Governor has decided to search all incoming vessels in the area.  You can refuse, wherein we will report the matter will to the appropriate authorities, which in your case is the MRB.  I suspect you will lose some standing with them if you go that route.  Otherwise, just give us clearance to dock, we will do a quick inspection and provided no contraband is found, you can be on your way.\"",
+    "Icon": "uixTxrSpot_UnidentifiedObject.png"
+  },
+  "Scope": "Company",
+  "Weight": 100000,
+  "Requirements": {
+    "Scope": "Company",
+    "RequirementTags": {
+      "items": [],
+      "tagSetSourceFile": ""
+    },
+    "ExclusionTags": {
+      "items": [],
+      "tagSetSourceFile": "Tags/CompanyTags"
+    },
+    "RequirementComparisons": [
+      {
+        "obj": "Travel",
+        "op": "Equal",
+        "val": 0,
+        "valueConstant": "0"
+      },
+      {
+        "obj": "LetterofMarque_MiG4Y",
+        "op": "GreaterThanOrEqual",
+        "val": 4,
+        "valueConstant" : "4"
+      },
+      {
+        "obj": "LetterofMarque_MiG",
+        "op": "LessThanOrEqual",
+        "val": 0,
+        "valueConstant" : "0"
+      }
+    ]
+  },
+  "AdditionalRequirements": [
+    {
+      "Scope": "StarSystem",
+      "RequirementTags": {
+        "items": [],
+        "tagSetSourceFile": "Tags/PlanetTags"
+      },
+      "ExclusionTags": {
+        "items": [
+          "planet_faction_nofaction"
+        ],
+        "tagSetSourceFile": "Tags/PlanetTags"
+      }
+    }
+  ],
+  "AdditionalObjects": [
+    {
+      "Scope": "SecondaryMechWarrior",
+      "Requirements": {
+        "Scope": "SecondaryMechWarrior",
+        "RequirementTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        },
+        "ExclusionTags": {
+          "items": [
+            "name_MiG"
+          ],
+          "tagSetSourceFile": "Tags/PilotTags"
+        },
+        "RequirementComparisons": []
+      }
+    },
+    {
+      "Scope": "TertiaryMechWarrior",
+      "Requirements": {
+        "Scope": "TertiaryMechWarrior",
+        "RequirementTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        },
+        "ExclusionTags": {
+          "items": [],
+          "tagSetSourceFile": "Tags/PilotTags"
+        },
+        "RequirementComparisons": [
+          {
+            "obj": "Injuries",
+            "op": "Equal",
+            "val": 0,
+            "valueConstant": "0"
+          }
+        ]
+      }
+    }
+  ],
+  "Options": [
+    {
+      "Description": {
+        "Id": "outcome_0",
+        "Name": "Stand your ground.",
+        "Details": "Refuse to let Customs Officials Board the <i>Argo</i>",
+        "Icon": ""
+      },
+      "RequirementList": [],
+      "ResultSets": [
+        {
+          "Description": {
+            "Id": "outcome_0_0",
+            "Name": "Lose MRB Rep & Morale",
+            "Details": "You press the comms button, \"I am not giving you permission to board the <i>Argo</i>.  For all we know, you are working for any number of governments we have taken contracts against.\"\r\n\r\nThe Official on the other end of the comms chuckles, \"No skin off my nose, it's your reputation here.  Before I send this out to the MRB on [[TGT_SYSTEM,{TGT_SYSTEM.Name}]], I need you to confirm you are denying us access to your vessel.\"\r\n\r\n\"Permission is denied,\" you state as you close the connection.\r\n\r\nYou turn towards Darius as he looks up at you and speaks before you get a chance, \"That was fast Commander.  The MRB have just sent a notification that our rating with them has dropped by 20 points.\"",
+            "Icon": ""
+          },
+          "Weight": 20,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Reputation.MercenaryReviewBoard",
+                  "value": "-20",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Morale",
+                  "value": "-10",
+                  "set": false
+                }
+              ],
+              "Actions" : null,
+              "ForceEvents" : [
+                {
+                  "Scope": "Company",
+                  "EventID": "forceevent_co_LetterofMarque_4YEnd",
+                  "MinDaysWait": 0,
+                  "MaxDaysWait": 0,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            },
+            {
+               "Scope" : "Company",
+               "Requirements" : null,
+               "AddedTags" : {
+                   "tagSetSourceFile" : "",
+                   "items" : [
+                     "LoM_End_Delay"
+                   ]
+               },
+               "RemovedTags" : {
+                   "tagSetSourceFile" : "Tags/CompanyTags",
+                   "items" : []
+               },
+               "Stats" : null,
+               "Actions" : null,
+               "ForceEvents" : null,
+               "TemporaryResult" : true,
+               "ResultDuration" : 5
+             }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_0_1",
+            "Name": "Lose MRB Rep & Morale",
+            "Details": "You press the comms button, \"I am not giving you permission to board the <i>Argo</i>.  For all we know, you are working for any number of governments we have taken contracts against.\"\r\n\r\nThe Official on the other end of the comms chuckles, \"No skin off my nose, it's your reputation here.  Before I send this out to the MRB on [[TGT_SYSTEM,{TGT_SYSTEM.Name}]], I need you to confirm you are denying us access to your vessel.\"\r\n\r\n\"Permission is denied,\" you state as you close the connection.\r\n\r\nYou turn towards Darius as he looks up at you and speaks before you get a chance, \"That was fast Commander.  The MRB have just sent a notification that our rating with them has dropped by 21 points.\"",
+            "Icon": ""
+          },
+          "Weight": 20,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Reputation.MercenaryReviewBoard",
+                  "value": "-21",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Morale",
+                  "value": "-10",
+                  "set": false
+                }
+              ],
+              "Actions" : null,
+              "ForceEvents" : [
+                {
+                  "Scope": "Company",
+                  "EventID": "forceevent_co_LetterofMarque_4YEnd",
+                  "MinDaysWait": 0,
+                  "MaxDaysWait": 0,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            },
+            {
+               "Scope" : "Company",
+               "Requirements" : null,
+               "AddedTags" : {
+                   "tagSetSourceFile" : "",
+                   "items" : [
+                     "LoM_End_Delay"
+                   ]
+               },
+               "RemovedTags" : {
+                   "tagSetSourceFile" : "Tags/CompanyTags",
+                   "items" : []
+               },
+               "Stats" : null,
+               "Actions" : null,
+               "ForceEvents" : null,
+               "TemporaryResult" : true,
+               "ResultDuration" : 5
+             }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_0_2",
+            "Name": "Lose MRB Rep & Morale",
+            "Details": "You press the comms button, \"I am not giving you permission to board the <i>Argo</i>.  For all we know, you are working for any number of governments we have taken contracts against.\"\r\n\r\nThe Official on the other end of the comms chuckles, \"No skin off my nose, it's your reputation here.  Before I send this out to the MRB on [[TGT_SYSTEM,{TGT_SYSTEM.Name}]], I need you to confirm you are denying us access to your vessel.\"\r\n\r\n\"Permission is denied,\" you state as you close the connection.\r\n\r\nYou turn towards Darius as he looks up at you and speaks before you get a chance, \"That was fast Commander.  The MRB have just sent a notification that our rating with them has dropped by 22 points.\"",
+            "Icon": ""
+          },
+          "Weight": 20,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Reputation.MercenaryReviewBoard",
+                  "value": "-22",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Morale",
+                  "value": "-10",
+                  "set": false
+                }
+              ],
+              "Actions" : null,
+              "ForceEvents" : [
+                {
+                  "Scope": "Company",
+                  "EventID": "forceevent_co_LetterofMarque_4YEnd",
+                  "MinDaysWait": 0,
+                  "MaxDaysWait": 0,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            },
+            {
+               "Scope" : "Company",
+               "Requirements" : null,
+               "AddedTags" : {
+                   "tagSetSourceFile" : "",
+                   "items" : [
+                     "LoM_End_Delay"
+                   ]
+               },
+               "RemovedTags" : {
+                   "tagSetSourceFile" : "Tags/CompanyTags",
+                   "items" : []
+               },
+               "Stats" : null,
+               "Actions" : null,
+               "ForceEvents" : null,
+               "TemporaryResult" : true,
+               "ResultDuration" : 5
+             }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_0_3",
+            "Name": "Lose MRB Rep & Morale",
+            "Details": "You press the comms button, \"I am not giving you permission to board the <i>Argo</i>.  For all we know, you are working for any number of governments we have taken contracts against.\"\r\n\r\nThe Official on the other end of the comms chuckles, \"No skin off my nose, it's your reputation here.  Before I send this out to the MRB on [[TGT_SYSTEM,{TGT_SYSTEM.Name}]], I need you to confirm you are denying us access to your vessel.\"\r\n\r\n\"Permission is denied,\" you state as you close the connection.\r\n\r\nYou turn towards Darius as he looks up at you and speaks before you get a chance, \"That was fast Commander.  The MRB have just sent a notification that our rating with them has dropped by 23 points.\"",
+            "Icon": ""
+          },
+          "Weight": 20,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Reputation.MercenaryReviewBoard",
+                  "value": "-23",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Morale",
+                  "value": "-10",
+                  "set": false
+                }
+              ],
+              "Actions" : null,
+              "ForceEvents" : [
+                {
+                  "Scope": "Company",
+                  "EventID": "forceevent_co_LetterofMarque_4YEnd",
+                  "MinDaysWait": 0,
+                  "MaxDaysWait": 0,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            },
+            {
+               "Scope" : "Company",
+               "Requirements" : null,
+               "AddedTags" : {
+                   "tagSetSourceFile" : "",
+                   "items" : [
+                     "LoM_End_Delay"
+                   ]
+               },
+               "RemovedTags" : {
+                   "tagSetSourceFile" : "Tags/CompanyTags",
+                   "items" : []
+               },
+               "Stats" : null,
+               "Actions" : null,
+               "ForceEvents" : null,
+               "TemporaryResult" : true,
+               "ResultDuration" : 5
+             }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_0_3",
+            "Name": "Lose MRB Rep & Morale",
+            "Details": "You press the comms button, \"I am not giving you permission to board the <i>Argo</i>.  For all we know, you are working for any number of governments we have taken contracts against.\"\r\n\r\nThe Official on the other end of the comms chuckles, \"No skin off my nose, it's your reputation here.  Before I send this out to the MRB on [[TGT_SYSTEM,{TGT_SYSTEM.Name}]], I need you to confirm you are denying us access to your vessel.\"\r\n\r\n\"Permission is denied,\" you state as you close the connection.\r\n\r\nYou turn towards Darius as he looks up at you and speaks before you get a chance, \"That was fast Commander.  The MRB have just sent a notification that our rating with them has dropped by 24 points.\"",
+            "Icon": ""
+          },
+          "Weight": 20,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Reputation.MercenaryReviewBoard",
+                  "value": "-24",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Morale",
+                  "value": "-10",
+                  "set": false
+                }
+              ],
+              "Actions" : null,
+              "ForceEvents" : [
+                {
+                  "Scope": "Company",
+                  "EventID": "forceevent_co_LetterofMarque_4YEnd",
+                  "MinDaysWait": 0,
+                  "MaxDaysWait": 0,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            },
+            {
+               "Scope" : "Company",
+               "Requirements" : null,
+               "AddedTags" : {
+                   "tagSetSourceFile" : "",
+                   "items" : [
+                     "LoM_End_Delay"
+                   ]
+               },
+               "RemovedTags" : {
+                   "tagSetSourceFile" : "Tags/CompanyTags",
+                   "items" : []
+               },
+               "Stats" : null,
+               "Actions" : null,
+               "ForceEvents" : null,
+               "TemporaryResult" : true,
+               "ResultDuration" : 5
+             }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_0_4",
+            "Name": "Lose MRB Rep & Morale",
+            "Details": "You press the comms button, \"I am not giving you permission to board the <i>Argo</i>.  For all we know, you are working for any number of governments we have taken contracts against.\"\r\n\r\nThe Official on the other end of the comms chuckles, \"No skin off my nose, it's your reputation here.  Before I send this out to the MRB on [[TGT_SYSTEM,{TGT_SYSTEM.Name}]], I need you to confirm you are denying us access to your vessel.\"\r\n\r\n\"Permission is denied,\" you state as you close the connection.\r\n\r\nYou turn towards Darius as he looks up at you and speaks before you get a chance, \"That was fast Commander.  The MRB have just sent a notification that our rating with them has dropped by 25 points.\"",
+            "Icon": ""
+          },
+          "Weight": 20,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "Stats": [
+                {
+                  "typeString": "System.Int32",
+                  "name": "Reputation.MercenaryReviewBoard",
+                  "value": "-25",
+                  "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "Morale",
+                  "value": "-10",
+                  "set": false
+                }
+              ],
+              "Actions" : null,
+              "ForceEvents" : [
+                {
+                  "Scope": "Company",
+                  "EventID": "forceevent_co_LetterofMarque_4YEnd",
+                  "MinDaysWait": 0,
+                  "MaxDaysWait": 0,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            },
+            {
+               "Scope" : "Company",
+               "Requirements" : null,
+               "AddedTags" : {
+                   "tagSetSourceFile" : "",
+                   "items" : [
+                     "LoM_End_Delay"
+                   ]
+               },
+               "RemovedTags" : {
+                   "tagSetSourceFile" : "Tags/CompanyTags",
+                   "items" : []
+               },
+               "Stats" : null,
+               "Actions" : null,
+               "ForceEvents" : null,
+               "TemporaryResult" : true,
+               "ResultDuration" : 5
+             }
+          ]
+        }
+      ],
+      "Requirements": {
+        "Scope": "Company",
+        "RequirementTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        },
+        "ExclusionTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        }
+      }
+    },
+    {
+      "Description": {
+        "Id": "outcome_1",
+        "Name": "Concede to Inspection.",
+        "Details": "Concede to let Customs Officials Board the <i>Argo</i>",
+        "Icon": ""
+      },
+      "RequirementList": [],
+      "ResultSets": [
+        {
+          "Description": {
+            "Id": "outcome_1_0",
+            "Name": "Clean Slate",
+            "Details": "With a long sigh, you open the comms channel, \"Fine, you have clearance to dock.\"\r\n\r\nThe Customs Official chimes back, \"Wise decision.  We promise to be quick and about it.\"\r\n\r\nThree hours later, Darius enters your office with a report in hand, \"Well, they finally left, and noted nothing of interest.  Here is the official report if you want to read the particulars.\"\r\n\r\nYou wave the report away, \"Just file it, Darius and lets get to our next contract.\"",
+            "Icon": ""
+          },
+          "Weight": 75,
+          "Results": [
+            {
+              "Scope": "Company",
+              "Requirements": null,
+              "AddedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "Stats": null,
+              "Actions": null,
+              "ForceEvents": [
+                {
+                  "Scope": "Company",
+                  "EventID": "forceevent_co_LetterofMarque_4YEnd",
+                  "MinDaysWait": 0,
+                  "MaxDaysWait": 0,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            },
+            {
+               "Scope" : "Company",
+               "Requirements" : null,
+               "AddedTags" : {
+                   "tagSetSourceFile" : "",
+                   "items" : [
+                     "LoM_End_Delay"
+                   ]
+               },
+               "RemovedTags" : {
+                   "tagSetSourceFile" : "Tags/CompanyTags",
+                   "items" : []
+               },
+               "Stats" : null,
+               "Actions" : null,
+               "ForceEvents" : null,
+               "TemporaryResult" : true,
+               "ResultDuration" : 5
+             }
+          ]
+        },
+        {
+          "Description": {
+            "Id": "outcome_1_1",
+            "Name": "Contraband Found",
+            "Details": "With a long sigh, you open the comms channel, \"Fine, you have clearance to dock.\"\r\n\r\nThe Customs Official chimes back, \"Wise decision.  We promise to be quick and about it.\"\r\n\r\nThree hours later, Darius enters your office with a report in hand, \"Well, they finally left... \"\r\n\r\nThe way Darius lets that statement hang alerts you to the pending bad news, \"What did they find, Darius?\"\r\n\r\n\"They located a still in one of the storage lockers belonging to [[TRT_MW,{TRT_MW.Callsign}]].  They confiscated it, citing some official garbage about alcohol requiring appropriate import stamps and some other legal jargon.  And we have been issued a fine of ¢50,000 for the infraction.\"r\n\r\nYou lean back in your chair, staring in disbelief before responding, \"Well, confine [[TRT_MW,{TRT_MW.Callsign}]] to their quarters off duty for 2 weeks and put them on latrine duty during the duty hours.  No combat for them.\"",
+            "Icon": ""
+          },
+          "Weight": 25,
+          "Results": [
+            {
+              "Scope": "TertiaryMechWarrior",
+              "Requirements": null,
+              "AddedTags": {
+                "items": [
+                  "pilot_morale_low"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": "Tags/PilotTags"
+              },
+              "Stats": null,
+              "Actions": null,
+              "ForceEvents": null,
+              "TemporaryResult": true,
+              "ResultDuration": 14
+            },
+            {
+              "Scope": "TertiaryMechWarrior",
+              "Requirements": null,
+              "AddedTags": {
+                "items": [
+                  "pilot_disgraced"
+                ],
+                "tagSetSourceFile": ""
+              },
+              "RemovedTags": {
+                "items": [
+                  "pilot_lucky"
+                ],
+                "tagSetSourceFile": "Tags/PilotTags"
+              },
+              "Stats": null,
+              "Actions": [
+                {
+                  "Type": "MechWarrior_SetTimeout",
+                  "value": "14",
+                  "valueConstant": null,
+                  "additionalValues": null
+                }
+              ],
+              "ForceEvents": null,
+              "TemporaryResult": false,
+              "ResultDuration": 0
+            },
+            {
+              "Scope" : "Company",
+              "Requirements" : null,
+              "AddedTags" : {
+                  "tagSetSourceFile" : "",
+                  "items" : []
+              },
+              "RemovedTags" : {
+                  "tagSetSourceFile" : "Tags/CompanyTags",
+                  "items" : []
+              },
+              "Stats" : null,
+              "Actions" : null,
+              "ForceEvents" : [
+                {
+                  "Scope": "Company",
+                  "EventID": "forceevent_co_LetterofMarque_4YEnd",
+                  "MinDaysWait": 0,
+                  "MaxDaysWait": 0,
+                  "Probability": 100,
+                  "RetainPilot": false
+                }
+              ],
+              "TemporaryResult" : false,
+              "ResultDuration" : 0
+            },
+            {
+               "Scope" : "Company",
+               "Requirements" : null,
+               "AddedTags" : {
+                   "tagSetSourceFile" : "",
+                   "items" : [
+                     "LoM_End_Delay"
+                   ]
+               },
+               "RemovedTags" : {
+                   "tagSetSourceFile" : "Tags/CompanyTags",
+                   "items" : []
+               },
+               "Stats" : null,
+               "Actions" : null,
+               "ForceEvents" : null,
+               "TemporaryResult" : true,
+               "ResultDuration" : 5
+             }
+          ]
+        }
+      ],
+      "Requirements": {
+        "Scope": "Company",
+        "RequirementTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        },
+        "ExclusionTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        }
+      }
+    }
+  ],
+  "PublishState": "PUBLISHED",
+  "ValidationState": "UNTESTED",
+  "EventType": "NORMAL"
+}
