@@ -12,7 +12,9 @@ In order to keep the README at a manageable size, it is broken into three sectio
 WIIC reads and sets a variety of tags and statistics on companies and star systems. These can be used in conditions, set, updated or removed from events and flashpoints like any other stat or tag.
 
 ### Company Tags
-When naming star systems, remember to use the ID and not the name. You want `starsystemdef_St.Ives`, not `St. Ives`. For factions, refer to them by factionID. You want `ClanCloudCobra`, not `Clan Cloud Cobra` or `faction_ClanCloudCobra`. This is slightly inconsistent, yes, but I work with what HBS gives me.
+When naming star systems, remember to use the ID and not the name. You want `starsystemdef_St.Ives`, not `St. Ives`. In addition, any place a system ID is accepted, you can use the special value `HERE`, which means "the player's current location." Eg: `WIIC_add_planet_other_pirate_to_HERE` or `WIIC_give_HERE_to_ClanWolf`.
+
+For factions, refer to them by factionID. You want `ClanCloudCobra`, not `Clan Cloud Cobra` or `faction_ClanCloudCobra`. This is slightly inconsistent, yes, but I work with what HBS gives me.
 
   * `WIIC_give_{system}_to_{newOwner}` (eg: `WIIC_give_starsystemdef_Terra_to_ClanWolf`) - Setting this will pass control of the named star system to the new owner. The tag won't actually added to the company - WIIC 'eats' it.
   * `WIIC_{faction}_attacks_{system}` (eg: `WIIC_Clan Jade Falcon_attacks_starsystemdef_Terra`) - Setting this will cause a new Attack to start in the given system, with the faction as the attacker, if one doesn't already exist. The tag won't actually added to the company - WIIC 'eats' it.
