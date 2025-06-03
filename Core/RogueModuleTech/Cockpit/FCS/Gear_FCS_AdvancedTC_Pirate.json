@@ -8,29 +8,28 @@
         "CategoryID": "CockpitFCS"
       }
     ],
-    "BonusDescriptions": [
-      "Breaching",
-      "Accuracy: +1",
-      "EvasionIgnore: +1",
-      "Recoil: +1",
-      "HeatGenerated: +10%",
-      "CoolantCostMulti: -6%",
-      "TCFCS"
-    ],
-    "Flags": [
-      "not_broken"
-    ],
     "WorkOrderCosts": {
       "Install": {
         "TechCost": "0.06667 * [[Chassis.Tonnage]]",
         "CBillCost": "1.1 * [[Chassis.Tonnage]]"
       }
     },
-    "IBLS": {
-      "StorageSize": 1
-    },
+    "BonusDescriptions": [
+      "Breaching",
+      "Accuracy: +1",
+      "Recoil: +1",
+      "HeatGenerated: +12",
+      "CoolantCostMulti: -6%",
+      "TCFCS"
+    ],
+    "Flags": [
+      "not_broken"
+    ],
     "HeatSinkingCost": {
       "HeatUpkeepMult": 0.94
+    },
+    "IBLS": {
+      "StorageSize": 1
     }
   },
   "Description": {
@@ -59,31 +58,6 @@
   "DisallowedLocations": "All",
   "CriticalComponent": false,
   "statusEffects": [
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator"
-      },
-      "effectType": "StatisticEffect",
-      "Description": {
-        "Id": "TCEvasive",
-        "Name": "Pirate FCS: Increased Evasive Pips Ignore",
-        "Details": "Called Shots twice as reliable",
-        "Icon": "uixSvgIcon_ability_mastertactician"
-      },
-      "statisticData": {
-        "abilifierId": "EvasionIgnoreFilter",
-        "statName": "EvasivePipsIgnored",
-        "operation": "Float_Add",
-        "modValue": "1.0",
-        "modType": "System.Single",
-        "targetCollection": "Weapon"
-      }
-    },
     {
       "durationData": {
         "duration": -1,
@@ -175,14 +149,14 @@
       "nature": "Buff",
       "Description": {
         "Id": "StatusEffect-Heat_GenPirateTC",
-        "Name": "Pirate FCS: Increased Heat Generated",
+        "Name": "Pirate FCS: Decreased Cooling",
         "Details": "Heat generation reduced by 10%.",
         "Icon": "uixSvgIcon_equipment_ThermalExchanger"
       },
       "statisticData": {
-        "statName": "HeatGenerated",
-        "operation": "Float_Multiply",
-        "modValue": "1.1",
+        "statName": "HeatSinkCapacity",
+        "operation": "Int_Subtract",
+        "modValue": "12",
         "modType": "System.Single",
         "targetCollection": "Weapon"
       }
