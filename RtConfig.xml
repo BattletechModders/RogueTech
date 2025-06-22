@@ -3,7 +3,7 @@
 	<LancherUpdateUrl>https://discourse.modsinexile.com/t/rogue-tech/134</LancherUpdateUrl>
 	<RequiredBattleTechVersion>1.9.1</RequiredBattleTechVersion>
 	<RequiredLauncherVersion>1.3.13</RequiredLauncherVersion>
-	<SecureHash>Fh0W6RZ+FjsWfRbkFoAWFBZgFtMWExZ/FmsWqha8FoY=</SecureHash>
+	<SecureHash>FjkWRhb/Fk8WdRY5FsMWhhb1FnkWUBaTFkEW1RbqFoc=</SecureHash>
 	<showCoreItems>false</showCoreItems>
 	<Tasks>
 		<InstallTask>
@@ -39,10 +39,48 @@
 			<promptConfirmation>false</promptConfirmation>
 			<promptText/>
 			<saveBreaking>false</saveBreaking>
-			<sourcePath>ModTek/DoorStop, ModTek/nativedll/sqlite3.dll, ModTek/nativedll/mono-2.0-bdwgc.dll, ModTek/nativedll/libmonobdwgc-2.0.so, ModTek/nativedll/libMonoPosixHelper.so</sourcePath>
-			<targetPath>., BattleTech_Data/Plugins/sqlite3.dll, MonoBleedingEdge/EmbedRuntime/mono-2.0-bdwgc.dll, BattleTech_Data/MonoBleedingEdge/x86_64/libmonobdwgc-2.0.so, BattleTech_Data/MonoBleedingEdge/x86_64/libMonoPosixHelper.so</targetPath>
+			<sourcePath>ModTek/DoorStop, ModTek/nativedll/sqlite3.dll</sourcePath>
+			<targetPath>., BattleTech_Data/Plugins/sqlite3.dll</targetPath>
 			<uiDescription>Install Modtek - REQUIRED Install</uiDescription>
 			<uiName>Install ModTek</uiName>
+		</InstallTask>
+		<InstallTask>
+			<Id>monoInstall</Id>
+			<additionalUiContext/>
+			<canSelect>true</canSelect>
+			<dependsOn/>
+			<difficultyModifier>0.0</difficultyModifier>
+			<excludePaths>log.txt</excludePaths>
+			<influenceMode>0</influenceMode>
+			<isSelected>true</isSelected>
+			<jobType>BtRootInstall</jobType>
+			<optionGroupId>RtPerfOpMono</optionGroupId>
+			<promptConfirmation>false</promptConfirmation>
+			<promptText/>
+			<saveBreaking>false</saveBreaking>
+			<sourcePath>ModTek/nativedll/mono-2.0-bdwgc.dll, ModTek/nativedll/libmonobdwgc-2.0.so, ModTek/nativedll/libMonoPosixHelper.so</sourcePath>
+			<targetPath>MonoBleedingEdge/EmbedRuntime/mono-2.0-bdwgc.dll, BattleTech_Data/MonoBleedingEdge/x86_64/libmonobdwgc-2.0.so, BattleTech_Data/MonoBleedingEdge/x86_64/libMonoPosixHelper.so</targetPath>
+			<uiDescription>Upgraded Mono Runtime</uiDescription>
+			<uiName>Upgraded Mono Runtime</uiName>
+		</InstallTask>
+		<InstallTask>
+			<Id>monoInstallExperimental</Id>
+			<additionalUiContext/>
+			<canSelect>true</canSelect>
+			<dependsOn/>
+			<difficultyModifier>0.0</difficultyModifier>
+			<excludePaths>log.txt</excludePaths>
+			<influenceMode>0</influenceMode>
+			<isSelected>false</isSelected>
+			<jobType>BtRootInstall</jobType>
+			<optionGroupId>RtPerfOpMono</optionGroupId>
+			<promptConfirmation>true</promptConfirmation>
+			<promptText>Warning! This is a highly Experimental optimized version that could be unstable.\n\nONLY USE THIS ON WINDOWS</promptText>
+			<saveBreaking>false</saveBreaking>
+			<sourcePath>InstallOptions/MonoRuntimeExperimental/MonoBleedingEdge, InstallOptions/MonoRuntimeExperimental/mimalloc.dll, InstallOptions/MonoRuntimeExperimental/mimalloc-redirect.dll</sourcePath>
+			<targetPath>MonoBleedingEdge/EmbedRuntime, .,.</targetPath>
+			<uiDescription>Experimental Mono Runtime - WINDOWS ONLY AND COULD BE UNSTABLE</uiDescription>
+			<uiName>Experimental Mono Runtime</uiName>
 		</InstallTask>
 		<InstallTask>
 			<Id>OnlineMode</Id>
@@ -2611,6 +2649,15 @@
 			<optionId>RtPerfOp</optionId>
 			<optionType>MultiSelectOption</optionType>
 			<optionUiName>RT Performance Options</optionUiName>
+			<requiredOption/>
+		</InstallOption>
+		<InstallOption>
+			<OnHideSelect/>
+			<isHidden>false</isHidden>
+			<optionDescription/>
+			<optionId>RtPerfOpMono</optionId>
+			<optionType>ExclusiveOption</optionType>
+			<optionUiName>RT Runtime Options</optionUiName>
 			<requiredOption/>
 		</InstallOption>
 	</Options>
