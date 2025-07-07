@@ -1,0 +1,954 @@
+{
+  "Custom": {
+    "Category": [
+      {
+        "CategoryID": "TargetingComputer"
+      },
+      {
+        "CategoryID": "CockpitSensors"
+      },
+      {
+        "CategoryID": "Cockpit"
+      },
+      {
+        "CategoryID": "CockpitFCS"
+      },
+      {
+        "CategoryID": "MultiTracker"
+      },
+      {
+        "CategoryID": "CommandCockpit"
+      },
+      {
+        "CategoryID": "ECM"
+      },
+      {
+        "CategoryID": "Probe"
+      },
+      {
+        "CategoryID": "AdvECM"
+      },
+      {
+        "CategoryID": "PHINetwork"
+      }
+    ],
+    "BonusDescriptions": [
+      "PHI",
+      "PHIBonus: +50% AA Factor, 3",
+      "PHIBonusNoStack: +1 Evasion Ignore",
+      "BoostedPHIBonus",
+      "AlliesTactics: +1",
+      "AllLanceSight: +5%",
+      "AllLanceSensors: +5%",
+      "LanceResolve2: 1",
+      "IsProbe: 1",
+      "AdvancedSensors: 3",
+      "ActiveEWS: 2, 2, 240",
+      "EWSSelf: 1, 1",
+      "EWSProbe: 15%, 1, 2, 240",
+      "MultiTracker",
+      "Breaching",
+      "Health: +3",
+      "SkillGuts: +1",
+      "ArmoredCowl: +45",
+      "ThermalVision: 1, 30, 150",
+      "NightVision",
+      "TCFCS",
+      "SideTorsoLifeSupport",
+      "BleedReduction: 20%",
+      "TribeSuperheavyOnly"
+    ],
+    "Flags": [
+      "ignore_shutdown",
+      "not_broken"
+    ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.25 * [[Chassis.Tonnage]]",
+        "CBillCost": "1.5 * [[Chassis.Tonnage]]"
+      }
+    },
+    "IBLS": {
+      "StorageSize": 8
+    },
+    "CriticalEffects": {
+      "PenalizedEffectIDs": [
+        [
+          "CriticalEffect-Sensors1",
+          "CriticalEffect-SensorsCheck1"
+        ],
+        [
+          "CriticalEffect-Sensors2",
+          "CriticalEffect-SensorsCheck2"
+        ]
+      ],
+      "DeathMethod": "PilotKilled"
+    },
+    "Linked": {
+      "Links": [
+        {
+          "ComponentDefId": "Default_Cockpit_LifeSupportA_Torso",
+          "Location": "LeftTorso",
+          "ComponentDefType": "Upgrade"
+        },
+        {
+          "ComponentDefId": "Default_Cockpit_LifeSupportB_Torso",
+          "Location": "RightTorso",
+          "ComponentDefType": "Upgrade"
+        }
+      ]
+    },
+    "DecoratorComponent": [
+      {
+        "Text": "W",
+        "Color": "#248000",
+        "Icon": "ComponentGearIcons_ECM",
+        "Importance": 30
+      },
+      {
+        "Text": "E",
+        "Color": "#FF0E07",
+        "Icon": "ComponentGearIcons_PROBE",
+        "Importance": 20
+      }
+    ]
+  },
+  "Description": {
+    "Cost": 3333333,
+    "Rarity": 15,
+    "Purchasable": true,
+    "Manufacturer": "Mann Manufacturing",
+    "Model": "Knox Battlesuite 900X",
+    "UIName": "Command Cockpit (SH-M)",
+    "Id": "Gear_Cockpit_Command_Superheavy_M",
+    "Name": "Superheavy Command Cockpit (M)",
+    "Details": "The Knox Battlesuite 900X is Mann Manufacturing’s ultimate cockpit system, built exclusively for the Minnesota Tribe’s superheavy command ’Mechs. An evolution of the 500X, it integrates command, electronic warfare, and survivability in a reinforced “ferro-fibrous vault.” Inside are advanced systems: high-bandwidth comms, sensor fusion, ECM/ECCM, and multi-target coordination—tailored to the Tribe’s mobile frontline leadership style. Compatible only with Tribe superheavies, its power and mass demands preclude use by lighter 'Mechs. For Tribe officers, it’s essential: more than a cockpit, the 900X is a hardened command hub that keeps leaders protected, connected, and in control amid the chaos of battle.",
+    "Icon": "satellite-communication"
+  },
+  "BonusValueA": "",
+  "BonusValueB": "",
+  "ComponentType": "Upgrade",
+  "ComponentSubType": "NotSet",
+  "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
+  "BattleValue": 0,
+  "InventorySize": 6,
+  "Tonnage": 12,
+  "AllowedLocations": "Head",
+  "DisallowedLocations": "All",
+  "CriticalComponent": false,
+  "Auras": [
+    {
+      "Id": "CommandAura",
+      "Name": "Command Aura",
+      "ReticleColor": "#00f2ff",
+      "Range": 8000,
+      "RemoveOnSensorLock": false,
+      "State": "Persistent",
+      "ApplySelf": true,
+      "HideOnNotSelected": true,
+      "FloatieAtEndOfMove": false,
+      "AllyStealthAffection": "None",
+      "EnemyStealthAffection": "None",
+      "IsPositiveToAlly": true,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": 2
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "AlliesWithinRange",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "StatusEffect_Cockpit_Skill_Tactics",
+            "Name": "Command Cockpit (SH-M) / Aura Command Aura: Increased Allies Tactics",
+            "Details": "Buffs Tactics Skill",
+            "Icon": "uixSvgIcon_equipment_Cockpit"
+          },
+          "statisticData": {
+            "statName": "Tactics",
+            "operation": "Int_Add",
+            "modValue": "1",
+            "modType": "System.Int32",
+            "targetCollection": "Pilot"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": 1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "AlliesWithinRange",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "StatusEffect-AllLanceSight1",
+            "Name": "Command Cockpit (SH-M) / Aura Command Aura: Increased Allies Vision Range Multiplier",
+            "Details": "AllLanceSight",
+            "Icon": "uixSvgIcon_equipment_Cockpit"
+          },
+          "statisticData": {
+            "statName": "SpotterDistanceMultiplier",
+            "operation": "Float_Multiply",
+            "modValue": "1.05",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": 1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "AlliesWithinRange",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "StatusEffect-AllLanceSensors1",
+            "Name": "Command Cockpit (SH-M) / Aura Command Aura: Increased Allies Sensor Range Multiplier",
+            "Details": "AllLanceSensors",
+            "Icon": "uixSvgIcon_equipment_Cockpit"
+          },
+          "statisticData": {
+            "statName": "SensorDistanceMultiplier",
+            "operation": "Float_Multiply",
+            "modValue": "1.05",
+            "modType": "System.Single"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "Boosted_Phi_Aura",
+      "Name": "Boosted PHI Suite Net",
+      "ReticleColor": "#ffa600",
+      "Range": 8000,
+      "RemoveOnSensorLock": false,
+      "State": "Persistent",
+      "ApplySelf": true,
+      "HideOnNotSelected": true,
+      "FloatieAtEndOfMove": false,
+      "AllyStealthAffection": "None",
+      "EnemyStealthAffection": "None",
+      "IsPositiveToAlly": true,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": 1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "AlliesWithinRange",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "PHI_Suite_network_bonus_accuracy",
+            "Name": "Command Cockpit (SH-M) / Aura Boosted PHI Suite Net: Increased Allies Evasive Pips Ignore",
+            "Details": "PHI Network",
+            "Icon": "uixSvgIcon_status_ECM-missileDef"
+          },
+          "statisticData": {
+            "abilifierId": "PHI_network",
+            "statName": "EvasivePipsIgnored",
+            "operation": "Float_Add",
+            "modValue": "1.0",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": 3
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "AlliesWithinRange",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "PHI_Suite_Network_AAA_Bonus",
+            "Name": "Command Cockpit (SH-M) / Aura Boosted PHI Suite Net: Anti Air Factor",
+            "Details": "AA Factor",
+            "Icon": "uixSvgIcon_equipment_Gyro"
+          },
+          "statisticData": {
+            "abilifierId": "PHI_network",
+            "statName": "AAAFactor",
+            "operation": "Float_Multiply",
+            "modValue": "1.5",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": 1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "AlliesWithinRange",
+            "showInTargetPreview": false,
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "StatusEffect-BoostedPhiNetwork-Accuracy",
+            "Name": "Command Cockpit (SH-M) / Aura Boosted PHI Suite Net: Improved Allies Accuracy",
+            "Details": "Upgraded PHI Network: +1 accuracy",
+            "Icon": "uixSvgIcon_equipment_Cockpit"
+          },
+          "statisticData": {
+            "abilifierId": "PHI_Network",
+            "statName": "AccuracyModifier",
+            "operation": "Float_Add",
+            "modValue": "-1.0",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": 1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "AlliesWithinRange",
+            "showInTargetPreview": false,
+            "showInStatusPanel": true
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "StatusEffect-BoostedPhiNetwork-Initiative",
+            "Name": "Command Cockpit (SH-M) / Aura Boosted PHI Suite Net: Increased Allies Initiative",
+            "Details": "Upgraded PHI Network: +1 initiative",
+            "Icon": "uixSvgIcon_equipment_Cockpit"
+          },
+          "statisticData": {
+            "abilifierId": "PHI_Network",
+            "statName": "SBI_MOD_MISC",
+            "operation": "Int_Add",
+            "modValue": "1",
+            "modType": "System.Int32"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "MINEDETECTIONAURA",
+      "Name": "Minesweeper",
+      "ReticleColor": "white",
+      "Range": 240,
+      "RemoveOnSensorLock": false,
+      "State": "Persistent",
+      "ApplySelf": true,
+      "HideOnNotSelected": true,
+      "AllyStealthAffection": "None",
+      "EnemyStealthAffection": "None",
+      "IsNegativeToEnemy": false,
+      "IsPositiveToAlly": false,
+      "MinefieldDetector": true,
+      "LineType": "Dots",
+      "isSpining": false
+    },
+    {
+      "Id": "ECM_Aura",
+      "Name": "ECM",
+      "ReticleColor": "#a31aff",
+      "Range": 240,
+      "RemoveOnSensorLock": false,
+      "State": "Persistent",
+      "ApplySelf": false,
+      "AllyStealthAffection": "PositiveOne",
+      "EnemyStealthAffection": "None",
+      "IsNegativeToEnemy": false,
+      "IsPositiveToAlly": true,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "AlliesWithinRange",
+            "forceVisRebuild": true,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "LV_ECM_SHIELD",
+            "Name": "Command Cockpit (SH-M) / Aura ECM: Increased Allies ECM Shield",
+            "Details": "Ally ECM Shield",
+            "Icon": "uixSvgIcon_status_ECM-missileDef"
+          },
+          "statisticData": {
+            "statName": "LV_ECM_SHIELD",
+            "operation": "Int_Add",
+            "modValue": "2",
+            "modType": "System.Int32"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "ECCM_Aura",
+      "Name": "ECCM",
+      "ReticleColor": "#a31aff",
+      "Range": 240,
+      "RemoveOnSensorLock": false,
+      "State": "Persistent",
+      "ApplySelf": false,
+      "HideOnNotSelected": false,
+      "AllyStealthAffection": "None",
+      "EnemyStealthAffection": "Nullify",
+      "IsNegativeToEnemy": true,
+      "IsPositiveToAlly": false,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "EnemiesWithinRange",
+            "forceVisRebuild": true,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
+          "Description": {
+            "Id": "LV_ECCM_SHIELD",
+            "Name": "Command Cockpit (SH-M) / Aura ECCM: Decreased Enemies ECM Shield",
+            "Details": "ECCM Shield Reduction",
+            "Icon": "uixSvgIcon_status_ECM-missileDef"
+          },
+          "statisticData": {
+            "statName": "LV_ECM_SHIELD",
+            "operation": "Int_Add",
+            "modValue": "-2",
+            "modType": "System.Int32"
+          }
+        }
+      ]
+    }
+  ],
+  "statusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "IRAllowMultiTargetEffect",
+        "Name": "Command Cockpit (SH-M): Allow Multi Target",
+        "Details": "Enables multi-target.",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "statisticData": {
+        "statName": "IRAllowMultiTarget",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "Status-ArmorCowlStructure-{location}",
+        "Name": "Command Cockpit (SH-M): Increased {location} Structure",
+        "Details": "Improved Head Structure",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "statisticData": {
+        "statName": "{location}.Structure",
+        "operation": "Float_Add",
+        "modValue": "45",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "Status-ArmorCowlArmor-{location}",
+        "Name": "Command Cockpit (SH-M): Increased {location} Armor",
+        "Details": "Improved Head Armor",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "statisticData": {
+        "statName": "{location}.Armor",
+        "operation": "Float_Add",
+        "modValue": "45",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": 2
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "StatusEffect_Cockpit_Skill_Guts",
+        "Name": "Command Cockpit (SH-M): Increased Guts",
+        "Details": "Buffs Guts Skill",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
+      },
+      "statisticData": {
+        "statName": "Guts",
+        "operation": "Int_Add",
+        "modValue": "2",
+        "modType": "System.Int32",
+        "targetCollection": "Pilot"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "StatusEffect-Pilot_HealthAdd-T2",
+        "Name": "Command Cockpit (SH-M): Increased Health",
+        "Details": "Prevents [AMT] Injuries against a MechWarrior.",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
+      },
+      "statisticData": {
+        "statName": "BonusHealth",
+        "operation": "Int_Add",
+        "modValue": "3",
+        "modType": "System.Int32",
+        "targetCollection": "Pilot"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "CockpitBleed",
+        "Name": "Command Cockpit (SH-M): Decreased Bleeding Rate",
+        "Details": "Bleed Rate x 0.8",
+        "Icon": "blood"
+      },
+      "statisticData": {
+        "statName": "BleedingRateMulti",
+        "operation": "Float_Multiply",
+        "modValue": "0.8",
+        "modType": "System.Single",
+        "targetCollection": "Pilot"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "TC-Breaching",
+        "Name": "Command Cockpit (SH-M): Enable Breaching Shot",
+        "Details": "PASSIVE: Attacking with a single weapon ignores COVER and GUARDED on the target.",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "statisticData": {
+        "statName": "PrecisionStrike",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "NightVision",
+        "Name": "Command Cockpit (SH-M): Night Vision",
+        "Details": "PASSIVE: Enables Night Vision.",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "statisticData": {
+        "statName": "LV_NIGHT_VISION",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "Heat Vision Effect",
+        "Name": "Command Cockpit (SH-M): Heat Vision",
+        "Details": "heat bonus accuracy",
+        "Icon": "uixSvgIcon_ability_precisionstrike"
+      },
+      "statisticData": {
+        "statName": "LV_HEAT_VISION",
+        "operation": "Set",
+        "modValue": "-1_30_150",
+        "modType": "System.String"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "MineFieldDetection",
+        "Name": "Command Cockpit (SH-M): Increased Minefield Detection",
+        "Details": "Detects Minefields",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "MinefieldDetection",
+        "operation": "Float_Add",
+        "modValue": "1",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "forceVisRebuild": true,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "LV_PROBE_CARRIER",
+        "Name": "Command Cockpit (SH-M): Active Probe",
+        "Details": "Reduces effectiveness of stealthed and ECM shielded units",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "LV_PROBE_CARRIER",
+        "operation": "Int_Add",
+        "modValue": "1",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "forceVisRebuild": true,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "LV_ADVANCED_SENSORS",
+        "Name": "Command Cockpit (SH-M): Increased Advanced Sensor Strength",
+        "Details": "Provides detailed information on enemy units",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "LV_ADVANCED_SENSORS",
+        "operation": "Int_Add",
+        "modValue": "3",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": 3,
+        "stackId": "LanceResolvePerRound"
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "AllLanceMates",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "StatusEffect-Morale_Gain-T3-CC",
+        "Name": "Command Cockpit (SH-M): Increased Lance Base Resolve Generation per Round",
+        "Details": "Provides a bonus to actions that generate Morale.",
+        "Icon": "uixSvgIcon_equipment_Cockpit"
+      },
+      "statisticData": {
+        "statName": "resolveRoundBaseMod",
+        "operation": "Float_Add",
+        "modValue": "1",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "ECMPassiveShield",
+        "Name": "Command Cockpit (SH-M): Increased ECM Shield",
+        "Details": "Passive ECM Protection",
+        "Icon": "uixSvgIcon_equipment_Gyro"
+      },
+      "statisticData": {
+        "statName": "LV_ECM_SHIELD",
+        "operation": "Int_Add",
+        "modValue": "1",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "ECMPassiveJam",
+        "Name": "Command Cockpit (SH-M): Decreased ECM Jamming",
+        "Details": "Passive Jamming Protection",
+        "Icon": "uixSvgIcon_equipment_Gyro"
+      },
+      "statisticData": {
+        "statName": "LV_ECM_JAMMED",
+        "operation": "Int_Add",
+        "modValue": "-1",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "forceVisRebuild": true,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "LV_Shares_Vision",
+        "Name": "Command Cockpit (SH-M): Shared Vision",
+        "Details": "Shows their vision when lancemates move",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "LV_SHARES_VISION",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "PHI",
+        "Name": "Command Cockpit (SH-M): PHI network",
+        "Details": "Shows their vision when lancemates move",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "ADD_ENCOUNTER_TAG_PHI_network",
+        "operation": "Float_Add",
+        "modValue": "1",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "C3_AI",
+        "Name": "Command Cockpit (SH-M): C3 AI",
+        "Details": "Shows their vision when lancemates move",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "abilifierId": "C3_network_AI",
+        "statName": "ADD_ENCOUNTER_TAG_C3AI_network",
+        "operation": "Float_Add",
+        "modValue": "1",
+        "modType": "System.Single"
+      }
+    }
+  ],
+  "ComponentTags": {
+    "items": [
+      "PHINetwork",
+      "PHINetworkBooster",
+      "ignore_shutdown",
+      "component_type_stock",
+      "LootMagnetBlacklist",
+      "ElectronicCounterMeasures",
+      "TribesSuperheavyEquipment"
+    ],
+    "tagSetSourceFile": ""
+  }
+}
