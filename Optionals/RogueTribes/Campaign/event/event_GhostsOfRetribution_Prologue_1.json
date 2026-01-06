@@ -1,0 +1,212 @@
+{
+  "Description": {
+    "Id": "event_GhostsOfRetribution_Prologue_1",
+    "Name": "Mysterious Contract",
+    "Details": "<color=#BFBFBF>Darius leans over the MRBC console, eyes narrowed.</color> “Commander, a contract just came in through the usual channels—but it’s anything but usual. The posting lists a name: Mizuki Bekker. No faction affiliation, no planetary tag, no routing origin. Just that name, and a mission brief marked eyes-only.”\n\n<color=#BFBFBF>He taps a few keys and brings up the sparse dossier.</color> “The offer’s legit. High-priority assault on a lightly defended convoy. No salvage rights, but the pay’s outrageous—well above MRBC scale. It even includes a clean bonus clause.”\n\n<color=#BFBFBF>He straightens, still uneasy.</color>\n\n“I’ve never seen a contract routed like this. Feels like it was dropped right into our queue by someone who knew exactly how to bypass the filters. And that name… Mizuki Bekker? Never heard of them. No records, no history.”\n\n<color=#BFBFBF>He frowns, voice dropping slightly.</color> “I don’t like ghosts, Commander. But that amount of C-bills is hard to ignore.”\n\n<color=#BFBFBF>He waits for your response, the flicker of unease lingering behind his eyes.</color>\n\n<b><color=blue>[If the mysterious contract is not completed before it disappears from the command center, this event will appear again after some time. The contract can only be completed once, and once the contract is completed this event will stop appearing.]</color></b>",
+    "Icon": "uixTxrSpot_DariusTalking"
+  },
+  "Scope": "Company",
+  "Weight": 1000,
+  "Requirements": {
+    "Scope": "Company",
+    "RequirementTags": {
+      "items": [],
+      "tagSetSourceFile": ""
+    },
+    "ExclusionTags": {
+      "items": [
+        "GoR_Prologue_Contract_Spawned",
+        "GoR_Prologue_Contract_Completed",
+        "GoR_Prologue_Skip",
+        "GoR_Campaign_Disabled"
+      ],
+      "tagSetSourceFile": "Tags/CompanyTags"
+    },
+    "RequirementComparisons": [
+      {
+        "obj": "DCE-CurrentDifficulty",
+        "op": "GreaterThanOrEqual",
+        "val": 3
+      },
+      {
+        "obj": "Travel",
+        "op": "Equal",
+        "val": 0,
+        "valueConstant": "0"
+      }
+    ]
+  },
+  "AdditionalRequirements": [
+    {
+      "Scope": "StarSystem",
+      "RequirementTags": {
+        "items": [],
+        "tagSetSourceFile": ""
+      },
+      "ExclusionTags": {
+        "items": [
+          "planet_other_gamesworld"
+        ],
+        "tagSetSourceFile": ""
+      },
+      "RequirementComparisons": []
+    }
+  ],
+  "AdditionalObjects": [],
+  "Options": [
+    {
+      "Description": {
+        "Id": "outcome_0",
+        "Name": "Check the contract",
+        "Details": "[A time-limited contract will appear in the command center]"
+      },
+      "RequirementList": [
+        {
+          "Scope": "Company",
+          "RequirementTags": {
+            "items": [],
+            "tagSetSourceFile": ""
+          },
+          "ExclusionTags": {
+            "items": [],
+            "tagSetSourceFile": ""
+          }
+        }
+      ],
+      "ResultSets": [
+        {
+          "Description": {
+            "Id": "outcome_0_0",
+            "Name": "Decision",
+            "Details": "<color=#BFBFBF>You consider the situation briefly before nodding at Darius.</color> “Yeah, that’s definitely odd but very tempting. I’ll take a closer look at the contract right away.”\n\n<i><b><color=#F79B25>[A new contract has temporarily appeared in the command center]</color></b></i>"
+          },
+          "Weight": 100,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "GoR_Prologue_Contract_Spawned"
+                ],
+                "tagSetSourceFile": "Tags/CompanyTags"
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "Actions": [],
+              "TemporaryResult": true,
+              "ResultDuration": 30
+            },
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [],
+                "tagSetSourceFile": "Tags/CompanyTags"
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "Actions": [
+                {
+                  "Type": "System_AddContract",
+                  "value": "GoR_Prologue_AmbushConvoy_MidnightHarvest",
+                  "valueConstant": "",
+                  "additionalValues": [
+                    "CenarisAppliedSystems",
+                    "UnknownFactionGoR",
+                    null,
+                    null,
+                    null,
+                    null,
+                    3
+                  ]
+                }
+              ],
+              "TemporaryResult": false
+            }
+          ]
+        }
+      ],
+      "Requirements": {
+        "Scope": "Company",
+        "RequirementTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        },
+        "ExclusionTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        }
+      }
+    },
+    {
+      "Description": {
+        "Id": "outcome_1",
+        "Name": "Ignore the contract",
+        "Details": "[Delay event for 180 days]"
+      },
+      "RequirementList": [
+        {
+          "Scope": "Company",
+          "RequirementTags": {
+            "items": [],
+            "tagSetSourceFile": ""
+          },
+          "ExclusionTags": {
+            "items": [],
+            "tagSetSourceFile": ""
+          }
+        }
+      ],
+      "ResultSets": [
+        {
+          "Description": {
+            "Id": "outcome_0_0",
+            "Name": "Ignore the contract",
+            "Details": "<color=#BFBFBF>You consider the situation briefly before shaking your head at Darius.</color> “No, that just sounds far too shady. Let's not take such risk at the current time.”"
+          },
+          "Weight": 100,
+          "Results": [
+            {
+              "Scope": "Company",
+              "AddedTags": {
+                "items": [
+                  "GoR_Prologue_Skip"
+                ],
+                "tagSetSourceFile": "Tags/CompanyTags"
+              },
+              "RemovedTags": {
+                "items": [],
+                "tagSetSourceFile": ""
+              },
+              "Actions": [],
+              "TemporaryResult": true,
+              "ResultDuration": 180
+            }
+          ]
+        }
+      ],
+      "Requirements": {
+        "Scope": "Company",
+        "RequirementTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        },
+        "ExclusionTags": {
+          "items": [],
+          "tagSetSourceFile": ""
+        }
+      }
+    }
+  ],
+  "PublishState": "PUBLISHED",
+  "ValidationState": "UNTESTED",
+  "EventType": "NORMAL",
+  "OneTimeEvent": false,
+  "Tags": {
+    "items": [],
+    "tagSetSourceFile": "tags/EventTags"
+  }
+}
