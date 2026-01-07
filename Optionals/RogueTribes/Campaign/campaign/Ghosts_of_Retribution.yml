@@ -1,0 +1,1279 @@
+name: Ghosts of Retribution
+beginsAt: starsystemdef_Maisons
+nodes:
+    Start:
+        - popup:
+              title: Campaign Info
+              sprite: uixTxrLogo_GenericCampaign
+              message: |
+                  The “Ghosts of Retribution” campaign is now available. To begin, start the flashpoint in the star system of Maisons.
+
+                  It will span a over a large number of contracts in several regions of the galaxy. The time investment is considerably longer than normal flashpoints, but the rewards are also much better.
+
+                  The story has several branching points, consider your choices carefully before taking an option.
+        - fakeFlashpoint:
+              name: Ghosts of Retribution
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: UnknownFactionGoR
+              difficulty: 6
+              at: starsystemdef_Maisons
+              description: |
+                  Help the Ghost Bear Watch track down the unknown faction with the strange Clan technology.
+        - popup:
+              title: Tutorial
+              sprite: uixTxrLogo_GenericCampaign
+              message: |
+                  A contract will now spawn in the Command Center and it is not possible to leave the star system or take other contracts until it has been completed. It is however possible to do all other forms of actions in the system during the contract lock, including saving.
+
+                  The campaign will utilize this type of contracts extensively, usually time gated. If they are not started before the time limit expires, they will trigger automatically. It is therefore recommended to prepare and take the contract before its deadline.
+
+                  In this case the contract will automatically trigger in <b>7</b> days, if it is not started manually before that.
+        - popup:
+              title: Tutorial (cont.)
+              sprite: uixTxrLogo_GenericCampaign
+              message: |
+                  The campaign often uses breadcrumb flashpoints, they will have a <color=#FF00FF>magenta</color> color for the marker on the star map.
+
+                  If a contract part of the campaign is failed, the campaign will temporarily pause until you feel ready to try again without any time limit.
+
+                  In such a situation the campaign is resumed by a Flashpoint at the location of the failed contract.
+        - goto: Common-GhostOfTheField
+
+    Error:
+        - popup:
+              title: Campaign Error
+              sprite: uixTxrLogo_GhostsOfRetribution_331
+              message: |
+                  THE CAMPAIGN HAS ENTERED AN ERROR STATE.
+
+                  PLEASE OPEN A TICKET ON DISCORD WITH LOGS AND SAVE FILE.
+        - goto: Exit
+
+    Common-GhostOfTheField:
+        - contract:
+              id: GoR_Common_Rescue_GhostsOfTheField
+              employer: GhostBearWatch
+              target: AuriganPirates
+              onFailGoto: Common-Retry-GhostOfTheField
+              withinDays: 7
+        - conversation:
+              id: GoR-Common-1-GhostsOfTheField-Debrief
+              header: Shortly After Mission Completion
+              subheader: In Orbit - Maisons
+        - wait:
+              days: 14
+              workOrder: Wait for new orders
+              sprite: uixTxrLogo_GenericCampaign
+        - conversation:
+              id: GoR-Common-2-BreadcrumbToCustozza
+              header: Incoming Transmission
+              subheader: Conference Room
+        - fakeFlashpoint:
+              name: Echoes in the Dust
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: UnknownFactionGoR
+              difficulty: 1
+              at: starsystemdef_Custozza
+              description: |
+                  A long-abandoned manufacturing colony deep in the Periphery, Custozza has been off the map for decades. Until now. A recovered BattleMech component points here, and what was once a forgotten industrial relic may hide the next link in a dangerous chain. Whatever force left its mark on Maisons may have passed through Custozza… or still be there.
+        - goto: Common-EchoesInTheDust
+
+    Common-EchoesInTheDust:
+        - contract:
+              id: GoR_Common_CaptureBase_EchoesInTheDust
+              employer: GhostBearWatch
+              target: UnknownFactionGoR
+              onFailGoto: Common-Retry-EchoesInTheDust
+              immediate: true
+        - conversation:
+              id: GoR-Common-3-MoreClues
+              header: Mission Debrief
+              subheader: In Orbit - Custozza
+        - event:
+              id: event_GhostsOfRetribution_Common_ThreadingTheFringe
+        - if:
+              companyDoesNotHaveTag: GoR_ThreadingTheFringe_ManualTravel
+          goto: Common-SignalIntercept
+        - fakeFlashpoint:
+              name: Melidron
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: UnknownFactionGoR
+              difficulty: 1
+              at: starsystemdef_Melidron
+              description: |
+                  The next trail to follow in the search of the unknown faction.
+        - goto: Common-SignalIntercept
+
+    Common-SignalIntercept:
+        - contract:
+              id: GoR_Common_SimpleBattle_SignalIntercept
+              employer: GhostBearWatch
+              target: UnknownFactionGoR
+              onFailGoto: Common-Retry-SignalIntercept
+              withinDays: 14
+        - conversation:
+              id: GoR-Common-4-TheTruth
+              header: Mission Debrief
+              subheader: In Orbit - Melidron
+        - event:
+              id: event_GhostsOfRetribution_Common_RisingDread
+        - wait:
+              days: 30
+              workOrder: Wait for the first strike
+              sprite: uixTxrLogo_GhostsOfRetribution_331
+        - event:
+              id: event_GhostsOfRetribution_Common_TheWeightOfTruth
+        - if:
+              companyDoesNotHaveTag: GoR_TheWeightOfTruth_ManualTravel
+          goto: Common-WarBegins
+        - fakeFlashpoint:
+              name: War Begins
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 6
+              at: starsystemdef_Melidron
+              description: |
+                  Arelle has issued a summons to go over the next step on how to deal with the Tribe.
+        - goto: Common-WarBegins
+
+    Common-WarBegins:
+        - conversation:
+              id: GoR-Common-5-WarBegins
+              header: Incoming Transmission from Arelle Jorgensson
+              subheader: Orbit over Melidron
+        - if:
+              companyHasTag: GoR_WarBegins_ChoseSide_GB
+          goto: GhostBearWatch-Start
+        - if:
+              companyHasTag: GoR_WarBegins_ChoseSide_MT
+          goto: MinnesotaTribe-Start
+        - goto: Error
+
+    Common-Retry-GhostOfTheField:
+        - fakeFlashpoint:
+              name: Ghost of the Field
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: UnknownFactionGoR
+              difficulty: 1
+              at: starsystemdef_Maisons
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the <i>Ghosts of the Field</i> contract.
+        - goto: Common-GhostOfTheField
+
+    Common-Retry-EchoesInTheDust:
+        - fakeFlashpoint:
+              name: Echoes in the Dust
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: UnknownFactionGoR
+              difficulty: 1
+              at: starsystemdef_Custozza
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the <i>Echoes in the Dust</i> contract.
+        - goto: Common-EchoesInTheDust
+
+    Common-Retry-SignalIntercept:
+        - fakeFlashpoint:
+              name: Signal Intercept
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: UnknownFactionGoR
+              difficulty: 1
+              at: starsystemdef_Melidron
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the <i>Signal Intercept</i> contract.
+        - goto: Common-SignalIntercept
+
+    GhostBearWatch-Start:
+        - reward: itemCollection_GhostBearWatch_Reward_StayingWithTheGhostBears
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_MarkedTerritory
+        - if:
+              companyHasTag: GoR_GB_AttackStarCluster752
+          goto: GhostBearWatch-AttackStarCluster752
+        - if:
+              companyHasTag: GoR_GB_AttackHorgens
+          goto: GhostBearWatch-AttackHorgens
+        - if:
+              companyHasTag: GoR_GB_AttackRWROutpost11
+          goto: GhostBearWatch-AttackRWROutpost11
+        - goto: Error
+
+    GhostBearWatch-AttackStarCluster752:
+        - if:
+              companyDoesNotHaveTag: GoR_UseSecondSelectEvent
+          event:
+              id: event_GhostsOfRetribution_GhostBearWatch_SelectStarCluster752_1
+        - if:
+              companyHasTag: GoR_UseSecondSelectEvent
+          event:
+              id: event_GhostsOfRetribution_GhostBearWatch_SelectStarCluster752_2
+        - if:
+              companyHasTag: GoR_GB_AshesOfThePast_Selected
+          goto: GhostBearWatch-AttackStarCluster752-AshesOfThePast
+        - if:
+              companyHasTag: GoR_GB_SignalDenied_Selected
+          goto: GhostBearWatch-AttackStarCluster752-SignalDenied
+        - if:
+              companyHasTag: GoR_GB_StrikeTheRedoubt_Selected
+          goto: GhostBearWatch-AttackStarCluster752-StrikeTheRedoubt
+        - goto: Error
+
+    GhostBearWatch-AttackStarCluster752-AshesOfThePast:
+        - contract:
+              id: GoR_GhostBearWatch_SimpleBattle_AshesOfThePast
+              employer: GhostBearWatch
+              target: MinnesotaTribe
+              onFailGoto: GhostBearWatch-Retry-AttackStarCluster752
+              withinDays: 14
+        - reward: itemCollection_GhostBearWatch_Reward_AttackMission1
+        - goto: GhostBearWatch-AttackStarCluster752-CheckStatus
+
+    GhostBearWatch-AttackStarCluster752-SignalDenied:
+        - contract:
+              id: GoR_GhostBearWatch_Rescue_SignalDenied
+              employer: GhostBearWatch
+              target: MinnesotaTribe
+              onFailGoto: GhostBearWatch-Retry-AttackStarCluster752
+              withinDays: 14
+        - reward: itemCollection_GhostBearWatch_Reward_AttackMission2
+        - goto: GhostBearWatch-AttackStarCluster752-CheckStatus
+
+    GhostBearWatch-AttackStarCluster752-StrikeTheRedoubt:
+        - contract:
+              id: GoR_GhostBearWatch_CaptureBase_StrikeTheRedoubt
+              employer: GhostBearWatch
+              target: MinnesotaTribe
+              onFailGoto: GhostBearWatch-Retry-AttackStarCluster752
+              withinDays: 14
+        - reward: itemCollection_GhostBearWatch_Reward_AttackMission3
+        - goto: GhostBearWatch-AttackStarCluster752-CheckStatus
+
+    GhostBearWatch-AttackStarCluster752-CheckStatus:
+        - if:
+              companyDoesNotHaveTag: GoR_GB_AshesOfThePast_Finished
+          goto: GhostBearWatch-AttackStarCluster752
+        - if:
+              companyDoesNotHaveTag: GoR_GB_SignalDenied_Finished
+          goto: GhostBearWatch-AttackStarCluster752
+        - if:
+              companyDoesNotHaveTag: GoR_GB_StrikeTheRedoubt_Finished
+          goto: GhostBearWatch-AttackStarCluster752
+        - conversation:
+              id: GoR-GhostBearWatch-1a-StarCluster752Captured
+              header: Incoming Transmission
+              subheader: In Orbit - Merovi
+        - goto: GhostBearWatch-Intermission
+
+    GhostBearWatch-Retry-AttackStarCluster752:
+        - fakeFlashpoint:
+              name: Attack on Star Cluster 752
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 1
+              at: starsystemdef_StarCluster752
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the failed contract during the attack on <i>Star Cluster 752</i>.
+        - goto: GhostBearWatch-AttackStarCluster752
+
+    GhostBearWatch-AttackHorgens:
+        - if:
+              companyDoesNotHaveTag: GoR_UseSecondSelectEvent
+          event:
+              id: event_GhostsOfRetribution_GhostBearWatch_SelectHorgens_1
+        - if:
+              companyHasTag: GoR_UseSecondSelectEvent
+          event:
+              id: event_GhostsOfRetribution_GhostBearWatch_SelectHorgens_2
+        - if:
+              companyHasTag: GoR_GB_PurgeTheirArteries_Selected
+          goto: GhostBearWatch-AttackHorgens-PurgeTheirArteries
+        - if:
+              companyHasTag: GoR_GB_BreakTheirNerve_Selected
+          goto: GhostBearWatch-AttackHorgens-BreakTheirNerve
+        - if:
+              companyHasTag: GoR_GB_NoTraceLeft_Selected
+          goto: GhostBearWatch-AttackHorgens-NoTraceLeft
+        - goto: Error
+
+    GhostBearWatch-AttackHorgens-PurgeTheirArteries:
+        - contract:
+              id: GoR_GhostBearWatch_AmbushConvoy_PurgeTheirArteries
+              employer: GhostBearWatch
+              target: MinnesotaTribe
+              onFailGoto: GhostBearWatch-Retry-AttackHorgens
+              withinDays: 14
+        - reward: itemCollection_GhostBearWatch_Reward_AttackMission1
+        - goto: GhostBearWatch-AttackHorgens-CheckStatus
+
+    GhostBearWatch-AttackHorgens-BreakTheirNerve:
+        - contract:
+              id: GoR_GhostBearWatch_CaptureBase_BreakTheirNerve
+              employer: GhostBearWatch
+              target: MinnesotaTribe
+              onFailGoto: GhostBearWatch-Retry-AttackHorgens
+              withinDays: 14
+        - reward: itemCollection_GhostBearWatch_Reward_AttackMission2
+        - goto: GhostBearWatch-AttackHorgens-CheckStatus
+
+    GhostBearWatch-AttackHorgens-NoTraceLeft:
+        - contract:
+              id: GoR_GhostBearWatch_Rescue_NoTraceLeft
+              employer: GhostBearWatch
+              target: MinnesotaTribe
+              onFailGoto: GhostBearWatch-Retry-AttackHorgens
+              withinDays: 14
+        - reward: itemCollection_GhostBearWatch_Reward_AttackMission3
+        - goto: GhostBearWatch-AttackHorgens-CheckStatus
+
+    GhostBearWatch-AttackHorgens-CheckStatus:
+        - if:
+              companyDoesNotHaveTag: GoR_GB_PurgeTheirArteries_Finished
+          goto: GhostBearWatch-AttackHorgens
+        - if:
+              companyDoesNotHaveTag: GoR_GB_BreakTheirNerve_Finished
+          goto: GhostBearWatch-AttackHorgens
+        - if:
+              companyDoesNotHaveTag: GoR_GB_NoTraceLeft_Finished
+          goto: GhostBearWatch-AttackHorgens
+        - conversation:
+              id: GoR-GhostBearWatch-1b-HorgensCaptured
+              header: Incoming Transmission
+              subheader: In Orbit - Horgens III
+        - goto: GhostBearWatch-Intermission
+
+    GhostBearWatch-Retry-AttackHorgens:
+        - fakeFlashpoint:
+              name: Attack on Horgens
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 1
+              at: starsystemdef_Horgens
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the failed contract during the attack on <i>Horgens</i>.
+        - goto: GhostBearWatch-AttackHorgens
+
+    GhostBearWatch-AttackRWROutpost11:
+        - if:
+              companyDoesNotHaveTag: GoR_UseSecondSelectEvent
+          event:
+              id: event_GhostsOfRetribution_GhostBearWatch_SelectRWROutpost11_1
+        - if:
+              companyHasTag: GoR_UseSecondSelectEvent
+          event:
+              id: event_GhostsOfRetribution_GhostBearWatch_SelectRWROutpost11_2
+        - if:
+              companyHasTag: GoR_GB_CullTheFuture_Selected
+          goto: GhostBearWatch-AttackRWROutpost11-CullTheFuture
+        - if:
+              companyHasTag: GoR_GB_SeverThePast_Selected
+          goto: GhostBearWatch-AttackRWROutpost11-SeverThePast
+        - if:
+              companyHasTag: GoR_GB_DisciplineShattered_Selected
+          goto: GhostBearWatch-AttackRWROutpost11-DisciplineShattered
+        - goto: Error
+
+    GhostBearWatch-AttackRWROutpost11-CullTheFuture:
+        - contract:
+              id: GoR_GhostBearWatch_SimpleBattle_CullTheFuture
+              employer: GhostBearWatch
+              target: MinnesotaTribe
+              onFailGoto: GhostBearWatch-Retry-AttackRWROutpost11
+              withinDays: 14
+        - reward: itemCollection_GhostBearWatch_Reward_AttackMission1
+        - goto: GhostBearWatch-AttackRWROutpost11-CheckStatus
+
+    GhostBearWatch-AttackRWROutpost11-SeverThePast:
+        - contract:
+              id: GoR_GhostBearWatch_Rescue_SeverThePast
+              employer: GhostBearWatch
+              target: MinnesotaTribe
+              onFailGoto: GhostBearWatch-Retry-AttackRWROutpost11
+              withinDays: 14
+        - reward: itemCollection_GhostBearWatch_Reward_AttackMission2
+        - goto: GhostBearWatch-AttackRWROutpost11-CheckStatus
+
+    GhostBearWatch-AttackRWROutpost11-DisciplineShattered:
+        - contract:
+              id: GoR_GhostBearWatch_CaptureBase_DisciplineShattered
+              employer: GhostBearWatch
+              target: MinnesotaTribe
+              onFailGoto: GhostBearWatch-Retry-AttackRWROutpost11
+              withinDays: 14
+        - reward: itemCollection_GhostBearWatch_Reward_AttackMission3
+        - goto: GhostBearWatch-AttackRWROutpost11-CheckStatus
+
+    GhostBearWatch-AttackRWROutpost11-CheckStatus:
+        - if:
+              companyDoesNotHaveTag: GoR_GB_CullTheFuture_Finished
+          goto: GhostBearWatch-AttackRWROutpost11
+        - if:
+              companyDoesNotHaveTag: GoR_GB_SeverThePast_Finished
+          goto: GhostBearWatch-AttackRWROutpost11
+        - if:
+              companyDoesNotHaveTag: GoR_GB_DisciplineShattered_Finished
+          goto: GhostBearWatch-AttackRWROutpost11
+        - conversation:
+              id: GoR-GhostBearWatch-1c-RWROutpost11Captured
+              header: Incoming Transmission
+              subheader: In Orbit - Carath Prime
+        - goto: GhostBearWatch-Intermission
+
+    GhostBearWatch-Retry-AttackRWROutpost11:
+        - fakeFlashpoint:
+              name: Attack on Rim Worlds Republic Outpost \#11
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 1
+              at: starsystemdef_RimWorldsRepublicOutpost11
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the failed contract during the attack on <i>Rim Worlds Republic Outpost \#11</i>.
+        - goto: GhostBearWatch-AttackRWROutpost11
+
+    GhostBearWatch-Intermission:
+        - reward: itemCollection_GhostBearWatch_Reward_SystemCaptured
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_WarfrontRebalanced
+        - wait:
+              days: 60
+              workOrder: Wait for new orders
+              sprite: uixTxrLogo_GhostsOfRetribution_331
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_FalseCalm
+        - if:
+              companyDoesNotHaveTag: GoR_FalseCalm_ManualTravel
+          goto: GhostBearWatch-DecodedPaths
+        - fakeFlashpoint:
+              name: Decoded Paths
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 6
+              at: starsystemdef_Melidron
+              description: |
+                  Arelle is waiting with new orders for the next move against the Tribe.
+        - goto: GhostBearWatch-DecodedPaths
+
+    GhostBearWatch-DecodedPaths:
+        - conversation:
+              id: GoR-GhostBearWatch-2-DecodedPaths
+              header: Incoming Transmission
+              subheader: Conference Room
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_VoyageToTheVault
+        - if:
+              companyDoesNotHaveTag: GoR_VoyageToTheVault_ManualTravel
+          goto: GhostBearWatch-CobraStrike-Vault
+        - fakeFlashpoint:
+              name: Defend the Vault
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 6
+              at: starsystemdef_Dunianshire
+              description: |
+                  A vault containing important research is being assaulted by the Tribe. They must be stopped.
+
+        - goto: GhostBearWatch-CobraStrike-Vault
+
+    GhostBearWatch-CobraStrike-Vault:
+        - contract:
+              id: GoR_GhostBearWatch_DefendBase_DefendTheVault
+              employer: MajestyMetals
+              target: MinnesotaTribe
+              onFailGoto: GhostBearWatch-Retry-CobraStrike-Vault
+              withinDays: 7
+        - goto: GhostBearWatch-CobraStrike-Assassinate
+
+    GhostBearWatch-Retry-CobraStrike-Vault:
+        - fakeFlashpoint:
+              name: Defend the Vault
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 6
+              at: starsystemdef_Dunianshire
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the contract.
+        - goto: GhostBearWatch-CobraStrike-Vault
+
+    GhostBearWatch-CobraStrike-Assassinate:
+        - contract:
+              id: GoR_GhostBearWatch_Assassinate_ShatterTheSpear
+              employer: GhostBearWatch
+              target: MinnesotaTribe
+              onFailGoto: GhostBearWatch-Retry-CobraStrike-Assassinate
+              withinDays: 1
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_DiplomaticFallout
+        - conversation:
+              id: GoR-GhostBearWatch-3-Complications
+              header: Incoming Transmission
+              subheader: Close Orbit over Dunianshire VI
+        - wait:
+              days: 2
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_UnmarkedCompensation
+        - wait:
+              days: 2
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_UninvitedTruths
+        - if:
+              companyHasTag: GoR_GB_MizukiCall_Alone
+          goto: GhostBearWatch-MizukiCall-Alone
+        - if:
+              companyHasTag: GoR_GB_MizukiCall_Crew
+          goto: GhostBearWatch-MizukiCall-Crew
+        - if:
+              companyHasTag: GoR_GB_MizukiCall_Reject
+          goto: GhostBearWatch-StayWithGhostBears
+        - goto: Error
+
+    GhostBearWatch-Retry-CobraStrike-Assassinate:
+        - fakeFlashpoint:
+              name: Shatter the Spear
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 7
+              at: starsystemdef_Dunianshire
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the contract.
+        - goto: GhostBearWatch-CobraStrike-Assassinate
+
+    GhostBearWatch-MizukiCall-Alone:
+        - conversation:
+              id: GoR-GhostBearWatch-4a-TheShadowInHerBlood
+              header: Secret Transmission
+              subheader: Close Orbit over Dunianshire VI
+        - if:
+              companyHasTag: GoR_GB_StayedWithGB
+          goto: GhostBearWatch-StayWithGhostBears
+
+        - goto: Error
+
+    GhostBearWatch-MizukiCall-Crew:
+        - conversation:
+              id: GoR-GhostBearWatch-4b-TheLieWovenInBlood
+              header: Secret Transmission
+              subheader: Close Orbit over Dunianshire VI
+        - if:
+              companyHasTag: GoR_GB_StayedWithGB
+          goto: GhostBearWatch-StayWithGhostBears
+
+        - goto: Error
+
+    GhostBearWatch-StayWithGhostBears:
+        - wait:
+              days: 7
+              workOrder: Wait for new orders
+              sprite: uixTxrLogo_GhostsOfRetribution_331
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_ColdOrders
+        - fakeFlashpoint:
+              name: Echo Relay
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 8
+              at: starsystemdef_EagleRest
+              description: |
+                  New intel from the Watch identified an encrypted relay array that has been hidden inside derelict Star League terraforming equipment. Destroy it to cripple the Tribe's off-world logistics.
+        - goto: GhostBearWatch-EagleRest
+
+    GhostBearWatch-EagleRest:
+        - contract:
+              id: GoR_GhostBearWatch_DestroyBase_EchoRelay
+              employer: GhostBearWatch
+              target: MinnesotaTribe
+              onFailGoto: GhostBearWatch-Retry-EagleRest
+              withinDays: 7
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_SignalSevered
+        - fakeFlashpoint:
+              name: Warden of Ash
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: Locals
+              difficulty: 8
+              at: starsystemdef_Butzfleth
+              description: |
+                  Ghost Bear Watch intelligence identifies Butzfleth Majoris as a covert logistics hub. You're ordered to investigate and eliminate a Tribe-aligned prison official supplying indentured labor for military construction.
+        - goto: GhostBearWatch-Butzfleth
+
+    GhostBearWatch-Retry-EagleRest:
+        - fakeFlashpoint:
+              name: Echo Relay
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 8
+              at: starsystemdef_EagleRest
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the contract.
+        - goto: GhostBearWatch-EagleRest
+
+    GhostBearWatch-Butzfleth:
+        - contract:
+              id: GoR_GhostBearWatch_Assassinate_WardenOfAsh
+              employer: GhostBearWatch
+              target: Locals
+              onFailGoto: GhostBearWatch-Retry-Butzfleth
+              withinDays: 7
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_AshesSettled
+        - fakeFlashpoint:
+              name: Storm Mirror
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 8
+              at: starsystemdef_Cygnus
+              description: |
+                  Ghost Bear intel confirms the Tribe stole prototype ECM tech from a derelict weather station on Cygnus III. A convoy is now moving to extract the systems off-world. Intercept and destroy it before launch.
+        - goto: GhostBearWatch-Cygnus
+
+    GhostBearWatch-Retry-Butzfleth:
+        - fakeFlashpoint:
+              name: Warden of Ash
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 1
+              at: starsystemdef_Butzfleth
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the contract.
+        - goto: GhostBearWatch-Butzfleth
+
+    GhostBearWatch-Cygnus:
+        - contract:
+              id: GoR_GhostBearWatch_AmbushConvoy_StormMirror
+              employer: GhostBearWatch
+              target: MinnesotaTribe
+              onFailGoto: GhostBearWatch-Retry-Cygnus
+              withinDays: 7
+        - wait:
+              days: 14
+              workOrder: Wait for update from Arelle
+              sprite: uixTxrLogo_GhostsOfRetribution_331
+        - conversation:
+              id: GoR-GhostBearWatch-5-WhereDidTheTribeGo
+              header: Incoming Transmission
+              subheader: Close Orbit over Cygnus
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_StarMapUpdates
+        - wait:
+              days: 30
+              workOrder: Wait for new orders
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_TendrilsOfFear
+        - if:
+              companyDoesNotHaveTag: GoR_TendrilsOfFear_ManualTravel
+          goto: GhostBearWatch-AntiSpinward
+        - fakeFlashpoint:
+              name: Anti-Spinward
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 10
+              at: starsystemdef_Melidron
+              description: |
+                  Arelle is waiting for your arrival to hand out new orders.
+        - goto: GhostBearWatch-AntiSpinward
+
+    GhostBearWatch-Retry-Cygnus:
+        - fakeFlashpoint:
+              name: Storm Mirror
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 9
+              at: starsystemdef_Cygnus
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the contract.
+        - goto: GhostBearWatch-Cygnus
+
+    GhostBearWatch-AntiSpinward:
+        - conversation:
+              id: GoR-GhostBearWatch-6-AntiSpinward
+              header: Incoming Transmission
+              subheader: Conference Room
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_TowardsTheTribe
+        - reward: itemCollection_GhostBearWatch_Reward_Doggerbank
+        - if:
+              companyDoesNotHaveTag: GoR_TowardsTheTribe_ManualTravel
+          goto: GhostBearWatch-Doggerbank
+        - fakeFlashpoint:
+              name: Doggerbank
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 10
+              at: starsystemdef_Doggerbank
+              description: |
+                  The next battle agains the tribe takes place on the remote system of <i>Doggerbank</i>.
+        - goto: GhostBearWatch-Doggerbank
+
+    GhostBearWatch-Doggerbank:
+        - contract:
+              id: GoR_GhostBearWatch_CaptureBase_SilentAnnex
+              employer: GhostBearWatch
+              target: MinnesotaTribe
+              onFailGoto: GhostBearWatch-Retry-Doggerbank
+              withinDays: 7
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_TheWatchMovesIn
+        - fakeFlashpoint:
+              name: Casket Run
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 10
+              at: starsystemdef_MaladorCluster
+              description: |
+                  Ghost Bear Watch surveillance assets have identified a Minnesota Tribe convoy departing from a new developed raw material site on Kuras Drift. The convoy is maintaining low emissions and moving at high speed, suggesting the transport of sensitive or high-value cargo.
+        - goto: GhostBearWatch-MaladorCluster-CasketRun
+
+    GhostBearWatch-Retry-Doggerbank:
+        - fakeFlashpoint:
+              name: Silent Annex
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 10
+              at: starsystemdef_Doggerbank
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the <i>Silent Annex</i> contract.
+        - goto: GhostBearWatch-Doggerbank
+
+    GhostBearWatch-MaladorCluster-CasketRun:
+        - contract:
+              id: GoR_GhostBearWatch_AmbushConvoy_CasketRun
+              employer: GhostBearWatch
+              target: MinnesotaTribe
+              onFailGoto: GhostBearWatch-Retry-MaladorCluster-CasketRun
+              withinDays: 7
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_BuriedRiches
+        - goto: GhostBearWatch-MaladorCluster-CloseTheMine
+
+    GhostBearWatch-Retry-MaladorCluster-CasketRun:
+        - fakeFlashpoint:
+              name: Casket Run
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 10
+              at: starsystemdef_MaladorCluster
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the <i>Casket Run</i> contract.
+        - goto: GhostBearWatch-MaladorCluster-CasketRun
+
+    GhostBearWatch-MaladorCluster-CloseTheMine:
+        - contract:
+              id: GoR_GhostBearWatch_DestroyBase_CloseTheMine
+              employer: GhostBearWatch
+              target: MinnesotaTribe
+              onFailGoto: GhostBearWatch-Retry-MaladorCluster-CloseTheMine
+              withinDays: 3
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_WideningFronts
+        - fakeFlashpoint:
+              name: Broken Columns
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 10
+              at: starsystemdef_Landrum
+              description: |
+                  Intelligence confirms multiple Minnesota Tribe elements have withdrawn to <i>Landrum</i> as part of a larger logistical fallback. Engage them before they can reestablish position or consolidate resources. Disrupt any and all identified formations planetside.
+        - goto: GhostBearWatch-Landrum
+
+    GhostBearWatch-Retry-MaladorCluster-CloseTheMine:
+        - fakeFlashpoint:
+              name: Close the Mine
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 10
+              at: starsystemdef_MaladorCluster
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the <i>Close the Mine</i> contract.
+        - goto: GhostBearWatch-MaladorCluster-CloseTheMine
+
+    GhostBearWatch-Landrum:
+        - contract:
+              id: GoR_GhostBearWatch_SimpleBattle_BrokenColumns
+              employer: GhostBearWatch
+              target: MinnesotaTribe
+              onFailGoto: GhostBearWatch-Retry-Landrum
+              withinDays: 7
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_StopTheFactory
+        - fakeFlashpoint:
+              name: Cold Iron
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 12
+              at: starsystemdef_Froeislandis
+              description: |
+                  Ghost Bear recon confirms the Tribe is using <i>Fröislandis VII</i> as a major staging site. A large arctic factory is producing advanced hardware. The harsh conditions complicate assaults, but destroying the plant is vital. Its loss will cripple Tribe logistics across the region.
+        - goto: GhostBearWatch-Froeislandis-ColdIron
+
+    GhostBearWatch-Retry-Landrum:
+        - fakeFlashpoint:
+              name: Broken Columns
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 10
+              at: starsystemdef_Landrum
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the <i>Broken Columns</i> contract.
+        - goto: GhostBearWatch-Landrum
+
+    GhostBearWatch-Froeislandis-ColdIron:
+        - contract:
+              id: GoR_GhostBearWatch_DestroyBase_ColdIron
+              employer: GhostBearWatch
+              target: MinnesotaTribe
+              onFailGoto: GhostBearWatch-Retry-Froeislandis-ColdIron
+              withinDays: 7
+        - conversation:
+              id: GoR-GhostBearWatch-7-Armageddon
+              header: Incoming Priority Transmission
+              subheader: Orbit over Fröislandis VII
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_PreparingForArmageddon
+        - reward: itemCollection_GhostBearWatch_Reward_Armageddon
+        - goto: GhostBearWatch-Froeislandis-Armageddon
+
+    GhostBearWatch-Retry-Froeislandis-ColdIron:
+        - fakeFlashpoint:
+              name: Cold Iron
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 10
+              at: starsystemdef_Froeislandis
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the <i>Cold Iron</i> contract.
+        - goto: GhostBearWatch-Froeislandis-ColdIron
+
+    GhostBearWatch-Froeislandis-Armageddon:
+        - contract:
+              id: GoR_GhostBearWatch_Assassinate_Armageddon
+              employer: GhostBearWatch
+              target: MinnesotaTribe
+              onFailGoto: GhostBearWatch-Retry-Froeislandis-Armageddon
+              withinDays: 14
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_Victory
+        - conversation:
+              id: GoR-GhostBearWatch-8-ArelleMissing
+              header: Incoming Priority Transmission
+              subheader: Orbit over Fröislandis VII
+        - reward: itemCollection_GhostBearWatch_Reward_ItIsOver
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_CurtainFall
+        - goto: Exit
+
+    GhostBearWatch-Retry-Froeislandis-Armageddon:
+        - fakeFlashpoint:
+              name: Armageddon
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: MinnesotaTribe
+              difficulty: 14
+              at: starsystemdef_Froeislandis
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the <i>Armageddon</i> contract.
+        - goto: GhostBearWatch-Froeislandis-Armageddon
+
+    MinnesotaTribe-Start:
+        - reward: itemCollection_MinnesotaTribe_Reward_SwitchingSides
+        - event:
+              id: event_GhostsOfRetribution_MinnesotaTribe_FlaggedStars
+        - if:
+              companyHasTag: GoR_MT_DefendStarCluster752"
+          goto: MinnesotaTribe-DefendStarCluster752
+        - if:
+              companyHasTag: GoR_MT_DefendHorgens"
+          goto: MinnesotaTribe-DefendHorgens
+        - if:
+              companyHasTag: GoR_MT_MinnesotaTribe-DefendRWROutpost11"
+          goto: MinnesotaTribe-DefendRWROutpost11
+        - goto: Error
+
+    MinnesotaTribe-DefendStarCluster752:
+        - if:
+              companyDoesNotHaveTag: GoR_UseSecondSelectEvent
+          event:
+              id: event_GhostsOfRetribution_MinnesotaTribe_SelectStarCluster752_1
+        - if:
+              companyHasTag: GoR_UseSecondSelectEvent
+          event:
+              id: event_GhostsOfRetribution_MinnesotaTribe_SelectStarCluster752_2
+        - if:
+              companyHasTag: GoR_MT_AshAndSteel_Selected
+          goto: MinnesotaTribe-DefendStarCluster752-AshAndSteel
+        - if:
+              companyHasTag: GoR_MT_HiddenRelay_Selected
+          goto: MinnesotaTribe-DefendStarCluster752-HiddenRelay
+        - if:
+              companyHasTag: GoR_MT_HoldTheHighGround_Selected
+          goto: MinnesotaTribe-DefendStarCluster752-HoldTheHighGround
+        - goto: Error
+
+    MinnesotaTribe-DefendStarCluster752-AshAndSteel:
+        - contract:
+              id: GoR_MinnesotaTribe_SimpleBattle_AshAndSteel
+              employer: MinnesotaTribe
+              target: GhostBearWatch
+              onFailGoto: MinnesotaTribe-Retry-DefendStarCluster752
+              withinDays: 14
+        - reward: itemCollection_MinnesotaTribe_Reward_DefenseMission1
+        - goto: MinnesotaTribe-DefendStarCluster752-CheckStatus
+
+    MinnesotaTribe-DefendStarCluster752-HiddenRelay:
+        - contract:
+              id: GoR_MinnesotaTribe_Rescue_HiddenRelay
+              employer: MinnesotaTribe
+              target: GhostBearWatch
+              onFailGoto: MinnesotaTribe-Retry-DefendStarCluster752
+              withinDays: 14
+        - reward: itemCollection_MinnesotaTribe_Reward_DefenseMission2
+        - goto: MinnesotaTribe-DefendStarCluster752-CheckStatus
+
+    MinnesotaTribe-DefendStarCluster752-HoldTheHighGround:
+        - contract:
+              id: GoR_MinnesotaTribe_DefendBase_HoldTheHighGround
+              employer: MinnesotaTribe
+              target: GhostBearWatch
+              onFailGoto: MinnesotaTribe-Retry-DefendStarCluster752
+              withinDays: 14
+        - reward: itemCollection_MinnesotaTribe_Reward_DefenseMission3
+        - goto: MinnesotaTribe-DefendStarCluster752-CheckStatus
+
+    MinnesotaTribe-DefendStarCluster752-CheckStatus:
+        - if:
+              companyDoesNotHaveTag: GoR_MT_AshAndSteel_Finished
+          goto: MinnesotaTribe-DefendStarCluster752
+        - if:
+              companyDoesNotHaveTag: GoR_MT_HiddenRelay_Finished
+          goto: MinnesotaTribe-DefendStarCluster752
+        - if:
+              companyDoesNotHaveTag: GoR_MT_HoldTheHighGround_Finished
+          goto: MinnesotaTribe-DefendStarCluster752
+        - conversation:
+              id: GoR-MinnesotaTribe-1a-StarCluster752Defended
+              header: Incoming Transmission
+              subheader: In Orbit - Star Cluster 752
+        - goto: MinnesotaTribe-Intermission
+
+    MinnesotaTribe-Retry-DefendStarCluster752:
+        - fakeFlashpoint:
+              name: Defense of Star Cluster 752
+              employer: MinnesotaTribe
+              employerPortrait: castDef_MizukiBekker
+              target: GhostBearWatch
+              difficulty: 1
+              at: starsystemdef_StarCluster752
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the failed contract during the defense of <i>Star Cluster 752</i>.
+        - goto: MinnesotaTribe-DefendStarCluster752
+
+    MinnesotaTribe-DefendHorgens:
+        - if:
+              companyDoesNotHaveTag: GoR_UseSecondSelectEvent
+          event:
+              id: event_GhostsOfRetribution_MinnesotaTribe_SelectHorgens_1
+        - if:
+              companyHasTag: GoR_UseSecondSelectEvent
+          event:
+              id: event_GhostsOfRetribution_MinnesotaTribe_SelectHorgens_2
+        - if:
+              companyHasTag: GoR_MT_RouteThroughFire_Selected
+          goto: MinnesotaTribe-DefendHorgens-RouteThroughFire
+        - if:
+              companyHasTag: GoR_MT_CradleOfCommand_Selected
+          goto: MinnesotaTribe-DefendHorgens-CradleOfCommand
+        - if:
+              companyHasTag: GoR_MT_SignalsInTheCanopy_Selected
+          goto: MinnesotaTribe-DefendHorgens-SignalsInTheCanopy
+        - goto: Error
+
+    MinnesotaTribe-Retry-DefendHorgens:
+        - fakeFlashpoint:
+              name: Defense of Horgens
+              employer: MinnesotaTribe
+              employerPortrait: castDef_MizukiBekker
+              target: GhostBearWatch
+              difficulty: 1
+              at: starsystemdef_Horgens
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the failed contract during the defense of <i>Horgens</i>.
+        - goto: MinnesotaTribe-DefendHorgens
+
+    MinnesotaTribe-DefendHorgens-RouteThroughFire:
+        - contract:
+              id: GoR_MinnesotaTribe_CaptureEscort_RouteThroughFire
+              employer: MinnesotaTribe
+              target: GhostBearWatch
+              onFailGoto: MinnesotaTribe-Retry-DefendHorgens
+              withinDays: 14
+        - reward: itemCollection_MinnesotaTribe_Reward_DefenseMission1
+        - goto: MinnesotaTribe-DefendHorgens-CheckStatus
+
+    MinnesotaTribe-DefendHorgens-CradleOfCommand:
+        - contract:
+              id: GoR_MinnesotaTribe_DefendBase_CradleOfCommand
+              employer: MinnesotaTribe
+              target: GhostBearWatch
+              onFailGoto: MinnesotaTribe-Retry-DefendHorgens
+              withinDays: 14
+        - reward: itemCollection_MinnesotaTribe_Reward_DefenseMission2
+        - goto: MinnesotaTribe-DefendHorgens-CheckStatus
+
+    MinnesotaTribe-DefendHorgens-SignalsInTheCanopy:
+        - contract:
+              id: GoR_MinnesotaTribe_Rescue_SignalsInTheCanopy
+              employer: MinnesotaTribe
+              target: GhostBearWatch
+              onFailGoto: MinnesotaTribe-Retry-DefendHorgens
+              withinDays: 14
+        - reward: itemCollection_MinnesotaTribe_Reward_DefenseMission3
+        - goto: MinnesotaTribe-DefendHorgens-CheckStatus
+
+    MinnesotaTribe-DefendHorgens-CheckStatus:
+        - if:
+              companyDoesNotHaveTag: GoR_MT_RouteThroughFire_Finished
+          goto: MinnesotaTribe-DefendHorgens
+        - if:
+              companyDoesNotHaveTag: GoR_MT_CradleOfCommand_Finished
+          goto: MinnesotaTribe-DefendHorgens
+        - if:
+              companyDoesNotHaveTag: GoR_MT_SignalsInTheCanopy_Finished
+          goto: MinnesotaTribe-DefendHorgens
+        - conversation:
+              id: GoR-MinnesotaTribe-1b-HorgensDefended
+              header: Incoming Transmission
+              subheader: In Orbit - Horgens
+        - goto: MinnesotaTribe-Intermission
+
+    MinnesotaTribe-DefendRWROutpost11:
+        - if:
+              companyDoesNotHaveTag: GoR_UseSecondSelectEvent
+          event:
+              id: event_GhostsOfRetribution_MinnesotaTribe_SelectRWROutpost11_1
+        - if:
+              companyHasTag: GoR_UseSecondSelectEvent
+          event:
+              id: event_GhostsOfRetribution_MinnesotaTribe_SelectRWROutpost11_2
+        - if:
+              companyHasTag: GoR_MT_YoungGeneration_Selected
+          goto: MinnesotaTribe-DefendRWROutpost11-YoungGeneration
+        - if:
+              companyHasTag: GoR_MT_TreasuresOfThePast_Selected
+          goto: MinnesotaTribe-DefendRWROutpost11-TreasuresOfThePast
+        - if:
+              companyHasTag: GoR_MT_SteelLessons_Selected
+          goto: MinnesotaTribe-DefendRWROutpost11-SteelLessons
+        - goto: Error
+
+    MinnesotaTribe-DefendRWROutpost11-YoungGeneration:
+        - contract:
+              id: GoR_MinnesotaTribe_SimpleBattle_YoungGeneration
+              employer: MinnesotaTribe
+              target: GhostBearWatch
+              onFailGoto: MinnesotaTribe-Retry-DefendRWROutpost11
+              withinDays: 14
+        - reward: itemCollection_MinnesotaTribe_Reward_DefenseMission1
+        - goto: MinnesotaTribe-DefendRWROutpost11-CheckStatus
+
+    MinnesotaTribe-DefendRWROutpost11-TreasuresOfThePast:
+        - contract:
+              id: GoR_MinnesotaTribe_Rescue_TreasuresOfThePast
+              employer: MinnesotaTribe
+              target: GhostBearWatch
+              onFailGoto: MinnesotaTribe-Retry-DefendRWROutpost11
+              withinDays: 14
+        - reward: itemCollection_MinnesotaTribe_Reward_DefenseMission2
+        - goto: MinnesotaTribe-DefendRWROutpost11-CheckStatus
+
+    MinnesotaTribe-DefendRWROutpost11-SteelLessons:
+        - contract:
+              id: GoR_MinnesotaTribe_DefendBase_SteelLessons
+              employer: MinnesotaTribe
+              target: GhostBearWatch
+              onFailGoto: MinnesotaTribe-Retry-DefendRWROutpost11
+              withinDays: 14
+        - reward: itemCollection_MinnesotaTribe_Reward_DefenseMission3
+        - goto: MinnesotaTribe-DefendRWROutpost11-CheckStatus
+
+    MinnesotaTribe-DefendRWROutpost11-CheckStatus:
+        - if:
+              companyDoesNotHaveTag: GoR_MT_YoungGeneration_Finished
+          goto: MinnesotaTribe-DefendRWROutpost11
+        - if:
+              companyDoesNotHaveTag: GoR_MT_TreasuresOfThePast_Finished
+          goto: MinnesotaTribe-DefendRWROutpost11
+        - if:
+              companyDoesNotHaveTag: GoR_MT_SteeLLessons_Finished
+          goto: MinnesotaTribe-DefendRWROutpost11
+        - conversation:
+              id: GoR-MinnesotaTribe-1c-RWROutpost11Defended
+              header: Incoming Transmission
+              subheader: In Orbit - Rim Worlds Republic Outpost \#11
+        - goto: MinnesotaTribe-Intermission
+
+    MinnesotaTribe-Retry-DefendRWROutpost11:
+        - fakeFlashpoint:
+              name: Defense of Rim Worlds Republic Outpost \#11
+              employer: MinnesotaTribe
+              employerPortrait: castDef_MizukiBekker
+              target: GhostBearWatch
+              difficulty: 1
+              at: starsystemdef_RimWorldsRepublicOutpost11
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the failed contract during the defense of <i>Rim Worlds Republic Outpost \#11</i>.
+        - goto: MinnesotaTribe-DefendRWROutpost11
+
+    MinnesotaTribe-Intermission:
+        - reward: itemCollection_MinnesotaTribe_Reward_SystemCaptured
+        - event:
+              id: event_GhostsOfRetribution_MinnesotaTribe_MostWanted
+        - wait:
+              days: 10
+              workOrder: Wait for new orders
+              sprite: uixTxrLogo_GhostsOfRetribution_331
+        - event:
+              id: event_GhostsOfRetribution_MinnesotaTribe_CourseForFolly
+        - goto: MinnesotaTribe-StrikeTheInnerSphere
+
+    MinnesotaTribe-StrikeTheInnerSphere:
+        - fakeFlashpoint:
+              name: Strike the Inner Sphere
+              employer: MinnesotaTribe
+              employerPortrait: castDef_MizukiBekker
+              target: GhostBearWatch
+              difficulty: 6
+              at: starsystemdef_McEvedysFolly
+              description: |
+                  Start the counterattack against the Inner Sphere after the successful defense of Tribe systems.
+        - event:
+              id: event_GhostsOfRetribution_MinnesotaTribe_TheKeyArrives
+        - conversation:
+              id: GoR-MinnesotaTribe-2-TheNextStep
+              header: Incoming Encrypted Transmission
+              subheader: Close Orbit over McEvedy's Folly
+        - fakeFlashpoint:
+              name: Under the Ruins
+              employer: MinnesotaTribe
+              employerPortrait: castDef_JoannaMcEvedy
+              target: OWNER
+              difficulty: 6
+              at: starsystemdef_Coopertown
+              description: |
+                  Help the Minnesota Tribe excavate the Star League-era resources before the Pirates can.
+        - goto: MinnesotaTribe-UnderTheRuins
+
+    MinnesotaTribe-UnderTheRuins:
+        - contract:
+              id: GoR_MinnesotaTribe_CaptureEscort_UnderTheRuins
+              employer: MinnesotaTribe
+              target: OWNER
+              onFailGoto: MinnesotaTribe-Retry-UnderTheRuins
+              withinDays: 7
+        - conversation:
+              id: GoR-MinnesotaTribe-3-AcquireRareMaterials
+              header: Orbit over {TGT_SYSTEM.Name}
+              subheader: Orbit over {CUR_SYSTEM}
+        - fakeFlashpoint:
+              name: Acquire Rare Materials
+              employer: MinnesotaTribe
+              employerPortrait: castDef_JoannaMcEvedy
+              target: OWNER
+              difficulty: 7
+              at: starsystemdef_Gallis
+              description: |
+                  Help the Minnesota Tribe secure the storage site of rare materials.
+        - goto: MinnesotaTribe-AcquireRareMaterials
+
+    MinnesotaTribe-Retry-UnderTheRuins:
+        - fakeFlashpoint:
+              name: Under The Ruins
+              employer: MinnesotaTribe
+              employerPortrait: castDef_JoannaMcEvedy
+              target: OWNER
+              difficulty: 6
+              at: starsystemdef_Coopertown
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the contract.
+        - goto: MinnesotaTribe-UnderTheRuins
+
+    MinnesotaTribe-AcquireRareMaterials:
+        - contract:
+              id: GoR_MinnesotaTribe_SimpleBattle_AcquireRareMaterials
+              employer: MinnesotaTribe
+              target: OWNER
+              onFailGoto: MinnesotaTribe-Retry-AcquireRareMaterials
+              withinDays: 7
+        - conversation:
+              id: GoR-MinnesotaTribe-4-QuestionableChoices
+              header: Orbit over {TGT_SYSTEM.Name}
+              subheader: Orbit over {CUR_SYSTEM}
+        - fakeFlashpoint:
+              name: Unwilling Asset
+              employer: MinnesotaTribe
+              employerPortrait: castDef_JoannaMcEvedy
+              target: OWNER
+              difficulty: 7
+              at: starsystemdef_Ryerson
+              description: |
+                  Acquire the services of Dr. Anika Tilsaye. Forcefully.
+        - goto: MinnesotaTribe-UnwillingAsset
+
+    MinnesotaTribe-Retry-AcquireRareMaterials:
+        - fakeFlashpoint:
+              name: Acquire Rare Materials
+              employer: MinnesotaTribe
+              employerPortrait: castDef_JoannaMcEvedy
+              target: OWNER
+              difficulty: 7
+              at: starsystemdef_Gallis
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the contract.
+        - goto: MinnesotaTribe-AcquireRareMaterials
+
+    MinnesotaTribe-UnwillingAsset:
+        - contract:
+              id: GoR_MinnesotaTribe_Rescue_UnwillingAsset
+              employer: MinnesotaTribe
+              target: OWNER
+              onFailGoto: MinnesotaTribe-Retry-UnwillingAsset
+              withinDays: 7
+
+        - goto: Exit
+
+    MinnesotaTribe-Retry-UnwillingAsset:
+        - fakeFlashpoint:
+              name: Unwilling Asset
+              employer: MinnesotaTribe
+              employerPortrait: castDef_JoannaMcEvedy
+              target: OWNER
+              difficulty: 8
+              at: starsystemdef_Ryerson
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the contract.
+        - goto: MinnesotaTribe-UnwillingAsset
