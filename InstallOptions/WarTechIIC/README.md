@@ -15,7 +15,10 @@ WIIC reads and sets a variety of tags and statistics on companies and star syste
 When naming star systems, remember to use the ID and not the name. You want `starsystemdef_St.Ives`, not `St. Ives`. In addition, any place a system ID is accepted, you can use the special value `HERE`, which means "the player's current location." Eg: `WIIC_add_planet_other_pirate_to_HERE` or `WIIC_give_HERE_to_ClanWolf`.
 
 For factions, refer to them by factionID. You want `ClanCloudCobra`, not `Clan Cloud Cobra` or `faction_ClanCloudCobra`. This is slightly inconsistent, yes, but I work with what HBS gives me.
+  - In addition, any place a factionID is accepted, you can use the special value `OWNER`, which means "the faction controlling the star system the player is currently in." Eg: `WIIC_OWNER_attacks_starsystemdef_Terra` or `WIIC_OWNER_offers_extended_Garrison Duty_at_HERE_against_AuriganPirates`
+  - Another option is `WIICEMPLOYER`, which refers to the faction employing the player in their current Extended Contract (or flareup). If the player is not currently employed in an EC, WIIC will throw an exception, and the tag will do nothing. Eg: `WIIC_WIICEMPLOYER_attacks_HERE`
 
+The following tag formats are supported:
   * `WIIC_give_{system}_to_{newOwner}` (eg: `WIIC_give_starsystemdef_Terra_to_ClanWolf`) - Setting this will pass control of the named star system to the new owner. The tag won't actually added to the company - WIIC 'eats' it.
   * `WIIC_{faction}_attacks_{system}` (eg: `WIIC_Clan Jade Falcon_attacks_starsystemdef_Terra`) - Setting this will cause a new Attack to start in the given system, with the faction as the attacker, if one doesn't already exist. The tag won't actually added to the company - WIIC 'eats' it.
     * `WIIC_{faction}_attacks_SOMEWHERE` (eg: `WIIC_Clan Jade Falcon_attacks_SOMEWHERE`) - Special case of the above; the target system is chosen using the usual logic, rather than specified by the tag.
@@ -25,8 +28,9 @@ For factions, refer to them by factionID. You want `ClanCloudCobra`, not `Clan C
   * `WIIC_set_{system}_{attacker|defender}_strength_{number}` (eg: `WIIC_set_starsystemdef_Terra_defender_strength_10`) - Setting this will adjust the attacker or defender's strength in that system's flareup, if there is one. The tag won't actually added to the company - WIIC 'eats' it.
   * `WIIC_add_{tag}_to_{system} | WIIC_remove_{tag}_from_{system}` (eg: `WIIC_add_planet_other_pirate_to_starsystemdef_Terra` or `WIIC_remove_planet_other_pirate_from_starsystemdef_Terra`) - Setting this will add or remove the given tag from the given system. The tag won't actually added to the company - WIIC 'eats' it.
   * `WIIC_{employer}_offers_{contractID}_at_{system}_against_{target}` (eg: `WIIC_ClanJadeFalcon_offers_StoryTime_3_Axylus_Default_at_systemdef_Sol_against_ClanWolf`) - Setting this will cause the employer to offer a travel contract of the given type to the player at the given system.
+    * `WIIC_{employer}_offers_{contractID}_at_{system}_against_TARGETOWNER` (eg: `WIIC_ClanJadeFalcon_offers_StoryTime_3_Axylus_Default_at_systemdef_Sol_against_TARGETOWNER`) - Special case of the above; the target of the contract will be whoever currently owns the target system.
   * `WIIC_{employer}_offers_extended_{contractID}_at_{system}_against_{target}` (eg: `WIIC_ClanJadeFalcon_offers_Garrison Duty_at_systemdef_Sol_against_ClanWolf`) - Setting this will cause WIIC to spawn the given extended contract at the given system with this employer and target. Note that this *ignores `employer`, `target` and `spawn_location`*, and just does the thing.
-  
+    * `WIIC_{employer}_offers_extended_{contractID}_at_{system}_against_TARGETOWNER` (eg: `WIIC_ClanJadeFalcon_offers_Garrison Duty_at_systemdef_Sol_against_TARGETOWNER`) - Special case of the above; the target of the extended contract will be whoever currently owns the target system.
   * `WIIC_begin_campaign {campaignName}` (eg: `WIIC_begin_campaign Sword of Restoration`) - Begin the given campaign. See Campaigns.md for more details about custom campaigns. If it's already active, nothing will happen. Note the space, not the underscore, between `WIIC_begin_campaign` and the name.
 
 ### Company Stats
