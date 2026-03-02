@@ -52,7 +52,7 @@ patch_base_kt = json.loads("""{
     "arrayHandle" : "Replace",
     "patch" : {
         "Enemy": {
-            "Max": 1,
+            "Max": 2,
             "ChanceToSpawn": 2.0,
             "LancePool": {
                 "ALL": [
@@ -116,7 +116,7 @@ for diff in range(1, 50+1):
     else:
         diff_config["Enemy"]["ChanceToSpawn"] = round(0.25 + 0.05*(diff-10), ndigits=2)
 
-    with open(filepath, 'w', newline='\r\n') as new_file:
+    with open(filepath, 'w', newline='\n') as new_file:
         json.dump(diff_config, new_file, indent=2)
 
     # no support
@@ -131,23 +131,17 @@ for diff in range(1, 50+1):
     patch_easy["patch"]["Enemy"]["ChanceToSpawn"] = round(max(0.0, 0.1 + 0.05*(diff-4)), ndigits=2)
     patchdef_easy["patches"].append(patch_easy)
     
-    # higher chance max 1 before KTs from 16 onwards
-    if diff > 9:
-        if diff > 15:
-            patch_kt = copy.deepcopy(patch_base_kt)
-            patch_kt["targetFile"] = "Core/MissionControl/config/AdditionalLances/" + filename
-        else:
-            patch_kt = copy.deepcopy(patch_base)
-            patch_kt["targetFile"] = "Core/MissionControl/config/AdditionalLances/" + filename
-            patch_kt["patch"]["Enemy"]["Max"] = 1
-            patch_kt["patch"]["Enemy"]["ChanceToSpawn"] = round(0.1 + 0.05*(diff+3), ndigits=2)
+    # KTs from 19 onwards
+    if diff > 18:
+        patch_kt = copy.deepcopy(patch_base_kt)
+        patch_kt["targetFile"] = "Core/MissionControl/config/AdditionalLances/" + filename
         patchdef_kt["patches"].append(patch_kt)
 
-with open("../../InstallOptions/SupportLances/MC-Hugs/patchdef.json", 'w', newline='\r\n') as new_file:
+with open("../../InstallOptions/SupportLances/MC-Hugs/patchdef.json", 'w', newline='\n') as new_file:
         json.dump(patchdef_hugs, new_file, indent=2)
 
-with open("../../InstallOptions/SupportLances/MC-Easy/patchdef.json", 'w', newline='\r\n') as new_file:
+with open("../../InstallOptions/SupportLances/MC-Easy/patchdef.json", 'w', newline='\n') as new_file:
         json.dump(patchdef_easy, new_file, indent=2)
 
-with open("../../InstallOptions/SupportLances/MC-KillTeams/patchdef.json", 'w', newline='\r\n') as new_file:
+with open("../../InstallOptions/SupportLances/MC-KillTeams/patchdef.json", 'w', newline='\n') as new_file:
         json.dump(patchdef_kt, new_file, indent=2)
