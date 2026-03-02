@@ -1,0 +1,307 @@
+{
+  "Custom": {
+    "Category": [
+      {
+        "CategoryID": "ArmorMod"
+      },
+      {
+        "CategoryID": "VoidSignatureSystem"
+      }
+    ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.10667 * [[Chassis.Tonnage]]",
+        "CBillCost": "55 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
+    "BonusDescriptions": [
+      "IsArmorMod",
+      "Mimetic",
+      "MimeticStealth: -13%, 5, 3",
+      "StealthReserved: 1",
+      "Visibility: -30%",
+      "Signature: -15%",
+      "ActiveHeatGenerated: +10%",
+      "ActiveHeatPerTurn: +10",
+      "ActiveAccuracy: -1",
+      "ReqECM",
+      "ArmorTPCost: x1.6",
+      "ArmorCBCost: x1.8"
+    ],
+    "ActivatableComponent": {
+      "ButtonName": "Stealth",
+      "CanNotBeActivatedManualy": false,
+      "CanActivateAfterMove": true,
+      "CanActivateAfterFire": false,
+      "ActiveByDefault": true,
+      "SafeActivation": true,
+      "ActivationMessage": "Void On",
+      "DeactivationMessage": "Void Off",
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "forceVisRebuild": true,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "LV_MIMETIC",
+            "Name": "Void-Signature System (Armor Mod) Activatable: Mimetic Armor",
+            "Details": "Makes the carrier much harder to see with eyes",
+            "Icon": "uixSvgIcon_status_ECM-ghost"
+          },
+          "statisticData": {
+            "statName": "LV_MIMETIC",
+            "operation": "Set",
+            "modValue": "5_0.13_1_3",
+            "modType": "System.String"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "Stealth_Heat_Generation_Stealth",
+            "Name": "Void-Signature System (Armor Mod) Activatable: Increased Heat Generated",
+            "Details": "Heat generation",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "statisticData": {
+            "statName": "HeatGenerated",
+            "operation": "Float_Multiply",
+            "modValue": "1.1",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
+          "Description": {
+            "Id": "Stealth_Heat_Capacity_Stealth",
+            "Name": "Void-Signature System (Armor Mod) Activatable: Decreased Cooling",
+            "Details": "Heat Capacity Penalty",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "statisticData": {
+            "statName": "HeatSinkCapacity",
+            "operation": "Int_Add",
+            "modValue": "-10",
+            "modType": "System.Int32"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
+          "Description": {
+            "Id": "Stealth_Accuracy_Stealth",
+            "Name": "Void-Signature System (Armor Mod) Activatable: Reduced Accuracy",
+            "Details": "Accuracy Penalty",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "statisticData": {
+            "statName": "AccuracyModifier",
+            "operation": "Float_Add",
+            "modValue": "1",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
+          }
+        }
+      ],
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [
+            "Damper"
+          ],
+          "Deactivate": []
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": [
+            "Damper"
+          ]
+        }
+      }
+    },
+    "ArmorRepair": {
+      "ArmorTPCost": 1.6,
+      "ArmorCBCost": 1.8
+    },
+    "Color": "Gold",
+    "CriticalEffects": {
+      "LinkedStatisticName": "Void Signature System"
+    },
+    "DecoratorComponent": [
+      {
+        "Text": "M",
+        "Color": "#5F24AC",
+        "Icon": "ComponentGearIcons_STEALTH",
+        "Importance": 40
+      }
+    ],
+    "ErrorMessage": "Stealth Armor requires a ECM!",
+    "Flags": [
+      "not_broken"
+    ],
+    "IBLS": {
+      "StorageSize": 7
+    },
+    "Linked": {
+      "Links": [
+        {
+          "ComponentDefId": "Linked_Armor_VoidSignatureSystem",
+          "Location": "LeftTorso"
+        },
+        {
+          "ComponentDefId": "Linked_Armor_VoidSignatureSystem",
+          "Location": "RightTorso"
+        },
+        {
+          "ComponentDefId": "Linked_Armor_VoidSignatureSystem",
+          "Location": "LeftArm"
+        },
+        {
+          "ComponentDefId": "Linked_Armor_VoidSignatureSystem",
+          "Location": "RightArm"
+        },
+        {
+          "ComponentDefId": "Linked_Armor_VoidSignatureSystem",
+          "Location": "LeftLeg"
+        },
+        {
+          "ComponentDefId": "Linked_Armor_VoidSignatureSystem",
+          "Location": "RightLeg"
+        }
+      ]
+    }
+  },
+  "Description": {
+    "Cost": 1500000,
+    "Rarity": 8,
+    "Purchasable": true,
+    "Manufacturer": "Prototype",
+    "Model": "Void-Signature System",
+    "UIName": "Void-Signature System (Armor Mod)",
+    "Id": "Gear_ArmorMod_VoidSignatureSystem",
+    "Name": "Void Signature System",
+    "Details": "The Void Signature System is a hybrid evolution of Star League era systems such as the Chameleon Light Polarization Shield and the Null Signature System. Essentially a scaled up version of the Battle Suits Mimetic Armor, the Void Signature System shields a BattleMech's presence from both visual and electronic detection with help from a paired ECM suite.  Reserves 1 slot in every Location except the Head and requires an ECM.",
+    "Icon": "StealthArmor"
+  },
+  "BonusValueA": "",
+  "BonusValueB": "",
+  "ComponentType": "Upgrade",
+  "ComponentSubType": "NotSet",
+  "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
+  "BattleValue": 0,
+  "InventorySize": 1,
+  "Tonnage": 0,
+  "AllowedLocations": "CenterTorso",
+  "DisallowedLocations": "All",
+  "CriticalComponent": false,
+  "statusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "Stealth_Signature_Decrease_Stealth",
+        "Name": "Void-Signature System (Armor Mod): Decreased Sensor Signature",
+        "Details": "Signature Statuseffect.",
+        "Icon": "uixSvgIcon_equipment_TTS"
+      },
+      "statisticData": {
+        "statName": "SensorSignatureModifier",
+        "operation": "Float_Multiply",
+        "modValue": "0.85",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "Stealth_Visibility_Decrease_Stealth",
+        "Name": "Void-Signature System (Armor Mod): Decreased Visual Signature",
+        "Details": "Visibility Statuseffect.",
+        "Icon": "uixSvgIcon_equipment_TTS"
+      },
+      "statisticData": {
+        "statName": "SpottingVisibilityMultiplier",
+        "operation": "Float_Multiply",
+        "modValue": "0.7",
+        "modType": "System.Single"
+      }
+    }
+  ],
+  "ComponentTags": {
+    "items": [
+      "component_type_stock",
+      "LootMagnetBlacklist",
+      "VoidSignatureSystem",
+      "SuperheavyIncompatible",
+      "SquadIncompatible"
+    ],
+    "tagSetSourceFile": ""
+  }
+}
