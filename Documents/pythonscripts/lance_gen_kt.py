@@ -50,9 +50,9 @@ slot_template = json.loads("""{
 
 # tuple (include_tags, exclude_tags)
 tags = {}
-tags["easy"] = (["unit_killteam", "unit_kt_easy"], ["unit_kt_hard"])
+tags["easy"] = (["unit_killteam", "unit_kt_low"], ["unit_kt_high"])
 tags["mixed"] = (["unit_killteam"], [])
-tags["hard"] = (["unit_killteam", "unit_kt_hard"], ["unit_kt_easy"])
+tags["hard"] = (["unit_killteam", "unit_kt_high"], ["unit_kt_low"])
 
 tags["regular"] = (
     ["{CUR_TEAM.faction}", "unit_mech", "unit_bracket_high", "unit_legendary"],
