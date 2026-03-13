@@ -887,7 +887,6 @@ nodes:
               id: GoR-GhostBearWatch-8-ArelleMissing
               header: Incoming Priority Transmission
               subheader: Orbit over Fröislandis VII
-        - reward: itemCollection_GhostBearWatch_Reward_ItIsOver
         - event:
               id: event_GhostsOfRetribution_GhostBearWatch_CurtainFall
         - goto: Exit
@@ -1364,15 +1363,17 @@ nodes:
               employer: MinnesotaTribe
               employerPortrait: castDef_JoannaMcEvedy
               target: GhostBearWatch
-              difficulty: 10
+              difficulty: 9
               at: starsystemdef_St.Andreas
               description: |
                   Rescue the Tribe prisoners from the Ghost Bear prison
-        - goto: WorkInProgress
+
+                  <b><color=red>The contract will start immediatly on arrival at St.Andreas.</b></color>
+        - goto: MinnesotaTribe-LiberationDay
 
     MinnesotaTribe-Retry-ThePoisonPath:
         - fakeFlashpoint:
-              name: The Posion Path
+              name: The Poison Path
               employer: MinnesotaTribe
               employerPortrait: castDef_JoannaMcEvedy
               target: OWNER
@@ -1381,6 +1382,198 @@ nodes:
               description: |
                   Resume the <b>Ghost of Retribution</b> campaign by retrying the contract.
         - goto: MinnesotaTribe-ThePoisonPath
+
+    MinnesotaTribe-LiberationDay:
+        - contract:
+              id: GoR_MinnesotaTribe_Rescue_LiberationDay
+              employer: MinnesotaTribe
+              target: GhostBearWatch
+              onFailGoto: MinnesotaTribe-Retry-LiberationDay
+              mapName: mapGeneral_paupersCanyon_aWst
+              immediate: true
+        - conversation:
+              id: GoR-MinnesotaTribe-7-BloodBeforeHonor
+              header: Mission Debriefing
+              subheader: Orbit over St.Andreas
+        - wait:
+              days: 5
+        - event:
+              id: event_GhostsOfRetribution_MinnesotaTribe_BlindSpot
+        - goto: MinnesotaTribe-SilentVigil
+
+    MinnesotaTribe-Retry-LiberationDay:
+        - fakeFlashpoint:
+              name: Liberation Day
+              employer: MinnesotaTribe
+              employerPortrait: castDef_JoannaMcEvedy
+              target: GhostBearWatch
+              difficulty: 9
+              at: starsystemdef_St.Andreas
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the contract.
+        - goto: MinnesotaTribe-LiberationDay
+
+    MinnesotaTribe-SilentVigil:
+        - contract:
+              id: GoR_MinnesotaTribe_CaptureBase_SilentVigil
+              employer: MinnesotaTribe
+              target: GhostBearWatch
+              onFailGoto: MinnesotaTribe-Retry-SilentVigil
+              withinDays: 7
+        - conversation:
+              id: GoR-MinnesotaTribe-8-GhostsInTheMachine
+              header: Mission Debriefing
+              subheader: Orbit over St.Andreas
+        - event:
+              id: event_GhostsOfRetribution_MinnesotaTribe_MapUpdate
+        - wait:
+              days: 90
+              workOrder: Look for any traces of Joanna
+              sprite: uixTxrLogo_GenericCampaign
+        - event:
+              id: event_GhostsOfRetribution_MinnesotaTribe_TheOtherSignal
+        - conversation:
+              id: GoR-MinnesotaTribe-9-BetterHuntedThanMonsters
+              header: Unknown Transmission
+              subheader: Conference Room
+        - event:
+              id: event_GhostsOfRetribution_MinnesotaTribe_ANewWorld
+        - fakeFlashpoint:
+              name: Broken Chains
+              employer: MinnesotaTribe
+              employerPortrait: castDef_MarcusHammerick
+              target: RemembranceCell
+              difficulty: 10
+              at: starsystemdef_Argondale
+              description: |
+                  Rescue Dr. Tilsaye from the clutches of Joanna McEvedy
+
+                  <b><color=red>The contract will start immediatly on arrival at Argondale.</b></color>
+        - goto: MinnesotaTribe-BrokenChains
+
+    MinnesotaTribe-Retry-SilentVigil:
+        - fakeFlashpoint:
+              name: Silent Vigil
+              employer: MinnesotaTribe
+              employerPortrait: castDef_JoannaMcEvedy
+              target: GhostBearWatch
+              difficulty: 10
+              at: starsystemdef_St.Andreas
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the contract.
+        - goto: MinnesotaTribe-SilentVigil
+
+    MinnesotaTribe-BrokenChains:
+        - contract:
+              id: GoR_MinnesotaTribe_AmbushConvoy_BrokenChains
+              employer: MinnesotaTribe
+              target: RemembranceCell
+              onFailGoto: MinnesotaTribe-Retry-BrokenChains
+              immediate: true
+        - conversation:
+              id: GoR-MinnesotaTribe-10-TheArchive
+              header: Mission Debriefing
+              subheader: Orbit over Argondale
+        - goto: MinnesotaTribe-TraitorsMark
+
+    MinnesotaTribe-Retry-BrokenChains:
+        - fakeFlashpoint:
+              name: Broken Chains
+              employer: MinnesotaTribe
+              employerPortrait: castDef_MarcusHammerick
+              target: RemembranceCell
+              difficulty: 10
+              at: starsystemdef_Argondale
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the contract.
+        - goto: MinnesotaTribe-BrokenChains
+
+    MinnesotaTribe-TraitorsMark:
+        - contract:
+              id: GoR_MinnesotaTribe_DefendBase_TraitorsMark
+              employer: MinnesotaTribe
+              target: RemembranceCell
+              onFailGoto: MinnesotaTribe-Retry-TraitorsMark
+              withinDays: 5
+        - conversation:
+              id: GoR-MinnesotaTribe-11-JoannasWrath
+              header: Post-Mission Meeting
+              subheader: Orbit over Argondale
+        - event:
+              id: event_GhostsOfRetribution_MinnesotaTribe_TheHuntBegins
+        - fakeFlashpoint:
+              name: Cold Iron
+              employer: MinnesotaTribe
+              employerPortrait: castDef_MarcusHammerick
+              target: RemembranceCell
+              difficulty: 12
+              at: starsystemdef_Froeislandis
+              description: |
+                  Start the final attack against Joanna McEvedy, the Remembrance Cell and the Armageddon project
+        - event:
+              id: event_GhostsOfRetribution_MinnesotaTribe_PointOfNoReturn
+        - goto: MinnesotaTribe-TheBreakingPoint
+
+    MinnesotaTribe-Retry-TraitorsMark:
+        - fakeFlashpoint:
+              name: Traitor's Mark
+              employer: MinnesotaTribe
+              employerPortrait: castDef_MarcusHammerick
+              target: RemembranceCell
+              difficulty: 11
+              at: starsystemdef_Argondale
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the contract.
+        - goto: MinnesotaTribe-TraitorsMark
+
+    MinnesotaTribe-TheBreakingPoint:
+        - contract:
+              id: GoR_MinnesotaTribe_SimpleBattle_TheBreakingPoint
+              employer: MinnesotaTribe
+              target: RemembranceCell
+              onFailGoto: MinnesotaTribe-Retry-TheBreakingPoint
+              immediate: true
+              postContractEvent: event_GhostsOfRetribution_MinnesotaTribe_TheLastStep
+        - goto: MinnesotaTribe-ArmageddonsFall
+
+    MinnesotaTribe-Retry-TheBreakingPoint:
+        - fakeFlashpoint:
+              name: Cold Iron
+              employer: MinnesotaTribe
+              employerPortrait: castDef_MarcusHammerick
+              target: RemembranceCell
+              difficulty: 12
+              at: starsystemdef_Froeislandis
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the contract.
+        - goto: MinnesotaTribe-TheBreakingPoint
+
+    MinnesotaTribe-ArmageddonsFall:
+        - contract:
+              id: GoR_MinnesotaTribe_DestroyBase_ArmageddonsFall
+              employer: MinnesotaTribe
+              target: RemembranceCell
+              onFailGoto: MinnesotaTribe-Retry-ArmageddonsFall
+              immediate: true
+        - conversation:
+              id: GoR-MinnesotaTribe-12-JoannaMissing
+              header: Mission Debrief
+              subheader: Orbit around Fröislandis VII
+        - event:
+              id: event_GhostsOfRetribution_MinnesotaTribe_PayDay
+        - goto: Exit
+
+    MinnesotaTribe-Retry-ArmageddonsFall:
+        - fakeFlashpoint:
+              name: Armageddon's Fall
+              employer: MinnesotaTribe
+              employerPortrait: castDef_MarcusHammerick
+              target: RemembranceCell
+              difficulty: 14
+              at: starsystemdef_Froeislandis
+              description: |
+                  Resume the <b>Ghost of Retribution</b> campaign by retrying the contract.
+        - goto: MinnesotaTribe-ArmageddonsFall
 
     WorkInProgress:
         - popup:

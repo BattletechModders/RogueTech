@@ -1,7 +1,7 @@
 Quirk_AR20 -> 	WeightedQuirk: 50%, EWSystem, ActiveEWS: 2, 1, 180, EWSSelf: 1, 1, EWSProbe: 16%, 2, 2, 210, EWARScan: 310, 2, 15
 Quirk_AccurateWeaponCategory_Ballistics -> 	BallisticAcc: +1, BallisticRecoil: -1, Quirk
 Quirk_AccurateWeaponCategory_Energy -> 	EnergyAcc: +1, EnergyHeatGenerated: -5%, Quirk
-Quirk_AccurateWeaponCategory_Missiles -> 	MissileAcc: +1, MissileClustering: +0.1, Quirk
+Quirk_AccurateWeaponCategory_Missiles -> 	MissileAcc: +1, MissileGrouping: +0.1, Quirk
 Quirk_AccurateWeapon_Autocannon -> 	ACAccuracy: +1, RecoilAC: -1, Quirk
 Quirk_AccurateWeapon_Gauss -> 	GaussAccuracy: +1, RecoilGauss: -1, Quirk
 Quirk_AccurateWeapon_HandHeld -> 	HandHeldQuirk: +2, Quirk
