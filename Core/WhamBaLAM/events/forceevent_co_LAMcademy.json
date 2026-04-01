@@ -14,7 +14,9 @@
       "tagSetSourceFile": ""
     },
     "ExclusionTags": {
-      "items": [],
+      "items": [
+          "LAML_School_Delay"
+        ],
       "tagSetSourceFile": "Tags/CompanyTags"
     },
     "RequirementComparisons": [
@@ -23,6 +25,18 @@
         "op": "GreaterThanOrEqual",
         "val": 750000,
         "valueConstant": "750000"
+      },
+      {
+        "obj": "PilotLAM",
+        "op": "LessThanOrEqual",
+        "val": 0,
+        "valueConstant": "0"
+      },
+      {
+        "obj": "LAMPilotEnrolled",
+        "op": "LessThanOrEqual",
+        "val": 0,
+        "valueConstant": "0"
       }
     ]
   },
@@ -41,6 +55,8 @@
         "ExclusionTags": {
           "items": [
             "can_pilot_landairmech",
+            "pilot_pilotTraining",
+            "pilot_unavailable",
             "pilot_rejected",
             "pilot_noLAM",
             "pilot_VTOL_School",
@@ -52,12 +68,6 @@
           {
             "obj": "Injuries",
             "op": "Equal",
-            "val": 0,
-            "valueConstant": "0"
-          },
-          {
-            "obj": "PilotLAM",
-            "op": "LessThanOrEqual",
             "val": 0,
             "valueConstant": "0"
           }
@@ -82,6 +92,8 @@
           "ExclusionTags": {
             "items": [
               "can_pilot_landairmech",
+              "pilot_pilotTraining",
+              "pilot_unavailable",
               "pilot_rejected",
               "pilot_noLAM",
               "pilot_VTOL_School",
@@ -93,12 +105,6 @@
             {
               "obj": "Injuries",
               "op": "Equal",
-              "val": 0,
-              "valueConstant": "0"
-            },
-            {
-              "obj": "PilotLAM",
-              "op": "LessThanOrEqual",
               "val": 0,
               "valueConstant": "0"
             }
@@ -118,7 +124,9 @@
               "Scope": "SecondaryMechWarrior",
               "AddedTags": {
                 "items": [
-                  "pilot_LAM_School"
+                  "pilot_LAM_School",
+                  "pilot_pilotTraining",
+                  "pilot_unavailable"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -126,22 +134,8 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
-              "Stats": [
-                {
-                  "typeString": "System.Int32",
-                  "name": "PilotLAM",
-                  "value": "1",
-                  "set": true
-                }
-              ],
-              "Actions": [
-                {
-                  "Type": "MechWarrior_SetTimeout",
-                  "value": "120",
-                  "valueConstant": null,
-                  "additionalValues": null
-                }
-              ],
+              "Stats": [],
+              "Actions": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
@@ -167,23 +161,20 @@
                   "name": "LAMPilotEnrolled",
                   "value": "1",
                   "set": true
-                }
-              ],
-              "ForceEvents": [
+                },
                 {
-                  "Scope": "Company",
-                  "EventID": "forceevent_co_LAM_Passed",
-                  "MinDaysWait": 120,
-                  "MaxDaysWait": 120,
-                  "Probability": 100,
-                  "RetainPilot": false
+                  "typeString": "System.Int32",
+                  "name": "PilotLAM",
+                  "value": "1",
+                  "set": true
                 }
               ],
+              "ForceEvents": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
             {
-              "Scope": "SecondaryMechWarrior",
+              "Scope": "Company",
               "AddedTags": {
                 "items": [
                   "LAM_Training_Bypass_Delay"
@@ -195,7 +186,7 @@
                 "tagSetSourceFile": ""
               },
               "TemporaryResult": true,
-              "ResultDuration": 140
+              "ResultDuration": 120
             }
           ]
         },
@@ -211,7 +202,9 @@
               "Scope": "SecondaryMechWarrior",
               "AddedTags": {
                 "items": [
-                  "pilot_LAM_School"
+                  "pilot_LAM_School",
+                  "pilot_pilotTraining",
+                  "pilot_unavailable"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -219,22 +212,8 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
-              "Stats": [
-                {
-                  "typeString": "System.Int32",
-                  "name": "PilotLAM",
-                  "value": "1",
-                  "set": true
-                }
-              ],
-              "Actions": [
-                {
-                  "Type": "MechWarrior_SetTimeout",
-                  "value": "120",
-                  "valueConstant": null,
-                  "additionalValues": null
-                }
-              ],
+              "Stats": [],
+              "Actions": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
@@ -260,23 +239,20 @@
                   "name": "LAMPilotEnrolled",
                   "value": "1",
                   "set": true
-                }
-              ],
-              "ForceEvents": [
+                },
                 {
-                  "Scope": "Company",
-                  "EventID": "forceevent_co_LAM_Injured",
-                  "MinDaysWait": 120,
-                  "MaxDaysWait": 120,
-                  "Probability": 100,
-                  "RetainPilot": false
+                  "typeString": "System.Int32",
+                  "name": "PilotLAM",
+                  "value": "2",
+                  "set": true
                 }
               ],
+              "ForceEvents": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
             {
-              "Scope": "SecondaryMechWarrior",
+              "Scope": "Company",
               "AddedTags": {
                 "items": [
                   "LAM_Training_Bypass_Delay"
@@ -288,7 +264,7 @@
                 "tagSetSourceFile": ""
               },
               "TemporaryResult": true,
-              "ResultDuration": 140
+              "ResultDuration": 120
             }
           ]
         },
@@ -304,7 +280,9 @@
               "Scope": "SecondaryMechWarrior",
               "AddedTags": {
                 "items": [
-                  "pilot_LAM_School"
+                  "pilot_LAM_School",
+                  "pilot_pilotTraining",
+                  "pilot_unavailable"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -312,22 +290,8 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
-              "Stats": [
-                {
-                  "typeString": "System.Int32",
-                  "name": "PilotLAM",
-                  "value": "1",
-                  "set": true
-                }
-              ],
-              "Actions": [
-                {
-                  "Type": "MechWarrior_SetTimeout",
-                  "value": "120",
-                  "valueConstant": null,
-                  "additionalValues": null
-                }
-              ],
+              "Stats": [],
+              "Actions": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
@@ -353,23 +317,20 @@
                   "name": "LAMPilotEnrolled",
                   "value": "1",
                   "set": true
-                }
-              ],
-              "ForceEvents": [
+                },
                 {
-                  "Scope": "Company",
-                  "EventID": "forceevent_co_LAM_Death",
-                  "MinDaysWait": 120,
-                  "MaxDaysWait": 120,
-                  "Probability": 100,
-                  "RetainPilot": false
+                  "typeString": "System.Int32",
+                  "name": "PilotLAM",
+                  "value": "3",
+                  "set": true
                 }
               ],
+              "ForceEvents": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
             {
-              "Scope": "SecondaryMechWarrior",
+              "Scope": "Company",
               "AddedTags": {
                 "items": [
                   "LAM_Training_Bypass_Delay"
@@ -381,7 +342,7 @@
                 "tagSetSourceFile": ""
               },
               "TemporaryResult": true,
-              "ResultDuration": 140
+              "ResultDuration": 120
             }
           ]
         },
@@ -397,7 +358,9 @@
               "Scope": "SecondaryMechWarrior",
               "AddedTags": {
                 "items": [
-                  "pilot_LAM_School"
+                  "pilot_LAM_School",
+                  "pilot_pilotTraining",
+                  "pilot_unavailable"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -405,22 +368,8 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
-              "Stats": [
-                {
-                  "typeString": "System.Int32",
-                  "name": "PilotLAM",
-                  "value": "1",
-                  "set": true
-                }
-              ],
-              "Actions": [
-                {
-                  "Type": "MechWarrior_SetTimeout",
-                  "value": "150",
-                  "valueConstant": null,
-                  "additionalValues": null
-                }
-              ],
+              "Stats": [],
+              "Actions": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
@@ -446,23 +395,20 @@
                   "name": "LAMPilotEnrolled",
                   "value": "1",
                   "set": true
-                }
-              ],
-              "ForceEvents": [
+                },
                 {
-                  "Scope": "Company",
-                  "EventID": "forceevent_co_LAM_Passed",
-                  "MinDaysWait": 150,
-                  "MaxDaysWait": 150,
-                  "Probability": 100,
-                  "RetainPilot": false
+                  "typeString": "System.Int32",
+                  "name": "PilotLAM",
+                  "value": "1",
+                  "set": true
                 }
               ],
+              "ForceEvents": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
             {
-              "Scope": "SecondaryMechWarrior",
+              "Scope": "Company",
               "AddedTags": {
                 "items": [
                   "LAM_Training_Bypass_Delay"
@@ -474,7 +420,7 @@
                 "tagSetSourceFile": ""
               },
               "TemporaryResult": true,
-              "ResultDuration": 170
+              "ResultDuration": 150
             }
           ]
         },
@@ -490,7 +436,9 @@
               "Scope": "SecondaryMechWarrior",
               "AddedTags": {
                 "items": [
-                  "pilot_LAM_School"
+                  "pilot_LAM_School",
+                  "pilot_pilotTraining",
+                  "pilot_unavailable"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -498,22 +446,8 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
-              "Stats": [
-                {
-                  "typeString": "System.Int32",
-                  "name": "PilotLAM",
-                  "value": "1",
-                  "set": true
-                }
-              ],
-              "Actions": [
-                {
-                  "Type": "MechWarrior_SetTimeout",
-                  "value": "150",
-                  "valueConstant": null,
-                  "additionalValues": null
-                }
-              ],
+              "Stats": [],
+              "Actions": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
@@ -539,23 +473,20 @@
                   "name": "LAMPilotEnrolled",
                   "value": "1",
                   "set": true
-                }
-              ],
-              "ForceEvents": [
+                },
                 {
-                  "Scope": "Company",
-                  "EventID": "forceevent_co_LAM_Injured",
-                  "MinDaysWait": 150,
-                  "MaxDaysWait": 150,
-                  "Probability": 100,
-                  "RetainPilot": false
+                  "typeString": "System.Int32",
+                  "name": "PilotLAM",
+                  "value": "2",
+                  "set": true
                 }
               ],
+              "ForceEvents": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
             {
-              "Scope": "SecondaryMechWarrior",
+              "Scope": "Company",
               "AddedTags": {
                 "items": [
                   "LAM_Training_Bypass_Delay"
@@ -567,7 +498,7 @@
                 "tagSetSourceFile": ""
               },
               "TemporaryResult": true,
-              "ResultDuration": 170
+              "ResultDuration": 150
             }
           ]
         },
@@ -583,7 +514,9 @@
               "Scope": "SecondaryMechWarrior",
               "AddedTags": {
                 "items": [
-                  "pilot_LAM_School"
+                  "pilot_LAM_School",
+                  "pilot_pilotTraining",
+                  "pilot_unavailable"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -591,22 +524,8 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
-              "Stats": [
-                {
-                  "typeString": "System.Int32",
-                  "name": "PilotLAM",
-                  "value": "1",
-                  "set": true
-                }
-              ],
-              "Actions": [
-                {
-                  "Type": "MechWarrior_SetTimeout",
-                  "value": "150",
-                  "valueConstant": null,
-                  "additionalValues": null
-                }
-              ],
+              "Stats": [],
+              "Actions": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
@@ -632,23 +551,20 @@
                   "name": "LAMPilotEnrolled",
                   "value": "1",
                   "set": true
-                }
-              ],
-              "ForceEvents": [
+                },
                 {
-                  "Scope": "Company",
-                  "EventID": "forceevent_co_LAM_Death",
-                  "MinDaysWait": 150,
-                  "MaxDaysWait": 150,
-                  "Probability": 100,
-                  "RetainPilot": false
+                  "typeString": "System.Int32",
+                  "name": "PilotLAM",
+                  "value": "2",
+                  "set": true
                 }
               ],
+              "ForceEvents": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
             {
-              "Scope": "SecondaryMechWarrior",
+              "Scope": "Company",
               "AddedTags": {
                 "items": [
                   "LAM_Training_Bypass_Delay"
@@ -660,7 +576,7 @@
                 "tagSetSourceFile": ""
               },
               "TemporaryResult": true,
-              "ResultDuration": 170
+              "ResultDuration": 150
             }
           ]
         },
@@ -676,7 +592,9 @@
               "Scope": "SecondaryMechWarrior",
               "AddedTags": {
                 "items": [
-                  "pilot_LAM_School"
+                  "pilot_LAM_School",
+                  "pilot_pilotTraining",
+                  "pilot_unavailable"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -684,22 +602,8 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
-              "Stats": [
-                {
-                  "typeString": "System.Int32",
-                  "name": "PilotLAM",
-                  "value": "1",
-                  "set": true
-                }
-              ],
-              "Actions": [
-                {
-                  "Type": "MechWarrior_SetTimeout",
-                  "value": "180",
-                  "valueConstant": null,
-                  "additionalValues": null
-                }
-              ],
+              "Stats": [],
+              "Actions": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
@@ -725,23 +629,20 @@
                   "name": "LAMPilotEnrolled",
                   "value": "1",
                   "set": true
-                }
-              ],
-              "ForceEvents": [
+                },
                 {
-                  "Scope": "Company",
-                  "EventID": "forceevent_co_LAM_Passed",
-                  "MinDaysWait": 180,
-                  "MaxDaysWait": 180,
-                  "Probability": 100,
-                  "RetainPilot": false
+                  "typeString": "System.Int32",
+                  "name": "PilotLAM",
+                  "value": "1",
+                  "set": true
                 }
               ],
+              "ForceEvents": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
             {
-              "Scope": "SecondaryMechWarrior",
+              "Scope": "Company",
               "AddedTags": {
                 "items": [
                   "LAM_Training_Bypass_Delay"
@@ -753,7 +654,7 @@
                 "tagSetSourceFile": ""
               },
               "TemporaryResult": true,
-              "ResultDuration": 200
+              "ResultDuration": 180
             }
           ]
         },
@@ -769,7 +670,9 @@
               "Scope": "SecondaryMechWarrior",
               "AddedTags": {
                 "items": [
-                  "pilot_LAM_School"
+                  "pilot_LAM_School",
+                  "pilot_pilotTraining",
+                  "pilot_unavailable"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -777,22 +680,8 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
-              "Stats": [
-                {
-                  "typeString": "System.Int32",
-                  "name": "PilotLAM",
-                  "value": "1",
-                  "set": true
-                }
-              ],
-              "Actions": [
-                {
-                  "Type": "MechWarrior_SetTimeout",
-                  "value": "180",
-                  "valueConstant": null,
-                  "additionalValues": null
-                }
-              ],
+              "Stats": [],
+              "Actions": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
@@ -818,23 +707,20 @@
                   "name": "LAMPilotEnrolled",
                   "value": "1",
                   "set": true
-                }
-              ],
-              "ForceEvents": [
+                },
                 {
-                  "Scope": "Company",
-                  "EventID": "forceevent_co_LAM_Injured",
-                  "MinDaysWait": 180,
-                  "MaxDaysWait": 180,
-                  "Probability": 100,
-                  "RetainPilot": false
+                  "typeString": "System.Int32",
+                  "name": "PilotLAM",
+                  "value": "2",
+                  "set": true
                 }
               ],
+              "ForceEvents": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
             {
-              "Scope": "SecondaryMechWarrior",
+              "Scope": "Company",
               "AddedTags": {
                 "items": [
                   "LAM_Training_Bypass_Delay"
@@ -846,7 +732,7 @@
                 "tagSetSourceFile": ""
               },
               "TemporaryResult": true,
-              "ResultDuration": 200
+              "ResultDuration": 180
             }
           ]
         },
@@ -862,7 +748,9 @@
               "Scope": "SecondaryMechWarrior",
               "AddedTags": {
                 "items": [
-                  "pilot_LAM_School"
+                  "pilot_LAM_School",
+                  "pilot_pilotTraining",
+                  "pilot_unavailable"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -870,22 +758,8 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
-              "Stats": [
-                {
-                  "typeString": "System.Int32",
-                  "name": "PilotLAM",
-                  "value": "1",
-                  "set": true
-                }
-              ],
-              "Actions": [
-                {
-                  "Type": "MechWarrior_SetTimeout",
-                  "value": "180",
-                  "valueConstant": null,
-                  "additionalValues": null
-                }
-              ],
+              "Stats": [],
+              "Actions": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
@@ -911,23 +785,20 @@
                   "name": "LAMPilotEnrolled",
                   "value": "1",
                   "set": true
-                }
-              ],
-              "ForceEvents": [
+                },
                 {
-                  "Scope": "Company",
-                  "EventID": "forceevent_co_LAM_Death",
-                  "MinDaysWait": 180,
-                  "MaxDaysWait": 180,
-                  "Probability": 100,
-                  "RetainPilot": false
+                  "typeString": "System.Int32",
+                  "name": "PilotLAM",
+                  "value": "3",
+                  "set": true
                 }
               ],
+              "ForceEvents": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
             {
-              "Scope": "SecondaryMechWarrior",
+              "Scope": "Company",
               "AddedTags": {
                 "items": [
                   "LAM_Training_Bypass_Delay"
@@ -939,7 +810,7 @@
                 "tagSetSourceFile": ""
               },
               "TemporaryResult": true,
-              "ResultDuration": 200
+              "ResultDuration": 180
             }
           ]
         }
@@ -988,6 +859,12 @@
                   "name": "Funds",
                   "value": "-50000",
                   "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "LAMPilotEnrolled",
+                  "value": "0",
+                  "set": true
                 }
               ],
               "TemporaryResult": false,

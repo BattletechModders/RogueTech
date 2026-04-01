@@ -503,6 +503,10 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
     if "unit_bracket_med" in include_tags and "unit_assault" not in exclude_tags and "unit_heavy" in exclude_tags:
         exclude_tags.remove("unit_heavy")
 
+    # limit worst case ba and ultralight spam at very low diff
+    if "unit_mech" in include_tags and diff < 3 and index in [0, 1] and "unit_squad" not in exclude_tags:
+        exclude_tags.append("unit_squad")
+
     exclude_tags.append("unit_killteam")
 
     return (include_tags, exclude_tags)
@@ -516,10 +520,19 @@ def grab_pilot_include_exclude(index, diff, category, composition, variant, extr
     if category == "duel" or extra == "elite":
         include_tags.append("pilot_elite_d"+str(pilot_diff))
 
+    elif variant == "urbie":
+        if composition == "mixed" and (index == 1 or index == 2):
+            include_tags.append("pilot_npc_tanker_d"+str(diff)),
+            include_tags.append("{CUR_TEAM.faction}")
+        else:
+            include_tags.append("pilot_npc_d"+str(diff))
+            if index == 0:
+                include_tags.append("pilot_npc_high")
+        
     elif variant == "risc":
         include_tags.append("pilot_npc_d"+str(pilot_diff))
         include_tags.append("pilot_risc")
-        
+
     elif category == "turret":
         include_tags.append("pilot_turret_d"+str(pilot_diff))
 
@@ -774,7 +787,7 @@ def build_lances(category, composition, variant, start_diff, stop_diff, extra = 
 
         save_path +=  "/" + lancedef["Description"]["Id"] + ".json"
 
-        with open(save_path, 'w', newline='\r\n') as new_file:
+        with open(save_path, 'w', newline='\n') as new_file:
             json.dump(lancedef, new_file, indent=2)
             new_file.write("\n")
 

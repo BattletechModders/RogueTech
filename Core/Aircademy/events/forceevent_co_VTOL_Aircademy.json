@@ -14,7 +14,9 @@
       "tagSetSourceFile": ""
     },
     "ExclusionTags": {
-      "items": [],
+      "items": [
+        "VTOL_School_Delay"
+      ],
       "tagSetSourceFile": "Tags/CompanyTags"
     },
     "RequirementComparisons": [
@@ -23,6 +25,18 @@
         "op": "GreaterThanOrEqual",
         "val": 750000,
         "valueConstant": "750000"
+      },
+      {
+        "obj": "PilotEnrolled",
+        "op": "LessThanOrEqual",
+        "val": 0,
+        "valueConstant": "0"
+      },
+      {
+        "obj": "PilotVTOL",
+        "op": "LessThanOrEqual",
+        "val": 0,
+        "valueConstant": "0"
       }
     ]
   },
@@ -41,6 +55,8 @@
         "ExclusionTags": {
           "items": [
             "can_pilot_vtol",
+            "pilot_pilotTraining",
+            "pilot_unavailable",
             "pilot_rejected",
             "pilot_novtol",
             "pilot_VTOL_School",
@@ -52,12 +68,6 @@
           {
             "obj": "Injuries",
             "op": "Equal",
-            "val": 0,
-            "valueConstant": "0"
-          },
-          {
-            "obj": "PilotVTOL",
-            "op": "LessThanOrEqual",
             "val": 0,
             "valueConstant": "0"
           }
@@ -76,12 +86,16 @@
         {
           "Scope": "SecondaryMechWarrior",
           "RequirementTags": {
-            "items": [],
+            "items": [
+              "can_pilot_generic_vehicle"
+            ],
             "tagSetSourceFile": ""
           },
           "ExclusionTags": {
             "items": [
               "can_pilot_vtol",
+              "pilot_pilotTraining",
+              "pilot_unavailable",
               "pilot_rejected",
               "pilot_novtol",
               "pilot_VTOL_School",
@@ -95,12 +109,6 @@
               "op": "Equal",
               "val": 0,
               "valueConstant": "0"
-            },
-            {
-              "obj": "PilotVTOL",
-              "op": "LessThanOrEqual",
-              "val": 0,
-              "valueConstant": "0"
             }
           ]
         }
@@ -109,7 +117,7 @@
         {
           "Description": {
             "Id": "outcome_0_0",
-            "Name": "All Systems Go",
+            "Name": "All Systems Go - Passed",
             "Details": "You place a tick next to [[SCN_MW,{SCN_MW.Callsign}]]'s name on the datapad and scribble your signature.  Handing the pad to Darius as you stand up, \"Ok, lets get [[SCN_MW,{SCN_MW.Callsign}]] packed up and on the next jumpship bound for the Aircademy.\r\n \r\nDarius jumps up and heads off to the barracks to inform [[SCN_MW,{SCN_MW.Callsign}]] they have been accepted into the VTOL Aircademy."
           },
           "Weight": 25,
@@ -118,7 +126,9 @@
               "Scope": "SecondaryMechWarrior",
               "AddedTags": {
                 "items": [
-                  "pilot_VTOL_School"
+                  "pilot_VTOL_School",
+                  "pilot_pilotTraining",
+                  "pilot_unavailable"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -126,22 +136,8 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
-              "Stats": [
-                {
-                  "typeString": "System.Int32",
-                  "name": "PilotVTOL",
-                  "value": "1",
-                  "set": true
-                }
-              ],
-              "Actions": [
-                {
-                  "Type": "MechWarrior_SetTimeout",
-                  "value": "120",
-                  "valueConstant": null,
-                  "additionalValues": null
-                }
-              ],
+              "Stats": [],
+              "Actions": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
@@ -167,26 +163,23 @@
                   "name": "PilotEnrolled",
                   "value": "1",
                   "set": true
-                }
-              ],
-              "ForceEvents": [
+                },
                 {
-                  "Scope": "Company",
-                  "EventID": "forceevent_co_VTOL_Passed",
-                  "MinDaysWait": 120,
-                  "MaxDaysWait": 120,
-                  "Probability": 100,
-                  "RetainPilot": false
+                  "typeString": "System.Int32",
+                  "name": "PilotVTOL",
+                  "value": "1",
+                  "set": true
                 }
               ],
+              "ForceEvents": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
             {
-              "Scope": "SecondaryMechWarrior",
+              "Scope": "Company",
               "AddedTags": {
                 "items": [
-                  "VTOL_Training_Bypass_Delay"
+                  "VTOL_School_Delay"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -194,8 +187,9 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
+              "Stats": [],
               "TemporaryResult": true,
-              "ResultDuration": 140
+              "ResultDuration": 120
             }
           ]
         },
@@ -211,7 +205,9 @@
               "Scope": "SecondaryMechWarrior",
               "AddedTags": {
                 "items": [
-                  "pilot_VTOL_School"
+                  "pilot_VTOL_School",
+                  "pilot_pilotTraining",
+                  "pilot_unavailable"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -219,22 +215,8 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
-              "Stats": [
-                {
-                  "typeString": "System.Int32",
-                  "name": "PilotVTOL",
-                  "value": "1",
-                  "set": true
-                }
-              ],
-              "Actions": [
-                {
-                  "Type": "MechWarrior_SetTimeout",
-                  "value": "120",
-                  "valueConstant": null,
-                  "additionalValues": null
-                }
-              ],
+              "Stats": [],
+              "Actions": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
@@ -260,26 +242,23 @@
                   "name": "PilotEnrolled",
                   "value": "1",
                   "set": true
-                }
-              ],
-              "ForceEvents": [
+                },
                 {
-                  "Scope": "Company",
-                  "EventID": "forceevent_co_VTOL_Injured",
-                  "MinDaysWait": 120,
-                  "MaxDaysWait": 120,
-                  "Probability": 100,
-                  "RetainPilot": false
+                  "typeString": "System.Int32",
+                  "name": "PilotVTOL",
+                  "value": "2",
+                  "set": true
                 }
               ],
+              "ForceEvents": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
             {
-              "Scope": "SecondaryMechWarrior",
+              "Scope": "Company",
               "AddedTags": {
                 "items": [
-                  "VTOL_Training_Bypass_Delay"
+                  "VTOL_School_Delay"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -287,8 +266,9 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
+              "Stats": [],
               "TemporaryResult": true,
-              "ResultDuration": 140
+              "ResultDuration": 120
             }
           ]
         },
@@ -304,7 +284,9 @@
               "Scope": "SecondaryMechWarrior",
               "AddedTags": {
                 "items": [
-                  "pilot_VTOL_School"
+                  "pilot_VTOL_School",
+                  "pilot_pilotTraining",
+                  "pilot_unavailable"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -312,22 +294,8 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
-              "Stats": [
-                {
-                  "typeString": "System.Int32",
-                  "name": "PilotVTOL",
-                  "value": "1",
-                  "set": true
-                }
-              ],
-              "Actions": [
-                {
-                  "Type": "MechWarrior_SetTimeout",
-                  "value": "120",
-                  "valueConstant": null,
-                  "additionalValues": null
-                }
-              ],
+              "Stats": [],
+              "Actions": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
@@ -353,26 +321,23 @@
                   "name": "PilotEnrolled",
                   "value": "1",
                   "set": true
-                }
-              ],
-              "ForceEvents": [
+                },
                 {
-                  "Scope": "Company",
-                  "EventID": "forceevent_co_VTOL_Death",
-                  "MinDaysWait": 120,
-                  "MaxDaysWait": 120,
-                  "Probability": 100,
-                  "RetainPilot": false
+                  "typeString": "System.Int32",
+                  "name": "PilotVTOL",
+                  "value": "3",
+                  "set": true
                 }
               ],
+              "ForceEvents": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
             {
-              "Scope": "SecondaryMechWarrior",
+              "Scope": "Company",
               "AddedTags": {
                 "items": [
-                  "VTOL_Training_Bypass_Delay"
+                  "VTOL_School_Delay"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -380,8 +345,9 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
+              "Stats": [],
               "TemporaryResult": true,
-              "ResultDuration": 140
+              "ResultDuration": 120
             }
           ]
         },
@@ -397,7 +363,9 @@
               "Scope": "SecondaryMechWarrior",
               "AddedTags": {
                 "items": [
-                  "pilot_VTOL_School"
+                  "pilot_VTOL_School",
+                  "pilot_pilotTraining",
+                  "pilot_unavailable"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -405,22 +373,8 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
-              "Stats": [
-                {
-                  "typeString": "System.Int32",
-                  "name": "PilotVTOL",
-                  "value": "1",
-                  "set": true
-                }
-              ],
-              "Actions": [
-                {
-                  "Type": "MechWarrior_SetTimeout",
-                  "value": "150",
-                  "valueConstant": null,
-                  "additionalValues": null
-                }
-              ],
+              "Stats": [],
+              "Actions": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
@@ -446,26 +400,23 @@
                   "name": "PilotEnrolled",
                   "value": "1",
                   "set": true
-                }
-              ],
-              "ForceEvents": [
+                },
                 {
-                  "Scope": "Company",
-                  "EventID": "forceevent_co_VTOL_Passed",
-                  "MinDaysWait": 150,
-                  "MaxDaysWait": 150,
-                  "Probability": 100,
-                  "RetainPilot": false
+                  "typeString": "System.Int32",
+                  "name": "PilotVTOL",
+                  "value": "1",
+                  "set": true
                 }
               ],
+              "ForceEvents": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
             {
-              "Scope": "SecondaryMechWarrior",
+              "Scope": "Company",
               "AddedTags": {
                 "items": [
-                  "VTOL_Training_Bypass_Delay"
+                  "VTOL_School_Delay"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -473,8 +424,9 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
+              "Stats": [],
               "TemporaryResult": true,
-              "ResultDuration": 170
+              "ResultDuration": 150
             }
           ]
         },
@@ -490,7 +442,9 @@
               "Scope": "SecondaryMechWarrior",
               "AddedTags": {
                 "items": [
-                  "pilot_VTOL_School"
+                  "pilot_VTOL_School",
+                  "pilot_pilotTraining",
+                  "pilot_unavailable"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -498,22 +452,8 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
-              "Stats": [
-                {
-                  "typeString": "System.Int32",
-                  "name": "PilotVTOL",
-                  "value": "1",
-                  "set": true
-                }
-              ],
-              "Actions": [
-                {
-                  "Type": "MechWarrior_SetTimeout",
-                  "value": "150",
-                  "valueConstant": null,
-                  "additionalValues": null
-                }
-              ],
+              "Stats": [],
+              "Actions": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
@@ -539,26 +479,23 @@
                   "name": "PilotEnrolled",
                   "value": "1",
                   "set": true
-                }
-              ],
-              "ForceEvents": [
+                },
                 {
-                  "Scope": "Company",
-                  "EventID": "forceevent_co_VTOL_Injured",
-                  "MinDaysWait": 150,
-                  "MaxDaysWait": 150,
-                  "Probability": 100,
-                  "RetainPilot": false
+                  "typeString": "System.Int32",
+                  "name": "PilotVTOL",
+                  "value": "2",
+                  "set": true
                 }
               ],
+              "ForceEvents": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
             {
-              "Scope": "SecondaryMechWarrior",
+              "Scope": "Company",
               "AddedTags": {
                 "items": [
-                  "VTOL_Training_Bypass_Delay"
+                  "VTOL_School_Delay"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -566,8 +503,9 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
+              "Stats": [],
               "TemporaryResult": true,
-              "ResultDuration": 170
+              "ResultDuration": 150
             }
           ]
         },
@@ -583,7 +521,9 @@
               "Scope": "SecondaryMechWarrior",
               "AddedTags": {
                 "items": [
-                  "pilot_VTOL_School"
+                  "pilot_VTOL_School",
+                  "pilot_pilotTraining",
+                  "pilot_unavailable"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -591,22 +531,8 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
-              "Stats": [
-                {
-                  "typeString": "System.Int32",
-                  "name": "PilotVTOL",
-                  "value": "1",
-                  "set": true
-                }
-              ],
-              "Actions": [
-                {
-                  "Type": "MechWarrior_SetTimeout",
-                  "value": "150",
-                  "valueConstant": null,
-                  "additionalValues": null
-                }
-              ],
+              "Stats": [],
+              "Actions": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
@@ -632,26 +558,23 @@
                   "name": "PilotEnrolled",
                   "value": "1",
                   "set": true
-                }
-              ],
-              "ForceEvents": [
+                },
                 {
-                  "Scope": "Company",
-                  "EventID": "forceevent_co_VTOL_Death",
-                  "MinDaysWait": 150,
-                  "MaxDaysWait": 150,
-                  "Probability": 100,
-                  "RetainPilot": false
+                  "typeString": "System.Int32",
+                  "name": "PilotVTOL",
+                  "value": "3",
+                  "set": true
                 }
               ],
+              "ForceEvents": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
             {
-              "Scope": "SecondaryMechWarrior",
+              "Scope": "Company",
               "AddedTags": {
                 "items": [
-                  "VTOL_Training_Bypass_Delay"
+                  "VTOL_School_Delay"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -659,8 +582,9 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
+              "Stats": [],
               "TemporaryResult": true,
-              "ResultDuration": 170
+              "ResultDuration": 150
             }
           ]
         },
@@ -676,7 +600,9 @@
               "Scope": "SecondaryMechWarrior",
               "AddedTags": {
                 "items": [
-                  "pilot_VTOL_School"
+                  "pilot_VTOL_School",
+                  "pilot_pilotTraining",
+                  "pilot_unavailable"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -684,22 +610,8 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
-              "Stats": [
-                {
-                  "typeString": "System.Int32",
-                  "name": "PilotVTOL",
-                  "value": "1",
-                  "set": true
-                }
-              ],
-              "Actions": [
-                {
-                  "Type": "MechWarrior_SetTimeout",
-                  "value": "180",
-                  "valueConstant": null,
-                  "additionalValues": null
-                }
-              ],
+              "Stats": [],
+              "Actions": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
@@ -725,26 +637,23 @@
                   "name": "PilotEnrolled",
                   "value": "1",
                   "set": true
-                }
-              ],
-              "ForceEvents": [
+                },
                 {
-                  "Scope": "Company",
-                  "EventID": "forceevent_co_VTOL_Passed",
-                  "MinDaysWait": 180,
-                  "MaxDaysWait": 180,
-                  "Probability": 100,
-                  "RetainPilot": false
+                  "typeString": "System.Int32",
+                  "name": "PilotVTOL",
+                  "value": "1",
+                  "set": true
                 }
               ],
+              "ForceEvents": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
             {
-              "Scope": "SecondaryMechWarrior",
+              "Scope": "Company",
               "AddedTags": {
                 "items": [
-                  "VTOL_Training_Bypass_Delay"
+                  "VTOL_School_Delay"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -752,8 +661,9 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
+              "Stats": [],
               "TemporaryResult": true,
-              "ResultDuration": 200
+              "ResultDuration": 180
             }
           ]
         },
@@ -769,7 +679,9 @@
               "Scope": "SecondaryMechWarrior",
               "AddedTags": {
                 "items": [
-                  "pilot_VTOL_School"
+                  "pilot_VTOL_School",
+                  "pilot_pilotTraining",
+                  "pilot_unavailable"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -777,22 +689,8 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
-              "Stats": [
-                {
-                  "typeString": "System.Int32",
-                  "name": "PilotVTOL",
-                  "value": "1",
-                  "set": true
-                }
-              ],
-              "Actions": [
-                {
-                  "Type": "MechWarrior_SetTimeout",
-                  "value": "180",
-                  "valueConstant": null,
-                  "additionalValues": null
-                }
-              ],
+              "Stats": [],
+              "Actions": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
@@ -818,26 +716,23 @@
                   "name": "PilotEnrolled",
                   "value": "1",
                   "set": true
-                }
-              ],
-              "ForceEvents": [
+                },
                 {
-                  "Scope": "Company",
-                  "EventID": "forceevent_co_VTOL_Injured",
-                  "MinDaysWait": 180,
-                  "MaxDaysWait": 180,
-                  "Probability": 100,
-                  "RetainPilot": false
+                  "typeString": "System.Int32",
+                  "name": "PilotVTOL",
+                  "value": "2",
+                  "set": true
                 }
               ],
+              "ForceEvents": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
             {
-              "Scope": "SecondaryMechWarrior",
+              "Scope": "Company",
               "AddedTags": {
                 "items": [
-                  "VTOL_Training_Bypass_Delay"
+                  "VTOL_School_Delay"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -845,8 +740,9 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
+              "Stats": [],
               "TemporaryResult": true,
-              "ResultDuration": 200
+              "ResultDuration": 180
             }
           ]
         },
@@ -862,7 +758,9 @@
               "Scope": "SecondaryMechWarrior",
               "AddedTags": {
                 "items": [
-                  "pilot_VTOL_School"
+                  "pilot_VTOL_School",
+                  "pilot_pilotTraining",
+                  "pilot_unavailable"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -870,22 +768,8 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
-              "Stats": [
-                {
-                  "typeString": "System.Int32",
-                  "name": "PilotVTOL",
-                  "value": "1",
-                  "set": true
-                }
-              ],
-              "Actions": [
-                {
-                  "Type": "MechWarrior_SetTimeout",
-                  "value": "180",
-                  "valueConstant": null,
-                  "additionalValues": null
-                }
-              ],
+              "Stats": [],
+              "Actions": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
@@ -911,26 +795,23 @@
                   "name": "PilotEnrolled",
                   "value": "1",
                   "set": true
-                }
-              ],
-              "ForceEvents": [
+                },
                 {
-                  "Scope": "Company",
-                  "EventID": "forceevent_co_VTOL_Death",
-                  "MinDaysWait": 180,
-                  "MaxDaysWait": 180,
-                  "Probability": 100,
-                  "RetainPilot": false
+                  "typeString": "System.Int32",
+                  "name": "PilotVTOL",
+                  "value": "3",
+                  "set": true
                 }
               ],
+              "ForceEvents": [],
               "TemporaryResult": false,
               "ResultDuration": 0
             },
             {
-              "Scope": "SecondaryMechWarrior",
+              "Scope": "Company",
               "AddedTags": {
                 "items": [
-                  "VTOL_Training_Bypass_Delay"
+                  "VTOL_School_Delay"
                 ],
                 "tagSetSourceFile": ""
               },
@@ -938,8 +819,9 @@
                 "items": [],
                 "tagSetSourceFile": ""
               },
+              "Stats": [],
               "TemporaryResult": true,
-              "ResultDuration": 200
+              "ResultDuration": 180
             }
           ]
         }
@@ -968,7 +850,7 @@
           "Description": {
             "Id": "outcome_1_0",
             "Name": "Abort! Abort!",
-            "Details": "You look over the name and record of the candidate.  You thumb back through their file numerous times, before letting out a long sigh and close the datapad.\r\n\r\nYou hand the pad back to Darius, \"Thanks Darius, but I do not think that pilot meets our needs here.  See if there are any other suitable candidates.  We do not need to rush into this blindly.\"\r\n\r\nDarius takes the datapad, \"As you wish, Commander.  <i>Air Today, Gone Tomorrow</i> will still bill us the cost of the assessment.  The Aircademy also states the applicant must wait 90 days before they can be reassessed should you change your mind later.\"\r\n\r\n<color=#E62E00>The following pilot is not eligible again for 90 days: \r\n[[SCN_MW,{SCN_MW.Callsign}]]\r\n</color>"
+            "Details": "You look over the name and record of the candidate.  You scroll back through their file numerous times, before letting out a long sigh and close the datapad.\r\n\r\nYou hand the pad back to Darius, \"Thanks Darius, but I do not think that pilot meets our needs here.  See if there are any other suitable candidates.  We do not need to rush into this blindly.\"\r\n\r\nDarius takes the datapad, \"As you wish, Commander.  <i>Air Today, Gone Tomorrow</i> will still bill us the cost of the assessment.  The Aircademy also states the applicant must wait 90 days before they can be reassessed should you change your mind later.\"\r\n\r\n<color=#E62E00>The following pilot is not eligible again for 90 days: \r\n[[SCN_MW,{SCN_MW.Callsign}]]\r\n</color>"
           },
           "Weight": 100,
           "Results": [
@@ -988,6 +870,12 @@
                   "name": "Funds",
                   "value": "-50000",
                   "set": false
+                },
+                {
+                  "typeString": "System.Int32",
+                  "name": "PilotEnrolled",
+                  "value": "0",
+                  "set": true
                 }
               ],
               "TemporaryResult": false,
