@@ -1,0 +1,242 @@
+{
+  "Custom": {
+    "Category": [
+      {
+        "CategoryID": "ArmorMod"
+      },
+      {
+        "CategoryID": "SensorStealthMod"
+      }
+    ],
+    "BonusDescriptions": [
+      "IsArmorModLocation: Center Torso",
+      "SensorStealthActivatable",
+      "SensorStealthBonus: -75%, 2, 1, 2, 3",
+      "ActiveSignature: -15%",
+      "FixedSlotsExcept: 6, 1, Head",
+      "ActiveHeatGenerated: +15%",
+      "ActiveHeatPerTurn: +10",
+      "ArmorTPCost: x1.1",
+      "ArmorCBCost: x1.15"
+    ],
+    "Flags": [
+      "not_broken"
+    ],
+    "ActivatableComponent": {
+      "ButtonName": "Stealth",
+      "CanNotBeActivatedManualy": false,
+      "CanActivateAfterMove": true,
+      "CanActivateAfterFire": false,
+      "ActiveByDefault": true,
+      "SafeActivation": true,
+      "ActivationMessage": "NSS On",
+      "DeactivationMessage": "NSS Off",
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "forceVisRebuild": true,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "LV_Stealth_Effect",
+            "Name": "Null Signature System Activatable: Stealth",
+            "Details": "Makes the carrier much harder to detect with stealth",
+            "Icon": "uixSvgIcon_status_ECM-ghost"
+          },
+          "statisticData": {
+            "statName": "LV_STEALTH",
+            "operation": "Set",
+            "modValue": "0.75_2_1_2_3",
+            "modType": "System.String"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "Stealth_Heat_Generation_Stealth",
+            "Name": "Null Signature System Activatable: Increased Heat Generated",
+            "Details": "Heat generation",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "statisticData": {
+            "statName": "HeatGenerated",
+            "operation": "Float_Multiply",
+            "modValue": "1.15",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
+          "Description": {
+            "Id": "Stealth_Heat_Capacity_Stealth",
+            "Name": "Null Signature System Activatable: Decreased Cooling",
+            "Details": "Heat Capacity Penalty",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "statisticData": {
+            "statName": "HeatSinkCapacity",
+            "operation": "Int_Add",
+            "modValue": "-10",
+            "modType": "System.Int32"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "Stealth_Signature_Decrease_Stealth",
+            "Name": "Null Signature System Activatable: Decreased Sensor Signature",
+            "Details": "Signature Statuseffect.",
+            "Icon": "uixSvgIcon_equipment_TTS"
+          },
+          "statisticData": {
+            "statName": "SensorSignatureModifier",
+            "operation": "Float_Multiply",
+            "modValue": "0.85",
+            "modType": "System.Single"
+          }
+        }
+      ],
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [],
+          "Deactivate": [
+            "ECCM"
+          ]
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": []
+        }
+      }
+    },
+    "ArmorRepair": {
+      "ArmorTPCost": 1.1,
+      "ArmorCBCost": 1.15
+    },
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.115 * [[Chassis.Tonnage]]",
+        "CBillCost": "22.22222 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
+    "IBLS": {
+      "StorageSize": 7
+    },
+    "CriticalEffects": {
+      "LinkedStatisticName": "Null Signature System"
+    },
+    "Linked": {
+      "Links": [
+        {
+          "ComponentDefId": "Linked_ArmorMod_NullSignatureSystem",
+          "Location": "RightTorso"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_NullSignatureSystem",
+          "Location": "LeftTorso"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_NullSignatureSystem",
+          "Location": "LeftArm"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_NullSignatureSystem",
+          "Location": "RightArm"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_NullSignatureSystem",
+          "Location": "LeftLeg"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_NullSignatureSystem",
+          "Location": "RightLeg"
+        }
+      ]
+    },
+    "Color": "Gold",
+    "DecoratorComponent": [
+      {
+        "Text": "S",
+        "Color": "#5F24AC",
+        "Icon": "ComponentGearIcons_STEALTH",
+        "Importance": 40
+      }
+    ]
+  },
+  "Description": {
+    "Cost": 1400000,
+    "Rarity": 5,
+    "Purchasable": true,
+    "Manufacturer": "Ceres Metals",
+    "Model": "NSS",
+    "UIName": "Null Signature System",
+    "Id": "Gear_ArmorMod_NullSignatureSystem",
+    "Name": "Null Signature System",
+    "Details": "Developed by the Terran Hegemony in 2630, the Null Signature System employs heat baffles and a phased-array sensor suite to mask a mech's thermal and electromagnetic output.",
+    "Icon": "uixSvgIcon_ArmourMod"
+  },
+  "BonusValueA": "",
+  "BonusValueB": "",
+  "ComponentType": "Upgrade",
+  "ComponentSubType": "NotSet",
+  "PrefabIdentifier": "",
+  "BattleValue": 0,
+  "InventorySize": 1,
+  "Tonnage": 0,
+  "AllowedLocations": "CenterTorso",
+  "DisallowedLocations": "All",
+  "CriticalComponent": false,
+  "ComponentTags": {
+    "items": [
+      "component_type_stock",
+      "SuperheavyIncompatible",
+      "SquadIncompatible"
+    ],
+    "tagSetSourceFile": ""
+  }
+}

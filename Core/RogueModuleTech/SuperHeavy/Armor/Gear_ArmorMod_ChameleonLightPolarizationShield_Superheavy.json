@@ -1,0 +1,239 @@
+{
+  "Custom": {
+    "Category": [
+      {
+        "CategoryID": "ArmorMod"
+      },
+      {
+        "CategoryID": "MimeticStealthMod"
+      }
+    ],
+    "BonusDescriptions": [
+      "IsArmorModLocation: Center Torso",
+      "MimeticStealthActivatable",
+      "MimeticStealthBonus: -10%, 4, 1",
+      "FixedSlotsIn: 8, 2, Arms and Legs",
+      "ActiveVisibility: -10%",
+      "ActiveHeatGenerated: +10%",
+      "ActiveHeatPerTurn: +9",
+      "ArmorTPCost: x1.6",
+      "ArmorCBCost: x1.9",
+      "SuperheavyOnly"
+    ],
+    "Flags": [
+      "not_broken"
+    ],
+    "ActivatableComponent": {
+      "ButtonName": "Stealth",
+      "CanNotBeActivatedManualy": false,
+      "CanActivateAfterMove": true,
+      "CanActivateAfterFire": false,
+      "ActiveByDefault": true,
+      "SafeActivation": true,
+      "ActivationMessage": "CLPS On",
+      "DeactivationMessage": "CLPS Off",
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "forceVisRebuild": true,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "LV_MIMETIC",
+            "Name": "Superheavy Chameleon LPS Activatable: Mimetic Armor",
+            "Details": "Makes the carrier much harder to see with eyes",
+            "Icon": "uixSvgIcon_status_ECM-ghost"
+          },
+          "statisticData": {
+            "statName": "LV_MIMETIC",
+            "operation": "Set",
+            "modValue": "4_0.1_1_1",
+            "modType": "System.String"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "Stealth_Heat_Generation_Stealth",
+            "Name": "Superheavy Chameleon LPS Activatable: Increased Heat Generated",
+            "Details": "Heat generation",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "statisticData": {
+            "statName": "HeatGenerated",
+            "operation": "Float_Multiply",
+            "modValue": "1.1",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
+          "Description": {
+            "Id": "Stealth_Heat_Capacity_Stealth",
+            "Name": "Superheavy Chameleon LPS Activatable: Decreased Cooling",
+            "Details": "Heat Capacity Penalty",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "statisticData": {
+            "statName": "HeatSinkCapacity",
+            "operation": "Int_Add",
+            "modValue": "-9",
+            "modType": "System.Int32"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "StatusEffect-Hekate-Visibility",
+            "Name": "Superheavy Chameleon LPS Activatable: Decreased Visual Signature",
+            "Details": "Visibility Statuseffect.",
+            "Icon": "uixSvgIcon_equipment_TTS"
+          },
+          "statisticData": {
+            "statName": "SpottingVisibilityMultiplier",
+            "operation": "Float_Multiply",
+            "modValue": "0.9",
+            "modType": "System.Single"
+          }
+        }
+      ],
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [
+            "CLPS"
+          ],
+          "Deactivate": []
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": [
+            "CLPS"
+          ]
+        }
+      }
+    },
+    "ArmorRepair": {
+      "ArmorTPCost": 1.6,
+      "ArmorCBCost": 1.9
+    },
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.1 * [[Chassis.Tonnage]]",
+        "CBillCost": "28 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
+    "IBLS": {
+      "StorageSize": 10
+    },
+    "CriticalEffects": {
+      "LinkedStatisticName": "CLPS"
+    },
+    "Linked": {
+      "Links": [
+        {
+          "ComponentDefId": "Linked_ArmorMod_ChameleonLightPolarizationShield_Superheavy",
+          "Location": "LeftArm"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_ChameleonLightPolarizationShield_Superheavy",
+          "Location": "RightArm"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_ChameleonLightPolarizationShield_Superheavy",
+          "Location": "LeftLeg"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_ChameleonLightPolarizationShield_Superheavy",
+          "Location": "RightLeg"
+        }
+      ]
+    },
+    "Color": "Gold",
+    "DecoratorComponent": [
+      {
+        "Text": "M",
+        "Color": "#5F24AC",
+        "Icon": "ComponentGearIcons_STEALTH",
+        "Importance": 40
+      }
+    ]
+  },
+  "Description": {
+    "Cost": 900000,
+    "Rarity": 2,
+    "Purchasable": true,
+    "Manufacturer": "Terran Armorwerks",
+    "Model": "SHCLPS",
+    "UIName": "Superheavy Chameleon LPS",
+    "Id": "Gear_ArmorMod_ChameleonLightPolarizationShield_Superheavy",
+    "Name": "Superheavy Chameleon LPS",
+    "Details": "The Chameleon Light Polarization Shield was designed to make a 'Mech invisible to the naked eye. By using a primitive mimetic system, the outline of the 'Mech carrying it was broken up, blending into the surrounding terrain making it harder to hit.",
+    "Icon": "uixSvgIcon_ArmourMod"
+  },
+  "BonusValueA": "",
+  "BonusValueB": "",
+  "ComponentType": "Upgrade",
+  "ComponentSubType": "NotSet",
+  "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
+  "BattleValue": 0,
+  "InventorySize": 2,
+  "Tonnage": 0,
+  "AllowedLocations": "CenterTorso",
+  "DisallowedLocations": "All",
+  "CriticalComponent": false,
+  "ComponentTags": {
+    "items": [
+      "component_type_stock",
+      "SuperheavyEquipment",
+      "LootMagnetBlacklist"
+    ],
+    "tagSetSourceFile": ""
+  }
+}

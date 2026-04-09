@@ -5,13 +5,19 @@
         "CategoryID": "Armor"
       },
       {
-        "CategoryID": "StealthSystem"
+        "CategoryID": "SensorStealthSystem"
       }
     ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.1 * [[Chassis.Tonnage]]",
+        "CBillCost": "50 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
     "BonusDescriptions": [
-      "Stealth",
-      "StealthSensors: 40%, 3, 1, 2, 2",
-      "ActiveVisibility: -20%",
+      "SensorStealthActivatable",
+      "SensorStealthBonus: -40%, 3, 1, 2, 2",
+      "ActiveSignature: -20%",
       "ActiveHeatGenerated: +20%",
       "ArmorProtection: +40%",
       "ArmorFactor: -30%",
@@ -23,10 +29,6 @@
       "CASEII",
       "CASEVENT: 50, 100",
       "SuperheavyOnly"
-    ],
-    "Flags": [
-      "not_broken",
-      "no_salvage"
     ],
     "ActivatableComponent": {
       "ButtonName": "Bless",
@@ -82,12 +84,12 @@
           "nature": "Buff",
           "Description": {
             "Id": "StatusEffect-Hekate-Visibility",
-            "Name": "Cloak of Hekate Activatable: Decreased Visual Signature",
+            "Name": "Cloak of Hekate Activatable: Decreased Sensor Signature",
             "Details": "Visibility Statuseffect.",
             "Icon": "uixSvgIcon_equipment_TTS"
           },
           "statisticData": {
-            "statName": "SpottingVisibilityMultiplier",
+            "statName": "SensorSignatureModifier",
             "operation": "Float_Multiply",
             "modValue": "0.8",
             "modType": "System.Single"
@@ -136,29 +138,30 @@
         }
       }
     },
-    "Weights": {
-      "ArmorFactor": 0.7
-    },
-    "ArmorStructureChanges": {
-      "ArmorFactor": 1.4
-    },
     "ArmorRepair": {
       "ArmorTPCost": 2.2,
       "ArmorCBCost": 2.5
+    },
+    "ArmorStructureChanges": {
+      "ArmorFactor": 1.4
     },
     "CASE": {
       "MaximumDamage": 5,
       "AllLocations": true
     },
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.1 * [[Chassis.Tonnage]]",
-        "CBillCost": "50 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+    "Color": "Gold",
+    "CriticalEffects": {
+      "LinkedStatisticName": "Stealth System"
+    },
+    "DecoratorComponent": [
+      {
+        "Text": "S",
+        "Color": "#5F24AC",
+        "Icon": "ComponentGearIcons_STEALTH",
+        "Importance": 40
       }
-    },
-    "IBLS": {
-      "StorageSize": 7
-    },
+    ],
+    "ErrorMessage": "Stealth Armor requires a ECM!",
     "ExplosionProtectionHeat": {
       "MaximumDamage": 50,
       "AllLocations": true
@@ -167,8 +170,12 @@
       "MaximumDamage": 100,
       "AllLocations": true
     },
-    "CriticalEffects": {
-      "LinkedStatisticName": "Stealth System"
+    "Flags": [
+      "not_broken",
+      "no_salvage"
+    ],
+    "IBLS": {
+      "StorageSize": 7
     },
     "Linked": {
       "Links": [
@@ -198,16 +205,9 @@
         }
       ]
     },
-    "Color": "Gold",
-    "ErrorMessage": "Stealth Armor requires a ECM!",
-    "DecoratorComponent": [
-      {
-        "Text": "S",
-        "Color": "#5F24AC",
-        "Icon": "ComponentGearIcons_STEALTH",
-        "Importance": 40
-      }
-    ]
+    "Weights": {
+      "ArmorFactor": 0.7
+    }
   },
   "Description": {
     "Cost": 0,
@@ -292,6 +292,7 @@
       "component_type_stock",
       "StealthArmor",
       "CasedArmor",
+      "HardenedArmor",
       "SuperheavyEquipment",
       "LootMagnetBlacklist"
     ],

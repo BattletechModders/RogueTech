@@ -7,25 +7,136 @@
     ],
     "BonusDescriptions": [
       "WeightedQuirk: 50%",
-      "Stealth",
-      "StealthSensors: -70%, 3, 1, 2, 3",
-      "MimeticStealth: -20%, 3, 3",
-      "Visibility: -20%",
+      "SensorMimeticStealthActivatable",
+      "SensorStealthBonus: -70%, 3, 1, 2, 3",
+      "MimeticStealthBonus: -10%, 3, 3",
+      "ActiveSignature: -10%",
+      "ActiveVisibility: -5%",
       "HeatGenerated: +10%",
       "HeatPerTurn: +10",
       "PersistentECM",
       "PersistentECMAura: 2, 2, 180",
       "PersistentECMSelf: 1, 1"
     ],
-    "Flags": [
-      "not_broken",
-      "no_salvage",
-      "autorepair",
-      "default",
-      "ignore_damage"
-    ],
-    "IBLS": {
-      "StorageSize": 1
+    "ActivatableComponent": {
+      "ButtonName": "Stealth",
+      "CanNotBeActivatedManualy": false,
+      "CanActivateAfterMove": true,
+      "CanActivateAfterFire": false,
+      "ActiveByDefault": true,
+      "SafeActivation": true,
+      "ActivationMessage": "Stealth Activated",
+      "DeactivationMessage": "Stealth Deactivated",
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "forceVisRebuild": true,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "LV_Stealth_Effect",
+            "Name": "Quirk OmniStealth Activatable: Stealth",
+            "Details": "Makes the carrier much harder to detect with stealth",
+            "Icon": "uixSvgIcon_status_ECM-ghost"
+          },
+          "statisticData": {
+            "statName": "LV_STEALTH",
+            "operation": "Set",
+            "modValue": "0.7_3_1_2_3",
+            "modType": "System.String"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "forceVisRebuild": true,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "LV_MIMETIC",
+            "Name": "Quirk OmniStealth Activatable: Mimetic Armor",
+            "Details": "Makes the carrier much harder to see with eyes",
+            "Icon": "uixSvgIcon_status_ECM-ghost"
+          },
+          "statisticData": {
+            "statName": "LV_MIMETIC",
+            "operation": "Set",
+            "modValue": "3_0.1_1_3",
+            "modType": "System.String"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "Stealth_Visibility_Decrease_Stealth",
+            "Name": "Quirk OmniStealth Activatable: Decreased Sensor Signature",
+            "Details": "Visibility Statuseffect.",
+            "Icon": "uixSvgIcon_equipment_TTS"
+          },
+          "statisticData": {
+            "statName": "SensorSignatureModifier",
+            "operation": "Float_Multiply",
+            "modValue": "0.9",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "Stealth_Visibility_Decrease_Stealth",
+            "Name": "Quirk OmniStealth Activatable: Decreased Visual Signature",
+            "Details": "Visibility Statuseffect.",
+            "Icon": "uixSvgIcon_equipment_TTS"
+          },
+          "statisticData": {
+            "statName": "SpottingVisibilityMultiplier",
+            "operation": "Float_Multiply",
+            "modValue": "0.95",
+            "modType": "System.Single"
+          }
+        }
+      ]
     },
     "CarryCapacityFactor": 0.5,
     "DecoratorComponent": [
@@ -41,7 +152,17 @@
         "Icon": "ComponentGearIcons_ECM",
         "Importance": 30
       }
-    ]
+    ],
+    "Flags": [
+      "not_broken",
+      "no_salvage",
+      "autorepair",
+      "default",
+      "ignore_damage"
+    ],
+    "IBLS": {
+      "StorageSize": 1
+    }
   },
   "Description": {
     "Cost": 1500000,
@@ -216,7 +337,7 @@
       ]
     },
     {
-      "Id": "ECCM_Anitjam",
+      "Id": "ECCM_Antijam",
       "Name": "CounterJamming",
       "ReticleColor": "#00f2ff",
       "Range": 180,
@@ -311,86 +432,6 @@
         "operation": "Int_Add",
         "modValue": "-1",
         "modType": "System.Int32"
-      }
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "forceVisRebuild": true,
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "nature": "Buff",
-      "Description": {
-        "Id": "LV_Stealth_Effect",
-        "Name": "Quirk OmniStealth: Stealth",
-        "Details": "Makes the carrier much harder to detect with stealth",
-        "Icon": "uixSvgIcon_status_ECM-ghost"
-      },
-      "statisticData": {
-        "statName": "LV_STEALTH",
-        "operation": "Set",
-        "modValue": "0.7_3_1_2_3",
-        "modType": "System.String"
-      }
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "forceVisRebuild": true,
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "nature": "Buff",
-      "Description": {
-        "Id": "LV_MIMETIC",
-        "Name": "Quirk OmniStealth: Mimetic Armor",
-        "Details": "Makes the carrier much harder to see with eyes",
-        "Icon": "uixSvgIcon_status_ECM-ghost"
-      },
-      "statisticData": {
-        "statName": "LV_MIMETIC",
-        "operation": "Set",
-        "modValue": "3_0.20_1_3",
-        "modType": "System.String"
-      }
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "nature": "Buff",
-      "Description": {
-        "Id": "Stealth_Visibility_Decrease_Stealth",
-        "Name": "Quirk OmniStealth: Decreased Visual Signature",
-        "Details": "Visibility Statuseffect.",
-        "Icon": "uixSvgIcon_equipment_TTS"
-      },
-      "statisticData": {
-        "statName": "SpottingVisibilityMultiplier",
-        "operation": "Float_Multiply",
-        "modValue": "0.8",
-        "modType": "System.Single"
       }
     },
     {

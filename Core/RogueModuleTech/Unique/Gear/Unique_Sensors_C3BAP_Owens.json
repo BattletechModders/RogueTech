@@ -20,15 +20,9 @@
       "DetectMine: 210",
       "C3BoostedSlave",
       "BoostedC3i",
+      "C3ECMPenalty: -1, +10%",
       "ExplainC3"
     ],
-    "Flags": [
-      "no_salvage",
-      "not_broken"
-    ],
-    "IBLS": {
-      "StorageSize": 1
-    },
     "DecoratorComponent": [
       {
         "Text": "IS",
@@ -42,7 +36,14 @@
         "Icon": "ComponentGearIcons_PROBE",
         "Importance": 20
       }
-    ]
+    ],
+    "Flags": [
+      "no_salvage",
+      "not_broken"
+    ],
+    "IBLS": {
+      "StorageSize": 1
+    }
   },
   "Description": {
     "Cost": 500000,
@@ -89,6 +90,60 @@
     }
   ],
   "statusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": 1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "forceVisRebuild": true,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Debuff",
+      "Description": {
+        "Id": "C3_ECM_Penalty",
+        "Name": "Sensor Sentinel: Decreased ECM Shield",
+        "Details": "Reduces effectiveness of ECM shield on this unit",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "LV_ECM_SHIELD",
+        "operation": "Int_Add",
+        "modValue": "-1",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": 1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "forceVisRebuild": true,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Debuff",
+      "Description": {
+        "Id": "C3_Signature_Increase",
+        "Name": "Sensor Sentinel: Increased Sensor Signature",
+        "Details": "Increases this unit's sensor signature, making it easier to detect.",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "SensorSignatureModifier",
+        "operation": "Float_Multiply",
+        "modValue": "1.1",
+        "modType": "System.Single"
+      }
+    },
     {
       "durationData": {
         "duration": -1,
@@ -155,7 +210,7 @@
       "nature": "Buff",
       "Description": {
         "Id": "NightVision",
-        "Name": "Owens BAP: Night Vision",
+        "Name": "Sensor Sentinel: Night Vision",
         "Details": "PASSIVE: Enables Night Vision.",
         "Icon": "uixSvgIcon_ability_precisionstrike"
       },

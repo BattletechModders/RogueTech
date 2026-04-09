@@ -5,13 +5,19 @@
         "CategoryID": "Armor"
       },
       {
-        "CategoryID": "StealthSystem"
+        "CategoryID": "SensorStealthSystem"
       }
     ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.7 * [[Chassis.Tonnage]]",
+        "CBillCost": "600 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
     "BonusDescriptions": [
-      "Stealth",
-      "StealthSensors: 50%, 3, 1, 2, 3",
-      "ActiveVisibility: -15%",
+      "SensorStealthActivatable",
+      "SensorStealthBonus: -50%, 3, 1, 2, 3",
+      "ActiveSignature: -15%",
       "ActiveHeatGenerated: +10%",
       "ActiveHeatPerTurn: +9",
       "APImmune",
@@ -23,10 +29,6 @@
       "CASEVENT: 50, 100",
       "ReqECM",
       "SuperheavyOnly"
-    ],
-    "Flags": [
-      "not_broken",
-      "no_salvage"
     ],
     "ActivatableComponent": {
       "ButtonName": "Stealth",
@@ -82,12 +84,12 @@
           "nature": "Buff",
           "Description": {
             "Id": "Stealth_Visibility_Decrease_Stealth",
-            "Name": "Exsecratio Armor Activatable: Decreased Visual Signature",
+            "Name": "Exsecratio Armor Activatable: Decreased Sensor Signature",
             "Details": "Visibility Statuseffect.",
             "Icon": "uixSvgIcon_equipment_TTS"
           },
           "statisticData": {
-            "statName": "SpottingVisibilityMultiplier",
+            "statName": "SensorSignatureModifier",
             "operation": "Float_Multiply",
             "modValue": "0.85",
             "modType": "System.Single"
@@ -162,12 +164,6 @@
         }
       }
     },
-    "ComponentExplosion": {
-      "ExplosionDamage": 30.0
-    },
-    "Weights": {
-      "ArmorFactor": 1
-    },
     "ArmorRepair": {
       "ArmorTPCost": 2.5,
       "ArmorCBCost": 2.9
@@ -175,15 +171,22 @@
     "CASE": {
       "MaximumDamage": 5
     },
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.7 * [[Chassis.Tonnage]]",
-        "CBillCost": "600 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+    "Color": "Gold",
+    "ComponentExplosion": {
+      "ExplosionDamage": 30.0
+    },
+    "CriticalEffects": {
+      "LinkedStatisticName": "Exsecratio Armor"
+    },
+    "DecoratorComponent": [
+      {
+        "Text": "S",
+        "Color": "#5F24AC",
+        "Icon": "ComponentGearIcons_STEALTH",
+        "Importance": 40
       }
-    },
-    "IBLS": {
-      "StorageSize": 8
-    },
+    ],
+    "ErrorMessage": "Exsecratio Armor requires a ECM!",
     "ExplosionProtectionHeat": {
       "MaximumDamage": 50,
       "AllLocations": true
@@ -192,8 +195,12 @@
       "MaximumDamage": 100,
       "AllLocations": true
     },
-    "CriticalEffects": {
-      "LinkedStatisticName": "Exsecratio Armor"
+    "Flags": [
+      "not_broken",
+      "no_salvage"
+    ],
+    "IBLS": {
+      "StorageSize": 8
     },
     "Linked": {
       "Links": [
@@ -227,16 +234,9 @@
         }
       ]
     },
-    "Color": "Gold",
-    "ErrorMessage": "Exsecratio Armor requires a ECM!",
-    "DecoratorComponent": [
-      {
-        "Text": "S",
-        "Color": "#5F24AC",
-        "Icon": "ComponentGearIcons_STEALTH",
-        "Importance": 40
-      }
-    ]
+    "Weights": {
+      "ArmorFactor": 1
+    }
   },
   "Description": {
     "Cost": 12000000,

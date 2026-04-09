@@ -7,14 +7,9 @@
     ],
     "BonusDescriptions": [
       "C3Slave",
+      "C3ECMPenalty: -2, +20%",
       "ExplainC3"
     ],
-    "Flags": [
-      "not_broken"
-    ],
-    "IBLS": {
-      "StorageSize": 1
-    },
     "DecoratorComponent": [
       {
         "Text": "S",
@@ -22,7 +17,13 @@
         "Icon": "ComponentGearIcons_HEXAGON",
         "Importance": 50
       }
-    ]
+    ],
+    "Flags": [
+      "not_broken"
+    ],
+    "IBLS": {
+      "StorageSize": 1
+    }
   },
   "Description": {
     "Cost": 250000,
@@ -49,8 +50,61 @@
   "AllowedLocations": "All",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
-  "Auras": [],
   "statusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": 1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "forceVisRebuild": true,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Debuff",
+      "Description": {
+        "Id": "C3_ECM_Penalty",
+        "Name": "C3 Slave: Decreased ECM Shield",
+        "Details": "Reduces effectiveness of ECM shield on this unit",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "LV_ECM_SHIELD",
+        "operation": "Int_Add",
+        "modValue": "-2",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": 1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "forceVisRebuild": true,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Debuff",
+      "Description": {
+        "Id": "C3_Signature_Increase",
+        "Name": "C3 Slave: Increased Sensor Signature",
+        "Details": "Increases this unit's sensor signature, making it easier to detect.",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "SensorSignatureModifier",
+        "operation": "Float_Multiply",
+        "modValue": "1.2",
+        "modType": "System.Single"
+      }
+    },
     {
       "durationData": {
         "duration": -1,

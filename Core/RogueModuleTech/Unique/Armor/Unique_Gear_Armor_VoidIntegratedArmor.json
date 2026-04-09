@@ -1,0 +1,290 @@
+{
+  "Custom": {
+    "Category": [
+      {
+        "CategoryID": "Armor"
+      },
+      {
+        "CategoryID": "VoidSignatureSystem"
+      }
+    ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.15 * [[Chassis.Tonnage]]",
+        "CBillCost": "67 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
+    "BonusDescriptions": [
+      "SensorMimeticStealthActivatable",
+      "SensorStealthBonus: -65%, 3, 3, 4, 6",
+      "MimeticStealthBonus: -13%, 5, 3",
+      "ActiveVisibility: -30%",
+      "ActiveSignature: -15%",
+      "ActiveHeatGenerated: +20%",
+      "ActiveHeatPerTurn: +15",
+      "ActiveAccuracy: -1",
+      "ReqECM",
+      "ArmorTPCost: x2.2",
+      "ArmorCBCost: x2.5"
+    ],
+    "ActivatableComponent": {
+      "ButtonName": "Stealth",
+      "CanNotBeActivatedManualy": false,
+      "CanActivateAfterMove": true,
+      "CanActivateAfterFire": false,
+      "ActiveByDefault": true,
+      "SafeActivation": true,
+      "ActivationMessage": "VSS On",
+      "DeactivationMessage": "VSS Off",
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "forceVisRebuild": true,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "LV_Stealth_Effect",
+            "Name": "Void Integrated Armor Activatable: Stealth",
+            "Details": "Makes the carrier much harder to detect with stealth",
+            "Icon": "uixSvgIcon_status_ECM-ghost"
+          },
+          "statisticData": {
+            "statName": "LV_STEALTH",
+            "operation": "Set",
+            "modValue": "0.65_3_3_4_6",
+            "modType": "System.String"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "forceVisRebuild": true,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "LV_MIMETIC",
+            "Name": "Void Integrated Armor Activatable: Mimetic Armor",
+            "Details": "Makes the carrier much harder to see with eyes",
+            "Icon": "uixSvgIcon_status_ECM-ghost"
+          },
+          "statisticData": {
+            "statName": "LV_MIMETIC",
+            "operation": "Set",
+            "modValue": "5_0.13_1_3",
+            "modType": "System.String"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "Stealth_Heat_Generation_Stealth",
+            "Name": "Void Integrated Armor Activatable: Increased Heat Generated",
+            "Details": "Heat generation",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "statisticData": {
+            "statName": "HeatGenerated",
+            "operation": "Float_Multiply",
+            "modValue": "1.2",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
+          "Description": {
+            "Id": "Stealth_Heat_Capacity_Stealth",
+            "Name": "Void Integrated Armor Activatable: Decreased Cooling",
+            "Details": "Heat Capacity Penalty",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "statisticData": {
+            "statName": "HeatSinkCapacity",
+            "operation": "Int_Add",
+            "modValue": "-15",
+            "modType": "System.Int32"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
+          "Description": {
+            "Id": "Stealth_Accuracy_Stealth",
+            "Name": "Void Integrated Armor Activatable: Reduced Accuracy",
+            "Details": "Accuracy Penalty",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "statisticData": {
+            "statName": "AccuracyModifier",
+            "operation": "Float_Add",
+            "modValue": "1",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "Stealth_Signature_Decrease_Stealth",
+            "Name": "Void Integrated Armor Activatable: Decreased Sensor Signature",
+            "Details": "Signature Statuseffect.",
+            "Icon": "uixSvgIcon_equipment_TTS"
+          },
+          "statisticData": {
+            "statName": "SensorSignatureModifier",
+            "operation": "Float_Multiply",
+            "modValue": "0.85",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "StatusEffect-Hekate-Visibility",
+            "Name": "Void Integrated Armor Activatable: Decreased Visual Signature",
+            "Details": "Visibility Statuseffect.",
+            "Icon": "uixSvgIcon_equipment_TTS"
+          },
+          "statisticData": {
+            "statName": "SpottingVisibilityMultiplier",
+            "operation": "Float_Multiply",
+            "modValue": "0.7",
+            "modType": "System.Single"
+          }
+        }
+      ]
+    },
+    "ArmorRepair": {
+      "ArmorTPCost": 2.2,
+      "ArmorCBCost": 2.5
+    },
+    "Color": "Gold",
+    "DecoratorComponent": [
+      {
+        "Text": "MS",
+        "Color": "#5F24AC",
+        "Icon": "ComponentGearIcons_STEALTH",
+        "Importance": 40
+      }
+    ],
+    "ErrorMessage": "VSS requires a ECM!",
+    "Flags": [
+      "not_broken",
+      "no_salvage",
+      "autorepair"
+    ],
+    "IBLS": {
+      "StorageSize": 1
+    },
+    "Lootable": "Gear_ArmorMod_VoidSignatureSystem"
+  },
+  "Description": {
+    "Cost": 3000000,
+    "Rarity": 99,
+    "Purchasable": true,
+    "Manufacturer": "Prototype",
+    "Model": "V-I-A",
+    "UIName": "Void Integrated Armor",
+    "Id": "Unique_Gear_Armor_VoidIntegratedArmor",
+    "Name": "Void Integrated Armor",
+    "Details": "A prototype armor-integrated version of the Void Signature System, removing the need for extra space for its components. By using the tight integration into the armor, the prototype even performed slightly better than its standard counterpart.",
+    "Icon": "StealthArmor"
+  },
+  "BonusValueA": "",
+  "BonusValueB": "",
+  "ComponentType": "Upgrade",
+  "ComponentSubType": "NotSet",
+  "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
+  "BattleValue": 0,
+  "InventorySize": 1,
+  "Tonnage": 0,
+  "AllowedLocations": "CenterTorso",
+  "DisallowedLocations": "All",
+  "CriticalComponent": false,
+  "ComponentTags": {
+    "items": [
+      "BLACKLISTED",
+      "WikiWL",
+      "component_type_stock",
+      "SuperheavyIncompatible",
+      "LootMagnetBlacklist",
+      "SquadIncompatible"
+    ],
+    "tagSetSourceFile": ""
+  }
+}

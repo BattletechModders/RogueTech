@@ -1,0 +1,250 @@
+{
+  "Custom": {
+    "Category": [
+      {
+        "CategoryID": "ArmorMod"
+      },
+      {
+        "CategoryID": "SensorStealthMod"
+      }
+    ],
+    "BonusDescriptions": [
+      "IsArmorModLocation: Center Torso",
+      "SensorStealthActivatable",
+      "SensorStealthBonus: -80%, 5, 2, 4, 6",
+      "ActiveSignature: -35%",
+      "FixedSlotsExcept: 6, 1, Head",
+      "ActiveHeatGenerated: +10%",
+      "ActiveHeatPerTurn: +10",
+      "ReqECM",
+      "ArmorTPCost: x1.75",
+      "ArmorCBCost: x2"
+    ],
+    "Flags": [
+      "not_broken"
+    ],
+    "ActivatableComponent": {
+      "ButtonName": "Stealth",
+      "CanNotBeActivatedManualy": false,
+      "CanActivateAfterMove": true,
+      "CanActivateAfterFire": false,
+      "ActiveByDefault": true,
+      "SafeActivation": true,
+      "ActivationMessage": "Mistwalker On",
+      "DeactivationMessage": "Mistwalker Off",
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "forceVisRebuild": true,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "LV_Stealth_Effect",
+            "Name": "Mistwalker Veil System Activatable: Stealth",
+            "Details": "Makes the carrier much harder to detect with stealth",
+            "Icon": "uixSvgIcon_status_ECM-ghost"
+          },
+          "statisticData": {
+            "statName": "LV_STEALTH",
+            "operation": "Set",
+            "modValue": "0.8_5_2_4_6",
+            "modType": "System.String"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "Stealth_Heat_Generation_Stealth",
+            "Name": "Mistwalker Veil System Activatable: Increased Heat Generated",
+            "Details": "Heat generation",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "statisticData": {
+            "statName": "HeatGenerated",
+            "operation": "Float_Multiply",
+            "modValue": "1.1",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
+          "Description": {
+            "Id": "Stealth_Heat_Capacity_Stealth",
+            "Name": "Mistwalker Veil System Activatable: Decreased Cooling",
+            "Details": "Heat Capacity Penalty",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "statisticData": {
+            "statName": "HeatSinkCapacity",
+            "operation": "Int_Add",
+            "modValue": "-10",
+            "modType": "System.Int32"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "Stealth_Signature_Decrease_Stealth",
+            "Name": "Mistwalker Veil System Activatable: Decreased Sensor Signature",
+            "Details": "Signature Statuseffect.",
+            "Icon": "uixSvgIcon_equipment_TTS"
+          },
+          "statisticData": {
+            "statName": "SensorSignatureModifier",
+            "operation": "Float_Multiply",
+            "modValue": "0.65",
+            "modType": "System.Single"
+          }
+        }
+      ],
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [
+            "Camouflage"
+          ],
+          "Deactivate": []
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": [
+            "Camouflage"
+          ]
+        }
+      }
+    },
+    "ArmorRepair": {
+      "ArmorTPCost": 1.75,
+      "ArmorCBCost": 2.0
+    },
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.1 * [[Chassis.Tonnage]]",
+        "CBillCost": "40 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
+    "IBLS": {
+      "StorageSize": 7
+    },
+    "CriticalEffects": {
+      "LinkedStatisticName": "Mistwalker"
+    },
+    "Linked": {
+      "Links": [
+        {
+          "ComponentDefId": "Linked_ArmorMod_MistwalkerVeilSystem",
+          "Location": "LeftTorso"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_MistwalkerVeilSystem",
+          "Location": "RightTorso"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_MistwalkerVeilSystem",
+          "Location": "LeftArm"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_MistwalkerVeilSystem",
+          "Location": "RightArm"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_MistwalkerVeilSystem",
+          "Location": "LeftLeg"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_MistwalkerVeilSystem",
+          "Location": "RightLeg"
+        }
+      ]
+    },
+    "Color": "Gold",
+    "ErrorMessage": "Mistwalker requires a ECM!",
+    "DecoratorComponent": [
+      {
+        "Text": "S",
+        "Color": "#5F24AC",
+        "Icon": "ComponentGearIcons_STEALTH",
+        "Importance": 40
+      }
+    ]
+  },
+  "Description": {
+    "Cost": 2000000,
+    "Rarity": 5,
+    "Purchasable": true,
+    "Manufacturer": "NAIS",
+    "Model": "MVS",
+    "UIName": "Mistwalker Veil System",
+    "Id": "Gear_ArmorMod_MistwalkerVeilSystem",
+    "Name": "Mistwalker Veil System",
+    "Details": "A NAIS black-program evolution of the Null Signature System and Stealth Armor, the Mistwalker Veil integrates a new generation of sensor-absorbent composite plating bonded directly to the mech's armor. Advanced ECM baffling woven into the armor matrix suppresses heat and electromagnetic emissions more effectively than any previous production stealth system, functioning in conjunction with any compatible ECM suite.",
+    "Icon": "uixSvgIcon_ArmourMod"
+  },
+  "BonusValueA": "",
+  "BonusValueB": "",
+  "ComponentType": "Upgrade",
+  "ComponentSubType": "NotSet",
+  "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
+  "BattleValue": 0,
+  "InventorySize": 1,
+  "Tonnage": 0,
+  "AllowedLocations": "CenterTorso",
+  "DisallowedLocations": "All",
+  "CriticalComponent": false,
+  "ComponentTags": {
+    "items": [
+      "component_type_stock",
+      "LootMagnetBlacklist",
+      "StealthArmor",
+      "SuperheavyIncompatible",
+      "SquadIncompatible"
+    ],
+    "tagSetSourceFile": ""
+  }
+}

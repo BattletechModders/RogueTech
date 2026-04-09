@@ -1,0 +1,246 @@
+{
+  "Custom": {
+    "Category": [
+      {
+        "CategoryID": "ArmorMod"
+      },
+      {
+        "CategoryID": "MimeticStealthMod"
+      }
+    ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.1 * [[Chassis.Tonnage]]",
+        "CBillCost": "28 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
+    "BonusDescriptions": [
+      "IsArmorModLocation: Center Torso",
+      "MimeticStealthActivatable",
+      "MimeticStealthBonus: -25%, 5, 3",
+      "FixedSlotsExcept: 6, 1, Head",
+      "ActiveVisibility: -35%",
+      "ActiveHeatGenerated: +10%",
+      "ActiveHeatPerTurn: +12",
+      "ArmorTPCost: x2",
+      "ArmorCBCost: x2.2"
+    ],
+    "ActivatableComponent": {
+      "ButtonName": "Stealth",
+      "CanNotBeActivatedManualy": false,
+      "CanActivateAfterMove": true,
+      "CanActivateAfterFire": false,
+      "ActiveByDefault": true,
+      "SafeActivation": true,
+      "ActivationMessage": "W3S On",
+      "DeactivationMessage": "W3S Off",
+      "ActivationIsBuff": true,
+      "NoUniqueCheck": true,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "forceVisRebuild": true,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "LV_MIMETIC",
+            "Name": "Wraith Signature Suppression System Activatable: Mimetic Armor",
+            "Details": "Makes the carrier much harder to see with eyes",
+            "Icon": "uixSvgIcon_status_ECM-ghost"
+          },
+          "statisticData": {
+            "statName": "LV_MIMETIC",
+            "operation": "Set",
+            "modValue": "5_0.25_1_3",
+            "modType": "System.String"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "Stealth_Heat_Generation_Stealth",
+            "Name": "Wraith Signature Suppression System Activatable: Increased Heat Generated",
+            "Details": "Heat generation",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "statisticData": {
+            "statName": "HeatGenerated",
+            "operation": "Float_Multiply",
+            "modValue": "1.1",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
+          "Description": {
+            "Id": "Stealth_Heat_Capacity_Stealth",
+            "Name": "Wraith Signature Suppression System Activatable: Decreased Cooling",
+            "Details": "Heat Capacity Penalty",
+            "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+          },
+          "statisticData": {
+            "statName": "HeatSinkCapacity",
+            "operation": "Int_Add",
+            "modValue": "-12",
+            "modType": "System.Int32"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "Creator",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "StatusEffect-Hekate-Visibility",
+            "Name": "Wraith Signature Suppression System Activatable: Decreased Visual Signature",
+            "Details": "Visibility Statuseffect.",
+            "Icon": "uixSvgIcon_equipment_TTS"
+          },
+          "statisticData": {
+            "statName": "SpottingVisibilityMultiplier",
+            "operation": "Float_Multiply",
+            "modValue": "0.65",
+            "modType": "System.Single"
+          }
+        }
+      ],
+      "Linkage": {
+        "OnActivate": {
+          "Activate": [
+            "W3S"
+          ],
+          "Deactivate": []
+        },
+        "OnDeactivate": {
+          "Activate": [],
+          "Deactivate": [
+            "W3S"
+          ]
+        }
+      }
+    },
+    "ArmorRepair": {
+      "ArmorTPCost": 2.0,
+      "ArmorCBCost": 2.2
+    },
+    "Color": "Gold",
+    "CriticalEffects": {
+      "LinkedStatisticName": "W3S"
+    },
+    "DecoratorComponent": [
+      {
+        "Text": "M",
+        "Color": "#5F24AC",
+        "Icon": "ComponentGearIcons_STEALTH",
+        "Importance": 40
+      }
+    ],
+    "Flags": [
+      "not_broken"
+    ],
+    "IBLS": {
+      "StorageSize": 7
+    },
+    "Linked": {
+      "Links": [
+        {
+          "ComponentDefId": "Linked_ArmorMod_WraithSignatureSuppressionSystem",
+          "Location": "LeftArm"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_WraithSignatureSuppressionSystem",
+          "Location": "LeftTorso"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_WraithSignatureSuppressionSystem",
+          "Location": "RightTorso"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_WraithSignatureSuppressionSystem",
+          "Location": "RightArm"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_WraithSignatureSuppressionSystem",
+          "Location": "LeftLeg"
+        },
+        {
+          "ComponentDefId": "Linked_ArmorMod_WraithSignatureSuppressionSystem",
+          "Location": "RightLeg"
+        }
+      ]
+    }
+  },
+  "Description": {
+    "Cost": 2200000,
+    "Rarity": 2,
+    "Purchasable": true,
+    "Manufacturer": "RISC",
+    "Model": "W3S",
+    "UIName": "Wraith Signature Suppression System",
+    "Id": "Gear_ArmorMod_WraithSignatureSuppressionSystem",
+    "Name": "Wraith Signature Suppression System",
+    "Details": "Developed under RISC's classified Phantom Initiative, the Wraith Signature Suppression System, or W3S, advances Star League mimetic principles through an active phased-array optical disruption field. Adaptive polarization cells across the mech's surface continuously sample and reproject surrounding terrain, blurring visual resolution at a considerably higher level than previous iterations such as CLPS.",
+    "Icon": "uixSvgIcon_ArmourMod"
+  },
+  "BonusValueA": "",
+  "BonusValueB": "",
+  "ComponentType": "Upgrade",
+  "ComponentSubType": "NotSet",
+  "PrefabIdentifier": "",
+  "RelativeModifier": 0,
+  "AbsoluteModifier": 0,
+  "BattleValue": 0,
+  "InventorySize": 1,
+  "Tonnage": 0,
+  "AllowedLocations": "CenterTorso",
+  "DisallowedLocations": "All",
+  "CriticalComponent": false,
+  "ComponentTags": {
+    "items": [
+      "component_type_stock",
+      "SuperheavyIncompatible",
+      "SquadIncompatible"
+    ],
+    "tagSetSourceFile": ""
+  }
+}

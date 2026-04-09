@@ -13,7 +13,17 @@
     ],
     "BonusDescriptions": [
       "C3i",
-      "C3BonusNoStack: C3i, +1 Initiative"
+      "C3BonusNoStack: C3i, +1 Initiative",
+      "C3ECMPenalty: -2, +20%",
+      "ExplainC3"
+    ],
+    "DecoratorComponent": [
+      {
+        "Text": "I",
+        "Color": "#FF9901",
+        "Icon": "ComponentGearIcons_HEXAGON",
+        "Importance": 50
+      }
     ],
     "Flags": [
       "not_broken",
@@ -23,15 +33,7 @@
     ],
     "IBLS": {
       "StorageSize": 1
-    },
-    "DecoratorComponent": [
-      {
-        "Text": "I",
-        "Color": "#FF9901",
-        "Icon": "ComponentGearIcons_HEXAGON",
-        "Importance": 50
-      }
-    ]
+    }
   },
   "Description": {
     "Cost": 0,
@@ -88,7 +90,7 @@
           "nature": "Buff",
           "Description": {
             "Id": "C3i_network_bonus_initiative",
-            "Name": "BA C3i Aura: Improved Allies Initiative",
+            "Name": "BA C3i Aura: Increased Allies Initiative",
             "Details": "C3 network",
             "Icon": "uixSvgIcon_status_ECM-missileDef"
           },
@@ -104,6 +106,60 @@
     }
   ],
   "statusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": 1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "forceVisRebuild": true,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Debuff",
+      "Description": {
+        "Id": "C3_ECM_Penalty",
+        "Name": "BA C3i: Decreased ECM Shield",
+        "Details": "Reduces effectiveness of ECM shield on this unit",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "LV_ECM_SHIELD",
+        "operation": "Int_Add",
+        "modValue": "-2",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": 1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "forceVisRebuild": true,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Debuff",
+      "Description": {
+        "Id": "C3_Signature_Increase",
+        "Name": "BA C3i: Increased Sensor Signature",
+        "Details": "Increases this unit's sensor signature, making it easier to detect.",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "SensorSignatureModifier",
+        "operation": "Float_Multiply",
+        "modValue": "1.2",
+        "modType": "System.Single"
+      }
+    },
     {
       "durationData": {
         "duration": -1,

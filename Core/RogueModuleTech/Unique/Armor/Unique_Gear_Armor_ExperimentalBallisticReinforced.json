@@ -5,21 +5,27 @@
         "CategoryID": "Armor"
       }
     ],
+    "WorkOrderCosts": {
+      "Install": {
+        "TechCost": "0.1 * [[Chassis.Tonnage]]",
+        "CBillCost": "35 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
+      }
+    },
     "BonusDescriptions": [
       "KineticProtection: 45%",
       "MissileProtection: 45%",
+      "HHProtection: 20%",
       "TACChance: -30%",
       "Reserved: 4",
       "ArmorFactor: +40%",
       "ArmorTPCost: x2",
       "ArmorCBCost: x2.5"
     ],
-    "Flags": [
-      "default",
-      "not_broken",
-      "no_salvage",
-      "autorepair"
-    ],
+    "ArmorRepair": {
+      "ArmorTPCost": 2.0,
+      "ArmorCBCost": 2.5
+    },
+    "Color": "Gold",
     "DynamicSlots": {
       "ReservedSlots": 4,
       "BackgroundColor": "GoldHalf",
@@ -28,24 +34,19 @@
       "BonusAText": "Dynamic Slot",
       "BonusBText": " "
     },
-    "Weights": {
-      "ArmorFactor": 1.4
-    },
-    "ArmorRepair": {
-      "ArmorTPCost": 2.0,
-      "ArmorCBCost": 2.5
-    },
-    "WorkOrderCosts": {
-      "Install": {
-        "TechCost": "0.1 * [[Chassis.Tonnage]]",
-        "CBillCost": "35 * [[Chassis.Tonnage]] * [[Chassis.Tonnage]]"
-      }
-    },
+    "Flags": [
+      "default",
+      "not_broken",
+      "no_salvage",
+      "autorepair"
+    ],
     "IBLS": {
       "StorageSize": 5
     },
-    "Color": "Gold",
-    "Lootable": "Gear_Armor_BallisticReinforced"
+    "Lootable": "Gear_Armor_BallisticReinforced",
+    "Weights": {
+      "ArmorFactor": 1.4
+    }
   },
   "Description": {
     "Cost": 1500000,
@@ -95,7 +96,7 @@
       "statisticData": {
         "statName": "DamageReductionMultiplierBallistic",
         "operation": "Float_Multiply",
-        "modValue": "0.45",
+        "modValue": "0.55",
         "modType": "System.Single",
         "effectsPersistAfterDestruction": true
       }
@@ -122,7 +123,34 @@
       "statisticData": {
         "statName": "DamageReductionMultiplierMissile",
         "operation": "Float_Multiply",
-        "modValue": "0.45",
+        "modValue": "0.55",
+        "modType": "System.Single",
+        "effectsPersistAfterDestruction": true
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "StatusEffect-ReactiveBonus3",
+        "Name": "Experimental Ballistic Reinforced: Decreased Support Weapon Damage Taken",
+        "Details": "Takes less Handheld Damage.",
+        "Icon": "uixSvgIcon_mwFury"
+      },
+      "statisticData": {
+        "statName": "DamageReductionMultiplierAntipersonnel",
+        "operation": "Float_Multiply",
+        "modValue": "0.8",
         "modType": "System.Single",
         "effectsPersistAfterDestruction": true
       }
