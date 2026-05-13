@@ -23,12 +23,15 @@ template = json.loads("""{
   "LanceUnits": []
 }""")
     
+
+# Old template had:
+    # "unitSimGameID": null,
+    # "pilotSimGameID": null,
+    
 slot_template = json.loads("""{
     "unitType": "Mech",
     "unitId": "Tagged",
-    "unitSimGameID": null,
     "pilotId": "Tagged",
-    "pilotSimGameID": null,
     "unitTagSet": {
         "items": [],
         "tagSetSourceFile": "Tags/UnitTags"
