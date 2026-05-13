@@ -12,13 +12,14 @@
       }
     ],
     "BonusDescriptions": [
-      "HandHeld: 20",
+      "HandHeld: 25",
+      "BlockLocations: installed arm and adjacent side torso",
       "1shot",
       "WpnAccuracy: -1",
       "MissileHP: 1",
       "IsRocket: 180",
-      "AmmoCost: 60",
       "EjectableWeapon",
+      "AmmoCost: 60",
       "WeaponShardsModRange: 0.15, 0.6"
     ],
     "Flags": [
@@ -33,7 +34,7 @@
     "IBLS": {
       "StorageSize": 1
     },
-    "CarryHandUsage": 20
+    "CarryHandUsage": 25
   },
   "weaponCategoryID": "SpecialHandHeld",
   "Type": "LRM",
@@ -71,13 +72,6 @@
   "MissileHealth": 1,
   "CanBeBlocked": false,
   "blockWeaponsInInstalledLocation": true,
-  "blockWeaponsInMechLocations": [
-    "LeftArm",
-    "LeftTorso",
-    "CenterTorso",
-    "RightTorso",
-    "RightArm"
-  ],
   "EjectWeapon": true,
   "FireTerrainChance": 0.0075,
   "AttackRecoil": 1,
@@ -98,7 +92,7 @@
     "UIName": "Katyusha",
     "Id": "HandHeld_Weapon_Rocket_Katyusha",
     "Name": "HRL180",
-    "Details": "Heavy Rocket Launcher operate on the same Principle as the normal widespread Rocket Launcher, being unguided bolted on One Shot Throwaway Launchers do they carrier a heavier payload..<b><color=#F79232>1 SHOT!</color> </b> <b><color=#099ff2>VOLATILE!</color></b>",
+    "Details": "This is a nightmare. It's actually just the guts of a rocket technical with some 'Mech-sized handles welded on. Please don't ask me to reload it for you.<b><color=#F79232>1 SHOT!</color> </b> <b><color=#099ff2>VOLATILE!</color></b>",
     "Icon": "panzerfaust"
   },
   "BonusValueA": "",
@@ -112,6 +106,34 @@
   "AllowedLocations": "Arms",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
+  "statusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator"
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "StatusEffect-TemporarilyDisabled-Adjacent",
+        "Name": "Katyusha: Block Weapons - {adjacent}",
+        "Details": "Blocks weapons in adjacent Side Torso.",
+        "Icon": "uixSvgIcon_equipment_TTS"
+      },
+      "statisticData": {
+        "statName": "CACWeaponBlocked",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean",
+        "Location": "{adjacent}",
+        "targetCollection": "Weapon"
+      }
+    }
+  ],
   "ComponentTags": {
     "items": [
       "HandHeld.{location}",
