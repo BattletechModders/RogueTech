@@ -50,9 +50,11 @@ slot_template = json.loads("""{
 
 # tuple (include_tags, exclude_tags)
 tags = {}
-tags["easy"] = (["unit_killteam", "unit_kt_low"], ["unit_kt_high"])
-tags["mixed"] = (["unit_killteam"], [])
-tags["hard"] = (["unit_killteam", "unit_kt_high"], ["unit_kt_low"])
+tags["easy"] = (["unit_killteam", "unit_kt_low"], ["unit_kt_med", "unit_kt_high"])
+tags["mixed_easy"] = (["unit_killteam"], ["unit_kt_high"])
+tags["medium"] = (["unit_killteam", "unit_kt_med"], ["unit_kt_low", "unit_kt_high"])
+tags["mixed_hard"] = (["unit_killteam"], ["unit_kt_low"])
+tags["hard"] = (["unit_killteam", "unit_kt_high"], ["unit_kt_low", "unit_kt_med"]) # not used, pool much too small
 
 tags["regular"] = (
     ["{CUR_TEAM.faction}", "unit_mech", "unit_bracket_high", "unit_legendary"],
@@ -60,18 +62,18 @@ tags["regular"] = (
 )
 
 progressionA = [
-    ("easy",    "regular",  "regular",  "regular"),
-    ("easy",    "regular",  "regular",  "regular"),
-    ("mixed",   "regular",  "regular",  "regular"),
-    ("mixed",   "hard",     "regular",  "regular"),
-    ("mixed",   "hard",     "regular",  "regular"),
-    ("mixed",   "hard",     "regular",  "regular"),
-    ("mixed",   "hard",     "regular",  "regular"),
-    ("mixed",   "hard",     "hard",     "regular"),
-    ("mixed",   "hard",     "hard",     "regular"),
-    ("mixed",   "hard",     "hard",     "regular"),
-    ("mixed",   "hard",     "hard",     "regular"),
-    ("mixed",   "hard",     "hard",     "regular")
+    ("easy",        "regular",     "regular",  "regular"),
+    ("easy",        "regular",     "regular",  "regular"),
+    ("mixed_easy",  "regular",     "regular",  "regular"),
+    ("mixed_easy",  "medium",      "regular",  "regular"),
+    ("mixed_easy",  "medium",      "regular",  "regular"),
+    ("mixed_easy",  "medium",      "regular",  "regular"),
+    ("mixed_easy",  "medium",      "regular",  "regular"),
+    ("mixed_easy",  "medium",      "medium",   "regular"),
+    ("mixed_easy",  "mixed_hard",  "medium",   "regular"),
+    ("mixed_easy",  "mixed_hard",  "medium",   "regular"),
+    ("mixed_easy",  "mixed_hard",  "medium",   "regular"),
+    ("mixed_easy",  "mixed_hard",  "medium",   "regular")
 ]
 
 progressionB = [
@@ -79,14 +81,14 @@ progressionB = [
     ("regular", "regular",  "regular",  "regular"),
     ("easy",    "regular",  "regular",  "regular"),
     ("easy",    "regular",  "regular",  "regular"),
-    ("hard",    "regular",  "regular",  "regular"),
-    ("hard",    "easy",     "regular",  "regular"),
-    ("hard",    "easy",     "regular",  "regular"),
-    ("hard",    "hard",     "regular",  "regular"),
-    ("hard",    "hard",     "regular",  "regular"),
-    ("hard",    "hard",     "easy",     "regular"),
-    ("hard",    "hard",     "easy",     "regular"),
-    ("hard",    "hard",     "hard",     "regular")
+    ("medium",  "regular",  "regular",  "regular"),
+    ("medium",  "easy",     "regular",  "regular"),
+    ("medium",  "easy",     "regular",  "regular"),
+    ("medium",  "medium",   "regular",  "regular"),
+    ("medium",  "medium",   "regular",  "regular"),
+    ("medium",  "medium",   "easy",     "regular"),
+    ("medium",  "medium",   "easy",     "regular"),
+    ("medium",  "medium",   "medium",   "regular")
 ]
 
 assert len(progressionA) == len(progressionB)
