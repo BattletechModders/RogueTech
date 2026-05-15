@@ -559,7 +559,7 @@ nodes:
           goto: GhostBearWatch-StayWithGhostBears
         - if:
               companyHasTag: GoR_GB_SwitchedToMT
-          goto: WorkInProgress
+          goto: MinnesotaTribe-TheSwitch
         - goto: Error
 
     GhostBearWatch-MizukiCall-Crew:
@@ -572,7 +572,7 @@ nodes:
           goto: GhostBearWatch-StayWithGhostBears
         - if:
               companyHasTag: GoR_GB_SwitchedToMT
-          goto: WorkInProgress
+          goto: MinnesotaTribe-TheSwitch
         - goto: Error
 
     GhostBearWatch-StayWithGhostBears:
@@ -904,7 +904,7 @@ nodes:
         - goto: GhostBearWatch-Froeislandis-Armageddon
 
     MinnesotaTribe-Start:
-        - reward: itemCollection_MinnesotaTribe_Reward_SwitchingSides
+        - reward: itemCollection_MinnesotaTribe_Reward_JoiningTheCause
         - event:
               id: event_GhostsOfRetribution_MinnesotaTribe_FlaggedStars
         - if:
@@ -914,7 +914,7 @@ nodes:
               companyHasTag: GoR_MT_DefendHorgens
           goto: MinnesotaTribe-DefendHorgens
         - if:
-              companyHasTag: GoR_MT_MinnesotaTribe-DefendRWROutpost11
+              companyHasTag: GoR_MT_DefendRWROutpost11
           goto: MinnesotaTribe-DefendRWROutpost11
         - goto: Error
 
@@ -1132,7 +1132,7 @@ nodes:
               companyDoesNotHaveTag: GoR_MT_TreasuresOfThePast_Finished
           goto: MinnesotaTribe-DefendRWROutpost11
         - if:
-              companyDoesNotHaveTag: GoR_MT_SteeLLessons_Finished
+              companyDoesNotHaveTag: GoR_MT_SteelLessons_Finished
           goto: MinnesotaTribe-DefendRWROutpost11
         - conversation:
               id: GoR-MinnesotaTribe-1c-RWROutpost11Defended
@@ -1352,10 +1352,38 @@ nodes:
               id: GoR-MinnesotaTribe-6-HealersAndKillers
               header: Urgent Crew Officer's Meeting
               subheader: Orbit over Niops
+        - if:
+              companyDoesNotHaveTag: GoR_GB_SwitchedToMT
+          goto: MinnesotaTribe-SwitchOffer                  
         - wait:
               days: 14
               workOrder: Wait for updates from Joanna
               sprite: uixTxrLogo_GenericCampaign
+        - goto: MinnesotaTribe-HistoricalVengeance      
+
+    MinnesotaTribe-SwitchOffer:
+        - wait:
+              days: 7
+              workOrder: Wait for updates from Joanna
+              sprite: uixTxrLogo_GenericCampaign    
+        - event:
+              id: event_GhostsOfRetribution_MinnesotaTribe_ArelleReachesOut
+        - if:
+              companyHasTag: GoR_MT_AcceptedArelleCall
+          conversation:
+              id: GoR-MinnesotaTribe-6b-ArellesProposition
+              header: Conference Room
+              subheader: High Orbit     
+        - if:
+              companyHasTag: GoR_MT_SwitchedToGB
+          goto: GhostBearWatch-TheSwitch    
+        - wait:
+              days: 7
+              workOrder: Wait for updates from Joanna
+              sprite: uixTxrLogo_GenericCampaign
+        - goto: MinnesotaTribe-HistoricalVengeance           
+
+    MinnesotaTribe-HistoricalVengeance:
         - event:
               id: event_GhostsOfRetribution_MinnesotaTribe_HistoricalVengeance
         - fakeFlashpoint:
@@ -1369,7 +1397,7 @@ nodes:
                   Rescue the Tribe prisoners from the Ghost Bear prison
 
                   <b><color=red>The contract will start immediatly on arrival at St.Andreas.</b></color>
-        - goto: MinnesotaTribe-LiberationDay
+        - goto: MinnesotaTribe-LiberationDay    
 
     MinnesotaTribe-Retry-ThePoisonPath:
         - fakeFlashpoint:
@@ -1574,6 +1602,34 @@ nodes:
               description: |
                   Resume the <b>Ghost of Retribution</b> campaign by retrying the contract.
         - goto: MinnesotaTribe-ArmageddonsFall
+
+    MinnesotaTribe-TheSwitch:
+        - event:
+              id: event_GhostsOfRetribution_MinnesotaTribe_UnexpectedRewards
+        - fakeFlashpoint:
+              name: Unwilling Asset
+              employer: MinnesotaTribe
+              employerPortrait: castDef_JoannaMcEvedy
+              target: OWNER
+              difficulty: 7
+              at: starsystemdef_Ryerson
+              description: |
+                  Acquire the services of Dr. Anika Tilsaye. Forcefully.
+        - goto: MinnesotaTribe-UnwillingAsset
+    
+    GhostBearWatch-TheSwitch:
+        - event:
+              id: event_GhostsOfRetribution_GhostBearWatch_TheReward
+        - fakeFlashpoint:
+              name: Warden of Ash
+              employer: GhostBearWatch
+              employerPortrait: castDef_ArelleJorgensson
+              target: Locals
+              difficulty: 8
+              at: starsystemdef_Butzfleth
+              description: |
+                  Ghost Bear Watch intelligence identifies Butzfleth Majoris as a covert logistics hub. You're ordered to investigate and eliminate a Tribe-aligned prison official supplying indentured labor for military construction.
+        - goto: GhostBearWatch-Butzfleth
 
     WorkInProgress:
         - popup:
