@@ -24,9 +24,11 @@
       "LanceResolve2: 1",
       "AreaSensors: 3, 30%, 270",
       "C3Master",
+      "C3MTAG",
       "C3i",
       "C3Bonus: C3 Slave, 20%, 10%, +2",
       "C3BonusNoStack: C3 Slave, +1 Initiative",
+      "C3BonusNoStack: C3i, +1 Accuracy",
       "EWARScan: 500, 6, 20",
       "Sensors: 15%",
       "Sight: 15%",
@@ -60,7 +62,19 @@
         "Icon": "ComponentGearIcons_PROBE",
         "Importance": 20
       }
-    ]
+    ],
+    "CriticalEffects": {
+      "LinkedStatisticName": "C3 Master"
+    },
+    "Linked": {
+      "Links": [
+        {
+          "ComponentDefId": "Weapon_C3_Master_TAG",
+          "Location": "CenterTorso",
+          "ComponentDefType": "Weapon"
+        }
+      ]
+    }
   },
   "Description": {
     "Cost": 0,
@@ -71,7 +85,7 @@
     "UIName": "Adv. Command Mod",
     "Id": "Unique_AdvancedCommandModule",
     "Name": "Advanced Command Module",
-    "Details": "The Cyclops HQ comes equipped with a sophisticated and powerful Advanced Command Module. Granting the entire Command Improved Communication and Coordination.",
+    "Details": "The Cyclops HQ comes equipped with a sophisticated and powerful Advanced Command Module. Granting the entire Command Improved Communication and Coordination. The Command Module includes an integrated TAG.",
     "Icon": "uixSvgIcon_special_Equipment"
   },
   "BonusValueA": "",
@@ -231,6 +245,34 @@
             "operation": "Int_Add",
             "modValue": "1",
             "modType": "System.Int32"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": 1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "AlliesWithinRange",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "C3i_network_bonus_accuracy",
+            "Name": "Adv. Command Mod Aura: Improved Allies Accuracy",
+            "Details": "C3i network",
+            "Icon": "uixSvgIcon_status_ECM-missileDef"
+          },
+          "statisticData": {
+            "abilifierId": "C3i_network_bonus",
+            "statName": "AccuracyModifier",
+            "operation": "Float_Add",
+            "modValue": "-1.0",
+            "modType": "System.Single",
+            "targetCollection": "Weapon"
           }
         }
       ]

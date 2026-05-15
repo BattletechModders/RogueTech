@@ -359,7 +359,8 @@ WeaponAddonDef example
 			  "Damage":3000, - AoE damage linear decrease by distance between source and target
 			  "Heat":100, - Heat damage. If target is not mech this value will be added to Damage in calcualtion
 			  "Stability":100, - Stability damage. If target is not mech this value is ommited
-			  "Chance":0.6, - Chance of explosion if commited
+			  "Chance":0.6, - Chance of explosion if commited. 
+												NOTE from bwaa: the actual chance appears to be 1/3 of this value for some reason, so "Chance": 0.03 = 1%.
 			  "ExplosionMessage" : "", - floatie message on explosion commit
 			  "VFX":"WFX_Nuke" - additional VFX on explosion 
 				"VFXScaleX":1, - VFX scale
@@ -559,7 +560,7 @@ WeaponAddonDef example
 				}
 			},
       "Linkage":{ - linked components info
-        "OnActivate":{  
+        "OnActivate":{  Â§
           "Activate":[],
           "Deactivate":["ECM"] - array of ButtonName's 
         },
@@ -847,7 +848,7 @@ COMPOPNENT
           "Description": {
             "Id": "ECMStealth_GhostEffect_Allies",
             "Name": "STEALTH CHARGE",
-            "Details": "Units within an ECM field gain a Stealth Charge and cannot be targeted.\n\nFiring a weapon, using an activated ability, or an enemy penetrating the ECM field removes a Stealth Charge. Being Sensor Locked removes all Stealth Charges.",
+            "Details": "Units within an ECM field gain a Stealth Chargeï¿½and cannot be targeted.\n\nFiring a weapon, using an activated ability, or an enemy penetrating the ECM field removes a Stealth Charge. Being Sensor Locked removes all Stealth Charges.",
             "Icon": "uixSvgIcon_status_ECM-ghost"
           },
           "statisticData": {

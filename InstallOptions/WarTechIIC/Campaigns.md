@@ -43,7 +43,17 @@ All entries can have a condition applied, using `if`:
   Start:
     - if:
         companyHasTag: <tagName>
+        companyHasAnyTag:
+          - tagA
+          - tagB
+        companyHasAllTags:
+          - tagC
+          - tagD
+
         companyDoesNotHaveTag: <tagName>
+        companyDoesNotHaveTags:
+          - tagE
+          - tagF
       event:
         id: <some event>
 ```
@@ -125,7 +135,9 @@ Example:
         The [[DM.BaseDescriptionDefs[LoreAuriganCoalition],Aurigan Coalition]] will supply you with a mech for use in her procession, a venerable Shadowhawk that has been with the Aurigan Royal Guard for decades.
 ```
 
-All fields are required. `employer` and `target` need not be who the player is actually going to fight for / against; they're display only.
+All fields are required. `employer` and `target` need not be who the player is actually going to fight for / against; they're display only. 
+
+Both `employer` and `target` support using `OWNER` (configurable in settings) as a dynamic reference to the star system's owner. This will be resolved at Flashpoint creation, if the system owner is changed afterward it will not be reflected. 
 
 `at` can be the current system; this is a fine way to offer the player break points in the action that they can return to later.
 
@@ -150,6 +162,8 @@ Example:
 ```
 
 `id`, `employer`, `target` and `onFailGoto` are required, all others are optional.
+
+Both `employer` and `target` support using `OWNER` (configurable in settings) as a dynamic reference to the star system's owner. This will be resolved at contract creation, if the system owner is changed afterward it will not be reflected.
 
 `postContractEvent` deserves some special explanation. If the player succeeds at the mission, the given event *replaces the objectives screen* in the after action report. The event must be `Company` or `StarSystem` scoped; no other scopes are supported.
 

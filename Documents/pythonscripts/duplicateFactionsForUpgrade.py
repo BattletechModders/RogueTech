@@ -8,11 +8,11 @@ import pprint
 
 # put factions to duplicate here
 FactionsToDuplicate = [ 
-    
+    "Circinus"
 ]
 
 # update this to the year tag you want
-Year = 3150
+Year = 3031
 
 
 FactionDir = '../../Core/RogueTechCore/Factions/'
