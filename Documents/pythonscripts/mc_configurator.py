@@ -25,24 +25,6 @@ patch_base = json.loads("""{
 patchdef_template_kt = json.loads("""{
     "version" : 1,
     "patches" : [
-        {
-            "targetFile" : "Core/MissionControl/settings.json",
-            "priority" : 20,
-            "arrayHandle" : "Replace",
-            "patch" : {
-                "AdditionalLances": {
-                    "Enable": true,
-                    "ExcludeContractTypes": [
-                        "SoloDuel",
-                        "DuoDuel"
-                    ],
-                    "IsPrimaryObjectiveIn": [
-                        "SimpleBattle",
-                        "CaptureBase"
-                    ]
-                }
-            }
-        }
     ]
 }""")
 
