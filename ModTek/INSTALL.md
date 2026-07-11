@@ -2,9 +2,11 @@
 # Installing ModTek v3
 
 > **Note**
+> Verify the integrity of game files (Steam/GOG), to make sure you don't have old-style injected files lying around.
 > ModTek v3 or later does **not** have a `ModTekInjector.exe` anymore, and instead it uses 
 > [UnityDoorstop](https://github.com/BattletechModders/UnityDoorstop), which is based on hooking via libraries.
 > OS platforms (Windows, Linux, Mac) and game distribution platforms (Steam, GOG) are supported.
+
 
 > **Warning**
 > For ModTek to work properly, BATTLETECH should be installed outside of the program files folder structure,
@@ -61,7 +63,11 @@ If a crash happens with the following error
 > #1  0x007f982693674c in init_mono
 > ```
 
-Add a file /etc/sysctl.d/01-disable-aslr.conf with contents
+#### Proper fix
+Add the env variable `MODTEK_DISABLE_ASLR=true`, e.g. to your `~/.profile` file.
+
+#### Unsecure fix (obsolete)
+A previous variant of the fix suggested to add `/etc/sysctl.d/01-disable-aslr.conf` with contents
 > kernel.randomize_va_space = 0
 
 ## macOS
@@ -73,15 +79,31 @@ The base installation folder is the `Contents/Resources` directory within the .a
 For a standard Steam installation that means the following path:
 > `~/"Library/Application Support/Steam/steamapps/common/BATTLETECH/BattleTech.app/Contents/Resources/"`
 
+The easiest way to go to this folder is to go into Steam and select the gear icon->Manage->Browse local files. This will open up a Finder window. Right click on the Battletech app and select "Show Package Contents." From the next view, double click on Contents and then Resources. You are now in the correct folder. Copy the content of the ModTek download into the Resources folder.
+
+Run the follwoing in the `Resources` folder to remove the code signature from the executable, as it prevents injections:
+```sh
+codesign --remove-signature Battletech
+```
+
 ### Steam on macOS
 
-Launch options for macOS need to contain the absolute path to the run script.
+After copying the ModTek folders you will need to configure both the Steam launcher and set the correct file permissions for run.sh. To do both you need to first open a Terminal window in the resources directory. Either launch Terminal and CD to the Resources directory you navigated to above or if you have configured Terminal keyboard shortcut service, use that to open a Terminal Window in the Resources directory. First you will need to set the correct permissions for the run.sh script required to load ModTek via Doorstop. 
+
+In Terminal type:
+> `chmod +x run.sh`
+
+This will set the correct run execute permissions for the run.sh script. 
+
+Next you need to set the launch options for ModTek to load. Launch options for macOS need to contain the absolute path to the run.sh script.
+
 In a terminal, run this from the same location where the run script is:
 > `echo "\"$(pwd)/run.sh\" %command%"`
 
 The launch options should then look something like this:
 > `"/Users/ReplaceThisByYourUsername/Library/Application Support/Steam/steamapps/common/BATTLETECH/BattleTech.app/Contents/Resources/run.sh" %command%`
 
+In Steam go to Battletech, select Gear->Properties and paste the output from running the command above in Terminal (copy and paste) into the Launch Options box. 
 
 ## Enabling or Disabling
 
