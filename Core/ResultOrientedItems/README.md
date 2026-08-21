@@ -9,6 +9,8 @@ Whenever an item (UpgradeDef, JumpJetDef, WeaponDef, etc) would be added to the 
 
 If the ItemEvent's `AllowInInventory` is false, then the item disappears without even entering the player's possession. If true, they get it as normal.
 
+If the ItemEvent's `TriggerOnlyOnce` is true, the item's `Results` will be applied only a single time, even if multiple copies of the item are recieved at the same time.
+
 That's it.
 
 ## Additional options for Results
@@ -24,3 +26,7 @@ ROI also patches SetSimGameStat to give mod authors additional power. You can no
 ],
 ```
 will give the player +15 rep with the system owner (as long as they aren't the Locals).
+
+## Forcing shops and/or contracts to refresh
+
+If an event result adds the company tag `ROI_refresh_shops`, the current starsystem's shops will refresh. If an event result adds the company tag `ROI_refresh_contracts`, the current starsytstem's contracts will refresh. Neither tag is actually added to the CompanyTags.
