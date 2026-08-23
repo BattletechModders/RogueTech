@@ -2,15 +2,23 @@
   "Custom": {
     "Category": [
       {
+        "CategoryID": "IndustrialWeapon"
+      },
+      {
+        "CategoryID": "w/s/i/industrial"
+      },
+      {
         "CategoryID": "ArmHandActuator"
       }
     ],
     "BonusDescriptions": [
-      "HandActuator",
-      "CBTBEPunchAttackAccuracyUpgrade: +1",
-      "CBTBEPunchDamage: +20",
-      "CBTBEPunchStability: +10",
-      "CBTBEPunchHits: +1",
+      "IndustrialWeapon",
+      "ReplacesActuators: Hand",
+      "IncompatibleWith: HandHeld equipment",
+      "PhysicalWeaponNoBonus",
+      "PhysicalWeaponStandard",
+      "CBTBEPhysicalAttackDamage: 42",
+      "CBTBEPhysicalAttackStability: 21",
       "NoAA",
       "StandUP: 10%",
       "WeaponShardsModRange: 0.5, 2.5"
@@ -30,9 +38,9 @@
       }
     },
     "IBLS": {
-      "StorageSize": 2
+      "StorageSize": 5
     },
-    "Lootable": "HandHeld_Weapon_Industrial_Chainsaw"
+    "Lootable": "Weapon_Industrial_Chainsaw"
   },
   "weaponCategoryID": "AntiPersonnel",
   "Type": "MachineGun",
@@ -47,9 +55,9 @@
   "AmmoCategory": "NotSet",
   "StartingAmmoCapacity": 0,
   "HeatGenerated": 0,
-  "Damage": 6,
+  "Damage": 7,
   "HeatDamage": 0,
-  "Instability": 0.9,
+  "Instability": 1.05,
   "DamageVariance": 0,
   "AccuracyModifier": 0,
   "EvasivePipsIgnored": 0,
@@ -69,7 +77,7 @@
   "AttackRecoil": 0,
   "WeaponEffectID": "WeaponEffect-Weapon_MachineGun",
   "Description": {
-    "Cost": 100000,
+    "Cost": 300000,
     "Rarity": 222,
     "Purchasable": true,
     "Manufacturer": "Bunyan",
@@ -86,9 +94,9 @@
   "ComponentSubType": "Weapon",
   "PrefabIdentifier": "chainsaw",
   "BattleValue": 0,
-  "InventorySize": 2,
-  "Tonnage": 0,
-  "AllowedLocations": "All",
+  "InventorySize": 5,
+  "Tonnage": 5,
+  "AllowedLocations": "Arms",
   "DisallowedLocations": "All",
   "CriticalComponent": false,
   "statusEffects": [
@@ -133,14 +141,14 @@
       "nature": "Buff",
       "Description": {
         "Id": "MeleeAttacks_Weapon",
-        "Name": "Heavy Chainsaw: Increased Punch Extra Hits",
+        "Name": "Heavy Chainsaw: Increased Physical Weapon Extra Hits",
         "Details": "MeleeWeapon Accuracy Modifier",
         "Icon": "uixSvgIcon_run_n_gun"
       },
       "statisticData": {
-        "statName": "CBTBE_Punch_Extra_Hits_Count",
+        "statName": "CBTBE_Physical_Weapon_Extra_Hits_Count",
         "operation": "Float_Add",
-        "modValue": "1",
+        "modValue": "0.5",
         "modType": "System.Single"
       }
     },
@@ -158,15 +166,67 @@
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "Hatchet_Damage_Mod",
-        "Name": "Heavy Chainsaw: Increased Bonus Flat Punch Damage",
+        "Id": "IsPhysicalWeapon",
+        "Name": "Heavy Chainsaw: Is Physical Weapon",
         "Details": "Damage Modifier",
         "Icon": "uixSvgIcon_equipment_ActuatorArm"
       },
       "statisticData": {
-        "statName": "CBTBE_Punch_Target_Damage_Mod",
+        "statName": "CBTBE_Punch_Is_Physical_Weapon",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "PhysicalWeaponLocation",
+        "Name": "Heavy Chainsaw: Use STANDARD Hit Table",
+        "Details": "This is a physical weapon and hits like a normal weapon.",
+        "Icon": "uixSvgIcon_equipment_Gyro"
+      },
+      "statisticData": {
+        "statName": "CBTBE_Physical_Weapon_Location_Table",
+        "operation": "Set",
+        "modValue": "STANDARD",
+        "modType": "System.String"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "ChainSaw_Damage_Mod",
+        "Name": "Heavy Chainsaw: Increased Bonus Flat Physical Weapon Damage",
+        "Details": "Damage Modifier",
+        "Icon": "uixSvgIcon_equipment_ActuatorArm"
+      },
+      "statisticData": {
+        "statName": "CBTBE_Physical_Weapon_Target_Damage_Mod",
         "operation": "Int_Add",
-        "modValue": "20",
+        "modValue": "42",
         "modType": "System.Int32"
       }
     },
@@ -184,41 +244,15 @@
       "effectType": "StatisticEffect",
       "nature": "Buff",
       "Description": {
-        "Id": "Hatchet_Stability_Mod",
-        "Name": "Heavy Chainsaw: Increased Bonus Flat Punch Stability Damage",
+        "Id": "ChainSaw_Stability_Mod",
+        "Name": "Heavy Chainsaw: Increased Bonus Flat Physical Weapon Stability Damage",
         "Details": "Damage Modifier",
         "Icon": "uixSvgIcon_equipment_ActuatorArm"
       },
       "statisticData": {
-        "statName": "CBTBE_Punch_Target_Instability_Mod",
+        "statName": "CBTBE_Physical_Weapon_Target_Instability_Mod",
         "operation": "Int_Add",
-        "modValue": "10",
-        "modType": "System.Int32"
-      }
-    },
-    {
-      "durationData": {
-        "duration": -1,
-        "stackLimit": -1
-      },
-      "targetingData": {
-        "effectTriggerType": "Passive",
-        "effectTargetType": "Creator",
-        "showInTargetPreview": false,
-        "showInStatusPanel": false
-      },
-      "effectType": "StatisticEffect",
-      "nature": "Buff",
-      "Description": {
-        "Id": "HeavyChainsaw-PunchHit",
-        "Name": "Heavy Chainsaw: Improved Punch Hit Chance",
-        "Details": "MeleeWeapon Accuracy Modifier",
-        "Icon": "uixSvgIcon_run_n_gun"
-      },
-      "statisticData": {
-        "statName": "CBTBE_Punch_Attack_Mod",
-        "operation": "Int_Add",
-        "modValue": "-1",
+        "modValue": "21",
         "modType": "System.Int32"
       }
     }
@@ -231,6 +265,7 @@
       "range_close",
       "Hand.{location}",
       "Hand",
+      "HandHeldForbidden.{location}",
       "BAIncompatible",
       "LootMagnetBlacklist"
     ],

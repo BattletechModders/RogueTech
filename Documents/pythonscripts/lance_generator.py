@@ -191,6 +191,10 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             exclude_tags.append("unit_arrow")
         case "opfor":
             include_tags.append("unit_vehicle")
+            if index in [0,1]:
+                include_tags.append("unit_convoy_cargo")
+            else:
+                include_tags.append("unit_convoy")    
 
             exclude_tags.remove("unit_noncombatant")
             exclude_tags.append("unit_noconvoy")
@@ -204,6 +208,9 @@ def grab_unit_include_exclude(index, diff, category, composition, variant, extra
             exclude_tags.append("unit_arrow")
         case "mechconvoy":
             include_tags.append("unit_mech")
+            if index == 3:
+                include_tags.append("unit_convoy_cargo")
+            
             exclude_tags.append("unit_urbie")
             exclude_tags.append("unit_noconvoy")
             exclude_tags.append("unit_thumper")
@@ -970,37 +977,37 @@ build_lances("battle", "mixed", "urbie", 4, 8, location="../../../Optionals/Urbo
 # Mission control
 # support lances & duels
 
-build_lances("MCSupport", "mech", "low", 1, 2, extra="small", location="../../MissionControl/")
-build_lances("MCSupport", "mech", "low", 2, 6, location="../../MissionControl/")
-build_lances("MCSupport", "mech", "med", 4, 16, location="../../MissionControl/")
-build_lances("MCSupport", "mech", "high", 10, 20, location="../../MissionControl/")
+build_lances("MCSupport", "mech", "low", 1, 2, extra="small", location="../../MissionControl/overrides/lances/")
+build_lances("MCSupport", "mech", "low", 2, 6, location="../../MissionControl/overrides/lances/")
+build_lances("MCSupport", "mech", "med", 4, 16, location="../../MissionControl/overrides/lances/")
+build_lances("MCSupport", "mech", "high", 10, 20, location="../../MissionControl/overrides/lances/")
 
-build_lances("MCSupport", "mixed", "low", 1, 2, extra="small", location="../../MissionControl/")
-build_lances("MCSupport", "mixed", "low", 2, 6, location="../../MissionControl/")
-build_lances("MCSupport", "mixed", "med", 4, 16, location="../../MissionControl/")
-build_lances("MCSupport", "mixed", "high", 10, 20, location="../../MissionControl/")
+build_lances("MCSupport", "mixed", "low", 1, 2, extra="small", location="../../MissionControl/overrides/lances/")
+build_lances("MCSupport", "mixed", "low", 2, 6, location="../../MissionControl/overrides/lances/")
+build_lances("MCSupport", "mixed", "med", 4, 16, location="../../MissionControl/overrides/lances/")
+build_lances("MCSupport", "mixed", "high", 10, 20, location="../../MissionControl/overrides/lances/")
 
-build_lances("MCSupport", "vehicle", "low", 1, 2, extra="small", location="../../MissionControl/")
-build_lances("MCSupport", "vehicle", "low", 2, 6, location="../../MissionControl/")
-build_lances("MCSupport", "vehicle", "med", 4, 16, location="../../MissionControl/")
-build_lances("MCSupport", "vehicle", "high", 10, 20, location="../../MissionControl/")
+build_lances("MCSupport", "vehicle", "low", 1, 2, extra="small", location="../../MissionControl/overrides/lances/")
+build_lances("MCSupport", "vehicle", "low", 2, 6, location="../../MissionControl/overrides/lances/")
+build_lances("MCSupport", "vehicle", "med", 4, 16, location="../../MissionControl/overrides/lances/")
+build_lances("MCSupport", "vehicle", "high", 10, 20, location="../../MissionControl/overrides/lances/")
 
-build_lances("MCSupport", "mech", "low", 1, 6, extra="indirect", location="../../MissionControl/")
-build_lances("MCSupport", "mech", "med", 4, 16, extra="indirect", location="../../MissionControl/")
-build_lances("MCSupport", "mech", "high", 10, 20, extra="indirect", location="../../MissionControl/")
-build_lances("MCSupport", "mixed", "low", 1, 6, extra="indirect", location="../../MissionControl/")
-build_lances("MCSupport", "mixed", "med", 4, 16, extra="indirect", location="../../MissionControl/")
-build_lances("MCSupport", "mixed", "high", 10, 20, extra="indirect", location="../../MissionControl/")
-build_lances("MCSupport", "vehicle", "low", 1, 6, extra="indirect", location="../../MissionControl/")
-build_lances("MCSupport", "vehicle", "med", 4, 16, extra="indirect", location="../../MissionControl/")
-build_lances("MCSupport", "vehicle", "high", 10, 20, extra="indirect", location="../../MissionControl/")
+build_lances("MCSupport", "mech", "low", 1, 6, extra="indirect", location="../../MissionControl/overrides/lances/")
+build_lances("MCSupport", "mech", "med", 4, 16, extra="indirect", location="../../MissionControl/overrides/lances/")
+build_lances("MCSupport", "mech", "high", 10, 20, extra="indirect", location="../../MissionControl/overrides/lances/")
+build_lances("MCSupport", "mixed", "low", 1, 6, extra="indirect", location="../../MissionControl/overrides/lances/")
+build_lances("MCSupport", "mixed", "med", 4, 16, extra="indirect", location="../../MissionControl/overrides/lances/")
+build_lances("MCSupport", "mixed", "high", 10, 20, extra="indirect", location="../../MissionControl/overrides/lances/")
+build_lances("MCSupport", "vehicle", "low", 1, 6, extra="indirect", location="../../MissionControl/overrides/lances/")
+build_lances("MCSupport", "vehicle", "med", 4, 16, extra="indirect", location="../../MissionControl/overrides/lances/")
+build_lances("MCSupport", "vehicle", "high", 10, 20, extra="indirect", location="../../MissionControl/overrides/lances/")
 
-build_lances("MCDuel", "mech", "low", 1, 6, location="../../MissionControl/")
-build_lances("MCDuel", "mech", "med", 4, 16, location="../../MissionControl/")
-build_lances("MCDuel", "mech", "high", 10, 20, location="../../MissionControl/")
-build_lances("MCDuel", "mech", "low", 1, 6, extra="advanced", location="../../MissionControl/")
-build_lances("MCDuel", "mech", "med", 4, 16, extra="advanced", location="../../MissionControl/")
-build_lances("MCDuel", "mech", "high", 10, 20, extra="advanced", location="../../MissionControl/")
+build_lances("MCDuel", "mech", "low", 1, 6, location="../../MissionControl/overrides/lances/")
+build_lances("MCDuel", "mech", "med", 4, 16, location="../../MissionControl/overrides/lances/")
+build_lances("MCDuel", "mech", "high", 10, 20, location="../../MissionControl/overrides/lances/")
+build_lances("MCDuel", "mech", "low", 1, 6, extra="advanced", location="../../MissionControl/overrides/lances/")
+build_lances("MCDuel", "mech", "med", 4, 16, extra="advanced", location="../../MissionControl/overrides/lances/")
+build_lances("MCDuel", "mech", "high", 10, 20, extra="advanced", location="../../MissionControl/overrides/lances/")
 
 
 build_lances("turret", "standard", "", 1, 20)
