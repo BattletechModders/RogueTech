@@ -1,0 +1,620 @@
+{
+  "Custom": {
+    "Category": [
+      {
+        "CategoryID": "ECM"
+      },
+      {
+        "CategoryID": "Probe"
+      },
+      {
+        "CategoryID": "AdvECM"
+      },
+      {
+        "CategoryID": "C3Equipment"
+      }
+    ],
+    "BonusDescriptions": [
+      "EWSystem",
+      "ActiveEWS: 2, 2, 180",
+      "EWSSelf: 1, 1",
+      "EWSProbe: 15%, 1, 2, 180",
+      "C3Nova",
+      "NovaHeat",
+      "C3ECMPenalty: -2, +10%",
+      "ExplainC3",
+      "IsArmored"
+    ],
+    "Flags": [
+      "not_broken"
+    ],
+    "IBLS": {
+      "StorageSize": 1
+    },
+    "CriticalEffects": {
+      "IsArmored": true
+    },
+    "DecoratorComponent": [
+      {
+        "Text": "N",
+        "Color": "#FF9901",
+        "Icon": "ComponentGearIcons_HEXAGON",
+        "Importance": 50
+      },
+      {
+        "Text": "W",
+        "Color": "#248000",
+        "Icon": "ComponentGearIcons_ECM",
+        "Importance": 30
+      },
+      {
+        "Text": "E",
+        "Color": "#FF0E07",
+        "Icon": "ComponentGearIcons_PROBE",
+        "Importance": 20
+      }
+    ]
+  },
+  "Description": {
+    "Cost": 2300000,
+    "Manufacturer": "Clan",
+    "Model": "Nova CEWS (C)",
+    "UIName": "Nova CEWS (C) (Armored)",
+    "Id": "Gear_EWS_NovaCEWS_Armored",
+    "Name": "Armored Nova CEWS (C)",
+    "Details": "The rogue scientists of the Society developed the Nova CEWS after hearing about the C3 Systems used by the Inner Sphere. By combining elements of the Watchdog CEWS with a C3 system, they created a tool that could find enemy forces, hide the unit using it in an ECM bubble, and automatically provide targeting data to other friendly units. In addition, the Nova CEWS didn't require pre-configuration for the C3 capability; It could be programmed on the fly to respond to availability of friendly forces. This component has extra armor for a large increase in durability.",
+    "Icon": "EWS"
+  },
+  "BonusValueA": "",
+  "BonusValueB": "",
+  "ComponentType": "Upgrade",
+  "ComponentSubType": "Prototype_ElectronicWarfare",
+  "PrefabIdentifier": "",
+  "InventorySize": 1,
+  "Tonnage": 2,
+  "AllowedLocations": "All",
+  "DisallowedLocations": "All",
+  "Auras": [
+    {
+      "Id": "MINEDETECTIONAURA",
+      "Name": "Minesweeper",
+      "ReticleColor": "white",
+      "Range": 180,
+      "ApplySelf": true,
+      "MinefieldDetector": true,
+      "LineType": "Dots"
+    },
+    {
+      "Id": "ECM_Aura",
+      "Name": "ECM",
+      "ReticleColor": "#a31aff",
+      "Range": 180,
+      "AllyStealthAffection": "PositiveOne",
+      "IsPositiveToAlly": true,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "AlliesWithinRange",
+            "forceVisRebuild": true,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Buff",
+          "Description": {
+            "Id": "LV_ECM_SHIELD",
+            "Name": "Nova CEWS (C) (Armored) / Aura ECM: Increased Allies ECM Shield",
+            "Details": "Ally ECM Shield",
+            "Icon": "uixSvgIcon_status_ECM-missileDef"
+          },
+          "statisticData": {
+            "statName": "LV_ECM_SHIELD",
+            "operation": "Int_Add",
+            "modValue": "2",
+            "modType": "System.Int32"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "ECCM_Aura",
+      "Name": "ECCM",
+      "ReticleColor": "#a31aff",
+      "Range": 180,
+      "HideOnNotSelected": false,
+      "EnemyStealthAffection": "Nullify",
+      "IsNegativeToEnemy": true,
+      "statusEffects": [
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": -1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "EnemiesWithinRange",
+            "forceVisRebuild": true,
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
+          "Description": {
+            "Id": "LV_ECCM_SHIELD",
+            "Name": "Nova CEWS (C) (Armored) / Aura ECCM: Decreased Enemies ECM Shield",
+            "Details": "ECCM Shield Reduction",
+            "Icon": "uixSvgIcon_status_ECM-missileDef"
+          },
+          "statisticData": {
+            "statName": "LV_ECM_SHIELD",
+            "operation": "Int_Add",
+            "modValue": "-2",
+            "modType": "System.Int32"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": 1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "EnemiesWithinRange",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
+          "Description": {
+            "Id": "ECM_disrupt_C3",
+            "Name": "Nova CEWS (C) (Armored) / Aura ECCM: ECM Disrupts C3",
+            "Details": "C3 network",
+            "Icon": "uixSvgIcon_status_ECM-missileDef"
+          },
+          "statisticData": {
+            "statName": "ADD_ENCOUNTER_TAG_C3_network",
+            "operation": "Float_Add",
+            "modValue": "-2",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": 1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "EnemiesWithinRange",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
+          "Description": {
+            "Id": "ECM_disrupt_C3i",
+            "Name": "Nova CEWS (C) (Armored) / Aura ECCM: ECM Disrupts C3i",
+            "Details": "C3 network",
+            "Icon": "uixSvgIcon_status_ECM-missileDef"
+          },
+          "statisticData": {
+            "statName": "ADD_ENCOUNTER_TAG_C3i_network",
+            "operation": "Float_Add",
+            "modValue": "-2",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": 1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "EnemiesWithinRange",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
+          "Description": {
+            "Id": "ECM_disrupt_C3n",
+            "Name": "Nova CEWS (C) (Armored) / Aura ECCM: ECM Disrupts C3 Nova",
+            "Details": "C3 network",
+            "Icon": "uixSvgIcon_status_ECM-missileDef"
+          },
+          "statisticData": {
+            "statName": "ADD_ENCOUNTER_TAG_C3n_network",
+            "operation": "Float_Add",
+            "modValue": "-2",
+            "modType": "System.Single"
+          }
+        },
+        {
+          "durationData": {
+            "duration": -1,
+            "stackLimit": 1
+          },
+          "targetingData": {
+            "effectTriggerType": "Passive",
+            "effectTargetType": "EnemiesWithinRange",
+            "showInTargetPreview": false,
+            "showInStatusPanel": false
+          },
+          "effectType": "StatisticEffect",
+          "nature": "Debuff",
+          "Description": {
+            "Id": "ECM_disrupt_C3AI",
+            "Name": "Nova CEWS (C) (Armored) / Aura ECCM: ECM Disrupts C3 AI",
+            "Details": "C3 network",
+            "Icon": "uixSvgIcon_status_ECM-missileDef"
+          },
+          "statisticData": {
+            "statName": "ADD_ENCOUNTER_TAG_C3AI_network",
+            "operation": "Float_Add",
+            "modValue": "-2",
+            "modType": "System.Single"
+          }
+        }
+      ]
+    }
+  ],
+  "statusEffects": [
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": 1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "forceVisRebuild": true,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Debuff",
+      "Description": {
+        "Id": "C3_ECM_Penalty",
+        "Name": "Nova CEWS (C) (Armored): Decreased ECM Shield",
+        "Details": "Reduces effectiveness of ECM shield on this unit",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "LV_ECM_SHIELD",
+        "operation": "Int_Add",
+        "modValue": "-2",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": 1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "forceVisRebuild": true,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Debuff",
+      "Description": {
+        "Id": "C3_Signature_Increase",
+        "Name": "Nova CEWS (C) (Armored): Increased Sensor Signature",
+        "Details": "Increases this unit's sensor signature, making it easier to detect.",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "SensorSignatureModifier",
+        "operation": "Float_Multiply",
+        "modValue": "1.10",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "C3Nova",
+        "Name": "Nova CEWS (C) (Armored): C3 Nova",
+        "Details": "Shows their vision when lancemates move",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "ADD_ENCOUNTER_TAG_C3n_network",
+        "operation": "Float_Add",
+        "modValue": "1",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "C3_AI",
+        "Name": "Nova CEWS (C) (Armored): C3 AI",
+        "Details": "Shows their vision when lancemates move",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "abilifierId": "C3_network_AI",
+        "statName": "ADD_ENCOUNTER_TAG_C3AI_network",
+        "operation": "Float_Add",
+        "modValue": "1",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "MineFieldDetection",
+        "Name": "Nova CEWS (C) (Armored): Increased Minefield Detection",
+        "Details": "Detects Minefields",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "MinefieldDetection",
+        "operation": "Float_Add",
+        "modValue": "1",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "LV_PROBE_CARRIER",
+        "Name": "Nova CEWS (C) (Armored): Active Probe",
+        "Details": "Reduces effectiveness of stealthed and ECM shielded units",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "LV_PROBE_CARRIER",
+        "operation": "Int_Add",
+        "modValue": "1",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "LV_ADVANCED_SENSORS",
+        "Name": "Nova CEWS (C) (Armored): Increased Advanced Sensor Strength",
+        "Details": "Provides detailed information on enemy units",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "LV_ADVANCED_SENSORS",
+        "operation": "Int_Add",
+        "modValue": "2",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "AdvancedProbeSensor",
+        "Name": "Nova CEWS (C) (Armored): Increased Sensor Range Multiplier",
+        "Details": "Increased Sight/Sensors/Health.",
+        "Icon": "uixSvgIcon_equipment_Comms"
+      },
+      "statisticData": {
+        "statName": "SensorDistanceMultiplier",
+        "operation": "Float_Multiply",
+        "modValue": "1.15",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "AdvancedProbeSight",
+        "Name": "Nova CEWS (C) (Armored): Increased Vision Range Multiplier",
+        "Details": "Increases spotting distance by 50m.",
+        "Icon": "uixSvgIcon_equipment_Comms"
+      },
+      "statisticData": {
+        "statName": "SpotterDistanceMultiplier",
+        "operation": "Float_Multiply",
+        "modValue": "1.15",
+        "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "ECMPassiveShield",
+        "Name": "Nova CEWS (C) (Armored): Increased ECM Shield",
+        "Details": "Passive ECM Protection",
+        "Icon": "uixSvgIcon_equipment_Gyro"
+      },
+      "statisticData": {
+        "statName": "LV_ECM_SHIELD",
+        "operation": "Int_Add",
+        "modValue": "1",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "ECMPassiveJam",
+        "Name": "Nova CEWS (C) (Armored): Decreased ECM Jamming",
+        "Details": "Passive Jamming Protection",
+        "Icon": "uixSvgIcon_equipment_Gyro"
+      },
+      "statisticData": {
+        "statName": "LV_ECM_JAMMED",
+        "operation": "Int_Add",
+        "modValue": "-1",
+        "modType": "System.Int32"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "forceVisRebuild": true,
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "LV_Shares_Vision",
+        "Name": "Nova CEWS (C) (Armored): Shared Vision",
+        "Details": "Shows their vision when lancemates move",
+        "Icon": "uixSvgIcon_status_ECM-ghost"
+      },
+      "statisticData": {
+        "statName": "LV_SHARES_VISION",
+        "operation": "Set",
+        "modValue": "true",
+        "modType": "System.Boolean"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Debuff",
+      "Description": {
+        "Id": "Nova CEWS Heat",
+        "Name": "Nova CEWS (C) (Armored): Decreased Cooling",
+        "Details": "Heat Capacity Penalty",
+        "Icon": "uixSvgIcon_equipment_ThermalExchanger"
+      },
+      "statisticData": {
+        "statName": "HeatSinkCapacity",
+        "operation": "Int_Add",
+        "modValue": "-6",
+        "modType": "System.Int32"
+      }
+    }
+  ],
+  "ComponentTags": {
+    "items": [
+      "C3Nova",
+      "component_type_stock",
+      "LootMagnetBlacklist",
+      "ElectronicCounterMeasures",
+      "SquadIncompatible"
+    ]
+  }
+}
