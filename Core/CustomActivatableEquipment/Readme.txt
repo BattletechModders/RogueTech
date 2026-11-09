@@ -8,20 +8,39 @@ to invoke heat sinks manipulation dialog ctrl+click on brace (shield) button in 
    
 AI can activate component if it have correct tags
 AI related tags:
-	cae_ai_offence - component provides damage and/or accuracy boost
+    cae_ai_offence - component provides damage and/or accuracy boost
     cae_ai_defence - component provides defense boost
     cae_ai_explode - component can explode and damage other components in location and/or inner structure
     cae_ai_heat - component have negative impact on heat dissipation
     cae_ai_cool - component have positive impact on heat dissipation
+    cae_ai_overheat_protection - component that causes heat to be turned off when close to limit
     cae_ai_speed - component increase speed
     cae_ai_sensors - component increase sensors range
+    cae_ai_ecm - component switches an ECM between active and passive
+    cae_ai_stability - component trades mobility for stability
+    cae_ai_siege - component that roots the unit for better firing performance
+    cae_ai_always - component that is better on in every situation, the AI switches it on and keeps it on
+  - Every component with one of the purpose tags above is handled by the AI. It is switched on when its score reaches AIScoreOn and off when it falls below AIScoreOff.
+  - cae_ai_heat and cae_ai_explode only adjust the decision, they need a purpose tag to define the item.
+  - Components without a purpose tag are ignored, except components with InjuryOnFail: those are switched off when active and the pilot can't afford the injury. Squads are exempt, CAE never injures squad pilots.
+  - A component the AI switched on or off at round start keeps that state until the next round start in most cases.
+  - Components with charges are only used at round start. Their effects mostly last until the end of the next activation, and at activation end they would expire before doing anything.
 AI related mod settings
-	"AIComponentUsefullModifyer":0.2 - if value if greater AI will less fair to activate potentially useful components which can make significant damage to himself on fail
-	"AIComponentExtreamlyUsefulModifyer":0.4, - if value if greater AI will less fair to activate potentially very useful components which can make significant damage to himself on fail
+	"AIScoreOn":0.3, - score at which the AI switches a component on
+	"AIScoreOff":0.15, - score below which the AI switches an active component off
+	"AIScoreMaxRisk":0.6, - fail chance allowed for a dangerous component before switching it off
+	"AILastChanceBonus":0.2, - score bonus at round start for components that can't be switched after move or fire, otherwise the AI often skips it every turn
+	"AIHotPenalty":0.2, - score penalty for cae_ai_heat components while the unit is hot
+	"AIOverheatProtectionOffHeat":0.9, - overheat level above which cae_ai_overheat_protection components are switched off
+	"AIOverheatProtectionOnHeat":0.5, - overheat level below which cae_ai_overheat_protection components are switched on again
+	"AINoSensorsModifierId":"ATTACK_NO_SENSORS", - CustomAmmoCategories to-hit modifier read for the cae_ai_sensors scoring (LowVis no sensors penalty)
+	"AIEcmJammedStat":"LV_ECM_JAMMED", - unit statistic read as "jammed" for cae_ai_ecm
+	"AIStabilityRatio":0.7, - stability ratio at which cae_ai_stability components are activated
+	"AIActivatableCheating":0.8, - chance per evaluation that the AI test-rolls a component's next fail roll in advance and avoids the failure
 	"AIOffenceUsefullCoeff":0.1, - if value if lesser AI will count cae_ai_offence more useful
 	"AIDefenceUsefullCoeff":0.2, - if value if lesser AI will count cae_ai_defence more useful
-	"AIHeatCoeffCoeff":0.9, - if value if greater AI will count cae_ai_cool less useful and cae_ai_heat less dangerous
-	"AIOverheatCoeffCoeff":0.8 - if value if greater AI will count cae_ai_cool less useful and cae_ai_heat less dangerous
+	"AIHeatCoeff":0.9, - if value if greater AI will count cae_ai_cool less useful and cae_ai_heat less dangerous
+	"AIOverheatCoeff":0.8 - if value if greater AI will count cae_ai_cool less useful and cae_ai_heat less dangerous
   "ToolTipWarningFailChance": 0.2, - if component can be activated manually, active and have fail chance grater than this value it will be shown in tooltip with orange color
   "ToolTipAlertFailChance": 0.4, - if component can be activated manually, active and have fail chance grater than this value it will be shown in tooltip with red color
                                    NOTE! Component will not be show in same turn it has been activated no matter fail chance, cause it will not suffer fail roll only this turn.
@@ -359,8 +378,7 @@ WeaponAddonDef example
 			  "Damage":3000, - AoE damage linear decrease by distance between source and target
 			  "Heat":100, - Heat damage. If target is not mech this value will be added to Damage in calcualtion
 			  "Stability":100, - Stability damage. If target is not mech this value is ommited
-			  "Chance":0.6, - Chance of explosion if commited. 
-												NOTE from bwaa: the actual chance appears to be 1/3 of this value for some reason, so "Chance": 0.03 = 1%.
+			  "Chance":0.6, - Chance of explosion if commited
 			  "ExplosionMessage" : "", - floatie message on explosion commit
 			  "VFX":"WFX_Nuke" - additional VFX on explosion 
 				"VFXScaleX":1, - VFX scale
@@ -560,7 +578,7 @@ WeaponAddonDef example
 				}
 			},
       "Linkage":{ - linked components info
-        "OnActivate":{  Â§
+        "OnActivate":{  
           "Activate":[],
           "Deactivate":["ECM"] - array of ButtonName's 
         },
@@ -848,7 +866,7 @@ COMPOPNENT
           "Description": {
             "Id": "ECMStealth_GhostEffect_Allies",
             "Name": "STEALTH CHARGE",
-            "Details": "Units within an ECM field gain a Stealth Chargeï¿½and cannot be targeted.\n\nFiring a weapon, using an activated ability, or an enemy penetrating the ECM field removes a Stealth Charge. Being Sensor Locked removes all Stealth Charges.",
+            "Details": "Units within an ECM field gain a Stealth Charge and cannot be targeted.\n\nFiring a weapon, using an activated ability, or an enemy penetrating the ECM field removes a Stealth Charge. Being Sensor Locked removes all Stealth Charges.",
             "Icon": "uixSvgIcon_status_ECM-ghost"
           },
           "statisticData": {
