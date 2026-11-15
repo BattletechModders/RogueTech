@@ -1,0 +1,622 @@
+{
+    "Description": {
+        "Id": "forceevent_co_LutefiskLauncher_2_4x6",
+        "Name": "Fishing for Lutefisk",
+        "Details": "You stumble across [[SCN_MW,{SCN_MW.Callsign}]] in the machine shop aboard the <i>Argo</i>. Spread across several workbenches are mortar components, cabling, control assemblies, and a collection of tools. {SCN_MW.Callsign} is studying the parts with an expression of intense concentration.\r\n\r\nYou look over the components. \"I assume this has something to do with the Lutefisk Launcher.\"\r\n\r\n{SCN_MW.Callsign} looks up and smiles.\r\n\r\n\"Indeed, Commander. I finally have a workable design.\" {SCN_MW.Subj_C} gestures toward the components. \"I need enough mortar launchers to give me 25 tubes.  So for example, one Mortar 2, six Mortar 4s, and an FCS Scatter to link it together.  I'll also need an FCS Calibrator, which we can hire from [[TGT_SYSTEM,{TGT_SYSTEM.Name}]]. With those components, I can assemble the twenty-five-tube launcher I've been planning.\"\r\n\r\nYou look at the growing pile of equipment. \"And how much is this going to cost us?\"\r\n\r\n{SCN_MW.Callsign} hesitates. \"Should be less than three million C-Bills, once we account for the parts, fabrication, modifications, and everything else required to put it together properly.\"\r\n\r\nYou sigh. \"And the catch?\"\r\n\r\n{SCN_MW.Callsign} gestures toward the machine shop. \"I will need to supervise the construction myself. That means I'll be out of the combat rotation for approximately four weeks. The additional work will also take some of the <i>Argo</i>'s AsTech staff away from their normal duties, reducing the <i>Argo</i>'s efficiency during the construction period.\"\r\n\r\nYou look over the components again.\r\n\r\nOne Mortar 2.\r\n\r\nSix Mortar 4s.\r\n\r\nOne FCS Scatter.\r\n\r\nTwo million C-Bills.\r\n\r\nFour weeks of {SCN_MW.Callsign} being unavailable for combat and reduced AsTech efficiency aboard the <i>Argo</i>.\r\n\r\n{SCN_MW.Callsign} waits patiently for your response. \"So, Commander. Shall we build the Lutefisk Launcher?\"",
+        "Icon": "uixTxrSpot_JarlWorkshop.png"
+    },
+    "Scope": "Company",
+    "Weight": 10,
+    "Requirements": {
+        "Scope": "Company",
+        "RequirementTags": {
+            "items": [],
+            "tagSetSourceFile": ""
+        },
+        "ExclusionTags": {
+            "items": [],
+            "tagSetSourceFile": "Tags/CompanyTags"
+        }
+    },
+    "AdditionalRequirements": [],
+    "AdditionalObjects": [
+        {
+            "Scope": "SecondaryMechWarrior",
+            "Requirements": {
+                "Scope": "SecondaryMechWarrior",
+                "RequirementTags": {
+                    "items": [
+                        "name_Jarl"
+                    ],
+                    "tagSetSourceFile": ""
+                },
+                "ExclusionTags": {
+                    "items": [
+                        "pilot_unavailable"
+                    ],
+                    "tagSetSourceFile": ""
+                },
+                "RequirementComparisons": [
+                    {
+                        "obj": "Injuries",
+                        "op": "Equal",
+                        "val": 0,
+                        "valueConstant": "0"
+                    }
+                ]
+            }
+        }
+    ],
+    "Options": [
+        {
+            "Description": {
+                "Id": "outcome_0",
+                "Name": "Delay {SCN_MW.Det} project",
+                "Details": "Non-participation option",
+                "Icon": ""
+            },
+            "RequirementList": [],
+            "ResultSets": [
+                {
+                    "Description": {
+                        "Id": "outcome_0_0",
+                        "Name": "Nothing happens",
+                        "Details": "You look over the components one more time before shaking your head. \"Not yet, {SCN_MW.Callsign}. Three million C-Bills is more than we can justify right now. I also need you available for active duty, and we can't afford to reduce the <i>Argo</i>'s AsTech efficiency for four weeks.  Let's revisit this in a few months.\"\r\n\r\n{SCN_MW.Callsign}'s expression falls, but {SCN_MW.Subj} nods. \"Understood, Commander. The launcher can wait.\" {SCN_MW.Subj_C} begins gathering the components and returning them to storage.\r\n\r\n\"When the time is right, we'll build it properly.\"",
+                        "Icon": ""
+                    },
+                    "Weight": 100,
+                    "Results": [
+                        {
+                            "Scope": "Company",
+                            "AddedTags": {
+                                "items": [
+                                    "event_Lutefisk_Assembly_Delay"
+                                ],
+                                "tagSetSourceFile": "Tags/CompanyTags"
+                            },
+                            "RemovedTags": {
+                                "items": [],
+                                "tagSetSourceFile": ""
+                            },
+                            "TemporaryResult": true,
+                            "ResultDuration": 90
+                        },
+                        {
+                            "Scope": "Company",
+                            "AddedTags": {
+                                "items": [],
+                                "tagSetSourceFile": "Tags/CompanyTags"
+                            },
+                            "RemovedTags": {
+                                "items": [],
+                                "tagSetSourceFile": ""
+                            },
+                            "Stats": [
+                                {
+                                    "typeString": "System.Int32",
+                                    "name": "Item.UpgradeDef.Gear_LutefiskLauncher_Mortar4_Calibrator",
+                                    "value": "-1",
+                                    "set": false
+                                }
+                            ],
+                            "TemporaryResult": false,
+                            "ResultDuration": 0
+                        }
+                    ]
+                }
+            ],
+            "Requirements": {
+                "Scope": "Company",
+                "RequirementTags": {
+                    "items": [],
+                    "tagSetSourceFile": ""
+                },
+                "ExclusionTags": {
+                    "items": [],
+                    "tagSetSourceFile": ""
+                }
+            }
+        },
+        {
+            "Description": {
+                "Id": "outcome_1",
+                "Name": "Let {SCN_MW.Obj} build a Lutefisk Launcher.",
+                "Details": "[Use 6x Mortar 4, 1x Mortar 2, 1x FCS Scatter]",
+                "Icon": ""
+            },
+            "RequirementList": [
+                {
+                    "Scope": "Company",
+                    "RequirementTags": {
+                        "items": [],
+                        "tagSetSourceFile": "Tags/PilotTags"
+                    },
+                    "ExclusionTags": {
+                        "items": [],
+                        "tagSetSourceFile": ""
+                    },
+                    "RequirementComparisons": [
+                        {
+                            "obj": "Item.WeaponDef.Weapon_Mortar_2",
+                            "op": "GreaterThanOrEqual",
+                            "val": 1,
+                            "valueConstant": "1"
+                        },
+                        {
+                            "obj": "Item.WeaponDef.Weapon_Mortar_4",
+                            "op": "GreaterThanOrEqual",
+                            "val": 6,
+                            "valueConstant": "6"
+                        },
+                        {
+                            "obj": "Item.UpgradeDef.Gear_FCS_Scatter",
+                            "op": "GreaterThanOrEqual",
+                            "val": 1,
+                            "valueConstant": "1"
+                        },
+                        {
+                            "obj": "Item.UpgradeDef.Gear_LutefiskLauncher_Mortar4_Calibrator",
+                            "op": "GreaterThanOrEqual",
+                            "val": 1,
+                            "valueConstant": "1"
+                        },
+                        {
+                            "obj": "Funds",
+                            "op": "GreaterThan",
+                            "val": 2000000,
+                            "valueConstant": "2000000"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets": [
+                {
+                    "Description": {
+                        "Id": "outcome_1_0",
+                        "Name": "Work in Progress",
+                        "Details": "You look over the components before making your decision. \"Build it, [[SCN_MW,{SCN_MW.Callsign}]]. One Mortar 2, six Mortar 4s, and the FCS Scatter.\"\r\n\r\n{SCN_MW.Callsign}'s face breaks into a broad grin. \"Excellent, Commander! I'll begin immediately.\"\r\n\r\nYou authorize the ¢2,000,000 C-Bill expenditure and accept that {SCN_MW.Callsign} will be removed from combat rotation while the project is completed.\r\n\r\nThe machine shop comes alive as {SCN_MW.Callsign} begins laying out the components for the twenty-five-tube launcher. The <i>Argo</i>'s AsTech efficiency will be reduced for the next four weeks, but at the end of it, {SCN_MW.Callsign} should have {SCN_MW.Det} [[DM.WeaponDefs[Unique_Weapon_Mortar_Lutefisk],{DM.WeaponDefs[Unique_Weapon_Mortar_Lutefisk].Description.Manufacturer} {DM.WeaponDefs[Unique_Weapon_Mortar_Lutefisk].Description.Model}]].\"\r\n\r\n<color=#33bbee><b>Check a refreshed system shop to buy an <i>INSPECTION CERTIFICATE</i> after 28 days has passed to complete Jarl's Launcher Project after Jarl loses the <i>TINKERING</i> tag.</b></color>",
+                        "Icon": ""
+                    },
+                    "Weight": 100,
+                    "Results": [
+                        {
+                            "Scope": "Company",
+                            "AddedTags": {
+                                "items": [
+                                    "event_Lutefisk_Assembly_WIP"
+                                ],
+                                "tagSetSourceFile": ""
+                            },
+                            "RemovedTags": {
+                                "items": [],
+                                "tagSetSourceFile": ""
+                            },
+                            "Stats": [
+                                {
+                                    "typeString": "System.Int32",
+                                    "name": "Item.WeaponDef.Weapon_Mortar_2",
+                                    "value": "-1",
+                                    "set": false
+                                },
+                                {
+                                    "typeString": "System.Int32",
+                                    "name": "Item.WeaponDef.Weapon_Mortar_4",
+                                    "value": "-6",
+                                    "set": false
+                                },
+                                {
+                                    "typeString": "System.Int32",
+                                    "name": "Item.UpgradeDef.Gear_FCS_Scatter",
+                                    "value": "-1",
+                                    "set": false
+                                },
+                                {
+                                    "typeString": "System.Int32",
+                                    "name": "Funds",
+                                    "value": "-2000000",
+                                    "set": false
+                                }
+                            ],
+                            "ForceEvents": [],
+                            "TemporaryResult": false,
+                            "ResultDuration": 0
+                        },
+                        {
+                            "Scope": "Company",
+                            "AddedTags": {
+                                "items": [
+                                    "event_Lutefisk_Assembly_Delay"
+                                ],
+                                "tagSetSourceFile": "Tags/CompanyTags"
+                            },
+                            "RemovedTags": {
+                                "items": [
+                                    "LutefiskLauncher_Shop"
+                                ],
+                                "tagSetSourceFile": ""
+                            },
+                            "TemporaryResult": true,
+                            "ResultDuration": 28
+                        },
+                        {
+                            "Scope": "SecondaryMechWarrior",
+                            "AddedTags": {
+                                "items": [
+                                    "pilot_unavailable"
+                                ],
+                                "tagSetSourceFile": "Tags/CompanyTags"
+                            },
+                            "RemovedTags": {
+                                "items": [],
+                                "tagSetSourceFile": ""
+                            },
+                            "TemporaryResult": false,
+                            "ResultDuration": 0
+                        },
+                        {
+                            "Scope": "SecondaryMechWarrior",
+                            "AddedTags": {
+                                "items": [
+                                    "pilot_pilottinkering"
+                                ],
+                                "tagSetSourceFile": "Tags/CompanyTags"
+                            },
+                            "RemovedTags": {
+                                "items": [],
+                                "tagSetSourceFile": ""
+                            },
+                            "TemporaryResult": false,
+                            "ResultDuration": 28
+                        }
+                    ]
+                }
+            ],
+            "Requirements": {
+                "Scope": "Company",
+                "RequirementTags": {
+                    "items": [],
+                    "tagSetSourceFile": ""
+                },
+                "ExclusionTags": {
+                    "items": [],
+                    "tagSetSourceFile": ""
+                }
+            }
+        },
+        {
+            "Description": {
+                "Id": "outcome_2",
+                "Name": "Let {SCN_MW.Obj} build a Lutefisk Launcher.",
+                "Details": "[Use 4x Mortar 6, 1x Mortar 2, 1x FCS Scatter]",
+                "Icon": ""
+            },
+            "RequirementList": [
+                {
+                    "Scope": "Company",
+                    "RequirementTags": {
+                        "items": [],
+                        "tagSetSourceFile": "Tags/PilotTags"
+                    },
+                    "ExclusionTags": {
+                        "items": [],
+                        "tagSetSourceFile": ""
+                    },
+                    "RequirementComparisons": [
+                        {
+                            "obj": "Item.WeaponDef.Weapon_Mortar_2",
+                            "op": "GreaterThanOrEqual",
+                            "val": 1,
+                            "valueConstant": "1"
+                        },
+                        {
+                            "obj": "Item.WeaponDef.Weapon_Mortar_6",
+                            "op": "GreaterThanOrEqual",
+                            "val": 4,
+                            "valueConstant": "4"
+                        },
+                        {
+                            "obj": "Item.UpgradeDef.Gear_FCS_Scatter",
+                            "op": "GreaterThanOrEqual",
+                            "val": 1,
+                            "valueConstant": "1"
+                        },
+                        {
+                            "obj": "Item.UpgradeDef.Gear_LutefiskLauncher_Mortar6_Calibrator",
+                            "op": "GreaterThanOrEqual",
+                            "val": 1,
+                            "valueConstant": "1"
+                        },
+                        {
+                            "obj": "Funds",
+                            "op": "GreaterThan",
+                            "val": 2500000,
+                            "valueConstant": "2500000"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets": [
+                {
+                    "Description": {
+                        "Id": "outcome_2_0",
+                        "Name": "Work in Progress",
+                        "Details": "You study the available mortar components. \"Build it, [[SCN_MW,{SCN_MW.Callsign}]]. But use the Mortar 2, four Mortar 6s, and the FCS Scatter.\"\r\n\r\n{SCN_MW.Callsign} considers the arrangement for a moment before nodding.\r\n\r\n\"That configuration should work. The larger mortar assemblies will require some additional fabrication, but I can adapt them to the launcher design.\"\r\n\r\nYou authorize the approximately ¢2,500,000 C-Bill expenditure and accept the four-week disruption to {SCN_MW.Callsign}'s combat availability and the <i>Argo</i>'s AsTech efficiency.\r\n\r\n{SCN_MW.Callsign} immediately begins arranging the components, already planning how to integrate the four Mortar 6s into {SCN_MW.Det} [[DM.WeaponDefs[Unique_Weapon_Mortar_Lutefisk],{DM.WeaponDefs[Unique_Weapon_Mortar_Lutefisk].Description.Manufacturer} {DM.WeaponDefs[Unique_Weapon_Mortar_Lutefisk].Description.Model}]].\r\n\r\n<color=#33bbee><b>Check a refreshed system shop to buy an <i>INSPECTION CERTIFICATE</i> after 28 days has passed to complete Jarl's Launcher Project after Jarl loses the <i>TINKERING</i> tag.</b></color>",
+                        "Icon": ""
+                    },
+                    "Weight": 100,
+                    "Results": [
+                        {
+                            "Scope": "Company",
+                            "AddedTags": {
+                                "items": [
+                                    "event_Lutefisk_Assembly_WIP"
+                                ],
+                                "tagSetSourceFile": ""
+                            },
+                            "RemovedTags": {
+                                "items": [],
+                                "tagSetSourceFile": ""
+                            },
+                            "Stats": [
+                                {
+                                    "typeString": "System.Int32",
+                                    "name": "Item.WeaponDef.Weapon_Mortar_2",
+                                    "value": "-1",
+                                    "set": false
+                                },
+                                {
+                                    "typeString": "System.Int32",
+                                    "name": "Item.WeaponDef.Weapon_Mortar_6",
+                                    "value": "-4",
+                                    "set": false
+                                },
+                                {
+                                    "typeString": "System.Int32",
+                                    "name": "Item.UpgradeDef.Gear_FCS_Scatter",
+                                    "value": "-1",
+                                    "set": false
+                                },
+                                {
+                                    "typeString": "System.Int32",
+                                    "name": "Funds",
+                                    "value": "-2500000",
+                                    "set": false
+                                }
+                            ],
+                            "ForceEvents": [],
+                            "TemporaryResult": false,
+                            "ResultDuration": 0
+                        },
+                        {
+                            "Scope": "Company",
+                            "AddedTags": {
+                                "items": [
+                                    "event_Lutefisk_Assembly_Delay"
+                                ],
+                                "tagSetSourceFile": "Tags/CompanyTags"
+                            },
+                            "RemovedTags": {
+                                "items": [
+                                    "LutefiskLauncher_Shop"
+                                ],
+                                "tagSetSourceFile": ""
+                            },
+                            "TemporaryResult": true,
+                            "ResultDuration": 28
+                        },
+                        {
+                            "Scope": "SecondaryMechWarrior",
+                            "AddedTags": {
+                                "items": [
+                                    "pilot_unavailable"
+                                ],
+                                "tagSetSourceFile": "Tags/CompanyTags"
+                            },
+                            "RemovedTags": {
+                                "items": [],
+                                "tagSetSourceFile": ""
+                            },
+                            "TemporaryResult": false,
+                            "ResultDuration": 0
+                        },
+                        {
+                            "Scope": "SecondaryMechWarrior",
+                            "AddedTags": {
+                                "items": [
+                                    "pilot_pilottinkering"
+                                ],
+                                "tagSetSourceFile": "Tags/CompanyTags"
+                            },
+                            "RemovedTags": {
+                                "items": [],
+                                "tagSetSourceFile": ""
+                            },
+                            "TemporaryResult": false,
+                            "ResultDuration": 28
+                        }
+                    ]
+                }
+            ],
+            "Requirements": {
+                "Scope": "Company",
+                "RequirementTags": {
+                    "items": [],
+                    "tagSetSourceFile": ""
+                },
+                "ExclusionTags": {
+                    "items": [],
+                    "tagSetSourceFile": ""
+                }
+            }
+        },
+        {
+            "Description": {
+                "Id": "outcome_3",
+                "Name": "Let {SCN_MW.Obj} build a Lutefisk Launcher.",
+                "Details": "[Use 3x Mortar 8, 1x Mortar 2, 1x FCS Scatter]",
+                "Icon": ""
+            },
+            "RequirementList": [
+                {
+                    "Scope": "Company",
+                    "RequirementTags": {
+                        "items": [],
+                        "tagSetSourceFile": "Tags/PilotTags"
+                    },
+                    "ExclusionTags": {
+                        "items": [],
+                        "tagSetSourceFile": ""
+                    },
+                    "RequirementComparisons": [
+                        {
+                            "obj": "Item.WeaponDef.Weapon_Mortar_2",
+                            "op": "GreaterThanOrEqual",
+                            "val": 1,
+                            "valueConstant": "1"
+                        },
+                        {
+                            "obj": "Item.WeaponDef.Weapon_Mortar_8",
+                            "op": "GreaterThanOrEqual",
+                            "val": 3,
+                            "valueConstant": "3"
+                        },
+                        {
+                            "obj": "Item.UpgradeDef.Gear_FCS_Scatter",
+                            "op": "GreaterThanOrEqual",
+                            "val": 1,
+                            "valueConstant": "1"
+                        },
+                        {
+                            "obj": "Item.UpgradeDef.Gear_LutefiskLauncher_Mortar8_Calibrator",
+                            "op": "GreaterThanOrEqual",
+                            "val": 1,
+                            "valueConstant": "1"
+                        },
+                        {
+                            "obj": "Funds",
+                            "op": "GreaterThan",
+                            "val": 3000000,
+                            "valueConstant": "3000000"
+                        }
+                    ]
+                }
+            ],
+            "ResultSets": [
+                {
+                    "Description": {
+                        "Id": "outcome_3_0",
+                        "Name": "Work in Progress",
+                        "Details": "You look over the largest mortar components available.\r\n\r\n\"Build it, [[SCN_MW,{SCN_MW.Callsign}]]. Go ahead and use the Mortar 2, three Mortar 8s, and the FCS Scatter.\"\r\n\r\n{SCN_MW.Callsign} stares at the components for several seconds before a slow grin spreads across {SCN_MW.Det} face.\r\n\r\n\"That is an ambitious configuration, Commander. I like it.\"\r\n\r\nYou authorize the ¢3,000,000 C-Bill expenditure and accept that {SCN_MW.Callsign} will be out of combat rotation while the project is completed, with the <i>Argo</i>'s AsTech efficiency reduced for four weeks.\r\n\r\n{SCN_MW.Callsign} begins examining the three Mortar 8s, already considering how to integrate them into the launcher.\r\n\r\n\"[[DM.WeaponDefs[Unique_Weapon_Mortar_Lutefisk],{DM.WeaponDefs[Unique_Weapon_Mortar_Lutefisk].Description.Manufacturer} {DM.WeaponDefs[Unique_Weapon_Mortar_Lutefisk].Description.Model}]]... twenty-five tubes, Commander. With this configuration, we will have created something very impressive.\"\r\n\r\n<color=#33bbee><b>Check a refreshed system shop to buy an <i>INSPECTION CERTIFICATE</i> after 28 days has passed to complete Jarl's Launcher Project after Jarl loses the <i>TINKERING</i> tag.</b></color>",
+                        "Icon": ""
+                    },
+                    "Weight": 100,
+                    "Results": [
+                        {
+                            "Scope": "Company",
+                            "AddedTags": {
+                                "items": [
+                                    "event_Lutefisk_Assembly_WIP"
+                                ],
+                                "tagSetSourceFile": ""
+                            },
+                            "RemovedTags": {
+                                "items": [],
+                                "tagSetSourceFile": ""
+                            },
+                            "Stats": [
+                                {
+                                    "typeString": "System.Int32",
+                                    "name": "Item.WeaponDef.Weapon_Mortar_2",
+                                    "value": "-1",
+                                    "set": false
+                                },
+                                {
+                                    "typeString": "System.Int32",
+                                    "name": "Item.WeaponDef.Weapon_Mortar_8",
+                                    "value": "-3",
+                                    "set": false
+                                },
+                                {
+                                    "typeString": "System.Int32",
+                                    "name": "Item.UpgradeDef.Gear_FCS_Scatter",
+                                    "value": "-1",
+                                    "set": false
+                                },
+                                {
+                                    "typeString": "System.Int32",
+                                    "name": "Funds",
+                                    "value": "-3000000",
+                                    "set": false
+                                }
+                            ],
+                            "ForceEvents": [],
+                            "TemporaryResult": false,
+                            "ResultDuration": 0
+                        },
+                        {
+                            "Scope": "Company",
+                            "AddedTags": {
+                                "items": [
+                                    "event_Lutefisk_Assembly_Delay"
+                                ],
+                                "tagSetSourceFile": "Tags/CompanyTags"
+                            },
+                            "RemovedTags": {
+                                "items": [
+                                    "LutefiskLauncher_Shop"
+                                ],
+                                "tagSetSourceFile": ""
+                            },
+                            "TemporaryResult": true,
+                            "ResultDuration": 28
+                        },
+                        {
+                            "Scope": "SecondaryMechWarrior",
+                            "AddedTags": {
+                                "items": [
+                                    "pilot_unavailable"
+                                ],
+                                "tagSetSourceFile": "Tags/CompanyTags"
+                            },
+                            "RemovedTags": {
+                                "items": [],
+                                "tagSetSourceFile": ""
+                            },
+                            "TemporaryResult": false,
+                            "ResultDuration": 0
+                        },
+                        {
+                            "Scope": "SecondaryMechWarrior",
+                            "AddedTags": {
+                                "items": [
+                                    "pilot_pilottinkering"
+                                ],
+                                "tagSetSourceFile": "Tags/CompanyTags"
+                            },
+                            "RemovedTags": {
+                                "items": [],
+                                "tagSetSourceFile": ""
+                            },
+                            "TemporaryResult": false,
+                            "ResultDuration": 28
+                        }
+                    ]
+                }
+            ],
+            "Requirements": {
+                "Scope": "Company",
+                "RequirementTags": {
+                    "items": [],
+                    "tagSetSourceFile": ""
+                },
+                "ExclusionTags": {
+                    "items": [],
+                    "tagSetSourceFile": ""
+                }
+            }
+        }
+    ],
+    "PublishState": "PUBLISHED",
+    "ValidationState": "UNTESTED",
+    "EventType": "NORMAL"
+}
