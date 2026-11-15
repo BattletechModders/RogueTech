@@ -17,6 +17,27 @@
         "CategoryID": "HandHeldAlwaysArmMelee"
       }
     ],
+    "CriticalEffects": {
+      "PenalizedEffectIDs": [
+        [
+          "ComponentEffects-{uid}-AccuracyPenalty",
+          "ComponentEffects-{uid}-DamagePenalty",
+          "ComponentEffects-{uid}-MeleeDamagePenalty",
+          "ComponentEffects-{uid}-MeleeInstabilityPenalty",
+          "ComponentEffects-{uid}-MeleeAccuracyPenalty"
+        ],
+        [
+          "ComponentEffects-{uid}-AccuracyPenalty2",
+          "ComponentEffects-{uid}-DamagePenalty2",
+          "ComponentEffects-{uid}-MeleeDamagePenalty2",
+          "ComponentEffects-{uid}-MeleeInstabilityPenalty2",
+          "ComponentEffects-{uid}-MeleeAccuracyPenalty2"
+        ]
+      ],
+      "OnDestroyedEffectIDs": [
+        "CriticalEffect-ArmHandActuatorDestroyed-{location}"
+      ]
+    },
     "BonusDescriptions": [
       "IndustrialWeapon",
       "ReplacesActuators: Hand",
@@ -34,8 +55,6 @@
       "not_broken"
     ],
     "ActivatableComponent": {
-      "CanNotBeActivatedManualy": true,
-      "NoUniqueCheck": true,
       "presistantVFX": {
         "VFXPrefab": "vfxPrfPrtl_miningSmokePlume_sm_loop",
         "VFXScaleX": 0.4,
@@ -58,7 +77,6 @@
     1
   ],
   "AmmoCategory": "NotSet",
-  "StartingAmmoCapacity": 0,
   "HeatGenerated": 0,
   "Damage": 5,
   "HeatDamage": 0,
@@ -67,24 +85,18 @@
   "AccuracyModifier": 1,
   "EvasivePipsIgnored": 0,
   "RefireModifier": 0,
-  "OverheatedDamageMultiplier": 0,
-  "EvasiveDamageMultiplier": 0,
   "CriticalChanceMultiplier": 1,
   "APArmorShardsMod": 4,
   "APCriticalChanceMultiplier": 0.05,
-  "AOECapable": false,
   "ShotsWhenFired": 5,
   "ProjectilesPerShot": 1,
   "CantHitUnaffecedByPathing": true,
   "IndirectFireCapable": false,
   "GunneryJammingMult": 0.005,
   "GunneryJammingBase": 1,
-  "AttackRecoil": 0,
   "WeaponEffectID": "WeaponEffect-Weapon_MachineGun",
   "Description": {
     "Cost": 100000,
-    "Rarity": 2,
-    "Purchasable": true,
     "Manufacturer": "Dwayne Industries",
     "Model": "ROC/8",
     "UIName": "Rock Cutter",
@@ -93,17 +105,12 @@
     "Details": "Rock-cutters, used in mining and demolition, feature tempered alloy chains studded with diamond-hard cutting heads, resembling an oversized chainsaw. Built to cut through rock and ferrocrete, it generates notable heat from its motors. Though capable of harming armored units, its bulk makes it clumsy to wield, so it rarely appears in combat outside Solaris circuits.",
     "Icon": "uixSvgIcon_weapon_Support"
   },
-  "BonusValueA": "",
-  "BonusValueB": "",
   "ComponentType": "Weapon",
   "ComponentSubType": "Weapon",
   "PrefabIdentifier": "chainsaw",
-  "BattleValue": 7,
   "InventorySize": 5,
   "Tonnage": 5,
   "AllowedLocations": "Arms",
-  "DisallowedLocations": "All",
-  "CriticalComponent": false,
   "statusEffects": [
     {
       "durationData": {
@@ -129,6 +136,32 @@
         "operation": "Float_Add",
         "modValue": "0.5",
         "modType": "System.Single"
+      }
+    },
+    {
+      "durationData": {
+        "duration": -1,
+        "stackLimit": -1
+      },
+      "targetingData": {
+        "effectTriggerType": "Passive",
+        "effectTargetType": "Creator",
+        "showInTargetPreview": false,
+        "showInStatusPanel": false
+      },
+      "effectType": "StatisticEffect",
+      "nature": "Buff",
+      "Description": {
+        "Id": "MeleeAccuracy_Mace",
+        "Name": "Rock Cutter: Reduced Physical Weapon Hit Chance",
+        "Details": "MeleeWeapon Accuracy Modifier",
+        "Icon": "uixSvgIcon_run_n_gun"
+      },
+      "statisticData": {
+        "statName": "CBTBE_Physical_Weapon_Attack_Mod",
+        "operation": "Int_Add",
+        "modValue": "1",
+        "modType": "System.Int32"
       }
     },
     {
@@ -244,7 +277,6 @@
       "component_type_stock",
       "range_close",
       "BAIncompatible"
-    ],
-    "tagSetSourceFile": ""
+    ]
   }
 }
