@@ -17,6 +17,51 @@
         "CategoryID": "CritsArtillery6"
       }
     ],
+    "CriticalEffects": {
+      "PenalizedEffectIDs": [
+        [
+          "ComponentEffects-{uid}-AddMinRangePenalty3",
+          "ComponentEffects-{uid}-MinRangePenalty",
+          "ComponentEffects-{uid}-ShortRangePenalty",
+          "ComponentEffects-{uid}-MedRangePenalty",
+          "ComponentEffects-{uid}-LongRangePenalty",
+          "ComponentEffects-{uid}-MaxRangePenalty",
+          "ComponentEffects-{uid}-RecoilPenalty",
+          "ComponentEffects-{uid}-AccuracyPenalty",
+          "ComponentEffects-{uid}-FlatJamChancePenalty"
+        ],
+        [
+          "ComponentEffects-{uid}-AddMinRangePenalty4",
+          "ComponentEffects-{uid}-MinRangePenalty3",
+          "ComponentEffects-{uid}-ShortRangePenalty3",
+          "ComponentEffects-{uid}-MedRangePenalty3",
+          "ComponentEffects-{uid}-LongRangePenalty3",
+          "ComponentEffects-{uid}-MaxRangePenalty3",
+          "ComponentEffects-{uid}-RecoilPenalty2",
+          "ComponentEffects-{uid}-AccuracyPenalty2",
+          "ComponentEffects-{uid}-FlatJamChancePenalty2"
+        ],
+        [
+          "ComponentEffects-{uid}-AddMinRangePenalty5",
+          "ComponentEffects-{uid}-MinRangePenalty5",
+          "ComponentEffects-{uid}-ShortRangePenalty5",
+          "ComponentEffects-{uid}-MedRangePenalty5",
+          "ComponentEffects-{uid}-LongRangePenalty5",
+          "ComponentEffects-{uid}-MaxRangePenalty5",
+          "ComponentEffects-{uid}-RecoilPenalty3",
+          "ComponentEffects-{uid}-AccuracyPenalty3",
+          "ComponentEffects-{uid}-FlatJamChancePenalty3"
+        ]
+      ],
+      "OnDestroyedEffectIDs": [
+        "CriticalEffect-ShoulderDestroyed-{location}"
+      ],
+      "OnDestroyedDisableEffectIds": [
+        "CriticalEffect-ArmUpperActuatorDestroyed-{location}",
+        "CriticalEffect-ArmLowerActuatorDestroyed-{location}",
+        "CriticalEffect-ArmHandActuatorDestroyed-{location}"
+      ]
+    },
     "BonusDescriptions": [
       "IsArtillery",
       "NoBonusesArtillery",
@@ -25,11 +70,11 @@
       "FlakMode",
       "DirectMode: -4",
       "WpnRecoil: 5",
-      "ForbiddenRangeMode: 180, Indirect",
+      "ForbiddenRangeMode: 180, Artillery",
       "ForbiddenRangeMode: 90, Direct",
       "ShoulderMount",
       "BraceToFireModeShort: 48, Direct & Flak",
-      "BraceToFireModeShort: 64, Ultra Direct & Ultra Flak",
+      "BraceToFireModeShort: 64, Direct x2 & Flak x2",
       "BraceToFireDetails",
       "WeaponShardsModRange: 1, 4"
     ],
@@ -53,7 +98,6 @@
     3000
   ],
   "AmmoCategory": "Sniper",
-  "StartingAmmoCapacity": 0,
   "HeatGenerated": 60,
   "Damage": 75,
   "HeatDamage": 0,
@@ -62,8 +106,6 @@
   "AccuracyModifier": 0,
   "EvasivePipsIgnored": 0,
   "RefireModifier": 5,
-  "OverheatedDamageMultiplier": 0,
-  "EvasiveDamageMultiplier": 0,
   "CriticalChanceMultiplier": 1,
   "APArmorShardsMod": 3,
   "APCriticalChanceMultiplier": 0.1,
@@ -72,7 +114,6 @@
   "ShotsWhenFired": 2,
   "ProjectilesPerShot": 1,
   "AMSImmune": true,
-  "ImprovedBallistic": true,
   "GunneryJammingMult": 0.005,
   "GunneryJammingBase": 1,
   "FireTerrainChance": 0.0585,
@@ -80,8 +121,6 @@
   "WeaponEffectID": "WeaponEffect-Weapon_AC20_Single",
   "Description": {
     "Cost": 525000,
-    "Rarity": 0,
-    "Purchasable": true,
     "Manufacturer": "Harkness' Horde",
     "Model": "Ultra Artillery Cannon",
     "UIName": "The Big Steel",
@@ -90,17 +129,11 @@
     "Details": "An elegant union between a Sniper Artillery Piece and a Ultra Autocannon/5 feeder, the Big Steel is the custom-built namesake for the <i>Helepolis</i> 2L 'Big Steel'. Capable of firing two successive artillery shells with a reduced payload, nobody dares to ask Big Steel's business.\n\n<b><color=#ffcc00>Uses Sniper Ammo.</color></b>",
     "Icon": "Artillery"
   },
-  "BonusValueA": "",
-  "BonusValueB": "",
   "ComponentType": "Weapon",
   "ComponentSubType": "Weapon",
   "PrefabIdentifier": "artillery",
-  "BattleValue": 85,
   "InventorySize": 12,
   "Tonnage": 20,
-  "AllowedLocations": "All",
-  "DisallowedLocations": "All",
-  "CriticalComponent": false,
   "Modes": [
     {
       "Id": "directfire",
@@ -110,7 +143,6 @@
       "HeatGenerated": -30,
       "AccuracyModifier": 4,
       "ShotsWhenFired": -1,
-      "DirectFireModifier": 0,
       "ForbiddenRange": 90,
       "ShortRange": -2575,
       "MediumRange": -2575,
@@ -149,11 +181,10 @@
     },
     {
       "Id": "directfirex2",
-      "UIName": "Dir. x2",
+      "UIName": "Direct x2",
       "Description": "Fire twice Directly at line of sight targets at short range, minimum range 90. -4 Accuracy.",
       "isBaseMode": false,
       "AccuracyModifier": 4,
-      "DirectFireModifier": 0,
       "ForbiddenRange": 90,
       "ShortRange": -2575,
       "MediumRange": -2575,
@@ -177,7 +208,7 @@
           "nature": "Buff",
           "Description": {
             "Id": "WeaponEffect-SelfInstability_OnFire",
-            "Name": "The Big Steel / Dir. x2: Increased Self Instability on Fire",
+            "Name": "The Big Steel / Direct x2: Increased Self Instability on Fire",
             "Details": "Tubthumping",
             "Icon": "uixSvgIcon_run_n_gun"
           },
@@ -367,7 +398,6 @@
       "range_extreme",
       "BAIncompatible",
       "IgnoreSizeMatters"
-    ],
-    "tagSetSourceFile": ""
+    ]
   }
 }

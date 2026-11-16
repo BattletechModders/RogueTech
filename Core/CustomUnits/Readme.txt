@@ -17,6 +17,7 @@ main settings in mod.json
 	                                                                   example: weapon having tags "vehicle_component_category_cat1" and "vehicle_component_category_cat2"
 																	            can only be replaced by weapon having either "vehicle_component_category_cat1" either "vehicle_component_category_cat2"
 																				tag
+	"VehicleComponentIgnoreEnergyHeat": "vehicle_ignore_energy_heat" - if component have this tag skip generate heat check, for ammo energy weapons like chem lasers
 	"SortBy": {
 		"orderByCbillValue":false,
 		"orderByNickname":false,
